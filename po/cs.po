@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-11 20:25+0200\n"
-"PO-Revision-Date: 2003-08-12 00:11+0200\n"
+"POT-Creation-Date: 2003-08-29 20:25+0200\n"
+"PO-Revision-Date: 2003-08-30 14:55+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,44 +25,34 @@ msgstr ""
 "je povolena volba vzdáleného nastavení"
 
 #: gnome-system-tools.schemas.in.h:2
-msgid "Default runlevel"
-msgstr "Implicitní úroveň běhu"
-
-#: gnome-system-tools.schemas.in.h:3
 msgid "Dialog complexity for the boot-admin tool"
 msgstr "Složitost dialogu nástroje správce zavádění"
 
-#: gnome-system-tools.schemas.in.h:4
+#: gnome-system-tools.schemas.in.h:3
 msgid "Dialog complexity for the network-admin tool"
 msgstr "Složitost dialogu nástroje správce sítě"
 
-#: gnome-system-tools.schemas.in.h:5
-msgid "Dialog complexity for the runlevel-admin tool"
-msgstr "Složitost dialogu nástroje správce úrovně běhu"
+#: gnome-system-tools.schemas.in.h:4
+msgid "Dialog complexity for the services-admin tool"
+msgstr "Složitost dialogu nástroje správce služeb"
 
-#: gnome-system-tools.schemas.in.h:6
+#: gnome-system-tools.schemas.in.h:5
 msgid "Dialog complexity for the time-admin tool"
 msgstr "Složitost dialogu nástroje správce nastavení času"
 
-#: gnome-system-tools.schemas.in.h:7
+#: gnome-system-tools.schemas.in.h:6
 msgid "Dialog complexity for the users-admin tool"
 msgstr "Složitost dialogu nástroje správce uživatelů"
 
-#: gnome-system-tools.schemas.in.h:8
+#: gnome-system-tools.schemas.in.h:7
 msgid "Last GST version executed"
 msgstr "Poslední spuštěná verze GST"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:8
 msgid "Remote hosts"
 msgstr "Vzdálené počítače"
 
-#: gnome-system-tools.schemas.in.h:10
-msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
-msgstr ""
-"Úroveň běhu, kterou ukazuje nástroj správce úrovně běhu jako implicitní v "
-"základním režimu"
-
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:9
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -71,7 +61,7 @@ msgstr ""
 "pokročilý režim. Základní režim je navržen tak, aby zobrazoval méně voleb "
 "než pokročilý režim"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
@@ -79,27 +69,27 @@ msgstr ""
 "GST mohou provádět nastavení vzdáleně pomocí SSH, tuto vlastnost můžete "
 "použít povolením této volby"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:11
 msgid "The last GST version that this computer has run"
 msgstr ""
 "Poslední verze systémových nástrojů GNOME, která běžela na tomto počítači"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:12
 msgid "Whether the tools will use remote administration or not"
 msgstr "Jestli maji nástroje používat vzdálenou administraci"
 
-#: gnome-system-tools.schemas.in.h:15
+#: gnome-system-tools.schemas.in.h:13
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Jestli má nástroj správce uživatelů zobrazovat všechny uživatele a skupiny"
 
-#: gnome-system-tools.schemas.in.h:16
+#: gnome-system-tools.schemas.in.h:14
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Jestli se má zobrazovat dialog s varováním"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/disks.glade.in.h:1 interfaces/network.glade.in.h:1
-#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
+#: interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -119,11 +109,11 @@ msgstr "/dev/hdc"
 msgid "/dev/hdd"
 msgstr "/dev/hdd"
 
-#: interfaces/boot.glade.in.h:6 interfaces/display.glade.in.h:1
+#: interfaces/boot.glade.in.h:6
 msgid "1024x768"
 msgstr "1024×768"
 
-#: interfaces/boot.glade.in.h:7 interfaces/display.glade.in.h:2
+#: interfaces/boot.glade.in.h:7
 msgid "1280x1024"
 msgstr "1280×1024"
 
@@ -139,7 +129,7 @@ msgstr "256"
 msgid "32,768"
 msgstr "32.768"
 
-#: interfaces/boot.glade.in.h:11 interfaces/display.glade.in.h:3
+#: interfaces/boot.glade.in.h:11
 msgid "640x480"
 msgstr "640×480"
 
@@ -147,35 +137,39 @@ msgstr "640×480"
 msgid "65,536"
 msgstr "65.536"
 
-#: interfaces/boot.glade.in.h:13 interfaces/display.glade.in.h:4
+#: interfaces/boot.glade.in.h:13
 msgid "800x600"
 msgstr "800×600"
 
-#: interfaces/boot.glade.in.h:14 interfaces/users.glade.in.h:4
+#: interfaces/boot.glade.in.h:14
+msgid "<b>Security</b>"
+msgstr "<b>Zabezpečení</b>"
+
+#: interfaces/boot.glade.in.h:15 interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Basic Settings</span>"
 msgstr "<span weight=\"bold\">Základní nastavení</span>"
 
-#: interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.in.h:16
 msgid "<span weight=\"bold\">Image Settings</span>"
 msgstr "<span weight=\"bold\">Nastavení obrázku</span>"
 
-#: interfaces/boot.glade.in.h:16
+#: interfaces/boot.glade.in.h:17
 msgid "<span weight=\"bold\">Other Settings</span>"
 msgstr "<span weight=\"bold\">Jiná nastavení</span>"
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:18
 msgid "<span weight=\"bold\">Starting the Computer</span>"
 msgstr "<span weight=\"bold\">Startuji počítač</span>"
 
-#: interfaces/boot.glade.in.h:18
+#: interfaces/boot.glade.in.h:19
 msgid "Ask at boot"
 msgstr "Zeptat se při zavádění"
 
-#: interfaces/boot.glade.in.h:19
+#: interfaces/boot.glade.in.h:20
 msgid "Boot Image Assistant"
 msgstr "Asistent pro zaváděcí obraz"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition.\n"
@@ -187,15 +181,19 @@ msgstr ""
 "Můžete také volitelně připojit další parametry, které budou předány jádru\n"
 "při zavádění."
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:24
 msgid "Click \"Forward\" to continue"
 msgstr "Pokračujte kliknutím na \"Další\""
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:25
+msgid "Confirmation"
+msgstr "Potvrzení"
+
+#: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
 msgstr "Povolit IDE emulaci SCSI"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -203,53 +201,61 @@ msgstr ""
 "Zadejte název zaváděcího obrazu a udejte, o jaký typ operačního systému se "
 "jedná."
 
-#: interfaces/boot.glade.in.h:26 interfaces/internetsharing.glade.in.h:33
-#: interfaces/network.glade.in.h:52 interfaces/users.glade.in.h:34
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:52
+#: interfaces/users.glade.in.h:34
 msgid "Finished"
 msgstr "Dokončeno"
 
-#: interfaces/boot.glade.in.h:27
+#: interfaces/boot.glade.in.h:29
 msgid "Image Settings (Step 1 of 2)"
 msgstr "Nastavení obrazu (krok 1 ze 2)"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "Image Settings (Step 2 of 2)"
 msgstr "Nastavení obrazu (krok 2 ze 2)"
 
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1744
+#: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
+#: src/network/connection.c:1745
 msgid "Manual"
 msgstr "Ruční"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:32
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Úprava nastavení pro váš operační systém nebo jádro."
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "Number of colors:"
 msgstr "Počet barev:"
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:34
 msgid "Other Operating System (Step 2 of 2)"
 msgstr "Jiný operační systém (krok 2 ze 2)"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "Other parameters:"
 msgstr "Jiné parametry:"
 
-#: interfaces/boot.glade.in.h:34 interfaces/display.glade.in.h:17
+#: interfaces/boot.glade.in.h:36
+msgid "Password"
+msgstr "Heslo"
+
+#: interfaces/boot.glade.in.h:37
+msgid "Protect with password"
+msgstr "Chránit heslem"
+
+#: interfaces/boot.glade.in.h:38
 msgid "Resolution:"
 msgstr "Rozlišení:"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:39
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "Počet sekund před zavedením výchozího jádra nebo OS"
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:40
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Zadejte oddíl, na kterém je operační systém instalován."
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:41
 msgid ""
 "The new boot image has been added.\n"
 "Please click \"Apply\" to save your changes. "
@@ -257,7 +263,7 @@ msgstr ""
 "Nový zaváděcí obraz byl přidán.\n"
 "Uložte prosím své změny stiskem tlačítka \"Dokončit\"."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:43
 msgid ""
 "This assistant is designed to help you quickly \n"
 "and easily add a new boot image to your system.\n"
@@ -269,56 +275,54 @@ msgstr ""
 "\n"
 "Začněte kliknutím na \"Další\"."
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:47
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Použijte tento dialog pro upravení parametrů jádra."
 
-#: interfaces/boot.glade.in.h:44
+#: interfaces/boot.glade.in.h:48
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Použijte tento nástroj pro určení operačních systémů, ze kterých si mohou "
 "uživatelé při startu vybírat."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:49
 msgid "Video modes (only frame buffer)"
 msgstr "Režimy videa (jen framebuffer)"
 
-#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:140
-#: interfaces/shares.glade.in.h:60
+#: interfaces/boot.glade.in.h:50 interfaces/network.glade.in.h:140
 msgid "_Add..."
 msgstr "Přid_at..."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:51
 msgid "_Device:"
 msgstr "_Zařízení:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:52
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:53 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Cesta k obrazu _initrd:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:54
 msgid "_Kernel image path:"
 msgstr "Cesta k _obrazu jádra:"
 
-#: interfaces/boot.glade.in.h:51 interfaces/print.glade.in.h:72
-#: interfaces/shares.glade.in.h:68
+#: interfaces/boot.glade.in.h:55
 msgid "_Name:"
 msgstr "_Název:"
 
-#: interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.in.h:56
 msgid "_Operating system:"
 msgstr "_Operační systém:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:57
 msgid "_Parameters:"
 msgstr "_Parametry:"
 
-#: interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.in.h:58
 msgid "_Root file system device:"
 msgstr "Zařízení _kořenového systému souborů:"
 
@@ -364,7 +368,7 @@ msgstr "Složitost"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Zadejte heslo - Systémové nástroje GNOME"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1783
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1786
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
@@ -393,947 +397,8 @@ msgstr ""
 "který chcete nastavit"
 
 #: interfaces/common.glade.in.h:20 interfaces/network.glade.in.h:164
-#: interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Heslo:"
-
-#: interfaces/dhcpd.glade.in.h:1
-msgid "Advanced mode not yet implemented. Sorry."
-msgstr "Pokročilý režim zatím není implementován. Promiňte."
-
-#: interfaces/dhcpd.glade.in.h:2
-msgid "DHCP Server"
-msgstr "Server DHCP"
-
-#: interfaces/dhcpd.glade.in.h:3
-msgid "DHCP server configuration"
-msgstr "Nastavení serveru DHCP"
-
-#: interfaces/dhcpd.glade.in.h:4
-msgid "DHCP server configuration "
-msgstr "Nastavení serveru DHCP "
-
-#: interfaces/dhcpd.glade.in.h:5
-msgid "DNS_1 :"
-msgstr "DNS_1 :"
-
-#: interfaces/dhcpd.glade.in.h:6
-msgid "DNS_2 :"
-msgstr "DNS_2 :"
-
-#: interfaces/dhcpd.glade.in.h:7
-msgid "E_nabled"
-msgstr "Povol_en"
-
-#: interfaces/dhcpd.glade.in.h:8
-msgid "Host Info : "
-msgstr "Informace o počítači: "
-
-#: interfaces/dhcpd.glade.in.h:9
-msgid "Hosts :"
-msgstr "Počítače:"
-
-#: interfaces/dhcpd.glade.in.h:10
-msgid "Hosts Editor"
-msgstr "Editor počítačů"
-
-#: interfaces/dhcpd.glade.in.h:11
-msgid "Ip Address"
-msgstr "IP adresa"
-
-#: interfaces/dhcpd.glade.in.h:12
-msgid "Range _End :"
-msgstr "Kon_ec rozsahu:"
-
-#: interfaces/dhcpd.glade.in.h:13
-msgid "Range _Start :"
-msgstr "Počátek roz_sahu:"
-
-#: interfaces/dhcpd.glade.in.h:14
-msgid "Router :"
-msgstr "Router :"
-
-#: interfaces/dhcpd.glade.in.h:15
-msgid "Subnet _Mask :"
-msgstr "_Maska podsítě:"
-
-#: interfaces/dhcpd.glade.in.h:16 interfaces/memory.glade.in.h:22
-msgid "_Add"
-msgstr "Přid_at"
-
-#: interfaces/dhcpd.glade.in.h:17
-msgid "_Comment :"
-msgstr "K_omentář:"
-
-#: interfaces/dhcpd.glade.in.h:18 interfaces/network.glade.in.h:146
-#: interfaces/shares.glade.in.h:63 interfaces/users.glade.in.h:83
-msgid "_Delete"
-msgstr "O_dstranit"
-
-#: interfaces/dhcpd.glade.in.h:19
-msgid "_Domain :"
-msgstr "_Doména:"
-
-#: interfaces/dhcpd.glade.in.h:20
-msgid "_Edit Hosts..."
-msgstr "_Upravit počítače..."
-
-#: interfaces/dhcpd.glade.in.h:21
-msgid "_Hostname :"
-msgstr "_Název počítače:"
-
-#: interfaces/dhcpd.glade.in.h:22
-msgid "_IP address :"
-msgstr "_IP adresa:"
-
-#: interfaces/dhcpd.glade.in.h:23
-msgid "_MAC address :"
-msgstr "_MAC adresa:"
-
-#: interfaces/dhcpd.glade.in.h:24
-msgid "host"
-msgstr "počítač"
-
-#: interfaces/disks.glade.in.h:2
-msgid "Add an unlisted import"
-msgstr "Přidat neuvedený import"
-
-#: interfaces/disks.glade.in.h:3
-msgid "Add partition"
-msgstr "Přidat oddíl"
-
-#: interfaces/disks.glade.in.h:4
-msgid "Automatic (detect when mounting)"
-msgstr "Automatický (zjištěn při připojení)"
-
-#: interfaces/disks.glade.in.h:5
-msgid "Check for errors on startup"
-msgstr "Hledat chyby při spuštění"
-
-#: interfaces/disks.glade.in.h:6
-msgid "Choose a mount point"
-msgstr "Vyberte místo připojení"
-
-#: interfaces/disks.glade.in.h:7 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:50
-msgid "Device:"
-msgstr "Zařízení:"
-
-#: interfaces/disks.glade.in.h:8
-msgid "Disks & partitions"
-msgstr "Disky a oddíly"
-
-#: interfaces/disks.glade.in.h:9
-msgid ""
-"Disks are divided into several pieces, called partitions. Each partition is "
-"dedicated for a specific storage task, such as virtual memory or home "
-"directories for your users."
-msgstr ""
-"Disky jsou rozděleny na několik částí, tzv. oddíly. Každý oddíl je určen pro "
-"specifický typ uložení, například virtuální paměti nebo domovských adresářů "
-"vašich uživatelů."
-
-#: interfaces/disks.glade.in.h:10
-msgid "Ext2 (Linux)"
-msgstr "Ext2 (Linux)"
-
-#: interfaces/disks.glade.in.h:11
-msgid "FAT (DOS)"
-msgstr "FAT (DOS)"
-
-#: interfaces/disks.glade.in.h:12
-msgid "FAT32 (Windows 98 and newer)"
-msgstr "FAT32 (Windows 98 a novější)"
-
-#: interfaces/disks.glade.in.h:13 interfaces/shares.glade.in.h:37
-msgid "Mount point:"
-msgstr "Místo připojení:"
-
-#: interfaces/disks.glade.in.h:14
-msgid "Mount this partition"
-msgstr "Připojit tento oddíl"
-
-#: interfaces/disks.glade.in.h:15
-msgid "NTFS (Windows NT & 2000)"
-msgstr "NTFS (Windows NT a 2000)"
-
-#: interfaces/disks.glade.in.h:16
-msgid "Open settings dialog for selected import"
-msgstr "Otevřít dialog s nastavením pro vybraný import"
-
-#: interfaces/disks.glade.in.h:17
-msgid "Partition"
-msgstr "Oddíl"
-
-#: interfaces/disks.glade.in.h:18
-msgid "Partition Settings"
-msgstr "Nastavení oddílu"
-
-#: interfaces/disks.glade.in.h:19
-msgid "Remember details of this partition"
-msgstr "Pamatovat si podrobnosti tohoto oddílu"
-
-#: interfaces/disks.glade.in.h:20 interfaces/memory.glade.in.h:16
-#: interfaces/nameresolution.glade.in.h:30 interfaces/users.glade.in.h:59
-msgid "Settings"
-msgstr "Nastavení"
-
-#: interfaces/disks.glade.in.h:21
-msgid "Type:"
-msgstr "Typ:"
-
-#: interfaces/disks.glade.in.h:22
-msgid "VFAT (Windows 95 and newer)"
-msgstr "VFAT (Windows 95 a novější)"
-
-#: interfaces/disks.glade.in.h:23
-msgid "reiserfs (Linux)"
-msgstr "ReiserFS (Linux)"
-
-#: interfaces/disks.glade.in.h:24
-msgid "ufs (FreeBSD)"
-msgstr "UFS (FreeBSD)"
-
-#: interfaces/display.glade.in.h:5 interfaces/nameresolution.glade.in.h:3
-msgid "<unknown>"
-msgstr "<neznámý>"
-
-#: interfaces/display.glade.in.h:6
-msgid "Appearance"
-msgstr "Vzhled"
-
-#: interfaces/display.glade.in.h:7
-msgid "Colors"
-msgstr "Barvy"
-
-#: interfaces/display.glade.in.h:8
-msgid "Colors:"
-msgstr "Barvy:"
-
-#: interfaces/display.glade.in.h:9
-msgid "Down"
-msgstr "Dolů"
-
-#: interfaces/display.glade.in.h:10
-msgid "Left"
-msgstr "Vlevo"
-
-#: interfaces/display.glade.in.h:11
-msgid "Model:"
-msgstr "Model:"
-
-#: interfaces/display.glade.in.h:12
-msgid "Monitor information"
-msgstr "Informace o monitoru"
-
-#: interfaces/display.glade.in.h:13
-msgid "Narrower"
-msgstr "Užší"
-
-#: interfaces/display.glade.in.h:14
-msgid "Probe again"
-msgstr "Zjistit znovu"
-
-#: interfaces/display.glade.in.h:15
-msgid "Refresh rate:"
-msgstr "Rychlost obnovení:"
-
-#: interfaces/display.glade.in.h:16
-msgid "Resolution"
-msgstr "Rozlišení"
-
-#: interfaces/display.glade.in.h:18
-msgid "Restart X"
-msgstr "Restartovat X"
-
-#: interfaces/display.glade.in.h:19
-msgid "Right"
-msgstr "Vpravo"
-
-#: interfaces/display.glade.in.h:20
-msgid "Shift my display:"
-msgstr "Posunout displej:"
-
-#: interfaces/display.glade.in.h:21
-msgid "Shorter"
-msgstr "Kratší"
-
-#: interfaces/display.glade.in.h:22
-msgid "Stretch my display:"
-msgstr "Změnit velikost displeje:"
-
-#: interfaces/display.glade.in.h:23
-msgid "Taller"
-msgstr "Vyšší"
-
-#: interfaces/display.glade.in.h:24
-msgid "Test current setting"
-msgstr "Testovat současné nastavení"
-
-#: interfaces/display.glade.in.h:25
-msgid "Up"
-msgstr "Nahoru"
-
-#: interfaces/display.glade.in.h:26
-msgid "Use this tool to configure your monitor."
-msgstr "Použijte tento nástroj pro nastavení vašeho monitoru."
-
-#: interfaces/display.glade.in.h:27
-msgid "Vendor:"
-msgstr "Dodavatel:"
-
-#: interfaces/display.glade.in.h:28
-msgid "Wider"
-msgstr "Širší"
-
-#: interfaces/display.glade.in.h:29
-msgid "_Restore settings"
-msgstr "O_bnovit nastavení"
-
-#: interfaces/font.glade.in.h:1
-msgid "Add font..."
-msgstr "Přidat písmo..."
-
-#: interfaces/font.glade.in.h:2
-msgid "Delete font"
-msgstr "Odstranit písmo"
-
-#: interfaces/font.glade.in.h:3
-msgid "Font family"
-msgstr "Rodina písma"
-
-#: interfaces/font.glade.in.h:4
-msgid "Font size:"
-msgstr "Velikost písma:"
-
-#: interfaces/font.glade.in.h:5
-msgid "Preview"
-msgstr "Náhled"
-
-#: interfaces/font.glade.in.h:6
-msgid "Select the fonts you want to install."
-msgstr "Vyberte písma, které chcete nainstalovat."
-
-#: interfaces/font.glade.in.h:7
-msgid "Style"
-msgstr "Styl"
-
-#: interfaces/internetsharing.glade.in.h:1
-msgid "   Configure...   "
-msgstr "   Nastavit...   "
-
-#: interfaces/internetsharing.glade.in.h:2
-msgid " Exit and come back later after installing."
-msgstr " Ukončit a zkusí se to znovu, až se komponenty nainstalují."
-
-#: interfaces/internetsharing.glade.in.h:3
-msgid " Keep the current configuration."
-msgstr " Ponechat stávající nastavení."
-
-#: interfaces/internetsharing.glade.in.h:4
-msgid " Never mind, don't use it then."
-msgstr " Nevadí, ať se tedy nepoužívají."
-
-#: interfaces/internetsharing.glade.in.h:5
-msgid " No, I'll manually configure the local network computers."
-msgstr " Ne, počítače na lokální síti budou nastaveny ručně."
-
-#: interfaces/internetsharing.glade.in.h:6
-msgid " No, I'll set it up later by myself."
-msgstr " Ne, nastaví se později ručně."
-
-#: interfaces/internetsharing.glade.in.h:7
-msgid " No, exit this druid and continue later."
-msgstr " Ne, ukončit tohoto průvodce a pokračovat později."
-
-#: interfaces/internetsharing.glade.in.h:8
-msgid " No, overwrite with new defaults (recommended)"
-msgstr " Ne, přepsat novými hodnotami (doporučeno)."
-
-#: interfaces/internetsharing.glade.in.h:9
-msgid ""
-" Overwrite with the default internet sharing configuration (recommended)."
-msgstr " Přepsat výchozím nastavením sdílení Internetu (doporučeno)."
-
-#: interfaces/internetsharing.glade.in.h:10
-msgid ""
-" Yes, I'll set the local network computers to use automatic IP assignment  "
-"(recommended)."
-msgstr ""
-" Ano, lokální počítačová síť bude nastavena na používání automatického "
-"přiřazení IP adres (doporučeno)."
-
-#: interfaces/internetsharing.glade.in.h:11
-msgid " Yes, keep the current DHCP configuration."
-msgstr " Ano, ponechat současné nastavení služby DHCP."
-
-#: interfaces/internetsharing.glade.in.h:12
-msgid " Yes, launch network tool (recommended)."
-msgstr " Ano, spustit nástroj pro nastavení sítě (doporučeno)."
-
-#: interfaces/internetsharing.glade.in.h:13
-msgid ""
-"A local network connection was not detected.\n"
-"Would you like to configure one?\n"
-msgstr ""
-"Nebylo zjištěno připojení k lokální síti.\n"
-"Chcete takové připojení nastavit?\n"
-
-#: interfaces/internetsharing.glade.in.h:16
-msgid ""
-"A local network interface has been detected, but it's not active.\n"
-"Would you like to activate it now?\n"
-msgstr ""
-"Bylo zjištěno lokální síťové rozhraní, ale není aktivní.\n"
-"Chcete jej aktivovat nyní?\n"
-
-#: interfaces/internetsharing.glade.in.h:19
-msgid ""
-"A previous DHCP configuration has been detected. \n"
-"Do you want to keep this configuration?"
-msgstr ""
-"Bylo nalezeno starší nastavení služby DHCP.\n"
-"Chcete ponechat toto nastavení?"
-
-#: interfaces/internetsharing.glade.in.h:21
-msgid "Banner Removal (Junkbuster)"
-msgstr "Odstranění reklam (Junkbuster)"
-
-#: interfaces/internetsharing.glade.in.h:22
-msgid "Configure DHCP Service"
-msgstr "Nastavení služby DHCP"
-
-#: interfaces/internetsharing.glade.in.h:23
-msgid ""
-"Congratulations! This computer is now\n"
-"configured to share its Internet connection.\n"
-msgstr ""
-"Gratulujeme! Váš počítač je nyní nastaven\n"
-"na sdílení svého připojení k Internetu.\n"
-
-#: interfaces/internetsharing.glade.in.h:26
-msgid "Create a new local network interface."
-msgstr "Vytvořit nové lokální síťové rozhraní."
-
-#: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:46
-#: src/network/connection.c:1745
-msgid "DHCP"
-msgstr "DHCP"
-
-#: interfaces/internetsharing.glade.in.h:28
-msgid "DHCP service configuration."
-msgstr "Nastavení služby DHCP"
-
-#: interfaces/internetsharing.glade.in.h:29
-msgid "DHCP service requirements."
-msgstr "Požadavky služby DHCP."
-
-#: interfaces/internetsharing.glade.in.h:30
-msgid "Disable"
-msgstr "Vypnout"
-
-#: interfaces/internetsharing.glade.in.h:31
-msgid "Enable :"
-msgstr "Povolit:"
-
-#: interfaces/internetsharing.glade.in.h:32
-msgid "End of Range"
-msgstr "Konec rozsahu"
-
-#: interfaces/internetsharing.glade.in.h:34
-msgid "Firewall"
-msgstr "Firewall"
-
-#: interfaces/internetsharing.glade.in.h:35
-msgid "IP Forwarding"
-msgstr "Předávání IP adres (forwarding)"
-
-#: interfaces/internetsharing.glade.in.h:36
-msgid "Internet Sharing"
-msgstr "Sdílení Internetu"
-
-#: interfaces/internetsharing.glade.in.h:37
-msgid "Internet Sharing --Advanced Mode"
-msgstr "Sdílení Internetu - Pokročilý režim"
-
-#: interfaces/internetsharing.glade.in.h:38
-msgid "Internet Sharing Configuration Druid"
-msgstr "Průvodce nastavením sdílení Internetu"
-
-#: interfaces/internetsharing.glade.in.h:39
-msgid "Internet Sharing Druid"
-msgstr "Průvodce sdílením Internetu"
-
-#: interfaces/internetsharing.glade.in.h:40
-msgid "Internet sharing configuration."
-msgstr "Nastavení sdílení Internetu."
-
-#: interfaces/internetsharing.glade.in.h:41
-msgid "Local network interface activation."
-msgstr "Aktivace lokálního síťového rozhraní."
-
-#: interfaces/internetsharing.glade.in.h:42
-msgid "Start of Range"
-msgstr "Počátek rozsahu"
-
-#: interfaces/internetsharing.glade.in.h:43
-msgid ""
-"The Internet sharing tool allows you to share your Internet conection with "
-"other computers on the network."
-msgstr ""
-"Nástroj na sdílení Internetu vám umožní sdílet vaše připojení k Internetu s "
-"ostatními počítači na síti."
-
-#: interfaces/internetsharing.glade.in.h:44
-msgid "Web Cache (squid)"
-msgstr "Webová vyrovnávací paměť (squid)"
-
-#: interfaces/internetsharing.glade.in.h:45
-msgid ""
-"Welcome to the Internet Sharing Configuration Druid.\n"
-"\n"
-"This druid will help you to configure and share\n"
-"your Internet connection.\n"
-"\n"
-"You should have already installed and configured a local\n"
-"network connection, such as an Ethernet or waveLAN\n"
-"card, and an internet connection, such as a modem.\n"
-"\n"
-"If you haven't, you will be given the option to launch the\n"
-"Network Tool to configure them before continuing."
-msgstr ""
-"Vítejte v Průvodci nastavením sdílení připojení k Internetu.\n"
-"\n"
-"Tento průvodce vám pomůže nastavit a sdílet vaše\n"
-"připojení k Internetu.\n"
-"\n"
-"Musíte mít instalované a nastavené lokální síťové rozhraní\n"
-"jako Ethernet nebo kartu waveLAN, a připojení k Internetu,\n"
-"například pomocí modemu.\n"
-"\n"
-"Pokud nemáte, budete mít možnost spustit nástroj pro nastavení\n"
-"sítě a toto připojení nastavit."
-
-#: interfaces/internetsharing.glade.in.h:56
-msgid ""
-"Would you like to give the automatic network\n"
-"address assignment service (DHCP)?\n"
-msgstr ""
-"Chcete poskytovat službu automatického\n"
-"přiřazení síťových adres (DHCP)?\n"
-
-#: interfaces/internetsharing.glade.in.h:59
-msgid "Yes (recommended)."
-msgstr "Ano (doporučeno)."
-
-#: interfaces/internetsharing.glade.in.h:60
-msgid ""
-"You already have an internet sharing configuration.\n"
-"Do you want to keep it, or use the druid's defaults?\n"
-msgstr ""
-"Nastavení sdílení Internetu již na vašem počítači existuje.\n"
-"Chcete jej ponechat nebo použít implicitní hodnoty průvodce?\n"
-
-#: interfaces/internetsharing.glade.in.h:63
-msgid ""
-"You don't have a DHCP server installed, or\n"
-"some other related component is missing."
-msgstr ""
-"Nemáte nainstalovaný DHCP server, nebo\n"
-"chybí některé komponenty s tímto serverem spojené."
-
-#: interfaces/location-manager.glade.in.h:1 interfaces/shares.glade.in.h:1
-msgid "\n"
-msgstr "\n"
-
-#: interfaces/location-manager.glade.in.h:3
-msgid "                           "
-msgstr "                           "
-
-#: interfaces/location-manager.glade.in.h:4 interfaces/time.glade.in.h:1
-msgid "(unconfigured)"
-msgstr "(nenastaveno)"
-
-#: interfaces/location-manager.glade.in.h:5 interfaces/time.glade.in.h:3
-msgid ":"
-msgstr ":"
-
-#: interfaces/location-manager.glade.in.h:6
-msgid "AM"
-msgstr "dop."
-
-#: interfaces/location-manager.glade.in.h:7
-msgid "Boston Office"
-msgstr "Kancelář Boston"
-
-#: interfaces/location-manager.glade.in.h:8
-msgid "Choose Location"
-msgstr "Vyberte umístění"
-
-#: interfaces/location-manager.glade.in.h:9
-msgid "Copy"
-msgstr "Kopírovat"
-
-#: interfaces/location-manager.glade.in.h:10
-msgid "Copy Location"
-msgstr "Kopírovat umístění"
-
-#: interfaces/location-manager.glade.in.h:11
-msgid "Current:"
-msgstr "Současné:"
-
-#: interfaces/location-manager.glade.in.h:12
-msgid "Date"
-msgstr "Datum"
-
-#: interfaces/location-manager.glade.in.h:13
-msgid "Date/Time "
-msgstr "Datum/Čas"
-
-#: interfaces/location-manager.glade.in.h:14
-msgid "Date/time"
-msgstr "Datum/čas"
-
-#: interfaces/location-manager.glade.in.h:15
-msgid "Edit Date/Time"
-msgstr "Upravit čas/datum"
-
-#: interfaces/location-manager.glade.in.h:16
-msgid "Edit Location"
-msgstr "Upravit umístění"
-
-#: interfaces/location-manager.glade.in.h:17
-msgid "Edit:"
-msgstr "Upravit:"
-
-#: interfaces/location-manager.glade.in.h:18
-msgid "Helsinki Office"
-msgstr "Kancelář Helsinky"
-
-#: interfaces/location-manager.glade.in.h:19
-msgid "Keep clock synchronized with selected servers"
-msgstr "Udržovat hodiny synchronizované s vybranými servery"
-
-#: interfaces/location-manager.glade.in.h:20
-msgid "Location"
-msgstr "Umístění"
-
-#: interfaces/location-manager.glade.in.h:21
-#: interfaces/rollback-location-management.glade.in.h:7
-msgid "Location Management"
-msgstr "Správa umístění"
-
-#: interfaces/location-manager.glade.in.h:22
-msgid "Location:"
-msgstr "Umístění:"
-
-#: interfaces/location-manager.glade.in.h:23
-msgid "Locations"
-msgstr "Umístění"
-
-#: interfaces/location-manager.glade.in.h:24
-msgid "Mexico CIty "
-msgstr "Mexico City "
-
-#: interfaces/location-manager.glade.in.h:25 interfaces/shares.glade.in.h:43
-msgid "Name:"
-msgstr "Název:"
-
-#: interfaces/location-manager.glade.in.h:26
-msgid "New Location"
-msgstr "Nové umístění"
-
-#: interfaces/location-manager.glade.in.h:27
-msgid "New Name:"
-msgstr "Nový název:"
-
-#: interfaces/location-manager.glade.in.h:28
-msgid "New name:"
-msgstr "Nový název:"
-
-#: interfaces/location-manager.glade.in.h:29
-msgid "PM"
-msgstr "odp."
-
-#: interfaces/location-manager.glade.in.h:30 interfaces/time.glade.in.h:5
-msgid ""
-"Please select the current date and time. You can also specify a time zone "
-"and a time server."
-msgstr ""
-"Vyberte prosím aktuální datum a čas. Můžete také zadat časovou zónu a server "
-"času."
-
-#: interfaces/location-manager.glade.in.h:31
-msgid "Rename"
-msgstr "Přejmenovat"
-
-#: interfaces/location-manager.glade.in.h:32
-msgid "Rename Location"
-msgstr "Přejmenovat umístění"
-
-#: interfaces/location-manager.glade.in.h:33
-msgid "Rollback-location-management-mockup"
-msgstr "Rollback-location-management-mockup"
-
-#: interfaces/location-manager.glade.in.h:34
-msgid "Select servers..."
-msgstr "Vyberte servery..."
-
-#: interfaces/location-manager.glade.in.h:35
-msgid "Set time zone..."
-msgstr "Nastavit časovou zónu..."
-
-#: interfaces/location-manager.glade.in.h:36 src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Čas"
-
-#: interfaces/location-manager.glade.in.h:37
-msgid "Time server"
-msgstr "Server času"
-
-#: interfaces/location-manager.glade.in.h:38
-msgid "Time zone"
-msgstr "Časová zóna"
-
-#: interfaces/location-manager.glade.in.h:39
-msgid ""
-"Use this tool to manage all the different locations where you could possibly "
-"want to use your stinking laptop."
-msgstr ""
-"Použijte tento nástroj pro správu nejrůznějších míst, kde byste možná mohli "
-"chtít použít váš přenosný počítač."
-
-#: interfaces/location-manager.glade.in.h:40
-msgid "_Help"
-msgstr "Nápo_věda"
-
-#: interfaces/location-manager.glade.in.h:41 interfaces/shares.glade.in.h:72
-msgid "_Settings..."
-msgstr "Na_stavení..."
-
-#: interfaces/memory.glade.in.h:1
-msgid "Available partitions:"
-msgstr "Dostupné oddíly:"
-
-#: interfaces/memory.glade.in.h:2
-msgid "Available swap areas"
-msgstr "Dostupné odkládací oblasti"
-
-#: interfaces/memory.glade.in.h:3
-msgid "Browse..."
-msgstr "Probírat..."
-
-#: interfaces/memory.glade.in.h:4
-msgid "Cancel"
-msgstr "Zrušit"
-
-#: interfaces/memory.glade.in.h:5 src/boot/table.c:48
-#: src/network/connection.c:508
-msgid "Device"
-msgstr "Zařízení"
-
-#: interfaces/memory.glade.in.h:7 interfaces/shares.glade.in.h:16
-msgid "Enabled"
-msgstr "Povoleno"
-
-#: interfaces/memory.glade.in.h:8
-msgid "MB"
-msgstr "MB"
-
-#: interfaces/memory.glade.in.h:9
-msgid "New Swap Device"
-msgstr "Nové odkládací zařízení"
-
-#: interfaces/memory.glade.in.h:10
-msgid "OK"
-msgstr "Budiž"
-
-#: interfaces/memory.glade.in.h:11 interfaces/shares.glade.in.h:48
-msgid "Path:"
-msgstr "Cesta:"
-
-#: interfaces/memory.glade.in.h:12
-msgid "Physical memory:"
-msgstr "Fyzická paměť:"
-
-#: interfaces/memory.glade.in.h:13 src/runlevel/table.c:73
-msgid "Priority"
-msgstr "Priorita"
-
-#: interfaces/memory.glade.in.h:14 interfaces/runlevel.glade.in.h:7
-msgid "Priority:"
-msgstr "Priorita:"
-
-#: interfaces/memory.glade.in.h:15
-msgid "Select  Swap File"
-msgstr "Vyberte odkládací soubor"
-
-#: interfaces/memory.glade.in.h:17
-msgid "Size"
-msgstr "Velikost"
-
-#: interfaces/memory.glade.in.h:18
-msgid "Size:"
-msgstr "Velikost:"
-
-#: interfaces/memory.glade.in.h:19
-msgid "Swap Settings"
-msgstr "Nastavení odkládání"
-
-#: interfaces/memory.glade.in.h:20
-msgid "Swap memory:"
-msgstr "Odkládací paměť:"
-
-#: interfaces/memory.glade.in.h:21
-msgid "Swap type:"
-msgstr "Typ odkládání:"
-
-#: interfaces/memory.glade.in.h:23
-msgid "_Remove"
-msgstr "Odst_ranit"
-
-#: interfaces/memory.glade.in.h:24
-msgid "_Settings"
-msgstr "Na_stavení"
-
-#: interfaces/memory.glade.in.h:25
-msgid "file"
-msgstr "soubor"
-
-#: interfaces/memory.glade.in.h:26
-msgid "partition"
-msgstr "oddíl"
-
-#: interfaces/nameresolution.glade.in.h:1
-msgid " Move Up"
-msgstr " Přesunout výše"
-
-#: interfaces/nameresolution.glade.in.h:2
-msgid " Names"
-msgstr "Názvy"
-
-#: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:6
-#: interfaces/users.glade.in.h:14
-msgid "Add"
-msgstr "Přidat"
-
-#: interfaces/nameresolution.glade.in.h:5 src/network/hosts.c:155
-msgid "Aliases"
-msgstr "Přezdívky"
-
-#: interfaces/nameresolution.glade.in.h:6
-msgid "Aliases Settings"
-msgstr "Nastavení přezdívek"
-
-#: interfaces/nameresolution.glade.in.h:7
-msgid ""
-"Assign aliases to IP addresses that may not be registered in the DNS or WINS "
-"servers, or to override or set new names for commonly used IP addresses. "
-msgstr ""
-"Přiřaďte přezdívky (aliasy) IP adresám, které nejsou registrovány na "
-"serverech DNS nebo WINS, nebo zadejte nový název obvykle používaným IP "
-"adresám."
-
-#: interfaces/nameresolution.glade.in.h:8
-msgid "Change the alias' IP address or its corresponding names."
-msgstr "Změňte IP adresu přezdívky nebo její příslušné názvy."
-
-#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:21
-#: interfaces/shares.glade.in.h:13 interfaces/users.glade.in.h:28
-msgid "Delete"
-msgstr "Odstranit"
-
-#: interfaces/nameresolution.glade.in.h:10 interfaces/runlevel.glade.in.h:5
-msgid "Description:"
-msgstr "Popis:"
-
-#: interfaces/nameresolution.glade.in.h:11
-msgid "Domain"
-msgstr "Doména"
-
-#: interfaces/nameresolution.glade.in.h:12
-msgid "Domain Lookup Order"
-msgstr "Pořadí vyhledání domény"
-
-#: interfaces/nameresolution.glade.in.h:13
-msgid "Domain Name Service (DNS)"
-msgstr "Služba názvů domén (DNS)"
-
-#: interfaces/nameresolution.glade.in.h:14
-msgid "Domain:"
-msgstr "Doména:"
-
-#: interfaces/nameresolution.glade.in.h:15
-msgid "Existing:"
-msgstr "Existující:"
-
-#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:24
-msgid "Host"
-msgstr "Počítač"
-
-#: interfaces/nameresolution.glade.in.h:17
-msgid "Host name:"
-msgstr "Název počítače:"
-
-#: interfaces/nameresolution.glade.in.h:18
-msgid "IP address"
-msgstr "IP adresa"
-
-#: interfaces/nameresolution.glade.in.h:19
-msgid "IP address:"
-msgstr "IP adresa:"
-
-#: interfaces/nameresolution.glade.in.h:20
-msgid "Identification"
-msgstr "Identifikace"
-
-#: interfaces/nameresolution.glade.in.h:21
-msgid "Let the computer know its name, function and network surroundings."
-msgstr "Ať počítač zná svůj název, funkci a síťové okolí."
-
-#: interfaces/nameresolution.glade.in.h:22
-msgid "Move Down"
-msgstr "Přesunout níže"
-
-#: interfaces/nameresolution.glade.in.h:23
-msgid "New Alias"
-msgstr "Nová přezdívka"
-
-#: interfaces/nameresolution.glade.in.h:24
-msgid "New domain:"
-msgstr "Nová doména:"
-
-#: interfaces/nameresolution.glade.in.h:25
-msgid "New server:"
-msgstr "Nový server:"
-
-#: interfaces/nameresolution.glade.in.h:26
-msgid "New:"
-msgstr "Nová:"
-
-#: interfaces/nameresolution.glade.in.h:27
-msgid "Reverse:"
-msgstr "Reverzní:"
-
-#: interfaces/nameresolution.glade.in.h:28
-msgid "Search Domains"
-msgstr "Prohledávat domény"
-
-#: interfaces/nameresolution.glade.in.h:29
-msgid "Servers"
-msgstr "Servery"
-
-#: interfaces/nameresolution.glade.in.h:31
-msgid "Settings for the selected alias"
-msgstr "Nastavení vybrané přezdívky"
-
-#: interfaces/nameresolution.glade.in.h:32
-msgid "Use WINS server:"
-msgstr "Použít server WINS:"
-
-#: interfaces/nameresolution.glade.in.h:33
-msgid "Workgroup:"
-msgstr "Pracovní skupina:"
 
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
@@ -1471,7 +536,7 @@ msgstr "Povolit kontrolu nad aktivací všem uživatelům"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -1511,6 +576,10 @@ msgstr "Vytvořit nové připojení k Internetu "
 msgid "Create a new network connection"
 msgstr "Vytvořit nové připojení k síti"
 
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1746
+msgid "DHCP"
+msgstr "DHCP"
+
 #: interfaces/network.glade.in.h:47
 msgid "DNS"
 msgstr "DNS"
@@ -1522,6 +591,10 @@ msgstr "_Servery DNS:"
 #: interfaces/network.glade.in.h:49
 msgid "Default gateway device:"
 msgstr "Zařízení implicitní brány:"
+
+#: interfaces/network.glade.in.h:50
+msgid "Device:"
+msgstr "Zařízení:"
 
 #: interfaces/network.glade.in.h:51
 msgid "Domain / _Workgroup:"
@@ -1671,7 +744,7 @@ msgstr "He_slo (potvrdit):"
 msgid "Password (confirm):"
 msgstr "Heslo (potvrdit):"
 
-#: interfaces/network.glade.in.h:87 interfaces/shares.glade.in.h:46
+#: interfaces/network.glade.in.h:87
 msgid "Password:"
 msgstr "Heslo:"
 
@@ -1783,7 +856,7 @@ msgstr ""
 msgid "Username and password (Step 2 of 3)"
 msgstr "Jméno uživatele a heslo (krok 2 ze 3)"
 
-#: interfaces/network.glade.in.h:113 interfaces/shares.glade.in.h:58
+#: interfaces/network.glade.in.h:113
 msgid "Username:"
 msgstr "Uživatelské jméno:"
 
@@ -1868,7 +941,7 @@ msgstr "_Autodetekovat"
 msgid "_Channel:"
 msgstr "_Kanál:"
 
-#: interfaces/network.glade.in.h:143 interfaces/shares.glade.in.h:62
+#: interfaces/network.glade.in.h:143
 msgid "_Comment:"
 msgstr "_Komentář:"
 
@@ -1879,6 +952,10 @@ msgstr "Nasta_vení:"
 #: interfaces/network.glade.in.h:145
 msgid "_Configure"
 msgstr "Nasta_vit"
+
+#: interfaces/network.glade.in.h:146 interfaces/users.glade.in.h:83
+msgid "_Delete"
+msgstr "O_dstranit"
 
 #: interfaces/network.glade.in.h:147
 msgid "_Description:"
@@ -1908,7 +985,7 @@ msgstr "_Frekvence (GHz):"
 msgid "_Gateway address:"
 msgstr "Adresa _brány:"
 
-#: interfaces/network.glade.in.h:154 interfaces/print.glade.in.h:70
+#: interfaces/network.glade.in.h:154
 msgid "_Hostname:"
 msgstr "Název _počítače:"
 
@@ -1992,8 +1069,7 @@ msgstr "Akt_ualizovat DNS, když se připojení stane aktivním"
 msgid "_Use remote IP as default gateway"
 msgstr "Po_užít vzdálenou IP jako implicitní bránu"
 
-#: interfaces/network.glade.in.h:176 interfaces/print.glade.in.h:75
-#: interfaces/shares.glade.in.h:73 interfaces/users.glade.in.h:94
+#: interfaces/network.glade.in.h:176 interfaces/users.glade.in.h:94
 msgid "_Username:"
 msgstr "_Uživatelské jméno:"
 
@@ -2001,659 +1077,65 @@ msgstr "_Uživatelské jméno:"
 msgid "_Wavelan"
 msgstr "_Wavelan"
 
-#: interfaces/print.glade.in.h:1
-msgid "/dev/lp0 (LPT1)"
-msgstr "/dev/lp0 (LPT1)"
-
-#: interfaces/print.glade.in.h:2
-msgid "/dev/lp1 (LPT2)"
-msgstr "/dev/lp1 (LPT2)"
-
-#: interfaces/print.glade.in.h:3
-msgid "/dev/ttyS0 (COM1)"
-msgstr "/dev/ttyS0 (COM1)"
-
-#: interfaces/print.glade.in.h:4
-msgid "/dev/ttyS1 (COM2)"
-msgstr "/dev/ttyS1 (COM2)"
-
-#: interfaces/print.glade.in.h:5
-msgid "/dev/ttyS2 (COM3)"
-msgstr "/dev/ttyS2 (COM3)"
-
-#: interfaces/print.glade.in.h:6
-msgid "/dev/ttyS3 (COM4)"
-msgstr "/dev/ttyS3 (COM4)"
-
-#: interfaces/print.glade.in.h:7
-msgid "1200x1200"
-msgstr "1200×1200"
-
-#: interfaces/print.glade.in.h:8
-msgid "1200x600"
-msgstr "1200×600"
-
-#: interfaces/print.glade.in.h:9
-msgid "16 colors"
-msgstr "16 barev"
-
-#: interfaces/print.glade.in.h:10
-msgid "256 colors"
-msgstr "256 barev"
-
-#: interfaces/print.glade.in.h:11
-msgid "300x300"
-msgstr "300×300"
-
-#: interfaces/print.glade.in.h:12
-msgid "400x400"
-msgstr "400×400"
-
-#: interfaces/print.glade.in.h:13
-msgid "600x600"
-msgstr "600×600"
-
-#: interfaces/print.glade.in.h:14
-msgid "A3"
-msgstr "A3"
-
-#: interfaces/print.glade.in.h:15
-msgid "A4"
-msgstr "A4"
-
-#: interfaces/print.glade.in.h:16
-msgid "Add Printer..."
-msgstr "Přidat tiskárnu..."
-
-#: interfaces/print.glade.in.h:17
-msgid "Add a New Printer"
-msgstr "Přidat novou tiskárnu"
-
-#: interfaces/print.glade.in.h:18
-msgid "Connection"
-msgstr "Připojení"
-
-#: interfaces/print.glade.in.h:19
-msgid ""
-"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
-msgstr ""
-"Převádět konce řádků typu PC na formát Un*x. Pomáhá předcházet efektu "
-"\"stairstepping\"."
-
-#: interfaces/print.glade.in.h:20
-msgid "Convert _Linefeeds"
-msgstr "Převádět _konce řádků"
-
-#: interfaces/print.glade.in.h:22
-msgid "Document Pages per Sheet"
-msgstr "Stránek dokumentu na list"
-
-#: interfaces/print.glade.in.h:23
-msgid "Driver"
-msgstr "Ovladač"
-
-#: interfaces/print.glade.in.h:24
-msgid "E_xplicitly Eject Last Page"
-msgstr "E_xplicitně vysunout poslední stránku"
-
-#: interfaces/print.glade.in.h:25
-msgid "High Color"
-msgstr "High Color"
-
-#: interfaces/print.glade.in.h:26
-msgid "Legal"
-msgstr "Legal"
-
-#: interfaces/print.glade.in.h:27
-msgid "Letter"
-msgstr "Letter"
-
-#: interfaces/print.glade.in.h:28
-msgid "Name of the printer."
-msgstr "Název tiskárny."
-
-#: interfaces/print.glade.in.h:29
-msgid "Name of the server the printer is connected to."
-msgstr "Název serveru, ke kterému je připojena tiskárna."
-
-#: interfaces/print.glade.in.h:30
-msgid "Name the server uses for the printer."
-msgstr "Název, který používá server pro tiskárnu."
-
-#: interfaces/print.glade.in.h:31
-msgid "Novell _Netware (NCP) Printer"
-msgstr "Tiskárna pro Novell _Netware (NCP)"
-
-#: interfaces/print.glade.in.h:32
-msgid "Number of colors to print in."
-msgstr "Počet barev, ve kterých se má tisknout."
-
-#: interfaces/print.glade.in.h:33
-msgid "Options"
-msgstr "Volby"
-
-#: interfaces/print.glade.in.h:34
-msgid "P_aper Size:"
-msgstr "Velikost p_apíru:"
-
-#: interfaces/print.glade.in.h:35
-msgid "P_ort Number:"
-msgstr "Číslo p_ortu:"
-
-#: interfaces/print.glade.in.h:36
-msgid "Port number the server is listening to."
-msgstr "Číslo portu, na kterém server naslouchá."
-
-#: interfaces/print.glade.in.h:37
-msgid "Port the printer is connected to."
-msgstr "Port, ke kterému je tiskárna připojena."
-
-#: interfaces/print.glade.in.h:38
-msgid "Print one page per sheet."
-msgstr "Tisknout jednu stránku na list"
-
-#: interfaces/print.glade.in.h:39
-msgid "Print resolution."
-msgstr "Rozlišení tisku."
-
-#: interfaces/print.glade.in.h:40
-msgid "Printer Settings"
-msgstr "Nastavení tiskárny"
-
-#: interfaces/print.glade.in.h:41
-msgid "Printer connected to a port on your machine."
-msgstr "Tiskárna připojená k portu na vašem počítači."
-
-#: interfaces/print.glade.in.h:42
-msgid "Printer listening directly for network connections."
-msgstr "Tiskárna naslouchající přímo síťovým spojením."
-
-#: interfaces/print.glade.in.h:43
-msgid "Printer shared on a Windows (SMB) network."
-msgstr "Tiskárna sdílená pomocí sítě Windows (SMB)."
-
-#: interfaces/print.glade.in.h:44
-msgid "Printer shared using the Novell Netware (NCP) protocol."
-msgstr "Tiskárna sdílená pomocí tiskového protokolu Novell Netware (NCP)."
-
-#: interfaces/print.glade.in.h:45
-msgid "Printer shared using the Unix (lpd) print protocol."
-msgstr "Tiskárna sdílená pomocí tiskového protokolu Unix (lpd)."
-
-#: interfaces/print.glade.in.h:46
-msgid "R_esolution:"
-msgstr "Rozliš_ení:"
-
-#: interfaces/print.glade.in.h:47
-msgid "Remote UNIX (_lpd) Printer"
-msgstr "Vzdálená tiskárna pro _UNIX (lpd)"
-
-#: interfaces/print.glade.in.h:48
-msgid "Remote _Windows (SMB) printer"
-msgstr "Vzdálená tiskárna pro _Windows (SMB)"
-
-#: interfaces/print.glade.in.h:49
-msgid "SMB workgroup the server is in."
-msgstr "Pracovní skupina protokolu SMB, ve které je server."
-
-#: interfaces/print.glade.in.h:50
-msgid "Scale pages down and print eight per sheet."
-msgstr "Zmenšit stránky a tisknout osm na list."
-
-#: interfaces/print.glade.in.h:51
-msgid "Scale pages down and print four per sheet."
-msgstr "Zmenšit stránky a tisknout čtyři na list."
-
-#: interfaces/print.glade.in.h:52
-msgid "Scale pages down and print two per sheet."
-msgstr "Zmenšit stránky a tisknout dvě na list."
-
-#: interfaces/print.glade.in.h:53
-msgid "Select the type of printer to add:"
-msgstr "Vyberte typ přidávané tiskárny:"
-
-#: interfaces/print.glade.in.h:54
-msgid "Send an EOF after the print job to help eject the last page."
-msgstr ""
-"Posílat EOF po ukončení tiskové úlohy, aby se vysunula poslední stránka."
-
-#: interfaces/print.glade.in.h:55
-msgid "Send text documents raw to the printer."
-msgstr "Posílat textové dokumenty přímo na tiskárnu."
-
-#: interfaces/print.glade.in.h:56 interfaces/shares.glade.in.h:53
-msgid "Settings..."
-msgstr "Nastavení..."
-
-#: interfaces/print.glade.in.h:57
-msgid "Size of the paper in the printer."
-msgstr "Velikost papíru v tiskárně."
-
-#: interfaces/print.glade.in.h:58
-msgid "The password used to connect to the server."
-msgstr "Heslo používané pro připojení k serveru."
-
-#: interfaces/print.glade.in.h:59
-msgid ""
-"This is the list of the configured printers available on the system. Create "
-"new printers or edit existing printer settings with this dialog."
-msgstr ""
-"Toto je seznam nastavených tiskáren dostupných na vašem systému. Vytvořte "
-"novou tiskárnu nebo upravte již existující pomocí tohoto dialogu."
-
-#: interfaces/print.glade.in.h:60
-msgid "True Color"
-msgstr "True Color"
-
-#: interfaces/print.glade.in.h:61
-msgid "Username used to connect to the server."
-msgstr "Uživatelské jméno pro připojení k serveru."
-
-#: interfaces/print.glade.in.h:62
-msgid "_1"
-msgstr "_1"
-
-#: interfaces/print.glade.in.h:63
-msgid "_2"
-msgstr "_2"
-
-#: interfaces/print.glade.in.h:64
-msgid "_4"
-msgstr "_4"
-
-#: interfaces/print.glade.in.h:65
-msgid "_8"
-msgstr "_8"
-
-#: interfaces/print.glade.in.h:66
-msgid "_Color Depth:"
-msgstr "_Barevná hloubka:"
-
-#: interfaces/print.glade.in.h:67
-msgid "_Device Name:"
-msgstr "Název _zařízení:"
-
-#: interfaces/print.glade.in.h:68
-msgid "_Direct Network Printer"
-msgstr "Tiskárna připojená _přímo k síti"
-
-#: interfaces/print.glade.in.h:69
-msgid "_Fast Text Printing"
-msgstr "_Rychlý tisk textu"
-
-#: interfaces/print.glade.in.h:71
-msgid "_Local Printer"
-msgstr "_Lokální tiskárna"
-
-#: interfaces/print.glade.in.h:74
-msgid "_Remote Name:"
-msgstr "_Vzdálený název:"
-
-#: interfaces/print.glade.in.h:76
-msgid "_Workgroup:"
-msgstr "Pracovní _skupina:"
-
-#: interfaces/rollback-location-management.glade.in.h:1
-msgid "Advanced..."
-msgstr "Pokročilé..."
-
-#: interfaces/rollback-location-management.glade.in.h:2
-msgid "Change to this Location"
-msgstr "Změnit na toto umístění"
-
-#: interfaces/rollback-location-management.glade.in.h:3
-msgid "Configuration Restoration"
-msgstr "Obnovení nastavení"
-
-#: interfaces/rollback-location-management.glade.in.h:4
-msgid "Create..."
-msgstr "Vytvořit..."
-
-#: interfaces/rollback-location-management.glade.in.h:5
-msgid "Destroy..."
-msgstr "Zničit..."
-
-#: interfaces/rollback-location-management.glade.in.h:6
-msgid "Edit this Location"
-msgstr "Upravit toto umístění"
-
-#: interfaces/rollback-location-management.glade.in.h:8
-msgid "Location name:"
-msgstr "Název umístění:"
-
-#: interfaces/rollback-location-management.glade.in.h:9
-msgid "Parent Location:"
-msgstr "Rodičovské umístění:"
-
-#: interfaces/rollback-location-management.glade.in.h:10
-msgid "Rename..."
-msgstr "Přejmenovat..."
-
-#: interfaces/rollback-location-management.glade.in.h:11
-msgid "Restore all tools"
-msgstr "Obnovit všechny nástroje"
-
-#: interfaces/rollback-location-management.glade.in.h:12
-msgid "Restore configuration from"
-msgstr "Obnovit nastavení staré"
-
-#: interfaces/rollback-location-management.glade.in.h:13
-msgid "Restore only"
-msgstr "Pouze obnovit"
-
-#: interfaces/rollback-location-management.glade.in.h:14
-msgid "View Logs..."
-msgstr "Zobrazit záznamy..."
-
-#: interfaces/rollback-location-management.glade.in.h:15
-msgid "days ago"
-msgstr "dní"
-
-#: interfaces/runlevel.glade.in.h:1
+#: interfaces/services.glade.in.h:1
 msgid "<span weight=\"bold\">Description</span>"
 msgstr "<span weight=\"bold\">Popis:</span>"
 
-#: interfaces/runlevel.glade.in.h:2
+#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">Obecné informace</span>"
 
-#: interfaces/runlevel.glade.in.h:3
+#: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">Nastavení služby</span>"
 
-#: interfaces/runlevel.glade.in.h:4
+#: interfaces/services.glade.in.h:4
 msgid "Click on an item in the list to show it's description."
 msgstr "Kliknutím na položku seznamu zobrazíte její popis."
 
-#: interfaces/runlevel.glade.in.h:6
+#: interfaces/services.glade.in.h:5
+msgid "Description:"
+msgstr "Popis:"
+
+#: interfaces/services.glade.in.h:6
 msgid "Parameters:"
 msgstr "Parametry:"
 
-#: interfaces/runlevel.glade.in.h:8
+#: interfaces/services.glade.in.h:7
+msgid "Priority:"
+msgstr "Priorita:"
+
+#: interfaces/services.glade.in.h:8
 msgid "Service _Properties"
 msgstr "_Vlastnosti služby"
 
-#: interfaces/runlevel.glade.in.h:9
+#: interfaces/services.glade.in.h:9
 msgid "Service:"
 msgstr "Služba:"
 
-#: interfaces/runlevel.glade.in.h:10
-msgid ""
-"Use this tool to specify which services to run and the runlevel for the "
-"services."
-msgstr ""
-"Použijte tento nástroj určení, které služby spouštět v kterých a úrovních "
-"běhu."
+#: interfaces/services.glade.in.h:10
+msgid "Use this tool to specify which services to run"
+msgstr "Použijte tento nástroj pro určení, které služby spouštět"
 
-#: interfaces/shares.glade.in.h:3
-msgid " Edit clients... "
-msgstr " Upravit klienty... "
+#: interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr "(nenastaveno)"
 
-#: interfaces/shares.glade.in.h:4
-msgid " _Edit clients... "
-msgstr " Upravit kli_enty... "
-
-#: interfaces/shares.glade.in.h:5
-msgid "Access control"
-msgstr "Kontrola přístupu"
-
-#: interfaces/shares.glade.in.h:7
-msgid "Add..."
-msgstr "Přidat..."
-
-#: interfaces/shares.glade.in.h:8
-msgid "Allow writing"
-msgstr "Povolit zápis"
-
-#: interfaces/shares.glade.in.h:9
-msgid "Browseable"
-msgstr "Probíratelný"
-
-#: interfaces/shares.glade.in.h:10
-msgid "Client"
-msgstr "Klient"
-
-#: interfaces/shares.glade.in.h:11
-msgid "Clients"
-msgstr "Klienti"
-
-#: interfaces/shares.glade.in.h:12
-msgid "Comment:"
-msgstr "Komentář:"
-
-#: interfaces/shares.glade.in.h:14
-msgid "Do not _remount this share after computer reboots"
-msgstr "Nepřipojovat znovu toto sdílení po _restartu počítače"
-
-#: interfaces/shares.glade.in.h:15
-msgid "Do not remount this share after computer reboots"
-msgstr "Nepřipojovat toto sdílení po restartu počítače"
-
-#: interfaces/shares.glade.in.h:17
-msgid "Export"
-msgstr "Export"
-
-#: interfaces/shares.glade.in.h:18
-msgid "Export Clients"
-msgstr "Klienti exportu"
-
-#: interfaces/shares.glade.in.h:19
-msgid "Export Settings"
-msgstr "Nastavení exportu"
-
-#: interfaces/shares.glade.in.h:20
-msgid "Export _type:"
-msgstr "_Typ exportu:"
-
-#: interfaces/shares.glade.in.h:21
-msgid "Export type:"
-msgstr "Typ exportu:"
-
-#: interfaces/shares.glade.in.h:22
-msgid "Exports"
-msgstr "Exporty"
-
-#: interfaces/shares.glade.in.h:23
-msgid ""
-"Exports are used to share directories on your computer with other computers "
-"over the network. "
-msgstr ""
-"Exporty se používají ke sdílení adresářů na vašem počítači s jinými počítači "
-"pomocí sítě."
-
-#: interfaces/shares.glade.in.h:25
-msgid "Host:"
-msgstr "Počítač:"
-
-#: interfaces/shares.glade.in.h:26
-msgid "If the mount point does not exist, it will be created."
-msgstr "Pokud místo připojení neexistuje, bude vytvořeno."
-
-#: interfaces/shares.glade.in.h:27
-msgid "Import"
-msgstr "Import"
-
-#: interfaces/shares.glade.in.h:28
-msgid "Import Settings"
-msgstr "Nastavení importu"
-
-#: interfaces/shares.glade.in.h:29
-msgid "Import Settings--NFS Options"
-msgstr "Nastavení importu--volby NFS"
-
-#: interfaces/shares.glade.in.h:30
-msgid "Import Settings--Samba Options (Obsolete)"
-msgstr "Nastavení importu--volby Samba (zastaralé)"
-
-#: interfaces/shares.glade.in.h:31
-msgid "Import _type:"
-msgstr "_Typ importu:"
-
-#: interfaces/shares.glade.in.h:32
-msgid "Import type:"
-msgstr "Typ importu:"
-
-#: interfaces/shares.glade.in.h:33
-msgid "Imports"
-msgstr "Importy"
-
-#: interfaces/shares.glade.in.h:34
-msgid ""
-"Imports are directories which reside in other computers and are accessible "
-"to you through the network."
-msgstr ""
-"Importy jsou adresáře, které jsou umístěny na jiných počítačích a jsou vám "
-"přístupné pomocí sítě."
-
-#: interfaces/shares.glade.in.h:35
-msgid "Mount Point"
-msgstr "Místo připojení"
-
-#: interfaces/shares.glade.in.h:36
-msgid "Mount p_oint:"
-msgstr "Míst_o připojení:"
-
-#: interfaces/shares.glade.in.h:38
-msgid "Mounted"
-msgstr "Připojen"
-
-#: interfaces/shares.glade.in.h:39
-msgid "Mounting Options"
-msgstr "Volby připojení"
-
-#: interfaces/shares.glade.in.h:40
-msgid "Mounting options"
-msgstr "Volby připojení"
-
-#: interfaces/shares.glade.in.h:41
-msgid "NFS"
-msgstr "NFS"
-
-#: interfaces/shares.glade.in.h:42 src/boot/table.c:44
-msgid "Name"
-msgstr "Název"
-
-#: interfaces/shares.glade.in.h:44
-msgid "P_ublic"
-msgstr "_Veřejný"
-
-#: interfaces/shares.glade.in.h:45
-msgid "Pass_word:"
-msgstr "_Heslo:"
-
-#: interfaces/shares.glade.in.h:47
-msgid "Path"
-msgstr "Cesta"
-
-#: interfaces/shares.glade.in.h:49
-msgid "Pattern:"
-msgstr "Vzor:"
-
-#: interfaces/shares.glade.in.h:50
-msgid "Public"
-msgstr "Veřejný"
-
-#: interfaces/shares.glade.in.h:51
-msgid "Restrict access to this share to specific clients"
-msgstr "Omezit přístup k tomuto sdílení pouze na specifické klienty"
-
-#: interfaces/shares.glade.in.h:52
-msgid "Samba"
-msgstr "Samba"
-
-#: interfaces/shares.glade.in.h:54
-msgid "Update"
-msgstr "Aktualizovat"
-
-#: interfaces/shares.glade.in.h:55
-msgid ""
-"Use this dialog to create a new export, or to edit the settings of an "
-"existing export."
-msgstr ""
-"Použijte tento dialog pro vytvoření nového exportu nebo úpravu nastavení již "
-"existujícího exportu."
-
-#: interfaces/shares.glade.in.h:56
-msgid ""
-"Use this dialog to create a new import, or to edit the settings of an "
-"existing import."
-msgstr ""
-"Použijte tento dialog pro vytvoření nového importu nebo úpravu nastavení "
-"existujícího importu."
-
-#: interfaces/shares.glade.in.h:57
-msgid ""
-"Use this dialog to define the client patterns which determine who has access "
-"to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
-"or \" *.gnome.org\".  "
-msgstr ""
-"Použijte tento dialog pro definici vzorů klientů, které rozhodují o přístupu "
-"k vašemu sdílení NFS. Vzory klientů mají obvykle tvar \"10.10.10.*\" nebo \" "
-"*.gnome.org\". "
-
-#: interfaces/shares.glade.in.h:59
-msgid "Writable"
-msgstr "Lze zapisovat"
-
-#: interfaces/shares.glade.in.h:61
-msgid "_Browseable"
-msgstr "Pro_bíratelný"
-
-#: interfaces/shares.glade.in.h:64
-msgid "_Enable"
-msgstr "Po_volit"
-
-#: interfaces/shares.glade.in.h:65
-msgid "_Host:"
-msgstr "Počí_tač:"
-
-#: interfaces/shares.glade.in.h:66
-msgid "_Mount"
-msgstr "_Připojit"
-
-#: interfaces/shares.glade.in.h:67
-msgid "_Mounted"
-msgstr "_Připojeno"
-
-#: interfaces/shares.glade.in.h:69
-msgid "_Path:"
-msgstr "_Cesta:"
-
-#: interfaces/shares.glade.in.h:70
-msgid "_Restrict access to this share to specific clients"
-msgstr "Ome_zit přístup k tomuto sdílení na specifické klienty"
-
-#: interfaces/shares.glade.in.h:71
-msgid "_Scan"
-msgstr "_Zkoumat"
-
-#: interfaces/shares.glade.in.h:74
-msgid "_Writable"
-msgstr "_Lze zapisovat"
-
-#: interfaces/shares.glade.in.h:75
-msgid "add/edit clients"
-msgstr "přidat/upravit klienty"
-
-#: interfaces/shares.glade.in.h:76
-msgid "advanced mode--main window"
-msgstr "pokročilý režim--hlavní okno"
-
-#: interfaces/shares.glade.in.h:77
-msgid "export settings--NFS options"
-msgstr "nastavení exportu--volby NFS"
-
-#: interfaces/shares.glade.in.h:78
-msgid "export settings--Samba options"
-msgstr "nastavení exportu--volby Samba"
-
-#: interfaces/shares.glade.in.h:79
-msgid "simple mode--main window"
-msgstr "jednoduchý režim--hlavní okno"
+#: interfaces/time.glade.in.h:3
+msgid ":"
+msgstr ":"
 
 #: interfaces/time.glade.in.h:4
 msgid "<span weight=\"bold\">Time Configuration</span>"
 msgstr "<span weight=\"bold\">Nastavení času</span>"
+
+#: interfaces/time.glade.in.h:5
+msgid ""
+"Please select the current date and time. You can also specify a time zone "
+"and a time server."
+msgstr ""
+"Vyberte prosím aktuální datum a čas. Můžete také zadat časovou zónu a server "
+"času."
 
 #: interfaces/time.glade.in.h:6
 msgid "S_ynchronize clock with Internet servers:"
@@ -2727,6 +1209,10 @@ msgstr "<span weight=\"bold\">Implicitní hodnoty systému</span>"
 msgid "<span weight=\"bold\">User Profile</span>"
 msgstr "<span weight=\"bold\">Uživatelský profil</span>"
 
+#: interfaces/users.glade.in.h:14
+msgid "Add"
+msgstr "Přidat"
+
 #: interfaces/users.glade.in.h:16
 msgid "Assign a random password by default"
 msgstr "Přiřadit implicitně náhodné heslo"
@@ -2772,6 +1258,10 @@ msgstr "Implicitní s_kupina:"
 #: interfaces/users.glade.in.h:27
 msgid "Default _shell:"
 msgstr "Implicitní _shell:"
+
+#: interfaces/users.glade.in.h:28
+msgid "Delete"
+msgstr "Odstranit"
 
 #: interfaces/users.glade.in.h:29
 msgid ""
@@ -2894,6 +1384,10 @@ msgstr ""
 #: interfaces/users.glade.in.h:58
 msgid "Set password b_y hand"
 msgstr "Nastavit heslo _ručně"
+
+#: interfaces/users.glade.in.h:59
+msgid "Settings"
+msgstr "Nastavení"
 
 #: interfaces/users.glade.in.h:60
 msgid "Settings for selected user and group"
@@ -3043,10 +1537,6 @@ msgstr "_Pracovní telefon:"
 msgid "profiles_table"
 msgstr "tabulka_profilů"
 
-#: src/boot/boot-append-editor.c:119 src/boot/callbacks.c:165
-msgid "Boot Append Editor"
-msgstr "Editor zaváděcího příkazu"
-
 #: src/boot/boot-append-gui.c:226
 #, c-format
 msgid "vga=%s is not a valid vga value"
@@ -3056,11 +1546,6 @@ msgstr "vga=%s není platná hodnota vga"
 #: src/boot/boot-druid.c:407
 msgid "Boot Image Wizard"
 msgstr "Průvodce zaváděcím obrazem"
-
-#. give our dialog an OK button and title
-#: src/boot/boot-image-editor.c:108 src/boot/callbacks.c:79
-msgid "Boot Image Editor"
-msgstr "Editor zaváděcího obrazu"
 
 #: src/boot/boot-image.c:40
 msgid "Unknown"
@@ -3086,30 +1571,42 @@ msgstr "Linux"
 msgid "Linux swap"
 msgstr "Linux swap"
 
-#: src/boot/boot-image.c:266
+#: src/boot/boot-image.c:46
+msgid "GNU/Hurd"
+msgstr "GNU/Hurd"
+
+#: src/boot/boot-image.c:278
 #, c-format
 msgid "Invalid path: %s"
 msgstr "Neplatná cesta: %s"
 
-#: src/boot/boot-image.c:282
+#: src/boot/boot-image.c:294
 #, c-format
 msgid "Image '%s' already exists, please set another name."
 msgstr "Obraz '%s' již existuje, zadejte prosím jiný název."
 
-#: src/boot/boot-image.c:288
+#: src/boot/boot-image.c:300
 #, c-format
 msgid "Invalid image name: '%s'"
 msgstr "Neplatný název obrazu: '%s'"
 
-#: src/boot/boot-image.c:303
+#: src/boot/boot-image.c:313
 #, c-format
 msgid "Invalid image: '%s'"
 msgstr "Neplatný obraz: '%s'"
 
-#: src/boot/boot-image.c:321
+#: src/boot/boot-image.c:331
 #, c-format
 msgid "Invalid root device: '%s'"
 msgstr "Neplatné kořenové zařízení: '%s'"
+
+#: src/boot/boot-settings.c:43
+msgid "_Module path:"
+msgstr "Cesta _modulu:"
+
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:502
+msgid "Password confirmation isn't correct."
+msgstr "Potvrzení hesla není správně."
 
 #: src/boot/boot.desktop.in.in.h:1
 msgid "Boot"
@@ -3119,7 +1616,15 @@ msgstr "Zavedení"
 msgid "Boot Manager"
 msgstr "Správce zavádění"
 
-#: src/boot/callbacks.c:379
+#: src/boot/callbacks.c:75
+msgid "Boot Image Editor"
+msgstr "Editor zaváděcího obrazu"
+
+#: src/boot/callbacks.c:169
+msgid "Boot Append Editor"
+msgstr "Editor zaváděcího příkazu"
+
+#: src/boot/callbacks.c:390
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3127,12 +1632,12 @@ msgstr ""
 "Váš systém nenastartuje bez\n"
 "alespoň jednoho zaváděcího obrazu.\n"
 
-#: src/boot/callbacks.c:394
+#: src/boot/callbacks.c:405
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Jste si jisti, že chcete odstranit '%s'?"
 
-#: src/boot/callbacks.c:439 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:450
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3145,27 +1650,35 @@ msgstr ""
 msgid "Boot Manager Settings"
 msgstr "Nastavení správce zavádění"
 
-#: src/boot/table.c:45
+#: src/boot/table.c:41
+msgid "Name"
+msgstr "Název"
+
+#: src/boot/table.c:42
 msgid "Default"
 msgstr "Implicitní"
 
-#: src/boot/table.c:46 src/network/connection.c:492
+#: src/boot/table.c:43 src/network/connection.c:482
 msgid "Type"
 msgstr "Typ"
 
-#: src/boot/table.c:47
+#: src/boot/table.c:44
 msgid "Kernel Image"
 msgstr "Obraz jádra"
 
-#: src/boot/table.c:53
+#: src/boot/table.c:45 src/network/connection.c:498
+msgid "Device"
+msgstr "Zařízení"
+
+#: src/boot/table.c:50
 msgid "/_Add ..."
 msgstr "/Přid_at ..."
 
-#: src/boot/table.c:55 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Vlastnosti"
 
-#: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/O_dstranit"
 
@@ -3214,11 +1727,11 @@ msgstr "Chyba při připojení signálu `%s' v prvku `%s'"
 msgid "Skipping %s directive..."
 msgstr "Vynechává se direktiva %s..."
 
-#: src/common/gst-tool.c:1091
+#: src/common/gst-tool.c:1094
 msgid "Skipping actual save..."
 msgstr "Vynechává se skutečné uložení..."
 
-#: src/common/gst-tool.c:1153
+#: src/common/gst-tool.c:1156
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3226,12 +1739,12 @@ msgstr ""
 "Nastala chyba při spuštění podpůrného skriptu\n"
 "a nastavení nebylo možné načíst."
 
-#: src/common/gst-tool.c:1506
+#: src/common/gst-tool.c:1509
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1684
+#: src/common/gst-tool.c:1687
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -3258,11 +1771,11 @@ msgstr ""
 "--\n"
 "Váš tým aplikace Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1708
+#: src/common/gst-tool.c:1711
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1717
+#: src/common/gst-tool.c:1720
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
 
@@ -3274,7 +1787,7 @@ msgstr ""
 "Restartujte prosím vaše sezení GNOME,\n"
 "aby se tyto změny projevily."
 
-#: src/network/callbacks.c:115
+#: src/network/callbacks.c:115 src/services/table.c:55
 msgid "Active"
 msgstr "Aktivní"
 
@@ -3430,17 +1943,17 @@ msgstr ""
 "odrážkou připojení. Abyste tomu zamezili, musíte\n"
 "nainstalovat balíček redhat-config-network."
 
-#: src/network/callbacks.c:912
+#: src/network/callbacks.c:900
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Chcete povolit rozhraní %s?"
 
-#: src/network/callbacks.c:924
+#: src/network/callbacks.c:910
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Chcete zakázat rozhraní %s?"
 
-#: src/network/callbacks.c:998
+#: src/network/callbacks.c:983
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -3448,23 +1961,23 @@ msgstr ""
 "Nemohu autodetekovat zařízení modemu, zkontrolujte, že se nepoužívá a že je "
 "správně připojen"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:1028
 msgid "Silent"
 msgstr "Tichá"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:1030
 msgid "Low"
 msgstr "Nízká"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:1032
 msgid "Medium"
 msgstr "Střední"
 
-#: src/network/callbacks.c:1049
+#: src/network/callbacks.c:1034
 msgid "Loud"
 msgstr "Hlasitá"
 
-#: src/network/callbacks.c:1215
+#: src/network/callbacks.c:1200
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Jste si jisti, že chcete odstranit přezdívky pro %s?"
@@ -3501,15 +2014,15 @@ msgstr "Rozhraní loopback"
 msgid "Unknown interface type"
 msgstr "Neznámý typ rozhraní"
 
-#: src/network/connection.c:520
+#: src/network/connection.c:510
 msgid "Status"
 msgstr "Stav"
 
-#: src/network/connection.c:529 src/network/profiles-table.c:62
+#: src/network/connection.c:519 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Popis"
 
-#: src/network/connection.c:1625
+#: src/network/connection.c:1626
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3519,7 +2032,7 @@ msgstr ""
 "byla ponechána prázdná. Zadejte prosím\n"
 "do těchto polí platné IP adresy a pokračujte."
 
-#: src/network/connection.c:1632
+#: src/network/connection.c:1633
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3529,7 +2042,7 @@ msgstr ""
 "byla ponechána prázdná. Zadejte prosím\n"
 "do těchto polí platné IP adresy a pokračujte."
 
-#: src/network/connection.c:1638
+#: src/network/connection.c:1639
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3543,13 +2056,17 @@ msgstr ""
 "pro primární DNS server nebo odškrtněte\n"
 "volbu pro ruční nastavení DNS."
 
-#: src/network/connection.c:2194
+#: src/network/connection.c:2195
 msgid "Autodetecting modem device"
 msgstr "Autodetekuji zařízení modemu"
 
 #: src/network/hosts.c:147
 msgid "IP Address"
 msgstr "IP adresa"
+
+#: src/network/hosts.c:155
+msgid "Aliases"
+msgstr "Přezdívky"
 
 #: src/network/main.c:220
 msgid "Run the connection druid."
@@ -3647,32 +2164,32 @@ msgstr ""
 "\n"
 "Heslo: %s"
 
-#: src/network/profiles-table.c:53
-msgid "Profile name"
-msgstr "Název profilu"
-
 #: src/network/profile.c:43
 #, c-format
 msgid "Are you sure you want to delete profile %s?"
 msgstr "Jste si jisti, že chcete odstranit profil %s?"
 
-#: src/runlevel/callbacks.c:49
+#: src/network/profiles-table.c:53
+msgid "Profile name"
+msgstr "Název profilu"
+
+#: src/services/callbacks.c:45
 msgid "No description available."
 msgstr "Popis není k dispozici."
 
-#: src/runlevel/main.c:75
-msgid "Runlevel Settings"
-msgstr "Nastavení úrovně běhu"
+#: src/services/main.c:62
+msgid "Services Settings"
+msgstr "Nastavení služeb"
 
-#: src/runlevel/runlevel.desktop.in.in.h:1
-msgid "Runlevel"
-msgstr "Úroveň běhu"
+#: src/services/services.desktop.in.in.h:1
+msgid "Services"
+msgstr "Služby"
 
-#: src/runlevel/runlevel.desktop.in.in.h:2
-msgid "Runlevel Services Manager"
-msgstr "Správce služeb pro úrovně běhu"
+#: src/services/services.desktop.in.in.h:2
+msgid "Services Manager"
+msgstr "Správce služeb"
 
-#: src/runlevel/table.c:86
+#: src/services/table.c:65
 msgid "Service"
 msgstr "Služba"
 
@@ -3695,6 +2212,10 @@ msgstr ""
 #: src/time/main.c:789
 msgid "Time and Date Settings"
 msgstr "Nastavení data a času"
+
+#: src/time/time.desktop.in.in.h:1
+msgid "Time"
+msgstr "Čas"
 
 #: src/time/time.desktop.in.in.h:2
 msgid "Time, date and timezone."
@@ -3923,10 +2444,6 @@ msgstr "Zadejte prosím shell s plnou cestou."
 msgid "Password must not be empty."
 msgstr "Heslo nesmí být prázdné."
 
-#: src/users/user-settings.c:502
-msgid "Password confirmation isn't correct."
-msgstr "Potvrzení hesla není správně."
-
 #: src/users/user-settings.c:778
 #, c-format
 msgid "Settings for User %s"
@@ -3956,6 +2473,1076 @@ msgstr "Komentář"
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "Uživatelé a skupiny."
+
+#~ msgid "Default runlevel"
+#~ msgstr "Implicitní úroveň běhu"
+
+#~ msgid "Dialog complexity for the runlevel-admin tool"
+#~ msgstr "Složitost dialogu nástroje správce úrovně běhu"
+
+#~ msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
+#~ msgstr ""
+#~ "Úroveň běhu, kterou ukazuje nástroj správce úrovně běhu jako implicitní v "
+#~ "základním režimu"
+
+#~ msgid "Advanced mode not yet implemented. Sorry."
+#~ msgstr "Pokročilý režim zatím není implementován. Promiňte."
+
+#~ msgid "DHCP Server"
+#~ msgstr "Server DHCP"
+
+#~ msgid "DHCP server configuration"
+#~ msgstr "Nastavení serveru DHCP"
+
+#~ msgid "DHCP server configuration "
+#~ msgstr "Nastavení serveru DHCP "
+
+#~ msgid "E_nabled"
+#~ msgstr "Povol_en"
+
+#~ msgid "Host Info : "
+#~ msgstr "Informace o počítači: "
+
+#~ msgid "Hosts :"
+#~ msgstr "Počítače:"
+
+#~ msgid "Hosts Editor"
+#~ msgstr "Editor počítačů"
+
+#~ msgid "Ip Address"
+#~ msgstr "IP adresa"
+
+#~ msgid "Range _End :"
+#~ msgstr "Kon_ec rozsahu:"
+
+#~ msgid "Range _Start :"
+#~ msgstr "Počátek roz_sahu:"
+
+#~ msgid "Router :"
+#~ msgstr "Router :"
+
+#~ msgid "Subnet _Mask :"
+#~ msgstr "_Maska podsítě:"
+
+#~ msgid "_Add"
+#~ msgstr "Přid_at"
+
+#~ msgid "_Comment :"
+#~ msgstr "K_omentář:"
+
+#~ msgid "_Domain :"
+#~ msgstr "_Doména:"
+
+#~ msgid "_Edit Hosts..."
+#~ msgstr "_Upravit počítače..."
+
+#~ msgid "_Hostname :"
+#~ msgstr "_Název počítače:"
+
+#~ msgid "_IP address :"
+#~ msgstr "_IP adresa:"
+
+#~ msgid "_MAC address :"
+#~ msgstr "_MAC adresa:"
+
+#~ msgid "host"
+#~ msgstr "počítač"
+
+#~ msgid "Add an unlisted import"
+#~ msgstr "Přidat neuvedený import"
+
+#~ msgid "Add partition"
+#~ msgstr "Přidat oddíl"
+
+#~ msgid "Automatic (detect when mounting)"
+#~ msgstr "Automatický (zjištěn při připojení)"
+
+#~ msgid "Check for errors on startup"
+#~ msgstr "Hledat chyby při spuštění"
+
+#~ msgid "Choose a mount point"
+#~ msgstr "Vyberte místo připojení"
+
+#~ msgid "Disks & partitions"
+#~ msgstr "Disky a oddíly"
+
+#~ msgid ""
+#~ "Disks are divided into several pieces, called partitions. Each partition "
+#~ "is dedicated for a specific storage task, such as virtual memory or home "
+#~ "directories for your users."
+#~ msgstr ""
+#~ "Disky jsou rozděleny na několik částí, tzv. oddíly. Každý oddíl je určen "
+#~ "pro specifický typ uložení, například virtuální paměti nebo domovských "
+#~ "adresářů vašich uživatelů."
+
+#~ msgid "FAT32 (Windows 98 and newer)"
+#~ msgstr "FAT32 (Windows 98 a novější)"
+
+#~ msgid "Mount point:"
+#~ msgstr "Místo připojení:"
+
+#~ msgid "Mount this partition"
+#~ msgstr "Připojit tento oddíl"
+
+#~ msgid "NTFS (Windows NT & 2000)"
+#~ msgstr "NTFS (Windows NT a 2000)"
+
+#~ msgid "Open settings dialog for selected import"
+#~ msgstr "Otevřít dialog s nastavením pro vybraný import"
+
+#~ msgid "Partition"
+#~ msgstr "Oddíl"
+
+#~ msgid "Partition Settings"
+#~ msgstr "Nastavení oddílu"
+
+#~ msgid "Remember details of this partition"
+#~ msgstr "Pamatovat si podrobnosti tohoto oddílu"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
+
+#~ msgid "VFAT (Windows 95 and newer)"
+#~ msgstr "VFAT (Windows 95 a novější)"
+
+#~ msgid "<unknown>"
+#~ msgstr "<neznámý>"
+
+#~ msgid "Appearance"
+#~ msgstr "Vzhled"
+
+#~ msgid "Colors"
+#~ msgstr "Barvy"
+
+#~ msgid "Colors:"
+#~ msgstr "Barvy:"
+
+#~ msgid "Down"
+#~ msgstr "Dolů"
+
+#~ msgid "Left"
+#~ msgstr "Vlevo"
+
+#~ msgid "Model:"
+#~ msgstr "Model:"
+
+#~ msgid "Monitor information"
+#~ msgstr "Informace o monitoru"
+
+#~ msgid "Narrower"
+#~ msgstr "Užší"
+
+#~ msgid "Probe again"
+#~ msgstr "Zjistit znovu"
+
+#~ msgid "Refresh rate:"
+#~ msgstr "Rychlost obnovení:"
+
+#~ msgid "Resolution"
+#~ msgstr "Rozlišení"
+
+#~ msgid "Restart X"
+#~ msgstr "Restartovat X"
+
+#~ msgid "Right"
+#~ msgstr "Vpravo"
+
+#~ msgid "Shift my display:"
+#~ msgstr "Posunout displej:"
+
+#~ msgid "Shorter"
+#~ msgstr "Kratší"
+
+#~ msgid "Stretch my display:"
+#~ msgstr "Změnit velikost displeje:"
+
+#~ msgid "Taller"
+#~ msgstr "Vyšší"
+
+#~ msgid "Test current setting"
+#~ msgstr "Testovat současné nastavení"
+
+#~ msgid "Up"
+#~ msgstr "Nahoru"
+
+#~ msgid "Use this tool to configure your monitor."
+#~ msgstr "Použijte tento nástroj pro nastavení vašeho monitoru."
+
+#~ msgid "Vendor:"
+#~ msgstr "Dodavatel:"
+
+#~ msgid "Wider"
+#~ msgstr "Širší"
+
+#~ msgid "_Restore settings"
+#~ msgstr "O_bnovit nastavení"
+
+#~ msgid "Add font..."
+#~ msgstr "Přidat písmo..."
+
+#~ msgid "Delete font"
+#~ msgstr "Odstranit písmo"
+
+#~ msgid "Font family"
+#~ msgstr "Rodina písma"
+
+#~ msgid "Font size:"
+#~ msgstr "Velikost písma:"
+
+#~ msgid "Preview"
+#~ msgstr "Náhled"
+
+#~ msgid "Select the fonts you want to install."
+#~ msgstr "Vyberte písma, které chcete nainstalovat."
+
+#~ msgid "Style"
+#~ msgstr "Styl"
+
+#~ msgid "   Configure...   "
+#~ msgstr "   Nastavit...   "
+
+#~ msgid " Exit and come back later after installing."
+#~ msgstr " Ukončit a zkusí se to znovu, až se komponenty nainstalují."
+
+#~ msgid " Keep the current configuration."
+#~ msgstr " Ponechat stávající nastavení."
+
+#~ msgid " Never mind, don't use it then."
+#~ msgstr " Nevadí, ať se tedy nepoužívají."
+
+#~ msgid " No, I'll manually configure the local network computers."
+#~ msgstr " Ne, počítače na lokální síti budou nastaveny ručně."
+
+#~ msgid " No, I'll set it up later by myself."
+#~ msgstr " Ne, nastaví se později ručně."
+
+#~ msgid " No, exit this druid and continue later."
+#~ msgstr " Ne, ukončit tohoto průvodce a pokračovat později."
+
+#~ msgid " No, overwrite with new defaults (recommended)"
+#~ msgstr " Ne, přepsat novými hodnotami (doporučeno)."
+
+#~ msgid ""
+#~ " Overwrite with the default internet sharing configuration (recommended)."
+#~ msgstr " Přepsat výchozím nastavením sdílení Internetu (doporučeno)."
+
+#~ msgid ""
+#~ " Yes, I'll set the local network computers to use automatic IP "
+#~ "assignment  (recommended)."
+#~ msgstr ""
+#~ " Ano, lokální počítačová síť bude nastavena na používání automatického "
+#~ "přiřazení IP adres (doporučeno)."
+
+#~ msgid " Yes, keep the current DHCP configuration."
+#~ msgstr " Ano, ponechat současné nastavení služby DHCP."
+
+#~ msgid " Yes, launch network tool (recommended)."
+#~ msgstr " Ano, spustit nástroj pro nastavení sítě (doporučeno)."
+
+#~ msgid ""
+#~ "A local network connection was not detected.\n"
+#~ "Would you like to configure one?\n"
+#~ msgstr ""
+#~ "Nebylo zjištěno připojení k lokální síti.\n"
+#~ "Chcete takové připojení nastavit?\n"
+
+#~ msgid ""
+#~ "A local network interface has been detected, but it's not active.\n"
+#~ "Would you like to activate it now?\n"
+#~ msgstr ""
+#~ "Bylo zjištěno lokální síťové rozhraní, ale není aktivní.\n"
+#~ "Chcete jej aktivovat nyní?\n"
+
+#~ msgid ""
+#~ "A previous DHCP configuration has been detected. \n"
+#~ "Do you want to keep this configuration?"
+#~ msgstr ""
+#~ "Bylo nalezeno starší nastavení služby DHCP.\n"
+#~ "Chcete ponechat toto nastavení?"
+
+#~ msgid "Banner Removal (Junkbuster)"
+#~ msgstr "Odstranění reklam (Junkbuster)"
+
+#~ msgid "Configure DHCP Service"
+#~ msgstr "Nastavení služby DHCP"
+
+#~ msgid ""
+#~ "Congratulations! This computer is now\n"
+#~ "configured to share its Internet connection.\n"
+#~ msgstr ""
+#~ "Gratulujeme! Váš počítač je nyní nastaven\n"
+#~ "na sdílení svého připojení k Internetu.\n"
+
+#~ msgid "Create a new local network interface."
+#~ msgstr "Vytvořit nové lokální síťové rozhraní."
+
+#~ msgid "DHCP service configuration."
+#~ msgstr "Nastavení služby DHCP"
+
+#~ msgid "DHCP service requirements."
+#~ msgstr "Požadavky služby DHCP."
+
+#~ msgid "Disable"
+#~ msgstr "Vypnout"
+
+#~ msgid "Enable :"
+#~ msgstr "Povolit:"
+
+#~ msgid "End of Range"
+#~ msgstr "Konec rozsahu"
+
+#~ msgid "IP Forwarding"
+#~ msgstr "Předávání IP adres (forwarding)"
+
+#~ msgid "Internet Sharing"
+#~ msgstr "Sdílení Internetu"
+
+#~ msgid "Internet Sharing --Advanced Mode"
+#~ msgstr "Sdílení Internetu - Pokročilý režim"
+
+#~ msgid "Internet Sharing Configuration Druid"
+#~ msgstr "Průvodce nastavením sdílení Internetu"
+
+#~ msgid "Internet Sharing Druid"
+#~ msgstr "Průvodce sdílením Internetu"
+
+#~ msgid "Internet sharing configuration."
+#~ msgstr "Nastavení sdílení Internetu."
+
+#~ msgid "Local network interface activation."
+#~ msgstr "Aktivace lokálního síťového rozhraní."
+
+#~ msgid "Start of Range"
+#~ msgstr "Počátek rozsahu"
+
+#~ msgid ""
+#~ "The Internet sharing tool allows you to share your Internet conection "
+#~ "with other computers on the network."
+#~ msgstr ""
+#~ "Nástroj na sdílení Internetu vám umožní sdílet vaše připojení k Internetu "
+#~ "s ostatními počítači na síti."
+
+#~ msgid ""
+#~ "Welcome to the Internet Sharing Configuration Druid.\n"
+#~ "\n"
+#~ "This druid will help you to configure and share\n"
+#~ "your Internet connection.\n"
+#~ "\n"
+#~ "You should have already installed and configured a local\n"
+#~ "network connection, such as an Ethernet or waveLAN\n"
+#~ "card, and an internet connection, such as a modem.\n"
+#~ "\n"
+#~ "If you haven't, you will be given the option to launch the\n"
+#~ "Network Tool to configure them before continuing."
+#~ msgstr ""
+#~ "Vítejte v Průvodci nastavením sdílení připojení k Internetu.\n"
+#~ "\n"
+#~ "Tento průvodce vám pomůže nastavit a sdílet vaše\n"
+#~ "připojení k Internetu.\n"
+#~ "\n"
+#~ "Musíte mít instalované a nastavené lokální síťové rozhraní\n"
+#~ "jako Ethernet nebo kartu waveLAN, a připojení k Internetu,\n"
+#~ "například pomocí modemu.\n"
+#~ "\n"
+#~ "Pokud nemáte, budete mít možnost spustit nástroj pro nastavení\n"
+#~ "sítě a toto připojení nastavit."
+
+#~ msgid ""
+#~ "Would you like to give the automatic network\n"
+#~ "address assignment service (DHCP)?\n"
+#~ msgstr ""
+#~ "Chcete poskytovat službu automatického\n"
+#~ "přiřazení síťových adres (DHCP)?\n"
+
+#~ msgid "Yes (recommended)."
+#~ msgstr "Ano (doporučeno)."
+
+#~ msgid ""
+#~ "You already have an internet sharing configuration.\n"
+#~ "Do you want to keep it, or use the druid's defaults?\n"
+#~ msgstr ""
+#~ "Nastavení sdílení Internetu již na vašem počítači existuje.\n"
+#~ "Chcete jej ponechat nebo použít implicitní hodnoty průvodce?\n"
+
+#~ msgid ""
+#~ "You don't have a DHCP server installed, or\n"
+#~ "some other related component is missing."
+#~ msgstr ""
+#~ "Nemáte nainstalovaný DHCP server, nebo\n"
+#~ "chybí některé komponenty s tímto serverem spojené."
+
+#~ msgid "AM"
+#~ msgstr "dop."
+
+#~ msgid "Boston Office"
+#~ msgstr "Kancelář Boston"
+
+#~ msgid "Choose Location"
+#~ msgstr "Vyberte umístění"
+
+#~ msgid "Copy"
+#~ msgstr "Kopírovat"
+
+#~ msgid "Copy Location"
+#~ msgstr "Kopírovat umístění"
+
+#~ msgid "Current:"
+#~ msgstr "Současné:"
+
+#~ msgid "Date"
+#~ msgstr "Datum"
+
+#~ msgid "Date/Time "
+#~ msgstr "Datum/Čas"
+
+#~ msgid "Date/time"
+#~ msgstr "Datum/čas"
+
+#~ msgid "Edit Date/Time"
+#~ msgstr "Upravit čas/datum"
+
+#~ msgid "Edit Location"
+#~ msgstr "Upravit umístění"
+
+#~ msgid "Edit:"
+#~ msgstr "Upravit:"
+
+#~ msgid "Helsinki Office"
+#~ msgstr "Kancelář Helsinky"
+
+#~ msgid "Keep clock synchronized with selected servers"
+#~ msgstr "Udržovat hodiny synchronizované s vybranými servery"
+
+#~ msgid "Location"
+#~ msgstr "Umístění"
+
+#~ msgid "Location Management"
+#~ msgstr "Správa umístění"
+
+#~ msgid "Location:"
+#~ msgstr "Umístění:"
+
+#~ msgid "Locations"
+#~ msgstr "Umístění"
+
+#~ msgid "Mexico CIty "
+#~ msgstr "Mexico City "
+
+#~ msgid "Name:"
+#~ msgstr "Název:"
+
+#~ msgid "New Location"
+#~ msgstr "Nové umístění"
+
+#~ msgid "New Name:"
+#~ msgstr "Nový název:"
+
+#~ msgid "New name:"
+#~ msgstr "Nový název:"
+
+#~ msgid "PM"
+#~ msgstr "odp."
+
+#~ msgid "Rename"
+#~ msgstr "Přejmenovat"
+
+#~ msgid "Rename Location"
+#~ msgstr "Přejmenovat umístění"
+
+#~ msgid "Rollback-location-management-mockup"
+#~ msgstr "Rollback-location-management-mockup"
+
+#~ msgid "Select servers..."
+#~ msgstr "Vyberte servery..."
+
+#~ msgid "Set time zone..."
+#~ msgstr "Nastavit časovou zónu..."
+
+#~ msgid "Time server"
+#~ msgstr "Server času"
+
+#~ msgid "Time zone"
+#~ msgstr "Časová zóna"
+
+#~ msgid ""
+#~ "Use this tool to manage all the different locations where you could "
+#~ "possibly want to use your stinking laptop."
+#~ msgstr ""
+#~ "Použijte tento nástroj pro správu nejrůznějších míst, kde byste možná "
+#~ "mohli chtít použít váš přenosný počítač."
+
+#~ msgid "_Help"
+#~ msgstr "Nápo_věda"
+
+#~ msgid "_Settings..."
+#~ msgstr "Na_stavení..."
+
+#~ msgid "Available partitions:"
+#~ msgstr "Dostupné oddíly:"
+
+#~ msgid "Available swap areas"
+#~ msgstr "Dostupné odkládací oblasti"
+
+#~ msgid "Browse..."
+#~ msgstr "Probírat..."
+
+#~ msgid "Cancel"
+#~ msgstr "Zrušit"
+
+#~ msgid "Enabled"
+#~ msgstr "Povoleno"
+
+#~ msgid "New Swap Device"
+#~ msgstr "Nové odkládací zařízení"
+
+#~ msgid "OK"
+#~ msgstr "Budiž"
+
+#~ msgid "Path:"
+#~ msgstr "Cesta:"
+
+#~ msgid "Physical memory:"
+#~ msgstr "Fyzická paměť:"
+
+#~ msgid "Priority"
+#~ msgstr "Priorita"
+
+#~ msgid "Select  Swap File"
+#~ msgstr "Vyberte odkládací soubor"
+
+#~ msgid "Size"
+#~ msgstr "Velikost"
+
+#~ msgid "Size:"
+#~ msgstr "Velikost:"
+
+#~ msgid "Swap Settings"
+#~ msgstr "Nastavení odkládání"
+
+#~ msgid "Swap memory:"
+#~ msgstr "Odkládací paměť:"
+
+#~ msgid "Swap type:"
+#~ msgstr "Typ odkládání:"
+
+#~ msgid "_Remove"
+#~ msgstr "Odst_ranit"
+
+#~ msgid "_Settings"
+#~ msgstr "Na_stavení"
+
+#~ msgid "file"
+#~ msgstr "soubor"
+
+#~ msgid "partition"
+#~ msgstr "oddíl"
+
+#~ msgid " Move Up"
+#~ msgstr " Přesunout výše"
+
+#~ msgid " Names"
+#~ msgstr "Názvy"
+
+#~ msgid ""
+#~ "Assign aliases to IP addresses that may not be registered in the DNS or "
+#~ "WINS servers, or to override or set new names for commonly used IP "
+#~ "addresses. "
+#~ msgstr ""
+#~ "Přiřaďte přezdívky (aliasy) IP adresám, které nejsou registrovány na "
+#~ "serverech DNS nebo WINS, nebo zadejte nový název obvykle používaným IP "
+#~ "adresám."
+
+#~ msgid "Change the alias' IP address or its corresponding names."
+#~ msgstr "Změňte IP adresu přezdívky nebo její příslušné názvy."
+
+#~ msgid "Domain"
+#~ msgstr "Doména"
+
+#~ msgid "Domain Lookup Order"
+#~ msgstr "Pořadí vyhledání domény"
+
+#~ msgid "Domain Name Service (DNS)"
+#~ msgstr "Služba názvů domén (DNS)"
+
+#~ msgid "Domain:"
+#~ msgstr "Doména:"
+
+#~ msgid "Existing:"
+#~ msgstr "Existující:"
+
+#~ msgid "Host"
+#~ msgstr "Počítač"
+
+#~ msgid "Host name:"
+#~ msgstr "Název počítače:"
+
+#~ msgid "IP address"
+#~ msgstr "IP adresa"
+
+#~ msgid "IP address:"
+#~ msgstr "IP adresa:"
+
+#~ msgid "Identification"
+#~ msgstr "Identifikace"
+
+#~ msgid "Let the computer know its name, function and network surroundings."
+#~ msgstr "Ať počítač zná svůj název, funkci a síťové okolí."
+
+#~ msgid "Move Down"
+#~ msgstr "Přesunout níže"
+
+#~ msgid "New Alias"
+#~ msgstr "Nová přezdívka"
+
+#~ msgid "New domain:"
+#~ msgstr "Nová doména:"
+
+#~ msgid "New server:"
+#~ msgstr "Nový server:"
+
+#~ msgid "New:"
+#~ msgstr "Nová:"
+
+#~ msgid "Reverse:"
+#~ msgstr "Reverzní:"
+
+#~ msgid "Search Domains"
+#~ msgstr "Prohledávat domény"
+
+#~ msgid "Servers"
+#~ msgstr "Servery"
+
+#~ msgid "Settings for the selected alias"
+#~ msgstr "Nastavení vybrané přezdívky"
+
+#~ msgid "Use WINS server:"
+#~ msgstr "Použít server WINS:"
+
+#~ msgid "Workgroup:"
+#~ msgstr "Pracovní skupina:"
+
+#~ msgid "1200x1200"
+#~ msgstr "1200×1200"
+
+#~ msgid "1200x600"
+#~ msgstr "1200×600"
+
+#~ msgid "16 colors"
+#~ msgstr "16 barev"
+
+#~ msgid "256 colors"
+#~ msgstr "256 barev"
+
+#~ msgid "300x300"
+#~ msgstr "300×300"
+
+#~ msgid "400x400"
+#~ msgstr "400×400"
+
+#~ msgid "600x600"
+#~ msgstr "600×600"
+
+#~ msgid "Add Printer..."
+#~ msgstr "Přidat tiskárnu..."
+
+#~ msgid "Add a New Printer"
+#~ msgstr "Přidat novou tiskárnu"
+
+#~ msgid "Connection"
+#~ msgstr "Připojení"
+
+#~ msgid ""
+#~ "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+#~ msgstr ""
+#~ "Převádět konce řádků typu PC na formát Un*x. Pomáhá předcházet efektu "
+#~ "\"stairstepping\"."
+
+#~ msgid "Convert _Linefeeds"
+#~ msgstr "Převádět _konce řádků"
+
+#~ msgid "Document Pages per Sheet"
+#~ msgstr "Stránek dokumentu na list"
+
+#~ msgid "Driver"
+#~ msgstr "Ovladač"
+
+#~ msgid "E_xplicitly Eject Last Page"
+#~ msgstr "E_xplicitně vysunout poslední stránku"
+
+#~ msgid "High Color"
+#~ msgstr "High Color"
+
+#~ msgid "Name of the printer."
+#~ msgstr "Název tiskárny."
+
+#~ msgid "Name of the server the printer is connected to."
+#~ msgstr "Název serveru, ke kterému je připojena tiskárna."
+
+#~ msgid "Name the server uses for the printer."
+#~ msgstr "Název, který používá server pro tiskárnu."
+
+#~ msgid "Novell _Netware (NCP) Printer"
+#~ msgstr "Tiskárna pro Novell _Netware (NCP)"
+
+#~ msgid "Number of colors to print in."
+#~ msgstr "Počet barev, ve kterých se má tisknout."
+
+#~ msgid "Options"
+#~ msgstr "Volby"
+
+#~ msgid "P_aper Size:"
+#~ msgstr "Velikost p_apíru:"
+
+#~ msgid "P_ort Number:"
+#~ msgstr "Číslo p_ortu:"
+
+#~ msgid "Port number the server is listening to."
+#~ msgstr "Číslo portu, na kterém server naslouchá."
+
+#~ msgid "Port the printer is connected to."
+#~ msgstr "Port, ke kterému je tiskárna připojena."
+
+#~ msgid "Print one page per sheet."
+#~ msgstr "Tisknout jednu stránku na list"
+
+#~ msgid "Print resolution."
+#~ msgstr "Rozlišení tisku."
+
+#~ msgid "Printer Settings"
+#~ msgstr "Nastavení tiskárny"
+
+#~ msgid "Printer connected to a port on your machine."
+#~ msgstr "Tiskárna připojená k portu na vašem počítači."
+
+#~ msgid "Printer listening directly for network connections."
+#~ msgstr "Tiskárna naslouchající přímo síťovým spojením."
+
+#~ msgid "Printer shared on a Windows (SMB) network."
+#~ msgstr "Tiskárna sdílená pomocí sítě Windows (SMB)."
+
+#~ msgid "Printer shared using the Novell Netware (NCP) protocol."
+#~ msgstr "Tiskárna sdílená pomocí tiskového protokolu Novell Netware (NCP)."
+
+#~ msgid "Printer shared using the Unix (lpd) print protocol."
+#~ msgstr "Tiskárna sdílená pomocí tiskového protokolu Unix (lpd)."
+
+#~ msgid "R_esolution:"
+#~ msgstr "Rozliš_ení:"
+
+#~ msgid "Remote UNIX (_lpd) Printer"
+#~ msgstr "Vzdálená tiskárna pro _UNIX (lpd)"
+
+#~ msgid "Remote _Windows (SMB) printer"
+#~ msgstr "Vzdálená tiskárna pro _Windows (SMB)"
+
+#~ msgid "SMB workgroup the server is in."
+#~ msgstr "Pracovní skupina protokolu SMB, ve které je server."
+
+#~ msgid "Scale pages down and print eight per sheet."
+#~ msgstr "Zmenšit stránky a tisknout osm na list."
+
+#~ msgid "Scale pages down and print four per sheet."
+#~ msgstr "Zmenšit stránky a tisknout čtyři na list."
+
+#~ msgid "Scale pages down and print two per sheet."
+#~ msgstr "Zmenšit stránky a tisknout dvě na list."
+
+#~ msgid "Select the type of printer to add:"
+#~ msgstr "Vyberte typ přidávané tiskárny:"
+
+#~ msgid "Send an EOF after the print job to help eject the last page."
+#~ msgstr ""
+#~ "Posílat EOF po ukončení tiskové úlohy, aby se vysunula poslední stránka."
+
+#~ msgid "Send text documents raw to the printer."
+#~ msgstr "Posílat textové dokumenty přímo na tiskárnu."
+
+#~ msgid "Settings..."
+#~ msgstr "Nastavení..."
+
+#~ msgid "Size of the paper in the printer."
+#~ msgstr "Velikost papíru v tiskárně."
+
+#~ msgid "The password used to connect to the server."
+#~ msgstr "Heslo používané pro připojení k serveru."
+
+#~ msgid ""
+#~ "This is the list of the configured printers available on the system. "
+#~ "Create new printers or edit existing printer settings with this dialog."
+#~ msgstr ""
+#~ "Toto je seznam nastavených tiskáren dostupných na vašem systému. Vytvořte "
+#~ "novou tiskárnu nebo upravte již existující pomocí tohoto dialogu."
+
+#~ msgid "True Color"
+#~ msgstr "True Color"
+
+#~ msgid "Username used to connect to the server."
+#~ msgstr "Uživatelské jméno pro připojení k serveru."
+
+#~ msgid "_Color Depth:"
+#~ msgstr "_Barevná hloubka:"
+
+#~ msgid "_Device Name:"
+#~ msgstr "Název _zařízení:"
+
+#~ msgid "_Direct Network Printer"
+#~ msgstr "Tiskárna připojená _přímo k síti"
+
+#~ msgid "_Fast Text Printing"
+#~ msgstr "_Rychlý tisk textu"
+
+#~ msgid "_Local Printer"
+#~ msgstr "_Lokální tiskárna"
+
+#~ msgid "_Remote Name:"
+#~ msgstr "_Vzdálený název:"
+
+#~ msgid "_Workgroup:"
+#~ msgstr "Pracovní _skupina:"
+
+#~ msgid "Advanced..."
+#~ msgstr "Pokročilé..."
+
+#~ msgid "Change to this Location"
+#~ msgstr "Změnit na toto umístění"
+
+#~ msgid "Configuration Restoration"
+#~ msgstr "Obnovení nastavení"
+
+#~ msgid "Create..."
+#~ msgstr "Vytvořit..."
+
+#~ msgid "Destroy..."
+#~ msgstr "Zničit..."
+
+#~ msgid "Edit this Location"
+#~ msgstr "Upravit toto umístění"
+
+#~ msgid "Location name:"
+#~ msgstr "Název umístění:"
+
+#~ msgid "Parent Location:"
+#~ msgstr "Rodičovské umístění:"
+
+#~ msgid "Rename..."
+#~ msgstr "Přejmenovat..."
+
+#~ msgid "Restore all tools"
+#~ msgstr "Obnovit všechny nástroje"
+
+#~ msgid "Restore configuration from"
+#~ msgstr "Obnovit nastavení staré"
+
+#~ msgid "Restore only"
+#~ msgstr "Pouze obnovit"
+
+#~ msgid "View Logs..."
+#~ msgstr "Zobrazit záznamy..."
+
+#~ msgid "days ago"
+#~ msgstr "dní"
+
+#~ msgid " Edit clients... "
+#~ msgstr " Upravit klienty... "
+
+#~ msgid " _Edit clients... "
+#~ msgstr " Upravit kli_enty... "
+
+#~ msgid "Access control"
+#~ msgstr "Kontrola přístupu"
+
+#~ msgid "Add..."
+#~ msgstr "Přidat..."
+
+#~ msgid "Allow writing"
+#~ msgstr "Povolit zápis"
+
+#~ msgid "Browseable"
+#~ msgstr "Probíratelný"
+
+#~ msgid "Client"
+#~ msgstr "Klient"
+
+#~ msgid "Clients"
+#~ msgstr "Klienti"
+
+#~ msgid "Comment:"
+#~ msgstr "Komentář:"
+
+#~ msgid "Do not _remount this share after computer reboots"
+#~ msgstr "Nepřipojovat znovu toto sdílení po _restartu počítače"
+
+#~ msgid "Do not remount this share after computer reboots"
+#~ msgstr "Nepřipojovat toto sdílení po restartu počítače"
+
+#~ msgid "Export"
+#~ msgstr "Export"
+
+#~ msgid "Export Clients"
+#~ msgstr "Klienti exportu"
+
+#~ msgid "Export Settings"
+#~ msgstr "Nastavení exportu"
+
+#~ msgid "Export _type:"
+#~ msgstr "_Typ exportu:"
+
+#~ msgid "Export type:"
+#~ msgstr "Typ exportu:"
+
+#~ msgid "Exports"
+#~ msgstr "Exporty"
+
+#~ msgid ""
+#~ "Exports are used to share directories on your computer with other "
+#~ "computers over the network. "
+#~ msgstr ""
+#~ "Exporty se používají ke sdílení adresářů na vašem počítači s jinými "
+#~ "počítači pomocí sítě."
+
+#~ msgid "Host:"
+#~ msgstr "Počítač:"
+
+#~ msgid "If the mount point does not exist, it will be created."
+#~ msgstr "Pokud místo připojení neexistuje, bude vytvořeno."
+
+#~ msgid "Import"
+#~ msgstr "Import"
+
+#~ msgid "Import Settings"
+#~ msgstr "Nastavení importu"
+
+#~ msgid "Import Settings--NFS Options"
+#~ msgstr "Nastavení importu--volby NFS"
+
+#~ msgid "Import Settings--Samba Options (Obsolete)"
+#~ msgstr "Nastavení importu--volby Samba (zastaralé)"
+
+#~ msgid "Import _type:"
+#~ msgstr "_Typ importu:"
+
+#~ msgid "Import type:"
+#~ msgstr "Typ importu:"
+
+#~ msgid "Imports"
+#~ msgstr "Importy"
+
+#~ msgid ""
+#~ "Imports are directories which reside in other computers and are "
+#~ "accessible to you through the network."
+#~ msgstr ""
+#~ "Importy jsou adresáře, které jsou umístěny na jiných počítačích a jsou "
+#~ "vám přístupné pomocí sítě."
+
+#~ msgid "Mount Point"
+#~ msgstr "Místo připojení"
+
+#~ msgid "Mount p_oint:"
+#~ msgstr "Míst_o připojení:"
+
+#~ msgid "Mounted"
+#~ msgstr "Připojen"
+
+#~ msgid "Mounting Options"
+#~ msgstr "Volby připojení"
+
+#~ msgid "Mounting options"
+#~ msgstr "Volby připojení"
+
+#~ msgid "P_ublic"
+#~ msgstr "_Veřejný"
+
+#~ msgid "Pass_word:"
+#~ msgstr "_Heslo:"
+
+#~ msgid "Path"
+#~ msgstr "Cesta"
+
+#~ msgid "Pattern:"
+#~ msgstr "Vzor:"
+
+#~ msgid "Public"
+#~ msgstr "Veřejný"
+
+#~ msgid "Restrict access to this share to specific clients"
+#~ msgstr "Omezit přístup k tomuto sdílení pouze na specifické klienty"
+
+#~ msgid "Update"
+#~ msgstr "Aktualizovat"
+
+#~ msgid ""
+#~ "Use this dialog to create a new export, or to edit the settings of an "
+#~ "existing export."
+#~ msgstr ""
+#~ "Použijte tento dialog pro vytvoření nového exportu nebo úpravu nastavení "
+#~ "již existujícího exportu."
+
+#~ msgid ""
+#~ "Use this dialog to create a new import, or to edit the settings of an "
+#~ "existing import."
+#~ msgstr ""
+#~ "Použijte tento dialog pro vytvoření nového importu nebo úpravu nastavení "
+#~ "existujícího importu."
+
+#~ msgid ""
+#~ "Use this dialog to define the client patterns which determine who has "
+#~ "access to your NFS share. Client patterns are typically of the form "
+#~ "\"10.10.10.*\" or \" *.gnome.org\".  "
+#~ msgstr ""
+#~ "Použijte tento dialog pro definici vzorů klientů, které rozhodují o "
+#~ "přístupu k vašemu sdílení NFS. Vzory klientů mají obvykle tvar \"10.10.10."
+#~ "*\" nebo \" *.gnome.org\". "
+
+#~ msgid "Writable"
+#~ msgstr "Lze zapisovat"
+
+#~ msgid "_Browseable"
+#~ msgstr "Pro_bíratelný"
+
+#~ msgid "_Enable"
+#~ msgstr "Po_volit"
+
+#~ msgid "_Host:"
+#~ msgstr "Počí_tač:"
+
+#~ msgid "_Mount"
+#~ msgstr "_Připojit"
+
+#~ msgid "_Mounted"
+#~ msgstr "_Připojeno"
+
+#~ msgid "_Path:"
+#~ msgstr "_Cesta:"
+
+#~ msgid "_Restrict access to this share to specific clients"
+#~ msgstr "Ome_zit přístup k tomuto sdílení na specifické klienty"
+
+#~ msgid "_Scan"
+#~ msgstr "_Zkoumat"
+
+#~ msgid "_Writable"
+#~ msgstr "_Lze zapisovat"
+
+#~ msgid "add/edit clients"
+#~ msgstr "přidat/upravit klienty"
+
+#~ msgid "advanced mode--main window"
+#~ msgstr "pokročilý režim--hlavní okno"
+
+#~ msgid "export settings--NFS options"
+#~ msgstr "nastavení exportu--volby NFS"
+
+#~ msgid "export settings--Samba options"
+#~ msgstr "nastavení exportu--volby Samba"
+
+#~ msgid "simple mode--main window"
+#~ msgstr "jednoduchý režim--hlavní okno"
+
+#~ msgid "Runlevel Settings"
+#~ msgstr "Nastavení úrovně běhu"
+
+#~ msgid "Runlevel"
+#~ msgstr "Úroveň běhu"
 
 #~ msgid "Pretending we are root..."
 #~ msgstr "Předstíráme, že jsme správce systému..."
