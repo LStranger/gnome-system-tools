@@ -128,7 +128,11 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 	tool->backend_pid = forkpty (&tool->write_fd, NULL, NULL, NULL);
 
 	if (tool->backend_pid < 0) {
-		g_warning ("could not fork to backend");
+		gst_auth_display_error_message (tool,
+						_("Could not execute the backend"),
+						_("There was an error creating the child "
+						  "process, the tool will close now."));
+		exit (255);
 	}
 	else if (tool->backend_pid == 0) {
 		/* It's the child process */
