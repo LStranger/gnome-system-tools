@@ -84,10 +84,6 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	gtk_clist_set_column_auto_resize (list, 0, TRUE);
 	gtk_clist_set_column_auto_resize (list, 1, TRUE);
 	gtk_clist_set_column_auto_resize (list, 2, TRUE);
-
-#warning we re hiding dns_dhcp until it actually does sth.
-	widget = xst_dialog_get_widget (tool->main_dialog, "dns_dhcp");
-	gtk_widget_hide (widget);
 }
 
 void
@@ -95,7 +91,7 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 				 gint page_num, gpointer user_data)
 {
 	GtkWidget *w;
-	gchar *entry[] = { "hostname", "connection_list", "dns_dhcp", "statichost_list" };
+	gchar *entry[] = { "hostname", "connection_list", "domain", "statichost_list" };
 	
 	if (xst_tool_get_access (tool) && entry[page_num]) {
 		w = xst_dialog_get_widget (tool->main_dialog, entry[page_num]);
@@ -379,15 +375,6 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 	connection_update_row_enabled (cxn, FALSE);
-}
-
-void
-on_dns_dhcp_toggled (GtkWidget *w, gpointer null)
-{
-	gboolean active;
-
-	active = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "dns_table", active);
 }
 
 void

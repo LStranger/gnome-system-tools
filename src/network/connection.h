@@ -64,7 +64,7 @@ typedef struct {
 	gboolean enabled;
 	gboolean user;
 	gboolean autoboot;
-	gboolean dhcp_dns;
+	gboolean update_dns;
 
 	/* IP Settings */
 	IPConfigType ip_config;

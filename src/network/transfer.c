@@ -399,6 +399,9 @@ transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 
 	res = xst_xml_element_get_boolean (root, "dialinstalled");
 	gtk_object_set_data (GTK_OBJECT (tool), "dialinstalled", (gpointer) res);
+
+	res = xst_xml_element_get_boolean (root, "smartdhcpcd");
+	gtk_object_set_data (GTK_OBJECT (tool), "smartdhcpcd", (gpointer) res);
 }
 	
 void

@@ -1,3 +1,18 @@
+2001-05-23  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* transfer.c (transfer_misc_xml_to_tool): Added smartdhcpcd
+	userdata, although it is not required now.
+
+	* main.c: More dns_dhcp removing.
+
+	* connection.c: Lots of changes to make the update_dns
+	connection checkbox work and be hidden in unsupporting distros.
+
+	* callbacks.c (on_network_admin_show): removing dns_dhcp code.
+	(on_network_notebook_switch_page): Focus the domain entry when
+	witching now.
+	(on_dns_dhcp_toggled): removed.
+
 2001-05-24  Chema Celorio  <chema@celorio.com>
 
 	* callbacks.c : added g_return_if_fail checks.

@@ -60,7 +60,7 @@ static void on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cx
 static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, XstConnection *cxn);
 static void on_connection_modified (GtkWidget *w, XstConnection *cxn);
 static void on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn);
-static void on_ppp_peerdns_toggled (GtkWidget *w, XstConnection *cxn);
+static void on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn);
 
 #define W(s) my_get_widget (cxn->xml, (s))
 
@@ -615,7 +615,6 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 	cxn->persist = connection_xml_get_boolean (node, "persist");
 	cxn->serial_port = xst_xml_get_child_content (node, "serial_port");
 	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
-	cxn->peerdns = connection_xml_get_boolean (node, "peerdns");
 	cxn->dns1 = xst_xml_get_child_content (node, "dns1");
 	cxn->dns2 = xst_xml_get_child_content (node, "dns2");
 	cxn->ppp_options = xst_xml_get_child_content (node, "ppp_options");
@@ -638,7 +637,7 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	/* set up some defaults */
 	cxn->user = FALSE;
 	cxn->autoboot = TRUE;
-	cxn->dhcp_dns = TRUE;
+	cxn->update_dns = TRUE;
 	cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
 	
 #warning FIXME: figure out a new device correctly
@@ -651,7 +650,6 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 		break;
 	case XST_CONNECTION_PPP:
 		cxn->user = TRUE;
-		cxn->peerdns = TRUE;
 		cxn->autoboot = FALSE;
 		cxn->dev = connection_dev_get_next (root, "ppp");
 		break;
@@ -706,6 +704,7 @@ connection_new_from_node (xmlNode *node)
 	cxn->user = connection_xml_get_boolean (node, "user");
 	cxn->autoboot = connection_xml_get_boolean (node, "auto");
 	cxn->enabled = connection_xml_get_boolean (node, "enabled");
+	cxn->update_dns = connection_xml_get_boolean (node, "update_dns");
 
 	/* TCP/IP general paramaters */
 	cxn->address = xst_xml_get_child_content (node, "address");
@@ -808,7 +807,7 @@ static void
 empty_ip (XstConnection *cxn)
 {
 	cxn->ip_config = cxn->tmp_ip_config;
-	GET_BOOL ("status_", dhcp_dns);
+	GET_BOOL ("ip_", update_dns);
 	GET_STR ("ip_", address);
 	GET_STR ("ip_", netmask);
 	GET_STR ("ip_", gateway);
@@ -836,7 +835,7 @@ empty_ppp_adv (XstConnection *cxn)
 	GET_STR ("ppp_", serial_port);
 	GET_BOOL ("ppp_", stupid);
 	GET_BOOL ("ppp_", set_default_gw);
-	GET_BOOL_NOT ("ppp_", peerdns);
+	GET_BOOL_NOT ("ppp_", update_dns);
 	GET_STR ("ppp_", dns1);
 	GET_STR ("ppp_", dns2);
 	GET_STR ("ppp_", ppp_options);
@@ -937,11 +936,11 @@ on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn)
 }
 
 static void
-on_ppp_peerdns_toggled (GtkWidget *w, XstConnection *cxn)
+on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn)
 {
 	gboolean active;
 
-	active = GTK_TOGGLE_BUTTON (W ("ppp_peerdns"))->active;
+	active = GTK_TOGGLE_BUTTON (W ("ppp_update_dns"))->active;
 
 	gtk_widget_set_sensitive (W ("ppp_dns1_label"), active);
 	gtk_widget_set_sensitive (W ("ppp_dns2_label"), active);
@@ -967,8 +966,8 @@ update_ip_config (XstConnection *cxn)
 
 	ip = cxn->tmp_ip_config;
 
-	SET_BOOL ("status_", dhcp_dns);
-	gtk_widget_set_sensitive (W ("status_dhcp_dns"), ip != IP_MANUAL);
+	SET_BOOL ("ip_", update_dns);
+	gtk_widget_set_sensitive (W ("ip_update_dns"), ip != IP_MANUAL);
 	gtk_widget_set_sensitive (W ("ip_table"), ip == IP_MANUAL);
 }
 
@@ -992,7 +991,7 @@ ip_config_menu_cb (GtkWidget *w, gpointer data)
 
 	connection_set_modified (cxn, TRUE);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_dhcp_dns")),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("ip_update_dns")),
 				      ip != IP_MANUAL);
 
 	update_ip_config (cxn);
@@ -1028,6 +1027,7 @@ fill_ip (XstConnection *cxn)
 
 	update_ip_config (cxn);
 
+	SET_BOOL ("ip_", update_dns);
 	SET_STR ("ip_", address);
 	SET_STR ("ip_", netmask);
 	SET_STR ("ip_", gateway);
@@ -1055,8 +1055,8 @@ fill_ppp_adv (XstConnection *cxn)
 	SET_STR ("ppp_", serial_port);
 	SET_BOOL ("ppp_", stupid);
 	SET_BOOL ("ppp_", set_default_gw);
-	SET_BOOL_NOT ("ppp_", peerdns);
-	gtk_signal_emit_by_name (GTK_OBJECT (W ("ppp_peerdns")), "toggled");
+	SET_BOOL_NOT ("ppp_", update_dns);
+	gtk_signal_emit_by_name (GTK_OBJECT (W ("ppp_update_dns")), "toggled");
 	SET_STR ("ppp_", dns1);
 	SET_STR ("ppp_", dns2);
 	SET_STR ("ppp_", ppp_options);
@@ -1090,7 +1090,7 @@ hookup_callbacks (XstConnection *cxn)
 		{ "on_connection_modified", on_connection_modified },
 		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
-		{ "on_ppp_peerdns_toggled", on_ppp_peerdns_toggled },
+		{ "on_ppp_update_dns_toggled", on_ppp_update_dns_toggled },
 		{ NULL }
 	};
 	struct { char *name; EditableFilterRules rule; }
@@ -1117,7 +1117,7 @@ connection_configure (XstConnection *cxn)
 {
 	GtkWidget *nb;
 /*	GtkWidget *hb, *qm;*/
-	char *s;
+	gchar *s, *smart_dhcpcd;
 
 	if (cxn->window) {
 		gtk_widget_show (cxn->window);
@@ -1139,6 +1139,14 @@ connection_configure (XstConnection *cxn)
 
 	fill_general (cxn);
 	fill_ip      (cxn);
+
+	smart_dhcpcd = xst_xml_get_child_content (cxn->node->parent, "smartdhcpcd");
+	if (!smart_dhcpcd || !atoi (smart_dhcpcd)) {
+		GtkWidget *w = W("ip_update_dns");
+		gtk_widget_hide (w);
+	}
+
+	g_free (smart_dhcpcd);
 
 	/* would like to do this as a switch */
 	nb = W ("connection_nb");
@@ -1199,6 +1207,7 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 	connection_xml_save_boolean_to_node (node, "user", cxn->user);
 	connection_xml_save_boolean_to_node (node, "auto", cxn->autoboot);
 	connection_xml_save_boolean_to_node (node, "enabled", cxn->enabled);
+	connection_xml_save_boolean_to_node (node, "update_dns", cxn->update_dns);
 
 	/* TCP/IP general paramaters */
 	connection_xml_save_str_to_node (node, "address", cxn->address);
@@ -1226,7 +1235,6 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 		connection_xml_save_boolean_to_node (node, "persist", cxn->persist);
 		connection_xml_save_str_to_node (node, "serial_port", cxn->serial_port);
 		connection_xml_save_boolean_to_node (node, "set_default_gw", cxn->set_default_gw);
-		connection_xml_save_boolean_to_node (node, "peerdns", cxn->peerdns);
 		connection_xml_save_str_to_node (node, "dns1", cxn->dns1);
 		connection_xml_save_str_to_node (node, "dns2", cxn->dns2);
 		connection_xml_save_str_to_node (node, "ppp_options", cxn->ppp_options);
