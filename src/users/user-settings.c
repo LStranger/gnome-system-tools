@@ -48,13 +48,6 @@ extern GList *groups_list;
 xmlNodePtr user_profile;
 
 static void
-create_groups_lists (xmlNodePtr node, GList **user_settings_all_list, GList **user_settings_members_list)
-{
-	*user_settings_members_list = user_get_groups (node);
-	*user_settings_all_list = my_g_list_remove_duplicates (get_list_from_node ("name", NODE_GROUP), *user_settings_members_list);
-}
-
-static void
 create_groups_gtk_trees (void)
 {
 	GtkWidget *user_settings_all = gst_dialog_get_widget (tool->main_dialog, "user_settings_all");
@@ -62,24 +55,15 @@ create_groups_gtk_trees (void)
 	GtkWidget *add_button, *remove_button;
 	GtkTreeSelection *selection;
 	GtkSizeGroup *sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+	GtkTargetEntry target = { "group", GTK_TARGET_SAME_APP, 0 };
 	
 	/* connect signals and attach data if they haven't been created already */
 	if (g_object_get_data (G_OBJECT (user_settings_all), "button") == NULL) {
-		create_gtk_tree_list (user_settings_all);
+		create_gtk_tree_list (user_settings_all, target);
 		g_object_set_data (G_OBJECT (user_settings_all), "button", "user_settings_add");
-		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (user_settings_all));
-		g_signal_connect (G_OBJECT (selection),
-		                  "changed",
-		                  G_CALLBACK (on_list_select_row),
-		                  NULL);
 
-		create_gtk_tree_list (user_settings_members);
+		create_gtk_tree_list (user_settings_members, target);
 		g_object_set_data (G_OBJECT (user_settings_members), "button", "user_settings_remove");
-		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (user_settings_members));
-		g_signal_connect (G_OBJECT (selection),
-		                  "changed",
-		                  G_CALLBACK (on_list_select_row),
-		                  NULL);
 
 		/* We also need to attach some data to the 'add' and 'remove' buttons */
 		add_button = gst_dialog_get_widget (tool->main_dialog, "user_settings_add");
@@ -200,7 +184,6 @@ user_new_prepare (ug_data *ud)
 	GtkWidget *button;
 	gchar *buf;
 	GList *user_settings_all_list = NULL;
-	GList *user_settings_members_list = NULL;
 	GtkWidget *widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	GtkWidget *user_settings_all = gst_dialog_get_widget (tool->main_dialog, "user_settings_all");
 	GtkWidget *user_settings_members = gst_dialog_get_widget (tool->main_dialog, "user_settings_members");
@@ -212,12 +195,8 @@ user_new_prepare (ug_data *ud)
 	
 	/* Creates and fills GtkTrees */
 	create_groups_gtk_trees ();
-	create_groups_lists (ud->node, &user_settings_all_list, &user_settings_members_list);
+	user_settings_all_list = get_list_from_node ("name", NODE_GROUP);
 	populate_gtk_tree_list (GTK_TREE_VIEW (user_settings_all), user_settings_all_list);
-	
-	/* Attach the GLists to the GtkTreeViews */
-	g_object_set_data (G_OBJECT (user_settings_all), "list", user_settings_all_list);
-	g_object_set_data (G_OBJECT (user_settings_members), "list", user_settings_members_list);
 	
 	/* Fill menus */
 	option_menu_add_groups (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"), TRUE);
@@ -283,15 +262,6 @@ user_settings_dialog_close (void)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
 	
-	/* Clear the GLists attached to the GtkTreeViews */
-	list = g_object_get_data (G_OBJECT (user_settings_all), "list");
-	g_list_free (list);
-	g_object_steal_data (G_OBJECT (user_settings_all), "list");
-	
-	list = g_object_get_data (G_OBJECT (user_settings_members), "list");
-	g_list_free (list);
-	g_object_steal_data (G_OBJECT (user_settings_members), "list");
-
 	/* Clear user data attached to the widget */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	ud = g_object_get_data (G_OBJECT (widget), "data");
@@ -616,7 +586,7 @@ user_update (ug_data *ud)
 	}
 
 	g_list_free (data->extra_groups);
-	data->extra_groups = g_list_copy (g_object_get_data (G_OBJECT (user_settings_members), "list"));
+	data->extra_groups = get_gtk_tree_list_items (GTK_TREE_VIEW (user_settings_members));
 
 	data->pwd_maxdays = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_max"))));
 	data->pwd_mindays = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_min"))));
@@ -744,13 +714,11 @@ user_settings_dialog_prepare (ug_data *ud)
 	
 	/* Fill groups lists */
 	create_groups_gtk_trees ();
-	create_groups_lists (ud->node, &user_settings_all_list, &user_settings_members_list);
+
+	user_settings_members_list = user_get_groups (ud->node);
+	user_settings_all_list = my_g_list_remove_duplicates (get_list_from_node ("name", NODE_GROUP), user_settings_members_list);
 	populate_gtk_tree_list (GTK_TREE_VIEW (user_settings_all), user_settings_all_list);
 	populate_gtk_tree_list (GTK_TREE_VIEW (user_settings_members), user_settings_members_list);
-	
-	/* Attach the GLists to the GtkTreeViews */
-	g_object_set_data (G_OBJECT (user_settings_all), "list", user_settings_all_list);
-	g_object_set_data (G_OBJECT (user_settings_members), "list", user_settings_members_list);
 	
 	/* Set password */
 	user_settings_dialog_prepare_password ();

@@ -672,16 +672,15 @@ on_profile_delete_clicked (GtkButton *button, gpointer user_data)
 }
 
 /* general callbacks */
-
 void
-on_add_remove_button_clicked (GtkButton *button, gpointer user_data)
+on_add_remove_button_clicked (GtkButton *button, gpointer data)
 {
 	GtkTreeView *in, *out;
 	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	GList *in_list, *out_list;
-	GList *element;
+	GtkTreeIter iter_in, iter_out;
+	GtkTreeModel *model_in, *model_out;
+	gchar *group;
+	gboolean valid;
 	
 	g_return_if_fail (gst_tool_get_access (tool));
 	
@@ -690,38 +689,25 @@ on_add_remove_button_clicked (GtkButton *button, gpointer user_data)
 	
 	g_return_if_fail (in != NULL || out != NULL);
 
-	in_list = g_object_get_data (G_OBJECT (in), "list");
-	out_list = g_object_get_data (G_OBJECT (out), "list");
-	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (in));
-	model = gtk_tree_view_get_model (in);
-	gtk_tree_model_get_iter_first (model, &iter);
-	
-	do {
-		if (gtk_tree_selection_iter_is_selected (selection, &iter)) {
-			/* gets the user that is being removed from the 'in' list */
-			gtk_tree_model_get (model, &iter,
-	                                    1, &element,
-	                                    -1);
-			/* adds the user to the 'out' list */
-                        out_list = g_list_insert_sorted (out_list, element->data, my_strcmp);
-			
-			/* removes the user from the 'in' list */
-			in_list = g_list_remove (in_list, element->data);
-		}
-	} while (gtk_tree_model_iter_next (model, &iter));
-	
-	/* reattach GLists to GtkTreeViews */
-	g_object_set_data (G_OBJECT (in), "list", in_list);
-	g_object_set_data (G_OBJECT (out), "list", out_list);
+	model_in = gtk_tree_view_get_model (in);
+	model_out = gtk_tree_view_get_model (out);
 
-	/* Refresh the 'in' and 'out' lists */
-	clear_gtk_tree_list (in);
-	clear_gtk_tree_list (out);
-	populate_gtk_tree_list (in, in_list);
-	populate_gtk_tree_list (out, out_list);
-	
-	/* sets unsensitive the button again */
+	valid = gtk_tree_model_get_iter_first (model_in, &iter_in);
+
+	while (valid) {
+		if (gtk_tree_selection_iter_is_selected (selection, &iter_in)) {
+			gtk_tree_model_get (model_in, &iter_in, 0, &group, -1);
+
+			gtk_tree_store_append (GTK_TREE_STORE (model_out), &iter_out, NULL);
+			gtk_tree_store_set (GTK_TREE_STORE (model_out), &iter_out, 0, group, -1);
+
+			valid = gtk_tree_store_remove (GTK_TREE_STORE (model_in), &iter_in);
+		} else {
+			valid = gtk_tree_model_iter_next (model_in, &iter_in);
+		}
+	}
+
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 }
 
@@ -738,6 +724,56 @@ on_list_select_row (GtkTreeSelection *selection, gpointer data)
 	
 	widget = gst_dialog_get_widget (tool->main_dialog, button);
 	gtk_widget_set_sensitive (widget, TRUE);
+}
+
+void
+on_list_drag_data_get (GtkTreeView *treeview,
+		       GdkDragContext *context,
+		       GtkSelectionData *selection,
+		       guint info,
+		       guint time,
+		       gpointer data)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (treeview);
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gchar *group;
+
+	gtk_tree_view_get_cursor (treeview, &path, NULL);
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, 0, &group, -1);
+	
+	gtk_selection_data_set (selection,
+				gdk_atom_intern ("x/selection-data", FALSE),
+				8, group, strlen (group) + 1);
+}
+
+void
+on_list_drag_data_received (GtkTreeView *dest_treeview,
+			    GdkDragContext *context,
+			    gint x,
+			    gint y,
+			    GtkSelectionData *selection,
+			    guint info,
+			    guint time,
+			    gpointer data)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (dest_treeview);
+	GtkTreeIter iter;
+
+	if (selection->data == NULL || selection->length == -1) {
+		gtk_drag_finish (context, FALSE, FALSE, GDK_CURRENT_TIME);
+		return;
+	}
+
+	gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+	gtk_tree_store_set (GTK_TREE_STORE (model),
+			    &iter,
+			    0, selection->data,
+			    -1);
+	
+	gtk_drag_finish (context, TRUE, TRUE, GDK_CURRENT_TIME);
+	gst_dialog_modify (tool->main_dialog);
 }
 
 /* Helpers .*/

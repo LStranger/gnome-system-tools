@@ -40,8 +40,9 @@ enum {
 };
 
 /* User and group lists creation function */
-void                    create_gtk_tree_list		(GtkWidget*);
+void                    create_gtk_tree_list		(GtkWidget*, GtkTargetEntry);
 void			populate_gtk_tree_list		(GtkTreeView*, GList*);
+GList*                  get_gtk_tree_list_items         (GtkTreeView*);
 GtkItemFactory *        popup_item_factory_create       (GtkWidget *widget);
 
 /* User and group tables manipulation functions */

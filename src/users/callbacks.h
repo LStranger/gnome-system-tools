@@ -89,6 +89,8 @@ void on_profile_delete_clicked (GtkButton *, gpointer);
 /* general callbacks */
 void on_add_remove_button_clicked (GtkButton *button, gpointer user_data);
 void on_list_select_row (GtkTreeSelection*, gpointer);
+void on_list_drag_data_get (GtkTreeView*, GdkDragContext*, GtkSelectionData*, guint, guint, gpointer);
+void on_list_drag_data_received (GtkTreeView*, GdkDragContext*, gint, gint, GtkSelectionData*, guint, guint, gpointer);
 
 /* Helpers */
 void actions_set_sensitive (gint table, gboolean state);

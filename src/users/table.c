@@ -81,27 +81,52 @@ popup_item_factory_create (GtkWidget *widget)
 }
 
 void
-create_gtk_tree_list (GtkWidget *list)
+create_gtk_tree_list (GtkWidget *list, GtkTargetEntry target)
 {
 	GtkTreeModel *model = GTK_TREE_MODEL(gtk_tree_store_new (2, G_TYPE_STRING, G_TYPE_POINTER));
 	GtkTreeSelection *selection;
 	GtkCellRenderer *renderer;
-	
+	GtkTreeViewColumn *column;
+		
 	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
+	g_object_unref (model);
 	
 	renderer = gtk_cell_renderer_text_new ();
-	
-	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
-                                                     -1,
-                                                     "group",
-                                                     renderer,
-                                                     "text",
-                                                     0,
-                                                     NULL);
-	g_object_unref (model);
+
+	column = gtk_tree_view_column_new_with_attributes ("group",
+							   renderer,
+							   "text", 0,
+							   NULL);
+	gtk_tree_view_column_set_sort_column_id (column, 0);
+	gtk_tree_view_insert_column (GTK_TREE_VIEW (list), column, -1);
+
+	gtk_tree_view_column_clicked (column);
 	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+
+	g_signal_connect (G_OBJECT (selection),
+			  "changed",
+			  G_CALLBACK (on_list_select_row),
+			  NULL);
+	g_signal_connect (G_OBJECT (list),
+			  "drag-data-get",
+			  G_CALLBACK (on_list_drag_data_get),
+			  NULL);
+	g_signal_connect (G_OBJECT (list),
+			  "drag-data-received",
+			  G_CALLBACK (on_list_drag_data_received),
+			  NULL);
+
+	gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (list),
+						GDK_BUTTON1_MASK,
+						&target, 1,
+						GDK_ACTION_MOVE);
+	gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (list),
+					      &target, 1,
+					      GDK_ACTION_MOVE);
+
+
 }
 
 void
@@ -140,6 +165,27 @@ populate_gtk_tree_list (GtkTreeView *list, GList *items)
 				    -1);
 		items = items->next;
 	}
+}
+
+GList*
+get_gtk_tree_list_items (GtkTreeView *list)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (list);
+	GtkTreeIter iter;
+	GList *item_list = NULL;
+	gchar *item;
+	gboolean valid;
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter, 0, &item, -1);
+		item_list = g_list_prepend (item_list, item);
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+
+	return item_list;
 }
 
 void
