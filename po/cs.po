@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-22 15:15+0100\n"
-"PO-Revision-Date: 2003-12-22 19:35+0100\n"
+"POT-Creation-Date: 2003-12-26 20:11+0100\n"
+"PO-Revision-Date: 2003-12-27 00:05+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -382,12 +382,12 @@ msgid " "
 msgstr " "
 
 #: interfaces/disks.glade.in.h:3
-msgid "<b>CDROM Properties</b>"
-msgstr "<b>Vlastnosti CDROM</b>"
+msgid "<b>Configuration</b>"
+msgstr "<b>Nastavení</b>"
 
 #: interfaces/disks.glade.in.h:4
-msgid "<b>Disk Properties</b>"
-msgstr "<b>Vlastnosti disku</b>"
+msgid "<b>General Information</b>"
+msgstr "<b>Obecné informace</b>"
 
 #: interfaces/disks.glade.in.h:5
 msgid "<b>Partition List</b>"
@@ -406,108 +406,132 @@ msgid "<b>Storage Properties</b>"
 msgstr "<b>Vlastnosti zařízení pro ukládání dat</b>"
 
 #: interfaces/disks.glade.in.h:9
+msgid "<b>Supported Features</b>"
+msgstr "<b>Podporované funkce</b>"
+
+#: interfaces/disks.glade.in.h:10
 msgid ""
 "<big><b>Storage Settings</b></big>\n"
-"Configure your hard disks and storages devices."
+"Configure your hard disks and storage devices."
 msgstr ""
 "<big><b>Nastavení úložného prostoru</b></big>\n"
 "Nastavte své pevné disky a zařízení pro ukládání dat."
 
-#: interfaces/disks.glade.in.h:11
-msgid "Can Read DVD"
-msgstr "Může číst DVD"
-
 #: interfaces/disks.glade.in.h:12
-msgid "Can Write CD-R"
-msgstr "Může zapisovat CD-R"
+msgid "CD-ROM"
+msgstr "CD-ROM"
 
 #: interfaces/disks.glade.in.h:13
-msgid "Can Write CD-RW"
-msgstr "Může zapisovat CD-RW"
-
-#: interfaces/disks.glade.in.h:14
-msgid "Can Write DVD-R"
-msgstr "Může zapisovat DVD-R"
-
-#: interfaces/disks.glade.in.h:15
-msgid "Can Write DVD-RAM"
-msgstr "Může zapisovat DVD-RAM"
-
-#: interfaces/disks.glade.in.h:16
-msgid "Can play audio"
-msgstr "Může přehrávat zvuk"
-
-#: interfaces/disks.glade.in.h:17
-msgid "DMA"
-msgstr "DMA"
-
-#: interfaces/disks.glade.in.h:18
 msgid "Device: "
 msgstr "Zařízení: "
 
-#: interfaces/disks.glade.in.h:19
+#: interfaces/disks.glade.in.h:14
+msgid "Enable DMA"
+msgstr "Povolit DMA"
+
+#: interfaces/disks.glade.in.h:15
 msgid "Extended 2"
 msgstr "Extended 2"
 
-#: interfaces/disks.glade.in.h:20
+#: interfaces/disks.glade.in.h:16
 msgid "Extended 3"
 msgstr "Extended 3"
 
-#: interfaces/disks.glade.in.h:21
+#: interfaces/disks.glade.in.h:17
 msgid "FAT"
 msgstr "FAT"
 
-#: interfaces/disks.glade.in.h:22
+#: interfaces/disks.glade.in.h:18
 msgid "Filesystem:"
 msgstr "Systém souborů:"
 
-#: interfaces/disks.glade.in.h:23
+#: interfaces/disks.glade.in.h:19 src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "Pevý disk"
+
+#: interfaces/disks.glade.in.h:20
 msgid "JFS"
 msgstr "JFS"
 
-#: interfaces/disks.glade.in.h:24
+#: interfaces/disks.glade.in.h:21
 msgid "Memory Swap"
 msgstr "Odkládací prostor"
 
-#: interfaces/disks.glade.in.h:25
+#: interfaces/disks.glade.in.h:22
 msgid "Mount Point:"
 msgstr "Místo připojení:"
 
-#: interfaces/disks.glade.in.h:26
+#: interfaces/disks.glade.in.h:23
 msgid "NTFS"
 msgstr "NTFS"
 
-#: interfaces/disks.glade.in.h:27 src/disks/callbacks.c:312
+#: interfaces/disks.glade.in.h:24 src/disks/callbacks.c:312
 #: src/disks/callbacks.c:313 src/disks/callbacks.c:328
 #: src/disks/callbacks.c:329
 msgid "Not Available"
 msgstr "Není k dispozici"
 
-#: interfaces/disks.glade.in.h:28
+#: interfaces/disks.glade.in.h:25
 msgid "Partitions"
 msgstr "Oddíly"
 
-#: interfaces/disks.glade.in.h:29
+#: interfaces/disks.glade.in.h:26
+msgid "Play Audio"
+msgstr "Přehrávat zvuk"
+
+#: interfaces/disks.glade.in.h:27
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: interfaces/disks.glade.in.h:30
+#: interfaces/disks.glade.in.h:28
+msgid "Read DVD"
+msgstr "Číst DVD"
+
+#: interfaces/disks.glade.in.h:29
 msgid "Reiser FS"
 msgstr "Reiser FS"
 
-#: interfaces/disks.glade.in.h:31
+#: interfaces/disks.glade.in.h:30
 msgid "Size:"
 msgstr "Velikost:"
 
-#: interfaces/disks.glade.in.h:32
+#: interfaces/disks.glade.in.h:31
 msgid "Speed"
 msgstr "Rychlost"
 
+#: interfaces/disks.glade.in.h:32
+msgid "Speed:"
+msgstr "Rychlost:"
+
 #: interfaces/disks.glade.in.h:33
+msgid "Type:"
+msgstr "Typ:"
+
+#: interfaces/disks.glade.in.h:34
+msgid "Type: "
+msgstr "Typ: "
+
+#: interfaces/disks.glade.in.h:35
+msgid "Write CD-R"
+msgstr "Zapisovat CD-R"
+
+#: interfaces/disks.glade.in.h:36
+msgid "Write CD-RW"
+msgstr "Zapisovat CD-RW"
+
+#: interfaces/disks.glade.in.h:37
+msgid "Write DVD-R"
+msgstr "Zapisovat DVD-R"
+
+#: interfaces/disks.glade.in.h:38
+msgid "Write DVD-RAM"
+msgstr "Zapisovat DVD-RAM"
+
+#: interfaces/disks.glade.in.h:39
 msgid "XFS"
 msgstr "XFS"
 
-#: interfaces/disks.glade.in.h:34
+#: interfaces/disks.glade.in.h:40
 msgid "_Format"
 msgstr "_Formátovat"
 
@@ -1613,10 +1637,6 @@ msgstr "/_Formátovat"
 msgid "CDROM"
 msgstr "CDROM"
 
-#: src/disks/disks-storage-disk.c:83
-msgid "Hard Disk"
-msgstr "Pevý disk"
-
 #: src/disks/disks-storage-floppy.c:71
 msgid "Floppy"
 msgstr "Disketa"
@@ -2230,6 +2250,12 @@ msgstr "Shell"
 msgid "Add or remove users and groups"
 msgstr "Přidat nebo odstranit uživatele a skupiny"
 
+#~ msgid "<b>CDROM Properties</b>"
+#~ msgstr "<b>Vlastnosti CDROM</b>"
+
+#~ msgid "<b>Disk Properties</b>"
+#~ msgstr "<b>Vlastnosti disku</b>"
+
 #~ msgid "Parameters:"
 #~ msgstr "Parametry:"
 
@@ -2656,9 +2682,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgid "Remember details of this partition"
 #~ msgstr "Pamatovat si podrobnosti tohoto oddílu"
 
-#~ msgid "Type:"
-#~ msgstr "Typ:"
-
 #~ msgid "VFAT (Windows 95 and newer)"
 #~ msgstr "VFAT (Windows 95 a novější)"
 
@@ -3015,9 +3038,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 
 #~ msgid "Available swap areas"
 #~ msgstr "Dostupné odkládací oblasti"
-
-#~ msgid "Enabled"
-#~ msgstr "Povoleno"
 
 #~ msgid "New Swap Device"
 #~ msgstr "Nové odkládací zařízení"
