@@ -1,21 +1,21 @@
 interfaces = \
-	common.glade					\
-	disks.glade 					\
-	dhcpd.glade					\
-	memory.glade 					\
-	nameresolution.glade			\
-	network.glade 					\
-	shares.glade 					\
-	time.glade 					\
-	users.glade 					\
-	boot.glade					\
-	location-manager.glade			\
-	internetsharing.glade			\
-	rollback-location-management.glade \
-	display.glade					\
-	print.glade					\
-	runlevel.glade					\
-	font.glade
+	boot.glade	\
+	common.glade	\
+	network.glade	\
+	time.glade	\
+	users.glade	\
+	runlevel.glade
+#	font.glade
+#	disks.glade
+#	dhcpd.glade
+#	memory.glade
+#	nameresolution.glade
+#	shares.glade
+#	location-manager.glade
+#	internetsharing.glade 
+#	rollback-location-management.glade
+#	display.glade
+#	print.glade
 
 interfaces_DATA = $(interfaces)
 

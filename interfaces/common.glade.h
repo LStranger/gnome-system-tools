@@ -1,18 +1,18 @@
 /*
- * Archivo de cadenas traducibles generado por Glade.
- * Añada este archivo a su POTFILES.in de su proyecto.
- * NO lo compile como parte de su aplicación.
+ * Datei für übersetzbare Zeichenketten, erzeugt durch Glade.
+ * Fügen Sie diese Datei zur POTFILES.in Ihres Projektes hinzu.
+ * Compilieren Sie sie NICHT als Teil Ihrer Anwendung.
  */
 
 gchar *s = N_("GNOME System Tools");
-gchar *s = N_("Scanning your system configuration.");
-gchar *s = N_("Unsupported platform");
+gchar *s = N_("Scanning system configuration.");
+gchar *s = N_("Unsupported Platform");
 gchar *s = N_("<span weight=\"bold\">The platform you are running is not supported by this tool.</span>\n"
               "\n"
               "If you know for sure that it works like one of the platforms listed below, you can select that and continue.\n"
               "\n"
               "Note, however, that this might damage the system configuration or downright cripple your computer.");
-gchar *s = N_("GNOME System Tools - Password");
+gchar *s = N_("Enter Password - GNOME System Tools");
 gchar *s = N_("_Run without password");
 gchar *s = N_("<span weight=\"bold\">To run this tool, you need administrator privileges.</span>\n"
               "\n"
@@ -20,5 +20,5 @@ gchar *s = N_("<span weight=\"bold\">To run this tool, you need administrator pr
               "specify a password, you will be unable to modify your system configuration.");
 gchar *s = N_("Password:");
 gchar *s = N_("*");
-gchar *s = N_("Gnome System Tools");
+gchar *s = N_("GNOME System Tools");
 gchar *s = N_("Complexity");

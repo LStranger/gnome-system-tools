@@ -1,15 +1,15 @@
 /*
- * Archivo de cadenas traducibles generado por Glade.
- * Añada este archivo a su POTFILES.in de su proyecto.
- * NO lo compile como parte de su aplicación.
+ * Datei für übersetzbare Zeichenketten, erzeugt durch Glade.
+ * Fügen Sie diese Datei zur POTFILES.in Ihres Projektes hinzu.
+ * Compilieren Sie sie NICHT als Teil Ihrer Anwendung.
  */
 
 gchar *s = N_("Networking Settings");
 gchar *s = N_("How this computer is identified.");
-gchar *s = N_("<span weight=\"bold\">Host settings</span>");
+gchar *s = N_("<span weight=\"bold\">Host Settings</span>");
 gchar *s = N_("_Host name:");
 gchar *s = N_("*");
-gchar *s = N_("<span weight=\"bold\">Windows networking</span>");
+gchar *s = N_("<span weight=\"bold\">Windows Networking</span>");
 gchar *s = N_("_Description:");
 gchar *s = N_("Domain / _Workgroup:");
 gchar *s = N_("*");
@@ -21,7 +21,7 @@ gchar *s = N_("General");
 gchar *s = N_("How other computers are accessed.");
 gchar *s = N_("_Add...");
 gchar *s = N_("_Configure");
-gchar *s = N_("Default Gateway Device:");
+gchar *s = N_("Default gateway device:");
 gchar *s = N_("Use \"Auto\" if unsure.");
 gchar *s = N_("Auto");
 gchar *s = N_("Connections");
