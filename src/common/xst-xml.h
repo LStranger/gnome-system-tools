@@ -42,4 +42,5 @@ gchar         *xst_xml_get_child_content        (xmlNodePtr parent, const gchar 
 void           xst_xml_set_child_content        (xmlNodePtr parent, const gchar *child, const gchar *val);
 
 /* For tags looking like <element>{1|0}</element> */
-gboolean       xst_xml_element_get_boolean      (xmlNodePtr root, const gchar *name);
+gboolean       xst_xml_element_get_boolean      (xmlNodePtr parent, const gchar *name);
+void           xst_xml_element_set_boolean      (xmlNodePtr parent, const gchar *child, const gboolean val);

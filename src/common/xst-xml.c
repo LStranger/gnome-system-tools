@@ -394,14 +394,14 @@ xst_xml_set_child_content (xmlNodePtr parent, const gchar *child, const gchar *v
 }
 
 gboolean
-xst_xml_element_get_boolean (xmlNodePtr root, const gchar *name)
+xst_xml_element_get_boolean (xmlNodePtr parent, const gchar *name)
 {
 	xmlNodePtr node;
 	gboolean res;
 	gchar *str;
 
 	res = FALSE;
-	node = xst_xml_element_find_first (root, name);
+	node = xst_xml_element_find_first (parent, name);
 
 	if (node) {
 		str = xst_xml_element_get_content (node);
@@ -411,4 +411,11 @@ xst_xml_element_get_boolean (xmlNodePtr root, const gchar *name)
 
 	return res;
 }
+
+void
+xst_xml_element_set_boolean (xmlNodePtr parent, const gchar *child, const gboolean val)
+{
+	xst_xml_set_child_content (parent, child, val? "1": "0");
+}
+
 
