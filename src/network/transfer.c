@@ -148,7 +148,7 @@ transfer_string_list_xml_to_gui (XstTool *tool, xmlNodePtr root)
 		w = xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table [i].list);
 		position = 0;
 
-		gtk_text_freeze (GTK_TEXT (w));
+		gtk_text_freeze (w);
 		gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 		
 		for (node = xst_xml_element_find_first (root, transfer_string_list_table [i].xml_path); 
@@ -163,7 +163,7 @@ transfer_string_list_xml_to_gui (XstTool *tool, xmlNodePtr root)
 			}
 		}
 
-		gtk_text_thaw (GTK_TEXT (w));
+		gtk_text_thaw ((w));
 	}
 }
 

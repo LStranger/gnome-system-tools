@@ -250,8 +250,9 @@ xst_dialog_class_init (XstDialogClass *klass)
 				GTK_TYPE_NONE, 0);
 #endif	
 
-
+#if 0
 	gtk_object_class_add_signals (object_class, xstdialog_signals, LAST_SIGNAL);
+#endif	
 
 	object_class->destroy = xst_dialog_destroy;
 }
@@ -573,7 +574,12 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gtk_box_pack_start (GTK_BOX (w), dialog->child, TRUE, TRUE, 0);
 
 	w = glade_xml_get_widget (xml, "help");
+#warning FIXME
+#if 0	
 	i = gnome_stock_pixmap_widget (w, GNOME_STOCK_PIXMAP_HELP);
+#else
+	i = gtk_label_new ("Fixme stock icon\n");
+#endif	
 	gtk_widget_show (i);
 	gtk_container_add (GTK_CONTAINER (w), i);
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (help_cb), dialog);

@@ -1696,7 +1696,10 @@ fill_ppp (XstConnection *cxn)
 static void
 fill_ppp_adv (XstConnection *cxn)
 {
+#warning FIXME
+#if 0	
 	gnome_entry_load_history (GNOME_ENTRY (W ("ppp_serial_port_g")));
+#endif	
 	SET_STR ("ppp_", serial_port);
 	SET_BOOL ("ppp_", stupid);
 	SET_BOOL ("ppp_", set_default_gw);

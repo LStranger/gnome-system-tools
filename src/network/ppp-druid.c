@@ -253,7 +253,10 @@ _("You are about to create an account named with the following information:\n\n"
 	
 	text = g_strdup_printf (format, profile, phone, login, passwd);
 
-	gnome_druid_page_finish_set_text (GNOME_DRUID_PAGE_FINISH (w), text);
+#warning FIXME
+#if 0	
+	gnome_druid_page_finish_set_text (w, text);
+#endif	
 
 	g_free (text);
 	g_free (passwd);

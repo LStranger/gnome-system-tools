@@ -1242,7 +1242,9 @@ xst_tool_class_init (XstToolClass *klass)
 				GTK_TYPE_NONE, 0);
 #endif	
 
+#if 0	
 	gtk_object_class_add_signals (object_class, xsttool_signals, LAST_SIGNAL);
+#endif	
 
 	object_class->destroy = xst_tool_destroy;
 }
@@ -1620,25 +1622,20 @@ try_show_usage_warning (void)
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
-#ifdef XST_HAVE_ARCHIVER
-	CORBA_ORB orb;
-#endif	
-
+	GnomeProgram *program;
 	struct poptOption xst_options[] =
 	{
-#ifdef XST_HAVE_ARCHIVER	
-		{ "location", '\0', POPT_ARG_STRING, &location_id, 0,
-		  N_("	Edit configuration in the location LOCATION."), N_("LOCATION") },
-#endif	
-		
 		{NULL, '\0', 0, NULL, 0}
 	};
 
 #ifdef ENABLE_NLS
-	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
-	textdomain (PACKAGE);
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
 #endif
 
+#warning FIXME	
+#if 0	
         gnomelib_register_popt_table (xst_options, "general XST options");
 
 	if (options == NULL) {
@@ -1661,13 +1658,14 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 	}
 
 	glade_gnome_init ();
-
-#ifdef XST_HAVE_ARCHIVER	
-	orb = oaf_init (argc, argv);
-	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
-		g_critical ("Cannot initialize bonobo");
-	bonobo_activate ();
 #endif
+	program = gnome_program_init (app_name, VERSION,
+				      LIBGNOMEUI_MODULE, argc, argv,
+				      GNOME_PARAM_POPT_TABLE, options,
+				      GNOME_PARAM_HUMAN_READABLE_NAME,
+				      _("Ximian Setup Tool"),
+				      NULL);
+	
 
 	if (geteuid () == 0) {
 		root_access = ROOT_ACCESS_REAL;
