@@ -194,6 +194,8 @@ entry_filter (GtkEditable *editable, const gchar *text, gint length, gint *pos, 
                    (ret == GST_ADDRESS_IPV6_INCOMPLETE) ||
                    (ret == GST_ADDRESS_IPV6));
     }
+  else if (filter == GST_FILTER_PHONE)
+    success = (strspn (str, "0123456789abcdABCD,#*") == strlen (str));
 
   if (!success)
     gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");

@@ -26,7 +26,8 @@
 enum {
   GST_FILTER_IP,
   GST_FILTER_IPV4,
-  GST_FILTER_IPV6
+  GST_FILTER_IPV6,
+  GST_FILTER_PHONE
 };
 
 typedef enum {
