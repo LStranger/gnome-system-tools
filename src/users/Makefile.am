@@ -25,7 +25,7 @@ $(INTLLIBS) \
 
 desktop = users.desktop
 
-EXTRA_DIST = $(desktop)
+EXTRA_DIST = $(desktop).in
 
 CLEANFILES = $(desktop)
 
