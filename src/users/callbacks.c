@@ -449,8 +449,8 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		 * first identify the method, through magic, and then use crypt
 		 * and steal some code for MD5 crypt */
 				
-		g_free (current_user->password);
-		current_user->password = g_strdup (new_passwd);
+/*		g_free (current_user->password);
+		current_user->password = g_strdup (new_passwd);*/
 
 		/* I understand the need of feedback for the user, but this
 		 * dialog is being more of an obstacle, and is not actually true,
@@ -459,10 +459,11 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		 * changes.
 		 * Arturo. */
 		
-/*		msg = g_strdup_printf ("Password for %s updated.", current_user->login);
-		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (msg, GTK_WINDOW (win)));
+/*		msg = g_strdup_printf ("Password for %s updated.", current_user->login);*/
+		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (
+												   "Password changing not ready yet.", GTK_WINDOW (win)));
 		gnome_dialog_run (dialog);
-		g_free (msg);*/
+/*		g_free (msg);*/
 
 		gtk_widget_hide (win);
 		tool_set_modified (TRUE);
