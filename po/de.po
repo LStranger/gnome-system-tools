@@ -3,16 +3,17 @@
 # Kai Lahmann <kl@linuxfaqs.de>, 2001.
 # Christian Meyer <chrisime@gnome.org>, 2000, 2001.
 # Christian Neumair <chris@gnome-de.org>, 2002-2004.
-# Hendrik Brandt <heb@gnome-de.org>, 2004.
+# Hendrik Brandt <heb@gnome-de.org>, 2004-2005.
+# Frank Arnold <frank@scirocco-5v-turbo.de>, 2005.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools\n"
+"Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-22 23:01+0100\n"
-"PO-Revision-Date: 2005-01-22 13:56+0100\n"
-"Last-Translator: Frank Arnold <frank@scirocco-5v-turbo.de>\n"
+"POT-Creation-Date: 2005-01-31 13:31+0100\n"
+"PO-Revision-Date: 2005-01-31 13:30+0100\n"
+"Last-Translator: Hendrik Brandt <heb@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1204,6 +1205,16 @@ msgstr ""
 msgid "An unexpected error has ocurred"
 msgstr "Es ist ein unerwarteter Fehler aufgetreten"
 
+#: src/common/gst-auth.c:132
+msgid "Could not execute the backend"
+msgstr "Das Backend konnte nicht gestartet werden"
+
+#: src/common/gst-auth.c:133
+msgid "There was an error creating the child process, the tool will close now."
+msgstr ""
+"Während der Kindprozess erzeugt wurde, ist ein Fehler aufgetreten. Das "
+"Programm wird nun geschlossen."
+
 #: src/common/gst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
@@ -1294,11 +1305,11 @@ msgstr ""
 "Stellen Sie sicher, dass es nicht belegt und vorschriftsgemäß mit dem "
 "Computer verbunden ist"
 
-#: src/network/callbacks.c:433
+#: src/network/callbacks.c:439
 msgid "The host name has changed"
 msgstr "Der Rechnername wurde geändert"
 
-#: src/network/callbacks.c:436
+#: src/network/callbacks.c:442
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1306,7 +1317,7 @@ msgstr ""
 "Dies hindert Sie daran, neue Anwendungen zu starten. Daher müssen Sie sich "
 "erneut anmelden. Dennoch fortfahren?"
 
-#: src/network/callbacks.c:442
+#: src/network/callbacks.c:448
 msgid "Change _Host name"
 msgstr "_Rechnername ändern"
 
@@ -1322,7 +1333,7 @@ msgstr "DHCP"
 msgid "IP Address"
 msgstr "IP-Adresse"
 
-#: src/network/hosts.c:95
+#: src/network/hosts.c:96
 msgid "Aliases"
 msgstr "Aliase"
 
@@ -1334,19 +1345,19 @@ msgstr "Standort erstellen"
 msgid "Delete current location"
 msgstr "Aktuellen Standort löschen"
 
-#: src/network/location.c:362
+#: src/network/location.c:363
 msgid "Do you want to remove this location?"
 msgstr "Sind Sie sicher, dass Sie diesen Standort löschen wollen?"
 
-#: src/network/location.c:428
+#: src/network/location.c:436
 msgid "Changing profile"
 msgstr "Profil wird gewechselt"
 
-#: src/network/main.c:105
+#: src/network/main.c:107
 msgid "The interface does not exist"
 msgstr "Die Schnittstelle existiert nicht"
 
-#: src/network/main.c:107
+#: src/network/main.c:109
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -1354,23 +1365,23 @@ msgstr ""
 "Stellen Sie sicher, dass es richtig geschrieben und das es korrekt von Ihrem "
 "System unterstützt wird."
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "Configure a network interface"
 msgstr "Eine Netzerwerkschnittstelle konfigurieren"
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "INTERFACE"
 msgstr "SCHNITTSTELLE"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "Configure the first network interface with a specific type"
 msgstr "Die erste Netzwerkschnittstelle eines speziellen Typs konfigurieren"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "TYPE"
 msgstr "TYP"
 
-#: src/network/main.c:147
+#: src/network/main.c:162
 msgid "Network settings"
 msgstr "Netzwerkeinstellungen"
 
@@ -1711,11 +1722,11 @@ msgstr "Kennung der Benutzergruppe ist"
 msgid "Users and Groups"
 msgstr "Benutzer und Gruppen"
 
-#: src/users/passwd.c:266
+#: src/users/passwd.c:165
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
 
-#: src/users/passwd.c:271
+#: src/users/passwd.c:170
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1957,95 +1968,3 @@ msgstr "Befehlszeile"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Benutzer und Gruppen hinzufügen oder entfernen"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
-#~ "Use this tool to specify which operating systems users can choose at "
-#~ "startup"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">Bootloader-Einstellungen</span>\n"
-#~ "Mit Hilfe dieses Werkzeugs können Sie festlegen, zwischen welchen "
-#~ "Betriebssystemen der Benutzer beim Systemstart wählen kann"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
-#~ "Use this tool for configuring the way your system access to other "
-#~ "computers"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Netzwerkeinstellungen</span>\n"
-#~ "Mit Hilfe dieses Werkzeugs können Sie konfigurieren, wie Ihr System auf "
-#~ "andere Computer zugreift"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
-#~ "use this tool to specify which services to run at boot time"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">Diensteinstellungen</span>\n"
-#~ "Mit Hilfe dieses Werkzeugs können Sie angeben, welche Dienste beim "
-#~ "Systemstart gestartet werden sollen"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Shared folders configuration</"
-#~ "span>\n"
-#~ "Use this tool for making available folders to your local network "
-#~ "neighborhood"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Konfiguration geteilter Ordner</"
-#~ "span>\n"
-#~ "Verwenden Sie dieses Werkzeug um Ihre Ordner in der Netzwerkumgebung "
-#~ "verfügbar zumachen"
-
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
-#~ "Use this tool for setting your current date, time and time zone"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">Zeit- und Datumseinstellungen</"
-#~ "span>\n"
-#~ "Mit Hilfe dieses Werkzeugs können Sie das heutige Datum sowie die "
-#~ "derzeitige Uhrzeit und Zeitzone festlegen"
-
-#~ msgid "<span weight=\"bold\">Time Configuration</span>"
-#~ msgstr "<span weight=\"bold\">Zeiteinstellungen</span>"
-
-#~ msgid "date"
-#~ msgstr "Datum"
-
-#~ msgid "hours"
-#~ msgstr "Stunden"
-
-#~ msgid "minutes"
-#~ msgstr "Minuten"
-
-#~ msgid "seconds"
-#~ msgstr "Sekunden"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
-#~ "Use this tool for configuring users and groups settings in your system"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Benutzer- und Gruppeneinstellungen</"
-#~ "span>\n"
-#~ "Mit Hilfe dieses Werkzeugs können Sie die Benutzer- und "
-#~ "Gruppeneinstellungen Ihres Systems festlegen."
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">To run this tool, you need "
-#~ "administrator privileges</span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Sie benötigen Administratorrechte, "
-#~ "um dieses Werkzeug auszuführen</span>"
-
-#~ msgid "GST Shares admin component"
-#~ msgstr "GST-Shares-Verwaltungskomponente"
-
-#~ msgid "GST Shares sharing operations"
-#~ msgstr "GST-Shares-Verteilungsoperationen"
-
-#~ msgid "_Share Folder"
-#~ msgstr "Ordner _teilen"
-
-#~ msgid "Shares"
-#~ msgstr "Shares"
