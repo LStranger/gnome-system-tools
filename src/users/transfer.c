@@ -304,8 +304,8 @@ transfer_group_list_to_gui (void)
 	for (g = g_list_first (group_list); g; g = g_list_next (g))
 	{
 		current_g = (group *)g->data;
-		if (current_g->gid >= logindefs.new_group_min_id &&
-				current_g->gid <= logindefs.new_group_max_id) 
+/*		if (current_g->gid >= logindefs.new_group_min_id &&
+				current_g->gid <= logindefs.new_group_max_id) */
 		{
 			list_item = gtk_list_item_new_with_label (current_g->name);
 			gtk_widget_show (list_item);

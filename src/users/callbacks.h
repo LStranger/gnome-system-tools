@@ -67,6 +67,9 @@ extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data);
 
 extern void
+on_group_delete_clicked (GtkButton *button, gpointer user_data);
+
+extern void
 on_group_list_selection_changed (GtkWidget *list, gpointer user_data);
 
 
@@ -83,4 +86,17 @@ on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data);
 extern void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data);
 
+
+
+extern void
+on_group_settings_add_clicked (GtkButton *button, gpointer user_data);
+
+extern void
+on_group_settings_remove_clicked (GtkButton *button, gpointer user_data);
+
+extern void
+on_group_settings_all_selection_changed (GtkWidget *list, gpointer user_data);
+
+extern void
+on_group_settings_members_selection_changed (GtkWidget *list, gpointer user_data);
 

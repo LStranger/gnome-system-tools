@@ -32,28 +32,19 @@
 #include "callbacks.h"
 #include "transfer.h"
 
-
+/* Local globals */
 static int reply;
+const gchar *group_member_data_key = "group_member_name";
+
 
 /* Prototypes */
 static void reply_cb (gint val, gpointer data);
+static GList *fill_group_members_list (void);
+static void fill_all_users_list (GList *member_rows);
+static void do_quit (void);
+static void user_actions_set_sensitive (gboolean b);
+static void group_actions_set_sensitive (gboolean b);
 
-/* Helper functions */
-
-static void 
-do_quit (void)
-{
-	/* TODO: Check for changes and optionally ask for confirmation */
-	 gtk_main_quit ();
-}
-
-static void
-user_actions_set_sensitive (gboolean b)
-{
-	gtk_widget_set_sensitive (tool_widget_get ("user_delete"), b);
-	gtk_widget_set_sensitive (tool_widget_get ("user_chpasswd"), b);
-	gtk_widget_set_sensitive (tool_widget_get ("user_settings"), b);
-}
 
 /* Main button callbacks */
 
@@ -205,47 +196,53 @@ extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	GList *u, *rows = NULL;
-	GtkList *list;
-	user *current_u;
-	GtkWidget *list_item;
-
+       	GList *member_rows;	
 
 	w0 = tool_widget_get ("group_settings_name");
 	gtk_entry_set_text (GTK_ENTRY (w0), current_group->name);
 
-	/* Fill all users list */
-	
-	list = GTK_LIST (tool_widget_get ("group_settings_all"));
-	for (u = g_list_first (user_list); u; u = g_list_next (u))
-	{
-		current_u = (user *)u->data;
-		list_item = gtk_list_item_new_with_label (current_u->login);
-		gtk_widget_show (list_item);
-		rows = g_list_append (rows, list_item);
-	}
-
-	gtk_list_append_items (list, rows);
 
 	/* Fill group members */
+	member_rows = fill_group_members_list ();
 
-	rows = NULL;
-
-	list = GTK_LIST (tool_widget_get ("group_settings_members"));
-	for (u = g_list_first (current_group->users); u; u = g_list_next (u))
-	{
-		list_item = gtk_list_item_new_with_label ((gchar *)u->data);
-		gtk_widget_show (list_item);
-		rows = g_list_append (rows, list_item);
-	}
-
-	gtk_list_append_items (list, rows);
-
+	/* Fill all users list */
+	fill_all_users_list (member_rows);
 
 	/* Show group settings dialog */
 	
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_widget_show (w0);
+}
+
+extern void
+on_group_delete_clicked (GtkButton *button, gpointer user_data)
+{
+	gchar *txt;
+	GtkWindow *parent;
+	GnomeDialog *dialog;
+	GtkList *list;
+	GList *selection;
+
+	txt = g_strdup_printf ("Are you sure you want to delete group %s?", current_group->name);
+	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
+	
+	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
+	gnome_dialog_run (dialog);
+
+
+	if (reply)
+		return;
+	else
+	{
+		group_list = g_list_remove (group_list, current_group);
+		
+		list = GTK_LIST (tool_widget_get ("group_list"));
+		selection = g_list_copy (list->selection);
+		gtk_list_remove_items (list, selection);
+		g_list_free (selection);
+/*		current_user = user_list; */
+		
+	}
 }
 
 extern void
@@ -257,10 +254,13 @@ on_group_list_selection_changed (GtkWidget *list, gpointer user_data)
 	current = GTK_LIST (list)->selection;
 
 	if (!current)
-		return;
-
-	list_item = GTK_OBJECT (current->data);
-	current_group = gtk_object_get_data (list_item, group_list_data_key);
+		group_actions_set_sensitive (FALSE);
+	else
+	{
+		list_item = GTK_OBJECT (current->data);
+		current_group = gtk_object_get_data (list_item, group_list_data_key);
+		group_actions_set_sensitive (TRUE);
+	}
 }
 
 
@@ -304,26 +304,42 @@ on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
-	/* That #ifdef is just for commenting this code out, it crashes app and isn't ready.
-	 * I'll finish it tomorrow
-	 */
-	
-#ifdef TOMORROW
 	GtkWidget *w0;
+	GtkWindow *win;
+	GnomeDialog *dialog;
 	gchar *txt;
+	GtkWidget *label, *list_item;
+	GtkList *list;
+	GList *tmplist;
+	group *g;
 
 	w0 = tool_widget_get ("user_settings_name");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
 
-	/* If login name is changed and is at least 3 letters long (is that correct?) */
-	if (strcmp (txt, current_user->login) && strlen (txt) >= 3)
-	{
-		g_free (current_user->login);
-		current_user->login = txt;
-	}
-	else
-		g_free (txt);
+	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
 
+	/* If login name is changed and is at least 3 letters long (is that correct?) */
+	if (strcmp (txt, current_user->login))
+	{
+		if (strlen (txt) < 3)
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+					("Username is too short", win));
+			
+			gnome_dialog_run (dialog);
+		}
+		else
+		{
+			g_free (current_user->login);
+			current_user->login = g_strdup (txt);
+
+			list = GTK_LIST (tool_widget_get ("user_list"));
+			tmplist = g_list_copy (list->selection);
+			list_item = (GtkWidget *)tmplist->data;
+			label = GTK_BIN (list_item)->child;
+			gtk_label_set_text (GTK_LABEL (label), txt);			
+		}
+	}
 
 	w0 = tool_widget_get ("user_settings_comment");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
@@ -332,13 +348,29 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	if (strcmp (txt, current_user->comment))
 	{
 		g_free (current_user->comment);
-		current_user->comment = txt;
+		current_user->comment = g_strdup (txt);
 	}
-	else
-		g_free (txt);
-	
-#endif
-	
+
+
+	/* Get selected group name */
+
+	w0 = tool_widget_get ("user_settings_group");
+	label = GTK_BIN (w0)->child;
+	gtk_label_get (GTK_LABEL (label), &txt);
+
+	/* Now find group's gid */
+
+	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+	{
+		g = (group *)tmplist->data;
+		if (!strcmp (g->name, txt))
+		{
+			current_user->gid = g->gid;
+			break;
+		}
+	}
+				
+
 	/* Clean up dialog, it's easiest to just call *_cancel_* function */
 	on_user_settings_cancel_clicked (NULL, NULL);
 }
@@ -434,6 +466,105 @@ on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
+	GtkWidget *w0, *label, *list_item;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	gchar *txt;
+	GList *selection;
+	GtkList *list;
+	
+	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+
+	w0 = tool_widget_get ("group_settings_name");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	if (strcmp (current_group->name, txt))
+	{
+		if (strlen (txt) < 3) /* how short (long) can group name be? */
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+					("Group name is too short", win));
+			
+			gnome_dialog_run (dialog);
+		}
+		else
+		{
+			g_free (current_group->name);
+			current_group->name = g_strdup (txt);
+
+			list = GTK_LIST (tool_widget_get ("group_list"));
+			selection = g_list_copy (list->selection);
+			list_item = (GtkWidget *)selection->data;
+			label = GTK_BIN (list_item)->child;
+			gtk_label_set_text (GTK_LABEL (label), txt);
+		}
+	}
+
+	/* TODO: update group members also */
+
+	/* Clear list and hide dialog */
+	on_group_settings_cancel_clicked (NULL, NULL);
+}
+
+extern void
+on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkList *all, *members;
+	GList *selection;
+	GtkWidget *list_item;
+
+	all = GTK_LIST (tool_widget_get ("group_settings_all"));
+	members = GTK_LIST (tool_widget_get ("group_settings_members"));
+
+	selection = g_list_copy (all->selection);
+	list_item = (GtkWidget *)selection->data;
+	gtk_widget_reparent (list_item, GTK_WIDGET (members));
+}
+
+extern void
+on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkList *all, *members;
+	GList *selection;
+	GtkWidget *list_item;
+
+	all = GTK_LIST (tool_widget_get ("group_settings_all"));
+	members = GTK_LIST (tool_widget_get ("group_settings_members"));
+
+	selection = g_list_copy (members->selection);
+	list_item = (GtkWidget *)selection->data;
+	gtk_widget_reparent (list_item, GTK_WIDGET (all));
+}
+
+
+extern void
+on_group_settings_all_selection_changed (GtkWidget *list, gpointer user_data)
+{
+	GList *current;
+	GtkWidget *w0;
+
+	current = GTK_LIST (list)->selection;
+	w0 = tool_widget_get ("group_settings_add");
+
+	if (!current)
+		gtk_widget_set_sensitive (w0, FALSE);
+	else
+		gtk_widget_set_sensitive (w0, TRUE);
+}
+
+extern void
+on_group_settings_members_selection_changed (GtkWidget *list, gpointer user_data)
+{
+	GList *current;
+	GtkWidget *w0;
+
+	current = GTK_LIST (list)->selection;
+	w0 = tool_widget_get ("group_settings_remove");
+
+	if (!current)
+		gtk_widget_set_sensitive (w0, FALSE);
+	else
+		gtk_widget_set_sensitive (w0, TRUE);
 }
 
 
@@ -443,5 +574,99 @@ static void
 reply_cb (gint val, gpointer data)
 {
 	reply = val;
+}
+
+static GList *
+fill_group_members_list (void)
+{
+	GList *u;
+       	GList *member_rows = NULL;
+	GtkList *list;
+	GtkWidget *list_item;
+
+
+	list = GTK_LIST (tool_widget_get ("group_settings_members"));
+
+	for (u = g_list_first (current_group->users); u; u = g_list_next (u))
+	{
+		list_item = gtk_list_item_new_with_label ((gchar *)u->data);
+		gtk_widget_show (list_item);
+		gtk_object_set_data (GTK_OBJECT (list_item), group_member_data_key,
+				((gchar *)u->data));
+		
+		member_rows = g_list_append (member_rows, list_item);
+		
+	}
+
+	gtk_list_append_items (list, member_rows);
+
+	return member_rows;
+}
+
+static void
+fill_all_users_list (GList *member_rows)
+{
+	GList *u;
+	GList *all_rows = NULL;
+	GtkList *list;
+	user *current_u;
+	GtkWidget *list_item;
+	GList *tmplist;
+	gchar *name;
+	GtkObject *item;
+	gboolean found;
+
+	
+	list = GTK_LIST (tool_widget_get ("group_settings_all"));
+	for (u = g_list_first (user_list); u; u = g_list_next (u))
+	{
+		current_u = (user *)u->data;
+		found = FALSE;
+
+		/* Find, if not in members */
+
+		for (tmplist = g_list_first (member_rows); tmplist; tmplist = g_list_next (tmplist))
+		{
+			item = GTK_OBJECT (tmplist->data);
+			name = gtk_object_get_data (item, group_member_data_key);
+
+			if (!strcmp (name, current_u->login))
+			{
+				found = TRUE;
+				break;
+			}
+		}
+
+		if (!found)
+		{
+			list_item = gtk_list_item_new_with_label (current_u->login);
+			gtk_widget_show (list_item);
+			all_rows = g_list_append (all_rows, list_item);
+		}
+	}
+
+	gtk_list_append_items (list, all_rows);
+}
+
+static void 
+do_quit (void)
+{
+	/* TODO: Check for changes and optionally ask for confirmation */
+	 gtk_main_quit ();
+}
+
+static void
+user_actions_set_sensitive (gboolean b)
+{
+	gtk_widget_set_sensitive (tool_widget_get ("user_delete"), b);
+	gtk_widget_set_sensitive (tool_widget_get ("user_chpasswd"), b);
+	gtk_widget_set_sensitive (tool_widget_get ("user_settings"), b);
+}
+
+static void
+group_actions_set_sensitive (gboolean b)
+{
+	gtk_widget_set_sensitive (tool_widget_get ("group_delete"), b);
+	gtk_widget_set_sensitive (tool_widget_get ("group_settings"), b);
 }
 
