@@ -170,6 +170,8 @@ xmlNodePtr
 xml_element_find_first (xmlNodePtr parent, char *name)
 {
 	xmlNodePtr node;
+	
+	g_return_val_if_fail (parent != NULL, NULL);
 
 	for (node = parent->childs; node;)
 	{
@@ -185,6 +187,8 @@ xmlNodePtr
 xml_element_find_next (xmlNodePtr sibling, char *name)
 {
 	xmlNodePtr node;
+	
+	g_return_val_if_fail (sibling != NULL, NULL);
 
 	for (node = sibling->next; node;)
 	{
@@ -206,9 +210,13 @@ xml_element_add (xmlNodePtr parent, char *name)
 char *
 xml_element_get_content (xmlNodePtr node)
 {
-	char *text = 0;
+	char *text;
 	xmlNodePtr n0;
 
+	text = g_new0 (char, 1);
+	
+	g_return_val_if_fail (node != NULL, NULL);
+	
 	for (n0 = node->childs; n0; n0 = n0->next)
 	{
 		if (n0->type == XML_TEXT_NODE)
@@ -225,6 +233,8 @@ xml_element_get_content (xmlNodePtr node)
 void
 xml_element_set_content (xmlNodePtr node, char *text)
 {
+	g_return_if_fail (node != NULL);
+	
 	xmlNodeSetContent (node, text);
 }
 
@@ -234,6 +244,8 @@ xml_element_add_with_content (xmlNodePtr node, char *name, char *content)
 {
 	xmlNodePtr n0;
 
+	g_return_if_fail (node != NULL);
+	
 	n0 = xml_element_find_first (node, name);
 	if (!n0) n0 = xml_element_add (node, name);
 
@@ -247,6 +259,8 @@ xml_element_get_attribute (xmlNodePtr node, char *attr)
 	xmlAttrPtr a0;
 	char *text = 0;
 
+	g_return_val_if_fail (node != NULL, NULL);
+	
 	for (a0 = node->properties; a0; a0 = a0->next)
 	{
 		if (a0->name && !strcmp (a0->name, attr))
@@ -263,6 +277,8 @@ xml_element_get_attribute (xmlNodePtr node, char *attr)
 void
 xml_element_set_attribute (xmlNodePtr node, char *attr, char *value)
 {
+	g_return_if_fail (node != NULL);
+	
 	xmlSetProp (node, attr, value);
 }
 
@@ -273,6 +289,8 @@ xml_element_get_bool_attr (xmlNodePtr node, char *attr)
 	char *s;
 	int r = FALSE;
 
+	g_return_val_if_fail (node != NULL, FALSE);
+	
 	s = xml_element_get_attribute (node, attr);
 	if (s)
 	{
@@ -287,6 +305,8 @@ xml_element_get_bool_attr (xmlNodePtr node, char *attr)
 void
 xml_element_set_bool_attr (xmlNodePtr node, char *attr, gboolean state)
 {
+	g_return_if_fail (node != NULL);
+	
 	xml_element_set_attribute (node, attr, state ? "true" : "false");
 }
 
@@ -298,6 +318,8 @@ xml_element_get_state (xmlNodePtr node, char *element)
 	char *s;
 	int r = FALSE;
 
+	g_return_val_if_fail (node != NULL, FALSE);
+	
 	elem = xml_element_find_first (node, element);
 	if (elem)
 	{
@@ -318,6 +340,8 @@ xml_element_set_state (xmlNodePtr node, char *element, gboolean state)
 {
 	xmlNodePtr elem;
 
+	g_return_if_fail (node != NULL);
+	
 	elem = xml_element_find_first (node, element);
 	if (!elem) elem = xml_element_add (node, element);
 	xml_element_set_attribute (elem, "state", state ? "true" : "false");
@@ -325,8 +349,10 @@ xml_element_set_state (xmlNodePtr node, char *element, gboolean state)
 
 
 void
-xml_element_destroy (xmlNodePtr node)
+nxml_element_destroy (xmlNodePtr node)
 {
+	g_return_if_fail (node != NULL);
+	
 	xmlUnlinkNode (node);
 	xmlFreeNode (node);
 }
@@ -337,6 +363,8 @@ xml_element_destroy_children (xmlNodePtr parent)
 {
 	xmlNodePtr node, node_next;
 
+	g_return_if_fail (parent != NULL);
+	
 	for (node = parent->childs; node;)
 	{
 		node_next = node->next;
@@ -352,6 +380,8 @@ xml_element_destroy_children_by_name (xmlNodePtr parent, char *name)
 {
 	xmlNodePtr node, node_next;
 
+	g_return_if_fail (parent != NULL);
+	
 	for (node = xml_element_find_first (parent, name); node;)
 	{
 		node_next = xml_element_find_next (node, name);
