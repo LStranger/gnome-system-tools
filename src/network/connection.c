@@ -171,12 +171,15 @@ connection_xml_wvsection_has_name (xmlNode *node, gchar *name)
 {
 	gchar *section_found;
 	gint cmp;
-	
-	section_found = xst_xml_get_child_content (node, "name");
-	cmp = strcmp (section_found, name);
-	g_free (section_found);
 
-	return !cmp;
+	section_found = xst_xml_get_child_content (node, "name");
+	if (section_found) {
+		cmp = strcmp (section_found, name);
+		g_free (section_found);
+		return !cmp;
+	}
+
+	return 0;
 }
 
 /* Use type == NULL if you don't care about the type. */
