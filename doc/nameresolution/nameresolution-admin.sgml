@@ -1,0 +1,109 @@
+<!DOCTYPE book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!entity gpl SYSTEM "gpl.sgml">
+]>
+
+<book id="index">
+  <bookinfo>
+    <title>Name Resolution Setup Help</title>
+    <authorgroup>
+      <author>
+	<firstname>Hans Petter</firstname>
+	<surname>Jansson</surname>
+	<affiliation>
+	  <address>
+	    <email>hpj@helixcode.com</email>
+	  </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+    <copyright>
+      <year>2000</year>
+      <holder>Helix Code</holder>
+    </copyright>
+    <legalnotice>
+      <para>
+This documentation is free software; you can redistribute
+it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later
+version.</para>
+      <para>
+This program is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.  See the GNU General Public License (<xref linkend="gpl">)
+for more details.</para>
+    </legalnotice>
+  </bookinfo>
+  <preface id=intro>
+    <title>The Name Resolution Setup Tool</title>
+    <para>
+The name resolution tool lets you decide how network names are looked up. It
+lets you set the name for your own computer, its Internet domain, Windows(R)
+workgroup, etc. 
+    </para>
+  </preface>
+  <chapter id=identification>
+    <title>Identification</title>
+    <para>The "identification" tab lets you describe your computer in terms
+of name, Internet domain, Windows(R) workgroup and a description which is
+shown to others browsing the local network.</para>
+    <para>There are also two text displays showing the reverse equivalents
+of your computer name and Internet domain. These cannot be edited, but
+serve as guides - it's what others will see when trying to look up the
+Internet name information from your computer, and can only be changed in the
+DNS (you don't need to worry about this).</para>
+  </chapter>
+  <chapter id=dns>
+    <title>DNS Servers</title>
+    <para>This tab shows a list of the Internet name servers that will be used
+to answer name queries. They are tried in order of appearance, and are
+specified by IP address.</para>
+  </chapter>
+  <chapter id=wins>
+    <title>WINS Resolution</title>
+    <para>You are allowed to specify a WINS server, which will be used to get
+the list of computers participating in Windows(R)-like networking (SMB). You
+do not need to specify this unless your network is complex, typically
+consisting of two or more bridged networks.</para>
+  </chapter>
+  <chapter id=searchdomains>
+    <title>Search Domains</title>
+    <para>This is a list of Internet domains which will be appended to an
+unqualified host name, in order, when determining its IP address. Typically
+you will enter your Internet domain here, if you have one, and any other
+Internet domains for which you want to be able to use hostname
+shorthand.</para>
+    <para>E.g. if you have "mydomain.net" and "otherdomain.com" in your
+searchlist, and enter "ghost" as a hostname (in your web browser, for
+example), your computer will look for "ghost.mydomain.net", followed by
+"ghost.otherdomain.com" if the former doesn't exist.</para>
+  </chapter>
+  <chapter id=staticnames>
+    <title>Static Names</title>
+    <para>Some computers don't have a DNS entry, that is, there is no DNS
+server that give it an Internet name. You'd normally have to refer to such
+computers by their IP address.</para>
+    <para>However, this list lets you enter name aliases for such hosts. It
+works like a private name server - aliases entered here will map to their
+corresponding IP addresses whenever they are used. For instance, entering
+the alias "cube" for the IP address "10.10.10.1" will let you use "cube" in
+your applications when referring to the computer with this IP.</para>
+    <para>You can have several aliases for one IP. Use spaces to separate
+them in the alias entry field.</para>
+    <para>Remember that the aliases will only work on your local computer.
+Others will have to add similar aliases on their computers if they want to
+use them.</para>
+    <para>You'll usually have a special IP address here - "127.0.0.1". This
+is a reference to your computer, from your computer. It is also called the
+"loopback address".</para>
+  </chapter>
+  <appendix id=gpl>
+    &gpl;
+  </appendix>
+</book>
+<!-- Keep this comment at the end of the file
+Local variables:
+sgml-default-dtd-file: "/usr/lib/sgml/cdtd/docbook.ced"
+End:
+-->

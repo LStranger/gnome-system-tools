@@ -1,0 +1,81 @@
+<!DOCTYPE book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!entity gpl SYSTEM "gpl.sgml">
+]>
+
+<book id="index">
+  <bookinfo>
+    <title>Networking Setup Help</title>
+    <authorgroup>
+      <author>
+	<firstname>Hans Petter</firstname>
+	<surname>Jansson</surname>
+	<affiliation>
+	  <address>
+	    <email>hpj@helixcode.com</email>
+	  </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+    <copyright>
+      <year>2000</year>
+      <holder>Helix Code</holder>
+    </copyright>
+    <legalnotice>
+      <para>
+This documentation is free software; you can redistribute
+it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later
+version.</para>
+      <para>
+This program is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.  See the GNU General Public License (<xref linkend="gpl">)
+for more details.</para>
+    </legalnotice>
+  </bookinfo>
+  <preface id=intro>
+    <title>The Networking Setup Tool</title>
+    <para>
+The networking tool allows for specification of your computer's address and
+how it relates to the network it's on.
+    </para>
+  </preface>
+  <chapter id=primary>
+    <title>Primary Networking</title>
+    <para>To enable networking, you have to select a primary interface (if
+your computer has several, this is the interface you're using to communicate
+with the local network). If you need several interfaces operating at once,
+you'll need to do advanced configuration, which is not covered by this tool.
+Anyhow, the usual primary interface is "eth0" on Linux and "hma0" on Solaris
+computers.</para>
+    <para>Next, you'll have to input a host IP. This is the unique address
+that identifies your computer on the network. Make sure no one is using this
+IP number already. Usual IPs for local networks are 10.10.10.*, where *
+represents any number in the range [1-254]. If you have a person acting as
+network administrator, you should probably ask her or him about this.</para>
+    <para>The netmask tells your computer which part of the IP number is
+static (i.e. equal for all computers on the network), where the remainder
+varies on a per-computer basis. A rule-of-thumb is that 255 in one of the
+fields means that this part of the IP is totally static, and 0 means it is
+totally dynamic. A common netmask is "255.255.255.0".</para>
+    <para>If your local network is connected to other networks, like the
+Internet, chances are you'll have a gateway. A gateway is a computer that
+relays information back and forth to other networks with other netmasks and
+IP ranges. Like any computer on the local network, the gateway also has an IP
+address. Enter it in the corresponding fields if you want to communicate with
+other networks.</para>
+    <para>You can tell your computer to enable networking (with the
+configuration you provide) every time it starts up. If your computer is a
+networked workstation, you'll generally want this.</para>
+  </chapter>
+  <appendix id=gpl>
+    &gpl;
+  </appendix>
+</book>
+<!-- Keep this comment at the end of the file
+Local variables:
+sgml-default-dtd-file: "/usr/lib/sgml/cdtd/docbook.ced"
+End:
+-->
