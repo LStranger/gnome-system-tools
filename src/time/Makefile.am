@@ -7,34 +7,34 @@ INCLUDES = \
 	-I$(top_srcdir)/intl \
 	$(GNOME_INCLUDEDIR)
 
-bin_PROGRAMS = time-admin
+## bin_PROGRAMS = time-admin
 
-time_admin_SOURCES = \
-	main.c \
+## time_admin_SOURCES = \
+## 	main.c \
 ##	timezone.c timezone.h \
-	timeserv.c timeserv.h \
-	transfer.c transfer.h
+## 	timeserv.c timeserv.h \
+## 	transfer.c transfer.h
 ##	gnome-map.c gnome-map.h \
 ##	gnome-canvas-dot.c gnome-canvas-dot.h \
 ##	timezones.c timezones.h
 
-time_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS) "`gnome-config --cflags gnomecanvaspixbuf`"
+## time_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS) "`gnome-config --cflags gnomecanvaspixbuf`"
 
-time_admin_LDADD = \
-$(GNOME_LIBDIR) \
-$(GNOMEUI_LIBS) \
-$(GNOME_XML_LIB) \
-$(GDK_PIXBUF_LIBS) \
-$(LIBGLADE_LIBS) \
-$(INTLLIBS) \
-../common/libsetuptool.a
+## time_admin_LDADD = \
+## $(GNOME_LIBDIR) \
+## $(GNOMEUI_LIBS) \
+## $(GNOME_XML_LIB) \
+## $(GDK_PIXBUF_LIBS) \
+## $(LIBGLADE_LIBS) \
+## $(INTLLIBS) \
+## ../common/libsetuptool.a
 
-time_admin_LDFLAGS = `gnome-config --libs gnomecanvaspixbuf`
+## time_admin_LDFLAGS = `gnome-config --libs gnomecanvaspixbuf`
 
-EXTRA_DIST = time.desktop
+## EXTRA_DIST = time.desktop
 
-sysdir = $(datadir)/control-center/System
-sys_DATA = time.desktop
+## sysdir = $(datadir)/control-center/System
+## sys_DATA = time.desktop
 
-install-data-local:
-	$(INSTALL_DATA) $(srcdir)/time.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
+## install-data-local:
+## 	$(INSTALL_DATA) $(srcdir)/time.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
