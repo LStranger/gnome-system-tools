@@ -1,5 +1,10 @@
 2004-10-14  Carlos Garnacho Parro  <carlosg@gnome.org>
 
+	* gst-tool.c (gst_tool_directive_free): do not free data, it can be
+	reused
+
+2004-10-14  Carlos Garnacho Parro  <carlosg@gnome.org>
+
         * gst-auth.h: fixed build with -fno-common, patch by Heikki Tauriainen
         <heikki.tauriainen@hut.fi>. Fixes #153062
 

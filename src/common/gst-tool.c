@@ -706,7 +706,6 @@ gst_tool_queue_directive (GstTool *tool, GstDirectiveFunc callback, gpointer dat
 static void
 gst_tool_directive_free (GstDirectiveEntry *entry)
 {
-	g_free (entry->data);
 	g_free (entry->report_sign);
 	xmlFreeDoc (entry->in_xml);
 
