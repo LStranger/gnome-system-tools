@@ -1002,8 +1002,9 @@ connection_init_gui (GstTool *tool)
 
 	g_object_set_data (G_OBJECT (tool), CONNECTION_UI_STRING, (gpointer) ui);
 
-	for (i = GST_CONNECTION_OTHER; i < GST_CONNECTION_LAST; i++)
-		gst_iface_desc[i].pixbuf = load_pixbuf (gst_iface_desc[i].icon);
+	for (i = 0; i < G_N_ELEMENTS (gst_iface_desc); i++)
+		if (gst_iface_desc[i].icon)
+			gst_iface_desc[i].pixbuf = load_pixbuf (gst_iface_desc[i].icon);
 }
 
 /* returns -1 if the device is not found */
@@ -1831,8 +1832,10 @@ connection_update_ip_config (GstConnection *cxn)
 {
 	IPConfigType ip;
 	gboolean sensitive;
-	
-	ip = cxn->ip_config;
+	GtkWidget *menu;
+
+	menu = gst_dialog_get_widget (tool->main_dialog, "connection_config");
+	ip   = gtk_combo_box_get_active (GTK_COMBO_BOX (menu));
 	sensitive = (ip == IP_MANUAL);
 
 	SET_BOOL ("ip_", update_dns);
