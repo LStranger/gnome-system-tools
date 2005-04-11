@@ -32,6 +32,7 @@ struct _GstIfaceIsdnPriv
   gchar *section;
   
   gboolean default_gw;
+  gboolean peerdns;
   gboolean persist;
   gboolean noauth;
 };
@@ -63,6 +64,7 @@ enum {
   PROP_PHONE_NUMBER,
   PROP_DIAL_PREFIX,
   PROP_DEFAULT_GW,
+  PROP_PEERDNS,
   PROP_PERSIST,
   PROP_SECTION,
   PROP_NOAUTH
@@ -155,7 +157,14 @@ gst_iface_isdn_class_init (GstIfaceIsdnClass *class)
                                    g_param_spec_boolean ("iface_default_gw",
                                                          "Iface default gw",
                                                          "Whether to use the iface as the default gateway",
-                                                         FALSE,
+                                                         TRUE,
+                                                         G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+                                   PROP_PEERDNS,
+                                   g_param_spec_boolean ("iface_peerdns",
+                                                         "Iface use peer DNS",
+                                                         "Whether to use the ISP DNS",
+                                                         TRUE,
                                                          G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
                                    PROP_PERSIST,
@@ -186,6 +195,9 @@ gst_iface_isdn_init (GstIfaceIsdn *iface)
   iface->_priv->phone_number = NULL;
   iface->_priv->dial_prefix = NULL;
   iface->_priv->section = NULL;
+
+  iface->_priv->default_gw = TRUE;
+  iface->_priv->peerdns = TRUE;
 
   /* FIXME: Set here the default until we add gui for this */
   iface->_priv->noauth = TRUE;
@@ -248,6 +260,9 @@ gst_iface_isdn_set_property (GObject      *object,
     case PROP_DEFAULT_GW:
       iface->_priv->default_gw = g_value_get_boolean (value);
       break;
+    case PROP_PEERDNS:
+      iface->_priv->peerdns = g_value_get_boolean (value);
+      break;
     case PROP_PERSIST:
       iface->_priv->persist = g_value_get_boolean (value);
       break;
@@ -286,6 +301,9 @@ gst_iface_isdn_get_property (GObject      *object,
       break;
     case PROP_DEFAULT_GW:
       g_value_set_boolean (value, iface->_priv->default_gw);
+      break;
+    case PROP_PEERDNS:
+      g_value_set_boolean (value, iface->_priv->peerdns);
       break;
     case PROP_PERSIST:
       g_value_set_boolean (value, iface->_priv->persist);
@@ -347,6 +365,7 @@ gst_iface_isdn_impl_get_xml (GstIface *iface, xmlNodePtr node)
 				 gst_iface_get_dev (iface));
 
       gst_xml_element_set_boolean (configuration, "set_default_gw", iface_isdn->_priv->default_gw);
+      gst_xml_element_set_boolean (configuration, "peerdns", iface_isdn->_priv->peerdns);
       gst_xml_element_set_boolean (configuration, "persist", iface_isdn->_priv->persist);
       gst_xml_element_set_boolean (configuration, "noauth",  iface_isdn->_priv->noauth);
     }
@@ -359,7 +378,7 @@ gst_iface_isdn_set_config_from_xml (GstIfaceIsdn *iface,
 				    xmlNodePtr    node)
 {
   gchar      *login, *password, *phone_number, *dial_prefix, *section;
-  gboolean    default_gw, persist;
+  gboolean    default_gw, peerdns, persist;
   xmlNodePtr  configuration;
 
   /* config the parent class data */
@@ -376,6 +395,7 @@ gst_iface_isdn_set_config_from_xml (GstIfaceIsdn *iface,
   section      = gst_xml_get_child_content (configuration, "section");
 
   default_gw = gst_xml_element_get_boolean (configuration, "set_default_gw");
+  peerdns    = gst_xml_element_get_boolean (configuration, "update_dns");
   persist    = gst_xml_element_get_boolean (configuration, "persist");
 
   g_object_set (G_OBJECT (iface),
@@ -384,6 +404,7 @@ gst_iface_isdn_set_config_from_xml (GstIfaceIsdn *iface,
                 "iface-phone-number", phone_number,
                 "iface-dial-prefix", dial_prefix,
                 "iface-default-gw", default_gw,
+                "iface-peerdns", peerdns,
                 "iface-persist", persist,
                 "iface-section", section,
 		/* FIXME: until we add some gui for noauth, it will

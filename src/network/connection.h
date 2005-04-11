@@ -73,6 +73,7 @@ struct _GstConnectionDialog {
   GtkWidget *volume;
   GtkWidget *dial_type;
   GtkWidget *default_gw;
+  GtkWidget *peerdns;
   GtkWidget *persist;
 
   /* frames */

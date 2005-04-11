@@ -248,7 +248,7 @@ static void
 isdn_dialog_prepare (GstConnectionDialog *dialog)
 {
   gchar    *login, *password, *phone_number, *dial_prefix;
-  gboolean  default_gw, persist;
+  gboolean  default_gw, peerdns, persist;
 
   g_object_get (G_OBJECT (dialog->iface),
                 "iface-login", &login,
@@ -256,6 +256,7 @@ isdn_dialog_prepare (GstConnectionDialog *dialog)
                 "iface-phone-number", &phone_number,
                 "iface-dial-prefix", &dial_prefix,
                 "iface-default-gw", &default_gw,
+                "iface-peerdns", &peerdns,
                 "iface-persist", &persist,
                 NULL);
 
@@ -272,6 +273,7 @@ isdn_dialog_prepare (GstConnectionDialog *dialog)
                       (dial_prefix) ? dial_prefix : "");
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->default_gw), default_gw);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->peerdns), peerdns);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->persist), persist);
 
   g_free (login);
@@ -289,6 +291,7 @@ isdn_dialog_save (GstConnectionDialog *dialog)
                 "iface-phone-number", get_entry_text (dialog->phone_number),
                 "iface-dial-prefix",  get_entry_text (dialog->dial_prefix),
                 "iface-default-gw",   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->default_gw)),
+                "iface-peerdns",      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->peerdns)),
                 "iface-persist",      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->persist)),
                 NULL);
 }
@@ -389,6 +392,7 @@ connection_dialog_init (void)
   gcd->volume       = gst_dialog_get_widget (tool->main_dialog, "connection_volume");
   gcd->dial_type    = gst_dialog_get_widget (tool->main_dialog, "connection_dial_type");
   gcd->default_gw   = gst_dialog_get_widget (tool->main_dialog, "connection_default_gw");
+  gcd->peerdns      = gst_dialog_get_widget (tool->main_dialog, "connection_peerdns");
   gcd->persist      = gst_dialog_get_widget (tool->main_dialog, "connection_persist");
 
   gcd->wireless_frame = gst_dialog_get_widget (tool->main_dialog, "connection_wireless");
