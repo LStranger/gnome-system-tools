@@ -365,7 +365,7 @@ gst_iface_isdn_impl_get_xml (GstIface *iface, xmlNodePtr node)
 				 gst_iface_get_dev (iface));
 
       gst_xml_element_set_boolean (configuration, "set_default_gw", iface_isdn->_priv->default_gw);
-      gst_xml_element_set_boolean (configuration, "peerdns", iface_isdn->_priv->peerdns);
+      gst_xml_element_set_boolean (configuration, "update_dns", iface_isdn->_priv->peerdns);
       gst_xml_element_set_boolean (configuration, "persist", iface_isdn->_priv->persist);
       gst_xml_element_set_boolean (configuration, "noauth",  iface_isdn->_priv->noauth);
     }
