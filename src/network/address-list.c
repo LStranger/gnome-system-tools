@@ -567,7 +567,7 @@ gst_address_list_get_list (GstAddressList *list)
   gboolean      valid;
   gchar        *address;
 
-  g_return_if_fail (list != NULL);
+  g_return_val_if_fail (list != NULL, NULL);
 
   model = gtk_tree_view_get_model (list->_priv->list);
   valid = gtk_tree_model_get_iter_first (model, &iter);

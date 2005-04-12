@@ -270,7 +270,6 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 {
 	BootImage *image = gui->image;
 	GList *type_list;
-	gchar *error;
 
 	if (image->type == TYPE_LINUX)
 	{
@@ -279,7 +278,7 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 		if (image->root)
 			gst_ui_entry_set_text (GTK_ENTRY (GTK_BIN (gui->root)->child), image->root);
 
-		if (error = boot_image_valid_initrd (image))
+		if (boot_image_valid_initrd (image))
 			gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (gui->initrd_widget), "/boot");
 		else
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (gui->initrd_widget), image->initrd);
@@ -294,7 +293,7 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 		if (image->root)
 			gst_ui_entry_set_text (GTK_ENTRY (GTK_BIN (gui->root)->child), image->root);
 
-		if (error = boot_image_valid_module (image))
+		if (boot_image_valid_module (image))
 			gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (gui->initrd_widget), "/boot");
 		else
 			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (gui->initrd_widget), image->module);
@@ -315,7 +314,7 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 	
 	gst_ui_entry_set_text (gui->name, image->label);
 
-	if (error = boot_image_valid_root (image) || !image->image)
+	if (boot_image_valid_root (image) || !image->image)
 		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (gui->image_widget), "/boot");
 	else
 		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (gui->image_widget), image->image);
