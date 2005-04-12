@@ -516,3 +516,10 @@ on_gateway_combo_changed (GtkWidget *widget, gpointer data)
       g_free (gateway);
     }
 }
+
+gboolean
+on_connection_dialog_close (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+  gtk_widget_hide (widget);
+  return TRUE;
+}

@@ -49,6 +49,7 @@ static GstDialogSignal signals[] = {
   /* host aliases dialog */
   { "host_alias_address",           "changed", G_CALLBACK (on_host_aliases_dialog_changed) },
   /* connection dialog */
+  { "connection_config_dialog",     "delete-event", G_CALLBACK (on_connection_dialog_close) },
   { "connection_device_active",     "clicked", G_CALLBACK (on_iface_active_changed) },
   { "connection_ppp_device_active", "clicked", G_CALLBACK (on_iface_active_changed) },
   { "connection_bootproto",         "changed", G_CALLBACK (on_bootproto_changed) },
