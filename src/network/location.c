@@ -695,7 +695,7 @@ compare_current_with_profile (xmlNodePtr current, xmlNodePtr profile)
 static void
 copy_tag_list (xmlNodePtr source, xmlNodePtr dest, const gchar *list[])
 {
-  gchar **string = (gchar **) list;;
+  gchar **string = (gchar **) list;
   gchar  *value;
 
   while (*string)
