@@ -41,6 +41,20 @@ extern GstTool *tool;
 GtkWidget *users_table;
 GArray *users_array;
 
+typedef struct _UserTreeItem UserTreeItem;
+
+struct _UserTreeItem
+{
+	gchar *login;
+	guint UID;
+	gchar *home;
+	gchar *shell;
+	gchar *comment;
+	
+	UserTreeItem *children;
+};
+
+
 gchar *users_table_columns [] = {
 	N_("User"),
 	N_("Home"),
@@ -57,10 +71,8 @@ add_user_columns (GtkTreeView *treeview)
 	GtkCellRenderer *renderer;
 	guint i;
 	
-	for (i = 0; 
-	     users_table_columns [i] != NULL;
-	     i++)
-	{
+	for (i = 0; users_table_columns [i] != NULL; i++) {
+
 		renderer = gtk_cell_renderer_text_new ();
 
 		column = gtk_tree_view_column_new_with_attributes (_(users_table_columns [i]),
@@ -130,6 +142,7 @@ users_table_value (xmlNodePtr node, gchar *key)
 static UserTreeItem*
 get_user_node_data (xmlNodePtr user)
 {
+	gint i, j, len;
         UserTreeItem *item = g_malloc (sizeof(UserTreeItem));
 	
 	item->login = users_table_value (user, "login");
@@ -137,10 +150,37 @@ get_user_node_data (xmlNodePtr user)
 	item->home = users_table_value (user, "home");
 	item->shell = users_table_value (user, "shell");
 	item->comment = users_table_value (user, "comment");
-        
+
+	/* Remove ending and double commas from comment */
+	len = strlen (item->comment);
+	j = 0;
+	for (i = 0; i < len; i++) {
+		if (item->comment[i] == ',') 	{
+			if (item->comment[i+1] == '\0') {
+				item->comment[j] = '\0';
+			} else 	if (item->comment[i+1] != ',') {
+				item->comment[j] = item->comment[i];
+				j++;						
+			}
+		} else {
+			item->comment[j] = item->comment[i];
+			j++;
+		}	
+	}
+	item->comment[j] = '\0';
         return item;
 }
 
+static void 
+free_user_tree_item (UserTreeItem *user_tree_item)
+{
+	g_free(user_tree_item->login);
+	g_free(user_tree_item->home);
+	g_free(user_tree_item->shell);
+	g_free(user_tree_item->comment);
+
+	g_free(user_tree_item);
+}
 void
 populate_users_table (void)
 {
@@ -148,6 +188,7 @@ populate_users_table (void)
 	xmlNodePtr root = get_root_node (NODE_USER);
 	GtkTreeIter iter;
 	xmlNodePtr user;
+	UserTreeItem *item;
 
 	g_return_if_fail (model != NULL);
 	g_return_if_fail (root != NULL);
@@ -155,14 +196,11 @@ populate_users_table (void)
 	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	
 	users_array = g_array_new (FALSE, FALSE, sizeof (xmlNodePtr));
-	
-	for (user = gst_xml_element_find_first (root, "user"); user != NULL; user = gst_xml_element_find_next (user, "user"))
-	{
-		if (check_node_visibility (user))
-		{
-			UserTreeItem *item;
+
+	for (user = gst_xml_element_find_first (root, "user"); user != NULL; user = gst_xml_element_find_next (user, "user")) {
+		if (check_node_visibility (user)) {
 			item = get_user_node_data (user);
-		
+
 			gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 			gtk_tree_store_set (GTK_TREE_STORE (model),
 			                    &iter,
@@ -173,6 +211,7 @@ populate_users_table (void)
 					    COL_USER_SHELL, item->shell,
 			                    COL_USER_POINTER, user,
 					    -1);
+			free_user_tree_item (item);
 		}
 	}
 }
@@ -205,10 +244,11 @@ users_table_set_cursor (gchar *old_login)
 			GtkTreePath *path = gtk_tree_model_get_path (model, &iter);
 			gtk_tree_view_set_cursor (GTK_TREE_VIEW (users_table), path, NULL, FALSE);
 			gtk_tree_path_free (path);
+			g_free (login);
 
 			return;
 		}
-
+		g_free (login);
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 }

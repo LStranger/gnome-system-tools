@@ -36,19 +36,6 @@ enum {
 	COL_USER_LAST
 };
 
-typedef struct UserTreeItem_ UserTreeItem;
-	
-struct UserTreeItem_
-{
-	const gchar *login;
-	guint UID;
-	const gchar *home;
-	const gchar *shell;
-	const gchar *comment;
-	
-	UserTreeItem *children;
-};
-
 void	create_users_table		(void);
 void	populate_users_table		(void);
 void	users_table_update_content	(void);
