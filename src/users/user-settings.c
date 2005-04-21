@@ -80,8 +80,8 @@ check_user_delete (xmlNodePtr node)
 					 GTK_BUTTONS_NONE,
 					 _("Are you sure you want to delete user \"%s\"?"), login);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _("This will disable the access of this user to the system, "
-						    "but his home directory will not be deleted"));
+						  _("This will disable this user's access to the system "
+						    "without deleting the user's home directory"));
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,

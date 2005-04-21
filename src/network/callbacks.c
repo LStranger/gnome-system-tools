@@ -45,7 +45,7 @@ enable_iface (GstIface *iface)
 				       gst_iface_get_dev (iface),
 				       NULL);
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						_("Check that the settings are apropriate for "
+						_("Check that the settings are correct for "
 						  "this network and that the computer is correctly "
 						  "connected to it."),
 						NULL);
