@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-18 20:56-0400\n"
-"PO-Revision-Date: 2005-04-18 20:56-0400\n"
-"Last-Translator: David Lodge <dave@cirt.net>\n"
+"POT-Creation-Date: 2005-04-22 19:19-0400\n"
+"PO-Revision-Date: 2005-04-22 19:21-0400\n"
+"Last-Translator: Gareth Owen <gowen@gnome.org>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -129,12 +129,9 @@ msgstr "Boot Manager Settings"
 #: ../interfaces/boot.glade.in.h:15
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter append parameters which are passed "
-"to the kernel at boot time."
-msgstr ""
-"Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter append parameters which are passed "
-"to the kernel at boot time."
+"partition. Optionally, you may also enter parameters passed to the kernel at "
+"boot time."
+msgstr "Choose a kernel image to boot and a partition to mount as the root partition. Optionally, you may also enter parameters passed to the kernel at boot time."
 
 #: ../interfaces/boot.glade.in.h:16
 msgid "Click \"Forward\" to continue"
@@ -303,22 +300,23 @@ msgid "Run _Without Password"
 msgstr "Run _Without Password"
 
 #: ../interfaces/common.glade.in.h:7
-msgid ""
-"To use this tool, you need administrator privileges, if you don't provide a "
-"password, you will be unable to modify your system configuration."
-msgstr ""
-"To use this tool, you need administrator privileges, if you don't provide a "
-"password, you will be unable to modify your system configuration."
-
-#: ../interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
 msgstr "Unsupported Platform"
 
-#: ../interfaces/common.glade.in.h:9
+#: ../interfaces/common.glade.in.h:8
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Use this window to select the computer you wish to configure"
 
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:9
+msgid ""
+"You need administrator privileges to use this tool. Enter a password to "
+"modify\n"
+"your system configuration."
+msgstr ""
+"You need administrator privileges to use this tool. Enter a password to modify\n"
+"your system configuration."
+
+#: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
 msgstr "_Password:"
 
@@ -1274,11 +1272,9 @@ msgstr "Could not enable the interface %s"
 
 #: ../src/network/callbacks.c:48
 msgid ""
-"Check that the settings are apropriate for this network and that the "
-"computer is correctly connected to it."
-msgstr ""
-"Check that the settings are apropriate for this network and that the "
-"computer is correctly connected to it."
+"Check that the settings are correct for this network and that the computer "
+"is correctly connected to it."
+msgstr "Check that the settings are correct for this network and that the computer is correctly connected to it."
 
 #: ../src/network/callbacks.c:235
 msgid "Could not autodetect modem device"
@@ -1547,16 +1543,14 @@ msgstr ""
 "folders. The tool will close now."
 
 #: ../src/time/main.c:461
-msgid "NTP support is not running"
-msgstr "NTP support is not running"
+msgid "NTP support is not installed"
+msgstr "NTP support is not installed"
 
 #: ../src/time/main.c:463
 msgid ""
-"Please run NTP support in the system to enable synchronization of your local "
-"time server with internet time servers"
-msgstr ""
-"Please run NTP support in the system to enable synchronisation of your local "
-"time server with internet time servers"
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers"
+msgstr "Please install and activate NTP support in the system to enable synchronisation of your local time server with internet time servers"
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1776,11 +1770,9 @@ msgstr "Are you sure you want to delete user \"%s\"?"
 
 #: ../src/users/user-settings.c:83
 msgid ""
-"This will disable the access of this user to the system, but his home "
-"directory will not be deleted"
-msgstr ""
-"This will disable the access of this user to the system, but his home "
-"directory will not be deleted"
+"This will disable this user's access to the system without deleting the "
+"user's home directory"
+msgstr "This will disable this user's access to the system without deleting the user's home directory"
 
 #: ../src/users/user-settings.c:187
 msgid "User Account Editor"
