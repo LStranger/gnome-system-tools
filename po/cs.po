@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-15 05:13+0000\n"
-"PO-Revision-Date: 2005-04-15 13:32+0200\n"
+"POT-Creation-Date: 2005-04-30 13:47+0000\n"
+"PO-Revision-Date: 2005-04-30 16:33+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -130,12 +130,9 @@ msgstr "Nastavení správce zavádění"
 #: ../interfaces/boot.glade.in.h:15
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter append parameters which are passed "
-"to the kernel at boot time."
-msgstr ""
-"Vyberte obraz jádra, který zavést, a oddíl, který připojit jako kořenový. "
-"Můžete také volitelně připojit další parametry, které budou předány jádru "
-"při zavádění."
+"partition. Optionally, you may also enter parameters passed to the kernel at "
+"boot time."
+msgstr "Vyberte obraz jádra, který zavést, a oddíl, který připojit jako kořenový. Můžete také volitelně zadat parametry, které budou předány jádru při zavádění."
 
 #: ../interfaces/boot.glade.in.h:16
 msgid "Click \"Forward\" to continue"
@@ -305,22 +302,23 @@ msgid "Run _Without Password"
 msgstr "Spustit bez _hesla"
 
 #: ../interfaces/common.glade.in.h:7
-msgid ""
-"To use this tool, you need administrator privileges, if you don't provide a "
-"password, you will be unable to modify your system configuration."
-msgstr ""
-"Pro používání tohoto nástroje potřebujete oprávnění správce, pokud nezadáte "
-"heslo, nebudete moci měnit nastavení vašeho systému."
-
-#: ../interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
 msgstr "Nepodporovaná platforma"
 
-#: ../interfaces/common.glade.in.h:9
+#: ../interfaces/common.glade.in.h:8
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Použijte toto okno pro výběr počítače, který chcete nastavit"
 
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:9
+msgid ""
+"You need administrator privileges to use this tool. Enter a password to "
+"modify\n"
+"your system configuration."
+msgstr ""
+"Pro používání tohoto nástroje potřebujete oprávnění správce. Pro úpravu\n"
+"nastavení vašeho systému zadejte heslo."
+
+#: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
 msgstr "_Heslo:"
 
@@ -1275,11 +1273,9 @@ msgstr "Nemohu povolit rozhraní %s"
 
 #: ../src/network/callbacks.c:48
 msgid ""
-"Check that the settings are apropriate for this network and that the "
-"computer is correctly connected to it."
-msgstr ""
-"Zkontrolujte, že nastavení jsou pro tuto síť správná a že počítač je k ní "
-"správně připojen."
+"Check that the settings are correct for this network and that the computer "
+"is correctly connected to it."
+msgstr "Zkontrolujte, že nastavení jsou pro tuto síť správná a že počítač je k ní správně připojen."
 
 #: ../src/network/callbacks.c:235
 msgid "Could not autodetect modem device"
@@ -1547,16 +1543,14 @@ msgstr ""
 "nástroj nyní skončí."
 
 #: ../src/time/main.c:461
-msgid "NTP support is not running"
-msgstr "Podpora NTP neběží"
+msgid "NTP support is not installed"
+msgstr "Podpora NTP není nainstalována"
 
 #: ../src/time/main.c:463
 msgid ""
-"Please run NTP support in the system to enable synchronization of your local "
-"time server with internet time servers"
-msgstr ""
-"Pro povolení synchronizace se servery času na Internetu prosím v systému "
-"spusťte podporu NTP"
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers"
+msgstr "Pro povolení synchronizace vašeho místního serveru času se servery času na Internetu prosím v systému nainstalujte a aktivujte podporu NTP"
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1777,11 +1771,9 @@ msgstr "Jste si jisti, že chcete odstranit uživatele \"%s\"?"
 
 #: ../src/users/user-settings.c:83
 msgid ""
-"This will disable the access of this user to the system, but his home "
-"directory will not be deleted"
-msgstr ""
-"To zakáže přístup tohoto uživatele do systému, ale jeho domovský adresář "
-"nebude odstraněn"
+"This will disable this user's access to the system without deleting the "
+"user's home directory"
+msgstr "To zakáže přístup tohoto uživatele do systému bez odstranění jeho domovského adresáře"
 
 #: ../src/users/user-settings.c:187
 msgid "User Account Editor"
