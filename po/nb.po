@@ -1,15 +1,17 @@
+# translation of nb.po to Norwegian Bokmal
 # Norwegian (bokmål) translation of gnome-system-tools.
-# Copyright (C) 2001-2004 Free Software Foundation, Inc.
+# Copyright (C) 2001-2004, 2005 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@gnome.org>, 2001-2004.
-# 
+# Terance Edward Sola <terance@lyse.net>, 2005.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools 0.1\n"
+"Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-02-16 12:14+0100\n"
-"PO-Revision-Date: 2005-02-16 12:36+0100\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
-"Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
+"PO-Revision-Date: 2005-06-01 02:14+0200\n"
+"Last-Translator: Terance Edward Sola <terance@lyse.net>\n"
+"Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,6 +39,8 @@ msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
 msgstr ""
+"GST er i stand til å konfigurere ekstern gjennom SSH. Slå på denne "
+"instillingen for å bruke den funksjonen."
 
 #: gnome-system-tools.schemas.in.h:6
 msgid "The last GST version that this computer has run"
@@ -48,10 +52,13 @@ msgid ""
 "more than one installed, if it's not set or isn't valid, then boot-admin "
 "will ask the user"
 msgstr ""
+"Denne nøkkelen lagrer oppstartsladeren som «boot-admin» vil sette opp "
+"hvis det er mer enn en installert. Hvis nøkkelen ikke er gyldig eller satt vil "
+"«boot-admin» spørre brukeren"
 
 #: gnome-system-tools.schemas.in.h:8
 msgid "Whether the tools will use remote administration or not"
-msgstr ""
+msgstr "Om verktøyene skal bruke ekstern administrasjon eller ei"
 
 #: gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
@@ -123,6 +130,8 @@ msgid ""
 "partition. Optionally, you may also enter append parameters which are passed "
 "to the kernel at boot time."
 msgstr ""
+"Velg en oppstartskjerne og en partisjon å bruke som rotpartisjonen. Eventuelt "
+"kan du også angi parametere som blir sendt til kjernen ved oppstart."
 
 #: interfaces/boot.glade.in.h:16
 msgid "Click \"Forward\" to continue"
@@ -249,8 +258,7 @@ msgid "_Root file system device:"
 msgstr "Enhet for _rotfilsystem:"
 
 #: interfaces/common.glade.in.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+msgid "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Vennligst oppgi passord for root</span>"
 
 #: interfaces/common.glade.in.h:2
@@ -269,6 +277,8 @@ msgid ""
 "you can select that and continue. Note, however, that this might damage the "
 "system configuration or downright cripple your computer."
 msgstr ""
+"Hvis du er sikker på at det virker som en av platformene listet nedenfor, velg en "
+"og fortsett. Dette kan imidlertid gjøre skade på systemet ditt."
 
 #: interfaces/common.glade.in.h:5
 msgid "Remote administration"
@@ -283,6 +293,8 @@ msgid ""
 "To use this tool, you need administrator privileges, if you don't provide a "
 "password, you will be unable to modify your system configuration."
 msgstr ""
+"Du trenger administratorprivilegier for å bruke dette verktøyet. Du vil ikke "
+"være i stand til å endre systemoppsettet uten passord."
 
 #: interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
@@ -1133,6 +1145,8 @@ msgid ""
 "Check that you have access to this network and that the computer is actually "
 "working and running SSHD"
 msgstr ""
+"Undersøk om du har tilgang til dette nettverket og at datamaskinen fungerer "
+"og kjører SSHD"
 
 #. the proccess was running su
 #: src/common/gst-auth.c:93
@@ -1143,7 +1157,7 @@ msgstr "Oppgitt passord er ugyldig"
 msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
-msgstr ""
+msgstr "Undersøk om du skrev det riktig og at du ikke har slått på «Caps Lock»"
 
 #: src/common/gst-auth.c:103
 #, c-format
@@ -1236,6 +1250,8 @@ msgid ""
 "Check that the settings are apropriate for this network and that the "
 "computer is correctly connected to it."
 msgstr ""
+"Undersøk om instillingene er passende for dette nettverket og at "
+"datamaskinen er skikkelig koblet til"
 
 #: src/network/callbacks.c:234
 msgid "Could not autodetect modem device"
@@ -1245,8 +1261,7 @@ msgstr "Kunne ikke gjenkjenne modemenhet automatisk"
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer"
-msgstr ""
-"Sjekk at enheten ikke er opptatt og at den er koblet riktig til datamaskinen"
+msgstr "Sjekk at enheten ikke er opptatt og at den er koblet riktig til datamaskinen"
 
 #: src/network/callbacks.c:439
 msgid "The host name has changed"
@@ -1690,8 +1705,7 @@ msgstr "Slett profil «%s»?"
 
 #: src/users/profile-settings.c:217
 msgid "You will not be able to recover this profile after pressing \"apply\""
-msgstr ""
-"Du vil ikke kunne gjenopprette denne profilen etter at du trykker «bruk»"
+msgstr "Du vil ikke kunne gjenopprette denne profilen etter at du trykker «bruk»"
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: src/users/profiles-table.c:38
@@ -1728,6 +1742,8 @@ msgid ""
 "This will disable the access of this user to the system, but his home "
 "directory will not be deleted"
 msgstr ""
+"Dette vil slå av tilgangen til systemet for denne brukeren men hjemmemappen "
+"hans vil ikke bli slettet"
 
 #: src/users/user-settings.c:187
 msgid "User Account Editor"
@@ -1829,6 +1845,8 @@ msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
 msgstr ""
+"Flere bruker kan dele samme bruker-ID, men det er ikke vanlig og "
+"kan lede til sikkerhetstrusler"
 
 #: src/users/user-settings.c:471
 msgid "Incomplete path in shell"
@@ -1887,272 +1905,3 @@ msgstr "Skall"
 msgid "Add or remove users and groups"
 msgstr "Legg til eller fjern brukere og grupper"
 
-#~ msgid "Creating a new network connection"
-#~ msgstr "Oppretter en ny nettverksforbindelse"
-
-#~ msgid "Current network profile:"
-#~ msgstr "Aktiv nettverksprofil:"
-
-#~ msgid "Delete DNS server"
-#~ msgstr "Slett DNS-tjener"
-
-#~ msgid "ISP phone number"
-#~ msgstr "Telefonnummer til ISP"
-
-#~ msgid "Network profiles"
-#~ msgstr "Nettverksprofiler"
-
-#~ msgid "Networking Settings"
-#~ msgstr "Innstillinger for nettverk"
-
-#~ msgid "New network profile"
-#~ msgstr "Ny nettverksprofil"
-
-#~ msgid "Number to _access an external line:"
-#~ msgstr "Nummer for å få en _ekstern linje:"
-
-#~ msgid "Number to get to an _external line:"
-#~ msgstr "Nummer for å få en _ekstern linje:"
-
-#~ msgid "PPPD _options:"
-#~ msgstr "Alternativer f_or pppd:"
-
-#~ msgid "Pa_ssword (confirm):"
-#~ msgstr "Pa_ssord (bekreft):"
-
-#~ msgid "Phone _number:"
-#~ msgstr "Telefon_nummer:"
-
-#~ msgid "Please, select which type of connection you would like to add."
-#~ msgstr "Velg hvilken type tilkobling du vil legge til."
-
-#~ msgid "Se_condary:"
-#~ msgstr "Se_kundær:"
-
-#~ msgid "Set _DNS servers manually"
-#~ msgstr "Sett _DNS-tjenere manuelt"
-
-#~ msgid ""
-#~ "This assistant will help you configure a new \n"
-#~ "network connection."
-#~ msgstr ""
-#~ "Denne assistenten vil hjelpe deg med å konfigurere en ny \n"
-#~ "nettverkstilkobling."
-
-#~ msgid "Username and password"
-#~ msgstr "Brukernavn og passord"
-
-#~ msgid "Wireless device:"
-#~ msgstr "Trådløs enhet:"
-
-#~ msgid "_Apply and activate connection"
-#~ msgstr "L_agre og aktiver tilkobling"
-
-#~ msgid "_Ethernet"
-#~ msgstr "_Ethernet"
-
-#~ msgid "_IR LAN"
-#~ msgstr "_IR-LAN"
-
-#~ msgid "_Modem (PPP)"
-#~ msgstr "_Modem (PPP)"
-
-#~ msgid "_Network Profiles"
-#~ msgstr "_Nettverksprofiler"
-
-#~ msgid "_Network name:"
-#~ msgstr "_Nettverksnavn:"
-
-#~ msgid "_Parallel Line"
-#~ msgstr "_Parallell-linje"
-
-#~ msgid "_Primary:"
-#~ msgstr "_Primær:"
-
-#~ msgid "_Remote IP address:"
-#~ msgstr "_Ekste_rn IP-adresse:"
-
-#~ msgid "_Save Current"
-#~ msgstr "_Lagre aktiv:"
-
-#~ msgid "_Start PPP as soon as modem connects"
-#~ msgstr "_Start PPP så snart modemet kobler til"
-
-#~ msgid "_Update DNS when this connection becomes active"
-#~ msgstr "_Oppdater DNS når denne tilkoblingen blir aktivert"
-
-#~ msgid "_Use remote IP as default gateway"
-#~ msgstr "Br_uk ekstern IP som standard gateway"
-
-#~ msgid "_Wireless"
-#~ msgstr "_Trådløs"
-
-#~ msgid "new search domain"
-#~ msgstr "nytt søkedomene"
-
-#~ msgid "<span weight=\"bold\">Time Configuration</span>"
-#~ msgstr "<span weight=\"bold\">Konfigurasjon av tid</span>"
-
-#~ msgid "date"
-#~ msgstr "dato"
-
-#~ msgid "hours"
-#~ msgstr "timer"
-
-#~ msgid "minutes"
-#~ msgstr "minutter"
-
-#~ msgid "seconds"
-#~ msgstr "sekunder"
-
-#~ msgid "Other Groups"
-#~ msgstr "Andre grupper"
-
-#~ msgid "_Available groups:"
-#~ msgstr "Til_gjengelige grupper:"
-
-#~ msgid "_Generate Password"
-#~ msgstr "_Generer passord"
-
-#~ msgid "_User's groups:"
-#~ msgstr "Br_ukers grupper:"
-
-#~ msgid "Are you sure you want to delete connection \"%s\"?"
-#~ msgstr "Er du sikker på at du vil slette tilkobling «%s»?"
-
-#~ msgid "SMB Support is not running"
-#~ msgstr "SMB-støtte kjører ikke"
-
-#~ msgid "Wvdial command not found"
-#~ msgstr "Wvdial-kommando ikke funnet"
-
-#~ msgid ""
-#~ "wvdial could not be found on your system. You need to install wvdial, or "
-#~ "the PPP (modem) connections will not activate"
-#~ msgstr ""
-#~ "wvdial ble ikke funnet på ditt system. Du må installere wvdial, ellers "
-#~ "vil ikke PPP-forbindelser (modem) aktiveres"
-
-#~ msgid ""
-#~ "wvdial could not be found on your system. You need to install wvdial, or "
-#~ "the PPP (modem) connections will not activate. Continue anyway?"
-#~ msgstr ""
-#~ "wvdial ble ikke funnet på systemet. Du må installere wvdial, ellers vil "
-#~ "ikke PPP-forbindelser (modem) aktiveres. Fortsett likevel?"
-
-#~ msgid "_Continue"
-#~ msgstr "_Fortsett"
-
-#~ msgid "The default gateway device is not activated"
-#~ msgstr "Forvalgt gateway-enhet er ikke aktivert"
-
-#~ msgid "The default gateway device is missing gateway information"
-#~ msgstr "Forvalgt gateway-enhet mangler informasjon om gateway"
-
-#~ msgid "The program redhat-config-network-cmd could not be found"
-#~ msgstr "Programmet redhat-config-network-cmd ble ikke funnet"
-
-#~ msgid "This will enable network access through this interface"
-#~ msgstr "Dette vil aktivere nettverkstilgang gjennom dette grensesnittet"
-
-#~ msgid "_Enable"
-#~ msgstr "_Aktiver"
-
-#~ msgid "Do you want to disable interface \"%s\"?"
-#~ msgstr "Vil du deaktivere grensesnitt «%s»?"
-
-#~ msgid "This will disable network access through this interface"
-#~ msgstr "Dette vil deaktivere nettverkstilgang gjennom dette grensesnittet"
-
-#~ msgid "_Disable"
-#~ msgstr "_Deaktiver"
-
-#~ msgid "Silent"
-#~ msgstr "Stille"
-
-#~ msgid "Low"
-#~ msgstr "Lav"
-
-#~ msgid "Medium"
-#~ msgstr "Middels"
-
-#~ msgid "Loud"
-#~ msgstr "Høy"
-
-#~ msgid "Other type"
-#~ msgstr "Annen type"
-
-#~ msgid "Ethernet LAN card"
-#~ msgstr "Ethernet nettverkskort"
-
-#~ msgid "Wireless LAN card"
-#~ msgstr "Trådløst LAN-kort"
-
-#~ msgid "Modem or transfer cable"
-#~ msgstr "Modem eller overføringskabel"
-
-#~ msgid "Parallel line"
-#~ msgstr "Paralell-linje"
-
-#~ msgid "Infrared LAN"
-#~ msgstr "Infrarødt LAN"
-
-#~ msgid "Loopback interface"
-#~ msgstr "Loopback-grensesnitt"
-
-#~ msgid "Unknown interface type"
-#~ msgstr "Ukjent type grensesnitt"
-
-#~ msgid "Automatic (DHCP)"
-#~ msgstr "Automatisk (DHCP)"
-
-#~ msgid "Automatic (BOOTP)"
-#~ msgstr "Automatisk (BOOTP)"
-
-#~ msgid "Tones"
-#~ msgstr "Toner"
-
-#~ msgid "Error in IP address"
-#~ msgstr "Feil i IP-adressen"
-
-#~ msgid "Error in domain name servers"
-#~ msgstr "Feil med domenenavnetjenere"
-
-#~ msgid "Invalid modem device"
-#~ msgstr "Ugyldig modemenhet"
-
-#~ msgid "Invalid phone number"
-#~ msgstr "Ugyldig telefonnummer"
-
-#~ msgid "Run the connection assistant."
-#~ msgstr "Kjør veiviseren for tilkobling."
-
-#~ msgid "Run the PPP connection assistant."
-#~ msgstr "Kjør veiviseren for PPP-tilkobling."
-
-#~ msgid "Run the ethernet connection assistant."
-#~ msgstr "Kjør veiviseren for ethernet-tilkobling."
-
-#~ msgid "Run the wlan connection assistant."
-#~ msgstr "Kjør veiviseren for WLAN-tilkobling."
-
-#~ msgid "Run the irlan connection assistant."
-#~ msgstr "Kjør veiviseren for tilkobling via irlan."
-
-#~ msgid "interface"
-#~ msgstr "grensesnitt"
-
-#~ msgid "Creating a new network connection (%d of %d)"
-#~ msgstr "Oppretter en ny nettverkstilkobling (%d av %d)"
-
-#~ msgid "Finished creating a new network connection"
-#~ msgstr "Fullført opprettelse av ny nettverkstilkobling"
-
-#~ msgid "Are you sure you want to delete profile \"%s\"?"
-#~ msgstr "Er du sikker på at du vil slette profil «%s»?"
-
-#~ msgid "Profile name"
-#~ msgstr "Profilnavn"
-
-#~ msgid "Description"
-#~ msgstr "Beskrivelse"
