@@ -36,8 +36,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-10 17:00+0100\n"
-"PO-Revision-Date: 2005-03-10 17:00+0100\n"
+"POT-Creation-Date: 2005-06-02 19:03+0200\n"
+"PO-Revision-Date: 2005-06-02 19:04+0200\n"
 "Last-Translator: Marie Lund <marielund@post.cybercity.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -155,10 +155,11 @@ msgid "Boot Manager Settings"
 msgstr "Startindstillinger"
 
 #: ../interfaces/boot.glade.in.h:15
+#, fuzzy
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter append parameters which are passed "
-"to the kernel at boot time."
+"partition. Optionally, you may also enter parameters passed to the kernel at "
+"boot time."
 msgstr ""
 "Vælg det kerneaftryk der skal bruges til start, og den partition der skal "
 "monteres som rodpartitionen. Du kan også indtaste ekstra parametre som "
@@ -331,22 +332,24 @@ msgid "Run _Without Password"
 msgstr "Kør _uden adgangskode"
 
 #: ../interfaces/common.glade.in.h:7
+msgid "Unsupported Platform"
+msgstr "Ikke-understøttet platform"
+
+#: ../interfaces/common.glade.in.h:8
+msgid "Use this window to select the computer you wish to configure"
+msgstr "Benyt dette vindue til at vælge den maskine du vil konfigurere"
+
+#: ../interfaces/common.glade.in.h:9
+#, fuzzy
 msgid ""
-"To use this tool, you need administrator privileges, if you don't provide a "
-"password, you will be unable to modify your system configuration."
+"You need administrator privileges to use this tool. Enter a password to "
+"modify\n"
+"your system configuration."
 msgstr ""
 "For at bruge dette værktøj har du brug for administratorrettigheder, hvis du "
 "ikke angiver en adgangskode, kan du ikke ændre systemets opsætning."
 
-#: ../interfaces/common.glade.in.h:8
-msgid "Unsupported Platform"
-msgstr "Ikke-understøttet platform"
-
-#: ../interfaces/common.glade.in.h:9
-msgid "Use this window to select the computer you wish to configure"
-msgstr "Benyt dette vindue til at vælge den maskine du vil konfigurere"
-
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
 msgstr "_Adgangskode:"
 
@@ -405,62 +408,72 @@ msgid "Aliases:"
 msgstr "Aliaser:"
 
 #: ../interfaces/network.glade.in.h:16
+#, fuzzy
+msgid "C_onfiguration:"
+msgstr "_Konfiguration:"
+
+#: ../interfaces/network.glade.in.h:17
 msgid "Connections"
 msgstr "Forbindelser"
 
-#: ../interfaces/network.glade.in.h:17
+#: ../interfaces/network.glade.in.h:18
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:18
+#: ../interfaces/network.glade.in.h:19
 msgid "D_omain name:"
 msgstr "D_omænenavn:"
 
-#: ../interfaces/network.glade.in.h:19
-msgid "Default _gateway device:"
-msgstr "Forvalgt adga_ngspunkt:"
-
 #: ../interfaces/network.glade.in.h:20
+msgid "Default _gateway device:"
+msgstr "Forvalgt _netværksenhed:"
+
+#: ../interfaces/network.glade.in.h:21
 msgid "Device:"
 msgstr "Enhed:"
 
-#: ../interfaces/network.glade.in.h:21 ../interfaces/users.glade.in.h:20
+#: ../interfaces/network.glade.in.h:22
+#, fuzzy
+msgid "E_nable this connection"
+msgstr "Ethernetforbindelse"
+
+#: ../interfaces/network.glade.in.h:23 ../interfaces/users.glade.in.h:20
 msgid "General"
 msgstr "Generelt"
 
-#: ../interfaces/network.glade.in.h:22
+#: ../interfaces/network.glade.in.h:24
 msgid "Host alias settings"
 msgstr "Indstillinger for vært-aliaser"
 
-#: ../interfaces/network.glade.in.h:23
+#: ../interfaces/network.glade.in.h:25
 msgid "Hosts"
 msgstr "Værter"
 
-#: ../interfaces/network.glade.in.h:24 ../interfaces/shares.glade.in.h:15
+#: ../interfaces/network.glade.in.h:26 ../interfaces/shares.glade.in.h:15
 msgid "IP address:"
 msgstr "IP-adresse:"
 
-#: ../interfaces/network.glade.in.h:25
+#: ../interfaces/network.glade.in.h:27
 msgid "Interface properties"
 msgstr "Forbindelsesegenskaber"
 
-#: ../interfaces/network.glade.in.h:26
+#: ../interfaces/network.glade.in.h:28
 msgid "Location name:"
 msgstr "Stednavn:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.glade.in.h:29
 msgid "Location:"
 msgstr "Sted:"
 
-#: ../interfaces/network.glade.in.h:28
+#: ../interfaces/network.glade.in.h:30
 msgid "Modem"
 msgstr "Modem"
 
-#: ../interfaces/network.glade.in.h:29
+#: ../interfaces/network.glade.in.h:31
 msgid "Network name (_ESSID):"
 msgstr "Netværksnavn (_ESSID):"
 
-#: ../interfaces/network.glade.in.h:30
+#: ../interfaces/network.glade.in.h:32
 msgid ""
 "Off\n"
 "Low\n"
@@ -473,23 +486,19 @@ msgstr ""
 "Høj"
 
 # RETMIG: indstillinger?
-#: ../interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:36
 msgid "Options"
 msgstr "Tilvalg"
 
-#: ../interfaces/network.glade.in.h:35
+#: ../interfaces/network.glade.in.h:37
 msgid "P_assword"
 msgstr "Ad_gangskode"
 
-#: ../interfaces/network.glade.in.h:36
+#: ../interfaces/network.glade.in.h:38
 msgid "Select location name"
 msgstr "Vælg stednavn"
 
-#: ../interfaces/network.glade.in.h:37
-msgid "This device is _configured"
-msgstr "Denne en_hed er konfigureret"
-
-#: ../interfaces/network.glade.in.h:38
+#: ../interfaces/network.glade.in.h:39
 msgid ""
 "Tones\n"
 "Pulses"
@@ -497,80 +506,81 @@ msgstr ""
 "Toner\n"
 "Impulser"
 
-#: ../interfaces/network.glade.in.h:40
+#: ../interfaces/network.glade.in.h:41
+#, fuzzy
+msgid "Use the Internet service provider nameservers"
+msgstr "<b>Data for internetudbyder</b>"
+
+#: ../interfaces/network.glade.in.h:42
 msgid "WEP _key:"
 msgstr "WEP-n_øgle:"
 
-#: ../interfaces/network.glade.in.h:41 ../src/network/ifaces-list.c:33
+#: ../interfaces/network.glade.in.h:43 ../src/network/ifaces-list.c:33
 msgid "_Activate"
 msgstr "Akti_vér"
 
-#: ../interfaces/network.glade.in.h:42
+#: ../interfaces/network.glade.in.h:44
 msgid "_Autodetect"
 msgstr "_Find automatisk"
 
-#: ../interfaces/network.glade.in.h:43
-msgid "_Configuration:"
-msgstr "_Konfiguration:"
-
-#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
+#: ../interfaces/network.glade.in.h:45 ../src/network/ifaces-list.c:34
 msgid "_Deactivate"
 msgstr "_Deaktivér"
 
-#: ../interfaces/network.glade.in.h:45
+#: ../interfaces/network.glade.in.h:46
 msgid "_Dial prefix:"
 msgstr "Forvalg_snummer:"
 
-#: ../interfaces/network.glade.in.h:46
+#: ../interfaces/network.glade.in.h:47
 msgid "_Dial type:"
 msgstr "_Opkaldstype:"
 
-#: ../interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:48
 msgid "_Gateway address:"
 msgstr "_Adgangspunktadresse:"
 
-#: ../interfaces/network.glade.in.h:48
+#: ../interfaces/network.glade.in.h:49
 msgid "_Hostname:"
 msgstr "V_ærtsnavn:"
 
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:50
 msgid "_IP address:"
 msgstr "_IP-adresse:"
 
-#: ../interfaces/network.glade.in.h:50
+#: ../interfaces/network.glade.in.h:51
 msgid "_Local IP:"
 msgstr "_Lokal IP:"
 
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.glade.in.h:52
 msgid "_Modem port:"
 msgstr "_Modem-port:"
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.glade.in.h:53
 msgid "_Phone number:"
 msgstr "_Telefonnummer:"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.glade.in.h:54
 msgid "_Remote IP:"
 msgstr "Ekste_rn IP:"
 
-#: ../interfaces/network.glade.in.h:54
+#: ../interfaces/network.glade.in.h:55
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "Prøv _igen hvis forbindelsen mistes eller ikke starter"
 
 #  Alle muligheder for genvejstaster er brugt; jeg har taget en tilfældig
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.glade.in.h:56
 msgid "_Set modem as default route to internet"
 msgstr "Sæt _modem som standardrute til internettet"
 
-#: ../interfaces/network.glade.in.h:56
+#: ../interfaces/network.glade.in.h:57
 msgid "_Subnet mask:"
 msgstr "_Undernetmaske:"
 
-#: ../interfaces/network.glade.in.h:57 ../interfaces/users.glade.in.h:60
+#: ../interfaces/network.glade.in.h:58 ../interfaces/users.glade.in.h:60
 msgid "_Username:"
 msgstr "Br_ugernavn:"
 
-#: ../interfaces/network.glade.in.h:58
+#: ../interfaces/network.glade.in.h:59
 msgid "_Volume:"
 msgstr "L_ydstyrke:"
 
@@ -1099,11 +1109,11 @@ msgstr "Ugyldig rodenhed: \"%s\""
 msgid "_Module path:"
 msgstr "_Modulsti:"
 
-#: ../src/boot/boot-settings.c:406
+#: ../src/boot/boot-settings.c:405
 msgid "Password confirmation is not correct"
 msgstr "Bekræftelsen af adgangskoden er ikke korrekt"
 
-#: ../src/boot/boot-settings.c:431
+#: ../src/boot/boot-settings.c:430
 msgid "Error modifying boot image"
 msgstr "Fejl ved ændring af startaftryk"
 
@@ -1299,9 +1309,10 @@ msgid "Could not enable the interface %s"
 msgstr "Kunne ikke aktivere brugerfladen %s"
 
 #: ../src/network/callbacks.c:48
+#, fuzzy
 msgid ""
-"Check that the settings are apropriate for this network and that the "
-"computer is correctly connected to it."
+"Check that the settings are correct for this network and that the computer "
+"is correctly connected to it."
 msgstr ""
 "Kontrollér at indstillingerne passer til dette netværk og at maskinen er "
 "forbundet korrekt til det."
@@ -1365,12 +1376,12 @@ msgstr "Vil du slette dette sted?"
 msgid "Changing profile"
 msgstr "Ændrer profil"
 
-#: ../src/network/main.c:108
+#: ../src/network/main.c:109
 msgid "The interface does not exist"
 msgstr "Grænsefladen eksisterer ikke"
 
 # 'Det' eller 'den'?
-#: ../src/network/main.c:110
+#: ../src/network/main.c:111
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -1378,24 +1389,24 @@ msgstr ""
 "Kontrollér at det er indtastet korrekt og at det understøttes korrekt af dit "
 "system."
 
-#: ../src/network/main.c:155
+#: ../src/network/main.c:156
 msgid "Configure a network interface"
 msgstr "Konfigurér en netværksforbindelse"
 
-#: ../src/network/main.c:155
+#: ../src/network/main.c:156
 msgid "INTERFACE"
 msgstr "GRÆNSEFLADE"
 
-#: ../src/network/main.c:156
+#: ../src/network/main.c:157
 msgid "Configure the first network interface with a specific type"
 msgstr "Konfigurér den første netværksgrænseflade med en specifik type"
 
 # Jeg antager at 'type' her betyder type, og ikke indtaste
-#: ../src/network/main.c:156
+#: ../src/network/main.c:157
 msgid "TYPE"
 msgstr "TYPE"
 
-#: ../src/network/main.c:163
+#: ../src/network/main.c:164
 msgid "Network settings"
 msgstr "Indstillinger for netværk"
 
@@ -1415,7 +1426,7 @@ msgstr "Ethernetforbindelse"
 msgid "Infrared connection"
 msgstr "Infrarød forbindelse"
 
-#: ../src/network/network-iface-isdn.c:311
+#: ../src/network/network-iface-isdn.c:332
 msgid "ISDN connection"
 msgstr "ISDN-forbindelse"
 
@@ -1500,15 +1511,15 @@ msgstr "Er du sikker på at du vil slette denne deling?"
 msgid "Other computers in your network will stop viewing this"
 msgstr "Andre maskiner i dit netværk vil ikke længere se dette"
 
-#: ../src/shares/main.c:86
+#: ../src/shares/main.c:88
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Tilføj en delt sti, ændrer den hvis den allerede eksisterer"
 
-#: ../src/shares/main.c:86
+#: ../src/shares/main.c:88
 msgid "PATH"
 msgstr "STI"
 
-#: ../src/shares/main.c:93
+#: ../src/shares/main.c:95
 msgid "Shared folders settings"
 msgstr "Indstillinger for delte mapper"
 
@@ -1574,13 +1585,15 @@ msgstr ""
 "dine mapper. Værktøjet lukkes nu."
 
 #: ../src/time/main.c:461
-msgid "NTP support is not running"
+#, fuzzy
+msgid "NTP support is not installed"
 msgstr "NTP-understøttelse kører ikke"
 
 #: ../src/time/main.c:463
+#, fuzzy
 msgid ""
-"Please run NTP support in the system to enable synchronization of your local "
-"time server with internet time servers"
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers"
 msgstr ""
 "Start venligst NTP-understøttelse på systemet for at aktivere synkronisering "
 "mellem din lokale tidsserver med internettidsservere"
@@ -1803,9 +1816,10 @@ msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "Er du sikker på at du vil slette brugeren \"%s\"?"
 
 #: ../src/users/user-settings.c:83
+#, fuzzy
 msgid ""
-"This will disable the access of this user to the system, but his home "
-"directory will not be deleted"
+"This will disable this user's access to the system without deleting the "
+"user's home directory"
 msgstr ""
 "Dette vil deaktivere denne brugers adgang til systemet, men hans hjemmemappe "
 "vil ikke blive slettet"
@@ -1949,29 +1963,32 @@ msgstr "Kontrollér at du har angivet den samme adgangskode i begge tekstfelter"
 msgid "Settings for User %s"
 msgstr "Indstillinger for brugeren %s"
 
-#: ../src/users/users-table.c:45
+#: ../src/users/users-table.c:59
 msgid "User"
 msgstr "Bruger"
 
-#: ../src/users/users-table.c:46
+#: ../src/users/users-table.c:60
 msgid "Home"
 msgstr "Hjem"
 
-#: ../src/users/users-table.c:47
+#: ../src/users/users-table.c:61
 msgid "User details"
 msgstr "Brugerdetaljer"
 
-#: ../src/users/users-table.c:48
+#: ../src/users/users-table.c:62
 msgid "UID"
 msgstr "Bruger-id"
 
-#: ../src/users/users-table.c:49
+#: ../src/users/users-table.c:63
 msgid "Shell"
 msgstr "Skal"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Tilføj eller fjern brugere og grupper"
+
+#~ msgid "This device is _configured"
+#~ msgstr "Denne en_hed er konfigureret"
 
 #~ msgid "*"
 #~ msgstr "*"
