@@ -61,6 +61,7 @@ static GstDialogSignal signals[] = {
   { "connection_ppp_device_active", "toggled", G_CALLBACK (on_dialog_changed) },
   { "connection_device_active",     "toggled", G_CALLBACK (on_dialog_changed) },
   { "connection_essid",             "changed", G_CALLBACK (on_dialog_changed) },
+  { "connection_wep_key_type",      "changed", G_CALLBACK (on_dialog_changed) },
   { "connection_wep_key",           "changed", G_CALLBACK (on_dialog_changed) },
   { "connection_bootproto",         "changed", G_CALLBACK (on_dialog_changed) },
   { "connection_address",           "changed", G_CALLBACK (on_dialog_changed) },

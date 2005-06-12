@@ -29,6 +29,7 @@ struct _GstIfaceWirelessPriv
 
   gchar     *essid;
   gchar     *wep_key;
+  GstWirelessKey key_type;
 };
 
 static void gst_iface_wireless_class_init (GstIfaceWirelessClass *class);
@@ -54,10 +55,30 @@ static void gst_iface_wireless_get_property (GObject      *object,
 enum {
   PROP_0,
   PROP_ESSID,
+  PROP_WEP_KEY_TYPE,
   PROP_WEP_KEY
 };
 
 static gpointer parent_class;
+
+GType
+gst_wireless_key_get_type (void)
+{
+  static GType etype = 0;
+
+  if (!etype)
+    {
+      static const GEnumValue values[] =
+	{
+	  { GST_WIRELESS_KEY_ASCII,       "GST_WIRELESS_KEY_ASCII",       "ascii" },
+	  { GST_WIRELESS_KEY_HEXADECIMAL, "GST_WIRELESS_KEY_HEXADECIMAL", "hexadecimal" },
+	};
+
+      etype = g_enum_register_static ("GstWirelessKey", values);
+    }
+
+  return etype;
+}
 
 GType
 gst_iface_wireless_get_type (void)
@@ -111,6 +132,14 @@ gst_iface_wireless_class_init (GstIfaceWirelessClass *class)
 							"ESSID",
 							NULL,
 							G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+				   PROP_WEP_KEY_TYPE,
+				   g_param_spec_enum ("iface_wep_key_type",
+						      "Iface WEP key type",
+						      "key type",
+						      GST_TYPE_WIRELESS_KEY,
+						      GST_WIRELESS_KEY_HEXADECIMAL,
+						      G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
 				   PROP_WEP_KEY,
 				   g_param_spec_string ("iface_wep_key",
@@ -168,6 +197,9 @@ gst_iface_wireless_set_property (GObject      *object,
       g_free (iface->_priv->essid);
       iface->_priv->essid = g_value_dup_string (value);
       break;
+    case PROP_WEP_KEY_TYPE:
+      iface->_priv->key_type = g_value_get_enum (value);
+      break;
     case PROP_WEP_KEY:
       g_free (iface->_priv->wep_key);
       iface->_priv->wep_key = g_value_dup_string (value);
@@ -189,6 +221,9 @@ gst_iface_wireless_get_property (GObject      *object,
     {
     case PROP_ESSID:
       g_value_set_string (value, iface->_priv->essid);
+      break;
+    case PROP_WEP_KEY_TYPE:
+      g_value_set_enum (value, iface->_priv->key_type);
       break;
     case PROP_WEP_KEY:
       g_value_set_string (value, iface->_priv->wep_key);
@@ -231,6 +266,11 @@ gst_iface_wireless_impl_get_xml (GstIface *iface, xmlNodePtr node)
 
       gst_xml_set_child_content (configuration, "essid", iface_wireless->_priv->essid);
       gst_xml_set_child_content (configuration, "key",   iface_wireless->_priv->wep_key);
+
+      if (iface_wireless->_priv->key_type == GST_WIRELESS_KEY_ASCII)
+	gst_xml_set_child_content (configuration, "key_type", "ascii");
+      else
+	gst_xml_set_child_content (configuration, "key_type", "hexadecimal");
     }
 
   GST_IFACE_CLASS (parent_class)->get_xml (iface, node);
@@ -241,7 +281,8 @@ gst_iface_wireless_set_config_from_xml (GstIfaceWireless *iface,
 					xmlNodePtr        node)
 {
   xmlNodePtr configuration;
-  gchar *essid, *key;
+  gchar *essid, *key, *type;
+  GstWirelessKey key_type;
   
   /* set ethernet configuration */
   gst_iface_ethernet_set_config_from_xml (GST_IFACE_ETHERNET (iface), node);
@@ -252,12 +293,19 @@ gst_iface_wireless_set_config_from_xml (GstIfaceWireless *iface,
 
   essid = gst_xml_get_child_content (configuration, "essid");
   key   = gst_xml_get_child_content (configuration, "key");
+  type  = gst_xml_get_child_content (configuration, "key_type");
+
+  if (type && strcmp (type, "ascii") == 0)
+    key_type = GST_WIRELESS_KEY_ASCII;
+  else
+    key_type = GST_WIRELESS_KEY_HEXADECIMAL;
   
   g_object_set (G_OBJECT (iface),
 		"iface-essid", essid,
 		"iface-wep-key", key,
+		"iface-wep-key-type", key_type,
 		NULL);
-  
+
   g_free (essid);
   g_free (key);
 }

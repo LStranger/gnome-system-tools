@@ -21,12 +21,18 @@
 #ifndef __GST_IFACE_WIRELESS_H
 #define __GST_IFACE_WIRELESS_H
 
-#include "network-iface-ethernet.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
+#include "network-iface-ethernet.h"
+
+typedef enum {
+  GST_WIRELESS_KEY_ASCII,
+  GST_WIRELESS_KEY_HEXADECIMAL
+} GstWirelessKey;
+
+#define GST_TYPE_WIRELESS_KEY             (gst_wireless_key_get_type ())
 #define GST_TYPE_IFACE_WIRELESS           (gst_iface_wireless_get_type ())
 #define GST_IFACE_WIRELESS(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_IFACE_WIRELESS, GstIfaceWireless))
 #define GST_IFACE_WIRELESS_CLASS(obj)     (G_TYPE_CHECK_CLASS_CAST ((obj),    GST_TYPE_IFACE_WIRELESS, GstIfaceWirelessClass))

@@ -51,6 +51,7 @@ struct _GstConnectionDialog {
 
   /* wireless */
   GtkWidget *essid;
+  GtkWidget *key_type_combo;
   GtkWidget *wep_key;
 
   /* plip */
