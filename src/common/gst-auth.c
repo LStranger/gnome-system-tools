@@ -103,7 +103,7 @@ gst_auth_wait_child (GstTool *tool)
 			primary_text   = g_strdup_printf (_("Could not run \"%s\""), auth_command);
 			secondary_text = g_strdup (_("Check that you have permissions to run this command"));
 		} else {
-			primary_text   = g_strdup (_("An unexpected error has ocurred"));
+			primary_text   = g_strdup (_("An unexpected error has occurred"));
 			secondary_text = NULL;
 		}
 
