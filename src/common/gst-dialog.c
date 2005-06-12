@@ -562,7 +562,7 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 
 	g_signal_connect (G_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
 	g_signal_connect (G_OBJECT (tool->remote_dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
-	g_signal_connect (G_OBJECT (dialog), "key-press-event", G_CALLBACK (dialog_key_press_event_cb), dialog);
+	g_signal_connect_after (G_OBJECT (dialog), "key-press-event", G_CALLBACK (dialog_key_press_event_cb), dialog);
 }
 
 GstDialog *
