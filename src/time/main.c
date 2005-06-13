@@ -462,7 +462,7 @@ ntp_use_toggled (GtkWidget *w, GstDialog *dialog)
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 							  _("Please install and activate NTP support in the system to enable "
 							    "synchronization of your local time server with "
-							    "internet time servers"));
+							    "internet time servers."));
 		gtk_dialog_run (GTK_DIALOG (message));
 		gtk_widget_destroy (message);
 		return;
