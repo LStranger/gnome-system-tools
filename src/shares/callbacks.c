@@ -183,7 +183,7 @@ on_delete_share_clicked (GtkWidget *widget, gpointer data)
 						 GTK_BUTTONS_NONE,
 						 _("Are you sure you want to delete this share?"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-							  _("Other computers in your network will stop viewing this"));
+							  _("Other computers in your network will stop viewing this."));
 		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,

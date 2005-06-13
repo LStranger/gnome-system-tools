@@ -236,7 +236,7 @@ on_detect_modem_clicked (GtkWidget *widget, gpointer data)
 				  NULL);
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
 						_("Check that the device is not busy and "
-						  "that is correctly attached to the computer"),
+						  "that is correctly attached to the computer."),
 						NULL);
       gtk_dialog_run (GTK_DIALOG (d));
       gtk_widget_destroy (d);

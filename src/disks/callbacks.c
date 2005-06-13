@@ -354,7 +354,7 @@ gst_on_format_button_clicked (GtkWidget *button, gpointer gdata)
 															 point);
 								gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (msgdialog),
 																  _("Access Path \"%s\" is already being "
-																    "used by other partition"), point);
+																    "used by other partition."), point);
 								gtk_dialog_run (GTK_DIALOG (msgdialog));
 								gtk_widget_destroy (msgdialog);
 								
