@@ -289,13 +289,13 @@ boot_image_valid_label (BootImage *image)
 		return NULL;
 
 	if (boot_image_label_exists (image)) {
-		error = g_strdup_printf (_("\"%s\" already exists, please set another name"),
+		error = g_strdup_printf (_("\"%s\" already exists, please set another name."),
 					 image->label);
 		return error;
 	}
 	
 	if (!boot_image_valid_name_chars (image->label)) {
-		error = g_strdup_printf (_("Invalid image name: \"%s\""), image->label);
+		error = g_strdup_printf (_("Invalid image name: \"%s\"."), image->label);
 		return error;
 	}
 	
@@ -308,7 +308,7 @@ boot_image_valid_device (BootImage *image)
 	gchar *error = NULL;
 
 	if (!boot_image_valid_chars (image->image)) {
-		error = g_strdup_printf (_("Invalid image: \"%s\""), image->image);
+		error = g_strdup_printf (_("Invalid image: \"%s\"."), image->image);
 		return error;
 	}
 
@@ -326,7 +326,7 @@ boot_image_valid_root (BootImage *image)
 		return NULL; /* Not required */
 	
 	if (!boot_image_valid_chars (image->root)) {
-		error = g_strdup_printf (_("Invalid root device: \"%s\""), image->root);
+		error = g_strdup_printf (_("Invalid root device: \"%s\"."), image->root);
 		return error;
 	}
 

@@ -251,7 +251,7 @@ boot_append_vga_error (GtkWidget *parent, gchar *vga)
 								 GTK_BUTTONS_CLOSE,
 								 _("Invalid VGA value"));
 	   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-										_("\"%s\" is not a valid VGA value"), vga);
+										_("\"%s\" is not a valid VGA value."), vga);
 	   gtk_dialog_run (GTK_DIALOG (dialog));
 	   gtk_widget_destroy (dialog);
 }

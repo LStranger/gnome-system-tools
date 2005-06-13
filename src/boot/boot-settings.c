@@ -402,7 +402,7 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 
 		if ((!msg_error) && (strcmp (gtk_entry_get_text (gui->password),
 					     gtk_entry_get_text (gui->password_confirm)) != 0))
-			msg_error = g_strdup (_("Password confirmation is not correct"));
+			msg_error = g_strdup (_("Password confirmation is not correct."));
 
 		if (msg_error) {
 			boot_settings_gui_error (GTK_WINDOW (gui->top), msg_error);

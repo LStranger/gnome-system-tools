@@ -412,7 +412,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 					    _("Error deleting boot image"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
 							  _("Without at least one boot image "
-							    "your computer will not start"));
+							    "your computer will not start."));
 		gtk_dialog_run (GTK_DIALOG (d));
 		gtk_widget_destroy (d);
 		return;
@@ -432,7 +432,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 				    GTK_BUTTONS_NONE,
 				    _("Are you sure you want to delete \"%s\"?"), label);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
-						  _("This may leave this operating system unbootable"));
+						  _("This may leave this operating system unbootable."));
 	gtk_dialog_add_buttons (GTK_DIALOG (d),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
@@ -463,7 +463,7 @@ callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer d
 					 GTK_BUTTONS_CLOSE,
 					 _("The configuration will show empty"));
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _("The file \"%s\" is missing or could not be read"), rline->argv[0]);
+						  _("The file \"%s\" is missing or could not be read."), rline->argv[0]);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 
