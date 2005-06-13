@@ -215,7 +215,7 @@ check_profile_delete (xmlNodePtr node)
 					 _("Delete profile \"%s\"?"), profile_name);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("You will not be able to recover this "
-						    "profile after pressing \"apply\""));
+						    "profile after pressing \"apply\"."));
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,

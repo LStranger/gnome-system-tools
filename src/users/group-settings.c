@@ -296,7 +296,7 @@ check_group_delete (xmlNodePtr node)
 					 GTK_BUTTONS_NONE,
 					 _("Are you sure you want to delete group \"%s\"?"), name);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _("This may leave files with invalid group ID in the filesystem"));
+						  _("This may leave files with invalid group ID in the filesystem."));
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
