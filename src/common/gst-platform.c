@@ -45,6 +45,7 @@ extern GdkPixbuf *black_panther;
 extern GdkPixbuf *vine;
 extern GdkPixbuf *specifix;
 extern GdkPixbuf *archlinux;
+extern GdkPixbuf *vidalinux;
 
 GstPlatform *
 gst_platform_new (const gchar *key, const gchar *name)
@@ -178,6 +179,8 @@ gst_platform_get_pixmap (GstPlatform *platform)
 		return specifix;
 	else if (g_ascii_strncasecmp (platform->name, "Arch Linux", 10) == 0)
 		return archlinux;
+	else if (g_ascii_strncasecmp (platform->name, "Vida Linux", 10) == 0)
+		return vidalinux;
 	else return NULL;
 }
 

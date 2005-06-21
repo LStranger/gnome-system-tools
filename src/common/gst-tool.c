@@ -76,6 +76,7 @@ GdkPixbuf *black_panther;
 GdkPixbuf *vine;
 GdkPixbuf *specifix;
 GdkPixbuf *archlinux;
+GdkPixbuf *vidalinux;
 
 enum {
 	BOGUS,
@@ -453,6 +454,7 @@ gst_tool_create_distro_images (void)
 	vine = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vine.png", NULL);
 	specifix = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/specifix.png", NULL);
 	archlinux = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/archlinux.png", NULL);
+	vidalinux = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vidalinux.png", NULL);
 }
 
 static void
