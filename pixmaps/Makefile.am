@@ -44,6 +44,7 @@ pixmaps_DATA = \
 	unsupported-distro.png    \
 	users-groups.png          \
 	users.png                 \
+	vidalinux.png		  \
 	vine.png                  \
 	wavelan-16.png            \
 	wavelan-48.png            \
