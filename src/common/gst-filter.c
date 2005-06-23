@@ -157,21 +157,11 @@ gst_filter_check_ip_address (const gchar *text)
   return GST_ADDRESS_INCOMPLETE;
 }
 
-static void
-entry_filter (GtkEditable *editable, const gchar *text, gint length, gint *pos, gpointer data)
+static gboolean
+check_string (gint filter, const gchar *str)
 {
-  gint      filter, ret;
-  gchar    *str, *pre, *post;
-  gboolean  success = FALSE;
-
-  filter = GPOINTER_TO_INT (data);
-  pre  = gtk_editable_get_chars (editable, 0, *pos);
-  post = gtk_editable_get_chars (editable, *pos, -1);
-
-  str = g_strconcat (pre, text, post, NULL);
-
-  g_free (pre);
-  g_free (post);
+  gboolean success = FALSE;
+  gint ret;
 
   if ((filter == GST_FILTER_IP) ||
       (filter == GST_FILTER_IPV4) ||
@@ -197,9 +187,46 @@ entry_filter (GtkEditable *editable, const gchar *text, gint length, gint *pos, 
   else if (filter == GST_FILTER_PHONE)
     success = (strspn (str, "0123456789abcdABCD,#*") == strlen (str));
 
-  if (!success)
-    gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
+  return success;
+}
 
+static void
+insert_filter (GtkEditable *editable, const gchar *text, gint length, gint *pos, gpointer data)
+{
+  gint   filter;
+  gchar *str, *pre, *post;
+
+  filter = GPOINTER_TO_INT (data);
+  pre  = gtk_editable_get_chars (editable, 0, *pos);
+  post = gtk_editable_get_chars (editable, *pos, -1);
+
+  str = g_strconcat (pre, text, post, NULL);
+
+  if (!check_string (filter, str))
+    gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert-text");
+
+  g_free (pre);
+  g_free (post);
+  g_free (str);
+}
+
+static void
+delete_filter (GtkEditable *editable, gint start, gint end, gpointer data)
+{
+  gint   filter;
+  gchar *str, *pre, *post;
+
+  filter = GPOINTER_TO_INT (data);
+  pre  = gtk_editable_get_chars (editable, 0, start);
+  post = gtk_editable_get_chars (editable, end, -1);
+
+  str = g_strconcat (pre, post, NULL);
+
+  if (!check_string (filter, str))
+    gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "delete-text");
+
+  g_free (pre);
+  g_free (post);
   g_free (str);
 }
 
@@ -207,5 +234,8 @@ void
 gst_filter_init (GtkEntry *entry, gint filter)
 {
   g_signal_connect (G_OBJECT (entry), "insert-text",
-                    G_CALLBACK (entry_filter), GINT_TO_POINTER (filter));
+                    G_CALLBACK (insert_filter), GINT_TO_POINTER (filter));
+
+  g_signal_connect (G_OBJECT (entry), "delete-text",
+                    G_CALLBACK (delete_filter), GINT_TO_POINTER (filter));
 }
