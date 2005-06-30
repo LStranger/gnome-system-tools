@@ -8,13 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-20 23:06+0200\n"
-"PO-Revision-Date: 2005-06-20 23:11+0200\n"
+"POT-Creation-Date: 2005-06-30 16:13+0200\n"
+"PO-Revision-Date: 2005-06-30 16:12+0200\n"
 "Last-Translator: Terance Edward Sola <terance@lyse.net>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
 msgid ""
@@ -127,7 +128,6 @@ msgid "Boot Manager Settings"
 msgstr "Innstillinger for oppstartshåndterer"
 
 #: ../interfaces/boot.glade.in.h:15
-#, fuzzy
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter parameters passed to the kernel at "
@@ -311,14 +311,14 @@ msgid "Use this window to select the computer you wish to configure"
 msgstr "Bruk dette vinduet til å velge datamaskinen du ønsker å konfigurere"
 
 #: ../interfaces/common.glade.in.h:9
-#, fuzzy
 msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
 "modify\n"
 "your system configuration."
 msgstr ""
-"Du trenger administratorprivilegier for å bruke dette verktøyet. Du vil ikke "
-"være i stand til å endre systemoppsettet uten passord."
+"Du trenger administratorprivilegier for å bruke dette verktøyet. Oppgi et "
+"passord\n"
+"for å endre systemkonfigurasjonen."
 
 #: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
@@ -495,9 +495,8 @@ msgstr ""
 "Puls"
 
 #: ../interfaces/network.glade.in.h:46
-#, fuzzy
 msgid "Use the Internet service provider nameservers"
-msgstr "<p>Data for internettilbyder</p>"
+msgstr "Bruk internettleverandøren sine navnetjenere"
 
 #: ../interfaces/network.glade.in.h:47
 msgid "WEP _key:"
@@ -1125,9 +1124,8 @@ msgid "Error deleting boot image"
 msgstr "Feil under sletting av oppstartsbilde"
 
 #: ../src/boot/callbacks.c:414
-#, fuzzy
 msgid "Without at least one boot image your computer will not start."
-msgstr "Systemet vil ikke starte uten minst ett oppstartsbilde"
+msgstr "Systemet vil ikke starte uten minst ett oppstartsbilde."
 
 #: ../src/boot/callbacks.c:433
 #, c-format
@@ -1135,9 +1133,8 @@ msgid "Are you sure you want to delete \"%s\"?"
 msgstr "Er du sikker på at du vil slette «%s»?"
 
 #: ../src/boot/callbacks.c:435
-#, fuzzy
 msgid "This may leave this operating system unbootable."
-msgstr "Dette kan medføre at du ikke kan starte dette operativsystemet"
+msgstr "Dette kan medføre at operativsystemet ikke starter."
 
 #: ../src/boot/callbacks.c:464
 msgid "The configuration will show empty"
@@ -1244,20 +1241,20 @@ msgstr "Aktiver dem nå?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Feil tilkoblingssignal «%s» i komponent «%s»"
 
-#: ../src/common/gst-tool.c:1020
+#: ../src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "Konfigurasjonen kunne ikke lastes"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "Det oppsto en feil under kjøring av skript"
 
-#: ../src/common/gst-tool.c:1503
+#: ../src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Velkommen til %s-utgaven av GNOME systemverktøy"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1266,19 +1263,19 @@ msgid ""
 "System Tools!"
 msgstr ""
 
-#: ../src/common/gst-tool.c:1526
+#: ../src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "Advarsel"
 
-#: ../src/common/gst-tool.c:1546
+#: ../src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "Ikke vis denne igjen"
 
-#: ../src/common/gst-tool.c:1603
+#: ../src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "GNOME systemverktøy"
 
-#: ../src/common/gst-tool.c:1748
+#: ../src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjelp"
 
@@ -1292,25 +1289,23 @@ msgid "Could not enable the interface %s"
 msgstr "Kunne ikke aktivere grensesnitt %s"
 
 #: ../src/network/callbacks.c:48
-#, fuzzy
 msgid ""
 "Check that the settings are correct for this network and that the computer "
 "is correctly connected to it."
 msgstr ""
 "Undersøk om instillingene er passende for dette nettverket og at "
-"datamaskinen er skikkelig koblet til"
+"datamaskinen er skikkelig koblet til."
 
 #: ../src/network/callbacks.c:235
 msgid "Could not autodetect modem device"
 msgstr "Kunne ikke gjenkjenne modemenhet automatisk"
 
 #: ../src/network/callbacks.c:238
-#, fuzzy
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
-"Sjekk at enheten ikke er opptatt og at den er koblet riktig til datamaskinen"
+"Sjekk at enheten ikke er opptatt og at den er koblet riktig til datamaskinen."
 
 #: ../src/network/callbacks.c:449
 msgid "The host name has changed"
@@ -1480,9 +1475,8 @@ msgid "Are you sure you want to delete this share?"
 msgstr "Er du sikker på at du vil slette den delte ressursen"
 
 #: ../src/shares/callbacks.c:186
-#, fuzzy
 msgid "Other computers in your network will stop viewing this."
-msgstr "Andre datamaskiner i ditt nettverk vil ikke kunne se ressursen"
+msgstr "Andre datamaskiner i ditt nettverk vil ikke kunne se dette."
 
 #: ../src/shares/main.c:88
 msgid "Add a shared path, modifies it if it already exists"
@@ -1566,6 +1560,8 @@ msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr ""
+"Installer og aktiver NTP-støtte i systemet for å synkronisere klokken din "
+"med en tidtjener på Internett."
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1748,10 +1744,9 @@ msgid "Delete profile \"%s\"?"
 msgstr "Slett profil «%s»?"
 
 #: ../src/users/profile-settings.c:217
-#, fuzzy
 msgid "You will not be able to recover this profile after pressing \"apply\"."
 msgstr ""
-"Du vil ikke kunne gjenopprette denne profilen etter at du trykker «bruk»"
+"Du vil ikke kunne gjenopprette denne profilen etter at du trykker «bruk»."
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: ../src/users/profiles-table.c:38
@@ -1789,13 +1784,12 @@ msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "Er du sikker på at du vil slette bruker «%s»?"
 
 #: ../src/users/user-settings.c:83
-#, fuzzy
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
 msgstr ""
-"Dette vil slå av tilgangen til systemet for denne brukeren men hjemmemappen "
-"hans vil ikke bli slettet"
+"Dette vil slå av tilgangen til systemet for denne brukeren uten å slette "
+"hjemmemappen."
 
 #: ../src/users/user-settings.c:187
 msgid "User Account Editor"
@@ -1828,13 +1822,10 @@ msgid "User name has invalid characters"
 msgstr "Brukernavnet har ugyldige tegn"
 
 #: ../src/users/user-settings.c:309
-#, fuzzy
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
-msgstr ""
-"Vennligst sett et gyldig brukernavn som starter med en bokstav og fortsetter "
-"med små bokstaver og tall"
+msgstr "Velg et brukernavn som består bare av små bokstaver og tall."
 
 #: ../src/users/user-settings.c:315
 #, c-format
@@ -1896,13 +1887,12 @@ msgid "User ID %s already exists"
 msgstr "Bruker-ID %s eksisterer allerede"
 
 #: ../src/users/user-settings.c:453
-#, fuzzy
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems."
 msgstr ""
-"Flere bruker kan dele samme bruker-ID, men det er ikke vanlig og kan lede "
-"til sikkerhetstrusler"
+"Flere brukere kan dele samme bruker-ID men det er ikke vanlig og kan lede "
+"til sikkerhetstrusler."
 
 #: ../src/users/user-settings.c:471
 msgid "Incomplete path in shell"
@@ -1929,9 +1919,8 @@ msgid "Password confirmation isn't correct"
 msgstr "Bekreftelse av passord er ikke korrekt"
 
 #: ../src/users/user-settings.c:498
-#, fuzzy
 msgid "Check that you have provided the same password in both text fields."
-msgstr "Sjekk at du har oppgitt samme passord i begge tekstfeltene"
+msgstr "Sjekk at du har oppgitt samme passord i begge tekstfeltene."
 
 #: ../src/users/user-settings.c:772
 #, c-format
