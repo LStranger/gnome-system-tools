@@ -3,7 +3,7 @@
 #
 # Copyright (C) 2002, 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-system-tools package.
-# 
+#
 # Tõivo Leedjärv <toivo@linux.ee>, 2002.
 # Ivar Smolin <okul@linux.ee>, 2005.
 #
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-06-28 05:57+0000\n"
-"PO-Revision-Date: 2005-06-08 08:44+0300\n"
+"PO-Revision-Date: 2005-07-03 17:56+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../gnome-system-tools.schemas.in.h:3
 msgid "Preferred bootloader that boot-admin will configure"
-msgstr ""
+msgstr "Eelistatud alglaadur, mida boot-admin peab seadistama"
 
 #: ../gnome-system-tools.schemas.in.h:4
 msgid "Remote hosts"
@@ -94,6 +94,9 @@ msgid ""
 "\n"
 "please select which do you want to configure"
 msgstr ""
+"<span size=\"larger\" weight=\"bold\">Leiti mitu alglaadurit</span>\n"
+"\n"
+"palun vali, millist sa soovid seadistada"
 
 #: ../interfaces/boot.glade.in.h:9 ../interfaces/users.glade.in.h:3
 msgid "<span weight=\"bold\">Basic Settings</span>"
@@ -413,9 +416,8 @@ msgid "Interface properties"
 msgstr "Liidese omadused"
 
 #: ../interfaces/network.glade.in.h:28
-#, fuzzy
 msgid "Key _type:"
-msgstr "Muu tüüp"
+msgstr "_Võtme tüüp"
 
 #: ../interfaces/network.glade.in.h:29
 msgid "Location name:"
@@ -464,11 +466,12 @@ msgid "Select location name"
 msgstr "Asukoha nime valimine"
 
 #: ../interfaces/network.glade.in.h:42
-#, fuzzy
 msgid ""
 "Static IP address\n"
 "DHCP"
-msgstr "Staatiline IP aadress"
+msgstr ""
+"Staatiline IP aadress\n"
+"DHCP"
 
 #: ../interfaces/network.glade.in.h:44
 msgid ""
@@ -1005,9 +1008,9 @@ msgid "Invalid VGA value"
 msgstr "Vigane VGA väärtus"
 
 #: ../src/boot/boot-append-gui.c:254
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is not a valid VGA value."
-msgstr "\"%s\" pole VGA väärtuseks lubatud"
+msgstr "\"%s\" pole VGA väärtuseks lubatud."
 
 #: ../src/boot/boot-druid.c:112
 msgid "Error creating boot image"
@@ -1056,33 +1059,32 @@ msgid "\"%s\" is an invalid path"
 msgstr "\"%s\" on vigane otsingurada"
 
 #: ../src/boot/boot-image.c:292
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" already exists, please set another name."
-msgstr "\"%s\" on juba olemas, palun vali mingi muu nimi"
+msgstr "\"%s\" on juba olemas, palun vali mingi muu nimi."
 
 #: ../src/boot/boot-image.c:298
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid image name: \"%s\"."
-msgstr "Vigane tõmmise nimi: \"%s\""
+msgstr "Vigane tõmmise nimi: \"%s\"."
 
 #: ../src/boot/boot-image.c:311
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid image: \"%s\"."
-msgstr "Vigane tõmmis \"%s\""
+msgstr "Vigane tõmmis \"%s\"."
 
 #: ../src/boot/boot-image.c:329
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid root device: \"%s\"."
-msgstr "Vigane juurseade: \"%s\""
+msgstr "Vigane juurseade: \"%s\"."
 
 #: ../src/boot/boot-settings.c:43
 msgid "_Module path:"
 msgstr "_Mooduli rada:"
 
 #: ../src/boot/boot-settings.c:405
-#, fuzzy
 msgid "Password confirmation is not correct."
-msgstr "Paroolikontroll ei ole korras"
+msgstr "Paroolikontroll ei ole korras."
 
 #: ../src/boot/boot-settings.c:430
 msgid "Error modifying boot image"
@@ -1109,9 +1111,8 @@ msgid "Error deleting boot image"
 msgstr "Viga alglaadimistõmmise kustutamisel"
 
 #: ../src/boot/callbacks.c:414
-#, fuzzy
 msgid "Without at least one boot image your computer will not start."
-msgstr "Ilma ühegi alglaadimistõmmiseta ei ole arvuti võimeline käivituma"
+msgstr "Ilma ühegi alglaadimistõmmiseta pole arvuti võimeline käivituma."
 
 #: ../src/boot/callbacks.c:433
 #, c-format
@@ -1119,18 +1120,17 @@ msgid "Are you sure you want to delete \"%s\"?"
 msgstr "Kas sa soovid eemaldada \"%s\"?"
 
 #: ../src/boot/callbacks.c:435
-#, fuzzy
 msgid "This may leave this operating system unbootable."
-msgstr "See võib teha operatsioonisüsteemi alglaadimise võimatuks"
+msgstr "See võib teha operatsioonisüsteemi alglaadimise võimatuks."
 
 #: ../src/boot/callbacks.c:464
 msgid "The configuration will show empty"
 msgstr ""
 
 #: ../src/boot/callbacks.c:466
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" is missing or could not be read."
-msgstr "Fail \"%s\" puudub või on loetamatu"
+msgstr "Fail \"%s\" puudub või on loetamatu."
 
 #: ../src/boot/table.c:41
 msgid "Name"
@@ -1197,7 +1197,6 @@ msgid "Check that you have permissions to run this command"
 msgstr "Veendu, et sul on selle käsu käivitamiseks vajalikud õigused"
 
 #: ../src/common/gst-auth.c:106
-#, fuzzy
 msgid "An unexpected error has occurred"
 msgstr "Tekkis ootamatu viga"
 
@@ -1285,11 +1284,10 @@ msgid "Could not autodetect modem device"
 msgstr "Modemi seadet pole võimalik automaatselt tuvastada"
 
 #: ../src/network/callbacks.c:238
-#, fuzzy
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
-msgstr "Veendu, et seade poleks hõivatud ja on arvutiga korralikult ühendatud"
+msgstr "Veendu, et seade poleks hõivatud ja on arvutiga korralikult ühendatud."
 
 #: ../src/network/callbacks.c:449
 msgid "The host name has changed"
@@ -1457,9 +1455,8 @@ msgid "Are you sure you want to delete this share?"
 msgstr ""
 
 #: ../src/shares/callbacks.c:186
-#, fuzzy
 msgid "Other computers in your network will stop viewing this."
-msgstr "Teised võrgus olevad arvutid ei näe seda enam"
+msgstr "Teised võrgus olevad arvutid ei näe seda enam."
 
 #: ../src/shares/main.c:88
 msgid "Add a shared path, modifies it if it already exists"
@@ -1519,7 +1516,6 @@ msgid "Configure which folders are available for your network neighborhood"
 msgstr ""
 
 #: ../src/shares/shares.desktop.in.in.h:2
-#, fuzzy
 msgid "Shared Folders"
 msgstr "Jagatud kataloogid"
 
@@ -1540,13 +1536,12 @@ msgid "NTP support is not installed"
 msgstr "NTP tugi ei ole paigaldatud"
 
 #: ../src/time/main.c:463
-#, fuzzy
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr ""
 "Kohaliku ajaserveri sünkroniseerimiseks internetis olevate ajaserveritega "
-"pead sa paigaldama ja aktiveerime süsteemis NTP toe"
+"pead sa paigaldama ja aktiveerime süsteemis NTP toe."
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1654,9 +1649,8 @@ msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Kas sa soovid eemaldada gruppi \"%s\"?"
 
 #: ../src/users/group-settings.c:299
-#, fuzzy
 msgid "This may leave files with invalid group ID in the filesystem."
-msgstr "Selle tagajärjel võivad failisüsteemi jääda failid vigase grupi ID'ga"
+msgstr "Selle tagajärjel võivad failisüsteemi jääda failid vigase grupi ID'ga."
 
 #: ../src/users/group-settings.c:359
 #, c-format
@@ -1760,9 +1754,8 @@ msgstr "Kasutajat \"root\" ei tohiks kustutada"
 
 #: ../src/users/user-settings.c:72 ../src/users/user-settings.c:303
 #: ../src/users/user-settings.c:398 ../src/users/user-settings.c:434
-#, fuzzy
 msgid "This would leave the system unusable."
-msgstr "See võib mõjuda halvasti süsteemi stabiilsusele"
+msgstr "See võib mõjuda halvasti süsteemi stabiilsusele."
 
 #: ../src/users/user-settings.c:81
 #, c-format
@@ -1770,13 +1763,12 @@ msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "Kas sa soovid eemaldada kasutajat \"%s\"?"
 
 #: ../src/users/user-settings.c:83
-#, fuzzy
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
 msgstr ""
 "Selle abil saab keelata kasutajal süsteemi ligipääsu ilma kasutaja "
-"kodukataloogi kustutamata"
+"kodukataloogi kustutamata."
 
 #: ../src/users/user-settings.c:187
 msgid "User Account Editor"
@@ -1787,9 +1779,8 @@ msgid "The user name is empty"
 msgstr "Kasutajanimi on tühi"
 
 #: ../src/users/user-settings.c:284
-#, fuzzy
 msgid "A user name must be specified."
-msgstr "Kasutajanimi peab olema määratud"
+msgstr "Kasutajanimi peab olema määratud."
 
 #. = sizeof (ut.ut_name)
 #: ../src/users/user-settings.c:290 ../src/users/user-settings.c:295
@@ -1797,9 +1788,9 @@ msgid "The user name is too long"
 msgstr "Kasutajanimi on liiga pikk"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
-#, fuzzy, c-format
+#, c-format
 msgid "The user name should have less than %i characters for being valid."
-msgstr "Lubatud kasutajanimi peab sisaldama vähem kui %i sümbolit"
+msgstr "Lubatud kasutajanimi peab sisaldama vähem kui %i sümbolit."
 
 #: ../src/users/user-settings.c:302
 msgid "User name for the \"root\" user should not be modified"
@@ -1810,11 +1801,10 @@ msgid "User name has invalid characters"
 msgstr "Kasutajanimi sisaldab lubamatuid sümboleid"
 
 #: ../src/users/user-settings.c:309
-#, fuzzy
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
-msgstr "Palun sisesta korrektne grupinimi, kasutades ainult väiketähti"
+msgstr "Palun sisesta korrektne grupinimi, kasutades esimese tähena väiketähte, millele järgnevad ainult väiketähed ja/või numbrid."
 
 #: ../src/users/user-settings.c:315
 #, c-format
@@ -1822,9 +1812,8 @@ msgid "User name \"%s\" already exists"
 msgstr "Kasutaja nimega \"%s\" on juba olemas"
 
 #: ../src/users/user-settings.c:316
-#, fuzzy
 msgid "Please select a different user name."
-msgstr "Palun vali mõni muu kasutajanimi"
+msgstr "Palun vali mõni muu kasutajanimi."
 
 #: ../src/users/user-settings.c:341
 #, c-format
@@ -1832,31 +1821,28 @@ msgid "Invalid character \"%c\" in comment"
 msgstr "Kommentaaris on lubamatu sümbol \"%c\""
 
 #: ../src/users/user-settings.c:342
-#, fuzzy
 msgid "Check that this character is not used."
-msgstr "Veendu, et seda sümbolit poleks kasutusel"
+msgstr "Veendu, et seda sümbolit poleks kasutusel."
 
 #: ../src/users/user-settings.c:390
 msgid "Home directory should not be empty"
 msgstr "Kodukataloogi ei tohiks olla tühi"
 
 #: ../src/users/user-settings.c:391
-#, fuzzy
 msgid "Make sure you provide a home directory."
-msgstr "Veendu, et kodukataloog oleks sisestatud"
+msgstr "Veendu, et sa määrasid kodukataloogi."
 
 #: ../src/users/user-settings.c:393
 msgid "Incomplete path in home directory"
 msgstr "Mittetäielik kodukataloogi rada"
 
 #: ../src/users/user-settings.c:394
-#, fuzzy
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
 msgstr ""
 "Palun sisesta kodukataloogi täielik rada\n"
-"<span size=\"smaller\">näiteks: /home/jaan</span>"
+"<span size=\"smaller\">näiteks: /home/jaan</span>."
 
 #: ../src/users/user-settings.c:397
 msgid "Home directory of the \"root\" user should not be modified"
@@ -1867,9 +1853,8 @@ msgid "Invalid user ID"
 msgstr "Vigane kasutaja ID"
 
 #: ../src/users/user-settings.c:431
-#, fuzzy
 msgid "User ID must be a positive number."
-msgstr "Kasutaja ID peab olema positiivne number"
+msgstr "Kasutaja ID peab olema positiivne number."
 
 #: ../src/users/user-settings.c:433
 msgid "User ID of the \"root\" user should not be modified"
@@ -1891,31 +1876,28 @@ msgid "Incomplete path in shell"
 msgstr "Mittetäielik kestprogrammi rada"
 
 #: ../src/users/user-settings.c:472
-#, fuzzy
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>."
 msgstr ""
 "Palun sisesta kestprogrammi täielik rada\n"
-"<span size=\"smaller\">näiteks: /bin/sh</span>"
+"<span size=\"smaller\">näiteks: /bin/sh</span>."
 
 #: ../src/users/user-settings.c:494
 msgid "Password should not be empty"
 msgstr "Parool ei tohi olla tühi"
 
 #: ../src/users/user-settings.c:495
-#, fuzzy
 msgid "A password must be provided."
-msgstr "Parool peab olema sisestatud"
+msgstr "Parool peab olema sisestatud."
 
 #: ../src/users/user-settings.c:497
 msgid "Password confirmation isn't correct"
 msgstr "Paroolikontroll ei ole korras"
 
 #: ../src/users/user-settings.c:498
-#, fuzzy
 msgid "Check that you have provided the same password in both text fields."
-msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool"
+msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
 
 #: ../src/users/user-settings.c:772
 #, c-format
