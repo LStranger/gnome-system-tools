@@ -216,7 +216,7 @@ load_glade_common (const gchar *widget)
 }
 
 static void
-gst_auth_get_password (gchar **password)
+gst_auth_get_password (GstTool *tool, gchar **password)
 {
 	GladeXML *xml;
 	gint result;
@@ -229,6 +229,7 @@ gst_auth_get_password (gchar **password)
 	g_assert (password_entry);
 	g_assert (password_dialog);
 
+	gtk_window_set_transient_for (GTK_WINDOW (password_dialog), GTK_WINDOW (tool->main_dialog));
 	gtk_widget_show (password_dialog);
 	gtk_widget_grab_focus (password_entry);
 	result = gtk_dialog_run (GTK_DIALOG (password_dialog));
@@ -289,7 +290,7 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 	result = gst_auth_get_auth_required (tool);
 
 	if (result == GST_AUTH_PASSWORD) {
-		gst_auth_get_password (&password);
+		gst_auth_get_password (tool, &password);
 		gst_tool_write_to_backend (tool, password);
 
 		if (strlen (password) > 0)
