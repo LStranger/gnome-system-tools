@@ -20,6 +20,7 @@ services_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
 services_admin_SOURCES = \
 	main.c                              \
 	callbacks.c 		callbacks.h     \
+	service.c		service.h	\
 	table.c			table.h	\
 	transfer.c		transfer.h
 toolpixmaps =

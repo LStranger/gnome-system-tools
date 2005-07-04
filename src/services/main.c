@@ -38,18 +38,10 @@
 GstTool *tool;
 
 static GstDialogSignal signals [] = {
-	{ "settings_button",         "clicked",       G_CALLBACK (on_settings_button_clicked)   },
-	{ "dialog_service_priority", "value-changed", G_CALLBACK (on_service_priority_changed)  },
-	{ "sequence_ordering",       "clicked",       G_CALLBACK (on_sequence_ordering_changed) },
-	{ "runlevels_menu",          "changed",       G_CALLBACK (on_runlevel_changed)          },
 	{ NULL }
 };
 
 static GstWidgetPolicy policies [] = {
-	/* Name                     Basic                        Advanced                   Root   User */
-	{ "settings_button",        GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "runlevels_menu",         GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "sequence_ordering",      GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_HIDDEN,    TRUE,  TRUE  },
 	{NULL}
 };
 
@@ -59,9 +51,10 @@ main (int argc, char *argv[])
 	gst_init ("services-admin", argc, argv, NULL);
 	
 	tool = gst_tool_new();
-	gst_tool_construct (tool, "services", _("Services Settings"));
-	table_create ();
+	gst_tool_construct (tool, "services", _("Change your running services"));
 
+	table_create ();
+	
 	gst_dialog_set_widget_policies (tool->main_dialog, policies);
 	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
 

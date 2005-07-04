@@ -18,29 +18,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho <garparr@teleline.es>.
+ * Authors: Carlos Garnacho <carlosg@gnome.org>.
  */
 
-#ifndef _TABLE_H
-#define _TABLE_H
+#ifndef __SERVICE_H
+#define __SERVICE_H
 
-#include <gtk/gtk.h>
+#include <glib.h>
 
-enum {
-	COL_ACTIVE,
-	COL_DESC,
-	COL_IMAGE,
-	COL_POINTER,
-	COL_DANGEROUS,
-	COL_LAST
+typedef struct _ServiceDescription ServiceDescription;
+
+struct _ServiceDescription {
+	gchar *role;
+	gboolean dangerous;
+	gchar *icon;
+	gchar *description;
+	gchar *long_description;
 };
 
-enum {
-	POPUP_SETTINGS
-};
+const ServiceDescription *service_search (const gchar *service);
 
-void			table_create				(void);
-void			table_populate				(xmlNodePtr, gchar*);
-void                    table_empty                             (void);
-
-#endif /* _TABLE_H */
+#endif /* __SERVICE_H */
