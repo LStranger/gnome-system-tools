@@ -60,7 +60,7 @@ show_settings (void)
 	/* get the description and the script name */
 	script = gst_xml_get_child_content (service, "script");
 
-	title = g_strdup_printf (_("Settings for «%s»"), script);
+	title = g_strdup_printf (_("Settings for \"%s\""), script);
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
