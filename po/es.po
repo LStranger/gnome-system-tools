@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-20 22:22+0200\n"
-"PO-Revision-Date: 2005-06-20 22:28+0200\n"
+"POT-Creation-Date: 2005-07-06 18:08+0200\n"
+"PO-Revision-Date: 2005-07-06 18:10+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -584,40 +584,12 @@ msgid "_Volume:"
 msgstr "_Volumen:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">Información general</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>Servicios disponibles</b>"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">Configuración de servicios</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "Descripción:"
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "_Propiedades del servicio"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "Servicio:"
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "Estado:"
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "_Ordenar lista por la secuencia de inicio"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "_Inicio"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "Secuencia de _inicio:"
+msgid "Advanced settings:"
+msgstr "Configuración avanzada:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1254,20 +1226,20 @@ msgstr "¿Desea aplicarlos ahora?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal «%s» con el widget «%s»"
 
-#: ../src/common/gst-tool.c:1020
+#: ../src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "No se ha podido cargar la configuración"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "Se produjo un error al ejecutar el script del backend"
 
-#: ../src/common/gst-tool.c:1503
+#: ../src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Bienvenido al prelanzamiento %s de Gnome System Tools"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1282,19 +1254,19 @@ msgstr ""
 "probar esta versión preliminar de prueba de las Herramientas de sistema de "
 "GNOME!"
 
-#: ../src/common/gst-tool.c:1526
+#: ../src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "Aviso"
 
-#: ../src/common/gst-tool.c:1546
+#: ../src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "No mostrarme esto otra vez"
 
-#: ../src/common/gst-tool.c:1603
+#: ../src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "Herramientas de sistema de GNOME"
 
-#: ../src/common/gst-tool.c:1748
+#: ../src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "No se pudo mostrar la ayuda"
 
@@ -1451,30 +1423,25 @@ msgstr "El interfaz «%s» no está activo"
 msgid "The interface %s is active"
 msgstr "El interfaz «%s» está activo"
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "No hay descripción disponible."
-
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "Funcionando"
-
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "Detenido"
-
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "No se ha podido obtener información"
-
-#: ../src/services/callbacks.c:292
+#: ../src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "Configuración para el servicio %s"
+msgid "Settings for \"%s\""
+msgstr "Configuración para «%s»"
 
-#: ../src/services/main.c:62
-msgid "Services Settings"
-msgstr "Configuración de los servicios"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "¿Está seguro de que desea desactivar este servicio?"
+
+#: ../src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr "Esto puede afectar el comportamiento de su sistema de varias formas, posiblemente  produciendo una pérdida de datos"
+
+#: ../src/services/main.c:54
+msgid "Change your running services"
+msgstr "Cambiar sus servicios en funcionamiento"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1483,14 +1450,6 @@ msgstr "Configurar qué servicios serán ejecutados cuando el sistema se inicie"
 #: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "Servicios"
-
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "Activo"
-
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "Servicio"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1581,7 +1540,9 @@ msgstr "El soporte NTP no está instalado"
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
-msgstr "Instale y active el soporte NTP en el sistema para activar la sincronización con su servidor de hora local con los servidores de hora de Internet."
+msgstr ""
+"Instale y active el soporte NTP en el sistema para activar la sincronización "
+"con su servidor de hora local con los servidores de hora de Internet."
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1690,7 +1651,8 @@ msgstr "¿Está seguro que desea borrar el grupo «%s»?"
 
 #: ../src/users/group-settings.c:299
 msgid "This may leave files with invalid group ID in the filesystem."
-msgstr "Esto puede dejar archivos con ID de grupo inválido en el sistema de archivos."
+msgstr ""
+"Esto puede dejar archivos con ID de grupo inválido en el sistema de archivos."
 
 #: ../src/users/group-settings.c:359
 #, c-format
@@ -1767,7 +1729,8 @@ msgstr "¿Desea borrar el perfil «%s»?"
 
 #: ../src/users/profile-settings.c:217
 msgid "You will not be able to recover this profile after pressing \"apply\"."
-msgstr "No debería ser posible recobrar este perfil después de pulsar «Aplicar»."
+msgstr ""
+"No debería ser posible recobrar este perfil después de pulsar «Aplicar»."
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: ../src/users/profiles-table.c:38
@@ -1808,7 +1771,9 @@ msgstr "¿Está seguro que desea borrar el usuario %s?"
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
-msgstr "Esto desactivará el acceso de este usuario al sistema, pero su directorio personal no se borrará."
+msgstr ""
+"Esto desactivará el acceso de este usuario al sistema, pero su directorio "
+"personal no se borrará."
 
 #: ../src/users/user-settings.c:187
 msgid "User Account Editor"
@@ -1830,7 +1795,8 @@ msgstr "El nombre del usuario es demasiado largo"
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
 msgid "The user name should have less than %i characters for being valid."
-msgstr "El nombre de usuario debería tener menos de %i caracteres para ser válido."
+msgstr ""
+"El nombre de usuario debería tener menos de %i caracteres para ser válido."
 
 #: ../src/users/user-settings.c:302
 msgid "User name for the \"root\" user should not be modified"
@@ -1844,7 +1810,9 @@ msgstr "El nombre de usuario tiene caracteres inválidos"
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
-msgstr "Establezca un nombre de usuario válido, consistente en una letra minúscula seguida de letras minúsculas y/o números."
+msgstr ""
+"Establezca un nombre de usuario válido, consistente en una letra minúscula "
+"seguida de letras minúsculas y/o números."
 
 #: ../src/users/user-settings.c:315
 #, c-format
@@ -1909,7 +1877,9 @@ msgstr "El ID de usuario %s ya existe"
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems."
-msgstr "Algunos usuarios quizá compartan un único ID de usuario, pero no es común y puede acarrear problemas de seguridad."
+msgstr ""
+"Algunos usuarios quizá compartan un único ID de usuario, pero no es común y "
+"puede acarrear problemas de seguridad."
 
 #: ../src/users/user-settings.c:471
 msgid "Incomplete path in shell"
@@ -1937,7 +1907,8 @@ msgstr "La confirmación de la contraseña es incorrecta"
 
 #: ../src/users/user-settings.c:498
 msgid "Check that you have provided the same password in both text fields."
-msgstr "Compruebe que ha proporcionado la misma contraseña en ambos campos de texto."
+msgstr ""
+"Compruebe que ha proporcionado la misma contraseña en ambos campos de texto."
 
 #: ../src/users/user-settings.c:772
 #, c-format
@@ -1967,6 +1938,57 @@ msgstr "Intérprete de comandos"
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Añadir o quitar usuarios y grupos"
+
+#~ msgid "<span weight=\"bold\">General Information</span>"
+#~ msgstr "<span weight=\"bold\">Información general</span>"
+
+#~ msgid "<span weight=\"bold\">Service Settings</span>"
+#~ msgstr "<span weight=\"bold\">Configuración de servicios</span>"
+
+#~ msgid "Description:"
+#~ msgstr "Descripción:"
+
+#~ msgid "Service _Properties"
+#~ msgstr "_Propiedades del servicio"
+
+#~ msgid "Service:"
+#~ msgstr "Servicio:"
+
+#~ msgid "Status:"
+#~ msgstr "Estado:"
+
+#~ msgid "_Order list by startup sequence"
+#~ msgstr "_Ordenar lista por la secuencia de inicio"
+
+#~ msgid "_Start"
+#~ msgstr "_Inicio"
+
+#~ msgid "_Startup sequence:"
+#~ msgstr "Secuencia de _inicio:"
+
+#~ msgid "No description available."
+#~ msgstr "No hay descripción disponible."
+
+#~ msgid "Running"
+#~ msgstr "Funcionando"
+
+#~ msgid "Stopped"
+#~ msgstr "Detenido"
+
+#~ msgid "Could not get info"
+#~ msgstr "No se ha podido obtener información"
+
+#~ msgid "Settings for service %s"
+#~ msgstr "Configuración para el servicio %s"
+
+#~ msgid "Services Settings"
+#~ msgstr "Configuración de los servicios"
+
+#~ msgid "Active"
+#~ msgstr "Activo"
+
+#~ msgid "Service"
+#~ msgstr "Servicio"
 
 #~ msgid "DHCP"
 #~ msgstr "DHCP"
@@ -4675,9 +4697,6 @@ msgstr "Añadir o quitar usuarios y grupos"
 
 #~ msgid "Home _directory:"
 #~ msgstr "_Directorio home:"
-
-#~ msgid "Advanced settings"
-#~ msgstr "Configuración avanzada"
 
 #~ msgid "Optional settings"
 #~ msgstr "Configuración opcional"
