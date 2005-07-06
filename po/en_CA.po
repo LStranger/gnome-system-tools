@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-17 01:50-0400\n"
-"PO-Revision-Date: 2005-06-17 19:30-0400\n"
+"POT-Creation-Date: 2005-07-06 18:34-0400\n"
+"PO-Revision-Date: 2005-07-06 19:30-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -571,40 +571,12 @@ msgid "_Volume:"
 msgstr "_Volume:"
 
 #: interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">General Information</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>Available services:</b>"
 
 #: interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">Service Settings</span>"
-
-#: interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "Description:"
-
-#: interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "Service _Properties"
-
-#: interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "Service:"
-
-#: interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "Status:"
-
-#: interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "_Order list by startup sequence"
-
-#: interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "_Start"
-
-#: interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "_Startup sequence:"
+msgid "Advanced settings:"
+msgstr "Advanced settings:"
 
 #: interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1241,20 +1213,20 @@ msgstr "Apply them now?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Error connection signal `%s' in widget `%s'"
 
-#: src/common/gst-tool.c:1020
+#: src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "The configuration could not be loaded"
 
-#: src/common/gst-tool.c:1022
+#: src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "There was an error running the backend script"
 
-#: src/common/gst-tool.c:1503
+#: src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Welcome to the %s prerelease of the GNOME System Tools"
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1268,19 +1240,19 @@ msgstr ""
 "have been warned. Thank you for trying out this prerelease of the GNOME "
 "System Tools!"
 
-#: src/common/gst-tool.c:1526
+#: src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "Warning"
 
-#: src/common/gst-tool.c:1546
+#: src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "Don't show me this again"
 
-#: src/common/gst-tool.c:1603
+#: src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
-#: src/common/gst-tool.c:1748
+#: src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "Could not display help"
 
@@ -1437,30 +1409,27 @@ msgstr "The interface %s is not active"
 msgid "The interface %s is active"
 msgstr "The interface %s is active"
 
-#: src/services/callbacks.c:46
-msgid "No description available."
-msgstr "No description available."
-
-#: src/services/callbacks.c:217
-msgid "Running"
-msgstr "Running"
-
-#: src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "Stopped"
-
-#: src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "Could not get info"
-
-#: src/services/callbacks.c:292
+#: src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "Settings for service %s"
+msgid "Settings for \"%s\""
+msgstr "Settings for \"%s\""
 
-#: src/services/main.c:62
-msgid "Services Settings"
-msgstr "Services Settings"
+#. FIXME: put service name !!!
+#: src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "Are you sure you want to deactivate this service?"
+
+#: src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"This may affect your system behaviour in several ways, possibly leading to "
+"data loss"
+
+#: src/services/main.c:54
+msgid "Change your running services"
+msgstr "Change your running services"
 
 #: src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1469,14 +1438,6 @@ msgstr "Configure which services will be run when the system starts"
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "Services"
-
-#: src/services/table.c:86
-msgid "Active"
-msgstr "Active"
-
-#: src/services/table.c:95
-msgid "Service"
-msgstr "Service"
 
 #: src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
