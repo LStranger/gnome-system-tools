@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 1.1.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-14 16:54+0700\n"
-"PO-Revision-Date: 2005-06-14 17:56+0700\n"
+"POT-Creation-Date: 2005-07-10 16:39+0700\n"
+"PO-Revision-Date: 2005-07-10 16:52+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <l10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -552,40 +552,12 @@ msgid "_Volume:"
 msgstr "ระดับเ_สียง:"
 
 #: interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">ข้อมูลทั่วไป</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>บริการที่มี:</b>"
 
 #: interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">ค่าตั้งของบริการ</span>"
-
-#: interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "คำบรรยาย:"
-
-#: interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "คุณ_สมบัติของบริการ"
-
-#: interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "บริการ:"
-
-#: interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "สถานะ:"
-
-#: interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "เ_รียงรายการตามลำดับการเริ่มบริการ"
-
-#: interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "เ_ริ่ม"
-
-#: interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "_ลำดับการเริ่มบริการ:"
+msgid "Advanced settings:"
+msgstr "ตั้งค่าละเอียด:"
 
 #: interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1219,20 +1191,20 @@ msgstr "เริ่มใช้เลยหรือไม่?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "เกิดข้อผิดพลาดขณะเชื่อมสัญญาณ `%s' ในวิดเจ็ต `%s'"
 
-#: src/common/gst-tool.c:1020
+#: src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "อ่านค่าตั้งไม่สำเร็จ"
 
-#: src/common/gst-tool.c:1022
+#: src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "มีปัญหาบางอย่างระหว่างการทำงานของสคริปต์แบ็กเอนด์"
 
-#: src/common/gst-tool.c:1503
+#: src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "ยินดีต้อนรับสู่รุ่นก่อนรีลีส %s ของเครื่องมือดูแลระบบของ GNOME"
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1245,19 +1217,19 @@ msgstr ""
 "เปลืองเวลา แรงงาน และความราบรื่นของการใช้งาน เราเตือนคุณแล้ว "
 "และขอขอบคุณที่ทดลองใช้รุ่นก่อนรีลีสของเครื่องมือดูแลระบบของ GNOME นี้!"
 
-#: src/common/gst-tool.c:1526
+#: src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "คำเตือน"
 
-#: src/common/gst-tool.c:1546
+#: src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "ไม่ต้องแสดงข้อความนี้อีก"
 
-#: src/common/gst-tool.c:1603
+#: src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "เครื่องมือดูแลระบบของ GNOME"
 
-#: src/common/gst-tool.c:1748
+#: src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "แสดงเอกสารแนะนำวิธีใช้ไม่สำเร็จ"
 
@@ -1410,30 +1382,27 @@ msgstr "อินเทอร์เฟซ %s ยังไม่เปิดใ�
 msgid "The interface %s is active"
 msgstr "อินเทอร์เฟซ %s เปิดใช้อยู่"
 
-#: src/services/callbacks.c:46
-msgid "No description available."
-msgstr "ไม่มีข้อมูลคำบรรยาย"
-
-#: src/services/callbacks.c:217
-msgid "Running"
-msgstr "กำลังทำงาน"
-
-#: src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "หยุดทำงาน"
-
-#: src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "อ่านข้อมูลไม่ได้"
-
-#: src/services/callbacks.c:292
+#: src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "ตั้งค่าบริการระบบ %s"
+msgid "Settings for \"%s\""
+msgstr "ค่าตั้งสำหรับ \"%s\""
 
-#: src/services/main.c:62
-msgid "Services Settings"
-msgstr "ตั้งค่าบริการระบบ"
+#. FIXME: put service name !!!
+#: src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "ยืนยันที่จะปิดบริการนี้หรือไม่?"
+
+#: src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"การปิดนี้อาจมีผลต่อพฤติกรรมของระบบของคุณได้หลายทาง "
+"โดยอาจทำให้ข้อมูลสูญหายได้"
+
+#: src/services/main.c:54
+msgid "Change your running services"
+msgstr "เปลี่ยนบริการที่กำลังทำงานอยู่"
 
 #: src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1442,14 +1411,6 @@ msgstr "ตั้งค่าบริการระบบที่จะเป
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "บริการระบบ"
-
-#: src/services/table.c:86
-msgid "Active"
-msgstr "เปิดใช้งาน"
-
-#: src/services/table.c:95
-msgid "Service"
-msgstr "บริการ"
 
 #: src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1927,6 +1888,54 @@ msgstr "เชลล์"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "เพิ่มหรือลบบัญชีผู้ใช้และกลุ่มผู้ใช้"
+
+#~ msgid "<span weight=\"bold\">General Information</span>"
+#~ msgstr "<span weight=\"bold\">ข้อมูลทั่วไป</span>"
+
+#~ msgid "<span weight=\"bold\">Service Settings</span>"
+#~ msgstr "<span weight=\"bold\">ค่าตั้งของบริการ</span>"
+
+#~ msgid "Description:"
+#~ msgstr "คำบรรยาย:"
+
+#~ msgid "Service _Properties"
+#~ msgstr "คุณ_สมบัติของบริการ"
+
+#~ msgid "Service:"
+#~ msgstr "บริการ:"
+
+#~ msgid "Status:"
+#~ msgstr "สถานะ:"
+
+#~ msgid "_Order list by startup sequence"
+#~ msgstr "เ_รียงรายการตามลำดับการเริ่มบริการ"
+
+#~ msgid "_Start"
+#~ msgstr "เ_ริ่ม"
+
+#~ msgid "_Startup sequence:"
+#~ msgstr "_ลำดับการเริ่มบริการ:"
+
+#~ msgid "No description available."
+#~ msgstr "ไม่มีข้อมูลคำบรรยาย"
+
+#~ msgid "Running"
+#~ msgstr "กำลังทำงาน"
+
+#~ msgid "Stopped"
+#~ msgstr "หยุดทำงาน"
+
+#~ msgid "Could not get info"
+#~ msgstr "อ่านข้อมูลไม่ได้"
+
+#~ msgid "Settings for service %s"
+#~ msgstr "ตั้งค่าบริการระบบ %s"
+
+#~ msgid "Active"
+#~ msgstr "เปิดใช้งาน"
+
+#~ msgid "Service"
+#~ msgstr "บริการ"
 
 #~ msgid "DHCP"
 #~ msgstr "DHCP"
