@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-02 23:20+0900\n"
-"PO-Revision-Date: 2005-03-02 23:19+0900\n"
+"POT-Creation-Date: 2005-07-15 00:02+0900\n"
+"PO-Revision-Date: 2005-07-14 23:59+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translations@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr ""
 "<span size=\"larger\" weight=\"bold\">複数のブートローダが見つかりました</"
 "span>\n"
 "\n"
-"どれを設定するか選択して下さい。"
+"どれを設定するか選択して下さい:"
 
 #: ../interfaces/boot.glade.in.h:9 ../interfaces/users.glade.in.h:3
 msgid "<span weight=\"bold\">Basic Settings</span>"
@@ -131,8 +131,8 @@ msgstr "Boot マネージャの設定"
 #: ../interfaces/boot.glade.in.h:15
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter append parameters which are passed "
-"to the kernel at boot time."
+"partition. Optionally, you may also enter parameters passed to the kernel at "
+"boot time."
 msgstr ""
 "起動する Kernel イメージと、ルート・ファイルシステムとしてマウントするパー"
 "ティションを選択して下さい。オプションとして、起動時に Kernel に引き渡すパラ"
@@ -227,8 +227,8 @@ msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
 msgstr ""
-"このアシスタントは新しい起動イメージを素早く、簡単にシステムへ追加するお手伝"
-"いをします。"
+"このアシスタントは新しい Boot イメージを素早く、簡単にシステムへ追加するお手"
+"伝いをします。"
 
 #: ../interfaces/boot.glade.in.h:35
 msgid "Video modes (only frame buffer)"
@@ -308,22 +308,23 @@ msgid "Run _Without Password"
 msgstr "権限なしで実行する(_W)"
 
 #: ../interfaces/common.glade.in.h:7
-msgid ""
-"To use this tool, you need administrator privileges, if you don't provide a "
-"password, you will be unable to modify your system configuration."
-msgstr ""
-"このツールを利用するには管理者の権限が必要です。パスワードを指定しない場合"
-"は、お使いのシステムの設定を変更することはできません。"
-
-#: ../interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
 msgstr "サポート外のプラットフォーム"
 
-#: ../interfaces/common.glade.in.h:9
+#: ../interfaces/common.glade.in.h:8
 msgid "Use this window to select the computer you wish to configure"
 msgstr "設定するコンピュータを選択します。"
 
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:9
+msgid ""
+"You need administrator privileges to use this tool. Enter a password to "
+"modify\n"
+"your system configuration."
+msgstr ""
+"このツールを利用するには管理者の権限が必要です。\n"
+"システムの設定を変更する場合はパスワードを入力して下さい。"
+
+#: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
 msgstr "パスワード(_P):"
 
@@ -382,62 +383,74 @@ msgid "Aliases:"
 msgstr "別名:"
 
 #: ../interfaces/network.glade.in.h:16
+msgid "C_onfiguration:"
+msgstr "設定の種類(_O):"
+
+#: ../interfaces/network.glade.in.h:17
 msgid "Connections"
 msgstr "接続"
 
-#: ../interfaces/network.glade.in.h:17
+#: ../interfaces/network.glade.in.h:18
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:18
+#: ../interfaces/network.glade.in.h:19
 msgid "D_omain name:"
 msgstr "ドメイン名(_O):"
 
-#: ../interfaces/network.glade.in.h:19
+#: ../interfaces/network.glade.in.h:20
 msgid "Default _gateway device:"
 msgstr "デフォルトのゲートウェイ(_G):"
 
-#: ../interfaces/network.glade.in.h:20
+#: ../interfaces/network.glade.in.h:21
 msgid "Device:"
 msgstr "デバイス:"
 
-#: ../interfaces/network.glade.in.h:21 ../interfaces/users.glade.in.h:20
+#: ../interfaces/network.glade.in.h:22
+msgid "E_nable this connection"
+msgstr "この接続を有効にする(_N)"
+
+#: ../interfaces/network.glade.in.h:23 ../interfaces/users.glade.in.h:20
 msgid "General"
 msgstr "全般"
 
-#: ../interfaces/network.glade.in.h:22
+#: ../interfaces/network.glade.in.h:24
 msgid "Host alias settings"
 msgstr "ホストの別名の設定"
 
-#: ../interfaces/network.glade.in.h:23
+#: ../interfaces/network.glade.in.h:25
 msgid "Hosts"
 msgstr "ホスト"
 
-#: ../interfaces/network.glade.in.h:24 ../interfaces/shares.glade.in.h:15
+#: ../interfaces/network.glade.in.h:26 ../interfaces/shares.glade.in.h:15
 msgid "IP address:"
 msgstr "IP アドレス:"
 
-#: ../interfaces/network.glade.in.h:25
+#: ../interfaces/network.glade.in.h:27
 msgid "Interface properties"
 msgstr "インタフェースのプロパティ"
 
-#: ../interfaces/network.glade.in.h:26
+#: ../interfaces/network.glade.in.h:28
+msgid "Key _type:"
+msgstr "キーの種類(_T):"
+
+#: ../interfaces/network.glade.in.h:29
 msgid "Location name:"
 msgstr "場所の名前:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.glade.in.h:30
 msgid "Location:"
 msgstr "場所:"
 
-#: ../interfaces/network.glade.in.h:28
+#: ../interfaces/network.glade.in.h:31
 msgid "Modem"
 msgstr "モデム"
 
-#: ../interfaces/network.glade.in.h:29
+#: ../interfaces/network.glade.in.h:32
 msgid "Network name (_ESSID):"
 msgstr "ネットワーク名 (ESSID)(_E):"
 
-#: ../interfaces/network.glade.in.h:30
+#: ../interfaces/network.glade.in.h:33
 msgid ""
 "Off\n"
 "Low\n"
@@ -449,23 +462,35 @@ msgstr ""
 "中音\n"
 "大音"
 
-#: ../interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:37
 msgid "Options"
 msgstr "オプション"
 
-#: ../interfaces/network.glade.in.h:35
+#: ../interfaces/network.glade.in.h:38
 msgid "P_assword"
 msgstr "パスワード(_A)"
 
-#: ../interfaces/network.glade.in.h:36
+#: ../interfaces/network.glade.in.h:39
+msgid ""
+"Plain (ASCII)\n"
+"Hexadecimal"
+msgstr ""
+"プレーンテキスト (ASCII)\n"
+"16進形式"
+
+#: ../interfaces/network.glade.in.h:41
 msgid "Select location name"
-msgstr "場所の名前の選択"
+msgstr "場所の選択"
 
-#: ../interfaces/network.glade.in.h:37
-msgid "This device is _configured"
-msgstr "このデバイスを使用する(_C)"
+#: ../interfaces/network.glade.in.h:42
+msgid ""
+"Static IP address\n"
+"DHCP"
+msgstr ""
+"スタティックな IP-アドレス\n"
+"DHCP"
 
-#: ../interfaces/network.glade.in.h:38
+#: ../interfaces/network.glade.in.h:44
 msgid ""
 "Tones\n"
 "Pulses"
@@ -473,117 +498,89 @@ msgstr ""
 "トーン\n"
 "パルス"
 
-#: ../interfaces/network.glade.in.h:40
+#: ../interfaces/network.glade.in.h:46
+msgid "Use the Internet service provider nameservers"
+msgstr "ISP プロバイダが提供するネームサーバを利用する"
+
+#: ../interfaces/network.glade.in.h:47
 msgid "WEP _key:"
 msgstr "WEP キー(_K):"
 
-#: ../interfaces/network.glade.in.h:41 ../src/network/ifaces-list.c:33
+#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:33
 msgid "_Activate"
 msgstr "有効にする(_A)"
 
-#: ../interfaces/network.glade.in.h:42
+#: ../interfaces/network.glade.in.h:49
 msgid "_Autodetect"
 msgstr "自動判別(_A)"
 
-#: ../interfaces/network.glade.in.h:43
-msgid "_Configuration:"
-msgstr "設定(_C):"
-
-#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
+#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:34
 msgid "_Deactivate"
 msgstr "無効にする(_D)"
 
-#: ../interfaces/network.glade.in.h:45
+#: ../interfaces/network.glade.in.h:51
 msgid "_Dial prefix:"
 msgstr "ダイアルの接頭番号(_D):"
 
-#: ../interfaces/network.glade.in.h:46
+#: ../interfaces/network.glade.in.h:52
 msgid "_Dial type:"
 msgstr "ダイアルの種類(_D):"
 
-#: ../interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:53
 msgid "_Gateway address:"
 msgstr "ゲートウェイ(_G):"
 
-#: ../interfaces/network.glade.in.h:48
+#: ../interfaces/network.glade.in.h:54
 msgid "_Hostname:"
 msgstr "ホスト名(_H):"
 
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:55
 msgid "_IP address:"
 msgstr "IP アドレス(_I):"
 
-#: ../interfaces/network.glade.in.h:50
+#: ../interfaces/network.glade.in.h:56
 msgid "_Local IP:"
 msgstr "ローカル IP(_L):"
 
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.glade.in.h:57
 msgid "_Modem port:"
 msgstr "モデムのポート(_M):"
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.glade.in.h:58
 msgid "_Phone number:"
 msgstr "電話番号(_P):"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.glade.in.h:59
 msgid "_Remote IP:"
 msgstr "リモート IP(_R):"
 
-#: ../interfaces/network.glade.in.h:54
+#: ../interfaces/network.glade.in.h:60
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "切断されたり接続に失敗した場合に再試行する(_R)"
 
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.glade.in.h:61
 msgid "_Set modem as default route to internet"
 msgstr "モデムをインターネットに対するデフォルト・ルートにする(_S)"
 
-#: ../interfaces/network.glade.in.h:56
+#: ../interfaces/network.glade.in.h:62
 msgid "_Subnet mask:"
 msgstr "サブネット・マスク(_S):"
 
-#: ../interfaces/network.glade.in.h:57 ../interfaces/users.glade.in.h:60
+#: ../interfaces/network.glade.in.h:63 ../interfaces/users.glade.in.h:60
 msgid "_Username:"
 msgstr "ユーザ名(_U):"
 
-#: ../interfaces/network.glade.in.h:58
+#: ../interfaces/network.glade.in.h:64
 msgid "_Volume:"
 msgstr "音量(_V):"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">一般的な情報</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>利用可能なサービスの一覧:</b>"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">サービスの設定</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "説明:"
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "サービスの設定(_P)"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "サービス名:"
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "状態:"
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "起動する順番に並べる(_O):"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "起動(_S)"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "起動する順番(_S):"
+msgid "Advanced settings:"
+msgstr "拡張設定:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1001,8 +998,8 @@ msgstr "VGA の値が間違っています"
 
 #: ../src/boot/boot-append-gui.c:254
 #, c-format
-msgid "\"%s\" is not a valid VGA value"
-msgstr "\"%s\" は正しい VGA 値ではありません"
+msgid "\"%s\" is not a valid VGA value."
+msgstr "\"%s\" は妥当な VGA 値ではありません"
 
 #: ../src/boot/boot-druid.c:112
 msgid "Error creating boot image"
@@ -1039,7 +1036,7 @@ msgstr "Linux"
 
 #: ../src/boot/boot-image.c:45
 msgid "Linux swap"
-msgstr "Linux swap"
+msgstr "Linux スワップ"
 
 #: ../src/boot/boot-image.c:46
 msgid "GNU/Hurd"
@@ -1052,33 +1049,33 @@ msgstr "パス名 \"%s\" は正しくありません"
 
 #: ../src/boot/boot-image.c:292
 #, c-format
-msgid "\"%s\" already exists, please set another name"
-msgstr "'%s' は既に存在します。別の名前を設定して下さい"
+msgid "\"%s\" already exists, please set another name."
+msgstr "'%s' が既に存在するので、別の名前を設定して下さい"
 
 #: ../src/boot/boot-image.c:298
 #, c-format
-msgid "Invalid image name: \"%s\""
+msgid "Invalid image name: \"%s\"."
 msgstr "無効なイメージ名です: \"%s\""
 
 #: ../src/boot/boot-image.c:311
 #, c-format
-msgid "Invalid image: \"%s\""
+msgid "Invalid image: \"%s\"."
 msgstr "無効なイメージです: \"%s\""
 
 #: ../src/boot/boot-image.c:329
 #, c-format
-msgid "Invalid root device: \"%s\""
+msgid "Invalid root device: \"%s\"."
 msgstr "無効なルートデバイスです: \"%s\""
 
 #: ../src/boot/boot-settings.c:43
 msgid "_Module path:"
 msgstr "モデムのパス(_M):"
 
-#: ../src/boot/boot-settings.c:406
-msgid "Password confirmation is not correct"
+#: ../src/boot/boot-settings.c:405
+msgid "Password confirmation is not correct."
 msgstr "正しいパスワードを確認できませんでした"
 
-#: ../src/boot/boot-settings.c:431
+#: ../src/boot/boot-settings.c:430
 msgid "Error modifying boot image"
 msgstr "Boot イメージの変更でエラー"
 
@@ -1103,7 +1100,7 @@ msgid "Error deleting boot image"
 msgstr "Boot イメージの削除でエラー"
 
 #: ../src/boot/callbacks.c:414
-msgid "Without at least one boot image your computer will not start"
+msgid "Without at least one boot image your computer will not start."
 msgstr "少なくとも Boot イメージが一つないとシステムを起動できません"
 
 #: ../src/boot/callbacks.c:433
@@ -1112,7 +1109,7 @@ msgid "Are you sure you want to delete \"%s\"?"
 msgstr "\"%s\" を本当に削除してもよろしいですか？"
 
 #: ../src/boot/callbacks.c:435
-msgid "This may leave this operating system unbootable"
+msgid "This may leave this operating system unbootable."
 msgstr "このオペレーティング・システムを起動不可の状態にします"
 
 #: ../src/boot/callbacks.c:464
@@ -1121,7 +1118,7 @@ msgstr "設定が空のようです"
 
 #: ../src/boot/callbacks.c:466
 #, c-format
-msgid "The file \"%s\" is missing or could not be read"
+msgid "The file \"%s\" is missing or could not be read."
 msgstr "ファイル \"%s\" が存在しないか、読み込めません"
 
 #: ../src/boot/table.c:41
@@ -1190,7 +1187,7 @@ msgid "Check that you have permissions to run this command"
 msgstr "このコマンドを実行できる権限があるか確認して下さい。"
 
 #: ../src/common/gst-auth.c:106
-msgid "An unexpected error has ocurred"
+msgid "An unexpected error has occurred"
 msgstr "予期しないエラーが発生しました"
 
 #: ../src/common/gst-auth.c:132
@@ -1216,25 +1213,25 @@ msgstr "未だ適用していない変更がいくつかあります"
 msgid "Apply them now?"
 msgstr "今すぐ適用しますか？"
 
-#: ../src/common/gst-dialog.c:490
+#: ../src/common/gst-dialog.c:491
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "widget '%2$s' でエラー接続シグナル '%1$s'"
 
-#: ../src/common/gst-tool.c:1020
+#: ../src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "設定を読み込めませんでした"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "バックエンド・スクリプトの実行中にエラー発生しました。"
 
-#: ../src/common/gst-tool.c:1503
+#: ../src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "GNOME システム・ツールの %s プレリリース版へようこそ"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1248,74 +1245,66 @@ msgstr ""
 "かくの努力を無駄にするかもしれません。ちゃんと警告しましたよ。そして、GNOME "
 "システム・ツールのプレリリース版のご試用に感謝します！"
 
-#: ../src/common/gst-tool.c:1526
+#: ../src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "警告"
 
-#: ../src/common/gst-tool.c:1546
+#: ../src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "次回からこの警告を表示しない"
 
-#: ../src/common/gst-tool.c:1603
+#: ../src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "GNOME システム・ツール"
 
-#: ../src/common/gst-tool.c:1748
+#: ../src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "ヘルプを表示できませんでした"
 
 #: ../src/network/address-list.c:528
 msgid "Type address"
-msgstr "アドレスの入力"
+msgstr "\"アドレスを入力して下さい\""
 
-#: ../src/network/callbacks.c:43
+#: ../src/network/callbacks.c:44
 #, c-format
 msgid "Could not enable the interface %s"
 msgstr "インターフェース %s を有効にできませんでした"
 
-#: ../src/network/callbacks.c:47
+#: ../src/network/callbacks.c:48
 msgid ""
-"Check that the settings are apropriate for this network and that the "
-"computer is correctly connected to it."
+"Check that the settings are correct for this network and that the computer "
+"is correctly connected to it."
 msgstr ""
 "このネットワークに対する設定が適切であるか、そしてコンピュータに正しく接続さ"
-"れているか確認して下さい。"
+"れているか確認して下さい"
 
-#: ../src/network/callbacks.c:234
+#: ../src/network/callbacks.c:235
 msgid "Could not autodetect modem device"
 msgstr "モデム・デバイスを自動検出できませんでした"
 
-#: ../src/network/callbacks.c:237
+#: ../src/network/callbacks.c:238
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
-"computer"
+"computer."
 msgstr ""
 "モデムがビジー状態でないか、またはお使いのシステムへ正しく接続されているかを"
-"確認して下さい。"
+"確認して下さい"
 
-#: ../src/network/callbacks.c:443
+#: ../src/network/callbacks.c:449
 msgid "The host name has changed"
 msgstr "ホスト名が変更されています"
 
-#: ../src/network/callbacks.c:446
+#: ../src/network/callbacks.c:452
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
 msgstr ""
-"これにより新しいアプリを起動できなくなるので、再ログインして下さい。どうして"
-"も続行しますか？"
+"これにより新しいアプリを起動できなくなるので再ログインして下さい。どうしても"
+"続行しますか？"
 
-#: ../src/network/callbacks.c:452
+#: ../src/network/callbacks.c:458
 msgid "Change _Host name"
 msgstr "ホスト名を変更する(_H)"
-
-#: ../src/network/connection.c:56
-msgid "Static IP address"
-msgstr "スタティックな IP-アドレス"
-
-#: ../src/network/connection.c:57
-msgid "DHCP"
-msgstr "DHCP"
 
 #: ../src/network/hosts.c:88
 msgid "IP Address"
@@ -1327,7 +1316,7 @@ msgstr "別名"
 
 #: ../src/network/location.c:141
 msgid "Create location"
-msgstr "場所の作成"
+msgstr "新しい場所"
 
 #: ../src/network/location.c:149
 msgid "Delete current location"
@@ -1341,35 +1330,35 @@ msgstr "この場所を削除してもよろしいですか？"
 msgid "Changing profile"
 msgstr "プロファイルの変更"
 
-#: ../src/network/main.c:108
+#: ../src/network/main.c:110
 msgid "The interface does not exist"
 msgstr "インタフェースは存在しません"
 
-#: ../src/network/main.c:110
+#: ../src/network/main.c:112
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
 msgstr ""
 "インタフェース名を正しく入力したか、そしてお使いのシステムでサポートされてい"
-"るか確認して下さい。"
+"るか確認して下さい"
 
-#: ../src/network/main.c:155
+#: ../src/network/main.c:157
 msgid "Configure a network interface"
 msgstr "ネットワーク・インタフェースを設定する"
 
-#: ../src/network/main.c:155
+#: ../src/network/main.c:157
 msgid "INTERFACE"
 msgstr "INTERFACE"
 
-#: ../src/network/main.c:156
+#: ../src/network/main.c:158
 msgid "Configure the first network interface with a specific type"
 msgstr "一番最初のネットワーク・インタフェースを指定した種類で設定する"
 
-#: ../src/network/main.c:156
+#: ../src/network/main.c:158
 msgid "TYPE"
 msgstr "TYPE"
 
-#: ../src/network/main.c:163
+#: ../src/network/main.c:165
 msgid "Network settings"
 msgstr "ネットワークの設定"
 
@@ -1389,7 +1378,7 @@ msgstr "Ethernet 接続"
 msgid "Infrared connection"
 msgstr "赤外線接続"
 
-#: ../src/network/network-iface-isdn.c:311
+#: ../src/network/network-iface-isdn.c:332
 msgid "ISDN connection"
 msgstr "ISDN 接続"
 
@@ -1401,7 +1390,7 @@ msgstr "モデム接続"
 msgid "Parallel port connection"
 msgstr "パラレルポート接続"
 
-#: ../src/network/network-iface-wireless.c:214
+#: ../src/network/network-iface-wireless.c:249
 msgid "Wireless connection"
 msgstr "無線 LAN 接続"
 
@@ -1425,30 +1414,27 @@ msgstr "インタフェース %s が有効になっていません"
 msgid "The interface %s is active"
 msgstr "インタフェース %s は有効です"
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "説明がありません。"
-
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "起動中"
-
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "停止中"
-
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "情報を取得できませんでした"
-
-#: ../src/services/callbacks.c:292
+#: ../src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "サービス %s の設定"
+msgid "Settings for \"%s\""
+msgstr "\"%s\" の設定"
 
-#: ../src/services/main.c:62
-msgid "Services Settings"
-msgstr "サービスの設定"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "このサービスを無効にしてもよろしいですか？"
+
+#: ../src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"これはお使いのシステムにいろいろ影響を及ぼす恐れがあり、最終的にデータを失う"
+"かもしれません"
+
+#: ../src/services/main.c:54
+msgid "Change your running services"
+msgstr "実行中のサービスの変更"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1458,31 +1444,23 @@ msgstr "システムの起動時に実行するサービスを設定します"
 msgid "Services"
 msgstr "サービスの管理"
 
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "有効"
-
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "サービス"
-
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
 msgstr "この共有を本当に削除してもよろしいですか？"
 
 #: ../src/shares/callbacks.c:186
-msgid "Other computers in your network will stop viewing this"
+msgid "Other computers in your network will stop viewing this."
 msgstr "ネットワーク内の他のコンピュータで閲覧できなくなります"
 
-#: ../src/shares/main.c:86
+#: ../src/shares/main.c:88
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "共有するフォルダを追加する (既に存在していれば編集する)"
 
-#: ../src/shares/main.c:86
+#: ../src/shares/main.c:88
 msgid "PATH"
 msgstr "PATH"
 
-#: ../src/shares/main.c:93
+#: ../src/shares/main.c:95
 msgid "Shared folders settings"
 msgstr "共有フォルダの設定"
 
@@ -1532,7 +1510,7 @@ msgid "Configure which folders are available for your network neighborhood"
 msgstr "お使いのネットワーク内で共有し利用できるフォルダを設定します"
 
 #: ../src/shares/shares.desktop.in.in.h:2
-msgid "Shared folders"
+msgid "Shared Folders"
 msgstr "フォルダの共有"
 
 #: ../src/shares/transfer.c:42
@@ -1548,16 +1526,16 @@ msgstr ""
 "ストールする必要があります。"
 
 #: ../src/time/main.c:461
-msgid "NTP support is not running"
-msgstr "NTP サービスが起動されていません"
+msgid "NTP support is not installed"
+msgstr "NTP サービスがインストールされていません"
 
 #: ../src/time/main.c:463
 msgid ""
-"Please run NTP support in the system to enable synchronization of your local "
-"time server with internet time servers"
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers."
 msgstr ""
 "インターネット時刻サーバを利用してお使いの地域の時刻サーバと同期を行う場合"
-"は、お使いのシステムで NTP サービスを起動して下さい。"
+"は、NTP サービスをインストールして起動しておいて下さい。"
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1603,9 +1581,7 @@ msgid "Group ID of the \"root\" user should not be modified"
 msgstr "\"root\" のグループ ID は変更できません"
 
 #: ../src/users/group-settings.c:167 ../src/users/group-settings.c:213
-#: ../src/users/group-settings.c:283 ../src/users/user-settings.c:72
-#: ../src/users/user-settings.c:303 ../src/users/user-settings.c:398
-#: ../src/users/user-settings.c:434
+#: ../src/users/group-settings.c:283
 msgid "This would leave the system unusable"
 msgstr "システムを利用できなくなります。"
 
@@ -1667,7 +1643,7 @@ msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "グループ \"%s\" を本当に削除してもよろしいですか？"
 
 #: ../src/users/group-settings.c:299
-msgid "This may leave files with invalid group ID in the filesystem"
+msgid "This may leave files with invalid group ID in the filesystem."
 msgstr ""
 "ファイルシステムにあるファイルに間違ったグループ ID を付与することになりま"
 "す。"
@@ -1745,7 +1721,7 @@ msgid "Delete profile \"%s\"?"
 msgstr "プロファイル \"%s\" を削除しますか？"
 
 #: ../src/users/profile-settings.c:217
-msgid "You will not be able to recover this profile after pressing \"apply\""
+msgid "You will not be able to recover this profile after pressing \"apply\"."
 msgstr ""
 "[適用] をクリックすると、このプロファイルを復旧することができなくなります。"
 
@@ -1774,6 +1750,11 @@ msgstr "テキスト"
 msgid "The \"root\" user should not be deleted"
 msgstr "\"root\" ユーザは削除できません"
 
+#: ../src/users/user-settings.c:72 ../src/users/user-settings.c:303
+#: ../src/users/user-settings.c:398 ../src/users/user-settings.c:434
+msgid "This would leave the system unusable."
+msgstr "システムを利用できなくなります。"
+
 #: ../src/users/user-settings.c:81
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
@@ -1781,8 +1762,8 @@ msgstr "本当にユーザ \"%s\" を削除してもよろしいですか？"
 
 #: ../src/users/user-settings.c:83
 msgid ""
-"This will disable the access of this user to the system, but his home "
-"directory will not be deleted"
+"This will disable this user's access to the system without deleting the "
+"user's home directory."
 msgstr ""
 "このユーザ権限でシステムにアクセスできなくなります。ただし、ホーム・フォルダ"
 "は削除しません。"
@@ -1796,7 +1777,7 @@ msgid "The user name is empty"
 msgstr "ユーザ名が空です"
 
 #: ../src/users/user-settings.c:284
-msgid "A user name must be specified"
+msgid "A user name must be specified."
 msgstr "ユーザ名を指定して下さい。"
 
 #. = sizeof (ut.ut_name)
@@ -1806,7 +1787,7 @@ msgstr "ユーザ名が長すぎます"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid"
+msgid "The user name should have less than %i characters for being valid."
 msgstr "ユーザ名は %i 文字より少なくして下さい。"
 
 #: ../src/users/user-settings.c:302
@@ -1820,8 +1801,8 @@ msgstr "ユーザ名に不正な文字があります"
 #: ../src/users/user-settings.c:309
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers"
-msgstr "小文字と数値に続く小文字からなる正しいユーザ名をセットして下さい。"
+"lower case letters and numbers."
+msgstr "小文字と数値を使って正しいユーザ名をセットして下さい。"
 
 #: ../src/users/user-settings.c:315
 #, c-format
@@ -1829,7 +1810,7 @@ msgid "User name \"%s\" already exists"
 msgstr "ユーザ名 \"%s\" は既に存在します"
 
 #: ../src/users/user-settings.c:316
-msgid "Please select a different user name"
+msgid "Please select a different user name."
 msgstr "別のユーザ名を選択して下さい。"
 
 #: ../src/users/user-settings.c:341
@@ -1838,15 +1819,15 @@ msgid "Invalid character \"%c\" in comment"
 msgstr "コメントに無効な文字 \"%c\" があります"
 
 #: ../src/users/user-settings.c:342
-msgid "Check that this character is not used"
-msgstr "無効な文字 '%c' を利用していないか確認して下さい。"
+msgid "Check that this character is not used."
+msgstr "この文字を使用していないか確認して下さい。"
 
 #: ../src/users/user-settings.c:390
 msgid "Home directory should not be empty"
 msgstr "ホーム・ディレクトリを空欄にしないで下さい"
 
 #: ../src/users/user-settings.c:391
-msgid "Make sure you provide a home directory"
+msgid "Make sure you provide a home directory."
 msgstr "ホーム・ディレクトリを指定しているか確認して下さい。"
 
 #: ../src/users/user-settings.c:393
@@ -1856,10 +1837,10 @@ msgstr "ホーム・ディレクトリの中に不完全なパスがあります
 #: ../src/users/user-settings.c:394
 msgid ""
 "Please enter full path for home directory\n"
-"<span size=\"smaller\">i.e.: /home/john</span>"
+"<span size=\"smaller\">i.e.: /home/john</span>."
 msgstr ""
 "ホーム・ディレクトリの絶対パスを入力して下さい。\n"
-"<span size=\"smaller\">i.e.: /home/john</span>"
+"<span size=\"smaller\">例: /home/john</span>"
 
 #: ../src/users/user-settings.c:397
 msgid "Home directory of the \"root\" user should not be modified"
@@ -1870,7 +1851,7 @@ msgid "Invalid user ID"
 msgstr "ユーザ ID が間違っています"
 
 #: ../src/users/user-settings.c:431
-msgid "User ID must be a positive number"
+msgid "User ID must be a positive number."
 msgstr "ユーザ ID は正の整数にして下さい。"
 
 #: ../src/users/user-settings.c:433
@@ -1885,7 +1866,7 @@ msgstr "ユーザ ID %s は既に存在します。"
 #: ../src/users/user-settings.c:453
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
-"to security problems"
+"to security problems."
 msgstr ""
 "いくつかのユーザでシングル・ユーザ ID を共有することになりますが、それは共通"
 "ではなく、かつセキュリティの問題を引き起こすおそれがあります。"
@@ -1897,17 +1878,17 @@ msgstr "シェルの中に不完全なパスがあります"
 #: ../src/users/user-settings.c:472
 msgid ""
 "Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>"
+"<span size=\"smaller\">i.e.: /bin/sh</span>."
 msgstr ""
 "シェルの絶対パスを入力して下さい。\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>"
+"<span size=\"smaller\">例: /bin/sh</span>"
 
 #: ../src/users/user-settings.c:494
 msgid "Password should not be empty"
 msgstr "パスワードを空欄にしないで下さい"
 
 #: ../src/users/user-settings.c:495
-msgid "A password must be provided"
+msgid "A password must be provided."
 msgstr "パスワードを指定して下さい。"
 
 #: ../src/users/user-settings.c:497
@@ -1915,7 +1896,7 @@ msgid "Password confirmation isn't correct"
 msgstr "パスワードの妥当性を確認できませんでした"
 
 #: ../src/users/user-settings.c:498
-msgid "Check that you have provided the same password in both text fields"
+msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 "両方のテキスト・フィールドに同じパスワードを指定していないか確認して下さい。"
 
@@ -1924,23 +1905,23 @@ msgstr ""
 msgid "Settings for User %s"
 msgstr "ユーザ %s の設定"
 
-#: ../src/users/users-table.c:45
+#: ../src/users/users-table.c:59
 msgid "User"
 msgstr "ユーザ"
 
-#: ../src/users/users-table.c:46
+#: ../src/users/users-table.c:60
 msgid "Home"
 msgstr "ホーム・ディレクトリ"
 
-#: ../src/users/users-table.c:47
+#: ../src/users/users-table.c:61
 msgid "User details"
 msgstr "ユーザの詳細"
 
-#: ../src/users/users-table.c:48
+#: ../src/users/users-table.c:62
 msgid "UID"
 msgstr "UID"
 
-#: ../src/users/users-table.c:49
+#: ../src/users/users-table.c:63
 msgid "Shell"
 msgstr "Login シェル"
 
