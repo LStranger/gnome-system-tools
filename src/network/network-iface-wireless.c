@@ -25,8 +25,6 @@
 
 struct _GstIfaceWirelessPriv
 {
-  GdkPixbuf *pixbuf;
-
   gchar     *essid;
   gchar     *wep_key;
   GstWirelessKey key_type;
@@ -36,12 +34,11 @@ static void gst_iface_wireless_class_init (GstIfaceWirelessClass *class);
 static void gst_iface_wireless_init       (GstIfaceWireless      *iface);
 static void gst_iface_wireless_finalize   (GObject *object);
 
-static const GdkPixbuf* gst_iface_wireless_get_pixbuf     (GstIface *iface);
-static const gchar*     gst_iface_wireless_get_iface_type (GstIface *iface);
-static const gchar*     gst_iface_wireless_get_desc       (GstIface *iface);
-static void             gst_iface_wireless_get_xml        (GstIface *iface, xmlNodePtr root);
-static void             gst_iface_wireless_impl_get_xml   (GstIface *iface,
-                                                           xmlNodePtr node);
+static GdkPixbuf*   gst_iface_wireless_get_pixbuf     (GstIface *iface);
+static const gchar* gst_iface_wireless_get_iface_type (GstIface *iface);
+static const gchar* gst_iface_wireless_get_desc       (GstIface *iface);
+static void         gst_iface_wireless_get_xml        (GstIface *iface, xmlNodePtr root);
+static void         gst_iface_wireless_impl_get_xml   (GstIface *iface, xmlNodePtr node);
 
 static void gst_iface_wireless_set_property (GObject      *object,
 					     guint         prop_id,
@@ -155,7 +152,6 @@ gst_iface_wireless_init (GstIfaceWireless *iface)
   g_return_if_fail (GST_IS_IFACE_WIRELESS (iface));
 
   iface->_priv = g_new0 (GstIfaceWirelessPriv, 1);
-  iface->_priv->pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/wavelan-48.png", NULL);
   iface->_priv->essid = NULL;
   iface->_priv->wep_key = NULL;
 }
@@ -169,7 +165,6 @@ gst_iface_wireless_finalize (GObject *object)
 
   if (iface->_priv)
     {
-      gdk_pixbuf_unref (iface->_priv->pixbuf);
       g_free (iface->_priv->essid);
       g_free (iface->_priv->wep_key);
 
@@ -231,10 +226,10 @@ gst_iface_wireless_get_property (GObject      *object,
     }
 }
 
-static const GdkPixbuf*
+static GdkPixbuf*
 gst_iface_wireless_get_pixbuf (GstIface *iface)
 {
-  return GST_IFACE_WIRELESS (iface)->_priv->pixbuf;
+  return gdk_pixbuf_new_from_file (PIXMAPS_DIR "/wavelan-48.png", NULL);
 }
 
 static const gchar*

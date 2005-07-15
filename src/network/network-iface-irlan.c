@@ -24,16 +24,15 @@
 #include "gst.h"
 
 struct _GstIfaceIrlanPriv {
-  GdkPixbuf *pixbuf;
 };
 
 static void gst_iface_irlan_class_init (GstIfaceIrlanClass *class);
 static void gst_iface_irlan_init       (GstIfaceIrlan      *iface);
 static void gst_iface_irlan_finalize   (GObject *object);
 
-static const GdkPixbuf* gst_iface_irlan_get_pixbuf     (GstIface *iface);
-static const gchar*     gst_iface_irlan_get_iface_type (GstIface *iface);
-static const gchar*     gst_iface_irlan_get_desc       (GstIface *iface);
+static GdkPixbuf*   gst_iface_irlan_get_pixbuf     (GstIface *iface);
+static const gchar* gst_iface_irlan_get_iface_type (GstIface *iface);
+static const gchar* gst_iface_irlan_get_desc       (GstIface *iface);
 
 static gpointer parent_class;
 
@@ -85,7 +84,6 @@ gst_iface_irlan_init (GstIfaceIrlan *iface)
   g_return_if_fail (GST_IS_IFACE_IRLAN (iface));
 
   iface->_priv = g_new0 (GstIfaceIrlanPriv, 1);
-  iface->_priv->pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/irda-48.png", NULL);
 }
 
 static void
@@ -97,8 +95,6 @@ gst_iface_irlan_finalize (GObject *object)
 
   if (iface->_priv)
     {
-      gdk_pixbuf_unref (iface->_priv->pixbuf);
-
       g_free (iface->_priv);
       iface->_priv = NULL;
     }
@@ -107,10 +103,10 @@ gst_iface_irlan_finalize (GObject *object)
     (* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
-static const GdkPixbuf*
+static GdkPixbuf*
 gst_iface_irlan_get_pixbuf (GstIface *iface)
 {
-  return GST_IFACE_IRLAN (iface)->_priv->pixbuf;
+  return gdk_pixbuf_new_from_file (PIXMAPS_DIR "/irda-48.png", NULL);
 }
 
 static const gchar*

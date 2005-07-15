@@ -23,8 +23,6 @@
 
 struct _GstIfaceIsdnPriv
 {
-  GdkPixbuf *pixbuf;
-
   gchar *login;
   gchar *password;
   gchar *phone_number;
@@ -41,12 +39,12 @@ static void gst_iface_isdn_class_init (GstIfaceIsdnClass *class);
 static void gst_iface_isdn_init       (GstIfaceIsdn      *iface);
 static void gst_iface_isdn_finalize   (GObject           *object);
 
-static const GdkPixbuf* gst_iface_isdn_get_pixbuf     (GstIface *iface);
-static const gchar*     gst_iface_isdn_get_iface_type (GstIface *iface);
-static const gchar*     gst_iface_isdn_get_desc       (GstIface *iface);
-static gboolean         gst_iface_isdn_has_gateway    (GstIface *iface);
-static void             gst_iface_isdn_impl_get_xml   (GstIface *iface,
-                                                       xmlNodePtr node);
+static GdkPixbuf*   gst_iface_isdn_get_pixbuf     (GstIface *iface);
+static const gchar* gst_iface_isdn_get_iface_type (GstIface *iface);
+static const gchar* gst_iface_isdn_get_desc       (GstIface *iface);
+static gboolean     gst_iface_isdn_has_gateway    (GstIface *iface);
+static void         gst_iface_isdn_impl_get_xml   (GstIface *iface,
+                                                   xmlNodePtr node);
 
 static void gst_iface_isdn_set_property (GObject      *object,
                                          guint         prop_id,
@@ -188,7 +186,6 @@ gst_iface_isdn_init (GstIfaceIsdn *iface)
   g_return_if_fail (GST_IS_IFACE_ISDN (iface));
 
   iface->_priv = g_new0 (GstIfaceIsdnPriv, 1);
-  iface->_priv->pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/ppp.png", NULL);
 
   iface->_priv->login = NULL;
   iface->_priv->password = NULL;
@@ -212,7 +209,6 @@ gst_iface_isdn_finalize (GObject *object)
 
   if (iface->_priv)
     {
-      gdk_pixbuf_unref (iface->_priv->pixbuf);
       g_free (iface->_priv->login);
       g_free (iface->_priv->password);
       g_free (iface->_priv->phone_number);
@@ -314,10 +310,10 @@ gst_iface_isdn_get_property (GObject      *object,
     }
 }
 
-static const GdkPixbuf*
+static GdkPixbuf*
 gst_iface_isdn_get_pixbuf (GstIface *iface)
 {
-  return GST_IFACE_ISDN (iface)->_priv->pixbuf;
+  return gdk_pixbuf_new_from_file (PIXMAPS_DIR "/ppp.png", NULL);
 }
 
 static const gchar*

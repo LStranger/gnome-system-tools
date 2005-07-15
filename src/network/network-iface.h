@@ -51,7 +51,7 @@ struct _GstIfaceClass
 {
   GObjectClass parent_class;
 
-  const GdkPixbuf* (*get_iface_pixbuf) (GstIface*);
+  GdkPixbuf* (*get_iface_pixbuf) (GstIface*);
   const gchar* (*get_iface_type) (GstIface*);
   const gchar* (*get_iface_desc) (GstIface*);
   gboolean (*has_gateway) (GstIface*);
@@ -78,7 +78,7 @@ gboolean     gst_iface_enable (GstIface*);
 void         gst_iface_disable (GstIface*);
 
 void         gst_iface_get_xml (GstIface*, xmlNodePtr);
-const GdkPixbuf *gst_iface_get_pixbuf (GstIface *iface);
+GdkPixbuf   *gst_iface_get_pixbuf (GstIface *iface);
 gchar       *gst_iface_get_desc (GstIface *iface);
 const gchar *gst_iface_get_iface_type (GstIface *iface);
 

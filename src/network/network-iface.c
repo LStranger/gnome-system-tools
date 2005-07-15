@@ -466,15 +466,43 @@ gst_iface_get_xml (GstIface *iface, xmlNodePtr root)
   GST_IFACE_GET_CLASS (iface)->get_xml (iface, interface);
 }
 
-const GdkPixbuf*
+GdkPixbuf*
 gst_iface_get_pixbuf (GstIface *iface)
 {
+  GdkPixbuf *pixbuf, *emblem;
+  gint pixbuf_width, pixbuf_height, emblem_width, emblem_height;
+
   g_return_val_if_fail (GST_IS_IFACE (iface), NULL);
 
   if (GST_IFACE_GET_CLASS (iface)->get_iface_pixbuf == NULL)
     return NULL;
 
-  return GST_IFACE_GET_CLASS (iface)->get_iface_pixbuf (iface);
+  pixbuf = GST_IFACE_GET_CLASS (iface)->get_iface_pixbuf (iface);
+
+  if (!gst_iface_is_configured (iface))
+    {
+      emblem = gtk_icon_theme_load_icon (tool->icon_theme,
+					 "emblem-noread",
+					 48, 0, NULL);
+
+      pixbuf_width  = gdk_pixbuf_get_width  (pixbuf);
+      pixbuf_height = gdk_pixbuf_get_height (pixbuf);
+      emblem_width  = gdk_pixbuf_get_width  (emblem);
+      emblem_height = gdk_pixbuf_get_height (emblem);
+
+      gdk_pixbuf_composite (emblem,
+			    pixbuf,
+			    0, 0,
+			    pixbuf_width,
+			    pixbuf_height,
+			    pixbuf_width - emblem_width,
+			    pixbuf_height - emblem_height,
+			    1, 1,
+			    GDK_INTERP_BILINEAR,
+			    255);
+    }
+
+  return pixbuf;
 }
 
 gchar*

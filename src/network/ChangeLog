@@ -1,3 +1,13 @@
+2005-07-15  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-*.c: don't use a const GdkPixbuf, it now will be
+	modified for adding emblem.
+	* network-iface.[ch]: don't use const GdkPixbuf, add emblem if it's
+	not configured
+	* ifaces-list.c (iface_to_priority), (ifaces_list_sort): added to
+	order the interfaces from most to least used/usual. Don't put the
+	unconfigured interfaces as insensitive
+
 2005-07-05  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Release 1.3.0.1

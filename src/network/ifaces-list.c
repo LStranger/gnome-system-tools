@@ -138,6 +138,32 @@ ifaces_list_setup_popup (GtkWidget *table)
     }
 }
 
+static gint
+iface_to_priority (GstIface *iface)
+{
+  if (GST_IS_IFACE_WIRELESS (iface))
+    return 5;
+  else if (GST_IS_IFACE_IRLAN (iface))
+    return 2;
+  else if (GST_IS_IFACE_ETHERNET (iface))
+    return 4;
+  else if (GST_IS_IFACE_MODEM (iface) || GST_IS_IFACE_ISDN (iface))
+    return 3;
+  else
+    return 1;
+}
+
+static gint
+ifaces_list_sort (GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer data)
+{
+  GstIface *iface_a, *iface_b;
+
+  gtk_tree_model_get (model, a, COL_OBJECT, &iface_a, -1);
+  gtk_tree_model_get (model, b, COL_OBJECT, &iface_b, -1);
+
+  return (iface_to_priority (iface_a) - iface_to_priority (iface_b));
+}
+
 static void
 add_list_columns (GtkTreeView *table)
 {
@@ -148,16 +174,6 @@ add_list_columns (GtkTreeView *table)
 					       "Interface",
 					       renderer,
 					       "pixbuf", COL_IMAGE,
-					       "sensitive", COL_CONFIGURED,
-					       NULL);
-
-  /* bogus cellrenderer for showing everything unsensitive,
-     but still allowing user interaction.
-  */
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (table), -1,
-					       "",
-					       renderer,
 					       NULL);
 
   renderer = gtk_cell_renderer_text_new ();
@@ -167,7 +183,6 @@ add_list_columns (GtkTreeView *table)
 					       "Interface",
 					       renderer,
 					       "markup", COL_DESC,
-					       "sensitive", COL_CONFIGURED,
 					       NULL);
 }
 
@@ -182,6 +197,13 @@ ifaces_list_create (void)
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
   gtk_tree_view_set_model (GTK_TREE_VIEW (table), model);
   g_object_unref (G_OBJECT (model));
+
+  gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (GTK_LIST_STORE (model)),
+					   ifaces_list_sort,
+					   NULL, NULL);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (GTK_LIST_STORE (model)),
+					GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
+					GTK_SORT_DESCENDING);
 
   add_list_columns (GTK_TREE_VIEW (table));
 

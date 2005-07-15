@@ -25,7 +25,6 @@
 
 struct _GstIfacePlipPriv
 {
-  GdkPixbuf *pixbuf;
   gchar     *address;
   gchar     *remote_address;
 };
@@ -34,12 +33,12 @@ static void gst_iface_plip_class_init (GstIfacePlipClass *class);
 static void gst_iface_plip_init       (GstIfacePlip      *iface);
 static void gst_iface_plip_finalize   (GObject           *object);
 
-static const GdkPixbuf* gst_iface_plip_get_pixbuf     (GstIface *iface);
-static const gchar*     gst_iface_plip_get_iface_type (GstIface *iface);
-static const gchar*     gst_iface_plip_get_desc       (GstIface *iface);
-static gboolean         gst_iface_plip_has_gateway    (GstIface *iface);
-static void             gst_iface_plip_impl_get_xml   (GstIface *iface,
-						       xmlNodePtr node);
+static GdkPixbuf*   gst_iface_plip_get_pixbuf     (GstIface *iface);
+static const gchar* gst_iface_plip_get_iface_type (GstIface *iface);
+static const gchar* gst_iface_plip_get_desc       (GstIface *iface);
+static gboolean     gst_iface_plip_has_gateway    (GstIface *iface);
+static void         gst_iface_plip_impl_get_xml   (GstIface *iface,
+						   xmlNodePtr node);
 
 static void gst_iface_plip_set_property (GObject      *object,
 					 guint         prop_id,
@@ -125,7 +124,6 @@ gst_iface_plip_init (GstIfacePlip *iface)
   g_return_if_fail (GST_IS_IFACE_PLIP (iface));
 
   iface->_priv = g_new0 (GstIfacePlipPriv, 1);
-  iface->_priv->pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/plip-48.png", NULL);
   iface->_priv->address = NULL;
   iface->_priv->remote_address = NULL;
 }
@@ -139,7 +137,6 @@ gst_iface_plip_finalize (GObject *object)
 
   if (iface->_priv)
     {
-      gdk_pixbuf_unref (iface->_priv->pixbuf);
       g_free (iface->_priv->address);
       g_free (iface->_priv->remote_address);
 
@@ -195,10 +192,10 @@ gst_iface_plip_get_property (GObject      *object,
     }
 }
 
-static const GdkPixbuf*
+static GdkPixbuf*
 gst_iface_plip_get_pixbuf (GstIface *iface)
 {
-  return GST_IFACE_PLIP (iface)->_priv->pixbuf;
+  return gdk_pixbuf_new_from_file (PIXMAPS_DIR "/plip-48.png", NULL);
 }
 
 static const gchar*
