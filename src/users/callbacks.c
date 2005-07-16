@@ -237,7 +237,7 @@ on_profile_settings_users_dialog_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
 	GtkTreeModel *model;
 	
-	while (gtk_dialog_run (GTK_DIALOG (profile_window)) != GTK_RESPONSE_CLOSE);
+	while (gtk_dialog_run (GTK_DIALOG (profile_window)) == GTK_RESPONSE_HELP);
 	gtk_widget_hide (profile_window);
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
