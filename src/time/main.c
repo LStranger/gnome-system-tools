@@ -379,7 +379,7 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 
 	gtk_window_set_transient_for (GTK_WINDOW (d), GTK_WINDOW (dialog));
 
-	while (gtk_dialog_run (GTK_DIALOG (d)) != GTK_RESPONSE_CLOSE);
+	while (gtk_dialog_run (GTK_DIALOG (d)) == GTK_RESPONSE_HELP);
 
 	tz_name     = e_tz_map_get_selected_tz_name (tzmap);
 	tz_location = e_tz_map_get_location_by_name (tzmap, tz_name);
@@ -408,7 +408,7 @@ server_button_clicked (GtkWidget *w, gpointer data)
 
 	gtk_window_set_transient_for (GTK_WINDOW (d), GTK_WINDOW (dialog));
 
-	while (gtk_dialog_run (GTK_DIALOG (d)) != GTK_RESPONSE_CLOSE);
+	while (gtk_dialog_run (GTK_DIALOG (d)) == GTK_RESPONSE_HELP);
 	gtk_widget_hide (d);
 }
 
