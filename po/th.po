@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 1.1.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-10 16:39+0700\n"
-"PO-Revision-Date: 2005-07-10 16:52+0700\n"
+"POT-Creation-Date: 2005-07-17 08:58+0700\n"
+"PO-Revision-Date: 2005-07-17 09:09+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <l10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -1338,15 +1338,15 @@ msgstr "ตั้งค่าอุปกรณ์และการเชื่
 msgid "Networking"
 msgstr "ระบบเครือข่าย"
 
-#: src/network/network-iface-ethernet.c:305
+#: src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "อีเทอร์เน็ต"
 
-#: src/network/network-iface-irlan.c:125
+#: src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "อินฟราเรด"
 
-#: src/network/network-iface-isdn.c:332
+#: src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN"
 
@@ -1354,11 +1354,11 @@ msgstr "ISDN"
 msgid "Modem connection"
 msgstr "โมเด็ม"
 
-#: src/network/network-iface-plip.c:213
+#: src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "พอร์ตขนาน"
 
-#: src/network/network-iface-wireless.c:249
+#: src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "ไร้สาย"
 
@@ -1367,17 +1367,17 @@ msgstr "ไร้สาย"
 msgid "Activating interface \"%s\""
 msgstr "กำลังเปิดใช้อินเทอร์เฟซ \"%s\""
 
-#: src/network/network-iface.c:494
+#: src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "อินเทอร์เฟซ %s ยังไม่ตั้งค่า"
 
-#: src/network/network-iface.c:496
+#: src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "อินเทอร์เฟซ %s ยังไม่เปิดใช้"
 
-#: src/network/network-iface.c:498
+#: src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "อินเทอร์เฟซ %s เปิดใช้อยู่"
@@ -1396,9 +1396,7 @@ msgstr "ยืนยันที่จะปิดบริการนี้ห
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss"
-msgstr ""
-"การปิดนี้อาจมีผลต่อพฤติกรรมของระบบของคุณได้หลายทาง "
-"โดยอาจทำให้ข้อมูลสูญหายได้"
+msgstr "การปิดนี้อาจมีผลต่อพฤติกรรมของระบบของคุณได้หลายทาง โดยอาจทำให้ข้อมูลสูญหายได้"
 
 #: src/services/main.c:54
 msgid "Change your running services"
@@ -1411,6 +1409,78 @@ msgstr "ตั้งค่าบริการระบบที่จะเป
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "บริการระบบ"
+
+#: src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "กำหนดเวลางาน"
+
+#: src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "เรียกโปรแกรมทำงานตามกำหนดเวลา"
+
+#: src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "หน้าจอล็อกอินแบบกราฟิก"
+
+#: src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "ถามชื่อผู้ใช้และรหัสผ่านในแบบกราฟิก"
+
+#: src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "บริการโฟลเดอร์ใช้ร่วม"
+
+#: src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "เปิดโฟลเดอร์ให้ใช้ร่วมกันในเครือข่าย"
+
+#: src/services/service.c:33
+msgid "Mail agent"
+msgstr "ตัวส่งเมล"
+
+#: src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "ส่งเมลที่คุณฝากส่ง ออกทางอินเทอร์เน็ต"
+
+#: src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "บริการตั้งนาฬิกา"
+
+#: src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "ตั้งนาฬิการะบบตามเซิร์ฟเวอร์เวลาในอินเทอร์เน็ต"
+
+#: src/services/service.c:35
+msgid "Printer service"
+msgstr "บริการเครื่องพิมพ์"
+
+#: src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "เปิดให้โปรแกรมต่างๆ ใช้เครื่องพิมพ์ได้"
+
+#: src/services/service.c:36
+msgid "Remote shell server"
+msgstr "เซิร์ฟเวอร์เชลล์ระยะไกล"
+
+#: src/services/service.c:36
+msgid "Secure shell server"
+msgstr "เซิร์ฟเวอร์เชลล์นิรภัย"
+
+#: src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "ผู้บันทึกปฏิบัติการระบบ"
+
+#: src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "เก็บบันทึกปฏิบัติการของคอมพิวเตอร์ของคุณ"
+
+#: src/services/service.c:38
+msgid "Web server"
+msgstr "เซิร์ฟเวอร์เว็บ"
+
+#: src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "เปิดหน้าเว็บของคุณให้เข้าชมได้จากอินเทอร์เน็ต"
 
 #: src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1748,7 +1818,7 @@ msgstr "ชื่อผู้ใช้ยาวเกินไป"
 
 #: src/users/user-settings.c:291 src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
+msgid "To be valid, the user name should have less than %i characters."
 msgstr "ชื่อผู้ใช้ควรยาวไม่เกิน %i ตัวอักษร"
 
 #: src/users/user-settings.c:302
