@@ -1,5 +1,3 @@
-# traducción de es.po al Spanish
-# translation of es.po to Spanish
 # translation of gnome-system-tools.HEAD.es.po to Spanish
 # GNOME System tools's Spanish translation
 # Copyright © 2001-2003 Free Software Foundation, Inc.
@@ -15,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-06 18:08+0200\n"
-"PO-Revision-Date: 2005-07-06 18:10+0200\n"
+"POT-Creation-Date: 2005-07-17 12:51+0200\n"
+"PO-Revision-Date: 2005-07-17 12:56+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1379,15 +1377,15 @@ msgstr "Configurar los dispositivos de red y las conexiones"
 msgid "Networking"
 msgstr "Red"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Conexión Ethernet"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "Conexión infraroja"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "Conexión RDSI"
 
@@ -1395,11 +1393,11 @@ msgstr "Conexión RDSI"
 msgid "Modem connection"
 msgstr "Conexión con módem"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "Conexión por puerto paralelo"
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "Conexión inalámbrica"
 
@@ -1408,17 +1406,17 @@ msgstr "Conexión inalámbrica"
 msgid "Activating interface \"%s\""
 msgstr "Activando interfaz «%s»"
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "El interfaz %s no está configurado"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "El interfaz «%s» no está activo"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "El interfaz «%s» está activo"
@@ -1437,7 +1435,9 @@ msgstr "¿Está seguro de que desea desactivar este servicio?"
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss"
-msgstr "Esto puede afectar el comportamiento de su sistema de varias formas, posiblemente  produciendo una pérdida de datos"
+msgstr ""
+"Esto puede afectar el comportamiento de su sistema de varias formas, "
+"posiblemente  produciendo una pérdida de datos"
 
 #: ../src/services/main.c:54
 msgid "Change your running services"
@@ -1450,6 +1450,78 @@ msgstr "Configurar qué servicios serán ejecutados cuando el sistema se inicie"
 #: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "Servicios"
+
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "Programador de acciones"
+
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "Ejecuta acciones programadas"
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "Gestor de inicio de sesión gráfico"
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "Solicita usuario y contraseña de una forma gráfica"
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "Servicio de compartición de carpetas"
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "Comparta sus carpetas seleccionadas a través de su red"
+
+#: ../src/services/service.c:33
+msgid "Mail agent"
+msgstr "Agente de correo"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "Entrega sus mensajes enviados a través de Internet"
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "Servicio de sincronización del reloj"
+
+#: ../src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "Sincroniza el reloj de su computadora con los servidores de hora de Internet"
+
+#: ../src/services/service.c:35
+msgid "Printer service"
+msgstr "Servicio de impresoras"
+
+#: ../src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "Permite a las aplicaciones usar impresoras"
+
+#: ../src/services/service.c:36
+msgid "Remote shell server"
+msgstr "Servidor de shell remota"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr "Servidor de shell segura"
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "Registro de actividad del equipo"
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "Mantiene un registro de la actividad de su equipo"
+
+#: ../src/services/service.c:38
+msgid "Web server"
+msgstr "Servidor web"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "Comparta sus páginas web a través de internet"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1794,9 +1866,8 @@ msgstr "El nombre del usuario es demasiado largo"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
-msgstr ""
-"El nombre de usuario debería tener menos de %i caracteres para ser válido."
+msgid "To be valid, the user name should have less than %i characters."
+msgstr "El nombre de usuario debería tener menos de %i caracteres para ser válido."
 
 #: ../src/users/user-settings.c:302
 msgid "User name for the \"root\" user should not be modified"
@@ -2149,9 +2220,6 @@ msgstr "Añadir o quitar usuarios y grupos"
 #~ msgid "Current network profile:"
 #~ msgstr "Perfil de red actual:"
 
-#~ msgid "Delete DNS server"
-#~ msgstr "Borrar servidor DNS"
-
 #~ msgid "Delete search domain"
 #~ msgstr "Borrar dominio de búsqueda"
 
@@ -2406,9 +2474,6 @@ msgstr "Añadir o quitar usuarios y grupos"
 
 #~ msgid "_Disable"
 #~ msgstr "_Desactivar"
-
-#~ msgid "Silent"
-#~ msgstr "Silencioso"
 
 #~ msgid "Low"
 #~ msgstr "Bajo"
@@ -3032,9 +3097,6 @@ msgstr "Añadir o quitar usuarios y grupos"
 
 #~ msgid "Add New Internet Connection"
 #~ msgstr "Añadir una conexión a Internet nueva"
-
-#~ msgid "Allow activation control for all users"
-#~ msgstr "Permite el control de activación para todos los usuarios"
 
 #~ msgid "Connection active"
 #~ msgstr "Conexión activa"
@@ -4079,9 +4141,6 @@ msgstr "Añadir o quitar usuarios y grupos"
 
 #~ msgid "Print resolution."
 #~ msgstr "Resolución de la impresión."
-
-#~ msgid "Printer Settings"
-#~ msgstr "Configuración de la impresora"
 
 #~ msgid "Printer connected to a port on your machine."
 #~ msgstr "Impresora conectada a un puerto de su máquina."
