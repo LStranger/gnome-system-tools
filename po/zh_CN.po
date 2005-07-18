@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-13 22:31+0000\n"
+"POT-Creation-Date: 2005-07-17 22:25+0000\n"
 "PO-Revision-Date: 2005-06-14 14:14+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -452,7 +452,9 @@ msgstr "密码(_A)"
 msgid ""
 "Plain (ASCII)\n"
 "Hexadecimal"
-msgstr "纯文本\n十六进制"
+msgstr ""
+"纯文本\n"
+"十六进制"
 
 #: ../interfaces/network.glade.in.h:41
 msgid "Select location name"
@@ -462,7 +464,9 @@ msgstr "选择位置名称"
 msgid ""
 "Static IP address\n"
 "DHCP"
-msgstr "静态 IP 地址\nDHCP"
+msgstr ""
+"静态 IP 地址\n"
+"DHCP"
 
 #: ../interfaces/network.glade.in.h:44
 msgid ""
@@ -549,40 +553,12 @@ msgid "_Volume:"
 msgstr "音量(_V)："
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">常规信息</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>可用的服务：</b>"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">服务设置</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "描述："
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "服务属性(_P)"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "服务："
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "状态："
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "按启动顺序排列清单(_O)"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "启动(_S)"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "启动顺序(_S)："
+msgid "Advanced settings:"
+msgstr "高级设置："
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1217,20 +1193,20 @@ msgstr "立即应用吗？"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "在部件“%2$s”中存在错误的连接信号“%1$s”"
 
-#: ../src/common/gst-tool.c:1020
+#: ../src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "配置文件无法装入"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "运行后端脚本时出错"
 
-#: ../src/common/gst-tool.c:1503
+#: ../src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "欢迎使用 GNOME 系统工具 %s 预发行版"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1242,19 +1218,19 @@ msgstr ""
 "会导致您的计算机<span weight=\"bold\">无法使用</span>，降低速度、处理能力以及"
 "稳定性。您已获知该警告。感谢您试用 GNOME 系统工具预发行版！"
 
-#: ../src/common/gst-tool.c:1526
+#: ../src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "警告"
 
-#: ../src/common/gst-tool.c:1546
+#: ../src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "不再显示此信息"
 
-#: ../src/common/gst-tool.c:1603
+#: ../src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "GNOME 系统工具"
 
-#: ../src/common/gst-tool.c:1748
+#: ../src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "无法显示帮助"
 
@@ -1360,15 +1336,15 @@ msgstr "配置网络设备和连接"
 msgid "Networking"
 msgstr "联网"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "以太网连接"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "红外连接"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN 连接"
 
@@ -1376,11 +1352,11 @@ msgstr "ISDN 连接"
 msgid "Modem connection"
 msgstr "调制解调器连接"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "并口连接"
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "无线连接"
 
@@ -1389,45 +1365,41 @@ msgstr "无线连接"
 msgid "Activating interface \"%s\""
 msgstr "激活接口“%s”"
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "无法配置接口 %s"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "接口 %s 未激活"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "接口 %s 已激活"
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "没有可用的描述。"
-
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "运行中"
-
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "已停止"
-
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "无法获取信息"
-
-#: ../src/services/callbacks.c:292
+#: ../src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "服务 %s 的设置"
+msgid "Settings for \"%s\""
+msgstr "“%s”的设置"
 
-#: ../src/services/main.c:62
-msgid "Services Settings"
-msgstr "服务设置"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "您确定想要禁用此服务吗？"
+
+#: ../src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"这可能从不同方式影响您系统的行为，可能会导致系统丢失"
+
+#: ../src/services/main.c:54
+msgid "Change your running services"
+msgstr "更改您运行中的服务"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1437,13 +1409,77 @@ msgstr "配置要在系统启动时使用哪些服务"
 msgid "Services"
 msgstr "服务"
 
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "激活"
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "动作计划"
 
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "服务"
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "执行计划的动作"
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "图形登录管理器"
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "以图形界面请求用户名和密码"
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "文件夹共享服务"
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "通过您的网络共享您选中的文件夹"
+
+#: ../src/services/service.c:33
+msgid "Mail agent"
+msgstr "邮件代理"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "通过 Internet 发送您的邮件"
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "时钟同步服务"
+
+#: ../src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "将计算机的时钟与 Internet 时间服务器同步"
+
+#: ../src/services/service.c:35
+msgid "Printer service"
+msgstr "打印机服务"
+
+#: ../src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "允许应用程序使用打印机"
+
+#: ../src/services/service.c:36
+msgid "Remote shell server"
+msgstr "远程 Shell 服务器"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr "安全 Shell 服务器"
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "计算机活动日志"
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "保留您计算机活动的日志"
+
+#: ../src/services/service.c:38
+msgid "Web server"
+msgstr "Web 服务器"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "通过 Internet 共享您的网页"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1781,7 +1817,7 @@ msgstr "用户名太长"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
+msgid "To be valid, the user name should have less than %i characters."
 msgstr "有效的用户名应该至少有 %i 个字符。"
 
 #: ../src/users/user-settings.c:302
@@ -1920,3 +1956,4 @@ msgstr "Shell"
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "添加或删除用户和组"
+
