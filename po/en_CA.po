@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-06 18:34-0400\n"
-"PO-Revision-Date: 2005-07-06 19:30-0400\n"
+"POT-Creation-Date: 2005-07-18 04:53-0400\n"
+"PO-Revision-Date: 2005-07-18 19:30-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1365,15 +1365,15 @@ msgstr "Configure network devices and connections"
 msgid "Networking"
 msgstr "Networking"
 
-#: src/network/network-iface-ethernet.c:305
+#: src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Ethernet connection"
 
-#: src/network/network-iface-irlan.c:125
+#: src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "Infrared connection"
 
-#: src/network/network-iface-isdn.c:332
+#: src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN connection"
 
@@ -1381,11 +1381,11 @@ msgstr "ISDN connection"
 msgid "Modem connection"
 msgstr "Modem connection"
 
-#: src/network/network-iface-plip.c:213
+#: src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "Parallel port connection"
 
-#: src/network/network-iface-wireless.c:249
+#: src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "Wireless connection"
 
@@ -1394,17 +1394,17 @@ msgstr "Wireless connection"
 msgid "Activating interface \"%s\""
 msgstr "Activating interface \"%s\""
 
-#: src/network/network-iface.c:494
+#: src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "The interface %s is not configured"
 
-#: src/network/network-iface.c:496
+#: src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "The interface %s is not active"
 
-#: src/network/network-iface.c:498
+#: src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "The interface %s is active"
@@ -1438,6 +1438,78 @@ msgstr "Configure which services will be run when the system starts"
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "Services"
+
+#: src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "Actions scheduler"
+
+#: src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "Executes scheduled actions"
+
+#: src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "Graphical login manager"
+
+#: src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "Requests username and password in a graphical fashion"
+
+#: src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "Folder sharing service"
+
+#: src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "Shares your selected folders through your network"
+
+#: src/services/service.c:33
+msgid "Mail agent"
+msgstr "Mail agent"
+
+#: src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "Delivers your outgoing email"
+
+#: src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "Clock synchronization service"
+
+#: src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "Synchronizes your computer clock with internet time servers"
+
+#: src/services/service.c:35
+msgid "Printer service"
+msgstr "Printer service"
+
+#: src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "Allows applications to use printers"
+
+#: src/services/service.c:36
+msgid "Remote shell server"
+msgstr "Remote shell server"
+
+#: src/services/service.c:36
+msgid "Secure shell server"
+msgstr "Secure shell server"
+
+#: src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "Computer activity logger"
+
+#: src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "Keeps a log of your computer activity"
+
+#: src/services/service.c:38
+msgid "Web server"
+msgstr "Web server"
+
+#: src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "Shares your web pages through internet"
 
 #: src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1778,7 +1850,7 @@ msgstr "The user name is too long"
 
 #: src/users/user-settings.c:291 src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
+msgid "To be valid, the user name should have less than %i characters."
 msgstr "To be valid, the user name should have less than %i characters."
 
 #: src/users/user-settings.c:302
