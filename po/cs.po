@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-13 14:17+0000\n"
-"PO-Revision-Date: 2005-07-14 18:21+0200\n"
+"POT-Creation-Date: 2005-07-23 14:25+0000\n"
+"PO-Revision-Date: 2005-07-23 18:23+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1282,7 +1282,8 @@ msgstr "Nemohu autodetekovat zařízení modemu"
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
-msgstr "Zkontrolujte, že se zařízení nepoužívá a že je správně připojeno k počítači."
+msgstr ""
+"Zkontrolujte, že se zařízení nepoužívá a že je správně připojeno k počítači."
 
 #: ../src/network/callbacks.c:449
 msgid "The host name has changed"
@@ -1364,15 +1365,15 @@ msgstr "Nastavit síťové zařízení a spojení"
 msgid "Networking"
 msgstr "Sítě"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Ethernetové připojení"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "Infračervené připojení"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "Připojení ISDN"
 
@@ -1380,11 +1381,11 @@ msgstr "Připojení ISDN"
 msgid "Modem connection"
 msgstr "Připojení modem"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "Připojení přes paralelní port"
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "Bezdrátové připojení"
 
@@ -1393,17 +1394,17 @@ msgstr "Bezdrátové připojení"
 msgid "Activating interface \"%s\""
 msgstr "Aktivuji rozhraní \"%s\""
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "Rozhraní %s není nastaveno"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "Rozhraní %s není aktivní"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "Rozhraní %s je aktivní"
@@ -1422,7 +1423,9 @@ msgstr "Opravdu chcete deaktivovat tuto službu?"
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss"
-msgstr "To může různými způsoby ovlivňovat chování vašeho systému a možná způsobit ztrátu dat."
+msgstr ""
+"To může různými způsoby ovlivňovat chování vašeho systému a možná způsobit "
+"ztrátu dat."
 
 #: ../src/services/main.c:54
 msgid "Change your running services"
@@ -1435,6 +1438,78 @@ msgstr "Nastavit, které služby budou spuštěny při startu systému"
 #: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "Služby"
+
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "Plánovač akcí"
+
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "Provádí naplánované akce"
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "Správce grafického přihlašování"
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "Žádá uživatele a heslo graficky"
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "Služba sdílení složek"
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "Sdílí vaše zvolené adresáře po vaší síti"
+
+#: ../src/services/service.c:33
+msgid "Mail agent"
+msgstr "Agent pošty"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "Doručuje vaše odeslané e-maily internetem"
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "Služba pro synchronizaci hodin"
+
+#: ../src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "Synchronizuje hodiny vašeho počítače se servery času na internetu"
+
+#: ../src/services/service.c:35
+msgid "Printer service"
+msgstr "Služba tiskárny"
+
+#: ../src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "Umožňuje aplikacím používat tiskárny"
+
+#: ../src/services/service.c:36
+msgid "Remote shell server"
+msgstr "Vzdálený server shellu"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr "Zabezpečený server shellu"
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "Zaznamenávač aktivity počítače"
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "Udržuje záznam aktivity vašeho počítače"
+
+#: ../src/services/service.c:38
+msgid "Web server"
+msgstr "WWW server"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "Sdílí vaše WWW stránky internetem"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1525,7 +1600,9 @@ msgstr "Podpora NTP není nainstalována"
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
-msgstr "Pro povolení synchronizace vašeho místního serveru času se servery času na Internetu prosím v systému nainstalujte a aktivujte podporu NTP."
+msgstr ""
+"Pro povolení synchronizace vašeho místního serveru času se servery času na "
+"Internetu prosím v systému nainstalujte a aktivujte podporu NTP."
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1751,7 +1828,9 @@ msgstr "Jste si jisti, že chcete odstranit uživatele \"%s\"?"
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
-msgstr "To zakáže přístup tohoto uživatele do systému bez odstranění jeho domovského adresáře."
+msgstr ""
+"To zakáže přístup tohoto uživatele do systému bez odstranění jeho domovského "
+"adresáře."
 
 #: ../src/users/user-settings.c:187
 msgid "User Account Editor"
@@ -1772,7 +1851,7 @@ msgstr "Jméno uživatele je příliš dlouhé"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
+msgid "To be valid, the user name should have less than %i characters."
 msgstr "Aby bylo jméno uživatele platné, musí mít méně než %i znaků."
 
 #: ../src/users/user-settings.c:302
@@ -1787,7 +1866,9 @@ msgstr "Jméno uživatele má neplatné znaky"
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
-msgstr "Zadejte prosím platné jméno uživatele skládající se z malého písmene na začátku a dále z malých písmen a číslic."
+msgstr ""
+"Zadejte prosím platné jméno uživatele skládající se z malého písmene na "
+"začátku a dále z malých písmen a číslic."
 
 #: ../src/users/user-settings.c:315
 #, c-format
@@ -1853,7 +1934,9 @@ msgstr "ID uživatele %s již existuje"
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems."
-msgstr "Několik uživatelů může sdílet jedno ID uživatele, ale není to obvyklé a může to způsobit bezpečnostní problémy."
+msgstr ""
+"Několik uživatelů může sdílet jedno ID uživatele, ale není to obvyklé a může "
+"to způsobit bezpečnostní problémy."
 
 #: ../src/users/user-settings.c:471
 msgid "Incomplete path in shell"
