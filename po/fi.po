@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-26 14:04+0300\n"
-"PO-Revision-Date: 2005-06-26 14:12+0300\n"
+"POT-Creation-Date: 2005-07-24 20:56+0300\n"
+"PO-Revision-Date: 2005-07-24 21:02+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -319,8 +319,8 @@ msgid ""
 "modify\n"
 "your system configuration."
 msgstr ""
-"Tämän työkalun käyttöön tarvitaan ylläpitäjän oikeuksia. Syötä salasana "
-"jos haluat muokata järjestelmän asetuksia."
+"Tämän työkalun käyttöön tarvitaan ylläpitäjän oikeuksia. Syötä salasana jos "
+"haluat muokata järjestelmän asetuksia."
 
 #: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
@@ -484,7 +484,8 @@ msgstr "Valitse sijainnin nimi"
 msgid ""
 "Static IP address\n"
 "DHCP"
-msgstr "Kiinteä IP-osoite\n"
+msgstr ""
+"Kiinteä IP-osoite\n"
 "DHCP"
 
 #: ../interfaces/network.glade.in.h:44
@@ -572,40 +573,12 @@ msgid "_Volume:"
 msgstr "_Äänenvoimakkuus:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">Yleiset tiedot</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>Saatavilla olevat palvelut:</b>"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">Palvelun asetukset</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "Kuvaus:"
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "Palvelun asetukset"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "Palvelu:"
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "Tila:"
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "_Järjestä lista käynnistysjärjestyksen mukaan"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "_Käynnistä"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "Käynnistys_järjestys:"
+msgid "Advanced settings:"
+msgstr "Edistyneet asetukset:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1394,15 +1367,15 @@ msgstr "Määrittele verkkolaitteiden ja yhteyksien asetuksia"
 msgid "Networking"
 msgstr "Verkkoasetukset"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Ethernet-yhteys"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "Infrapunayhteys"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN-yhteys"
 
@@ -1410,11 +1383,11 @@ msgstr "ISDN-yhteys"
 msgid "Modem connection"
 msgstr "Modeemiyhteys"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "Rinnakkaisporttiyhteys"
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "Langaton yhteys"
 
@@ -1423,45 +1396,42 @@ msgstr "Langaton yhteys"
 msgid "Activating interface \"%s\""
 msgstr "Aktivoidaan verkkolaitetta \"%s\""
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "Verkkolaite %s ei ole määritelty"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "Verkkolaite %s ei ole aktiivinen"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "Verkkolaite %s on aktiivinen"
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "Ei kuvausta."
-
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "Käytössä"
-
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "Pysäytetty"
-
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "Tietoja ei voitu hakea"
-
-#: ../src/services/callbacks.c:292
+#: ../src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "Palvelun %s asetukset"
+msgid "Settings for \"%s\""
+msgstr "\"%s\" asetukset"
 
-#: ../src/services/main.c:62
-msgid "Services Settings"
-msgstr "Palveluiden asetukset"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "Halutako varmasti poistaa tämän palvelun käytöstä?"
+
+#: ../src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"Tämä voi vaikuttaa järjestelmäsi toimintaan monella eri tavalla ja "
+"mahdollisesti johtaa tiedon hukkumiseen"
+
+#: ../src/services/main.c:54
+msgid "Change your running services"
+msgstr "Muuta järjestelmässä suoritettavia palveluita"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1471,13 +1441,77 @@ msgstr "Määrittele mitä palveluita suoritetaan järjestelmän käynnistyessä
 msgid "Services"
 msgstr "Palvelut"
 
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "Aktiivinen"
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "Tehtävien skeduloija"
 
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "Palvelu"
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "Suorittaa skeduloituja tehtäviä"
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "Graafisen sisäänkirjautumisen palvelin"
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "Kysyy käyttäjätunnusta ja salasanaa graafisella käyttöliittymällä"
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "Kansioiden jakopalvelu"
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "Jakaa valittuja kansioita verkossa"
+
+#: ../src/services/service.c:33
+msgid "Mail agent"
+msgstr "Sähköpostin välittäjä"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "Välittää lähettämäsi sähköpostit Internetiin"
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "Kellon synkronointipalvelu"
+
+#: ../src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "Synkronoi tietokoneen kello Internetin kellopalvelimilta"
+
+#: ../src/services/service.c:35
+msgid "Printer service"
+msgstr "Tulostuspalvelu"
+
+#: ../src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "Tarjoaa tulostimia ohjelmien käyttöön"
+
+#: ../src/services/service.c:36
+msgid "Remote shell server"
+msgstr "Etäkomentulkin palvelin"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr "Secure Shell-palvelin"
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "Tietokoneen tapahtumien kirjaaja"
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "Pitää lokia järjestelmän toiminnasta"
+
+#: ../src/services/service.c:38
+msgid "Web server"
+msgstr "WWW-palvelin"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "Jakaa WWW-sivusi Internetissä"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1569,8 +1603,8 @@ msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr ""
-"Asenna ja käynnistä NTP-tuki järjestelmään, jos haluat synkronoida paikallisen "
-"kellopalvelimesi Internetin kellopalvelinten kanssa."
+"Asenna ja käynnistä NTP-tuki järjestelmään, jos haluat synkronoida "
+"paikallisen kellopalvelimesi Internetin kellopalvelinten kanssa."
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1818,8 +1852,9 @@ msgid "The user name is too long"
 msgstr "Käyttäjätunnus on liian pitkä"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
-msgid "The user name should have less than %i characters for being valid."
-msgstr "Käyttäjätunnuksessa saa olla enintään %i merkkiä."
+#, c-format
+msgid "To be valid, the user name should have less than %i characters."
+msgstr "Kelvollisessa käyttäjätunnuksessa saa olla enintään %i merkkiä."
 
 #: ../src/users/user-settings.c:302
 msgid "User name for the \"root\" user should not be modified"
@@ -1961,6 +1996,54 @@ msgstr "Komentotulkki"
 msgid "Add or remove users and groups"
 msgstr "Lisää tai poista käyttäjiä ja ryhmiä"
 
+#~ msgid "<span weight=\"bold\">General Information</span>"
+#~ msgstr "<span weight=\"bold\">Yleiset tiedot</span>"
+
+#~ msgid "<span weight=\"bold\">Service Settings</span>"
+#~ msgstr "<span weight=\"bold\">Palvelun asetukset</span>"
+
+#~ msgid "Description:"
+#~ msgstr "Kuvaus:"
+
+#~ msgid "Service _Properties"
+#~ msgstr "Palvelun asetukset"
+
+#~ msgid "Service:"
+#~ msgstr "Palvelu:"
+
+#~ msgid "Status:"
+#~ msgstr "Tila:"
+
+#~ msgid "_Order list by startup sequence"
+#~ msgstr "_Järjestä lista käynnistysjärjestyksen mukaan"
+
+#~ msgid "_Start"
+#~ msgstr "_Käynnistä"
+
+#~ msgid "_Startup sequence:"
+#~ msgstr "Käynnistys_järjestys:"
+
+#~ msgid "No description available."
+#~ msgstr "Ei kuvausta."
+
+#~ msgid "Running"
+#~ msgstr "Käytössä"
+
+#~ msgid "Stopped"
+#~ msgstr "Pysäytetty"
+
+#~ msgid "Could not get info"
+#~ msgstr "Tietoja ei voitu hakea"
+
+#~ msgid "Settings for service %s"
+#~ msgstr "Palvelun %s asetukset"
+
+#~ msgid "Active"
+#~ msgstr "Aktiivinen"
+
+#~ msgid "Service"
+#~ msgstr "Palvelu"
+
 #~ msgid "DHCP"
 #~ msgstr "DHCP"
 
@@ -2052,9 +2135,6 @@ msgstr "Lisää tai poista käyttäjiä ja ryhmiä"
 
 #~ msgid "Current network profile:"
 #~ msgstr "Valittu verkkoprofiili:"
-
-#~ msgid "Delete DNS server"
-#~ msgstr "Poista DNS-palvelin"
 
 #~ msgid "ISP phone number"
 #~ msgstr "Palveluntarjoajan puhelinnumero"
@@ -2345,9 +2425,6 @@ msgstr "Lisää tai poista käyttäjiä ja ryhmiä"
 
 #~ msgid "_Disable"
 #~ msgstr "_Poista käytöstä"
-
-#~ msgid "Silent"
-#~ msgstr "Äänetön"
 
 #~ msgid "Low"
 #~ msgstr "Hiljainen"
