@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome system tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-15 15:42+0300\n"
-"PO-Revision-Date: 2005-06-15 15:43+0300\n"
+"POT-Creation-Date: 2005-07-25 18:10+0300\n"
+"PO-Revision-Date: 2005-07-25 18:04+0300\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -144,7 +144,7 @@ msgstr ""
 
 #: ../interfaces/boot.glade.in.h:16
 msgid "Click \"Forward\" to continue"
-msgstr "Натиснете \"Напред\" за да продължите"
+msgstr "Натиснете „Напред“ за да продължите"
 
 #: ../interfaces/boot.glade.in.h:17
 msgid "Confirmation"
@@ -223,7 +223,7 @@ msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
 msgstr ""
-"Новата операционна система за стартиране е добавена. Натиснете \"Прилагане\" "
+"Новата операционна система за стартиране е добавена. Натиснете „Прилагане“ "
 "за да запазите промените."
 
 #: ../interfaces/boot.glade.in.h:34
@@ -581,40 +581,12 @@ msgid "_Volume:"
 msgstr "Сила на _звука:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">Обща информация</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>Налични услуги:</b>"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">Настройки на услугите</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "Описание:"
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "_Настройки на услугата"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "Услуга:"
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "Състояние:"
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "По_следователност на стартиране"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "_Стартиране"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "По_следователност на стартиране:"
+msgid "Advanced settings:"
+msgstr "Допълнителни настройки:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -694,7 +666,7 @@ msgstr "Споделяне на папка"
 
 #: ../interfaces/shares.glade.in.h:21
 msgid "Share with:"
-msgstr "Споделяне с:"
+msgstr "Споделяне чрез:"
 
 #: ../interfaces/shares.glade.in.h:22
 msgid "This computer is a WINS server"
@@ -750,7 +722,7 @@ msgstr "NTP сървър"
 
 #: ../interfaces/time.glade.in.h:7
 msgid "S_ynchronize clock with Internet servers:"
-msgstr "Синхронизация на часовника с интернет сървъри:"
+msgstr "Сверяване на часовника през Интернет"
 
 #: ../interfaces/time.glade.in.h:8
 msgid "Se_lect Servers..."
@@ -1033,7 +1005,7 @@ msgstr "Невалидна стойност на VGA"
 #: ../src/boot/boot-append-gui.c:254
 #, c-format
 msgid "\"%s\" is not a valid VGA value."
-msgstr "%s не е валидна стойност за VGA."
+msgstr "„%s“ не е валидна стойност за VGA."
 
 #: ../src/boot/boot-druid.c:112
 msgid "Error creating boot image"
@@ -1079,27 +1051,27 @@ msgstr "GNU/Hurd"
 #: ../src/boot/boot-image.c:276
 #, c-format
 msgid "\"%s\" is an invalid path"
-msgstr "%s е невалиден път"
+msgstr "„%s“ е невалиден път"
 
 #: ../src/boot/boot-image.c:292
 #, c-format
 msgid "\"%s\" already exists, please set another name."
-msgstr "\"%s\" вече съществува, задайте друго име."
+msgstr "„%s“ вече съществува, задайте друго име."
 
 #: ../src/boot/boot-image.c:298
 #, c-format
 msgid "Invalid image name: \"%s\"."
-msgstr "Невалидно име на изображението: \"%s\"."
+msgstr "Невалидно име на изображението: „%s“."
 
 #: ../src/boot/boot-image.c:311
 #, c-format
 msgid "Invalid image: \"%s\"."
-msgstr "Невалидно изображение: \"%s\"."
+msgstr "Невалидно изображение: „%s“."
 
 #: ../src/boot/boot-image.c:329
 #, c-format
 msgid "Invalid root device: \"%s\"."
-msgstr "Невалидно кореново устройство: \"%s\"."
+msgstr "Невалидно кореново устройство: „%s“."
 
 #: ../src/boot/boot-settings.c:43
 msgid "_Module path:"
@@ -1142,7 +1114,7 @@ msgstr ""
 #: ../src/boot/callbacks.c:433
 #, c-format
 msgid "Are you sure you want to delete \"%s\"?"
-msgstr "Искате ли да изтриете \"%s\"?"
+msgstr "Искате ли да изтриете „%s“?"
 
 #: ../src/boot/callbacks.c:435
 msgid "This may leave this operating system unbootable."
@@ -1155,7 +1127,7 @@ msgstr "Конфигурацията ще показва празно"
 #: ../src/boot/callbacks.c:466
 #, c-format
 msgid "The file \"%s\" is missing or could not be read."
-msgstr "Файлът \"%s'' липсва или не може да бъде прочетен."
+msgstr "Файлът „%s“ липсва или не може да бъде прочетен."
 
 #: ../src/boot/table.c:41
 msgid "Name"
@@ -1211,12 +1183,12 @@ msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
 msgstr ""
-"Проверете дали сте го изписали вярно, и че не сте натиснали \"caps lock\""
+"Проверете дали сте го изписали вярно, и че не сте натиснали „Caps Lock“"
 
 #: ../src/common/gst-auth.c:103
 #, c-format
 msgid "Could not run \"%s\""
-msgstr "\"%s\" не може да бъде стартиран"
+msgstr "„%s“ не може да бъде стартиран"
 
 #: ../src/common/gst-auth.c:104
 msgid "Check that you have permissions to run this command"
@@ -1251,22 +1223,22 @@ msgstr "Моментално прилагане на промените?"
 #: ../src/common/gst-dialog.c:491
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
-msgstr "Грешка при свързващия сигнал \"%s\" в уиджета \"%s\""
+msgstr "Грешка при свързващия сигнал „%s“ в уиджета „%s“"
 
-#: ../src/common/gst-tool.c:1020
+#: ../src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "Настройките не могат да бъдат заредени"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "Грешка при изпълнението на скрипта"
 
-#: ../src/common/gst-tool.c:1503
+#: ../src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Добре дошли във версия %s на системните инструменти към GNOME"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1280,19 +1252,19 @@ msgstr ""
 "Ви струва време и нерви. Бяхте предупреден. Благодаря ви, че изпробвате тази "
 "предварителна версия на системните инструменти на GNOME!"
 
-#: ../src/common/gst-tool.c:1526
+#: ../src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "Внимание"
 
-#: ../src/common/gst-tool.c:1546
+#: ../src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "Да не ми показва това съобщение отново"
 
-#: ../src/common/gst-tool.c:1603
+#: ../src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "Системни инструменти към GNOME"
 
-#: ../src/common/gst-tool.c:1748
+#: ../src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "Помощта не може да бъде показана"
 
@@ -1404,15 +1376,15 @@ msgstr "Настройка на мрежови устройства и връз�
 msgid "Networking"
 msgstr "Мрежа"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Локална мрежа"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "Инфрачервена връзка"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN"
 
@@ -1420,58 +1392,55 @@ msgstr "ISDN"
 msgid "Modem connection"
 msgstr "Модем"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "Паралелен порт"
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "Безжична връзка"
 
 #: ../src/network/network-iface.c:410
 #, c-format
 msgid "Activating interface \"%s\""
-msgstr "Активиране на интерфейса \"%s\""
+msgstr "Активиране на интерфейса „%s“"
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "Интерфейсът %s не е настроен"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "Интерфейсът %s не е активиран"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "Интерфейсът %s е активиран"
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "Няма описание на разположение."
-
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "Стартирана"
-
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "Спряна"
-
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "Не може да бъде получена информация"
-
-#: ../src/services/callbacks.c:292
+#: ../src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "Настройки за услугата %s"
+msgid "Settings for \"%s\""
+msgstr "Настройки за %s"
 
-#: ../src/services/main.c:62
-msgid "Services Settings"
-msgstr "Настройки за услугите"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "Сигурни ли сте, че искате да деактивирате тази услуга?"
+
+#: ../src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"Това може да повлияе върху поведението на вашата система по няколко начина, "
+"възможно е да се стигне до загуба на данни"
+
+#: ../src/services/main.c:54
+msgid "Change your running services"
+msgstr "Промяна на стартираните услуги"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1482,13 +1451,78 @@ msgstr ""
 msgid "Services"
 msgstr "Услуги"
 
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "Активно"
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "Диспечер на действия"
 
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "Услуга"
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "Изпълнение на запланувани действия"
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "Графична програма за влизане"
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "Изисква име и парола на потребител в графичен режим"
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "Услуга за споделяне на папка"
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "Споделя избрани папки по мрежата"
+
+#: ../src/services/service.c:33
+msgid "Mail agent"
+msgstr "Пощенски агент"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "Доставя пратената поща по Интернет"
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "Услуга за синхронизиране на часовника"
+
+#: ../src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr ""
+"Сверяване на часовника на компютъра със сървърите за точно време в Интернет"
+
+#: ../src/services/service.c:35
+msgid "Printer service"
+msgstr "Услуга за печат"
+
+#: ../src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "Позволява на приложенията да ползват принтери"
+
+#: ../src/services/service.c:36
+msgid "Remote shell server"
+msgstr "Сървър за отдалечена обвивка"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr "Сървър за сигурна обвивка"
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "Журнал на действията на компютъра"
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "Записва журнал с действията на компютъра"
+
+#: ../src/services/service.c:38
+msgid "Web server"
+msgstr "Уеб сървър"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "Споделяне на уеб страниците по Интернет"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1554,7 +1588,7 @@ msgstr "NFS"
 #: ../src/shares/shares.desktop.in.in.h:1
 msgid "Configure which folders are available for your network neighborhood"
 msgstr ""
-"Настройване на папките, които са налични във вашия network·neighborhood"
+"Настройване на папките, които са налични във вашия network neighborhood"
 
 #: ../src/shares/shares.desktop.in.in.h:2
 msgid "Shared Folders"
@@ -1671,7 +1705,7 @@ msgstr "Задайте валидно име за групата, използв
 #: ../src/users/group-settings.c:208
 #, c-format
 msgid "Group \"%s\" already exists"
-msgstr "Групата \"%s\" вече съществува"
+msgstr "Групата „%s“ вече съществува"
 
 #: ../src/users/group-settings.c:209
 msgid "Please select a different group name"
@@ -1689,7 +1723,7 @@ msgstr "Групата на администратора не трябва да 
 #: ../src/users/group-settings.c:297
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
-msgstr "Сигурни ли сте, че искате да изтриете групата \"%s\"?"
+msgstr "Сигурни ли сте, че искате да изтриете групата „%s“?"
 
 #: ../src/users/group-settings.c:299
 msgid "This may leave files with invalid group ID in the filesystem."
@@ -1768,12 +1802,12 @@ msgstr ""
 #: ../src/users/profile-settings.c:215
 #, c-format
 msgid "Delete profile \"%s\"?"
-msgstr "Изтриване на профила \"%s\"?"
+msgstr "Изтриване на профила „%s“?"
 
 #: ../src/users/profile-settings.c:217
 msgid "You will not be able to recover this profile after pressing \"apply\"."
 msgstr ""
-"Няма да можете да възстановите този профил след натискането на \"прилагане\"."
+"Няма да можете да възстановите този профил след натискането на „прилагане“."
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: ../src/users/profiles-table.c:38
@@ -1808,7 +1842,7 @@ msgstr "Това би могло да направи системата неиз
 #: ../src/users/user-settings.c:81
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
-msgstr "Сигурни ли сте, че искате да изтриете потребителя \"%s\"?"
+msgstr "Сигурни ли сте, че искате да изтриете потребителя „%s“?"
 
 #: ../src/users/user-settings.c:83
 msgid ""
@@ -1837,7 +1871,7 @@ msgstr "Потребителското име е твърде дълго"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
+msgid "To be valid, the user name should have less than %i characters."
 msgstr ""
 "За да бъде валидно, потребителското име трябва да има по-малко от %i символа."
 
@@ -1859,7 +1893,7 @@ msgstr ""
 #: ../src/users/user-settings.c:315
 #, c-format
 msgid "User name \"%s\" already exists"
-msgstr "Потребителят \"%s\" вече съществува"
+msgstr "Потребителят „%s“ вече съществува"
 
 #: ../src/users/user-settings.c:316
 msgid "Please select a different user name."
@@ -1868,7 +1902,7 @@ msgstr "Изберете различно потребителско име."
 #: ../src/users/user-settings.c:341
 #, c-format
 msgid "Invalid character \"%c\" in comment"
-msgstr "Невалиден знак \"%c\" в коментара"
+msgstr "Невалиден знак „%c“ в коментара"
 
 #: ../src/users/user-settings.c:342
 msgid "Check that this character is not used."
@@ -1979,9 +2013,3 @@ msgstr "Обвивка"
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Добавяне или премахване на потребители и групи"
-
-#~ msgid "DHCP"
-#~ msgstr "DHCP"
-
-#~ msgid "This device is _configured"
-#~ msgstr "Това устройство е _настроено"
