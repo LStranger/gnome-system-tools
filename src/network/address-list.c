@@ -422,6 +422,22 @@ setup_treeview (GstAddressList *list)
 					GDK_ACTION_MOVE);
 }
 
+static gboolean
+check_address (GstAddressList *list, const gchar *text)
+{
+  gint type;
+
+  if (list->_priv->type != GST_ADDRESS_TYPE_IP)
+    return TRUE;
+
+  type = gst_filter_check_ip_address (text);
+
+  if (type == GST_ADDRESS_IPV4 || type == GST_ADDRESS_IPV6)
+    return TRUE;
+
+  return FALSE;
+}
+
 static void
 on_editable_activate (GtkWidget *widget, GstAddressList *list)
 {
@@ -429,8 +445,7 @@ on_editable_activate (GtkWidget *widget, GstAddressList *list)
 
   text = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
 
-  if (list->_priv->type == GST_ADDRESS_TYPE_IP &&
-      gst_filter_check_ip_address (text) != GST_ADDRESS_IPV4)
+  if (!check_address (list, text))
     g_signal_stop_emission_by_name (widget, "activate");
 }
 
@@ -481,6 +496,7 @@ on_editing_done (GtkCellRenderer *renderer,
   GtkTreePath    *path;
   GtkTreeIter     iter;
   GstAddressList *list;
+  gboolean        is_new_row;
 
   list  = (GstAddressList *) data;
   model = gtk_tree_view_get_model (list->_priv->list);
@@ -488,11 +504,21 @@ on_editing_done (GtkCellRenderer *renderer,
 
   gtk_tree_model_get_iter (model, &iter, path);
 
-  gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-		      0, new_text,
-		      1, FALSE,
-		      -1);
-  gst_dialog_modify (tool->main_dialog);
+  if (!check_address (list, new_text))
+    {
+      gtk_tree_model_get (model, &iter, 1, &is_new_row, -1);
+
+      if (is_new_row)
+	gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+    }
+  else
+    {
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			  0, new_text,
+			  1, FALSE,
+			  -1);
+      gst_dialog_modify (tool->main_dialog);
+    }
 }
 
 static void
