@@ -209,7 +209,7 @@ gst_time_update_date (GstTimeTool *tool, gint add)
 		{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
 	};
 	GtkWidget *calendar;
-	gint day, month, year;
+	guint day, month, year;
 	gint days_in_month;
 	gboolean leap_year;
 
@@ -708,7 +708,7 @@ void
 gst_time_set_full (GstTimeTool *time_tool, struct tm *tm)
 {
 	GtkWidget *calendar_widget;
-	gint day, month, year;
+	guint day, month, year;
 
 	calendar_widget = gst_dialog_get_widget (GST_TOOL (time_tool)->main_dialog, "calendar");
 	
