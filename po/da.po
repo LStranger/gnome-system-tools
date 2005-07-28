@@ -36,8 +36,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-15 09:04+0200\n"
-"PO-Revision-Date: 2005-06-15 10:03+0200\n"
+"POT-Creation-Date: 2005-07-28 12:15+0200\n"
+"PO-Revision-Date: 2005-07-28 12:11+0200\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -600,40 +600,14 @@ msgid "_Volume:"
 msgstr "L_ydstyrke:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">Generelle oplysninger</span>"
+#, fuzzy
+msgid "<b>Available services:</b>"
+msgstr "<b>Delingsegenskaber</b>"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">Tjenesteindstillinger</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "Beskrivelse:"
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "_Indstillinger for tjeneste"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "Tjeneste:"
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "Status:"
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "S_ortér liste efter startsekvens"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "_Start"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "_Startsekvens:"
+#, fuzzy
+msgid "Advanced settings:"
+msgstr "Avancerede indstillinger"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1271,20 +1245,20 @@ msgstr "Aktivér disse nu?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fejl ved forbindelse af signalet '%s' i kontrollen '%s'"
 
-#: ../src/common/gst-tool.c:1020
+#: ../src/common/gst-tool.c:1022
 msgid "The configuration could not be loaded"
 msgstr "Konfigurationen kunne ikke indlæses"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1024
 msgid "There was an error running the backend script"
 msgstr "Der opstod en fejl ved kørsel af bagendeprogrammet"
 
-#: ../src/common/gst-tool.c:1503
+#: ../src/common/gst-tool.c:1505
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Velkommen til præversion %s af systemværktøjerne til Gnome"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1507
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1298,30 +1272,30 @@ msgstr ""
 "fra din side. Du er blevet advaret. Tak, fordi du prøver denne tidlige "
 "udgave af systemværktøjerne!"
 
-#: ../src/common/gst-tool.c:1526
+#: ../src/common/gst-tool.c:1528
 msgid "Warning"
 msgstr "Advarsel"
 
-#: ../src/common/gst-tool.c:1546
+#: ../src/common/gst-tool.c:1548
 msgid "Don't show me this again"
 msgstr "Vis ikke dette vindue igen"
 
-#: ../src/common/gst-tool.c:1603
+#: ../src/common/gst-tool.c:1605
 msgid "GNOME System Tools"
 msgstr "Systemværktøjer"
 
-#: ../src/common/gst-tool.c:1748
+#: ../src/common/gst-tool.c:1750
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjælp"
 
-#: ../src/network/address-list.c:528
+#: ../src/network/address-list.c:554
 msgid "Type address"
 msgstr "Indtast adresse"
 
 #: ../src/network/callbacks.c:44
 #, c-format
 msgid "Could not enable the interface %s"
-msgstr "Kunne ikke aktivere brugerfladen %s"
+msgstr "Kunne ikke aktivere grænsefladen %s"
 
 #: ../src/network/callbacks.c:48
 msgid ""
@@ -1424,15 +1398,15 @@ msgstr "Konfigurér netværksenheder og -forbindelser"
 msgid "Networking"
 msgstr "Netværk"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Ethernetforbindelse"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "Infrarød forbindelse"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN-forbindelse"
 
@@ -1440,11 +1414,11 @@ msgstr "ISDN-forbindelse"
 msgid "Modem connection"
 msgstr "Modemforbindelse"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "Parallelportforbindelse"
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "Trådløs forbindelse"
 
@@ -1453,45 +1427,41 @@ msgstr "Trådløs forbindelse"
 msgid "Activating interface \"%s\""
 msgstr "Aktiverer grænsefladen \"%s\""
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "Grænsefladen %s er ikke konfigureret"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "Grænsefladen %s er ikke aktiv"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "Grænsefladen %s er aktiv"
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "Ingen beskrivelse tilgængelig."
+#: ../src/services/callbacks.c:63
+#, fuzzy, c-format
+msgid "Settings for \"%s\""
+msgstr "Indstillinger for brugeren %s"
 
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "Kører"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:152
+#, fuzzy
+msgid "Are you sure you want to deactivate this service?"
+msgstr "Er du sikker på at du vil slette denne deling?"
 
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "Stoppet"
+#: ../src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
 
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "Kunne ikke skaffe oplysninger"
-
-#: ../src/services/callbacks.c:292
-#, c-format
-msgid "Settings for service %s"
-msgstr "Indstillinger for tjenesten %s"
-
-#: ../src/services/main.c:62
-msgid "Services Settings"
-msgstr "Tjenesteindstillinger"
+#: ../src/services/main.c:54
+msgid "Change your running services"
+msgstr ""
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1501,13 +1471,83 @@ msgstr "Konfigurér hvilke tjenester der vil blive kørt når systemet starter"
 msgid "Services"
 msgstr "Tjenester"
 
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "Aktiv"
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr ""
 
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "Tjeneste"
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr ""
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr ""
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr ""
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr ""
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr ""
+
+#: ../src/services/service.c:33
+#, fuzzy
+msgid "Mail agent"
+msgstr "Stum"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr ""
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr ""
+
+#: ../src/services/service.c:34
+#, fuzzy
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "S_ynkronisér ur med internetservere:"
+
+#: ../src/services/service.c:35
+#, fuzzy
+msgid "Printer service"
+msgstr "Printerindstillinger"
+
+#: ../src/services/service.c:35
+#, fuzzy
+msgid "Allows applications to use printers"
+msgstr "Tillad aktiveringskontrol for alle brugere"
+
+#: ../src/services/service.c:36
+#, fuzzy
+msgid "Remote shell server"
+msgstr "Slet DNS-server"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr ""
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr ""
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr ""
+
+#: ../src/services/service.c:38
+#, fuzzy
+msgid "Web server"
+msgstr "Tidsservere"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr ""
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1600,7 +1640,7 @@ msgid ""
 "synchronization of your local time server with internet time servers."
 msgstr ""
 "Installér og aktivér NTP-understøttelse på systemet for at aktivere "
-"synkronisering mellem din lokale tidsserver med internettidsservere."
+"synkronisering af din lokale tidsserver med internettidsservere."
 
 #: ../src/time/main.c:759
 msgid "Time and Date Settings"
@@ -1827,7 +1867,7 @@ msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
 msgstr ""
-"Dette vil deaktivere denne brugers adgang til systemet, uden at slette "
+"Dette vil deaktivere denne brugers adgang til systemet uden at slette "
 "brugerens hjemmemappe."
 
 #: ../src/users/user-settings.c:187
@@ -1849,8 +1889,8 @@ msgid "The user name is too long"
 msgstr "Brugernavnet er for langt"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
-#, c-format
-msgid "The user name should have less than %i characters for being valid."
+#, fuzzy, c-format
+msgid "To be valid, the user name should have less than %i characters."
 msgstr "Brugernavnet skal være på mindre end %i tegn for at være gyldigt."
 
 #: ../src/users/user-settings.c:302
@@ -1962,7 +2002,8 @@ msgstr "Bekræftelsen af adgangskoden er ikke korrekt"
 
 #: ../src/users/user-settings.c:498
 msgid "Check that you have provided the same password in both text fields."
-msgstr "Kontrollér at du har angivet den samme adgangskode i begge tekstfelter."
+msgstr ""
+"Kontrollér at du har angivet den samme adgangskode i begge tekstfelter."
 
 #: ../src/users/user-settings.c:772
 #, c-format
@@ -1992,6 +2033,57 @@ msgstr "Skal"
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Tilføj eller fjern brugere og grupper"
+
+#~ msgid "<span weight=\"bold\">General Information</span>"
+#~ msgstr "<span weight=\"bold\">Generelle oplysninger</span>"
+
+#~ msgid "<span weight=\"bold\">Service Settings</span>"
+#~ msgstr "<span weight=\"bold\">Tjenesteindstillinger</span>"
+
+#~ msgid "Description:"
+#~ msgstr "Beskrivelse:"
+
+#~ msgid "Service _Properties"
+#~ msgstr "_Indstillinger for tjeneste"
+
+#~ msgid "Service:"
+#~ msgstr "Tjeneste:"
+
+#~ msgid "Status:"
+#~ msgstr "Status:"
+
+#~ msgid "_Order list by startup sequence"
+#~ msgstr "S_ortér liste efter startsekvens"
+
+#~ msgid "_Start"
+#~ msgstr "_Start"
+
+#~ msgid "_Startup sequence:"
+#~ msgstr "_Startsekvens:"
+
+#~ msgid "No description available."
+#~ msgstr "Ingen beskrivelse tilgængelig."
+
+#~ msgid "Running"
+#~ msgstr "Kører"
+
+#~ msgid "Stopped"
+#~ msgstr "Stoppet"
+
+#~ msgid "Could not get info"
+#~ msgstr "Kunne ikke skaffe oplysninger"
+
+#~ msgid "Settings for service %s"
+#~ msgstr "Indstillinger for tjenesten %s"
+
+#~ msgid "Services Settings"
+#~ msgstr "Tjenesteindstillinger"
+
+#~ msgid "Active"
+#~ msgstr "Aktiv"
+
+#~ msgid "Service"
+#~ msgstr "Tjeneste"
 
 #~ msgid "DHCP"
 #~ msgstr "DHCP"
@@ -2090,9 +2182,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 
 #~ msgid "Current network profile:"
 #~ msgstr "Aktuelle netværksprofil:"
-
-#~ msgid "Delete DNS server"
-#~ msgstr "Slet DNS-server"
 
 #~ msgid "Delete search domain"
 #~ msgstr "Slet søgedomæne"
@@ -2390,9 +2479,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 
 #~ msgid "_Disable"
 #~ msgstr "_Deaktivér"
-
-#~ msgid "Silent"
-#~ msgstr "Stum"
 
 #~ msgid "Low"
 #~ msgstr "Svag"
@@ -2975,9 +3061,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "Add New Internet Connection"
 #~ msgstr "Tilføj ny internetforbindelse"
 
-#~ msgid "Allow activation control for all users"
-#~ msgstr "Tillad aktiveringskontrol for alle brugere"
-
 #~ msgid "Connection active"
 #~ msgstr "Forbindelse aktiv"
 
@@ -3422,8 +3505,8 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ "directories for your users."
 #~ msgstr ""
 #~ "Diske er opdelt i flere enheder som kaldes partitioner. Hver partition "
-#~ "får tildelt en specifik datalagringsopgave som fx at supplere den "
-#~ "normale hukommelse eller indeholde hjemmemapper for brugerne."
+#~ "får tildelt en specifik datalagringsopgave som fx at supplere den normale "
+#~ "hukommelse eller indeholde hjemmemapper for brugerne."
 
 #~ msgid "Ext2 (Linux)"
 #~ msgstr "Ext2 (Linux)"
@@ -4053,9 +4136,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "Print resolution."
 #~ msgstr "Printeropløsning."
 
-#~ msgid "Printer Settings"
-#~ msgstr "Printerindstillinger"
-
 # 'port' må hvis skulle opfattes som stik her
 #~ msgid "Printer connected to a port on your machine."
 #~ msgstr "Printer som er forbundet til et stik på din maskine."
@@ -4627,8 +4707,8 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ "On this page, you can define security options, such as how frequently "
 #~ "users must change their passwords."
 #~ msgstr ""
-#~ "På denne side kan du tilrette sikkerhedsindstillinger som fx hvor "
-#~ "ofte brugere skal ændre deres adgangskode."
+#~ "På denne side kan du tilrette sikkerhedsindstillinger som fx hvor ofte "
+#~ "brugere skal ændre deres adgangskode."
 
 #~ msgid "Password options"
 #~ msgstr "Adgangskodeindstillinger"
@@ -4659,9 +4739,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 
 #~ msgid "Home _directory:"
 #~ msgstr "Hjemme_mappe:"
-
-#~ msgid "Advanced settings"
-#~ msgstr "Avancerede indstillinger"
 
 #~ msgid "Optional settings"
 #~ msgstr "Valgfri indstillinger"
