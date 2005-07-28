@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-30 16:13+0200\n"
-"PO-Revision-Date: 2005-06-30 16:12+0200\n"
+"POT-Creation-Date: 2005-07-28 04:25+0200\n"
+"PO-Revision-Date: 2005-07-28 04:24+0200\n"
 "Last-Translator: Terance Edward Sola <terance@lyse.net>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -571,40 +571,12 @@ msgid "_Volume:"
 msgstr "_Volum:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">Generell informasjon</span>"
+msgid "<b>Available services:</b>"
+msgstr "<b>Tilgjengelige tjenester:</b>"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">Tjenesteinnstillinger</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "Beskrivelse:"
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "Egenska_per for tjeneste"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "Tjeneste:"
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "Status:"
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "S_orter listen etter oppstartssekvens"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "_Start"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "Opp_startssekvens:"
+msgid "Advanced settings:"
+msgstr "Avanserte instillinger:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -1262,6 +1234,11 @@ msgid ""
 "have been warned. Thank you for trying out this prerelease of the GNOME "
 "System Tools!"
 msgstr ""
+"Dette programmet er enda under utforming og kan derfor ha alvorlige feil. På "
+"grunn av egenskapene til disse verktøyene kan feil gjøre datamaskinen <span "
+"weight=\"bold \">ubrukelig</span>. Dette kan fort koste tid, innsats og gå "
+"ut over psyken. Du har blitt advard. Takk for at du prøver ut denne tidlige "
+"utgaven av GNOME System Tools!"
 
 #: ../src/common/gst-tool.c:1528
 msgid "Warning"
@@ -1279,7 +1256,7 @@ msgstr "GNOME systemverktøy"
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjelp"
 
-#: ../src/network/address-list.c:528
+#: ../src/network/address-list.c:554
 msgid "Type address"
 msgstr "Type adresse"
 
@@ -1385,15 +1362,15 @@ msgstr "Konfigurer nettverksenheter og tilkoblinger"
 msgid "Networking"
 msgstr "Nettverk"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Ethernet-tilkobling"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "Infrarød tilkobling"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN-tilkobling"
 
@@ -1401,11 +1378,11 @@ msgstr "ISDN-tilkobling"
 msgid "Modem connection"
 msgstr "Modem-tilkobling"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "Tilkobling via parallellport."
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "Trådløs tilkobling"
 
@@ -1414,45 +1391,41 @@ msgstr "Trådløs tilkobling"
 msgid "Activating interface \"%s\""
 msgstr "Aktiverer grensesnitt «%s»"
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "Grensesnitt %s er ikke konfigurert"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "Grensesnitt %s er ikke aktivt"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "Grensesnitt %s er aktivt"
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "Ingen beskrivelse tilgjengelig."
-
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "Kjører"
-
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "Stoppet"
-
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "Fant ikke informasjon"
-
-#: ../src/services/callbacks.c:292
+#: ../src/services/callbacks.c:63
 #, c-format
-msgid "Settings for service %s"
-msgstr "Innstillinger for tjeneste %s"
+msgid "Settings for \"%s\""
+msgstr "Innstillinger for «%s»"
 
-#: ../src/services/main.c:62
-msgid "Services Settings"
-msgstr "Innstillinger for tjenester"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:152
+msgid "Are you sure you want to deactivate this service?"
+msgstr "Er du sikker på at du vil slå av tjenesten?"
+
+#: ../src/services/callbacks.c:155
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"Dette kan påvirke systemet på mange måter, og muligens føre til tap av data"
+
+#: ../src/services/main.c:54
+msgid "Change your running services"
+msgstr "Endre kjørende tjenester"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1462,13 +1435,77 @@ msgstr "Konfigurer hvilke tjenester som skal kjøres når systemet starter"
 msgid "Services"
 msgstr "Tjenester"
 
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "Aktiv"
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "Handlingsplanlegger"
 
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "Tjeneste"
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "Kjører planlagte handlinger"
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "Grafisk innloggingshåndterer"
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "Spør etter bruker og passord grafisk"
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "Tjeneste for mappedeling"
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "Deler dine valgte mapper gjennom nettverket"
+
+#: ../src/services/service.c:33
+msgid "Mail agent"
+msgstr "E-postagent"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "Leverer sendte e-poster gjennom Internett"
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "Tjeneste for klokkesynkronisering"
+
+#: ../src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "Synkroniser klokken på datamaskinen med tidtjenere på Internett"
+
+#: ../src/services/service.c:35
+msgid "Printer service"
+msgstr "Skrivertjeneste"
+
+#: ../src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "Tillater programmer å bruke skrivere"
+
+#: ../src/services/service.c:36
+msgid "Remote shell server"
+msgstr "Ekstern skalltjener"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr "Sikker skalltjener"
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr ""
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "Logger aktivitet på datamaskinen"
+
+#: ../src/services/service.c:38
+msgid "Web server"
+msgstr "Vevtjener"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "Del dine nettsider gjennom Internett"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1810,7 +1847,7 @@ msgstr "Brukernavnet er for langt"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
+msgid "To be valid, the user name should have less than %i characters."
 msgstr "Brukernavn må ha mindre enn %i tegn for å være gyldig."
 
 #: ../src/users/user-settings.c:302
