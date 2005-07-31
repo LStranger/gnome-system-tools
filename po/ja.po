@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-15 00:02+0900\n"
-"PO-Revision-Date: 2005-07-14 23:59+0900\n"
+"POT-Creation-Date: 2005-07-31 22:35+0900\n"
+"PO-Revision-Date: 2005-07-31 22:33+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translations@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -1261,7 +1261,7 @@ msgstr "GNOME システム・ツール"
 msgid "Could not display help"
 msgstr "ヘルプを表示できませんでした"
 
-#: ../src/network/address-list.c:528
+#: ../src/network/address-list.c:554
 msgid "Type address"
 msgstr "\"アドレスを入力して下さい\""
 
@@ -1370,15 +1370,15 @@ msgstr "ネットワーク・デバイスの接続を設定します"
 msgid "Networking"
 msgstr "ネットワークの管理"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:301
 msgid "Ethernet connection"
 msgstr "Ethernet 接続"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:121
 msgid "Infrared connection"
 msgstr "赤外線接続"
 
-#: ../src/network/network-iface-isdn.c:332
+#: ../src/network/network-iface-isdn.c:328
 msgid "ISDN connection"
 msgstr "ISDN 接続"
 
@@ -1386,11 +1386,11 @@ msgstr "ISDN 接続"
 msgid "Modem connection"
 msgstr "モデム接続"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:210
 msgid "Parallel port connection"
 msgstr "パラレルポート接続"
 
-#: ../src/network/network-iface-wireless.c:249
+#: ../src/network/network-iface-wireless.c:244
 msgid "Wireless connection"
 msgstr "無線 LAN 接続"
 
@@ -1399,17 +1399,17 @@ msgstr "無線 LAN 接続"
 msgid "Activating interface \"%s\""
 msgstr "インタフェース \"%s\" を有効にしています"
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "インタフェース %s が設定されていません"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "インタフェース %s が有効になっていません"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "インタフェース %s は有効です"
@@ -1443,6 +1443,78 @@ msgstr "システムの起動時に実行するサービスを設定します"
 #: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "サービスの管理"
+
+#: ../src/services/service.c:30
+msgid "Actions scheduler"
+msgstr "スケジューラの起動"
+
+#: ../src/services/service.c:30
+msgid "Executes scheduled actions"
+msgstr "スケジュールされた処理を実行します"
+
+#: ../src/services/service.c:31
+msgid "Graphical login manager"
+msgstr "グラフィカルなログイン・マネージャ"
+
+#: ../src/services/service.c:31
+msgid "Requests user and password in a graphical fashion"
+msgstr "グラフィカルなスタイルでログインを要求します"
+
+#: ../src/services/service.c:32
+msgid "Folder sharing service"
+msgstr "フォルダの共有サービス"
+
+#: ../src/services/service.c:32
+msgid "Shares your selected folders through your network"
+msgstr "選択したフォルダをネットワークを介して共有します"
+
+#: ../src/services/service.c:33
+msgid "Mail agent"
+msgstr "メール・エージェント"
+
+#: ../src/services/service.c:33
+msgid "Delivers your sent mails through internet"
+msgstr "送信したメールをインターネットを経由して配送します"
+
+#: ../src/services/service.c:34
+msgid "Clock synchronization service"
+msgstr "時刻の同期サービス"
+
+#: ../src/services/service.c:34
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "お使いのコンピュータの時計をインターネット時刻サーバに同期します"
+
+#: ../src/services/service.c:35
+msgid "Printer service"
+msgstr "印刷サービス"
+
+#: ../src/services/service.c:35
+msgid "Allows applications to use printers"
+msgstr "アプリケーションでプリンタを使用できるようにします"
+
+#: ../src/services/service.c:36
+msgid "Remote shell server"
+msgstr "リモート・シェル・サービス"
+
+#: ../src/services/service.c:36
+msgid "Secure shell server"
+msgstr "セキュアなシェル・サービスです"
+
+#: ../src/services/service.c:37
+msgid "Computer activity logger"
+msgstr "ログの記録サービス"
+
+#: ../src/services/service.c:37
+msgid "Keeps a log of your computer activity"
+msgstr "お使いのコンピュータの動きをログに記録します"
+
+#: ../src/services/service.c:38
+msgid "Web server"
+msgstr "ウェブ・サーバ"
+
+#: ../src/services/service.c:38
+msgid "Shares your web pages through internet"
+msgstr "ウェブ・ページをインターネットを介して共有します"
 
 #: ../src/shares/callbacks.c:184
 msgid "Are you sure you want to delete this share?"
@@ -1787,7 +1859,7 @@ msgstr "ユーザ名が長すぎます"
 
 #: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
-msgid "The user name should have less than %i characters for being valid."
+msgid "To be valid, the user name should have less than %i characters."
 msgstr "ユーザ名は %i 文字より少なくして下さい。"
 
 #: ../src/users/user-settings.c:302
