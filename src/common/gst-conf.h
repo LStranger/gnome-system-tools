@@ -22,7 +22,6 @@
 #ifndef GST_CONF_H
 #define GST_CONF_H
 
-#include <gnome.h>
 #include "gst-types.h"
 #include "gst-tool.h"
 

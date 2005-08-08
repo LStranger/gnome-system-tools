@@ -21,9 +21,11 @@
  * Authors: Carlos Garnacho <carlosg@gnome.org>.
  */
 
-#include "service.h"
+
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include "gst.h"
+#include "service.h"
 
 /* this has to be sorted */
 static ServiceDescription descriptions[] = {

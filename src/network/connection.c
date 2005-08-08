@@ -18,6 +18,8 @@
  * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
+#include <string.h>
+
 #include "gst.h"
 #include "gst-network-tool.h"
 #include "connection.h"

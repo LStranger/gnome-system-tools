@@ -19,6 +19,7 @@
  */
 
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <gdk/gdkpixbuf.h>
 #include "gst.h"
 #include "network-iface.h"

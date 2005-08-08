@@ -23,8 +23,9 @@
 #ifndef BOOT_DRUID_H
 #define BOOT_DRUID_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include <glade/glade.h>
+#include <libgnomeui/gnome-druid.h>
 
 #include "boot-settings.h"
 

@@ -23,8 +23,8 @@
 
 /* Functions for transferring information between XML tree and UI */
 
+#include <gtk/gtk.h>
 
-#include <gnome.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
 #include "gst.h"

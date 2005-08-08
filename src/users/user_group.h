@@ -26,7 +26,6 @@
 #ifndef __USER_GROUP_H
 #define __USER_GROUP_H
 
-#include <gnome.h>
 
 #include "gst.h"
 

@@ -21,7 +21,9 @@
  * Authors: Carlos Garnacho Parro <carlosg@gnome.org>.
  */
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
 #include "share-settings.h"
 #include "share-export-smb.h"
 #include "share-export-nfs.h"

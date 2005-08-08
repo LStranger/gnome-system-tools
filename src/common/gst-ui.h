@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#include <gnome.h>
+
 #include <glade/glade.h>
+#include <gtk/gtk.h>
 
 #ifndef GST_UI_H
 #define GST_UI_H

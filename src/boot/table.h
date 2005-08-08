@@ -24,7 +24,7 @@
 #ifndef __TABLE_H
 #define __TABLE_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "boot-image.h"
 

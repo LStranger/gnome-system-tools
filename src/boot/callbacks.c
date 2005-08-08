@@ -26,7 +26,7 @@
 #endif
 
 #include <ctype.h>
-#include <gnome.h>
+#include <glib/gi18n.h>
 
 #include "gst.h"
 #include "gst-report-hook.h"

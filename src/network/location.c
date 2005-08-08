@@ -18,6 +18,9 @@
  * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
+#include <glib/gi18n.h>
+#include <string.h>
+
 #include "gst-network-tool.h"
 #include "location.h"
 #include "ifaces-list.h"

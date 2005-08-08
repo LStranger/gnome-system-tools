@@ -24,7 +24,6 @@
 #ifndef __GROUP_SETTINGS_H
 #define __GROUP_SETTINGS_H
 
-#include <gnome.h>
 
 void		group_new_prepare		(ug_data*);
 void		group_settings_prepare		(ug_data*);

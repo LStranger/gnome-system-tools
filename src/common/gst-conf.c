@@ -20,7 +20,6 @@
  */
 
 #include <config.h>
-#include <gnome.h>
 #include <gconf/gconf-client.h>
 
 #include "gst-conf.h"
@@ -62,8 +61,6 @@ gst_conf_set_boolean (GstTool *tool, const gchar *key, gboolean value)
 	main_key = gst_conf_make_key (tool, key);
 
 	gconf_client_set_bool (client, main_key, value, &error);
-
-	gnome_config_set_bool (main_key, value);
 
 	g_free (main_key);
 }

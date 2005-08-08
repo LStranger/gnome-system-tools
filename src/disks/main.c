@@ -27,7 +27,7 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib/gi18n.h>
 
 #include "gst-report-hook.h"
 #include "gst-disks-tool.h"

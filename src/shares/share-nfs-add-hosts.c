@@ -21,6 +21,8 @@
  * Authors: Carlos Garnacho Parro <carlosg@gnome.org>.
  */
 
+#include <glib/gi18n.h>
+
 #include "share-nfs-add-hosts.h"
 #include "gst.h"
 

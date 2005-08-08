@@ -24,7 +24,7 @@
 #ifndef __CALLBACKS_H
 #define __CALLBACKS_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 void      on_boot_table_default_toggled (GtkWidget*, gchar*, gpointer);
 void	  on_boot_table_cursor_changed	(GtkTreeSelection*, gpointer);

@@ -31,6 +31,9 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+
+#include <glib/gi18n.h>
 
 #ifdef HAVE_LIBCRACK
 #include <crack.h>

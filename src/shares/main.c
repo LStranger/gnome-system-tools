@@ -25,6 +25,8 @@
 #  include <config.h>
 #endif
 
+#include <glib/gi18n.h>
+
 #include "gst.h"
 #include "table.h"
 #include "nfs-acl-table.h"

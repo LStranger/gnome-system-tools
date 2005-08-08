@@ -25,7 +25,10 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <string.h>
+
+#include <glib/gi18n.h>
+
 #include "gst.h"
 
 #include "disks-storage.h"

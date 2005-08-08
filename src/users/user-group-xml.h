@@ -25,7 +25,6 @@
 #ifndef __USER_GROUP_XML_H
 #define __USER_GROUP_XML_H
 
-#include <gnome.h>
 #include "user-settings.h"
 
 gchar    *generic_value_string         (xmlNodePtr node, const gchar *name);

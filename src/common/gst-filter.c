@@ -18,6 +18,8 @@
  * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
+#include <string.h>
+
 #include "gst-filter.h"
 
 typedef enum {

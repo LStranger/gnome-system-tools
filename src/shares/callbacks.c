@@ -25,7 +25,10 @@
 #  include <config.h>
 #endif
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
+#include <libgnomevfs/gnome-vfs-uri.h>
 
 #include "gst.h"
 #include "table.h"

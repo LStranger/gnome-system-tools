@@ -19,6 +19,7 @@
  */
 
 #include <glib.h>
+#include <glib/gi18n.h>
 #include "network-iface-ethernet.h"
 #include "network-iface.h"
 #include "gst.h"

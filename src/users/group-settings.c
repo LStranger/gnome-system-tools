@@ -25,7 +25,9 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib/gi18n.h>
+
+#include <string.h>
 
 #include "gst.h"
 #include "groups-table.h"

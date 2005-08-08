@@ -23,7 +23,7 @@
 #ifndef __BOOT_APPEND_H
 #define __BOOT_APPEND_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "boot-settings.h"
 

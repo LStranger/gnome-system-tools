@@ -26,6 +26,8 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
+
 #include "gst.h"
 #include "user-group-xml.h"
 

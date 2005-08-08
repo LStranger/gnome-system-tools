@@ -24,8 +24,6 @@
 #ifndef __USER_SETTINGS_H
 #define __USER_SETTINGS_H
 
-#include <gnome.h>
-
 #include "user_group.h"
 
 typedef struct {

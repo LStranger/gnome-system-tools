@@ -21,6 +21,8 @@
  * Authors: Carlos Garnacho <carlosg@gnome.org>.
  */
 
+#include <glib/gi18n.h>
+
 #include "gst.h"
 #include "share-export.h"
 #include "table.h"

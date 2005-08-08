@@ -2,7 +2,7 @@
 #ifndef __BOOT_SETTINGS_H
 #define __BOOT_SETTINGS_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "boot-image.h"
 

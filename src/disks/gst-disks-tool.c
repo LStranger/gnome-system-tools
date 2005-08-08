@@ -22,9 +22,6 @@
 #  include <config.h>
 #endif
 
-/*#include <gtk/gtk.h>*/
-#include <libgnomeui/libgnomeui.h>
-
 #include "gst-tool.h"
 #include "gst-disks-tool.h"
 

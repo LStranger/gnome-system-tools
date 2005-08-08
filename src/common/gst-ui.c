@@ -23,13 +23,14 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 #include "gst-ui.h"
 
 /* For gst_ui_image_widget_create */
 #include <config.h>
+#include <string.h>
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <libgnomecanvas/libgnomecanvas.h>
 
 static gchar *
 container_get_label_string (GtkWidget *container)

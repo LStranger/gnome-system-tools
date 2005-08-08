@@ -26,6 +26,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string.h>
+
+#include <glib/gi18n.h>
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>

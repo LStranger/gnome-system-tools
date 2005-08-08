@@ -24,6 +24,7 @@
 
 #include <string.h>
 #include <ctype.h>
+#include <glib/gi18n.h>
 
 #include "gst.h"
 #include "boot-druid.h"
@@ -255,7 +256,7 @@ other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 image_check (BootDruid *druid)
 {
-	const gchar *buf = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (druid->gui->image_widget));
+	gchar *buf = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (druid->gui->image_widget));
 	const gchar *buf2 = gtk_entry_get_text (GTK_ENTRY (GTK_BIN (druid->gui->root)->child));
 	gboolean enabled = (buf && buf2 && (strlen (buf) > 0) && (strlen (buf2) > 0)) ? TRUE : FALSE;
 	

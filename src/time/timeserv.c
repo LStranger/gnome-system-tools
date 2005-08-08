@@ -1,9 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #include "config.h"
 
+#include <string.h>
 #include <stdio.h>
 
-#include <gnome.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 

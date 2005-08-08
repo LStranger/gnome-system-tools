@@ -29,8 +29,11 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
+#include <time.h>
 
-#include <gnome.h>
+#include <gdk/gdkkeysyms.h>
+#include <glib/gi18n.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 

@@ -21,12 +21,13 @@
 #ifndef __SEARCH_BAR_H__
 #define __SEARCH_BAR_H__
 
-#include <gnome.h>
 
 #ifdef __cplusplus
 extern "C" {
 #pragma }
 #endif /* __cplusplus */
+
+#include <gtk/gtk.h>
 
 #define SEARCH_BAR_TYPE			(search_bar_get_type ())
 #define SEARCH_BAR(obj)			(GTK_CHECK_CAST ((obj), SEARCH_BAR_TYPE, SearchBar))

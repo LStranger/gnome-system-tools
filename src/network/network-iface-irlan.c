@@ -19,6 +19,7 @@
  */
 
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <gdk/gdkpixbuf.h>
 #include "network-iface-irlan.h"
 #include "gst.h"

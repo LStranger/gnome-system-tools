@@ -26,7 +26,9 @@
 #endif
 
 #include <ctype.h>
-#include <gnome.h>
+#include <string.h>
+
+#include <glib/gi18n.h>
 
 #include "gst.h"
 #include "callbacks.h"
@@ -124,7 +126,7 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 
 	/* Image frame */
 	gui->image_frame = glade_xml_get_widget (gui->xml, "settings_image_frame");
-	gui->image_widget = glade_xml_get_widget (gui->xml, "settings_image");
+	gui->image_widget = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image"));
 	gui->root = glade_xml_get_widget (gui->xml, "settings_root");
 	gui->initrd_label = glade_xml_get_widget (gui->xml, "settings_initrd_label");
 	gui->initrd_widget = glade_xml_get_widget (gui->xml, "settings_initrd");

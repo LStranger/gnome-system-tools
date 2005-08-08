@@ -26,7 +26,8 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <glade/glade.h>
 

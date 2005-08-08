@@ -25,7 +25,7 @@
 #ifndef __CALLBACKS_H
 #define __CALLBACKS_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 void gst_on_storage_list_selection_change   (GtkTreeSelection *selection, gpointer gdata);
 gboolean gst_on_storage_list_button_press   (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);

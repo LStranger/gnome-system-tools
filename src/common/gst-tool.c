@@ -38,14 +38,18 @@
 #  include <config-archiver/archiver-client.h>
 #endif
 
-#include <gnome.h>
-#include <libgnomeui/gnome-window-icon.h>
-
+#include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
+
+#include <libgnome/gnome-program.h>
+#include <libgnome/gnome-help.h>
+#include <libgnomeui/gnome-ui-init.h>
+
 
 #include <stdio.h>
 #include <errno.h>
 
+#include <string.h>
 #include <sys/types.h>
 #include <sys/poll.h>
 #include <sys/wait.h>

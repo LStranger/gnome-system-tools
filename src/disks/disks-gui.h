@@ -25,7 +25,7 @@
 #ifndef __DISKS_GUI_H
 #define __DISKS_GUI_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"

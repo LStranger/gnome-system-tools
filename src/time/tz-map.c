@@ -21,7 +21,6 @@
  */
 
 #include "config.h"
-#include <gnome.h>
 #include <glade/glade.h>
 #include <stdio.h>
 #include <stdlib.h>

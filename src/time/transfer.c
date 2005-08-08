@@ -1,11 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* Functions for transferring information between XML tree and UI */
 
+#include <string.h>
 #include <time.h>
 #include <sys/time.h>
 #include <unistd.h>
-
-#include <gnome.h>
 
 #include "gst.h"
 #include "time-tool.h"

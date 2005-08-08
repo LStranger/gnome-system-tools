@@ -24,8 +24,9 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
 #include <ctype.h>
-#include <gnome.h>
+#include <glib/gi18n.h>
 
 #include "gst.h"
 #include "callbacks.h"

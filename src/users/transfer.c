@@ -26,8 +26,6 @@
 /* Functions for transferring information between XML tree and UI */
 
 
-#include <gnome.h>
-
 #include "transfer.h"
 #include "table.h"
 

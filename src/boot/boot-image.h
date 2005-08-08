@@ -24,7 +24,7 @@
 #ifndef BOOT_IMAGE_H
 #define BOOT_IMAGE_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 #include "gst.h"
 
 #define MAX_IMAGES 16

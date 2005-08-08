@@ -21,8 +21,9 @@
 
 #include <config.h>
 
-#include <gnome.h>
 #include <gmodule.h>
+#include <glib/gi18n.h>
+#include <gdk/gdkkeysyms.h>
 #include "gst-widget.h"
 #include "gst-dialog.h"
 #include "gst-conf.h"

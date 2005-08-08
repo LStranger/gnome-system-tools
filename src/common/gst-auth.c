@@ -35,8 +35,8 @@
 #include <sys/wait.h>
 #include <termios.h>
 
-#include <gnome.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 #include <glade/glade.h>
 #include <gconf/gconf-client.h>
 

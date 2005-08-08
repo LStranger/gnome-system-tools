@@ -28,7 +28,9 @@
 #endif
 
 #include <ctype.h>
-#include <gnome.h>
+#include <string.h>
+
+#include <glib/gi18n.h>
 
 #include "callbacks.h"
 #include "user_group.h"

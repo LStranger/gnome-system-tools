@@ -22,7 +22,6 @@
 #include <config.h>
 #include <stdlib.h>
 #include <string.h>
-#include <gnome.h>
 
 #include "gst-report-line.h"
 

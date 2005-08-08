@@ -25,12 +25,14 @@
 #  include <config.h>
 #endif
 
+#include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <utmp.h>
 #include <ctype.h>
-#include <gnome.h>
+
+#include <glib/gi18n.h>
 
 #include "gst.h"
 #include "users-table.h"

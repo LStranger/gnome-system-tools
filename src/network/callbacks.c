@@ -18,6 +18,8 @@
  * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
+#include <glib/gi18n.h>
+
 #include "gst.h"
 #include "gst-network-tool.h"
 #include "network-iface.h"

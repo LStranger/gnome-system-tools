@@ -21,7 +21,6 @@
 #ifndef __GST_DISKS_TOOL_H__
 #define __GST_DISKS_TOOL_H__
 
-#include <libgnomeui/libgnomeui.h>
 #include <glib-object.h>
 #include "gst-tool.h"
 #include "disks-storage.h"
@@ -40,7 +39,7 @@ struct _GstDisksTool {
 	   GstTool      parent;
 
 	   GList          *storages;
-	   GnomeIconTheme *icon_theme;
+	   GtkIconTheme *icon_theme;
 };
 
 struct _GstDisksToolClass {
