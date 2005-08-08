@@ -27,15 +27,21 @@
 
 /* this has to be sorted */
 static ServiceDescription descriptions[] = {
-	{ "COMMAND_SCHEDULER",    FALSE, "stock_alarm",       N_("Actions scheduler"),             N_("Executes scheduled actions") },
-	{ "DISPLAY_MANAGER",      TRUE,  "gdm",               N_("Graphical login manager"),       N_("Requests user and password in a graphical fashion") },
-	{ "FILE_SERVER",          FALSE, "gnome-fs-share",    N_("Folder sharing service"),        N_("Shares your selected folders through your network") },
-	{ "MTA",                  FALSE, "stock_mail",        N_("Mail agent"),                    N_("Delivers your sent mails through internet") },
-	{ "NTP_SERVER",           FALSE, "clock",             N_("Clock synchronization service"), N_("Synchronizes your computer clock with internet time servers") },
-	{ "PRINTER_SERVICE",      FALSE, "gnome-dev-printer", N_("Printer service"),               N_("Allows applications to use printers") },
-	{ "SECURE_SHELL_SERVER",  FALSE, "gnome-terminal",    N_("Remote shell server"),           N_("Secure shell server") },
-	{ "SYSTEM_LOGGER",        FALSE, "logviewer",         N_("Computer activity logger"),      N_("Keeps a log of your computer activity") },
-	{ "WEB_SERVER",           FALSE, "apacheconf",        N_("Web server"),                    N_("Shares your web pages through internet") },
+	{ "ANTIVIRUS",            FALSE, "stock_lock",         N_("Antivirus"),                     N_("Analyzes your incoming mail for virus") },
+	{ "AUTOMOUNTER",          FALSE, "disks",              N_("Volumes mounter"),               N_("Mounts your volumes automatically") },
+	{ "COMMAND_SCHEDULER",    FALSE, "stock_alarm",        N_("Actions scheduler"),             N_("Executes scheduled actions") },
+	{ "DATABASE_SERVER",      FALSE, "file-manager",       N_("Database server"),               N_("Data storage system") },
+	{ "DISPLAY_MANAGER",      TRUE,  "gdm",                N_("Graphical login manager"),       N_("Allows users to login graphically") },
+	{ "FILE_SERVER",          FALSE, "gnome-fs-share",     N_("Folder sharing service"),        N_("Shares folders through your network") },
+	{ "FILE_SHARING",         FALSE, "gnome-ftp",          N_("File sharing service"),          N_("Shares files though internet") },
+	{ "FTP_SERVER",           FALSE, "gnome-ftp",          N_("FTP service"),                   N_("Shares files though internet") },
+	{ "MAIL_FETCHER",         FALSE, "stock_mail-receive", N_("Mail fetcher"),                  N_("Downloads your mail from remote accounts") },
+	{ "MTA",                  FALSE, "stock_mail-send",    N_("Mail agent"),                    N_("Delivers your mails through internet") },
+	{ "NTP_SERVER",           FALSE, "clock",              N_("Clock synchronization service"), N_("Synchronizes your computer clock with internet time servers") },
+	{ "PRINTER_SERVICE",      FALSE, "gnome-dev-printer",  N_("Printer service"),               N_("Allows applications to use printers") },
+	{ "SECURE_SHELL_SERVER",  FALSE, "gnome-terminal",     N_("Remote shell server"),           N_("Secure shell server") },
+	{ "SYSTEM_LOGGER",        FALSE, "logviewer",          N_("Computer activity logger"),      N_("Keeps a log of your computer activity") },
+	{ "WEB_SERVER",           FALSE, "apacheconf",         N_("Web server"),                    N_("Shares your web pages through internet") },
 };
 
 static int

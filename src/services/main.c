@@ -51,7 +51,7 @@ main (int argc, char *argv[])
 	gst_init ("services-admin", argc, argv, NULL);
 	
 	tool = gst_tool_new();
-	gst_tool_construct (tool, "services", _("Change your running services"));
+	gst_tool_construct (tool, "services", _("Services settings"));
 
 	table_create ();
 	
