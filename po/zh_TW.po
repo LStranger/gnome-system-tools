@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.9.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-05 22:27+0000\n"
-"PO-Revision-Date: 2005-08-06 08:58+0800\n"
+"POT-Creation-Date: 2005-08-08 22:47+0000\n"
+"PO-Revision-Date: 2005-08-09 08:25+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (traditional) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
@@ -109,7 +109,7 @@ msgid "Ask at boot"
 msgstr "在啟動電腦時詢問"
 
 #: ../interfaces/boot.glade.in.h:14
-#: ../src/boot/main.c:70
+#: ../src/boot/main.c:71
 msgid "Boot Manager Settings"
 msgstr "啟動總管設定"
 
@@ -127,8 +127,8 @@ msgstr "確認密碼"
 
 #. set window title
 #: ../interfaces/boot.glade.in.h:18
-#: ../src/boot/boot-druid.c:441
-#: ../src/boot/boot-druid.c:453
+#: ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:454
 msgid "Creating a new boot image"
 msgstr "建立新的啟動影像檔"
 
@@ -213,7 +213,7 @@ msgid "_Edit"
 msgstr "修改(_E)"
 
 #: ../interfaces/boot.glade.in.h:39
-#: ../src/boot/boot-settings.c:42
+#: ../src/boot/boot-settings.c:44
 msgid "_Initrd image path:"
 msgstr "_Initrd 影像檔路徑："
 
@@ -462,7 +462,7 @@ msgid "WEP _key:"
 msgstr "WEP _key:"
 
 #: ../interfaces/network.glade.in.h:48
-#: ../src/network/ifaces-list.c:33
+#: ../src/network/ifaces-list.c:34
 msgid "_Activate"
 msgstr "啟用(_A)"
 
@@ -471,7 +471,7 @@ msgid "_Autodetect"
 msgstr "自動偵測(_A)"
 
 #: ../interfaces/network.glade.in.h:50
-#: ../src/network/ifaces-list.c:34
+#: ../src/network/ifaces-list.c:35
 msgid "_Deactivate"
 msgstr "停止使用(_D)"
 
@@ -533,12 +533,12 @@ msgid "_Volume:"
 msgstr "音量(_V)："
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<b>Available services:</b>"
-msgstr "<b>可用的服務：</b>"
-
-#: ../interfaces/services.glade.in.h:2
 msgid "Advanced settings:"
 msgstr "進階設定值："
+
+#: ../interfaces/services.glade.in.h:2
+msgid "Select the services that you wish to activate:"
+msgstr "選擇您想要使用的服務："
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -609,7 +609,7 @@ msgid "Network:"
 msgstr "網路："
 
 #: ../interfaces/shares.glade.in.h:19
-#: ../src/shares/nfs-acl-table.c:55
+#: ../src/shares/nfs-acl-table.c:57
 msgid "Read only"
 msgstr "唯讀"
 
@@ -898,11 +898,11 @@ msgid "_Days between warning and password expiration:"
 msgstr "密碼過期前，於指定日數發出警告(_D)："
 
 #: ../interfaces/users.glade.in.h:51
-#: ../src/boot/table.c:52
-#: ../src/network/address-list.c:71
-#: ../src/network/hosts.c:35
-#: ../src/shares/table.c:41
-#: ../src/users/table.c:49
+#: ../src/boot/table.c:54
+#: ../src/network/address-list.c:72
+#: ../src/network/hosts.c:39
+#: ../src/shares/table.c:42
+#: ../src/users/table.c:50
 msgid "_Delete"
 msgstr "刪除(_D)"
 
@@ -942,102 +942,102 @@ msgstr "命令殼(_S)："
 msgid "_Work phone:"
 msgstr "工作電話(_W)："
 
-#: ../src/boot/boot-append-gui.c:139
+#: ../src/boot/boot-append-gui.c:140
 msgid "32,768"
 msgstr "32,768"
 
-#: ../src/boot/boot-append-gui.c:140
+#: ../src/boot/boot-append-gui.c:141
 msgid "65,536"
 msgstr "65,536"
 
-#: ../src/boot/boot-append-gui.c:141
+#: ../src/boot/boot-append-gui.c:142
 msgid "16,777,216"
 msgstr "16,777,216"
 
-#: ../src/boot/boot-append-gui.c:252
+#: ../src/boot/boot-append-gui.c:253
 msgid "Invalid VGA value"
 msgstr "無效的 VGA 數值"
 
-#: ../src/boot/boot-append-gui.c:254
+#: ../src/boot/boot-append-gui.c:255
 #, c-format
 msgid "\"%s\" is not a valid VGA value."
 msgstr "“%s” 不是有效的 VGA 數值。"
 
-#: ../src/boot/boot-druid.c:112
+#: ../src/boot/boot-druid.c:113
 msgid "Error creating boot image"
 msgstr "建立開機影像檔時發生錯誤"
 
-#: ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:443
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "正在建立新的開機影像檔( %d 之 %d)"
 
-#: ../src/boot/boot-druid.c:443
+#: ../src/boot/boot-druid.c:444
 msgid "Finished creating a new boot image"
 msgstr "已完成建立新的開機影像檔"
 
-#: ../src/boot/boot-image.c:40
+#: ../src/boot/boot-image.c:43
 msgid "Unknown"
 msgstr "不詳"
 
-#: ../src/boot/boot-image.c:41
+#: ../src/boot/boot-image.c:44
 msgid "Windows NT"
 msgstr "Windows NT"
 
-#: ../src/boot/boot-image.c:42
+#: ../src/boot/boot-image.c:45
 msgid "Windows 9x"
 msgstr "Windows 9x"
 
-#: ../src/boot/boot-image.c:43
+#: ../src/boot/boot-image.c:46
 msgid "Dos"
 msgstr "Dos"
 
-#: ../src/boot/boot-image.c:44
+#: ../src/boot/boot-image.c:47
 msgid "Linux"
 msgstr "Linux"
 
-#: ../src/boot/boot-image.c:45
+#: ../src/boot/boot-image.c:48
 msgid "Linux swap"
 msgstr "Linux swap"
 
-#: ../src/boot/boot-image.c:46
+#: ../src/boot/boot-image.c:49
 msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
-#: ../src/boot/boot-image.c:276
+#: ../src/boot/boot-image.c:279
 #, c-format
 msgid "\"%s\" is an invalid path"
 msgstr "“%s” 不是有效的路徑"
 
-#: ../src/boot/boot-image.c:292
+#: ../src/boot/boot-image.c:295
 #, c-format
 msgid "\"%s\" already exists, please set another name."
 msgstr "“%s”已經存在，請設定其它名稱。"
 
-#: ../src/boot/boot-image.c:298
+#: ../src/boot/boot-image.c:301
 #, c-format
 msgid "Invalid image name: \"%s\"."
 msgstr "無效的影像檔名稱：‘%s’。"
 
-#: ../src/boot/boot-image.c:311
+#: ../src/boot/boot-image.c:314
 #, c-format
 msgid "Invalid image: \"%s\"."
 msgstr "無效的影像檔：‘%s’。"
 
-#: ../src/boot/boot-image.c:329
+#: ../src/boot/boot-image.c:332
 #, c-format
 msgid "Invalid root device: \"%s\"."
 msgstr "無效的 root 裝置：‘%s’。"
 
-#: ../src/boot/boot-settings.c:43
+#: ../src/boot/boot-settings.c:45
 msgid "_Module path:"
 msgstr "模組路徑(_M)："
 
-#: ../src/boot/boot-settings.c:405
+#: ../src/boot/boot-settings.c:407
 msgid "Password confirmation is not correct."
 msgstr "確認密碼並不正確。"
 
-#: ../src/boot/boot-settings.c:430
+#: ../src/boot/boot-settings.c:432
 msgid "Error modifying boot image"
 msgstr "修正開機影像檔時發生錯誤"
 
@@ -1084,39 +1084,39 @@ msgstr "回復至"
 msgid "The file \"%s\" is missing or could not be read."
 msgstr "缺少了或是無法讀入檔案“%s”。"
 
-#: ../src/boot/table.c:41
+#: ../src/boot/table.c:43
 msgid "Name"
 msgstr "名稱"
 
-#: ../src/boot/table.c:42
+#: ../src/boot/table.c:44
 msgid "Default"
 msgstr "預設"
 
-#: ../src/boot/table.c:43
+#: ../src/boot/table.c:45
 msgid "Type"
 msgstr "類型"
 
-#: ../src/boot/table.c:44
+#: ../src/boot/table.c:46
 msgid "Kernel Image"
 msgstr "核心影像檔"
 
-#: ../src/boot/table.c:45
+#: ../src/boot/table.c:47
 msgid "Device"
 msgstr "裝置"
 
-#: ../src/boot/table.c:50
-#: ../src/network/address-list.c:70
-#: ../src/network/hosts.c:33
-#: ../src/shares/table.c:39
-#: ../src/users/table.c:47
+#: ../src/boot/table.c:52
+#: ../src/network/address-list.c:71
+#: ../src/network/hosts.c:37
+#: ../src/shares/table.c:40
+#: ../src/users/table.c:48
 msgid "_Add"
 msgstr "加入(_A)"
 
-#: ../src/boot/table.c:51
-#: ../src/network/hosts.c:34
-#: ../src/network/ifaces-list.c:32
-#: ../src/shares/table.c:40
-#: ../src/users/table.c:48
+#: ../src/boot/table.c:53
+#: ../src/network/hosts.c:38
+#: ../src/network/ifaces-list.c:33
+#: ../src/shares/table.c:41
+#: ../src/users/table.c:49
 msgid "_Properties"
 msgstr "屬性(_P)"
 
@@ -1159,111 +1159,111 @@ msgstr "無法執行後端程式"
 msgid "There was an error creating the child process, the tool will close now."
 msgstr "建立子進程是發生錯誤，工具會現在關閉。"
 
-#: ../src/common/gst-dialog.c:59
+#: ../src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "找不到視窗元件：%s"
 
-#: ../src/common/gst-dialog.c:382
+#: ../src/common/gst-dialog.c:383
 msgid "There are changes which have not been applied"
 msgstr "尚有已更改的設定未生效"
 
-#: ../src/common/gst-dialog.c:384
+#: ../src/common/gst-dialog.c:385
 msgid "Apply them now?"
 msgstr "套用已修改的設定？"
 
-#: ../src/common/gst-dialog.c:491
+#: ../src/common/gst-dialog.c:492
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "將錯誤訊號‘%s’及視窗元件‘%s’建立聯繫時發生錯誤"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1026
 msgid "The configuration could not be loaded"
 msgstr "無法載入組態"
 
-#: ../src/common/gst-tool.c:1024
+#: ../src/common/gst-tool.c:1028
 msgid "There was an error running the backend script"
 msgstr "執行背景模組命令稿時發生錯誤"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1509
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "歡迎使用GNOME 系統工具的 %s 預覽版本"
 
-#: ../src/common/gst-tool.c:1507
+#: ../src/common/gst-tool.c:1511
 msgid "This is still a work in progress, and so it may have serious bugs. Due to the nature of these tools, bugs may render your computer <span weight=\"bold\">practically useless</span>, costing time, effort and sanity points. You have been warned. Thank you for trying out this prerelease of the GNOME System Tools!"
 msgstr "此程式仍在編寫中，所以很可能有嚴重的錯誤。因為此工具本身的性質，程式中的錯誤可能會令電腦<span weight=\"bold\">作廢</span>，損失時間及精力。您已經被提醒了。多謝使用 GNOME 系統工具的預覽版本！"
 
-#: ../src/common/gst-tool.c:1528
+#: ../src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "警告"
 
-#: ../src/common/gst-tool.c:1548
+#: ../src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "不要再顯示"
 
-#: ../src/common/gst-tool.c:1605
+#: ../src/common/gst-tool.c:1609
 msgid "GNOME System Tools"
 msgstr "GNOME 系統設定工具"
 
-#: ../src/common/gst-tool.c:1750
+#: ../src/common/gst-tool.c:1754
 msgid "Could not display help"
 msgstr "無法顯示說明"
 
-#: ../src/network/address-list.c:554
+#: ../src/network/address-list.c:555
 msgid "Type address"
 msgstr "輸入地址"
 
-#: ../src/network/callbacks.c:44
+#: ../src/network/callbacks.c:46
 #, c-format
 msgid "Could not enable the interface %s"
 msgstr "無法啟用介面 %s"
 
-#: ../src/network/callbacks.c:48
+#: ../src/network/callbacks.c:50
 msgid "Check that the settings are correct for this network and that the computer is correctly connected to it."
 msgstr "請檢查這網路的設定是否妥當及與電腦的連接是否正確。"
 
-#: ../src/network/callbacks.c:235
+#: ../src/network/callbacks.c:237
 msgid "Could not autodetect modem device"
 msgstr "無法自動偵測數據機裝置"
 
-#: ../src/network/callbacks.c:238
+#: ../src/network/callbacks.c:240
 msgid "Check that the device is not busy and that is correctly attached to the computer."
 msgstr "請確定它不是正在使用中，而且是正確地連接至電腦。"
 
-#: ../src/network/callbacks.c:449
+#: ../src/network/callbacks.c:451
 msgid "The host name has changed"
 msgstr "主機名稱已變更"
 
-#: ../src/network/callbacks.c:452
+#: ../src/network/callbacks.c:454
 msgid "This will prevent you from launching new applications, and so you will have to log in again. Continue anyway?"
 msgstr "這樣會妨礙啟動新的應用程式，而且需要重新登入。是否要繼續？"
 
-#: ../src/network/callbacks.c:458
+#: ../src/network/callbacks.c:460
 msgid "Change _Host name"
 msgstr "更改主機名稱(_H)"
 
-#: ../src/network/hosts.c:88
+#: ../src/network/hosts.c:92
 msgid "IP Address"
 msgstr "IP 地址"
 
-#: ../src/network/hosts.c:96
+#: ../src/network/hosts.c:100
 msgid "Aliases"
 msgstr "別稱"
 
-#: ../src/network/location.c:141
+#: ../src/network/location.c:144
 msgid "Create location"
 msgstr "建立位置"
 
-#: ../src/network/location.c:149
+#: ../src/network/location.c:152
 msgid "Delete current location"
 msgstr "刪除目前的位置"
 
-#: ../src/network/location.c:363
+#: ../src/network/location.c:366
 msgid "Do you want to remove this location?"
 msgstr "您確定要移除這位置？"
 
-#: ../src/network/location.c:436
+#: ../src/network/location.c:439
 msgid "Changing profile"
 msgstr "更改設定組合"
 
@@ -1303,27 +1303,27 @@ msgstr "設定網路裝置與連線"
 msgid "Networking"
 msgstr "網路"
 
-#: ../src/network/network-iface-ethernet.c:301
+#: ../src/network/network-iface-ethernet.c:302
 msgid "Ethernet connection"
 msgstr "乙太網連線"
 
-#: ../src/network/network-iface-irlan.c:121
+#: ../src/network/network-iface-irlan.c:122
 msgid "Infrared connection"
 msgstr "紅外線連線"
 
-#: ../src/network/network-iface-isdn.c:328
+#: ../src/network/network-iface-isdn.c:330
 msgid "ISDN connection"
 msgstr "ISDN 數據機連線"
 
-#: ../src/network/network-iface-modem.c:251
+#: ../src/network/network-iface-modem.c:253
 msgid "Modem connection"
 msgstr "數據機連線"
 
-#: ../src/network/network-iface-plip.c:210
+#: ../src/network/network-iface-plip.c:211
 msgid "Parallel port connection"
 msgstr "並列埠連線"
 
-#: ../src/network/network-iface-wireless.c:244
+#: ../src/network/network-iface-wireless.c:245
 msgid "Wireless connection"
 msgstr "無線連接"
 
@@ -1347,23 +1347,23 @@ msgstr "介面“%s”沒有使用"
 msgid "The interface %s is active"
 msgstr "介面“%s”正在使用"
 
-#: ../src/services/callbacks.c:63
+#: ../src/services/callbacks.c:64
 #, c-format
 msgid "Settings for \"%s\""
 msgstr "「%s」的設定值"
 
 #. FIXME: put service name !!!
-#: ../src/services/callbacks.c:152
+#: ../src/services/callbacks.c:153
 msgid "Are you sure you want to deactivate this service?"
 msgstr "您確定要停止這個服務？"
 
-#: ../src/services/callbacks.c:155
+#: ../src/services/callbacks.c:156
 msgid "This may affect your system behavior in several ways, possibly leading to data loss"
 msgstr "這樣可能會在許多方面影響您的系統行為，很可能導致資料的消失"
 
-#: ../src/services/main.c:54
-msgid "Change your running services"
-msgstr "改變您執行的服務"
+#: ../src/services/main.c:55
+msgid "Services settings"
+msgstr "服務設定值"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1373,95 +1373,140 @@ msgstr "設定當系統啟動時要執行哪項服務"
 msgid "Services"
 msgstr "服務"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:32
+msgid "Antivirus"
+msgstr "防毒功能"
+
+#: ../src/services/service.c:32
+msgid "Analyzes your incoming mail for virus"
+msgstr "分析您的內送郵件是否有病毒"
+
+#: ../src/services/service.c:33
+msgid "Volumes mounter"
+msgstr "裝置掛載程式"
+
+#: ../src/services/service.c:33
+msgid "Mounts your volumes automatically"
+msgstr "自動掛載您的裝置"
+
+#: ../src/services/service.c:34
 msgid "Actions scheduler"
 msgstr "動作排程器"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:34
 msgid "Executes scheduled actions"
 msgstr "執行已排程的動作"
 
-#: ../src/services/service.c:31
+#: ../src/services/service.c:35
+msgid "Database server"
+msgstr "資料庫伺服器"
+
+#: ../src/services/service.c:35
+msgid "Data storage system"
+msgstr "資料儲存系統"
+
+#: ../src/services/service.c:36
 msgid "Graphical login manager"
 msgstr "圖形化登入管理程式"
 
-#: ../src/services/service.c:31
-msgid "Requests user and password in a graphical fashion"
-msgstr "以圖形化的方式要求使用者與密碼"
+#: ../src/services/service.c:36
+msgid "Allows users to login graphically"
+msgstr "允許使用者以圖形介面登入"
 
-#: ../src/services/service.c:32
+#: ../src/services/service.c:37
 msgid "Folder sharing service"
 msgstr "資料夾分享服務"
 
-#: ../src/services/service.c:32
-msgid "Shares your selected folders through your network"
-msgstr "透過您的網路分享您選擇的資料夾"
+#: ../src/services/service.c:37
+msgid "Shares folders through your network"
+msgstr "透過您的網路分享資料夾"
 
-#: ../src/services/service.c:33
+#: ../src/services/service.c:38
+msgid "File sharing service"
+msgstr "檔案分享服務"
+
+#: ../src/services/service.c:38
+#: ../src/services/service.c:39
+msgid "Shares files though internet"
+msgstr "透過網際網路分享檔案"
+
+#: ../src/services/service.c:39
+msgid "FTP service"
+msgstr "FTP 伺服器"
+
+#: ../src/services/service.c:40
+msgid "Mail fetcher"
+msgstr "郵件擷取程式"
+
+#: ../src/services/service.c:40
+msgid "Downloads your mail from remote accounts"
+msgstr "從遠端帳號下載您的郵件"
+
+#: ../src/services/service.c:41
 msgid "Mail agent"
 msgstr "郵件代理程式"
 
-#: ../src/services/service.c:33
-msgid "Delivers your sent mails through internet"
-msgstr "透過網際網路遞送您寄出的郵件"
+#: ../src/services/service.c:41
+msgid "Delivers your mails through internet"
+msgstr "透過網際網路遞送您的郵件"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Clock synchronization service"
 msgstr "時鐘同步化服務"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Synchronizes your computer clock with internet time servers"
 msgstr "透過網際網路時刻伺服器校對您的系統時鐘"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Printer service"
 msgstr "印表機服務"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Allows applications to use printers"
 msgstr "允許應用程式使用印表機"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Remote shell server"
 msgstr "遠端 shell 伺服器"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Secure shell server"
 msgstr "Secure shell server"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Computer activity logger"
 msgstr "電腦活動記錄器"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Keeps a log of your computer activity"
 msgstr "保存您的電腦活動的紀錄"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Web server"
 msgstr "網頁伺服器"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Shares your web pages through internet"
 msgstr "透過網際網路分享您的網頁"
 
-#: ../src/shares/callbacks.c:184
+#: ../src/shares/callbacks.c:187
 msgid "Are you sure you want to delete this share?"
 msgstr "您確定要刪除這個共享？"
 
-#: ../src/shares/callbacks.c:186
+#: ../src/shares/callbacks.c:189
 msgid "Other computers in your network will stop viewing this."
 msgstr "其它在您的網路上的電腦會停止查看此分享。"
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "加入共享的路徑，如果它已存在請修改它"
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "PATH"
 msgstr "路徑"
 
-#: ../src/shares/main.c:95
+#: ../src/shares/main.c:97
 msgid "Shared folders settings"
 msgstr "共享資料夾設定"
 
@@ -1473,36 +1518,36 @@ msgstr "共享資料夾(_S)"
 msgid "Share this folder with other computers"
 msgstr "與其它電腦共享此資料夾"
 
-#: ../src/shares/nfs-acl-table.c:49
+#: ../src/shares/nfs-acl-table.c:51
 msgid "Allowed host/network"
 msgstr "允許的主機/網路"
 
-#: ../src/shares/share-nfs-add-hosts.c:112
+#: ../src/shares/share-nfs-add-hosts.c:114
 #, c-format
 msgid "Hosts in the %s network"
 msgstr "主機在 %s 網路"
 
-#: ../src/shares/share-nfs-add-hosts.c:144
+#: ../src/shares/share-nfs-add-hosts.c:146
 msgid "Specify hostname"
 msgstr "指定主機名稱"
 
-#: ../src/shares/share-nfs-add-hosts.c:151
+#: ../src/shares/share-nfs-add-hosts.c:153
 msgid "Specify IP address"
 msgstr "指定 IP 地址"
 
-#: ../src/shares/share-nfs-add-hosts.c:158
+#: ../src/shares/share-nfs-add-hosts.c:160
 msgid "Specify network"
 msgstr "指定網路"
 
-#: ../src/shares/share-settings.c:121
+#: ../src/shares/share-settings.c:123
 msgid "Do not share"
 msgstr "不共享"
 
-#: ../src/shares/share-settings.c:129
+#: ../src/shares/share-settings.c:131
 msgid "SMB"
 msgstr "SMB"
 
-#: ../src/shares/share-settings.c:137
+#: ../src/shares/share-settings.c:139
 msgid "NFS"
 msgstr "NFS"
 
@@ -1514,23 +1559,23 @@ msgstr "設定那一個資料夾共享給您的網路芳鄰"
 msgid "Shared Folders"
 msgstr "共享的資料夾"
 
-#: ../src/shares/transfer.c:42
+#: ../src/shares/transfer.c:44
 msgid "Sharing services are not installed"
 msgstr "沒有安裝分享服務"
 
-#: ../src/shares/transfer.c:44
+#: ../src/shares/transfer.c:46
 msgid "You need to install at least either Samba or NFS in order to share your folders. The tool will close now."
 msgstr "您最少要安裝 Samba 或 NFS 機分享您的目錄。工具現在會關閉。"
 
-#: ../src/time/main.c:461
+#: ../src/time/main.c:464
 msgid "NTP support is not installed"
 msgstr "沒有安裝 NTP 支援"
 
-#: ../src/time/main.c:463
+#: ../src/time/main.c:466
 msgid "Please install and activate NTP support in the system to enable synchronization of your local time server with internet time servers."
 msgstr "請在系統安裝並啟用 NTP 支援，令時刻校對服務生效"
 
-#: ../src/time/main.c:759
+#: ../src/time/main.c:762
 msgid "Time and Date Settings"
 msgstr "時間及日期設定"
 
@@ -1542,106 +1587,106 @@ msgstr "改變系統時刻、日期及時區。"
 msgid "Time and Date"
 msgstr "時刻及日期設定"
 
-#: ../src/users/callbacks.c:569
+#: ../src/users/callbacks.c:571
 msgid "Error saving profile"
 msgstr "儲存設定檔時發生錯誤"
 
-#: ../src/users/callbacks.c:611
+#: ../src/users/callbacks.c:613
 msgid "Create New profile"
 msgstr "建立新的設定檔"
 
-#: ../src/users/callbacks.c:647
+#: ../src/users/callbacks.c:649
 #, c-format
 msgid "Settings for profile %s"
 msgstr "設定檔 %s 的設定值"
 
-#: ../src/users/group-settings.c:89
+#: ../src/users/group-settings.c:91
 msgid "Create New Group"
 msgstr "建立新的群組"
 
 #. Check if gid is available
-#: ../src/users/group-settings.c:162
-#: ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:164
+#: ../src/users/group-settings.c:172
 msgid "Invalid group ID"
 msgstr "無效的群組 ID"
 
-#: ../src/users/group-settings.c:163
+#: ../src/users/group-settings.c:165
 msgid "Group ID must be a positive number"
 msgstr "群組 ID 必須為正數"
 
 #. if group is root
-#: ../src/users/group-settings.c:166
+#: ../src/users/group-settings.c:168
 msgid "Group ID of the \"root\" user should not be modified"
 msgstr "不應修改“root”使用者的群組 ID"
 
-#: ../src/users/group-settings.c:167
-#: ../src/users/group-settings.c:213
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:169
+#: ../src/users/group-settings.c:215
+#: ../src/users/group-settings.c:285
 msgid "This would leave the system unusable"
 msgstr "這樣會讓系統停留在無法使用的狀態"
 
-#: ../src/users/group-settings.c:171
+#: ../src/users/group-settings.c:173
 #, c-format
 msgid "Group ID %s already exists"
 msgstr "群組 ID %s 已經存在"
 
 #. If empty.
-#: ../src/users/group-settings.c:196
+#: ../src/users/group-settings.c:198
 msgid "Group name is empty"
 msgstr "群組名稱是空的"
 
-#: ../src/users/group-settings.c:197
+#: ../src/users/group-settings.c:199
 msgid "A group name must be specified"
 msgstr "必須指定群組名稱"
 
 #. If too long.
-#: ../src/users/group-settings.c:200
+#: ../src/users/group-settings.c:202
 msgid "The group name is too long"
 msgstr "群組名稱過長"
 
-#: ../src/users/group-settings.c:201
+#: ../src/users/group-settings.c:203
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
 msgstr "群組名稱應小於 %i 個字元才可以"
 
 #. if invalid.
-#: ../src/users/group-settings.c:204
+#: ../src/users/group-settings.c:206
 msgid "Group name has invalid characters"
 msgstr "群組名稱含有不正確的字元。"
 
-#: ../src/users/group-settings.c:205
+#: ../src/users/group-settings.c:207
 msgid "Please set a valid group name, using only lower case letters"
 msgstr "請設定有效的群組名稱，當中只含有小寫字母"
 
 #. if !exist.
-#: ../src/users/group-settings.c:208
+#: ../src/users/group-settings.c:210
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "群組“%s”已經存在"
 
-#: ../src/users/group-settings.c:209
+#: ../src/users/group-settings.c:211
 msgid "Please select a different group name"
 msgstr "請選擇不同的群組名稱"
 
 #. if it's the root group
-#: ../src/users/group-settings.c:212
+#: ../src/users/group-settings.c:214
 msgid "Group name of the \"root\" user should not be modified"
 msgstr "不應修改“root”使用者的群組名稱"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:284
 msgid "The group \"root\" should not be deleted"
 msgstr "不應刪除“root”群組"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:299
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "是否確定刪除群組“%s”？"
 
-#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:301
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "這樣可能會在檔案系統中留下具有無效的群組 ID 的檔案。"
 
-#: ../src/users/group-settings.c:359
+#: ../src/users/group-settings.c:361
 #, c-format
 msgid "Settings for Group %s"
 msgstr "群組 %s 的設定"
@@ -1654,32 +1699,32 @@ msgstr "群組"
 msgid "GID"
 msgstr "GID"
 
-#: ../src/users/main.c:122
+#: ../src/users/main.c:123
 msgid "User name contains"
 msgstr "使用者名稱含有"
 
-#: ../src/users/main.c:123
+#: ../src/users/main.c:124
 msgid "User ID is"
 msgstr "使用者識別碼為"
 
-#: ../src/users/main.c:124
+#: ../src/users/main.c:125
 msgid "Group name contains"
 msgstr "群組名稱含有"
 
-#: ../src/users/main.c:125
+#: ../src/users/main.c:126
 msgid "User GID is"
 msgstr "群組識別碼為"
 
-#: ../src/users/main.c:244
+#: ../src/users/main.c:245
 #: ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "使用者及群組"
 
-#: ../src/users/passwd.c:165
+#: ../src/users/passwd.c:168
 msgid "Passwords do not match"
 msgstr "密碼不符"
 
-#: ../src/users/passwd.c:170
+#: ../src/users/passwd.c:173
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1688,144 +1733,144 @@ msgstr ""
 "密碼不能使用：%s。\n"
 "請嘗試輸入新的密碼"
 
-#: ../src/users/profile-settings.c:122
+#: ../src/users/profile-settings.c:125
 msgid "The profile must have a name"
 msgstr "必須指定設定檔的名稱"
 
-#: ../src/users/profile-settings.c:127
+#: ../src/users/profile-settings.c:130
 msgid "The profile must have a default home"
 msgstr "設定檔中必須指定使用者預設的個人目錄"
 
-#: ../src/users/profile-settings.c:132
-#: ../src/users/profile-settings.c:137
+#: ../src/users/profile-settings.c:135
+#: ../src/users/profile-settings.c:140
 msgid "The profile must have a default shell"
 msgstr "設定檔中必須指定使用者預設的 shell"
 
-#: ../src/users/profile-settings.c:205
+#: ../src/users/profile-settings.c:208
 msgid "The default profile should not be deleted"
 msgstr "不可刪除“Default”設定檔"
 
-#: ../src/users/profile-settings.c:206
+#: ../src/users/profile-settings.c:209
 msgid "This profile is used for setting default data for new users"
 msgstr "這個設定檔是用來設定新使用者的預設資料"
 
-#: ../src/users/profile-settings.c:215
+#: ../src/users/profile-settings.c:218
 #, c-format
 msgid "Delete profile \"%s\"?"
 msgstr "是否刪除設定檔“%s”？"
 
-#: ../src/users/profile-settings.c:217
+#: ../src/users/profile-settings.c:220
 msgid "You will not be able to recover this profile after pressing \"apply\"."
 msgstr "在按下“套用”之後您將無法復原此設定組合。"
 
 #. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:38
+#: ../src/users/profiles-table.c:39
 msgid "Profile"
 msgstr "設定檔"
 
-#: ../src/users/profiles-table.c:39
+#: ../src/users/profiles-table.c:40
 msgid "Comment"
 msgstr "備註"
 
-#: ../src/users/search-bar/search-bar.c:225
+#: ../src/users/search-bar/search-bar.c:228
 msgid "C_lear"
 msgstr "清除(_L)"
 
-#: ../src/users/search-bar/search-bar.c:326
+#: ../src/users/search-bar/search-bar.c:329
 msgid "Choice"
 msgstr "選擇"
 
-#: ../src/users/search-bar/search-bar.c:336
+#: ../src/users/search-bar/search-bar.c:339
 msgid "Text"
 msgstr "文字"
 
-#: ../src/users/user-settings.c:71
+#: ../src/users/user-settings.c:73
 msgid "The \"root\" user should not be deleted"
 msgstr "不可刪除“root”使用者"
 
-#: ../src/users/user-settings.c:72
-#: ../src/users/user-settings.c:303
-#: ../src/users/user-settings.c:398
-#: ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:74
+#: ../src/users/user-settings.c:305
+#: ../src/users/user-settings.c:400
+#: ../src/users/user-settings.c:436
 msgid "This would leave the system unusable."
 msgstr "這樣會讓系統停留在無法使用的狀態。"
 
-#: ../src/users/user-settings.c:81
+#: ../src/users/user-settings.c:83
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "是否確定刪除使用者“%s”？"
 
-#: ../src/users/user-settings.c:83
+#: ../src/users/user-settings.c:85
 msgid "This will disable this user's access to the system without deleting the user's home directory."
 msgstr "這會停止該使用者存取系統，但他的家目錄不會被刪除。"
 
-#: ../src/users/user-settings.c:187
+#: ../src/users/user-settings.c:189
 msgid "User Account Editor"
 msgstr "帳號編輯程式"
 
-#: ../src/users/user-settings.c:283
+#: ../src/users/user-settings.c:285
 msgid "The user name is empty"
 msgstr "使用者名稱是空的"
 
-#: ../src/users/user-settings.c:284
+#: ../src/users/user-settings.c:286
 msgid "A user name must be specified."
 msgstr "必須指定使用者名稱。"
 
 #. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:290
-#: ../src/users/user-settings.c:295
+#: ../src/users/user-settings.c:292
+#: ../src/users/user-settings.c:297
 msgid "The user name is too long"
 msgstr "使用者名稱過長"
 
-#: ../src/users/user-settings.c:291
-#: ../src/users/user-settings.c:296
+#: ../src/users/user-settings.c:293
+#: ../src/users/user-settings.c:298
 #, c-format
 msgid "To be valid, the user name should have less than %i characters."
 msgstr "要合乎規定，使用者名稱應該小於 %i 個字元才可以。"
 
-#: ../src/users/user-settings.c:302
+#: ../src/users/user-settings.c:304
 msgid "User name for the \"root\" user should not be modified"
 msgstr "不應修改“root”使用者名稱"
 
-#: ../src/users/user-settings.c:308
+#: ../src/users/user-settings.c:310
 msgid "User name has invalid characters"
 msgstr "使用者名稱含有無效的字"
 
-#: ../src/users/user-settings.c:309
+#: ../src/users/user-settings.c:311
 msgid "Please set a valid user name consisting of a lower case letter followed by lower case letters and numbers."
 msgstr "請設定有效的使用者名稱，第一個字元只可以是小寫字母，其它的必須是小寫字母或數字。"
 
-#: ../src/users/user-settings.c:315
+#: ../src/users/user-settings.c:317
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "該使用者名稱“%s”已經存在"
 
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:318
 msgid "Please select a different user name."
 msgstr "請選擇不同的使用者名稱。"
 
-#: ../src/users/user-settings.c:341
+#: ../src/users/user-settings.c:343
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "備註中出現無效的字元“%c”"
 
-#: ../src/users/user-settings.c:342
+#: ../src/users/user-settings.c:344
 msgid "Check that this character is not used."
 msgstr "請檢查有無使用此不正確的字元。"
 
-#: ../src/users/user-settings.c:390
+#: ../src/users/user-settings.c:392
 msgid "Home directory should not be empty"
 msgstr "個人目錄不可留空"
 
-#: ../src/users/user-settings.c:391
+#: ../src/users/user-settings.c:393
 msgid "Make sure you provide a home directory."
 msgstr "請確定您已提供家目錄。"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:395
 msgid "Incomplete path in home directory"
 msgstr "個人目錄含有不完整的路徑"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:396
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1833,36 +1878,36 @@ msgstr ""
 "請輸入家目錄的完整路徑。\n"
 "<span size=\"smaller\">例如：/home/john</span>。"
 
-#: ../src/users/user-settings.c:397
+#: ../src/users/user-settings.c:399
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr "不應修改“root”使用者的家目錄"
 
-#: ../src/users/user-settings.c:430
+#: ../src/users/user-settings.c:432
 msgid "Invalid user ID"
 msgstr "無效的使用者 ID"
 
-#: ../src/users/user-settings.c:431
+#: ../src/users/user-settings.c:433
 msgid "User ID must be a positive number."
 msgstr "使用者識別碼必須為正數。"
 
-#: ../src/users/user-settings.c:433
+#: ../src/users/user-settings.c:435
 msgid "User ID of the \"root\" user should not be modified"
 msgstr "不應修改“root”使用者的使用者 ID"
 
-#: ../src/users/user-settings.c:451
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User ID %s already exists"
 msgstr "使用者 ID %s 已經存在"
 
-#: ../src/users/user-settings.c:453
+#: ../src/users/user-settings.c:455
 msgid "Several users may share a single user ID, but it's not common and may lead to security problems."
 msgstr "有的使用者可能會共享單一的使用者 ID ，但這並不普遍而且可能導致安全性的問題。"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:473
 msgid "Incomplete path in shell"
 msgstr "shell 含有不完整的路徑"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:474
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>."
@@ -1870,44 +1915,44 @@ msgstr ""
 "請輸入 shell 的完整路徑\n"
 "<span size=\"smaller\">例如：/bin/sh</span>。"
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:496
 msgid "Password should not be empty"
 msgstr "密碼不可留空"
 
-#: ../src/users/user-settings.c:495
+#: ../src/users/user-settings.c:497
 msgid "A password must be provided."
 msgstr "必須提供密碼。"
 
-#: ../src/users/user-settings.c:497
+#: ../src/users/user-settings.c:499
 msgid "Password confirmation isn't correct"
 msgstr "確認密碼程序失敗"
 
-#: ../src/users/user-settings.c:498
+#: ../src/users/user-settings.c:500
 msgid "Check that you have provided the same password in both text fields."
 msgstr "請檢查您是否在兩個文字欄位中提供相同的密碼。"
 
-#: ../src/users/user-settings.c:772
+#: ../src/users/user-settings.c:774
 #, c-format
 msgid "Settings for User %s"
 msgstr "使用者 %s 的設定"
 
-#: ../src/users/users-table.c:59
+#: ../src/users/users-table.c:61
 msgid "User"
 msgstr "使用者"
 
-#: ../src/users/users-table.c:60
+#: ../src/users/users-table.c:62
 msgid "Home"
 msgstr "個人目錄"
 
-#: ../src/users/users-table.c:61
+#: ../src/users/users-table.c:63
 msgid "User details"
 msgstr "使用者詳細資訊"
 
-#: ../src/users/users-table.c:62
+#: ../src/users/users-table.c:64
 msgid "UID"
 msgstr "UID"
 
-#: ../src/users/users-table.c:63
+#: ../src/users/users-table.c:65
 msgid "Shell"
 msgstr "命令殼"
 
