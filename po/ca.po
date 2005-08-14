@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-06 13:20+0200\n"
-"PO-Revision-Date: 2005-07-29 23:31+0200\n"
+"POT-Creation-Date: 2005-08-14 13:18+0200\n"
+"PO-Revision-Date: 2005-08-14 13:26+0200\n"
 "Last-Translator: Josep Puigdemont i Casamajó <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -126,7 +126,7 @@ msgstr "<span weight=\"bold\">S'està iniciant l'ordinador</span>"
 msgid "Ask at boot"
 msgstr "Pregunta-ho a l'arrencada"
 
-#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:70
+#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:71
 msgid "Boot Manager Settings"
 msgstr "Paràmetres del gestor d'arrencada"
 
@@ -149,8 +149,8 @@ msgid "Confirmation"
 msgstr "Confirmació"
 
 #. set window title
-#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:441
-#: ../src/boot/boot-druid.c:453
+#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:454
 msgid "Creating a new boot image"
 msgstr "S'està creant una nova imatge d'arrencada"
 
@@ -247,7 +247,7 @@ msgstr "_Dispositiu:"
 msgid "_Edit"
 msgstr "_Edita"
 
-#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:42
+#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:44
 msgid "_Initrd image path:"
 msgstr "Camí de la _imatge initrd:"
 
@@ -511,7 +511,7 @@ msgstr "Utilitza els servidors de domini del servidor de serveis d'Internet"
 msgid "WEP _key:"
 msgstr "Clau _WEP:"
 
-#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:33
+#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:34
 msgid "_Activate"
 msgstr "_Activa"
 
@@ -519,7 +519,7 @@ msgstr "_Activa"
 msgid "_Autodetect"
 msgstr "_Autodetecta"
 
-#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:34
+#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:35
 msgid "_Deactivate"
 msgstr "_Desactiva"
 
@@ -580,12 +580,12 @@ msgid "_Volume:"
 msgstr "_Volum:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<b>Available services:</b>"
-msgstr "<b>Serveis disponibles:</b>"
-
-#: ../interfaces/services.glade.in.h:2
 msgid "Advanced settings:"
 msgstr "Paràmetres avançats:"
+
+#: ../interfaces/services.glade.in.h:2
+msgid "Select the services that you wish to activate:"
+msgstr "Seleccioneu els serveis que vulgueu activar:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -660,7 +660,7 @@ msgid "Network:"
 msgstr "Xarxa:"
 
 # Mozilla 1.3->error-215
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:55
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
 msgid "Read only"
 msgstr "Només lectura"
 
@@ -948,9 +948,9 @@ msgstr "_Comentaris"
 msgid "_Days between warning and password expiration:"
 msgstr "Interval de _dies entre l'avís i el venciment de la contrasenya:"
 
-#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:52
-#: ../src/network/address-list.c:71 ../src/network/hosts.c:35
-#: ../src/shares/table.c:41 ../src/users/table.c:49
+#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:54
+#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
+#: ../src/shares/table.c:42 ../src/users/table.c:50
 msgid "_Delete"
 msgstr "_Suprimeix"
 
@@ -990,102 +990,102 @@ msgstr "Intèrpret d'ordre_s:"
 msgid "_Work phone:"
 msgstr "Telè_fon de la feina:"
 
-#: ../src/boot/boot-append-gui.c:139
+#: ../src/boot/boot-append-gui.c:140
 msgid "32,768"
 msgstr "32.768"
 
-#: ../src/boot/boot-append-gui.c:140
+#: ../src/boot/boot-append-gui.c:141
 msgid "65,536"
 msgstr "65.536"
 
-#: ../src/boot/boot-append-gui.c:141
+#: ../src/boot/boot-append-gui.c:142
 msgid "16,777,216"
 msgstr "16.777.216"
 
-#: ../src/boot/boot-append-gui.c:252
+#: ../src/boot/boot-append-gui.c:253
 msgid "Invalid VGA value"
 msgstr "El valor de VGA no és vàlid"
 
-#: ../src/boot/boot-append-gui.c:254
+#: ../src/boot/boot-append-gui.c:255
 #, c-format
 msgid "\"%s\" is not a valid VGA value."
 msgstr "\"%s\" no és un valor vàlid de VGA."
 
-#: ../src/boot/boot-druid.c:112
+#: ../src/boot/boot-druid.c:113
 msgid "Error creating boot image"
 msgstr "S'ha produït un error en crear una nova imatge d'arrencada"
 
-#: ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:443
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "S'està creant una nova imatge d'arrencada (%d de %d)"
 
-#: ../src/boot/boot-druid.c:443
+#: ../src/boot/boot-druid.c:444
 msgid "Finished creating a new boot image"
 msgstr "Ha finalitzat la creació d'una nova imatge d'arrencada"
 
-#: ../src/boot/boot-image.c:40
+#: ../src/boot/boot-image.c:43
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../src/boot/boot-image.c:41
+#: ../src/boot/boot-image.c:44
 msgid "Windows NT"
 msgstr "Windows NT"
 
-#: ../src/boot/boot-image.c:42
+#: ../src/boot/boot-image.c:45
 msgid "Windows 9x"
 msgstr "Windows 9x"
 
-#: ../src/boot/boot-image.c:43
+#: ../src/boot/boot-image.c:46
 msgid "Dos"
 msgstr "Dos"
 
-#: ../src/boot/boot-image.c:44
+#: ../src/boot/boot-image.c:47
 msgid "Linux"
 msgstr "Linux"
 
-#: ../src/boot/boot-image.c:45
+#: ../src/boot/boot-image.c:48
 msgid "Linux swap"
 msgstr "Intercanvi per a Linux"
 
-#: ../src/boot/boot-image.c:46
+#: ../src/boot/boot-image.c:49
 msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
-#: ../src/boot/boot-image.c:276
+#: ../src/boot/boot-image.c:279
 #, c-format
 msgid "\"%s\" is an invalid path"
 msgstr "«%s» no és un camí vàlid"
 
-#: ../src/boot/boot-image.c:292
+#: ../src/boot/boot-image.c:295
 #, c-format
 msgid "\"%s\" already exists, please set another name."
 msgstr "«%s» ja existeix, poseu-li un altre nom."
 
-#: ../src/boot/boot-image.c:298
+#: ../src/boot/boot-image.c:301
 #, c-format
 msgid "Invalid image name: \"%s\"."
 msgstr "El nom de la imatge no és vàlid: «%s»."
 
-#: ../src/boot/boot-image.c:311
+#: ../src/boot/boot-image.c:314
 #, c-format
 msgid "Invalid image: \"%s\"."
 msgstr "La imatge no és vàlida: «%s»."
 
-#: ../src/boot/boot-image.c:329
+#: ../src/boot/boot-image.c:332
 #, c-format
 msgid "Invalid root device: \"%s\"."
 msgstr "El dispositiu arrel no és vàlid: «%s»."
 
-#: ../src/boot/boot-settings.c:43
+#: ../src/boot/boot-settings.c:45
 msgid "_Module path:"
 msgstr "Camí del _mòdul:"
 
-#: ../src/boot/boot-settings.c:405
+#: ../src/boot/boot-settings.c:407
 msgid "Password confirmation is not correct."
 msgstr "La confirmació de la contrasenya no és correcta."
 
-#: ../src/boot/boot-settings.c:430
+#: ../src/boot/boot-settings.c:432
 msgid "Error modifying boot image"
 msgstr "S'ha produït un error en modificar la imatge d'arrencada"
 
@@ -1131,34 +1131,34 @@ msgstr "La configuració es mostrarà buida"
 msgid "The file \"%s\" is missing or could not be read."
 msgstr "Manca el fitxer «%s», o no s'ha pogut llegir."
 
-#: ../src/boot/table.c:41
+#: ../src/boot/table.c:43
 msgid "Name"
 msgstr "Nom"
 
-#: ../src/boot/table.c:42
+#: ../src/boot/table.c:44
 msgid "Default"
 msgstr "Per defecte"
 
-#: ../src/boot/table.c:43
+#: ../src/boot/table.c:45
 msgid "Type"
 msgstr "Tipus"
 
-#: ../src/boot/table.c:44
+#: ../src/boot/table.c:46
 msgid "Kernel Image"
 msgstr "Imatge del nucli"
 
-#: ../src/boot/table.c:45
+#: ../src/boot/table.c:47
 msgid "Device"
 msgstr "Dispositiu"
 
-#: ../src/boot/table.c:50 ../src/network/address-list.c:70
-#: ../src/network/hosts.c:33 ../src/shares/table.c:39 ../src/users/table.c:47
+#: ../src/boot/table.c:52 ../src/network/address-list.c:71
+#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
 msgid "_Add"
 msgstr "_Afegeix"
 
-#: ../src/boot/table.c:51 ../src/network/hosts.c:34
-#: ../src/network/ifaces-list.c:32 ../src/shares/table.c:40
-#: ../src/users/table.c:48
+#: ../src/boot/table.c:53 ../src/network/hosts.c:38
+#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
+#: ../src/users/table.c:49
 msgid "_Properties"
 msgstr "_Propietats"
 
@@ -1209,39 +1209,39 @@ msgstr "No s'ha pogut executar el rerefons"
 msgid "There was an error creating the child process, the tool will close now."
 msgstr "S'ha produït un error en crear el procés fill, l'enia es tancarà."
 
-#: ../src/common/gst-dialog.c:59
+#: ../src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "No s'ha pogut trobar el giny: %s"
 
-#: ../src/common/gst-dialog.c:382
+#: ../src/common/gst-dialog.c:383
 msgid "There are changes which have not been applied"
 msgstr "Hi ha canvis que no s'han aplicat"
 
-#: ../src/common/gst-dialog.c:384
+#: ../src/common/gst-dialog.c:385
 msgid "Apply them now?"
 msgstr "Els voleu aplicar ara?"
 
-#: ../src/common/gst-dialog.c:491
+#: ../src/common/gst-dialog.c:492
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "S'ha produït un error en connectar el senyal '%s' al giny '%s'"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1026
 msgid "The configuration could not be loaded"
 msgstr "No s'ha pogut carregar la configuració"
 
-#: ../src/common/gst-tool.c:1024
+#: ../src/common/gst-tool.c:1028
 msgid "There was an error running the backend script"
 msgstr "S'ha produït un error en l'execució de la seqüència de suport"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1509
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr ""
 "Benvingut a la versió de preliminar %s de les eines de sistema del GNOME"
 
-#: ../src/common/gst-tool.c:1507
+#: ../src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1255,32 +1255,32 @@ msgstr ""
 "salut. Ja esteu avisat. Gràcies per provar aquesta versió preliminar de les "
 "eines de sistema del GNOME (GNOME System Tools)."
 
-#: ../src/common/gst-tool.c:1528
+#: ../src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Avís"
 
-#: ../src/common/gst-tool.c:1548
+#: ../src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "No tornis a mostrar-ho"
 
-#: ../src/common/gst-tool.c:1605
+#: ../src/common/gst-tool.c:1609
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
-#: ../src/common/gst-tool.c:1750
+#: ../src/common/gst-tool.c:1754
 msgid "Could not display help"
 msgstr "No s'ha pogut mostrar l'ajuda"
 
-#: ../src/network/address-list.c:554
+#: ../src/network/address-list.c:555
 msgid "Type address"
 msgstr "Tipus d'adreça"
 
-#: ../src/network/callbacks.c:44
+#: ../src/network/callbacks.c:46
 #, c-format
 msgid "Could not enable the interface %s"
 msgstr "No s'ha pogut habilitar la interfície %s"
 
-#: ../src/network/callbacks.c:48
+#: ../src/network/callbacks.c:50
 msgid ""
 "Check that the settings are correct for this network and that the computer "
 "is correctly connected to it."
@@ -1288,11 +1288,11 @@ msgstr ""
 "Comproveu que els paràmetres per a aquesta xaxa són els correctes, i que "
 "l'ordinador hi estigui correctamet connectat."
 
-#: ../src/network/callbacks.c:235
+#: ../src/network/callbacks.c:237
 msgid "Could not autodetect modem device"
 msgstr "No s'ha pogut autodetectar el dispositiu mòdem"
 
-#: ../src/network/callbacks.c:238
+#: ../src/network/callbacks.c:240
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -1300,11 +1300,11 @@ msgstr ""
 "Comproveu que el dispositiu no estigui ocupat, i que estigui correctament "
 "connectat a l'ordinador."
 
-#: ../src/network/callbacks.c:449
+#: ../src/network/callbacks.c:451
 msgid "The host name has changed"
 msgstr "El nom de l'ordinador ha canviat"
 
-#: ../src/network/callbacks.c:452
+#: ../src/network/callbacks.c:454
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1312,31 +1312,31 @@ msgstr ""
 "Això us impedirà executar noves aplicacions i, per tant, haureu de tornar a "
 "entrar. Voleu continuar de totes maneres?"
 
-#: ../src/network/callbacks.c:458
+#: ../src/network/callbacks.c:460
 msgid "Change _Host name"
 msgstr "_Canvia el nom de l'ordinador"
 
-#: ../src/network/hosts.c:88
+#: ../src/network/hosts.c:92
 msgid "IP Address"
 msgstr "Adreça IP"
 
-#: ../src/network/hosts.c:96
+#: ../src/network/hosts.c:100
 msgid "Aliases"
 msgstr "Àlies"
 
-#: ../src/network/location.c:141
+#: ../src/network/location.c:144
 msgid "Create location"
 msgstr "Crea una ubicació"
 
-#: ../src/network/location.c:149
+#: ../src/network/location.c:152
 msgid "Delete current location"
 msgstr "Suprimeix aquesta ubicació"
 
-#: ../src/network/location.c:363
+#: ../src/network/location.c:366
 msgid "Do you want to remove this location?"
 msgstr "Voleu suprimir aquesta ubicació?"
 
-#: ../src/network/location.c:436
+#: ../src/network/location.c:439
 msgid "Changing profile"
 msgstr "S'està canviant el perfil"
 
@@ -1380,28 +1380,28 @@ msgstr "Configureu els dispositius de xarxa i les connexions"
 msgid "Networking"
 msgstr "Treball en xarxa"
 
-#: ../src/network/network-iface-ethernet.c:301
+#: ../src/network/network-iface-ethernet.c:302
 msgid "Ethernet connection"
 msgstr "Connexió ethernet"
 
 # FIXME
-#: ../src/network/network-iface-irlan.c:121
+#: ../src/network/network-iface-irlan.c:122
 msgid "Infrared connection"
 msgstr "Connexió per infraroig"
 
-#: ../src/network/network-iface-isdn.c:328
+#: ../src/network/network-iface-isdn.c:330
 msgid "ISDN connection"
 msgstr "Connexió XDSI"
 
-#: ../src/network/network-iface-modem.c:251
+#: ../src/network/network-iface-modem.c:253
 msgid "Modem connection"
 msgstr "Connexió mòdem"
 
-#: ../src/network/network-iface-plip.c:210
+#: ../src/network/network-iface-plip.c:211
 msgid "Parallel port connection"
 msgstr "Connexió per port paral·lel"
 
-#: ../src/network/network-iface-wireless.c:244
+#: ../src/network/network-iface-wireless.c:245
 msgid "Wireless connection"
 msgstr "Connexió per xarxa sense fil"
 
@@ -1425,17 +1425,17 @@ msgstr "La interfície %s no està activa"
 msgid "The interface %s is active"
 msgstr "La interfície %s està activa"
 
-#: ../src/services/callbacks.c:63
+#: ../src/services/callbacks.c:64
 #, c-format
 msgid "Settings for \"%s\""
 msgstr "Paràmetres per a «%s»"
 
 #. FIXME: put service name !!!
-#: ../src/services/callbacks.c:152
+#: ../src/services/callbacks.c:153
 msgid "Are you sure you want to deactivate this service?"
 msgstr "Esteu segur que voleu desactivar aquest servei?"
 
-#: ../src/services/callbacks.c:155
+#: ../src/services/callbacks.c:156
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss"
@@ -1443,9 +1443,9 @@ msgstr ""
 "Això pot afectar el comportament d'aquest sistema de diverses maneres, "
 "possiblement fent que es perdin dades"
 
-#: ../src/services/main.c:54
-msgid "Change your running services"
-msgstr "Canvieu els serveis en execució"
+#: ../src/services/main.c:55
+msgid "Services settings"
+msgstr "Paràmetres dels serveis"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1455,97 +1455,142 @@ msgstr "Configureu els serveis que s'executaran quan s'iniciï el sistema"
 msgid "Services"
 msgstr "Serveis"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:32
+msgid "Antivirus"
+msgstr "Antivirus"
+
+#: ../src/services/service.c:32
+msgid "Analyzes your incoming mail for virus"
+msgstr "Analitza si hi ha virus al vostre correu"
+
+#: ../src/services/service.c:33
+msgid "Volumes mounter"
+msgstr "Muntador de volums"
+
+#: ../src/services/service.c:33
+msgid "Mounts your volumes automatically"
+msgstr "Monta els volums automàticament"
+
+#: ../src/services/service.c:34
 msgid "Actions scheduler"
 msgstr "Planificador d'accions"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:34
 msgid "Executes scheduled actions"
 msgstr "Executa accions planificades"
 
+#: ../src/services/service.c:35
+msgid "Database server"
+msgstr "Servidor de bases de dades"
+
+#: ../src/services/service.c:35
+msgid "Data storage system"
+msgstr "Sistema d'emmagatzemament de dades"
+
 # FIXME: Ha de ser consistent amb la versió del GDM
-#: ../src/services/service.c:31
+#: ../src/services/service.c:36
 msgid "Graphical login manager"
 msgstr "Gestor d'entrada gràfic"
 
-#: ../src/services/service.c:31
-msgid "Requests user and password in a graphical fashion"
-msgstr "Sol·licita el nom d'usuari i la contrasenya d'una manera gràfica"
+#: ../src/services/service.c:36
+msgid "Allows users to login graphically"
+msgstr "Permet als usuaris entrar d'una manera gràfica"
 
-#: ../src/services/service.c:32
+#: ../src/services/service.c:37
 msgid "Folder sharing service"
 msgstr "Servei de compartició de carpetes"
 
-#: ../src/services/service.c:32
-msgid "Shares your selected folders through your network"
-msgstr "Compartiu carpetes seleccionades a través de la xarxa"
+#: ../src/services/service.c:37
+msgid "Shares folders through your network"
+msgstr "Comperteix carpetes a través de la xarxa"
 
-#: ../src/services/service.c:33
+#: ../src/services/service.c:38
+msgid "File sharing service"
+msgstr "Servei de compartició de fitxers"
+
+#: ../src/services/service.c:38 ../src/services/service.c:39
+msgid "Shares files though internet"
+msgstr "Comprateix fitxers a través d'internet"
+
+#: ../src/services/service.c:39
+msgid "FTP service"
+msgstr "Servei d'FTP"
+
+# FIXME: "recollidor", uh... em manquen idees (josep)
+#: ../src/services/service.c:40
+msgid "Mail fetcher"
+msgstr "Recollidor de correu"
+
+#: ../src/services/service.c:40
+msgid "Downloads your mail from remote accounts"
+msgstr "Descarrega el correu de comptes remots"
+
+#: ../src/services/service.c:41
 msgid "Mail agent"
 msgstr "Agent de correu"
 
-#: ../src/services/service.c:33
-msgid "Delivers your sent mails through internet"
-msgstr "Lliura a través de la xarxa els correus enviats"
+#: ../src/services/service.c:41
+msgid "Delivers your mails through internet"
+msgstr "Lliura el correu a través d'Internet"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Clock synchronization service"
 msgstr "Servei de sincronització del rellotge"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Synchronizes your computer clock with internet time servers"
 msgstr ""
 "Sincronitza el rellotge de l'ordinador amb servidors de temps d'internet:"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Printer service"
 msgstr "Servei d'impressió"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Allows applications to use printers"
 msgstr "Permet a les aplicacions utilitzar impressores"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Remote shell server"
 msgstr "Servidor d'intèrpret d'ordres remot"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Secure shell server"
 msgstr "Servidor d'intrèrpret d'ordres segur"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Computer activity logger"
 msgstr "Registre de l'activitat de l'ordinador"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Keeps a log of your computer activity"
 msgstr "Manté un registre de les activitat d'aquest ordinador"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Web server"
 msgstr "Servidor web"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Shares your web pages through internet"
 msgstr "Comprateix les pàgines web a través d'internet"
 
-#: ../src/shares/callbacks.c:184
+#: ../src/shares/callbacks.c:187
 msgid "Are you sure you want to delete this share?"
 msgstr "Esteu segur que voleu suprimir aquest compartit?"
 
-#: ../src/shares/callbacks.c:186
+#: ../src/shares/callbacks.c:189
 msgid "Other computers in your network will stop viewing this."
 msgstr "Altres ordinadors de la xarxa deixaran de poder veure això."
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Afegeix camí del compartit, el modifica si ja n'existeix un"
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "PATH"
 msgstr "CAMÍ"
 
-#: ../src/shares/main.c:95
+#: ../src/shares/main.c:97
 msgid "Shared folders settings"
 msgstr "Paràmetres de les carpetes compartides"
 
@@ -1557,38 +1602,38 @@ msgstr "_Comparteix carpeta"
 msgid "Share this folder with other computers"
 msgstr "Comparteix aquesta carpeta amb d'altres ordinadors"
 
-#: ../src/shares/nfs-acl-table.c:49
+#: ../src/shares/nfs-acl-table.c:51
 msgid "Allowed host/network"
 msgstr "Ordinador/xarxa permesos"
 
-#: ../src/shares/share-nfs-add-hosts.c:112
+#: ../src/shares/share-nfs-add-hosts.c:114
 #, c-format
 msgid "Hosts in the %s network"
 msgstr "Ordinadors de la xarxa %s"
 
-#: ../src/shares/share-nfs-add-hosts.c:144
+#: ../src/shares/share-nfs-add-hosts.c:146
 msgid "Specify hostname"
 msgstr "Especifica el nom de l'ordinador"
 
-#: ../src/shares/share-nfs-add-hosts.c:151
+#: ../src/shares/share-nfs-add-hosts.c:153
 msgid "Specify IP address"
 msgstr "Especifica l'adreça IP"
 
-#: ../src/shares/share-nfs-add-hosts.c:158
+#: ../src/shares/share-nfs-add-hosts.c:160
 msgid "Specify network"
 msgstr "Especifica la xarxa"
 
-#: ../src/shares/share-settings.c:121
+#: ../src/shares/share-settings.c:123
 msgid "Do not share"
 msgstr "No comparteixis"
 
 # Projecte_Gnome_2.2 [scrollkeeper.HEAD.ca.po]
 # Gnome_2.6_Extras [gnome-commander.HEAD.ca.po]
-#: ../src/shares/share-settings.c:129
+#: ../src/shares/share-settings.c:131
 msgid "SMB"
 msgstr "SMB"
 
-#: ../src/shares/share-settings.c:137
+#: ../src/shares/share-settings.c:139
 msgid "NFS"
 msgstr "NFS"
 
@@ -1601,11 +1646,11 @@ msgid "Shared Folders"
 msgstr "Carpetes compartides"
 
 # FIXME
-#: ../src/shares/transfer.c:42
+#: ../src/shares/transfer.c:44
 msgid "Sharing services are not installed"
 msgstr "La compratició de serveis no està instal·lada"
 
-#: ../src/shares/transfer.c:44
+#: ../src/shares/transfer.c:46
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders. The tool will close now."
@@ -1613,11 +1658,11 @@ msgstr ""
 "Cal que tingueu instal·lat Samba o bé NFS per poder compartir les carpetes. "
 "Ara l'eina es tancarà."
 
-#: ../src/time/main.c:461
+#: ../src/time/main.c:464
 msgid "NTP support is not installed"
 msgstr "L'NTP no està instal·lat"
 
-#: ../src/time/main.c:463
+#: ../src/time/main.c:466
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1625,7 +1670,7 @@ msgstr ""
 "Instal·leu i activeu l'NTP per a habilitar la sincronització del servidor "
 "local de temps amb servidors de temps d'Internet."
 
-#: ../src/time/main.c:759
+#: ../src/time/main.c:762
 msgid "Time and Date Settings"
 msgstr "Paràmetres de l'hora i la data"
 
@@ -1637,109 +1682,109 @@ msgstr "Canvieu l'hora, la data, i el fus horari del sistema"
 msgid "Time and Date"
 msgstr "Hora i data"
 
-#: ../src/users/callbacks.c:569
+#: ../src/users/callbacks.c:571
 msgid "Error saving profile"
 msgstr "S'ha produït un error en desar el perfil"
 
-#: ../src/users/callbacks.c:611
+#: ../src/users/callbacks.c:613
 msgid "Create New profile"
 msgstr "Crea un nou perfil"
 
-#: ../src/users/callbacks.c:647
+#: ../src/users/callbacks.c:649
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Paràmetres del perfil %s"
 
-#: ../src/users/group-settings.c:89
+#: ../src/users/group-settings.c:91
 msgid "Create New Group"
 msgstr "Crea un nou grup"
 
 #. Check if gid is available
-#: ../src/users/group-settings.c:162 ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
 msgid "Invalid group ID"
 msgstr "L'identificador de grup no és vàlid"
 
-#: ../src/users/group-settings.c:163
+#: ../src/users/group-settings.c:165
 msgid "Group ID must be a positive number"
 msgstr "L'identificador de grup ha de ser un nombre positiu"
 
 #. if group is root
-#: ../src/users/group-settings.c:166
+#: ../src/users/group-settings.c:168
 msgid "Group ID of the \"root\" user should not be modified"
 msgstr ""
 "No s'hauria de modificar l'identificador de grup de l'usuari «root» (el "
 "superusuari)."
 
-#: ../src/users/group-settings.c:167 ../src/users/group-settings.c:213
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:215
+#: ../src/users/group-settings.c:285
 msgid "This would leave the system unusable"
 msgstr "Això deixaria el sistema en un estat inservible"
 
-#: ../src/users/group-settings.c:171
+#: ../src/users/group-settings.c:173
 #, c-format
 msgid "Group ID %s already exists"
 msgstr "L'identificador de grup %s ja existeix"
 
 #. If empty.
-#: ../src/users/group-settings.c:196
+#: ../src/users/group-settings.c:198
 msgid "Group name is empty"
 msgstr "El nom del grup està buit"
 
-#: ../src/users/group-settings.c:197
+#: ../src/users/group-settings.c:199
 msgid "A group name must be specified"
 msgstr "Heu d'especificar un nom per al grup"
 
 #. If too long.
-#: ../src/users/group-settings.c:200
+#: ../src/users/group-settings.c:202
 msgid "The group name is too long"
 msgstr "El nom del grup és massa llarg"
 
-#: ../src/users/group-settings.c:201
+#: ../src/users/group-settings.c:203
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
 msgstr "Els noms del grup vàlids han de tenir menys de %i caràcters"
 
 #. if invalid.
-#: ../src/users/group-settings.c:204
+#: ../src/users/group-settings.c:206
 msgid "Group name has invalid characters"
 msgstr "El nom del grup conté caràcters invàlids"
 
-#: ../src/users/group-settings.c:205
+#: ../src/users/group-settings.c:207
 msgid "Please set a valid group name, using only lower case letters"
 msgstr "Establiu un nom de grup vàlid que només utilitzi lletres en minúscula"
 
 #. if !exist.
-#: ../src/users/group-settings.c:208
+#: ../src/users/group-settings.c:210
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "El grup «%s» ja existeix"
 
-#: ../src/users/group-settings.c:209
+#: ../src/users/group-settings.c:211
 msgid "Please select a different group name"
 msgstr "Seleccioneu un nom diferent per al grup"
 
 #. if it's the root group
-#: ../src/users/group-settings.c:212
+#: ../src/users/group-settings.c:214
 msgid "Group name of the \"root\" user should not be modified"
 msgstr ""
 "No s'hauria de modificar el nom del grup de l'usuari «root» (el superusuari)"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:284
 msgid "The group \"root\" should not be deleted"
 msgstr "No s'hauria de suprimir el grup «root» (el del superusuari)"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:299
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Esteu segur que voleu suprimir el grup «%s»?"
 
-#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:301
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr ""
 "Això pot deixar fitxers en el sistema de fitxers amb un identificador de "
 "grup invàlid."
 
-#: ../src/users/group-settings.c:359
+#: ../src/users/group-settings.c:361
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Paràmetres per al grup %s"
@@ -1752,31 +1797,31 @@ msgstr "Grup"
 msgid "GID"
 msgstr "GID"
 
-#: ../src/users/main.c:122
+#: ../src/users/main.c:123
 msgid "User name contains"
 msgstr "El nom de l'usuari conté"
 
-#: ../src/users/main.c:123
+#: ../src/users/main.c:124
 msgid "User ID is"
 msgstr "L'ID de l'usuari és"
 
-#: ../src/users/main.c:124
+#: ../src/users/main.c:125
 msgid "Group name contains"
 msgstr "El nom del grup conté"
 
-#: ../src/users/main.c:125
+#: ../src/users/main.c:126
 msgid "User GID is"
 msgstr "El GID de l'usuari és"
 
-#: ../src/users/main.c:244 ../src/users/users.desktop.in.in.h:2
+#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Usuaris i grups"
 
-#: ../src/users/passwd.c:165
+#: ../src/users/passwd.c:168
 msgid "Passwords do not match"
 msgstr "Les contrasenyes no coincideixen"
 
-#: ../src/users/passwd.c:170
+#: ../src/users/passwd.c:173
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1785,72 +1830,72 @@ msgstr ""
 "Contrasenya incorrecta: %s.\n"
 "Intenteu-ho amb una altra contrasenya"
 
-#: ../src/users/profile-settings.c:122
+#: ../src/users/profile-settings.c:125
 msgid "The profile must have a name"
 msgstr "El perfil ha de tenir un nom"
 
-#: ../src/users/profile-settings.c:127
+#: ../src/users/profile-settings.c:130
 msgid "The profile must have a default home"
 msgstr "El perfil ha de tenir un directori personal per defecte"
 
-#: ../src/users/profile-settings.c:132 ../src/users/profile-settings.c:137
+#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
 msgid "The profile must have a default shell"
 msgstr "El perfil ha de tenir un intèrpret d'ordres per defecte"
 
-#: ../src/users/profile-settings.c:205
+#: ../src/users/profile-settings.c:208
 msgid "The default profile should not be deleted"
 msgstr "No s'hauria d'eliminar el perfil per defecte"
 
-#: ../src/users/profile-settings.c:206
+#: ../src/users/profile-settings.c:209
 msgid "This profile is used for setting default data for new users"
 msgstr ""
 "Aquest perfil s'utilitza per especificar les dades per defecte d'usuaris nous"
 
-#: ../src/users/profile-settings.c:215
+#: ../src/users/profile-settings.c:218
 #, c-format
 msgid "Delete profile \"%s\"?"
 msgstr "Voleu suprimir el perfil «%s»?"
 
-#: ../src/users/profile-settings.c:217
+#: ../src/users/profile-settings.c:220
 msgid "You will not be able to recover this profile after pressing \"apply\"."
 msgstr "No podreu recuperar aquest perfil un cop hagueu fet clic a «aplica»."
 
 #. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:38
+#: ../src/users/profiles-table.c:39
 msgid "Profile"
 msgstr "Perfil"
 
-#: ../src/users/profiles-table.c:39
+#: ../src/users/profiles-table.c:40
 msgid "Comment"
 msgstr "Comentari"
 
-#: ../src/users/search-bar/search-bar.c:225
+#: ../src/users/search-bar/search-bar.c:228
 msgid "C_lear"
 msgstr "Ne_teja"
 
-#: ../src/users/search-bar/search-bar.c:326
+#: ../src/users/search-bar/search-bar.c:329
 msgid "Choice"
 msgstr "Opció"
 
-#: ../src/users/search-bar/search-bar.c:336
+#: ../src/users/search-bar/search-bar.c:339
 msgid "Text"
 msgstr "Text"
 
-#: ../src/users/user-settings.c:71
+#: ../src/users/user-settings.c:73
 msgid "The \"root\" user should not be deleted"
 msgstr "L'usuari «root» (superusuari) no s'hauria de suprimir"
 
-#: ../src/users/user-settings.c:72 ../src/users/user-settings.c:303
-#: ../src/users/user-settings.c:398 ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:305
+#: ../src/users/user-settings.c:400 ../src/users/user-settings.c:436
 msgid "This would leave the system unusable."
 msgstr "Això deixaria el sistema en un estat inservible."
 
-#: ../src/users/user-settings.c:81
+#: ../src/users/user-settings.c:83
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "Esteu segur que voleu suprimir l'usuari \"%s\"?"
 
-#: ../src/users/user-settings.c:83
+#: ../src/users/user-settings.c:85
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1858,37 +1903,37 @@ msgstr ""
 "Això inhabilitarà l'accés d'aquest usuari a aquest sistema, però el seu "
 "directori d'usuari no se suprimirà."
 
-#: ../src/users/user-settings.c:187
+#: ../src/users/user-settings.c:189
 msgid "User Account Editor"
 msgstr "Editor de comptes d'usuari"
 
-#: ../src/users/user-settings.c:283
+#: ../src/users/user-settings.c:285
 msgid "The user name is empty"
 msgstr "El nom de l'usuari està buit"
 
-#: ../src/users/user-settings.c:284
+#: ../src/users/user-settings.c:286
 msgid "A user name must be specified."
 msgstr "S'ha d'especificar un nom d'usuari."
 
 #. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:290 ../src/users/user-settings.c:295
+#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:297
 msgid "The user name is too long"
 msgstr "El nom d'usuari és massa llarg"
 
-#: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
+#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:298
 #, c-format
 msgid "To be valid, the user name should have less than %i characters."
 msgstr "El nom d'usuari ha de tenir menys de %i caràcters per ser vàlid."
 
-#: ../src/users/user-settings.c:302
+#: ../src/users/user-settings.c:304
 msgid "User name for the \"root\" user should not be modified"
 msgstr "No s'hauria de modificar el nom d'usuari «root» (el del superusuari)"
 
-#: ../src/users/user-settings.c:308
+#: ../src/users/user-settings.c:310
 msgid "User name has invalid characters"
 msgstr "El nom d'usuari conté caràcters invàlids"
 
-#: ../src/users/user-settings.c:309
+#: ../src/users/user-settings.c:311
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1896,37 +1941,37 @@ msgstr ""
 "Establiu un nom d'usuari vàlid utilitzant una lletra minúscula seguida de "
 "lletres en minúscules i nombres."
 
-#: ../src/users/user-settings.c:315
+#: ../src/users/user-settings.c:317
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "El nom d'usuari «%s» ja existeix"
 
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:318
 msgid "Please select a different user name."
 msgstr "Seleccioneu un nom d'usuari diferent."
 
-#: ../src/users/user-settings.c:341
+#: ../src/users/user-settings.c:343
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "El comentari conté el caràcter invàlid «%c»"
 
-#: ../src/users/user-settings.c:342
+#: ../src/users/user-settings.c:344
 msgid "Check that this character is not used."
 msgstr "Comproveu que no es faci servir aquest caràcter."
 
-#: ../src/users/user-settings.c:390
+#: ../src/users/user-settings.c:392
 msgid "Home directory should not be empty"
 msgstr "El directori de l'usuari no es pot deixar buit"
 
-#: ../src/users/user-settings.c:391
+#: ../src/users/user-settings.c:393
 msgid "Make sure you provide a home directory."
 msgstr "Assegureu-vos d'introduir el directori de l'usuari."
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:395
 msgid "Incomplete path in home directory"
 msgstr "El camí del directori de l'usuari no està complet"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:396
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1934,30 +1979,30 @@ msgstr ""
 "Introduïu el camí sencer del directori de l'usuari\n"
 "<span size=\"smaller\">per exemple: /home/josep</span>."
 
-#: ../src/users/user-settings.c:397
+#: ../src/users/user-settings.c:399
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr ""
 "No s'hauria de modificar el directori de l'usuari «root» (el superusuari)"
 
-#: ../src/users/user-settings.c:430
+#: ../src/users/user-settings.c:432
 msgid "Invalid user ID"
 msgstr "L'identificador d'usuari no és vàlid"
 
-#: ../src/users/user-settings.c:431
+#: ../src/users/user-settings.c:433
 msgid "User ID must be a positive number."
 msgstr "L'identificador d'usuari ha de ser un nombre positiu."
 
-#: ../src/users/user-settings.c:433
+#: ../src/users/user-settings.c:435
 msgid "User ID of the \"root\" user should not be modified"
 msgstr ""
 "No s'hauria de modificar l'identificador de l'usuari «root» (el superusuari)"
 
-#: ../src/users/user-settings.c:451
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User ID %s already exists"
 msgstr "L'identificador d'usuari %s ja existeix"
 
-#: ../src/users/user-settings.c:453
+#: ../src/users/user-settings.c:455
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems."
@@ -1965,11 +2010,11 @@ msgstr ""
 "Diversos usuaris poden compartir un mateix identificador d'usuari, però no "
 "és normal fer-ho, i si es fa pot derivar en problemes de seguretat."
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:473
 msgid "Incomplete path in shell"
 msgstr "El camí de l'intèrpret d'ordres no està complet"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:474
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>."
@@ -1977,50 +2022,59 @@ msgstr ""
 "Introduïu el camí complet a l'intèrpret d'ordres\n"
 "<span size=\"smaller\">per exemple: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:496
 msgid "Password should not be empty"
 msgstr "La contrasenya no es pot deixar buida"
 
-#: ../src/users/user-settings.c:495
+#: ../src/users/user-settings.c:497
 msgid "A password must be provided."
 msgstr "S'ha de proporcionar una contrasenya."
 
-#: ../src/users/user-settings.c:497
+#: ../src/users/user-settings.c:499
 msgid "Password confirmation isn't correct"
 msgstr "La confirmació de la contrasenya no és correcta"
 
-#: ../src/users/user-settings.c:498
+#: ../src/users/user-settings.c:500
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Comproveu que heu introduït la mateixa contrasenya en els dos camps."
 
-#: ../src/users/user-settings.c:772
+#: ../src/users/user-settings.c:774
 #, c-format
 msgid "Settings for User %s"
 msgstr "Paràmetres per a l'usuari %s"
 
-#: ../src/users/users-table.c:59
+#: ../src/users/users-table.c:61
 msgid "User"
 msgstr "Usuari"
 
-#: ../src/users/users-table.c:60
+#: ../src/users/users-table.c:62
 msgid "Home"
 msgstr "Inici"
 
-#: ../src/users/users-table.c:61
+#: ../src/users/users-table.c:63
 msgid "User details"
 msgstr "Detalls de l'usuari"
 
-#: ../src/users/users-table.c:62
+#: ../src/users/users-table.c:64
 msgid "UID"
 msgstr "UID"
 
-#: ../src/users/users-table.c:63
+#: ../src/users/users-table.c:65
 msgid "Shell"
 msgstr "Intèrpret d'ordres"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Afegeix o suprimeix usuaris i grups"
+
+#~ msgid "<b>Available services:</b>"
+#~ msgstr "<b>Serveis disponibles:</b>"
+
+#~ msgid "Change your running services"
+#~ msgstr "Canvieu els serveis en execució"
+
+#~ msgid "Requests user and password in a graphical fashion"
+#~ msgstr "Sol·licita el nom d'usuari i la contrasenya d'una manera gràfica"
 
 #~ msgid "This device is _configured"
 #~ msgstr "Aquest dispositiu està _configurat"
@@ -2726,11 +2780,6 @@ msgstr "Afegeix o suprimeix usuaris i grups"
 #~ msgstr ""
 #~ "Seleccioneu la data i hora actuals. També podeu establir un fus horari i "
 #~ "un servidor horari."
-
-#~ msgid "Select the servers you wish to use for time synchronization."
-#~ msgstr ""
-#~ "Seleccioneu els servidors que voleu utilitzar per a la sincronització "
-#~ "horària."
 
 #~ msgid "To select a time zone, click on one of the dots on the map"
 #~ msgstr "Seleccioneu un fus horari fent clic sobre un dels punts del mapa"
