@@ -9,16 +9,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools.HEAD\n"
+"Project-Id-Version: gnome-system-tools.HEAD.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-07 14:23+0000\n"
-"PO-Revision-Date: 2005-08-05 10:59+0200\n"
+"POT-Creation-Date: 2005-08-14 06:37+0000\n"
+"PO-Revision-Date: 2005-08-14 23:22+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
@@ -127,7 +127,7 @@ msgstr "<span weight=\"bold\">A számítógép indítása</span>"
 msgid "Ask at boot"
 msgstr "Kérdezzen rá rendszerbetöltéskor"
 
-#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:70
+#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:71
 msgid "Boot Manager Settings"
 msgstr "Rendszerbetöltő beállításai"
 
@@ -150,8 +150,8 @@ msgid "Confirmation"
 msgstr "Megerősítés"
 
 #. set window title
-#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:441
-#: ../src/boot/boot-druid.c:453
+#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:454
 msgid "Creating a new boot image"
 msgstr "Új rendszerindító kép létrehozása"
 
@@ -249,7 +249,7 @@ msgstr "_Eszköz:"
 msgid "_Edit"
 msgstr "S_zerkesztés"
 
-#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:42
+#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:44
 msgid "_Initrd image path:"
 msgstr "_Initrd-kép útvonala:"
 
@@ -274,8 +274,7 @@ msgid "_Root file system device:"
 msgstr "_Gyökérfájlrendszer eszköz:"
 
 #: ../interfaces/common.glade.in.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+msgid "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Adja meg a root jelszót</span>"
 
 #: ../interfaces/common.glade.in.h:2
@@ -507,7 +506,7 @@ msgstr "Az internetszolgáltató névkiszolgálóinak használata"
 msgid "WEP _key:"
 msgstr "_WEP-kulcs:"
 
-#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:33
+#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:34
 msgid "_Activate"
 msgstr "_Aktiválás"
 
@@ -515,7 +514,7 @@ msgstr "_Aktiválás"
 msgid "_Autodetect"
 msgstr "_Automatikus felismerés"
 
-#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:34
+#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:35
 msgid "_Deactivate"
 msgstr "_Deaktiválás"
 
@@ -576,12 +575,12 @@ msgid "_Volume:"
 msgstr "_Hangerő:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<b>Available services:</b>"
-msgstr "<b>Rendelkezésre álló szolgáltatások:</b>"
-
-#: ../interfaces/services.glade.in.h:2
 msgid "Advanced settings:"
 msgstr "Haladó beállítások:"
+
+#: ../interfaces/services.glade.in.h:2
+msgid "Select the services that you wish to activate:"
+msgstr "Válassza ki az aktiválni kívánt szolgáltatásokat:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -651,7 +650,7 @@ msgstr "Hálózati maszk:"
 msgid "Network:"
 msgstr "Hálózat:"
 
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:55
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
 msgid "Read only"
 msgstr "Csak olvasható"
 
@@ -939,9 +938,9 @@ msgstr "_Megjegyzések"
 msgid "_Days between warning and password expiration:"
 msgstr "_Napok száma a figyelmeztetés és a jelszó elévülése között:"
 
-#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:52
-#: ../src/network/address-list.c:71 ../src/network/hosts.c:35
-#: ../src/shares/table.c:41 ../src/users/table.c:49
+#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:54
+#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
+#: ../src/shares/table.c:42 ../src/users/table.c:50
 msgid "_Delete"
 msgstr "_Törlés"
 
@@ -981,102 +980,102 @@ msgstr "_Parancsértelmező:"
 msgid "_Work phone:"
 msgstr "_Munkahelyi telefon:"
 
-#: ../src/boot/boot-append-gui.c:139
+#: ../src/boot/boot-append-gui.c:140
 msgid "32,768"
 msgstr "32 768"
 
-#: ../src/boot/boot-append-gui.c:140
+#: ../src/boot/boot-append-gui.c:141
 msgid "65,536"
 msgstr "65 536"
 
-#: ../src/boot/boot-append-gui.c:141
+#: ../src/boot/boot-append-gui.c:142
 msgid "16,777,216"
 msgstr "16 777 216"
 
-#: ../src/boot/boot-append-gui.c:252
+#: ../src/boot/boot-append-gui.c:253
 msgid "Invalid VGA value"
 msgstr "Érvénytelen VGA-érték"
 
-#: ../src/boot/boot-append-gui.c:254
+#: ../src/boot/boot-append-gui.c:255
 #, c-format
 msgid "\"%s\" is not a valid VGA value."
 msgstr "\"%s\" nem érvényes VGA-érték."
 
-#: ../src/boot/boot-druid.c:112
+#: ../src/boot/boot-druid.c:113
 msgid "Error creating boot image"
 msgstr "Hiba a rendszerindító kép létrehozása közben"
 
-#: ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:443
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "Új rendszerindító kép létrehozása (%d/%d)"
 
-#: ../src/boot/boot-druid.c:443
+#: ../src/boot/boot-druid.c:444
 msgid "Finished creating a new boot image"
 msgstr "Befejeződött az új rendszerindító kép létrehozása"
 
-#: ../src/boot/boot-image.c:40
+#: ../src/boot/boot-image.c:43
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../src/boot/boot-image.c:41
+#: ../src/boot/boot-image.c:44
 msgid "Windows NT"
 msgstr "Windows NT"
 
-#: ../src/boot/boot-image.c:42
+#: ../src/boot/boot-image.c:45
 msgid "Windows 9x"
 msgstr "Windows 9x"
 
-#: ../src/boot/boot-image.c:43
+#: ../src/boot/boot-image.c:46
 msgid "Dos"
 msgstr "Dos"
 
-#: ../src/boot/boot-image.c:44
+#: ../src/boot/boot-image.c:47
 msgid "Linux"
 msgstr "Linux"
 
-#: ../src/boot/boot-image.c:45
+#: ../src/boot/boot-image.c:48
 msgid "Linux swap"
 msgstr "Linux swap"
 
-#: ../src/boot/boot-image.c:46
+#: ../src/boot/boot-image.c:49
 msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
-#: ../src/boot/boot-image.c:276
+#: ../src/boot/boot-image.c:279
 #, c-format
 msgid "\"%s\" is an invalid path"
 msgstr "a(z) \"%s\" érvénytelen útvonal"
 
-#: ../src/boot/boot-image.c:292
+#: ../src/boot/boot-image.c:295
 #, c-format
 msgid "\"%s\" already exists, please set another name."
 msgstr "\"%s\" már létezik, kérem állítson be egy másik nevet."
 
-#: ../src/boot/boot-image.c:298
+#: ../src/boot/boot-image.c:301
 #, c-format
 msgid "Invalid image name: \"%s\"."
 msgstr "Érvénytelen képnév: \"%s\"."
 
-#: ../src/boot/boot-image.c:311
+#: ../src/boot/boot-image.c:314
 #, c-format
 msgid "Invalid image: \"%s\"."
 msgstr "Érvénytelen kép: \"%s\"."
 
-#: ../src/boot/boot-image.c:329
+#: ../src/boot/boot-image.c:332
 #, c-format
 msgid "Invalid root device: \"%s\"."
 msgstr "Érvénytelen root eszköz: \"%s\"."
 
-#: ../src/boot/boot-settings.c:43
+#: ../src/boot/boot-settings.c:45
 msgid "_Module path:"
 msgstr "_Modulok elérési útvonala:"
 
-#: ../src/boot/boot-settings.c:405
+#: ../src/boot/boot-settings.c:407
 msgid "Password confirmation is not correct."
 msgstr "A jelszó megerősítése hibás."
 
-#: ../src/boot/boot-settings.c:430
+#: ../src/boot/boot-settings.c:432
 msgid "Error modifying boot image"
 msgstr "Hiba a rendszerindító kép módosítása közben"
 
@@ -1102,8 +1101,7 @@ msgstr "Hiba a rendszerindító kép törlése közben"
 
 #: ../src/boot/callbacks.c:414
 msgid "Without at least one boot image your computer will not start."
-msgstr ""
-"Legalább egy rendszerindító kép nélkül a számítógépe nem fog elindulni."
+msgstr "Legalább egy rendszerindító kép nélkül a számítógépe nem fog elindulni."
 
 #: ../src/boot/callbacks.c:433
 #, c-format
@@ -1123,34 +1121,34 @@ msgstr "A beállítások üresek lesznek"
 msgid "The file \"%s\" is missing or could not be read."
 msgstr "A(z) \"%s\" fájl hiányzik vagy nem olvasható."
 
-#: ../src/boot/table.c:41
+#: ../src/boot/table.c:43
 msgid "Name"
 msgstr "Név"
 
-#: ../src/boot/table.c:42
+#: ../src/boot/table.c:44
 msgid "Default"
 msgstr "Alapértelmezett"
 
-#: ../src/boot/table.c:43
+#: ../src/boot/table.c:45
 msgid "Type"
 msgstr "Típus"
 
-#: ../src/boot/table.c:44
+#: ../src/boot/table.c:46
 msgid "Kernel Image"
 msgstr "Rendszermag-kép"
 
-#: ../src/boot/table.c:45
+#: ../src/boot/table.c:47
 msgid "Device"
 msgstr "Eszköz"
 
-#: ../src/boot/table.c:50 ../src/network/address-list.c:70
-#: ../src/network/hosts.c:33 ../src/shares/table.c:39 ../src/users/table.c:47
+#: ../src/boot/table.c:52 ../src/network/address-list.c:71
+#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
 msgid "_Add"
 msgstr "Hozzá_adás"
 
-#: ../src/boot/table.c:51 ../src/network/hosts.c:34
-#: ../src/network/ifaces-list.c:32 ../src/shares/table.c:40
-#: ../src/users/table.c:48
+#: ../src/boot/table.c:53 ../src/network/hosts.c:38
+#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
+#: ../src/users/table.c:49
 msgid "_Properties"
 msgstr "T_ulajdonságok"
 
@@ -1176,8 +1174,7 @@ msgstr "A megadott jelszó érvénytelen"
 msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
-msgstr ""
-"Ellenőrizze, hogy helyesen írta-e be és a caps lock gomb nincs bekapcsolva"
+msgstr "Ellenőrizze, hogy helyesen írta-e be és a caps lock gomb nincs bekapcsolva"
 
 #: ../src/common/gst-auth.c:103
 #, c-format
@@ -1202,38 +1199,38 @@ msgstr ""
 "Hiba történt a gyermekfolyamat indítása közben, az eszköz most befejezi "
 "működését."
 
-#: ../src/common/gst-dialog.c:59
+#: ../src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Nem található a grafikai elem: %s"
 
-#: ../src/common/gst-dialog.c:382
+#: ../src/common/gst-dialog.c:383
 msgid "There are changes which have not been applied"
 msgstr "Nincs minden változtatás alkalmazva"
 
-#: ../src/common/gst-dialog.c:384
+#: ../src/common/gst-dialog.c:385
 msgid "Apply them now?"
 msgstr "Alkalmazza most?"
 
-#: ../src/common/gst-dialog.c:491
+#: ../src/common/gst-dialog.c:492
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
-msgstr "'%s' hibás kapcsolódási szignál '%s' grafikai elemben"
+msgstr "\"%s\" hibás kapcsolódási szignál \"%s\" grafikai elemben"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1026
 msgid "The configuration could not be loaded"
 msgstr "A beállítás nem tölthető be"
 
-#: ../src/common/gst-tool.c:1024
+#: ../src/common/gst-tool.c:1028
 msgid "There was an error running the backend script"
 msgstr "Hiba lépett fel a háttér-parancsfájl futtatása közben"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1509
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Üdvözli a GNOME Rendszereszközök %s. előzetes változata"
 
-#: ../src/common/gst-tool.c:1507
+#: ../src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1247,32 +1244,32 @@ msgstr ""
 "idejét, fáradozásait és józan ész pontjait pazarolva. Figyelmeztettük. "
 "Köszönjük, hogy kipróbálja a GNOME Rendszereszközöket!"
 
-#: ../src/common/gst-tool.c:1528
+#: ../src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Figyelmeztetés"
 
-#: ../src/common/gst-tool.c:1548
+#: ../src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Ne mutassa ezt többet"
 
-#: ../src/common/gst-tool.c:1605
+#: ../src/common/gst-tool.c:1609
 msgid "GNOME System Tools"
 msgstr "GNOME Rendszereszközök"
 
-#: ../src/common/gst-tool.c:1750
+#: ../src/common/gst-tool.c:1754
 msgid "Could not display help"
 msgstr "A súgó megjelenítése sikertelen"
 
-#: ../src/network/address-list.c:554
+#: ../src/network/address-list.c:555
 msgid "Type address"
 msgstr "Adja meg a címet"
 
-#: ../src/network/callbacks.c:44
+#: ../src/network/callbacks.c:46
 #, c-format
 msgid "Could not enable the interface %s"
 msgstr "Nem lehet bekapcsolni a következő felületet: %s"
 
-#: ../src/network/callbacks.c:48
+#: ../src/network/callbacks.c:50
 msgid ""
 "Check that the settings are correct for this network and that the computer "
 "is correctly connected to it."
@@ -1280,11 +1277,11 @@ msgstr ""
 "Ellenőrizze, hogy a beállítások megfelelőek-e ehhez a hálózathoz és hogy a "
 "számítógép megfelelően van-e hozzá csatlakoztatva."
 
-#: ../src/network/callbacks.c:235
+#: ../src/network/callbacks.c:237
 msgid "Could not autodetect modem device"
 msgstr "Nem lehet automatikusan felismerni a modemeszközt"
 
-#: ../src/network/callbacks.c:238
+#: ../src/network/callbacks.c:240
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -1292,11 +1289,11 @@ msgstr ""
 "Ellenőrizze, hogy az eszköz nem foglalt és megfelelően van csatlakoztatva a "
 "számítógéphez"
 
-#: ../src/network/callbacks.c:449
+#: ../src/network/callbacks.c:451
 msgid "The host name has changed"
 msgstr "A gépnév megváltozott"
 
-#: ../src/network/callbacks.c:452
+#: ../src/network/callbacks.c:454
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1304,31 +1301,31 @@ msgstr ""
 "Ez megakadályozza új alkalmazások elindítását, ezért újra be kell "
 "jelentkeznie. Mindenképp folytatja?"
 
-#: ../src/network/callbacks.c:458
+#: ../src/network/callbacks.c:460
 msgid "Change _Host name"
 msgstr "_Gépnév megváltoztatása"
 
-#: ../src/network/hosts.c:88
+#: ../src/network/hosts.c:92
 msgid "IP Address"
 msgstr "IP-cím"
 
-#: ../src/network/hosts.c:96
+#: ../src/network/hosts.c:100
 msgid "Aliases"
 msgstr "Álnevek"
 
-#: ../src/network/location.c:141
+#: ../src/network/location.c:144
 msgid "Create location"
 msgstr "Hely létrehozása"
 
-#: ../src/network/location.c:149
+#: ../src/network/location.c:152
 msgid "Delete current location"
 msgstr "Jelenlegi hely törlése"
 
-#: ../src/network/location.c:363
+#: ../src/network/location.c:366
 msgid "Do you want to remove this location?"
 msgstr "El szeretné távolítani ezt a helyet?"
 
-#: ../src/network/location.c:436
+#: ../src/network/location.c:439
 msgid "Changing profile"
 msgstr "Profil megváltoztatása"
 
@@ -1340,8 +1337,7 @@ msgstr "A felület nem létezik"
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
-msgstr ""
-"Ellenőrizze, hogy helyesen írta be és ezt megfelelően támogatja a rendszere."
+msgstr "Ellenőrizze, hogy helyesen írta be és ezt megfelelően támogatja a rendszere."
 
 #: ../src/network/main.c:157
 msgid "Configure a network interface"
@@ -1371,27 +1367,27 @@ msgstr "Hálózati eszközök és kapcsolatok beállítása"
 msgid "Networking"
 msgstr "Hálózat"
 
-#: ../src/network/network-iface-ethernet.c:301
+#: ../src/network/network-iface-ethernet.c:302
 msgid "Ethernet connection"
 msgstr "Ethernet kapcsolat"
 
-#: ../src/network/network-iface-irlan.c:121
+#: ../src/network/network-iface-irlan.c:122
 msgid "Infrared connection"
 msgstr "Infravörös kapcsolat"
 
-#: ../src/network/network-iface-isdn.c:328
+#: ../src/network/network-iface-isdn.c:330
 msgid "ISDN connection"
 msgstr "ISDN kapcsolat"
 
-#: ../src/network/network-iface-modem.c:251
+#: ../src/network/network-iface-modem.c:253
 msgid "Modem connection"
 msgstr "Modemes kapcsolat"
 
-#: ../src/network/network-iface-plip.c:210
+#: ../src/network/network-iface-plip.c:211
 msgid "Parallel port connection"
 msgstr "Párhuzamos porti kapcsolat"
 
-#: ../src/network/network-iface-wireless.c:244
+#: ../src/network/network-iface-wireless.c:245
 msgid "Wireless connection"
 msgstr "Vezeték nélküli kapcsolat"
 
@@ -1415,17 +1411,17 @@ msgstr "A(z) \"%s\" felület nem aktív"
 msgid "The interface %s is active"
 msgstr "A(z) \"%s\" felület aktív"
 
-#: ../src/services/callbacks.c:63
+#: ../src/services/callbacks.c:64
 #, c-format
 msgid "Settings for \"%s\""
 msgstr "\"%s\" beállításai"
 
 #. FIXME: put service name !!!
-#: ../src/services/callbacks.c:152
+#: ../src/services/callbacks.c:153
 msgid "Are you sure you want to deactivate this service?"
 msgstr "Biztos, hogy ki szeretné kapcsolni ezt a szolgáltatást?"
 
-#: ../src/services/callbacks.c:155
+#: ../src/services/callbacks.c:156
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss"
@@ -1433,9 +1429,9 @@ msgstr ""
 "Ez több módon befolyásolhatja a rendszere viselkedését, adatvesztéshez is "
 "vezethet"
 
-#: ../src/services/main.c:54
-msgid "Change your running services"
-msgstr "A futó szolgáltatások megváltoztatása"
+#: ../src/services/main.c:55
+msgid "Services settings"
+msgstr "Szolgáltatások beállításai"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1445,95 +1441,139 @@ msgstr "A rendszer indításakor futtatandó szolgáltatások beállítása"
 msgid "Services"
 msgstr "Szolgáltatások"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:32
+msgid "Antivirus"
+msgstr "Antivirus"
+
+#: ../src/services/service.c:32
+msgid "Analyzes your incoming mail for virus"
+msgstr "Vírusokat keres a bejövő levelekben"
+
+#: ../src/services/service.c:33
+msgid "Volumes mounter"
+msgstr "Kötetcsatlakoztató"
+
+#: ../src/services/service.c:33
+msgid "Mounts your volumes automatically"
+msgstr "Automatikusan csatlakoztatja a köteteit"
+
+#: ../src/services/service.c:34
 msgid "Actions scheduler"
 msgstr "Feladatütemező"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:34
 msgid "Executes scheduled actions"
 msgstr "Ütemezett feladatokat hajt végre"
 
-#: ../src/services/service.c:31
+#: ../src/services/service.c:35
+msgid "Database server"
+msgstr "Adatbázis-kiszolgáló"
+
+#: ../src/services/service.c:35
+msgid "Data storage system"
+msgstr "Adattároló rendszer"
+
+#: ../src/services/service.c:36
 msgid "Graphical login manager"
 msgstr "Grafikus bejelentkezéskezelő"
 
-#: ../src/services/service.c:31
-msgid "Requests user and password in a graphical fashion"
-msgstr "Felhasználónév és jelszó bekérése grafikusan"
+#: ../src/services/service.c:36
+msgid "Allows users to login graphically"
+msgstr "Lehetővé teszi a felhasználók bejelentkezését grafikus felületen"
 
-#: ../src/services/service.c:32
+#: ../src/services/service.c:37
 msgid "Folder sharing service"
 msgstr "Mappamegosztási szolgáltatás"
 
-#: ../src/services/service.c:32
-msgid "Shares your selected folders through your network"
-msgstr "Kijelölt mappák megosztása helyi hálózaton keresztül"
+#: ../src/services/service.c:37
+msgid "Shares folders through your network"
+msgstr "Mappákat oszt meg helyi hálózaton keresztül"
 
-#: ../src/services/service.c:33
+#: ../src/services/service.c:38
+msgid "File sharing service"
+msgstr "Fájlmegosztási szolgáltatás"
+
+#: ../src/services/service.c:38 ../src/services/service.c:39
+msgid "Shares files though internet"
+msgstr "Fájlokat oszt meg az interneten keresztül"
+
+#: ../src/services/service.c:39
+msgid "FTP service"
+msgstr "FTP szolgáltatás"
+
+#: ../src/services/service.c:40
+msgid "Mail fetcher"
+msgstr "Levélletöltő"
+
+#: ../src/services/service.c:40
+msgid "Downloads your mail from remote accounts"
+msgstr "Letölti a leveleit távoli fiókokból"
+
+#: ../src/services/service.c:41
 msgid "Mail agent"
 msgstr "Levelezőügynök"
 
-#: ../src/services/service.c:33
-msgid "Delivers your sent mails through internet"
-msgstr "Elküldött levelek kézbesítése az interneten keresztül"
+#: ../src/services/service.c:41
+msgid "Delivers your mails through internet"
+msgstr "Kézbesíti a leveleit az interneten keresztül"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Clock synchronization service"
 msgstr "Óraszinkronizációs szolgáltatás"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Synchronizes your computer clock with internet time servers"
 msgstr "A számítógép órájának szinkronizálása internetes időkiszolgálókkal"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Printer service"
 msgstr "Nyomtatószolgáltatás"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Allows applications to use printers"
 msgstr "Lehetővé teszi az alkalmazások számára nyomtatók használatát"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Remote shell server"
-msgstr "Távoli parancsértelemző kiszolgáló"
+msgstr "Távoli parancsértelmező kiszolgáló"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Secure shell server"
 msgstr "Biztonságos parancsértelmező kiszolgáló"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Computer activity logger"
 msgstr "Számítógép aktivitásának naplózása"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Keeps a log of your computer activity"
 msgstr "Fenntartja a számítógép tevékenységeinek naplóját"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Web server"
 msgstr "Webkiszolgáló"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Shares your web pages through internet"
 msgstr "Weboldalak megosztása az interneten keresztül"
 
-#: ../src/shares/callbacks.c:184
+#: ../src/shares/callbacks.c:187
 msgid "Are you sure you want to delete this share?"
 msgstr "Biztos, hogy törölni szeretné ezt a megosztást?"
 
-#: ../src/shares/callbacks.c:186
+#: ../src/shares/callbacks.c:189
 msgid "Other computers in your network will stop viewing this."
 msgstr "A hálózatában lévő más számítógépek ezt ezután nem fogják látni."
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Megosztott útvonalak hozzáadása és módosítása"
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "PATH"
 msgstr "ÚTVONAL"
 
-#: ../src/shares/main.c:95
+#: ../src/shares/main.c:97
 msgid "Shared folders settings"
 msgstr "Megosztott mappák beállításai"
 
@@ -1545,36 +1585,36 @@ msgstr "Mappa me_gosztása"
 msgid "Share this folder with other computers"
 msgstr "Ezen mappa megosztása más számítógépekkel"
 
-#: ../src/shares/nfs-acl-table.c:49
+#: ../src/shares/nfs-acl-table.c:51
 msgid "Allowed host/network"
 msgstr "Engedélyezett gép/hálózat"
 
-#: ../src/shares/share-nfs-add-hosts.c:112
+#: ../src/shares/share-nfs-add-hosts.c:114
 #, c-format
 msgid "Hosts in the %s network"
 msgstr "Gépek a(z) %s hálózatban"
 
-#: ../src/shares/share-nfs-add-hosts.c:144
+#: ../src/shares/share-nfs-add-hosts.c:146
 msgid "Specify hostname"
 msgstr "Adja meg a gépnevet"
 
-#: ../src/shares/share-nfs-add-hosts.c:151
+#: ../src/shares/share-nfs-add-hosts.c:153
 msgid "Specify IP address"
 msgstr "Adja meg az IP-címet"
 
-#: ../src/shares/share-nfs-add-hosts.c:158
+#: ../src/shares/share-nfs-add-hosts.c:160
 msgid "Specify network"
 msgstr "Adja meg a hálózatot"
 
-#: ../src/shares/share-settings.c:121
+#: ../src/shares/share-settings.c:123
 msgid "Do not share"
 msgstr "Ne ossza meg"
 
-#: ../src/shares/share-settings.c:129
+#: ../src/shares/share-settings.c:131
 msgid "SMB"
 msgstr "SMB"
 
-#: ../src/shares/share-settings.c:137
+#: ../src/shares/share-settings.c:139
 msgid "NFS"
 msgstr "NFS"
 
@@ -1586,11 +1626,11 @@ msgstr "A helyi hálózat számára elérhető mappák beállítása"
 msgid "Shared Folders"
 msgstr "Megosztott mappák"
 
-#: ../src/shares/transfer.c:42
+#: ../src/shares/transfer.c:44
 msgid "Sharing services are not installed"
 msgstr "Nincsenek telepítve megosztási szolgáltatások"
 
-#: ../src/shares/transfer.c:44
+#: ../src/shares/transfer.c:46
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders. The tool will close now."
@@ -1598,19 +1638,19 @@ msgstr ""
 "Mappák megosztásához vagy a Samba, vagy az NFS legalább egyikének "
 "megfelelően telepítve kell lennie. Az eszköz most befejezi működését."
 
-#: ../src/time/main.c:461
+#: ../src/time/main.c:464
 msgid "NTP support is not installed"
 msgstr "Az NTP támogatás nincs telepítve"
 
-#: ../src/time/main.c:463
+#: ../src/time/main.c:466
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr ""
-"Kérem telepítse ésaktiválja az NTP támogatást a rendszerén a helyi "
+"Kérem telepítse és aktiválja az NTP támogatást a rendszerén a helyi "
 "időkiszolgálószinkronizálásához internetes időkiszolgálókkal."
 
-#: ../src/time/main.c:759
+#: ../src/time/main.c:762
 msgid "Time and Date Settings"
 msgstr "Idő és dátum beállításai"
 
@@ -1622,62 +1662,62 @@ msgstr "Rendszeridő, dátum és időzóna megváltoztatása"
 msgid "Time and Date"
 msgstr "Idő és dátum"
 
-#: ../src/users/callbacks.c:569
+#: ../src/users/callbacks.c:571
 msgid "Error saving profile"
 msgstr "Hiba a profil mentése közben"
 
-#: ../src/users/callbacks.c:611
+#: ../src/users/callbacks.c:613
 msgid "Create New profile"
 msgstr "Új profil létrehozása"
 
-#: ../src/users/callbacks.c:647
+#: ../src/users/callbacks.c:649
 #, c-format
 msgid "Settings for profile %s"
 msgstr "A(z) %s profil beállításai"
 
-#: ../src/users/group-settings.c:89
+#: ../src/users/group-settings.c:91
 msgid "Create New Group"
 msgstr "Új csoport létrehozása"
 
 #. Check if gid is available
-#: ../src/users/group-settings.c:162 ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
 msgid "Invalid group ID"
 msgstr "Érvénytelen csoportazonosító"
 
-#: ../src/users/group-settings.c:163
+#: ../src/users/group-settings.c:165
 msgid "Group ID must be a positive number"
 msgstr "A csoportazonosítónak pozitív számnak kell lennie"
 
 #. if group is root
-#: ../src/users/group-settings.c:166
+#: ../src/users/group-settings.c:168
 msgid "Group ID of the \"root\" user should not be modified"
 msgstr "A root felhasználó csoportazonosítóját nem szabad megváltoztatni"
 
-#: ../src/users/group-settings.c:167 ../src/users/group-settings.c:213
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:215
+#: ../src/users/group-settings.c:285
 msgid "This would leave the system unusable"
 msgstr "Ez használhatatlanná tenné a rendszert"
 
-#: ../src/users/group-settings.c:171
+#: ../src/users/group-settings.c:173
 #, c-format
 msgid "Group ID %s already exists"
 msgstr "A(z) %s csoportazonosító már létezik"
 
 #. If empty.
-#: ../src/users/group-settings.c:196
+#: ../src/users/group-settings.c:198
 msgid "Group name is empty"
 msgstr "A csoportnév üres"
 
-#: ../src/users/group-settings.c:197
+#: ../src/users/group-settings.c:199
 msgid "A group name must be specified"
 msgstr "Meg kell adni egy csoportnevet"
 
 #. If too long.
-#: ../src/users/group-settings.c:200
+#: ../src/users/group-settings.c:202
 msgid "The group name is too long"
 msgstr "A csoportnév túl hosszú"
 
-#: ../src/users/group-settings.c:201
+#: ../src/users/group-settings.c:203
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
 msgstr ""
@@ -1685,43 +1725,43 @@ msgstr ""
 "legyen"
 
 #. if invalid.
-#: ../src/users/group-settings.c:204
+#: ../src/users/group-settings.c:206
 msgid "Group name has invalid characters"
 msgstr "A csoportnév érvénytelen karaktereket tartalmaz"
 
-#: ../src/users/group-settings.c:205
+#: ../src/users/group-settings.c:207
 msgid "Please set a valid group name, using only lower case letters"
 msgstr "Adjon meg egy érvényes csoportnevet, csak kisbetűket használjon"
 
 #. if !exist.
-#: ../src/users/group-settings.c:208
+#: ../src/users/group-settings.c:210
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "A(z) \"%s\" csoport már létezik"
 
-#: ../src/users/group-settings.c:209
+#: ../src/users/group-settings.c:211
 msgid "Please select a different group name"
 msgstr "Válasszon egy másik csoportnevet"
 
 #. if it's the root group
-#: ../src/users/group-settings.c:212
+#: ../src/users/group-settings.c:214
 msgid "Group name of the \"root\" user should not be modified"
 msgstr "A root felhasználó csoportjának nevét nem szabad megváltoztatni"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:284
 msgid "The group \"root\" should not be deleted"
 msgstr "A root csoportot nem szabad törölni"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:299
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Biztos, hogy törölni szeretné a következő csoportot: \"%s\"?"
 
-#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:301
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Ez érvénytelen csoportazonosítójú fájlokat hagyhat a fájlrendszeren."
 
-#: ../src/users/group-settings.c:359
+#: ../src/users/group-settings.c:361
 #, c-format
 msgid "Settings for Group %s"
 msgstr "A következő csoport beállításai: %s"
@@ -1734,31 +1774,31 @@ msgstr "Csoport"
 msgid "GID"
 msgstr "GID"
 
-#: ../src/users/main.c:122
+#: ../src/users/main.c:123
 msgid "User name contains"
 msgstr "A felhasználónév tartalmazza"
 
-#: ../src/users/main.c:123
+#: ../src/users/main.c:124
 msgid "User ID is"
 msgstr "A felhasználó azonosító"
 
-#: ../src/users/main.c:124
+#: ../src/users/main.c:125
 msgid "Group name contains"
 msgstr "A csoportnév tartalmazza"
 
-#: ../src/users/main.c:125
+#: ../src/users/main.c:126
 msgid "User GID is"
 msgstr "A csoportazonosító"
 
-#: ../src/users/main.c:244 ../src/users/users.desktop.in.in.h:2
+#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Felhasználók és csoportok"
 
-#: ../src/users/passwd.c:165
+#: ../src/users/passwd.c:168
 msgid "Passwords do not match"
 msgstr "A jelszavak nem egyeznek"
 
-#: ../src/users/passwd.c:170
+#: ../src/users/passwd.c:173
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1767,74 +1807,73 @@ msgstr ""
 "Hibás jelszó: %s.\n"
 "Próbálja meg egy másik jelszóval"
 
-#: ../src/users/profile-settings.c:122
+#: ../src/users/profile-settings.c:125
 msgid "The profile must have a name"
 msgstr "A profilnak rendelkeznie kell névvel"
 
-#: ../src/users/profile-settings.c:127
+#: ../src/users/profile-settings.c:130
 msgid "The profile must have a default home"
 msgstr "A profilnak rendelkeznie kell egy alapértelmezett saját könyvtárral"
 
-#: ../src/users/profile-settings.c:132 ../src/users/profile-settings.c:137
+#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
 msgid "The profile must have a default shell"
 msgstr "A profilnak rendelkeznie kell alapértelmezett parancsértelmezővel"
 
-#: ../src/users/profile-settings.c:205
+#: ../src/users/profile-settings.c:208
 msgid "The default profile should not be deleted"
 msgstr "Az alapértelmezett profilt nem szabad törölni"
 
-#: ../src/users/profile-settings.c:206
+#: ../src/users/profile-settings.c:209
 msgid "This profile is used for setting default data for new users"
-msgstr ""
-"Ez a profil az új felhasználók alapértelmezett adatainak beállítására szolgál"
+msgstr "Ez a profil az új felhasználók alapértelmezett adatainak beállítására szolgál"
 
-#: ../src/users/profile-settings.c:215
+#: ../src/users/profile-settings.c:218
 #, c-format
 msgid "Delete profile \"%s\"?"
 msgstr "Törli a(z) \"%s\" profilt?"
 
-#: ../src/users/profile-settings.c:217
+#: ../src/users/profile-settings.c:220
 msgid "You will not be able to recover this profile after pressing \"apply\"."
 msgstr ""
 "Az \"Alkalmaz\" gombra való kattintás után nem állíthatja vissza ezt a "
 "profilt."
 
 #. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:38
+#: ../src/users/profiles-table.c:39
 msgid "Profile"
 msgstr "Profil"
 
-#: ../src/users/profiles-table.c:39
+#: ../src/users/profiles-table.c:40
 msgid "Comment"
 msgstr "Megjegyzés"
 
-#: ../src/users/search-bar/search-bar.c:225
+#: ../src/users/search-bar/search-bar.c:228
 msgid "C_lear"
 msgstr "_Törlés"
 
-#: ../src/users/search-bar/search-bar.c:326
+#: ../src/users/search-bar/search-bar.c:329
 msgid "Choice"
 msgstr "Választás"
 
-#: ../src/users/search-bar/search-bar.c:336
+#: ../src/users/search-bar/search-bar.c:339
 msgid "Text"
 msgstr "Szöveg"
 
-#: ../src/users/user-settings.c:71
+#: ../src/users/user-settings.c:73
 msgid "The \"root\" user should not be deleted"
 msgstr "A root felhasználót nem szabad törölni"
 
-#: ../src/users/user-settings.c:72 ../src/users/user-settings.c:303
-#: ../src/users/user-settings.c:398 ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:305
+#: ../src/users/user-settings.c:400 ../src/users/user-settings.c:436
 msgid "This would leave the system unusable."
 msgstr "Ez használhatatlanná tenné a rendszert."
 
-#: ../src/users/user-settings.c:81
+#: ../src/users/user-settings.c:83
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "Biztos törli \"%s\" felhasználót?"
 
-#: ../src/users/user-settings.c:83
+#: ../src/users/user-settings.c:85
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1842,39 +1881,39 @@ msgstr ""
 "Ez letiltja a felhasználó hozzáférését a rendszerhez, azonban a felhasználó "
 "könyvtára nem lesz eltávolítva."
 
-#: ../src/users/user-settings.c:187
+#: ../src/users/user-settings.c:189
 msgid "User Account Editor"
 msgstr "Felhasználói fiók szerkesztő"
 
-#: ../src/users/user-settings.c:283
+#: ../src/users/user-settings.c:285
 msgid "The user name is empty"
 msgstr "A felhasználónév üres"
 
-#: ../src/users/user-settings.c:284
+#: ../src/users/user-settings.c:286
 msgid "A user name must be specified."
 msgstr "Meg kell adni egy felhasználónevet."
 
 #. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:290 ../src/users/user-settings.c:295
+#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:297
 msgid "The user name is too long"
 msgstr "A felhasználónév túl hosszú"
 
-#: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
+#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:298
 #, c-format
 msgid "To be valid, the user name should have less than %i characters."
 msgstr ""
 "A felhasználónévnek kevesebb, mint %i karakterből kell állnia, hogy érvényes "
 "legyen."
 
-#: ../src/users/user-settings.c:302
+#: ../src/users/user-settings.c:304
 msgid "User name for the \"root\" user should not be modified"
 msgstr "A root felhasználó nevét nem szabad megváltoztatni"
 
-#: ../src/users/user-settings.c:308
+#: ../src/users/user-settings.c:310
 msgid "User name has invalid characters"
 msgstr "A felhasználónév érvénytelen karaktereket tartalmaz"
 
-#: ../src/users/user-settings.c:309
+#: ../src/users/user-settings.c:311
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1882,37 +1921,37 @@ msgstr ""
 "Érvényes felhasználónevet adjon meg, ami (angol) kisbetűvel kezdődik és "
 "(angol) kisbetűkkel vagy számjegyekkel folytatódik."
 
-#: ../src/users/user-settings.c:315
+#: ../src/users/user-settings.c:317
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "A(z) \"%s\" felhasználónév már létezik"
 
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:318
 msgid "Please select a different user name."
 msgstr "Kérem válasszon egy másik felhasználónevet."
 
-#: ../src/users/user-settings.c:341
+#: ../src/users/user-settings.c:343
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Érvénytelen \"%c\" karakter a megjegyzésben"
 
-#: ../src/users/user-settings.c:342
+#: ../src/users/user-settings.c:344
 msgid "Check that this character is not used."
 msgstr "Ellenőrizze, hogy ezt a karaktert nem használja."
 
-#: ../src/users/user-settings.c:390
+#: ../src/users/user-settings.c:392
 msgid "Home directory should not be empty"
 msgstr "A saját könyvtár nem lehet üres"
 
-#: ../src/users/user-settings.c:391
+#: ../src/users/user-settings.c:393
 msgid "Make sure you provide a home directory."
 msgstr "Győződjön meg, hogy megadott egy saját könyvtárat."
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:395
 msgid "Incomplete path in home directory"
 msgstr "Nem teljes útvonal a saját könyvtárban"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:396
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1920,28 +1959,28 @@ msgstr ""
 "Adja meg a saját könyvtár teljes útvonalát\n"
 "<span size=\"smaller\">például: /home/kalman</span>."
 
-#: ../src/users/user-settings.c:397
+#: ../src/users/user-settings.c:399
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr "A root felhasználó saját könyvtárát nem szabad megváltoztatni"
 
-#: ../src/users/user-settings.c:430
+#: ../src/users/user-settings.c:432
 msgid "Invalid user ID"
 msgstr "Érvénytelen felhasználóazonosító"
 
-#: ../src/users/user-settings.c:431
+#: ../src/users/user-settings.c:433
 msgid "User ID must be a positive number."
 msgstr "A felhasználóazonosítónak pozitív számnak kell lennie."
 
-#: ../src/users/user-settings.c:433
+#: ../src/users/user-settings.c:435
 msgid "User ID of the \"root\" user should not be modified"
 msgstr "A root felhasználó felhasználóazonosítóját nem szabad megváltoztatni"
 
-#: ../src/users/user-settings.c:451
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User ID %s already exists"
 msgstr "A(z) %s felhasználóazonosító már létezik"
 
-#: ../src/users/user-settings.c:453
+#: ../src/users/user-settings.c:455
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems."
@@ -1949,11 +1988,11 @@ msgstr ""
 "Több felhasználó használhat egyetlen felhasználóazonosítót, de ez nem "
 "általános és biztonsági problémákat okozhat."
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:473
 msgid "Incomplete path in shell"
 msgstr "Érvénytelen útvonal a parancsértelmezőben"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:474
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>."
@@ -1961,47 +2000,48 @@ msgstr ""
 "Adja meg a parancsértelmező teljes útvonalát\n"
 "<span size=\"smaller\">pl.: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:496
 msgid "Password should not be empty"
 msgstr "A jelszó nem lehet üres"
 
-#: ../src/users/user-settings.c:495
+#: ../src/users/user-settings.c:497
 msgid "A password must be provided."
 msgstr "Meg kell adni egy jelszót."
 
-#: ../src/users/user-settings.c:497
+#: ../src/users/user-settings.c:499
 msgid "Password confirmation isn't correct"
 msgstr "Helytelen jelszómegerősítés"
 
-#: ../src/users/user-settings.c:498
+#: ../src/users/user-settings.c:500
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Ellenőrizze, hogy ugyanazt a jelszót adta-e meg mindkét szövegmezőben."
 
-#: ../src/users/user-settings.c:772
+#: ../src/users/user-settings.c:774
 #, c-format
 msgid "Settings for User %s"
 msgstr "%s felhasználó beállításai"
 
-#: ../src/users/users-table.c:59
+#: ../src/users/users-table.c:61
 msgid "User"
 msgstr "Felhasználó"
 
-#: ../src/users/users-table.c:60
+#: ../src/users/users-table.c:62
 msgid "Home"
 msgstr "Saját mappa"
 
-#: ../src/users/users-table.c:61
+#: ../src/users/users-table.c:63
 msgid "User details"
 msgstr "A felhasználó részletei"
 
-#: ../src/users/users-table.c:62
+#: ../src/users/users-table.c:64
 msgid "UID"
 msgstr "UID"
 
-#: ../src/users/users-table.c:63
+#: ../src/users/users-table.c:65
 msgid "Shell"
 msgstr "Parancsértelmező"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Felhasználók és csoportok hozzáadása vagy eltávolítása"
+
