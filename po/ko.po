@@ -2,10 +2,10 @@
 # Young-Ho, Cha <ganadist@chollian.net>, 2000, 2001, 2002, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools\n"
+"Project-Id-Version: AC_PACKAGE_NAME AC_PACKAGE_VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-16 01:10+0900\n"
-"PO-Revision-Date: 2005-02-16 01:12+0900\n"
+"POT-Creation-Date: 2005-08-16 23:26+0900\n"
+"PO-Revision-Date: 2005-08-16 23:30+0900\n"
 "Last-Translator: Young-Ho Cha <ganadist at mizi.com>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -115,18 +115,18 @@ msgstr "<span weight=\"bold\">컴퓨터 시작</span>"
 msgid "Ask at boot"
 msgstr "부팅할 때 물어봄"
 
-#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:70
+#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:71
 msgid "Boot Manager Settings"
 msgstr "부트 관리자 설정"
 
 #: ../interfaces/boot.glade.in.h:15
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter append parameters which are passed "
-"to the kernel at boot time."
+"partition. Optionally, you may also enter parameters passed to the kernel at "
+"boot time."
 msgstr ""
-"부트할 커널 이미지와 루트로 마운트할 파티션을 선택하십시오.선택적으로 부트할 "
-"때 커널에 넘어갈 파라메터를 입력할 수도 있습니다."
+"부팅할 때 사용할 커널 이미지와 루트로 마운트할 파티션을 선택하십시오. 선택적"
+"으로 부팅할 때 커널에 전달할 파라메터를 입력할 수도 있습니다."
 
 #: ../interfaces/boot.glade.in.h:16
 msgid "Click \"Forward\" to continue"
@@ -137,8 +137,8 @@ msgid "Confirmation"
 msgstr "확인"
 
 #. set window title
-#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:441
-#: ../src/boot/boot-druid.c:453
+#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:454
 msgid "Creating a new boot image"
 msgstr "새 부트 이미지 만들기"
 
@@ -231,7 +231,7 @@ msgstr "장치(_D):"
 msgid "_Edit"
 msgstr "편집(_E)"
 
-#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:42
+#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:44
 msgid "_Initrd image path:"
 msgstr "Initrd 이미지 경로(_I):"
 
@@ -291,22 +291,23 @@ msgid "Run _Without Password"
 msgstr "열쇠글 없이 실행(_W)"
 
 #: ../interfaces/common.glade.in.h:7
-msgid ""
-"To use this tool, you need administrator privileges, if you don't provide a "
-"password, you will be unable to modify your system configuration."
-msgstr ""
-"이 도구를 쓰려면 관리자 권한이 필요합니다. 열쇠글을 입력하지 않으면, 시스템 "
-"설정을 수정할 수 없습니다."
-
-#: ../interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
 msgstr "지원되지 않는 플랫폼"
 
-#: ../interfaces/common.glade.in.h:9
+#: ../interfaces/common.glade.in.h:8
 msgid "Use this window to select the computer you wish to configure"
 msgstr "설정하려는 컴퓨터를 이 창에서 선택하십시오"
 
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:9
+msgid ""
+"You need administrator privileges to use this tool. Enter a password to "
+"modify\n"
+"your system configuration."
+msgstr ""
+"이 도구를 쓰려면 관리자 권한이 필요합니다. 열쇠글을 입력하지 않으면,\n"
+" 시스템 설정을 수정할 수 없습니다."
+
+#: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
 msgstr "열쇠글(_P):"
 
@@ -365,62 +366,74 @@ msgid "Aliases:"
 msgstr "별명:"
 
 #: ../interfaces/network.glade.in.h:16
+msgid "C_onfiguration:"
+msgstr "설정(_O):"
+
+#: ../interfaces/network.glade.in.h:17
 msgid "Connections"
 msgstr "연결"
 
-#: ../interfaces/network.glade.in.h:17
+#: ../interfaces/network.glade.in.h:18
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:18
+#: ../interfaces/network.glade.in.h:19
 msgid "D_omain name:"
 msgstr "도메인이름(_O):"
 
-#: ../interfaces/network.glade.in.h:19
+#: ../interfaces/network.glade.in.h:20
 msgid "Default _gateway device:"
 msgstr "기본 게이트웨이 장치(_G):"
 
-#: ../interfaces/network.glade.in.h:20
+#: ../interfaces/network.glade.in.h:21
 msgid "Device:"
 msgstr "장치:"
 
-#: ../interfaces/network.glade.in.h:21 ../interfaces/users.glade.in.h:20
+#: ../interfaces/network.glade.in.h:22
+msgid "E_nable this connection"
+msgstr "연결 사용(_N)"
+
+#: ../interfaces/network.glade.in.h:23 ../interfaces/users.glade.in.h:20
 msgid "General"
 msgstr "일반"
 
-#: ../interfaces/network.glade.in.h:22
+#: ../interfaces/network.glade.in.h:24
 msgid "Host alias settings"
 msgstr "호스트 별명 설정"
 
-#: ../interfaces/network.glade.in.h:23
+#: ../interfaces/network.glade.in.h:25
 msgid "Hosts"
 msgstr "호스트"
 
-#: ../interfaces/network.glade.in.h:24 ../interfaces/shares.glade.in.h:15
+#: ../interfaces/network.glade.in.h:26 ../interfaces/shares.glade.in.h:15
 msgid "IP address:"
 msgstr "IP 주소:"
 
-#: ../interfaces/network.glade.in.h:25
+#: ../interfaces/network.glade.in.h:27
 msgid "Interface properties"
 msgstr "인터페이스 등록 정보"
 
-#: ../interfaces/network.glade.in.h:26
+#: ../interfaces/network.glade.in.h:28
+msgid "Key _type:"
+msgstr "키 형식(_T):"
+
+#: ../interfaces/network.glade.in.h:29
 msgid "Location name:"
 msgstr "위치 이름:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.glade.in.h:30
 msgid "Location:"
 msgstr "위치:"
 
-#: ../interfaces/network.glade.in.h:28
+#: ../interfaces/network.glade.in.h:31
 msgid "Modem"
 msgstr "모뎀"
 
-#: ../interfaces/network.glade.in.h:29
+#: ../interfaces/network.glade.in.h:32
 msgid "Network name (_ESSID):"
 msgstr "네트워크 이름 (_ESSID):"
 
-#: ../interfaces/network.glade.in.h:30
+#: ../interfaces/network.glade.in.h:33
 msgid ""
 "Off\n"
 "Low\n"
@@ -432,23 +445,35 @@ msgstr ""
 "중간\n"
 "높음"
 
-#: ../interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:37
 msgid "Options"
 msgstr "옵션"
 
-#: ../interfaces/network.glade.in.h:35
+#: ../interfaces/network.glade.in.h:38
 msgid "P_assword"
 msgstr "열쇠글(_A)"
 
-#: ../interfaces/network.glade.in.h:36
+#: ../interfaces/network.glade.in.h:39
+msgid ""
+"Plain (ASCII)\n"
+"Hexadecimal"
+msgstr ""
+"보통 (ASCII)\n"
+"16진수"
+
+#: ../interfaces/network.glade.in.h:41
 msgid "Select location name"
 msgstr "위치 이름 선택"
 
-#: ../interfaces/network.glade.in.h:37
-msgid "This device is _configured"
-msgstr "이 장치는 설정됨(_C)"
+#: ../interfaces/network.glade.in.h:42
+msgid ""
+"Static IP address\n"
+"DHCP"
+msgstr ""
+"고정 IP 주소\n"
+"DHCP"
 
-#: ../interfaces/network.glade.in.h:38
+#: ../interfaces/network.glade.in.h:44
 msgid ""
 "Tones\n"
 "Pulses"
@@ -456,117 +481,89 @@ msgstr ""
 "톤\n"
 "펄스"
 
-#: ../interfaces/network.glade.in.h:40
+#: ../interfaces/network.glade.in.h:46
+msgid "Use the Internet service provider nameservers"
+msgstr "인터넷 서비스 제공자의 이름서버 쓰기"
+
+#: ../interfaces/network.glade.in.h:47
 msgid "WEP _key:"
 msgstr "WEP 열쇠글(_K):"
 
-#: ../interfaces/network.glade.in.h:41 ../src/network/ifaces-list.c:33
+#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:34
 msgid "_Activate"
 msgstr "활성화(_A)"
 
-#: ../interfaces/network.glade.in.h:42
+#: ../interfaces/network.glade.in.h:49
 msgid "_Autodetect"
 msgstr "자동 인식(_A)"
 
-#: ../interfaces/network.glade.in.h:43
-msgid "_Configuration:"
-msgstr "설정(_C):"
-
-#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
+#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:35
 msgid "_Deactivate"
 msgstr "비활성화(_D)"
 
-#: ../interfaces/network.glade.in.h:45
+#: ../interfaces/network.glade.in.h:51
 msgid "_Dial prefix:"
 msgstr "외선 번호(_D):"
 
-#: ../interfaces/network.glade.in.h:46
+#: ../interfaces/network.glade.in.h:52
 msgid "_Dial type:"
 msgstr "걸기 형식(_D):"
 
-#: ../interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:53
 msgid "_Gateway address:"
 msgstr "게이트웨이 주소(_G):"
 
-#: ../interfaces/network.glade.in.h:48
+#: ../interfaces/network.glade.in.h:54
 msgid "_Hostname:"
 msgstr "호스트이름(_H):"
 
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:55
 msgid "_IP address:"
 msgstr "IP 주소(_I):"
 
-#: ../interfaces/network.glade.in.h:50
+#: ../interfaces/network.glade.in.h:56
 msgid "_Local IP:"
 msgstr "로컬 IP(_L):"
 
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.glade.in.h:57
 msgid "_Modem port:"
 msgstr "모뎀 포트(_M):"
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.glade.in.h:58
 msgid "_Phone number:"
 msgstr "전화 번호(_P):"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.glade.in.h:59
 msgid "_Remote IP:"
 msgstr "원격 IP(_R):"
 
-#: ../interfaces/network.glade.in.h:54
+#: ../interfaces/network.glade.in.h:60
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "시작할 때 연결이 끊기거나 실패하면 재시도(_R)"
 
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.glade.in.h:61
 msgid "_Set modem as default route to internet"
 msgstr "모뎀을 기본 라우트로 설정(_S)"
 
-#: ../interfaces/network.glade.in.h:56
+#: ../interfaces/network.glade.in.h:62
 msgid "_Subnet mask:"
 msgstr "서브넷 마스크(_S):"
 
-#: ../interfaces/network.glade.in.h:57 ../interfaces/users.glade.in.h:60
+#: ../interfaces/network.glade.in.h:63 ../interfaces/users.glade.in.h:60
 msgid "_Username:"
 msgstr "사용자이름(_U):"
 
-#: ../interfaces/network.glade.in.h:58
+#: ../interfaces/network.glade.in.h:64
 msgid "_Volume:"
 msgstr "소리크기(_V):"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr "<span weight=\"bold\">일반 정보</span>"
+msgid "Advanced settings:"
+msgstr "고급 설정:"
 
 #: ../interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr "<span weight=\"bold\">서비스 설정</span>"
-
-#: ../interfaces/services.glade.in.h:3
-msgid "Description:"
-msgstr "설명:"
-
-#: ../interfaces/services.glade.in.h:4
-msgid "Service _Properties"
-msgstr "서비스 등록 정보(_P)"
-
-#: ../interfaces/services.glade.in.h:5
-msgid "Service:"
-msgstr "서비스:"
-
-#: ../interfaces/services.glade.in.h:6
-msgid "Status:"
-msgstr "상태:"
-
-#: ../interfaces/services.glade.in.h:7
-msgid "_Order list by startup sequence"
-msgstr "시작 순서대로 목록 정렬(_O)"
-
-#: ../interfaces/services.glade.in.h:8
-msgid "_Start"
-msgstr "시작(_S)"
-
-#: ../interfaces/services.glade.in.h:9
-msgid "_Startup sequence:"
-msgstr "시작 순서(_S):"
+msgid "Select the services that you wish to activate:"
+msgstr "활성화 하려는 서비스를 선택:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -636,7 +633,7 @@ msgstr "넷마스크:"
 msgid "Network:"
 msgstr "네트워크:"
 
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:55
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
 msgid "Read only"
 msgstr "읽기 전용"
 
@@ -924,9 +921,9 @@ msgstr "설명(_C)"
 msgid "_Days between warning and password expiration:"
 msgstr "열쇠글 만기 주의 날짜(_D):"
 
-#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:52
-#: ../src/network/address-list.c:71 ../src/network/hosts.c:35
-#: ../src/shares/table.c:41 ../src/users/table.c:49
+#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:54
+#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
+#: ../src/shares/table.c:42 ../src/users/table.c:50
 msgid "_Delete"
 msgstr "지우기(_D)"
 
@@ -966,102 +963,102 @@ msgstr "쉘(_S):"
 msgid "_Work phone:"
 msgstr "직장 전화(_W):"
 
-#: ../src/boot/boot-append-gui.c:139
+#: ../src/boot/boot-append-gui.c:140
 msgid "32,768"
 msgstr "32,768"
 
-#: ../src/boot/boot-append-gui.c:140
+#: ../src/boot/boot-append-gui.c:141
 msgid "65,536"
 msgstr "65,536"
 
-#: ../src/boot/boot-append-gui.c:141
+#: ../src/boot/boot-append-gui.c:142
 msgid "16,777,216"
 msgstr "16,777,216"
 
-#: ../src/boot/boot-append-gui.c:252
+#: ../src/boot/boot-append-gui.c:253
 msgid "Invalid VGA value"
 msgstr "잘못된 VGA 값"
 
-#: ../src/boot/boot-append-gui.c:254
+#: ../src/boot/boot-append-gui.c:255
 #, c-format
-msgid "\"%s\" is not a valid VGA value"
-msgstr "\"%s\"값은 올바른 vga값이 아닙니다"
+msgid "\"%s\" is not a valid VGA value."
+msgstr "\"%s\"값은 올바른 vga값이 아닙니다."
 
-#: ../src/boot/boot-druid.c:112
+#: ../src/boot/boot-druid.c:113
 msgid "Error creating boot image"
 msgstr "부트 이미지 만드는 중 오류"
 
-#: ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:443
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "새 부트이미지 (%2$d 중 %1$d) 만들기"
 
-#: ../src/boot/boot-druid.c:443
+#: ../src/boot/boot-druid.c:444
 msgid "Finished creating a new boot image"
 msgstr "새 부트이미지 만들기가 끝났습니다"
 
-#: ../src/boot/boot-image.c:40
+#: ../src/boot/boot-image.c:43
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../src/boot/boot-image.c:41
+#: ../src/boot/boot-image.c:44
 msgid "Windows NT"
 msgstr "윈도우 NT"
 
-#: ../src/boot/boot-image.c:42
+#: ../src/boot/boot-image.c:45
 msgid "Windows 9x"
 msgstr "윈도우 9x"
 
-#: ../src/boot/boot-image.c:43
+#: ../src/boot/boot-image.c:46
 msgid "Dos"
 msgstr "도스"
 
-#: ../src/boot/boot-image.c:44
+#: ../src/boot/boot-image.c:47
 msgid "Linux"
 msgstr "리눅스"
 
-#: ../src/boot/boot-image.c:45
+#: ../src/boot/boot-image.c:48
 msgid "Linux swap"
 msgstr "리눅스 스왑"
 
-#: ../src/boot/boot-image.c:46
+#: ../src/boot/boot-image.c:49
 msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
-#: ../src/boot/boot-image.c:276
+#: ../src/boot/boot-image.c:279
 #, c-format
 msgid "\"%s\" is an invalid path"
 msgstr "\"%s\"은(는) 잘못된 경로입니다"
 
-#: ../src/boot/boot-image.c:292
+#: ../src/boot/boot-image.c:295
 #, c-format
-msgid "\"%s\" already exists, please set another name"
-msgstr "'%s'은(는) 이미 존재합니다, 다른 이름을 설정하십시오"
+msgid "\"%s\" already exists, please set another name."
+msgstr "\"%s\"은(는) 이미 존재합니다, 다른 이름을 설정하십시오."
 
-#: ../src/boot/boot-image.c:298
+#: ../src/boot/boot-image.c:301
 #, c-format
-msgid "Invalid image name: \"%s\""
-msgstr "잘못된 이미지 이름: \"%s\""
+msgid "Invalid image name: \"%s\"."
+msgstr "잘못된 이미지 이름: \"%s\"."
 
-#: ../src/boot/boot-image.c:311
+#: ../src/boot/boot-image.c:314
 #, c-format
-msgid "Invalid image: \"%s\""
-msgstr "잘못된 이미지: \"%s\""
+msgid "Invalid image: \"%s\"."
+msgstr "잘못된 이미지: \"%s\"."
 
-#: ../src/boot/boot-image.c:329
+#: ../src/boot/boot-image.c:332
 #, c-format
-msgid "Invalid root device: \"%s\""
-msgstr "잘못된 루트 장치: \"%s\""
+msgid "Invalid root device: \"%s\"."
+msgstr "잘못된 루트 장치: \"%s\"."
 
-#: ../src/boot/boot-settings.c:43
+#: ../src/boot/boot-settings.c:45
 msgid "_Module path:"
 msgstr "모듈 경로(_M):"
 
-#: ../src/boot/boot-settings.c:406
-msgid "Password confirmation is not correct"
+#: ../src/boot/boot-settings.c:407
+msgid "Password confirmation is not correct."
 msgstr "열쇠글 확인이 올바르지 않습니다."
 
-#: ../src/boot/boot-settings.c:431
+#: ../src/boot/boot-settings.c:432
 msgid "Error modifying boot image"
 msgstr "부트 이미지 고치는 중 오류"
 
@@ -1086,7 +1083,7 @@ msgid "Error deleting boot image"
 msgstr "부트 이미지 지우는 중 오류"
 
 #: ../src/boot/callbacks.c:414
-msgid "Without at least one boot image your computer will not start"
+msgid "Without at least one boot image your computer will not start."
 msgstr "하나 이상의 부트 이미지가 없으면 시스템이 시작할 수 없습니다."
 
 #: ../src/boot/callbacks.c:433
@@ -1095,46 +1092,46 @@ msgid "Are you sure you want to delete \"%s\"?"
 msgstr "\"%s\"을(를) 정말로 지우겠습니까?"
 
 #: ../src/boot/callbacks.c:435
-msgid "This may leave this operating system unbootable"
-msgstr "운영체제가 부팅되지 않을 수 있습니다"
+msgid "This may leave this operating system unbootable."
+msgstr "운영체제가 부팅되지 않을 수 있습니다."
 
 #: ../src/boot/callbacks.c:464
 msgid "The configuration will show empty"
-msgstr "설정이 비어있는채로 보일것입니다."
+msgstr "설정이 비어있는채로 보일것입니다"
 
 #: ../src/boot/callbacks.c:466
 #, c-format
-msgid "The file \"%s\" is missing or could not be read"
-msgstr "파일 \"%s\"(이)가 없거나 읽을 수 없습니다"
+msgid "The file \"%s\" is missing or could not be read."
+msgstr "파일 \"%s\"(이)가 없거나 읽을 수 없습니다."
 
-#: ../src/boot/table.c:41
+#: ../src/boot/table.c:43
 msgid "Name"
 msgstr "이름"
 
-#: ../src/boot/table.c:42
+#: ../src/boot/table.c:44
 msgid "Default"
 msgstr "기본값"
 
-#: ../src/boot/table.c:43
+#: ../src/boot/table.c:45
 msgid "Type"
 msgstr "형식"
 
-#: ../src/boot/table.c:44
+#: ../src/boot/table.c:46
 msgid "Kernel Image"
 msgstr "커널 이미지"
 
-#: ../src/boot/table.c:45
+#: ../src/boot/table.c:47
 msgid "Device"
 msgstr "장치"
 
-#: ../src/boot/table.c:50 ../src/network/address-list.c:70
-#: ../src/network/hosts.c:33 ../src/shares/table.c:39 ../src/users/table.c:47
+#: ../src/boot/table.c:52 ../src/network/address-list.c:71
+#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
 msgid "_Add"
 msgstr "더하기(_A)"
 
-#: ../src/boot/table.c:51 ../src/network/hosts.c:34
-#: ../src/network/ifaces-list.c:32 ../src/shares/table.c:40
-#: ../src/users/table.c:48
+#: ../src/boot/table.c:53 ../src/network/hosts.c:38
+#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
+#: ../src/users/table.c:49
 msgid "_Properties"
 msgstr "등록 정보(_P)"
 
@@ -1172,7 +1169,7 @@ msgid "Check that you have permissions to run this command"
 msgstr "이 명령을 실행할 수 있는 허가권이 있는지 확인하십시오"
 
 #: ../src/common/gst-auth.c:106
-msgid "An unexpected error has ocurred"
+msgid "An unexpected error has occurred"
 msgstr "예측하지 못한 오류가 생겼습니다"
 
 #: ../src/common/gst-auth.c:132
@@ -1183,38 +1180,38 @@ msgstr "백엔드를 실행할 수 없습니다"
 msgid "There was an error creating the child process, the tool will close now."
 msgstr "자식 프로세스를 만드는데 오류가 있습니다. 도구는 지금 마칩니다."
 
-#: ../src/common/gst-dialog.c:59
+#: ../src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "위젯을 찾을 수 없음: %s"
 
-#: ../src/common/gst-dialog.c:382
+#: ../src/common/gst-dialog.c:383
 msgid "There are changes which have not been applied"
 msgstr "적용되지 않은 바뀐점 있습니다"
 
-#: ../src/common/gst-dialog.c:384
+#: ../src/common/gst-dialog.c:385
 msgid "Apply them now?"
 msgstr "적용할까요?"
 
-#: ../src/common/gst-dialog.c:490
+#: ../src/common/gst-dialog.c:492
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "위젯 `%2$s'에 시그널 `%1$s'연결 오류"
 
-#: ../src/common/gst-tool.c:1020
+#: ../src/common/gst-tool.c:1026
 msgid "The configuration could not be loaded"
 msgstr "설정을 읽을 수 없습니다"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1028
 msgid "There was an error running the backend script"
 msgstr "백엔드 스크립트를 실행하는중 오류가 생겼습니다"
 
-#: ../src/common/gst-tool.c:1503
+#: ../src/common/gst-tool.c:1509
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "그놈 시스템 도구의 %s 미리보기 판에 오신것을 환영합니다."
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1227,52 +1224,52 @@ msgstr ""
 "과 결과, 그리고 온전한 점들이 보여질 것입니다.경고를 하엿습니다. 그놈 시스템 "
 "도구의 미리보기 판을 사용해주어서감사합니다!"
 
-#: ../src/common/gst-tool.c:1526
+#: ../src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "주의"
 
-#: ../src/common/gst-tool.c:1546
+#: ../src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "다시 보이지 않습니다"
 
-#: ../src/common/gst-tool.c:1603
+#: ../src/common/gst-tool.c:1609
 msgid "GNOME System Tools"
 msgstr "그놈 시스템 도구"
 
-#: ../src/common/gst-tool.c:1748
+#: ../src/common/gst-tool.c:1754
 msgid "Could not display help"
 msgstr "도움말을 보여줄 수 없습니다"
 
-#: ../src/network/address-list.c:528
+#: ../src/network/address-list.c:555
 msgid "Type address"
 msgstr "주소 입력"
 
-#: ../src/network/callbacks.c:43
+#: ../src/network/callbacks.c:46
 #, c-format
 msgid "Could not enable the interface %s"
 msgstr "인터페이스 %s을(를) 쓰겠습니까?"
 
-#: ../src/network/callbacks.c:47
+#: ../src/network/callbacks.c:50
 msgid ""
-"Check that the settings are apropriate for this network and that the "
-"computer is correctly connected to it."
+"Check that the settings are correct for this network and that the computer "
+"is correctly connected to it."
 msgstr "네트워크 설정이 올바르고, 컴퓨터가 연결되어 있는지 확인하십시오."
 
-#: ../src/network/callbacks.c:234
+#: ../src/network/callbacks.c:237
 msgid "Could not autodetect modem device"
 msgstr "모뎀장치를 자동으로 인식할 수 없습니다"
 
-#: ../src/network/callbacks.c:237
+#: ../src/network/callbacks.c:240
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
-"computer"
-msgstr "통화중 또는 제대로 연결되어 있는지 확인해보십시오"
+"computer."
+msgstr "통화중 또는 제대로 연결되어 있는지 확인해보십시오."
 
-#: ../src/network/callbacks.c:439
+#: ../src/network/callbacks.c:451
 msgid "The host name has changed"
 msgstr "호스트이름이 바뀌었습니다"
 
-#: ../src/network/callbacks.c:442
+#: ../src/network/callbacks.c:454
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1280,69 +1277,61 @@ msgstr ""
 "이것은 새 응용 프로그램을 실행하지 못할 수 있습니다. 따라서 여러분은 다시 로"
 "그인을 하여야 합니다. 계속 할까요?"
 
-#: ../src/network/callbacks.c:448
+#: ../src/network/callbacks.c:460
 msgid "Change _Host name"
 msgstr "호스트 이름 바꾸기(_H)"
 
-#: ../src/network/connection.c:56
-msgid "Static IP address"
-msgstr "고정 IP 주소"
-
-#: ../src/network/connection.c:57
-msgid "DHCP"
-msgstr "DHCP"
-
-#: ../src/network/hosts.c:88
+#: ../src/network/hosts.c:92
 msgid "IP Address"
 msgstr "IP 주소"
 
-#: ../src/network/hosts.c:96
+#: ../src/network/hosts.c:100
 msgid "Aliases"
 msgstr "별명"
 
-#: ../src/network/location.c:141
+#: ../src/network/location.c:144
 msgid "Create location"
 msgstr "위치 만들기"
 
-#: ../src/network/location.c:149
+#: ../src/network/location.c:152
 msgid "Delete current location"
 msgstr "현재 도메인 지우기"
 
-#: ../src/network/location.c:363
+#: ../src/network/location.c:366
 msgid "Do you want to remove this location?"
 msgstr "이 위치를 지우겠습니까?"
 
-#: ../src/network/location.c:436
+#: ../src/network/location.c:439
 msgid "Changing profile"
 msgstr "프로파일 바꾸는 중"
 
-#: ../src/network/main.c:107
+#: ../src/network/main.c:110
 msgid "The interface does not exist"
 msgstr "인터페이스가 없습니다."
 
-#: ../src/network/main.c:109
+#: ../src/network/main.c:112
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
 msgstr "올바르게 입력했는지, 그리고 시스템에서 올바로 지원하는지 확인하십시오."
 
-#: ../src/network/main.c:154
+#: ../src/network/main.c:157
 msgid "Configure a network interface"
 msgstr "네트워크 인터페이스 설정"
 
-#: ../src/network/main.c:154
+#: ../src/network/main.c:157
 msgid "INTERFACE"
 msgstr "INTERFACE"
 
-#: ../src/network/main.c:155
+#: ../src/network/main.c:158
 msgid "Configure the first network interface with a specific type"
 msgstr "첫번째 네트워크 인터페이스를 특별한 형식으로 설정"
 
-#: ../src/network/main.c:155
+#: ../src/network/main.c:158
 msgid "TYPE"
 msgstr "TYPE"
 
-#: ../src/network/main.c:162
+#: ../src/network/main.c:165
 msgid "Network settings"
 msgstr "네트워크 설정"
 
@@ -1354,27 +1343,27 @@ msgstr "네트워크 장치와 연결을 설정합니다"
 msgid "Networking"
 msgstr "네트워크"
 
-#: ../src/network/network-iface-ethernet.c:305
+#: ../src/network/network-iface-ethernet.c:302
 msgid "Ethernet connection"
 msgstr "이더넷 연결"
 
-#: ../src/network/network-iface-irlan.c:125
+#: ../src/network/network-iface-irlan.c:122
 msgid "Infrared connection"
 msgstr "적외선 연결"
 
-#: ../src/network/network-iface-isdn.c:311
+#: ../src/network/network-iface-isdn.c:330
 msgid "ISDN connection"
 msgstr "ISDN 연결"
 
-#: ../src/network/network-iface-modem.c:251
+#: ../src/network/network-iface-modem.c:253
 msgid "Modem connection"
 msgstr "모뎀 연결"
 
-#: ../src/network/network-iface-plip.c:213
+#: ../src/network/network-iface-plip.c:211
 msgid "Parallel port connection"
 msgstr "병렬 포트 연결"
 
-#: ../src/network/network-iface-wireless.c:214
+#: ../src/network/network-iface-wireless.c:245
 msgid "Wireless connection"
 msgstr "무선 연결"
 
@@ -1383,44 +1372,39 @@ msgstr "무선 연결"
 msgid "Activating interface \"%s\""
 msgstr "\"%s\" 인터페이스 활성"
 
-#: ../src/network/network-iface.c:494
+#: ../src/network/network-iface.c:522
 #, c-format
 msgid "The interface %s is not configured"
 msgstr "%s 인터페이스는 설정할 수 없습니다"
 
-#: ../src/network/network-iface.c:496
+#: ../src/network/network-iface.c:524
 #, c-format
 msgid "The interface %s is not active"
 msgstr "%s 인터페이스가 활성화 되지 않았습니다"
 
-#: ../src/network/network-iface.c:498
+#: ../src/network/network-iface.c:526
 #, c-format
 msgid "The interface %s is active"
 msgstr "%s 인터페이스가 활성화 되었습니다."
 
-#: ../src/services/callbacks.c:46
-msgid "No description available."
-msgstr "설명 없음."
-
-#: ../src/services/callbacks.c:217
-msgid "Running"
-msgstr "실행중"
-
-#: ../src/services/callbacks.c:221
-msgid "Stopped"
-msgstr "멈춤"
-
-#: ../src/services/callbacks.c:226
-msgid "Could not get info"
-msgstr "정보를 찾을 수 없음"
-
-#: ../src/services/callbacks.c:292
+#: ../src/services/callbacks.c:64
 #, c-format
-msgid "Settings for service %s"
-msgstr "서비스 %s의 설정"
+msgid "Settings for \"%s\""
+msgstr "사용자 \"%s\"의 설정"
 
-#: ../src/services/main.c:62
-msgid "Services Settings"
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:153
+msgid "Are you sure you want to deactivate this service?"
+msgstr "이 서비스를 비활성화 하겠습니까?"
+
+#: ../src/services/callbacks.c:156
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr "데이터 손실로 인하여, 시스템에 여러가지 면으로 영향을 끼칠 수 있습니다"
+
+#: ../src/services/main.c:55
+msgid "Services settings"
 msgstr "서비스 설정"
 
 #: ../src/services/services.desktop.in.in.h:1
@@ -1431,31 +1415,139 @@ msgstr "시스템이 시작할 때 실행할 서비스를 설정합니다"
 msgid "Services"
 msgstr "서비스"
 
-#: ../src/services/table.c:86
-msgid "Active"
-msgstr "활성화"
+#: ../src/services/service.c:32
+msgid "Antivirus"
+msgstr "안티바이러스"
 
-#: ../src/services/table.c:95
-msgid "Service"
-msgstr "서비스"
+#: ../src/services/service.c:32
+msgid "Analyzes your incoming mail for virus"
+msgstr "들어온 메일에서 바이러스를 검사합니다"
 
-#: ../src/shares/callbacks.c:184
+#: ../src/services/service.c:33
+msgid "Volumes mounter"
+msgstr "볼륨 마운터"
+
+#: ../src/services/service.c:33
+msgid "Mounts your volumes automatically"
+msgstr "불륨을 자동으로 마운트합니다"
+
+#: ../src/services/service.c:34
+msgid "Actions scheduler"
+msgstr "예약 작업"
+
+#: ../src/services/service.c:34
+msgid "Executes scheduled actions"
+msgstr "예약된 작업을 실행합니다"
+
+#: ../src/services/service.c:35
+msgid "Database server"
+msgstr "데이터베이스 서버"
+
+#: ../src/services/service.c:35
+msgid "Data storage system"
+msgstr "데이터 저장 시스템"
+
+#: ../src/services/service.c:36
+msgid "Graphical login manager"
+msgstr "그래픽 로그인 관리자"
+
+#: ../src/services/service.c:36
+msgid "Allows users to login graphically"
+msgstr "사용자가 그래픽환경에서 로그인하도록 합니다"
+
+#: ../src/services/service.c:37
+msgid "Folder sharing service"
+msgstr "폴더 공유 서비스"
+
+#: ../src/services/service.c:37
+msgid "Shares folders through your network"
+msgstr "네트워크를 통해 폴더를 공유합니다"
+
+#: ../src/services/service.c:38
+msgid "File sharing service"
+msgstr "파일 공유 서비스"
+
+#: ../src/services/service.c:38 ../src/services/service.c:39
+msgid "Shares files though internet"
+msgstr "인터넷을 통해 파일을 공유합니다"
+
+#: ../src/services/service.c:39
+msgid "FTP service"
+msgstr "FTP 서비스"
+
+#: ../src/services/service.c:40
+msgid "Mail fetcher"
+msgstr "메일 가져오기"
+
+#: ../src/services/service.c:40
+msgid "Downloads your mail from remote accounts"
+msgstr "원격 계정에서 메일을 받습니다"
+
+#: ../src/services/service.c:41
+msgid "Mail agent"
+msgstr "메일 에이전트"
+
+#: ../src/services/service.c:41
+msgid "Delivers your mails through internet"
+msgstr "인터넷을 통해 메일을 전달합니다"
+
+#: ../src/services/service.c:42
+msgid "Clock synchronization service"
+msgstr "시계 동기화 서비스"
+
+#: ../src/services/service.c:42
+msgid "Synchronizes your computer clock with internet time servers"
+msgstr "인터넷 시간서버와 컴퓨터의 시간을 일치하도록 합니다"
+
+#: ../src/services/service.c:43
+msgid "Printer service"
+msgstr "프린터 서버"
+
+#: ../src/services/service.c:43
+msgid "Allows applications to use printers"
+msgstr "응용프로그램이 프린터를 쓸 수 있도록 합니다"
+
+#: ../src/services/service.c:44
+msgid "Remote shell server"
+msgstr "원격 쉘 서버"
+
+#: ../src/services/service.c:44
+msgid "Secure shell server"
+msgstr "보안 쉘 서버"
+
+#: ../src/services/service.c:45
+msgid "Computer activity logger"
+msgstr "컴퓨터 활동 기록"
+
+#: ../src/services/service.c:45
+msgid "Keeps a log of your computer activity"
+msgstr "컴퓨터의 활동 기록을 남깁니다"
+
+#: ../src/services/service.c:46
+msgid "Web server"
+msgstr "웹 서버"
+
+#: ../src/services/service.c:46
+msgid "Shares your web pages through internet"
+msgstr "인터넷을 통해 웹페이지를 공유합니다"
+
+#: ../src/shares/callbacks.c:187
 msgid "Are you sure you want to delete this share?"
 msgstr "이 공유폴더를 정말로 지우겠습니까?"
 
-#: ../src/shares/callbacks.c:186
-msgid "Other computers in your network will stop viewing this"
-msgstr "네트워크에서 다른 컴퓨터에게 보이는것을 그만둡니다"
+#: ../src/shares/callbacks.c:189
+msgid "Other computers in your network will stop viewing this."
+msgstr "네트워크에서 다른 컴퓨터에게 보이는 것을 그만둡니다."
 
-#: ../src/shares/main.c:86
+#: ../src/shares/main.c:90
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "공유된 경로를 더하거나 고칩니다"
 
-#: ../src/shares/main.c:86
+#: ../src/shares/main.c:90
 msgid "PATH"
 msgstr "PATH"
 
-#: ../src/shares/main.c:93
+#: ../src/shares/main.c:97
 msgid "Shared folders settings"
 msgstr "공유 폴더 설정"
 
@@ -1467,36 +1559,36 @@ msgstr "공유 폴더(_S)"
 msgid "Share this folder with other computers"
 msgstr "이 폴더를 다른 컴퓨터와 공유합니다"
 
-#: ../src/shares/nfs-acl-table.c:49
+#: ../src/shares/nfs-acl-table.c:51
 msgid "Allowed host/network"
 msgstr "허용된 호스트/네트워크"
 
-#: ../src/shares/share-nfs-add-hosts.c:112
+#: ../src/shares/share-nfs-add-hosts.c:114
 #, c-format
 msgid "Hosts in the %s network"
 msgstr "%s네트워크의 호스트"
 
-#: ../src/shares/share-nfs-add-hosts.c:144
+#: ../src/shares/share-nfs-add-hosts.c:146
 msgid "Specify hostname"
 msgstr "호스트 이름 지정"
 
-#: ../src/shares/share-nfs-add-hosts.c:151
+#: ../src/shares/share-nfs-add-hosts.c:153
 msgid "Specify IP address"
 msgstr "IP 주소 지정"
 
-#: ../src/shares/share-nfs-add-hosts.c:158
+#: ../src/shares/share-nfs-add-hosts.c:160
 msgid "Specify network"
 msgstr "네트워크 지정"
 
-#: ../src/shares/share-settings.c:121
+#: ../src/shares/share-settings.c:123
 msgid "Do not share"
 msgstr "공유하지 말기"
 
-#: ../src/shares/share-settings.c:129
+#: ../src/shares/share-settings.c:131
 msgid "SMB"
 msgstr "SMB"
 
-#: ../src/shares/share-settings.c:137
+#: ../src/shares/share-settings.c:139
 msgid "NFS"
 msgstr "NFS"
 
@@ -1505,14 +1597,14 @@ msgid "Configure which folders are available for your network neighborhood"
 msgstr "네트워크에서 사용가능한 폴더 설정"
 
 #: ../src/shares/shares.desktop.in.in.h:2
-msgid "Shared folders"
+msgid "Shared Folders"
 msgstr "공유 폴더"
 
-#: ../src/shares/transfer.c:42
+#: ../src/shares/transfer.c:44
 msgid "Sharing services are not installed"
 msgstr "공유 서비스가 설치되지 않았습니다"
 
-#: ../src/shares/transfer.c:44
+#: ../src/shares/transfer.c:46
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders. The tool will close now."
@@ -1520,19 +1612,19 @@ msgstr ""
 "폴더를 공유하려면 Samba나 NFS가 설치되어 있어야 합니다. 이 도구는 지금 끝납니"
 "다."
 
-#: ../src/time/main.c:461
-msgid "NTP support is not running"
-msgstr "NTP 지원이 실행되지 않습니다"
+#: ../src/time/main.c:464
+msgid "NTP support is not installed"
+msgstr "NTP 지원이 설치되지 않았습니다"
 
-#: ../src/time/main.c:463
+#: ../src/time/main.c:466
 msgid ""
-"Please run NTP support in the system to enable synchronization of your local "
-"time server with internet time servers"
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers."
 msgstr ""
-"로컬 시간서버와 인터넷 시간서버를 똑같이 맞추기 위해서는 시스템에서 NTP 지원"
-"을 실행하여야 합니다"
+"로컬 시간서버와 인터넷 시간서버의 시계를 똑같이 맞추기 위해서는 시스템에서 "
+"NTP 지원을 실행하여야 합니다."
 
-#: ../src/time/main.c:759
+#: ../src/time/main.c:762
 msgid "Time and Date Settings"
 msgstr "시간과 날짜 설정"
 
@@ -1544,106 +1636,104 @@ msgstr "시간, 날짜와 시간대를 설정합니다"
 msgid "Time and Date"
 msgstr "시간과 날짜"
 
-#: ../src/users/callbacks.c:569
+#: ../src/users/callbacks.c:571
 msgid "Error saving profile"
 msgstr "프로파일 저장중 오류"
 
-#: ../src/users/callbacks.c:611
+#: ../src/users/callbacks.c:613
 msgid "Create New profile"
 msgstr "새 프로파일 만들기"
 
-#: ../src/users/callbacks.c:647
+#: ../src/users/callbacks.c:649
 #, c-format
 msgid "Settings for profile %s"
 msgstr "프로파일 %s의 설정"
 
-#: ../src/users/group-settings.c:89
+#: ../src/users/group-settings.c:91
 msgid "Create New Group"
 msgstr "새 그룹 만들기"
 
 #. Check if gid is available
-#: ../src/users/group-settings.c:162 ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
 msgid "Invalid group ID"
 msgstr "잘못된 그룹 ID"
 
-#: ../src/users/group-settings.c:163
+#: ../src/users/group-settings.c:165
 msgid "Group ID must be a positive number"
 msgstr "그룹 ID는 양수이어야 합니다."
 
 #. if group is root
-#: ../src/users/group-settings.c:166
+#: ../src/users/group-settings.c:168
 msgid "Group ID of the \"root\" user should not be modified"
 msgstr "\"root\"의 그룹 ID는 고칠 수 없습니다."
 
-#: ../src/users/group-settings.c:167 ../src/users/group-settings.c:213
-#: ../src/users/group-settings.c:283 ../src/users/user-settings.c:72
-#: ../src/users/user-settings.c:303 ../src/users/user-settings.c:398
-#: ../src/users/user-settings.c:434
+#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:215
+#: ../src/users/group-settings.c:285
 msgid "This would leave the system unusable"
 msgstr "시스템을 쓰지 못하게 할 것입니다"
 
-#: ../src/users/group-settings.c:171
+#: ../src/users/group-settings.c:173
 #, c-format
 msgid "Group ID %s already exists"
 msgstr "그룹 ID %s은(는) 이미 있습니다."
 
 #. If empty.
-#: ../src/users/group-settings.c:196
+#: ../src/users/group-settings.c:198
 msgid "Group name is empty"
 msgstr "그룹 이름이 비어있습니다."
 
-#: ../src/users/group-settings.c:197
+#: ../src/users/group-settings.c:199
 msgid "A group name must be specified"
 msgstr "그룹 이름이 지정되어 있어야 합니다"
 
 #. If too long.
-#: ../src/users/group-settings.c:200
+#: ../src/users/group-settings.c:202
 msgid "The group name is too long"
 msgstr "그룹 이름이 너무 깁니다."
 
-#: ../src/users/group-settings.c:201
+#: ../src/users/group-settings.c:203
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
 msgstr "그룹이름은 %i 문자보다 적어야 합니다"
 
 #. if invalid.
-#: ../src/users/group-settings.c:204
+#: ../src/users/group-settings.c:206
 msgid "Group name has invalid characters"
 msgstr "그룹이름에 잘못된 글자가 있습니다"
 
-#: ../src/users/group-settings.c:205
+#: ../src/users/group-settings.c:207
 msgid "Please set a valid group name, using only lower case letters"
 msgstr "그룹이름을 올바로 정하십시오, 소문자만으로 그룹이름을 정하십시오."
 
 #. if !exist.
-#: ../src/users/group-settings.c:208
+#: ../src/users/group-settings.c:210
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "그룹 \"%s\"이(가) 이미 있습니다."
 
-#: ../src/users/group-settings.c:209
+#: ../src/users/group-settings.c:211
 msgid "Please select a different group name"
 msgstr "다른 그룹 이름을 선택하십시오."
 
 #. if it's the root group
-#: ../src/users/group-settings.c:212
+#: ../src/users/group-settings.c:214
 msgid "Group name of the \"root\" user should not be modified"
 msgstr "\"root\"의 그룹 이름은 고칠 수 없습니다."
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:284
 msgid "The group \"root\" should not be deleted"
 msgstr "\"root\" 그룹은 지울 수 없습니다."
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:299
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "그룹 \"%s\"을(를) 정말로 지우겠습니까?"
 
-#: ../src/users/group-settings.c:299
-msgid "This may leave files with invalid group ID in the filesystem"
-msgstr "파일시스템에 잘못된 그룹 ID를 가진 파일을 남기게 할 수 있습니다"
+#: ../src/users/group-settings.c:301
+msgid "This may leave files with invalid group ID in the filesystem."
+msgstr "파일시스템에 잘못된 그룹 ID를 가진 파일을 남기게 할 수 있습니다."
 
-#: ../src/users/group-settings.c:359
+#: ../src/users/group-settings.c:361
 #, c-format
 msgid "Settings for Group %s"
 msgstr "그룹 %s의 설정"
@@ -1656,31 +1746,31 @@ msgstr "그룹"
 msgid "GID"
 msgstr "GID"
 
-#: ../src/users/main.c:122
+#: ../src/users/main.c:123
 msgid "User name contains"
 msgstr "사용자 이름에 다음을 포함"
 
-#: ../src/users/main.c:123
+#: ../src/users/main.c:124
 msgid "User ID is"
 msgstr "사용자 ID"
 
-#: ../src/users/main.c:124
+#: ../src/users/main.c:125
 msgid "Group name contains"
 msgstr "그룹 이름에 다음을 포함"
 
-#: ../src/users/main.c:125
+#: ../src/users/main.c:126
 msgid "User GID is"
 msgstr "사용자 GID"
 
-#: ../src/users/main.c:244 ../src/users/users.desktop.in.in.h:2
+#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "사용자와 그룹"
 
-#: ../src/users/passwd.c:165
+#: ../src/users/passwd.c:168
 msgid "Passwords do not match"
 msgstr "열쇠글이 다릅니다"
 
-#: ../src/users/passwd.c:170
+#: ../src/users/passwd.c:173
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1689,228 +1779,233 @@ msgstr ""
 "잘못된 열쇠글: %s.\n"
 "다른 열쇠글로 시도하십시오."
 
-#: ../src/users/profile-settings.c:122
+#: ../src/users/profile-settings.c:125
 msgid "The profile must have a name"
 msgstr "프로파일에 이름이 있어야 합니다"
 
-#: ../src/users/profile-settings.c:127
+#: ../src/users/profile-settings.c:130
 msgid "The profile must have a default home"
 msgstr "프로파일에 기본 홈 디렉토리가 있어야 합니다"
 
-#: ../src/users/profile-settings.c:132 ../src/users/profile-settings.c:137
+#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
 msgid "The profile must have a default shell"
 msgstr "프로파일이 기본 쉘이 있어야 합니다"
 
-#: ../src/users/profile-settings.c:205
+#: ../src/users/profile-settings.c:208
 msgid "The default profile should not be deleted"
 msgstr "기본 프로파일은 지울 수 없습니다."
 
-#: ../src/users/profile-settings.c:206
+#: ../src/users/profile-settings.c:209
 msgid "This profile is used for setting default data for new users"
 msgstr "이 프로파일은 새 사용자의 기본 데이터 설정으로 쓰입니다"
 
-#: ../src/users/profile-settings.c:215
+#: ../src/users/profile-settings.c:218
 #, c-format
 msgid "Delete profile \"%s\"?"
 msgstr "프로파일 \"%s\"을(를) 지울까요?"
 
-#: ../src/users/profile-settings.c:217
-msgid "You will not be able to recover this profile after pressing \"apply\""
-msgstr "\"적용\"을 누르고 나면 이 프로파일을 복구할 수 없습니다"
+#: ../src/users/profile-settings.c:220
+msgid "You will not be able to recover this profile after pressing \"apply\"."
+msgstr "\"적용\"을 누르고 나면 이 프로파일을 복구할 수 없습니다."
 
 #. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:38
+#: ../src/users/profiles-table.c:39
 msgid "Profile"
 msgstr "프로파일"
 
-#: ../src/users/profiles-table.c:39
+#: ../src/users/profiles-table.c:40
 msgid "Comment"
 msgstr "설명"
 
-#: ../src/users/search-bar/search-bar.c:225
+#: ../src/users/search-bar/search-bar.c:228
 msgid "C_lear"
 msgstr "비우기(_L)"
 
-#: ../src/users/search-bar/search-bar.c:326
+#: ../src/users/search-bar/search-bar.c:329
 msgid "Choice"
 msgstr "선택"
 
-#: ../src/users/search-bar/search-bar.c:336
+#: ../src/users/search-bar/search-bar.c:339
 msgid "Text"
 msgstr "글자"
 
-#: ../src/users/user-settings.c:71
+#: ../src/users/user-settings.c:73
 msgid "The \"root\" user should not be deleted"
 msgstr "\"root\" 사용자는 지울 수 없습니다."
 
-#: ../src/users/user-settings.c:81
+#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:305
+#: ../src/users/user-settings.c:400 ../src/users/user-settings.c:436
+msgid "This would leave the system unusable."
+msgstr "시스템을 쓰지 못하게 할 것입니다."
+
+#: ../src/users/user-settings.c:83
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "사용자 \"%s\"을(를) 정말로 지우겠습니까?"
 
-#: ../src/users/user-settings.c:83
+#: ../src/users/user-settings.c:85
 msgid ""
-"This will disable the access of this user to the system, but his home "
-"directory will not be deleted"
+"This will disable this user's access to the system without deleting the "
+"user's home directory."
 msgstr ""
 "이 사용자가 시스템에 접근하지 못하도록합니다. 하지만 홈 디렉토리는 지우지 않"
 "습니다."
 
-#: ../src/users/user-settings.c:187
+#: ../src/users/user-settings.c:189
 msgid "User Account Editor"
 msgstr "사용자 계정 편집기"
 
-#: ../src/users/user-settings.c:283
+#: ../src/users/user-settings.c:285
 msgid "The user name is empty"
 msgstr "사용자 이름이 비어있습니다."
 
-#: ../src/users/user-settings.c:284
-msgid "A user name must be specified"
-msgstr "사용자 이름을 정하여야 합니다"
+#: ../src/users/user-settings.c:286
+msgid "A user name must be specified."
+msgstr "사용자 이름을 정하여야 합니다."
 
 #. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:290 ../src/users/user-settings.c:295
+#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:297
 msgid "The user name is too long"
 msgstr "사용자 이름이 너무 깁니다."
 
-#: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
+#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:298
 #, c-format
-msgid "The user name should have less than %i characters for being valid"
-msgstr "사용자 이름은 %i 글자보다 적어야 합니다"
+msgid "To be valid, the user name should have less than %i characters."
+msgstr "사용자 이름은 %i 글자보다 적어야 합니다."
 
-#: ../src/users/user-settings.c:302
+#: ../src/users/user-settings.c:304
 msgid "User name for the \"root\" user should not be modified"
 msgstr "\"root\"의 사용자이름은 고칠 수 없습니다."
 
-#: ../src/users/user-settings.c:308
+#: ../src/users/user-settings.c:310
 msgid "User name has invalid characters"
 msgstr "사용자 이름에 잘못된 글자가 있습니다"
 
-#: ../src/users/user-settings.c:309
+#: ../src/users/user-settings.c:311
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers"
+"lower case letters and numbers."
 msgstr ""
 "올바른 사용자 이름을 설정해 주십시오. 사용자 이름은 소문자로 시작해서 소문자"
-"와 숫자로 이루어져야 합니다"
+"와 숫자로 이루어져야 합니다."
 
-#: ../src/users/user-settings.c:315
+#: ../src/users/user-settings.c:317
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "사용자 이름 \"%s\"이(가) 이미 있습니다"
 
-#: ../src/users/user-settings.c:316
-msgid "Please select a different user name"
+#: ../src/users/user-settings.c:318
+msgid "Please select a different user name."
 msgstr "다른 사용자 이름을 선택하십시오."
 
-#: ../src/users/user-settings.c:341
+#: ../src/users/user-settings.c:343
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "설명에 잘못된 문자 \"%c\"'"
 
-#: ../src/users/user-settings.c:342
-msgid "Check that this character is not used"
-msgstr "이 글자가 쓰이지 않는지 확인하십시오"
+#: ../src/users/user-settings.c:344
+msgid "Check that this character is not used."
+msgstr "이 글자가 쓰이지 않는지 확인하십시오."
 
-#: ../src/users/user-settings.c:390
+#: ../src/users/user-settings.c:392
 msgid "Home directory should not be empty"
 msgstr "홈 디렉토리는 비어있지 않아야 합니다."
 
-#: ../src/users/user-settings.c:391
-msgid "Make sure you provide a home directory"
-msgstr "홈 디렉토리가 주어져야 합니다"
-
 #: ../src/users/user-settings.c:393
+msgid "Make sure you provide a home directory."
+msgstr "홈 디렉토리가 주어져야 합니다."
+
+#: ../src/users/user-settings.c:395
 msgid "Incomplete path in home directory"
 msgstr "홈 디렉토리의 전체 경로를 입력하십시오."
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:396
 msgid ""
 "Please enter full path for home directory\n"
-"<span size=\"smaller\">i.e.: /home/john</span>"
+"<span size=\"smaller\">i.e.: /home/john</span>."
 msgstr ""
-"홈 디렉토리의 전체 경로를 입력하십시오.\n"
-"<span size=\"smaller\">예: /home/john</span>"
+"홈 디렉토리의 전체 경로를 입력하십시오\n"
+"<span size=\"smaller\">예: /home/john</span>."
 
-#: ../src/users/user-settings.c:397
+#: ../src/users/user-settings.c:399
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr "\"root\"의 홈 디렉토리는 고칠 수 없습니다."
 
-#: ../src/users/user-settings.c:430
+#: ../src/users/user-settings.c:432
 msgid "Invalid user ID"
 msgstr "잘못된 사용자 ID"
 
-#: ../src/users/user-settings.c:431
-msgid "User ID must be a positive number"
+#: ../src/users/user-settings.c:433
+msgid "User ID must be a positive number."
 msgstr "사용자 ID는 양수이어야 합니다."
 
-#: ../src/users/user-settings.c:433
+#: ../src/users/user-settings.c:435
 msgid "User ID of the \"root\" user should not be modified"
 msgstr "\"root\"의 사용자 ID는 고칠 수 없습니다."
 
-#: ../src/users/user-settings.c:451
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User ID %s already exists"
 msgstr "사용자 ID %s은(는) 이미 있습니다."
 
-#: ../src/users/user-settings.c:453
+#: ../src/users/user-settings.c:455
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
-"to security problems"
+"to security problems."
 msgstr ""
 "여러 사용자들이 하나의 사용자 ID를 공유할 수 있습니다, 하지만 일반적으로 그렇"
-"게 하지 않고 보안문제를 일으킬 수 있습니다"
+"게 사용하는 경우는 없으며 또한 보안문제를 일으킬 수 있습니다."
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:473
 msgid "Incomplete path in shell"
 msgstr "완전하지 않은 쉘 경로"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:474
 msgid ""
 "Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>"
+"<span size=\"smaller\">i.e.: /bin/sh</span>."
 msgstr ""
 "쉘의 전체경로를 넣으십시오\n"
-"<span size=\"smaller\">예: /bin/sh</span>"
+"<span size=\"smaller\">예: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:496
 msgid "Password should not be empty"
 msgstr "열쇠글은 비어있지 않아야 합니다."
 
-#: ../src/users/user-settings.c:495
-msgid "A password must be provided"
-msgstr "열쇠글이 주어져야 합니다"
-
 #: ../src/users/user-settings.c:497
+msgid "A password must be provided."
+msgstr "열쇠글이 주어져야 합니다."
+
+#: ../src/users/user-settings.c:499
 msgid "Password confirmation isn't correct"
 msgstr "열쇠글 확인이 올바르지 않습니다."
 
-#: ../src/users/user-settings.c:498
-msgid "Check that you have provided the same password in both text fields"
-msgstr "열쇠글을 똑같이 입력하여야 합니다"
+#: ../src/users/user-settings.c:500
+msgid "Check that you have provided the same password in both text fields."
+msgstr "열쇠글을 똑같이 입력하여야 합니다."
 
-#: ../src/users/user-settings.c:765
+#: ../src/users/user-settings.c:774
 #, c-format
 msgid "Settings for User %s"
 msgstr "사용자 %s의 설정"
 
-#: ../src/users/users-table.c:45
+#: ../src/users/users-table.c:61
 msgid "User"
 msgstr "사용자"
 
-#: ../src/users/users-table.c:46
+#: ../src/users/users-table.c:62
 msgid "Home"
 msgstr "홈"
 
-#: ../src/users/users-table.c:47
+#: ../src/users/users-table.c:63
 msgid "User details"
 msgstr "사용자 자세히 보기"
 
-#: ../src/users/users-table.c:48
+#: ../src/users/users-table.c:64
 msgid "UID"
 msgstr "UID"
 
-#: ../src/users/users-table.c:49
+#: ../src/users/users-table.c:65
 msgid "Shell"
 msgstr "쉘"
 
@@ -1918,75 +2013,11 @@ msgstr "쉘"
 msgid "Add or remove users and groups"
 msgstr "사용자와 그룹을 더하거나 지웁니다"
 
-#~ msgid "*"
-#~ msgstr "*"
+#~ msgid "<b>Available services:</b>"
+#~ msgstr "<b>사용가능한 서비스:</b>"
 
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
-#~ "Use this tool to specify which operating systems users can choose at "
-#~ "startup"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">부트로더 설정</span>\n"
-#~ "컴퓨터가 시작할 때 설치된 운영체제를 설정할 수 있습니다"
+#~ msgid "Change your running services"
+#~ msgstr "실행중인 서비스를 바꿉니다"
 
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
-#~ "Use this tool for configuring the way your system access to other "
-#~ "computers"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">네트워크 설정</span>\n"
-#~ "이 도구를 사용해서 다른 컴퓨터와 연결할 수 있도록 설정할 수 있습니다"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
-#~ "use this tool to specify which services to run at boot time"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">서비스 설정</span>\n"
-#~ "부팅할 때 시작할 서비스를 지정할 수 있습니다"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Shared folders configuration</"
-#~ "span>\n"
-#~ "Use this tool for making available folders to your local network "
-#~ "neighborhood"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">공유 폴더 설정</span>\n"
-#~ "이 도구로 로컬 네트워크 환경에 폴더를 쓸 수 있도록 합니다"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
-#~ "Use this tool for setting your current date, time and time zone"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">날짜/시간 설정</span>\n"
-#~ "현재 날짜와 시간, 시간대를 설정할 수 있습니다"
-
-#~ msgid "<span weight=\"bold\">Time Configuration</span>"
-#~ msgstr "<span weight=\"bold\">시간 설정</span>"
-
-#~ msgid "date"
-#~ msgstr "날짜"
-
-#~ msgid "hours"
-#~ msgstr "시간"
-
-#~ msgid "minutes"
-#~ msgstr "분"
-
-#~ msgid "seconds"
-#~ msgstr "초"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
-#~ "Use this tool for configuring users and groups settings in your system"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">사용자/그룹 설정</span>\n"
-#~ "시스템의 사용자와 그룹을 설정할 수 있습니다"
-
-#~ msgid "GST Shares admin component"
-#~ msgstr "GST 공유 관리 컴포넌트"
-
-#~ msgid "GST Shares sharing operations"
-#~ msgstr "GST 공유 작동"
-
-#~ msgid "_Share Folder"
-#~ msgstr "폴더 공유(_S)"
+#~ msgid "Requests user and password in a graphical fashion"
+#~ msgstr "그림을 이용한 방법으로 사용자 이름과 열쇠글을 요청합니다"
