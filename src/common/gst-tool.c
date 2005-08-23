@@ -1631,7 +1631,8 @@ read_everything (GstTool *tool, gchar *needle, va_list ap)
 {
 	GString *str  = g_string_new ("");
 	GSList  *list = NULL;
-	gchar   *arg, *ptr, c;
+	gchar   *arg, *ptr;
+	gint     c;
 
 	list = g_slist_prepend (list, needle);
 
