@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-27 09:45+0200\n"
-"PO-Revision-Date: 2005-07-27 09:45+0200\n"
+"POT-Creation-Date: 2005-09-03 21:50+0200\n"
+"PO-Revision-Date: 2005-09-03 21:53+0200\n"
 "Last-Translator: Слободан Д. Средојевић <slobo@akrep.be>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -128,7 +128,7 @@ msgstr "<span weight=\"bold\">Укључивање рачунара</span>"
 msgid "Ask at boot"
 msgstr "Питај при подизању система"
 
-#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:70
+#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:71
 msgid "Boot Manager Settings"
 msgstr "Подешавања подизања оперативног система"
 
@@ -152,8 +152,8 @@ msgid "Confirmation"
 msgstr "Потврђивање"
 
 #. set window title
-#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:441
-#: ../src/boot/boot-druid.c:453
+#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:454
 msgid "Creating a new boot image"
 msgstr "Стварам нови отисак језгра"
 
@@ -253,7 +253,7 @@ msgstr "_Уређај:"
 msgid "_Edit"
 msgstr "_Уреди"
 
-#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:42
+#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:44
 msgid "_Initrd image path:"
 msgstr "Путања до initrd датот_еке:"
 
@@ -516,7 +516,7 @@ msgstr "Користи сервере имена добављача интерн
 msgid "WEP _key:"
 msgstr "WEP _кључ:"
 
-#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:33
+#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:34
 msgid "_Activate"
 msgstr "_Успостави"
 
@@ -524,7 +524,7 @@ msgstr "_Успостави"
 msgid "_Autodetect"
 msgstr "_Сам пронађи"
 
-#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:34
+#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:35
 msgid "_Deactivate"
 msgstr "Пре_кини"
 
@@ -585,12 +585,12 @@ msgid "_Volume:"
 msgstr "Јачина _звука:"
 
 #: ../interfaces/services.glade.in.h:1
-msgid "<b>Available services:</b>"
-msgstr "<b>Доступне услуге:</b>"
-
-#: ../interfaces/services.glade.in.h:2
 msgid "Advanced settings:"
 msgstr "Напредна подешавања:"
+
+#: ../interfaces/services.glade.in.h:2
+msgid "Select the services that you wish to activate:"
+msgstr "Изаберите услуге које желите да покренете:"
 
 #: ../interfaces/shares.glade.in.h:1
 msgid "<b>Allowed hosts</b>"
@@ -660,7 +660,7 @@ msgstr "Мрежна _маска:"
 msgid "Network:"
 msgstr "Мрежа:"
 
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:55
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
 msgid "Read only"
 msgstr "Само читање"
 
@@ -949,9 +949,9 @@ msgstr "_Напомене"
 msgid "_Days between warning and password expiration:"
 msgstr "Број дана између упозорења и самог _истека лозинке:"
 
-#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:52
-#: ../src/network/address-list.c:71 ../src/network/hosts.c:35
-#: ../src/shares/table.c:41 ../src/users/table.c:49
+#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:54
+#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
+#: ../src/shares/table.c:42 ../src/users/table.c:50
 msgid "_Delete"
 msgstr "_Уклони"
 
@@ -991,102 +991,102 @@ msgstr "_Љуска:"
 msgid "_Work phone:"
 msgstr "_Телефон на послу:"
 
-#: ../src/boot/boot-append-gui.c:139
+#: ../src/boot/boot-append-gui.c:140
 msgid "32,768"
 msgstr "32.768"
 
-#: ../src/boot/boot-append-gui.c:140
+#: ../src/boot/boot-append-gui.c:141
 msgid "65,536"
 msgstr "65.536"
 
-#: ../src/boot/boot-append-gui.c:141
+#: ../src/boot/boot-append-gui.c:142
 msgid "16,777,216"
 msgstr "16.777.216"
 
-#: ../src/boot/boot-append-gui.c:252
+#: ../src/boot/boot-append-gui.c:253
 msgid "Invalid VGA value"
 msgstr "Неисправна ВГА вредност"
 
-#: ../src/boot/boot-append-gui.c:254
+#: ../src/boot/boot-append-gui.c:255
 #, c-format
 msgid "\"%s\" is not a valid VGA value."
 msgstr "„%s“ није исправна вредност за ВГА."
 
-#: ../src/boot/boot-druid.c:112
+#: ../src/boot/boot-druid.c:113
 msgid "Error creating boot image"
 msgstr "Грешка при прављењу отиска за подизање"
 
-#: ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:443
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "Стварам нови отисак за подизање (%d од %d)"
 
-#: ../src/boot/boot-druid.c:443
+#: ../src/boot/boot-druid.c:444
 msgid "Finished creating a new boot image"
 msgstr "Готово стварање новог отиска за подизање"
 
-#: ../src/boot/boot-image.c:40
+#: ../src/boot/boot-image.c:43
 msgid "Unknown"
 msgstr "Непознат"
 
-#: ../src/boot/boot-image.c:41
+#: ../src/boot/boot-image.c:44
 msgid "Windows NT"
 msgstr "Виндоуз НТ (Windows NT)"
 
-#: ../src/boot/boot-image.c:42
+#: ../src/boot/boot-image.c:45
 msgid "Windows 9x"
 msgstr "Виндоуз 9x (Windows 9x)"
 
-#: ../src/boot/boot-image.c:43
+#: ../src/boot/boot-image.c:46
 msgid "Dos"
 msgstr "ДОС"
 
-#: ../src/boot/boot-image.c:44
+#: ../src/boot/boot-image.c:47
 msgid "Linux"
 msgstr "Линукс"
 
-#: ../src/boot/boot-image.c:45
+#: ../src/boot/boot-image.c:48
 msgid "Linux swap"
 msgstr "Линукс размена меморије"
 
-#: ../src/boot/boot-image.c:46
+#: ../src/boot/boot-image.c:49
 msgid "GNU/Hurd"
 msgstr "ГНУ/Крдо"
 
-#: ../src/boot/boot-image.c:276
+#: ../src/boot/boot-image.c:279
 #, c-format
 msgid "\"%s\" is an invalid path"
 msgstr "„%s“ је неисправна путања"
 
-#: ../src/boot/boot-image.c:292
+#: ../src/boot/boot-image.c:295
 #, c-format
 msgid "\"%s\" already exists, please set another name."
 msgstr "„%s“ већ постоји, молим изаберите неко друго име."
 
-#: ../src/boot/boot-image.c:298
+#: ../src/boot/boot-image.c:301
 #, c-format
 msgid "Invalid image name: \"%s\"."
 msgstr "Погрешно име отиска: „%s“."
 
-#: ../src/boot/boot-image.c:311
+#: ../src/boot/boot-image.c:314
 #, c-format
 msgid "Invalid image: \"%s\"."
 msgstr "Погрешан отисак: „%s“."
 
-#: ../src/boot/boot-image.c:329
+#: ../src/boot/boot-image.c:332
 #, c-format
 msgid "Invalid root device: \"%s\"."
 msgstr "Неисправан корени уређај: „%s“."
 
-#: ../src/boot/boot-settings.c:43
+#: ../src/boot/boot-settings.c:45
 msgid "_Module path:"
 msgstr "_Путања модула:"
 
-#: ../src/boot/boot-settings.c:405
+#: ../src/boot/boot-settings.c:407
 msgid "Password confirmation is not correct."
 msgstr "Потврда лозинке није исправна."
 
-#: ../src/boot/boot-settings.c:430
+#: ../src/boot/boot-settings.c:432
 msgid "Error modifying boot image"
 msgstr "Грешка при измени отиска за подизање"
 
@@ -1132,34 +1132,34 @@ msgstr "Подешавања ће бити празна"
 msgid "The file \"%s\" is missing or could not be read."
 msgstr "Недостаје датотека „%s“ или се не може прочитати."
 
-#: ../src/boot/table.c:41
+#: ../src/boot/table.c:43
 msgid "Name"
 msgstr "Име"
 
-#: ../src/boot/table.c:42
+#: ../src/boot/table.c:44
 msgid "Default"
 msgstr "Подразумевано"
 
-#: ../src/boot/table.c:43
+#: ../src/boot/table.c:45
 msgid "Type"
 msgstr "Врста"
 
-#: ../src/boot/table.c:44
+#: ../src/boot/table.c:46
 msgid "Kernel Image"
 msgstr "Датотека са отиском језгра"
 
-#: ../src/boot/table.c:45
+#: ../src/boot/table.c:47
 msgid "Device"
 msgstr "Уређај"
 
-#: ../src/boot/table.c:50 ../src/network/address-list.c:70
-#: ../src/network/hosts.c:33 ../src/shares/table.c:39 ../src/users/table.c:47
+#: ../src/boot/table.c:52 ../src/network/address-list.c:71
+#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
 msgid "_Add"
 msgstr "_Додај"
 
-#: ../src/boot/table.c:51 ../src/network/hosts.c:34
-#: ../src/network/ifaces-list.c:32 ../src/shares/table.c:40
-#: ../src/users/table.c:48
+#: ../src/boot/table.c:53 ../src/network/hosts.c:38
+#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
+#: ../src/users/table.c:49
 msgid "_Properties"
 msgstr "_Особине"
 
@@ -1211,38 +1211,38 @@ msgstr "Не могу сам да покренем позадинску скри
 msgid "There was an error creating the child process, the tool will close now."
 msgstr "Дошло је до грешке при образовању потпроцеса, алат се сада затвара."
 
-#: ../src/common/gst-dialog.c:59
+#: ../src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Не могу пронаћи елемент: %s"
 
-#: ../src/common/gst-dialog.c:382
+#: ../src/common/gst-dialog.c:383
 msgid "There are changes which have not been applied"
 msgstr "Постоје промене које нису примењене"
 
-#: ../src/common/gst-dialog.c:384
+#: ../src/common/gst-dialog.c:385
 msgid "Apply them now?"
 msgstr "Применити их сада?"
 
-#: ../src/common/gst-dialog.c:491
+#: ../src/common/gst-dialog.c:492
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Грешка повезивања сигнал `%s' у елементу `%s'"
 
-#: ../src/common/gst-tool.c:1022
+#: ../src/common/gst-tool.c:1026
 msgid "The configuration could not be loaded"
 msgstr "Не могу учитати подешавања"
 
-#: ../src/common/gst-tool.c:1024
+#: ../src/common/gst-tool.c:1028
 msgid "There was an error running the backend script"
 msgstr "Догодила се грешка при раду позадинске скрипте"
 
-#: ../src/common/gst-tool.c:1505
+#: ../src/common/gst-tool.c:1509
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Добродошли у %s предиздање Гномових системских алата"
 
-#: ../src/common/gst-tool.c:1507
+#: ../src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1256,33 +1256,33 @@ msgstr ""
 "додатни труд. Упозорени сте. Хвала Вам на испробавању овог предиздања "
 "„Гномових системских алата“!"
 
-#: ../src/common/gst-tool.c:1528
+#: ../src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Упозорење"
 
-#: ../src/common/gst-tool.c:1548
+#: ../src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Ову поруку више не приказуј"
 
-#: ../src/common/gst-tool.c:1605
+#: ../src/common/gst-tool.c:1609
 msgid "GNOME System Tools"
 msgstr "Гномови системски алати"
 
-#: ../src/common/gst-tool.c:1750
+#: ../src/common/gst-tool.c:1755
 msgid "Could not display help"
 msgstr "Не могу да прикажем помоћ"
 
 # bug(danilo): is this imperative "type an address", or "type of an address" or "address of a type"?
-#: ../src/network/address-list.c:554
+#: ../src/network/address-list.c:555
 msgid "Type address"
 msgstr "Унесите адресу"
 
-#: ../src/network/callbacks.c:44
+#: ../src/network/callbacks.c:46
 #, c-format
 msgid "Could not enable the interface %s"
 msgstr "Не могу да укључим уређај „%s“?"
 
-#: ../src/network/callbacks.c:48
+#: ../src/network/callbacks.c:50
 msgid ""
 "Check that the settings are correct for this network and that the computer "
 "is correctly connected to it."
@@ -1290,21 +1290,21 @@ msgstr ""
 "Проверите да ли су подешавања исправна за ову мрежу и да је рачунар добро "
 "повезан на њу."
 
-#: ../src/network/callbacks.c:235
+#: ../src/network/callbacks.c:237
 msgid "Could not autodetect modem device"
 msgstr "Не могу сам да препознам уређај модема"
 
-#: ../src/network/callbacks.c:238
+#: ../src/network/callbacks.c:240
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr "Проверите да модем није у употреби и да је правилно прикључен"
 
-#: ../src/network/callbacks.c:449
+#: ../src/network/callbacks.c:451
 msgid "The host name has changed"
 msgstr "Име рачунара је измењено"
 
-#: ../src/network/callbacks.c:452
+#: ../src/network/callbacks.c:454
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1312,31 +1312,31 @@ msgstr ""
 "Ово ће спречити покретање нових програма тако да ћете морати да се пријавите "
 "на систем поново. Наставити и поред тога?"
 
-#: ../src/network/callbacks.c:458
+#: ../src/network/callbacks.c:460
 msgid "Change _Host name"
 msgstr "Промени _име рачунара"
 
-#: ../src/network/hosts.c:88
+#: ../src/network/hosts.c:92
 msgid "IP Address"
 msgstr "ИП адреса"
 
-#: ../src/network/hosts.c:96
+#: ../src/network/hosts.c:100
 msgid "Aliases"
 msgstr "Други надимци"
 
-#: ../src/network/location.c:141
+#: ../src/network/location.c:144
 msgid "Create location"
 msgstr "Направи место"
 
-#: ../src/network/location.c:149
+#: ../src/network/location.c:152
 msgid "Delete current location"
 msgstr "Уклони текуће место"
 
-#: ../src/network/location.c:363
+#: ../src/network/location.c:366
 msgid "Do you want to remove this location?"
 msgstr "Желите ли да уклоните ово место?"
 
-#: ../src/network/location.c:436
+#: ../src/network/location.c:439
 msgid "Changing profile"
 msgstr "Измена скупа подешавања"
 
@@ -1379,27 +1379,27 @@ msgstr "Подесите мрежне уређаје и везе"
 msgid "Networking"
 msgstr "Умрежавање"
 
-#: ../src/network/network-iface-ethernet.c:301
+#: ../src/network/network-iface-ethernet.c:302
 msgid "Ethernet connection"
 msgstr "Етернет веза"
 
-#: ../src/network/network-iface-irlan.c:121
+#: ../src/network/network-iface-irlan.c:122
 msgid "Infrared connection"
 msgstr "Инфрацрвена веза"
 
-#: ../src/network/network-iface-isdn.c:328
+#: ../src/network/network-iface-isdn.c:330
 msgid "ISDN connection"
 msgstr "ИСДН веза"
 
-#: ../src/network/network-iface-modem.c:251
+#: ../src/network/network-iface-modem.c:253
 msgid "Modem connection"
 msgstr "Модемска веза"
 
-#: ../src/network/network-iface-plip.c:210
+#: ../src/network/network-iface-plip.c:211
 msgid "Parallel port connection"
 msgstr "Веза преко паралелног прикључка"
 
-#: ../src/network/network-iface-wireless.c:244
+#: ../src/network/network-iface-wireless.c:245
 msgid "Wireless connection"
 msgstr "Бежична веза"
 
@@ -1423,17 +1423,17 @@ msgstr "Уређај %s није активан"
 msgid "The interface %s is active"
 msgstr "Уређај %s је активан"
 
-#: ../src/services/callbacks.c:63
+#: ../src/services/callbacks.c:64
 #, c-format
 msgid "Settings for \"%s\""
 msgstr "Подешавања за %s"
 
 #. FIXME: put service name !!!
-#: ../src/services/callbacks.c:152
+#: ../src/services/callbacks.c:153
 msgid "Are you sure you want to deactivate this service?"
 msgstr "Да ли сте сигурни да желите да искључите ову услугу?"
 
-#: ../src/services/callbacks.c:155
+#: ../src/services/callbacks.c:156
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss"
@@ -1441,10 +1441,9 @@ msgstr ""
 "Ово може утицати на понашање система у разним погледима, водећи до могућег "
 "губитка података"
 
-# bug(slobo): провери
-#: ../src/services/main.c:54
-msgid "Change your running services"
-msgstr "Измените радне услуге система"
+#: ../src/services/main.c:55
+msgid "Services settings"
+msgstr "Подешавање услужних програма"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1454,95 +1453,139 @@ msgstr "Подесите који услужни програми се покр�
 msgid "Services"
 msgstr "Услужни програми"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:32
+msgid "Antivirus"
+msgstr "Противвирусни"
+
+#: ../src/services/service.c:32
+msgid "Analyzes your incoming mail for virus"
+msgstr "Претражује вашу долазећу пошту за вирусе"
+
+#: ../src/services/service.c:33
+msgid "Volumes mounter"
+msgstr "Прикључивач дискова"
+
+#: ../src/services/service.c:33
+msgid "Mounts your volumes automatically"
+msgstr "Сам прикључује ваше дискове"
+
+#: ../src/services/service.c:34
 msgid "Actions scheduler"
 msgstr "Распоред задатака"
 
-#: ../src/services/service.c:30
+#: ../src/services/service.c:34
 msgid "Executes scheduled actions"
 msgstr "Извршава постављене задатке"
 
-#: ../src/services/service.c:31
+#: ../src/services/service.c:35
+msgid "Database server"
+msgstr "База података"
+
+#: ../src/services/service.c:35
+msgid "Data storage system"
+msgstr "Систем за смештање података"
+
+#: ../src/services/service.c:36
 msgid "Graphical login manager"
 msgstr "Графички управник пријављивања на систем"
 
-#: ../src/services/service.c:31
-msgid "Requests user and password in a graphical fashion"
-msgstr "Захтева корисничко име и лозинку кроз графичко сучеље"
+#: ../src/services/service.c:36
+msgid "Allows users to login graphically"
+msgstr "Дозвољава графичку пријаву корисника"
 
-#: ../src/services/service.c:32
+#: ../src/services/service.c:37
 msgid "Folder sharing service"
 msgstr "Услуга дељења података"
 
-#: ../src/services/service.c:32
-msgid "Shares your selected folders through your network"
-msgstr "Дели податке које сте одредили са остатком мреже"
+#: ../src/services/service.c:37
+msgid "Shares folders through your network"
+msgstr "Дели фасцикле путем мреже"
 
-#: ../src/services/service.c:33
+#: ../src/services/service.c:38
+msgid "File sharing service"
+msgstr "Услуга дељења датотека"
+
+#: ../src/services/service.c:38 ../src/services/service.c:39
+msgid "Shares files though internet"
+msgstr "Дели датотеке путем Интернета"
+
+#: ../src/services/service.c:39
+msgid "FTP service"
+msgstr "FTP услуга"
+
+#: ../src/services/service.c:40
+msgid "Mail fetcher"
+msgstr "Прикупљање поште"
+
+#: ../src/services/service.c:40
+msgid "Downloads your mail from remote accounts"
+msgstr "Преузима вашу пошту са удаљених налога"
+
+#: ../src/services/service.c:41
 msgid "Mail agent"
 msgstr "Услуга е-поште"
 
-#: ../src/services/service.c:33
-msgid "Delivers your sent mails through internet"
-msgstr "Испоручује Вашу послату електронску пошту"
+#: ../src/services/service.c:41
+msgid "Delivers your mails through internet"
+msgstr "Испоручује вашу пошту путем Интернета"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Clock synchronization service"
 msgstr "Услуга усклађивања времена"
 
-#: ../src/services/service.c:34
+#: ../src/services/service.c:42
 msgid "Synchronizes your computer clock with internet time servers"
 msgstr "_Усклађује сат према времену интернет сервера"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Printer service"
 msgstr "Услуга штампања"
 
-#: ../src/services/service.c:35
+#: ../src/services/service.c:43
 msgid "Allows applications to use printers"
 msgstr "Дозвољава програмима да користе штампаче"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Remote shell server"
 msgstr "Удаљени сервер са конзолним приступом"
 
-#: ../src/services/service.c:36
+#: ../src/services/service.c:44
 msgid "Secure shell server"
 msgstr "Сервер за шифровање комуникационог канала"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Computer activity logger"
 msgstr "Услуга вођења дневника"
 
-#: ../src/services/service.c:37
+#: ../src/services/service.c:45
 msgid "Keeps a log of your computer activity"
 msgstr "Бележи дневник рада Вашег рачунара"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Web server"
 msgstr "Услуга веб садржаја"
 
-#: ../src/services/service.c:38
+#: ../src/services/service.c:46
 msgid "Shares your web pages through internet"
 msgstr "Омогућава објављивање Ваших личних страница на Интернету"
 
-#: ../src/shares/callbacks.c:184
+#: ../src/shares/callbacks.c:187
 msgid "Are you sure you want to delete this share?"
 msgstr "Да ли сте сигурни да ово више не желите да делите?"
 
-#: ../src/shares/callbacks.c:186
+#: ../src/shares/callbacks.c:189
 msgid "Other computers in your network will stop viewing this."
 msgstr "Остали рачунари у вашој мрежи више неће видети ово."
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Додаје дељену путању, или је мења ако већ постоји"
 
-#: ../src/shares/main.c:88
+#: ../src/shares/main.c:90
 msgid "PATH"
 msgstr "ПУТАЊА"
 
-#: ../src/shares/main.c:95
+#: ../src/shares/main.c:97
 msgid "Shared folders settings"
 msgstr "Подешавања дељених директоријума"
 
@@ -1554,36 +1597,36 @@ msgstr "_Дели директоријум"
 msgid "Share this folder with other computers"
 msgstr "Дели овај директоријум са осталим рачунарима"
 
-#: ../src/shares/nfs-acl-table.c:49
+#: ../src/shares/nfs-acl-table.c:51
 msgid "Allowed host/network"
 msgstr "Допуштени рачунари/мреже"
 
-#: ../src/shares/share-nfs-add-hosts.c:112
+#: ../src/shares/share-nfs-add-hosts.c:114
 #, c-format
 msgid "Hosts in the %s network"
 msgstr "Рачунари у мрежи %s"
 
-#: ../src/shares/share-nfs-add-hosts.c:144
+#: ../src/shares/share-nfs-add-hosts.c:146
 msgid "Specify hostname"
 msgstr "Наведите име рачунара"
 
-#: ../src/shares/share-nfs-add-hosts.c:151
+#: ../src/shares/share-nfs-add-hosts.c:153
 msgid "Specify IP address"
 msgstr "Наведите ИП адресу"
 
-#: ../src/shares/share-nfs-add-hosts.c:158
+#: ../src/shares/share-nfs-add-hosts.c:160
 msgid "Specify network"
 msgstr "Наведите мрежу"
 
-#: ../src/shares/share-settings.c:121
+#: ../src/shares/share-settings.c:123
 msgid "Do not share"
 msgstr "Не дели"
 
-#: ../src/shares/share-settings.c:129
+#: ../src/shares/share-settings.c:131
 msgid "SMB"
 msgstr "Самба"
 
-#: ../src/shares/share-settings.c:137
+#: ../src/shares/share-settings.c:139
 msgid "NFS"
 msgstr "Мрежни систем датотека"
 
@@ -1595,12 +1638,12 @@ msgstr "Подесите који директоријуми су доступн
 msgid "Shared Folders"
 msgstr "Дељени директоријуми"
 
-#: ../src/shares/transfer.c:42
+#: ../src/shares/transfer.c:44
 msgid "Sharing services are not installed"
 msgstr "Услуге за дељење нису инсталиране"
 
 # bug(slobo): бољи предлог за „Алат ће се сада затворити“
-#: ../src/shares/transfer.c:44
+#: ../src/shares/transfer.c:46
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders. The tool will close now."
@@ -1608,11 +1651,11 @@ msgstr ""
 "Морате инсталирати било Самбу било мрежни систем датотека да бисте делили "
 "ваше директоријуме. Алат ће се сада затворити."
 
-#: ../src/time/main.c:461
+#: ../src/time/main.c:464
 msgid "NTP support is not installed"
 msgstr "Подршка за мрежни протокол за време није присутна"
 
-#: ../src/time/main.c:463
+#: ../src/time/main.c:466
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1620,7 +1663,7 @@ msgstr ""
 "Молим поставите и покрените услугу мрежног времена на систему да омогућите "
 "усклађивање локалне временске услуге са временским услугама са Интерната"
 
-#: ../src/time/main.c:759
+#: ../src/time/main.c:762
 msgid "Time and Date Settings"
 msgstr "Подешавања времена и датума"
 
@@ -1632,106 +1675,106 @@ msgstr "Промените време, датум и временску зону
 msgid "Time and Date"
 msgstr "Време и датум"
 
-#: ../src/users/callbacks.c:569
+#: ../src/users/callbacks.c:571
 msgid "Error saving profile"
 msgstr "Грешка при чувању скупа подешавања"
 
-#: ../src/users/callbacks.c:611
+#: ../src/users/callbacks.c:613
 msgid "Create New profile"
 msgstr "Направи нови скуп подешавања"
 
-#: ../src/users/callbacks.c:647
+#: ../src/users/callbacks.c:649
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Подешавања за скуп %s"
 
-#: ../src/users/group-settings.c:89
+#: ../src/users/group-settings.c:91
 msgid "Create New Group"
 msgstr "Направи нову групу"
 
 #. Check if gid is available
-#: ../src/users/group-settings.c:162 ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
 msgid "Invalid group ID"
 msgstr "Неисправан ИБ групе"
 
-#: ../src/users/group-settings.c:163
+#: ../src/users/group-settings.c:165
 msgid "Group ID must be a positive number"
 msgstr "ИБ групе мора бити позитиван број"
 
 # bug: '"root" user' might need to be '"root" group'
 #. if group is root
-#: ../src/users/group-settings.c:166
+#: ../src/users/group-settings.c:168
 msgid "Group ID of the \"root\" user should not be modified"
 msgstr "ИБ групе „root“ не треба мењати"
 
-#: ../src/users/group-settings.c:167 ../src/users/group-settings.c:213
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:215
+#: ../src/users/group-settings.c:285
 msgid "This would leave the system unusable"
 msgstr "Ово може учинити систем неупотребљивим"
 
-#: ../src/users/group-settings.c:171
+#: ../src/users/group-settings.c:173
 #, c-format
 msgid "Group ID %s already exists"
 msgstr "ИБ групе „%s“ већ постоји"
 
 #. If empty.
-#: ../src/users/group-settings.c:196
+#: ../src/users/group-settings.c:198
 msgid "Group name is empty"
 msgstr "Име групе није наведено"
 
-#: ../src/users/group-settings.c:197
+#: ../src/users/group-settings.c:199
 msgid "A group name must be specified"
 msgstr "Обавезно је навести име групе"
 
 #. If too long.
-#: ../src/users/group-settings.c:200
+#: ../src/users/group-settings.c:202
 msgid "The group name is too long"
 msgstr "Име групе је предугачко"
 
 # bug(danilo): plural-forms
-#: ../src/users/group-settings.c:201
+#: ../src/users/group-settings.c:203
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
 msgstr "Име групе треба да има мање од %i знакова да би било исправно"
 
 #. if invalid.
-#: ../src/users/group-settings.c:204
+#: ../src/users/group-settings.c:206
 msgid "Group name has invalid characters"
 msgstr "Име групе садржи неисправне знакове"
 
-#: ../src/users/group-settings.c:205
+#: ../src/users/group-settings.c:207
 msgid "Please set a valid group name, using only lower case letters"
 msgstr "Молим поставите исправно име групе, користећи само мала слова"
 
 #. if !exist.
-#: ../src/users/group-settings.c:208
+#: ../src/users/group-settings.c:210
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Група „%s“ већ постоји"
 
-#: ../src/users/group-settings.c:209
+#: ../src/users/group-settings.c:211
 msgid "Please select a different group name"
 msgstr "Изаберите неко друго име за групу"
 
 #. if it's the root group
-#: ../src/users/group-settings.c:212
+#: ../src/users/group-settings.c:214
 msgid "Group name of the \"root\" user should not be modified"
 msgstr "Име групе за администратора (root) не би требало да се мења"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:284
 msgid "The group \"root\" should not be deleted"
 msgstr "Не треба брисати групу „root“"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:299
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Да ли сте сигурни да желите да уклоните групу „%s“?"
 
-#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:301
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "На систему датотека могу остати датотеке са неисправним ИБ групе."
 
-#: ../src/users/group-settings.c:359
+#: ../src/users/group-settings.c:361
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Подешавања за групу %s"
@@ -1744,31 +1787,31 @@ msgstr "Група"
 msgid "GID"
 msgstr "Број групе"
 
-#: ../src/users/main.c:122
+#: ../src/users/main.c:123
 msgid "User name contains"
 msgstr "Корисничко име садржи"
 
-#: ../src/users/main.c:123
+#: ../src/users/main.c:124
 msgid "User ID is"
 msgstr "Кориснички број је"
 
-#: ../src/users/main.c:124
+#: ../src/users/main.c:125
 msgid "Group name contains"
 msgstr "Име групе садржи"
 
-#: ../src/users/main.c:125
+#: ../src/users/main.c:126
 msgid "User GID is"
 msgstr "Број групе је"
 
-#: ../src/users/main.c:244 ../src/users/users.desktop.in.in.h:2
+#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Корисници и групе"
 
-#: ../src/users/passwd.c:165
+#: ../src/users/passwd.c:168
 msgid "Passwords do not match"
 msgstr "Лозинке се не подударају"
 
-#: ../src/users/passwd.c:170
+#: ../src/users/passwd.c:173
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1777,74 +1820,74 @@ msgstr ""
 "Лоша лозинка: %s.\n"
 "Молим покушајте са новом лозинком"
 
-#: ../src/users/profile-settings.c:122
+#: ../src/users/profile-settings.c:125
 msgid "The profile must have a name"
 msgstr "Скуп подешавања мора имати име"
 
-#: ../src/users/profile-settings.c:127
+#: ../src/users/profile-settings.c:130
 msgid "The profile must have a default home"
 msgstr "Скуп подешавања мора имати подразумевани лични директоријум"
 
-#: ../src/users/profile-settings.c:132 ../src/users/profile-settings.c:137
+#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
 msgid "The profile must have a default shell"
 msgstr "Скуп подешавања мора имати подразумевану љуску"
 
-#: ../src/users/profile-settings.c:205
+#: ../src/users/profile-settings.c:208
 msgid "The default profile should not be deleted"
 msgstr "Подразумевани скуп подешавања се не сме уклонити"
 
-#: ../src/users/profile-settings.c:206
+#: ../src/users/profile-settings.c:209
 msgid "This profile is used for setting default data for new users"
 msgstr ""
 "Овај скуп подешавања се користи за постављање подразумеваних података за "
 "нове кориснике"
 
-#: ../src/users/profile-settings.c:215
+#: ../src/users/profile-settings.c:218
 #, c-format
 msgid "Delete profile \"%s\"?"
 msgstr "Уклони скуп подешавања „%s“?"
 
-#: ../src/users/profile-settings.c:217
+#: ../src/users/profile-settings.c:220
 msgid "You will not be able to recover this profile after pressing \"apply\"."
 msgstr ""
 "Нећете моћи да повратите овај скуп подешавања након притиска на „Примени“."
 
 #. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:38
+#: ../src/users/profiles-table.c:39
 msgid "Profile"
 msgstr "Скуп подешавања"
 
-#: ../src/users/profiles-table.c:39
+#: ../src/users/profiles-table.c:40
 msgid "Comment"
 msgstr "Напомена"
 
-#: ../src/users/search-bar/search-bar.c:225
+#: ../src/users/search-bar/search-bar.c:228
 msgid "C_lear"
 msgstr "_Очисти"
 
-#: ../src/users/search-bar/search-bar.c:326
+#: ../src/users/search-bar/search-bar.c:329
 msgid "Choice"
 msgstr "Избор"
 
-#: ../src/users/search-bar/search-bar.c:336
+#: ../src/users/search-bar/search-bar.c:339
 msgid "Text"
 msgstr "Текст"
 
-#: ../src/users/user-settings.c:71
+#: ../src/users/user-settings.c:73
 msgid "The \"root\" user should not be deleted"
 msgstr "Налог за администратора се не сме уклонити"
 
-#: ../src/users/user-settings.c:72 ../src/users/user-settings.c:303
-#: ../src/users/user-settings.c:398 ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:305
+#: ../src/users/user-settings.c:400 ../src/users/user-settings.c:436
 msgid "This would leave the system unusable."
 msgstr "Ово може учинити систем неупотребљивим."
 
-#: ../src/users/user-settings.c:81
+#: ../src/users/user-settings.c:83
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "Да ли сте сигурни да желите да уклоните корисника „%s“?"
 
-#: ../src/users/user-settings.c:83
+#: ../src/users/user-settings.c:85
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1852,42 +1895,44 @@ msgstr ""
 "Ово ће онемогућити приступ овог корисника систему, али његов лични "
 "директоријум неће бити уклоњен."
 
-#: ../src/users/user-settings.c:187
+#: ../src/users/user-settings.c:189
 msgid "User Account Editor"
 msgstr "Уређивање корисничких налога"
 
-#: ../src/users/user-settings.c:283
+#: ../src/users/user-settings.c:285
 msgid "The user name is empty"
 msgstr "Име корисника је празно"
 
-#: ../src/users/user-settings.c:284
+#: ../src/users/user-settings.c:286
 msgid "A user name must be specified."
 msgstr "Обавезно је задати име корисника."
 
 #. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:290 ../src/users/user-settings.c:295
+#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:297
 msgid "The user name is too long"
 msgstr "Име корисника је предугачко"
 
 # bug(danilo): plural-forms
 # bug(slobo): привремено решење
 # msgstr "Име корисника мора бити краће од %i знакова да би било исправно"
-#: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
+#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:298
 #, c-format
 msgid "To be valid, the user name should have less than %i characters."
-msgstr "Највећи број знакова које треба да има корисничко име да би било исправно: %i."
+msgstr ""
+"Највећи број знакова које треба да има корисничко име да би било исправно: %"
+"i."
 
-#: ../src/users/user-settings.c:302
+#: ../src/users/user-settings.c:304
 msgid "User name for the \"root\" user should not be modified"
 msgstr "Име за администратора (root) не би требало да се мења"
 
-#: ../src/users/user-settings.c:308
+#: ../src/users/user-settings.c:310
 msgid "User name has invalid characters"
 msgstr "Име корисника садржи недозвољене знаке"
 
 # bug(slobo): maybe you should add the word "leading" in front of "lower case
 # letter followed by..."
-#: ../src/users/user-settings.c:309
+#: ../src/users/user-settings.c:311
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1895,38 +1940,38 @@ msgstr ""
 "Молим поставите исправно корисничко име које је састављено од почетног малог "
 "слова праћеног малим словима и цифрама."
 
-#: ../src/users/user-settings.c:315
+#: ../src/users/user-settings.c:317
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Корисничко име „%s“ већ постоји"
 
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:318
 msgid "Please select a different user name."
 msgstr "Молим изаберите неко друго корисничко име."
 
-#: ../src/users/user-settings.c:341
+#: ../src/users/user-settings.c:343
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Недозвољен знак „%c“ у напомени"
 
 # bug(slobo): пошто је искочила гршка, тај знак се користио. бољи превод?
-#: ../src/users/user-settings.c:342
+#: ../src/users/user-settings.c:344
 msgid "Check that this character is not used."
 msgstr "Проверите да се не користи овај знак."
 
-#: ../src/users/user-settings.c:390
+#: ../src/users/user-settings.c:392
 msgid "Home directory should not be empty"
 msgstr "Лични директоријум не би требао бити празан"
 
-#: ../src/users/user-settings.c:391
+#: ../src/users/user-settings.c:393
 msgid "Make sure you provide a home directory."
 msgstr "Проверите да наводите лични директоријум."
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:395
 msgid "Incomplete path in home directory"
 msgstr "Непотпуна путања личног директоријума"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:396
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1934,28 +1979,28 @@ msgstr ""
 "Молим унесите пуну путању за лични директоријум\n"
 "<span size=\"smaller\">нпр.: /home/slavko</span>"
 
-#: ../src/users/user-settings.c:397
+#: ../src/users/user-settings.c:399
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr "Лични директоријм администратора (root) не би требало да се мења"
 
-#: ../src/users/user-settings.c:430
+#: ../src/users/user-settings.c:432
 msgid "Invalid user ID"
 msgstr "Неисправан ИБ корисника"
 
-#: ../src/users/user-settings.c:431
+#: ../src/users/user-settings.c:433
 msgid "User ID must be a positive number."
 msgstr "ИБ корисника мора бити позитиван број."
 
-#: ../src/users/user-settings.c:433
+#: ../src/users/user-settings.c:435
 msgid "User ID of the \"root\" user should not be modified"
 msgstr "ИБ администратора (root) не би требало да се мења"
 
-#: ../src/users/user-settings.c:451
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User ID %s already exists"
 msgstr "ИБ корисника %s већ постоји"
 
-#: ../src/users/user-settings.c:453
+#: ../src/users/user-settings.c:455
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems."
@@ -1963,11 +2008,11 @@ msgstr ""
 "Више корисника може имати један исти ИБ, али то није уобичајено и може "
 "довести до безбедносних неприлика."
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:473
 msgid "Incomplete path in shell"
 msgstr "Непотпуна путања у љусци"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:474
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>."
@@ -1975,50 +2020,60 @@ msgstr ""
 "Молим унесите пуну путању за љуску\n"
 "<span size=\"smaller\">нпр.: /bin/sh</span>"
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:496
 msgid "Password should not be empty"
 msgstr "Лозинка не сме бити празна"
 
-#: ../src/users/user-settings.c:495
+#: ../src/users/user-settings.c:497
 msgid "A password must be provided."
 msgstr "Морате унети лозинку."
 
-#: ../src/users/user-settings.c:497
+#: ../src/users/user-settings.c:499
 msgid "Password confirmation isn't correct"
 msgstr "Лозинка и њена потврда морају бити исте"
 
-#: ../src/users/user-settings.c:498
+#: ../src/users/user-settings.c:500
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Проверите да ли сте унели истоветне лозинке у оба поља."
 
-#: ../src/users/user-settings.c:772
+#: ../src/users/user-settings.c:774
 #, c-format
 msgid "Settings for User %s"
 msgstr "Подешавања за корисника %s"
 
-#: ../src/users/users-table.c:59
+#: ../src/users/users-table.c:61
 msgid "User"
 msgstr "Корисник"
 
-#: ../src/users/users-table.c:60
+#: ../src/users/users-table.c:62
 msgid "Home"
 msgstr "Лични директоријум"
 
-#: ../src/users/users-table.c:61
+#: ../src/users/users-table.c:63
 msgid "User details"
 msgstr "Детаљи корисника"
 
-#: ../src/users/users-table.c:62
+#: ../src/users/users-table.c:64
 msgid "UID"
 msgstr "Јединствени број корисника"
 
-#: ../src/users/users-table.c:63
+#: ../src/users/users-table.c:65
 msgid "Shell"
 msgstr "Љуска"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Додајте или уклоните кориснике и групе"
+
+#~ msgid "<b>Available services:</b>"
+#~ msgstr "<b>Доступне услуге:</b>"
+
+# bug(slobo): провери
+#~ msgid "Change your running services"
+#~ msgstr "Измените радне услуге система"
+
+#~ msgid "Requests user and password in a graphical fashion"
+#~ msgstr "Захтева корисничко име и лозинку кроз графичко сучеље"
 
 #~ msgid "This device is _configured"
 #~ msgstr "Овај уређај је _подешен"
@@ -2067,9 +2122,6 @@ msgstr "Додајте или уклоните кориснике и групе"
 
 #~ msgid "Settings for service %s"
 #~ msgstr "Подешавања за услугу %s"
-
-#~ msgid "Services Settings"
-#~ msgstr "Подешавање услужних програма"
 
 #~ msgid "Active"
 #~ msgstr "Активно"
@@ -2743,10 +2795,6 @@ msgstr "Додајте или уклоните кориснике и групе"
 #~ msgstr ""
 #~ "Молим изаберите тренутни датум и време. Такође можете задати временску "
 #~ "зону и сервер за синхронизацију."
-
-#~ msgid "Select the servers you wish to use for time synchronization."
-#~ msgstr ""
-#~ "Изаберите сервере које желите да користите за синхронизацију времена."
 
 #~ msgid "To select a time zone, click on one of the dots on the map"
 #~ msgstr "Да изаберете временску зону, притисните на неку тачку на карти"
