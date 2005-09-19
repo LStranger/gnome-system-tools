@@ -641,7 +641,7 @@ compare_statichosts (xmlNodePtr current, xmlNodePtr profile)
 static gboolean
 compare_general_data (xmlNodePtr current, xmlNodePtr profile)
 {
-  compare_tag_list (current, profile, general_tags);
+  return compare_tag_list (current, profile, general_tags);
 }
 
 static gboolean
