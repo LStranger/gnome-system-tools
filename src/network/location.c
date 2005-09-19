@@ -77,10 +77,11 @@ const gchar *general_tags[] = {
 };
 
 const gchar *interface_tags[] = {
-  "address", "auto", "bootproto", "broadcast", "debug", "dial_command",
-  "essid", "external_line", "file", "key", "netmask", "network", "noauth", "persist",
-  "phone_number", "section", "serial_hwctl", "serial_port", "set_default_gw",
-  "update_dns", "volume", "user", NULL
+  "address", "auto", "bootproto", "broadcast", "debug", "dev", "dial_command", "dns1", "dns2",
+  "essid", "external_line", "file", "gateway", "key", "key_type", "login", "netmask", "network",
+  "noauth", "mtu", "mru", "password", "persist", "phone_number", "ppp_options", "remote_address",
+  "section", "serial_escapechars", "serial_hwctl", "serial_port", "serial_speed", "set_default_gw",
+  "stupid", "update_dns", "volume", "user", NULL
 };
 
 
