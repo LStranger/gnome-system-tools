@@ -49,6 +49,7 @@
 
 #include "gst-auth.h"
 #include "gst-tool.h"
+#include "gst-platform.h"
 
 #define GST_AUTH_RESPONSE_NP 1
 
