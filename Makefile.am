@@ -2,6 +2,8 @@
 
 SUBDIRS = doc interfaces pixmaps src po
 
+distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
+
 EXTRA_DIST = \
 	HACKING 		\
 	BUGS			\
@@ -10,6 +12,8 @@ EXTRA_DIST = \
 	intltool-extract.in	\
 	intltool-merge.in 	\
 	intltool-update.in 	\
+	omf.make		\
+	xmldocs.make		\
 	gnome-system-tools.pc.in
 
 
