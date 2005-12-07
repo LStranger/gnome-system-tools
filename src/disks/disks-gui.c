@@ -987,29 +987,35 @@ gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 		      "write_cdrw", &write_cdrw, "read_dvd", &read_dvd, 
 		      "write_dvdr", &write_dvdr, "write_dvdram", &write_dvdram, NULL);
 	
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "play_audio_check")),
-		play_audio);
+	gtk_image_set_from_stock (
+		GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "play_audio_image")),
+		(play_audio) ? GTK_STOCK_YES : GTK_STOCK_NO,
+		GTK_ICON_SIZE_MENU);
 
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdr_check")),
-		write_cdr);
+	gtk_image_set_from_stock (
+		GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_cdr_image")),
+		(write_cdr) ? GTK_STOCK_YES : GTK_STOCK_NO,
+		GTK_ICON_SIZE_MENU);
+	
+	gtk_image_set_from_stock (
+		GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_cdrw_image")),
+		(write_cdrw) ? GTK_STOCK_YES : GTK_STOCK_NO,
+		GTK_ICON_SIZE_MENU);
 
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdrw_check")),
-		write_cdrw);
-
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "read_dvd_check")),
-		read_dvd);
-
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdr_check")),
-		write_dvdr);
-
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdram_check")),
-		write_dvdram);
+	gtk_image_set_from_stock (
+		GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "read_dvd_image")),
+		(read_dvd) ? GTK_STOCK_YES : GTK_STOCK_NO,
+		GTK_ICON_SIZE_MENU);
+	
+	gtk_image_set_from_stock (
+		GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_dvdr_image")),
+		(write_dvdr) ? GTK_STOCK_YES : GTK_STOCK_NO,
+		GTK_ICON_SIZE_MENU);
+	
+	gtk_image_set_from_stock (
+		GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_dvdram_image")),
+		(write_dvdram) ? GTK_STOCK_YES : GTK_STOCK_NO,
+		GTK_ICON_SIZE_MENU);
 	
 }
 	
