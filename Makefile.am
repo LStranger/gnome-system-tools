@@ -14,6 +14,7 @@ EXTRA_DIST = \
 	intltool-update.in 	\
 	omf.make		\
 	xmldocs.make		\
+	gnome-doc-utils.make	\
 	gnome-system-tools.pc.in
 
 
@@ -36,4 +37,8 @@ DISTCLEANFILES = \
 	backends/intltool-merge \
 	backends/intltool-update \
 	gnome-system-tools.schemas \
+	gnome-doc-utils.make \
 	gnome-system-tools.pc
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+

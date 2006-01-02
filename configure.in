@@ -1,11 +1,14 @@
 AC_PREREQ(2.52)
 AC_INIT(gnome-system-tools, 1.4.1, http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools)
 AC_CONFIG_SRCDIR(src/common/gst-tool.c)
+AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
 AC_PROG_INTLTOOL([0.29])
 
 AM_CONFIG_HEADER(config.h)
+
+GNOME_DOC_INIT
 
 AM_MAINTAINER_MODE
 
@@ -279,17 +282,12 @@ dnl ===========================
 AC_OUTPUT([
 Makefile
 doc/Makefile
-doc/boot/C/Makefile
 doc/boot/Makefile
-doc/network/C/Makefile
 doc/network/Makefile
-doc/services/C/Makefile
-doc/services/nl/Makefile
 doc/services/Makefile
-doc/time/C/Makefile
-doc/time/nl/Makefile
+doc/services/nl/Makefile
 doc/time/Makefile
-doc/users/C/Makefile
+doc/time/nl/Makefile
 doc/users/Makefile
 gnome-system-tools.spec
 interfaces/Makefile
