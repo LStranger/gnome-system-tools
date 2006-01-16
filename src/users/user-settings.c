@@ -290,12 +290,18 @@ is_login_valid (xmlNodePtr node, const gchar *login)
 #ifdef __FreeBSD__
 	else if (strlen (login) > UT_NAMESIZE) { /*  = sizeof (ut.ut_name) */
 		primary_text   = g_strdup (_("The user name is too long"));
-		secondary_text = g_strdup_printf (_("To be valid, the user name should have less than %i characters."), UT_NAMESIZE);
+		secondary_text = g_strdup_printf (ngettext ("To be valid, the user name should have less than %d character",
+							    "To be valid, the user name should have less than %d characters",
+							    UT_NAMESIZE),
+						  UT_NAMESIZE);
 	}
 #else
 	else if (strlen (login) > sizeof (ut.ut_user)) {
 		primary_text   = g_strdup (_("The user name is too long"));
-		secondary_text = g_strdup_printf (_("To be valid, the user name should have less than %i characters."), sizeof (ut.ut_user));
+		secondary_text = g_strdup_printf (ngettext ("To be valid, the user name should have less than %d character",
+							    "To be valid, the user name should have less than %d characters",
+							    sizeof (ut.ut_user)),
+						  sizeof (ut.ut_user));
 	}
 #endif
 

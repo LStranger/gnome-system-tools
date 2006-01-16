@@ -200,7 +200,10 @@ is_group_name_valid (xmlNodePtr node, const gchar *name)
 	} else if (strlen (name) > 16) {
 		/* If too long. */
 		primary_text   = g_strdup (_("The group name is too long"));
-		secondary_text = g_strdup_printf (_("The group name should have less than %i characters for being valid"), 16);
+		secondary_text = g_strdup_printf (ngettext ("To be valid, the group name should have less than %d character",
+							    "To be valid, the group name should have less than %d characters",
+							    16),
+						  16);
 	} else if (!is_valid_name (name)) {
 		/* if invalid. */
 		primary_text   = g_strdup (_("Group name has invalid characters"));
