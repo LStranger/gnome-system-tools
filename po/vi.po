@@ -4,10 +4,10 @@
 # Clytie Siddall <clytie@riverland.net.au>, 2005, 2006.
 msgid ""
 ""
-msgstr "Project-Id-Version: gnome-system-tools 1.4 Gnome HEAD\n"
+msgstr "Project-Id-Version: gnome-system-tools 2.13.1 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-13 06:42+0100\n"
-"PO-Revision-Date: 2006-01-13 23:47+1030\n"
+"POT-Creation-Date: 2006-01-17 07:04+0100\n"
+"PO-Revision-Date: 2006-01-17 23:10+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1665,8 +1665,8 @@ msgstr "ID nhóm phải là một số dương."
 msgid "Group ID of the \"root\" user should not be modified"
 msgstr "Không nên sửa đổi ID nhóm của người dùng « chủ »."
 
-#:../src/users/group-settings.c:169 ../src/users/group-settings.c:215
-#:../src/users/group-settings.c:285
+#:../src/users/group-settings.c:169 ../src/users/group-settings.c:218
+#:../src/users/group-settings.c:288
 msgid "This would leave the system unusable"
 msgstr "Hành động này sẽ làm cho hệ thống vô ích."
 
@@ -1691,48 +1691,49 @@ msgstr "Tên nhóm quá dài."
 
 #:../src/users/group-settings.c:203
 #,c-format
-msgid "The group name should have less than %i characters for being valid"
-msgstr "Tên nhóm hợp lệ nên chứa ít hơn %i ký tự."
+msgid "To be valid, the group name should have less than %d character"
+msgid_plural "To be valid, the group name should have less than %d characters"
+msgstr[0] "Tên nhóm hợp lệ nên chứa ít hơn %d ký tự."
 
 #.if invalid.
-#:../src/users/group-settings.c:206
+#:../src/users/group-settings.c:209
 msgid "Group name has invalid characters"
 msgstr "Tên nhóm chứa ký tự không hợp lệ."
 
-#:../src/users/group-settings.c:207
+#:../src/users/group-settings.c:210
 msgid "Please set a valid group name, using only lower case letters"
 msgstr "Hãy lập tên nhóm hợp lệ, chỉ dùng chữ cái thường."
 
 #.if !exist.
-#:../src/users/group-settings.c:210
+#:../src/users/group-settings.c:213
 #,c-format
 msgid "Group \"%s\" already exists"
 msgstr "Đã có nhóm « %s »."
 
-#:../src/users/group-settings.c:211
+#:../src/users/group-settings.c:214
 msgid "Please select a different group name"
 msgstr "Hãy chọn một tên nhóm khác."
 
 #.if it's the root group
-#:../src/users/group-settings.c:214
+#:../src/users/group-settings.c:217
 msgid "Group name of the \"root\" user should not be modified"
 msgstr "Không nên sửa đổi tên nhóm của người dùng « chủ »."
 
-#:../src/users/group-settings.c:284
+#:../src/users/group-settings.c:287
 msgid "The group \"root\" should not be deleted"
 msgstr "Không nên xóa bỏ nhóm « chủ »"
 
-#:../src/users/group-settings.c:299
+#:../src/users/group-settings.c:302
 #,c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Bạn có chắc là muốn xoá bỏ nhóm « %s » không?"
 
-#:../src/users/group-settings.c:301
+#:../src/users/group-settings.c:304
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Hành động này có thể làm cho hệ thống tập tin chứa tập tin có ID nhóm không "
 "hợp lệ."
 
-#:../src/users/group-settings.c:361
+#:../src/users/group-settings.c:364
 #,c-format
 msgid "Settings for Group %s"
 msgstr "Thiết lập cho nhóm « %s »"
@@ -1832,8 +1833,8 @@ msgstr "Chữ"
 msgid "The \"root\" user should not be deleted"
 msgstr "Không nên xóa bỏ người dùng « chủ »."
 
-#:../src/users/user-settings.c:74 ../src/users/user-settings.c:305
-#:../src/users/user-settings.c:400 ../src/users/user-settings.c:436
+#:../src/users/user-settings.c:74 ../src/users/user-settings.c:311
+#:../src/users/user-settings.c:406 ../src/users/user-settings.c:442
 msgid "This would leave the system unusable."
 msgstr "Hành động này sẽ làm cho hệ thống vô ích."
 
@@ -1862,123 +1863,124 @@ msgid "A user name must be specified."
 msgstr "Cần phải ghi rõ một tên người dùng."
 
 #.= sizeof (ut.ut_name)
-#:../src/users/user-settings.c:292 ../src/users/user-settings.c:297
+#:../src/users/user-settings.c:292 ../src/users/user-settings.c:300
 msgid "The user name is too long"
 msgstr "Tên người dùng quá dài."
 
-#:../src/users/user-settings.c:293 ../src/users/user-settings.c:298
+#:../src/users/user-settings.c:293 ../src/users/user-settings.c:301
 #,c-format
-msgid "To be valid, the user name should have less than %i characters."
-msgstr "Tên người dùng hợp lệ nên chứa ít hơn %i ký tự."
+msgid "To be valid, the user name should have less than %d character"
+msgid_plural "To be valid, the user name should have less than %d characters"
+msgstr[0] "Tên người dùng hợp lệ nên chứa ít hơn %d ký tự."
 
-#:../src/users/user-settings.c:304
+#:../src/users/user-settings.c:310
 msgid "User name for the \"root\" user should not be modified"
 msgstr "Không nên sửa đổi tên người dùng của người dùng « chủ »."
 
-#:../src/users/user-settings.c:310
+#:../src/users/user-settings.c:316
 msgid "User name has invalid characters"
 msgstr "Tên người dùng chứa ký tự không hợp lệ."
 
-#:../src/users/user-settings.c:311
+#:../src/users/user-settings.c:317
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "Hãy lập một tên người dùng hợp lệ chứa một chữ cái thường đứng đầu và các "
 "chữ cái thường và số đứng sau."
 
-#:../src/users/user-settings.c:317
+#:../src/users/user-settings.c:323
 #,c-format
 msgid "User name \"%s\" already exists"
 msgstr "Đã có tên người dùng « %s »."
 
-#:../src/users/user-settings.c:318
+#:../src/users/user-settings.c:324
 msgid "Please select a different user name."
 msgstr "Hãy chọn một tên người dùng khác."
 
-#:../src/users/user-settings.c:343
+#:../src/users/user-settings.c:349
 #,c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Chú thích chứa ký tự không hợp lệ « %c »."
 
-#:../src/users/user-settings.c:344
+#:../src/users/user-settings.c:350
 msgid "Check that this character is not used."
 msgstr "Hãy kiểm tra không dùng ký tự này."
 
-#:../src/users/user-settings.c:392
+#:../src/users/user-settings.c:398
 msgid "Home directory should not be empty"
 msgstr "Thư mục chính phải không được rỗng."
 
-#:../src/users/user-settings.c:393
+#:../src/users/user-settings.c:399
 msgid "Make sure you provide a home directory."
 msgstr "Hãy đảm bảo đả cung cấp một thư mục chính."
 
-#:../src/users/user-settings.c:395
+#:../src/users/user-settings.c:401
 msgid "Incomplete path in home directory"
 msgstr "Có đường dẫn chưa hoàn thành trong thư mục chính."
 
-#:../src/users/user-settings.c:396
+#:../src/users/user-settings.c:402
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
 msgstr "Hãy nhập đường dẫn đầy đủ tới thư mục chính\n"
 "<span size=\"smaller\">v.d.: /chính/mìnhtuấn</span>"
 
-#:../src/users/user-settings.c:399
+#:../src/users/user-settings.c:405
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr "Không nên sửa đổi thư mục chính của người dùng « chủ »."
 
-#:../src/users/user-settings.c:432
+#:../src/users/user-settings.c:438
 msgid "Invalid user ID"
 msgstr "ID người dùng không hợp lệ."
 
-#:../src/users/user-settings.c:433
+#:../src/users/user-settings.c:439
 msgid "User ID must be a positive number."
 msgstr "ID người dùng phải là một số dương."
 
-#:../src/users/user-settings.c:435
+#:../src/users/user-settings.c:441
 msgid "User ID of the \"root\" user should not be modified"
 msgstr "Không nên sửa đổi ID người dùng của tên người dùng « chủ »."
 
-#:../src/users/user-settings.c:453
+#:../src/users/user-settings.c:459
 #,c-format
 msgid "User ID %s already exists"
 msgstr "Đã có ID người dùng « %s »."
 
-#:../src/users/user-settings.c:455
+#:../src/users/user-settings.c:461
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems."
 msgstr "Nhiều người dùng có thể dùng cùng một ID người dùng riêng lẻ, nhưng mà làm "
 "như thế không thường, và có thể đưa tới vấn đề bảo mật. "
 
-#:../src/users/user-settings.c:473
+#:../src/users/user-settings.c:479
 msgid "Incomplete path in shell"
 msgstr "Đường dẫn chưa hoàn thành trong hệ vỏ."
 
-#:../src/users/user-settings.c:474
+#:../src/users/user-settings.c:480
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>."
 msgstr "Hãy nhập đường dẫn đầy đủ cho hệ vỏ\n"
 "<span size=\"smaller\">tức là: /bin/sh</span>"
 
-#:../src/users/user-settings.c:496
+#:../src/users/user-settings.c:502
 msgid "Password should not be empty"
 msgstr "Mật khẩu không được trống."
 
-#:../src/users/user-settings.c:497
+#:../src/users/user-settings.c:503
 msgid "A password must be provided."
 msgstr "Cần phải cung cấp một mật khẩu."
 
-#:../src/users/user-settings.c:499
+#:../src/users/user-settings.c:505
 msgid "Password confirmation isn't correct"
 msgstr "Xác nhận mật khẩu không đúng."
 
-#:../src/users/user-settings.c:500
+#:../src/users/user-settings.c:506
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Hãy kiểm tra đã nhập cùng một mật khẩu vào cả hai trường nhập chữ."
 
-#:../src/users/user-settings.c:774
+#:../src/users/user-settings.c:780
 #,c-format
 msgid "Settings for User %s"
 msgstr "Thiết lập cho người dùng « %s »"
