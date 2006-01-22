@@ -6,5 +6,5 @@ DOC_ENTITIES = legal.xml
 DOC_INCLUDES = 
 DOC_FIGURES = figures/boot-tool.png
 
-DOC_LINGUAS =
+DOC_LINGUAS = es
 
