@@ -88,7 +88,7 @@ gst_auth_wait_child (GstTool *tool)
 				/* the proccess was running ssh */
 				primary_text   = g_strdup (_("The tool could not connect to the computer"));
 				secondary_text = g_strdup (_("Check that you have access to this network "
-							     "and that the computer is actually working and running SSHD"));
+							     "and that the computer is actually working and running the SSH daemon"));
 			} else {
 				/* the proccess was running su */
 				primary_text   = g_strdup (_("The entered password is invalid"));
