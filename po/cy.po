@@ -1,0 +1,2030 @@
+# gnome-system-tools yn Gymraeg.
+# This file is distributed under the same license as gnome-system-tools.
+# Rhys Jones <rhys@sucs.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-system-tools\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-03-02 09:08+0000\n"
+"PO-Revision-Date: 2006-03-01 22:24-0000\n"
+"Last-Translator: Rhys Jones <rhys@sucs.org>\n"
+"Language-Team: Cymraeg <gnome-cy@lists.linux.org.uk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural= (n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != "
+"11) ? 2 : 3;\n"
+
+#: ../gnome-system-tools.schemas.in.h:1
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr ""
+"Rhestr o westeiwyr, wedi'u gwahanu gan gomáu, y gall Offer System GNOME "
+"gysylltu â nhw pan fo'r opsiwn cyflunio pell wedi'i alluogi"
+
+#: ../gnome-system-tools.schemas.in.h:2
+msgid "Last GST version executed"
+msgstr "Y fersiwn o Offer System GNOME a weithredwyd diwethaf"
+
+#: ../gnome-system-tools.schemas.in.h:3
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr "Y llwythwr cychwyn fydd boot-admin yn ei gyflunio, o ddewis"
+
+#: ../gnome-system-tools.schemas.in.h:4
+msgid "Remote hosts"
+msgstr "Gweinyddion pell"
+
+#: ../gnome-system-tools.schemas.in.h:5
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr ""
+"Galluogwch yr opsiwn hwn i adael i Offer System GNOME wneud cyfluniad pell "
+"drwy SSH"
+
+#: ../gnome-system-tools.schemas.in.h:6
+msgid "The last GST version that this computer has run"
+msgstr ""
+"Y fersiwn o Offer System GNOME gafodd ei weithredu diwethaf ar y cyfrifiadur "
+"hwn"
+
+#: ../gnome-system-tools.schemas.in.h:7
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+"Mae'r allwedd hon yn storio'r llwythwr cychwyn y bydd boot-admin yn ei "
+"gyflunio os oes fwy nag un wedi ei osod. Os nad yw wedi ei osod neu os nad "
+"yw'n ddilys, fe fydd boot-admin yn holi'r defnyddiwr"
+
+#: ../gnome-system-tools.schemas.in.h:8
+msgid "Whether the tools will use remote administration or not"
+msgstr "A fydd yr offer yn defnyddio rheoli pell ai peidio"
+
+#: ../gnome-system-tools.schemas.in.h:9
+msgid "Whether the users-admin tool should show all users and groups or not"
+msgstr ""
+"A ddylai'r teclyn gweinyddu defnyddwyr ddangos bob defnyddiwr a grŵp ai "
+"peidio"
+
+#: ../gnome-system-tools.schemas.in.h:10
+msgid "Whether the warning dialog should be shown or not"
+msgstr "A ddylid dangos y ddeialog rhybudd ai peidio"
+
+#: ../interfaces/boot.glade.in.h:1
+msgid "<b>Security</b>"
+msgstr "<b>Diogelwch</b>"
+
+#: ../interfaces/boot.glade.in.h:2
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
+"span>\n"
+"\n"
+"please select which do you want to configure"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Mae sawl llwythwr cychwyn wedi'u "
+"canfod</span>\n"
+"\n"
+"Dewiswch ba un yr ydych am ei gyflunio"
+
+#: ../interfaces/boot.glade.in.h:5 ../interfaces/users.glade.in.h:3
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span weight=\"bold\">Gosodiadau Sylfaenol</span>"
+
+#: ../interfaces/boot.glade.in.h:6
+msgid "<span weight=\"bold\">Image Settings</span>"
+msgstr "<span weight=\"bold\">Gosodiadau Delweddau</span>"
+
+#: ../interfaces/boot.glade.in.h:7
+msgid "<span weight=\"bold\">Other Settings</span>"
+msgstr "<span weight=\"bold\">Gosodiadau Eraill</span>"
+
+#: ../interfaces/boot.glade.in.h:8
+msgid "<span weight=\"bold\">Starting the Computer</span>"
+msgstr "<span weight=\"bold\">Cychwyn y Cyfrifiadur</span>"
+
+#: ../interfaces/boot.glade.in.h:9
+msgid "Ask at boot"
+msgstr "Gofyn wrth gychwyn"
+
+#: ../interfaces/boot.glade.in.h:10 ../src/boot/main.c:71
+msgid "Boot Manager Settings"
+msgstr "Gosodiadau'r Rheolwr Cychwyn"
+
+#: ../interfaces/boot.glade.in.h:11
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition. Optionally, you may also enter parameters passed to the kernel at "
+"boot time."
+msgstr ""
+"Dewiswch ddelwedd gnewyllyn i'w cychwyn, a rhaniad i'w osod yn rhaniad "
+"gwraidd. Gallwch hefyd ddewis rhoi paramedrau i'w pasio at y cnewyllyn ar "
+"amser cychwyn."
+
+#: ../interfaces/boot.glade.in.h:12
+msgid "Click \"Forward\" to continue"
+msgstr "Cliciwch \"Ymlaen\" i barhau"
+
+#: ../interfaces/boot.glade.in.h:13
+msgid "Confirmation"
+msgstr "Cadarnhad"
+
+#. set window title
+#: ../interfaces/boot.glade.in.h:14 ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:454
+msgid "Creating a new boot image"
+msgstr "Creu delwedd gychwyn newydd"
+
+#: ../interfaces/boot.glade.in.h:15
+msgid "Don't ask me again"
+msgstr "Peidiwch â gofyn eto"
+
+#: ../interfaces/boot.glade.in.h:16
+msgid "Enable IDE SCSI emulation"
+msgstr "Galluogi efelychiad IDE SCSI"
+
+#: ../interfaces/boot.glade.in.h:17
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr ""
+"Rhowch enw ar gyfer y ddelwedd gychwyn, a nodwch pa fath o system weithredu "
+"yw hi."
+
+#: ../interfaces/boot.glade.in.h:18
+msgid "Finished"
+msgstr "Wedi gorffen"
+
+#: ../interfaces/boot.glade.in.h:19
+msgid "Manual"
+msgstr "A llaw"
+
+#: ../interfaces/boot.glade.in.h:20
+msgid "Number of colors:"
+msgstr "Nifer y lliwiau:"
+
+#: ../interfaces/boot.glade.in.h:21
+msgid "Other parameters:"
+msgstr "Paramedrau eraill:"
+
+#: ../interfaces/boot.glade.in.h:22
+msgid "Password"
+msgstr "Cyfrinair"
+
+#: ../interfaces/boot.glade.in.h:23
+msgid "Protect with password"
+msgstr "Diogelu â chyfrinair"
+
+#: ../interfaces/boot.glade.in.h:24
+msgid "Resolution:"
+msgstr "Cydraniad:"
+
+#: ../interfaces/boot.glade.in.h:25
+msgid "Seconds to wait before loading default kernel or OS"
+msgstr ""
+"Faint o eiliadau i aros cyn llwytho'r cnewyllyn neu'r system weithredu "
+"ragosodedig"
+
+#: ../interfaces/boot.glade.in.h:26
+msgid "Select a kernel image"
+msgstr "Dewiswch ddelwedd cnewyllyn"
+
+#: ../interfaces/boot.glade.in.h:27
+msgid "Select an initrd image"
+msgstr "Dewiswch ddelwedd initrd"
+
+#: ../interfaces/boot.glade.in.h:28
+msgid "Specify the partition on which the operating system is installed."
+msgstr "Nodwch ar ba raniad mae'r system weithredu wedi ei gosod."
+
+#: ../interfaces/boot.glade.in.h:29
+msgid ""
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr ""
+"Cafodd y ddelwedd gychwyn newydd ei hychwanegu. Cliciwch \"Gweithredu\" er "
+"mwyn cadw'ch newidiadau."
+
+#: ../interfaces/boot.glade.in.h:30
+msgid ""
+"This assistant is designed to help you quickly and easily add a new boot "
+"image to your system."
+msgstr ""
+"Mae'r cynorthwyydd hwn wedi ei lunio er mwyn i chi fedru ychwanegu delwedd "
+"gychwyn newydd at eich system yn hawdd."
+
+#: ../interfaces/boot.glade.in.h:31
+msgid "Video modes (only frame buffer)"
+msgstr "Moddau fideo (dim ond byffer ffrâm)"
+
+#: ../interfaces/boot.glade.in.h:32
+msgid "_Add..."
+msgstr "_Ychwanegu..."
+
+#: ../interfaces/boot.glade.in.h:33
+msgid "_Device:"
+msgstr "_Dyfais:"
+
+#: ../interfaces/boot.glade.in.h:34
+msgid "_Edit"
+msgstr "_Golygu"
+
+#: ../interfaces/boot.glade.in.h:35 ../src/boot/boot-settings.c:44
+msgid "_Initrd image path:"
+msgstr "Llwybr delwedd _initrd:"
+
+#: ../interfaces/boot.glade.in.h:36
+msgid "_Kernel image path:"
+msgstr "Llwybr delwedd y _cnewyllyn:"
+
+#: ../interfaces/boot.glade.in.h:37
+msgid "_Name:"
+msgstr "_Enw:"
+
+#: ../interfaces/boot.glade.in.h:38
+msgid "_Operating system:"
+msgstr "_System reoli:"
+
+#: ../interfaces/boot.glade.in.h:39
+msgid "_Parameters:"
+msgstr "_Paramedrau"
+
+#: ../interfaces/boot.glade.in.h:40
+msgid "_Root file system device:"
+msgstr "Dyfais _gwraidd y system ffeilio:"
+
+#: ../interfaces/common.glade.in.h:1
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Rhowch eich cyfrinair gwraidd (root)</"
+"span>"
+
+#: ../interfaces/common.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
+"supported by this tool</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Nid yw'r teclyn yn cynnal y platfform "
+"yr ydych chi'n rhedeg arno</span>"
+
+#: ../interfaces/common.glade.in.h:3
+msgid "Enter Password"
+msgstr "Rhowch Gyfrinair"
+
+#: ../interfaces/common.glade.in.h:4
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
+msgstr ""
+"Os ydych chi'n sicr ei fod yn gweithio'r un fath ag un o'r platfformau a "
+"restrir isod, gallwch chi ddewis yr un hynny a chario blaen. Sylwer, fodd "
+"bynnag, y gallai greu difrod i gyfluniad y system neu analluogi'ch "
+"cyfrifiadur yn llwyr."
+
+#: ../interfaces/common.glade.in.h:5
+msgid "Remote administration"
+msgstr "Gweinyddu pell"
+
+#: ../interfaces/common.glade.in.h:6
+msgid "Run _Without Password"
+msgstr "Rhedeg _Heb Gyfrinair"
+
+#: ../interfaces/common.glade.in.h:7
+msgid "Unsupported Platform"
+msgstr "Llwyfan heb ei Gynnal"
+
+#: ../interfaces/common.glade.in.h:8
+msgid "Use this window to select the computer you wish to configure"
+msgstr ""
+"Defnyddiwch y ffenestr hon i ddewis y cyfrifiadur yr ydych am ei gyflunio"
+
+#: ../interfaces/common.glade.in.h:9
+msgid ""
+"You need administrator privileges to use this tool. Enter a password to "
+"modify your system configuration."
+msgstr ""
+"Mae angen breintiau gweinyddwr cyn defnyddio'r teclyn hwn. Rhowch gyfrinair "
+"er mwyn newid cyfluniad eich system."
+
+#: ../interfaces/common.glade.in.h:10
+msgid "_Password:"
+msgstr "_Cyfrinair:"
+
+#: ../interfaces/network.glade.in.h:1
+msgid "<b>Account data</b>"
+msgstr "<b>Data'r cyfrif</b>"
+
+#: ../interfaces/network.glade.in.h:2
+msgid "<b>Connection settings</b>"
+msgstr "<b>Gosodiadau'r cysylltiad</b>"
+
+#: ../interfaces/network.glade.in.h:3
+msgid "<b>Connection</b>"
+msgstr "<b>Cysylltiad</b>"
+
+#: ../interfaces/network.glade.in.h:4
+msgid "<b>DNS Servers</b>"
+msgstr "<b>Gweinyddion DNS</b>"
+
+#: ../interfaces/network.glade.in.h:5
+msgid "<b>Host Settings</b>"
+msgstr "<b>Gosodiadau Gwesteiwr</b>"
+
+#: ../interfaces/network.glade.in.h:6
+msgid "<b>Internet service provider data</b>"
+msgstr "<b>Data darparwr gwasanaeth Rhyngrwyd</b>"
+
+#: ../interfaces/network.glade.in.h:7
+msgid "<b>Modem settings</b>"
+msgstr "<b>Gosodiadau modem</b>"
+
+#: ../interfaces/network.glade.in.h:8
+msgid "<b>Search Domains</b>"
+msgstr "<b>Pyrth Chwilio</b>"
+
+#: ../interfaces/network.glade.in.h:9
+msgid "<b>Wireless settings</b>"
+msgstr "<b>Gosodiadau diwifr</b>"
+
+#: ../interfaces/network.glade.in.h:10
+msgid "Aliases:"
+msgstr "Enwau eraill:"
+
+#: ../interfaces/network.glade.in.h:11
+msgid "C_onfiguration:"
+msgstr "_Cyfluniad:"
+
+#: ../interfaces/network.glade.in.h:12
+msgid "Connections"
+msgstr "Cysylltiadau"
+
+#: ../interfaces/network.glade.in.h:13
+msgid "DNS"
+msgstr "DNS"
+
+#: ../interfaces/network.glade.in.h:14
+msgid "D_omain name:"
+msgstr "_Enw parth:"
+
+#: ../interfaces/network.glade.in.h:15
+msgid "Default _gateway device:"
+msgstr "Dyfais porth _rhagosodedig:"
+
+#: ../interfaces/network.glade.in.h:16
+msgid "Device:"
+msgstr "Dyfais:"
+
+#: ../interfaces/network.glade.in.h:17
+msgid "E_nable this connection"
+msgstr "Rhoi'r cysylltiad hwn ar _waith"
+
+#: ../interfaces/network.glade.in.h:18 ../interfaces/users.glade.in.h:21
+msgid "General"
+msgstr "Cyffredinol"
+
+#: ../interfaces/network.glade.in.h:19
+msgid "Host alias settings"
+msgstr "Gosodiadau arall-enwi y gwesteiwr"
+
+#: ../interfaces/network.glade.in.h:20
+msgid "Hosts"
+msgstr "Gwesteiwyr"
+
+#: ../interfaces/network.glade.in.h:21 ../interfaces/shares.glade.in.h:15
+msgid "IP address:"
+msgstr "Cyfeiriad IP:"
+
+#: ../interfaces/network.glade.in.h:22
+msgid "Interface name:"
+msgstr "_Enw rhyngwyneb:"
+
+#: ../interfaces/network.glade.in.h:23
+msgid "Interface properties"
+msgstr "Priodweddau'r rhyngwyneb"
+
+#: ../interfaces/network.glade.in.h:24
+msgid "Key _type:"
+msgstr "Math _allwedd:"
+
+#: ../interfaces/network.glade.in.h:25
+msgid "Location name:"
+msgstr "Enw lleoliad:"
+
+#: ../interfaces/network.glade.in.h:26
+msgid "Location:"
+msgstr "Lleoliad:"
+
+#: ../interfaces/network.glade.in.h:27
+msgid "Modem"
+msgstr "Modem"
+
+#: ../interfaces/network.glade.in.h:28
+msgid "Network name (_ESSID):"
+msgstr "Enw rhwydwaith (_ESSID):"
+
+#: ../interfaces/network.glade.in.h:29
+msgid ""
+"Off\n"
+"Low\n"
+"Medium\n"
+"Loud"
+msgstr ""
+"I Ffwrdd\n"
+"Isel\n"
+"Canolig\n"
+"Swnllyd"
+
+#: ../interfaces/network.glade.in.h:33
+msgid "Options"
+msgstr "Opsiynau"
+
+#: ../interfaces/network.glade.in.h:34
+msgid "P_assword"
+msgstr "C_yfrinair"
+
+#: ../interfaces/network.glade.in.h:35
+msgid ""
+"Plain (ASCII)\n"
+"Hexadecimal"
+msgstr ""
+"Plaen (ASCII)\n"
+"Hecsadegol"
+
+#: ../interfaces/network.glade.in.h:37
+msgid "Select location name"
+msgstr "Dewiswch enw lleoliad"
+
+#: ../interfaces/network.glade.in.h:38
+msgid ""
+"Static IP address\n"
+"DHCP"
+msgstr ""
+"Cyfeiriad IP sefydlog\n"
+"DHCP"
+
+#: ../interfaces/network.glade.in.h:40
+msgid ""
+"Tones\n"
+"Pulses"
+msgstr ""
+"Tonau\n"
+"Pylsiau"
+
+#: ../interfaces/network.glade.in.h:42
+msgid "Use the Internet service provider nameservers"
+msgstr "Defnyddio gweinyddion enwau'r darparwr gwasanaeth Rhyngrwyd"
+
+#: ../interfaces/network.glade.in.h:43
+msgid "WEP _key:"
+msgstr "Allwedd _WEP:"
+
+#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
+msgid "_Activate"
+msgstr "_Gweithredu"
+
+#: ../interfaces/network.glade.in.h:45
+msgid "_Autodetect"
+msgstr "C_anfod yn Awtomatig"
+
+#: ../interfaces/network.glade.in.h:46 ../src/network/ifaces-list.c:35
+msgid "_Deactivate"
+msgstr "Dad-_weithredu"
+
+#: ../interfaces/network.glade.in.h:47
+msgid "_Dial prefix:"
+msgstr "_Rhoi hwn cyn deialu:"
+
+#: ../interfaces/network.glade.in.h:48
+msgid "_Dial type:"
+msgstr "Math _deialu:"
+
+#: ../interfaces/network.glade.in.h:49
+msgid "_Gateway address:"
+msgstr "Cyfeiriad _porth:"
+
+#: ../interfaces/network.glade.in.h:50
+msgid "_Hostname:"
+msgstr "Enw _gwesteiwr:"
+
+#: ../interfaces/network.glade.in.h:51
+msgid "_IP address:"
+msgstr "_Cyfeiriad IP:"
+
+#: ../interfaces/network.glade.in.h:52
+msgid "_Local IP:"
+msgstr "_IP lleol:"
+
+#: ../interfaces/network.glade.in.h:53
+msgid "_Modem port:"
+msgstr "_Porth modem:"
+
+#: ../interfaces/network.glade.in.h:54
+msgid "_Phone number:"
+msgstr "_Rhif ffôn:"
+
+#: ../interfaces/network.glade.in.h:55
+msgid "_Remote IP:"
+msgstr "_IP pell:"
+
+#: ../interfaces/network.glade.in.h:56
+msgid "_Retry if the connection breaks or fails to start"
+msgstr "_Ail-geisio os wnaiff y cysylltiad dorri neu fethu cychwyn"
+
+#: ../interfaces/network.glade.in.h:57
+msgid "_Set modem as default route to internet"
+msgstr "_Gosod y modem yn llwybr rhagosodedig i'r Rhyngrwyd"
+
+#: ../interfaces/network.glade.in.h:58
+msgid "_Subnet mask:"
+msgstr "_Masg is-rwyd:"
+
+#: ../interfaces/network.glade.in.h:59 ../interfaces/users.glade.in.h:61
+msgid "_Username:"
+msgstr "_Enw defnyddiwr:"
+
+#: ../interfaces/network.glade.in.h:60
+msgid "_Volume:"
+msgstr "Lefel _sain:"
+
+#: ../interfaces/services.glade.in.h:1
+msgid "Advanced settings:"
+msgstr "Gosodiadau uwch:"
+
+#: ../interfaces/services.glade.in.h:2
+msgid "Select the services that you wish to activate:"
+msgstr "Dewiswch y gwasanaethau yr ydych am eu gosod ar waith:"
+
+#: ../interfaces/shares.glade.in.h:1
+msgid "<b>Allowed hosts</b>"
+msgstr "<b>Gwesteiwyr a ganiateir</b>"
+
+#: ../interfaces/shares.glade.in.h:2
+msgid "<b>Hosts settings</b>"
+msgstr "<b>Gosodiadau gwesteiwyr</b>"
+
+#: ../interfaces/shares.glade.in.h:3
+msgid "<b>Share properties</b>"
+msgstr "<b>Rhannu priodweddau</b>"
+
+#: ../interfaces/shares.glade.in.h:4
+msgid "<b>Shared folder</b>"
+msgstr "<b>Plygell wedi ei rhannu</b>"
+
+#: ../interfaces/shares.glade.in.h:5
+msgid "<b>WINS server</b>"
+msgstr "<b>Gweinydd WINS</b>"
+
+#: ../interfaces/shares.glade.in.h:6
+msgid "<b>Windows sharing Settings</b>"
+msgstr "<b>Gosodiadau rhannu Windows</b>"
+
+#: ../interfaces/shares.glade.in.h:7
+msgid "Add allowed hosts"
+msgstr "Ychwanegu'r gwesteiwyr a ganiateir"
+
+#: ../interfaces/shares.glade.in.h:8
+msgid "Allow _browsing folder"
+msgstr "Caniatáu pori'r _plygell"
+
+#: ../interfaces/shares.glade.in.h:9
+msgid "Allowed hosts:"
+msgstr "Gwesteiwyr a ganiateir:"
+
+#: ../interfaces/shares.glade.in.h:10
+msgid "Comment:"
+msgstr "Sylw:"
+
+#: ../interfaces/shares.glade.in.h:11
+msgid "Do not use WINS server"
+msgstr "Peidio â defnyddio gweinydd WINS"
+
+#: ../interfaces/shares.glade.in.h:12
+msgid "Domain / _Workgroup"
+msgstr "Parth / _Grŵp Gwaith"
+
+#: ../interfaces/shares.glade.in.h:13
+msgid "General Windows sharing settings"
+msgstr "Gosodiadau rhannu cyffredinol Windows"
+
+#: ../interfaces/shares.glade.in.h:14
+msgid "Host name:"
+msgstr "Enw gwesteiwr:"
+
+#: ../interfaces/shares.glade.in.h:16
+msgid "Name:"
+msgstr "Enw:"
+
+#: ../interfaces/shares.glade.in.h:17
+msgid "Netmask:"
+msgstr "Masg Rhwydwaith:"
+
+#: ../interfaces/shares.glade.in.h:18
+msgid "Network:"
+msgstr "Rhwydwaith:"
+
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
+msgid "Read only"
+msgstr "Darllen yn unig"
+
+#: ../interfaces/shares.glade.in.h:20
+msgid "Share folder"
+msgstr "Rhannu plygell"
+
+#: ../interfaces/shares.glade.in.h:21
+msgid "Share with:"
+msgstr "Rhannu gyda"
+
+#: ../interfaces/shares.glade.in.h:22
+msgid "This computer is a WINS server"
+msgstr "Mae'r cyfrifiadur hwn yn weinydd WINS"
+
+#: ../interfaces/shares.glade.in.h:23
+msgid "Use WINS Server"
+msgstr "Defnyddio gweinydd WINS"
+
+#: ../interfaces/shares.glade.in.h:24
+msgid "Windows sharing settings"
+msgstr "Gosodiadau rhannu Windows"
+
+#: ../interfaces/shares.glade.in.h:25
+msgid "_Add host"
+msgstr "_Ychwanegu gwesteiwr"
+
+#: ../interfaces/shares.glade.in.h:26
+msgid "_Host description:"
+msgstr "_Disgrifiad gwesteiwr:"
+
+#: ../interfaces/shares.glade.in.h:27
+msgid "_Path:"
+msgstr "_Llwybr:"
+
+#: ../interfaces/shares.glade.in.h:28
+msgid "_Read only"
+msgstr "_Darllen yn unig"
+
+#: ../interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr "(heb gyflunio)"
+
+#: ../interfaces/time.glade.in.h:2
+msgid "<b>Selection</b>"
+msgstr "<b>Dewis</b>"
+
+#: ../interfaces/time.glade.in.h:3
+msgid "<b>Time zone</b>"
+msgstr "<b>Cylchfa Amser</b>"
+
+#: ../interfaces/time.glade.in.h:4
+msgid "Add NTP Server"
+msgstr "Ychwanegu Gweinydd NTP"
+
+#: ../interfaces/time.glade.in.h:5
+msgid "NTP server"
+msgstr "Gweinydd NTP"
+
+#: ../interfaces/time.glade.in.h:6
+msgid "S_ynchronize clock with Internet servers:"
+msgstr "_Cyd-amseru'r cloc â gweinyddion Rhyngrwyd"
+
+#: ../interfaces/time.glade.in.h:7
+msgid "Se_lect Servers..."
+msgstr "De_wis Gweinyddion..."
+
+#: ../interfaces/time.glade.in.h:8
+msgid "Time servers"
+msgstr "Gweinyddion amser"
+
+#: ../interfaces/time.glade.in.h:9
+msgid "Time zone"
+msgstr "Cylchfa amser"
+
+#: ../interfaces/time.glade.in.h:10
+msgid "Time zone:"
+msgstr "Cylchfa amser:"
+
+#: ../interfaces/time.glade.in.h:11
+msgid "_Date:"
+msgstr "_Dyddiad:"
+
+#: ../interfaces/time.glade.in.h:12
+msgid "_Select Time Zone..."
+msgstr "D_ewis Cylchfa Amser..."
+
+#: ../interfaces/time.glade.in.h:13
+msgid "_Time:"
+msgstr "_Amser:"
+
+#: ../interfaces/users.glade.in.h:1
+msgid "<span weight=\"bold\">Advanced Settings</span>"
+msgstr "<span weight=\"bold\">Dewisiadau Uwch</span>"
+
+#: ../interfaces/users.glade.in.h:2
+msgid "<span weight=\"bold\">Automatic UID/GID</span>"
+msgstr "<span weight=\"bold\">UID/GID awtomatig</span>"
+
+#: ../interfaces/users.glade.in.h:4
+msgid "<span weight=\"bold\">Contact Information</span>"
+msgstr "<span weight=\"bold\">Gwybodaeth Gyswllt</span>"
+
+#: ../interfaces/users.glade.in.h:5
+msgid "<span weight=\"bold\">Group Members</span>"
+msgstr "<span weight=\"bold\">Aelodau'r Grŵp</span>"
+
+#: ../interfaces/users.glade.in.h:6
+msgid "<span weight=\"bold\">Optional Settings</span>"
+msgstr "<span weight=\"bold\">Gosodiadau Dewisol</span>"
+
+#: ../interfaces/users.glade.in.h:7
+msgid "<span weight=\"bold\">Password Settings</span>"
+msgstr "<span weight=\"bold\">Gosodiadau Cyfrinair</span>"
+
+#: ../interfaces/users.glade.in.h:8
+msgid "<span weight=\"bold\">Password</span>"
+msgstr "<span weight=\"bold\">Cyfrinair</span>"
+
+#: ../interfaces/users.glade.in.h:9
+msgid "<span weight=\"bold\">Profile Settings</span>"
+msgstr "<span weight=\"bold\">Gosodiadau Proffil</span>"
+
+#: ../interfaces/users.glade.in.h:10
+msgid "<span weight=\"bold\">System Defaults</span>"
+msgstr "<span weight=\"bold\">Rhagosodiadau'r System</span>"
+
+#: ../interfaces/users.glade.in.h:11
+msgid "<span weight=\"bold\">User Profile</span>"
+msgstr "<span weight=\"bold\">Proffil Defnyddiwr</span>"
+
+#: ../interfaces/users.glade.in.h:12
+msgid "Account"
+msgstr "Cyfrif"
+
+#: ../interfaces/users.glade.in.h:13
+msgid "Advanced"
+msgstr "Uwch"
+
+#: ../interfaces/users.glade.in.h:14
+msgid "Allow user to:"
+msgstr "Caniatáu i ddefnyddiwr:"
+
+#: ../interfaces/users.glade.in.h:15
+msgid "Assign a random password by default"
+msgstr "Fel rhagosodiad, rhoi cyfrinair ar hap"
+
+#: ../interfaces/users.glade.in.h:16
+msgid "Check password _quality"
+msgstr "Gwirio _ansawdd cyfrinair"
+
+#: ../interfaces/users.glade.in.h:17
+msgid "Con_firmation:"
+msgstr "_Cadarnhad:"
+
+#: ../interfaces/users.glade.in.h:18
+msgid "Days between warning and password expiration:"
+msgstr "Dyddiau rhwng y rhybudd a darfod cyfrinair"
+
+#: ../interfaces/users.glade.in.h:19
+msgid "Default _group:"
+msgstr "_Grŵp rhagosodedig:"
+
+#: ../interfaces/users.glade.in.h:20
+msgid "Default _shell:"
+msgstr "Plisgyn _rhagosodedig:"
+
+#: ../interfaces/users.glade.in.h:22
+msgid "Generate _random password"
+msgstr "Creu _cyfrinair ar hap"
+
+#: ../interfaces/users.glade.in.h:23
+msgid "Group _ID:"
+msgstr "_ID grŵp:"
+
+#: ../interfaces/users.glade.in.h:24
+msgid "Group _members:"
+msgstr "_Aelodau grŵp:"
+
+#: ../interfaces/users.glade.in.h:25
+msgid "Group _name:"
+msgstr "_Enw grŵp:"
+
+#: ../interfaces/users.glade.in.h:26
+msgid "Group properties"
+msgstr "Priodweddau grŵp"
+
+#: ../interfaces/users.glade.in.h:27
+msgid "Groups"
+msgstr "Grwpiau"
+
+#: ../interfaces/users.glade.in.h:28
+msgid "Ma_ximum days a password may be used:"
+msgstr "Yr _uchafrif o ddiwrnodau y gellir defnyddio cyfrinair:"
+
+#: ../interfaces/users.glade.in.h:29
+msgid "Maximum UID:"
+msgstr "UID uchaf:"
+
+#: ../interfaces/users.glade.in.h:30
+msgid "Mi_nimum days between password changes:"
+msgstr "Yr _isafrif o ddiwrnodau rhwng newid cyfrineiriau:"
+
+#: ../interfaces/users.glade.in.h:31
+msgid "Minimum GID:"
+msgstr "Lleiafswm GID:"
+
+#: ../interfaces/users.glade.in.h:32
+msgid "Minimum UID:"
+msgstr "Lleiafswm UID:"
+
+#: ../interfaces/users.glade.in.h:33
+msgid "Minimum days allowed between password changes:"
+msgstr "Y nifer lleiaf o ddyddiau a ganiateir rhwng newid cyfrineiriau:"
+
+#: ../interfaces/users.glade.in.h:34
+msgid "Number of days that a password may be used:"
+msgstr "Y nifer o ddyddiau sydd raid defnyddio cyfrinair:"
+
+#: ../interfaces/users.glade.in.h:35
+msgid "O_ffice location:"
+msgstr "_Lleoliad swyddfa:"
+
+#: ../interfaces/users.glade.in.h:36
+msgid "Password set to: "
+msgstr "Cyfrinair wedi'i osod yn:"
+
+#: ../interfaces/users.glade.in.h:37
+msgid "Privileges"
+msgstr "Breintiau"
+
+#: ../interfaces/users.glade.in.h:38
+msgid "Profile _name:"
+msgstr "_Enw proffil:"
+
+#: ../interfaces/users.glade.in.h:39
+msgid "Set password b_y hand"
+msgstr "Gosod y cyfrinair â _llaw"
+
+#: ../interfaces/users.glade.in.h:40
+msgid "Show a_ll users and groups"
+msgstr "Dangos _bob defnyddiwr a grŵp"
+
+#: ../interfaces/users.glade.in.h:41
+msgid "User _ID:"
+msgstr "_ID y defnyddiwr:"
+
+#: ../interfaces/users.glade.in.h:42
+msgid "User _password:"
+msgstr "_Cyfrinair y defnyddiwr:"
+
+#: ../interfaces/users.glade.in.h:43
+msgid "User privileges"
+msgstr "Breintiau defnyddwyr"
+
+#: ../interfaces/users.glade.in.h:44
+msgid "User profiles"
+msgstr "Proffiliau defnyddwyr"
+
+#: ../interfaces/users.glade.in.h:45
+msgid "Users"
+msgstr "Defnyddwyr"
+
+#: ../interfaces/users.glade.in.h:46
+msgid "_Add Group..."
+msgstr "_Ychwanegu Grŵp..."
+
+#: ../interfaces/users.glade.in.h:47
+msgid "_Add Profile..."
+msgstr "_Ychwanegu Proffil..."
+
+#: ../interfaces/users.glade.in.h:48
+msgid "_Add User..."
+msgstr "_Ychwanegu Defnyddiwr..."
+
+#: ../interfaces/users.glade.in.h:49
+msgid "_All users:"
+msgstr "_Pob defnyddiwr:"
+
+#: ../interfaces/users.glade.in.h:50
+msgid "_Comments"
+msgstr "_Sylwadau"
+
+#: ../interfaces/users.glade.in.h:51
+msgid "_Days between warning and password expiration:"
+msgstr "D_yddiau rhwng y rhybudd a darfod cyfrinair:"
+
+#: ../interfaces/users.glade.in.h:52 ../src/boot/table.c:54
+#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
+#: ../src/shares/table.c:42 ../src/users/table.c:50
+msgid "_Delete"
+msgstr "_Dileu"
+
+#: ../interfaces/users.glade.in.h:53
+msgid "_Edit User Profiles..."
+msgstr "_Golygu Proffil Defnyddwyr..."
+
+#: ../interfaces/users.glade.in.h:54
+msgid "_Generate"
+msgstr "_Creu"
+
+#: ../interfaces/users.glade.in.h:55
+msgid "_Home directory:"
+msgstr "_Cyfeiriadur cartref:"
+
+#: ../interfaces/users.glade.in.h:56
+msgid "_Home phone:"
+msgstr "_Ffôn cartref:"
+
+#: ../interfaces/users.glade.in.h:57
+msgid "_Main group:"
+msgstr "_Prif grŵp:"
+
+#: ../interfaces/users.glade.in.h:58
+msgid "_Profile:"
+msgstr "_Proffil:"
+
+#: ../interfaces/users.glade.in.h:59
+msgid "_Real name:"
+msgstr "_Enw iawn:"
+
+#: ../interfaces/users.glade.in.h:60
+msgid "_Shell:"
+msgstr "_Plisgyn:"
+
+#: ../interfaces/users.glade.in.h:62
+msgid "_Work phone:"
+msgstr "_Ffôn gwaith:"
+
+#: ../src/boot/boot-append-gui.c:140
+msgid "32,768"
+msgstr "32,768"
+
+#: ../src/boot/boot-append-gui.c:141
+msgid "65,536"
+msgstr "65,536"
+
+#: ../src/boot/boot-append-gui.c:142
+msgid "16,777,216"
+msgstr "16,777,216"
+
+#: ../src/boot/boot-append-gui.c:253
+msgid "Invalid VGA value"
+msgstr "Gwerth VGA annilys"
+
+#: ../src/boot/boot-append-gui.c:255
+#, c-format
+msgid "\"%s\" is not a valid VGA value."
+msgstr "Nid yw \"%s\" yn werth VGA dilys."
+
+#: ../src/boot/boot-druid.c:113
+msgid "Error creating boot image"
+msgstr "Gwall wrth greu delwedd gychwyn"
+
+#: ../src/boot/boot-druid.c:443
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Creu delwedd gychwyn newydd (%d o %d)"
+
+#: ../src/boot/boot-druid.c:444
+msgid "Finished creating a new boot image"
+msgstr "Wedi gorffen creu delwedd gychwyn newydd"
+
+#: ../src/boot/boot-image.c:43
+msgid "Unknown"
+msgstr "Anhysbys"
+
+#: ../src/boot/boot-image.c:44
+msgid "Windows NT"
+msgstr "Windows NT"
+
+#: ../src/boot/boot-image.c:45
+msgid "Windows 9x"
+msgstr "Windows 9x"
+
+#: ../src/boot/boot-image.c:46
+msgid "Dos"
+msgstr "Dos"
+
+#: ../src/boot/boot-image.c:47
+msgid "Linux"
+msgstr "Linux"
+
+#: ../src/boot/boot-image.c:48
+msgid "Linux swap"
+msgstr "Cyfnewid (swap) Linux"
+
+#: ../src/boot/boot-image.c:49
+msgid "GNU/Hurd"
+msgstr "GNU/Hurd"
+
+#: ../src/boot/boot-image.c:279
+#, c-format
+msgid "\"%s\" is an invalid path"
+msgstr "Mae \"%s\" yn llwybr annilys"
+
+#: ../src/boot/boot-image.c:295
+#, c-format
+msgid "\"%s\" already exists, please set another name."
+msgstr "\"%s\" yn bodoli eisoes: dewiswch enw gwahanol."
+
+#: ../src/boot/boot-image.c:301
+#, c-format
+msgid "Invalid image name: \"%s\"."
+msgstr "Enw delwedd annilys: \"%s\"."
+
+#: ../src/boot/boot-image.c:314
+#, c-format
+msgid "Invalid image: \"%s\"."
+msgstr "Delwedd annilys: \"%s\"."
+
+#: ../src/boot/boot-image.c:332
+#, c-format
+msgid "Invalid root device: \"%s\"."
+msgstr "Dyfais gwraidd annilys: \"%s\"."
+
+#: ../src/boot/boot-settings.c:45
+msgid "_Module path:"
+msgstr "_Llwybr modwl:"
+
+#: ../src/boot/boot-settings.c:407
+msgid "Password confirmation is not correct."
+msgstr "Cadarnhad cyfrinair ddim yn gywir."
+
+#: ../src/boot/boot-settings.c:432
+msgid "Error modifying boot image"
+msgstr "Gwall wrth newid delwedd gychwyn"
+
+#: ../src/boot/boot.desktop.in.in.h:1
+msgid "Boot"
+msgstr "Cychwyn"
+
+#: ../src/boot/boot.desktop.in.in.h:2
+msgid "Configure the system boot process"
+msgstr "Cyflunio proses gychwyn y system"
+
+#: ../src/boot/callbacks.c:81
+msgid "Boot Image Editor"
+msgstr "Golygydd Delwedd Gychwyn"
+
+#: ../src/boot/callbacks.c:179
+msgid "Boot Append Editor"
+msgstr "Golygydd Atodi Cychwyn"
+
+#: ../src/boot/callbacks.c:412
+msgid "Error deleting boot image"
+msgstr "Gwall wrth ddileu'r ddelwedd gychwyn"
+
+#: ../src/boot/callbacks.c:414
+msgid "Without at least one boot image your computer will not start."
+msgstr "Heb o leiaf un ddelwedd gychwyn, fedr eich cyfrifiadur ddim cychwyn."
+
+#: ../src/boot/callbacks.c:433
+#, c-format
+msgid "Are you sure you want to delete \"%s\"?"
+msgstr "Ydych chi'n siŵr eich bod am ddileu \"%s\"?"
+
+#: ../src/boot/callbacks.c:435
+msgid "This may leave this operating system unbootable."
+msgstr "Gall hyn adael y system reoli heb ffordd o'i chychwyn."
+
+#: ../src/boot/callbacks.c:464
+msgid "The configuration will show empty"
+msgstr "Bydd y cyfluniad yn dangos yn wag"
+
+#: ../src/boot/callbacks.c:466
+#, c-format
+msgid "The file \"%s\" is missing or could not be read."
+msgstr "Mae'r ffeil \"%s\" ar goll, neu nid oes posib ei darllen."
+
+#: ../src/boot/table.c:43
+msgid "Name"
+msgstr "Enw"
+
+#: ../src/boot/table.c:44
+msgid "Default"
+msgstr "Rhagosodedig"
+
+#: ../src/boot/table.c:45
+msgid "Type"
+msgstr "Math"
+
+#: ../src/boot/table.c:46
+msgid "Kernel Image"
+msgstr "Delwedd Cnewyllyn"
+
+#: ../src/boot/table.c:47
+msgid "Device"
+msgstr "Dyfais"
+
+#: ../src/boot/table.c:52 ../src/network/address-list.c:71
+#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
+msgid "_Add"
+msgstr "_Ychwanegu"
+
+#: ../src/boot/table.c:53 ../src/network/hosts.c:38
+#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
+#: ../src/users/table.c:49
+msgid "_Properties"
+msgstr "_Priodweddau"
+
+#. the proccess was running ssh
+#: ../src/common/gst-auth.c:89
+msgid "The tool could not connect to the computer"
+msgstr "Methodd yr arf gysylltu â'r cyfrifiadur"
+
+#: ../src/common/gst-auth.c:90
+msgid ""
+"Check that you have access to this network and that the computer is actually "
+"working and running the SSH daemon"
+msgstr ""
+"Gwnewch yn siŵr fod gennych fynediad i'r rhwydwaith hwn, bod y cyfrifiadur "
+"yn gweithio ac yn rhedeg yr ellyll SSH"
+
+#. the proccess was running su
+#: ../src/common/gst-auth.c:94
+msgid "The entered password is invalid"
+msgstr "Mae'r cyfrinair a roddwyd yn rhy fyr"
+
+#: ../src/common/gst-auth.c:95
+msgid ""
+"Check that you typed it correctly and that you haven't activated the \"caps "
+"lock\" key"
+msgstr ""
+"Gwnewch yn siŵr eich bod wedi ei deipio'n gywir ac nad yw'r fysell \"caps "
+"lock\" ymlaen"
+
+#: ../src/common/gst-auth.c:104
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Methu rhedeg \"%s\""
+
+#: ../src/common/gst-auth.c:105
+msgid "Check that you have permissions to run this command"
+msgstr "Gwnewch yn siŵr fod gennych chi'r caniatâd i redeg y gorchymyn hwn"
+
+#: ../src/common/gst-auth.c:107
+msgid "An unexpected error has occurred"
+msgstr "Mae gwall annisgwyl wedi digwydd"
+
+#: ../src/common/gst-auth.c:133
+msgid "Could not execute the backend"
+msgstr "Methu gweithredu'r ochr gefn"
+
+#: ../src/common/gst-auth.c:134
+msgid "There was an error creating the child process, the tool will close now."
+msgstr "Roedd gwall wrth greu'r proses blentyn. Fe fydd y teclyn yn cau'n awr."
+
+#: ../src/common/gst-dialog.c:60
+#, c-format
+msgid "Could not find widget: %s"
+msgstr "Methu canfod y teclyn: %s"
+
+#: ../src/common/gst-dialog.c:383
+msgid "There are changes which have not been applied"
+msgstr "Mae yna newidiadau sydd heb eu rhoi ar waith"
+
+#: ../src/common/gst-dialog.c:385
+msgid "Apply them now?"
+msgstr "Eu rhoi nhw ar waith yn awr?"
+
+#: ../src/common/gst-dialog.c:492
+#, c-format
+msgid "Error connection signal `%s' in widget `%s'"
+msgstr "Gwall: signal cysylltu `%s' yn y teclyn `%s'"
+
+#: ../src/common/gst-tool.c:1026
+msgid "The configuration could not be loaded"
+msgstr "Methu llwytho'r cyfluniad"
+
+#: ../src/common/gst-tool.c:1028
+msgid "There was an error running the backend script"
+msgstr "Roedd gwall wrth redeg y sgript ochr gefn"
+
+#: ../src/common/gst-tool.c:1509
+#, c-format
+msgid "Welcome to the %s prerelease of the GNOME System Tools"
+msgstr "Croeso i fersiwn gynderfynol %s o Offer System GNOME"
+
+#: ../src/common/gst-tool.c:1511
+msgid ""
+"This is still a work in progress, and so it may have serious bugs. Due to "
+"the nature of these tools, bugs may render your computer <span weight=\"bold"
+"\">practically useless</span>, costing time, effort and sanity points. You "
+"have been warned. Thank you for trying out this prerelease of the GNOME "
+"System Tools!"
+msgstr ""
+"Mae gwaith yn parhau ar hwn o hyd, felly gall fod namau difrifol ynddo. O "
+"achos natur yr offer yma, gall unrhyw namau droi'ch cyfrifiadur <span weight="
+"\"bold\">yn ddiwerth</span> i bob pwrpas, ar draul amser, ymdrech a "
+"challineb. Dyma eich rhybudd. Diolch am roi cynnig ar y fersiwn gynderfynol "
+"hon o Offer System GNOME!"
+
+#: ../src/common/gst-tool.c:1532
+msgid "Warning"
+msgstr "Rhybudd"
+
+#: ../src/common/gst-tool.c:1552
+msgid "Don't show me this again"
+msgstr "Peidio â dangos hyn i fi eto"
+
+#: ../src/common/gst-tool.c:1609
+msgid "GNOME System Tools"
+msgstr "Offer System GNOME"
+
+#: ../src/common/gst-tool.c:1755
+msgid "Could not display help"
+msgstr "Methu dangos y cymorth"
+
+#: ../src/network/address-list.c:555
+msgid "Type address"
+msgstr "Teipiwch gyfeiriad"
+
+#: ../src/network/callbacks.c:46
+#, c-format
+msgid "Could not enable the interface %s"
+msgstr "Methu galluogi'r rhyngwyneb %s"
+
+#: ../src/network/callbacks.c:50
+msgid ""
+"Check that the settings are correct for this network and that the computer "
+"is correctly connected to it."
+msgstr ""
+"Gwnewch yn siŵr fod y gosodiadau yn gywir ar gyfer y rhwydwaith hwn, a'i fod "
+"wedi'i gysylltu â'r cyfrifiadur yn iawn."
+
+#: ../src/network/callbacks.c:237
+msgid "Could not autodetect modem device"
+msgstr "Methu canfod dyfais modem yn awtomatig"
+
+#: ../src/network/callbacks.c:240
+msgid ""
+"Check that the device is not busy and that is correctly attached to the "
+"computer."
+msgstr ""
+"Gwnewch yn siŵr nad yw'r ddyfais yn brysur, a'i bod wedi ei chysylltu â'r "
+"cyfrifiadur yn iawn."
+
+#: ../src/network/callbacks.c:451
+msgid "The host name has changed"
+msgstr "Mae'r enw gwesteiwr wedi newid"
+
+#: ../src/network/callbacks.c:454
+msgid ""
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
+msgstr ""
+"Bydd hyn yn eich rhwystro rhag lansio rhaglenni newydd, felly fe fydd rhaid "
+"i chi fewngofnodi eto. Parhau beth bynnag?"
+
+#: ../src/network/callbacks.c:460
+msgid "Change _Host name"
+msgstr "Newid enw _Gwesteiwr"
+
+#: ../src/network/hosts.c:92
+msgid "IP Address"
+msgstr "Cyfeiriad IP"
+
+#: ../src/network/hosts.c:100
+msgid "Aliases"
+msgstr "Arall-enwau"
+
+#: ../src/network/location.c:145
+msgid "Create location"
+msgstr "Creu lleoliad"
+
+#: ../src/network/location.c:153
+msgid "Delete current location"
+msgstr "Dileu'r lleoliad presennol"
+
+#: ../src/network/location.c:367
+msgid "Do you want to remove this location?"
+msgstr "Ydych chi am dynnu'r lleoliad hwn?"
+
+#: ../src/network/location.c:440
+msgid "Changing profile"
+msgstr "Newid proffil"
+
+#: ../src/network/main.c:110
+msgid "The interface does not exist"
+msgstr "Rhyngwyneb ddim yn bodoli"
+
+#: ../src/network/main.c:112
+msgid ""
+"Check that it is correctly typed and that it is correctly supported by your "
+"system."
+msgstr ""
+"Gwnewch yn siŵr ei fod wedi'i deipio'n gywir a bod eich system yn ei gynnal "
+"yn iawn."
+
+#: ../src/network/main.c:157
+msgid "Configure a network interface"
+msgstr "Cyflunio rhyngwyneb rhwydwaith"
+
+#: ../src/network/main.c:157
+msgid "INTERFACE"
+msgstr "RHYNGWYNEB"
+
+#: ../src/network/main.c:158
+msgid "Configure the first network interface with a specific type"
+msgstr "Cyflunio'r rhyngwyneb rhwydwaith cyntaf gyda math arbennig"
+
+#: ../src/network/main.c:158
+msgid "TYPE"
+msgstr "MATH"
+
+#: ../src/network/main.c:165
+msgid "Network settings"
+msgstr "Gosodiadau rhwydwaith"
+
+#: ../src/network/network.desktop.in.in.h:1
+msgid "Configure network devices and connections"
+msgstr "Cyflunio dyfeisiau a chysylltiadau rhwydwaith"
+
+#: ../src/network/network.desktop.in.in.h:2
+msgid "Networking"
+msgstr "Rhwydweithio"
+
+#: ../src/network/network-iface-ethernet.c:302
+msgid "Ethernet connection"
+msgstr "Cysylltiad Ethernet"
+
+#: ../src/network/network-iface-irlan.c:122
+msgid "Infrared connection"
+msgstr "Cysylltiad is-goch"
+
+#: ../src/network/network-iface-isdn.c:330
+msgid "ISDN connection"
+msgstr "Cysylltiad ISDN"
+
+#: ../src/network/network-iface-modem.c:253
+msgid "Modem connection"
+msgstr "Cysylltiad modem"
+
+#: ../src/network/network-iface-plip.c:211
+msgid "Parallel port connection"
+msgstr "Cysylltiad porth paralel"
+
+#: ../src/network/network-iface-wireless.c:245
+msgid "Wireless connection"
+msgstr "Cysylltiad diwifr"
+
+#: ../src/network/network-iface.c:410
+#, c-format
+msgid "Activating interface \"%s\""
+msgstr "Rhoi'r rhyngwyneb \"%s\" ar waith"
+
+#: ../src/network/network-iface.c:522
+#, c-format
+msgid "The interface %s is not configured"
+msgstr "Nid yw'r rhyngwyneb %s wedi ei gyflunio"
+
+#: ../src/network/network-iface.c:524
+#, c-format
+msgid "The interface %s is not active"
+msgstr "Nid yw'r rhyngwyneb %s ar waith"
+
+#: ../src/network/network-iface.c:526
+#, c-format
+msgid "The interface %s is active"
+msgstr "Mae'r rhyngwyneb %s ar waith"
+
+#: ../src/services/callbacks.c:64
+#, c-format
+msgid "Settings for \"%s\""
+msgstr "Gosodiadau ar gyfer \"%s\""
+
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:153
+msgid "Are you sure you want to deactivate this service?"
+msgstr "Ydych chi'n siŵr eich bod am ddiffodd y gwasanaeth hwn?"
+
+#: ../src/services/callbacks.c:156
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr ""
+"Gall hyn effeithio ar eich system mewn sawl ffordd, a gall arwain at golli "
+"data"
+
+#: ../src/services/main.c:55
+msgid "Services settings"
+msgstr "Gosodiadau gwasanaethau"
+
+#: ../src/services/services.desktop.in.in.h:1
+msgid "Configure which services will be run when the system starts"
+msgstr "Cyflunio pa wasanaethau caiff eu rhedeg pan fo'r system yn dechrau"
+
+#: ../src/services/services.desktop.in.in.h:2
+msgid "Services"
+msgstr "Gwasanaethau"
+
+#: ../src/services/service.c:32
+msgid "Antivirus"
+msgstr "Gwrth-firws"
+
+#: ../src/services/service.c:32
+msgid "Analyzes your incoming mail for virus"
+msgstr "Dadansoddi a oes firws o fewn yr e-bost sy'n dod i mewn"
+
+#: ../src/services/service.c:33
+msgid "Volumes mounter"
+msgstr "Teclyn gosod cyfrolau"
+
+#: ../src/services/service.c:33
+msgid "Mounts your volumes automatically"
+msgstr "Gosod eich cyfrolau'n awtomatig"
+
+#: ../src/services/service.c:34
+msgid "Actions scheduler"
+msgstr "Trefnydd gweithredoedd"
+
+#: ../src/services/service.c:34
+msgid "Executes scheduled actions"
+msgstr "Rhedeg y gweithredoedd a drefnwyd"
+
+#: ../src/services/service.c:35
+msgid "Database server"
+msgstr "Gweinydd cronfa ddata"
+
+#: ../src/services/service.c:35
+msgid "Data storage system"
+msgstr "System storio data"
+
+#: ../src/services/service.c:36
+msgid "Graphical login manager"
+msgstr "Gweinydd mewngofnodi graffigol"
+
+#: ../src/services/service.c:36
+msgid "Allows users to login graphically"
+msgstr "Caniatáu i ddefnyddwyr fewngofnodi'n raffigol"
+
+#: ../src/services/service.c:37
+msgid "Folder sharing service"
+msgstr "Gwasanaeth rhannu plygellau"
+
+#: ../src/services/service.c:37
+msgid "Shares folders over your network"
+msgstr "Rhannu plygellau dros eich rhwydwaith"
+
+#: ../src/services/service.c:38
+msgid "File sharing service"
+msgstr "Gwasanaeth rhannu ffeiliau"
+
+#: ../src/services/service.c:38 ../src/services/service.c:39
+msgid "Shares files over the Internet"
+msgstr "Rhannu ffeiliau dros y Rhyngrwyd"
+
+#: ../src/services/service.c:39
+msgid "FTP service"
+msgstr "Gwasanaeth FTP"
+
+#: ../src/services/service.c:40
+msgid "Mail fetcher"
+msgstr "Cyrchydd E-bost"
+
+#: ../src/services/service.c:40
+msgid "Downloads your mail from remote accounts"
+msgstr "Llwytho'ch e-bost i lawr o gyfrifon pell"
+
+#: ../src/services/service.c:41
+msgid "Mail agent"
+msgstr "Asiant E-bost"
+
+#: ../src/services/service.c:41
+msgid "Delivers your outgoing mail"
+msgstr "Anfon yr e-bost sydd i fod i fynd allan"
+
+#: ../src/services/service.c:42
+msgid "Clock synchronization service"
+msgstr "Gwasanaeth cysoni cloc"
+
+#: ../src/services/service.c:42
+msgid "Synchronizes your computer clock with Internet time servers"
+msgstr "Cysoni cloc eich cyfrifiadur â gweinyddion amser ar y Rhyngrwyd"
+
+#: ../src/services/service.c:43
+msgid "Printer service"
+msgstr "Gwasanaeth argraffydd"
+
+#: ../src/services/service.c:43
+msgid "Allows applications to use printers"
+msgstr "Caniatáu i raglenni defnyddio argraffydd"
+
+#: ../src/services/service.c:44
+msgid "Remote shell server"
+msgstr "Gweinydd plisgyn pell (Remote shell)"
+
+#: ../src/services/service.c:44
+msgid "Secure shell server"
+msgstr "Gweinydd plisgyn diogel (Secure shell)"
+
+#: ../src/services/service.c:45
+msgid "Computer activity logger"
+msgstr "Cofnodydd gweithgarwch y cyfrifiadur"
+
+#: ../src/services/service.c:45
+msgid "Keeps a log of your computer activity"
+msgstr "Cadw cofnod o weithgarwch eich cyfrifiadur"
+
+#: ../src/services/service.c:46
+msgid "Web server"
+msgstr "Gweinydd Gwe"
+
+#: ../src/services/service.c:46
+msgid "Shares your web pages over the Internet"
+msgstr "Rhannu'ch tudalennau gwe ar y Rhyngrwyd"
+
+#: ../src/shares/callbacks.c:187
+msgid "Are you sure you want to delete this share?"
+msgstr "Ydych chi'n siŵr eich bod am ddileu'r rhaniad hwn?"
+
+#: ../src/shares/callbacks.c:189
+msgid "Other computers in your network will stop viewing this."
+msgstr ""
+"Ni fydd cyfrifiaduron eraill ar eich rhwydwaith yn medru ei weld bellach."
+
+#: ../src/shares/main.c:90
+msgid "Add a shared path, modifies it if it already exists"
+msgstr "Ychwanegu llwybr i'w rannu, neu ei newid os yw'n bodoli'n barod"
+
+#: ../src/shares/main.c:90
+msgid "PATH"
+msgstr "LLWYBR"
+
+#: ../src/shares/main.c:97
+msgid "Shared folders settings"
+msgstr "Gosodiadau plygellau wedi'u rhannu"
+
+#: ../src/shares/nautilus/nautilus-shares.c:129
+msgid "_Share folder"
+msgstr "_Rhannu plygell"
+
+#: ../src/shares/nautilus/nautilus-shares.c:130
+msgid "Share this folder with other computers"
+msgstr "Rhannu'r blygell hon gyda chyfrifiaduron eraill"
+
+#: ../src/shares/nfs-acl-table.c:51
+msgid "Allowed host/network"
+msgstr "Gwesteiwr/rhwydwaith a ganiateir"
+
+#: ../src/shares/share-nfs-add-hosts.c:114
+#, c-format
+msgid "Hosts in the %s network"
+msgstr "Gwesteiwyr o fewn rhwydwaith %s"
+
+#: ../src/shares/share-nfs-add-hosts.c:146
+msgid "Specify hostname"
+msgstr "Penodi enw gwesteiwr"
+
+#: ../src/shares/share-nfs-add-hosts.c:153
+msgid "Specify IP address"
+msgstr "Penodi cyfeiriad IP"
+
+#: ../src/shares/share-nfs-add-hosts.c:160
+msgid "Specify network"
+msgstr "Penodi rhwydwaith"
+
+#: ../src/shares/share-settings.c:123
+msgid "Do not share"
+msgstr "Peidio â rhannu"
+
+#: ../src/shares/share-settings.c:131
+msgid "SMB"
+msgstr "SMB"
+
+#: ../src/shares/share-settings.c:139
+msgid "NFS"
+msgstr "NFS"
+
+#: ../src/shares/shares.desktop.in.in.h:1
+msgid "Configure which folders are available for your network neighborhood"
+msgstr "Cyflunio pa blygellau sydd ar gael ar gyfer eich rhwydwaith cyfagos"
+
+#: ../src/shares/shares.desktop.in.in.h:2
+msgid "Shared Folders"
+msgstr "Plygellau wedi'u Rhannu"
+
+#: ../src/shares/transfer.c:44
+msgid "Sharing services are not installed"
+msgstr "Gwasanaethau rhannu heb eu gosod"
+
+#: ../src/shares/transfer.c:46
+msgid ""
+"You need to install at least either Samba or NFS in order to share your "
+"folders. The tool will close now."
+msgstr ""
+"Rhaid i chi osod o leiaf Samba neu NFS cyn rhannu'ch ffeiliau. Bydd y teclyn "
+"hwn yn cau yn awr."
+
+#: ../src/time/main.c:464
+msgid "NTP support is not installed"
+msgstr "Cynhaliaeth NTP heb ei osod"
+
+#: ../src/time/main.c:466
+msgid ""
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with Internet time servers."
+msgstr ""
+"Gosodwch a rhowch gynhaliaeth NTP ar waith yn y system, er mwyn gallu "
+"cysoni'ch gweinydd amser lleol â gweinyddion amser ar y Rhyngrwyd."
+
+#: ../src/time/main.c:762
+msgid "Time and Date Settings"
+msgstr "Gosodiadau Dyddiad ac Amser"
+
+#: ../src/time/time.desktop.in.in.h:1
+msgid "Change system time, date, and timezone"
+msgstr "Newid dyddiad, amser a chylchfa amser y system"
+
+#: ../src/time/time.desktop.in.in.h:2
+msgid "Time and Date"
+msgstr "Dyddiad ac Amser"
+
+#: ../src/users/callbacks.c:571
+msgid "Error saving profile"
+msgstr "Gwall wrth gadw proffil"
+
+#: ../src/users/callbacks.c:613
+msgid "Create New profile"
+msgstr "Creu proffil newydd"
+
+#: ../src/users/callbacks.c:649
+#, c-format
+msgid "Settings for profile %s"
+msgstr "Gosodiadau ar gyfer proffil %s"
+
+#: ../src/users/group-settings.c:91
+msgid "Create New Group"
+msgstr "Creu Grŵp Newydd"
+
+#. Check if gid is available
+#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
+msgid "Invalid group ID"
+msgstr "ID grŵp annilys"
+
+#: ../src/users/group-settings.c:165
+msgid "Group ID must be a positive number"
+msgstr "Rhaid i ID y grŵp fod yn rhif positif"
+
+#. if group is root
+#: ../src/users/group-settings.c:168
+msgid "Group ID of the \"root\" user should not be modified"
+msgstr "Ni ddylid newid ID grŵp y defnyddiwr gwraidd (\"root\")"
+
+#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:218
+#: ../src/users/group-settings.c:288
+msgid "This would leave the system unusable"
+msgstr "Mi fyddai hyn yn gwneud y system yn amhosibl ei defnyddio"
+
+#: ../src/users/group-settings.c:173
+#, c-format
+msgid "Group ID %s already exists"
+msgstr "ID grŵp %s yn bodoli'n barod"
+
+#. If empty.
+#: ../src/users/group-settings.c:198
+msgid "Group name is empty"
+msgstr "Enw grŵp yn wag"
+
+#: ../src/users/group-settings.c:199
+msgid "A group name must be specified"
+msgstr "Rhaid penodi enw grŵp"
+
+#. If too long.
+#: ../src/users/group-settings.c:202
+msgid "The group name is too long"
+msgstr "Mae'r enw grŵp yn rhy hir"
+
+#: ../src/users/group-settings.c:203
+#, c-format
+msgid "To be valid, the group name should have less than %d character"
+msgid_plural "To be valid, the group name should have less than %d characters"
+msgstr[0] "I fod yn ddilys, rhaid i'r enw grŵp fod yn llai nag %d nod"
+msgstr[1] "I fod yn ddilys, rhaid i'r enw grŵp fod yn llai na %d nod"
+msgstr[2] "I fod yn ddilys, rhaid i'r enw grŵp fod yn llai na %d nod"
+msgstr[3] "I fod yn ddilys, rhaid i'r enw grŵp fod yn llai na %d nod"
+
+#. if invalid.
+#: ../src/users/group-settings.c:209
+msgid "Group name has invalid characters"
+msgstr "Nodau annilys yn yr enw grŵp"
+
+#: ../src/users/group-settings.c:210
+msgid "Please set a valid group name, using only lower case letters"
+msgstr "Gosodwch enw grŵp dilys, gan ddefnyddio dim ond llythrennau bach"
+
+#. if !exist.
+#: ../src/users/group-settings.c:213
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "Grŵp \"%s\" yn bodoli'n barod"
+
+#: ../src/users/group-settings.c:214
+msgid "Please select a different group name"
+msgstr "Dewiswch enw grŵp gwahanol"
+
+#. if it's the root group
+#: ../src/users/group-settings.c:217
+msgid "Group name of the \"root\" user should not be modified"
+msgstr "Ni ddylid newid enw grŵp y defnyddiwr gwraidd (\"root\")"
+
+#: ../src/users/group-settings.c:287
+msgid "The group \"root\" should not be deleted"
+msgstr "Ni ddylai grŵp yr uwchddefnyddiwr (\"root\") gael ei ddileu"
+
+#: ../src/users/group-settings.c:302
+#, c-format
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "Ydych chi'n siŵr eich bod am ddileu'r grŵp \"%s\"?"
+
+#: ../src/users/group-settings.c:304
+msgid "This may leave files with invalid group ID in the filesystem."
+msgstr "Gall hyn adael ffeiliau gydag ID grŵp annilys yn y system ffeiliau."
+
+#: ../src/users/group-settings.c:364
+#, c-format
+msgid "Settings for Group %s"
+msgstr "Gosodiadau'r Grŵp %s"
+
+#: ../src/users/groups-table.c:44
+msgid "Group"
+msgstr "Grŵp"
+
+#: ../src/users/groups-table.c:45
+msgid "GID"
+msgstr "GID"
+
+#: ../src/users/main.c:123
+msgid "User name contains"
+msgstr "Enw defnyddiwr yn cynnwys"
+
+#: ../src/users/main.c:124
+msgid "User ID is"
+msgstr "ID y defnyddiwr yw"
+
+#: ../src/users/main.c:125
+msgid "Group name contains"
+msgstr "Enw'r grŵp yn cynnwys"
+
+#: ../src/users/main.c:126
+msgid "User GID is"
+msgstr "GID y defnyddiwr yw"
+
+#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
+msgid "Users and Groups"
+msgstr "Defnyddwyr a Grwpiau"
+
+#: ../src/users/passwd.c:168
+msgid "Passwords do not match"
+msgstr "Cyfrineiriau ddim yr un fath"
+
+#: ../src/users/passwd.c:173
+#, c-format
+msgid ""
+"Bad password: %s.\n"
+"Please try with a new password"
+msgstr ""
+"Cyfrinair gwael: %s.\n"
+"Ceisiwch eto gyda chyfrinair newydd"
+
+#: ../src/users/profile-settings.c:125
+msgid "The profile must have a name"
+msgstr "Rhaid i'r proffil gael enw"
+
+#: ../src/users/profile-settings.c:130
+msgid "The profile must have a default home"
+msgstr "Rhaid i'r proffil gael cartref rhagosodedig"
+
+#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
+msgid "The profile must have a default shell"
+msgstr "Rhaid i'r proffil gael plisgyn rhagosodedig"
+
+#: ../src/users/profile-settings.c:208
+msgid "The default profile should not be deleted"
+msgstr "Ni ddylid dileu'r proffil rhagosodedig"
+
+#: ../src/users/profile-settings.c:209
+msgid "This profile is used for setting default data for new users"
+msgstr ""
+"Defnyddir y proffil hwn i osod data rhagosodedig ar gyfer defnyddwyr newydd"
+
+#: ../src/users/profile-settings.c:218
+#, c-format
+msgid "Delete profile \"%s\"?"
+msgstr "Dileu proffil \"%s\"?"
+
+#: ../src/users/profile-settings.c:220
+msgid "You will not be able to recover this profile after pressing \"apply\"."
+msgstr "Fedrwch chi ddim adfer y proffil hwn ar ôl pwyso \"Gweithredu\"."
+
+#. Column name,          Adv_state_show,	Basic_state_show
+#: ../src/users/profiles-table.c:39
+msgid "Profile"
+msgstr "Proffil"
+
+#: ../src/users/profiles-table.c:40
+msgid "Comment"
+msgstr "Sylw"
+
+#: ../src/users/search-bar/search-bar.c:228
+msgid "C_lear"
+msgstr "_Clirio"
+
+#: ../src/users/search-bar/search-bar.c:329
+msgid "Choice"
+msgstr "Dewis"
+
+#: ../src/users/search-bar/search-bar.c:339
+msgid "Text"
+msgstr "Testun"
+
+#: ../src/users/user-settings.c:73
+msgid "The \"root\" user should not be deleted"
+msgstr "Ni ddylai'r uwchddefnyddiwr (\"root\") gael ei ddileu"
+
+#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:311
+#: ../src/users/user-settings.c:406 ../src/users/user-settings.c:442
+msgid "This would leave the system unusable."
+msgstr "Byddai hyn yn golygu na fedrir defnyddio'r system."
+
+#: ../src/users/user-settings.c:83
+#, c-format
+msgid "Are you sure you want to delete user \"%s\"?"
+msgstr "Ydych chi'n siŵr eich bod am ddileu'r defnyddiwr \"%s\"?"
+
+#: ../src/users/user-settings.c:85
+msgid ""
+"This will disable this user's access to the system without deleting the "
+"user's home directory."
+msgstr ""
+"Bydd hyn yn analluogi mynediad y defnyddiwr i'r system, ond yn gadael "
+"cyfeiriadur cartref y defnyddiwr yn ei le."
+
+#: ../src/users/user-settings.c:189
+msgid "User Account Editor"
+msgstr "Golygydd Cyfrif Defnyddiwr"
+
+#: ../src/users/user-settings.c:285
+msgid "The user name is empty"
+msgstr "Enw defnyddiwr yn wag"
+
+#: ../src/users/user-settings.c:286
+msgid "A user name must be specified."
+msgstr "Rhaid rhoi enw defnyddiwr."
+
+#. = sizeof (ut.ut_name)
+#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:300
+msgid "The user name is too long"
+msgstr "Mae enw'r defnyddiwr yn rhy hir"
+
+#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:301
+#, c-format
+msgid "To be valid, the user name should have less than %d character"
+msgid_plural "To be valid, the user name should have less than %d characters"
+msgstr[0] "I fod yn ddilys, rhaid i'r enw defnyddiwr fod yn llai nag %d nod"
+msgstr[1] "I fod yn ddilys, rhaid i'r enw defnyddiwr fod yn llai na %d nod"
+msgstr[2] "I fod yn ddilys, rhaid i'r enw defnyddiwr fod yn llai na %d nod"
+msgstr[3] "I fod yn ddilys, rhaid i'r enw defnyddiwr fod yn llai na %d nod"
+
+#: ../src/users/user-settings.c:310
+msgid "User name for the \"root\" user should not be modified"
+msgstr "Ni ddylid newid enw'r defnyddiwr gwraidd (\"root\")"
+
+#: ../src/users/user-settings.c:316
+msgid "User name has invalid characters"
+msgstr "Nodau annilys yn yr enw defnyddiwr"
+
+#: ../src/users/user-settings.c:317
+msgid ""
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Dewiswch enw defnyddiwr dilys, sy'n cynnwys llythyren fach sy'n cael ei "
+"dilyn gan lythrennau bach a rhifau."
+
+#: ../src/users/user-settings.c:323
+#, c-format
+msgid "User name \"%s\" already exists"
+msgstr "Enw defnyddiwr \"%s\" yn bodoli eisoes"
+
+#: ../src/users/user-settings.c:324
+msgid "Please select a different user name."
+msgstr "Dewiswch enw defnyddiwr gwahanol."
+
+#: ../src/users/user-settings.c:349
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "Nod annilys \"%c\" yn y sylw"
+
+#: ../src/users/user-settings.c:350
+msgid "Check that this character is not used."
+msgstr "Gwnewch yn siŵr nad yw'r nod hwn yn cael ei ddefnyddio."
+
+#: ../src/users/user-settings.c:398
+msgid "Home directory should not be empty"
+msgstr "Ni ddylai'r cyfeiriadur cartref fod yn wag"
+
+#: ../src/users/user-settings.c:399
+msgid "Make sure you provide a home directory."
+msgstr "Gwnewch yn siŵr eich bod chi'n darparu cyfeiriadur cartref."
+
+#: ../src/users/user-settings.c:401
+msgid "Incomplete path in home directory"
+msgstr "Llwybr nad yw'n gyflawn ar gyfer y cyfeiriadur cartref."
+
+#: ../src/users/user-settings.c:402
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>."
+msgstr ""
+"Rhowch lwybr llawn y cyfeiriadur cartref\n"
+"<span size=\"smaller\">e.e.: /home/dafydd</span>."
+
+#: ../src/users/user-settings.c:405
+msgid "Home directory of the \"root\" user should not be modified"
+msgstr "Ni ddylid newid cyfeiriadur cartref y defnyddiwr gwraidd (\"root\")"
+
+#: ../src/users/user-settings.c:438
+msgid "Invalid user ID"
+msgstr "ID defnyddiwr annilys"
+
+#: ../src/users/user-settings.c:439
+msgid "User ID must be a positive number."
+msgstr "Rhaid i ID y defnyddiwr fod yn rhif positif."
+
+#: ../src/users/user-settings.c:441
+msgid "User ID of the \"root\" user should not be modified"
+msgstr "Ni ddylid newid ID y defnyddiwr gwraidd (\"root\")"
+
+#: ../src/users/user-settings.c:459
+#, c-format
+msgid "User ID %s already exists"
+msgstr "Defnyddiwr â'r ID %s yn bodoli eisoes"
+
+#: ../src/users/user-settings.c:461
+msgid ""
+"Several users may share a single user ID, but it's not common and may lead "
+"to security problems."
+msgstr ""
+"Mae hi'n bosib i fwy nag un defnyddiwr rannu un ID defnyddiwr, ond nid yw'n "
+"gyffredin a gall greu problemau diogelwch."
+
+#: ../src/users/user-settings.c:479
+msgid "Incomplete path in shell"
+msgstr "Llwybr anghyflawn yn y plisgyn"
+
+#: ../src/users/user-settings.c:480
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/sh</span>."
+msgstr ""
+"Rhowch lwybr llawn y plisgyn\n"
+"<span size=\"smaller\">e.e.: /bin/sh</span>."
+
+#: ../src/users/user-settings.c:502
+msgid "Password should not be empty"
+msgstr "Ni ddylai'r cyfrinair fod yn wag"
+
+#: ../src/users/user-settings.c:503
+msgid "A password must be provided."
+msgstr "Rhaid rhoi cyfrinair."
+
+#: ../src/users/user-settings.c:505
+msgid "Password confirmation isn't correct"
+msgstr "Cadarnhad cyfrinair ddim yn gywir"
+
+#: ../src/users/user-settings.c:506
+msgid "Check that you have provided the same password in both text fields."
+msgstr ""
+"Gwnewch yn siŵr eich bod chi wedi rhoi'r un cyfrinair yn y ddau faes testun."
+
+#: ../src/users/user-settings.c:780
+#, c-format
+msgid "Settings for User %s"
+msgstr "Gosodiadau ar gyfer Defnyddiwr %s"
+
+#: ../src/users/users-table.c:61
+msgid "User"
+msgstr "Defnyddiwr"
+
+#: ../src/users/users-table.c:62
+msgid "Home"
+msgstr "Cartref"
+
+#: ../src/users/users-table.c:63
+msgid "User details"
+msgstr "Manylion defnyddiwr"
+
+#: ../src/users/users-table.c:64
+msgid "UID"
+msgstr "UID"
+
+#: ../src/users/users-table.c:65
+msgid "Shell"
+msgstr "Plisgyn"
+
+#: ../src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Ychwanegu neu dynnu defnyddwyr a grwpiau"
