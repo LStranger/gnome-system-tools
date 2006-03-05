@@ -1,1487 +1,2008 @@
-# Chinese (Taiwan) translation of gcalctool.
-# Copyright (C) 2003, 04, 05 Free Software Foundation, Inc.
-# Ching-Hung Lin <2billlin@yahoo.com.tw>, 2004.
-# Abel Cheung <abel@oaka.org>, 2003, 05.
-#
+# Chinese (Taiwan) translation for gnome-system-tools.
+# Copyright (C) 2001-06 Free Software Foundation, Inc.
+# Abel Cheung <abel@oaka.org>, 2001-2003.
+# Chao-Hsiung Liao <pesder.liao@msa.hinet.net>, 2004.
+# Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>, 2006.
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: gcalctool 5.7.18\n"
+"Project-Id-Version: gnome-system-tools 2.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-01 06:18+0100\n"
-"PO-Revision-Date: 2006-02-24 11:38+0800\n"
-"Last-Translator: Abel Cheung <abel@oaka.org>\n"
+"POT-Creation-Date: 2006-03-01 06:52+0100\n"
+"PO-Revision-Date: 2006-03-01 17:21+0800\n"
+"Last-Translator: Woodman Tuen <wmtuen@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#. Strings for each base value.
-#: ../gcalctool/calctool.c:41
-msgid "_Bin"
-msgstr "_2 進位"
 
-#: ../gcalctool/calctool.c:41
-msgid "_Oct"
-msgstr "_8"
-
-#: ../gcalctool/calctool.c:41
-msgid "_Dec"
-msgstr "1_0"
-
-#: ../gcalctool/calctool.c:41
-msgid "He_x"
-msgstr "1_6"
-
-#. Tooltips for each base value.
-#: ../gcalctool/calctool.c:45
-msgid "Set numeric base to binary (base 2)"
-msgstr "用 2 進制數字進行計算"
-
-#: ../gcalctool/calctool.c:46
-msgid "Set numeric base to octal (base 8)"
-msgstr "用 8 進制數字進行計算"
-
-#: ../gcalctool/calctool.c:47
-msgid "Set numeric base to decimal (base 10)"
-msgstr "用 10 進制數字進行計算"
-
-#: ../gcalctool/calctool.c:48
-msgid "Set numeric base to hexadecimal (base 16)"
-msgstr "用 16 進制數字進行計算"
-
-#. Strings for each display mode value.
-#: ../gcalctool/calctool.c:59
-msgid "E_ng"
-msgstr "工程(_N)"
-
-#: ../gcalctool/calctool.c:59
-msgid "_Fix"
-msgstr "定點(_F)"
-
-#: ../gcalctool/calctool.c:59
-msgid "_Sci"
-msgstr "科學(_S)"
-
-#. Tooltips for each display mode value.
-#: ../gcalctool/calctool.c:63
-msgid "Set display type to engineering format"
-msgstr "將顯示模式設定為工程模式"
-
-#: ../gcalctool/calctool.c:64
-msgid "Set display type to fixed-point format"
-msgstr "將顯示模式設定為定點模式"
-
-#: ../gcalctool/calctool.c:65
-msgid "Set display type to scientific format"
-msgstr "將顯示模式設定為科學模式"
-
-#: ../gcalctool/calctool.c:68
-msgid "Set hyperbolic option for trigonometric functions"
-msgstr "使用雙曲三角函數"
-
-#: ../gcalctool/calctool.c:69
-msgid "Set inverse option for trigonometric functions"
-msgstr "使用反三角函數"
-
-#. Mode titles to be added to the titlebar.
-#: ../gcalctool/calctool.c:72 ../gcalctool/gtk.c:361
-msgid "Basic"
-msgstr "基本模式"
-
-#: ../gcalctool/calctool.c:72 ../gcalctool/gtk.c:363
-msgid "Advanced"
-msgstr "進階模式"
-
-#: ../gcalctool/calctool.c:72 ../gcalctool/gtk.c:365
-msgid "Financial"
-msgstr "財務計算模式"
-
-#: ../gcalctool/calctool.c:73 ../gcalctool/gtk.c:367
-msgid "Scientific"
-msgstr "科學計算模式"
-
-#: ../gcalctool/calctool.c:73
-msgid "Expression"
-msgstr "算式"
-
-#. Strings for each trig type value.
-#: ../gcalctool/calctool.c:77
-msgid "De_grees"
-msgstr "角度(_G)"
-
-#: ../gcalctool/calctool.c:77
-msgid "Gr_adians"
-msgstr "梯度(_A)"
-
-#: ../gcalctool/calctool.c:77
-msgid "_Radians"
-msgstr "弧度(_R)"
-
-#. Tooltips for each trig type value.
-#: ../gcalctool/calctool.c:81
-msgid "Set trigonometric type to degrees"
-msgstr "三角函數會以角度方式運算"
-
-#: ../gcalctool/calctool.c:82
-msgid "Set trigonometric type to gradians"
-msgstr "三角函數會以梯度方式運算"
-
-#: ../gcalctool/calctool.c:83
-msgid "Set trigonometric type to radians"
-msgstr "三角函數會以弧度方式運算"
-
-#: ../gcalctool/calctool.c:134
-msgid "7"
-msgstr "7"
-
-#: ../gcalctool/calctool.c:136
-msgid "Numeric 7"
-msgstr "數字 7"
-
-#: ../gcalctool/calctool.c:146
-msgid "8"
-msgstr "8"
-
-#: ../gcalctool/calctool.c:148
-msgid "Numeric 8"
-msgstr "數字 8"
-
-#: ../gcalctool/calctool.c:158
-msgid "9"
-msgstr "9"
-
-#: ../gcalctool/calctool.c:160
-msgid "Numeric 9"
-msgstr "數字 9"
-
-#. Note to translators: this is a division sign (÷)
-#: ../gcalctool/calctool.c:171
-msgid "÷"
-msgstr "÷"
-
-#: ../gcalctool/calctool.c:172
-msgid "Divide"
-msgstr "除號"
-
-#: ../gcalctool/calctool.c:179
-msgid "/"
-msgstr "÷"
-
-#: ../gcalctool/calctool.c:183
-msgid "("
-msgstr "("
-
-# (Abel) 用計算機的人還要你來解釋甚麼是左括號嗎!?
-#: ../gcalctool/calctool.c:184
-msgid "Start group of calculations"
-msgstr "左括號"
-
-#: ../gcalctool/calctool.c:185
-msgid "Left bracket"
-msgstr "左括號"
-
-#: ../gcalctool/calctool.c:195
-msgid "Bksp"
-msgstr "←"
-
-#: ../gcalctool/calctool.c:196
-msgid "Remove rightmost character from displayed value"
-msgstr "清除畫面中最右邊的數字"
-
-#: ../gcalctool/calctool.c:197
-msgid "Backspace"
-msgstr "後退鍵"
-
-#: ../gcalctool/calctool.c:207
-msgid "CE"
-msgstr "CE"
-
-#: ../gcalctool/calctool.c:208
-msgid "Clear displayed value"
-msgstr "清除畫面中的數值"
-
-#: ../gcalctool/calctool.c:209
-msgid "Clear entry"
-msgstr "清除畫面數值"
-
-#: ../gcalctool/calctool.c:219
-msgid "Clr"
-msgstr "C"
-
-#: ../gcalctool/calctool.c:220
-msgid "Clear displayed value and any partial calculation"
-msgstr "清除畫面中的數值及所有未完成的計算操作"
-
-#: ../gcalctool/calctool.c:221
-msgid "Clear"
-msgstr "全部清除"
-
-#: ../gcalctool/calctool.c:233
-msgid "4"
-msgstr "4"
-
-#: ../gcalctool/calctool.c:235
-msgid "Numeric 4"
-msgstr "數字 4"
-
-#: ../gcalctool/calctool.c:245
-msgid "5"
-msgstr "5"
-
-#: ../gcalctool/calctool.c:247
-msgid "Numeric 5"
-msgstr "數字 5"
-
-#: ../gcalctool/calctool.c:257
-msgid "6"
-msgstr "6"
-
-#: ../gcalctool/calctool.c:259
-msgid "Numeric 6"
-msgstr "數字 6"
-
-#. Note to translators: this is a multiplication sign (*)
-#: ../gcalctool/calctool.c:270
-msgid "×"
-msgstr "×"
-
-#: ../gcalctool/calctool.c:271
-msgid "Multiply"
-msgstr "乘號"
-
-#: ../gcalctool/calctool.c:278
-msgid "*"
-msgstr "×"
-
-#: ../gcalctool/calctool.c:282
-msgid ")"
-msgstr ")"
-
-#: ../gcalctool/calctool.c:283
-msgid "End group of calculations"
-msgstr "右括號"
-
-#: ../gcalctool/calctool.c:284
-msgid "Right bracket"
-msgstr "右括號"
-
-#. Note to translators: this is a plus-minus sign (+/-)
-#: ../gcalctool/calctool.c:295
-msgid "±"
-msgstr "±"
-
-#: ../gcalctool/calctool.c:296
-msgid "Change sign [c]"
-msgstr "更改正負號 [c]"
-
-#: ../gcalctool/calctool.c:303
-msgid "Chs"
-msgstr "Chs"
-
-#: ../gcalctool/calctool.c:307
-msgid "Int"
-msgstr "整數"
-
-#: ../gcalctool/calctool.c:308
-msgid "Integer portion of displayed value [i]"
-msgstr "數字的整數部分 [i]"
-
-#: ../gcalctool/calctool.c:309
-msgid "Integer portion"
-msgstr "數字的整數部分"
-
-#: ../gcalctool/calctool.c:319
-msgid "Sto"
-msgstr "儲存"
-
-#: ../gcalctool/calctool.c:320
-msgid "Store displayed value in memory register [S]"
-msgstr "將畫面中的數值儲存在暫存器內 [S]"
-
-#: ../gcalctool/calctool.c:321
-msgid "Store to register"
-msgstr "儲存至暫存器"
-
-#: ../gcalctool/calctool.c:333
-msgid "1"
-msgstr "1"
-
-#: ../gcalctool/calctool.c:335
-msgid "Numeric 1"
-msgstr "數字 1"
-
-#: ../gcalctool/calctool.c:345
-msgid "2"
-msgstr "2"
-
-#: ../gcalctool/calctool.c:347
-msgid "Numeric 2"
-msgstr "數字 2"
-
-#: ../gcalctool/calctool.c:357
-msgid "3"
-msgstr "3"
-
-#: ../gcalctool/calctool.c:359
-msgid "Numeric 3"
-msgstr "數字 3"
-
-#. Note to translators: this is a minus sign (-)
-#: ../gcalctool/calctool.c:370
-msgid "−"
-msgstr "−"
-
-#: ../gcalctool/calctool.c:371
-msgid "Subtract"
-msgstr "減號"
-
-#: ../gcalctool/calctool.c:378
-msgid "-"
-msgstr "－"
-
-#: ../gcalctool/calctool.c:382
-msgid "%"
-msgstr "%"
-
-#: ../gcalctool/calctool.c:383
-msgid "Percentage"
-msgstr "百分比"
-
-#. Note to translators: this is a square root sign
-#: ../gcalctool/calctool.c:395
-msgid "√"
-msgstr "√"
-
-#: ../gcalctool/calctool.c:396
-msgid "Square root [s]"
-msgstr "平方根 [s]"
-
-#: ../gcalctool/calctool.c:403
-msgid "Sqrt"
-msgstr "√"
-
-#: ../gcalctool/calctool.c:407
-msgid "Frac"
-msgstr "小數"
-
-#: ../gcalctool/calctool.c:408
-msgid "Fractional portion of displayed value [:]"
-msgstr "數字的小數部分 [:]"
-
-#: ../gcalctool/calctool.c:409
-msgid "Fractional portion"
-msgstr "數字的小數部分"
-
-#: ../gcalctool/calctool.c:419
-msgid "Rcl"
-msgstr "讀取"
-
-#: ../gcalctool/calctool.c:420
-msgid "Retrieve memory register to display [R]"
-msgstr "讀取暫存器中的數值 [R]"
-
-#: ../gcalctool/calctool.c:421
-msgid "Retrieve from register"
-msgstr "讀取暫存器中的數值"
-
-#: ../gcalctool/calctool.c:433
-msgid "0"
-msgstr "0"
-
-#: ../gcalctool/calctool.c:435
-msgid "Numeric 0"
-msgstr "數字 0"
-
-#: ../gcalctool/calctool.c:445
-msgid "."
-msgstr "."
-
-#: ../gcalctool/calctool.c:446
-msgid "Numeric point"
-msgstr "小數點"
-
-#: ../gcalctool/calctool.c:457
-msgid "="
-msgstr "＝"
-
-#: ../gcalctool/calctool.c:458
-msgid "Calculate result"
-msgstr "計算結果"
-
-#: ../gcalctool/calctool.c:469
-msgid "+"
-msgstr "＋"
-
-#: ../gcalctool/calctool.c:470
-msgid "Add"
-msgstr "加號"
-
-#: ../gcalctool/calctool.c:481
-msgid "1/<i>x</i>"
-msgstr "<small>1</small>/<i>x</i>"
-
-#: ../gcalctool/calctool.c:482
-msgid "Reciprocal [r]"
-msgstr "倒數 [r]"
-
-#: ../gcalctool/calctool.c:489
-msgid "Recip"
-msgstr "倒數"
-
-#: ../gcalctool/calctool.c:493
-msgid "<i>x</i><sup>2</sup>"
-msgstr "<i>x</i><sup><small>2</small></sup>"
-
-#: ../gcalctool/calctool.c:494
-msgid "Square [@]"
-msgstr "平方 [@]"
-
-#: ../gcalctool/calctool.c:501
-msgid "^2"
-msgstr "^2"
-
-#: ../gcalctool/calctool.c:505
-msgid "Abs"
-msgstr "|<i>x</i>|"
-
-#: ../gcalctool/calctool.c:506
-msgid "Absolute value [u]"
-msgstr "絕對值 [u]"
-
-#: ../gcalctool/calctool.c:517
-msgid "Exch"
-msgstr "交換"
-
-#: ../gcalctool/calctool.c:518
-msgid "Exchange displayed value with memory register [X]"
-msgstr "將畫面和暫存器中數值交換 [X]"
-
-#: ../gcalctool/calctool.c:519
-msgid "Exchange with register"
-msgstr "和暫存器數值交換"
-
-#: ../gcalctool/calctool.c:545
-msgid "Ctrm"
-msgstr "Ctrm"
-
-#: ../gcalctool/calctool.c:546
-msgid "Compounding term [m]"
-msgstr "複利期間 [m]"
-
-#: ../gcalctool/calctool.c:557
-msgid "Ddb"
-msgstr "Ddb"
-
-#: ../gcalctool/calctool.c:558
-msgid "Double-declining depreciation [d]"
-msgstr "倍數餘額遞減 [d]"
-
-#: ../gcalctool/calctool.c:569
-msgid "Fv"
-msgstr "Fv"
-
-#: ../gcalctool/calctool.c:570
-msgid "Future value [v]"
-msgstr "未來值 [y]"
-
-#: ../gcalctool/calctool.c:581
-msgid "Pmt"
-msgstr "Pmt"
-
-#: ../gcalctool/calctool.c:582
-msgid "Periodic payment [P]"
-msgstr "分期付款 [P]"
-
-#: ../gcalctool/calctool.c:593
-msgid "Pv"
-msgstr "Pv"
-
-#: ../gcalctool/calctool.c:594
-msgid "Present value [p]"
-msgstr "現值 [p]"
-
-#: ../gcalctool/calctool.c:605
-msgid "Rate"
-msgstr "Rate"
-
-#: ../gcalctool/calctool.c:606
-msgid "Periodic interest rate [T]"
-msgstr "定期利率 [T]"
-
-#: ../gcalctool/calctool.c:617
-msgid "Sln"
-msgstr "Sln"
-
-#: ../gcalctool/calctool.c:618
-msgid "Straight-line depreciation [l]"
-msgstr "直線折舊 [l]"
-
-#: ../gcalctool/calctool.c:629
-msgid "Syd"
-msgstr "Syd"
-
-#: ../gcalctool/calctool.c:630
-msgid "Sum-of-the years'-digits depreciation [Y]"
-msgstr "年數合計折舊 [Y]"
-
-#: ../gcalctool/calctool.c:643
-msgid "Term"
-msgstr "Term"
-
-#: ../gcalctool/calctool.c:644
-msgid "Payment period [T]"
-msgstr "付款期間 [T]"
-
-# (Abel) this is bit shift
-#: ../gcalctool/calctool.c:755
-msgid "<"
-msgstr "<<"
-
-#: ../gcalctool/calctool.c:756
-msgid "Shift displayed value 1-15 places to the left"
-msgstr "將畫面中的數值以 2 進制方式向左移 1-15 位元"
-
-#: ../gcalctool/calctool.c:757
-msgid "Shift left"
-msgstr "將各位元向左移"
-
-# (Abel) this is bit shift
-#: ../gcalctool/calctool.c:767
-msgid ">"
-msgstr ">>"
-
-#: ../gcalctool/calctool.c:768
-msgid "Shift displayed value 1-15 places to the right"
-msgstr "將畫面中的數值以 2 進制方式向右移 1-15 位元"
-
-#: ../gcalctool/calctool.c:769
-msgid "Shift right"
-msgstr "將各位元向右移"
-
-#: ../gcalctool/calctool.c:779
-msgid "&amp;16"
-msgstr "&amp;16"
-
-#: ../gcalctool/calctool.c:780
-msgid "16-bit unsigned integer value of display (])"
-msgstr "將數字轉換成不帶正負號的 16 位元整數 (])"
-
-#: ../gcalctool/calctool.c:781
-msgid "16 bit unsigned integer"
-msgstr "轉換成無正負的 16 位元整數"
-
-#: ../gcalctool/calctool.c:787
-msgid "u16"
-msgstr "u16"
-
-#: ../gcalctool/calctool.c:791
-msgid "&amp;32"
-msgstr "&amp;32"
-
-#: ../gcalctool/calctool.c:792
-msgid "32-bit unsigned integer value of display ([)"
-msgstr "將數字轉換成不帶正負號的 32 位元整數 ([)"
-
-#: ../gcalctool/calctool.c:793
-msgid "32 bit unsigned integer"
-msgstr "轉換成無正負的 32 位元整數"
-
-#: ../gcalctool/calctool.c:799
-msgid "u32"
-msgstr "u32"
-
-# (Abel) 這裏不是玩數論的地方，只是計算機而已，所以不稱為模數，而改用
-# 一般人容易明白的餘數
-#: ../gcalctool/calctool.c:827
-msgid "Mod"
-msgstr "餘數"
-
-#: ../gcalctool/calctool.c:828
-msgid "Modulus Division"
-msgstr "餘數除法"
-
-#: ../gcalctool/calctool.c:835
-msgid " Mod "
-msgstr " Mod "
-
-#: ../gcalctool/calctool.c:839
-msgid "Acc"
-msgstr "準確度"
-
-#: ../gcalctool/calctool.c:840
-msgid "Set accuracy from 0 to 9 numeric places [a]"
-msgstr "將準確度設定為小數點後 0 至 9 個位 [a]"
-
-#: ../gcalctool/calctool.c:841
-msgid "Accuracy"
-msgstr "準確度"
-
-#: ../gcalctool/calctool.c:853
-msgid "Con"
-msgstr "常數"
-
-#: ../gcalctool/calctool.c:854
-msgid "Constants [#]"
-msgstr "常數 [#]"
-
-# (Abel) 用函數而不用函式，因為這裡始終是有關數學，而且事實上 function
-# 根本就沒有 function 的功能，和定義一個 constant 沒兩樣
-#: ../gcalctool/calctool.c:865
-msgid "Fun"
-msgstr "函數"
-
-#: ../gcalctool/calctool.c:866
-msgid "User-defined functions [f]"
-msgstr "用戶自行定義的函數 [f]"
-
-#: ../gcalctool/calctool.c:877
-msgid "Exp"
-msgstr "EXP"
-
-#: ../gcalctool/calctool.c:878
-msgid "Enter an exponential number [e]"
-msgstr "輸入定點小數的指數部分 [e]"
-
-#: ../gcalctool/calctool.c:879
-msgid "Exponential"
-msgstr "定點小數的指數"
-
-#: ../gcalctool/calctool.c:885 ../gcalctool/calctool.c:1263
-msgid "e"
-msgstr "自然對數"
-
-# (Abel) 原作者只是盲目地跟隨 Windows 和 style guide，我不打算有樣學樣，
-# 就學要學，也該找部真正的計算機來學。
-#: ../gcalctool/calctool.c:889
-msgid "e<sup><i>x</i></sup>"
-msgstr "ℯ<sup><small><i>x</i></small></sup>"
-
-#: ../gcalctool/calctool.c:890
-msgid "e to the power of displayed value [{]"
-msgstr "ℯ 的 x 次方，x 是畫面中的數值 [{]"
-
-#: ../gcalctool/calctool.c:891
-msgid "E to the x"
-msgstr "ℯ 的 x 次方"
-
-#: ../gcalctool/calctool.c:897
-msgid "e^"
-msgstr "ℯ^"
-
-#: ../gcalctool/calctool.c:901
-msgid "10<sup><i>x</i></sup>"
-msgstr "<small>10</small><sup><small><i>x</i></small></sup>"
-
-#: ../gcalctool/calctool.c:902
-msgid "10 to the power of displayed value [}]"
-msgstr "10 的 x 次方，x 是畫面中的數值 [}]"
-
-#: ../gcalctool/calctool.c:903
-msgid "Ten to the x"
-msgstr "10 的 x 次方"
-
-#: ../gcalctool/calctool.c:909
-msgid "10^"
-msgstr "10^"
-
-#: ../gcalctool/calctool.c:913
-msgid "<i>x</i><sup><i>y</i></sup>"
-msgstr "<i>x</i><sup><small><i>y</i></small></sup>"
-
-#: ../gcalctool/calctool.c:914
-msgid "Raise displayed value to the power of y [^]"
-msgstr "計算畫面中的數值的 y 次方 [^]"
-
-#: ../gcalctool/calctool.c:915
-msgid "X to the y"
-msgstr "x 的 y 次方"
-
-#: ../gcalctool/calctool.c:921
-msgid "^"
-msgstr "^"
-
-#: ../gcalctool/calctool.c:925
-msgid "<i>x</i>!"
-msgstr "<i>x</i>!"
-
-#: ../gcalctool/calctool.c:926
-msgid "Factorial of displayed value [!]"
-msgstr "畫面中的數值的階乘"
-
-#: ../gcalctool/calctool.c:927
-msgid "Factorial"
-msgstr "階乘"
-
-#: ../gcalctool/calctool.c:933
-msgid "!"
-msgstr "!"
-
-#: ../gcalctool/calctool.c:937
-msgid "Rand"
-msgstr "隨機數"
-
-#: ../gcalctool/calctool.c:938
-msgid "Random number in the range 0.0 to 1.0 [?]"
-msgstr "在 0.0 至 1.0 之間的隨機數 [?]"
-
-#: ../gcalctool/calctool.c:939
-msgid "Random number"
-msgstr "隨機數"
-
-#: ../gcalctool/calctool.c:951
-msgid "D"
-msgstr "D"
-
-#: ../gcalctool/calctool.c:952
-msgid "Hexadecimal digit D"
-msgstr "16 進制數字 D"
-
-#: ../gcalctool/calctool.c:963
-msgid "E"
-msgstr "E"
-
-#: ../gcalctool/calctool.c:964
-msgid "Hexadecimal digit E"
-msgstr "16 進制數字 E"
-
-#: ../gcalctool/calctool.c:975 ../gcalctool/gtk.c:1870
-msgid "F"
-msgstr "F"
-
-#: ../gcalctool/calctool.c:976
-msgid "Hexadecimal digit F"
-msgstr "16 進制數字 F"
-
-#: ../gcalctool/calctool.c:987
-msgid "Cos"
-msgstr "cos"
-
-#: ../gcalctool/calctool.c:988
-msgid "Cosine [J]"
-msgstr "餘弦 [J]"
-
-#: ../gcalctool/calctool.c:999
-msgid "Sin"
-msgstr "sin"
-
-#: ../gcalctool/calctool.c:1000
-msgid "Sine [K]"
-msgstr "正弦 [K]"
-
-#: ../gcalctool/calctool.c:1011
-msgid "Tan"
-msgstr "tan"
-
-#: ../gcalctool/calctool.c:1012
-msgid "Tangent [L]"
-msgstr "正切 [L]"
-
-#: ../gcalctool/calctool.c:1023
-msgid "Ln"
-msgstr "ln"
-
-#: ../gcalctool/calctool.c:1024
-msgid "Natural log [N]"
-msgstr "自然對數 [N]"
-
-#: ../gcalctool/calctool.c:1035
-msgid "Log"
-msgstr "log"
-
-#: ../gcalctool/calctool.c:1036
-msgid "Base 10 log [G]"
-msgstr "10 為底數的對數 [G]"
-
-#: ../gcalctool/calctool.c:1049
-msgid "A"
-msgstr "A"
-
-#: ../gcalctool/calctool.c:1050
-msgid "Hexadecimal digit A"
-msgstr "16 進制數字 A"
-
-#: ../gcalctool/calctool.c:1061
-msgid "B"
-msgstr "B"
-
-#: ../gcalctool/calctool.c:1062
-msgid "Hexadecimal digit B"
-msgstr "16 進制數字 B"
-
-#: ../gcalctool/calctool.c:1073 ../gcalctool/gtk.c:1862
-msgid "C"
-msgstr "C"
-
-#: ../gcalctool/calctool.c:1074
-msgid "Hexadecimal digit C"
-msgstr "16 進制數字 C"
-
-#: ../gcalctool/calctool.c:1085
-msgid "Or"
-msgstr "OR"
-
-#: ../gcalctool/calctool.c:1086
-msgid "Bitwise OR"
-msgstr "邏輯 OR"
-
-#: ../gcalctool/calctool.c:1093
-msgid " Or "
-msgstr " OR "
-
-#: ../gcalctool/calctool.c:1097
-msgid "And"
-msgstr "AND"
-
-#: ../gcalctool/calctool.c:1098
-msgid "Bitwise AND [&]"
-msgstr "邏輯 AND [&]"
-
-#: ../gcalctool/calctool.c:1105
-msgid " And "
-msgstr " AND "
-
-#: ../gcalctool/calctool.c:1109
-msgid "Not"
-msgstr "NOT"
-
-#: ../gcalctool/calctool.c:1110
-msgid "Bitwise NOT [~]"
-msgstr "邏輯 NOT [~]"
-
-#: ../gcalctool/calctool.c:1117
-msgid "~"
-msgstr "~"
-
-#: ../gcalctool/calctool.c:1121
-msgid "Xor"
-msgstr "XOR"
-
-#: ../gcalctool/calctool.c:1122
-msgid "Bitwise XOR [x]"
-msgstr "邏輯 XOR [x]"
-
-#: ../gcalctool/calctool.c:1129
-msgid " Xor "
-msgstr " XOR "
-
-#: ../gcalctool/calctool.c:1133
-msgid "Xnor"
-msgstr "XNOR"
-
-#: ../gcalctool/calctool.c:1134
-msgid "Bitwise XNOR [n]"
-msgstr "邏輯 XNOR [n]"
-
-#: ../gcalctool/calctool.c:1141
-msgid " Xnor "
-msgstr " XNOR "
-
-#: ../gcalctool/calctool.c:1261
-msgid "Kilometer-to-mile conversion factor"
-msgstr "「公里→英里」轉換單位"
-
-#: ../gcalctool/calctool.c:1262
-msgid "square root of 2"
-msgstr "2 的平方根"
-
-#: ../gcalctool/calctool.c:1264
-msgid "pi"
-msgstr "π"
-
-#: ../gcalctool/calctool.c:1265
-msgid "Centimeter-to-inch conversion factor"
-msgstr "「公分→英寸」轉換單位"
-
-#: ../gcalctool/calctool.c:1266
-msgid "degrees in a radian"
-msgstr "1 弧度代表的角度"
-
-#: ../gcalctool/calctool.c:1267
-msgid "2 ^ 20"
-msgstr "2 ^ 20"
-
-#: ../gcalctool/calctool.c:1268
-msgid "Gram-to-ounce conversion factor"
-msgstr "「克→盎司」轉換單位"
-
-#: ../gcalctool/calctool.c:1270
-msgid "Kilojoule-to-British-thermal-unit conversion factor"
-msgstr "「千焦耳→英制熱量單位」轉換單位"
-
-#: ../gcalctool/calctool.c:1272
-msgid "Cubic-centimeter-to-cubic-inch conversion factor"
-msgstr "「立方厘米→立方英吋」轉換單位"
-
-#. THIS ROUTINE IS CALLED WHEN AN ERROR CONDITION IS ENCOUNTERED, AND
-#. *  AFTER A MESSAGE HAS BEEN WRITTEN TO STDERR.
-#.
-#: ../gcalctool/calctool.c:1283 ../gcalctool/display.c:268
-#: ../gcalctool/mp.c:1973 ../gcalctool/mpmath.c:432 ../gcalctool/mpmath.c:471
-#: ../gcalctool/mpmath.c:526
-msgid "Error"
-msgstr "錯誤"
-
-#: ../gcalctool/functions.c:342
-msgid "Previous expression"
-msgstr "剛才的算式"
-
-#: ../gcalctool/functions.c:425
-msgid "Invalid number for the current base"
-msgstr "使用了這個基數中不能出現的數字"
-
-#: ../gcalctool/functions.c:428
-msgid "Too long number"
-msgstr "數字太長"
-
-#: ../gcalctool/functions.c:431
-msgid "Malformed expression"
-msgstr "算式錯誤"
-
-#: ../gcalctool/functions.c:501
-msgid "Error, operands must be integers"
-msgstr "發生錯誤，運算元必須是整數"
-
-#: ../gcalctool/functions.c:657 ../gcalctool/functions.c:1035
-msgid "No sane value to convert"
-msgstr "沒有正常數值可以轉換"
-
-#: ../gcalctool/functions.c:756 ../gcalctool/functions.c:1112
-#: ../gcalctool/functions.c:1340
-msgid "No sane value to store"
-msgstr "沒有正常數值可以儲存"
-
-#: ../gcalctool/functions.c:884
-msgid "Malformed function"
-msgstr "函數錯誤"
-
-#: ../gcalctool/functions.c:1065
-msgid "Cleared display, prefix without an operator is not allowed"
-msgstr "清除畫面，前綴不允許沒有運算符號"
-
-#: ../gcalctool/functions.c:1089
-msgid "Malformed parenthesis expression"
-msgstr "算式的括數錯誤"
-
-#: ../gcalctool/functions.c:1388
-msgid "Numeric stack error"
-msgstr "數字堆疊錯誤"
-
-#: ../gcalctool/functions.c:1409
-msgid "Operand stack error"
-msgstr "運算子堆疊錯誤"
-
-#: ../gcalctool/get.c:153
-msgid "-a needs accuracy value"
-msgstr "-a 選項需要指定準確度數值"
-
-#: ../gcalctool/get.c:157 ../gcalctool/get.c:311
-#, c-format
-msgid "%s: accuracy should be in the range 0-%d\n"
-msgstr "%s：準確度必須在 0 至 %d 之內\n"
-
-#: ../gcalctool/get.c:182
-#, c-format
-msgid "%s: %s as next argument.\n"
-msgstr "%s：%s 當作下一個參數。\n"
-
-#. No calculator error initially.
-#. Not entering an exponent number.
-#. No pending arithmetic operation.
-#. No User supplied title line.
-#: ../gcalctool/get.c:269
-msgid "calculator"
-msgstr "計算機"
-
-#: ../gcalctool/get.c:331
-#, c-format
-msgid "%s: base should be 2, 8, 10 or 16\n"
-msgstr "%s：必須使用 2、8、10 或 16 進制\n"
-
-#: ../gcalctool/get.c:346
-#, c-format
-msgid "%s: invalid display mode [%s]\n"
-msgstr "%s：顯示模式 [%s] 無效\n"
-
-#: ../gcalctool/get.c:361
-#, c-format
-msgid "%s: invalid mode [%s]\n"
-msgstr "%s：模式 [%s] 無效\n"
-
-#: ../gcalctool/get.c:375
-#, c-format
-msgid "%s: invalid trigonometric mode [%s]\n"
-msgstr "%s：三角函數模式 [%s] 無效\n"
-
-#: ../gcalctool/get.c:393
-#, c-format
-msgid "%s: invalid syntax mode [%s]\n"
-msgstr "%s：語法模式 [%s] 無效\n"
-
-#: ../gcalctool/get.c:440
-#, c-format
+#: ../gnome-system-tools.schemas.in.h:1
 msgid ""
-"%s version %s\n"
-"\n"
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr "以逗號分隔的主機清單，在啟用遠端組態選項時，GST 將可以存取它們。"
+
+#: ../gnome-system-tools.schemas.in.h:2
+msgid "Last GST version executed"
+msgstr "最後一次執行 GST 時的版本"
+
+#: ../gnome-system-tools.schemas.in.h:3
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr "設定 boot-admin 時喜好的開機載入程式"
+
+#: ../gnome-system-tools.schemas.in.h:4
+msgid "Remote hosts"
+msgstr "遠端主機"
+
+#: ../gnome-system-tools.schemas.in.h:5
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr "GST 可以透過 SSH 進行遠端組態，請啟用此選項以使用這個功能。"
+
+#: ../gnome-system-tools.schemas.in.h:6
+msgid "The last GST version that this computer has run"
+msgstr "本電腦最後一次執行 GST 時的 GST 版本"
+
+#: ../gnome-system-tools.schemas.in.h:7
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
 msgstr ""
-"%s %s 版本\n"
+"這個機碼儲存了當安裝一個以上的開機載入程式時，boot-admin 要設定哪一個。如果沒"
+"有設定或無法使用，boot-admin 會詢問使用者。"
+
+#: ../gnome-system-tools.schemas.in.h:8
+msgid "Whether the tools will use remote administration or not"
+msgstr "此工具是否使用遠端系統管理"
+
+#: ../gnome-system-tools.schemas.in.h:9
+msgid "Whether the users-admin tool should show all users and groups or not"
+msgstr "「使用者及群組」工具應否顯示所有帳戶及群組"
+
+#: ../gnome-system-tools.schemas.in.h:10
+msgid "Whether the warning dialog should be shown or not"
+msgstr "應否顯示警告訊息對話方塊"
+
+#: ../interfaces/boot.glade.in.h:1
+msgid "<b>Security</b>"
+msgstr "<b>安全性</b>"
+
+#: ../interfaces/boot.glade.in.h:2
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
+"span>\n"
 "\n"
+"please select which do you want to configure"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">在這個系統上找到多個開機載入程式</"
+"span>\n"
+"\n"
+"請選擇您要設定哪一個"
 
-#: ../gcalctool/get.c:441
-#, c-format
-msgid "Usage: %s: [-D] [-E] [-a accuracy] "
-msgstr "用法：%s: [-D] [-E] [-a 準確度] "
+#: ../interfaces/boot.glade.in.h:5 ../interfaces/users.glade.in.h:3
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span weight=\"bold\">基本設定</span>"
 
-#: ../gcalctool/get.c:442
-msgid "\t\t [-?] [-v] [-?]\n"
-msgstr "[-v] [-?]\n"
+#: ../interfaces/boot.glade.in.h:6
+msgid "<span weight=\"bold\">Image Settings</span>"
+msgstr "<span weight=\"bold\">影像檔設定</span>"
 
-#: ../gcalctool/gtk.c:236
-msgid "_Calculator"
-msgstr "計算機(_C)"
+#: ../interfaces/boot.glade.in.h:7
+msgid "<span weight=\"bold\">Other Settings</span>"
+msgstr "<span weight=\"bold\">其它設定</span>"
 
-#: ../gcalctool/gtk.c:237
+#: ../interfaces/boot.glade.in.h:8
+msgid "<span weight=\"bold\">Starting the Computer</span>"
+msgstr "<span weight=\"bold\">啟動電腦</span>"
+
+#: ../interfaces/boot.glade.in.h:9
+msgid "Ask at boot"
+msgstr "在啟動電腦時詢問"
+
+#: ../interfaces/boot.glade.in.h:10 ../src/boot/main.c:71
+msgid "Boot Manager Settings"
+msgstr "啟動總管設定"
+
+#: ../interfaces/boot.glade.in.h:11
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition. Optionally, you may also enter parameters passed to the kernel at "
+"boot time."
+msgstr ""
+"請選取作為啟動系統用的核心影像檔，及它所掛載的 root 分割區。另外也可以輸入啟"
+"動系統時傳送給核心的參數。"
+
+#: ../interfaces/boot.glade.in.h:12
+msgid "Click \"Forward\" to continue"
+msgstr "請按「下一頁」繼續"
+
+#: ../interfaces/boot.glade.in.h:13
+msgid "Confirmation"
+msgstr "確認密碼"
+
+#. set window title
+#: ../interfaces/boot.glade.in.h:14 ../src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:454
+msgid "Creating a new boot image"
+msgstr "建立新的啟動影像檔"
+
+#: ../interfaces/boot.glade.in.h:15
+msgid "Don't ask me again"
+msgstr "不要再詢問我"
+
+#: ../interfaces/boot.glade.in.h:16
+msgid "Enable IDE SCSI emulation"
+msgstr "將 IDE 裝置模擬為 SCSI"
+
+#: ../interfaces/boot.glade.in.h:17
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr "請輸入系統啟動影像檔的名稱，及指定它會啟動的作業系統。"
+
+#: ../interfaces/boot.glade.in.h:18
+msgid "Finished"
+msgstr "完成"
+
+#: ../interfaces/boot.glade.in.h:19
+msgid "Manual"
+msgstr "手動"
+
+#: ../interfaces/boot.glade.in.h:20
+msgid "Number of colors:"
+msgstr "顏色數目："
+
+#: ../interfaces/boot.glade.in.h:21
+msgid "Other parameters:"
+msgstr "其它參數："
+
+#: ../interfaces/boot.glade.in.h:22
+msgid "Password"
+msgstr "密碼"
+
+#: ../interfaces/boot.glade.in.h:23
+msgid "Protect with password"
+msgstr "以密碼保護"
+
+#: ../interfaces/boot.glade.in.h:24
+msgid "Resolution:"
+msgstr "解析度："
+
+#: ../interfaces/boot.glade.in.h:25
+msgid "Seconds to wait before loading default kernel or OS"
+msgstr "載入預設的核心或作業系統前等待指定秒數："
+
+#: ../interfaces/boot.glade.in.h:26
+msgid "Select a kernel image"
+msgstr "選取核心影像檔"
+
+#: ../interfaces/boot.glade.in.h:27
+msgid "Select an initrd image"
+msgstr "選取 Initrd 影像"
+
+#: ../interfaces/boot.glade.in.h:28
+msgid "Specify the partition on which the operating system is installed."
+msgstr "指定作業系統安裝在哪個分割區。"
+
+#: ../interfaces/boot.glade.in.h:29
+msgid ""
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr "已經加入了新的系統啟動影像檔。請按「套用」儲存修改後的設定。"
+
+#: ../interfaces/boot.glade.in.h:30
+msgid ""
+"This assistant is designed to help you quickly and easily add a new boot "
+"image to your system."
+msgstr "本輔助程式可協助您輕鬆而快速的新增啟動系統用的影像檔。"
+
+#: ../interfaces/boot.glade.in.h:31
+msgid "Video modes (only frame buffer)"
+msgstr "畫面模式 (只適用於 framebuffer)"
+
+#: ../interfaces/boot.glade.in.h:32
+msgid "_Add..."
+msgstr "新增(_A)..."
+
+#: ../interfaces/boot.glade.in.h:33
+msgid "_Device:"
+msgstr "裝置(_D)："
+
+#: ../interfaces/boot.glade.in.h:34
 msgid "_Edit"
-msgstr "編輯(_E)"
+msgstr "修改(_E)"
 
-#: ../gcalctool/gtk.c:238
-msgid "_View"
-msgstr "顯示(_V)"
+#: ../interfaces/boot.glade.in.h:35 ../src/boot/boot-settings.c:44
+msgid "_Initrd image path:"
+msgstr "_Initrd 影像檔路徑："
 
-#: ../gcalctool/gtk.c:239
-msgid "_Help"
-msgstr "求助(_H)"
+#: ../interfaces/boot.glade.in.h:36
+msgid "_Kernel image path:"
+msgstr "核心影像檔路徑(_K)："
 
-#: ../gcalctool/gtk.c:242
-msgid "Quit the calculator"
-msgstr "結束計算機程式"
+#: ../interfaces/boot.glade.in.h:37
+msgid "_Name:"
+msgstr "名稱(_N)："
 
-#: ../gcalctool/gtk.c:245
-msgid "Copy selection"
-msgstr "複製已選定的內容"
+#: ../interfaces/boot.glade.in.h:38
+msgid "_Operating system:"
+msgstr "作業系統(_O)："
 
-#: ../gcalctool/gtk.c:247
-msgid "Paste selection"
-msgstr "貼上剪貼簿中的內容"
+#: ../interfaces/boot.glade.in.h:39
+msgid "_Parameters:"
+msgstr "參數(_P)："
 
-# (Abel) I 字幾乎看不到底線
-#: ../gcalctool/gtk.c:248
-msgid "_Insert ASCII Value..."
-msgstr "插入 _ASCII 值..."
+#: ../interfaces/boot.glade.in.h:40
+msgid "_Root file system device:"
+msgstr "根目錄檔案系統所在裝置(_R)："
 
-#: ../gcalctool/gtk.c:249
-msgid "Insert ASCII value"
-msgstr "插入 ASCII 值"
-
-#: ../gcalctool/gtk.c:253
-msgid "Show help contents"
-msgstr "顯示說明文件內容"
-
-#: ../gcalctool/gtk.c:256
-msgid "Show the About Gcalctool dialog"
-msgstr "顯示有關計算機的資訊的對話方塊"
-
-#: ../gcalctool/gtk.c:258 ../gcalctool/gtk.c:289
-msgid "_1 place"
-msgstr "_1 個位"
-
-#: ../gcalctool/gtk.c:259 ../gcalctool/gtk.c:290
-msgid "1 place"
-msgstr "1 個位"
-
-#: ../gcalctool/gtk.c:260 ../gcalctool/gtk.c:291
-msgid "_2 places"
-msgstr "_2 個位"
-
-#: ../gcalctool/gtk.c:261 ../gcalctool/gtk.c:292
-msgid "2 places"
-msgstr "2 個位"
-
-#: ../gcalctool/gtk.c:262 ../gcalctool/gtk.c:293
-msgid "_3 places"
-msgstr "_3 個位"
-
-#: ../gcalctool/gtk.c:263 ../gcalctool/gtk.c:294
-msgid "3 places"
-msgstr "3 個位"
-
-#: ../gcalctool/gtk.c:264 ../gcalctool/gtk.c:295
-msgid "_4 places"
-msgstr "_4 個位"
-
-#: ../gcalctool/gtk.c:265 ../gcalctool/gtk.c:296
-msgid "4 places"
-msgstr "4 個位"
-
-#: ../gcalctool/gtk.c:266 ../gcalctool/gtk.c:297
-msgid "_5 places"
-msgstr "_5 個位"
-
-#: ../gcalctool/gtk.c:267 ../gcalctool/gtk.c:298
-msgid "5 places"
-msgstr "5 個位"
-
-#: ../gcalctool/gtk.c:268 ../gcalctool/gtk.c:299
-msgid "_6 places"
-msgstr "_6 個位"
-
-#: ../gcalctool/gtk.c:269 ../gcalctool/gtk.c:300
-msgid "6 places"
-msgstr "6 個位"
-
-#: ../gcalctool/gtk.c:270 ../gcalctool/gtk.c:301
-msgid "_7 places"
-msgstr "_7 個位"
-
-#: ../gcalctool/gtk.c:271 ../gcalctool/gtk.c:302
-msgid "7 places"
-msgstr "7 個位"
-
-#: ../gcalctool/gtk.c:272 ../gcalctool/gtk.c:303
-msgid "_8 places"
-msgstr "_8 個位"
-
-#: ../gcalctool/gtk.c:273 ../gcalctool/gtk.c:304
-msgid "8 places"
-msgstr "8 個位"
-
-#: ../gcalctool/gtk.c:274 ../gcalctool/gtk.c:305
-msgid "_9 places"
-msgstr "_9 個位"
-
-#: ../gcalctool/gtk.c:275 ../gcalctool/gtk.c:306
-msgid "9 places"
-msgstr "9 個位"
-
-#: ../gcalctool/gtk.c:276 ../gcalctool/gtk.c:277 ../gcalctool/gtk.c:307
-#: ../gcalctool/gtk.c:308
-msgid "10 places"
-msgstr "10 個位"
-
-#: ../gcalctool/gtk.c:278 ../gcalctool/gtk.c:279 ../gcalctool/gtk.c:309
-#: ../gcalctool/gtk.c:310
-msgid "11 places"
-msgstr "11 個位"
-
-#: ../gcalctool/gtk.c:280 ../gcalctool/gtk.c:281 ../gcalctool/gtk.c:311
-#: ../gcalctool/gtk.c:312
-msgid "12 places"
-msgstr "12 個位"
-
-#: ../gcalctool/gtk.c:282 ../gcalctool/gtk.c:283 ../gcalctool/gtk.c:313
-#: ../gcalctool/gtk.c:314
-msgid "13 places"
-msgstr "13 個位"
-
-#: ../gcalctool/gtk.c:284 ../gcalctool/gtk.c:285 ../gcalctool/gtk.c:315
-#: ../gcalctool/gtk.c:316
-msgid "14 places"
-msgstr "14 個位"
-
-#: ../gcalctool/gtk.c:286 ../gcalctool/gtk.c:287 ../gcalctool/gtk.c:317
-#: ../gcalctool/gtk.c:318
-msgid "15 places"
-msgstr "15 個位"
-
-#: ../gcalctool/gtk.c:322 ../gcalctool/gtk.c:328
-msgid "Show _Trailing Zeroes"
-msgstr "顯示末端的 _0"
-
-#: ../gcalctool/gtk.c:323 ../gcalctool/gtk.c:329
-msgid "Show trailing zeroes"
-msgstr "顯示末端的 0"
-
-#: ../gcalctool/gtk.c:324
-msgid "Show T_housands Separator"
-msgstr "顯示千位分隔符號(_H)"
-
-#: ../gcalctool/gtk.c:325
-msgid "Show thousands separator"
-msgstr "顯示千位分隔符號"
-
-#: ../gcalctool/gtk.c:326
-msgid "_Memory Registers"
-msgstr "暫存器數值(_M)"
-
-#: ../gcalctool/gtk.c:327
-msgid "Show memory registers"
-msgstr "顯示暫存器數值"
-
-#: ../gcalctool/gtk.c:330
-msgid "_Use Arithmetic Precedence"
-msgstr "使用正常的加減乘除優先次序(_U)"
-
-#: ../gcalctool/gtk.c:331
-msgid "Use Arithmetic Precedence"
-msgstr "使用正常的加減乘除優先次序"
-
-#: ../gcalctool/gtk.c:335
-msgid "_0 significant places"
-msgstr "_0 位有效數字"
-
-#: ../gcalctool/gtk.c:336
-msgid "0 significant places"
-msgstr "0 位有效數字"
-
-#: ../gcalctool/gtk.c:337
-msgid "_1 significant place"
-msgstr "_1 位有效數字"
-
-#: ../gcalctool/gtk.c:338
-msgid "1 significant place"
-msgstr "1 位有效數字"
-
-#: ../gcalctool/gtk.c:339
-msgid "_2 significant places"
-msgstr "_2 位有效數字"
-
-#: ../gcalctool/gtk.c:340
-msgid "2 significant places"
-msgstr "2 位有效數字"
-
-#: ../gcalctool/gtk.c:341
-msgid "_3 significant places"
-msgstr "_3 位有效數字"
-
-#: ../gcalctool/gtk.c:342
-msgid "3 significant places"
-msgstr "3 位有效數字"
-
-#: ../gcalctool/gtk.c:343
-msgid "_4 significant places"
-msgstr "_4 位有效數字"
-
-#: ../gcalctool/gtk.c:344
-msgid "4 significant places"
-msgstr "4 位有效數字"
-
-#: ../gcalctool/gtk.c:345
-msgid "_5 significant places"
-msgstr "_5 位有效數字"
-
-#: ../gcalctool/gtk.c:346
-msgid "5 significant places"
-msgstr "5 位有效數字"
-
-#: ../gcalctool/gtk.c:347
-msgid "_6 significant places"
-msgstr "_6 位有效數字"
-
-#: ../gcalctool/gtk.c:348
-msgid "6 significant places"
-msgstr "6 位有效數字"
-
-#: ../gcalctool/gtk.c:349
-msgid "_7 significant places"
-msgstr "_7 位有效數字"
-
-#: ../gcalctool/gtk.c:350
-msgid "7 significant places"
-msgstr "7 位有效數字"
-
-#: ../gcalctool/gtk.c:351
-msgid "_8 significant places"
-msgstr "_8 位有效數字"
-
-#: ../gcalctool/gtk.c:352
-msgid "8 significant places"
-msgstr "8 位有效數字"
-
-#: ../gcalctool/gtk.c:353
-msgid "_9 significant places"
-msgstr "_9 位有效數字"
-
-#: ../gcalctool/gtk.c:354
-msgid "9 significant places"
-msgstr "9 位有效數字"
-
-#: ../gcalctool/gtk.c:355
-msgid "_Other (10) ..."
-msgstr "其它，預設為 1_0 ..."
-
-#: ../gcalctool/gtk.c:356
-msgid "Set other precision"
-msgstr "自選精確度"
-
-#: ../gcalctool/gtk.c:360
-msgid "_Basic"
-msgstr "基本模式(_B)"
-
-#: ../gcalctool/gtk.c:362
-msgid "_Advanced"
-msgstr "進階模式(_A)"
-
-#: ../gcalctool/gtk.c:364
-msgid "_Financial"
-msgstr "財務計算模式(_F)"
-
-#: ../gcalctool/gtk.c:366
-msgid "_Scientific"
-msgstr "科學計算模式(_S)"
-
-#: ../gcalctool/gtk.c:526
-msgid "translator-credits"
-msgstr ""
-"如對翻譯有任何意見，請送一封電子郵件給\n"
-"以下地址，GNOME 翻譯團隊會盡快回覆您：\n"
-"community@linuxhall.org\n"
-"\n"
-"Abel Cheung <abel@oaka.org>, 2003, 05\n"
-"Ching-Hung Lin <2billlin@yahoo.com.tw>, 2004"
-
-# (Abel) 嘗試反其道而行，不保留軟體名稱，令用家不需自己理解 "gcalctool"
-# 是甚麼東西；不值得為 calctool 的歴史擾亂用家
-#: ../gcalctool/gtk.c:529
-msgid "Gcalctool"
-msgstr "計算機"
-
-#: ../gcalctool/gtk.c:532
-msgid "Calculator with financial and scientific modes."
-msgstr "附有財務及科學計算模式的計算機。"
-
-#: ../gcalctool/gtk.c:787
-msgid "Insert ASCII Value"
-msgstr "插入 ASCII 值"
-
-#: ../gcalctool/gtk.c:802
-msgid "Ch_aracter:"
-msgstr "字元(_A)："
-
-#: ../gcalctool/gtk.c:827
-msgid "_Insert"
-msgstr "插入(_I)"
-
-#: ../gcalctool/gtk.c:906
-msgid "Edit Constants"
-msgstr "修改常數"
-
-#: ../gcalctool/gtk.c:906
-msgid "Edit Functions"
-msgstr "修改函數"
-
-#: ../gcalctool/gtk.c:930
-msgid "Note:"
-msgstr "注意:"
-
-#: ../gcalctool/gtk.c:931
-msgid "All constant values are specified in the decimal numeric base."
-msgstr "所有常數都是以十進制顯示。"
-
-#: ../gcalctool/gtk.c:941
-msgid "Click a _value or description to edit it:"
-msgstr "若要修改數值，請點選數值本身或它的說明(_V):"
-
-#: ../gcalctool/gtk.c:964
-msgid "No."
-msgstr "常數"
-
-#: ../gcalctool/gtk.c:966
-msgid "Value"
-msgstr "數值"
-
-#: ../gcalctool/gtk.c:968
-msgid "Description"
-msgstr "說明"
-
-#: ../gcalctool/gtk.c:1078
-msgid "_Do not warn me again"
-msgstr "不要再顯示訊息(_D)"
-
-#: ../gcalctool/gtk.c:1084
+#: ../interfaces/common.glade.in.h:1
 msgid ""
-"<big><b>Changing Modes Clears Calculation</b></big>\n"
-"\n"
-"When you change modes, the current calculation will be cleared, and the base "
-"will be reset to decimal."
+"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">請輸入 root 密碼</span>"
+
+#: ../interfaces/common.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
+"supported by this tool</span>"
 msgstr ""
-"<big><b>切換模式會清除畫面</b></big>\n"
-"\n"
-"當切換模式時，所有目前畫面中的數值都會被清除，而且會切換至 10 進制模式運作。"
+"<span weight=\"bold\" size=\"larger\">您所執行的平臺尚未被本工具支援</span>"
 
-#: ../gcalctool/gtk.c:1123
-msgid "C_hange Mode"
-msgstr "切換模式(_H)"
+#: ../interfaces/common.glade.in.h:3
+msgid "Enter Password"
+msgstr "輸入密碼"
 
-#: ../gcalctool/gtk.c:1160
-msgid "Set Precision"
-msgstr "設定精確度"
+#: ../interfaces/common.glade.in.h:4
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
+msgstr ""
+"如果肯定本系統和以下列出的其中一種作業平台運作方式類似，則可以選取該平台並繼"
+"續。可是請注意，這樣做有可能會破壞系統的設定甚至令電腦作廢。"
 
-#: ../gcalctool/gtk.c:1175
-msgid "Significant _places:"
-msgstr "有效數字位數(_P):"
+#: ../interfaces/common.glade.in.h:5
+msgid "Remote administration"
+msgstr "遠端系統管理"
 
-#: ../gcalctool/gtk.c:1201
-msgid "_Set"
-msgstr "設定(_S)"
+#: ../interfaces/common.glade.in.h:6
+msgid "Run _Without Password"
+msgstr "不輸入密碼而執行(_W)"
 
-#: ../gcalctool/gtk.c:1418 ../gcalctool/gtk.c:1420 ../gcalctool.desktop.in.h:1
-msgid "Calculator"
-msgstr "計算機"
+#: ../interfaces/common.glade.in.h:7
+msgid "Unsupported Platform"
+msgstr "不支援的平台"
 
-#. translators: R is the short form of register used inter alia
-#. in popup menus
-#: ../gcalctool/gtk.c:1615 ../gcalctool/gtk.c:1761
-msgid "R"
-msgstr "R"
+#: ../interfaces/common.glade.in.h:8
+msgid "Use this window to select the computer you wish to configure"
+msgstr "使用這個視窗來選擇您想要設定的電腦"
 
-#. Make Hyp and Inv trigonometric check boxes.
-#: ../gcalctool/gtk.c:1683
-msgid "_Inv"
-msgstr "反函數(_I)"
+#: ../interfaces/common.glade.in.h:9
+msgid ""
+"You need administrator privileges to use this tool. Enter a password to "
+"modify your system configuration."
+msgstr "您需要有系統管理員的權限來使用此工具。輸入密碼以修改您的系統組態。"
 
-#: ../gcalctool/gtk.c:1691
-msgid "H_yp"
-msgstr "雙曲函數(_Y)"
+#: ../interfaces/common.glade.in.h:10
+msgid "_Password:"
+msgstr "密碼(_P)："
 
-#: ../gcalctool/gtk.c:1751
-msgid "Memory Registers"
-msgstr "暫存器數值"
+#: ../interfaces/network.glade.in.h:1
+msgid "<b>Account data</b>"
+msgstr "<b>帳戶資料</b>"
 
-#: ../gcalctool/gtk.c:1851
-msgid "Edit Constants..."
-msgstr "修改常數..."
+#: ../interfaces/network.glade.in.h:2
+msgid "<b>Connection settings</b>"
+msgstr "<b>連線設定</b>"
 
-#: ../gcalctool/gtk.c:1851
-msgid "Edit Functions..."
-msgstr "修改函數..."
+#: ../interfaces/network.glade.in.h:3
+msgid "<b>Connection</b>"
+msgstr "<b>連線</b>"
 
-#: ../gcalctool/gtk.c:2020
-msgid "Clipboard contained malformed calculation"
-msgstr "剪貼簿中的算式內容有誤"
+#: ../interfaces/network.glade.in.h:4
+msgid "<b>DNS Servers</b>"
+msgstr "<b>DNS 伺服器</b>"
 
-#: ../gcalctool/gtk.c:2299
+#: ../interfaces/network.glade.in.h:5
+msgid "<b>Host Settings</b>"
+msgstr "<b>主機設定</b>"
+
+#: ../interfaces/network.glade.in.h:6
+msgid "<b>Internet service provider data</b>"
+msgstr "<b>網路服務供應商資料</b>"
+
+#: ../interfaces/network.glade.in.h:7
+msgid "<b>Modem settings</b>"
+msgstr "<b>數據機設定</b>"
+
+#: ../interfaces/network.glade.in.h:8
+msgid "<b>Search Domains</b>"
+msgstr "<b>搜尋網域</b>"
+
+#: ../interfaces/network.glade.in.h:9
+msgid "<b>Wireless settings</b>"
+msgstr "<b>無線網路設定</b>"
+
+#: ../interfaces/network.glade.in.h:10
+msgid "Aliases:"
+msgstr "別名："
+
+#: ../interfaces/network.glade.in.h:11
+msgid "C_onfiguration:"
+msgstr "組態(_O)："
+
+#: ../interfaces/network.glade.in.h:12
+msgid "Connections"
+msgstr "連線"
+
+#: ../interfaces/network.glade.in.h:13
+msgid "DNS"
+msgstr "DNS"
+
+#: ../interfaces/network.glade.in.h:14
+msgid "D_omain name:"
+msgstr "網域名稱(_O)："
+
+#: ../interfaces/network.glade.in.h:15
+msgid "Default _gateway device:"
+msgstr "預設通訊閘裝置(_G)："
+
+#: ../interfaces/network.glade.in.h:16
+msgid "Device:"
+msgstr "裝置："
+
+#: ../interfaces/network.glade.in.h:17
+msgid "E_nable this connection"
+msgstr "啟用這個連線(_N)"
+
+#: ../interfaces/network.glade.in.h:18 ../interfaces/users.glade.in.h:21
+msgid "General"
+msgstr "一般"
+
+#: ../interfaces/network.glade.in.h:19
+msgid "Host alias settings"
+msgstr "主機別名設定"
+
+#: ../interfaces/network.glade.in.h:20
+msgid "Hosts"
+msgstr "主機"
+
+#: ../interfaces/network.glade.in.h:21 ../interfaces/shares.glade.in.h:15
+msgid "IP address:"
+msgstr "IP 地址："
+
+#: ../interfaces/network.glade.in.h:22
+msgid "Interface name:"
+msgstr "介面名稱："
+
+#: ../interfaces/network.glade.in.h:23
+msgid "Interface properties"
+msgstr "介面屬性"
+
+#: ../interfaces/network.glade.in.h:24
+msgid "Key _type:"
+msgstr "鍵值類型(_T):"
+
+#: ../interfaces/network.glade.in.h:25
+msgid "Location name:"
+msgstr "位置名稱："
+
+#: ../interfaces/network.glade.in.h:26
+msgid "Location:"
+msgstr "位置："
+
+#: ../interfaces/network.glade.in.h:27
+msgid "Modem"
+msgstr "數據機"
+
+#: ../interfaces/network.glade.in.h:28
+msgid "Network name (_ESSID):"
+msgstr "網路名稱(_ESSID)："
+
+#: ../interfaces/network.glade.in.h:29
+msgid ""
+"Off\n"
+"Low\n"
+"Medium\n"
+"Loud"
+msgstr ""
+"關閉\n"
+"低\n"
+"中\n"
+"高"
+
+#: ../interfaces/network.glade.in.h:33
+msgid "Options"
+msgstr "選項"
+
+#: ../interfaces/network.glade.in.h:34
+msgid "P_assword"
+msgstr "密碼(_A)"
+
+#: ../interfaces/network.glade.in.h:35
+msgid ""
+"Plain (ASCII)\n"
+"Hexadecimal"
+msgstr ""
+"純文字 (ASCII)\n"
+"16 進位"
+
+#: ../interfaces/network.glade.in.h:37
+msgid "Select location name"
+msgstr "選取位置名稱"
+
+#: ../interfaces/network.glade.in.h:38
+msgid ""
+"Static IP address\n"
+"DHCP"
+msgstr ""
+"固定 IP 地址\n"
+"DHCP"
+
+#: ../interfaces/network.glade.in.h:40
+msgid ""
+"Tones\n"
+"Pulses"
+msgstr ""
+"Tones\n"
+"Pulses"
+
+#: ../interfaces/network.glade.in.h:42
+msgid "Use the Internet service provider nameservers"
+msgstr "使用網路服務供應商名稱伺服器"
+
+#: ../interfaces/network.glade.in.h:43
+msgid "WEP _key:"
+msgstr "WEP _key:"
+
+#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
+msgid "_Activate"
+msgstr "啟用(_A)"
+
+#: ../interfaces/network.glade.in.h:45
+msgid "_Autodetect"
+msgstr "自動偵測(_A)"
+
+#: ../interfaces/network.glade.in.h:46 ../src/network/ifaces-list.c:35
+msgid "_Deactivate"
+msgstr "停止使用(_D)"
+
+#: ../interfaces/network.glade.in.h:47
+msgid "_Dial prefix:"
+msgstr "撥號方式(_D)："
+
+#: ../interfaces/network.glade.in.h:48
+msgid "_Dial type:"
+msgstr "撥號方式(_D)："
+
+#: ../interfaces/network.glade.in.h:49
+msgid "_Gateway address:"
+msgstr "通訊閘地址(_G)："
+
+#: ../interfaces/network.glade.in.h:50
+msgid "_Hostname:"
+msgstr "主機名稱(_H)："
+
+#: ../interfaces/network.glade.in.h:51
+msgid "_IP address:"
+msgstr "_IP 地址："
+
+#: ../interfaces/network.glade.in.h:52
+msgid "_Local IP:"
+msgstr "本機 IP(_L)："
+
+#: ../interfaces/network.glade.in.h:53
+msgid "_Modem port:"
+msgstr "數據機通訊埠(_M)："
+
+#: ../interfaces/network.glade.in.h:54
+msgid "_Phone number:"
+msgstr "電話號碼(_P)："
+
+#: ../interfaces/network.glade.in.h:55
+msgid "_Remote IP:"
+msgstr "遠端 IP(_R)："
+
+#: ../interfaces/network.glade.in.h:56
+msgid "_Retry if the connection breaks or fails to start"
+msgstr "如果連線中斷或無法啟用時重新連線(_R)"
+
+#: ../interfaces/network.glade.in.h:57
+msgid "_Set modem as default route to internet"
+msgstr "設定數據機為預設路由(_S)"
+
+#: ../interfaces/network.glade.in.h:58
+msgid "_Subnet mask:"
+msgstr "子網路遮罩(_S)："
+
+#: ../interfaces/network.glade.in.h:59 ../interfaces/users.glade.in.h:61
+msgid "_Username:"
+msgstr "使用者名稱(_U)："
+
+#: ../interfaces/network.glade.in.h:60
+msgid "_Volume:"
+msgstr "音量(_V)："
+
+#: ../interfaces/services.glade.in.h:1
+msgid "Advanced settings:"
+msgstr "進階設定值："
+
+#: ../interfaces/services.glade.in.h:2
+msgid "Select the services that you wish to activate:"
+msgstr "選擇您想要使用的服務："
+
+#: ../interfaces/shares.glade.in.h:1
+msgid "<b>Allowed hosts</b>"
+msgstr "<b>允許的主機</b>"
+
+#: ../interfaces/shares.glade.in.h:2
+msgid "<b>Hosts settings</b>"
+msgstr "<b>主機設定</b>"
+
+#: ../interfaces/shares.glade.in.h:3
+msgid "<b>Share properties</b>"
+msgstr "<b>共享內容</b>"
+
+#: ../interfaces/shares.glade.in.h:4
+msgid "<b>Shared folder</b>"
+msgstr "<b>共享資料夾</b>"
+
+#: ../interfaces/shares.glade.in.h:5
+msgid "<b>WINS server</b>"
+msgstr "<b>WINS 伺服器</b>"
+
+#: ../interfaces/shares.glade.in.h:6
+msgid "<b>Windows sharing Settings</b>"
+msgstr "<b>Windows 共享設定</b>"
+
+#: ../interfaces/shares.glade.in.h:7
+msgid "Add allowed hosts"
+msgstr "加入允許的主機"
+
+#: ../interfaces/shares.glade.in.h:8
+msgid "Allow _browsing folder"
+msgstr "允許瀏覽資料夾(_B)"
+
+#: ../interfaces/shares.glade.in.h:9
+msgid "Allowed hosts:"
+msgstr "允許的主機："
+
+#: ../interfaces/shares.glade.in.h:10
+msgid "Comment:"
+msgstr "備註："
+
+#: ../interfaces/shares.glade.in.h:11
+msgid "Do not use WINS server"
+msgstr "不使用 WINS 伺服器"
+
+#: ../interfaces/shares.glade.in.h:12
+msgid "Domain / _Workgroup"
+msgstr "網域/工作群組(_W)"
+
+#: ../interfaces/shares.glade.in.h:13
+msgid "General Windows sharing settings"
+msgstr "Windows 共享通用設定"
+
+#: ../interfaces/shares.glade.in.h:14
+msgid "Host name:"
+msgstr "主機名稱："
+
+#: ../interfaces/shares.glade.in.h:16
+msgid "Name:"
+msgstr "名稱："
+
+#: ../interfaces/shares.glade.in.h:17
+msgid "Netmask:"
+msgstr "子網路遮罩："
+
+#: ../interfaces/shares.glade.in.h:18
+msgid "Network:"
+msgstr "網路："
+
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
+msgid "Read only"
+msgstr "唯讀"
+
+#: ../interfaces/shares.glade.in.h:20
+msgid "Share folder"
+msgstr "共享資料夾"
+
+#: ../interfaces/shares.glade.in.h:21
+msgid "Share with:"
+msgstr "共享為："
+
+#: ../interfaces/shares.glade.in.h:22
+msgid "This computer is a WINS server"
+msgstr "本電腦是 WINS 伺服器"
+
+#: ../interfaces/shares.glade.in.h:23
+msgid "Use WINS Server"
+msgstr "使用 WINS 伺服器"
+
+#: ../interfaces/shares.glade.in.h:24
+msgid "Windows sharing settings"
+msgstr "Windows 共享設定"
+
+#: ../interfaces/shares.glade.in.h:25
+msgid "_Add host"
+msgstr "加入主機(_A)"
+
+#: ../interfaces/shares.glade.in.h:26
+msgid "_Host description:"
+msgstr "主機描述(_H)："
+
+#: ../interfaces/shares.glade.in.h:27
+msgid "_Path:"
+msgstr "路徑(_P)："
+
+#: ../interfaces/shares.glade.in.h:28
+msgid "_Read only"
+msgstr "唯讀(_R)"
+
+#: ../interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr "（未設定）"
+
+#: ../interfaces/time.glade.in.h:2
+msgid "<b>Selection</b>"
+msgstr "<b>選擇區</b>"
+
+#: ../interfaces/time.glade.in.h:3
+msgid "<b>Time zone</b>"
+msgstr "<b>時區</b>"
+
+#: ../interfaces/time.glade.in.h:4
+msgid "Add NTP Server"
+msgstr "加入 NTP 伺服器"
+
+#: ../interfaces/time.glade.in.h:5
+msgid "NTP server"
+msgstr "NTP 伺服器"
+
+#: ../interfaces/time.glade.in.h:6
+msgid "S_ynchronize clock with Internet servers:"
+msgstr "透過網際網路的伺服器校對系統時間(_Y)："
+
+#: ../interfaces/time.glade.in.h:7
+msgid "Se_lect Servers..."
+msgstr "選取伺服器(_L)..."
+
+#: ../interfaces/time.glade.in.h:8
+msgid "Time servers"
+msgstr "時刻校對伺服器"
+
+#: ../interfaces/time.glade.in.h:9
+msgid "Time zone"
+msgstr "時區"
+
+#: ../interfaces/time.glade.in.h:10
+msgid "Time zone:"
+msgstr "時區："
+
+#: ../interfaces/time.glade.in.h:11
+msgid "_Date:"
+msgstr "日期(_D)："
+
+#: ../interfaces/time.glade.in.h:12
+msgid "_Select Time Zone..."
+msgstr "選取時區(_S)..."
+
+#: ../interfaces/time.glade.in.h:13
+msgid "_Time:"
+msgstr "時間(_T)："
+
+#: ../interfaces/users.glade.in.h:1
+msgid "<span weight=\"bold\">Advanced Settings</span>"
+msgstr "<span weight=\"bold\">進階設定</span>"
+
+#: ../interfaces/users.glade.in.h:2
+msgid "<span weight=\"bold\">Automatic UID/GID</span>"
+msgstr "<span weight=\"bold\">自動安排 UID/GID</span>"
+
+#: ../interfaces/users.glade.in.h:4
+msgid "<span weight=\"bold\">Contact Information</span>"
+msgstr "<span weight=\"bold\">聯絡資料</span>"
+
+#: ../interfaces/users.glade.in.h:5
+msgid "<span weight=\"bold\">Group Members</span>"
+msgstr "<span weight=\"bold\">群組成員</span>"
+
+#: ../interfaces/users.glade.in.h:6
+msgid "<span weight=\"bold\">Optional Settings</span>"
+msgstr "<span weight=\"bold\">選擇性設定</span>"
+
+#: ../interfaces/users.glade.in.h:7
+msgid "<span weight=\"bold\">Password Settings</span>"
+msgstr "<span weight=\"bold\">密碼設定</span>"
+
+#: ../interfaces/users.glade.in.h:8
+msgid "<span weight=\"bold\">Password</span>"
+msgstr "<span weight=\"bold\">密碼</span>"
+
+#: ../interfaces/users.glade.in.h:9
+msgid "<span weight=\"bold\">Profile Settings</span>"
+msgstr "<span weight=\"bold\">設定檔內容</span>"
+
+#: ../interfaces/users.glade.in.h:10
+msgid "<span weight=\"bold\">System Defaults</span>"
+msgstr "<span weight=\"bold\">系統預設值</span>"
+
+#: ../interfaces/users.glade.in.h:11
+msgid "<span weight=\"bold\">User Profile</span>"
+msgstr "<span weight=\"bold\">使用者設定檔</span>"
+
+#: ../interfaces/users.glade.in.h:12
+msgid "Account"
+msgstr "帳號"
+
+#: ../interfaces/users.glade.in.h:13
+msgid "Advanced"
+msgstr "進階"
+
+#: ../interfaces/users.glade.in.h:14
+msgid "Allow user to:"
+msgstr "允許使用者："
+
+#: ../interfaces/users.glade.in.h:15
+msgid "Assign a random password by default"
+msgstr "預設會安排隨機的密碼"
+
+#: ../interfaces/users.glade.in.h:16
+msgid "Check password _quality"
+msgstr "檢查密碼的質素(_Q)"
+
+#: ../interfaces/users.glade.in.h:17
+msgid "Con_firmation:"
+msgstr "確認密碼(_F)："
+
+#: ../interfaces/users.glade.in.h:18
+msgid "Days between warning and password expiration:"
+msgstr "密碼過期前，於指定日數發出警告："
+
+#: ../interfaces/users.glade.in.h:19
+msgid "Default _group:"
+msgstr "預設群組(_G)："
+
+#: ../interfaces/users.glade.in.h:20
+msgid "Default _shell:"
+msgstr "預設命令殼(_S)："
+
+#: ../interfaces/users.glade.in.h:22
+msgid "Generate _random password"
+msgstr "產生隨機密碼(_R)"
+
+#: ../interfaces/users.glade.in.h:23
+msgid "Group _ID:"
+msgstr "群組識別碼(_I)："
+
+#: ../interfaces/users.glade.in.h:24
+msgid "Group _members:"
+msgstr "群組成員(_M)："
+
+#: ../interfaces/users.glade.in.h:25
+msgid "Group _name:"
+msgstr "群組名稱(_N)："
+
+#: ../interfaces/users.glade.in.h:26
+msgid "Group properties"
+msgstr "群組屬性"
+
+#: ../interfaces/users.glade.in.h:27
+msgid "Groups"
+msgstr "群組"
+
+#: ../interfaces/users.glade.in.h:28
+msgid "Ma_ximum days a password may be used:"
+msgstr "密碼可使用的日數上限(_X)："
+
+#: ../interfaces/users.glade.in.h:29
+msgid "Maximum UID:"
+msgstr "UID 值上限："
+
+#: ../interfaces/users.glade.in.h:30
+msgid "Mi_nimum days between password changes:"
+msgstr "密碼使用了指定的日數後方可修改(_N)："
+
+#: ../interfaces/users.glade.in.h:31
+msgid "Minimum GID:"
+msgstr "GID 值下限："
+
+#: ../interfaces/users.glade.in.h:32
+msgid "Minimum UID:"
+msgstr "UID 值下限："
+
+#: ../interfaces/users.glade.in.h:33
+msgid "Minimum days allowed between password changes:"
+msgstr "密碼使用了指定的日數後方可修改："
+
+#: ../interfaces/users.glade.in.h:34
+msgid "Number of days that a password may be used:"
+msgstr "密碼可使用的日數："
+
+#: ../interfaces/users.glade.in.h:35
+msgid "O_ffice location:"
+msgstr "公司位置(_F)："
+
+#: ../interfaces/users.glade.in.h:36
+msgid "Password set to: "
+msgstr "密碼設定為："
+
+#: ../interfaces/users.glade.in.h:37
+msgid "Privileges"
+msgstr "權限"
+
+#: ../interfaces/users.glade.in.h:38
+msgid "Profile _name:"
+msgstr "設定檔名稱(_N)："
+
+#: ../interfaces/users.glade.in.h:39
+msgid "Set password b_y hand"
+msgstr "自行設定密碼(_Y)"
+
+#: ../interfaces/users.glade.in.h:40
+msgid "Show a_ll users and groups"
+msgstr "顯示所有使用者及群組(_L)"
+
+#: ../interfaces/users.glade.in.h:41
+msgid "User _ID:"
+msgstr "使用者識別碼(_I)："
+
+#: ../interfaces/users.glade.in.h:42
+msgid "User _password:"
+msgstr "使用者密碼(_P)："
+
+#: ../interfaces/users.glade.in.h:43
+msgid "User privileges"
+msgstr "使用者權限"
+
+#: ../interfaces/users.glade.in.h:44
+msgid "User profiles"
+msgstr "使用者設定檔"
+
+#: ../interfaces/users.glade.in.h:45
+msgid "Users"
+msgstr "使用者"
+
+#: ../interfaces/users.glade.in.h:46
+msgid "_Add Group..."
+msgstr "新增群組(_A)..."
+
+#: ../interfaces/users.glade.in.h:47
+msgid "_Add Profile..."
+msgstr "新增設定檔(_A)"
+
+#: ../interfaces/users.glade.in.h:48
+msgid "_Add User..."
+msgstr "新增使用者(_A)..."
+
+#: ../interfaces/users.glade.in.h:49
+msgid "_All users:"
+msgstr "所有使用者(_A)："
+
+#: ../interfaces/users.glade.in.h:50
+msgid "_Comments"
+msgstr "備註(_C)"
+
+#: ../interfaces/users.glade.in.h:51
+msgid "_Days between warning and password expiration:"
+msgstr "密碼過期前，於指定日數發出警告(_D)："
+
+#: ../interfaces/users.glade.in.h:52 ../src/boot/table.c:54
+#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
+#: ../src/shares/table.c:42 ../src/users/table.c:50
+msgid "_Delete"
+msgstr "刪除(_D)"
+
+#: ../interfaces/users.glade.in.h:53
+msgid "_Edit User Profiles..."
+msgstr "修改使用者設定檔(_E)..."
+
+#: ../interfaces/users.glade.in.h:54
+msgid "_Generate"
+msgstr "產生(_G)"
+
+#: ../interfaces/users.glade.in.h:55
+msgid "_Home directory:"
+msgstr "個人目錄(_H)："
+
+#: ../interfaces/users.glade.in.h:56
+msgid "_Home phone:"
+msgstr "住宅電話(_H)："
+
+#: ../interfaces/users.glade.in.h:57
+msgid "_Main group:"
+msgstr "主群組(_M)："
+
+#: ../interfaces/users.glade.in.h:58
+msgid "_Profile:"
+msgstr "設定檔(_P)："
+
+#: ../interfaces/users.glade.in.h:59
+msgid "_Real name:"
+msgstr "真實姓名(_R)："
+
+#: ../interfaces/users.glade.in.h:60
+msgid "_Shell:"
+msgstr "_Shell:"
+
+#: ../interfaces/users.glade.in.h:62
+msgid "_Work phone:"
+msgstr "工作電話(_W)："
+
+#: ../src/boot/boot-append-gui.c:140
+msgid "32,768"
+msgstr "32,768"
+
+#: ../src/boot/boot-append-gui.c:141
+msgid "65,536"
+msgstr "65,536"
+
+#: ../src/boot/boot-append-gui.c:142
+msgid "16,777,216"
+msgstr "16,777,216"
+
+#: ../src/boot/boot-append-gui.c:253
+msgid "Invalid VGA value"
+msgstr "無效的 VGA 數值"
+
+#: ../src/boot/boot-append-gui.c:255
 #, c-format
-msgid "Other (%d) ..."
-msgstr "其它 (%d) ..."
+msgid "\"%s\" is not a valid VGA value."
+msgstr "“%s” 不是有效的 VGA 數值。"
 
-#: ../gcalctool/gtk.c:2310
+#: ../src/boot/boot-druid.c:113
+msgid "Error creating boot image"
+msgstr "建立開機影像檔時發生錯誤"
+
+#: ../src/boot/boot-druid.c:443
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "正在建立新的開機影像檔( %d 之 %d)"
+
+#: ../src/boot/boot-druid.c:444
+msgid "Finished creating a new boot image"
+msgstr "已完成建立新的開機影像檔"
+
+#: ../src/boot/boot-image.c:43
+msgid "Unknown"
+msgstr "不詳"
+
+#: ../src/boot/boot-image.c:44
+msgid "Windows NT"
+msgstr "Windows NT"
+
+#: ../src/boot/boot-image.c:45
+msgid "Windows 9x"
+msgstr "Windows 9x"
+
+#: ../src/boot/boot-image.c:46
+msgid "Dos"
+msgstr "Dos"
+
+#: ../src/boot/boot-image.c:47
+msgid "Linux"
+msgstr "Linux"
+
+#: ../src/boot/boot-image.c:48
+msgid "Linux swap"
+msgstr "Linux swap"
+
+#: ../src/boot/boot-image.c:49
+msgid "GNU/Hurd"
+msgstr "GNU/Hurd"
+
+#: ../src/boot/boot-image.c:279
+#, c-format
+msgid "\"%s\" is an invalid path"
+msgstr "“%s” 不是有效的路徑"
+
+#: ../src/boot/boot-image.c:295
+#, c-format
+msgid "\"%s\" already exists, please set another name."
+msgstr "“%s”已經存在，請設定其它名稱。"
+
+#: ../src/boot/boot-image.c:301
+#, c-format
+msgid "Invalid image name: \"%s\"."
+msgstr "無效的影像檔名稱：‘%s’。"
+
+#: ../src/boot/boot-image.c:314
+#, c-format
+msgid "Invalid image: \"%s\"."
+msgstr "無效的影像檔：‘%s’。"
+
+#: ../src/boot/boot-image.c:332
+#, c-format
+msgid "Invalid root device: \"%s\"."
+msgstr "無效的 root 裝置：‘%s’。"
+
+#: ../src/boot/boot-settings.c:45
+msgid "_Module path:"
+msgstr "模組路徑(_M)："
+
+#: ../src/boot/boot-settings.c:407
+msgid "Password confirmation is not correct."
+msgstr "確認密碼並不正確。"
+
+#: ../src/boot/boot-settings.c:432
+msgid "Error modifying boot image"
+msgstr "修正開機影像檔時發生錯誤"
+
+#: ../src/boot/boot.desktop.in.in.h:1
+msgid "Boot"
+msgstr "系統啟動"
+
+#: ../src/boot/boot.desktop.in.in.h:2
+msgid "Configure the system boot process"
+msgstr "設定系統開機程序"
+
+#: ../src/boot/callbacks.c:81
+msgid "Boot Image Editor"
+msgstr "系統啟動影像檔編輯器"
+
+#: ../src/boot/callbacks.c:179
+msgid "Boot Append Editor"
+msgstr "啟動系統 Append 參數編輯器"
+
+#: ../src/boot/callbacks.c:412
+msgid "Error deleting boot image"
+msgstr "刪除開機影像檔時發生錯誤"
+
+#: ../src/boot/callbacks.c:414
+msgid "Without at least one boot image your computer will not start."
+msgstr "沒有任何系統啟動影像檔，您的系統將會無法啟動。"
+
+#: ../src/boot/callbacks.c:433
+#, c-format
+msgid "Are you sure you want to delete \"%s\"?"
+msgstr "是否確定刪除“%s”？"
+
+#: ../src/boot/callbacks.c:435
+msgid "This may leave this operating system unbootable."
+msgstr "這樣可能會讓這個作業系統無法開機。"
+
+# FIXME: Join this entry together with the entry below -- Abel
+#: ../src/boot/callbacks.c:464
+msgid "The configuration will show empty"
+msgstr "回復至"
+
+#: ../src/boot/callbacks.c:466
+#, c-format
+msgid "The file \"%s\" is missing or could not be read."
+msgstr "缺少了或是無法讀入檔案“%s”。"
+
+#: ../src/boot/table.c:43
+msgid "Name"
+msgstr "名稱"
+
+#: ../src/boot/table.c:44
+msgid "Default"
+msgstr "預設"
+
+#: ../src/boot/table.c:45
+msgid "Type"
+msgstr "類型"
+
+#: ../src/boot/table.c:46
+msgid "Kernel Image"
+msgstr "核心影像檔"
+
+#: ../src/boot/table.c:47
+msgid "Device"
+msgstr "裝置"
+
+#: ../src/boot/table.c:52 ../src/network/address-list.c:71
+#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
+msgid "_Add"
+msgstr "加入(_A)"
+
+#: ../src/boot/table.c:53 ../src/network/hosts.c:38
+#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
+#: ../src/users/table.c:49
+msgid "_Properties"
+msgstr "屬性(_P)"
+
+#. the proccess was running ssh
+#: ../src/common/gst-auth.c:89
+msgid "The tool could not connect to the computer"
+msgstr "此工具無法連接到這臺電腦"
+
+#: ../src/common/gst-auth.c:90
+msgid ""
+"Check that you have access to this network and that the computer is actually "
+"working and running the SSH daemon"
+msgstr "請檢查您是否能存取網路，而該電腦也確實在運作並執行 SSH 服務程式中"
+
+#. the proccess was running su
+#: ../src/common/gst-auth.c:94
+msgid "The entered password is invalid"
+msgstr "輸入的密碼無效"
+
+#: ../src/common/gst-auth.c:95
+msgid ""
+"Check that you typed it correctly and that you haven't activated the \"caps "
+"lock\" key"
+msgstr "請檢查您是否正確輸入並且沒有按下“caps lock”鍵"
+
+#: ../src/common/gst-auth.c:104
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "無法執行“%s”"
+
+#: ../src/common/gst-auth.c:105
+msgid "Check that you have permissions to run this command"
+msgstr "請檢查您是否有權限執行此指令。"
+
+#: ../src/common/gst-auth.c:107
+msgid "An unexpected error has occurred"
+msgstr "發生了未預期的錯誤"
+
+#: ../src/common/gst-auth.c:133
+msgid "Could not execute the backend"
+msgstr "無法執行後端程式"
+
+#: ../src/common/gst-auth.c:134
+msgid "There was an error creating the child process, the tool will close now."
+msgstr "建立子進程是發生錯誤，工具會現在關閉。"
+
+#: ../src/common/gst-dialog.c:60
+#, c-format
+msgid "Could not find widget: %s"
+msgstr "找不到視窗元件：%s"
+
+#: ../src/common/gst-dialog.c:383
+msgid "There are changes which have not been applied"
+msgstr "尚有已更改的設定未生效"
+
+#: ../src/common/gst-dialog.c:385
+msgid "Apply them now?"
+msgstr "套用已修改的設定？"
+
+#: ../src/common/gst-dialog.c:492
+#, c-format
+msgid "Error connection signal `%s' in widget `%s'"
+msgstr "將錯誤訊號‘%s’及視窗元件‘%s’建立聯繫時發生錯誤"
+
+#: ../src/common/gst-tool.c:1026
+msgid "The configuration could not be loaded"
+msgstr "無法載入組態"
+
+#: ../src/common/gst-tool.c:1028
+msgid "There was an error running the backend script"
+msgstr "執行背景模組命令稿時發生錯誤"
+
+#: ../src/common/gst-tool.c:1509
+#, c-format
+msgid "Welcome to the %s prerelease of the GNOME System Tools"
+msgstr "歡迎使用GNOME 系統工具的 %s 預覽版本"
+
+#: ../src/common/gst-tool.c:1511
+msgid ""
+"This is still a work in progress, and so it may have serious bugs. Due to "
+"the nature of these tools, bugs may render your computer <span weight=\"bold"
+"\">practically useless</span>, costing time, effort and sanity points. You "
+"have been warned. Thank you for trying out this prerelease of the GNOME "
+"System Tools!"
+msgstr ""
+"此程式仍在編寫中，所以很可能有嚴重的錯誤。因為此工具本身的性質，程式中的錯誤"
+"可能會令電腦<span weight=\"bold\">作廢</span>，損失時間及精力。您已經被提醒"
+"了。多謝使用 GNOME 系統工具的預覽版本！"
+
+#: ../src/common/gst-tool.c:1532
+msgid "Warning"
+msgstr "警告"
+
+#: ../src/common/gst-tool.c:1552
+msgid "Don't show me this again"
+msgstr "不要再顯示"
+
+#: ../src/common/gst-tool.c:1609
+msgid "GNOME System Tools"
+msgstr "GNOME 系統設定工具"
+
+#: ../src/common/gst-tool.c:1755
+msgid "Could not display help"
+msgstr "無法顯示說明"
+
+#: ../src/network/address-list.c:555
+msgid "Type address"
+msgstr "輸入地址"
+
+#: ../src/network/callbacks.c:46
+#, c-format
+msgid "Could not enable the interface %s"
+msgstr "無法啟用介面 %s"
+
+#: ../src/network/callbacks.c:50
+msgid ""
+"Check that the settings are correct for this network and that the computer "
+"is correctly connected to it."
+msgstr "請檢查這網路的設定是否妥當及與電腦的連接是否正確。"
+
+#: ../src/network/callbacks.c:237
+msgid "Could not autodetect modem device"
+msgstr "無法自動偵測數據機裝置"
+
+#: ../src/network/callbacks.c:240
+msgid ""
+"Check that the device is not busy and that is correctly attached to the "
+"computer."
+msgstr "請確定它不是正在使用中，而且是正確地連接至電腦。"
+
+#: ../src/network/callbacks.c:451
+msgid "The host name has changed"
+msgstr "主機名稱已變更"
+
+#: ../src/network/callbacks.c:454
+msgid ""
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
+msgstr "這樣會妨礙啟動新的應用程式，而且需要重新登入。是否要繼續？"
+
+#: ../src/network/callbacks.c:460
+msgid "Change _Host name"
+msgstr "更改主機名稱(_H)"
+
+#: ../src/network/hosts.c:92
+msgid "IP Address"
+msgstr "IP 地址"
+
+#: ../src/network/hosts.c:100
+msgid "Aliases"
+msgstr "別稱"
+
+#: ../src/network/location.c:145
+msgid "Create location"
+msgstr "建立位置"
+
+#: ../src/network/location.c:153
+msgid "Delete current location"
+msgstr "刪除目前的位置"
+
+#: ../src/network/location.c:367
+msgid "Do you want to remove this location?"
+msgstr "您確定要移除這位置？"
+
+#: ../src/network/location.c:440
+msgid "Changing profile"
+msgstr "更改設定組合"
+
+#: ../src/network/main.c:110
+msgid "The interface does not exist"
+msgstr "介面不存在"
+
+#: ../src/network/main.c:112
+msgid ""
+"Check that it is correctly typed and that it is correctly supported by your "
+"system."
+msgstr "請檢查輸入是否正確及您的系統是否支援該裝置。"
+
+#: ../src/network/main.c:157
+msgid "Configure a network interface"
+msgstr "設定網路界面"
+
+#: ../src/network/main.c:157
+msgid "INTERFACE"
+msgstr "介面"
+
+#: ../src/network/main.c:158
+msgid "Configure the first network interface with a specific type"
+msgstr "以指定的類型來設定第一個網路介面"
+
+#: ../src/network/main.c:158
+msgid "TYPE"
+msgstr "輸入"
+
+#: ../src/network/main.c:165
+msgid "Network settings"
+msgstr "網路連線"
+
+#: ../src/network/network.desktop.in.in.h:1
+msgid "Configure network devices and connections"
+msgstr "設定網路裝置與連線"
+
+#: ../src/network/network.desktop.in.in.h:2
+msgid "Networking"
+msgstr "網路"
+
+#: ../src/network/network-iface-ethernet.c:302
+msgid "Ethernet connection"
+msgstr "乙太網連線"
+
+#: ../src/network/network-iface-irlan.c:122
+msgid "Infrared connection"
+msgstr "紅外線連線"
+
+#: ../src/network/network-iface-isdn.c:330
+msgid "ISDN connection"
+msgstr "ISDN 數據機連線"
+
+#: ../src/network/network-iface-modem.c:253
+msgid "Modem connection"
+msgstr "數據機連線"
+
+#: ../src/network/network-iface-plip.c:211
+msgid "Parallel port connection"
+msgstr "並列埠連線"
+
+#: ../src/network/network-iface-wireless.c:245
+msgid "Wireless connection"
+msgstr "無線連接"
+
+#: ../src/network/network-iface.c:410
+#, c-format
+msgid "Activating interface \"%s\""
+msgstr "正在啟用介面“%s”"
+
+#: ../src/network/network-iface.c:522
+#, c-format
+msgid "The interface %s is not configured"
+msgstr "介面 %s 並未設置"
+
+#: ../src/network/network-iface.c:524
+#, c-format
+msgid "The interface %s is not active"
+msgstr "介面“%s”沒有使用"
+
+#: ../src/network/network-iface.c:526
+#, c-format
+msgid "The interface %s is active"
+msgstr "介面“%s”正在使用"
+
+#: ../src/services/callbacks.c:64
+#, c-format
+msgid "Settings for \"%s\""
+msgstr "“%s”的設定值"
+
+#. FIXME: put service name !!!
+#: ../src/services/callbacks.c:153
+msgid "Are you sure you want to deactivate this service?"
+msgstr "您確定要停止這個服務？"
+
+#: ../src/services/callbacks.c:156
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss"
+msgstr "這樣可能會在許多方面影響您的系統行為，很可能導致資料的消失"
+
+#: ../src/services/main.c:55
+msgid "Services settings"
+msgstr "服務設定值"
+
+#: ../src/services/services.desktop.in.in.h:1
+msgid "Configure which services will be run when the system starts"
+msgstr "設定當系統啟動時要執行哪項服務"
+
+#: ../src/services/services.desktop.in.in.h:2
+msgid "Services"
+msgstr "服務"
+
+#: ../src/services/service.c:32
+msgid "Antivirus"
+msgstr "防毒功能"
+
+#: ../src/services/service.c:32
+msgid "Analyzes your incoming mail for virus"
+msgstr "分析您的內送郵件是否有病毒"
+
+#: ../src/services/service.c:33
+msgid "Volumes mounter"
+msgstr "裝置掛載程式"
+
+#: ../src/services/service.c:33
+msgid "Mounts your volumes automatically"
+msgstr "自動掛載您的裝置"
+
+#: ../src/services/service.c:34
+msgid "Actions scheduler"
+msgstr "動作排程器"
+
+#: ../src/services/service.c:34
+msgid "Executes scheduled actions"
+msgstr "執行已排程的動作"
+
+#: ../src/services/service.c:35
+msgid "Database server"
+msgstr "資料庫伺服器"
+
+#: ../src/services/service.c:35
+msgid "Data storage system"
+msgstr "資料儲存系統"
+
+#: ../src/services/service.c:36
+msgid "Graphical login manager"
+msgstr "圖形化登入管理程式"
+
+#: ../src/services/service.c:36
+msgid "Allows users to login graphically"
+msgstr "允許使用者以圖形介面登入"
+
+#: ../src/services/service.c:37
+msgid "Folder sharing service"
+msgstr "資料夾分享服務"
+
+#: ../src/services/service.c:37
+msgid "Shares folders over your network"
+msgstr "透過您的網路共享資料夾"
+
+#: ../src/services/service.c:38
+msgid "File sharing service"
+msgstr "檔案分享服務"
+
+#: ../src/services/service.c:38 ../src/services/service.c:39
+msgid "Shares files over the Internet"
+msgstr "透過網際網路共享檔案"
+
+#: ../src/services/service.c:39
+msgid "FTP service"
+msgstr "FTP 伺服器"
+
+#: ../src/services/service.c:40
+msgid "Mail fetcher"
+msgstr "郵件擷取程式"
+
+#: ../src/services/service.c:40
+msgid "Downloads your mail from remote accounts"
+msgstr "從遠端帳號下載您的郵件"
+
+#: ../src/services/service.c:41
+msgid "Mail agent"
+msgstr "郵件代理程式"
+
+#: ../src/services/service.c:41
+msgid "Delivers your outgoing mail"
+msgstr "透過網際網路遞送您的郵件"
+
+#: ../src/services/service.c:42
+msgid "Clock synchronization service"
+msgstr "時鐘同步化服務"
+
+#: ../src/services/service.c:42
+msgid "Synchronizes your computer clock with Internet time servers"
+msgstr "透過網際網路時刻伺服器校對您的系統時鐘"
+
+#: ../src/services/service.c:43
+msgid "Printer service"
+msgstr "印表機服務"
+
+#: ../src/services/service.c:43
+msgid "Allows applications to use printers"
+msgstr "允許應用程式使用印表機"
+
+#: ../src/services/service.c:44
+msgid "Remote shell server"
+msgstr "遠端 shell 伺服器"
+
+#: ../src/services/service.c:44
+msgid "Secure shell server"
+msgstr "Secure shell server"
+
+#: ../src/services/service.c:45
+msgid "Computer activity logger"
+msgstr "電腦活動記錄器"
+
+#: ../src/services/service.c:45
+msgid "Keeps a log of your computer activity"
+msgstr "保存您的電腦活動的紀錄"
+
+#: ../src/services/service.c:46
+msgid "Web server"
+msgstr "網頁伺服器"
+
+#: ../src/services/service.c:46
+msgid "Shares your web pages over the Internet"
+msgstr "透過網際網路共享您的網頁"
+
+#: ../src/shares/callbacks.c:187
+msgid "Are you sure you want to delete this share?"
+msgstr "您確定要刪除這個共享？"
+
+#: ../src/shares/callbacks.c:189
+msgid "Other computers in your network will stop viewing this."
+msgstr "其它在您的網路上的電腦會停止查看此分享。"
+
+#: ../src/shares/main.c:90
+msgid "Add a shared path, modifies it if it already exists"
+msgstr "加入共享的路徑，如果它已存在請修改它"
+
+#: ../src/shares/main.c:90
+msgid "PATH"
+msgstr "路徑"
+
+#: ../src/shares/main.c:97
+msgid "Shared folders settings"
+msgstr "共享資料夾設定"
+
+#: ../src/shares/nautilus/nautilus-shares.c:129
+msgid "_Share folder"
+msgstr "共享資料夾(_S)"
+
+#: ../src/shares/nautilus/nautilus-shares.c:130
+msgid "Share this folder with other computers"
+msgstr "與其它電腦共享此資料夾"
+
+#: ../src/shares/nfs-acl-table.c:51
+msgid "Allowed host/network"
+msgstr "允許的主機/網路"
+
+#: ../src/shares/share-nfs-add-hosts.c:114
+#, c-format
+msgid "Hosts in the %s network"
+msgstr "主機在 %s 網路"
+
+#: ../src/shares/share-nfs-add-hosts.c:146
+msgid "Specify hostname"
+msgstr "指定主機名稱"
+
+#: ../src/shares/share-nfs-add-hosts.c:153
+msgid "Specify IP address"
+msgstr "指定 IP 地址"
+
+#: ../src/shares/share-nfs-add-hosts.c:160
+msgid "Specify network"
+msgstr "指定網路"
+
+#: ../src/shares/share-settings.c:123
+msgid "Do not share"
+msgstr "不共享"
+
+#: ../src/shares/share-settings.c:131
+msgid "SMB"
+msgstr "SMB"
+
+#: ../src/shares/share-settings.c:139
+msgid "NFS"
+msgstr "NFS"
+
+#: ../src/shares/shares.desktop.in.in.h:1
+msgid "Configure which folders are available for your network neighborhood"
+msgstr "設定那一個資料夾共享給您的網路芳鄰"
+
+#: ../src/shares/shares.desktop.in.in.h:2
+msgid "Shared Folders"
+msgstr "共享的資料夾"
+
+#: ../src/shares/transfer.c:44
+msgid "Sharing services are not installed"
+msgstr "沒有安裝分享服務"
+
+#: ../src/shares/transfer.c:46
+msgid ""
+"You need to install at least either Samba or NFS in order to share your "
+"folders. The tool will close now."
+msgstr "您最少要安裝 Samba 或 NFS 機分享您的目錄。工具現在會關閉。"
+
+#: ../src/time/main.c:464
+msgid "NTP support is not installed"
+msgstr "沒有安裝 NTP 支援"
+
+#: ../src/time/main.c:466
+msgid ""
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with Internet time servers."
+msgstr ""
+"請在系統安裝並啟用 NTP 支援，令您的本地時間伺服器能與網路時間伺服器進行同步。"
+
+#: ../src/time/main.c:762
+msgid "Time and Date Settings"
+msgstr "時間及日期設定"
+
+#: ../src/time/time.desktop.in.in.h:1
+msgid "Change system time, date, and timezone"
+msgstr "改變系統時刻、日期及時區。"
+
+#: ../src/time/time.desktop.in.in.h:2
+msgid "Time and Date"
+msgstr "時刻及日期設定"
+
+#: ../src/users/callbacks.c:571
+msgid "Error saving profile"
+msgstr "儲存設定檔時發生錯誤"
+
+#: ../src/users/callbacks.c:613
+msgid "Create New profile"
+msgstr "建立新的設定檔"
+
+#: ../src/users/callbacks.c:649
+#, c-format
+msgid "Settings for profile %s"
+msgstr "設定檔 %s 的設定值"
+
+#: ../src/users/group-settings.c:91
+msgid "Create New Group"
+msgstr "建立新的群組"
+
+#. Check if gid is available
+#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
+msgid "Invalid group ID"
+msgstr "無效的群組 ID"
+
+#: ../src/users/group-settings.c:165
+msgid "Group ID must be a positive number"
+msgstr "群組 ID 必須為正數"
+
+#. if group is root
+#: ../src/users/group-settings.c:168
+msgid "Group ID of the \"root\" user should not be modified"
+msgstr "不應修改“root”使用者的群組 ID"
+
+#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:218
+#: ../src/users/group-settings.c:288
+msgid "This would leave the system unusable"
+msgstr "這樣會讓系統停留在無法使用的狀態"
+
+#: ../src/users/group-settings.c:173
+#, c-format
+msgid "Group ID %s already exists"
+msgstr "群組 ID %s 已經存在"
+
+#. If empty.
+#: ../src/users/group-settings.c:198
+msgid "Group name is empty"
+msgstr "群組名稱是空的"
+
+#: ../src/users/group-settings.c:199
+msgid "A group name must be specified"
+msgstr "必須指定群組名稱"
+
+#. If too long.
+#: ../src/users/group-settings.c:202
+msgid "The group name is too long"
+msgstr "群組名稱過長"
+
+#: ../src/users/group-settings.c:203
+#, c-format
+msgid "To be valid, the group name should have less than %d character"
+msgid_plural "To be valid, the group name should have less than %d characters"
+msgstr[0] "要使其有效，群組名稱應該小於 %d 個字元"
+
+#. if invalid.
+#: ../src/users/group-settings.c:209
+msgid "Group name has invalid characters"
+msgstr "群組名稱含有不正確的字元。"
+
+#: ../src/users/group-settings.c:210
+msgid "Please set a valid group name, using only lower case letters"
+msgstr "請設定有效的群組名稱，當中只含有小寫字母"
+
+#. if !exist.
+#: ../src/users/group-settings.c:213
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "群組“%s”已經存在"
+
+#: ../src/users/group-settings.c:214
+msgid "Please select a different group name"
+msgstr "請選擇不同的群組名稱"
+
+#. if it's the root group
+#: ../src/users/group-settings.c:217
+msgid "Group name of the \"root\" user should not be modified"
+msgstr "不應修改“root”使用者的群組名稱"
+
+#: ../src/users/group-settings.c:287
+msgid "The group \"root\" should not be deleted"
+msgstr "不應刪除“root”群組"
+
+#: ../src/users/group-settings.c:302
+#, c-format
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "是否確定刪除群組“%s”？"
+
+#: ../src/users/group-settings.c:304
+msgid "This may leave files with invalid group ID in the filesystem."
+msgstr "這樣可能會在檔案系統中留下具有無效的群組 ID 的檔案。"
+
+#: ../src/users/group-settings.c:364
+#, c-format
+msgid "Settings for Group %s"
+msgstr "群組 %s 的設定"
+
+#: ../src/users/groups-table.c:44
+msgid "Group"
+msgstr "群組"
+
+#: ../src/users/groups-table.c:45
+msgid "GID"
+msgstr "GID"
+
+#: ../src/users/main.c:123
+msgid "User name contains"
+msgstr "使用者名稱含有"
+
+#: ../src/users/main.c:124
+msgid "User ID is"
+msgstr "使用者識別碼為"
+
+#: ../src/users/main.c:125
+msgid "Group name contains"
+msgstr "群組名稱含有"
+
+#: ../src/users/main.c:126
+msgid "User GID is"
+msgstr "群組識別碼為"
+
+#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
+msgid "Users and Groups"
+msgstr "使用者及群組"
+
+#: ../src/users/passwd.c:168
+msgid "Passwords do not match"
+msgstr "密碼不符"
+
+#: ../src/users/passwd.c:173
 #, c-format
 msgid ""
-"Set accuracy from 0 to %d numeric places. Currently set to %d places. [a]"
-msgstr "將準確度設定為小數點後 0 至 %d 個數字，目前為 %d 位。 [a]"
+"Bad password: %s.\n"
+"Please try with a new password"
+msgstr ""
+"密碼不能使用：%s。\n"
+"請嘗試輸入新的密碼"
 
-#: ../gcalctool/gtk.c:2542
-msgid "Activated no operator precedence mode"
-msgstr "啟用了四則運算不分先後次序的模式"
+#: ../src/users/profile-settings.c:125
+msgid "The profile must have a name"
+msgstr "必須指定設定檔的名稱"
 
-#: ../gcalctool/gtk.c:2552
-msgid "Activated expression mode with operator precedence"
-msgstr "啟用了正常四則運算模式"
+#: ../src/users/profile-settings.c:130
+msgid "The profile must have a default home"
+msgstr "設定檔中必須指定使用者預設的個人目錄"
 
-#: ../gcalctool/gtk.c:2846
-msgid "Accuracy value out of range"
-msgstr "精確度超出可接受的範圍"
+#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
+msgid "The profile must have a default shell"
+msgstr "設定檔中必須指定使用者預設的 shell"
 
-#: ../gcalctool/mp.c:3356
-msgid "Negative X and non-integer Y not supported"
-msgstr "不支援 X 為負數而 Y 不是整數的情況"
+#: ../src/users/profile-settings.c:208
+msgid "The default profile should not be deleted"
+msgstr "不可刪除“Default”設定檔"
 
-#: ../gcalctool/mpmath.c:268
-msgid "Error, cannot calculate cosine"
-msgstr "出現錯誤，無法計算餘弦值"
+#: ../src/users/profile-settings.c:209
+msgid "This profile is used for setting default data for new users"
+msgstr "這個設定檔是用來設定新使用者的預設資料"
 
-#: ../gcalctool.desktop.in.h:2
-msgid "Perform calculations"
-msgstr "進行計算"
+#: ../src/users/profile-settings.c:218
+#, c-format
+msgid "Delete profile \"%s\"?"
+msgstr "是否刪除設定檔“%s”？"
 
-#~ msgid "+/-"
-#~ msgstr "±"
+#: ../src/users/profile-settings.c:220
+msgid "You will not be able to recover this profile after pressing \"apply\"."
+msgstr "在按下“套用”之後您將無法復原此設定組合。"
+
+#. Column name,          Adv_state_show,	Basic_state_show
+#: ../src/users/profiles-table.c:39
+msgid "Profile"
+msgstr "設定檔"
+
+#: ../src/users/profiles-table.c:40
+msgid "Comment"
+msgstr "備註"
+
+#: ../src/users/search-bar/search-bar.c:228
+msgid "C_lear"
+msgstr "清除(_L)"
+
+#: ../src/users/search-bar/search-bar.c:329
+msgid "Choice"
+msgstr "選擇"
+
+#: ../src/users/search-bar/search-bar.c:339
+msgid "Text"
+msgstr "文字"
+
+#: ../src/users/user-settings.c:73
+msgid "The \"root\" user should not be deleted"
+msgstr "不可刪除“root”使用者"
+
+#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:311
+#: ../src/users/user-settings.c:406 ../src/users/user-settings.c:442
+msgid "This would leave the system unusable."
+msgstr "這樣會讓系統停留在無法使用的狀態。"
+
+#: ../src/users/user-settings.c:83
+#, c-format
+msgid "Are you sure you want to delete user \"%s\"?"
+msgstr "是否確定刪除使用者“%s”？"
+
+#: ../src/users/user-settings.c:85
+msgid ""
+"This will disable this user's access to the system without deleting the "
+"user's home directory."
+msgstr "這會停止該使用者存取系統，但他的家目錄不會被刪除。"
+
+#: ../src/users/user-settings.c:189
+msgid "User Account Editor"
+msgstr "帳號編輯程式"
+
+#: ../src/users/user-settings.c:285
+msgid "The user name is empty"
+msgstr "使用者名稱是空的"
+
+#: ../src/users/user-settings.c:286
+msgid "A user name must be specified."
+msgstr "必須指定使用者名稱。"
+
+#. = sizeof (ut.ut_name)
+#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:300
+msgid "The user name is too long"
+msgstr "使用者名稱過長"
+
+#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:301
+#, c-format
+msgid "To be valid, the user name should have less than %d character"
+msgid_plural "To be valid, the user name should have less than %d characters"
+msgstr[0] "要使其有效，使用者名稱應該小於 %d 個字元"
+
+#: ../src/users/user-settings.c:310
+msgid "User name for the \"root\" user should not be modified"
+msgstr "不應修改“root”使用者名稱"
+
+#: ../src/users/user-settings.c:316
+msgid "User name has invalid characters"
+msgstr "使用者名稱含有無效的字"
+
+#: ../src/users/user-settings.c:317
+msgid ""
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"請設定有效的使用者名稱，第一個字元只可以是小寫字母，其它的必須是小寫字母或數"
+"字。"
+
+#: ../src/users/user-settings.c:323
+#, c-format
+msgid "User name \"%s\" already exists"
+msgstr "該使用者名稱“%s”已經存在"
+
+#: ../src/users/user-settings.c:324
+msgid "Please select a different user name."
+msgstr "請選擇不同的使用者名稱。"
+
+#: ../src/users/user-settings.c:349
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "備註中出現無效的字元“%c”"
+
+#: ../src/users/user-settings.c:350
+msgid "Check that this character is not used."
+msgstr "請檢查有無使用此不正確的字元。"
+
+#: ../src/users/user-settings.c:398
+msgid "Home directory should not be empty"
+msgstr "個人目錄不可留空"
+
+#: ../src/users/user-settings.c:399
+msgid "Make sure you provide a home directory."
+msgstr "請確定您已提供家目錄。"
+
+#: ../src/users/user-settings.c:401
+msgid "Incomplete path in home directory"
+msgstr "個人目錄含有不完整的路徑"
+
+#: ../src/users/user-settings.c:402
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>."
+msgstr ""
+"請輸入家目錄的完整路徑。\n"
+"<span size=\"smaller\">例如：/home/john</span>。"
+
+#: ../src/users/user-settings.c:405
+msgid "Home directory of the \"root\" user should not be modified"
+msgstr "不應修改“root”使用者的家目錄"
+
+#: ../src/users/user-settings.c:438
+msgid "Invalid user ID"
+msgstr "無效的使用者 ID"
+
+#: ../src/users/user-settings.c:439
+msgid "User ID must be a positive number."
+msgstr "使用者識別碼必須為正數。"
+
+#: ../src/users/user-settings.c:441
+msgid "User ID of the \"root\" user should not be modified"
+msgstr "不應修改“root”使用者的使用者 ID"
+
+#: ../src/users/user-settings.c:459
+#, c-format
+msgid "User ID %s already exists"
+msgstr "使用者 ID %s 已經存在"
+
+#: ../src/users/user-settings.c:461
+msgid ""
+"Several users may share a single user ID, but it's not common and may lead "
+"to security problems."
+msgstr ""
+"有的使用者可能會共享單一的使用者 ID ，但這並不普遍而且可能導致安全性的問題。"
+
+#: ../src/users/user-settings.c:479
+msgid "Incomplete path in shell"
+msgstr "shell 含有不完整的路徑"
+
+#: ../src/users/user-settings.c:480
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/sh</span>."
+msgstr ""
+"請輸入 shell 的完整路徑\n"
+"<span size=\"smaller\">例如：/bin/sh</span>。"
+
+#: ../src/users/user-settings.c:502
+msgid "Password should not be empty"
+msgstr "密碼不可留空"
+
+#: ../src/users/user-settings.c:503
+msgid "A password must be provided."
+msgstr "必須提供密碼。"
+
+#: ../src/users/user-settings.c:505
+msgid "Password confirmation isn't correct"
+msgstr "確認密碼程序失敗"
+
+#: ../src/users/user-settings.c:506
+msgid "Check that you have provided the same password in both text fields."
+msgstr "請檢查您是否在兩個文字欄位中提供相同的密碼。"
+
+#: ../src/users/user-settings.c:780
+#, c-format
+msgid "Settings for User %s"
+msgstr "使用者 %s 的設定"
+
+#: ../src/users/users-table.c:61
+msgid "User"
+msgstr "使用者"
+
+#: ../src/users/users-table.c:62
+msgid "Home"
+msgstr "個人目錄"
+
+#: ../src/users/users-table.c:63
+msgid "User details"
+msgstr "使用者詳細資訊"
+
+#: ../src/users/users-table.c:64
+msgid "UID"
+msgstr "UID"
+
+#: ../src/users/users-table.c:65
+msgid "Shell"
+msgstr "Shell"
+
+#: ../src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "新增或移除使用者及群組"
+
+#~ msgid "/dev/hda"
+#~ msgstr "/dev/hda"
+
+#~ msgid "/dev/hdb"
+#~ msgstr "/dev/hdb"
+
+#~ msgid "/dev/hdc"
+#~ msgstr "/dev/hdc"
+
+#~ msgid "/dev/hdd"
+#~ msgstr "/dev/hdd"
+
+#~ msgid ""
+#~ "/dev/modem\n"
+#~ "/dev/ttyS0\n"
+#~ "/dev/ttyS1\n"
+#~ "/dev/ttyS2\n"
+#~ "/dev/ttyS3"
+#~ msgstr ""
+#~ "/dev/modem\n"
+#~ "/dev/ttyS0\n"
+#~ "/dev/ttyS1\n"
+#~ "/dev/ttyS2\n"
+#~ "/dev/ttyS3"
+
+#~ msgid ":"
+#~ msgstr "："
+
+#~ msgid "The group name should have less than %i characters for being valid"
+#~ msgstr "群組名稱應小於 %i 個字元才可以"
