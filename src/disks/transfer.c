@@ -270,9 +270,9 @@ transfer_xml_disk_to_config (GstDisksStorage *storage, xmlNodePtr disk_node)
 			partitions = g_list_remove (partitions, part);
 		
 		partitions = g_list_append (partitions, part);
-	}
 
-	g_object_set (G_OBJECT (storage), "partitions", partitions, NULL);
+		g_object_set (G_OBJECT (storage), "partitions", partitions, NULL);
+	}
 }
 		
 
