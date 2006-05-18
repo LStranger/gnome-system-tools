@@ -29,11 +29,11 @@ endif
 SUBDIRS = \
 	common			\
 	$(services_SUBDIR)	\
+	$(shares_SUBDIR)	\
 	$(time_SUBDIR)	
 #	  $(network_SUBDIR) 	\
 #	  $(boot_SUBDIR)	\
 #	  $(users_SUBDIR)	\
 #	  $(disks_SUBDIR)	\
-#	  $(shares_SUBDIR)
 
 
