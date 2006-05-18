@@ -4,7 +4,7 @@
 <glade-interface>
 <requires lib="gnome"/>
 
-<widget class="GtkWindow" id="Time Dialog">
+<widget class="GtkWindow" id="main_dialog">
   <property name="title" translatable="yes">window1</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -50,8 +50,8 @@
 		  <property name="numeric">True</property>
 		  <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		  <property name="snap_to_ticks">False</property>
-		  <property name="wrap">False</property>
-		  <property name="adjustment">0 -100 100 1 10 10</property>
+		  <property name="wrap">True</property>
+		  <property name="adjustment">0 0 23 1 10 10</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -63,7 +63,7 @@
 	      <child>
 		<widget class="GtkLabel" id="label103">
 		  <property name="visible">True</property>
-		  <property name="label">:</property>
+		  <property name="label" translatable="yes">:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -94,8 +94,8 @@
 		  <property name="numeric">True</property>
 		  <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		  <property name="snap_to_ticks">False</property>
-		  <property name="wrap">False</property>
-		  <property name="adjustment">0 -100 100 1 10 10</property>
+		  <property name="wrap">True</property>
+		  <property name="adjustment">0 0 59 1 10 10</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -107,7 +107,7 @@
 	      <child>
 		<widget class="GtkLabel" id="label104">
 		  <property name="visible">True</property>
-		  <property name="label">:</property>
+		  <property name="label" translatable="yes">:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">False</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -138,8 +138,8 @@
 		  <property name="numeric">True</property>
 		  <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		  <property name="snap_to_ticks">False</property>
-		  <property name="wrap">False</property>
-		  <property name="adjustment">0 -100 100 1 10 10</property>
+		  <property name="wrap">True</property>
+		  <property name="adjustment">0 0 59 1 10 10</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -227,8 +227,8 @@
 		      <child>
 			<widget class="GtkImage" id="image11">
 			  <property name="visible">True</property>
-			  <property name="stock">gtk-index</property>
 			  <property name="icon_size">4</property>
+			  <property name="icon_name">stock_internet</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
@@ -309,8 +309,8 @@
 		      <child>
 			<widget class="GtkImage" id="image12">
 			  <property name="visible">True</property>
-			  <property name="stock">gtk-home</property>
 			  <property name="icon_size">4</property>
+			  <property name="icon_name">stock_timezone</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
@@ -509,19 +509,6 @@
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
-
-	  <child>
-	    <widget class="GtkButton" id="time_zone_help_button">
-	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="label">gtk-help</property>
-	      <property name="use_stock">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="focus_on_click">True</property>
-	      <property name="response_id">-11</property>
-	    </widget>
-	  </child>
 
 	  <child>
 	    <widget class="GtkButton" id="closebutton1">
@@ -792,19 +779,6 @@
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 
 	  <child>
-	    <widget class="GtkButton" id="time_server_help_button">
-	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="label">gtk-help</property>
-	      <property name="use_stock">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="focus_on_click">True</property>
-	      <property name="response_id">-11</property>
-	    </widget>
-	  </child>
-
-	  <child>
 	    <widget class="GtkButton" id="closebutton2">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
@@ -843,7 +817,7 @@
 	      <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 	      <child>
-		<widget class="GtkTreeView" id="ntp_list2">
+		<widget class="GtkTreeView" id="ntp_list">
 		  <property name="visible">True</property>
 		  <property name="headers_visible">False</property>
 		  <property name="rules_hint">True</property>
