@@ -28,8 +28,8 @@ endif
 
 SUBDIRS = \
 	common
+	$(time_SUBDIR)		\
 #	  $(network_SUBDIR) 	\
-#	  $(time_SUBDIR) 	\
 #	  $(boot_SUBDIR)	\
 #	  $(services_SUBDIR)	\
 #	  $(users_SUBDIR)	\
