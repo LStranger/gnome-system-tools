@@ -55,9 +55,6 @@ typedef enum {
 	GST_MAJOR_INVALID = 6  /* Only for validation purposes. Always last in enum */
 } GstReportMajor;
 
-typedef struct _GstTool             GstTool;
-typedef struct _GstToolClass        GstToolClass;
-
 typedef struct _GstDialog           GstDialog;
 typedef struct _GstDialogClass      GstDialogClass;
 
@@ -78,7 +75,7 @@ typedef struct _GstDirectiveEntry   GstDirectiveEntry;
 typedef void (GstDirectiveFunc)    (GstDirectiveEntry *entry);
 
 struct _GstDirectiveEntry {
-	GstTool          *tool;
+	void             *tool;
 	
 	GstDirectiveFunc *callback;
 	gpointer          data;

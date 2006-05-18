@@ -1,3 +1,18 @@
+2006-05-18  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-conf.[ch] (gst_conf_add_notify): added
+	* gst-platform-dialog.[ch]: deprecates gst-platform.[ch], does the
+	same, but using liboobs and being somewhat more encapsulated
+	* gst-platform.[ch]: to the Attic
+	* gst-dialog.[ch]: Inherit from GtkDialog instead of GnomeApp,
+	use G_DEFINE_TYPE and stuff, removed unused code
+	* gst-tool.[ch]: use G_DEFINE_TYPE, remove/comment out all the code
+	for communicating with the backends. Replaced with OobsSession.
+	removed no longer necessary code. Note that there's still lots of 
+	code to delete/refactor.
+	* gst-types.h: GstTool and GstToolClass are now defined in gst-tool.h
+	* gst-widget.c: use gst_tool_is_authenticated()
+
 2006-03-13  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Release 2.14.0

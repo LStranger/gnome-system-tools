@@ -47,7 +47,7 @@ struct _GstDialogSignal {
 };
 
 struct _GstDialog {
-	GnomeApp app;
+	GtkDialog dialog;
 	GstTool *tool;
 
 	/* Glade files */
@@ -64,14 +64,10 @@ struct _GstDialog {
 };
 
 struct _GstDialogClass {
-	GnomeAppClass parent_class;
-
-	void (*apply)             (GstDialog *);
-	void (*restore)           (GstDialog *);
-	void (*complexity_change) (GstDialog *);
+	GtkDialogClass parent_class;
 };
 
-GtkType             gst_dialog_get_type            (void);
+GType               gst_dialog_get_type            (void);
 
 GstDialog          *gst_dialog_new                 (GstTool *tool, 
 						    const char *widget, 

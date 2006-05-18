@@ -33,6 +33,8 @@ void     gst_conf_set_integer (GstTool *tool, const gchar *key, gint value);
 gint     gst_conf_get_integer (GstTool *tool, const gchar *key);
 void     gst_conf_set_string  (GstTool *tool, const gchar *key, const gchar *value);
 gchar *  gst_conf_get_string  (GstTool *tool, const gchar *key);
+void     gst_conf_add_notify  (GstTool *tool, const gchar *key, GConfClientNotifyFunc func, gpointer data);
+
 
 G_END_DECLS
 

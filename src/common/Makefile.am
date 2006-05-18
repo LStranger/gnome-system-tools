@@ -16,11 +16,10 @@ libsetuptool_a_SOURCES =				\
 	gst-tool.c		gst-tool.h		\
 	gst-report-hook.c	gst-report-hook.h	\
 	gst-report-line.c	gst-report-line.h	\
-	gst-platform.c		gst-platform.h		\
+	gst-platform-dialog.c	gst-platform-dialog.h	\
 	gst-ui.c		gst-ui.h		\
 	gst-util.c		gst-util.h		\
 	gst-conf.c		gst-conf.h		\
-	gst-auth.c		gst-auth.h		\
 	gst-filter.c		gst-filter.h		\
 	gst.h						\
 	gst-marshal.h					\

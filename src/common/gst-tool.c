@@ -16,27 +16,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Jacob Berkman <jacob@ximian.com>
- *          Hans Petter Jansson <hpj@ximian.com>
- *          Carlos Garnacho Parro <garparr@teleline.es>
+ * Authors: Jacob Berkman         <jacob@ximian.com>
+ *          Hans Petter Jansson   <hpj@ximian.com>
+ *          Carlos Garnacho Parro <carlosg@gnome.org>
  */
 
-#include <config.h>
-
+#include <glib.h>
 #include "gst-tool.h"
 #include "gst-dialog.h"
 #include "gst-report-line.h"
 #include "gst-report-hook.h"
-#include "gst-platform.h"
+#include "gst-platform-dialog.h"
 #include "gst-ui.h"
-#include "gst-auth.h"
-#include "gst-xml.h"
 #include "gst-marshal.h"
-
-#ifdef GST_HAVE_ARCHIVER
-#  include <bonobo.h>
-#  include <config-archiver/archiver-client.h>
-#endif
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
@@ -55,106 +47,303 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-#define BUFFER_SIZE 2048
-#define GST_DEBUG 1
-#define GST_TOOL_EOR "<!-- GST: end of request -->"
-#define REDRAW_NCHARS 50
+#include <config.h>
 
-/* Define this if you want the frontend to run the backend under strace */
-/*#define GST_DEBUG_STRACE_BACKEND*/
+#define GST_TOOL_GET_PRIVATE (o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_TOOL, GstToolPrivate))
 
-/* pixmaps used for distros/OS's */
-GdkPixbuf *redhat;
-GdkPixbuf *debian;
-GdkPixbuf *mandrake;
-GdkPixbuf *turbolinux;
-GdkPixbuf *slackware;
-GdkPixbuf *suse;
-GdkPixbuf *freebsd;
-GdkPixbuf *gentoo;
-GdkPixbuf *pld;
-GdkPixbuf *openna;
-GdkPixbuf *fedora;
-GdkPixbuf *conectiva;
-GdkPixbuf *black_panther;
-GdkPixbuf *vine;
-GdkPixbuf *specifix;
-GdkPixbuf *archlinux;
-GdkPixbuf *vidalinux;
+typedef struct _GstToolPrivate GstToolPrivate;
 
-enum {
-	BOGUS,
-	FILL_GUI,
-	FILL_XML,
-	CLOSE,
-	LAST_SIGNAL
+struct _GstToolPrivate {
+
 };
 
 enum {
 	PLATFORM_LIST_COL_LOGO,
 	PLATFORM_LIST_COL_NAME,
-	PLATFORM_LIST_COL_PLATFORM,
-
+	PLATFORM_LIST_COL_ID,
 	PLATFORM_LIST_COL_LAST
 };
 
-static GObjectClass *parent_class;
-static gint gsttool_signals [LAST_SIGNAL] = { 0 };
+enum {
+	UPDATE_GUI,
+	UPDATE_CONFIG,
+	CLOSE,
+	LAST_SIGNAL
+};
 
-static void     gst_tool_idle_run_directives_remove (GstTool *tool);
-static void     gst_tool_idle_run_directives_add    (GstTool *tool);
-static void     gst_tool_directive_free             (GstDirectiveEntry*);
+static gint signals [LAST_SIGNAL] = { 0 };
 
-static gboolean platform_set_current_cb   (GstTool *tool, GstReportLine *rline, gpointer data);
-static gboolean platform_unsupported_cb   (GstTool *tool, GstReportLine *rline, gpointer data);
-static gboolean report_finished_cb        (GstTool *tool, GstReportLine *rline, gpointer data);
+static void  gst_tool_class_init   (GstToolClass *class);
+static void  gst_tool_init         (GstTool      *tool);
+static void  gst_tool_finalize     (GObject      *object);
 
-static void report_dispatch (GstTool *tool);
-static void poll_backend    (GstTool *tool);
+static GObject* gst_tool_constructor (GType                  type,
+				      guint                  n_construct_properties,
+				      GObjectConstructParam *construct_params);
 
-static void gst_tool_show_report_window (GstTool *tool, const gchar *report);
-static void gst_tool_hide_report_window (GstTool *tool);
+static void  gst_tool_set_property (GObject      *object,
+				    guint         prop_id,
+				    const GValue *value,
+				    GParamSpec   *pspec);
 
-static gchar* gst_tool_read_line_from_backend (GstTool *tool);
+static void gst_tool_close         (GstTool *tool);
 
+static void gst_tool_create_platform_list        (GstTool *tool,
+						  GtkTreeView *list);
+static void gst_tool_populate_platform_list      (GstTool *tool);
+static const gchar* gst_tool_run_platform_dialog (GstTool *tool);
+
+
+
+enum {
+	PROP_0,
+	PROP_NAME,
+	PROP_TITLE
+};
+
+G_DEFINE_TYPE (GstTool, gst_tool, G_TYPE_OBJECT);
+
+/* FIXME
 static GstReportHookEntry common_report_hooks[] = {
 /*        key                 function                    type                      allow_repeat user_data */
-	{ "end",              report_finished_cb,         GST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
+/*	{ "end",              report_finished_cb,         GST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
 	{ "platform_success", platform_set_current_cb,    GST_REPORT_HOOK_SAVE,     TRUE,        NULL }, 
 	{ "platform_unsup",   platform_unsupported_cb,    GST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
 	{ "platform_undet",   platform_unsupported_cb,    GST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
 	{ NULL,               NULL,                       -1,                       FALSE,       NULL }
 };
+*/
 
 static gchar *location_id = NULL;    /* Location in which we are editing */
 
-/* --- Report hook and signal callbacks --- */
+static void
+gst_tool_class_init (GstToolClass *class)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
+	object_class->set_property = gst_tool_set_property;
+	object_class->constructor  = gst_tool_constructor;
+	object_class->finalize     = gst_tool_finalize;
+
+	class->close = gst_tool_close;
+	class->update_gui = NULL;
+	class->update_config = NULL;
+
+	g_object_class_install_property (object_class,
+					 PROP_NAME,
+					 g_param_spec_string ("name",
+							      "name",
+							      "Tool name",
+							      NULL,
+							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+	g_object_class_install_property (object_class,
+					 PROP_TITLE,
+					 g_param_spec_string ("title",
+							      "title",
+							      "Tool title",
+							      NULL,
+							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+	signals[UPDATE_GUI] =
+		g_signal_new ("update_gui",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GstToolClass, update_gui),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+	signals[UPDATE_CONFIG] = 
+		g_signal_new ("update_config",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GstToolClass, update_config),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+	signals[CLOSE] = 
+		g_signal_new ("close",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GstToolClass, close),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+
+	g_type_class_add_private (object_class,
+				  sizeof (GstToolPrivate));
+}
+
+static gboolean
+report_window_close_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
+{
+	gtk_widget_hide (widget);
+	return TRUE;
+}
+
+static void
+gst_tool_init (GstTool *tool)
+{
+	GdkPixbuf *pixbuf;
+	GladeXML  *xml;
+
+	tool->name = NULL;
+	tool->title = NULL;
+	tool->icon_theme = gtk_icon_theme_get_default ();
+	tool->glade_common_path  = INTERFACES_DIR "/common.glade";
+
+	tool->session = oobs_session_get ();
+	tool->gconf_client = gconf_client_get_default ();
+
+	xml = gst_tool_load_glade_common (tool, "report_window");
+
+	tool->report_window = glade_xml_get_widget (xml, "report_window");
+	tool->report_label = glade_xml_get_widget (xml, "report_label");
+	tool->report_progress = glade_xml_get_widget (xml, "report_progress");
+	tool->report_pixmap = glade_xml_get_widget (xml, "report_pixmap");
+	g_signal_connect (G_OBJECT (tool->report_window), "delete_event",
+			  G_CALLBACK (report_window_close_cb), tool);
+
+	pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "gnome-system-config", 48, 0, NULL);
+	gtk_image_set_from_pixbuf (GTK_IMAGE (tool->report_pixmap), pixbuf);
+	gdk_pixbuf_unref (pixbuf);
+
+	g_object_unref (xml);
+	
+	/* load the report window */
+	/* FIXME
+	xml = gst_tool_load_glade_common (tool, "report_window");
+
+	tool->report_window = glade_xml_get_widget (xml, "report_window");
+
+	g_signal_connect (G_OBJECT (tool->report_window), "delete_event",
+			  G_CALLBACK (report_window_close_cb), tool);
+	*/
+/*
+	tool->report_label    = glade_xml_get_widget (xml, "report_label");
+	tool->report_progress = glade_xml_get_widget (xml, "report_progress");
+	tool->report_pixmap   = glade_xml_get_widget (xml, "report_pixmap");
+
+	pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "gnome-system-config", 48, 0, NULL);
+	gtk_image_set_from_pixbuf (GTK_IMAGE (tool->report_pixmap), pixbuf);
+	gdk_pixbuf_unref (pixbuf);
+*/
+
+	/* load the platforms list */
+	xml = gst_tool_load_glade_common (tool, "platform_dialog");
+	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
+	gst_tool_create_platform_list (tool, GTK_TREE_VIEW (tool->platform_list));
+	gst_tool_populate_platform_list (tool);
+
+	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
+	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
+	g_object_unref (xml);
+
+	/* load the remote config dialog */
+	/* FIXME
+	xml = gst_tool_load_glade_common (tool, "remote_dialog");
+	tool->remote_dialog = glade_xml_get_widget (xml, "remote_dialog");
+	tool->remote_hosts_list = glade_xml_get_widget (xml, "remote_hosts_list");
+	gst_tool_create_remote_hosts_list (GTK_TREE_VIEW (tool->remote_hosts_list), tool);
+	*/
+}
+
+static GObject*
+gst_tool_constructor (GType                  type,
+		      guint                  n_construct_properties,
+		      GObjectConstructParam *construct_params)
+{
+	GObject *object;
+	GstTool *tool;
+	gchar *pixmap_path, *widget_name;
+	const gchar *platform;
+	GtkWidget *dialog;
+
+	object = (* G_OBJECT_CLASS (gst_tool_parent_class)->constructor) (type,
+									  n_construct_properties,
+									  construct_params);
+	tool = GST_TOOL (object);
+
+	if (tool->name) {
+		tool->glade_path = g_strdup_printf (INTERFACES_DIR "/%s.glade", tool->name);
+
+		widget_name = g_strdup_printf ("%s_admin", tool->name);
+		pixmap_path = g_strdup_printf (PIXMAPS_DIR "/%s.png", tool->name);
+
+		tool->main_dialog = gst_dialog_new (tool, widget_name, tool->title);
+		gtk_window_set_default_icon_from_file (pixmap_path, NULL);
+
+		g_free (widget_name);
+		g_free (pixmap_path);
+	}
+
+	if (!oobs_session_get_platform (tool->session)) {
+		dialog = gst_platform_dialog_new (tool->session);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+	}
+
+	return object;
+}
+
+static void
+gst_tool_set_property (GObject      *object,
+		       guint         prop_id,
+		       const GValue *value,
+		       GParamSpec   *pspec)
+{
+	GstTool *tool = GST_TOOL (object);
+
+	switch (prop_id) {
+	case PROP_NAME:
+		tool->name = g_value_dup_string (value);
+		break;
+	case PROP_TITLE:
+		tool->title = g_value_dup_string (value);
+		break;
+	}
+}
+
+static void
+gst_tool_finalize (GObject *object)
+{
+	/* FIXME: free stuff */
+	(* G_OBJECT_CLASS (gst_tool_parent_class)->finalize) (object);
+}
+
+static void
+gst_tool_close (GstTool *tool)
+{
+	/* FIXME: add things to do when closing the tool */
+	gtk_main_quit ();
+}
+
+GObject*
+gst_tool_new (const gchar *name, const gchar *title)
+{
+	return g_object_new (GST_TYPE_TOOL,
+			     "name",  name,
+			     "title", title,
+			     NULL);
+}
+
+void
+gst_tool_update_gui (GstTool *tool)
+{
+	g_signal_emit (G_OBJECT (tool), signals[UPDATE_GUI], 0, NULL);
+}
+
+
+/* --- Report hook and signal callbacks --- */
 static void
 on_platform_list_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	GstPlatform *platform;
+	GstTool *tool = GST_TOOL (data);
 	gboolean selected;
-	GstTool *tool = (GstTool *) data;
-	
-	if (tool->current_platform)
-		gst_platform_free (tool->current_platform);
-	
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		gtk_tree_model_get (model, &iter, PLATFORM_LIST_COL_PLATFORM, &platform, -1);
-		tool->current_platform = gst_platform_dup (platform);
 
-		selected = TRUE;
-	} else {
-		tool->current_platform = NULL;
-		selected = FALSE;
-	}
-
+	selected = gtk_tree_selection_get_selected (selection, NULL, NULL);
 	gtk_widget_set_sensitive (tool->platform_ok_button, selected);
 }
 
+/*
 static gboolean
 platform_set_current_cb (GstTool *tool, GstReportLine *rline, gpointer data)
 {
@@ -178,19 +367,7 @@ platform_unsupported_cb (GstTool *tool, GstReportLine *rline, gpointer data)
 
 	return TRUE;
 }
-
-/* --- Other Report Hooks --- */
-
-static gboolean
-report_finished_cb (GstTool *tool, GstReportLine *rline, gpointer data)
-{
-	tool->report_dispatch_pending = FALSE;
-	tool->report_finished = TRUE;
-
-	gtk_widget_hide (tool->report_window);
-	
-	return TRUE;
-}
+*/
 
 /* --- GstTool --- */
 
@@ -202,6 +379,7 @@ gst_tool_add_supported_platform (GstTool *tool, GstPlatform *platform)
 
 	/* Avoid duplicates. Backend shouldn't serve duplicates, but
 	 * we're paranoid here. */
+	/* FIXME
 	g_return_if_fail
 		(g_slist_find_custom (tool->supported_platforms_list, platform,
 		    (GCompareFunc) gst_platform_cmp) == NULL);
@@ -209,6 +387,7 @@ gst_tool_add_supported_platform (GstTool *tool, GstPlatform *platform)
 	tool->supported_platforms_list =
 		g_slist_insert_sorted (tool->supported_platforms_list, platform,
 		    (GCompareFunc) gst_platform_cmp);
+	*/
 }
 
 void
@@ -216,6 +395,8 @@ gst_tool_clear_supported_platforms (GstTool *tool)
 {
 	GSList *list;
 	GstPlatform *platform;
+
+	/* FIXME
 
 	g_return_if_fail (tool != NULL);
 
@@ -231,6 +412,7 @@ gst_tool_clear_supported_platforms (GstTool *tool)
 		g_slist_free (tool->supported_platforms_list);
 		tool->supported_platforms_list = NULL;
 	}
+	*/
 }
 
 GladeXML *
@@ -276,148 +458,16 @@ gst_tool_get_dialog (GstTool *tool)
 }
 
 gboolean
-gst_tool_get_access (GstTool *tool)
+gst_tool_is_authenticated (GstTool *tool)
 {
-	return tool->root_access != ROOT_ACCESS_NONE;
-}
-
-static void
-report_clear_lines (GstTool *tool)
-{
-	GSList *list;
-	GstReportLine *rline;
-
-	for (list = tool->report_line_list; list; list = g_slist_next (list))
-	{
-		rline = (GstReportLine *) list->data;
-		gst_report_line_free (rline);
-	}
-
-	if (tool->report_line_list)
-	{
-		g_slist_free (tool->report_line_list);
-		tool->report_line_list = NULL;
-	}
-}
-
-static void
-report_dispatch (GstTool *tool)
-{
-	GSList *list;
-	GstReportLine *rline;
-
-	for (list = tool->report_line_list; list; list = g_slist_next (list))
-	{
-		rline = (GstReportLine *) list->data;
-
-		if (gst_report_line_get_handled (rline))
-			continue;
-
-		if (strcmp (gst_report_line_get_key (rline), "progress"))
-			gst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
-		
-		gst_report_line_set_handled (rline, TRUE);
-	}
-
-	if (tool->report_finished && tool->input_id)
-	{
-		gdk_input_remove (tool->input_id);
-		tool->input_id = 0;
-	}
-}
-
-static void
-report_progress_do (GstTool *tool)
-{
-	GstReportLine *rline;
-	gchar *buffer;
-	gint i = 0;
-
-	if (tool->input_block)
-		return;
-
-	if (!tool->line)
-		tool->line = g_string_new ("");
-
-	while ((buffer = gst_tool_read_line_from_backend (tool))) {
-		for (i = 0; (i < strlen (buffer)); i++) {
-			gchar c = buffer [i];
-
-			if (c == '\n') {
-				/* End of line */
-
-				/* Report line; add to list */
-				rline = gst_report_line_new_from_string (tool->line->str);
-
-				if (rline)
-					tool->report_line_list = g_slist_append (
-						tool->report_line_list, rline);
-
-				g_string_assign (tool->line, "");
-
-				if (!tool->report_dispatch_pending) {
-					report_dispatch (tool);
-					if (tool->report_finished) {
-						i++;
-						goto full_break;
-					}
-				}
-			} else {
-				/* Add character to end of current line */
-				g_string_append_c (tool->line, buffer [i]);
-			}
-		}
-
-		g_free (buffer);
-	}
-
-full_break:
-	if (tool->report_finished) {
-		if ((strlen (buffer) - i) > 0)
-			tool->xml_document = g_string_new (&buffer [i]);
-		
-		g_string_free (tool->line, TRUE);
-		tool->line = NULL;
-	}
-	
-	if (!tool->report_dispatch_pending)
-		report_dispatch (tool);
-	
-	if (tool->report_finished && tool->input_id)
-	{
-		gdk_input_remove (tool->input_id);
-		tool->input_id = 0;
-	}
-
-	g_free (buffer);
-}
-
-static gboolean
-report_window_close_cb (GtkWidget *window, GdkEventAny *ev, gpointer data)
-{
-	GstTool *tool = data;
-	gtk_widget_hide (tool->report_window);
+	/* FIXME */
 	return TRUE;
-}
-
-static void
-report_progress (GstTool *tool)
-{
-	tool->report_finished = FALSE;
-	tool->report_dispatch_pending = FALSE;
-
-	gst_tool_clear_supported_platforms (tool);
-	report_clear_lines (tool);
-
-	report_progress_do (tool);
-
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
 }
 
 static GSList *
 gst_tool_get_supported_platforms (GstTool *tool)
 {
+/*
 	xmlDoc *doc;
 	xmlNode *root, *node;
 	GSList *list;
@@ -437,30 +487,10 @@ gst_tool_get_supported_platforms (GstTool *tool)
 	}
 
 	return list;
+*/
 }
 
-static void
-gst_tool_create_distro_images (void)
-{
-	debian = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/debian.png", NULL);
-	redhat = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/redhat.png", NULL);
-	mandrake = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/mandrake.png", NULL);
-	turbolinux = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/turbolinux.png", NULL);
-	slackware = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/slackware.png", NULL);
-	suse = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/suse.png", NULL);
-	freebsd = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/freebsd.png", NULL);
-	gentoo = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gentoo.png", NULL);
-	pld = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/pld.png", NULL);
-	openna = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/openna.png", NULL);
-	fedora = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/fedora.png", NULL);
-	conectiva = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/conectiva.png", NULL);
-	black_panther = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/black_panther.png", NULL);
-	vine = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vine.png", NULL);
-	specifix = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/specifix.png", NULL);
-	archlinux = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/archlinux.png", NULL);
-	vidalinux = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vidalinux.png", NULL);
-}
-
+/*
 static void
 gst_tool_fill_platform_tree (GstTool *tool)
 {
@@ -473,7 +503,7 @@ gst_tool_fill_platform_tree (GstTool *tool)
 	gst_tool_create_distro_images ();
 
 	/* Fill in the platform GtkTreeView */
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (tool->platform_list));
+/*	model = gtk_tree_view_get_model (GTK_TREE_VIEW (tool->platform_list));
 
 	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	
@@ -506,13 +536,18 @@ gst_tool_fill_remote_hosts_list (GstTool *tool, gchar *hosts_list[])
 				    -1);
 	}
 }
+*/
 
-static void
+static const gchar*
 gst_tool_run_platform_dialog (GstTool *tool)
 {
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
+	gchar *platform;
 	gint result;
 	
-	gst_tool_fill_platform_tree (tool);
+	//gst_tool_fill_platform_tree (tool);
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
 	
 	result = gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
@@ -520,19 +555,32 @@ gst_tool_run_platform_dialog (GstTool *tool)
 
 	if (result != GTK_RESPONSE_OK)
 		exit (0);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tool->platform_list));
+
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter,
+				    PLATFORM_LIST_COL_ID, &platform,
+				    -1);
+
+		return platform;
+	}
+
+	return NULL;
 }
 
 void
 gst_tool_process_startup (GstTool *tool)
 {
 	/* let's process those startup reports. */
+/*
 	tool->report_hook_type = GST_REPORT_HOOK_LOAD;
 
 	report_progress (tool);
 
 	/* stable version users should pass here only once,
 	   but if there's an inconsistency the dialog will repeat */
-	while (tool->run_again) {
+/*	while (tool->run_again) {
 		gst_tool_run_platform_dialog (tool);
 		g_assert (tool->current_platform);
 
@@ -545,55 +593,21 @@ gst_tool_process_startup (GstTool *tool)
 		if (tool->root_access == ROOT_ACCESS_SIMULATED_DISABLED)
 			tool->root_access = ROOT_ACCESS_SIMULATED;
 	}
-}
-
-static gint
-gst_tool_idle_run_directives (gpointer data)
-{
-	GstTool           *tool = data;
-	GstDirectiveEntry *entry;
-	
-	while (tool->directive_queue)
-	{
-		entry = tool->directive_queue->data;
-		tool->directive_queue = g_slist_remove (tool->directive_queue, entry);
-		entry->callback (entry);
-		gst_tool_directive_free (entry);
-	}
-
-	tool->directive_queue_idle_id = 0;
-
-	return FALSE;
-}
-
-static void
-gst_tool_idle_run_directives_add (GstTool *tool)
-{
-	if (!tool->directive_queue_idle_id && !tool->directive_running)
-		tool->directive_queue_idle_id = 
-			gtk_idle_add_priority (G_PRIORITY_LOW, gst_tool_idle_run_directives, tool);
-}
-
-static void
-gst_tool_idle_run_directives_remove (GstTool *tool)
-{
-	if (tool->directive_queue_idle_id) {
-		gtk_idle_remove (tool->directive_queue_idle_id);
-		tool->directive_queue_idle_id = 0;
-	}
+*/
 }
 
 static void
 gst_tool_kill_backend_cb (GstDirectiveEntry *entry)
 {
+/*
 	GstTool *tool = entry->tool;
 
 	/* removes the g_timeout that's waiting for the backend to die */
-	g_source_remove (tool->timeout_id);
+/*	g_source_remove (tool->timeout_id);
 
 	/* The backend was never called. No problem! */
 	/* For further reference check http://www.xs4all.nl/~pjbrink/apekool/050/045-en.html */
-	if (tool->backend_pid > 0) {
+/*	if (tool->backend_pid > 0) {
 		if (tool->root_access == ROOT_ACCESS_SIMULATED)
 			tool->root_access = ROOT_ACCESS_SIMULATED_DISABLED;
 
@@ -604,269 +618,47 @@ gst_tool_kill_backend_cb (GstDirectiveEntry *entry)
 
 		waitpid (tool->backend_pid, NULL, 0);
 	}
+*/
 }
 
 static void
 gst_tool_kill_tool_cb (GstDirectiveEntry *entry)
 {
+/*
 	GstTool *tool = entry->tool;
 
 	gst_tool_kill_backend_cb (entry);
 
 	g_object_unref (G_OBJECT (tool));
 	exit (0);
+*/
 }
 
 /* kills the whole tool */
 static void
 gst_tool_kill_tool (GstTool *tool, gpointer data)
 {
+/*
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (GST_IS_TOOL (tool));
 
 	gst_tool_queue_directive (tool, gst_tool_kill_tool_cb, NULL, NULL, NULL, "end");
+*/
 }
 
 /* only kills the backend */
 static void
 gst_tool_kill_backend (GstTool *tool, gpointer data)
 {
+/*
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (GST_IS_TOOL (tool));
 
 	gst_tool_queue_directive (tool, gst_tool_kill_backend_cb, NULL, NULL, NULL, "end");
+*/
 }
 
-static gboolean
-gst_tool_end_of_request (GString *string)
-{
-	gchar *str, *eorpos;
-	gint len, i;
-
-	str = string->str;
-	len = strlen (str);
-
-	eorpos = g_strrstr (str, GST_TOOL_EOR);
-
-	if (eorpos == NULL)
-		return FALSE;
-
-	g_string_truncate (string, strlen (str) - strlen (eorpos));
-
-	return TRUE;
-}
-
-static xmlDoc *
-gst_tool_read_xml_from_backend (GstTool *tool)
-{
-	xmlDoc *xml = NULL;
-	gchar *buffer = NULL;
-
-	if (!tool->xml_document)
-		tool->xml_document = g_string_new ("");
-
-	do {
-		g_free (buffer);
-		buffer = gst_tool_read_line_from_backend (tool);
-		g_string_append (tool->xml_document, buffer);
-	} while (g_strrstr (buffer, GST_TOOL_EOR) == NULL);
-
-	g_free (buffer);
-
-	if (tool->xml_document->str[0] == '<')
-		xml = xmlParseDoc (tool->xml_document->str);
-
-	g_string_free (tool->xml_document, TRUE);
-	tool->xml_document = NULL;
-
-	return xml;
-}
-
-static void
-gst_tool_default_set_directive_callback (GstDirectiveEntry *entry)
-{
-	gst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign,
-				    entry->directive, NULL);
-}
-
-/* All parameters except directive can be NULL.
-   NULL report_sign makes no report window to be shown when directive is run.
-   NULL callback runs the default directive callback, which runs a set directive.
-   data is for closure. in_xml is an input xml that may be required by the directive. */
-void
-gst_tool_queue_directive (GstTool *tool, GstDirectiveFunc callback, gpointer data,
-			  xmlDoc *in_xml, gchar *report_sign, gchar *directive)
-{
-	GstDirectiveEntry *entry;
-
-	g_return_if_fail (tool != NULL);
-	g_return_if_fail (GST_IS_TOOL (tool));
-
-	entry = g_new0 (GstDirectiveEntry, 1);
-	g_return_if_fail (entry != NULL);
-	
-	entry->tool        = tool;
-	entry->callback    = callback? callback: gst_tool_default_set_directive_callback;
-	entry->data        = data;
-	entry->in_xml      = in_xml;
-	entry->report_sign = report_sign;
-	entry->directive   = directive;
-
-	tool->directive_queue = g_slist_append (tool->directive_queue, entry);
-	gst_tool_idle_run_directives_add (tool);
-}
-
-static void
-gst_tool_directive_free (GstDirectiveEntry *entry)
-{
-	g_free (entry->report_sign);
-	xmlFreeDoc (entry->in_xml);
-
-	g_free (entry);
-}
-
-/* As specified, escapes :: to \:: and \ to \\ and joins the strings. */
-static GString *
-gst_tool_join_directive (const gchar *directive, va_list ap)
-{
-	GString *str;
-	gchar   *arg, *s;
-	
-	str = g_string_new (directive);
-	while ((arg = va_arg (ap, char *)) != NULL) {
-		g_string_append (str, "::");
-		for (s = arg; *s; s++) {
-			switch (*s) {
-			case '\\':
-				g_string_append_c (str, '\\');
-				break;
-			case ':':
-				if (*(s + 1) == ':')
-					g_string_append_c (str, '\\');
-			}
-			g_string_append_c (str, *s);
-		}
-	}
-	va_end (ap);
-
-	return str;
-}
-
-static void
-gst_tool_send_directive (GstTool *tool, const gchar *directive, va_list ap)
-{
-	GString *directive_line;
-	gchar *buffer;
-
-	g_return_if_fail (tool->backend_pid >= 0);
-
-       	directive_line = gst_tool_join_directive (directive, ap);
-	g_string_append_c (directive_line, '\n');
-
-	gst_tool_write_to_backend (tool, directive_line->str);
-
-	g_string_free (directive_line, TRUE);
-}
-
-static xmlDoc *
-gst_tool_run_get_directive_va (GstTool *tool, const gchar *report_sign, const gchar *directive, va_list ap)
-{
-	xmlDoc *xml;
-	
-	g_return_val_if_fail (tool != NULL, NULL);
-	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
-	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
-
-	tool->directive_running = TRUE;
-	gst_tool_idle_run_directives_remove (tool);
-
-	gst_dialog_freeze_visible (tool->main_dialog);
-	gst_tool_show_report_window (tool, report_sign);
-	gst_tool_send_directive (tool, directive, ap);
-
-	/* FIXME: Instead of doing the following, we should pass around a value describing
-	 * tool I/O mode (as opposed to a string to report_progress ()). */
-	tool->report_hook_type = GST_REPORT_HOOK_LOAD;
-
-	xmlSubstituteEntitiesDefault (TRUE);
-
-	report_progress (tool);
-	xml = gst_tool_read_xml_from_backend(tool);
-
-	gst_tool_hide_report_window (tool);
-	gst_dialog_thaw_visible (tool->main_dialog);
-	tool->directive_running = FALSE;
-	gst_tool_idle_run_directives_add (tool);
-	
-	return xml;
-}
-
-xmlDoc *
-gst_tool_run_get_directive (GstTool *tool, const gchar *report_sign, const gchar *directive, ...)
-{
-	va_list ap;
-	
-	va_start (ap, directive);
-	return gst_tool_run_get_directive_va (tool, report_sign, directive, ap);
-}
-
-static xmlDoc *
-gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
-			       const gchar *report_sign, const gchar *directive, va_list ap)
-{
-	xmlDoc *xml_out;
-	int n;
-	gchar buf;
-
-	g_return_val_if_fail (tool != NULL, NULL);
-	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
-	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
-
-	tool->directive_running = TRUE;
-	gst_tool_idle_run_directives_remove (tool);
-
-	/* don't actually run if we are just pretending */
-	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
-		g_warning ("Skipping %s directive...", directive);
-		tool->directive_running = FALSE;
-		return NULL;
-	}
-
-	gst_dialog_freeze_visible (tool->main_dialog);
-	gst_tool_show_report_window (tool, report_sign);
-	gst_tool_send_directive (tool, directive, ap);
-
-	if (xml)
-		gst_tool_write_xml_to_backend (tool, xml);
-
-	/* FIXME: Instead of doing the following, we should pass around a value describing
-	 * tool I/O mode (as opposed to a string to report_progress ()). */
-	tool->report_hook_type = GST_REPORT_HOOK_SAVE;
-
-	report_progress (tool);
-
-	/* This is tipicaly to just read the end of request string,
-	   but a set directive may return some XML too. */
-	xml_out = gst_tool_read_xml_from_backend (tool);
-
-	gst_tool_hide_report_window (tool);
-	gst_dialog_thaw_visible (tool->main_dialog);
-	tool->directive_running = FALSE;
-	gst_tool_idle_run_directives_add (tool);
-
-	return xml_out;
-}
-
-xmlDoc *
-gst_tool_run_set_directive (GstTool *tool, xmlDoc *xml,
-			    const gchar *report_sign, const gchar *directive, ...)
-{
-	va_list ap;
-	
-	va_start (ap, directive);
-	return gst_tool_run_set_directive_va (tool, xml, report_sign, directive, ap);
-}
-
+/*
 gboolean
 gst_tool_load (GstTool *tool)
 {
@@ -888,44 +680,7 @@ gst_tool_load (GstTool *tool)
 		tool->config = gst_tool_run_get_directive (tool, NULL, "get", NULL);
 		tool->original_config = xmlCopyDoc (tool->config, 1);
 	} else {
-#ifndef GST_HAVE_ARCHIVER
 		g_assert_not_reached ();
-#else	
-		CORBA_Environment ev;
-		ConfigArchiver_Archive archive;
-		ConfigArchiver_Location location;
-		gchar *backend_id;
-
-		CORBA_exception_init (&ev);
-
-		archive = bonobo_get_object ("archive:global-archive", "IDL:ConfigArchiver/Archive:1.0", &ev);
-
-		if (BONOBO_EX (&ev) || archive == CORBA_OBJECT_NIL) {
-			g_critical ("Could not resolve the archive moniker");
-			return FALSE;
-		}
-
-		location = ConfigArchiver_Archive_getLocation (archive, location_id, &ev);
-
-		if (BONOBO_EX (&ev) || location == CORBA_OBJECT_NIL) {
-			g_critical ("Could not get the location %s", location_id);
-			return FALSE;
-		}
-
-		backend_id = strrchr (tool->script_path, '/');
-
-		if (backend_id != NULL)
-			backend_id++;
-		else
-			backend_id = tool->script_path;
-
-		tool->config = location_client_load_rollback_data (location, NULL, 0, backend_id, TRUE, &ev);
-
-		bonobo_object_release_unref (location, NULL);
-		bonobo_object_release_unref (archive, NULL);
-
-		CORBA_exception_free (&ev);
-#endif	
 	}
 
 	if (tool->config)
@@ -933,17 +688,12 @@ gst_tool_load (GstTool *tool)
 
 	return tool->config != NULL;
 }
+*/
 
 gboolean
-gst_tool_save (GstTool *tool, gboolean restore)
+gst_tool_save (GstTool *tool)
 {
-#ifdef GST_HAVE_ARCHIVER
-	CORBA_Environment ev;
-	ConfigArchiver_Archive archive;
-	ConfigArchiver_Location location;
-	gchar *backend_id;
-#endif	
-
+/*
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (GST_IS_TOOL (tool), FALSE);
 	g_return_val_if_fail (tool->root_access != ROOT_ACCESS_NONE, FALSE);
@@ -951,50 +701,7 @@ gst_tool_save (GstTool *tool, gboolean restore)
 	gst_dialog_freeze_visible (tool->main_dialog);
 
 	g_signal_emit (G_OBJECT (tool), gsttool_signals[FILL_XML], 0);
-#ifdef GST_DEBUG
-	/* don't actually save if we are just pretending */
-	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
-		g_warning ("Skipping actual save...");
-		return TRUE;
-	}
-#endif
 
-#ifdef GST_HAVE_ARCHIVER
-	CORBA_exception_init (&ev);
-
-	/* Archive data with the archiver */
-	archive = bonobo_get_object ("archive:global-archive", "IDL:ConfigArchiver/Archive:1.0", &ev);
-
-	if (BONOBO_EX (&ev) || archive == CORBA_OBJECT_NIL) {
-		g_critical ("Could not resolve the archive moniker");
-	} else {
-		if (location_id == NULL)
-			location = ConfigArchiver_Archive__get_currentLocation (archive, &ev);
-		else
-			location = ConfigArchiver_Archive_getLocation (archive, location_id, &ev);
-
-		if (BONOBO_EX (&ev) || location == CORBA_OBJECT_NIL) {
-			g_critical ("Could not get location %s", location_id);
-		} else {
-			backend_id = strrchr (tool->script_path, '/');
-
-			if (backend_id != NULL)
-				backend_id++;
-			else
-				backend_id = tool->script_path;
-
-			location_client_store_xml (location, backend_id, tool->config, ConfigArchiver_STORE_MASK_PREVIOUS, &ev);
-
-			bonobo_object_release_unref (location, &ev);
-		}
-
-		bonobo_object_release_unref (archive, &ev);
-	}
-
-	CORBA_exception_free (&ev);
-
-#endif
-	
 	if (location_id == NULL) {
 		if (restore)
 			gst_tool_run_set_directive (tool, tool->original_config, NULL, "set", NULL);
@@ -1003,16 +710,11 @@ gst_tool_save (GstTool *tool, gboolean restore)
 	}
 	
 	gst_dialog_thaw_visible (tool->main_dialog);
-
+*/
 	return TRUE;  /* FIXME: Determine if it really worked. */
 }
 
-void
-gst_tool_save_cb (GtkWidget *w, GstTool *tool)
-{
-	gst_tool_save (tool, FALSE);
-}
-
+/*
 void
 gst_tool_load_try (GstTool *tool)
 {
@@ -1043,11 +745,11 @@ tool_main_do (GstTool *tool, gboolean no_main_loop, gboolean show_main_dialog)
 
 	if (tool->remote_config == TRUE) {
 		/* run the ssh client */
-		gst_tool_fill_remote_hosts_list (tool, tool->remote_hosts);
+/*		gst_tool_fill_remote_hosts_list (tool, tool->remote_hosts);
 		gtk_widget_show (tool->remote_dialog);
 	} else {
 		/* run the su command */
-		gst_auth_do_su_authentication (tool);
+/*		gst_auth_do_su_authentication (tool);
 
 		gst_tool_process_startup (tool);
 		gst_dialog_apply_widget_policies (tool->main_dialog);
@@ -1114,11 +816,12 @@ gst_tool_class_init (GstToolClass *class)
 
 	gobject_class->finalize = gst_tool_finalize;
 }
+*/
 
 static void
-gst_tool_create_platform_list (GtkTreeView *list, GstTool *tool)
+gst_tool_create_platform_list (GstTool *tool, GtkTreeView *list)
 {
-	GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_store_new (PLATFORM_LIST_COL_LAST, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER));
+	GtkTreeModel *model = GTK_TREE_MODEL (gtk_list_store_new (PLATFORM_LIST_COL_LAST, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER));
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeSelection *select;
@@ -1132,7 +835,7 @@ gst_tool_create_platform_list (GtkTreeView *list, GstTool *tool)
 	/* Insert the pixmaps cell */
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
-	
+
 	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
 	                                             -1,
 	                                             "_Platform",
@@ -1147,7 +850,7 @@ gst_tool_create_platform_list (GtkTreeView *list, GstTool *tool)
 	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
 
 	gtk_tree_view_column_pack_end (column, renderer, TRUE);
-	gtk_tree_view_column_add_attribute (column, renderer, "text", PLATFORM_LIST_COL_NAME);
+	gtk_tree_view_column_add_attribute (column, renderer, "markup", PLATFORM_LIST_COL_NAME);
 	
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
 	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
@@ -1158,6 +861,45 @@ gst_tool_create_platform_list (GtkTreeView *list, GstTool *tool)
 }
 
 static void
+gst_tool_populate_platform_list (GstTool *tool)
+{
+	GtkListStore *store;
+	GtkTreeIter iter;
+	GList *platforms, *list;
+	OobsPlatform *platform;
+	GString *str;
+
+	store = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (tool->platform_list)));
+	list = platforms = oobs_session_get_supported_platforms (tool->session);
+
+	while (platforms) {
+		platform = platforms->data;
+		platforms = platforms->next;
+
+		str = g_string_new (platform->name);
+
+		if (platform->version)
+			g_string_append_printf (str, " %s", platform->version);
+
+		if (platform->codename)
+			g_string_append_printf (str, " (<i>%s</i>)", platform->codename);
+
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter,
+		                    PLATFORM_LIST_COL_LOGO, NULL,
+		                    PLATFORM_LIST_COL_NAME, str->str,
+		                    PLATFORM_LIST_COL_ID, platform->id,
+				    -1);
+
+		g_string_free (str, TRUE);
+	}
+
+	g_list_free (list);
+}
+
+
+/*
+static void
 on_remote_hosts_list_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
 	GstTool *tool = GST_TOOL (data);
@@ -1167,7 +909,7 @@ on_remote_hosts_list_selection_changed (GtkTreeSelection *selection, gpointer da
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		/* freeze the dialog */
-		gtk_widget_set_sensitive (tool->remote_dialog, FALSE);
+/*		gtk_widget_set_sensitive (tool->remote_dialog, FALSE);
 		
 		gtk_tree_model_get (model, &iter, 0, &host, -1);
 
@@ -1176,14 +918,14 @@ on_remote_hosts_list_selection_changed (GtkTreeSelection *selection, gpointer da
 			gst_dialog_set_modified (tool->main_dialog, FALSE);
 
 			/* stops the backend */
-			gst_tool_kill_backend (tool, NULL);
+/*			gst_tool_kill_backend (tool, NULL);
 
 			/* process the "end" directive */
-			while (gtk_events_pending())
+/*			while (gtk_events_pending())
 				gtk_main_iteration();
 
 			/* remove current platform info, in the new host may be another one */
-			if (tool->current_platform != NULL) {
+/*			if (tool->current_platform != NULL) {
 				gst_platform_free (tool->current_platform);
 				tool->current_platform = NULL;
 			}
@@ -1198,7 +940,7 @@ on_remote_hosts_list_selection_changed (GtkTreeSelection *selection, gpointer da
 		gst_dialog_apply_widget_policies (tool->main_dialog);
 
 		/* thaw all the dialogs */
-		gst_dialog_thaw_visible (tool->main_dialog);
+/*		gst_dialog_thaw_visible (tool->main_dialog);
 		gtk_widget_set_sensitive (tool->remote_dialog, TRUE);
 	}
 }
@@ -1243,7 +985,7 @@ gst_tool_type_init (GstTool *tool)
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
 
 	/* load the report window */
-	xml = gst_tool_load_glade_common (tool, "report_window");
+/*	xml = gst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window = glade_xml_get_widget (xml, "report_window");
 	g_signal_connect (G_OBJECT (tool->report_window), "delete_event",
@@ -1258,7 +1000,7 @@ gst_tool_type_init (GstTool *tool)
 	gdk_pixbuf_unref (pixbuf);
 
 	/* load the platforms list */
-	xml = gst_tool_load_glade_common (tool, "platform_dialog");
+/*	xml = gst_tool_load_glade_common (tool, "platform_dialog");
 	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
 	gst_tool_create_platform_list (GTK_TREE_VIEW (tool->platform_list), tool);
 
@@ -1266,7 +1008,7 @@ gst_tool_type_init (GstTool *tool)
 	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
 
 	/* load the remote config dialog */
-	xml = gst_tool_load_glade_common (tool, "remote_dialog");
+/*	xml = gst_tool_load_glade_common (tool, "remote_dialog");
 	tool->remote_dialog = glade_xml_get_widget (xml, "remote_dialog");
 	tool->remote_hosts_list = glade_xml_get_widget (xml, "remote_hosts_list");
 	gst_tool_create_remote_hosts_list (GTK_TREE_VIEW (tool->remote_hosts_list), tool);
@@ -1281,13 +1023,13 @@ gst_tool_get_type (void)
 		GTypeInfo gsttool_info = {
 			sizeof (GstToolClass),
 			NULL, /* base_init */
-			NULL, /* base finalize */
-			(GClassInitFunc) gst_tool_class_init,
+/*			NULL, /* base finalize */
+/*			(GClassInitFunc) gst_tool_class_init,
 			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (GstTool),
+/*			NULL, /* class_data */
+/*			sizeof (GstTool),
 			0, /* n_preallocs */
-			(GInstanceInitFunc) gst_tool_type_init
+/*			(GInstanceInitFunc) gst_tool_type_init
 		};
 		
 		gsttool_type = g_type_register_static (G_TYPE_OBJECT, "GstTool", &gsttool_info, 0);
@@ -1295,6 +1037,8 @@ gst_tool_get_type (void)
 
 	return gsttool_type;
 }
+*/
+
 
 /**
  * gst_tool_construct:
@@ -1306,6 +1050,7 @@ gst_tool_get_type (void)
  * 
  * Return Value: FALSE on error
  **/
+/*
 void
 gst_tool_construct (GstTool *tool, const char *name, const char *title)
 {
@@ -1355,7 +1100,7 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	tool->directive_queue_idle_id = 0;
 
 	/* get the remote configuration gconf keys */
-	remote_config_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote_configuration", NULL);
+/*	remote_config_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote_configuration", NULL);
 	remote_hosts_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote_hosts_list", NULL);
 
 	do_remote_conf = gconf_client_get_bool (client, remote_config_key, NULL);
@@ -1369,6 +1114,7 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	g_free (remote_config_key);
 	g_free (remote_hosts_key);
 }
+
 
 GstTool *
 gst_tool_new (void)
@@ -1585,8 +1331,10 @@ try_show_usage_warning (void)
 	g_free (key);
 }
 
+*/
+
 void
-gst_init (const gchar *app_name, int argc, char *argv [], GOptionEntry *entries)
+gst_init_tool (const gchar *app_name, int argc, char *argv [], GOptionEntry *entries)
 {
 	GnomeProgram   *program;
 	GOptionContext *context;
@@ -1609,131 +1357,6 @@ gst_init (const gchar *app_name, int argc, char *argv [], GOptionEntry *entries)
 				      _("GNOME System Tools"),
 				      NULL);
 	/* try_show_usage_warning (); */
-}
-
-static gboolean
-is_string_complete (gchar *str, GSList *list)
-{
-	GSList *elem;
-	
-	if (strlen (str) == 0)
-		return FALSE;
-
-	for (elem = list; elem; elem = g_slist_next (elem))
-		if (g_strrstr (str, elem->data) != NULL)
-			return TRUE;
-
-	return FALSE;
-}
-
-static gchar*
-read_everything (GstTool *tool, gchar *needle, va_list ap)
-{
-	GString *str  = g_string_new ("");
-	GSList  *list = NULL;
-	gchar   *arg, *ptr;
-	gint     c;
-
-	list = g_slist_prepend (list, needle);
-
-	while ((arg = va_arg (ap, char*)) != NULL)
-		list = g_slist_prepend (list, arg);
-
-	va_end (ap);
-
-	while (!is_string_complete (str->str, list)) {
-		c = fgetc (tool->read_stream);
-
-		if (c != EOF)
-			g_string_append_c (str, c);
-	}
-
-	ptr = str->str;
-	g_string_free (str, FALSE);
-
-	return ptr;
-}
-
-static void
-poll_backend (GstTool *tool)
-{
-	struct pollfd fd;
-
-	fd.fd = tool->read_fd;
-	fd.events = POLLIN || POLLPRI;
-
-	while (poll (&fd, 1, 100) <= 0) {
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
-	}
-}
-
-static gchar*
-gst_tool_read_from_backend_va (GstTool *tool, gchar *needle, va_list ap)
-{
-	poll_backend (tool);
-	return read_everything (tool, needle, ap);
-}
-
-gchar*
-gst_tool_read_from_backend (GstTool *tool, gchar *needle, ...)
-{
-	va_list ap;
-
-	va_start (ap, needle);
-	return gst_tool_read_from_backend_va (tool, needle, ap);
-}
-
-static gchar*
-gst_tool_read_line_from_backend (GstTool *tool)
-{
-	gchar line[1000];
-
-	poll_backend (tool);
-	fgets (line, 1000, tool->read_stream);
-
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-
-	return g_strdup (line);
-}
-
-void
-gst_tool_write_xml_to_backend (GstTool *tool, xmlDoc *doc)
-{
-	gint size;
-	xmlChar *xml;
-	gchar *string;
-
-	xmlDocDumpMemory (doc, &xml, &size);
-	string = (gchar *) xml;
-
-	gst_tool_write_to_backend (tool, string);
-	gst_tool_write_to_backend (tool, GST_TOOL_EOR "\n");
-
-	xmlFree (xml);
-}
-
-void
-gst_tool_write_to_backend (GstTool *tool, gchar *string)
-{
-	gint nread = 0;
-	int ret;
-	gchar *p;
-
-	do {
-		ret = fputc (string [nread], tool->write_stream);
-
-		if (ret != EOF)
-			nread++;
-
-		/* ugly hack for redrawing UI */
-		if (nread % REDRAW_NCHARS == 0)
-			while (gtk_events_pending ())
-				gtk_main_iteration ();
-	} while (nread < strlen (string));
-
-	while (fflush (tool->write_stream) != 0);
 }
 
 void
@@ -1775,6 +1398,7 @@ gst_tool_report_window_timeout (GstTool *tool)
 {
 	gtk_window_set_transient_for (GTK_WINDOW (tool->report_window), GTK_WINDOW (tool->main_dialog));
 	gtk_widget_show (tool->report_window);
+
 	tool->report_timeout_id = 0;
 	return FALSE;
 }
@@ -1810,4 +1434,27 @@ gst_tool_hide_report_window (GstTool *tool)
 	}
 
 	gtk_widget_hide (tool->report_window);
+}
+
+static void
+on_commit_finalized (OobsObject       *object,
+		     OobsObjectResult  result,
+		     gpointer          data)
+{
+	gst_tool_hide_report_window (GST_TOOL (data));
+}
+
+void
+gst_tool_commit_async (GstTool     *tool,
+		       OobsObject  *object,
+		       const gchar *message)
+{
+	gst_tool_show_report_window (tool, message);
+	oobs_object_commit_async (object, on_commit_finalized, tool);
+}
+
+GtkIconTheme*
+gst_tool_get_icon_theme (GstTool *tool)
+{
+	return tool->icon_theme;
 }

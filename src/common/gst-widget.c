@@ -34,8 +34,8 @@ gst_widget_apply_policy (GstWidget *xw)
 
 	g_return_if_fail (xw != NULL);
 
-	complexity = gst_dialog_get_complexity (xw->dialog);
-	have_access = gst_tool_get_access (xw->dialog->tool);
+	complexity = GST_DIALOG_ADVANCED;
+	have_access = gst_tool_is_authenticated (xw->dialog->tool);
 
 	if (complexity == GST_DIALOG_BASIC)
 		mode = xw->basic;

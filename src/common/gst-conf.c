@@ -227,3 +227,23 @@ gst_conf_get_string (GstTool *tool, const gchar *key)
 	
 	return value;
 }
+
+void
+gst_conf_add_notify (GstTool               *tool,
+		     const gchar           *key,
+		     GConfClientNotifyFunc  func,
+		     gpointer               data)
+{
+	gchar *main_key;
+
+	main_key = gst_conf_make_key (tool, key);
+
+	gconf_client_add_dir (tool->gconf_client, main_key,
+			      GCONF_CLIENT_PRELOAD_NONE,
+			      NULL);
+
+	gconf_client_notify_add (tool->gconf_client,
+				 main_key, func, data,
+				 NULL, NULL);
+	g_free (main_key);
+}

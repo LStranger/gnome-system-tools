@@ -16,7 +16,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Jacob Berkman <jacob@ximian.com>
+ * Authors: Jacob Berkman   <jacob@ximian.com>
+ *          Carlos Garnacho <carlosg@gnome.org>
  */
 
 #include <config.h>
@@ -24,154 +25,374 @@
 #include <gmodule.h>
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
+#include "gst-tool.h"
 #include "gst-widget.h"
 #include "gst-dialog.h"
 #include "gst-conf.h"
 #include "gst-marshal.h"
 
-#ifdef GST_DEBUG
-/* define to x for debugging output */
-#define d(x) x
-#else
-#define d(x)
-#endif
+#define GST_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_DIALOG, GstDialogPrivate))
 
-enum {
-	BOGUS,
-	APPLY,
-	LAST_SIGNAL
+typedef struct _GstDialogPrivate GstDialogPrivate;
+
+struct _GstDialogPrivate {
+	GstTool *tool;
+
+	gchar   *title;
+	gchar   *widget_name;
+
+	GladeXML  *gui;
+	GtkWidget *child;
+
+	gboolean modified;
+	gboolean frozen;
+
+	GSList *gst_widget_list;
 };
 
-static GnomeAppClass *parent_class;
-static gint gstdialog_signals[LAST_SIGNAL] = { 0 };
+static void gst_dialog_class_init (GstDialogClass *class);
+static void gst_dialog_init       (GstDialog      *group);
+static void gst_dialog_finalize   (GObject        *object);
+
+static GObject*	gst_dialog_constructor (GType                  type,
+					guint                  n_construct_properties,
+					GObjectConstructParam *construct_params);
+
+static void gst_dialog_set_property (GObject      *object,
+				     guint         prop_id,
+				     const GValue *value,
+				     GParamSpec   *pspec);
+
+static void gst_dialog_response (GtkDialog *dialog,
+				 gint       response);
+
+static void gst_dialog_map      (GtkWidget *widget);
+
+enum {
+	PROP_0,
+	PROP_TOOL,
+	PROP_WIDGET_NAME,
+	PROP_TITLE
+};
+
+G_DEFINE_TYPE (GstDialog, gst_dialog, GTK_TYPE_DIALOG);
+
+static void
+gst_dialog_class_init (GstDialogClass *class)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
+	GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (class);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
+
+	object_class->set_property = gst_dialog_set_property;
+	object_class->constructor  = gst_dialog_constructor;
+	object_class->finalize     = gst_dialog_finalize;
+
+	dialog_class->response     = gst_dialog_response;
+	widget_class->map          = gst_dialog_map;
+
+	g_object_class_install_property (object_class,
+					 PROP_TOOL,
+					 g_param_spec_object ("tool",
+							      "tool",
+							      "tool",
+							      GST_TYPE_TOOL,
+							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+	g_object_class_install_property (object_class,
+					 PROP_WIDGET_NAME,
+					 g_param_spec_string ("widget_name",
+							      "Widget name",
+							      "Widget name",
+							      NULL,
+							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+	g_object_class_install_property (object_class,
+					 PROP_TITLE,
+					 g_param_spec_string ("title",
+							      "title",
+							      "title",
+							      NULL,
+							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+	g_type_class_add_private (object_class,
+				  sizeof (GstDialogPrivate));
+}
+
+static void
+gst_dialog_init (GstDialog *dialog)
+{
+	GstDialogPrivate *priv;
+	GtkWidget *button;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	priv->tool  = NULL;
+	priv->title = NULL;
+	priv->gui   = NULL;
+	priv->child = NULL;
+
+	priv->modified = FALSE;
+	priv->frozen   = FALSE;
+
+	priv->gst_widget_list = NULL;
+
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+				GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				NULL);
+}
+
+static GObject*
+gst_dialog_constructor (GType                  type,
+			guint                  n_construct_properties,
+			GObjectConstructParam *construct_params)
+{
+	GObject *object;
+	GstDialog *dialog;
+	GstDialogPrivate *priv;
+
+	object = (* G_OBJECT_CLASS (gst_dialog_parent_class)->constructor) (type,
+									    n_construct_properties,
+									    construct_params);
+	dialog = GST_DIALOG (object);
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	if (priv->tool && priv->widget_name) {
+		priv->gui   = glade_xml_new (priv->tool->glade_path, NULL, NULL);
+		priv->child = gst_dialog_get_widget (dialog, priv->widget_name);
+
+		if (GTK_WIDGET_TOPLEVEL (priv->child)) {
+			g_error ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
+				 "You just need to add the widget inside a GtkWindow so that it can be deparented.", priv->widget_name);
+		}
+
+		gtk_widget_ref (priv->child);
+		gtk_widget_unparent (priv->child);
+		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), priv->child);
+	}
+
+	if (priv->title)
+		gtk_window_set_title (GTK_WINDOW (dialog), priv->title);
+
+	return object;
+}
+
+static void
+gst_dialog_set_property (GObject      *object,
+			 guint         prop_id,
+			 const GValue *value,
+			 GParamSpec   *pspec)
+{
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (object);
+
+	switch (prop_id) {
+	case PROP_TOOL:
+		g_print ("uuuuh\n");
+		priv->tool = GST_TOOL (g_value_dup_object (value));
+		break;
+	case PROP_WIDGET_NAME:
+		priv->widget_name = g_value_dup_string (value);
+		break;
+	case PROP_TITLE:
+		priv->title = g_value_dup_string (value);
+		break;
+	}
+}
+
+static void
+gst_dialog_finalize (GObject *object)
+{
+	/* FIXME: need to free stuff */
+	(* G_OBJECT_CLASS (gst_dialog_parent_class)->finalize) (object);
+}
+
+static void
+gst_dialog_response (GtkDialog *dialog,
+		     gint       response)
+{
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	switch (response) {
+	case GTK_RESPONSE_CLOSE:
+	case GTK_RESPONSE_DELETE_EVENT:
+		gtk_widget_hide (GTK_WIDGET (dialog));
+		g_signal_emit_by_name (G_OBJECT (priv->tool), "close");
+		break;
+	case GTK_RESPONSE_HELP:
+		gst_tool_show_help (priv->tool, NULL);
+		break;
+	}
+}
+
+static void
+gst_dialog_map (GtkWidget *widget)
+{
+	GstDialog *dialog = GST_DIALOG (widget);
+	GstDialogPrivate *priv;
+
+	(* GTK_WIDGET_CLASS (gst_dialog_parent_class)->map) (widget);
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	gst_dialog_freeze_visible (dialog);
+	gst_tool_update_gui (priv->tool);
+	gst_dialog_thaw_visible (dialog);
+}
+
+GstDialog*
+gst_dialog_new (GstTool *tool, const char *widget, const char *title)
+{
+	return g_object_new (GST_TYPE_DIALOG,
+			     "has-separator", FALSE,
+			     "tool", tool,
+			     "widget-name", widget,
+			     "title", title,
+			     NULL);
+}
 
 GtkWidget *
-gst_dialog_get_widget (GstDialog *xd, const char *widget)
+gst_dialog_get_widget (GstDialog *dialog, const char *widget)
 {
+	GstDialogPrivate *priv;
 	GtkWidget *w;
 
-	g_return_val_if_fail (xd != NULL, NULL);
-	g_return_val_if_fail (GST_IS_DIALOG (xd), NULL);
-	g_return_val_if_fail (xd->gui != NULL, NULL);
+	g_return_val_if_fail (dialog != NULL, NULL);
+	g_return_val_if_fail (GST_IS_DIALOG (dialog), NULL);
 
-	w = glade_xml_get_widget (xd->gui, widget);
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	g_return_val_if_fail (priv->gui != NULL, NULL);
+
+	w = glade_xml_get_widget (priv->gui, widget);
 
 	if (!w)
-		g_error (_("Could not find widget: %s"), widget);
+		g_error ("Could not find widget: %s", widget);
 
 	return w;
 }
 
 void
-gst_dialog_apply_widget_policies (GstDialog *xd)
+gst_dialog_apply_widget_policies (GstDialog *dialog)
 {
+	GstDialogPrivate *priv;
 	GSList *list;
 
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
 	/* Hide, show + desensitize or show + sensitize widgets based on access level */
-	for (list = xd->gst_widget_list; list; list = g_slist_next (list))
-	{
+	for (list = priv->gst_widget_list; list; list = g_slist_next (list)) {
 		gst_widget_apply_policy (list->data);
 	}
 }
 
-GstDialogComplexity 
-gst_dialog_get_complexity (GstDialog *xd)
-{
-	g_return_val_if_fail (xd != NULL, 0);
-	g_return_val_if_fail (GST_IS_DIALOG (xd), 0);
-
-	return GST_DIALOG_ADVANCED;
-}
-
 void
-gst_dialog_freeze (GstDialog *xd)
+gst_dialog_freeze (GstDialog *dialog)
 {
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
+	GstDialogPrivate *priv;
 
-	d(g_message ("freezing %p", xd));
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (GST_IS_DIALOG (dialog));
 
-	xd->frozen = TRUE;
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	priv->frozen = TRUE;
 }
 
 void 
-gst_dialog_thaw (GstDialog *xd)
+gst_dialog_thaw (GstDialog *dialog)
 {
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
+	GstDialogPrivate *priv;
 
-	d(g_message ("thawing %p", xd));
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (GST_IS_DIALOG (dialog));
 
-	xd->frozen = FALSE;
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	priv->frozen = FALSE;
 }
 
 void
-gst_dialog_freeze_visible (GstDialog *xd)
+gst_dialog_freeze_visible (GstDialog *dialog)
 {
+	GstDialogPrivate *priv;
 	GdkCursor *cursor;
 	
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
-	g_return_if_fail (xd->frozen >= 0);
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (GST_IS_DIALOG (dialog));
+	g_return_if_fail (dialog->frozen >= 0);
 
-	if (GTK_WIDGET (xd)->window) {
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	if (GTK_WIDGET (dialog)->window) {
 		cursor = gdk_cursor_new (GDK_WATCH);
-		gdk_window_set_cursor (GTK_WIDGET (xd)->window, cursor);
+		gdk_window_set_cursor (GTK_WIDGET (dialog)->window, cursor);
 		gdk_cursor_unref (cursor);
 	}
 
-	if (!xd->frozen)
-		gtk_widget_set_sensitive (GTK_WIDGET (xd), FALSE);
+	if (!priv->frozen)
+		gtk_widget_set_sensitive (GTK_WIDGET (dialog), FALSE);
 	
-	gst_dialog_freeze (xd);
+	gst_dialog_freeze (dialog);
 }
 
 void
-gst_dialog_thaw_visible (GstDialog *xd)
+gst_dialog_thaw_visible (GstDialog *dialog)
 {
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
-	g_return_if_fail (xd->frozen >= 0);
+	GstDialogPrivate *priv;
 
-	if (GTK_WIDGET (xd)->window)
-		gdk_window_set_cursor (GTK_WIDGET (xd)->window, NULL);
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (GST_IS_DIALOG (dialog));
+	g_return_if_fail (dialog->frozen >= 0);
 
-	gst_dialog_thaw (xd);
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	if (!xd->frozen)
-		gtk_widget_set_sensitive (GTK_WIDGET (xd), TRUE);
+	if (GTK_WIDGET (dialog)->window)
+		gdk_window_set_cursor (GTK_WIDGET (dialog)->window, NULL);
+
+	gst_dialog_thaw (dialog);
+
+	if (!dialog->frozen)
+		gtk_widget_set_sensitive (GTK_WIDGET (dialog), TRUE);
 }
 
 gboolean
-gst_dialog_get_modified (GstDialog *xd)
+gst_dialog_get_modified (GstDialog *dialog)
 {
-	g_return_val_if_fail (xd != NULL, FALSE);
-	g_return_val_if_fail (GST_IS_DIALOG (xd), FALSE);
+	GstDialogPrivate *priv;
 
-	return xd->is_modified;
+	g_return_val_if_fail (dialog != NULL, FALSE);
+	g_return_val_if_fail (GST_IS_DIALOG (dialog), FALSE);
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	return priv->modified;
 }
 
 void
-gst_dialog_set_modified (GstDialog *xd, gboolean state)
+gst_dialog_set_modified (GstDialog *dialog, gboolean state)
 {
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
+	GstDialogPrivate *priv;
 
-	xd->is_modified = state;
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (GST_IS_DIALOG (dialog));
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	priv->modified = state;
 }
 
 void
-gst_dialog_modify (GstDialog *xd)
+gst_dialog_modify (GstDialog *dialog)
 {
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
+	GstDialogPrivate *priv;
 
-	d(g_print ("froze: %d\taccess: %d\n", xd->frozen, gst_tool_get_access (xd->tool)));
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (GST_IS_DIALOG (dialog));
 
-	if (xd->frozen || !gst_tool_get_access (xd->tool))
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	if (priv->frozen || !gst_tool_is_authenticated (priv->tool))
 		return;
 
-	gst_dialog_set_modified (xd, TRUE);
+	gst_dialog_set_modified (dialog, TRUE);
 }
 
 void
@@ -180,92 +401,14 @@ gst_dialog_modify_cb (GtkWidget *w, gpointer data)
 	gst_dialog_modify (data);
 }
 
-static void
-gst_dialog_class_init (GstDialogClass *class)
-{
-	GObjectClass *gobject_class;
-
-	gobject_class = G_OBJECT_CLASS (class);
-	parent_class = g_type_class_peek_parent (class);
-
-	gstdialog_signals[APPLY] = 
-		g_signal_new ("apply",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GstDialogClass, apply),
-			      NULL, NULL,
-			      gst_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
-}
-
-static void
-gst_dialog_init (GstDialog *dialog)
-{
-	/* nothing to do here
-	 * exciting stuff happens in _construct
-	 */
-}
-	
-GtkType
-gst_dialog_get_type (void)
-{
-	static GType gstdialog_type = 0;
-
-	if (!gstdialog_type) {
-		static const GTypeInfo gstdialog_info = {
-			sizeof (GstDialogClass),
-			NULL, /* base_init */
-			NULL, /* base finalize */
-			(GClassInitFunc) gst_dialog_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
-			sizeof (GstDialog),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) gst_dialog_init
-		};
-
-		gstdialog_type = g_type_register_static (GNOME_TYPE_APP, "GstDialog", &gstdialog_info, 0);
-	}
-
-	return gstdialog_type;
-}
-
 void
-gst_dialog_add_apply_hook (GstDialog *xd, GstDialogHookFunc func, gpointer data)
+gst_dialog_set_widget_policies (GstDialog *dialog, const GstWidgetPolicy *wp)
 {
-	GstDialogHookEntry *entry;
-
-	entry = g_new0 (GstDialogHookEntry, 1);
-	entry->data = data;
-	entry->func = func;
-
-	xd->apply_hook_list = g_list_append (xd->apply_hook_list, entry);
-}
-
-gboolean
-gst_dialog_run_apply_hooks (GstDialog *xd)
-{
-	GstDialogHookEntry *hookentry;
-	GList *l;
-	
-	for (l = xd->apply_hook_list; l; l = l->next) {
-		hookentry = l->data;
-		if (! (hookentry->func) (xd, hookentry->data))
-			return FALSE;
-	}
-
-	return TRUE;
-}
-
-void
-gst_dialog_set_widget_policies (GstDialog *xd, const GstWidgetPolicy *xwp)
-{
-	GstWidget *xw;
+	GstWidget *w;
 	int i;
 
-	for (i = 0; xwp [i].widget; i++) {
-		xw = gst_widget_new (xd, xwp [i]);
+	for (i = 0; wp [i].widget; i++) {
+		w = gst_widget_new (dialog, wp [i]);
 	}
 }
 
@@ -315,10 +458,13 @@ gst_dialog_get_gst_widget (GstDialog *xd, const gchar *name)
 	return (xw);
 }
 
-GstTool *
-gst_dialog_get_tool (GstDialog *xd)
+GstTool*
+gst_dialog_get_tool (GstDialog *dialog)
 {
-	return xd->tool;
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	return priv->tool;
 }
 
 void
@@ -345,122 +491,6 @@ gst_dialog_widget_set_user_sensitive (GstDialog *xd, const gchar *name, gboolean
 	g_return_if_fail (xw != NULL);
 
 	gst_widget_set_user_sensitive (xw, state);
-}
-
-static void
-apply_config (gpointer data)
-{
-	GstDialog *dialog;
-
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GST_IS_DIALOG (data));
-
-	dialog = GST_DIALOG (data);
-
-	if (!gst_dialog_run_apply_hooks (dialog))
-		return;
-
-	g_signal_emit (G_OBJECT (dialog), gstdialog_signals[APPLY], 0);
-
-	gst_dialog_set_modified (dialog, FALSE);
-}
-
-void
-gst_dialog_ask_apply (GstDialog *dialog)
-{
-        g_return_if_fail (dialog != NULL);
-        g_return_if_fail (GST_IS_DIALOG (dialog));
-
-        if (gst_dialog_get_modified (dialog)) {
-                /* Changes have been made. */
-                GtkWidget *w;
-                gint       res;
-
-		w = gtk_message_dialog_new (GTK_WINDOW (dialog),
-					    GTK_DIALOG_MODAL,
-					    GTK_MESSAGE_QUESTION,
-					    GTK_BUTTONS_NONE,
-					    _("There are changes which have not been applied"));
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (w),
-							  _("Apply them now?"));
-		gtk_dialog_add_buttons (GTK_DIALOG (w),
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
-					NULL);
-                res = gtk_dialog_run (GTK_DIALOG (w));
-                gtk_widget_destroy (w);
-                                                                                
-                if (res == GTK_RESPONSE_APPLY)
-                        apply_config (dialog);
-        }
-}
-
-static void
-dialog_close (GstDialog *dialog)
-{
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (GST_IS_DIALOG (dialog));
-
-	gtk_widget_hide (GTK_WIDGET (dialog));
-
-	if (dialog == dialog->tool->main_dialog)
-		g_signal_emit_by_name (G_OBJECT (dialog->tool), "close");
-}
-
-static void
-cancel_cb (GtkWidget *w, gpointer data)
-{
-	GstDialog *dialog;
-
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GST_IS_DIALOG (data));
-
-	dialog = GST_DIALOG (data);
-
-	dialog_close (dialog);
-}
-
-static void
-accept_cb (GtkWidget *w, gpointer data)
-{
-	GstDialog *dialog;
-	
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GST_IS_DIALOG (data));
-
-	dialog = GST_DIALOG (data);
-
-	if (gst_dialog_get_modified (dialog))
-		apply_config (dialog);
-	
-	dialog_close (dialog);
-}
-
-static void
-help_cb (GtkWidget *w, gpointer data)
-{
-	GstDialog *gst_dialog;
-
-	gst_dialog = GST_DIALOG (data);
-	gst_tool_show_help (gst_dialog->tool, NULL);
-}
-
-static gboolean
-dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
-{
-	cancel_cb (w, data);
-	return TRUE;
-}
-
-static gboolean
-dialog_key_press_event_cb (GtkWidget *w, GdkEventKey *event, gpointer data)
-{
-	if (event->keyval == GDK_Escape) {
-		cancel_cb (w, data);
-		return TRUE;
-	}
-
-	return FALSE;
 }
 
 static void
@@ -504,81 +534,4 @@ void
 gst_dialog_connect_signals_after (GstDialog *dialog, GstDialogSignal *signals)
 {
 	dialog_connect_signals (dialog, signals, TRUE);
-}
-
-void
-gst_dialog_construct (GstDialog *dialog, GstTool *tool,
-		      const char *widget, const char *title)
-{
-	GladeXML     *xml;
-	GtkWidget    *w;
-	char         *s;
-	GtkSizeGroup *size_group;
-
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (GST_IS_DIALOG (dialog));
-	g_return_if_fail (tool != NULL);
-	g_return_if_fail (GST_IS_TOOL (tool));
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (title != NULL);
-
-	dialog->tool = tool;
-	dialog->apply_hook_list = NULL;
-
-	s = g_strdup_printf ("%s-admin", tool->name);
-	gnome_app_construct (GNOME_APP (dialog), s, title);
-	g_free (s);
-
-	xml = gst_tool_load_glade_common (tool, "tool_vbox");
-	w = glade_xml_get_widget (xml, "tool_vbox");
-	gnome_app_set_contents (GNOME_APP (dialog), w);
-
-	dialog->gui   = gst_tool_load_glade (tool, NULL);
-	dialog->child = gst_dialog_get_widget (dialog, widget);
-
-	if (GTK_WIDGET_TOPLEVEL (dialog->child)) {
-		g_error ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
-			 "You just need to add the widget inside a GtkWindow so that it can be deparented.", widget);
-	}
-
-	gtk_widget_ref (dialog->child);
-	gtk_widget_unparent (dialog->child);
-	gtk_box_pack_start (GTK_BOX (w), dialog->child, TRUE, TRUE, 0);
-
-	size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
-
-	w = glade_xml_get_widget (xml, "help");
-	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (help_cb), dialog);
-	gtk_size_group_add_widget (size_group, w);
-
-	w = glade_xml_get_widget (xml, "cancel");
-	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (cancel_cb), dialog);
-	gtk_size_group_add_widget (size_group, w);
-
-	w = glade_xml_get_widget (xml, "accept");
-	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (accept_cb), dialog);
-	gtk_size_group_add_widget (size_group, w);
-	
-	gst_dialog_set_modified (dialog, FALSE);
-
-	g_signal_connect (G_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
-	g_signal_connect (G_OBJECT (tool->remote_dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
-	g_signal_connect_after (G_OBJECT (dialog), "key-press-event", G_CALLBACK (dialog_key_press_event_cb), dialog);
-}
-
-GstDialog *
-gst_dialog_new (GstTool *tool, const char *widget, const char *title)
-{
-	GstDialog *dialog;
-
-	g_return_val_if_fail (tool != NULL, NULL);
-	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
-	g_return_val_if_fail (widget != NULL, NULL);
-	g_return_val_if_fail (title != NULL, NULL);
-
-	dialog = GST_DIALOG (g_type_create_instance (GST_TYPE_DIALOG));
-	
-	gst_dialog_construct (dialog, tool, widget, title);
-
-	return dialog;
 }
