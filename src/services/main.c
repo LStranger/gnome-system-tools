@@ -22,46 +22,40 @@
  */
 
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
-
+#include <config.h>
 #include <gtk/gtk.h>
-#include <glib/gi18n.h>
-
-/* #include <stdlib.h> */
-#include "transfer.h"
-#include "table.h"
 #include "gst.h"
+
+#include "table.h"
+#include "service-settings-table.h"
 #include "gst-report-hook.h"
 #include "callbacks.h"
 
 GstTool *tool;
 
 static GstDialogSignal signals [] = {
+	{ "services_list",          "button_press_event",     G_CALLBACK (on_table_button_press_event) },
+	{ "services_list",          "popup_menu",             G_CALLBACK (on_table_popup_menu) },
 	{ NULL }
 };
 
 static GstWidgetPolicy policies [] = {
-	{NULL}
+	{ NULL }
 };
 
 int 
 main (int argc, char *argv[])
 {
-	gst_init ("services-admin", argc, argv, NULL);
-	
-	tool = gst_tool_new();
-	gst_tool_construct (tool, "services", _("Services settings"));
+	gst_init_tool ("services-admin", argc, argv, NULL);
+	tool = gst_services_tool_new ();
 
-	table_create ();
-	
 	gst_dialog_set_widget_policies (tool->main_dialog, policies);
-	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
-
 	gst_dialog_connect_signals (tool->main_dialog, signals);
+	table_create ();
+	service_settings_table_create ();
 
-	gst_tool_main (tool,FALSE);
-	
+	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
+	gtk_main ();
+
 	return 0;
 }

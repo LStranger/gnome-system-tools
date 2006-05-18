@@ -1,8 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* table.h: this file is part of services-admin, a gnome-system-tool frontend 
- * for run level services administration.
- * 
- * Copyright (C) 2002 Ximian, Inc.
+/* 
+ * Copyright (C) 2006 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,30 +16,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho <garparr@teleline.es>.
+ * Authors: Carlos Garnacho <carlosg@gnome.org>
  */
 
-#ifndef _TABLE_H
-#define _TABLE_H
+void   service_settings_table_create      (void);
+void   service_settings_table_set_service (OobsServicesConfig *config,
+					   OobsService        *service);
 
-#include <gtk/gtk.h>
-
-enum {
-	COL_ACTIVE,
-	COL_DESC,
-	COL_IMAGE,
-	COL_DANGEROUS,
-	COL_OBJECT,
-	COL_ITER,
-	COL_LAST
-};
-
-enum {
-	POPUP_SETTINGS
-};
-
-void			table_create				(void);
-void			table_populate				(xmlNodePtr, gchar*);
-void                    table_empty                             (void);
-
-#endif /* _TABLE_H */

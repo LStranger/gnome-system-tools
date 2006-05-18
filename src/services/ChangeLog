@@ -1,3 +1,17 @@
+2006-05-18  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* services-tool.[ch]: new GObject, inherits from GstTool, also gives
+	OobsServicesConfig & co.
+	* service-settings-table.[ch]: added too, implements the advanced
+	runlevels/priorities table.
+	* Makefile.am: added these files
+	* table.[ch]: add a pointer to the OobsService objects, add hability
+	to show the advanced properties dialog.
+	* service.h: cosmetic change
+	* callbacks.[ch]: make things work with liboobs. Remove/comment out
+	unused code
+	* main.c: modify main to work with GstTool changes
+
 2006-03-13  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Release 2.14.0

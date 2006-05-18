@@ -34,12 +34,15 @@ void            on_menu_item_activate                   (GtkWidget*,   gpointer)
 void            on_throw_service_button_clicked         (GtkWidget*,   gpointer);
 void            on_service_priority_changed             (GtkWidget*,   gpointer);
 void            on_runlevel_changed                     (GtkWidget*,   gpointer);
-void            on_service_toggled                      (GtkWidget*,   gchar*, gpointer);
 void            on_popup_settings_activate              (gpointer,     guint, GtkWidget*);
 void            on_sequence_ordering_changed            (GtkWidget*,   gpointer);
-gboolean        on_table_button_press_event             (GtkWidget*,   GdkEventButton*, GtkWidget*);
-gboolean        on_table_popup_menu                     (GtkWidget*,   GtkWidget*);
+gboolean        on_table_button_press_event             (GtkWidget*,   GdkEventButton*, gpointer);
+gboolean        on_table_popup_menu                     (GtkWidget*,   gpointer);
 void            change_runlevel                         (gchar*);
 void            hide_sequence_ordering_toggle_button    (xmlNodePtr);
+
+void            on_service_toggled      (GtkCellRenderer*, gchar*, gpointer);
+void            on_popup_service_enable (GtkAction *action, gpointer data);
+
 
 #endif /* CALLBACKS_H */

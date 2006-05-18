@@ -22,5 +22,7 @@ services_admin_SOURCES = \
 	callbacks.c 		callbacks.h     \
 	service.c		service.h	\
 	table.c			table.h	\
-	transfer.c		transfer.h
+	service-settings-table.c service-settings-table.h \
+	services-tool.c		services-tool.h
+
 toolpixmaps =

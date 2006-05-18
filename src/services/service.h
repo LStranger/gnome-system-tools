@@ -36,6 +36,6 @@ struct _ServiceDescription {
 	gchar *long_description;
 };
 
-const ServiceDescription *service_search (const gchar *service);
+const ServiceDescription *service_search (const gchar *role);
 
 #endif /* __SERVICE_H */
