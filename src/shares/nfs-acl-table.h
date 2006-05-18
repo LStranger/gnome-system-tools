@@ -24,7 +24,7 @@
 #ifndef _NFS_ACL_TABLE_H
 #define _NFS_ACL_TABLE_H
 
-#include "share-export-nfs.h"
+#include <oobs/oobs.h>
 
 enum {
 	NFS_COL_PATTERN,
@@ -33,7 +33,7 @@ enum {
 };
 
 void    nfs_acl_table_create          (void);
-void    nfs_acl_table_add_element     (GstShareACLElement*);
-void    nfs_acl_table_insert_elements (GstShareNFS*);
+void    nfs_acl_table_add_element     (OobsShareAclElement*);
+void    nfs_acl_table_insert_elements (OobsShareNFS*);
 
 #endif /* _NFS_ACL_TABLE_H */

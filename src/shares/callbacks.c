@@ -29,7 +29,9 @@
 #include <gtk/gtk.h>
 
 #include <libgnomevfs/gnome-vfs-uri.h>
+#include <oobs/oobs.h>
 
+#include "shares-tool.h"
 #include "gst.h"
 #include "table.h"
 #include "callbacks.h"
@@ -175,30 +177,48 @@ on_delete_share_clicked (GtkWidget *widget, gpointer data)
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
 	gint              response;
+	OobsList         *list;
+	OobsListIter     *list_iter;
+	OobsShare        *share;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table));
 
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						 GTK_MESSAGE_WARNING,
-						 GTK_BUTTONS_NONE,
-						 _("Are you sure you want to delete this share?"));
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-							  _("Other computers in your network will stop viewing this."));
-		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
-					NULL);
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
 
-		response = gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_WARNING,
+					 GTK_BUTTONS_NONE,
+					 _("Are you sure you want to delete this share?"));
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("Other computers in your network will stop viewing this."));
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				NULL);
 
-		if (response == GTK_RESPONSE_ACCEPT) {
-			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-			gst_dialog_modify (tool->main_dialog);
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	if (response == GTK_RESPONSE_ACCEPT) {
+		gtk_tree_model_get (model, &iter,
+				    COL_SHARE, &share,
+				    COL_ITER, &list_iter,
+				    -1);
+
+		if (OOBS_IS_SHARE_NFS (share)) {
+			list = oobs_nfs_config_get_shares (GST_SHARES_TOOL (tool)->nfs_config);
+			oobs_list_remove (list, list_iter);
+			oobs_object_commit (GST_SHARES_TOOL (tool)->nfs_config);
+		} else {
+			list = oobs_smb_config_get_shares (GST_SHARES_TOOL (tool)->smb_config);
+			oobs_list_remove (list, list_iter);
+			oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
 		}
+
+		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 	}
 }
 
@@ -282,16 +302,6 @@ on_share_nfs_add_clicked (GtkWidget *widget, gpointer data)
 	}
 }
 
-/* helper for setting visibility */
-static void
-widget_set_visibility (GtkWidget *w, gboolean visible)
-{
-	if (visible)
-		gtk_widget_show (w);
-	else
-		gtk_widget_hide (w);
-}
-
 void
 on_share_nfs_host_type_changed (GtkWidget *widget, gpointer data)
 {
@@ -305,30 +315,15 @@ on_share_nfs_host_type_changed (GtkWidget *widget, gpointer data)
 		gtk_tree_model_get (model, &iter,
 				    NFS_HOST_COL_TYPE, &selected_type, -1);
 
-		widget_set_visibility (gst_dialog_get_widget (tool->main_dialog, "share_nfs_hostname_box"),
-				       (selected_type == NFS_SHARE_HOSTNAME));
+		g_object_set (gst_dialog_get_widget (tool->main_dialog, "share_nfs_hostname_box"),
+			      "visible", (selected_type == NFS_SHARE_HOSTNAME), NULL);
 
-		widget_set_visibility (gst_dialog_get_widget (tool->main_dialog, "share_nfs_address_box"),
-				       (selected_type == NFS_SHARE_ADDRESS));
+		g_object_set (gst_dialog_get_widget (tool->main_dialog, "share_nfs_address_box"),
+			      "visible", (selected_type == NFS_SHARE_ADDRESS), NULL);
 
-		widget_set_visibility (gst_dialog_get_widget (tool->main_dialog, "share_nfs_network_box"),
-				       (selected_type == NFS_SHARE_NETWORK));
+		g_object_set (gst_dialog_get_widget (tool->main_dialog, "share_nfs_network_box"),
+			      "visible", (selected_type == NFS_SHARE_NETWORK), NULL);
 	}
-}
-
-void
-on_share_smb_settings_clicked (GtkWidget *widget, gpointer data)
-{
-	GtkWidget *dialog;
-	gint       response;
-
-	smb_settings_prepare_dialog ();
-	dialog   = gst_dialog_get_widget (tool->main_dialog, "smb_properties_dialog");
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_hide (dialog);
-
-	if (response == GTK_RESPONSE_OK)
-		smb_settings_save ();
 }
 
 void
@@ -338,4 +333,52 @@ on_dialog_validate (GtkWidget *widget, gpointer data)
 
 	ok_button = gst_dialog_get_widget (tool->main_dialog, "share_properties_ok");
 	gtk_widget_set_sensitive (ok_button, share_settings_validate ());
+}
+
+void
+on_is_wins_toggled (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *label, *entry;
+	gboolean is_wins_server;
+
+	is_wins_server = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+
+	label = gst_dialog_get_widget (tool->main_dialog, "smb_wins_server_label");
+	entry = gst_dialog_get_widget (tool->main_dialog, "smb_wins_server");
+
+	gtk_widget_set_sensitive (label, !is_wins_server);
+	gtk_widget_set_sensitive (entry, !is_wins_server);
+
+	oobs_smb_config_set_is_wins_server (GST_SHARES_TOOL (tool)->smb_config, is_wins_server);
+	oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
+}
+
+gboolean
+on_workgroup_focus_out (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	gchar *workgroup;
+
+	/* FIXME: check that it has actually changed */
+	workgroup = gtk_entry_get_text (GTK_ENTRY (widget));
+
+	if (workgroup && *workgroup) {
+		oobs_smb_config_set_workgroup (GST_SHARES_TOOL (tool)->smb_config, workgroup);
+		oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
+	}
+
+	return FALSE;
+}
+
+gboolean
+on_wins_server_focus_out (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	gchar *wins_server;
+
+	/* FIXME: check that it has actually changed */
+	wins_server = gtk_entry_get_text (GTK_ENTRY (widget));
+
+	oobs_smb_config_set_wins_server (GST_SHARES_TOOL (tool)->smb_config, wins_server);
+	oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
+
+	return FALSE;
 }

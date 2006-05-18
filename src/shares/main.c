@@ -27,40 +27,39 @@
 
 #include <glib/gi18n.h>
 
+#include "shares-tool.h"
 #include "gst.h"
 #include "table.h"
 #include "nfs-acl-table.h"
-#include "transfer.h"
-#include "share-export-smb.h"
 #include "share-settings.h"
 #include "share-nfs-add-hosts.h"
 #include "callbacks.h"
 
 GstTool *tool;
-GtkIconTheme *icon_theme;
 
 static GstDialogSignal signals [] = {
 	/* Main dialog */
-	{ "add_share",                "clicked",      G_CALLBACK (on_add_share_clicked) },
-	{ "edit_share",               "clicked",      G_CALLBACK (on_edit_share_clicked) },
-	{ "delete_share",             "clicked",      G_CALLBACK (on_delete_share_clicked) },
+	{ "add_share",             "clicked",         G_CALLBACK (on_add_share_clicked) },
+	{ "edit_share",            "clicked",         G_CALLBACK (on_edit_share_clicked) },
+	{ "delete_share",          "clicked",         G_CALLBACK (on_delete_share_clicked) },
+	{ "smb_is_wins",           "toggled",         G_CALLBACK (on_is_wins_toggled) },
+	{ "smb_workgroup",         "focus-out-event", G_CALLBACK (on_workgroup_focus_out) },
+	{ "smb_wins_server",       "focus-out-event", G_CALLBACK (on_wins_server_focus_out) },
 	/* Shares dialog */
-	{ "share_type",               "changed",      G_CALLBACK (on_share_type_changed) },
-	{ "share_type",               "changed",      G_CALLBACK (on_dialog_validate) },
-	{ "share_nfs_delete",         "clicked",      G_CALLBACK (on_share_nfs_delete_clicked) },
-	{ "share_nfs_add",            "clicked",      G_CALLBACK (on_share_nfs_add_clicked) },
-	{ "share_smb_settings",       "clicked",      G_CALLBACK (on_share_smb_settings_clicked) },
-	{ "share_smb_name",           "changed",      G_CALLBACK (on_dialog_validate) },
+	{ "share_type",            "changed",         G_CALLBACK (on_share_type_changed) },
+	{ "share_type",            "changed",         G_CALLBACK (on_dialog_validate) },
+	{ "share_nfs_delete",      "clicked",         G_CALLBACK (on_share_nfs_delete_clicked) },
+	{ "share_nfs_add",         "clicked",         G_CALLBACK (on_share_nfs_add_clicked) },
+	{ "share_smb_name",        "changed",         G_CALLBACK (on_dialog_validate) },
 	/* NFS add hosts dialog */
-	{ "share_nfs_host_type",      "changed",      G_CALLBACK (on_share_nfs_host_type_changed) },
-	/* SMB settings dialog */
+	{ "share_nfs_host_type",   "changed",         G_CALLBACK (on_share_nfs_host_type_changed) },
 	{ NULL }
 };
 
 void
-initialize_tables (void)
+initialize_tables (GstTool *tool)
 {
-	table_create ();
+	table_create (tool);
 	nfs_acl_table_create ();
 	share_nfs_add_hosts_dialog_setup ();
 	share_settings_create_combo ();
@@ -69,12 +68,11 @@ initialize_tables (void)
 void
 init_standalone_dialog (const gchar *path)
 {
-	gst_tool_main_with_hidden_dialog (tool, TRUE);
 	share_settings_dialog_run (path, TRUE);
 }
 
 void
-init_filters (void)
+initialize_filters (void)
 {
 	gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "share_nfs_address")), GST_FILTER_IPV4);
 	gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "share_nfs_network")), GST_FILTER_IPV4);
@@ -91,20 +89,18 @@ main (int argc, char *argv[])
 		{ NULL }
 	};
 	
-	gst_init ("shares-admin", argc, argv, entries);
+	gst_init_tool ("shares-admin", argc, argv, entries);
+	tool = GST_TOOL (gst_shares_tool_new ());
 
-	tool = gst_tool_new ();
-	gst_tool_construct (tool, "shares", _("Shared folders settings"));
-	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	initialize_tables (tool);
 	gst_dialog_connect_signals (tool->main_dialog, signals);
-	init_filters ();
-
-	initialize_tables ();
+	initialize_filters ();
 
 	if (path)
 		init_standalone_dialog (path);
 	else
-		gst_tool_main (tool, FALSE);
+		gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 
+	gtk_main ();
 	return 0;
 }

@@ -24,10 +24,10 @@
 #include <glib/gi18n.h>
 
 #include "share-nfs-add-hosts.h"
+#include "shares-tool.h"
 #include "gst.h"
 
 extern GstTool *tool;
-extern GtkIconTheme *icon_theme;
 
 static void
 share_nfs_create_size_group (void)
@@ -136,7 +136,7 @@ share_nfs_add_static_combo_elements (GtkListStore *store)
 	GtkTreeIter  iter;
 	GdkPixbuf   *pixbuf;
 
-	pixbuf = gtk_icon_theme_load_icon (icon_theme,
+	pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
 					   "gnome-fs-network",
 					   16, 0, NULL);
 
@@ -165,14 +165,39 @@ share_nfs_add_static_combo_elements (GtkListStore *store)
 }
 
 static void
-share_nfs_add_hosts_completion (xmlNodePtr node)
+populate_hosts_completion (GtkListStore *store)
 {
-	GtkWidget          *entry = gst_dialog_get_widget (tool->main_dialog, "share_nfs_hostname");
+	OobsList *list;
+	OobsListIter list_iter;
+	gboolean valid;
+	GtkTreeIter iter;
+	GObject *static_host;
+	GList *aliases, *alias;
+
+	list = oobs_hosts_config_get_static_hosts (GST_SHARES_TOOL (tool)->hosts_config);
+	valid = oobs_list_get_iter_first (list, &list_iter);
+
+	while (valid) {
+		static_host = oobs_list_get (list, &list_iter);
+		aliases = alias = oobs_static_host_get_aliases (static_host);
+		g_object_unref (static_host);
+
+		while (alias) {
+			gtk_list_store_append (store, &iter);
+			gtk_list_store_set (store, &iter, 0, alias->data, -1);
+			alias = alias->next;
+		}
+
+		valid = oobs_list_iter_next (list, &list_iter);
+	}
+}
+
+static void
+share_nfs_add_hosts_completion (void)
+{
+	GtkWidget *entry = gst_dialog_get_widget (tool->main_dialog, "share_nfs_hostname");
 	GtkEntryCompletion *completion;
-	GtkListStore       *store;
-	GtkTreeIter         iter;
-	xmlNodePtr          host, alias;
-	gchar              *text;
+	GtkListStore *store;
 
 	completion = gtk_entry_completion_new ();
 	store = gtk_list_store_new (1, G_TYPE_STRING);
@@ -184,41 +209,24 @@ share_nfs_add_hosts_completion (xmlNodePtr node)
 	g_object_unref (completion);
 
 	gtk_entry_completion_set_text_column (completion, 0);
-
-	for (host = gst_xml_element_find_first (node, "statichost");
-	     host; host = gst_xml_element_find_next (host, "statichost")) {
-		for (alias = gst_xml_element_find_first (host, "alias");
-		     alias; alias = gst_xml_element_find_next (alias, "alias")) {
-			text = gst_xml_element_get_content (alias);
-
-			gtk_list_store_append (store, &iter);
-			gtk_list_store_set (store, &iter, 0, text, -1);
-
-			g_free (text);
-		}
-	}
+	populate_hosts_completion (store);
 }
 
 static void
 share_nfs_add_combo_elements (void)
 {
-	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "share_nfs_host_type");
+	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "share_nfs_host_type");
 	GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-	xmlDoc       *doc;
-	xmlNodePtr    node;
-
-	doc = gst_tool_run_get_directive (tool, NULL, "get_network_conf", NULL);
-	node = gst_xml_doc_get_root (doc);
 
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 
-	share_nfs_add_hosts_completion (node);
-
+	share_nfs_add_hosts_completion ();
+	/* FIXME
 	share_nfs_add_ifaces_combo_elements (GTK_LIST_STORE (model), node);
-	share_nfs_add_static_combo_elements (GTK_LIST_STORE (model));
+	*/
 
+	share_nfs_add_static_combo_elements (GTK_LIST_STORE (model));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
-	gst_xml_doc_destroy (doc);
 }
 
 GtkWidget*

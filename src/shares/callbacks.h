@@ -43,4 +43,9 @@ void      on_shares_dragged_folder            (GtkWidget *widget, GdkDragContext
 					       gint x, gint y, GtkSelectionData *selection_data,
 					       guint info, guint time, gpointer gdata);
 
+void      on_is_wins_toggled                  (GtkWidget *widget, gpointer data);
+gboolean  on_workgroup_focus_out              (GtkWidget *widget, GdkEvent *event, gpointer data);
+gboolean  on_wins_server_focus_out            (GtkWidget *widget, GdkEvent *event, gpointer data);
+
+
 #endif /* __CALLBACKS_H */

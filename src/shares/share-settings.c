@@ -24,10 +24,9 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include "share-settings.h"
-#include "share-export-smb.h"
-#include "share-export-nfs.h"
+#include "shares-tool.h"
 #include "nfs-acl-table.h"
+#include "share-settings.h"
 #include "table.h"
 #include "gst.h"
 
@@ -46,11 +45,8 @@ share_settings_clear_dialog (void)
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_comment");
 	gtk_entry_set_text (GTK_ENTRY (widget), "");
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_browsable");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_readonly");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+        widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_readonly");
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
 
 	/* NFS widgets */
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_nfs_acl");
@@ -80,21 +76,15 @@ share_settings_create_combo (void)
 static void
 share_settings_set_path (const gchar *path)
 {
-	GtkWidget *path_entry        = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	GtkWidget *path_entry_label  = gst_dialog_get_widget (tool->main_dialog, "share_path_fentry_label");
-	GtkWidget *path_label        = gst_dialog_get_widget (tool->main_dialog, "share_path_label");
-	GtkWidget *path_label_label  = gst_dialog_get_widget (tool->main_dialog, "share_path_label_label");
+	GtkWidget *path_entry = gst_dialog_get_widget (tool->main_dialog, "share_path");
+	GtkWidget *path_label = gst_dialog_get_widget (tool->main_dialog, "share_path_label");
 
 	if (!path) {
 		gtk_widget_show (path_entry);
-		gtk_widget_show (path_entry_label);
 		gtk_widget_hide (path_label);
-		gtk_widget_hide (path_label_label);
 	} else {
 		gtk_widget_hide (path_entry);
-		gtk_widget_hide (path_entry_label);
 		gtk_widget_show (path_label);
-		gtk_widget_show (path_label_label);
 		gtk_label_set_text (GTK_LABEL (path_label), path);
 		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (path_entry), path);
 	}
@@ -103,17 +93,14 @@ share_settings_set_path (const gchar *path)
 static GtkWidget*
 share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 {
-	GtkWidget    *combo       = gst_dialog_get_widget (tool->main_dialog, "share_type");
-	GtkWidget    *dialog      = gst_dialog_get_widget (tool->main_dialog, "share_properties");
+	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "share_type");
+	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "share_properties");
 	GtkTreeModel *model;
-	GtkTreeIter   iter;
-	xmlNodePtr    root;
+	GtkTreeIter iter;
 
 	share_settings_clear_dialog ();
 	share_settings_set_path (path);
 
-	root = gst_xml_doc_get_root (tool->config);
-	
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 
@@ -125,7 +112,7 @@ share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 				    -1);
 	}
 
-	if (gst_xml_element_get_boolean (root, "smbinstalled")) {
+	if (GST_SHARES_TOOL (tool)->smb_available) {
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 				    0, _("SMB"),
@@ -133,7 +120,7 @@ share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 				    -1);
 	}
 
-	if (gst_xml_element_get_boolean (root, "nfsinstalled")) {
+	if (GST_SHARES_TOOL (tool)->nfs_available) {
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 				    0, _("NFS"),
@@ -147,45 +134,41 @@ share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 }
 
 static void
-share_settings_set_share_smb (GstShareSMB *share)
+share_settings_set_share_smb (OobsShareSMB *share)
 {
 	GtkWidget *widget;
 	gint       flags;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget),
-					     gst_share_get_path (GST_SHARE (share)));
+					     oobs_share_get_path (OOBS_SHARE (share)));
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 	gtk_entry_set_text (GTK_ENTRY (widget),
-			    gst_share_smb_get_name (share));
+			    oobs_share_smb_get_name (share));
 	
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_comment");
 	gtk_entry_set_text (GTK_ENTRY (widget),
-			    gst_share_smb_get_comment (share));
+			    oobs_share_smb_get_comment (share));
 
-	flags = gst_share_smb_get_flags (share);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_browsable");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
-				      flags & GST_SHARE_SMB_BROWSABLE);
+	flags = oobs_share_smb_get_flags (share);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_readonly");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
-				      ! (flags & GST_SHARE_SMB_WRITABLE));
+				      ! (flags & OOBS_SHARE_SMB_WRITABLE));
 }
 
 static void
-share_settings_set_share_nfs (GstShareNFS *share)
+share_settings_set_share_nfs (OobsShareNFS *share)
 {
 	GtkWidget    *widget;
 	const GSList *list;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget),
-					     gst_share_get_path (GST_SHARE (share)));
+					     oobs_share_get_path (OOBS_SHARE (share)));
 
-	list = gst_share_nfs_get_acl (share);
+	list = oobs_share_nfs_get_acl (share);
 
 	while (list) {
 		nfs_acl_table_add_element (list->data);
@@ -217,14 +200,14 @@ share_settings_set_active (gint val)
 }
 
 static void
-share_settings_set_share (GstShare *share)
+share_settings_set_share (OobsShare *share)
 {
-	if (GST_IS_SHARE_SMB (share)) {
+	if (OOBS_IS_SHARE_SMB (share)) {
 		share_settings_set_active (SHARE_THROUGH_SMB);
-		share_settings_set_share_smb (GST_SHARE_SMB (share));
-	} else if (GST_IS_SHARE_NFS (share)) {
+		share_settings_set_share_smb (OOBS_SHARE_SMB (share));
+	} else if (OOBS_IS_SHARE_NFS (share)) {
 		share_settings_set_active (SHARE_THROUGH_NFS);
-		share_settings_set_share_nfs (GST_SHARE_NFS (share));
+		share_settings_set_share_nfs (OOBS_SHARE_NFS (share));
 	}
 }
 
@@ -236,53 +219,50 @@ share_settings_close_dialog (void)
 	gtk_widget_hide (dialog);
 }
 
-static GstShare*
+static OobsShare*
 share_settings_get_share_smb (void)
 {
 	GtkWidget   *widget;
 	const gchar *path, *name, *comment;
 	gint         flags = 0;
 
-	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	path    = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget));
+	widget = gst_dialog_get_widget (tool->main_dialog, "share_path");
+	path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget));
 
-	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
-	name    = gtk_entry_get_text (GTK_ENTRY (widget));
+	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
+	name = gtk_entry_get_text (GTK_ENTRY (widget));
 	
-	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_comment");
+	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_comment");
 	comment = gtk_entry_get_text (GTK_ENTRY (widget));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_browsable");
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
-		flags |= GST_SHARE_SMB_BROWSABLE;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_readonly");
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
-		flags |= GST_SHARE_SMB_WRITABLE;
+		flags |= OOBS_SHARE_SMB_WRITABLE;
 
-	flags |= GST_SHARE_SMB_ENABLED;
-	flags |= GST_SHARE_SMB_PUBLIC;
+	flags |= (OOBS_SHARE_SMB_ENABLED |
+		  OOBS_SHARE_SMB_PUBLIC |
+		  OOBS_SHARE_SMB_BROWSABLE);
 
-	return GST_SHARE (gst_share_smb_new (name, comment, path, flags));
+	return OOBS_SHARE (oobs_share_smb_new (path, name, comment, flags));
 }
 
-static GstShare*
+static OobsShare*
 share_settings_get_share_nfs ()
 {
-	GtkWidget   *widget;
-	const gchar *path;
-	GstShareNFS *share;
+	GtkWidget    *widget;
+	const gchar  *path;
+	OobsShareNFS *share;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
 	path    = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget));
 
-	share = gst_share_nfs_new (path);
+	share = oobs_share_nfs_new (path);
 	nfs_acl_table_insert_elements (share);
 
-	return GST_SHARE (share);
+	return OOBS_SHARE (share);
 }
 
-static GstShare*
+static OobsShare*
 share_settings_get_share (void)
 {
 	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "share_type");
@@ -333,14 +313,96 @@ share_settings_validate (void)
 	return TRUE;
 }
 
+static void
+modify_share (OobsShare *new_share, OobsShare *old_share, OobsListIter *list_iter, GtkTreeIter *iter)
+{
+	OobsObject *old_config, *new_config;
+	OobsList *old_list, *new_list;
+
+	if (OOBS_IS_SHARE_SMB (old_share)) {
+		old_config = GST_SHARES_TOOL (tool)->smb_config;
+		old_list = oobs_smb_config_get_shares (OOBS_SMB_CONFIG (old_config));
+	} else {
+		old_config = GST_SHARES_TOOL (tool)->nfs_config;
+		old_list = oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (old_config));
+	}
+
+	oobs_list_remove (old_list, list_iter);
+
+	/* FIXME: this part is almost the same than add_new_share() */
+	if (OOBS_IS_SHARE_SMB (new_share)) {
+		new_config = GST_SHARES_TOOL (tool)->smb_config;
+		new_list = oobs_smb_config_get_shares (OOBS_SMB_CONFIG (new_config));
+	} else {
+		new_config = GST_SHARES_TOOL (tool)->nfs_config;
+		new_list = oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (new_config));
+	}
+
+	oobs_list_append (new_list, list_iter);
+	oobs_list_set (new_list, list_iter, new_share);
+	g_object_unref (new_share);
+
+	table_modify_share_at_iter (iter, new_share, list_iter);
+
+	oobs_object_commit (new_config);
+
+	if (old_config != new_config)
+		oobs_object_commit (old_config);
+}
+
+static void
+add_new_share (OobsShare *share)
+{
+	OobsObject *config;
+	OobsList *list;
+	OobsListIter iter;
+
+	if (OOBS_IS_SHARE_SMB (share)) {
+		config = GST_SHARES_TOOL (tool)->smb_config;
+		list = oobs_smb_config_get_shares (OOBS_SMB_CONFIG (config));
+	} else {
+		config = GST_SHARES_TOOL (tool)->nfs_config;
+		list = oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (config));
+	}
+
+	oobs_list_append (list, &iter);
+	oobs_list_set (list, &iter, share);
+	g_object_unref (share);
+
+	table_add_share (share, &iter);
+
+	oobs_object_commit (config);
+}
+
+static void
+delete_share (GtkTreeIter *iter, OobsShare *share, OobsListIter *list_iter)
+{
+	OobsObject *config;
+	OobsList *list;
+
+	if (OOBS_IS_SHARE_SMB (share)) {
+		config = GST_SHARES_TOOL (tool)->smb_config;
+		list = oobs_smb_config_get_shares (OOBS_SMB_CONFIG (config));
+	} else {
+		config = GST_SHARES_TOOL (tool)->nfs_config;
+		list = oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (config));
+	}
+
+	oobs_list_remove (list, list_iter);
+	table_delete_share_at_iter (&iter);
+
+	oobs_object_commit (config);
+}
+
 void
 share_settings_dialog_run (const gchar *path, gboolean standalone)
 {
-	GtkWidget   *dialog;
-	gint         response;
-	GstShare    *new_share, *share;
-	GtkTreeIter  iter;
-	gboolean     path_exists;
+	GtkWidget    *dialog;
+	gint          response;
+	OobsShare    *new_share, *share;
+	OobsListIter *list_iter;
+	GtkTreeIter   iter;
+	gboolean      path_exists;
 
 	share  = NULL;
 	dialog = share_settings_prepare_dialog (path, standalone);
@@ -349,107 +411,32 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 	path_exists = table_get_iter_with_path (path, &iter);
 
 	if (path_exists) {
-		share = table_get_share_at_iter (&iter);
+		share = table_get_share_at_iter (&iter, &list_iter);
 		share_settings_set_share (share);
-		g_object_unref (share);
 	}
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
-	while ((response = gtk_dialog_run (GTK_DIALOG (dialog))) == GTK_RESPONSE_HELP);
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_hide (dialog);
 
 	if (response == GTK_RESPONSE_OK) {
 		new_share = share_settings_get_share ();
 
-		if (path_exists && new_share)
-			table_modify_share_at_iter (&iter, new_share);
-		else if (!path_exists && new_share)
-			table_add_share (new_share);
-		else if (path_exists && !new_share)
-			table_delete_share_at_iter (&iter);
-
-		gst_dialog_modify (tool->main_dialog);
-
-		if (standalone)
-			gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog),
-						 "apply", tool);
+		if (new_share) {
+			/* FIXME: check type, and move
+			 * share between lists if necessary */
+			if (path_exists)
+				modify_share (new_share, share, list_iter, &iter);
+			else
+				add_new_share (new_share);
+		} else {
+			if (path_exists)
+				delete_share (&iter, share, list_iter);
+		}
 	}
 
 	share_settings_close_dialog ();
-}
 
-void
-smb_settings_prepare_dialog (void)
-{
-	GtkWidget *widget;
-	gchar     *desc, *workgroup, *wins_server;
-	gboolean   wins_use;
-	xmlNodePtr root;
-
-	root = gst_xml_doc_get_root (tool->config);
-	desc        = gst_xml_get_child_content (root, "smbdesc");
-	workgroup   = gst_xml_get_child_content (root, "workgroup");
-	wins_server = gst_xml_get_child_content (root, "smb_wins_server");
-	wins_use    = gst_xml_element_get_boolean (root, "winsuse");
-	
-	widget = gst_dialog_get_widget (tool->main_dialog, "smb_description");
-	gtk_entry_set_text (GTK_ENTRY (widget), desc);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "smb_workgroup");
-	gtk_entry_set_text (GTK_ENTRY (widget), workgroup);
-
-	if (wins_server) {
-		widget = gst_dialog_get_widget (tool->main_dialog, "smb_wins_server");
-		gtk_entry_set_text (GTK_ENTRY (widget), wins_server);
-
-		widget = gst_dialog_get_widget (tool->main_dialog, "smb_use_wins");
-	} else if (wins_use)
-		widget = gst_dialog_get_widget (tool->main_dialog, "smb_is_wins");
-	else
-		widget = gst_dialog_get_widget (tool->main_dialog, "smb_no_wins");
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-
-	g_free (desc);
-	g_free (workgroup);
-	g_free (wins_server);
-}
-
-void
-smb_settings_save (void)
-{
-	GtkWidget   *widget;
-	const gchar *text;
-	gboolean    *active;
-	xmlNodePtr   root;
-
-	root = gst_xml_doc_get_root (tool->config);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "smb_description");
-	text = gtk_entry_get_text (GTK_ENTRY (widget));
-	gst_xml_set_child_content (root, "smbdesc", text);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "smb_workgroup");
-	text = gtk_entry_get_text (GTK_ENTRY (widget));
-	gst_xml_set_child_content (root, "workgroup", text);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "smb_no_wins");
-
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
-		gst_xml_element_destroy_children_by_name (root, "smb_wins_server");
-		gst_xml_element_set_boolean (root, "winsuse", FALSE);
-	} else {
-		widget = gst_dialog_get_widget (tool->main_dialog, "smb_is_wins");
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
-			gst_xml_element_destroy_children_by_name (root, "smb_wins_server");
-			gst_xml_element_set_boolean (root, "winsuse", TRUE);
-		} else {
-			widget = gst_dialog_get_widget (tool->main_dialog, "smb_wins_server");
-			text   = gtk_entry_get_text (GTK_ENTRY (widget));
-
-			gst_xml_set_child_content (root, "smb_wins_server", text);
-			gst_xml_element_set_boolean (root, "winsuse", FALSE);
-		}
-	}
+	if (share)
+		g_object_unref (share);
 }

@@ -23,23 +23,21 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtktreeview.h>
+#include "gst-tool.h"
 #include "gst.h"
 #include "table.h"
 #include "callbacks.h"
-#include "share-export-smb.h"
-#include "share-export-nfs.h"
 
 extern GstTool *tool;
-extern GtkIconTheme *icon_theme;
 
 static GtkTargetEntry drop_types[] = {
 	{ "text/uri-list", 0, SHARES_DND_URI_LIST },
 };
 
 GtkActionEntry popup_menu_items [] = {
-	{ "Add",       GTK_STOCK_ADD,         N_("_Add"),        NULL, NULL, G_CALLBACK (on_add_share_clicked) },
+	{ "Add",        GTK_STOCK_ADD,        N_("_Add"),        NULL, NULL, G_CALLBACK (on_add_share_clicked) },
 	{ "Properties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL, NULL, G_CALLBACK (on_edit_share_clicked) },
-	{ "Delete",    GTK_STOCK_DELETE,      N_("_Delete"),     NULL, NULL, G_CALLBACK (on_delete_share_clicked) },
+	{ "Delete",     GTK_STOCK_DELETE,     N_("_Delete"),     NULL, NULL, G_CALLBACK (on_delete_share_clicked) },
 };
 
 const gchar *ui_description =
@@ -85,7 +83,8 @@ create_table_model (void)
 	store = gtk_list_store_new (COL_LAST,
 				    GDK_TYPE_PIXBUF,
 				    G_TYPE_STRING,
-				    G_TYPE_OBJECT);
+				    G_TYPE_OBJECT,
+				    OOBS_TYPE_LIST_ITER);
 
 	return GTK_TREE_MODEL (store);
 }
@@ -111,7 +110,7 @@ add_table_columns (GtkTreeView *table)
 }
 
 void
-table_create (void)
+table_create (GstTool *tool)
 {
 	GtkWidget        *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	GtkWidget        *popup;
@@ -141,92 +140,81 @@ table_create (void)
 			   GDK_ACTION_COPY);
 	g_signal_connect (G_OBJECT (table), "drag_data_received",
 			  G_CALLBACK (on_shares_dragged_folder), NULL);
-
-	icon_theme = gtk_icon_theme_get_default ();
 }
 
-void
-table_add_share_from_node (xmlNodePtr node)
+static GdkPixbuf*
+get_share_icon (OobsShare *share)
 {
-	gchar    *share_type;
-	GstShare *share = NULL;
+	GdkPixbuf *pixbuf = NULL;
 
-	share_type = gst_xml_element_get_attribute (node, "type");
+	if (OOBS_IS_SHARE_SMB (share)) {
+		pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
+						   "gnome-fs-smb",
+						   48, 0, NULL);
+	} else if (OOBS_IS_SHARE_NFS (share)) {
+		pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
+						   "gnome-fs-nfs",
+						   48, 0, NULL);
+	}
 
-	if (strcmp (share_type, "smb") == 0)
-		share  = GST_SHARE (gst_share_smb_new_from_xml (node));
-	else if (strcmp (share_type, "nfs") == 0)
-		share  = GST_SHARE (gst_share_nfs_new_from_xml (node));
-
-	table_add_share (share);
-
-	g_free (share_type);
+	return pixbuf;
 }
 
 void
-table_add_share (GstShare *share)
+table_add_share (OobsShare *share, OobsListIter *list_iter)
 {
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
 
 	g_return_if_fail (share != NULL);
-	g_return_if_fail (GST_IS_SHARE (share));
+	g_return_if_fail (OOBS_IS_SHARE (share));
 	
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
-	table_modify_share_at_iter (&iter, share);
+	gtk_list_store_set (GTK_LIST_STORE (model),
+			    &iter,
+			    COL_PIXBUF, get_share_icon (share),
+			    COL_PATH, oobs_share_get_path (share),
+			    COL_SHARE, share,
+			    COL_ITER, list_iter,
+			    -1);
 }
 
 void
-table_modify_share_at_iter (GtkTreeIter *iter, GstShare *share)
+table_modify_share_at_iter (GtkTreeIter *iter, OobsShare *share, OobsListIter *list_iter)
 {
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	GtkTreeModel *model;
 	GdkPixbuf    *pixbuf = NULL;
 
 	g_return_if_fail (share != NULL);
-	g_return_if_fail (GST_IS_SHARE (share));
+	g_return_if_fail (OOBS_IS_SHARE (share));
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
-
-	if (GST_IS_SHARE_SMB (share)) {
-		pixbuf = gtk_icon_theme_load_icon (icon_theme,
-						   "gnome-fs-smb",
-						   48, 0, NULL);
-	} else if (GST_IS_SHARE_NFS (share)) {
-		pixbuf = gtk_icon_theme_load_icon (icon_theme,
-						   "gnome-fs-nfs",
-						   48, 0, NULL);
-	}
-
 	gtk_list_store_set (GTK_LIST_STORE (model),
 			    iter,
-			    0, pixbuf,
-			    1, gst_share_get_path (share),
-			    2, share,
+			    COL_PIXBUF, get_share_icon (share),
+			    COL_PATH, oobs_share_get_path (share),
+			    COL_SHARE, share,
+			    COL_ITER, list_iter,
 			    -1);
-
-	g_object_unref (share);
-
-	if (pixbuf)
-		gdk_pixbuf_unref (pixbuf);
 }
 
-GstShare*
-table_get_share_at_iter (GtkTreeIter *iter)
+OobsShare*
+table_get_share_at_iter (GtkTreeIter *iter, OobsListIter **list_iter)
 {
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	GtkTreeModel *model;
-	GstShare     *share;
+	OobsShare     *share;
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 
 	gtk_tree_model_get (model, iter,
-			    COL_POINTER, &share,
+			    COL_SHARE, &share,
+			    COL_ITER, list_iter,
 			    -1);
-
 	return share;
 }
 

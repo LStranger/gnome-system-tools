@@ -24,7 +24,6 @@
 #include <glib/gi18n.h>
 
 #include "nfs-acl-table.h"
-#include "share-export-nfs.h"
 #include "gst.h"
 
 extern GstTool *tool;
@@ -63,29 +62,19 @@ add_nfs_acl_table_columns (GtkTreeView *table)
 void
 nfs_acl_table_create (void)
 {
-	GtkWidget        *table = gst_dialog_get_widget (tool->main_dialog, "share_nfs_acl");
-	GtkTreeModel     *model;
+	GtkWidget *table = gst_dialog_get_widget (tool->main_dialog, "share_nfs_acl");
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
 
 	model = create_nfs_acl_table_model ();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (table), model);
 	g_object_unref (G_OBJECT (model));
 
 	add_nfs_acl_table_columns (GTK_TREE_VIEW (table));
-/*
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table));
-	g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK (on_shares_table_selection_changed), NULL);
-
-	popup = popup_menu_create (GTK_TREE_VIEW (table));
-	g_signal_connect (G_OBJECT (table), "button-press-event",
-			  G_CALLBACK (on_shares_table_button_press), (gpointer) popup);
-	g_signal_connect (G_OBJECT (table), "popup_menu",
-			  G_CALLBACK (on_shares_table_popup_menu), (gpointer) popup);
-*/
 }
 
 void
-nfs_acl_table_add_element (GstShareACLElement *element)
+nfs_acl_table_add_element (OobsShareAclElement *element)
 {
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "share_nfs_acl");
 	GtkTreeModel *model;
@@ -101,7 +90,7 @@ nfs_acl_table_add_element (GstShareACLElement *element)
 }
 
 void
-nfs_acl_table_insert_elements (GstShareNFS *share)
+nfs_acl_table_insert_elements (OobsShareNFS *share)
 {
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "share_nfs_acl");
 	GtkTreeModel *model;
@@ -118,7 +107,7 @@ nfs_acl_table_insert_elements (GstShareNFS *share)
 				    1, &read_only,
 				    -1);
 
-		gst_share_nfs_add_acl_element (share, element, read_only);
+		oobs_share_nfs_add_acl_element (share, element, read_only);
 		g_free (element);
 
 		valid = gtk_tree_model_iter_next (model, &iter);

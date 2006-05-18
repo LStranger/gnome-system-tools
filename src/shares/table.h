@@ -24,12 +24,13 @@
 #ifndef __TABLE_H__
 #define __TABLE_H__
 
-#include "share-export.h"
+#include "gst-tool.h"
 
 enum {
 	   COL_PIXBUF,
 	   COL_PATH,
-	   COL_POINTER,
+	   COL_SHARE,
+	   COL_ITER,
 	   COL_LAST
 };
 
@@ -37,12 +38,12 @@ enum {
 	SHARES_DND_URI_LIST
 };
 
-void      table_create               (void);
+void      table_create               (GstTool*);
 void      table_add_share_from_node  (xmlNodePtr);
-void      table_add_share            (GstShare*);
+void      table_add_share            (OobsShare*, OobsListIter*);
 gboolean  table_get_iter_with_path   (const gchar*, GtkTreeIter*);
-GstShare* table_get_share_at_iter    (GtkTreeIter*);
-void      table_modify_share_at_iter (GtkTreeIter*, GstShare*);
+OobsShare *table_get_share_at_iter    (GtkTreeIter*, OobsListIter**);
+void      table_modify_share_at_iter (GtkTreeIter*, OobsShare*, OobsListIter*);
 void      table_delete_share_at_iter (GtkTreeIter*);
 
 #endif /* __TABLE_H__ */
