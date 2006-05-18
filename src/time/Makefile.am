@@ -18,10 +18,10 @@ EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 time_admin_LDADD = $(GST_TOOL_LIBS) ./e-map/libemap.a
 time_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) ./e-map/libemap.a
 time_admin_SOURCES = \
-	main.c            time-tool.h \
+	time-tool.c	time-tool.h \
 	tz.c              tz.h \
 	tz-map.c          tz-map.h \
 	timeserv.c        timeserv.h \
-	transfer.c        transfer.h 
+	main.c
 
 toolpixmaps =

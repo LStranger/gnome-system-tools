@@ -51,7 +51,7 @@ static gboolean update_map (GtkWidget *w, gpointer data);
 static gboolean out_map (GtkWidget *w,GdkEventCrossing *event, gpointer data);
 
 ETzMap *
-e_tz_map_new (GstTimeTool *tool)
+e_tz_map_new (GstTool *tool)
 {
 	ETzMap *tzmap;
 	GPtrArray *locs;
@@ -164,6 +164,9 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 	GPtrArray *locs;
 	double l_longitude = 0.0, l_latitude = 0.0;
 	int i;
+
+	g_return_if_fail (tzmap != NULL);
+	g_return_if_fail (name != NULL);
 
 	tz_db = e_tz_map_get_tz_db (tzmap);
 	locs = tz_get_locations (tz_db);

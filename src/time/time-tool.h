@@ -1,3 +1,15 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
+#ifndef __TIME_TOOL_H__
+#define __TIME_TOOL_H__
+
+G_BEGIN_DECLS
+
+#include "gst-tool.h"
+#include "tz.h"
+#include "e-map/e-map.h"
+#include "tz-map.h"
+
 #define GST_TYPE_TIME_TOOL            (gst_time_tool_get_type ())
 #define GST_TIME_TOOL(obj)            (GTK_CHECK_CAST ((obj), GST_TYPE_TIME_TOOL, GstTimeTool))
 #define GST_TIME_TOOL_CLASS(class)    (GTK_CHECK_CLASS_CAST ((class), GST_TYPE_TIME_TOOL, GstTimeToolClass))
@@ -10,35 +22,32 @@ typedef struct _GstTimeToolClass GstTimeToolClass;
 struct _GstTimeTool {
 	GstTool tool;
 
-	gboolean running;
-	gboolean ticking;
-	
-	guint timeout;
-
+	GtkWidget *calendar;
 	GtkWidget *seconds;
 	GtkWidget *minutes;
 	GtkWidget *hours;
 
+	ETzMap    *tzmap;
+	GtkWidget *timezone_dialog;
 	GtkWidget *map_hover_label;
 
-	gint sec;
-	gint min;
-	gint hrs;
-
-	gchar *time_zone_name;
+	OobsService *ntp_service;
 };
 
 struct _GstTimeToolClass {
 	GstToolClass parent_class;
 };
 
-GtkType gst_time_tool_get_type           (void);
-void    gst_time_update                  (GstTimeTool *tool);
+GType    gst_time_tool_get_type            (void);
 
-void    gst_time_clock_stop              (GstTimeTool *tool);
-void    gst_time_clock_start             (GstTimeTool *tool);
+GstTool *gst_time_tool_new                 (void);
 
-void    gst_time_tool_set_time_zone_name (GstTimeTool *time_tool, gchar *name);
-gchar*  gst_time_tool_get_time_zone_name (GstTimeTool*);
-void    gst_time_set_full                (GstTimeTool *time_tool, struct tm *tm);
-void    gst_time_set_from_localtime      (GstTimeTool *time_tool, gint correction);
+void     gst_time_tool_start_clock         (GstTimeTool *tool);
+void     gst_time_tool_stop_clock          (GstTimeTool *tool);
+
+void     gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool);
+
+
+G_END_DECLS
+
+#endif /* __TIME_TOOL_H__ */
