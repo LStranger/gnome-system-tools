@@ -27,9 +27,9 @@ shares_SUBDIR = shares
 endif
 
 SUBDIRS = \
-	common
+	common			\
 	$(services_SUBDIR)	\
-	$(time_SUBDIR)		\
+	$(time_SUBDIR)	
 #	  $(network_SUBDIR) 	\
 #	  $(boot_SUBDIR)	\
 #	  $(users_SUBDIR)	\
