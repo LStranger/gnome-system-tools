@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-01 07:00+0100\n"
-"PO-Revision-Date: 2006-02-01 12:21+0530\n"
+"POT-Creation-Date: 2006-05-18 23:20+0200\n"
+"PO-Revision-Date: 2006-05-19 09:55+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -301,10 +302,13 @@ msgstr "તમે જે કમ્પ્યૂટરનું રુપરેખ
 #: ../interfaces/common.glade.in.h:9
 msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
-"modify your system configuration."
-msgstr "આ સાધન વાપરવા માટે તમને સંચાલક વિશેષાધિકારો જરૂરી છે. તમારું સિસ્ટમ રૂપરેખાંકન સુધારવા માટે પાસવર્ડ દાખલ કરો."
+"modify\n"
+"your system configuration."
+msgstr ""
+"આ સાધન વાપરવા માટે તમારી પાસે સંચાલક વિશેષાધિકારોની જરૂર છે. તમારું સિસ્ટમ રૂપરેખાંકન\n"
+"સુધારવા માટે પાસવર્ડ દાખલ કરો."
 
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:11
 msgid "_Password:"
 msgstr "પાસવર્ડ (_P):"
 
@@ -665,50 +669,54 @@ msgid "(unconfigured)"
 msgstr "(રુપરેખાંકિત નથી)"
 
 #: ../interfaces/time.glade.in.h:2
+msgid ":"
+msgstr ":"
+
+#: ../interfaces/time.glade.in.h:3
 msgid "<b>Selection</b>"
 msgstr "<b>પસંદગી</b>"
 
-#: ../interfaces/time.glade.in.h:3
+#: ../interfaces/time.glade.in.h:4
 msgid "<b>Time zone</b>"
 msgstr "<b>ટાઈમ ઝોન</b>"
 
-#: ../interfaces/time.glade.in.h:4
+#: ../interfaces/time.glade.in.h:5
 msgid "Add NTP Server"
 msgstr "NTP સર્વર ઉમેરો"
 
-#: ../interfaces/time.glade.in.h:5
+#: ../interfaces/time.glade.in.h:6
 msgid "NTP server"
 msgstr "NTP સર્વર"
 
-#: ../interfaces/time.glade.in.h:6
+#: ../interfaces/time.glade.in.h:7
 msgid "S_ynchronize clock with Internet servers:"
 msgstr "ઈન્ટરનેટ સર્વરો સાથે ઘડિયાળને સુમેળ કરો (_y):"
 
-#: ../interfaces/time.glade.in.h:7
+#: ../interfaces/time.glade.in.h:8
 msgid "Se_lect Servers..."
 msgstr "સર્વરો પસંદ કરો (_l)..."
 
-#: ../interfaces/time.glade.in.h:8
+#: ../interfaces/time.glade.in.h:9
 msgid "Time servers"
 msgstr "સમય સર્વરો"
 
-#: ../interfaces/time.glade.in.h:9
+#: ../interfaces/time.glade.in.h:10
 msgid "Time zone"
 msgstr "ટાઈમ ઝોન"
 
-#: ../interfaces/time.glade.in.h:10
+#: ../interfaces/time.glade.in.h:11
 msgid "Time zone:"
 msgstr "ટાઈમ ઝોન:"
 
-#: ../interfaces/time.glade.in.h:11
+#: ../interfaces/time.glade.in.h:12
 msgid "_Date:"
 msgstr "તારીખ (_D):"
 
-#: ../interfaces/time.glade.in.h:12
+#: ../interfaces/time.glade.in.h:13
 msgid "_Select Time Zone..."
 msgstr "ટાઈમ ઝોન પસંદ કરો (_S)..."
 
-#: ../interfaces/time.glade.in.h:13
+#: ../interfaces/time.glade.in.h:14
 msgid "_Time:"
 msgstr "સમય (_T):"
 
@@ -1131,7 +1139,9 @@ msgstr "સાધન કમ્પ્યૂટર સાથે જોડાઈ �
 msgid ""
 "Check that you have access to this network and that the computer is actually "
 "working and running the SSH daemon"
-msgstr "ચકાસો કે તમને આ નેટવર્કનો વપરાશ છે અને એ પણ કે કમ્પ્યૂટર વાસ્તવમાં કામ આપી રહ્યું છે અને SSH ડિમન ચલાવીને"
+msgstr ""
+"ચકાસો કે તમને આ નેટવર્કનો વપરાશ છે અને એ પણ કે કમ્પ્યૂટર વાસ્તવમાં કામ આપી રહ્યું છે અને SSH "
+"ડિમન ચલાવીને"
 
 #. the proccess was running su
 #: ../src/common/gst-auth.c:94
@@ -1165,63 +1175,16 @@ msgstr "બેકન્ડ ચલાવી શક્યા નહિં"
 msgid "There was an error creating the child process, the tool will close now."
 msgstr "બાળ પ્રક્રિયા મારી નાંખવામાં ભૂલ આવી હતી, સાધન હવે બંધ થઈ જશે."
 
-#: ../src/common/gst-dialog.c:60
-#, c-format
-msgid "Could not find widget: %s"
-msgstr "વિજેટ શોધી શકાયું નહિં: %s"
-
-#: ../src/common/gst-dialog.c:383
-msgid "There are changes which have not been applied"
-msgstr "ત્યાં અમુક બદલાવો છે કે જે હજુ સુધી અમલમાં મૂકવામાં આવ્યા નથી"
-
-#: ../src/common/gst-dialog.c:385
-msgid "Apply them now?"
-msgstr "શું તેમને હમણાં અમલમાં મૂકવાના છે?"
-
-#: ../src/common/gst-dialog.c:492
+#: ../src/common/gst-dialog.c:522
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "જોડાણમાં ભૂલનો સંકેત `%s' છે જે `%s' વિજેટમાં છે"
 
-#: ../src/common/gst-tool.c:1026
-msgid "The configuration could not be loaded"
-msgstr "રુપરેખા લાવી શકાઈ નથી"
-
-#: ../src/common/gst-tool.c:1028
-msgid "There was an error running the backend script"
-msgstr "બેકેન્ડ સ્ક્રિપ્ટ ચલાવવામાં ત્યાં ભૂલ હતી"
-
-#: ../src/common/gst-tool.c:1509
-#, c-format
-msgid "Welcome to the %s prerelease of the GNOME System Tools"
-msgstr "જીનોમ સિસ્ટમ સાધનોનુ પૂર્વપ્રકાશન %s માં તમારુ સ્વાગત છે"
-
-#: ../src/common/gst-tool.c:1511
-msgid ""
-"This is still a work in progress, and so it may have serious bugs. Due to "
-"the nature of these tools, bugs may render your computer <span weight=\"bold"
-"\">practically useless</span>, costing time, effort and sanity points. You "
-"have been warned. Thank you for trying out this prerelease of the GNOME "
-"System Tools!"
-msgstr ""
-"આ હજુ સુધી પ્રગતિના પંથે છે, અને તેથી તેની પાસે જોખમી ભૂલો છે.આ સાધનોની વર્તણૂકને લીધે, ભૂલો "
-"તમારા કમ્પ્યૂટરને શોધી કાઢશે <span weight=\"bold\">પ્રાયોગિક રીતે બિનઉપયોગી</span>, "
-"ખર્ચાળ સમય, સાહસો અને દુખઃદ  બાબતો. તમે ચેતવાયેલ છો. જીનોમ સિસ્ટમ સાધનોના "
-"પૂર્વપ્રકાશનને વાપરવા બદલ તમારો આભાર!"
-
-#: ../src/common/gst-tool.c:1532
-msgid "Warning"
-msgstr "ચેતવણી"
-
-#: ../src/common/gst-tool.c:1552
-msgid "Don't show me this again"
-msgstr "મને આ ફરી બતાવશો નહિં"
-
-#: ../src/common/gst-tool.c:1609
+#: ../src/common/gst-tool.c:1357
 msgid "GNOME System Tools"
 msgstr "જીનોમ સિસ્ટમ સાધનો"
 
-#: ../src/common/gst-tool.c:1755
+#: ../src/common/gst-tool.c:1378
 msgid "Could not display help"
 msgstr "મદદ પ્રદર્શિત કરી શક્યા નહિં"
 
@@ -1372,25 +1335,21 @@ msgstr "ઈન્ટરફેસ %s ક્રિયાશીલ નથી"
 msgid "The interface %s is active"
 msgstr "ઈન્ટરફેસ %s ક્રિયાશીલ છે"
 
-#: ../src/services/callbacks.c:64
+#: ../src/services/callbacks.c:58
 #, c-format
-msgid "Settings for \"%s\""
-msgstr "%s માટે સુયોજનો"
+msgid "Settings for service \"%s\""
+msgstr "સેવા \"%s\" માટે સુયોજનો"
 
-#. FIXME: put service name !!!
-#: ../src/services/callbacks.c:153
-msgid "Are you sure you want to deactivate this service?"
-msgstr "શું તમે ખરેખર આ આ સેવા નિષ્ક્રિય કરવા માંગો છો?"
+#: ../src/services/callbacks.c:110
+#, c-format
+msgid "Are you sure you want to deactivate %s?"
+msgstr "શું તમે ખરેખર %s ને અસક્રિય કરવા માંગો છો?"
 
-#: ../src/services/callbacks.c:156
+#: ../src/services/callbacks.c:114
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
-"data loss"
-msgstr "આ તમારી સિસ્ટમની વર્તણૂકને વિવિધ રીતોએ અસર કરશે, કદાચ માહિતીના નાશમાં પણ પરિણમશે"
-
-#: ../src/services/main.c:55
-msgid "Services settings"
-msgstr "સેવાઓ સુયોજનો"
+"data loss."
+msgstr "આ તમારી સિસ્ટમ વર્તણૂકને ઘણા દિવસોમાં અસર કરશે, કદાચ માહિતી ગુમ થવાની પણ શક્યતા રહશે."
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1597,21 +1556,15 @@ msgstr ""
 "તમારે તમારા ફોલ્ડરો વહેંચવા માટે ઓછામાં ઓછું ક્યાં તો સામ્બા અથવા NFS સ્થાપિત કરવાની જરૂર "
 "છે. સાધન હવે બંધ થઈ જશે."
 
-#: ../src/time/main.c:464
+#: ../src/time/main.c:322
 msgid "NTP support is not installed"
 msgstr "NTP નો આધાર સ્થાપિત નથી"
 
-#: ../src/time/main.c:466
+#: ../src/time/main.c:324
 msgid ""
 "Please install and activate NTP support in the system to enable "
-"synchronization of your local time server with Internet time servers."
-msgstr ""
-"મહેરબાની કરીને તમારા સ્થાનિક ટાઈમ સર્વરનો ઈન્ટરનેટ ટાઈમ સર્વરો સાથે સુમેળ કરવા માટે "
-"સિસ્ટમમાં NTP સ્થાપિત કરો અને સક્રિય કરો."
-
-#: ../src/time/main.c:762
-msgid "Time and Date Settings"
-msgstr "સમય અને તારીખના સુયોજનો"
+"synchronization of your local time server with internet time servers."
+msgstr "તમારા સ્થાનિક સમય સર્વરને ઈન્ટરનેટ સમય સર્વરો સાથે સુમેળ તમારી સિસ્ટમમાં સક્રિય કરવા માટે મહેરબાની કરીને NTP આધાર સ્થાપિત અને સક્રિય કરો."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
