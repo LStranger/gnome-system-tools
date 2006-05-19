@@ -187,7 +187,6 @@ gst_dialog_set_property (GObject      *object,
 
 	switch (prop_id) {
 	case PROP_TOOL:
-		g_print ("uuuuh\n");
 		priv->tool = GST_TOOL (g_value_dup_object (value));
 		break;
 	case PROP_WIDGET_NAME:
