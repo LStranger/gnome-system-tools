@@ -30,10 +30,10 @@ SUBDIRS = \
 	common			\
 	$(services_SUBDIR)	\
 	$(shares_SUBDIR)	\
-	$(time_SUBDIR)	
+	$(time_SUBDIR)		\
+	$(users_SUBDIR)
 #	  $(network_SUBDIR) 	\
 #	  $(boot_SUBDIR)	\
-#	  $(users_SUBDIR)	\
 #	  $(disks_SUBDIR)	\
 
 
