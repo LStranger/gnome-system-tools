@@ -26,14 +26,11 @@ if BUILD_SHARES
 shares_SUBDIR = shares
 endif
 
+# FIXME: no boot nor disks ATM
 SUBDIRS = \
 	common			\
+	$(network_SUBDIR)	\
 	$(services_SUBDIR)	\
 	$(shares_SUBDIR)	\
 	$(time_SUBDIR)		\
 	$(users_SUBDIR)
-#	  $(network_SUBDIR) 	\
-#	  $(boot_SUBDIR)	\
-#	  $(disks_SUBDIR)	\
-
-
