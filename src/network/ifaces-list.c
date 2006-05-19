@@ -24,7 +24,7 @@
 #include "gst.h"
 #include "callbacks.h"
 #include "ifaces-list.h"
-#include "gst-network-tool.h"
+#include "network-tool.h"
 
 extern GstTool *tool;
 

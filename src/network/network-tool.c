@@ -21,7 +21,7 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include "gst.h"
-#include "gst-network-tool.h"
+#include "network-tool.h"
 #include "ifaces-list.h"
 #include "connection.h"
 #include "hosts.h"

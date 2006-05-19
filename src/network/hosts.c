@@ -28,7 +28,7 @@
 
 #include "hosts.h"
 #include "gst.h"
-#include "gst-network-tool.h"
+#include "network-tool.h"
 #include "callbacks.h"
 
 extern GstTool *tool;

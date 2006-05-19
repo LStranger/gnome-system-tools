@@ -21,7 +21,7 @@
 #include <string.h>
 
 #include "gst.h"
-#include "gst-network-tool.h"
+#include "network-tool.h"
 #include "connection.h"
 
 extern GstTool *tool;
