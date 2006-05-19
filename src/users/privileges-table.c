@@ -23,17 +23,62 @@
  *          Sivan Greenberg       <sivan@workaround.org>
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
-
-#include <gtk/gtk.h>
-
+#include <config.h>
 #include "gst.h"
+#include <glib/gi18n.h>
 #include "privileges-table.h"
-#include "user_group.h"
 
 extern GstTool *tool;
+
+enum {
+	COL_MEMBER,
+	COL_DESCRIPTION,
+	COL_GROUP
+};
+
+typedef struct _PrivilegeDescription PrivilegeDescription;
+
+struct _PrivilegeDescription {
+	const gchar *group;
+	const gchar *privilege;
+};
+
+/* keep this sorted, or you'll go to hell */
+static PrivilegeDescription descriptions[] = {
+	{ "adm", N_("Monitor system logs") },
+	{ "admin", N_("Administer the system") },
+	{ "audio", N_("Use audio devices") },
+	{ "cdrom", N_("Use CD-ROM drives") },
+	{ "dialout", N_("Use modems") },
+	{ "dip", N_("Connect to Internet using a modem") },
+	{ "fax", N_("Send and receive faxes") },
+	{ "floppy", N_("Use floppy drives") },
+	{ "plugdev", N_("Enable access to external storage devices automatically") },
+	{ "scanner", N_("Use scanners") },
+	{ "tape", N_("Use tape drives") },
+	{ "wheel", N_("Be able to get administrator privileges") },
+};
+
+static int
+compare_groups (const void *p1, const void *p2)
+{
+	PrivilegeDescription *desc1 = (PrivilegeDescription *) p1;
+	PrivilegeDescription *desc2 = (PrivilegeDescription *) p2;
+
+	return strcmp (desc1->group, desc2->group);
+}
+
+static const PrivilegeDescription*
+privilege_search (const gchar *group)
+{
+	PrivilegeDescription p;
+
+	p.group = (gchar *) group;
+
+	return bsearch (&group, descriptions, G_N_ELEMENTS (descriptions),
+			sizeof (PrivilegeDescription), compare_groups);
+}
+
 
 static void
 on_user_privilege_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
@@ -43,21 +88,26 @@ on_user_privilege_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointe
 	GtkTreeIter   iter;
 	gboolean      value;
 
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
-	gtk_tree_model_get (model, &iter, 0, &value, -1);
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, !value, -1);
+	if (gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path)) {
+		gtk_tree_model_get (model, &iter, 0, &value, -1);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, !value, -1);
+	}
+
+	gtk_tree_path_free (path);
 }
 
-static void
-create_privileges_table (GtkWidget *list)
+void
+create_user_privileges_table (void)
 {
-	GtkTreeModel      *model;
-	GtkCellRenderer   *renderer;
+	GtkWidget *list;
+	GtkTreeModel *model;
+	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeIter        iter;
+	GtkTreeIter iter;
 
-	model = GTK_TREE_MODEL (gtk_list_store_new (3, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING));
+	list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
 
+	model = GTK_TREE_MODEL (gtk_list_store_new (3, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_OBJECT));
 	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
 	g_object_unref (model);
 
@@ -67,7 +117,7 @@ create_privileges_table (GtkWidget *list)
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column,
 					     renderer,
-					     "active", 0,
+					     "active", COL_MEMBER,
 					     NULL);
 	g_signal_connect (G_OBJECT (renderer), "toggled", G_CALLBACK (on_user_privilege_toggled), model);
 
@@ -75,7 +125,7 @@ create_privileges_table (GtkWidget *list)
 	gtk_tree_view_column_pack_end (column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes (column,
 					     renderer,
-					     "text", 1,
+					     "text", COL_DESCRIPTION,
 					     NULL);
 
 	gtk_tree_view_column_set_sort_column_id (column, 1);
@@ -84,190 +134,80 @@ create_privileges_table (GtkWidget *list)
 }
 
 void
-create_user_privileges_table (void)
+privileges_table_add_group (OobsGroup *group, OobsListIter *list_iter)
 {
-	GtkWidget *list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
-	create_privileges_table (list);
-}
+	const PrivilegeDescription *p;
+	GtkWidget *table;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 
-void
-create_profile_privileges_table (void)
-{
-	GtkWidget *list = gst_dialog_get_widget (tool->main_dialog, "profile_privileges");
-	create_privileges_table (list);
-}
+	p = privilege_search (oobs_group_get_name (group));
 
-void
-populate_privileges_table (GtkWidget *list, gchar *username)
-{
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
-	xmlNodePtr    root = get_root_node (NODE_GROUP);
-	xmlNodePtr    group, user;
-	GtkTreeIter   iter;
-	gchar        *groupname, *desc, *buf;
-	gboolean      val;
+	if (p) {
+		table = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 
-	gtk_list_store_clear (GTK_LIST_STORE (model));
-	
-	for (group = gst_xml_element_find_first (root, "group");
-	     group;
-	     group = gst_xml_element_find_next (group, "group")) {
-		desc = gst_xml_get_child_content (group, "allows_to");
-
-		if (desc) {
-			val = FALSE;
-
-			groupname = gst_xml_get_child_content (group, "name");
-			
-			/* check whether the user is already in the group */
-			if (username) {
-				user = gst_xml_element_find_first (group, "users");
-				
-				for (user = gst_xml_element_find_first (user, "user");
-				     user;
-				     user = gst_xml_element_find_next (user, "user")) {
-					buf = gst_xml_element_get_content (user);
-
-					if (strcmp (username, buf) == 0)
-						val = TRUE;
-
-					g_free (buf);
-				}
-			}
-			
-			gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-					    0, val,
-					    1, desc,
-					    2, groupname,
-					    -1);
-			g_free (desc);
-			g_free (groupname);
-		}
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    COL_MEMBER, FALSE,
+				    COL_DESCRIPTION, _(p->privilege),
+				    COL_GROUP, group,
+				    -1);
 	}
 }
 
-static gboolean
-is_group_in_profile (xmlNodePtr profile, gchar *groupname)
-{
-	xmlNodePtr  root, group;
-	gchar      *buf;
-	gboolean    val = FALSE;
-
-	g_return_if_fail (groupname != NULL);
-	root = gst_xml_element_find_first (profile, "groups");
-
-	if (!root)
-		return FALSE;
-
-	for (group = gst_xml_element_find_first (root, "group");
-	     group != NULL;
-	     group = gst_xml_element_find_next (group, "group")) {
-		buf = gst_xml_element_get_content (group);
-
-		if (buf && strcmp (groupname, buf) == 0)
-			val = TRUE;
-
-		g_free (buf);
-	}
-
-	return val;
-}
-
 void
-populate_privileges_table_from_profile (GtkWidget *list, xmlNodePtr profile)
+privileges_table_set_from_user (OobsUser *user)
 {
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
-	xmlNodePtr    root = get_root_node (NODE_GROUP);
-	xmlNodePtr    group;
-	GtkTreeIter   iter;
-	gchar        *groupname, *desc, *buf;
-	gboolean      val;
+	GtkWidget *table;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean valid;
+	OobsGroup *group;
+	GList *users;
 
-	gtk_list_store_clear (GTK_LIST_STORE (model));
-
-	for (group = gst_xml_element_find_first (root, "group");
-	     group;
-	     group = gst_xml_element_find_next (group, "group"))
-	{
-		desc = gst_xml_get_child_content (group, "allows_to");
-
-		if (desc) {
-			groupname = gst_xml_get_child_content (group, "name");
-			val = is_group_in_profile (profile, groupname);
-
-			gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-					    0, val,
-					    1, desc,
-					    2, groupname,
-					    -1);
-			g_free (desc);
-			g_free (groupname);
-		}
-	}
-}
-
-GList*
-user_privileges_get_list (GList *groups)
-{
-	GtkWidget    *list  = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
-	GList        *elem  = NULL;
-	gboolean      valid, active;
-	GtkTreeIter   iter;
-	gchar        *group;
-
-	valid = gtk_tree_model_get_iter_first (model, &iter);
-
-	while (valid) {
-		gtk_tree_model_get (model, &iter, 0, &active, 2, &group, -1);
-		elem = g_list_find_custom (groups, group, my_strcmp);
-
-		if (active && !elem)
-			groups = g_list_prepend (groups, group);
-		else if (!active && elem)
-			groups = g_list_remove (groups, elem->data);
-
-		valid = gtk_tree_model_iter_next (model, &iter);
-	}
-
-	return groups;
-}
-
-void
-profile_groups_save_data (xmlNodePtr profile)
-{
-	GtkWidget    *list  = gst_dialog_get_widget (tool->main_dialog, "profile_privileges");
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
-	GtkTreeIter   iter;
-	xmlNodePtr    groups, group;
-	gboolean      valid, active;
-	gchar        *groupname;
-
-	g_return_if_fail (profile != NULL);
-
-	groups = gst_xml_element_find_first (profile, "groups");
-
-	if (groups)
-		gst_xml_element_destroy_children (groups);
-	else
-		groups = gst_xml_element_add (profile, "groups");
-
+	table = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 
 	while (valid) {
 		gtk_tree_model_get (model, &iter,
-				    0, &active,
-				    2, &groupname,
+				    COL_GROUP, &group,
 				    -1);
 
-		if (active) {
-			group = gst_xml_element_add (groups, "group");
-			gst_xml_element_set_content (group, groupname);
-		}
+		users = oobs_group_get_users (group);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    COL_MEMBER, (g_list_find (users, user) != NULL),
+				    -1);
+		g_list_free (users);
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+	
+}
 
-		g_free (groupname);
+void
+privileges_table_save (OobsUser *user)
+{
+	GtkWidget *table;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	OobsGroup *group;
+	gboolean valid, member;
+
+	table = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter,
+				    COL_GROUP, &group,
+				    COL_MEMBER, &member,
+				    -1);
+		if (member)
+			oobs_group_add_user (group, user);
+		else
+			oobs_group_remove_user (group, user);
+
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 }

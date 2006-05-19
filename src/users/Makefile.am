@@ -10,28 +10,25 @@ include ../common/CommonMakefile
 toolname = users
 bin_PROGRAMS = users-admin
 
-SUBDIRS = search-bar
+SUBDIRS = 
 INCLUDES = $(GST_TOOL_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
 EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 
-users_admin_LDADD = $(GST_TOOL_LIBS) ./search-bar/libsearchbar.a
-users_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) ./search-bar/libsearchbar.a
+users_admin_LDADD = $(GST_TOOL_LIBS) 
+users_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) 
 users_admin_SOURCES = \
 	main.c \
+	passwd.c passwd.h \
+	users-tool.c users-tool.h \
 	callbacks.c callbacks.h \
 	user-settings.c user-settings.h \
 	group-settings.c group-settings.h \
-	passwd.c passwd.h \
-	transfer.c transfer.h \
-	user_group.c user_group.h \
-	md5.c md5.h md5_crypt.c \
 	users-table.c users-table.h \
 	groups-table.c groups-table.h \
 	table.c table.h  \
-	user-group-xml.c user-group-xml.h \
-	profiles-table.c profiles-table.h \
-	profile-settings.c profile-settings.h \
-	privileges-table.c privileges-table.h
+	privileges-table.c privileges-table.h \
+	group-members-table.c group-members-table.h \
+	test-battery.c test-battery.h
 
 toolpixmaps =

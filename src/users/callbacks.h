@@ -29,7 +29,6 @@
 #include "gst.h"
 
 /* Main dialog general callbacks */
-void      on_showall_toggled (GtkToggleButton*, gpointer);
 void      on_table_clicked (GtkTreeSelection*, gpointer);
 gboolean  on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
 gboolean  on_table_popup_menu   (GtkTreeView*, GtkWidget*);
@@ -37,59 +36,22 @@ void      on_popup_add_activate (GtkAction*, gpointer);
 void      on_popup_settings_activate (GtkAction*, gpointer);
 void      on_popup_delete_activate (GtkAction*, gpointer);
 
-
-/* Main dialog callbacks, users tab */
+/* Users window callbacks */
 void on_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_user_settings_clicked (GtkButton *button, gpointer data);
 void on_user_delete_clicked (GtkButton *button, gpointer user_data);
+void on_manage_groups_clicked (GtkWidget *widget, gpointer user_data);
 
 /* Main dialog callbacks, groups tab */
 void on_group_new_clicked (GtkButton*, gpointer);
 void on_group_settings_clicked (GtkButton*, gpointer);
 void on_group_delete_clicked (GtkButton*, gpointer);
 
-#ifdef NIS
-void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
-void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
-void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
-#endif
-
-
 /* user settings dialog callbacks */
-void on_user_settings_dialog_show (GtkWidget*, gpointer);
-gboolean on_user_settings_dialog_delete_event (GtkWidget*, gpointer);
-void on_user_settings_ok_clicked (GtkButton*, gpointer);
+void on_user_settings_passwd_changed (GtkEntry*, gpointer);
 void on_user_settings_passwd_random_new (GtkButton*, gpointer);
 void on_user_settings_passwd_toggled (GtkToggleButton*, gpointer);
-void on_user_settings_profile_changed (GtkWidget*, gpointer);
-void on_user_settings_passwd_changed (GtkEntry*, gpointer);
-void on_profile_settings_users_dialog_clicked (GtkButton *, gpointer);
-void on_user_settings_show_help (GtkButton*, gpointer);
-
-/* group settings dialog callbacks */
-void on_group_settings_dialog_show (GtkWidget*, gpointer);
-void on_group_settings_dialog_delete_event (GtkWidget*, gpointer);
-void on_group_settings_ok_clicked (GtkButton*, gpointer);
-void on_group_settings_show_help (GtkButton*, gpointer);
-
-/* Profile settings dialog callbacks */
-void on_profile_settings_dialog_delete_event (GtkWidget*, gpointer);
-void on_profile_settings_ok_clicked (GtkButton*, gpointer);
-void on_profile_settings_show_help (GtkButton*, gpointer);
-
-/* profiles dialog callbacks */
-void on_profile_new_clicked (GtkButton*, gpointer);
-void on_profile_settings_clicked (GtkButton*, gpointer);
-void on_profile_delete_clicked (GtkButton *, gpointer);
-
-/* general callbacks */
-void on_add_remove_button_clicked (GtkButton *button, gpointer user_data);
-void on_list_select_row (GtkTreeSelection*, gpointer);
-void on_list_drag_data_get (GtkTreeView*, GdkDragContext*, GtkSelectionData*, guint, guint, gpointer);
-void on_list_drag_data_received (GtkTreeView*, GdkDragContext*, gint, gint, GtkSelectionData*, guint, guint, gpointer);
-
-/* Helpers */
-void actions_set_sensitive (gint table, gboolean state);
+void on_user_settings_login_changed (GtkEditable *editable, gpointer data);
 
 
 #endif /* CALLBACKS_H */

@@ -21,28 +21,18 @@
  * Authors: Carlos Garnacho Parro <garparr@teleline.es>
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
-
-#include <glib/gi18n.h>
-#include <gtk/gtk.h>
-
+#include <config.h>
 #include "gst.h"
+#include <glib/gi18n.h>
 
 #include "table.h"
 #include "users-table.h"
 #include "groups-table.h"
-#include "profiles-table.h"
 #include "privileges-table.h"
-#include "user_group.h"
+#include "group-members-table.h"
 #include "callbacks.h"
-#include "user-group-xml.h"
 
 extern GstTool *tool;
-
-extern GtkWidget *users_table;
-extern GtkWidget *groups_table;
 
 GtkActionEntry popup_menu_items [] = {
 	{ "Add",         GTK_STOCK_ADD,        N_("_Add"),        NULL, NULL, G_CALLBACK (on_popup_add_activate)      },
@@ -61,14 +51,16 @@ const gchar *ui_description =
 	"</ui>";
 
 GtkWidget*
-popup_menu_create (GtkWidget *widget)
+popup_menu_create (GtkWidget *widget, gint table)
 {
 	GtkUIManager   *ui_manager;
 	GtkActionGroup *action_group;
 	GtkWidget      *popup;
 
 	action_group = gtk_action_group_new ("MenuActions");
-	gtk_action_group_add_actions (action_group, popup_menu_items, G_N_ELEMENTS (popup_menu_items), widget);
+	gtk_action_group_add_actions (action_group, popup_menu_items,
+				      G_N_ELEMENTS (popup_menu_items),
+				      GINT_TO_POINTER (table));
 
 	ui_manager = gtk_ui_manager_new ();
 	gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
@@ -80,170 +72,96 @@ popup_menu_create (GtkWidget *widget)
 	popup = gtk_ui_manager_get_widget (ui_manager, "/MainMenu");
 
 	return popup;
-
 }
 
-void
-create_gtk_tree_list (GtkWidget *list, GtkTargetEntry target)
+static void
+setup_groups_combo (void)
 {
-	GtkTreeModel *model = GTK_TREE_MODEL(gtk_tree_store_new (2, G_TYPE_STRING, G_TYPE_POINTER));
-	GtkTreeSelection *selection;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-		
-	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
-	g_object_unref (model);
-	
-	renderer = gtk_cell_renderer_text_new ();
+	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
+	GtkWidget *table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 
-	column = gtk_tree_view_column_new_with_attributes ("group",
-							   renderer,
-							   "text", 0,
-							   NULL);
-	gtk_tree_view_column_set_sort_column_id (column, 0);
-	gtk_tree_view_insert_column (GTK_TREE_VIEW (list), column, -1);
-
-	gtk_tree_view_column_clicked (column);
-	
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
-	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
-
-	g_signal_connect (G_OBJECT (selection),
-			  "changed",
-			  G_CALLBACK (on_list_select_row),
-			  NULL);
-	g_signal_connect (G_OBJECT (list),
-			  "drag-data-get",
-			  G_CALLBACK (on_list_drag_data_get),
-			  NULL);
-	g_signal_connect (G_OBJECT (list),
-			  "drag-data-received",
-			  G_CALLBACK (on_list_drag_data_received),
-			  NULL);
-
-	gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (list),
-						GDK_BUTTON1_MASK,
-						&target, 1,
-						GDK_ACTION_MOVE);
-	gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (list),
-					      &target, 1,
-					      GDK_ACTION_MOVE);
-
-
+	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
 }
 
-void
-clear_gtk_tree_list (GtkTreeView *list)
+static void
+setup_shells_combo (GstUsersTool *tool)
 {
-	GtkTreeModel *model;
-	
-	g_return_if_fail (list != NULL);
-	g_return_if_fail (GTK_IS_TREE_VIEW (list));
-	
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
-	gtk_tree_store_clear (GTK_TREE_STORE (model));
-}
-
-void
-populate_gtk_tree_list (GtkTreeView *list, GList *items)
-{
-	gchar *entry;
+	GtkWidget *combo;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
+	GList *shells;
 
-	g_return_if_fail (list != NULL);
-	g_return_if_fail (GTK_IS_TREE_VIEW (list));
-	
-	model = gtk_tree_view_get_model (list);
+	combo = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_shell");
 
-	while (items)
-	{
-		entry = items->data;
+	model = GTK_TREE_MODEL (gtk_list_store_new (1, G_TYPE_STRING));
+	shells = oobs_users_config_get_available_shells (OOBS_USERS_CONFIG (tool->users_config));
 
-		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
-		gtk_tree_store_set (GTK_TREE_STORE (model),
-		                    &iter,
-				    0, entry,
-		                    1, items,
+	while (shells) {
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    0, shells->data,
 				    -1);
-		items = items->next;
+		shells = shells->next;
+	}
+
+	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
+	g_object_unref (model);
+}
+
+void
+create_tables (GstUsersTool *tool)
+{
+	create_users_table (tool);
+	create_groups_table ();
+	create_user_privileges_table ();
+	create_group_members_table ();
+
+	/* not strictly tables, but uses a model */
+	setup_groups_combo ();
+	setup_shells_combo (tool);
+}
+
+static GtkWidget*
+get_table (gint table)
+{
+	switch (table) {
+	case TABLE_USERS:
+		return gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	case TABLE_GROUPS:
+		return gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "groups_table");
+	default:
+		g_assert_not_reached ();
 	}
 }
 
 GList*
-get_gtk_tree_list_items (GtkTreeView *list)
+table_get_row_references (gint table, GtkTreeModel **model)
 {
-	GtkTreeModel *model = gtk_tree_view_get_model (list);
-	GtkTreeIter iter;
-	GList *item_list = NULL;
-	gchar *item;
-	gboolean valid;
+	GtkTreeSelection *selection;
+	GtkTreeModel *filter_model;
+	GtkTreePath *child_path;
+	GList *paths, *elem, *list = NULL;
 
-	valid = gtk_tree_model_get_iter_first (model, &iter);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (get_table (table)));
+	paths = elem = gtk_tree_selection_get_selected_rows (selection, &filter_model);
+	*model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 
-	while (valid) {
-		gtk_tree_model_get (model, &iter, 0, &item, -1);
-		item_list = g_list_prepend (item_list, item);
+	if (!paths)
+		return NULL;
 
-		valid = gtk_tree_model_iter_next (model, &iter);
+	while (elem) {
+		child_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (filter_model),
+									       (GtkTreePath *) elem->data);
+
+		list = g_list_prepend (list, gtk_tree_row_reference_new (*model, child_path));
+		gtk_tree_path_free (child_path);
+		elem = elem->next;
 	}
 
-	return item_list;
-}
+	list = g_list_reverse (list);
+	g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
+	g_list_free (paths);
 
-void
-create_tables (void)
-{
-	create_users_table ();
-	create_groups_table ();
-	create_profiles_table ();
-	create_user_privileges_table ();
-	create_profile_privileges_table ();
-}
-
-void
-populate_all_tables (void)
-{
-	populate_users_table ();
-	populate_groups_table ();
-	populate_profiles_table ();
-}
-
-void 
-tables_update_content (void)
-{
-	users_table_update_content ();
-	groups_table_update_content ();
-}
-
-xmlNodePtr get_selected_row_node (gint tbl)
-{
-	xmlNodePtr node;
-	GtkTreeView *table;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	gint column;
-	
-	switch (tbl) {
-		case NODE_USER:
-			table = GTK_TREE_VIEW (users_table);
-			column = COL_USER_POINTER;
-			break;
-		case NODE_GROUP:
-			table = GTK_TREE_VIEW (groups_table);
-			column = COL_GROUP_POINTER;
-			break;
-		default:
-			return NULL;
-	}
-	
-        model = gtk_tree_view_get_model (table);
-        
-        gtk_tree_view_get_cursor (table, &path, NULL);
-        gtk_tree_model_get_iter (model, &iter, path);
-
-        gtk_tree_model_get (model, &iter, column, &node, -1);
-	
-	return node;
+	return list;
 }

@@ -1,3 +1,24 @@
+2006-05-19  Carlos Garnacho  <carlosg@gnome.org>
+
+	* users-tool.[ch]: new GObject, inherits from GstTool, and provides
+	access to the necessary OobsObjects.
+	* group-members-table.[ch]: added. It's table to show users/group
+	members.
+	* test-battery.[ch]: added. Provides functions to run series of tests
+	over something (say an user or a group), replaces the former 
+	if/else if/else if/else if/... mess.
+	* transfer.[ch]: to the Attic, XML interface is deprecated.
+	* Makefile.am: reflect those changes. Do not compile the search bar.
+	* callbacks.[ch], group-settings.[ch], user-settings.[ch]: adapt to
+	liboobs. remove/comment out unused code.
+	* groups-table.[ch], users-table.[ch]: store pointers to user/group
+	objects.
+	* main.c, passwd.[ch]: code cleanup
+	* privileges-table.c: store the mapping table of groups -> privilege
+	here, no longer use the <allows_to> hack
+	* table.[ch]: cleanup and code improvements. Use the same model in
+	several places, filtering where necessary.
+
 2006-03-13  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Release 2.14.0

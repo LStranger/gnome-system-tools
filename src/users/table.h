@@ -24,15 +24,17 @@
 #ifndef __TABLE_H
 #define __TABLE_H
 
-/* User and group lists creation function */
-void                    create_gtk_tree_list		(GtkWidget*, GtkTargetEntry);
-void			populate_gtk_tree_list		(GtkTreeView*, GList*);
-GList*                  get_gtk_tree_list_items         (GtkTreeView*);
-GtkWidget*              popup_menu_create               (GtkWidget*);
+#include "gst.h"
+#include "users-tool.h"
 
-/* User and group tables manipulation functions */
-void			create_tables			(void);
-void			populate_all_tables		(void);
-xmlNodePtr		get_selected_row_node		(gint);
+enum {
+	TABLE_USERS,
+	TABLE_GROUPS,
+};
+
+GtkWidget*  popup_menu_create          (GtkWidget *wigdet, gint table);
+void	    create_tables	       (GstUsersTool *tool);
+GList*      table_get_row_references   (gint table, GtkTreeModel **model);
+
 
 #endif /* __TABLE_H */

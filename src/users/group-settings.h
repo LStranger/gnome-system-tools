@@ -24,12 +24,19 @@
 #ifndef __GROUP_SETTINGS_H
 #define __GROUP_SETTINGS_H
 
+#include "gst.h"
 
-void		group_new_prepare		(ug_data*);
-void		group_settings_prepare		(ug_data*);
-void		group_settings_dialog_close	(void);
-gboolean	group_update			(ug_data*);
-gboolean	group_delete			(xmlNodePtr);
+gboolean     group_delete                       (GtkTreeModel *model,
+						 GtkTreePath  *path);
+
+GtkWidget*   group_settings_dialog_new          (OobsGroup    *group);
+gboolean     group_settings_dialog_group_is_new (void);
+
+gint         group_settings_dialog_run          (GtkWidget    *dialog,
+						 OobsGroup    *group);
+
+void         group_settings_dialog_get_data     (OobsGroup    *group);
+
 
 #endif /* __GROUP_SETTINGS_H */
 

@@ -1,8 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of users-admin, a ximian-setup-tool frontend 
- * for user administration.
- * 
- * Copyright (C) 2000-2001 Ximian, Inc.
+/* 
+ * Copyright (C) 2006 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,17 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
- *          Tambet Ingo <tambet@ximian.com> and 
- *          Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <carlosg@gnome.org>
  */
 
-#ifndef __TRANSFER_H
-#define __TRANSFER_H
-
-#include "gst.h"
-
-void transfer_xml_to_gui(GstTool *tool, gpointer data);
-void transfer_gui_to_xml(GstTool *tool, gpointer data);
-
-#endif /* TRANSFER_H */
+void   create_group_members_table   (void);

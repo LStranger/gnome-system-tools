@@ -24,21 +24,26 @@
 #ifndef _USERS_TABLE_H
 #define _USERS_TABLE_H
 
+#include "users-tool.h"
+
 enum {
+	COL_USER_FACE,
+	COL_USER_NAME,
 	COL_USER_LOGIN,
 	COL_USER_HOME,
-	COL_USER_COMMENT,
-	COL_USER_UID,
-	COL_USER_SHELL,
-	COL_USER_GROUP,
-	COL_USER_POINTER,
-
+	COL_USER_ID,
+	COL_USER_MEMBER, /* used in group members dialog */
+	COL_USER_OBJECT,
+	COL_USER_ITER,
 	COL_USER_LAST
 };
 
-void	create_users_table		(void);
-void	populate_users_table		(void);
-void	users_table_update_content	(void);
+void	create_users_table	(GstUsersTool *tool);
+void    users_table_set_user    (OobsUser     *user,
+				 OobsListIter *list_iter,
+				 GtkTreeIter  *iter);
+void    users_table_add_user    (OobsUser     *user,
+				 OobsListIter *list_iter);
 
 #endif /* _USERS_TABLE_H */
 

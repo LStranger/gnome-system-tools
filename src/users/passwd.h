@@ -24,12 +24,10 @@
 #ifndef __PASSWD_H
 #define __PASSWD_H
 
-#include <glib.h>
-#include "user_group.h"
-#include "table.h"
+#include "gst.h"
+
 
 gchar *passwd_get_random (void);
-gchar *passwd_check      (gchar *pwd1, gchar *pwd2, gboolean check_quality);
-void   passwd_set        (xmlNodePtr node, const gchar *pwd);
+
 
 #endif /* PASSWD_H */

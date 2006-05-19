@@ -24,37 +24,14 @@
 #ifndef __USER_SETTINGS_H
 #define __USER_SETTINGS_H
 
-#include "user_group.h"
+gboolean        user_delete                      (GtkTreeModel *model,
+						  GtkTreePath *path);
+GtkWidget*      user_settings_dialog_new         (OobsUser *user);
+gboolean        user_settings_dialog_user_is_new (void);
+gint            user_settings_dialog_run         (GtkWidget *dialog,
+						  OobsUser *user);
 
-typedef struct {
-	gchar *login;
-	gchar *uid;
-	gchar *gid;
-		
-	gchar *name;
-	gchar *location;
-	gchar *work_phone;
-	gchar *home_phone;
-	gchar *other_info;
-		
-	gchar *group;
-	gchar *home;
-	gchar *shell;
-	gchar *password1;
-	gchar *password2;
-		
-	gchar *pwd_maxdays;
-	gchar *pwd_mindays;
-	gchar *pwd_warndays;
-		
-	GList *extra_groups;
-} UserAccountData;
+void            user_settings_dialog_get_data    (OobsUser *user);
 
-void		user_new_prepare		(ug_data*);
-void		user_settings_dialog_close	(void);
-gboolean	user_update 			(ug_data*);
-void		user_set_profile		(xmlNodePtr);
-gboolean	delete_user			(xmlNodePtr);
-void		user_settings_prepare		(ug_data*);
 
 #endif /* USER_SETTINGS_H */

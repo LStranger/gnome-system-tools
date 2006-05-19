@@ -1,8 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.c: this file is part of users-admin, a ximian-setup-tool frontend 
- * for user administration.
- * 
- * Copyright (C) 2000-2001 Ximian, Inc.
+/* 
+ * Copyright (C) 2006 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,33 +16,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
- *          Tambet Ingo <tambet@ximian.com> and 
- *          Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <carlosg@gnome.org>.
  */
 
-/* Functions for transferring information between XML tree and UI */
+#ifndef __TEST_BATTERY_H
+#define __TEST_BATTERY_H
 
+#include "gst.h"
 
-#include "transfer.h"
-#include "table.h"
+typedef void (*TestBattery) (gchar **primary_text, gchar **secondary_text, gpointer data);
 
-void
-transfer_xml_to_gui (GstTool *tool, gpointer data)
-{
-	xmlNodePtr root;
+gboolean  test_battery_run  (TestBattery *battery,
+			     GtkWindow   *parent,
+			     gpointer     data);
 
-	root = gst_xml_doc_get_root (tool->config);
-
-	/* Profiles */
-//	profile_table_init ();
-//	profile_table_from_xml (root);
-
-	/* Populate tables */
-	populate_all_tables ();
-}
-
-void
-transfer_gui_to_xml (GstTool *tool, gpointer data)
-{
-}
+#endif /* __TEST_BATTERY_H */
