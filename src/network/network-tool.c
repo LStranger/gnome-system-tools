@@ -1,0 +1,257 @@
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
+/* Copyright (C) 2004 Carlos Garnacho
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
+ */
+
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
+#include "gst.h"
+#include "gst-network-tool.h"
+#include "ifaces-list.h"
+#include "connection.h"
+#include "hosts.h"
+
+static void gst_network_tool_class_init (GstNetworkToolClass *class);
+static void gst_network_tool_init       (GstNetworkTool      *tool);
+static void gst_network_tool_finalize   (GObject             *object);
+
+static GObject* gst_network_tool_constructor (GType                  type,
+					      guint                  n_construct_properties,
+					      GObjectConstructParam *construct_params);
+
+static void gst_network_tool_update_gui (GstTool *tool);
+
+
+G_DEFINE_TYPE (GstNetworkTool, gst_network_tool, GST_TYPE_TOOL);
+
+static void
+gst_network_tool_class_init (GstNetworkToolClass *class)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (class);
+  GstToolClass *tool_class = GST_TOOL_CLASS (class);
+
+  object_class->constructor = gst_network_tool_constructor;
+  object_class->finalize = gst_network_tool_finalize;
+  tool_class->update_gui = gst_network_tool_update_gui;
+}
+
+static void
+gst_network_tool_init (GstNetworkTool *tool)
+{
+  tool->hosts_config = oobs_hosts_config_get (GST_TOOL (tool)->session);
+  tool->ifaces_config = oobs_ifaces_config_get (GST_TOOL (tool)->session);
+
+  tool->dns = NULL;
+  tool->search = NULL;
+  tool->interfaces_model = NULL;
+  tool->gateways_model = NULL;
+  tool->interfaces_list = NULL;
+  tool->gateways_list = NULL;
+  tool->hostname = NULL;
+  tool->domain = NULL;
+  tool->dialog = NULL;
+  tool->host_aliases_list = NULL;
+}
+
+static void
+gst_network_tool_finalize (GObject *object)
+{
+  GstNetworkTool *tool;
+
+  g_return_if_fail (GST_IS_NETWORK_TOOL (object));
+
+  tool = GST_NETWORK_TOOL (object);
+
+  g_object_unref (tool->dns);
+  g_object_unref (tool->search);
+  g_object_unref (tool->interfaces_model);
+  g_object_unref (tool->gateways_model);
+  g_free (tool->dialog);
+
+  (* G_OBJECT_CLASS (gst_network_tool_parent_class)->finalize) (object);
+}
+
+static GObject*
+gst_network_tool_constructor (GType                  type,
+			      guint                  n_construct_properties,
+			      GObjectConstructParam *construct_params)
+{
+  GObject *object;
+  GstNetworkTool *tool;
+  GtkWidget *widget, *add_button, *delete_button;
+
+  object = (* G_OBJECT_CLASS (gst_network_tool_parent_class)->constructor) (type,
+									    n_construct_properties,
+									    construct_params);
+  tool = GST_NETWORK_TOOL (object);
+
+  widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "dns_list");
+  add_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "dns_list_add");
+  delete_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "dns_list_delete");
+  tool->dns = gst_address_list_new (GTK_TREE_VIEW (widget),
+				    GTK_BUTTON (add_button),
+				    GTK_BUTTON (delete_button),
+				    GST_ADDRESS_TYPE_IP);
+
+  widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "search_domain_list");
+  add_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "search_domain_add");
+  delete_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "search_domain_delete");
+  tool->search = gst_address_list_new (GTK_TREE_VIEW (widget),
+				       GTK_BUTTON (add_button),
+				       GTK_BUTTON (delete_button),
+				       GST_ADDRESS_TYPE_DOMAIN);
+
+  widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "hostname");
+  tool->hostname = GTK_ENTRY (widget);
+
+  widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "domain");
+  tool->domain = GTK_ENTRY (widget);
+
+  tool->interfaces_model = ifaces_model_create ();
+  tool->gateways_model = gateways_filter_model_create (tool->interfaces_model);
+  tool->interfaces_list = ifaces_list_create (tool);
+  /* FIXME
+  tool->gateways_list = gateways_combo_create ();
+  */
+  tool->host_aliases_list = host_aliases_list_create (tool);
+
+  /* FIXME: locations
+  tool->location = gst_location_combo_new ();
+  gtk_widget_show (GTK_WIDGET (tool->location));
+  widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "locations_box");
+  gtk_box_pack_start_defaults (GTK_BOX (widget), GTK_WIDGET (tool->location));
+  */
+
+  tool->dialog = connection_dialog_init (tool);
+
+  return object;
+}
+
+static void
+update_address_list (GstAddressList *address_list,
+		     GList          *list)
+{
+  gst_address_list_clear (address_list);
+
+  while (list)
+    {
+      gst_address_list_add_address (address_list, (const gchar*) list->data);
+      list = list->next;
+    }
+}
+
+static void
+update_hosts_list (OobsList *list)
+{
+  GObject *host;
+  OobsListIter iter;
+  gboolean valid;
+
+  host_aliases_clear ();
+  valid = oobs_list_get_iter_first (list, &iter);
+
+  while (valid)
+    {
+      host = oobs_list_get (list, &iter);
+      host_aliases_add (OOBS_STATIC_HOST (host), &iter);
+      g_object_unref (host);
+
+      valid = oobs_list_iter_next (list, &iter);
+    }
+}
+
+static void
+add_interfaces (GtkTreeView *ifaces_list, OobsList *list)
+{
+  OobsListIter iter;
+  GObject *iface;
+  gboolean valid;
+
+  valid = oobs_list_get_iter_first (list, &iter);
+
+  while (valid)
+    {
+      iface = oobs_list_get (list, &iter);
+      ifaces_model_add_interface (OOBS_IFACE (iface));
+
+      g_object_unref (iface);
+      valid = oobs_list_iter_next (list, &iter);
+    }
+}
+
+static void
+add_all_interfaces (GstNetworkTool *network_tool)
+{
+  OobsList *ifaces_list;
+
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_ETHERNET);
+  add_interfaces (network_tool->interfaces_list, ifaces_list);
+
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_WIRELESS);
+  add_interfaces (network_tool->interfaces_list, ifaces_list);
+
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_IRLAN);
+  add_interfaces (network_tool->interfaces_list, ifaces_list);
+
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_PLIP);
+  add_interfaces (network_tool->interfaces_list, ifaces_list);
+
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_MODEM);
+  add_interfaces (network_tool->interfaces_list, ifaces_list);
+
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_ISDN);
+  add_interfaces (network_tool->interfaces_list, ifaces_list);
+}
+
+static void
+gst_network_tool_update_gui (GstTool *tool)
+{
+  GstNetworkTool *network_tool;
+  GList *dns, *search_domains;
+  OobsList *hosts_list, *ifaces_list;
+
+  network_tool = GST_NETWORK_TOOL (tool);
+
+  dns = oobs_hosts_config_get_dns_servers (network_tool->hosts_config);
+  update_address_list (network_tool->dns, dns);
+  g_list_free (dns);
+
+  search_domains = oobs_hosts_config_get_search_domains (network_tool->hosts_config);
+  update_address_list (network_tool->search, search_domains);
+  g_list_free (search_domains);
+
+  hosts_list = oobs_hosts_config_get_static_hosts (network_tool->hosts_config);
+  update_hosts_list (hosts_list);
+
+  gtk_entry_set_text (network_tool->hostname,
+		      oobs_hosts_config_get_hostname (network_tool->hosts_config));
+  gtk_entry_set_text (network_tool->domain,
+		      oobs_hosts_config_get_domainname (network_tool->hosts_config));
+
+  add_all_interfaces (network_tool);
+}
+
+
+GstTool*
+gst_network_tool_new (void)
+{
+  return g_object_new (GST_TYPE_NETWORK_TOOL,
+		       "name", "network",
+		       "title", _("Network settings"),
+		       NULL);
+}

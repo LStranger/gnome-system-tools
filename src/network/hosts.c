@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
@@ -56,7 +56,9 @@ host_aliases_model_create (void)
 
   store = gtk_list_store_new (COL_HOST_LAST,
 			      G_TYPE_STRING,
-			      G_TYPE_STRING);
+			      G_TYPE_STRING,
+			      G_TYPE_OBJECT,
+			      OOBS_TYPE_LIST_ITER);
   return GTK_TREE_MODEL (store);
 }
 
@@ -104,7 +106,7 @@ add_list_columns (GtkTreeView *list)
 }
 
 GtkTreeView*
-host_aliases_list_create (void)
+host_aliases_list_create (GstTool *tool)
 {
   GtkWidget     *list;
   GstTablePopup *table_popup;
@@ -131,25 +133,57 @@ host_aliases_list_create (void)
   return GTK_TREE_VIEW (list);
 }
 
+static gchar*
+concatenate_aliases (GList *aliases, gchar *sep)
+{
+  GString *str = NULL;
+  gchar *ret_str;
+
+  g_return_val_if_fail (aliases != NULL, NULL);
+
+  while (aliases)
+    {
+      if (!str)
+	str = g_string_new ((gchar*) aliases->data);
+      else
+	g_string_append_printf (str, "%s%s", sep, (gchar*) aliases->data);
+
+      aliases = aliases->next;
+    }
+
+  ret_str = str->str;
+  g_string_free (str, FALSE);
+
+  return ret_str;
+}
+
 static void
-host_aliases_modify_at_iter (GtkTreeIter *iter,
-			     const gchar *address,
-			     const gchar *aliases)
+host_aliases_modify_at_iter (GtkTreeIter    *iter,
+			     OobsStaticHost *host,
+			     OobsListIter   *list_iter)
 {
   GtkTreeView  *list;
   GtkTreeModel *model;
+  gchar *aliases_str;
+  GList *aliases;
 
   list = GST_NETWORK_TOOL (tool)->host_aliases_list;
   model = gtk_tree_view_get_model (list);
 
+  aliases = oobs_static_host_get_aliases (host);
+  aliases_str = concatenate_aliases (aliases, " ");
+  g_list_free (aliases);
+
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
-		      COL_HOST_IP, address,
-		      COL_HOST_ALIASES, aliases,
+		      COL_HOST_IP, oobs_static_host_get_ip_address (host),
+		      COL_HOST_ALIASES, aliases_str,
+		      COL_HOST_OBJECT, host,
+		      COL_HOST_ITER, list_iter,
 		      -1);
 }
 
-static void
-host_aliases_add (const gchar *address, const gchar *aliases)
+void
+host_aliases_add (OobsStaticHost *host, OobsListIter *list_iter)
 {
   GtkTreeView  *list;
   GtkTreeModel *model;
@@ -159,73 +193,7 @@ host_aliases_add (const gchar *address, const gchar *aliases)
   model = gtk_tree_view_get_model (list);
 
   gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-  host_aliases_modify_at_iter (&iter, address, aliases);
-}
-
-void
-host_aliases_add_from_xml (xmlNodePtr node)
-{
-  xmlNodePtr  alias;
-  gchar      *address, *str;
-  GString    *aliases = NULL;
-  
-  address = gst_xml_get_child_content (node, "ip");
-
-  for (alias = gst_xml_element_find_first (node, "alias");
-       alias; alias = gst_xml_element_find_next (alias, "alias"))
-    {
-      str = gst_xml_element_get_content (alias);
-
-      if (!aliases)
-        aliases = g_string_new (str);
-      else
-        g_string_append_printf (aliases, " %s", str);
-
-      g_free (str);
-    }
-
-  if (address && aliases)
-    host_aliases_add (address, aliases->str);
-
-  g_free (address);
-
-  if (aliases)
-    g_string_free (aliases, TRUE);
-}
-
-void
-host_aliases_extract_to_xml (GtkTreeIter *iter, xmlNodePtr root)
-{
-  GtkTreeView  *list;
-  GtkTreeModel *model;
-  xmlNodePtr    host, alias;
-  gchar        *address, *aliases, **arr, **str;
-
-  g_return_if_fail (iter != NULL);
-  g_return_if_fail (root != NULL);
-
-  list = GST_NETWORK_TOOL (tool)->host_aliases_list;
-  model = gtk_tree_view_get_model (list);
-  
-  gtk_tree_model_get (model, iter,
-                      COL_HOST_IP, &address,
-                      COL_HOST_ALIASES, &aliases,
-                      -1);
-
-  arr = g_strsplit (aliases, " ", -1);
-
-  host = gst_xml_element_add (root, "statichost");
-  gst_xml_set_child_content (host, "ip", address);
-
-  for (str = arr; *str; str++)
-    {
-      alias = gst_xml_element_add (host, "alias");
-      gst_xml_element_set_content (alias, *str);
-    }
-
-  g_free (address);
-  g_free (aliases);
-  g_strfreev (arr);
+  host_aliases_modify_at_iter (&iter, host, list_iter);
 }
 
 void
@@ -270,36 +238,28 @@ host_aliases_check_fields (void)
 }
 
 static void
-host_aliases_dialog_prepare (GtkTreeIter *iter)
+host_aliases_dialog_prepare (OobsStaticHost *host)
 {
-  GtkTreeView   *list;
-  GtkTreeModel  *model;
-  GtkWidget     *address, *aliases;
+  GtkWidget *address, *aliases;
   GtkTextBuffer *buffer;
-  gchar         *addr, *al, *str;
+  GList *alias_list;
+  gchar *alias_str;
 
   address = gst_dialog_get_widget (tool->main_dialog, "host_alias_address");
   aliases = gst_dialog_get_widget (tool->main_dialog, "host_alias_list");
-  buffer  = gtk_text_view_get_buffer (GTK_TEXT_VIEW (aliases));
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (aliases));
 
-  if (iter)
+  if (host)
     {
-      list = GST_NETWORK_TOOL (tool)->host_aliases_list;
-      model = gtk_tree_view_get_model (list);
+      gtk_entry_set_text (GTK_ENTRY (address),
+			  oobs_static_host_get_ip_address (host));
 
-      gtk_tree_model_get (model, iter,
-			  COL_HOST_IP, &addr,
-			  COL_HOST_ALIASES, &al,
-			  -1);
+      alias_list = oobs_static_host_get_aliases (host);
+      alias_str = concatenate_aliases (alias_list, "\n");
+      g_list_free (alias_list);
 
-      for (str = (gchar *) strchr (al, ' '); str; str = (gchar *) strchr (str, ' '))
-	*str = '\n';
-
-      gtk_entry_set_text (GTK_ENTRY (address), addr);
-      gtk_text_buffer_set_text (buffer, al, -1);
-
-      g_free (addr);
-      g_free (al);
+      gtk_text_buffer_set_text (buffer, alias_str, -1);
+      g_free (alias_str);
     }
   else
     {
@@ -310,42 +270,109 @@ host_aliases_dialog_prepare (GtkTreeIter *iter)
   host_aliases_check_fields ();
 }
 
+static GList*
+split_buffer_content (GtkTextBuffer *buffer)
+{
+  GtkTextIter start, end;
+  gchar *str, **arr;
+  GList *list = NULL;
+  gint i = 0;
+
+  gtk_text_buffer_get_bounds (buffer, &start, &end);
+  str = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
+  arr = g_strsplit_set (str, " \n", -1);
+  g_free (str);
+
+  while (arr[i])
+    {
+      if (arr[i] && *arr[i])
+	list = g_list_prepend (list, g_strdup (arr[i]));
+
+      i++;
+    }
+
+  list = g_list_reverse (list);
+  g_strfreev (arr);
+  return list;
+}
+
+static void
+host_aliases_dialog_save (GtkTreeIter *iter)
+{
+  GtkTreeView *list;
+  GtkTreeModel *model;
+  GtkWidget *address, *aliases;
+  GtkTextBuffer *buffer;
+  OobsStaticHost *host;
+  OobsListIter list_iter;
+  GList *aliases_list;
+  
+  address = gst_dialog_get_widget (tool->main_dialog, "host_alias_address");
+  aliases = gst_dialog_get_widget (tool->main_dialog, "host_alias_list");
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (aliases));
+
+  aliases_list = split_buffer_content (buffer);
+
+  if (iter)
+    {
+      list = GST_NETWORK_TOOL (tool)->host_aliases_list;
+      model = gtk_tree_view_get_model (list);
+
+      gtk_tree_model_get (model, iter,
+			  COL_HOST_OBJECT, &host,
+			  COL_HOST_ITER, &list_iter,
+			  -1);
+
+      oobs_static_host_set_ip_address (host, gtk_entry_get_text (GTK_ENTRY (address)));
+      oobs_static_host_set_aliases (host, aliases_list);
+      host_aliases_modify_at_iter (iter, host, &list_iter);
+      g_object_unref (host);
+    }
+  else
+    {
+      OobsList *list;
+
+      list = oobs_hosts_config_get_static_hosts (GST_NETWORK_TOOL (tool)->hosts_config);
+      host = oobs_static_host_new (gtk_entry_get_text (GTK_ENTRY (address)), aliases_list);
+
+      oobs_list_append (list, &list_iter);
+      oobs_list_set (list, &list_iter, host);
+
+      host_aliases_add (host, &list_iter);
+    }
+
+  oobs_object_commit (OOBS_OBJECT (GST_NETWORK_TOOL (tool)->hosts_config));
+}
+
 void
 host_aliases_run_dialog (GtkTreeIter *iter)
 {
-  GtkWidget     *dialog, *address, *aliases;
-  GtkTextBuffer *buffer;
-  GtkTextIter    start, end;
-  gchar *addr, *str, *list;
-  gint   response;
+  GtkTreeView *list;
+  GtkTreeModel *model;
+  GtkWidget *dialog;
+  gint response;
+  OobsStaticHost *host = NULL;
+
+  if (iter)
+    {
+      list = GST_NETWORK_TOOL (tool)->host_aliases_list;
+      model = gtk_tree_view_get_model (list);
+
+      gtk_tree_model_get (model, iter,
+			  COL_HOST_OBJECT, &host,
+			  -1);
+    }
 
   dialog = gst_dialog_get_widget (tool->main_dialog, "host_aliases_edit_dialog");
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
+  host_aliases_dialog_prepare (host);
 
-  host_aliases_dialog_prepare (iter);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
   response = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_hide (dialog);
 
   if (response == GTK_RESPONSE_OK)
-    {
-      address = gst_dialog_get_widget (tool->main_dialog, "host_alias_address");
-      aliases = gst_dialog_get_widget (tool->main_dialog, "host_alias_list");
-      buffer  = gtk_text_view_get_buffer (GTK_TEXT_VIEW (aliases));
-      gtk_text_buffer_get_bounds (buffer, &start, &end);
+    host_aliases_dialog_save (iter);
 
-      addr = (gchar *) gtk_entry_get_text (GTK_ENTRY (address));
-      list = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
-
-      for (str = (gchar *) strchr (list, '\n'); str; str = (gchar *) strchr (str, '\n'))
-	*str = ' ';
-
-      if (!iter)
-	host_aliases_add (addr, list);
-      else
-	host_aliases_modify_at_iter (iter, addr, list);
-
-      gst_dialog_modify (tool->main_dialog);
-      gtk_widget_hide (dialog);
-      g_free (list);
-    }
+  if (host)
+    g_object_unref (host);
 }

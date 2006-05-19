@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,7 +22,6 @@
 #include <glib/gi18n.h>
 #include <gdk/gdkpixbuf.h>
 #include "gst.h"
-#include "network-iface.h"
 #include "callbacks.h"
 #include "ifaces-list.h"
 #include "gst-network-tool.h"
@@ -39,9 +38,6 @@ const gchar *ui_description =
   "<ui>"
   "  <popup name='MainMenu'>"
   "    <menuitem action='Properties'/>"
-  "    <separator/>"
-  "    <menuitem action='Activate'/>"
-  "    <menuitem action='Deactivate'/>"
   "  </popup>"
   "</ui>";
 
@@ -51,11 +47,11 @@ ifaces_model_create (void)
   GtkListStore *store;
 
   store = gtk_list_store_new (COL_LAST,
+			      G_TYPE_BOOLEAN,
 			      GDK_TYPE_PIXBUF,
 			      G_TYPE_STRING,
 			      G_TYPE_OBJECT,
 			      G_TYPE_STRING,
-			      G_TYPE_BOOLEAN,
 			      G_TYPE_BOOLEAN,
 			      G_TYPE_BOOLEAN);
   return GTK_TREE_MODEL (store);
@@ -66,15 +62,15 @@ gateways_filter_func (GtkTreeModel *model,
 		      GtkTreeIter  *iter,
 		      gpointer      data)
 {
-  gboolean configured, enabled, has_gateway;
+  gboolean inconsistent, active, has_gateway;
 
   gtk_tree_model_get (model, iter,
-		      COL_CONFIGURED,  &configured,
-		      COL_ENABLED,     &enabled,
+		      COL_INCONSISTENT, &inconsistent,
+		      COL_ACTIVE, &active,
 		      COL_HAS_GATEWAY, &has_gateway,
 		      -1);
 
-  return configured && enabled && has_gateway;
+  return !inconsistent && active && has_gateway;
 }
 
 
@@ -114,41 +110,16 @@ popup_menu_create (GtkWidget *widget)
   return popup;
 }
 
-static void
-ifaces_list_setup_popup (GtkWidget *table)
-{
-  GtkUIManager     *ui_manager;
-  GtkTreeSelection *selection;
-  GtkTreeModel     *model;
-  GtkTreeIter       iter;
-  gboolean          enabled, configured;
-
-  ui_manager = (GtkUIManager *) g_object_get_data (G_OBJECT (table), "ui-manager");
-  selection  = gtk_tree_view_get_selection (GTK_TREE_VIEW (table));
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-			  COL_CONFIGURED, &configured,
-			  COL_ENABLED,    &enabled,
-			  -1);
-      gtk_widget_set_sensitive (
-	gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Activate"), configured && !enabled);
-      gtk_widget_set_sensitive (
-	gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Deactivate"), configured && enabled);
-    }
-}
-
 static gint
-iface_to_priority (GstIface *iface)
+iface_to_priority (OobsIface *iface)
 {
-  if (GST_IS_IFACE_WIRELESS (iface))
+  if (OOBS_IS_IFACE_WIRELESS (iface))
     return 5;
-  else if (GST_IS_IFACE_IRLAN (iface))
+  else if (OOBS_IS_IFACE_IRLAN (iface))
     return 2;
-  else if (GST_IS_IFACE_ETHERNET (iface))
+  else if (OOBS_IS_IFACE_ETHERNET (iface))
     return 4;
-  else if (GST_IS_IFACE_MODEM (iface) || GST_IS_IFACE_ISDN (iface))
+  else if (OOBS_IS_IFACE_MODEM (iface) || OOBS_IS_IFACE_ISDN (iface))
     return 3;
   else
     return 1;
@@ -157,7 +128,7 @@ iface_to_priority (GstIface *iface)
 static gint
 ifaces_list_sort (GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer data)
 {
-  GstIface *iface_a, *iface_b;
+  OobsIface *iface_a, *iface_b;
 
   gtk_tree_model_get (model, a, COL_OBJECT, &iface_a, -1);
   gtk_tree_model_get (model, b, COL_OBJECT, &iface_b, -1);
@@ -166,10 +137,21 @@ ifaces_list_sort (GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer 
 }
 
 static void
-add_list_columns (GtkTreeView *table)
+add_list_columns (GtkTreeView  *table,
+		  GtkTreeModel *model)
 {
   GtkCellRenderer *renderer;
 
+  renderer = gtk_cell_renderer_toggle_new ();
+  gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (table), -1,
+					       "Enable",
+					       renderer,
+					       "active", COL_ACTIVE,
+					       "inconsistent", COL_INCONSISTENT,
+					       NULL);
+  g_signal_connect (G_OBJECT (renderer), "toggled",
+		    G_CALLBACK (on_iface_toggled), model);
+  
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (table), -1,
 					       "Interface",
@@ -188,7 +170,7 @@ add_list_columns (GtkTreeView *table)
 }
 
 GtkTreeView*
-ifaces_list_create (void)
+ifaces_list_create (GstTool *tool)
 {
   GtkWidget        *table = gst_dialog_get_widget (tool->main_dialog, "interfaces_list");
   GstTablePopup    *table_popup;
@@ -206,14 +188,13 @@ ifaces_list_create (void)
 					GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
 					GTK_SORT_DESCENDING);
 
-  add_list_columns (GTK_TREE_VIEW (table));
+  add_list_columns (GTK_TREE_VIEW (table), model);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table));
   g_signal_connect (G_OBJECT (selection), "changed",
 		    G_CALLBACK (on_table_selection_changed), NULL);
 
   table_popup = g_new0 (GstTablePopup, 1);
-  table_popup->setup = ifaces_list_setup_popup;
   table_popup->properties = on_iface_properties_clicked;
   table_popup->popup = popup_menu_create (table);
 
@@ -225,45 +206,10 @@ ifaces_list_create (void)
   return GTK_TREE_VIEW (table);
 }
 
-void
-ifaces_model_set_interface_from_node_at_iter (xmlNodePtr node, GtkTreeIter *iter)
-{
-  gchar    *type;
-  GstIface *iface = NULL;
-
-  type = gst_xml_element_get_attribute (node, "type");
-  g_return_if_fail (type != NULL);
-
-  if (strcmp (type, "ethernet") == 0)
-    iface = GST_IFACE (gst_iface_ethernet_new_from_xml (node));
-  else if (strcmp (type, "wireless") == 0)
-    iface = GST_IFACE (gst_iface_wireless_new_from_xml (node));
-  else if (strcmp (type, "irlan") == 0)
-    iface = GST_IFACE (gst_iface_irlan_new_from_xml (node));
-  else if (strcmp (type, "plip") == 0)
-    iface = GST_IFACE (gst_iface_plip_new_from_xml (node));
-  else if (strcmp (type, "modem") == 0)
-    iface = GST_IFACE (gst_iface_modem_new_from_xml (node));
-  else if (strcmp (type, "isdn") == 0)
-    iface = GST_IFACE (gst_iface_isdn_new_from_xml (node));
-
-  if (iface)
-    {
-      ifaces_model_set_interface_at_iter (iface, iter);
-      g_object_unref (iface);
-      g_free (type);
-    }
-}
-
-void
-ifaces_model_add_interface_from_node (xmlNodePtr node)
-{
-  ifaces_model_set_interface_from_node_at_iter (node, NULL);
-}
-
-GstIface*
+OobsIface*
 ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
 {
+  /* FIXME
   GtkTreeModel *model;
   GtkTreeIter   iter;
   gboolean      valid;
@@ -300,6 +246,8 @@ ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
     }
 
   return iface;
+  */
+  return NULL;
 }
 
 static void
@@ -309,6 +257,7 @@ update_gateways_combo (void)
   gint          count;
 
   /* refilter the gateways model */
+  /* FIXME
   gtk_tree_model_filter_refilter (GST_NETWORK_TOOL (tool)->gateways_model);
 
   model = GTK_TREE_MODEL (GST_NETWORK_TOOL (tool)->gateways_model);
@@ -316,56 +265,152 @@ update_gateways_combo (void)
 
   gtk_widget_set_sensitive (GTK_WIDGET (GST_NETWORK_TOOL (tool)->gateways_list), (count > 0));
   gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "gateways_combo_label"), (count > 0));
+  */
+}
+
+static GdkPixbuf*
+get_iface_pixbuf (OobsIface *iface)
+{
+  GdkPixbuf *pixbuf = NULL;
+
+  if (OOBS_IS_IFACE_WIRELESS (iface))
+    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/wavelan-48.png", NULL);
+  else if (OOBS_IS_IFACE_IRLAN (iface))
+    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/irda-48.png", NULL);
+  else if (OOBS_IS_IFACE_ETHERNET (iface))
+    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/connection-ethernet.png", NULL);
+  else if (OOBS_IS_IFACE_PLIP (iface))
+    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/plip-48.png", NULL);
+  else if (OOBS_IS_IFACE_ISDN (iface))
+    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/ppp.png", NULL);
+
+  return pixbuf;
+}
+
+static gchar*
+get_iface_secondary_text (OobsIface *iface)
+{
+  GString *str;
+  gchar *text;
+
+  str = g_string_new ("");
+
+  if (!oobs_iface_get_configured (iface))
+    str = g_string_append (str, _("This network interface is not configured"));
+  else if (OOBS_IS_IFACE_ETHERNET (iface))
+    {
+      if (OOBS_IS_IFACE_WIRELESS (iface))
+	g_string_append_printf (str, _("<b>Essid:</b> %s "),
+				oobs_iface_wireless_get_essid (iface));
+
+      if (oobs_iface_ethernet_get_configuration_method (iface) != OOBS_METHOD_DHCP)
+	g_string_append_printf (str, _("<b>Address:</b> %s <b>Subnet mask:</b> %s"),
+				oobs_iface_ethernet_get_ip_address (iface),
+				oobs_iface_ethernet_get_network_mask (iface));
+      else
+	g_string_append_printf (str, _("<b>Address:</b> DHCP"));
+    }
+  else if (OOBS_IS_IFACE_PLIP (iface))
+    {
+      g_string_append_printf (str, _("<b>Address:</b> %s <b>Remote address:</b> %s"),
+			      oobs_iface_plip_get_address (iface),
+			      oobs_iface_plip_get_remote_address (iface));
+    }
+  else if (OOBS_IS_IFACE_ISDN (iface))
+    {
+      g_string_append_printf (str, _("<b>Phone number:</b> %s <b>Login:</b> %s"),
+			      oobs_iface_isdn_get_phone_number (iface),
+			      oobs_iface_isdn_get_login (iface));
+    }
+
+  text = str->str;
+  g_string_free (str, FALSE);
+
+  return text;
+}
+
+static gchar*
+get_iface_desc (OobsIface *iface)
+{
+  gchar *primary_text, *secondary_text, *full_text;
+
+  primary_text = secondary_text = full_text = NULL;
+
+  if (OOBS_IS_IFACE_WIRELESS (iface))
+    primary_text = N_("Wireless connection");
+  else if (OOBS_IS_IFACE_IRLAN (iface))
+    primary_text = N_("Infrared connection");
+  else if (OOBS_IS_IFACE_ETHERNET (iface))
+    primary_text = N_("Wired connection");
+  else if (OOBS_IS_IFACE_PLIP (iface))
+    primary_text = N_("Parallel port connection");
+  else if (OOBS_IS_IFACE_MODEM (iface))
+    primary_text = N_("Modem connection");
+  else if (OOBS_IS_IFACE_ISDN (iface))
+    primary_text = N_("ISDN connection");
+
+  secondary_text = get_iface_secondary_text (iface);
+
+  if (primary_text)
+    full_text = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s", _(primary_text), secondary_text);
+
+  g_free (secondary_text);
+  return full_text;
 }
 
 void
 ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
 {
   GtkTreeModel *model;
-  GstIface     *iface;
+  OobsIface *iface;
+  gchar *desc;
 
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
 
   gtk_tree_model_get (model, iter, COL_OBJECT, &iface, -1);
+  desc = get_iface_desc (OOBS_IFACE (iface));
 
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
-		      COL_IMAGE, gst_iface_get_pixbuf (GST_IFACE (iface)),
-		      COL_DESC, gst_iface_get_desc (GST_IFACE (iface)),
-		      COL_DEV, gst_iface_get_dev (GST_IFACE (iface)),
-		      COL_CONFIGURED, gst_iface_is_configured (GST_IFACE (iface)),
-		      COL_ENABLED, gst_iface_get_enabled (GST_IFACE (iface)),
+		      COL_ACTIVE, oobs_iface_get_active (OOBS_IFACE (iface)),
+		      COL_IMAGE, get_iface_pixbuf (OOBS_IFACE (iface)),
+		      COL_DESC, desc,
+		      COL_DEV, oobs_iface_get_device_name (OOBS_IFACE (iface)),
+		      COL_INCONSISTENT, !oobs_iface_get_configured (OOBS_IFACE (iface)),
+		      /* FIXME
 		      COL_HAS_GATEWAY, gst_iface_has_gateway (GST_IFACE (iface)),
+		      */
 		      -1);
   g_object_unref (iface);
+  g_free (desc);
 
   update_gateways_combo ();
 }
 
 void
-ifaces_model_set_interface_at_iter (GstIface *iface, GtkTreeIter *iter)
+ifaces_model_set_interface_at_iter (OobsIface *iface, GtkTreeIter *iter)
 {
   GtkTreeModel *model;
-  GtkTreeIter   it;
 
   g_return_if_fail (iface != NULL);
 
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
 
-  if (!iter)
-    gtk_list_store_append (GTK_LIST_STORE (model), &it);
-  else
-    it = *iter;
-
-  gtk_list_store_set (GTK_LIST_STORE (model), &it,
+  gtk_list_store_set (GTK_LIST_STORE (model), iter,
 		      COL_OBJECT, iface,
 		      -1);
-  ifaces_model_modify_interface_at_iter (&it);
+  ifaces_model_modify_interface_at_iter (iter);
 }
 
 void
-ifaces_model_add_interface (GstIface *iface)
+ifaces_model_add_interface (OobsIface *iface)
 {
-  ifaces_model_set_interface_at_iter (iface, NULL);
+  GtkTreeModel *model;
+  GtkTreeIter   it;
+
+  model = GST_NETWORK_TOOL (tool)->interfaces_model;
+
+  gtk_list_store_append (GTK_LIST_STORE (model), &it);
+  ifaces_model_set_interface_at_iter (iface, &it);
 }
 
 void

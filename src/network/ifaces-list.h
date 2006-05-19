@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,17 +21,15 @@
 #ifndef __IFACES_LIST_H
 #define __IFACES_LIST_H
 
-#include <gtk/gtktreeview.h>
-#include "network-iface.h"
-#include "gst-xml.h"
+#include "gst.h"
 
 enum {
+  COL_ACTIVE,
   COL_IMAGE,
   COL_DESC,
   COL_OBJECT,
   COL_DEV,
-  COL_CONFIGURED,
-  COL_ENABLED,
+  COL_INCONSISTENT,
   COL_HAS_GATEWAY,
   COL_LAST
 };
@@ -42,17 +40,15 @@ typedef enum {
 } IfaceSearchTerm;
 
 GtkTreeModel* ifaces_model_create                   (void);
-void          ifaces_model_set_interface_at_iter    (GstIface*, GtkTreeIter*);
-void          ifaces_model_set_interface_from_node_at_iter (xmlNodePtr, GtkTreeIter*);
-void          ifaces_model_add_interface            (GstIface*);
-void          ifaces_model_add_interface_from_node  (xmlNodePtr);
+void          ifaces_model_set_interface_at_iter    (OobsIface*, GtkTreeIter*);
+void          ifaces_model_add_interface            (OobsIface*);
 void          ifaces_model_modify_interface_at_iter (GtkTreeIter*);
-GstIface*     ifaces_model_search_iface             (IfaceSearchTerm, const gchar*);
+OobsIface*    ifaces_model_search_iface             (IfaceSearchTerm, const gchar*);
 void          ifaces_model_clear                    (void);
 
 GtkTreeModelFilter* gateways_filter_model_create    (GtkTreeModel *model);
 
-GtkTreeView*  ifaces_list_create                   (void);
+GtkTreeView*  ifaces_list_create                   (GstTool *tool);
 
 GtkComboBox*  gateways_combo_create                (void);
 void          gateways_combo_select                (gchar*);

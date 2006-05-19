@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho Parro.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -88,7 +88,7 @@ enum {
   PROP_DELETE_BUTTON
 };
 
-static gpointer parent_class;
+G_DEFINE_TYPE (GstAddressList, gst_address_list, G_TYPE_OBJECT);
 
 GType
 gst_address_type_get_type (void)
@@ -109,41 +109,10 @@ gst_address_type_get_type (void)
   return etype;
 }
 
-GType
-gst_address_list_get_type (void)
-{
-  static GType type = 0;
-
-  if (!type)
-    {
-      static const GTypeInfo type_info =
-        {
-	  sizeof (GstAddressListClass),
-	  NULL,		/* base_init */
-	  NULL,		/* base_finalize */
-	  (GClassInitFunc) gst_address_list_class_init,
-	  NULL,		/* class_finalize */
-	  NULL,		/* class_data */
-	  sizeof (GstAddressList),
-	  0,		/* n_preallocs */
-	  (GInstanceInitFunc) gst_address_list_init,
-
-	};
-
-      type = g_type_register_static (G_TYPE_OBJECT, "GstAddressList",
-				     &type_info, 0);
-    }
-
-  return type;
-}
-
 static void
 gst_address_list_class_init (GstAddressListClass *class)
 {
-  GObjectClass *object_class;
-
-  object_class = G_OBJECT_CLASS (class);
-  parent_class = g_type_class_peek_parent (class);
+  GObjectClass *object_class = G_OBJECT_CLASS (class);
 
   object_class->set_property = gst_address_list_set_property;
   object_class->get_property = gst_address_list_get_property;
@@ -212,8 +181,8 @@ gst_address_list_finalize (GObject *object)
       list->_priv = NULL;
     }
 
-  if (G_OBJECT_CLASS (parent_class)->finalize)
-    (* G_OBJECT_CLASS (parent_class)->finalize) (object);
+  if (G_OBJECT_CLASS (gst_address_list_parent_class)->finalize)
+    (* G_OBJECT_CLASS (gst_address_list_parent_class)->finalize) (object);
 }
 
 static void
@@ -278,14 +247,14 @@ gst_address_list_get_property (GObject    *object,
 }
 
 static GtkWidget*
-popup_menu_create (GstAddressList *list)
+popup_menu_create (GtkWidget *widget)
 {
   GtkUIManager   *ui_manager;
   GtkActionGroup *action_group;
   GtkWidget      *popup;
 
   action_group = gtk_action_group_new ("MenuActions");
-  gtk_action_group_add_actions (action_group, address_list_popup_menu_items, G_N_ELEMENTS (address_list_popup_menu_items), list);
+  gtk_action_group_add_actions (action_group, address_list_popup_menu_items, G_N_ELEMENTS (address_list_popup_menu_items), widget);
 
   ui_manager = gtk_ui_manager_new ();
   gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
@@ -293,75 +262,10 @@ popup_menu_create (GstAddressList *list)
   if (!gtk_ui_manager_add_ui_from_string (ui_manager, address_list_ui_description, -1, NULL))
     return NULL;
 
-  g_object_set_data (G_OBJECT (list->_priv->list), "ui-manager", ui_manager);
+  g_object_set_data (G_OBJECT (widget), "ui-manager", ui_manager);
   popup = gtk_ui_manager_get_widget (ui_manager, "/MainMenu");
 
   return popup;
-}
-
-static void
-on_drag_data_get (GtkTreeView      *treeview,
-		  GdkDragContext   *context,
-		  GtkSelectionData *data,
-		  guint             info,
-		  guint             time,
-		  gpointer          user_data)
-{
-  GtkTreeSelection *selection;
-  GtkTreeModel     *model;
-  GtkTreeIter       iter;
-  gchar            *ip_address;
-
-  selection = gtk_tree_view_get_selection (treeview);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter, 0, &ip_address, -1);
-      gtk_selection_data_set (data, gdk_atom_intern ("x/dns-data", FALSE),
-			      8, ip_address, strlen (ip_address) + 1);
-    }
-}
-
-static void
-on_drag_data_received (GtkTreeView *treeview,
-		       GdkDragContext *context,
-		       gint x,
-		       gint y,
-		       GtkSelectionData *data,
-		       guint info,
-		       guint time)
-{
-  GtkTreeModel *model = gtk_tree_view_get_model (treeview);
-  GtkTreePath *dest_path;
-  GtkTreeViewDropPosition pos;
-  GtkTreeIter dest_iter, iter;
-
-  if (data->data == NULL || data->length == -1)
-    {
-      gtk_drag_finish (context, FALSE, FALSE, GDK_CURRENT_TIME);
-      return;
-    }
-
-  if (gtk_tree_view_get_dest_row_at_pos (treeview, x, y, &dest_path, &pos))
-    {
-      if (!gtk_tree_model_get_iter (model, &dest_iter, dest_path))
-        {
-	  gtk_drag_finish (context, FALSE, FALSE, GDK_CURRENT_TIME);
-	  return;
-	}
-
-      if (pos == GTK_TREE_VIEW_DROP_BEFORE)
-	gtk_list_store_insert_before (GTK_LIST_STORE (model), &iter, &dest_iter);
-      else
-	gtk_list_store_insert_after (GTK_LIST_STORE (model), &iter, &dest_iter);
-    }
-  else
-    gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-
-  gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, data->data, -1);
-  gtk_drag_finish (context, TRUE, TRUE, GDK_CURRENT_TIME);
-
-  gst_dialog_modify (tool->main_dialog);
 }
 
 static void
@@ -399,28 +303,12 @@ setup_treeview (GstAddressList *list)
   table_popup = g_new0 (GstTablePopup, 1);
   table_popup->setup = NULL;
   table_popup->properties = NULL;
-  table_popup->popup = popup_menu_create (list);
+  table_popup->popup = popup_menu_create (GTK_WIDGET (list->_priv->list));
 
   g_signal_connect (G_OBJECT (list->_priv->list), "button-press-event",
 		    G_CALLBACK (on_table_button_press), (gpointer) table_popup);
   g_signal_connect (G_OBJECT (list->_priv->list), "popup_menu",
 		    G_CALLBACK (on_table_popup_menu), (gpointer) table_popup);
-
-  g_signal_connect (G_OBJECT (list->_priv->list), "drag-data-get",
-		    G_CALLBACK (on_drag_data_get), NULL);
-  g_signal_connect (G_OBJECT (list->_priv->list), "drag_data_received",
-		    G_CALLBACK (on_drag_data_received), NULL);
-
-  gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (list->_priv->list),
-					  GDK_BUTTON1_MASK,
-					  &target,
-					  1,
-					  GDK_ACTION_MOVE);
-
-  gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (list->_priv->list),
-					&target,
-					1,
-					GDK_ACTION_MOVE);
 }
 
 static gboolean

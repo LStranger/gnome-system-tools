@@ -21,21 +21,11 @@
 #ifndef __GST_NETWORK_TOOL_H
 #define __GST_NETWORK_TOOL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 #include <gtk/gtk.h>
 #include "address-list.h"
-#include "network-iface.h"
-#include "network-iface-ethernet.h"
-#include "network-iface-wireless.h"
-#include "network-iface-plip.h"
-#include "network-iface-irlan.h"
-#include "network-iface-isdn.h"
-#include "network-iface-modem.h"
 #include "connection.h"
-#include "location.h"
 
 #define GST_TYPE_NETWORK_TOOL           (gst_network_tool_get_type ())
 #define GST_NETWORK_TOOL(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_NETWORK_TOOL, GstNetworkTool))
@@ -51,6 +41,11 @@ struct _GstNetworkTool
 {
   GstTool parent_instance;
 
+  /* config */
+  OobsHostsConfig *hosts_config;
+  OobsIfacesConfig *ifaces_config;
+
+  /* gui */
   GstAddressList *dns;
   GstAddressList *search;
 
@@ -60,13 +55,14 @@ struct _GstNetworkTool
   GtkComboBox  *gateways_list;
 
   GtkTreeView *host_aliases_list;
+  /* FIXME
   GstLocation *location;
+  */
 
   GtkEntry *hostname;
   GtkEntry *domain;
 
   GstConnectionDialog *dialog;
-  GtkIconTheme *icon_theme;
 };
 
 struct _GstNetworkToolClass
@@ -77,10 +73,7 @@ struct _GstNetworkToolClass
 
 GType    gst_network_tool_get_type  (void);
 GstTool *gst_network_tool_new       (void);
-void     gst_network_tool_construct (GstNetworkTool*, const gchar*, const gchar*);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+G_END_DECLS
 
 #endif /* __GST_NETWORK_TOOL_H */

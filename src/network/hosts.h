@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,12 +27,13 @@
 enum {
   COL_HOST_IP,
   COL_HOST_ALIASES,
+  COL_HOST_OBJECT,
+  COL_HOST_ITER,
   COL_HOST_LAST
 };
 
-GtkTreeView*   host_aliases_list_create    (void);
-void           host_aliases_add_from_xml   (xmlNodePtr);
-void           host_aliases_extract_to_xml (GtkTreeIter*, xmlNodePtr);
+GtkTreeView*   host_aliases_list_create    (GstTool*);
+void           host_aliases_add            (OobsStaticHost*, OobsListIter*);
 void           host_aliases_run_dialog     (GtkTreeIter*);
 void           host_aliases_clear          (void);
 void           host_aliases_check_fields   (void);

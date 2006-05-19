@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,12 +21,12 @@
 #ifndef __CONNECTION_H
 #define __CONNECTION_H
 
-#include "network-iface.h"
+#include "gst.h"
 
 typedef struct _GstConnectionDialog GstConnectionDialog;
 
 struct _GstConnectionDialog {
-  GstIface  *iface;
+  OobsIface  *iface;
   gboolean   changed;
   gboolean   standalone;
   GtkWidget *dialog;
@@ -34,14 +34,10 @@ struct _GstConnectionDialog {
   /* notebook pages */
   GtkWidget *notebook;
   GtkWidget *general_page;
-  GtkWidget *ppp_general_page;
   GtkWidget *modem_page;
   GtkWidget *options_page;
 
   GtkWidget *connection_configured;
-  GtkWidget *connection_device;
-  GtkWidget *connection_ppp_configured;
-  GtkWidget *connection_ppp_device;
 
   /* ethernet */
   GtkWidget *bootproto_combo;
@@ -81,13 +77,14 @@ struct _GstConnectionDialog {
   GtkWidget *wireless_frame;
   GtkWidget *ethernet_frame;
   GtkWidget *plip_frame;
-  GtkWidget *modem_frame;
+  GtkWidget *isp_frame;
+  GtkWidget *account_frame;
 
   GtkWidget *ok_button;
 };
 
-GstConnectionDialog *connection_dialog_init (void);
-void connection_dialog_prepare    (GstConnectionDialog*, GstIface*);
+GstConnectionDialog *connection_dialog_init (GstTool*);
+void connection_dialog_prepare    (GstConnectionDialog*, OobsIface*);
 void connection_dialog_set_sensitive (GstConnectionDialog*, gboolean);
 void connection_save (GstConnectionDialog*);
 void connection_check_fields (GstConnectionDialog*);

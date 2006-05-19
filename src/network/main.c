@@ -27,7 +27,6 @@
 
 #include "gst.h"
 #include "gst-network-tool.h"
-#include "transfer.h"
 #include "ifaces-list.h"
 #include "callbacks.h"
 
@@ -51,14 +50,12 @@ static GstDialogSignal signals[] = {
   /* connection dialog */
   { "connection_config_dialog",     "delete-event", G_CALLBACK (on_connection_dialog_close) },
   { "connection_device_active",     "clicked", G_CALLBACK (on_iface_active_changed) },
-  { "connection_ppp_device_active", "clicked", G_CALLBACK (on_iface_active_changed) },
   { "connection_bootproto",         "changed", G_CALLBACK (on_bootproto_changed) },
   { "connection_cancel",            "clicked", G_CALLBACK (on_connection_cancel_clicked) },
   { "connection_ok",                "clicked", G_CALLBACK (on_connection_ok_clicked) },
   { "connection_detect_modem",      "clicked", G_CALLBACK (on_detect_modem_clicked) },
   /* dialog changing detection */
   { "connection_address",           "focus-out-event", G_CALLBACK (on_ip_address_focus_out) },
-  { "connection_ppp_device_active", "toggled", G_CALLBACK (on_dialog_changed) },
   { "connection_device_active",     "toggled", G_CALLBACK (on_dialog_changed) },
   { "connection_essid",             "changed", G_CALLBACK (on_dialog_changed) },
   { "connection_wep_key_type",      "changed", G_CALLBACK (on_dialog_changed) },
@@ -85,11 +82,10 @@ static void
 init_standalone_dialog (IfaceSearchTerm search_term, const gchar *term)
 {
   GstNetworkTool *network_tool;
-  GstIface       *iface;
+  OobsIface      *iface;
   GtkWidget      *d;
 
   network_tool = GST_NETWORK_TOOL (tool);
-  gst_tool_main_with_hidden_dialog (tool, TRUE);
   iface = ifaces_model_search_iface (search_term, term);
 
   if (iface)
@@ -99,7 +95,6 @@ init_standalone_dialog (IfaceSearchTerm search_term, const gchar *term)
       g_object_unref (iface);
 
       gtk_widget_show (network_tool->dialog->dialog);
-      gtk_main ();
     }
   else
     {
@@ -115,6 +110,7 @@ init_standalone_dialog (IfaceSearchTerm search_term, const gchar *term)
                                                 NULL);
       gtk_dialog_run (GTK_DIALOG (d));
       gtk_widget_destroy (d);
+      exit (-1);
     }
 }
 
@@ -159,15 +155,16 @@ main (int argc, gchar *argv[])
     { NULL }
   };
 
-  gst_init ("network-admin", argc, argv, entries);
-
+  gst_init_tool ("network-admin", argc, argv, entries);
   tool = gst_network_tool_new ();
-  gst_network_tool_construct (GST_NETWORK_TOOL (tool), "network", _("Network settings"));
 
+  /*
   gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+  gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
+  */
+
   gst_dialog_connect_signals (tool->main_dialog, signals);
   set_text_buffers_callback ();
-  gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
   init_filters ();
 
   if (interface)
@@ -175,7 +172,8 @@ main (int argc, gchar *argv[])
   else if (type)
     init_standalone_dialog (SEARCH_TYPE, type);
   else
-    gst_tool_main (tool, FALSE);
+    gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 
+  gtk_main ();
   return 0;
 }

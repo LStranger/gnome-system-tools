@@ -1,3 +1,26 @@
+2006-05-19  Carlos Garnacho  <carlosg@gnome.org>
+
+	* transfer.[ch]: deleted, XML interface is now obsolete.
+	* network-iface.[ch], network-iface-ethernet.[ch],
+	network-iface-wireless.[ch], network-iface-irlan.[ch],
+	network-iface-plip.[ch], network-iface-modem.[ch],
+	network-iface-isdn.[ch]: deleted, their main functionality is mainly
+	in liboobs
+	* location.[ch]: deleted, used the XML interface and will be rewritten
+	from scratch.
+	* network-tool.[ch]: replaces gst-network-tool.[ch], GObject that
+	inherits from GstTool, providing what the old GstNetworkTool offered,
+	plus OobsObjects access.
+	* gst-network-tool.[ch]: deleted as a consequence.
+	* Makefile.am: reflect those changes.
+	* address-list.[ch]: use G_DEFINE_TYPE, do not implement treeview
+	reordering on its own
+	* callbacks.[ch], connection.[ch], hosts.[ch]: comment out lots of
+	code, use liboobs
+	* ifaces-list.[ch]: port to liboobs, show better at first sight the
+	interfaces configuration.
+	* main.c: minor changes to adapt to new GstTool API
+
 2006-03-13  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Release 2.14.0

@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,15 +22,16 @@
 
 #include "gst.h"
 #include "gst-network-tool.h"
-#include "network-iface.h"
 #include "ifaces-list.h"
 #include "callbacks.h"
+#include "hosts.h"
 
 extern GstTool *tool;
 
 static void
-enable_iface (GstIface *iface)
+enable_iface (OobsIface *iface)
 {
+  /* FIXME
   GtkWidget *dialog;
   gboolean   success;
 
@@ -54,41 +55,16 @@ enable_iface (GstIface *iface)
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
     }
+  */
 }
 
 void
 on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
-  GtkWidget    *properties, *activate, *deactivate;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  GstIface     *iface;
-  gboolean      enabled, configured;
-  gboolean      state_properties, state_activate, state_deactivate;
+  GtkWidget    *properties;
 
   properties = gst_dialog_get_widget (tool->main_dialog, "properties_button");
-  activate   = gst_dialog_get_widget (tool->main_dialog, "activate_button");
-  deactivate = gst_dialog_get_widget (tool->main_dialog, "deactivate_button");
-
-  state_properties = state_activate = state_deactivate = FALSE;
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-			  COL_OBJECT, &iface,
-			  COL_CONFIGURED, &configured,
-			  -1);
-      enabled = gst_iface_get_enabled (iface);
-      g_object_unref (iface);
-
-      state_properties = TRUE;
-      state_activate = configured && !enabled;
-      state_deactivate = configured && enabled;
-    }
-
-  gtk_widget_set_sensitive (properties, state_properties);
-  gtk_widget_set_sensitive (activate,   state_activate);
-  gtk_widget_set_sensitive (deactivate, state_deactivate);
+  gtk_widget_set_sensitive (properties, gtk_tree_selection_get_selected_rows (selection, NULL) != 0);
 }
 
 void
@@ -97,8 +73,8 @@ on_iface_properties_clicked (GtkWidget *widget, gpointer data)
   GstConnectionDialog *dialog;
   GtkTreeSelection *selection;
   GtkTreeModel *model;
-  GtkTreeIter   iter;
-  GstIface *iface;
+  GtkTreeIter iter;
+  OobsIface *iface;
 
   selection = gtk_tree_view_get_selection (GST_NETWORK_TOOL (tool)->interfaces_list);
 
@@ -110,8 +86,6 @@ on_iface_properties_clicked (GtkWidget *widget, gpointer data)
 
       dialog = GST_NETWORK_TOOL (tool)->dialog;
       connection_dialog_prepare (dialog, iface);
-      g_object_unref (iface);
-
       gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (tool->main_dialog));
       gtk_widget_show (dialog->dialog);
     }
@@ -163,9 +137,7 @@ on_connection_ok_clicked (GtkWidget *widget, gpointer data)
 {
   GstConnectionDialog *dialog;
   GtkTreeSelection    *selection;
-  GtkTreeModel        *model;
   GtkTreeIter          iter;
-  GstIface            *iface;
 
   dialog = GST_NETWORK_TOOL (tool)->dialog;
   gtk_widget_hide (dialog->dialog);
@@ -175,29 +147,20 @@ on_connection_ok_clicked (GtkWidget *widget, gpointer data)
       connection_save (dialog);
       selection = gtk_tree_view_get_selection (GST_NETWORK_TOOL (tool)->interfaces_list);
 
-      if (gtk_tree_selection_get_selected (selection, &model, &iter))
+      if (gtk_tree_selection_get_selected (selection, NULL, &iter))
         {
-	  gtk_tree_model_get (model, &iter, COL_OBJECT, &iface, -1);
-
-	  /* modify the config realtime */
-	  if (gst_iface_get_enabled (iface))
-	    enable_iface (iface);
-
 	  ifaces_model_modify_interface_at_iter (&iter);
-	  g_object_unref (iface);
-
 	  g_signal_emit_by_name (G_OBJECT (selection), "changed");
-	  gst_dialog_modify (tool->main_dialog);
 	}
+
+      gst_tool_commit_async (tool, GST_NETWORK_TOOL (tool)->ifaces_config,
+			     _("Changing interface configuration"));
     }
 
   g_object_unref (dialog->iface);
 
   if (dialog->standalone)
-    {
-      gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
-      gtk_main_quit ();
-    }
+    gtk_main_quit ();
 }
 
 void
@@ -325,6 +288,7 @@ on_table_popup_menu (GtkWidget *widget, gpointer data)
 static void
 enable_disable_iface (GstNetworkTool *network_tool, gboolean enable)
 {
+  /* FIXME
   GtkTreeSelection *selection;
   GtkTreeModel *model;
   GtkTreeIter   iter;
@@ -349,14 +313,15 @@ enable_disable_iface (GstNetworkTool *network_tool, gboolean enable)
       g_object_unref (iface);
 
       /* we need this to update the buttons state */
-      g_signal_emit_by_name (G_OBJECT (selection), "changed");
+  /*      g_signal_emit_by_name (G_OBJECT (selection), "changed");
 
       /* update gateway settings */
-      if (gtk_combo_box_get_active (network_tool->gateways_list) == -1)
+  /*      if (gtk_combo_box_get_active (network_tool->gateways_list) == -1)
 	gtk_combo_box_set_active (network_tool->gateways_list, 0);
 
       gst_dialog_modify (tool->main_dialog);
     }
+  */
 }
 
 void
@@ -396,17 +361,23 @@ void
 on_host_aliases_delete_clicked (GtkWidget *widget, gpointer data)
 {
   GtkTreeSelection *selection;
-  GtkTreeView      *list;
-  GtkTreeModel     *model;
-  GtkTreeIter       iter;
+  GtkTreeView *list;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  OobsList *hosts_list;
+  OobsListIter *list_iter;
 
   list  = GST_NETWORK_TOOL (tool)->host_aliases_list;
   selection = gtk_tree_view_get_selection (list);
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
+      gtk_tree_model_get (model, &iter, COL_HOST_ITER, &list_iter, -1);
+      hosts_list = oobs_hosts_config_get_static_hosts (GST_NETWORK_TOOL (tool)->hosts_config);
+      oobs_list_remove (hosts_list, list_iter);
       gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-      gst_dialog_modify (tool->main_dialog);
+
+      oobs_object_commit (OOBS_OBJECT (GST_NETWORK_TOOL (tool)->hosts_config));
     }
 }
 
@@ -428,6 +399,7 @@ on_dialog_changed (GtkWidget *widget, gpointer data)
 gboolean
 callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 {
+  /* FIXME
   GstNetworkTool *network_tool;
   gchar          *hostname_old, *hostname_new;
   xmlNodePtr      root, node;
@@ -476,6 +448,7 @@ callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
     }
 
   g_free (hostname_old);
+  */
   return TRUE;
 }
 
@@ -491,9 +464,11 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 void
 on_gateway_combo_changed (GtkWidget *widget, gpointer data)
 {
+  /* FIXME
+
   GtkTreeModel *model;
   GtkTreeIter   iter;
-  GstIface     *iface;
+  OobsIface    *iface;
   gchar        *dev, *gateway;
 
   if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter))
@@ -505,7 +480,7 @@ on_gateway_combo_changed (GtkWidget *widget, gpointer data)
 			  -1);
 
       /* FIXME: this won't work for DHCP nor PPP ifaces */
-      g_object_get (G_OBJECT (iface),
+/*      g_object_get (G_OBJECT (iface),
 		    "iface-dev", &dev,
 		    "iface-gateway", &gateway,
 		    NULL);
@@ -517,6 +492,7 @@ on_gateway_combo_changed (GtkWidget *widget, gpointer data)
       g_free (dev);
       g_free (gateway);
     }
+*/
 }
 
 gboolean
@@ -524,4 +500,42 @@ on_connection_dialog_close (GtkWidget *widget, GdkEvent *event, gpointer data)
 {
   gtk_widget_hide (widget);
   return TRUE;
+}
+
+void
+on_iface_toggled (GtkCellRendererToggle *renderer,
+		  gchar                 *path_str,
+		  gpointer               data)
+{
+  GtkTreePath *path;
+  GtkTreeModel *model = GTK_TREE_MODEL (data);
+  GtkTreeIter iter;
+  gboolean active, inconsistent;
+  OobsIface *iface;
+
+  path = gtk_tree_path_new_from_string (path_str);
+
+  if (gtk_tree_model_get_iter (model, &iter, path))
+    {
+      gtk_tree_model_get (model, &iter,
+			  COL_ACTIVE, &active,
+			  COL_INCONSISTENT, &inconsistent,
+			  COL_OBJECT, &iface,
+			  -1);
+
+      if (!inconsistent)
+	{
+	  active ^= 1;
+
+	  oobs_iface_set_active (iface, active);
+	  ifaces_model_modify_interface_at_iter (&iter);
+
+	  gst_tool_commit_async (tool, GST_NETWORK_TOOL (tool)->ifaces_config,
+				 _("Activating network interface"));
+	}
+
+      g_object_unref (iface);
+    }
+
+  gtk_tree_path_free (path);
 }

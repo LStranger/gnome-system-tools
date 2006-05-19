@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* -*- Mode: C; c-file-style: "gnu"; tab-width: 8 -*- */
 /* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
@@ -56,5 +56,10 @@ void  on_dialog_changed (GtkWidget*, gpointer);
 
 gboolean on_ip_address_focus_out (GtkWidget*, GdkEventFocus*, gpointer);
 gboolean callbacks_check_hostname_hook (GstDialog*, gpointer);
+
+void  on_iface_toggled  (GtkCellRendererToggle *renderer,
+			 gchar                 *path_str,
+			 gpointer               data);
+
 
 #endif /* __CALLBACKS_H */

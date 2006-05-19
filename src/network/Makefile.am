@@ -19,20 +19,11 @@ network_admin_LDADD = $(GST_TOOL_LIBS)
 network_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
 network_admin_SOURCES = 			\
 	address-list.c	address-list.h		\
-	gst-network-tool.c gst-network-tool.h	\
-	transfer.c transfer.h			\
-	network-iface.c network-iface.h		\
-	network-iface-ethernet.c network-iface-ethernet.h	\
-	network-iface-wireless.c network-iface-wireless.h	\
-	network-iface-irlan.c network-iface-irlan.h		\
-	network-iface-plip.c network-iface-plip.h		\
-	network-iface-modem.c network-iface-modem.h		\
-	network-iface-isdn.c network-iface-isdn.h		\
+	network-tool.c network-tool.h		\
 	ifaces-list.c ifaces-list.h		\
 	callbacks.c callbacks.h			\
 	connection.c connection.h		\
 	hosts.c hosts.h				\
-	location.c location.h			\
 	main.c 
 
 toolpixmaps =
