@@ -1,7 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* main.c: this file is part of time-admin, a ximian-setup-tool frontend 
- * for system time configuration.
- * 
+/* 
  * Copyright (C) 2005 Carlos Garnacho.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,16 +23,14 @@
 #include <glib/gi18n.h>
 #include "time-tool.h"
 #include "gst.h"
+#include "ntp-servers-list.h"
 
 #define GST_TIME_TOOL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_TIME_TOOL, GstTimeToolPrivate))
+#define APPLY_CONFIG_TIMEOUT 2000
 
 typedef struct _GstTimeToolPrivate GstTimeToolPrivate;
 
 struct _GstTimeToolPrivate {
-	OobsObject *time_config;
-	OobsObject *ntp_config;
-	OobsObject *services_config;
-
 	guint clock_timeout;
 	guint apply_timeout;
 };
@@ -75,7 +71,7 @@ get_ntp_service (GstTimeTool *tool)
 	gboolean valid;
 	const gchar *role;
 
-	list = oobs_services_config_get_services (priv->services_config);
+	list = oobs_services_config_get_services (tool->services_config);
 	valid = oobs_list_get_iter_first (list, &iter);
 
 	while (valid) {
@@ -96,9 +92,9 @@ gst_time_tool_init (GstTimeTool *tool)
 	OobsList *list;
 	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 
-	priv->time_config = oobs_time_config_get (GST_TOOL (tool)->session);
-	priv->ntp_config = oobs_ntp_config_get (GST_TOOL (tool)->session);
-	priv->services_config = oobs_services_config_get (GST_TOOL (tool)->session);
+	tool->time_config = oobs_time_config_get (GST_TOOL (tool)->session);
+	tool->ntp_config = oobs_ntp_config_get (GST_TOOL (tool)->session);
+	tool->services_config = oobs_services_config_get (GST_TOOL (tool)->session);
 
 	get_ntp_service (tool);
 }
@@ -114,11 +110,11 @@ on_apply_timeout (GstTimeTool *tool)
 	minute = (guint) gtk_spin_button_get_value (GTK_SPIN_BUTTON (tool->minutes));
 	second = (guint) gtk_spin_button_get_value (GTK_SPIN_BUTTON (tool->seconds));
 
-	oobs_time_config_set_time (OOBS_TIME_CONFIG (priv->time_config),
+	oobs_time_config_set_time (OOBS_TIME_CONFIG (tool->time_config),
 				   (gint) year, (gint) month, (gint) day,
 				   (gint) hour, (gint) minute, (gint)second);
 
-	oobs_object_commit (priv->time_config);
+	oobs_object_commit (tool->time_config);
 	gst_time_tool_start_clock (tool);
 
 	return FALSE;
@@ -136,7 +132,7 @@ update_apply_timeout (GstTimeTool *tool)
 		priv->apply_timeout = 0;
 	}
 
-	priv->apply_timeout = g_timeout_add (2000, (GSourceFunc) on_apply_timeout, tool);
+	priv->apply_timeout = g_timeout_add (APPLY_CONFIG_TIMEOUT, (GSourceFunc) on_apply_timeout, tool);
 }
 
 static void
@@ -297,6 +293,7 @@ gst_time_tool_constructor (GType                  type,
 	g_signal_connect (G_OBJECT (time_tool->calendar), "day-selected",
 			  G_CALLBACK (on_calendar_day_selected), time_tool);
 
+	time_tool->ntp_list = ntp_servers_list_get (time_tool);
 	init_timezone (time_tool);
 
 	return object;
@@ -305,27 +302,53 @@ gst_time_tool_constructor (GType                  type,
 static void
 gst_time_tool_finalize (GObject *object)
 {
+	GstTimeTool *tool = GST_TIME_TOOL (object);
 	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (object);
 
-	g_object_unref (priv->time_config);
+	/* FIXME: missing things to free */
+	g_object_unref (tool->time_config);
 
 	(* G_OBJECT_CLASS (gst_time_tool_parent_class)->finalize) (object);
 }
 
 static void
+update_servers_list (GstTimeTool *tool)
+{
+	GstTimeToolPrivate *priv;
+	OobsList *list;
+	OobsListIter iter;
+	GObject *server;
+	gboolean valid;
+
+	/* FIXME: restore NTP servers to NULL */
+	list = oobs_ntp_config_get_servers (tool->ntp_config);
+	valid = oobs_list_get_iter_first (list, &iter);
+
+	while (valid) {
+		server = oobs_list_get (list, &iter);
+		ntp_servers_list_check (GST_TIME_TOOL (tool)->ntp_list,
+					&iter, OOBS_NTP_SERVER (server));
+
+		g_object_unref (server);
+		valid = oobs_list_iter_next (list, &iter);
+	}
+}
+
+static void
 gst_time_tool_update_gui (GstTool *tool)
 {
-	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
+	GstTimeTool *time_tool = GST_TIME_TOOL (tool);
 	GtkWidget *timezone;
 
 	gst_time_tool_start_clock (GST_TIME_TOOL (tool));
 	timezone = gst_dialog_get_widget (tool->main_dialog, "tzlabel");
 
 	gtk_label_set_text (GTK_LABEL (timezone),
-			    oobs_time_config_get_timezone (OOBS_TIME_CONFIG (priv->time_config)));
+			    oobs_time_config_get_timezone (OOBS_TIME_CONFIG (time_tool->time_config)));
+
+	update_servers_list (GST_TIME_TOOL (tool));
 
 	/* FIXME: missing NTP active button state */
-	/* FIXME: missing NTP servers list */
 }
 
 GstTool*
@@ -358,10 +381,9 @@ thaw_clock (GstTimeTool *tool)
 void
 gst_time_tool_update_clock (GstTimeTool *tool)
 {
-	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 	gint year, month, day, hour, minute, second;
 
-	oobs_time_config_get_time (OOBS_TIME_CONFIG (priv->time_config),
+	oobs_time_config_get_time (OOBS_TIME_CONFIG (tool->time_config),
 				   &year, &month,  &day,
 				   &hour, &minute, &second);
 
@@ -415,7 +437,6 @@ gst_time_tool_stop_clock (GstTimeTool *tool)
 void
 gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 {
-	GstTimeToolPrivate *priv;
 	GstTool *tool;
 	GtkWidget *label;
 	gchar *timezone;
@@ -424,11 +445,10 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 	TzLocation *tz_location;
 	gint correction;
 
-	priv  = GST_TIME_TOOL_GET_PRIVATE (time_tool);
 	tool  = GST_TOOL (time_tool);
 	label = gst_dialog_get_widget (tool->main_dialog, "tzlabel");
 
-	timezone = oobs_time_config_get_timezone (OOBS_TIME_CONFIG (priv->time_config));
+	timezone = oobs_time_config_get_timezone (OOBS_TIME_CONFIG (time_tool->time_config));
 	e_tz_map_set_tz_from_name (time_tool->tzmap, timezone);
 
 	gtk_window_set_transient_for (GTK_WINDOW (time_tool->timezone_dialog),
@@ -440,8 +460,8 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 	tz_location = e_tz_map_get_location_by_name (time_tool->tzmap, tz_name);
 
 	if (!timezone || strcmp (tz_name, timezone) != 0) {
-		oobs_time_config_set_timezone (OOBS_TIME_CONFIG (priv->time_config), tz_name);
-		oobs_object_commit (priv->time_config);
+		oobs_time_config_set_timezone (OOBS_TIME_CONFIG (time_tool->time_config), tz_name);
+		oobs_object_commit (time_tool->time_config);
 		gtk_label_set_text (GTK_LABEL (label), tz_name);
 	}
 

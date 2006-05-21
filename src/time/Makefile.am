@@ -19,9 +19,10 @@ time_admin_LDADD = $(GST_TOOL_LIBS) ./e-map/libemap.a
 time_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) ./e-map/libemap.a
 time_admin_SOURCES = \
 	time-tool.c	time-tool.h \
-	tz.c              tz.h \
-	tz-map.c          tz-map.h \
-	timeserv.c        timeserv.h \
+	tz.c		tz.h \
+	tz-map.c	tz-map.h \
+	timeserv.c	timeserv.h \
+	ntp-servers-list.c	ntp-servers-list.h	\
 	main.c
 
 toolpixmaps =

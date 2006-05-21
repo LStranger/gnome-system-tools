@@ -22,10 +22,18 @@ typedef struct _GstTimeToolClass GstTimeToolClass;
 struct _GstTimeTool {
 	GstTool tool;
 
+	/* config */
+	OobsObject *time_config;
+	OobsObject *ntp_config;
+	OobsObject *services_config;
+
+	/* gui */
 	GtkWidget *calendar;
 	GtkWidget *seconds;
 	GtkWidget *minutes;
 	GtkWidget *hours;
+
+	GtkWidget *ntp_list;
 
 	ETzMap    *tzmap;
 	GtkWidget *timezone_dialog;

@@ -54,72 +54,6 @@ static void ntp_use_toggled (GtkWidget *w, GstDialog *dialog);
 static void gst_time_calendar_change_cb (GtkCalendar *, gpointer);
 static void on_server_list_element_toggled (GtkCellRendererToggle*, gchar*, gpointer);
 
-struct NtpServer {
-	const gchar *url;
-	const gchar *location;
-} ntp_servers [] = {
-	{ "time.nrc.ca", "Canada" },
-	{ "ntp1.cmc.ec.gc.ca", "Eastern Canada" },
-	{ "ntp2.cmc.ec.gc.ca", "Eastern Canada" },
-	{ "clock.tricity.wsu.edu", "Washington, USA" },
-	{ "wuarchive.wustl.edu", "Missouri, USA" },
-	{ "clock.psu.edu", "Pennsylvania, USA" },
-	{ "constellation.ecn.uoknor.edu", "Oklahoma, USA" },
-	{ "gilbreth.ecn.purdue.edu", "Indiana, USA" },
-	{ "molecule.ecn.purdue.edu", "Indiana, USA" },
-	{ "libra.rice.edu", "Texas, USA" },
-	{ "ntp.cox.smu.edu", "Texas, USA" },
-	{ "ntp.tmc.edu", "Texas, USA" },
-	{ "louie.udel.edu", "Delaware, USA" },
-	{ "ntp.cmr.gov", "Virginia, USA" },
-	{ "ntp0.cornell.edu", "New York, USA" },
-	{ "ntp-0.cso.uiuc.edu", "Illinois, USA" },
-	{ "ntp1.cs.wisc.edu", "Wisconsin, USA" },
-	{ "tick.cs.unlv.edu", "Las Vegas, USA" },
-	{ "ntp2a.mcc.ac.uk", "England, Europe" },
-	{ "ntp2b.mcc.ac.uk", "England, Europe" },
-	{ "salmon.maths.tcd.ie", "Ireland, Europe" },
-	{ "ntp.cs.strath.ac.uk", "Scotland, Europe" },
-	{ "bernina.ethz.ch", "Switzerland, Europe" },
-	{ "ntp.univ-lyon1.fr", "France, Europe" },
-	{ "tick.keso.fi", "Finland, Europe" },
-	{ "fartein.ifi.uio.no", "Norway, Europe" },
-	{ "ntp1.arnes.si", "Slovenia, Europe" },
-	{ "ntp2.arnes.si", "Slovenia, Europe" },
-	{ "ntp.landau.ac.ru", "Moscow, Russia" },
-	{ "time.esec.com.au", "Australia" },
-	{ "ntp.adelaide.edu.au", "South Australia" },
-	{ "ntp.shim.org", "Singapore, Asia" },
-	{ "time.nuri.net", "Korea, Asia" },
-	{ "ntp.cs.mu.oz.au", "Melbourne, Australia" },
-	{ "ntp.mel.nml.csiro.au", "Melbourne, Australia" },
-	{ "ntp.nml.csiro.au", "Sydney, Australia" },
-	{ "ntp.per.nml.csiro.au", "Perth, Australia" },
-	{ "swisstime.ethz.ch", "Zurich, Switzerland" },
-	{ "ntp.cesnet.cz", "Prague, Czech Republic" },
-	{ "ntpa2.kph.uni-mainz.de", "Mainz, Germany" },
-	{ "ntps1-0.cs.tu-berlin.de", "Berlin, Germany" },
-	{ "ntps1-1.cs.tu-berlin.de", "Berlin, Germany" },
-	{ "ntps1-2.uni-erlangen.de", "Erlangen, Germany" },
-	{ "canon.inria.fr", "Rocquencourt, France" },
-	{ "chronos.cru.fr", "Britany, France" },
-	{ "stdtime.gov.hk", "Hong Kong, China" },
-	{ "clock.cuhk.edu.hk", "Hong Kong, China" },
-	{ "time.ien.it", "Torino, Italy" },
-	{ "clock.tl.fukuoka-u.ac.jp", "Fukuoka, Japan" },
-	{ "cronos.cenam.mx", "Queretaro, Mexico" },
-	{ "ntp0.nl.net", "Amsterdam, The Netherlands" },
-	{ "ntp1.nl.net", "Amsterdam, The Netherlands" },
-	{ "ntp2.nl.net", "Amsterdam, The Netherlands" },
-	{ "time.service.uit.no", "Norway" },
-	{ "ntp.certum.pl", "Poland" },
-	{ "vega.cbk.poznan.pl", "Borowiec, Poland" },
-	{ "time1.stupi.se", "Stockholm, Sweden" },
-	{ "goodtime.ijs.si", "Ljubljana, Slovenia" },
-	{ "ntp2.ja.net", "United Kingdom" },
-	{ NULL }
-};
-
 static GstDialogSignal signals[] = {
 	{ "timezone_button",     "clicked",  G_CALLBACK (timezone_button_clicked) },
 	{ "ntp_use",             "toggled",  G_CALLBACK (ntp_use_toggled) },
@@ -127,53 +61,6 @@ static GstDialogSignal signals[] = {
 	{ "ntp_add_server",      "clicked",  G_CALLBACK (on_ntp_addserver) },
 	{ NULL, NULL }
 };
-
-static void
-populate_ntp_list (GstTimeTool *time_tool)
-{
-	GstTool *tool = GST_TOOL (time_tool);
-	GtkWidget *ntp_list, *item;
-	GList *list_add = 0;
-	GtkListStore *store;
-	GtkCellRenderer *cell;
-	GtkTreeViewColumn *column;
-	GtkTreeIter iter;
-	gchar *str;
-	gint i;
-
-	ntp_list = gst_dialog_get_widget (tool->main_dialog, "ntp_list");
-
-	/* set the model */
-	store = gtk_list_store_new (3, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
-	gtk_tree_view_set_model (GTK_TREE_VIEW (ntp_list),
-				 GTK_TREE_MODEL (store));
-
-	column = gtk_tree_view_column_new ();
-
-	cell = gtk_cell_renderer_toggle_new ();
-	gtk_tree_view_column_pack_start (column, cell, FALSE);
-	gtk_tree_view_column_add_attribute (column, cell, "active", 0);
-	g_object_set_data (G_OBJECT (cell), "tool", tool);
-	g_signal_connect (G_OBJECT (cell), "toggled", G_CALLBACK (on_server_list_element_toggled), store);
-	
-	cell = gtk_cell_renderer_text_new ();
-	gtk_tree_view_column_pack_end (column, cell, TRUE);
-	gtk_tree_view_column_add_attribute (column, cell, "text", 1);
-
-	gtk_tree_view_append_column (GTK_TREE_VIEW (ntp_list), column);
-	
-	for (i = 0; ntp_servers[i].url; i++) {
-		str = g_strdup_printf ("%s (%s)", ntp_servers[i].url, ntp_servers[i].location);
-
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter,
-				    0, FALSE,
-				    1, str,
-				    2, ntp_servers[i].url,
-				    -1);
-		g_free (str);
-	}
-}
 
 #define is_leap_year(yyy) ((((yyy % 4) == 0) && ((yyy % 100) != 0)) || ((yyy % 400) == 0));
 
@@ -420,10 +307,7 @@ main (int argc, char *argv[])
 	tool = GST_TOOL (gst_time_tool_new ());
 
 	gst_dialog_connect_signals (tool->main_dialog, signals);
-	populate_ntp_list (GST_TIME_TOOL (tool));
-
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
-	
 	gtk_main ();
 
 	return 0;

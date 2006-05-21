@@ -1,3 +1,12 @@
+2006-05-22  Carlos Garnacho  <carlosg@gnome.org>
+
+	* ntp-servers-list.[ch]: new files, manage NTP servers list.
+	* Makefile.am: add these files.
+	* main.c (populate_ntp_list): moved from here to ntp-servers-list.c.
+	Ditto with ntp_servers[].
+	* time-tool.[ch]: use ntp-servers-list.[ch], add back hability to
+	show/edit NTP servers. made OobsObjects public.
+
 2006-05-18  Carlos Garnacho  <carlosg@gnome.org>
 
 	* time-tool.c: added, inherits from gst-tool, containing all the
