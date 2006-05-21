@@ -21,7 +21,17 @@
  *          Carlos Garnacho Parro <carlosg@gnome.org>
  */
 
+#include <config.h>
 #include <glib.h>
+#include <glib/gi18n.h>
+#include <gconf/gconf-client.h>
+
+#include <libgnomeui/libgnomeui.h>
+#include <libgnome/gnome-program.h>
+#include <libgnome/gnome-help.h>
+
+#include <string.h>
+
 #include "gst-tool.h"
 #include "gst-dialog.h"
 #include "gst-report-line.h"
@@ -30,24 +40,6 @@
 #include "gst-ui.h"
 #include "gst-marshal.h"
 
-#include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
-
-#include <libgnome/gnome-program.h>
-#include <libgnome/gnome-help.h>
-#include <libgnomeui/gnome-ui-init.h>
-
-
-#include <stdio.h>
-#include <errno.h>
-
-#include <string.h>
-#include <sys/types.h>
-#include <sys/poll.h>
-#include <sys/wait.h>
-#include <signal.h>
-
-#include <config.h>
 
 #define GST_TOOL_GET_PRIVATE (o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_TOOL, GstToolPrivate))
 
@@ -204,7 +196,9 @@ gst_tool_init (GstTool *tool)
 
 	pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "gnome-system-config", 48, 0, NULL);
 	gtk_image_set_from_pixbuf (GTK_IMAGE (tool->report_pixmap), pixbuf);
-	gdk_pixbuf_unref (pixbuf);
+
+	if (pixbuf)
+		gdk_pixbuf_unref (pixbuf);
 
 	g_object_unref (xml);
 	
