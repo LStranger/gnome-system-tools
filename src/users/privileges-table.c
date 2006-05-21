@@ -88,7 +88,7 @@ on_user_privilege_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointe
 	GtkTreeIter   iter;
 	gboolean      value;
 
-	if (gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path)) {
+	if (gtk_tree_model_get_iter (model, &iter, path)) {
 		gtk_tree_model_get (model, &iter, 0, &value, -1);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, !value, -1);
 	}
