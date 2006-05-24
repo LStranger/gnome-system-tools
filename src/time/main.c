@@ -216,8 +216,13 @@ ntp_use_toggled (GtkWidget *w, GstDialog *dialog)
 		return;
 	}
 
-	/* FIXME: enable NTP for the current runlevel */
+	oobs_service_set_runlevel_configuration (GST_TIME_TOOL (tool)->ntp_service,
+						 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
+						 (active) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
+						 /* FIXME: hardcoded priority? */
+						 50);
 
+	oobs_object_commit (GST_TIME_TOOL (tool)->services_config);
 	gtk_widget_set_sensitive (gst_dialog_get_widget (dialog, "timeserver_button"), active);
 }
 

@@ -338,17 +338,27 @@ static void
 gst_time_tool_update_gui (GstTool *tool)
 {
 	GstTimeTool *time_tool = GST_TIME_TOOL (tool);
-	GtkWidget *timezone;
+	GtkWidget *timezone, *ntp_use;
+	gint active;
 
 	gst_time_tool_start_clock (GST_TIME_TOOL (tool));
 	timezone = gst_dialog_get_widget (tool->main_dialog, "tzlabel");
+	ntp_use = gst_dialog_get_widget (tool->main_dialog, "ntp_use");
 
 	gtk_label_set_text (GTK_LABEL (timezone),
 			    oobs_time_config_get_timezone (OOBS_TIME_CONFIG (time_tool->time_config)));
 
 	update_servers_list (GST_TIME_TOOL (tool));
 
-	/* FIXME: missing NTP active button state */
+	oobs_service_get_runlevel_configuration (time_tool->ntp_service,
+						 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
+						 &active,
+						 NULL);
+	/* FIXME: block signal handler */
+	/* g_signal_handlers_block_by_func (ntp_use, ntp_use_toggled, tool->main_dialog); */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ntp_use),
+				      (active == OOBS_SERVICE_START));
+	/* g_signal_handlers_unblock_by_func (ntp_use, ntp_use_toggled, tool->main_dialog); */
 }
 
 GstTool*
