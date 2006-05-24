@@ -24,6 +24,7 @@
 #include "network-tool.h"
 #include "ifaces-list.h"
 #include "connection.h"
+#include "callbacks.h"
 #include "hosts.h"
 
 static void gst_network_tool_class_init (GstNetworkToolClass *class);
@@ -86,6 +87,24 @@ gst_network_tool_finalize (GObject *object)
   (* G_OBJECT_CLASS (gst_network_tool_parent_class)->finalize) (object);
 }
 
+static void
+save_dns (GList *list, gpointer data)
+{
+  GstNetworkTool *tool = (GstNetworkTool *) data;
+
+  oobs_hosts_config_set_dns_servers (tool->hosts_config, list);
+  oobs_object_commit (tool->hosts_config);
+}
+
+static void
+save_search_domains (GList *list, gpointer data)
+{
+  GstNetworkTool *tool = (GstNetworkTool *) data;
+
+  oobs_hosts_config_set_search_domains (tool->hosts_config, list);
+  oobs_object_commit (tool->hosts_config);
+}
+
 static GObject*
 gst_network_tool_constructor (GType                  type,
 			      guint                  n_construct_properties,
@@ -107,6 +126,7 @@ gst_network_tool_constructor (GType                  type,
 				    GTK_BUTTON (add_button),
 				    GTK_BUTTON (delete_button),
 				    GST_ADDRESS_TYPE_IP);
+  gst_address_list_set_save_func (tool->dns, save_dns, tool);
 
   widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "search_domain_list");
   add_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "search_domain_add");
@@ -115,6 +135,7 @@ gst_network_tool_constructor (GType                  type,
 				       GTK_BUTTON (add_button),
 				       GTK_BUTTON (delete_button),
 				       GST_ADDRESS_TYPE_DOMAIN);
+  gst_address_list_set_save_func (tool->search, save_search_domains, tool);
 
   widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "hostname");
   tool->hostname = GTK_ENTRY (widget);
@@ -238,10 +259,15 @@ gst_network_tool_update_gui (GstTool *tool)
   hosts_list = oobs_hosts_config_get_static_hosts (network_tool->hosts_config);
   update_hosts_list (hosts_list);
 
+  g_signal_handlers_block_by_func (network_tool->hostname, on_entry_changed, tool->main_dialog);
   gtk_entry_set_text (network_tool->hostname,
 		      oobs_hosts_config_get_hostname (network_tool->hosts_config));
+  g_signal_handlers_unblock_by_func (network_tool->hostname, on_entry_changed, tool->main_dialog);
+
+  g_signal_handlers_block_by_func (network_tool->domain, on_entry_changed, tool->main_dialog);
   gtk_entry_set_text (network_tool->domain,
 		      oobs_hosts_config_get_domainname (network_tool->hosts_config));
+  g_signal_handlers_unblock_by_func (network_tool->domain, on_entry_changed, tool->main_dialog);
 
   add_all_interfaces (network_tool);
 }

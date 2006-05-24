@@ -304,7 +304,6 @@ host_aliases_dialog_save (GtkTreeIter *iter)
   GtkWidget *address, *aliases;
   GtkTextBuffer *buffer;
   OobsStaticHost *host;
-  OobsListIter list_iter;
   GList *aliases_list;
   
   address = gst_dialog_get_widget (tool->main_dialog, "host_alias_address");
@@ -315,6 +314,8 @@ host_aliases_dialog_save (GtkTreeIter *iter)
 
   if (iter)
     {
+      OobsListIter *list_iter;
+
       list = GST_NETWORK_TOOL (tool)->host_aliases_list;
       model = gtk_tree_view_get_model (list);
 
@@ -325,12 +326,13 @@ host_aliases_dialog_save (GtkTreeIter *iter)
 
       oobs_static_host_set_ip_address (host, gtk_entry_get_text (GTK_ENTRY (address)));
       oobs_static_host_set_aliases (host, aliases_list);
-      host_aliases_modify_at_iter (iter, host, &list_iter);
+      host_aliases_modify_at_iter (iter, host, list_iter);
       g_object_unref (host);
     }
   else
     {
       OobsList *list;
+      OobsListIter list_iter;
 
       list = oobs_hosts_config_get_static_hosts (GST_NETWORK_TOOL (tool)->hosts_config);
       host = oobs_static_host_new (gtk_entry_get_text (GTK_ENTRY (address)), aliases_list);

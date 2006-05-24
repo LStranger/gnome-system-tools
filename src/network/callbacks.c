@@ -397,62 +397,6 @@ on_dialog_changed (GtkWidget *widget, gpointer data)
 }
 
 gboolean
-callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
-{
-  /* FIXME
-  GstNetworkTool *network_tool;
-  gchar          *hostname_old, *hostname_new;
-  xmlNodePtr      root, node;
-  GtkWidget      *d;
-  gint            res;
-
-  network_tool = GST_NETWORK_TOOL (dialog->tool);
-  root = gst_xml_doc_get_root (dialog->tool->config);
-  node = gst_xml_element_find_first (root, "hostname");
-
-  hostname_old = gst_xml_element_get_content (node);
-  hostname_new = (gchar *) gtk_entry_get_text (network_tool->hostname);
-
-  if (hostname_old && hostname_new &&
-      (strcmp (hostname_new, hostname_old) != 0))
-    {
-      d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-				  GTK_DIALOG_MODAL,
-				  GTK_MESSAGE_WARNING,
-				  GTK_BUTTONS_NONE,
-				  _("The host name has changed"),
-				  NULL);
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
-						_("This will prevent you "
-						  "from launching new applications, and so you will "
-						  "have to log in again. Continue anyway?"),
-						NULL);
-      gtk_dialog_add_buttons (GTK_DIALOG (d),
-			      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-			      _("Change _Host name"), GTK_RESPONSE_ACCEPT,
-			      NULL);
-
-      res = gtk_dialog_run (GTK_DIALOG (d));
-      gtk_widget_destroy (d);
-
-      switch (res)
-        {
-	case GTK_RESPONSE_ACCEPT:
-	  g_free (hostname_old);
-	  return TRUE;
-	case GTK_RESPONSE_CANCEL:
-	default:
-	  gtk_entry_set_text (network_tool->hostname, hostname_old);
-	  return FALSE;
-	}
-    }
-
-  g_free (hostname_old);
-  */
-  return TRUE;
-}
-
-gboolean
 on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 {
   GstConnectionDialog *dialog = GST_NETWORK_TOOL (tool)->dialog;
@@ -528,6 +472,7 @@ on_iface_toggled (GtkCellRendererToggle *renderer,
 	  active ^= 1;
 
 	  oobs_iface_set_active (iface, active);
+	  oobs_iface_set_auto (iface, active);
 	  ifaces_model_modify_interface_at_iter (&iter);
 
 	  gst_tool_commit_async (tool, GST_NETWORK_TOOL (tool)->ifaces_config,
@@ -539,3 +484,82 @@ on_iface_toggled (GtkCellRendererToggle *renderer,
 
   gtk_tree_path_free (path);
 }
+
+void
+on_entry_changed (GtkWidget *widget, gpointer data)
+{
+  g_object_set_data (G_OBJECT (widget), "content-changed", GINT_TO_POINTER (TRUE));
+}
+
+gboolean
+on_hostname_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
+{
+  GstNetworkTool *tool;
+  gboolean changed;
+  gchar *hostname;
+
+  tool = GST_NETWORK_TOOL (gst_dialog_get_tool (GST_DIALOG (data)));
+  changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "content-changed"));
+  hostname = gtk_entry_get_text (GTK_ENTRY (widget));
+
+  if (changed && hostname && *hostname)
+    {
+      GtkWidget *dialog;
+      gint res;
+
+      dialog = gtk_message_dialog_new (GTK_WINDOW (GST_TOOL (tool)->main_dialog),
+				       GTK_DIALOG_MODAL,
+				       GTK_MESSAGE_WARNING,
+				       GTK_BUTTONS_NONE,
+				       _("The host name has changed"),
+				       NULL);
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						_("This will prevent you "
+						  "from launching new applications, and so you will "
+						  "have to log in again. Continue anyway?"),
+						NULL);
+      gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+			      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+			      _("Change _Host name"), GTK_RESPONSE_ACCEPT,
+			      NULL);
+
+      res = gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+
+      if (res == GTK_RESPONSE_ACCEPT)
+	{
+	  oobs_hosts_config_set_hostname (tool->hosts_config, hostname);
+	  oobs_object_commit (tool->hosts_config);
+	}
+      else
+	{
+	  gtk_entry_set_text (GTK_ENTRY (widget),
+			      oobs_hosts_config_get_hostname (tool->hosts_config));
+	}
+    }
+
+  g_object_set_data (G_OBJECT (widget), "content-changed", GINT_TO_POINTER (FALSE));
+
+  return FALSE;
+}
+
+gboolean
+on_domain_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
+{
+  GstNetworkTool *tool;
+  gboolean changed;
+  gchar *domain;
+
+  tool = GST_NETWORK_TOOL (gst_dialog_get_tool (GST_DIALOG (data)));
+  changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "content-changed"));
+  domain = gtk_entry_get_text (GTK_ENTRY (widget));
+
+  if (changed && domain && *domain)
+    {
+      oobs_hosts_config_set_domainname (tool->hosts_config, domain);
+      oobs_object_commit (tool->hosts_config);
+    }
+
+  return FALSE;
+}
+     

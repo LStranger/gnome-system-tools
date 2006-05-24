@@ -55,11 +55,18 @@ void  on_host_aliases_dialog_changed     (GtkWidget*, gpointer);
 void  on_dialog_changed (GtkWidget*, gpointer);
 
 gboolean on_ip_address_focus_out (GtkWidget*, GdkEventFocus*, gpointer);
-gboolean callbacks_check_hostname_hook (GstDialog*, gpointer);
 
 void  on_iface_toggled  (GtkCellRendererToggle *renderer,
 			 gchar                 *path_str,
 			 gpointer               data);
 
+void     on_entry_changed      (GtkWidget     *widget,
+				gpointer       data);
+gboolean on_hostname_focus_out (GtkWidget     *widget,
+				GdkEventFocus *event,
+				gpointer       data);
+gboolean on_domain_focus_out   (GtkWidget     *widget,
+				GdkEventFocus *event,
+				gpointer       data);
 
 #endif /* __CALLBACKS_H */

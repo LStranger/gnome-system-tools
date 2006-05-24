@@ -38,6 +38,9 @@ struct _GstAddressListPrivate {
   GtkButton         *add_button;
   GtkButton         *delete_button;
   guint              type;
+
+  GstAddressListSaveFunc save_func;
+  gpointer               save_func_data;
 };
 
 static void gst_address_list_class_init (GstAddressListClass *class);
@@ -376,6 +379,31 @@ on_editing_canceled (GtkCellRenderer *renderer, gpointer data)
 }
 
 static void
+save_address_data (GstAddressList *list)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean valid;
+  GList *l = NULL;
+  gchar *str;
+
+  g_return_if_fail (list->_priv->save_func != NULL);
+
+  model = gtk_tree_view_get_model (list->_priv->list);
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+
+  while (valid)
+    {
+      gtk_tree_model_get (model, &iter, 0, &str, -1);
+      l = g_list_prepend (l, str);
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  l = g_list_reverse (l);
+  (list->_priv->save_func) (l, list->_priv->save_func_data);
+}
+
+static void
 on_editing_done (GtkCellRenderer *renderer,
 		 const gchar     *path_string,
 		 const gchar     *new_text,
@@ -406,7 +434,7 @@ on_editing_done (GtkCellRenderer *renderer,
 			  0, new_text,
 			  1, FALSE,
 			  -1);
-      gst_dialog_modify (tool->main_dialog);
+      save_address_data (list);
     }
 }
 
@@ -424,7 +452,7 @@ on_element_deleted (GtkWidget *widget, gpointer data)
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
-  gst_dialog_modify (tool->main_dialog);
+  save_address_data (list);
 }
 
 static void
@@ -521,4 +549,15 @@ gst_address_list_new (GtkTreeView    *treeview,
 		       "delete-button", delete_button,
 		       NULL);
   return list;
+}
+
+void
+gst_address_list_set_save_func (GstAddressList         *address_list,
+				GstAddressListSaveFunc  save_func,
+				gpointer                save_func_data)
+{
+  g_return_if_fail (address_list != NULL);
+
+  address_list->_priv->save_func = save_func;
+  address_list->_priv->save_func_data = save_func_data;
 }

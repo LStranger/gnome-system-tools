@@ -1,3 +1,17 @@
+2006-05-24  Carlos Garnacho  <carlosg@gnome.org>
+
+	* address-list.[ch] (gst_address_list_set_save_func): added. also use
+	it to save data.
+	* callbacks.[ch] (check_hostname_hook): removed
+	(on_entry_changed), (on_hostname_focus_out) (on_domain_focus_out):
+	added
+	* main.c: connect these callbacks
+	* hosts.c: do not set a corrupted OobsListIter
+	* ifaces-list.c (iface_to_type): added, use it to get a interface
+	configuration dialog from the interface type
+	* network-tool.c (save_dns) (save_search_domains): added. block
+	some signals for not prematurely saving the configuration
+
 2006-05-19  Carlos Garnacho  <carlosg@gnome.org>
 
 	* callbacks.c, connection.c, hosts.c, ifaces-list.c, main.c,

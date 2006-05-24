@@ -206,15 +206,33 @@ ifaces_list_create (GstTool *tool)
   return GTK_TREE_VIEW (table);
 }
 
+const gchar*
+iface_to_type (OobsIface *iface)
+{
+  if (OOBS_IS_IFACE_WIRELESS (iface))
+    return "wireless";
+  else if (OOBS_IS_IFACE_IRLAN (iface))
+    return "irlan";
+  else if (OOBS_IS_IFACE_ETHERNET (iface))
+    return "ethernet";
+  else if (OOBS_IS_IFACE_PLIP (iface))
+    return "plip";
+  else if (OOBS_IS_IFACE_MODEM (iface))
+    return "modem";
+  else if (OOBS_IS_IFACE_ISDN (iface))
+    return "isdn";
+
+  return "unknown";
+}
+
 OobsIface*
 ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
 {
-  /* FIXME
   GtkTreeModel *model;
   GtkTreeIter   iter;
   gboolean      valid;
   gchar        *dev, *item;
-  GstIface     *iface = NULL;
+  OobsIface    *iface = NULL;
 
   g_return_val_if_fail (term != NULL, NULL);
 
@@ -231,7 +249,7 @@ ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
       if (search_term == SEARCH_DEV)
 	item = dev;
       else
-	item = (gchar *) gst_iface_get_iface_type (iface);
+	item = (gchar *) iface_to_type (iface);
 
       if (strcmp (term, item) == 0)
 	valid = FALSE;
@@ -246,8 +264,6 @@ ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
     }
 
   return iface;
-  */
-  return NULL;
 }
 
 static void

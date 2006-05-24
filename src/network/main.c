@@ -39,8 +39,9 @@ static GstDialogSignal signals[] = {
   { "deactivate_button",            "clicked", G_CALLBACK (on_deactivate_button_clicked) },
   { "gateways_combo",               "changed", G_CALLBACK (on_gateway_combo_changed) },
   /* general tab */
-  { "hostname",                     "changed", G_CALLBACK (gst_dialog_modify_cb) },
-  { "domain",                       "changed", G_CALLBACK (gst_dialog_modify_cb) },
+  { "domain",                       "focus-out-event", G_CALLBACK (on_domain_focus_out) },
+  { "hostname",                     "changed", G_CALLBACK (on_entry_changed) },
+  { "domain",                       "changed", G_CALLBACK (on_entry_changed) },
   /* host aliases tab */
   { "host_aliases_add",             "clicked", G_CALLBACK (on_host_aliases_add_clicked) },
   { "host_aliases_properties",      "clicked", G_CALLBACK (on_host_aliases_properties_clicked) },
@@ -76,6 +77,10 @@ static GstDialogSignal signals[] = {
   { "connection_default_gw",        "toggled", G_CALLBACK (on_dialog_changed) },
   { "connection_persist",           "toggled", G_CALLBACK (on_dialog_changed) },
   { NULL }
+};
+
+static GstDialogSignal signals_after[] = {
+  { "hostname",                     "focus-out-event", G_CALLBACK (on_hostname_focus_out) },
 };
 
 static void
@@ -158,12 +163,8 @@ main (int argc, gchar *argv[])
   gst_init_tool ("network-admin", argc, argv, entries);
   tool = gst_network_tool_new ();
 
-  /*
-  gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-  gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
-  */
-
   gst_dialog_connect_signals (tool->main_dialog, signals);
+  gst_dialog_connect_signals_after (tool->main_dialog, signals_after);
   set_text_buffers_callback ();
   init_filters ();
 

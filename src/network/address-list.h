@@ -23,9 +23,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 typedef enum
 {
@@ -57,6 +55,8 @@ struct _GstAddressListClass
   GObjectClass parent_class;
 };
 
+typedef void (*GstAddressListSaveFunc) (GList *list, gpointer data);
+
 GType    gst_address_type_get_type (void);
 GType    gst_address_list_get_type (void);
 
@@ -65,8 +65,10 @@ void            gst_address_list_add_address (GstAddressList*, const gchar*);
 GSList*         gst_address_list_get_list    (GstAddressList*);
 void            gst_address_list_clear       (GstAddressList*);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+void            gst_address_list_set_save_func (GstAddressList         *address_list,
+						GstAddressListSaveFunc  save_func,
+						gpointer                save_func_data);
+
+G_END_DECLS
 
 #endif /* __DNS_SEARCH_H_ */
