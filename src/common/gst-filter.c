@@ -205,7 +205,7 @@ insert_filter (GtkEditable *editable, const gchar *text, gint length, gint *pos,
   str = g_strconcat (pre, text, post, NULL);
 
   if (!check_string (filter, str))
-    gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert-text");
+    g_signal_stop_emission_by_name (G_OBJECT (editable), "insert-text");
 
   g_free (pre);
   g_free (post);
@@ -225,7 +225,7 @@ delete_filter (GtkEditable *editable, gint start, gint end, gpointer data)
   str = g_strconcat (pre, post, NULL);
 
   if (!check_string (filter, str))
-    gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "delete-text");
+    g_signal_stop_emission_by_name (G_OBJECT (editable), "delete-text");
 
   g_free (pre);
   g_free (post);

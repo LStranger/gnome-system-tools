@@ -509,16 +509,16 @@ dialog_connect_signals (GstDialog *dialog, GstDialogSignal *signals, gboolean co
 			sig = g_signal_connect_after (G_OBJECT (w),
 						      signals[i].signal_name,
 						      G_CALLBACK (signals[i].func),
-						      (gpointer)dialog);
+						      dialog);
 		} else {
 			sig = g_signal_connect (G_OBJECT (w),
 						signals[i].signal_name,
 						G_CALLBACK (signals[i].func),
-						(gpointer)dialog);
+						dialog);
 		}
 		
-		if (!sig)
-			g_error (_("Error connection signal `%s' in widget `%s'"),
+		if (G_UNLIKELY (!sig))
+			g_error ("Error connecting signal `%s' in widget `%s'",
 				 signals[i].signal_name, signals[i].widget);
 	}
 }
