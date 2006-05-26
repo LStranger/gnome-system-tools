@@ -111,8 +111,8 @@ group_delete (GtkTreeModel *model, GtkTreePath *path)
 
 }
 
-static gid_t
-find_new_gid (void)
+gid_t
+group_settings_find_new_gid (void)
 {
 	OobsGroupsConfig *config;
 	OobsList *list;
@@ -167,7 +167,8 @@ group_settings_dialog_new (OobsGroup *group)
 		gtk_window_set_title (GTK_WINDOW (dialog), _("New group"));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), find_new_gid ());
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget),
+					   group_settings_find_new_gid ());
 	} else {
 		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (FALSE));
 

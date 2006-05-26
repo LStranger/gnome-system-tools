@@ -140,6 +140,10 @@ set_main_group (OobsUser *user)
 	gboolean valid;
 
 	main_group = oobs_user_get_main_group (user);
+
+	if (!main_group)
+		main_group = oobs_users_config_get_default_group (GST_USERS_TOOL (tool)->users_config);
+
 	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -159,7 +163,7 @@ set_main_group (OobsUser *user)
 }
 
 static OobsGroup*
-get_main_group (void)
+get_main_group (const gchar *name)
 {
 	GtkWidget *combo;
 	GtkTreeModel *model;
@@ -169,8 +173,26 @@ get_main_group (void)
 	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
-		return NULL;
+	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter)) {
+		/* create new group for the user */
+		OobsGroupsConfig *config;
+		OobsList *groups_list;
+		OobsListIter list_iter;
+
+		group = oobs_group_new (name);
+		oobs_group_set_gid (group, group_settings_find_new_gid ());
+
+		/* FIXME: this should be in a generic function */
+		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+		groups_list = oobs_groups_config_get_groups (config);
+		oobs_list_append (groups_list, &list_iter);
+		oobs_list_set (groups_list, &list_iter, group);
+
+		groups_table_add_group (group, &list_iter);
+		oobs_object_commit (OOBS_OBJECT (config));
+
+		return group;
+	}
 
 	gtk_tree_model_get (model, &iter,
 			    COL_GROUP_OBJECT, &group,
@@ -576,7 +598,7 @@ user_settings_dialog_get_data (OobsUser *user)
 		oobs_user_set_password (user, gtk_entry_get_text (GTK_ENTRY (widget)));
 	}
 
-	group = get_main_group ();
+	group = get_main_group (oobs_user_get_login_name (user));
 	oobs_user_set_main_group (user, group);
 
 	privileges_table_save (user);

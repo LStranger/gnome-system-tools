@@ -35,6 +35,7 @@ gboolean     group_settings_dialog_group_is_new (void);
 gint         group_settings_dialog_run          (GtkWidget    *dialog,
 						 OobsGroup    *group);
 
+gid_t        group_settings_find_new_gid        (void);
 void         group_settings_dialog_get_data     (OobsGroup    *group);
 
 
