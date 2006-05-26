@@ -55,7 +55,7 @@ struct NtpServer {
 	{ "tick.cs.unlv.edu", "Las Vegas, USA" },
 	{ "ntp2a.mcc.ac.uk", "England, Europe" },
 	{ "ntp2b.mcc.ac.uk", "England, Europe" },
-	{ "salmon.maths.tcd.ie", "Ireland, Europe" },
+	{ "ntp.maths.tcd.ie", "Ireland, Europe" },
 	{ "ntp.cs.strath.ac.uk", "Scotland, Europe" },
 	{ "bernina.ethz.ch", "Switzerland, Europe" },
 	{ "ntp.univ-lyon1.fr", "France, Europe" },
