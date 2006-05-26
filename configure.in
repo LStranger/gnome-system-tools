@@ -33,47 +33,6 @@ LIBGLADE_REQUIRED=2.4.0
 LIBGNOMEUI_REQUIRED=2.9.0
 GCONF_REQUIRED=2.2.0
 
-dnl =====================================================
-dnl search for su
-dnl =====================================================
-
-AC_PATH_PROG(SU_TOOL, su)
-if test x"${SU_TOOL}" = xno; then
-  AC_MSG_ERROR([su executable not found in your path - should be installed])
-else
-  AC_DEFINE_UNQUOTED(SU_PATH, "${SU_TOOL}", [su executable path])
-fi
-
-dnl =====================================================
-dnl END: search for su
-dnl =====================================================
-
-dnl =====================================================
-dnl search for ssh
-dnl =====================================================
-
-AC_PATH_PROG(SSH_TOOL, ssh)
-if test x"${SSH_TOOL}" = xno; then
-  AC_MSG_WARN([ssh executable not found in your path - should be installed if remote administration is desired])
-  AC_DEFINE_UNQUOTED(SSH_PATH, "", [ssh executable path])
-else
-  AC_DEFINE_UNQUOTED(SSH_PATH, "${SSH_TOOL}", [ssh executable path])
-fi
-
-dnl =====================================================
-dnl END: search for ssh
-dnl =====================================================
-
-dnl =====================================================
-dnl LibUtil checking
-dnl =====================================================
-
-AC_CHECK_LIB(util, forkpty, , [AC_MSG_ERROR(Libutil library ir required.)])
-AC_CHECK_HEADER(pty.h, )
-
-dnl =====================================================
-dnl END: LibUtil checking
-dnl =====================================================
 
 dnl =====================================================
 dnl Cracklib checking
@@ -102,10 +61,6 @@ dnl   if test "$withval" != "no"; then
 dnl     GST_CRACK_LIB_LOCATION=$withval
 dnl   fi
 dnl ])
-
-AC_CHECK_LIB(crypt, crypt, ,[
-   AC_MSG_ERROR(crypt library is required.)])
-AC_CHECK_HEADER(crypt.h,AC_DEFINE(HAVE_CRYPT_H, "", [whether it has crypt function]))
 dnl AC_SUBST(GST_CRACK_LIB_LOCATION)
 dnl GST_CRACK_LIB_CFLAGS="-DGST_CRACK_LIB_DICT_PATH=\"\\\"\$(GST_CRACK_LIB_LOCATION)\\\"\""
 dnl AC_SUBST(GST_CRACK_LIB_CFLAGS)
@@ -189,11 +144,8 @@ dnl END : Translations
 dnl ========================================================
 
 dnl ========================================================
-dnl Set SCRIPTS_DIR & PIXMAPS_DIR 
+dnl Set dirs
 dnl ========================================================
-
-AM_PATH_SYSTEM_TOOLS_BACKENDS($SYSTEM_TOOLS_BACKENDS_REQUIRED)
-AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "$STB_SCRIPTS_DIR", [System Tools backends dir])
 
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
@@ -211,12 +163,11 @@ else
   AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${prefix}/${DATADIRNAME}/control-center-2.0/capplets", [capplets directory])
 fi
 
-AC_SUBST(scriptsdir)
 AC_SUBST(pixmapsdir)
 AC_SUBST(interfacesdir)
 
 dnl ==============================================================
-dnl END: Set SCRIPTS_DIR & PIXMAPS_DIR 
+dnl END: Set dirs
 dnl ==============================================================
 
 dnl =====================================================
@@ -245,7 +196,7 @@ GST_DEPRECATED_FLAGS=""
 GST_LIBS="$GST_DEPENDS_LIBS"
 GST_CFLAGS="$GST_DEPENDS_CFLAGS $GST_CRACK_LIB_CFLAGS $GST_DEPRECATED_FLAGS"
 
-GST_TOOL_LIBS="$GST_LIBS -lutil \$(top_builddir)/src/common/libsetuptool.a"
+GST_TOOL_LIBS="$GST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
 GST_TOOL_CFLAGS="$GST_CFLAGS -I\$(top_srcdir)/src/common"
 
 GST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
@@ -289,7 +240,6 @@ doc/services/nl/Makefile
 doc/time/Makefile
 doc/time/nl/Makefile
 doc/users/Makefile
-gnome-system-tools.spec
 interfaces/Makefile
 pixmaps/Makefile
 src/Makefile
@@ -318,8 +268,6 @@ gnome-system-tools.pc
 echo "
 
 Configuration (GST):
-	Boot tool:         ${enable_boot}
-	Disks tool:        ${enable_disks}
 	Services tool:     ${enable_services}
 	Users tool:        ${enable_users}
 	Network tool:      ${enable_network}
