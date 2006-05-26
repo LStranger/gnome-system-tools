@@ -179,7 +179,6 @@ ifaces_list_create (GstTool *tool)
 
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
   gtk_tree_view_set_model (GTK_TREE_VIEW (table), model);
-  g_object_unref (G_OBJECT (model));
 
   gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (GTK_LIST_STORE (model)),
 					   ifaces_list_sort,
