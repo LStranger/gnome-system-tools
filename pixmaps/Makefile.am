@@ -1,11 +1,7 @@
 pixmaps_DATA = \
 	16_ethernet.xpm           \
-	16_loopback.xpm           \
-	16_ppp.xpm                \
-	16_plip.xpm               \
 	archlinux.png		  \
 	black_panther.png         \
-	computer.png              \
 	conectiva.png		  \
 	connection-ethernet.png   \
 	connection-modem.png      \
@@ -17,36 +13,19 @@ pixmaps_DATA = \
 	gentoo.png                \
 	gnome-dev-cdrom-data.png  \
 	gnome-dev-cdrom-mixed.png \
-	irda-16.png               \
 	irda-48.png               \
 	mandrake.png              \
-	nameresolution.png        \
-	nameresolution_alias.png  \
-	nameresolution_id.png     \
-	network.png               \
 	openna.png                \
 	pld.png                   \
 	plip-48.png               \
 	ppp.png                   \
-	reading.png               \
 	redhat.png                \
-	server.png                \
-	services.png		  \
-	settings.png              \
-	shares.png                \
 	slackware.png             \
 	specifix.png              \
 	suse.png                  \
-	talk-userlist.png         \
-	time.png                  \
-	timezone.png              \
 	turbolinux.png            \
-	unsupported-distro.png    \
-	users-groups.png          \
-	users.png                 \
 	vidalinux.png		  \
 	vine.png                  \
-	wavelan-16.png            \
 	wavelan-48.png            \
 	world_map-960.png 
 
