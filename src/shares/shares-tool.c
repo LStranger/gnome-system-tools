@@ -155,7 +155,7 @@ gst_shares_tool_new (void)
 {
 	return g_object_new (GST_TYPE_SHARES_TOOL,
 			     "name", "shares",
-			     "title", _("Shared folder settings"),
+			     "title", _("Shared Folders"),
 			     "icon", "gnome-fs-share",
 			     NULL);
 }
