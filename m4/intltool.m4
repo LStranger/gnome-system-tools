@@ -23,7 +23,7 @@
 ## the same distribution terms that you use for the rest of that program.
 
 dnl IT_PROG_INTLTOOL([MINIMUM-VERSION], [no-xml])
-# serial 34 IT_PROG_INTLTOOL
+# serial 35 IT_PROG_INTLTOOL
 AC_DEFUN([IT_PROG_INTLTOOL],
 [AC_PREREQ([2.50])dnl
 
