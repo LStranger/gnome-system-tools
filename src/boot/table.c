@@ -74,6 +74,7 @@ boot_popup_menu_create (GtkTreeView *treeview)
         g_return_val_if_fail (treeview != NULL, NULL);
 
         action_group = gtk_action_group_new ("MenuActions");
+	gtk_action_group_set_translation_domain (action_group, NULL);
         gtk_action_group_add_actions (action_group,
                                       popup_menu_items,
                                       G_N_ELEMENTS (popup_menu_items), treeview);
