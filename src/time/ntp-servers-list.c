@@ -83,7 +83,7 @@ struct NtpServer {
 	{ "stdtime.gov.hk", "Hong Kong, China" },
 	{ "clock.cuhk.edu.hk", "Hong Kong, China" },
 	{ "time.ien.it", "Torino, Italy" },
-	{ "clock.tl.fukuoka-u.ac.jp", "Fukuoka, Japan" },
+	{ "ntp.jst.mfeed.ad.jp", "Japan" },
 	{ "cronos.cenam.mx", "Queretaro, Mexico" },
 	{ "ntp0.nl.net", "Amsterdam, The Netherlands" },
 	{ "ntp1.nl.net", "Amsterdam, The Netherlands" },
