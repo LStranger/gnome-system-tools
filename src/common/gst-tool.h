@@ -47,6 +47,7 @@ struct _GstTool {
 
 	gchar *name;
 	gchar *title;
+	gchar *icon;
 
 	OobsSession *session;
 	GConfClient *gconf_client;
@@ -102,8 +103,6 @@ GType        gst_tool_get_type            (void);
 void         gst_init                     (const gchar *app_name,
 					   int argc, char *argv [],
 					   GOptionEntry *entries);
-
-GObject     *gst_tool_new                 (const gchar *name, const gchar *title);
 
 gboolean     gst_tool_is_authenticated    (GstTool *tool);
 

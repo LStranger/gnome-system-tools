@@ -90,10 +90,11 @@ static const gchar* gst_tool_run_platform_dialog (GstTool *tool);
 enum {
 	PROP_0,
 	PROP_NAME,
-	PROP_TITLE
+	PROP_TITLE,
+	PROP_ICON
 };
 
-G_DEFINE_TYPE (GstTool, gst_tool, G_TYPE_OBJECT);
+G_DEFINE_ABSTRACT_TYPE (GstTool, gst_tool, G_TYPE_OBJECT);
 
 /* FIXME
 static GstReportHookEntry common_report_hooks[] = {
@@ -133,6 +134,13 @@ gst_tool_class_init (GstToolClass *class)
 					 g_param_spec_string ("title",
 							      "title",
 							      "Tool title",
+							      NULL,
+							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+	g_object_class_install_property (object_class,
+					 PROP_ICON,
+					 g_param_spec_string ("icon",
+							      "icon",
+							      "Tool icon",
 							      NULL,
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
 	signals[UPDATE_GUI] =
@@ -177,8 +185,6 @@ gst_tool_init (GstTool *tool)
 	GdkPixbuf *pixbuf;
 	GladeXML  *xml;
 
-	tool->name = NULL;
-	tool->title = NULL;
 	tool->icon_theme = gtk_icon_theme_get_default ();
 	tool->glade_common_path  = INTERFACES_DIR "/common.glade";
 
@@ -247,7 +253,7 @@ gst_tool_constructor (GType                  type,
 {
 	GObject *object;
 	GstTool *tool;
-	gchar *pixmap_path, *widget_name;
+	gchar *widget_name;
 	const gchar *platform;
 	GtkWidget *dialog;
 
@@ -256,17 +262,18 @@ gst_tool_constructor (GType                  type,
 									  construct_params);
 	tool = GST_TOOL (object);
 
+	if (tool->title)
+		g_set_application_name (tool->title);
+
+	if (tool->icon)
+		gtk_window_set_default_icon_name (tool->icon);
+
 	if (tool->name) {
 		tool->glade_path = g_strdup_printf (INTERFACES_DIR "/%s.glade", tool->name);
 
 		widget_name = g_strdup_printf ("%s_admin", tool->name);
-		pixmap_path = g_strdup_printf (PIXMAPS_DIR "/%s.png", tool->name);
-
 		tool->main_dialog = gst_dialog_new (tool, widget_name, tool->title);
-		gtk_window_set_default_icon_from_file (pixmap_path, NULL);
-
 		g_free (widget_name);
-		g_free (pixmap_path);
 	}
 
 	if (!oobs_session_get_platform (tool->session)) {
@@ -293,6 +300,9 @@ gst_tool_set_property (GObject      *object,
 	case PROP_TITLE:
 		tool->title = g_value_dup_string (value);
 		break;
+	case PROP_ICON:
+		tool->icon = g_value_dup_string (value);
+		break;
 	}
 }
 
@@ -308,15 +318,6 @@ gst_tool_close (GstTool *tool)
 {
 	/* FIXME: add things to do when closing the tool */
 	gtk_main_quit ();
-}
-
-GObject*
-gst_tool_new (const gchar *name, const gchar *title)
-{
-	return g_object_new (GST_TYPE_TOOL,
-			     "name",  name,
-			     "title", title,
-			     NULL);
 }
 
 void
