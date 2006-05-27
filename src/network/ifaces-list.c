@@ -96,6 +96,7 @@ popup_menu_create (GtkWidget *widget)
   GtkWidget      *popup;
 
   action_group = gtk_action_group_new ("MenuActions");
+  gtk_action_group_set_translation_domain (action_group, NULL);
   gtk_action_group_add_actions (action_group, popup_menu_items, G_N_ELEMENTS (popup_menu_items), widget);
 
   ui_manager = gtk_ui_manager_new ();
