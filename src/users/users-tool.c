@@ -153,5 +153,6 @@ gst_users_tool_new (void)
 	return g_object_new (GST_TYPE_USERS_TOOL,
 			     "name", "users",
 			     "title", _("Users settings"),
+			     "icon", "config-users",
 			     NULL);
 }
