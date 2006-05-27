@@ -46,7 +46,7 @@ share_settings_clear_dialog (void)
 	gtk_entry_set_text (GTK_ENTRY (widget), "");
 
         widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_readonly");
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 
 	/* NFS widgets */
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_nfs_acl");
