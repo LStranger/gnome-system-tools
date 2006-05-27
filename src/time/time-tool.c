@@ -367,6 +367,7 @@ gst_time_tool_new (void)
 	return g_object_new (GST_TYPE_TIME_TOOL,
 			     "name", "time",
 			     "title", _("Time and Date Settings"),
+			     "icon", "config-date",
 			     NULL);
 }
 
