@@ -41,7 +41,7 @@ connection_set_config_method (GstConnectionDialog          *dialog,
 			      OobsIfaceConfigurationMethod  config_method)
 {
   gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->bootproto_combo),
-			    (config_method == OOBS_METHOD_DHCP) ? 1 : 0);
+			    (config_method == OOBS_METHOD_DHCP) ? 0 : 1);
 }
 
 static OobsIfaceConfigurationMethod
@@ -50,7 +50,7 @@ connection_get_config_method (GstConnectionDialog *dialog)
   gint ret;
 
   ret = gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->bootproto_combo));
-  return (ret == 0) ? OOBS_METHOD_STATIC : OOBS_METHOD_DHCP;
+  return (ret == 1) ? OOBS_METHOD_STATIC : OOBS_METHOD_DHCP;
 }
 
 /* FIXME
