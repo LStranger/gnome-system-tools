@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-18 23:20+0200\n"
-"PO-Revision-Date: 2006-05-19 09:55+0530\n"
+"POT-Creation-Date: 2006-05-29 06:58+0200\n"
+"PO-Revision-Date: 2006-05-29 11:54+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -273,7 +274,8 @@ msgstr ""
 msgid "Enter Password"
 msgstr "પાસવર્ડ દાખલ કરો"
 
-#: ../interfaces/common.glade.in.h:4
+#. label
+#: ../interfaces/common.glade.in.h:4 ../src/common/gst-platform-dialog.c:224
 msgid ""
 "If you know for sure that it works like one of the platforms listed below, "
 "you can select that and continue. Note, however, that this might damage the "
@@ -296,10 +298,6 @@ msgid "Unsupported Platform"
 msgstr "બિન આધારિત પ્લેટફોર્મ"
 
 #: ../interfaces/common.glade.in.h:8
-msgid "Use this window to select the computer you wish to configure"
-msgstr "તમે જે કમ્પ્યૂટરનું રુપરેખાંકન કરવા માંગતા હોય તે પસંદ કરવા માટે આ વિન્ડો વાપરો."
-
-#: ../interfaces/common.glade.in.h:9
 msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
 "modify\n"
@@ -308,123 +306,129 @@ msgstr ""
 "આ સાધન વાપરવા માટે તમારી પાસે સંચાલક વિશેષાધિકારોની જરૂર છે. તમારું સિસ્ટમ રૂપરેખાંકન\n"
 "સુધારવા માટે પાસવર્ડ દાખલ કરો."
 
-#: ../interfaces/common.glade.in.h:11
+#: ../interfaces/common.glade.in.h:10
 msgid "_Password:"
 msgstr "પાસવર્ડ (_P):"
 
 #: ../interfaces/network.glade.in.h:1
+msgid ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3"
+msgstr ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3"
+
+#: ../interfaces/network.glade.in.h:6
 msgid "<b>Account data</b>"
 msgstr "<b>ખાતા માહિતી</b>"
 
-#: ../interfaces/network.glade.in.h:2
+#: ../interfaces/network.glade.in.h:7
 msgid "<b>Connection settings</b>"
 msgstr "<b>જોડાણ સુયોજનો</b>"
 
-#: ../interfaces/network.glade.in.h:3
-msgid "<b>Connection</b>"
-msgstr "<b>જોડાણ</b>"
-
-#: ../interfaces/network.glade.in.h:4
+#: ../interfaces/network.glade.in.h:8
 msgid "<b>DNS Servers</b>"
 msgstr "<b>DNS સર્વરો</b>"
 
-#: ../interfaces/network.glade.in.h:5
+#: ../interfaces/network.glade.in.h:9
 msgid "<b>Host Settings</b>"
 msgstr "<b>યજમાન સુયોજનો</b>"
 
-#: ../interfaces/network.glade.in.h:6
+#: ../interfaces/network.glade.in.h:10
 msgid "<b>Internet service provider data</b>"
 msgstr "<b>ઈન્ટરનેટ સેવા પૂરી પાડનાર માહિતી</b>"
 
-#: ../interfaces/network.glade.in.h:7
+#: ../interfaces/network.glade.in.h:11
 msgid "<b>Modem settings</b>"
 msgstr "<b>મોડેમ સુયોજનો</b>"
 
-#: ../interfaces/network.glade.in.h:8
+#: ../interfaces/network.glade.in.h:12
 msgid "<b>Search Domains</b>"
 msgstr "<b>શોધ ડોમેઈનો</b>"
 
-#: ../interfaces/network.glade.in.h:9
+#: ../interfaces/network.glade.in.h:13
 msgid "<b>Wireless settings</b>"
 msgstr "<b>વાયરલેસ સુયોજનો</b>"
 
-#: ../interfaces/network.glade.in.h:10
+#: ../interfaces/network.glade.in.h:14
+msgid "Add location"
+msgstr "જગ્યા ઉમેરો"
+
+#: ../interfaces/network.glade.in.h:15
 msgid "Aliases:"
 msgstr "ઉપનામો:"
 
-#: ../interfaces/network.glade.in.h:11
+#: ../interfaces/network.glade.in.h:16
 msgid "C_onfiguration:"
 msgstr "રુપરેખાંકન (_o):"
 
-#: ../interfaces/network.glade.in.h:12
+#: ../interfaces/network.glade.in.h:17
 msgid "Connections"
 msgstr "જોડાણો"
 
-#: ../interfaces/network.glade.in.h:13
+#: ../interfaces/network.glade.in.h:18
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:14
+#: ../interfaces/network.glade.in.h:19
 msgid "D_omain name:"
 msgstr "ડોમેઈન નામ (_o):"
 
-#: ../interfaces/network.glade.in.h:15
+#: ../interfaces/network.glade.in.h:20
 msgid "Default _gateway device:"
 msgstr "મૂળભુત ગેટવે ઉપકરણ (_g):"
 
-#: ../interfaces/network.glade.in.h:16
-msgid "Device:"
-msgstr "ઉપકરણ:"
-
-#: ../interfaces/network.glade.in.h:17
+#: ../interfaces/network.glade.in.h:21
 msgid "E_nable this connection"
 msgstr "આ જોડાણ સક્રિય કરો (_n)"
 
-#: ../interfaces/network.glade.in.h:18 ../interfaces/users.glade.in.h:21
+#: ../interfaces/network.glade.in.h:22 ../interfaces/users.glade.in.h:20
 msgid "General"
 msgstr "સામાન્ય"
 
-#: ../interfaces/network.glade.in.h:19
+#: ../interfaces/network.glade.in.h:23
 msgid "Host alias settings"
 msgstr "યજમાન ઉપનામ સુયોજનો"
 
-#: ../interfaces/network.glade.in.h:20
+#: ../interfaces/network.glade.in.h:24
 msgid "Hosts"
 msgstr "યજમાનો"
 
-#: ../interfaces/network.glade.in.h:21 ../interfaces/shares.glade.in.h:15
+#: ../interfaces/network.glade.in.h:25 ../interfaces/shares.glade.in.h:12
 msgid "IP address:"
 msgstr "IP સરનામું:"
 
-#: ../interfaces/network.glade.in.h:22
-msgid "Interface name:"
-msgstr "ઈન્ટરફેસ નામ:"
-
-#: ../interfaces/network.glade.in.h:23
+#: ../interfaces/network.glade.in.h:26
 msgid "Interface properties"
 msgstr "ઈન્ટરફેસ ગુણધર્મો"
 
-#: ../interfaces/network.glade.in.h:24
-msgid "Key _type:"
-msgstr "કી પ્રકાર (_t):"
-
-#: ../interfaces/network.glade.in.h:25
+#: ../interfaces/network.glade.in.h:27
 msgid "Location name:"
 msgstr "જગ્યાનું નામ:"
 
-#: ../interfaces/network.glade.in.h:26
+#: ../interfaces/network.glade.in.h:28
 msgid "Location:"
 msgstr "જગ્યા:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.glade.in.h:29
 msgid "Modem"
 msgstr "મોડેમ"
 
-#: ../interfaces/network.glade.in.h:28
+#: ../interfaces/network.glade.in.h:30
+msgid "Network _password:"
+msgstr "નેટવર્ક પાસવર્ડ (_p):"
+
+#: ../interfaces/network.glade.in.h:31
 msgid "Network name (_ESSID):"
 msgstr "નેટવર્ક નામ (_ESSID):"
 
-#: ../interfaces/network.glade.in.h:29
+#: ../interfaces/network.glade.in.h:32
 msgid ""
 "Off\n"
 "Low\n"
@@ -436,15 +440,19 @@ msgstr ""
 "મધ્યમ\n"
 "મોટું"
 
-#: ../interfaces/network.glade.in.h:33
+#: ../interfaces/network.glade.in.h:36
 msgid "Options"
 msgstr "વિકલ્પો"
 
-#: ../interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:37
 msgid "P_assword"
 msgstr "પાસવર્ડ (_a)"
 
-#: ../interfaces/network.glade.in.h:35
+#: ../interfaces/network.glade.in.h:38
+msgid "Password _type:"
+msgstr "પાસવર્ડ પ્રકાર (_t):"
+
+#: ../interfaces/network.glade.in.h:39
 msgid ""
 "Plain (ASCII)\n"
 "Hexadecimal"
@@ -452,11 +460,15 @@ msgstr ""
 "સાદું (ASCII)\n"
 "હેક્ઝાડેસીમલ"
 
-#: ../interfaces/network.glade.in.h:37
+#: ../interfaces/network.glade.in.h:41
+msgid "Remove location"
+msgstr "જગ્યા દૂર કરો"
+
+#: ../interfaces/network.glade.in.h:42
 msgid "Select location name"
 msgstr "જગ્યાનું નામ પસંદ કરો"
 
-#: ../interfaces/network.glade.in.h:38
+#: ../interfaces/network.glade.in.h:43
 msgid ""
 "Static IP address\n"
 "DHCP"
@@ -464,7 +476,7 @@ msgstr ""
 "સ્ટેટિક IP સરનામું\n"
 "DHCP"
 
-#: ../interfaces/network.glade.in.h:40
+#: ../interfaces/network.glade.in.h:45
 msgid ""
 "Tones\n"
 "Pulses"
@@ -472,79 +484,75 @@ msgstr ""
 "ટોન\n"
 "પલ્સ"
 
-#: ../interfaces/network.glade.in.h:42
+#: ../interfaces/network.glade.in.h:47
 msgid "Use the Internet service provider nameservers"
 msgstr "ઈન્ટરનેટ સેવા પૂરી પાડનાર નામસર્વરો વાપરો"
 
-#: ../interfaces/network.glade.in.h:43
-msgid "WEP _key:"
-msgstr "WEP કી (_k):"
-
-#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
+#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:33
 msgid "_Activate"
 msgstr "ક્રિયાશીલ કરો (_A)"
 
-#: ../interfaces/network.glade.in.h:45
+#: ../interfaces/network.glade.in.h:49
 msgid "_Autodetect"
 msgstr "આપોઆપ શોધો (_A)"
 
-#: ../interfaces/network.glade.in.h:46 ../src/network/ifaces-list.c:35
+#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:34
 msgid "_Deactivate"
 msgstr "નિષ્ક્રિય (_D)"
 
-#: ../interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:51
 msgid "_Dial prefix:"
 msgstr "ડાયલ પૂર્વગ (_D):"
 
-#: ../interfaces/network.glade.in.h:48
+#: ../interfaces/network.glade.in.h:52
 msgid "_Dial type:"
 msgstr "ડાયલ પ્રકાર (_D):"
 
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:53
 msgid "_Gateway address:"
 msgstr "ગેટવે સરનામુ (_G):"
 
-#: ../interfaces/network.glade.in.h:50
-msgid "_Hostname:"
-msgstr "યજમાનનું નામ (_H):"
+#: ../interfaces/network.glade.in.h:54
+msgid "_Host name:"
+msgstr "યજમાન નામ (_H):"
 
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.glade.in.h:55
 msgid "_IP address:"
 msgstr "_IP સરનામુ:"
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.glade.in.h:56
 msgid "_Local IP:"
 msgstr "સ્થાનિક IP (_L):"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.glade.in.h:57
 msgid "_Modem port:"
 msgstr "મોડેમ પોર્ટ (_M):"
 
-#: ../interfaces/network.glade.in.h:54
+#: ../interfaces/network.glade.in.h:58
 msgid "_Phone number:"
 msgstr "ફોન નંબર (_P):"
 
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.glade.in.h:59
 msgid "_Remote IP:"
 msgstr "દૂરસ્થ IP (_R):"
 
-#: ../interfaces/network.glade.in.h:56
+#: ../interfaces/network.glade.in.h:60
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "જો જોડાણો ભાંગી પડે અથવા શરુ થવામાં નિષ્ફળ જાય તો ફરીથી પ્રયત્ન કરો (_R)"
 
-#: ../interfaces/network.glade.in.h:57
+#: ../interfaces/network.glade.in.h:61
 msgid "_Set modem as default route to internet"
 msgstr "મોડેમને ઈન્ટરનેટના મૂળભુત માર્ગ તરીકે સુયોજિત કરો (_S)"
 
-#: ../interfaces/network.glade.in.h:58
+#: ../interfaces/network.glade.in.h:62
 msgid "_Subnet mask:"
 msgstr "સબનેટ માસ્ક (_S):"
 
-#: ../interfaces/network.glade.in.h:59 ../interfaces/users.glade.in.h:61
+#: ../interfaces/network.glade.in.h:63 ../interfaces/users.glade.in.h:57
 msgid "_Username:"
 msgstr "વપરાશકર્તા નામ (_U):"
 
-#: ../interfaces/network.glade.in.h:60
+#: ../interfaces/network.glade.in.h:64
 msgid "_Volume:"
 msgstr "અવાજ (_V):"
 
@@ -557,110 +565,91 @@ msgid "Select the services that you wish to activate:"
 msgstr "સેવાઓ પસંદ કરો કે જે તમે સક્રિય કરવા માંગો છો:"
 
 #: ../interfaces/shares.glade.in.h:1
-msgid "<b>Allowed hosts</b>"
+msgid "<b>Allowed Hosts</b>"
 msgstr "<b>માન્ય યજમાનો</b>"
 
 #: ../interfaces/shares.glade.in.h:2
-msgid "<b>Hosts settings</b>"
+msgid "<b>Hosts Settings</b>"
 msgstr "<b>યજમાનો સુયોજનો</b>"
 
 #: ../interfaces/shares.glade.in.h:3
-msgid "<b>Share properties</b>"
+msgid "<b>Share Froperties</b>"
 msgstr "<b>વહેંચાયેલના ગુણધર્મો</b>"
 
 #: ../interfaces/shares.glade.in.h:4
-msgid "<b>Shared folder</b>"
+msgid "<b>Shared Folder</b>"
 msgstr "<b>વહેંચાયેલ ફોલ્ડર</b>"
 
 #: ../interfaces/shares.glade.in.h:5
-msgid "<b>WINS server</b>"
-msgstr "<b>WINS સર્વર</b>"
+msgid "<b>Windows sharing</b>"
+msgstr "<b>વિન્ડો વહેંચણી</b>"
 
 #: ../interfaces/shares.glade.in.h:6
-msgid "<b>Windows sharing Settings</b>"
-msgstr "<b>સુયોજનો વહેંચતી વિન્ડો</b>"
-
-#: ../interfaces/shares.glade.in.h:7
 msgid "Add allowed hosts"
 msgstr "માન્ય યજમાનોને ઉમેરો"
 
-#: ../interfaces/shares.glade.in.h:8
-msgid "Allow _browsing folder"
-msgstr "ફોલ્ડર શોધવાની પરવાનગી આપો (_b)"
-
-#: ../interfaces/shares.glade.in.h:9
+#: ../interfaces/shares.glade.in.h:7
 msgid "Allowed hosts:"
 msgstr "માન્ય યજમાનો:"
 
-#: ../interfaces/shares.glade.in.h:10
+#: ../interfaces/shares.glade.in.h:8
 msgid "Comment:"
 msgstr "ટિપ્પળી:"
 
+#: ../interfaces/shares.glade.in.h:9
+msgid "Domain / _Workgroup:"
+msgstr "ડોમેઇન / કામ કરનારોનું જૂથ (_W):"
+
+#: ../interfaces/shares.glade.in.h:10
+msgid "General Properties"
+msgstr "સામાન્ય ગુણધર્મો"
+
 #: ../interfaces/shares.glade.in.h:11
-msgid "Do not use WINS server"
-msgstr "WINS સર્વર વાપરશો નહિં"
-
-#: ../interfaces/shares.glade.in.h:12
-msgid "Domain / _Workgroup"
-msgstr "ડોમેઇન / કામ કરનારોનું જૂથ (_W)"
-
-#: ../interfaces/shares.glade.in.h:13
-msgid "General Windows sharing settings"
-msgstr "સામાન્ય વિન્ડો સુયોજનો વહેંચી રહી છે"
-
-#: ../interfaces/shares.glade.in.h:14
 msgid "Host name:"
 msgstr "યજમાન નામ:"
 
-#: ../interfaces/shares.glade.in.h:16
+#: ../interfaces/shares.glade.in.h:13
 msgid "Name:"
 msgstr "નામ:"
 
-#: ../interfaces/shares.glade.in.h:17
+#: ../interfaces/shares.glade.in.h:14
 msgid "Netmask:"
 msgstr "નેટમાસ્ક:"
 
-#: ../interfaces/shares.glade.in.h:18
+#: ../interfaces/shares.glade.in.h:15
 msgid "Network:"
 msgstr "નેટવર્ક:"
 
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
+#: ../interfaces/shares.glade.in.h:16 ../src/shares/nfs-acl-table.c:56
 msgid "Read only"
 msgstr "માત્ર વાંચી શકાય તેવું"
 
-#: ../interfaces/shares.glade.in.h:20
+#: ../interfaces/shares.glade.in.h:17
 msgid "Share folder"
 msgstr "ફોલ્ડર વહેંચો"
 
-#: ../interfaces/shares.glade.in.h:21
+#: ../interfaces/shares.glade.in.h:18
 msgid "Share with:"
 msgstr "ની સાથે વહેંચો:"
 
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/shares.desktop.in.in.h:2
+#: ../src/shares/shares-tool.c:158
+msgid "Shared Folders"
+msgstr "વહેંચાયેલ ફોલ્ડરો"
+
+#: ../interfaces/shares.glade.in.h:20
+msgid "This computer is a _WINS server"
+msgstr "આ કમ્પ્યૂટર એ _WINS સર્વર છે"
+
+#: ../interfaces/shares.glade.in.h:21
+msgid "WINS _server:"
+msgstr "WINS સર્વર (_s):"
+
 #: ../interfaces/shares.glade.in.h:22
-msgid "This computer is a WINS server"
-msgstr "આ કમ્પ્યૂટર એ WINS સર્વર છે"
-
-#: ../interfaces/shares.glade.in.h:23
-msgid "Use WINS Server"
-msgstr "WINS સર્વર વાપરો"
-
-#: ../interfaces/shares.glade.in.h:24
-msgid "Windows sharing settings"
-msgstr "સુયોજનો વહેંચતી વિન્ડો"
-
-#: ../interfaces/shares.glade.in.h:25
-msgid "_Add host"
-msgstr "યજમાન ઉમેરો (_A)"
-
-#: ../interfaces/shares.glade.in.h:26
-msgid "_Host description:"
-msgstr "યજમાન વર્ણન (_H):"
-
-#: ../interfaces/shares.glade.in.h:27
 msgid "_Path:"
 msgstr "પથ (_P):"
 
-#: ../interfaces/shares.glade.in.h:28
+#: ../interfaces/shares.glade.in.h:23
 msgid "_Read only"
 msgstr "માત્ર વાંચી શકાય તેવું (_R)"
 
@@ -677,7 +666,7 @@ msgid "<b>Selection</b>"
 msgstr "<b>પસંદગી</b>"
 
 #: ../interfaces/time.glade.in.h:4
-msgid "<b>Time zone</b>"
+msgid "<b>Time Zone</b>"
 msgstr "<b>ટાઈમ ઝોન</b>"
 
 #: ../interfaces/time.glade.in.h:5
@@ -693,8 +682,8 @@ msgid "S_ynchronize clock with Internet servers:"
 msgstr "ઈન્ટરનેટ સર્વરો સાથે ઘડિયાળને સુમેળ કરો (_y):"
 
 #: ../interfaces/time.glade.in.h:8
-msgid "Se_lect Servers..."
-msgstr "સર્વરો પસંદ કરો (_l)..."
+msgid "Se_lect Servers"
+msgstr "સર્વરો પસંદ કરો (_l)"
 
 #: ../interfaces/time.glade.in.h:9
 msgid "Time servers"
@@ -769,192 +758,176 @@ msgid "Advanced"
 msgstr "ઉન્નત"
 
 #: ../interfaces/users.glade.in.h:14
-msgid "Allow user to:"
-msgstr "વપરાશકર્તાઓને આમ કરવા માટે પરવાનગી આપો:"
-
-#: ../interfaces/users.glade.in.h:15
 msgid "Assign a random password by default"
 msgstr "મૂળભુત રીતે કોઈપણ પાસવર્ડ આપો"
 
-#: ../interfaces/users.glade.in.h:16
+#: ../interfaces/users.glade.in.h:15
 msgid "Check password _quality"
 msgstr "પાસવર્ડની ગુણવત્તા ચકાસો (_q)"
 
-#: ../interfaces/users.glade.in.h:17
+#: ../interfaces/users.glade.in.h:16
 msgid "Con_firmation:"
 msgstr "ખાતરી (_f):"
 
-#: ../interfaces/users.glade.in.h:18
+#: ../interfaces/users.glade.in.h:17
 msgid "Days between warning and password expiration:"
 msgstr "ચેતવણી અને પાસવર્ડ પૂરો થઈ જવાના વચ્ચેના દિવસો:"
 
-#: ../interfaces/users.glade.in.h:19
+#: ../interfaces/users.glade.in.h:18
 msgid "Default _group:"
 msgstr "મૂળભુત જૂથ (_g):"
 
-#: ../interfaces/users.glade.in.h:20
+#: ../interfaces/users.glade.in.h:19
 msgid "Default _shell:"
 msgstr "મૂળભુત શેલ (_s):"
 
-#: ../interfaces/users.glade.in.h:22
+#: ../interfaces/users.glade.in.h:21
 msgid "Generate _random password"
 msgstr "રેન્ડમ પાસવર્ડ બનાવો (_r)"
 
-#: ../interfaces/users.glade.in.h:23
+#: ../interfaces/users.glade.in.h:22
 msgid "Group _ID:"
 msgstr "જૂથ _ID:"
 
-#: ../interfaces/users.glade.in.h:24
-msgid "Group _members:"
-msgstr "જૂથના સભ્યો (_m):"
-
-#: ../interfaces/users.glade.in.h:25
+#: ../interfaces/users.glade.in.h:23
 msgid "Group _name:"
 msgstr "જૂથ નામ (_n):"
 
-#: ../interfaces/users.glade.in.h:26
+#: ../interfaces/users.glade.in.h:24
 msgid "Group properties"
 msgstr "જૂથના ગુણધર્મો"
 
-#: ../interfaces/users.glade.in.h:27
-msgid "Groups"
-msgstr "જૂથો"
+#: ../interfaces/users.glade.in.h:25
+msgid "Groups settings"
+msgstr "જૂથ સુયોજનો"
 
-#: ../interfaces/users.glade.in.h:28
+#: ../interfaces/users.glade.in.h:26
 msgid "Ma_ximum days a password may be used:"
 msgstr "મહત્તમ દિવસો કે જ્યાં સુધી પાસવર્ડ વાપરી શકાશે (_x):"
 
-#: ../interfaces/users.glade.in.h:29
+#: ../interfaces/users.glade.in.h:27
 msgid "Maximum UID:"
 msgstr "મહત્તમ UID:"
 
-#: ../interfaces/users.glade.in.h:30
+#: ../interfaces/users.glade.in.h:28
 msgid "Mi_nimum days between password changes:"
 msgstr "પાસવર્ડ બદલાયા વચ્ચેના ન્યુનતમ દિવસો (_n):"
 
-#: ../interfaces/users.glade.in.h:31
+#: ../interfaces/users.glade.in.h:29
 msgid "Minimum GID:"
 msgstr "ન્યુનતમ GID:"
 
-#: ../interfaces/users.glade.in.h:32
+#: ../interfaces/users.glade.in.h:30
 msgid "Minimum UID:"
 msgstr "ન્યુનતમ UID:"
 
-#: ../interfaces/users.glade.in.h:33
+#: ../interfaces/users.glade.in.h:31
 msgid "Minimum days allowed between password changes:"
 msgstr "પાસવર્ડ બદલ્યા પછીના માન્ય ન્યુનતમ દિવસો:"
 
-#: ../interfaces/users.glade.in.h:34
+#: ../interfaces/users.glade.in.h:32
 msgid "Number of days that a password may be used:"
 msgstr "પાસવર્ડ વપરાશે ત્યાં સુધીના દિવસોની સંખ્યા:"
 
-#: ../interfaces/users.glade.in.h:35
+#: ../interfaces/users.glade.in.h:33
 msgid "O_ffice location:"
 msgstr "ઓફિસની જગ્યા (_f):"
 
-#: ../interfaces/users.glade.in.h:36
+#: ../interfaces/users.glade.in.h:34
 msgid "Password set to: "
 msgstr "પાસવર્ડ આને સુયોજિત થયો છે: "
 
-#: ../interfaces/users.glade.in.h:37
+#: ../interfaces/users.glade.in.h:35
 msgid "Privileges"
 msgstr "વિશેષાધિકારો"
 
-#: ../interfaces/users.glade.in.h:38
+#: ../interfaces/users.glade.in.h:36
 msgid "Profile _name:"
 msgstr "રુપરેખાનું નામ (_n):"
 
-#: ../interfaces/users.glade.in.h:39
+#: ../interfaces/users.glade.in.h:37
 msgid "Set password b_y hand"
 msgstr "હાથથી પાસવર્ડ સુયોજિત કરો (_y)"
 
+#: ../interfaces/users.glade.in.h:38
+msgid "User ID:"
+msgstr "વપરાશકર્તા ID:"
+
+#: ../interfaces/users.glade.in.h:39
+msgid "User Privileges"
+msgstr "વપરાશકર્તા વિશેષાધિકારો"
+
 #: ../interfaces/users.glade.in.h:40
-msgid "Show a_ll users and groups"
-msgstr "બધા વપરાશકર્તાઓ અને જૂથો બતાવો (_l)"
-
-#: ../interfaces/users.glade.in.h:41
-msgid "User _ID:"
-msgstr "વપરાશકર્તા _ID:"
-
-#: ../interfaces/users.glade.in.h:42
 msgid "User _password:"
 msgstr "વપરાશકર્તા પાસવર્ડ (_p):"
 
-#: ../interfaces/users.glade.in.h:43
-msgid "User privileges"
-msgstr "વપરાશકર્તા વિશેષાધિકારો"
-
-#: ../interfaces/users.glade.in.h:44
+#: ../interfaces/users.glade.in.h:41
 msgid "User profiles"
 msgstr "વપરાશકર્તા રુપરેખાઓ"
 
+#: ../interfaces/users.glade.in.h:42
+msgid "_Add Group"
+msgstr "જૂથ ઉમેરો (_A)"
+
+#: ../interfaces/users.glade.in.h:43
+msgid "_Add Profile"
+msgstr "રુપરેખા ઉમેરો (_A)"
+
+#: ../interfaces/users.glade.in.h:44
+msgid "_Add User"
+msgstr "વપરાશકર્તા ઉમેરો (_A)"
+
 #: ../interfaces/users.glade.in.h:45
-msgid "Users"
-msgstr "વપરાશકર્તાઓ"
-
-#: ../interfaces/users.glade.in.h:46
-msgid "_Add Group..."
-msgstr "જૂથ ઉમેરો (_A)..."
-
-#: ../interfaces/users.glade.in.h:47
-msgid "_Add Profile..."
-msgstr "રુપરેખા ઉમેરો (_A)..."
-
-#: ../interfaces/users.glade.in.h:48
-msgid "_Add User..."
-msgstr "વપરાશકર્તા ઉમેરો (_A)..."
-
-#: ../interfaces/users.glade.in.h:49
-msgid "_All users:"
-msgstr "બધા વપરાશકર્તાઓ (_A):"
-
-#: ../interfaces/users.glade.in.h:50
 msgid "_Comments"
 msgstr "ટિપ્પળીઓ (_C)"
 
-#: ../interfaces/users.glade.in.h:51
+#: ../interfaces/users.glade.in.h:46
 msgid "_Days between warning and password expiration:"
 msgstr "ચેતવણી અને પાસવર્ડની મર્યાદા પૂરી થવા વચ્ચેના દિવસો (_D):"
 
-#: ../interfaces/users.glade.in.h:52 ../src/boot/table.c:54
-#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
-#: ../src/shares/table.c:42 ../src/users/table.c:50
+#: ../interfaces/users.glade.in.h:47 ../src/boot/table.c:54
+#: ../src/network/address-list.c:75 ../src/network/hosts.c:39
+#: ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "કાઢી નાંખો (_D)"
 
-#: ../interfaces/users.glade.in.h:53
+#: ../interfaces/users.glade.in.h:48
 msgid "_Edit User Profiles..."
 msgstr "વપરાશકર્તાની રુપરેખાઓમાં ફેરફાર કરો (_E)..."
 
-#: ../interfaces/users.glade.in.h:54
+#: ../interfaces/users.glade.in.h:49
 msgid "_Generate"
 msgstr "પેદા કરો (_G)"
 
-#: ../interfaces/users.glade.in.h:55
+#: ../interfaces/users.glade.in.h:50
 msgid "_Home directory:"
 msgstr "ઘર ડિરેક્ટરી (_H):"
 
-#: ../interfaces/users.glade.in.h:56
+#: ../interfaces/users.glade.in.h:51
 msgid "_Home phone:"
 msgstr "ઘરનો ફોન (_H):"
 
-#: ../interfaces/users.glade.in.h:57
+#: ../interfaces/users.glade.in.h:52
 msgid "_Main group:"
 msgstr "મુખ્ય જૂથ (_M):"
 
-#: ../interfaces/users.glade.in.h:58
+#: ../interfaces/users.glade.in.h:53
+msgid "_Manage Groups"
+msgstr "જૂથોની વ્યવસ્થા કરો (_M)"
+
+#: ../interfaces/users.glade.in.h:54
 msgid "_Profile:"
 msgstr "રુપરેખા (_P):"
 
-#: ../interfaces/users.glade.in.h:59
+#: ../interfaces/users.glade.in.h:55
 msgid "_Real name:"
 msgstr "વાસ્તવિક નામ (_R):"
 
-#: ../interfaces/users.glade.in.h:60
+#: ../interfaces/users.glade.in.h:56
 msgid "_Shell:"
 msgstr "શેલ (_S):"
 
-#: ../interfaces/users.glade.in.h:62
+#: ../interfaces/users.glade.in.h:58
 msgid "_Work phone:"
 msgstr "કામ આપતો ફોન (_W):"
 
@@ -978,6 +951,14 @@ msgstr "અમાન્ય VGA કિંમત"
 #, c-format
 msgid "\"%s\" is not a valid VGA value."
 msgstr "\"%s\" એ માન્ય VGA કિંમત નથી."
+
+#: ../src/boot/boot.desktop.in.in.h:1
+msgid "Boot"
+msgstr "બુટ"
+
+#: ../src/boot/boot.desktop.in.in.h:2
+msgid "Configure the system boot process"
+msgstr "સિસ્ટમની બુટ પ્રક્રિયા રુપરેખાંકિત કરો"
 
 #: ../src/boot/boot-druid.c:113
 msgid "Error creating boot image"
@@ -1057,14 +1038,6 @@ msgstr "પાસવર્ડની ખાતરી કરવાનું યો
 msgid "Error modifying boot image"
 msgstr "બુટ ઈમેજ સુધારવામાં ભૂલ"
 
-#: ../src/boot/boot.desktop.in.in.h:1
-msgid "Boot"
-msgstr "બુટ"
-
-#: ../src/boot/boot.desktop.in.in.h:2
-msgid "Configure the system boot process"
-msgstr "સિસ્ટમની બુટ પ્રક્રિયા રુપરેખાંકિત કરો"
-
 #: ../src/boot/callbacks.c:81
 msgid "Boot Image Editor"
 msgstr "બુટ ઈમેજ સંપાદક"
@@ -1099,7 +1072,7 @@ msgstr "રુપરેખાંકન ખાલી દેખાશે"
 msgid "The file \"%s\" is missing or could not be read."
 msgstr "ફાઈલ \"%s\" ખોવાયેલ છે અથવા વાંચી શકાય એમ નથી."
 
-#: ../src/boot/table.c:43
+#: ../src/boot/table.c:43 ../src/users/users-table.c:44
 msgid "Name"
 msgstr "નામ"
 
@@ -1119,105 +1092,60 @@ msgstr "કર્નલ ઈમેજ"
 msgid "Device"
 msgstr "ઉપકરણ"
 
-#: ../src/boot/table.c:52 ../src/network/address-list.c:71
-#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
+#: ../src/boot/table.c:52 ../src/network/address-list.c:74
+#: ../src/network/hosts.c:37 ../src/shares/table.c:38 ../src/users/table.c:38
 msgid "_Add"
 msgstr "ઉમેરો (_A)"
 
 #: ../src/boot/table.c:53 ../src/network/hosts.c:38
-#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
-#: ../src/users/table.c:49
+#: ../src/network/ifaces-list.c:32 ../src/shares/table.c:39
+#: ../src/users/table.c:39
 msgid "_Properties"
 msgstr "ગુણધર્મો (_P)"
 
-#. the proccess was running ssh
-#: ../src/common/gst-auth.c:89
-msgid "The tool could not connect to the computer"
-msgstr "સાધન કમ્પ્યૂટર સાથે જોડાઈ શકતું નથી"
+#: ../src/common/gst-platform-dialog.c:218
+msgid "The platform you are running is not supported by this tool"
+msgstr "તમે જે પ્લેટફોર્મ ચલાવી રહ્યા છો તે આ સાધન દ્વારા આધારભૂત નથી"
 
-#: ../src/common/gst-auth.c:90
-msgid ""
-"Check that you have access to this network and that the computer is actually "
-"working and running the SSH daemon"
-msgstr ""
-"ચકાસો કે તમને આ નેટવર્કનો વપરાશ છે અને એ પણ કે કમ્પ્યૂટર વાસ્તવમાં કામ આપી રહ્યું છે અને SSH "
-"ડિમન ચલાવીને"
+#: ../src/common/gst-platform-dialog.c:250
+msgid "Unsupported platform"
+msgstr "બિનઆધારિત પ્લેટફોર્મ"
 
-#. the proccess was running su
-#: ../src/common/gst-auth.c:94
-msgid "The entered password is invalid"
-msgstr "દાખલ કરેલ પાસવર્ડ માન્ય નથી"
-
-#: ../src/common/gst-auth.c:95
-msgid ""
-"Check that you typed it correctly and that you haven't activated the \"caps "
-"lock\" key"
-msgstr "ચકાસો કે તમે એને બરાબર લખ્યો છે અને તમે \"caps lock\" કી તો ચાલુ નથી રાખી ને"
-
-#: ../src/common/gst-auth.c:104
-#, c-format
-msgid "Could not run \"%s\""
-msgstr "\"%s\" ચલાવી શકાયું નહિં"
-
-#: ../src/common/gst-auth.c:105
-msgid "Check that you have permissions to run this command"
-msgstr "તમારી પાસે આ આદેશ ચલાવવાની પરવાનગીઓ છે કે નહિં તે ચકાસો"
-
-#: ../src/common/gst-auth.c:107
-msgid "An unexpected error has occurred"
-msgstr "અનિચ્છનિય ભૂલ ઉદ્ભવી"
-
-#: ../src/common/gst-auth.c:133
-msgid "Could not execute the backend"
-msgstr "બેકન્ડ ચલાવી શક્યા નહિં"
-
-#: ../src/common/gst-auth.c:134
-msgid "There was an error creating the child process, the tool will close now."
-msgstr "બાળ પ્રક્રિયા મારી નાંખવામાં ભૂલ આવી હતી, સાધન હવે બંધ થઈ જશે."
-
-#: ../src/common/gst-dialog.c:522
-#, c-format
-msgid "Error connection signal `%s' in widget `%s'"
-msgstr "જોડાણમાં ભૂલનો સંકેત `%s' છે જે `%s' વિજેટમાં છે"
-
-#: ../src/common/gst-tool.c:1357
+#: ../src/common/gst-tool.c:1352
 msgid "GNOME System Tools"
 msgstr "જીનોમ સિસ્ટમ સાધનો"
 
-#: ../src/common/gst-tool.c:1378
+#: ../src/common/gst-tool.c:1373
 msgid "Could not display help"
 msgstr "મદદ પ્રદર્શિત કરી શક્યા નહિં"
 
-#: ../src/network/address-list.c:555
+#: ../src/network/address-list.c:472
 msgid "Type address"
 msgstr "સરનામું લખો"
 
-#: ../src/network/callbacks.c:46
-#, c-format
-msgid "Could not enable the interface %s"
-msgstr "ઈન્ટરફેસ %s સક્રિય કરી શક્યા નહિં"
+#: ../src/network/callbacks.c:157
+msgid "Changing interface configuration"
+msgstr "ઈન્ટરફેસ રૂપરેખાંકન બદલી રહ્યા છીએ"
 
-#: ../src/network/callbacks.c:50
-msgid ""
-"Check that the settings are correct for this network and that the computer "
-"is correctly connected to it."
-msgstr "ચકાસો કે આ નેટવર્ક માટેના સુયોજનો યોગ્ય છે અને કમ્પ્યૂટર તેની સાથે યોગ્ય રીતે જોડાયેલ છે."
-
-#: ../src/network/callbacks.c:237
+#: ../src/network/callbacks.c:200
 msgid "Could not autodetect modem device"
 msgstr "મોડેમ ઉપકરણ આપોઆપ શોધી શકાયું નહિં"
 
-#: ../src/network/callbacks.c:240
+#: ../src/network/callbacks.c:203
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr "ચકાસો કે ઉપકરણ વ્યસ્ત તો નથી અને તે યોગ્ય રીતે તમારા કમ્પ્યૂટર સાથે જોડાયેલ છે ને."
 
-#: ../src/network/callbacks.c:451
+#: ../src/network/callbacks.c:479
+msgid "Activating network interface"
+msgstr "નેટવર્ક ઈન્ટરફેસ સક્રિય કરી રહ્યા છીએ"
+
+#: ../src/network/callbacks.c:514
 msgid "The host name has changed"
 msgstr "યજમાનનું નામ બદલાયેલ છે"
 
-#: ../src/network/callbacks.c:454
+#: ../src/network/callbacks.c:517
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1225,33 +1153,69 @@ msgstr ""
 "આ તમને નવા કાર્યક્રમો લાવવાથી બચાવે છે, અને તેથી તમારે ફરીથી પ્રવેશ કરવો પડશે. કોઈપણ "
 "રીતે ચાલુ રાખવું છે?"
 
-#: ../src/network/callbacks.c:460
+#: ../src/network/callbacks.c:523
 msgid "Change _Host name"
 msgstr "યજમાનનું નામ બદલો (_H)"
 
-#: ../src/network/hosts.c:92
+#: ../src/network/hosts.c:95
 msgid "IP Address"
 msgstr "IP સરનામુ"
 
-#: ../src/network/hosts.c:100
+#: ../src/network/hosts.c:103
 msgid "Aliases"
 msgstr "ઉપનામો"
 
-#: ../src/network/location.c:145
-msgid "Create location"
-msgstr "જગ્યા બનાવો"
+#: ../src/network/ifaces-list.c:315
+msgid "This network interface is not configured"
+msgstr "આ નેટવર્ક ઈન્ટરફેસ રૂપરેખાંકિત થયેલ નથી"
 
-#: ../src/network/location.c:153
-msgid "Delete current location"
-msgstr "વર્તમાન જગ્યા કાઢી નાંખો"
+#: ../src/network/ifaces-list.c:319
+#, c-format
+msgid "<b>Essid:</b> %s "
+msgstr "<b>Essid:</b> %s "
 
-#: ../src/network/location.c:367
-msgid "Do you want to remove this location?"
-msgstr "શું તમે આ જગ્યા દૂર કરવા માંગો છો?"
+#: ../src/network/ifaces-list.c:323
+#, c-format
+msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
+msgstr "<b>સરનામું:</b> %s <b>સબનેટ માસ્ક:</b> %s"
 
-#: ../src/network/location.c:440
-msgid "Changing profile"
-msgstr "રૂપરેખા બદલી રહ્યા છીએ"
+#: ../src/network/ifaces-list.c:327
+msgid "<b>Address:</b> DHCP"
+msgstr "<b>સરનામું:</b> DHCP"
+
+#: ../src/network/ifaces-list.c:331
+#, c-format
+msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
+msgstr "<b>સરનામું:</b> %s <b>દૂરસ્થ સરનામું:</b> %s"
+
+#: ../src/network/ifaces-list.c:337
+#, c-format
+msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
+msgstr "<b>ફોન નંબર:</b> %s <b>પ્રવેશ:</b> %s"
+
+#: ../src/network/ifaces-list.c:356
+msgid "Wireless connection"
+msgstr "વાયરલેસ જોડાણ"
+
+#: ../src/network/ifaces-list.c:358
+msgid "Infrared connection"
+msgstr "ઈન્ફ્રારેડ જોડાણ"
+
+#: ../src/network/ifaces-list.c:360
+msgid "Wired connection"
+msgstr "વાયરવાળું જોડાણ"
+
+#: ../src/network/ifaces-list.c:362
+msgid "Parallel port connection"
+msgstr "સમાંતર પોર્ટ જોડાણ"
+
+#: ../src/network/ifaces-list.c:364
+msgid "Modem connection"
+msgstr "મોડેમ જોડાણ"
+
+#: ../src/network/ifaces-list.c:366
+msgid "ISDN connection"
+msgstr "ISDN જોડાણ"
 
 #: ../src/network/main.c:110
 msgid "The interface does not exist"
@@ -1263,25 +1227,21 @@ msgid ""
 "system."
 msgstr "ચકાસો કે તે બરાબર લખાયેલ છે અને તે તમારી સિસ્ટમ દ્વારા યોગ્ય રીતે આધારભૂત છે."
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:158
 msgid "Configure a network interface"
 msgstr "નેટવર્ક ઈન્ટરફેસ રુપરેખાંકિત કરો"
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:158
 msgid "INTERFACE"
 msgstr "INTERFACE"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:159
 msgid "Configure the first network interface with a specific type"
 msgstr "ચોક્કસ પ્રકાર સાથે પ્રથમ નેટવર્ક ઈન્ટરફેસ રૂપરેખાંકિત કરો"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:159
 msgid "TYPE"
 msgstr "TYPE"
-
-#: ../src/network/main.c:165
-msgid "Network settings"
-msgstr "નેટવર્ક સુયોજનો"
 
 #: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -1291,49 +1251,9 @@ msgstr "નેટવર્ક ઉપકરણો અને જોડાણો �
 msgid "Networking"
 msgstr "નેટવર્કીંગ"
 
-#: ../src/network/network-iface-ethernet.c:302
-msgid "Ethernet connection"
-msgstr "ઈથરનેટ જોડાણ"
-
-#: ../src/network/network-iface-irlan.c:122
-msgid "Infrared connection"
-msgstr "ઈન્ફ્રારેડ જોડાણ"
-
-#: ../src/network/network-iface-isdn.c:330
-msgid "ISDN connection"
-msgstr "ISDN જોડાણ"
-
-#: ../src/network/network-iface-modem.c:253
-msgid "Modem connection"
-msgstr "મોડેમ જોડાણ"
-
-#: ../src/network/network-iface-plip.c:211
-msgid "Parallel port connection"
-msgstr "સમાંતર પોર્ટ જોડાણ"
-
-#: ../src/network/network-iface-wireless.c:245
-msgid "Wireless connection"
-msgstr "વાયરલેસ જોડાણ"
-
-#: ../src/network/network-iface.c:410
-#, c-format
-msgid "Activating interface \"%s\""
-msgstr "ઈન્ટરફેસ \"%s\" સક્રિય કરી રહ્યા છીએ"
-
-#: ../src/network/network-iface.c:522
-#, c-format
-msgid "The interface %s is not configured"
-msgstr "ઈન્ટરફેસ %s એ રૂપરેખાંકિત નથી"
-
-#: ../src/network/network-iface.c:524
-#, c-format
-msgid "The interface %s is not active"
-msgstr "ઈન્ટરફેસ %s ક્રિયાશીલ નથી"
-
-#: ../src/network/network-iface.c:526
-#, c-format
-msgid "The interface %s is active"
-msgstr "ઈન્ટરફેસ %s ક્રિયાશીલ છે"
+#: ../src/network/network-tool.c:281
+msgid "Network Settings"
+msgstr "નેટવર્ક સુયોજનો"
 
 #: ../src/services/callbacks.c:58
 #, c-format
@@ -1350,14 +1270,6 @@ msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
 msgstr "આ તમારી સિસ્ટમ વર્તણૂકને ઘણા દિવસોમાં અસર કરશે, કદાચ માહિતી ગુમ થવાની પણ શક્યતા રહશે."
-
-#: ../src/services/services.desktop.in.in.h:1
-msgid "Configure which services will be run when the system starts"
-msgstr "જ્યારે સિસ્ટમ શરુ થાય ત્યારે કઈ સેવા ચાલુ થાય તે રુપરેખાંકિત કરો"
-
-#: ../src/services/services.desktop.in.in.h:2
-msgid "Services"
-msgstr "સેવાઓ"
 
 #: ../src/services/service.c:32
 msgid "Antivirus"
@@ -1475,25 +1387,62 @@ msgstr "વેબ સર્વર"
 msgid "Shares your web pages over the Internet"
 msgstr "તમારા વેબ પાનાંઓ ઈન્ટરનેટ ઉપર વહેંચે છે"
 
-#: ../src/shares/callbacks.c:187
+#: ../src/services/services.desktop.in.in.h:1
+msgid "Configure which services will be run when the system starts"
+msgstr "જ્યારે સિસ્ટમ શરુ થાય ત્યારે કઈ સેવા ચાલુ થાય તે રુપરેખાંકિત કરો"
+
+#: ../src/services/services.desktop.in.in.h:2
+msgid "Services"
+msgstr "સેવાઓ"
+
+#: ../src/services/service-settings-table.c:73
+#: ../src/services/service-settings-table.c:97
+#: ../src/services/service-settings-table.c:109
+msgid "Start"
+msgstr "શરૂ કરો"
+
+#: ../src/services/service-settings-table.c:79
+#: ../src/services/service-settings-table.c:99
+#: ../src/services/service-settings-table.c:111
+msgid "Stop"
+msgstr "અટકાવો"
+
+#: ../src/services/service-settings-table.c:85
+#: ../src/services/service-settings-table.c:102
+msgid "Ignore"
+msgstr "અવગણો"
+
+#: ../src/services/service-settings-table.c:175
+msgid "Runlevel"
+msgstr "રનલેવલ"
+
+#: ../src/services/service-settings-table.c:192
+msgid "Status"
+msgstr "પરિસ્થિતિ"
+
+#: ../src/services/service-settings-table.c:211
+msgid "Priority"
+msgstr "પ્રાધાન્ય"
+
+#: ../src/services/services-tool.c:89
+msgid "Services settings"
+msgstr "સેવાઓ સુયોજનો"
+
+#: ../src/shares/callbacks.c:194
 msgid "Are you sure you want to delete this share?"
 msgstr "શું તમે ખરેખર આ વહેંચાયેલને કાઢી નાંખવા માંગો છો?"
 
-#: ../src/shares/callbacks.c:189
+#: ../src/shares/callbacks.c:196
 msgid "Other computers in your network will stop viewing this."
 msgstr "તમારા નેટવર્કમાંના અન્ય કમ્પ્યૂટરો આને જોવાનું બંધ કરશે."
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:88
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "વહેંચાયેલ પથ ઉમેરો, જો તે પહેલાથી જ હાજર હોય તો તેને સુધારે છે"
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:88
 msgid "PATH"
 msgstr "PATH"
-
-#: ../src/shares/main.c:97
-msgid "Shared folders settings"
-msgstr "વહેંચાયેલ ફોલ્ડર સુયોજનો"
 
 #: ../src/shares/nautilus/nautilus-shares.c:129
 msgid "_Share folder"
@@ -1503,7 +1452,7 @@ msgstr "ફોલ્ડર વહેંચો (_S)"
 msgid "Share this folder with other computers"
 msgstr "અન્ય કમ્પ્યૂટરો સાથે આ ફોલ્ડરોને વહેંચો"
 
-#: ../src/shares/nfs-acl-table.c:51
+#: ../src/shares/nfs-acl-table.c:50
 msgid "Allowed host/network"
 msgstr "માન્ય યજમાન/નેટવર્ક"
 
@@ -1524,47 +1473,33 @@ msgstr "IP સરનામું સ્પષ્ટ કરો"
 msgid "Specify network"
 msgstr "નેટવર્ક સ્પષ્ટ કરો"
 
-#: ../src/shares/share-settings.c:123
-msgid "Do not share"
-msgstr "વહેંચો નહિં"
-
-#: ../src/shares/share-settings.c:131
-msgid "SMB"
-msgstr "SMB"
-
-#: ../src/shares/share-settings.c:139
-msgid "NFS"
-msgstr "NFS"
-
 #: ../src/shares/shares.desktop.in.in.h:1
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "તમારા નેટવર્કની પડોશમાં કયા ફોલ્ડરો તમારા માટે ઉપ્લબ્ધ છે તે રૂપરેખાંકિત કરો"
 
-#: ../src/shares/shares.desktop.in.in.h:2
-msgid "Shared Folders"
-msgstr "વહેંચાયેલ ફોલ્ડરો"
+#: ../src/shares/share-settings.c:110
+msgid "Do not share"
+msgstr "વહેંચો નહિં"
 
-#: ../src/shares/transfer.c:44
-msgid "Sharing services are not installed"
-msgstr "વહેંચવાની સેવાઓ સ્થાપિત નથી"
+#: ../src/shares/share-settings.c:118
+msgid "SMB"
+msgstr "SMB"
 
-#: ../src/shares/transfer.c:46
-msgid ""
-"You need to install at least either Samba or NFS in order to share your "
-"folders. The tool will close now."
-msgstr ""
-"તમારે તમારા ફોલ્ડરો વહેંચવા માટે ઓછામાં ઓછું ક્યાં તો સામ્બા અથવા NFS સ્થાપિત કરવાની જરૂર "
-"છે. સાધન હવે બંધ થઈ જશે."
+#: ../src/shares/share-settings.c:126
+msgid "NFS"
+msgstr "NFS"
 
-#: ../src/time/main.c:322
+#: ../src/time/main.c:209
 msgid "NTP support is not installed"
 msgstr "NTP નો આધાર સ્થાપિત નથી"
 
-#: ../src/time/main.c:324
+#: ../src/time/main.c:211
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
-msgstr "તમારા સ્થાનિક સમય સર્વરને ઈન્ટરનેટ સમય સર્વરો સાથે સુમેળ તમારી સિસ્ટમમાં સક્રિય કરવા માટે મહેરબાની કરીને NTP આધાર સ્થાપિત અને સક્રિય કરો."
+msgstr ""
+"તમારા સ્થાનિક સમય સર્વરને ઈન્ટરનેટ સમય સર્વરો સાથે સુમેળ તમારી સિસ્ટમમાં સક્રિય કરવા માટે "
+"મહેરબાની કરીને NTP આધાર સ્થાપિત અને સક્રિય કરો."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1574,150 +1509,126 @@ msgstr "સિસ્ટમ સમય, તારીખ, અને ટાઈમ �
 msgid "Time and Date"
 msgstr "સમય અને તારીખ"
 
-#: ../src/users/callbacks.c:571
-msgid "Error saving profile"
-msgstr "રુપરેખા સંગ્રહવામાં ભૂલ"
+#: ../src/time/time-tool.c:369
+msgid "Time and Date Settings"
+msgstr "સમય અને તારીખ સુયોજનો"
 
-#: ../src/users/callbacks.c:613
-msgid "Create New profile"
-msgstr "નવી રુપરેખા બનાવો"
+#: ../src/users/group-settings.c:52
+msgid "Administrator group can not be deleted"
+msgstr "સંચાલક જૂથ કાઢી શકાતું નથી"
 
-#: ../src/users/callbacks.c:649
-#, c-format
-msgid "Settings for profile %s"
-msgstr "%s રુપરેખા માટેના સુયોજનો"
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:59
+#: ../src/users/user-settings.c:416 ../src/users/user-settings.c:486
+msgid "This would leave the system unusable."
+msgstr "આ સિસ્ટમને વાપરી શકાય નહિં તેમ છોડી દેશે."
 
-#: ../src/users/group-settings.c:91
-msgid "Create New Group"
-msgstr "નવું જૂથ બનાવો"
-
-#. Check if gid is available
-#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
-msgid "Invalid group ID"
-msgstr "અયોગ્ય જૂથ ID"
-
-#: ../src/users/group-settings.c:165
-msgid "Group ID must be a positive number"
-msgstr "જૂથ ID ધન સંખ્યા જ હોવી જોઈએ"
-
-#. if group is root
-#: ../src/users/group-settings.c:168
-msgid "Group ID of the \"root\" user should not be modified"
-msgstr "\"રુટ\" વપરાશકર્તાનું જૂથ ID બદલી શકાતું નથી"
-
-#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:218
-#: ../src/users/group-settings.c:288
-msgid "This would leave the system unusable"
-msgstr "આ સિસ્ટમને વાપરી શકાય નહિં તેમ છોડી દે છે"
-
-#: ../src/users/group-settings.c:173
-#, c-format
-msgid "Group ID %s already exists"
-msgstr "જૂથ ID %s પહેલાથી જ હાજર છે"
-
-#. If empty.
-#: ../src/users/group-settings.c:198
-msgid "Group name is empty"
-msgstr "જૂથ નામ ખાલી છે"
-
-#: ../src/users/group-settings.c:199
-msgid "A group name must be specified"
-msgstr "જૂથ નામ સ્પષ્ટ કરેલ જ હોવું જોઈએ"
-
-#. If too long.
-#: ../src/users/group-settings.c:202
-msgid "The group name is too long"
-msgstr "જૂથ નામ ખૂબ મોટું છે"
-
-#: ../src/users/group-settings.c:203
-#, c-format
-msgid "To be valid, the group name should have less than %d character"
-msgid_plural "To be valid, the group name should have less than %d characters"
-msgstr[0] "માન્ય થવા માટે, વપરાશકર્તા નામ પાસે %d કરતાં ઓછા અક્ષર હોવા જોઈએ."
-msgstr[1] "માન્ય થવા માટે, વપરાશકર્તા નામ પાસે %d કરતાં ઓછા અક્ષરો હોવા જોઈએ."
-
-#. if invalid.
-#: ../src/users/group-settings.c:209
-msgid "Group name has invalid characters"
-msgstr "જૂથ નામ પાસે અમાન્ય અક્ષરો છે"
-
-#: ../src/users/group-settings.c:210
-msgid "Please set a valid group name, using only lower case letters"
-msgstr "મહેરબાની કરીને માન્ય જૂથ નામ, સુયોજિત કરો માત્ર નાના અક્ષરો વાપરીને"
-
-#. if !exist.
-#: ../src/users/group-settings.c:213
-#, c-format
-msgid "Group \"%s\" already exists"
-msgstr "જૂથ \"%s\" પહેલાથી જ હાજર છે"
-
-#: ../src/users/group-settings.c:214
-msgid "Please select a different group name"
-msgstr "મહેરબાની કરીને અલગ જૂથ નામ પસંદ કરો"
-
-#. if it's the root group
-#: ../src/users/group-settings.c:217
-msgid "Group name of the \"root\" user should not be modified"
-msgstr "\"રુટ\" વપરાશકર્તા માટે જૂથ નામ સુધારાયેલ નથી"
-
-#: ../src/users/group-settings.c:287
-msgid "The group \"root\" should not be deleted"
-msgstr "જૂથ \"રુટ\" કાઢી શકાશે નહિં"
-
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:68
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "શું તમે ખરેખર જૂથ \"%s\" કાઢી નાંખવા માંગો છો?"
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:71
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "આ ફાઈલ સિસ્ટમમાં માન્ય નહિં હોય એવા જૂથ ID વાળી ફાઈલો છોડી દેશે."
 
-#: ../src/users/group-settings.c:364
-#, c-format
-msgid "Settings for Group %s"
-msgstr "જૂથ %s માટે સુયોજનો"
+#: ../src/users/group-settings.c:167
+msgid "New group"
+msgstr "નવું જૂથ"
 
-#: ../src/users/groups-table.c:44
-msgid "Group"
-msgstr "જૂથ"
+#: ../src/users/group-settings.c:175
+#, c-format
+msgid "Group '%s' Properties"
+msgstr "જૂથ '%s' ગુણધર્મો"
+
+#: ../src/users/group-settings.c:274
+msgid "Group name is empty"
+msgstr "જૂથ નામ ખાલી છે"
+
+#: ../src/users/group-settings.c:275
+msgid "A group name must be specified."
+msgstr "જૂથ નામ સ્પષ્ટ કરેલ હોવું જ જોઈએ."
+
+#: ../src/users/group-settings.c:277
+msgid "Group name of the administrator group user should not be modified"
+msgstr "સંચાલક જૂથનું જૂથ નામ સુધારેલ હોવું જોઈએ નહિં"
+
+#: ../src/users/group-settings.c:280
+msgid "Group name has invalid characters"
+msgstr "જૂથ નામ પાસે અમાન્ય અક્ષરો છે"
+
+#: ../src/users/group-settings.c:281
+msgid ""
+"Please set a valid group name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"મહેરબાની કરીને માન્ય વપરાશકર્તા નામ સુયોજિત કરો કે જે નાના અક્ષરોને સમાવે છે જે નાના "
+"અક્ષરો અને સંખ્યાઓને અનુસરે છે."
+
+#: ../src/users/group-settings.c:285
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "જૂથ \"%s\" પહેલાથી જ હાજર છે"
+
+#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:424
+msgid "Please select a different user name."
+msgstr "મહેરબાની કરીને અલગ વપરાશકર્તા નામ પસંદ કરો."
+
+#: ../src/users/group-settings.c:301
+msgid "Group ID of the Administrator account should not be modified"
+msgstr "સંચાલક ખાતાનું જૂથ ID સુધારેલ હોવું જોઈએ નહિં"
 
 #: ../src/users/groups-table.c:45
-msgid "GID"
-msgstr "GID"
+msgid "Group name"
+msgstr "જૂથ નામ"
 
-#: ../src/users/main.c:123
-msgid "User name contains"
-msgstr "વપરાશકર્તા નામ સમાવે છે"
+#: ../src/users/privileges-table.c:48
+msgid "Monitor system logs"
+msgstr "સિસ્ટમ લોગ મોનીટર કરો"
 
-#: ../src/users/main.c:124
-msgid "User ID is"
-msgstr "વપરાશકર્તા ID આ છે"
+#: ../src/users/privileges-table.c:49
+msgid "Administer the system"
+msgstr "સિસ્ટમ સંચાલિત કરો"
 
-#: ../src/users/main.c:125
-msgid "Group name contains"
-msgstr "જૂથ નામ સમાવે છે"
+#: ../src/users/privileges-table.c:50
+msgid "Use audio devices"
+msgstr "ઓડિયો ઉપકરણો વાપરો"
 
-#: ../src/users/main.c:126
-msgid "User GID is"
-msgstr "વપરાશકર્તા GID આ છે"
+#: ../src/users/privileges-table.c:51
+msgid "Use CD-ROM drives"
+msgstr "CD-ROM ડ્રાઈવો વાપરો"
 
-#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
-msgid "Users and Groups"
-msgstr "વપરાશકર્તાઓ અને જૂથો"
+#: ../src/users/privileges-table.c:52
+msgid "Use modems"
+msgstr "મોડેમો વાપરો"
 
-#: ../src/users/passwd.c:168
-msgid "Passwords do not match"
-msgstr "પાસવર્ડો બંધબેસતા નથી"
+#: ../src/users/privileges-table.c:53
+msgid "Connect to Internet using a modem"
+msgstr "ઈન્ટરનેટ સાથે મોડેમની મદદથી જોડો"
 
-#: ../src/users/passwd.c:173
-#, c-format
-msgid ""
-"Bad password: %s.\n"
-"Please try with a new password"
-msgstr ""
-"ખરાબ પાસવર્ડ: %s.\n"
-"મહેરબાની કરીને નવા પાસવર્ડ સાથે પ્રયત્ન કરો"
+#: ../src/users/privileges-table.c:54
+msgid "Send and receive faxes"
+msgstr "ફેક્સો મોકલો અને મેળવો"
+
+#: ../src/users/privileges-table.c:55
+msgid "Use floppy drives"
+msgstr "ફ્લોપી ડ્રાઈવો વાપરો"
+
+#: ../src/users/privileges-table.c:56
+msgid "Access external storage devices automatically"
+msgstr "બાહ્ય સંગ્રહ ઉપકરણો આપોઆપ વાપરો"
+
+#: ../src/users/privileges-table.c:57
+msgid "Use scanners"
+msgstr "સ્કેનરો વાપરો"
+
+#: ../src/users/privileges-table.c:58
+msgid "Use tape drives"
+msgstr "ટેપ ડ્રાઈવો વાપરો"
+
+#: ../src/users/privileges-table.c:59
+msgid "Be able to get administrator privileges"
+msgstr "સંચાલક વિશેષાધિકારો મેળવવામાં સમર્થ"
 
 #: ../src/users/profile-settings.c:125
 msgid "The profile must have a name"
@@ -1769,59 +1680,55 @@ msgstr "પસંદ"
 msgid "Text"
 msgstr "લખાણ"
 
-#: ../src/users/user-settings.c:73
-msgid "The \"root\" user should not be deleted"
-msgstr "\"રુટ\" વપરાશકર્તા કાઢી શકાય એમ નથી"
+#: ../src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "વપરાશકર્તાઓ અને જૂથો ઉમેરો અથવા દૂર કરો"
 
-#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:311
-#: ../src/users/user-settings.c:406 ../src/users/user-settings.c:442
-msgid "This would leave the system unusable."
-msgstr "આ સિસ્ટમને વાપરી શકાય નહિં તેમ છોડી દેશે."
+#: ../src/users/users.desktop.in.in.h:2
+msgid "Users and Groups"
+msgstr "વપરાશકર્તાઓ અને જૂથો"
 
-#: ../src/users/user-settings.c:83
+#: ../src/users/user-settings.c:56
+msgid "Administrator account can not be deleted"
+msgstr "સંચાલક ખાતું કાઢી શકાતું નથી"
+
+#: ../src/users/user-settings.c:72
 #, c-format
-msgid "Are you sure you want to delete user \"%s\"?"
-msgstr "શું તમે ખરેખર વપરાશકર્તા \"%s\" કાઢી નાંખવા માંગો છો?"
+msgid "Are you sure you want to delete account \"%s\"?"
+msgstr "શું તમે ખરેખર ખાતું \"%s\" કાઢી નાંખવા માંગો છો?"
 
-#: ../src/users/user-settings.c:85
+#: ../src/users/user-settings.c:75
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
 msgstr "આ વપરાશકર્તાનો સિસ્ટમનો વપરાશ વપરાશકર્તાની ડિરેક્ટરી કાઢ્વા વિના આ તેને નિષ્ક્રિય કરશે."
 
-#: ../src/users/user-settings.c:189
-msgid "User Account Editor"
-msgstr "વપરાશકર્તા ખાતા સંપાદક"
+#: ../src/users/user-settings.c:266
+msgid "New user account"
+msgstr "નવું વપરાશકર્તા ખાતું"
 
-#: ../src/users/user-settings.c:285
-msgid "The user name is empty"
+#: ../src/users/user-settings.c:278
+#, c-format
+msgid "Account '%s' Properties"
+msgstr "ખાતા '%s' ગુણધર્મો"
+
+#: ../src/users/user-settings.c:412
+msgid "User name is empty"
 msgstr "વપરાશકર્તા નામ ખાલી છે"
 
-#: ../src/users/user-settings.c:286
+#: ../src/users/user-settings.c:413
 msgid "A user name must be specified."
 msgstr "વપરાશકર્તા નામ સ્પષ્ટ કરેલ હોવું જ જોઈએ."
 
-#. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:300
-msgid "The user name is too long"
-msgstr "વપરાશકર્તા નામ ખૂબ મોટું છે"
+#: ../src/users/user-settings.c:415
+msgid "User name of the administrator account should not be modified"
+msgstr "સંચાલક ખાતાનું વપરાશકર્તા નામ સુધારાયેલ હોવું જોઈએ નહિં"
 
-#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:301
-#, c-format
-msgid "To be valid, the user name should have less than %d character"
-msgid_plural "To be valid, the user name should have less than %d characters"
-msgstr[0] "માન્ય થવા માટે, વપરાશકર્તા નામ પાસે %d કરતાં ઓછા અક્ષર હોવા જોઈએ."
-msgstr[1] "માન્ય થવા માટે, વપરાશકર્તા નામ પાસે %d કરતાં ઓછા અક્ષરો હોવા જોઈએ."
-
-#: ../src/users/user-settings.c:310
-msgid "User name for the \"root\" user should not be modified"
-msgstr "\"રુટ\" વપરાશકર્તા માટે વપરાશકર્તા નામ સુધારી શકાય એમ નથી"
-
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:418
 msgid "User name has invalid characters"
 msgstr "વપરાશકર્તા નામ પાસે અયોગ્ય અક્ષરો છે"
 
-#: ../src/users/user-settings.c:317
+#: ../src/users/user-settings.c:419
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1829,37 +1736,25 @@ msgstr ""
 "મહેરબાની કરીને માન્ય વપરાશકર્તા નામ સુયોજિત કરો કે જે નાના અક્ષરોને સમાવે છે જે નાના "
 "અક્ષરો અને સંખ્યાઓને અનુસરે છે."
 
-#: ../src/users/user-settings.c:323
+#: ../src/users/user-settings.c:423
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "વપરાશકર્તા નામ \"%s\" પહેલાથી જ હાજર છે"
 
-#: ../src/users/user-settings.c:324
-msgid "Please select a different user name."
-msgstr "મહેરબાની કરીને અલગ વપરાશકર્તા નામ પસંદ કરો."
-
-#: ../src/users/user-settings.c:349
+#: ../src/users/user-settings.c:450
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "ટિપ્પળીમાં અયોગ્ય અક્ષર \"%c\" છે"
 
-#: ../src/users/user-settings.c:350
+#: ../src/users/user-settings.c:451
 msgid "Check that this character is not used."
 msgstr "ચકાસો કે આ અક્ષર વપરાયેલ નથી."
 
-#: ../src/users/user-settings.c:398
-msgid "Home directory should not be empty"
-msgstr "ઘર ડિરેક્ટરી ખાલી હોવી જોઈએ નહિં"
-
-#: ../src/users/user-settings.c:399
-msgid "Make sure you provide a home directory."
-msgstr "ખાતરી કરો કે તમને ઘર ડિરેક્ટરી પૂરી પાડેલ છે."
-
-#: ../src/users/user-settings.c:401
+#: ../src/users/user-settings.c:468
 msgid "Incomplete path in home directory"
 msgstr "ઘર ડિરેક્ટરીમાં અપૂર્ણ પથ"
 
-#: ../src/users/user-settings.c:402
+#: ../src/users/user-settings.c:469
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1867,89 +1762,47 @@ msgstr ""
 "મહેરબાની કરીને ઘર ડિરેક્ટરીનો પૂરો પથ દાખલ કરો\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
 
-#: ../src/users/user-settings.c:405
-msgid "Home directory of the \"root\" user should not be modified"
-msgstr "\"રુટ\" વપરાશકર્તાની ઘર ડિરેક્ટરી બદલી શકાય એમ નથી"
+#: ../src/users/user-settings.c:485
+msgid "User ID of the administrator account should not be modified"
+msgstr "સંચાલક ખાતાનું વપરાશકર્તા ID સુધારેલ હોવું જોઈએ નહિં"
 
-#: ../src/users/user-settings.c:438
-msgid "Invalid user ID"
-msgstr "અયોગ્ય વપરાશકર્તા ID"
-
-#: ../src/users/user-settings.c:439
-msgid "User ID must be a positive number."
-msgstr "વપરાશકર્તા ID ધન સંખ્યા જ હોવું જોઈએ."
-
-#: ../src/users/user-settings.c:441
-msgid "User ID of the \"root\" user should not be modified"
-msgstr "\"રુટ\" વપરાશકર્તાનું વપરાશકર્તા ID બદલી શકાય એમ નથી"
-
-#: ../src/users/user-settings.c:459
-#, c-format
-msgid "User ID %s already exists"
-msgstr "વપરાશકર્તા ID %s પહેલાથી જ હાજર છે"
-
-#: ../src/users/user-settings.c:461
-msgid ""
-"Several users may share a single user ID, but it's not common and may lead "
-"to security problems."
-msgstr ""
-"ઘણા બધા વપરાશકર્તાઓ એક જ વપરાશકર્તા ID વહેંચે છે, પરંતુ એ સામાન્ય નથી અને સરક્ષા સમસ્યાઓ "
-"ઊભી કરે છે."
-
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:501
 msgid "Incomplete path in shell"
 msgstr "શેલમાં અપૂર્ણ પથ"
 
-#: ../src/users/user-settings.c:480
+#: ../src/users/user-settings.c:502
 msgid ""
 "Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>."
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr ""
-"મહેરબાની કરીને શેલ માટે પૂરો પથ દાખલ કરો\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>."
+"મહેરબાની કરીને શેલ માટે આખો પાથ દાખલ કરો\n"
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:502
+#: ../src/users/user-settings.c:521
 msgid "Password should not be empty"
 msgstr "પાસવર્ડ ખાલી હોવો જોઈએ નહિં"
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:522
 msgid "A password must be provided."
 msgstr "પાસવર્ડ પૂરો પાડેલો જ હોવો જોઈએ."
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:524
 msgid "Password confirmation isn't correct"
 msgstr "પાસવર્ડની ખાતરી યોગ્ય નથી"
 
-#: ../src/users/user-settings.c:506
+#: ../src/users/user-settings.c:525
 msgid "Check that you have provided the same password in both text fields."
 msgstr "ચકાસો કે તમને પૂરો પાડેલો પાસવર્ડ બંને લખાણના ક્ષેત્રોમાં સરખો છે."
 
-#: ../src/users/user-settings.c:780
-#, c-format
-msgid "Settings for User %s"
-msgstr "વપરાશકર્તા %s માટે સુયોજનો"
-
-#: ../src/users/users-table.c:61
-msgid "User"
-msgstr "વપરાશકર્તા"
-
-#: ../src/users/users-table.c:62
-msgid "Home"
-msgstr "ઘર"
-
 #: ../src/users/users-table.c:63
-msgid "User details"
-msgstr "વપરાશકર્તા વિગતો"
+msgid "Login name"
+msgstr "પ્રવેશ નામ"
 
-#: ../src/users/users-table.c:64
-msgid "UID"
-msgstr "UID"
+#: ../src/users/users-table.c:70
+msgid "Home directory"
+msgstr "ઘર ડિરેક્ટરી"
 
-#: ../src/users/users-table.c:65
-msgid "Shell"
-msgstr "શેલ"
-
-#: ../src/users/users.desktop.in.in.h:1
-msgid "Add or remove users and groups"
-msgstr "વપરાશકર્તાઓ અને જૂથો ઉમેરો અથવા દૂર કરો"
+#: ../src/users/users-tool.c:155
+msgid "Users settings"
+msgstr "વપરાશકર્તાઓ સુયોજનો"
 
