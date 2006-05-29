@@ -115,7 +115,7 @@ share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 	if (GST_SHARES_TOOL (tool)->smb_available) {
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-				    0, _("SMB"),
+				    0, _("Windows networks (SMB)"),
 				    1, SHARE_THROUGH_SMB,
 				    -1);
 	}
@@ -123,7 +123,7 @@ share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 	if (GST_SHARES_TOOL (tool)->nfs_available) {
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-				    0, _("NFS"),
+				    0, _("Unix networks (NFS)"),
 				    1, SHARE_THROUGH_NFS,
 				    -1);
 	}
@@ -403,6 +403,7 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 	OobsListIter *list_iter;
 	GtkTreeIter   iter;
 	gboolean      path_exists;
+	gchar        *title;
 
 	share  = NULL;
 	dialog = share_settings_prepare_dialog (path, standalone);
@@ -413,6 +414,13 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 	if (path_exists) {
 		share = table_get_share_at_iter (&iter, &list_iter);
 		share_settings_set_share (share);
+
+		title = g_strdup_printf ("Settings for folder '%s'",
+					 oobs_share_get_path (share));
+		gtk_window_set_title (GTK_WINDOW (dialog), title);
+		g_free (title);
+	} else {
+		gtk_window_set_title (GTK_WINDOW (dialog), "Share Folder");
 	}
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
