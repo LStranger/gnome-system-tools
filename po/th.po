@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 1.1.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-28 21:43+0700\n"
-"PO-Revision-Date: 2006-05-29 00:14+0700\n"
+"POT-Creation-Date: 2006-05-29 19:47+0700\n"
+"PO-Revision-Date: 2006-05-29 19:59+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <l10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -277,17 +277,13 @@ msgid "Unsupported Platform"
 msgstr "ไม่สนับสนุนแพลตฟอร์มนี้"
 
 #: interfaces/common.glade.in.h:8
-msgid "Use this window to select the computer you wish to configure"
-msgstr "ใช้หน้าต่างนี้เลือกคอมพิวเตอร์ที่คุณต้องการปรับแต่งค่า"
-
-#: interfaces/common.glade.in.h:9
 msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
 "modify\n"
 "your system configuration."
 msgstr "เครื่องมือนี้ต้องการอภิสิทธิ์ผู้ดูแลระบบ กรุณาป้อนรหัสผ่านเพื่อแก้ไขค่าของระบบ"
 
-#: interfaces/common.glade.in.h:11
+#: interfaces/common.glade.in.h:10
 msgid "_Password:"
 msgstr "_รหัสผ่าน:"
 
@@ -494,7 +490,7 @@ msgid "_Gateway address:"
 msgstr "ที่อยู่เ_กตเวย์:"
 
 #: interfaces/network.glade.in.h:54
-msgid "_Hostname:"
+msgid "_Host name:"
 msgstr "_ชื่อโฮสต์:"
 
 #: interfaces/network.glade.in.h:55
@@ -546,19 +542,19 @@ msgid "Select the services that you wish to activate:"
 msgstr "เลือกบริการที่คุณต้องการเปิด:"
 
 #: interfaces/shares.glade.in.h:1
-msgid "<b>Allowed hosts</b>"
+msgid "<b>Allowed Hosts</b>"
 msgstr "<b>โฮสต์ที่อนุญาต</b>"
 
 #: interfaces/shares.glade.in.h:2
-msgid "<b>Hosts settings</b>"
-msgstr "<b>ตั้งค่าโฮสต์</b>"
+msgid "<b>Hosts Settings</b>"
+msgstr "<b>ค่าตั้งของเครื่องโฮสต์</b>"
 
 #: interfaces/shares.glade.in.h:3
-msgid "<b>Share properties</b>"
+msgid "<b>Share Properties</b>"
 msgstr "<b>คุณสมบัติการเปิดใช้ร่วม</b>"
 
 #: interfaces/shares.glade.in.h:4
-msgid "<b>Shared folder</b>"
+msgid "<b>Shared Folder</b>"
 msgstr "<b>โฟลเดอร์ใช้ร่วม</b>"
 
 #: interfaces/shares.glade.in.h:5
@@ -582,7 +578,7 @@ msgid "Domain / _Workgroup:"
 msgstr "โดเมน/เ_วิร์กกรุ๊ป:"
 
 #: interfaces/shares.glade.in.h:10
-msgid "General properties"
+msgid "General Properties"
 msgstr "คุณสมบัติทั่วไป"
 
 #: interfaces/shares.glade.in.h:11
@@ -613,17 +609,18 @@ msgstr "เปิดโฟลเดอร์ให้ใช้ร่วม"
 msgid "Share with:"
 msgstr "เปิดใช้ร่วมผ่าน:"
 
-#: interfaces/shares.glade.in.h:19
-msgid "Shared folders"
+#: interfaces/shares.glade.in.h:19 src/shares/shares.desktop.in.in.h:2
+#: src/shares/shares-tool.c:158
+msgid "Shared Folders"
 msgstr "โฟลเดอร์ใช้ร่วม"
 
 #: interfaces/shares.glade.in.h:20
-msgid "This computer is a WINS server"
-msgstr "เครื่องคอมพิวเตอร์นี้เป็นเซิร์ฟเวอร์ WINS"
+msgid "This computer is a _WINS server"
+msgstr "เครื่องคอมพิวเตอร์นี้เป็นเซิร์ฟเวอร์ _WINS"
 
 #: interfaces/shares.glade.in.h:21
-msgid "WINS server:"
-msgstr "เซิร์ฟเวอร์ WINS:"
+msgid "WINS _server:"
+msgstr "เ_ซิร์ฟเวอร์ WINS:"
 
 #: interfaces/shares.glade.in.h:22
 msgid "_Path:"
@@ -646,7 +643,7 @@ msgid "<b>Selection</b>"
 msgstr "<b>เลือก</b>"
 
 #: interfaces/time.glade.in.h:4
-msgid "<b>Time zone</b>"
+msgid "<b>Time Zone</b>"
 msgstr "<b>เขตเวลา</b>"
 
 #: interfaces/time.glade.in.h:5
@@ -662,8 +659,8 @@ msgid "S_ynchronize clock with Internet servers:"
 msgstr "_ตั้งนาฬิการะบบตามเซิร์ฟเวอร์ในอินเทอร์เน็ต:"
 
 #: interfaces/time.glade.in.h:8
-msgid "Se_lect Servers..."
-msgstr "เลือกเ_ซิร์ฟเวอร์..."
+msgid "Se_lect Servers"
+msgstr "เลือกเ_ซิร์ฟเวอร์"
 
 #: interfaces/time.glade.in.h:9
 msgid "Time servers"
@@ -834,28 +831,28 @@ msgid "User ID:"
 msgstr "หมายเลขผู้ใช้:"
 
 #: interfaces/users.glade.in.h:39
-msgid "User _password:"
-msgstr "รหัส_ผ่านผู้ใช้:"
+msgid "User Privileges"
+msgstr "อภิสิทธิ์ผู้ใช้"
 
 #: interfaces/users.glade.in.h:40
-msgid "User privileges"
-msgstr "อภิสิทธิ์ผู้ใช้"
+msgid "User _password:"
+msgstr "รหัส_ผ่านผู้ใช้:"
 
 #: interfaces/users.glade.in.h:41
 msgid "User profiles"
 msgstr "โพรไฟล์ผู้ใช้"
 
 #: interfaces/users.glade.in.h:42
-msgid "_Add Group..."
-msgstr "เ_พิ่มกลุ่ม..."
+msgid "_Add Group"
+msgstr "เ_พิ่มกลุ่ม"
 
 #: interfaces/users.glade.in.h:43
-msgid "_Add Profile..."
-msgstr "เ_พิ่มโพรไฟล์..."
+msgid "_Add Profile"
+msgstr "เ_พิ่มโพรไฟล์"
 
 #: interfaces/users.glade.in.h:44
-msgid "_Add User..."
-msgstr "เ_พิ่มผู้ใช้..."
+msgid "_Add User"
+msgstr "เ_พิ่มผู้ใช้"
 
 #: interfaces/users.glade.in.h:45
 msgid "_Comments"
@@ -892,7 +889,7 @@ msgid "_Main group:"
 msgstr "_กลุ่มหลัก:"
 
 #: interfaces/users.glade.in.h:53
-msgid "_Manage groups"
+msgid "_Manage Groups"
 msgstr "_จัดการกลุ่มผู้ใช้"
 
 #: interfaces/users.glade.in.h:54
@@ -1457,10 +1454,6 @@ msgstr "ระบุเครือข่าย"
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "กำหนดโฟลเดอร์ที่จะให้เครื่องเพื่อนบ้านในเครือข่ายใช้ร่วม"
 
-#: src/shares/shares.desktop.in.in.h:2 src/shares/shares-tool.c:158
-msgid "Shared Folders"
-msgstr "โฟลเดอร์ใช้ร่วม"
-
 #: src/shares/share-settings.c:110
 msgid "Do not share"
 msgstr "ไม่เปิดให้ใช้ร่วม"
@@ -1522,8 +1515,8 @@ msgstr "เพิ่มกลุ่มผู้ใช้ใหม่"
 
 #: src/users/group-settings.c:175
 #, c-format
-msgid "Settings for group %s"
-msgstr "ตั้งค่ากลุ่มผู้ใช้ %s"
+msgid "Group '%s' Properties"
+msgstr "คุณสมบัติของกลุ่มผู้ใช้ '%s'"
 
 #: src/users/group-settings.c:274
 msgid "Group name is empty"
@@ -1597,8 +1590,8 @@ msgid "Use floppy drives"
 msgstr "ใช้ไดรว์ฟลอปปี้"
 
 #: src/users/privileges-table.c:56
-msgid "Enable access to external storage devices automatically"
-msgstr "เปิดการเข้าใช้อุปกรณ์เก็บข้อมูลภายนอกโดยอัตโนมัติ"
+msgid "Access external storage devices automatically"
+msgstr "เข้าใช้อุปกรณ์เก็บข้อมูลภายนอกโดยอัตโนมัติ"
 
 #: src/users/privileges-table.c:57
 msgid "Use scanners"
@@ -1691,8 +1684,8 @@ msgstr "สร้างบัญชีผู้ใช้ใหม่"
 
 #: src/users/user-settings.c:278
 #, c-format
-msgid "Settings for account %s"
-msgstr "ตั้งค่าบัญชีผู้ใช้ %s"
+msgid "Account '%s' Properties"
+msgstr "คุณสมบัติของบัญชีผู้ใช้ '%s'"
 
 #: src/users/user-settings.c:412
 msgid "User name is empty"
@@ -1785,6 +1778,24 @@ msgstr "ไดเรกทอรีบ้าน"
 #: src/users/users-tool.c:155
 msgid "Users settings"
 msgstr "ตั้งค่าบัญชีผู้ใช้"
+
+#~ msgid "Use this window to select the computer you wish to configure"
+#~ msgstr "ใช้หน้าต่างนี้เลือกคอมพิวเตอร์ที่คุณต้องการปรับแต่งค่า"
+
+#~ msgid "_Hostname:"
+#~ msgstr "_ชื่อโฮสต์:"
+
+#~ msgid "<b>Hosts settings</b>"
+#~ msgstr "<b>ตั้งค่าโฮสต์</b>"
+
+#~ msgid "Shared folders"
+#~ msgstr "โฟลเดอร์ใช้ร่วม"
+
+#~ msgid "Settings for group %s"
+#~ msgstr "ตั้งค่ากลุ่มผู้ใช้ %s"
+
+#~ msgid "Settings for account %s"
+#~ msgstr "ตั้งค่าบัญชีผู้ใช้ %s"
 
 #~ msgid "<b>Connection</b>"
 #~ msgstr "<b>การเชื่อมต่อ</b>"
