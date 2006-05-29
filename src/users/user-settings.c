@@ -275,7 +275,7 @@ user_settings_dialog_new (OobsUser *user)
 	} else {
 		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (FALSE));
 
-		title = g_strdup_printf (_("Settings for account %s"), login);
+		title = g_strdup_printf (_("Account '%s' Properties"), login);
 		gtk_window_set_title (GTK_WINDOW (dialog), title);
 		g_free (title);
 

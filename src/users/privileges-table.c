@@ -53,7 +53,7 @@ static PrivilegeDescription descriptions[] = {
 	{ "dip", N_("Connect to Internet using a modem") },
 	{ "fax", N_("Send and receive faxes") },
 	{ "floppy", N_("Use floppy drives") },
-	{ "plugdev", N_("Enable access to external storage devices automatically") },
+	{ "plugdev", N_("Access external storage devices automatically") },
 	{ "scanner", N_("Use scanners") },
 	{ "tape", N_("Use tape drives") },
 	{ "wheel", N_("Be able to get administrator privileges") },
