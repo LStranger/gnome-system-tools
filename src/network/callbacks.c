@@ -560,6 +560,8 @@ on_domain_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
       oobs_object_commit (tool->hosts_config);
     }
 
+  g_object_set_data (G_OBJECT (widget), "content-changed", GINT_TO_POINTER (FALSE));
+
   return FALSE;
 }
      
