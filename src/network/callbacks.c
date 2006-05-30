@@ -112,7 +112,7 @@ on_bootproto_changed (GtkWidget *widget, gpointer data)
 
   dialog = GST_NETWORK_TOOL (tool)->dialog;
   pos = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-  enabled = (pos == 0);
+  enabled = (pos == 1);
 
   gtk_widget_set_sensitive (dialog->address, enabled);
   gtk_widget_set_sensitive (dialog->netmask, enabled);
