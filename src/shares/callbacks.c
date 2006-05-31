@@ -382,3 +382,9 @@ on_wins_server_focus_out (GtkWidget *widget, GdkEvent *event, gpointer data)
 
 	return FALSE;
 }
+
+void
+on_shared_folder_changed (GtkWidget *widget, gpointer data)
+{
+	share_settings_set_name_from_folder ();
+}

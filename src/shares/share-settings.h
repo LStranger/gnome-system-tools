@@ -32,6 +32,7 @@ enum {
 	SHARE_THROUGH_NFS
 };
 
+void          share_settings_set_name_from_folder (void);
 void          share_settings_dialog_run        (const gchar*, gboolean);
 void          share_settings_create_combo      (void);
 gboolean      share_settings_validate          (void);

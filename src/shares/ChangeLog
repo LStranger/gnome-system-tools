@@ -1,3 +1,11 @@
+2006-05-31  Carlos Garnacho  <carlosg@gnome.org>
+
+	* share-settings.[ch] (share_settings_set_name_from_folder): added,
+	defaults the SMB share name to match the selected folder name
+	* callbacks.[ch], main.c: added on_shared_folder_changed() signal
+	handler, changes the SMB name entry when the selected folder changes.
+	Fixes bug #336422.
+
 2006-05-29  Carlos Garnacho  <carlosg@gnome.org>
 
 	* share-settings.c: strings improvements. set according title to the

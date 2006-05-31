@@ -32,6 +32,26 @@
 
 extern GstTool *tool;
 
+void
+share_settings_set_name_from_folder (void)
+{
+	GtkWidget *folder_chooser, *name_entry;
+	gchar *path, *name;
+
+	folder_chooser = gst_dialog_get_widget (tool->main_dialog, "share_path");
+	name_entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
+	path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (folder_chooser));
+
+	if (strcmp (path, "/") == 0)
+		name = g_strdup (_("File System"));
+	else
+		name = g_path_get_basename (path);
+
+	gtk_entry_set_text (GTK_ENTRY (name_entry), name);
+	g_free (path);
+	g_free (name);
+}
+
 static void
 share_settings_clear_dialog (void)
 {
@@ -39,8 +59,7 @@ share_settings_clear_dialog (void)
 	GtkTreeModel *model;
 
 	/* SMB widgets */
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
-	gtk_entry_set_text (GTK_ENTRY (widget), "");
+	share_settings_set_name_from_folder ();
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_comment");
 	gtk_entry_set_text (GTK_ENTRY (widget), "");
@@ -304,7 +323,7 @@ share_settings_validate (void)
 
 	if (selected == SHARE_THROUGH_SMB) {
 		widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
-		text   = gtk_entry_get_text (GTK_ENTRY (widget));
+		text = gtk_entry_get_text (GTK_ENTRY (widget));
 		
 		return (text && *text);
 	}

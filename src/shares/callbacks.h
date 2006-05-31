@@ -37,7 +37,7 @@ void      on_share_nfs_add_clicked            (GtkWidget*, gpointer);
 void      on_share_nfs_host_type_changed      (GtkWidget*, gpointer);
 void      on_share_smb_settings_clicked       (GtkWidget*, gpointer);
 void      on_dialog_validate                  (GtkWidget*, gpointer);
-
+void      on_shared_folder_changed            (GtkWidget *widget, gpointer data);
 
 void      on_shares_dragged_folder            (GtkWidget *widget, GdkDragContext *context,
 					       gint x, gint y, GtkSelectionData *selection_data,
