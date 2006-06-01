@@ -24,6 +24,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#include "callbacks.h"
 #include "shares-tool.h"
 #include "nfs-acl-table.h"
 #include "share-settings.h"
@@ -32,14 +33,30 @@
 
 extern GstTool *tool;
 
+static void
+set_smb_name (const gchar *name)
+{
+	GtkWidget *entry;
+	gboolean modified;
+
+	entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
+
+	modified = GPOINTER_TO_INT (g_object_get_data (entry, "modified"));
+
+	if (!modified) {
+		g_signal_handlers_block_by_func (entry, on_share_smb_name_modified, tool->main_dialog);
+		gtk_entry_set_text (GTK_ENTRY (entry), name);
+		g_signal_handlers_unblock_by_func (entry, on_share_smb_name_modified, tool->main_dialog);
+	}
+}
+
 void
 share_settings_set_name_from_folder (void)
 {
-	GtkWidget *folder_chooser, *name_entry;
+	GtkWidget *folder_chooser;
 	gchar *path, *name;
 
 	folder_chooser = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	name_entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 	path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (folder_chooser));
 
 	if (strcmp (path, "/") == 0)
@@ -47,7 +64,7 @@ share_settings_set_name_from_folder (void)
 	else
 		name = g_path_get_basename (path);
 
-	gtk_entry_set_text (GTK_ENTRY (name_entry), name);
+	set_smb_name (name);
 	g_free (path);
 	g_free (name);
 }
@@ -59,7 +76,8 @@ share_settings_clear_dialog (void)
 	GtkTreeModel *model;
 
 	/* SMB widgets */
-	share_settings_set_name_from_folder ();
+	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
+	gtk_entry_set_text (GTK_ENTRY (widget), "");
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_comment");
 	gtk_entry_set_text (GTK_ENTRY (widget), "");
@@ -158,14 +176,13 @@ share_settings_set_share_smb (OobsShareSMB *share)
 	GtkWidget *widget;
 	gint       flags;
 
+	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
+	gtk_entry_set_text (GTK_ENTRY (widget), oobs_share_smb_get_name (share));
+	
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget),
 					     oobs_share_get_path (OOBS_SHARE (share)));
 
-	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
-	gtk_entry_set_text (GTK_ENTRY (widget),
-			    oobs_share_smb_get_name (share));
-	
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_comment");
 	gtk_entry_set_text (GTK_ENTRY (widget),
 			    oobs_share_smb_get_comment (share));
@@ -423,6 +440,7 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 	GtkTreeIter   iter;
 	gboolean      path_exists;
 	gchar        *title;
+	GtkWidget    *name_entry;
 
 	share  = NULL;
 	dialog = share_settings_prepare_dialog (path, standalone);
@@ -439,7 +457,11 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 		gtk_window_set_title (GTK_WINDOW (dialog), title);
 		g_free (title);
 	} else {
+		name_entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
+		g_object_set_data (name_entry, "modified", GINT_TO_POINTER (FALSE));
 		gtk_window_set_title (GTK_WINDOW (dialog), "Share Folder");
+
+		share_settings_set_name_from_folder ();
 	}
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));

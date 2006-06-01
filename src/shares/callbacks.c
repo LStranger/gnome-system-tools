@@ -388,3 +388,9 @@ on_shared_folder_changed (GtkWidget *widget, gpointer data)
 {
 	share_settings_set_name_from_folder ();
 }
+
+void
+on_share_smb_name_modified (GtkWidget *widget, gpointer data)
+{
+	g_object_set_data (widget, "modified", GINT_TO_POINTER (TRUE));
+}

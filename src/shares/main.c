@@ -50,6 +50,7 @@ static GstDialogSignal signals [] = {
 	{ "share_type",            "changed",         G_CALLBACK (on_dialog_validate) },
 	{ "share_nfs_delete",      "clicked",         G_CALLBACK (on_share_nfs_delete_clicked) },
 	{ "share_nfs_add",         "clicked",         G_CALLBACK (on_share_nfs_add_clicked) },
+	{ "share_smb_name",        "changed",         G_CALLBACK (on_share_smb_name_modified) },
 	{ "share_smb_name",        "changed",         G_CALLBACK (on_dialog_validate) },
 	{ "share_path",            "current-folder-changed", G_CALLBACK (on_shared_folder_changed) },
 	/* NFS add hosts dialog */
