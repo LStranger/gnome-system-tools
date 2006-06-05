@@ -33,6 +33,7 @@ struct _GstTimeTool {
 	GtkWidget *minutes;
 	GtkWidget *hours;
 
+	GtkWidget *ntp_use;
 	GtkWidget *ntp_list;
 
 	ETzMap    *tzmap;

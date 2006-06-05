@@ -50,13 +50,11 @@ ETzMap *tzmap;
 static void timezone_button_clicked (GtkWidget *w, gpointer data);
 static void update_tz (GstTimeTool *time_tool);
 static void server_button_clicked (GtkWidget *w, gpointer data);
-static void ntp_use_toggled (GtkWidget *w, GstDialog *dialog);
 static void gst_time_calendar_change_cb (GtkCalendar *, gpointer);
 static void on_server_list_element_toggled (GtkCellRendererToggle*, gchar*, gpointer);
 
 static GstDialogSignal signals[] = {
 	{ "timezone_button",     "clicked",  G_CALLBACK (timezone_button_clicked) },
-	{ "ntp_use",             "toggled",  G_CALLBACK (ntp_use_toggled) },
 	{ "timeserver_button",   "clicked",  G_CALLBACK (server_button_clicked) },
 	{ "ntp_add_server",      "clicked",  G_CALLBACK (on_ntp_addserver) },
 	{ NULL, NULL }
@@ -186,44 +184,6 @@ server_button_clicked (GtkWidget *w, gpointer data)
 
 	while (gtk_dialog_run (GTK_DIALOG (d)) == GTK_RESPONSE_HELP);
 	gtk_widget_hide (d);
-}
-
-static void
-ntp_use_toggled (GtkWidget *w, GstDialog *dialog)
-{
-	GstTool *tool;
-	gboolean active;
-
-	tool = gst_dialog_get_tool (dialog);
-	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
-
-	if (!GST_TIME_TOOL (tool)->ntp_service && active) {
-		GtkWidget *message;
-
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
-
-		message = gtk_message_dialog_new (GTK_WINDOW (dialog),
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_INFO,
-						  GTK_BUTTONS_CLOSE,
-						  _("NTP support is not installed"));
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
-							  _("Please install and activate NTP support in the system to enable "
-							    "synchronization of your local time server with "
-							    "internet time servers."));
-		gtk_dialog_run (GTK_DIALOG (message));
-		gtk_widget_destroy (message);
-		return;
-	}
-
-	oobs_service_set_runlevel_configuration (GST_TIME_TOOL (tool)->ntp_service,
-						 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
-						 (active) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
-						 /* FIXME: hardcoded priority? */
-						 50);
-
-	oobs_object_commit (GST_TIME_TOOL (tool)->services_config);
-	gtk_widget_set_sensitive (gst_dialog_get_widget (dialog, "timeserver_button"), active);
 }
 
 static void

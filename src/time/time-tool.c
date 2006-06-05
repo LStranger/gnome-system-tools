@@ -272,6 +272,45 @@ init_timezone (GstTimeTool *time_tool)
 	time_tool->timezone_dialog = gst_dialog_get_widget (tool->main_dialog, "time_zone_window");
 }
 
+static void
+on_ntp_use_toggled (GtkWidget *widget,
+		    gpointer   data)
+{
+	GstTool *tool;
+	gboolean active;
+
+	tool = (GstTool *) data;
+	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+
+	if (!GST_TIME_TOOL (tool)->ntp_service && active) {
+		GtkWidget *message;
+
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+
+		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+						  GTK_DIALOG_MODAL,
+						  GTK_MESSAGE_INFO,
+						  GTK_BUTTONS_CLOSE,
+						  _("NTP support is not installed"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
+							  _("Please install and activate NTP support in the system to enable "
+							    "synchronization of your local time server with "
+							    "internet time servers."));
+		gtk_dialog_run (GTK_DIALOG (message));
+		gtk_widget_destroy (message);
+		return;
+	}
+
+	oobs_service_set_runlevel_configuration (GST_TIME_TOOL (tool)->ntp_service,
+						 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
+						 (active) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
+						 /* FIXME: hardcoded priority? */
+						 50);
+
+	oobs_object_commit (GST_TIME_TOOL (tool)->services_config);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "timeserver_button"), active);
+}
+
 static GObject*
 gst_time_tool_constructor (GType                  type,
 			   guint                  n_construct_properties,
@@ -292,6 +331,10 @@ gst_time_tool_constructor (GType                  type,
 	time_tool->calendar = gst_dialog_get_widget (GST_TOOL (time_tool)->main_dialog, "calendar");
 	g_signal_connect (G_OBJECT (time_tool->calendar), "day-selected",
 			  G_CALLBACK (on_calendar_day_selected), time_tool);
+
+	time_tool->ntp_use  = gst_dialog_get_widget (GST_TOOL (time_tool)->main_dialog, "ntp_use");
+	g_signal_connect (G_OBJECT (time_tool->ntp_use), "toggled",
+			  G_CALLBACK (on_ntp_use_toggled), time_tool);
 
 	time_tool->ntp_list = ntp_servers_list_get (time_tool);
 	init_timezone (time_tool);
@@ -338,12 +381,13 @@ static void
 gst_time_tool_update_gui (GstTool *tool)
 {
 	GstTimeTool *time_tool = GST_TIME_TOOL (tool);
-	GtkWidget *timezone, *ntp_use;
+	GtkWidget *timezone, *ntp_use, *timeserver_button;
 	gint active;
 
 	gst_time_tool_start_clock (GST_TIME_TOOL (tool));
 	timezone = gst_dialog_get_widget (tool->main_dialog, "tzlabel");
 	ntp_use = gst_dialog_get_widget (tool->main_dialog, "ntp_use");
+	timeserver_button = gst_dialog_get_widget (tool->main_dialog, "timeserver_button");
 
 	gtk_label_set_text (GTK_LABEL (timezone),
 			    oobs_time_config_get_timezone (OOBS_TIME_CONFIG (time_tool->time_config)));
@@ -355,10 +399,11 @@ gst_time_tool_update_gui (GstTool *tool)
 						 &active,
 						 NULL);
 	/* FIXME: block signal handler */
-	/* g_signal_handlers_block_by_func (ntp_use, ntp_use_toggled, tool->main_dialog); */
+	g_signal_handlers_block_by_func (ntp_use, on_ntp_use_toggled, tool);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ntp_use),
 				      (active == OOBS_SERVICE_START));
-	/* g_signal_handlers_unblock_by_func (ntp_use, ntp_use_toggled, tool->main_dialog); */
+	gtk_widget_set_sensitive (timeserver_button, (active == OOBS_SERVICE_START));
+	g_signal_handlers_unblock_by_func (ntp_use, on_ntp_use_toggled, tool);
 }
 
 GstTool*
