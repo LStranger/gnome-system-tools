@@ -205,6 +205,7 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 
 		users_table_add_user (user, &list_iter);
 		oobs_object_commit (GST_USERS_TOOL (tool)->users_config);
+		oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
 	}
 }
 
@@ -242,6 +243,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 		user_settings_dialog_get_data (user);
 		users_table_set_user (user, list_iter, &filter_iter);
 		oobs_object_commit (GST_USERS_TOOL (tool)->users_config);
+		oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
 	}
 }
 
