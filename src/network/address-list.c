@@ -56,6 +56,7 @@ static void gst_address_list_get_property (GObject      *object,
 					   GValue       *value,
 					   GParamSpec   *pspec);
 
+static void save_address_data  (GstAddressList *list);
 static void setup_treeview     (GstAddressList *list);
 static void on_element_deleted (GtkWidget *widget, gpointer data);
 static void on_element_added   (GtkWidget *widget, gpointer data);
@@ -69,6 +70,7 @@ static void on_editing_done      (GtkCellRenderer *renderer,
 				  const gchar     *path_string,
 				  const gchar     *new_text,
 				  gpointer         data);
+
 
 GtkActionEntry address_list_popup_menu_items [] = {
   { "Add",        GTK_STOCK_ADD,        N_("_Add"),        NULL, NULL, G_CALLBACK (on_element_added) },
@@ -273,6 +275,16 @@ popup_menu_create (GtkWidget *widget)
 }
 
 static void
+on_list_drag_end (GtkWidget      *widget,
+		  GdkDragContext *context,
+		  gpointer data)
+{
+  GstAddressList *list = (GstAddressList *) data;
+
+  save_address_data (list);
+}
+
+static void
 setup_treeview (GstAddressList *list)
 {
   GtkCellRenderer *renderer;
@@ -310,9 +322,11 @@ setup_treeview (GstAddressList *list)
   table_popup->popup = popup_menu_create (GTK_WIDGET (list->_priv->list));
 
   g_signal_connect (G_OBJECT (list->_priv->list), "button-press-event",
-		    G_CALLBACK (on_table_button_press), (gpointer) table_popup);
+		    G_CALLBACK (on_table_button_press), table_popup);
   g_signal_connect (G_OBJECT (list->_priv->list), "popup_menu",
-		    G_CALLBACK (on_table_popup_menu), (gpointer) table_popup);
+		    G_CALLBACK (on_table_popup_menu), table_popup);
+  g_signal_connect (G_OBJECT (list->_priv->list), "drag-end",
+		    G_CALLBACK (on_list_drag_end), list);
 }
 
 static gboolean

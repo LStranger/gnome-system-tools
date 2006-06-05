@@ -554,7 +554,7 @@ on_domain_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
   changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "content-changed"));
   domain = gtk_entry_get_text (GTK_ENTRY (widget));
 
-  if (changed && domain && *domain)
+  if (changed)
     {
       oobs_hosts_config_set_domainname (tool->hosts_config, domain);
       oobs_object_commit (tool->hosts_config);
