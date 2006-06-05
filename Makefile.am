@@ -8,7 +8,6 @@ EXTRA_DIST = \
 	HACKING 		\
 	BUGS			\
 	$(schema_in_files)      \
-	gnome-system-tools.spec \
 	intltool-extract.in	\
 	intltool-merge.in 	\
 	intltool-update.in 	\
