@@ -9,7 +9,7 @@ DOC_FIGURES = \
 	figures/time-servers.png	\
 	figures/time-tool.png
 
-DOC_LINGUAS = es
+DOC_LINGUAS = es ru
 
 # This isn't still ported to gnome-doc-utils
 SUBDIRS = nl
