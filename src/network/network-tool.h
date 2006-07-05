@@ -25,6 +25,7 @@ G_BEGIN_DECLS
 
 #include <gtk/gtk.h>
 #include "address-list.h"
+#include "locations-combo.h"
 #include "connection.h"
 
 #define GST_TYPE_NETWORK_TOOL           (gst_network_tool_get_type ())
@@ -55,9 +56,7 @@ struct _GstNetworkTool
   GtkComboBox  *gateways_list;
 
   GtkTreeView *host_aliases_list;
-  /* FIXME
-  GstLocation *location;
-  */
+  GstLocationsCombo *location;
 
   GtkEntry *hostname;
   GtkEntry *domain;

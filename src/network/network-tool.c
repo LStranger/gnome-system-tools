@@ -26,6 +26,7 @@
 #include "connection.h"
 #include "callbacks.h"
 #include "hosts.h"
+#include "locations-combo.h"
 
 static void gst_network_tool_class_init (GstNetworkToolClass *class);
 static void gst_network_tool_init       (GstNetworkTool      *tool);
@@ -56,17 +57,6 @@ gst_network_tool_init (GstNetworkTool *tool)
 {
   tool->hosts_config = oobs_hosts_config_get (GST_TOOL (tool)->session);
   tool->ifaces_config = oobs_ifaces_config_get (GST_TOOL (tool)->session);
-
-  tool->dns = NULL;
-  tool->search = NULL;
-  tool->interfaces_model = NULL;
-  tool->gateways_model = NULL;
-  tool->interfaces_list = NULL;
-  tool->gateways_list = NULL;
-  tool->hostname = NULL;
-  tool->domain = NULL;
-  tool->dialog = NULL;
-  tool->host_aliases_list = NULL;
 }
 
 static void
@@ -151,12 +141,10 @@ gst_network_tool_constructor (GType                  type,
   */
   tool->host_aliases_list = host_aliases_list_create (tool);
 
-  /* FIXME: locations
-  tool->location = gst_location_combo_new ();
-  gtk_widget_show (GTK_WIDGET (tool->location));
-  widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "locations_box");
-  gtk_box_pack_start_defaults (GTK_BOX (widget), GTK_WIDGET (tool->location));
-  */
+  widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "locations_combo");
+  add_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "add_location");
+  delete_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "remove_location");
+  tool->location = gst_locations_combo_new (GST_TOOL (tool), widget, add_button, delete_button);
 
   tool->dialog = connection_dialog_init (tool);
 
@@ -220,22 +208,22 @@ add_all_interfaces (GstNetworkTool *network_tool)
 {
   OobsList *ifaces_list;
 
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_ETHERNET);
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_ETHERNET);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_WIRELESS);
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_WIRELESS);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_IRLAN);
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_IRLAN);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_PLIP);
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_PLIP);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_MODEM);
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_MODEM);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_ISDN);
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_ISDN);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 }
 
@@ -269,6 +257,7 @@ gst_network_tool_update_gui (GstTool *tool)
 		      oobs_hosts_config_get_domainname (network_tool->hosts_config));
   g_signal_handlers_unblock_by_func (network_tool->domain, on_entry_changed, tool->main_dialog);
 
+  gtk_list_store_clear (GTK_LIST_STORE (network_tool->interfaces_model));
   add_all_interfaces (network_tool);
 }
 

@@ -53,23 +53,22 @@ connection_get_config_method (GstConnectionDialog *dialog)
   return (ret == 1) ? OOBS_METHOD_STATIC : OOBS_METHOD_DHCP;
 }
 
-/* FIXME
 static void
-connection_set_wireless_key_type (GstConnectionDialog *dialog, GstWirelessKey key_type)
+connection_set_wireless_key_type (GstConnectionDialog *dialog,
+				  OobsWirelessKeyType  key_type)
 {
   gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->key_type_combo),
-			    (key_type == GST_WIRELESS_KEY_ASCII) ? 0 : 1);
+			    (key_type == OOBS_WIRELESS_KEY_ASCII) ? 0 : 1);
 }
 
-static GstBootProto
+static OobsWirelessKeyType
 connection_get_wireless_key_type (GstConnectionDialog *dialog)
 {
   gint ret;
 
   ret = gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->key_type_combo));
-  return (ret == 0) ? GST_WIRELESS_KEY_ASCII : GST_WIRELESS_KEY_HEXADECIMAL;
+  return (ret == 0) ? OOBS_WIRELESS_KEY_ASCII : OOBS_WIRELESS_KEY_HEXADECIMAL;
 }
-*/
 
 static void
 connection_essids_combo_init (GtkComboBoxEntry *combo)
@@ -194,25 +193,18 @@ wireless_essid_populate_model (GtkComboBox *combo, const gchar *dev)
 static void
 wireless_dialog_prepare (GstConnectionDialog *dialog)
 {
-  gchar *essid, *key, *dev;
+  gchar *essid, *key;
+  OobsWirelessKeyType key_type;
 
   g_object_get (G_OBJECT (dialog->iface),
 		"essid", &essid,
 		"key", &key,
-		/* FIXME
-		"iface-wep-key-type", &key_type,
-		"iface-dev", &dev,
-		*/
+		"key-type", &key_type,
 		NULL);
 
-  /* FIXME
-     connection_set_wireless_key_type (dialog, key_type);
-  */
+  connection_set_wireless_key_type (dialog, key_type);
   gtk_entry_set_text (GTK_ENTRY (GTK_BIN (dialog->essid)->child), (essid) ? essid : "");
-
-  /* FIXME
   gtk_entry_set_text (GTK_ENTRY (dialog->wep_key), (key) ? key : "");
-  */
 
   /* FIXME
   wireless_essid_populate_model (GTK_COMBO_BOX (dialog->essid), dev);
@@ -220,9 +212,6 @@ wireless_dialog_prepare (GstConnectionDialog *dialog)
 
   g_free (essid);
   g_free (key);
-  /*
-  g_free (dev);
-  */
 }
 
 static void
@@ -231,9 +220,7 @@ wireless_dialog_save (GstConnectionDialog *dialog)
   g_object_set (G_OBJECT (dialog->iface),
 		"essid",   get_entry_text (GTK_BIN (dialog->essid)->child),
 		"key", get_entry_text (dialog->wep_key),
-		/* FIXME
-		"iface-wep-key-type", connection_get_wireless_key_type (dialog),
-		*/
+		"key-type", connection_get_wireless_key_type (dialog),
 		NULL);
 }
 

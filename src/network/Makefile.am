@@ -19,7 +19,9 @@ network_admin_LDADD = $(GST_TOOL_LIBS)
 network_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
 network_admin_SOURCES = 			\
 	address-list.c	address-list.h		\
+	network-locations.c network-locations.h	\
 	network-tool.c network-tool.h		\
+	locations-combo.c locations-combo.h	\
 	ifaces-list.c ifaces-list.h		\
 	callbacks.c callbacks.h			\
 	connection.c connection.h		\
