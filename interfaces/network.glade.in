@@ -28,6 +28,7 @@
 
       <child>
 	<widget class="GtkHBox" id="locations_box">
+	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">6</property>
 
@@ -57,7 +58,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkComboBox" id="combobox1">
+	    <widget class="GtkComboBox" id="locations_combo">
 	      <property name="visible">True</property>
 	      <property name="add_tearoffs">False</property>
 	      <property name="focus_on_click">True</property>
@@ -70,12 +71,13 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button1">
+	    <widget class="GtkButton" id="add_location">
 	      <property name="visible">True</property>
 	      <property name="tooltip" translatable="yes">Add location</property>
 	      <property name="can_focus">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
+	      <accelerator key="A" modifiers="GDK_MOD1_MASK" signal="clicked"/>
 
 	      <child>
 		<widget class="GtkImage" id="image7">
@@ -97,12 +99,13 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button2">
+	    <widget class="GtkButton" id="remove_location">
 	      <property name="visible">True</property>
 	      <property name="tooltip" translatable="yes">Remove location</property>
 	      <property name="can_focus">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
+	      <accelerator key="R" modifiers="GDK_MOD1_MASK" signal="clicked"/>
 
 	      <child>
 		<widget class="GtkImage" id="image8">
