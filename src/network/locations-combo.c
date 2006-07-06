@@ -325,10 +325,7 @@ on_add_button_clicked (GtkWidget *widget, gpointer data)
   name = gtk_entry_get_text (GTK_ENTRY (priv->location_entry));
 
   if (response == GTK_RESPONSE_OK && check_save_location (combo, name))
-    {
-      gst_network_locations_save_current (GST_NETWORK_LOCATIONS (combo), name);
-      g_print ("guardando\n");
-    }
+    gst_network_locations_save_current (GST_NETWORK_LOCATIONS (combo), name);
 }
 
 static void
