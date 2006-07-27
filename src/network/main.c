@@ -81,6 +81,7 @@ static GstDialogSignal signals[] = {
 
 static GstDialogSignal signals_after[] = {
   { "hostname",                     "focus-out-event", G_CALLBACK (on_hostname_focus_out) },
+  { NULL }
 };
 
 static void
