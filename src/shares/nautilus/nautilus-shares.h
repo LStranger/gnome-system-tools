@@ -25,6 +25,7 @@
 #define NAUTILUS_SHARES_H
 
 #include <glib-object.h>
+#include <oobs/oobs.h>
 
 G_BEGIN_DECLS
 
@@ -37,6 +38,12 @@ typedef struct _NautilusSharesClass NautilusSharesClass;
 
 struct _NautilusShares {
   GObject parent;
+
+  OobsSession *session;
+  OobsObject *smb_config;
+  OobsObject *nfs_config;
+
+  GHashTable *paths;
 };
 
 struct _NautilusSharesClass {
