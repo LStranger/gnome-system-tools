@@ -57,7 +57,7 @@ GType                  gst_network_locations_get_type        (void);
 GstNetworkLocations*   gst_network_locations_get             (void);
 
 GList*                 gst_network_locations_get_names       (GstNetworkLocations *locations);
-gchar*                gst_network_locations_get_current     (GstNetworkLocations *locations);
+gchar*                 gst_network_locations_get_current     (GstNetworkLocations *locations);
 gboolean               gst_network_locations_set_location    (GstNetworkLocations *locations,
 							      const gchar         *name);
 gboolean               gst_network_locations_save_current    (GstNetworkLocations *locations,
