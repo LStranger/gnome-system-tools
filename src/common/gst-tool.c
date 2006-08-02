@@ -72,19 +72,12 @@ static void  gst_tool_finalize     (GObject      *object);
 static GObject* gst_tool_constructor (GType                  type,
 				      guint                  n_construct_properties,
 				      GObjectConstructParam *construct_params);
-
 static void  gst_tool_set_property (GObject      *object,
 				    guint         prop_id,
 				    const GValue *value,
 				    GParamSpec   *pspec);
 
 static void gst_tool_close         (GstTool *tool);
-
-static void gst_tool_create_platform_list        (GstTool *tool,
-						  GtkTreeView *list);
-static void gst_tool_populate_platform_list      (GstTool *tool);
-static const gchar* gst_tool_run_platform_dialog (GstTool *tool);
-
 
 
 enum {
@@ -207,43 +200,6 @@ gst_tool_init (GstTool *tool)
 		gdk_pixbuf_unref (pixbuf);
 
 	g_object_unref (xml);
-	
-	/* load the report window */
-	/* FIXME
-	xml = gst_tool_load_glade_common (tool, "report_window");
-
-	tool->report_window = glade_xml_get_widget (xml, "report_window");
-
-	g_signal_connect (G_OBJECT (tool->report_window), "delete_event",
-			  G_CALLBACK (report_window_close_cb), tool);
-	*/
-/*
-	tool->report_label    = glade_xml_get_widget (xml, "report_label");
-	tool->report_progress = glade_xml_get_widget (xml, "report_progress");
-	tool->report_pixmap   = glade_xml_get_widget (xml, "report_pixmap");
-
-	pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "gnome-system-config", 48, 0, NULL);
-	gtk_image_set_from_pixbuf (GTK_IMAGE (tool->report_pixmap), pixbuf);
-	gdk_pixbuf_unref (pixbuf);
-*/
-
-	/* load the platforms list */
-	xml = gst_tool_load_glade_common (tool, "platform_dialog");
-	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
-	gst_tool_create_platform_list (tool, GTK_TREE_VIEW (tool->platform_list));
-	gst_tool_populate_platform_list (tool);
-
-	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
-	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
-	g_object_unref (xml);
-
-	/* load the remote config dialog */
-	/* FIXME
-	xml = gst_tool_load_glade_common (tool, "remote_dialog");
-	tool->remote_dialog = glade_xml_get_widget (xml, "remote_dialog");
-	tool->remote_hosts_list = glade_xml_get_widget (xml, "remote_hosts_list");
-	gst_tool_create_remote_hosts_list (GTK_TREE_VIEW (tool->remote_hosts_list), tool);
-	*/
 }
 
 static GObject*
@@ -812,86 +768,6 @@ gst_tool_class_init (GstToolClass *class)
 	gobject_class->finalize = gst_tool_finalize;
 }
 */
-
-static void
-gst_tool_create_platform_list (GstTool *tool, GtkTreeView *list)
-{
-	GtkTreeModel *model = GTK_TREE_MODEL (gtk_list_store_new (PLATFORM_LIST_COL_LAST, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER));
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-	GtkTreeSelection *select;
-
-	g_return_if_fail (list != NULL);
-	g_return_if_fail (GTK_IS_TREE_VIEW (list));
-
-	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
-	g_object_unref (model);
-	
-	/* Insert the pixmaps cell */
-	renderer = gtk_cell_renderer_pixbuf_new ();
-	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
-
-	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
-	                                             -1,
-	                                             "_Platform",
-	                                             renderer,
-	                                             "pixbuf", PLATFORM_LIST_COL_LOGO,
-						     NULL);
-
-	/* Insert the text cell */
-	column = gtk_tree_view_get_column (GTK_TREE_VIEW (list), PLATFORM_LIST_COL_LOGO);
-	
-	renderer = gtk_cell_renderer_text_new ();
-	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
-
-	gtk_tree_view_column_pack_end (column, renderer, TRUE);
-	gtk_tree_view_column_add_attribute (column, renderer, "markup", PLATFORM_LIST_COL_NAME);
-	
-	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
-	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
-
-	g_signal_connect (G_OBJECT (select), "changed",
-			  G_CALLBACK (on_platform_list_selection_changed),
-			  (gpointer) tool);
-}
-
-static void
-gst_tool_populate_platform_list (GstTool *tool)
-{
-	GtkListStore *store;
-	GtkTreeIter iter;
-	GList *platforms, *list;
-	OobsPlatform *platform;
-	GString *str;
-
-	store = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (tool->platform_list)));
-	list = platforms = oobs_session_get_supported_platforms (tool->session);
-
-	while (platforms) {
-		platform = platforms->data;
-		platforms = platforms->next;
-
-		str = g_string_new (platform->name);
-
-		if (platform->version)
-			g_string_append_printf (str, " %s", platform->version);
-
-		if (platform->codename)
-			g_string_append_printf (str, " (<i>%s</i>)", platform->codename);
-
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter,
-		                    PLATFORM_LIST_COL_LOGO, NULL,
-		                    PLATFORM_LIST_COL_NAME, str->str,
-		                    PLATFORM_LIST_COL_ID, platform->id,
-				    -1);
-
-		g_string_free (str, TRUE);
-	}
-
-	g_list_free (list);
-}
-
 
 /*
 static void
