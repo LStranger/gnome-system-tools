@@ -11,11 +11,11 @@ toolname = time
 bin_PROGRAMS = time-admin
 
 SUBDIRS = e-map
-INCLUDES = $(GST_TOOL_CFLAGS)
+INCLUDES = $(GST_TOOL_CFLAGS) $(DBUS_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
 EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 
-time_admin_LDADD = $(GST_TOOL_LIBS) ./e-map/libemap.a
+time_admin_LDADD = $(GST_TOOL_LIBS) $(DBUS_LIBS) ./e-map/libemap.a
 time_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) ./e-map/libemap.a
 time_admin_SOURCES = \
 	time-tool.c	time-tool.h \

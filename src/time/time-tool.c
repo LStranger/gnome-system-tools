@@ -21,6 +21,7 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <dbus/dbus.h>
 #include "time-tool.h"
 #include "gst.h"
 #include "ntp-servers-list.h"
@@ -28,11 +29,18 @@
 #define GST_TIME_TOOL_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_TIME_TOOL, GstTimeToolPrivate))
 #define APPLY_CONFIG_TIMEOUT 2000
 
+#define SCREENSAVER_SERVICE "org.gnome.ScreenSaver"
+#define SCREENSAVER_PATH "/org/gnome/ScreenSaver"
+#define SCREENSAVER_INTERFACE "org.gnome.ScreenSaver"
+
 typedef struct _GstTimeToolPrivate GstTimeToolPrivate;
 
 struct _GstTimeToolPrivate {
 	guint clock_timeout;
 	guint apply_timeout;
+
+	DBusConnection *bus_connection;
+	gint cookie;
 };
 
 
@@ -92,11 +100,60 @@ gst_time_tool_init (GstTimeTool *tool)
 	OobsList *list;
 	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 
+	priv->bus_connection = dbus_bus_get (DBUS_BUS_SESSION, NULL);
+
 	tool->time_config = oobs_time_config_get (GST_TOOL (tool)->session);
 	tool->ntp_config = oobs_ntp_config_get (GST_TOOL (tool)->session);
 	tool->services_config = oobs_services_config_get (GST_TOOL (tool)->session);
 
 	get_ntp_service (tool);
+}
+
+static void
+inhibit_screensaver (GstTimeTool *tool,
+		     gboolean     inhibit)
+{
+	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
+	DBusMessage *message, *reply;
+	DBusMessageIter iter;
+
+	g_return_if_fail ((inhibit && priv->cookie == 0) || (!inhibit && priv->cookie != 0));
+
+	if (inhibit) {
+		const gchar *appname = "Time-admin";
+		const gchar *reason = "Changing time";
+
+		message = dbus_message_new_method_call (SCREENSAVER_SERVICE,
+							SCREENSAVER_PATH,
+							SCREENSAVER_INTERFACE,
+							"Inhibit");
+		/* set args */
+		dbus_message_iter_init_append (message, &iter);
+		dbus_message_iter_append_basic (&iter, DBUS_TYPE_STRING, &appname);
+		dbus_message_iter_append_basic (&iter, DBUS_TYPE_STRING, &reason);
+
+		reply = dbus_connection_send_with_reply_and_block (priv->bus_connection, message, -1, NULL);
+
+		/* get cookie */
+		dbus_message_iter_init (reply, &iter);
+		dbus_message_iter_get_basic (&iter, &priv->cookie);
+
+		dbus_message_unref (message);
+		dbus_message_unref (reply);
+	} else {
+		message = dbus_message_new_method_call (SCREENSAVER_SERVICE,
+							SCREENSAVER_PATH,
+							SCREENSAVER_INTERFACE,
+							"UnInhibit");
+		/* set args */
+		dbus_message_iter_init_append (message, &iter);
+		dbus_message_iter_append_basic (&iter, DBUS_TYPE_INT32, &priv->cookie);
+
+		dbus_connection_send (priv->bus_connection, message, NULL);
+		dbus_message_unref (message);
+
+		priv->cookie = 0;
+	}
 }
 
 static gboolean
@@ -110,12 +167,16 @@ on_apply_timeout (GstTimeTool *tool)
 	minute = (guint) gtk_spin_button_get_value (GTK_SPIN_BUTTON (tool->minutes));
 	second = (guint) gtk_spin_button_get_value (GTK_SPIN_BUTTON (tool->seconds));
 
+	inhibit_screensaver (tool, TRUE);
+
 	oobs_time_config_set_time (OOBS_TIME_CONFIG (tool->time_config),
 				   (gint) year, (gint) month, (gint) day,
 				   (gint) hour, (gint) minute, (gint)second);
 
 	oobs_object_commit (tool->time_config);
 	gst_time_tool_start_clock (tool);
+
+	inhibit_screensaver (tool, FALSE);
 
 	return FALSE;
 }

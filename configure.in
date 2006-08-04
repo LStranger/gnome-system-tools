@@ -32,6 +32,7 @@ GTK_REQUIRED=2.9.0
 LIBGLADE_REQUIRED=2.4.0
 LIBGNOMEUI_REQUIRED=2.9.0
 GCONF_REQUIRED=2.2.0
+DBUS_REQUIRED=0.32
 
 
 dnl =====================================================
@@ -80,6 +81,14 @@ PKG_CHECK_MODULES(GST_DEPENDS,[
 			   gconf-2.0 >= $GCONF_REQUIRED
 			   liboobs-1 >= $LIBOOBS_REQUIRED
 			   ])
+
+PKG_CHECK_MODULES(DBUS,[
+			   dbus-1 >= $DBUS_REQUIRED
+			   ])
+
+DBUS_CFLAGS="$DBUS_CFLAGS -DDBUS_API_SUBJECT_TO_CHANGE"
+AC_SUBST(DBUS_LIBS)
+AC_SUBST(DBUS_CFLAGS)
 
 dnl =====================================================
 dnl END: Check for Module versions
