@@ -1,5 +1,11 @@
 2006-08-04  Carlos Garnacho  <carlosg@gnome.org>
 
+	* time-tool.c (on_ntp_use_toggled) (gst_time_tool_update_gui): check
+	that the NTP service exists to avoid critical warnings. Fixes #347551 
+	(Jose M. daLuz)
+
+2006-08-04  Carlos Garnacho  <carlosg@gnome.org>
+
 	* Makefile.am: link to DBus
 	* time-tool.c (inhibit_screensaver): added, inhibits/uninhibits
 	gnome-screensaver while changing time.

@@ -346,7 +346,9 @@ on_ntp_use_toggled (GtkWidget *widget,
 	if (!GST_TIME_TOOL (tool)->ntp_service && active) {
 		GtkWidget *message;
 
+		g_signal_handlers_block_by_func (widget, on_ntp_use_toggled, tool);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+		g_signal_handlers_unblock_by_func (widget, on_ntp_use_toggled, tool);
 
 		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 						  GTK_DIALOG_MODAL,
@@ -443,6 +445,7 @@ gst_time_tool_update_gui (GstTool *tool)
 {
 	GstTimeTool *time_tool = GST_TIME_TOOL (tool);
 	GtkWidget *timezone, *ntp_use, *timeserver_button;
+	gboolean is_active = FALSE;
 	gint active;
 
 	gst_time_tool_start_clock (GST_TIME_TOOL (tool));
@@ -455,15 +458,17 @@ gst_time_tool_update_gui (GstTool *tool)
 
 	update_servers_list (GST_TIME_TOOL (tool));
 
-	oobs_service_get_runlevel_configuration (time_tool->ntp_service,
-						 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
-						 &active,
-						 NULL);
-	/* FIXME: block signal handler */
+	if (time_tool->ntp_service) {
+		oobs_service_get_runlevel_configuration (time_tool->ntp_service,
+							 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
+							 &active,
+							 NULL);
+		is_active = (active == OOBS_SERVICE_START);
+	}
+
 	g_signal_handlers_block_by_func (ntp_use, on_ntp_use_toggled, tool);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ntp_use),
-				      (active == OOBS_SERVICE_START));
-	gtk_widget_set_sensitive (timeserver_button, (active == OOBS_SERVICE_START));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ntp_use), is_active);
+	gtk_widget_set_sensitive (timeserver_button, is_active);
 	g_signal_handlers_unblock_by_func (ntp_use, on_ntp_use_toggled, tool);
 }
 
