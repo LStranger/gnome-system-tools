@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY toolversion "0.35">
-  <!ENTITY manrevision "0.35">
-  <!ENTITY date "June 2004">
+  <!ENTITY toolversion "2.15.2">
+  <!ENTITY manrevision "2.15.2">
+  <!ENTITY date "August 2006">
   <!ENTITY tool "Users Administration Tool">
 ]>
 <!-- 
@@ -69,6 +69,14 @@
           <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
 	   </revdescription>
 	 </revision>
+	 <revision>
+	   <revnumber>&tool; Manual V0.35</revnumber>
+	   <date>June 2004</date>
+	   <revdescription>
+          <para role="author">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+          <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+	   </revdescription>
+	 </revision>
     </revhistory>
 
     <releaseinfo>This manual describes version &toolversion; of &tool;.</releaseinfo> 
@@ -99,7 +107,7 @@
 
     <variablelist>
 	 <varlistentry>
-	   <term><guimenu>Desktop</guimenu> menu</term>
+	   <term><guimenu>System</guimenu> menu</term>
 	   <listitem>
 		<para>Choose <menuchoice><guisubmenu>Administration</guisubmenu><guimenuitem>Users and groups</guimenuitem></menuchoice>.</para>
 	   </listitem>
@@ -131,24 +139,43 @@
 	 </screenshot>
     </figure>
 
-    <para>
-	 The <application>&tool;</application> main window contains two tabbed sections:</para>
+    <para>The <application>&tool;</application> main window contains the following elements:</para>
 
     <variablelist>
 	 <varlistentry>
-	   <term><guilabel>Users</guilabel></term>
+	   <term><guilabel>Users list</guilabel></term>
 	   <listitem>
-		<para>Shows the list of users and enables you to add new users and to modify or delete the current ones.</para>
+		<para>Shows the available users. depending on the gconf key "/apps/gnome-system-tools/users/show_all" it will show the system users too.</para>
 	   </listitem>
 	 </varlistentry>
 
 	 <varlistentry>
-	   <term><guilabel>Groups</guilabel></term>
+	   <term><guilabel>User manipulation buttons</guilabel></term>
 	   <listitem>
-		<para>Shows the list of groups and enables you to add new groups and to modify or delete the current ones.</para>
+		<para>Allows to add or delete users or modify user settings.</para>
+	   </listitem>
+	 </varlistentry>
+	 <varlistentry>
+	   <term><guilabel>Manage groups button</guilabel></term>
+	   <listitem>
+		<para>Shows a similar dialog to modify group settings.</para>
 	   </listitem>
 	 </varlistentry>
     </variablelist>
+
+    <figure id="users-groups-editor">
+	 <title>&tool; groups editor</title>
+	 <screenshot>
+	   <mediaobject>
+		<imageobject>
+		  <imagedata fileref="figures/groups.png" format="PNG"/>
+		</imageobject>
+		<textobject>
+		  <phrase>Groups editor.</phrase>
+		</textobject>
+	   </mediaobject>
+	 </screenshot>
+    </figure>
   </sect1>
 
   <sect1 id="tool-usage">
@@ -156,9 +183,9 @@
 
     <sect2 id="tool-add-new-user">
 	 <title>To add a new user</title>
-	 <para>Press the <guilabel>Add</guilabel> button, a new window will appear asking for the new user data. For adding a new user, you must provide at least the username and password (automatically generated or by hand). Optionally you can specify or modify real name, office location, work phone, home phone, main group, used shell, home directory, user ID and a list of the secondary groups for the user.</para>
+	 <para>Press the <guilabel>Add</guilabel> button in the main dialog, a new window will appear asking for the new user data. For adding a new user, you must provide at least the username and password (automatically generated or by hand). Optionally you can specify or modify real name, office location, work phone, home phone, main group, used shell, home directory, user ID and a list of the secondary groups for the user.</para>
 
-	 <para>Main group, used shell, home directory and user ID are automatically guessed depending on the selected profile, so you may be interested in creating different profiles for different groups of users.</para>
+	 <para>Main group, used shell, home directory and user ID are automatically guessed depending on the selected profile.</para>
     </sect2>
 
     <sect2>
@@ -175,34 +202,17 @@
 
     <sect2 id="tool-add-new-group">
 	 <title>To add a new group</title>
-	 <para>Press the <guilabel>Add</guilabel> button, a new window will appear asking for the new group data. For adding a new group, you must provide at least the group name and the group ID. Optionally you can specify the users that will belong to this group.</para>
+	 <para>Press the <guilabel>Add</guilabel> button in the groups dialog, a new window will appear asking for the new group data. For adding a new group, you must provide at least the group name and the group ID. Optionally you can specify the users that will belong to this group.</para>
     </sect2>
 
     <sect2>
 	 <title>To modify an existing group</title>
-	 <para>Select the group you want to modify and press the <guilabel>Properties</guilabel> button, A window will appear with the group's data allowing you to modify them.</para>
+	 <para>Select the group you want to modify in the groups dialog and press the <guilabel>Properties</guilabel> button, A window will appear with the group's data allowing you to modify them.</para>
     </sect2>
 
     <sect2>
 	 <title>To delete an existing group</title>
-	 <para>Select the group or groups that you want to delete and press the <guilabel>Delete</guilabel> button in the <guilabel>Groups</guilabel> tab, due to the importance of this data, you will be asked for confirmation for every group you want to delete.</para>
-    </sect2>
-
-    <sect2 id="tool-add-new-profile">
-	 <title>To create new profile</title>
-	 <para>For opening the profiles window, you must press the <guilabel>Edit user profiles</guilabel> that is inside the new users window, then press the <guilabel>Add</guilabel> button, a new window will appear asking you for the new profile data. For creating a new profile, you must at least provide the profile name, the default home directory, the default shell and the default maximum/minimum user/group ID.</para>
-
-	 <para>If you want to replace any part of the default home directory with the user name, you can use the $user keyword (i.e.: /home/$user).</para>
-    </sect2>
-
-    <sect2>
-	 <title>To modify an existing profile</title>
-	 <para>In the profiles window, select the profile you want to modify and press the <guilabel>Properties</guilabel> button, a new window will appear with the profile data, allowing you to modify them.</para>
-    </sect2>
-
-    <sect2>
-	 <title>To delete an existing profile</title>
-	 <para>Select the profile or profiles that you want to delete and press the <guilabel>Delete</guilabel> button in the profiles window, note that at least the default profile is needed, so you can not delete it.</para>
+	 <para>Select the group or groups that you want to delete in the groups dialog and press the <guilabel>Delete</guilabel> button in the <guilabel>Groups</guilabel> tab, due to the importance of this data, you will be asked for confirmation for every group you want to delete.</para>
     </sect2>
   </sect1>
 </article> 
