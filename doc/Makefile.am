@@ -1,1 +1,1 @@
-SUBDIRS = boot network services time users
+SUBDIRS = boot network services shares time users
