@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY toolversion "0.35">
-  <!ENTITY manrevision "0.35">
-  <!ENTITY date "June 2004">
+  <!ENTITY toolversion "2.15.2">
+  <!ENTITY manrevision "2.15.2">
+  <!ENTITY date "August 2006">
   <!ENTITY tool "Services Administration Tool">
 ]>
 <!-- 
@@ -21,7 +21,7 @@
   <articleinfo> 
     <title>&tool; Manual</title> 
     <copyright>
-      <year>2004</year>
+      <year>2004-2006</year>
       <holder>Carlos Garnacho Parro</holder>
     </copyright>
 
@@ -69,6 +69,14 @@
           <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
 	   </revdescription>
 	 </revision>
+	 <revision>
+	   <revnumber>&tool; Manual V0.35</revnumber>
+	   <date>June 2004</date>
+	   <revdescription>
+          <para role="author">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+          <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+	   </revdescription>
+	 </revision>
     </revhistory>
 
     <releaseinfo>This manual describes version &toolversion; of &tool;.</releaseinfo> 
@@ -78,7 +86,7 @@
 	 <para> To report a bug or make a suggestion regarding the &tool; or this manual, follow the directions in the <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. </para>
     </legalnotice>
     <abstract role="description">
-      <para>The &tool; allows you to specify which services will be started during the system boot process, as well as starting or stopping them instantly.</para>
+      <para>The &tool; allows you to specify which services will be started during the system boot process.</para>
     </abstract> 
   </articleinfo> 
 
@@ -89,7 +97,7 @@
   <!-- ============= Document Body ============================= -->
   <sect1 id="tool-introduction"> 
     <title>Introduction</title> 
-    <para>The <application>&tool;</application> allows you to specify which services will be started during the system boot process, as well as starting or stopping them instantly.</para> 
+    <para>The <application>&tool;</application> allows you to specify which services will be started during the system boot process.</para>
   </sect1>
 
   <sect1 id="tool-getting-started">
@@ -99,7 +107,7 @@
 
     <variablelist>
 	 <varlistentry>
-	   <term><guimenu>Desktop</guimenu> menu</term>
+	   <term><guimenu>System</guimenu> menu</term>
 	   <listitem>
 		<para>Choose <menuchoice><guisubmenu>Administration</guisubmenu><guimenuitem>Services</guimenuitem></menuchoice>.</para>
 	   </listitem>
@@ -135,47 +143,12 @@
 
     <variablelist>
 	 <varlistentry>
-	   <term>Runlevels menu</term>
-	   <listitem>
-		<para>This drop-down menu allows you to tune your services' behavior by expressly telling them under which circumstances do they must start (i.e: enabled in graphical mode, while disabled in text mode). This menu may not exist if your system has not the concept of runlevels.</para>
-	   </listitem>
-	 </varlistentry>
-
-	 <varlistentry>
 	   <term>Services list</term>
 	   <listitem>
-		<para>This is a list of all the services installed in the system, telling whether they're active in the runlevel selected in the runlevels menu.</para>
-	   </listitem>
-	 </varlistentry>
-
-	 <varlistentry>
-	   <term>Ordering checkbox</term>
-	   <listitem>
-		<para>By default the services list has alphabetical order, turn on this checkbox to order the services by priority. This item may not exist if your system has not the concept of priority.</para>
-	   </listitem>
-	 </varlistentry>
-
-	 <varlistentry>
-	   <term>Service properties button</term>
-	   <listitem>
-		<para>This button displays more information about the selected service.</para>
+		<para>This is a list of the main services installed in the system, the checkbox indicates whether the service is active or not.</para>
 	   </listitem>
 	 </varlistentry>
     </variablelist>
-
-    <figure id="service-properties-window">
-	 <title>Service properties</title>
-	 <screenshot>
-	   <mediaobject>
-		<imageobject>
-		  <imagedata fileref="figures/service-properties.png" format="PNG"/>
-		</imageobject>
-		<textobject>
-		  <phrase>Shows the service properties window.</phrase>
-		</textobject>
-	   </mediaobject>
-	 </screenshot>
-    </figure>
   </sect1>
 
   <sect1 id="tool-usage">
@@ -183,17 +156,7 @@
 
     <sect2>
 	 <title>To enable or disable a service at boot time</title>
-	 <para>Turn up or down the checkbox beside the service in the services list.</para>
-    </sect2>
-
-    <sect2>
-	 <title>To enable or disable a service inmediately</title>
-	 <para>Select a service, click on the <guilabel>Service properties</guilabel> button and click on the <guilabel>Start</guilabel> or <guilabel>Stop</guilabel> buttons.</para>
-    </sect2>
-
-    <sect2>
-	 <title>To change a service startup sequence</title>
-	 <para>Select a service, click on the <guilabel>Service properties</guilabel> button and change the priority. If you have selected the <guilabel>Order list by startup sequence</guilabel> checkbox, you will see the selected service moving through the list. If your system does not have the concept of priorities, the spinbutton will not exist</para>
+	 <para>Enable or disable the checkbox beside the service in the services list.</para>
     </sect2>
   </sect1>
 </article> 
