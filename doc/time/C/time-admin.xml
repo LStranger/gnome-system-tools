@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY toolversion "0.35">
-  <!ENTITY manrevision "0.35">
-  <!ENTITY date "June 2004">
+  <!ENTITY toolversion "2.15.2">
+  <!ENTITY manrevision "2.15.2">
+  <!ENTITY date "August 2006">
   <!ENTITY tool "Time Administration Tool">
 ]>
 <!-- 
@@ -21,7 +21,7 @@
   <articleinfo> 
     <title>&tool; Manual</title> 
     <copyright>
-      <year>2004</year>
+      <year>2004-2006</year>
       <holder>Carlos Garnacho Parro</holder>
     </copyright>
 
@@ -69,6 +69,14 @@
           <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
 	   </revdescription>
 	 </revision>
+	 <revision>
+	   <revnumber>&tool; Manual V0.35</revnumber>
+	   <date>June 2004</date>
+	   <revdescription>
+          <para role="author">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+          <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+	   </revdescription>
+	 </revision>
     </revhistory>
 
     <releaseinfo>This manual describes version &toolversion; of &tool;.</releaseinfo> 
@@ -99,9 +107,16 @@
 
     <variablelist>
 	 <varlistentry>
-	   <term><guimenu>Destop</guimenu> menu</term>
+	   <term><guimenu>System</guimenu> menu</term>
 	   <listitem>
-		<para>Choose <menuchoice><guisubmenu>Administration</guisubmenu><guimenuitem>Time</guimenuitem></menuchoice>.</para>
+		<para>Choose <menuchoice><guisubmenu>Administration</guisubmenu><guimenuitem>Time and Date</guimenuitem></menuchoice>.</para>
+	   </listitem>
+	 </varlistentry>
+
+	 <varlistentry>
+	   <term>Context menu in the clock applet</term>
+	   <listitem>
+		<para>Choose <menuchoice><guisubmenu>Adjust Date and Time</guisubmenu></menuchoice>.</para>
 	   </listitem>
 	 </varlistentry>
 
@@ -167,7 +182,7 @@
 
     <sect2 id="tool-time-zone">
 	 <title>To change your time zone</title>
-	 <para>Click on the "Select time zone" button and select the new emplacement, alternatively you can also select the new emplacement from the list below.</para>
+	 <para>Click on the "Select time zone" button and select the new location, alternatively you can also select the new location from the list below.</para>
 
 	 <figure id="time-map-window">
 	   <title>&tool; map</title>
