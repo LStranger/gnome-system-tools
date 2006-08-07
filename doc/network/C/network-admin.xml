@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY toolversion "0.35">
-  <!ENTITY manrevision "0.35">
-  <!ENTITY date "June 2004">
+  <!ENTITY toolversion "2.15.2">
+  <!ENTITY manrevision "2.15.2">
+  <!ENTITY date "August 2006">
   <!ENTITY tool "Network Administration Tool">
 ]>
 <!-- 
@@ -21,7 +21,7 @@
   <articleinfo> 
     <title>&tool; Manual</title> 
     <copyright>
-      <year>2004</year>
+      <year>2004-2006</year>
       <holder>Carlos Garnacho Parro</holder>
     </copyright>
 
@@ -69,6 +69,14 @@
           <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
 	   </revdescription>
 	 </revision>
+	 <revision>
+	   <revnumber>&tool; Manual V0.35</revnumber>
+	   <date>June 2004</date>
+	   <revdescription>
+          <para role="author">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+          <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+	   </revdescription>
+	 </revision>
     </revhistory>
 
     <releaseinfo>This manual describes version &toolversion; of &tool;.</releaseinfo> 
@@ -99,9 +107,9 @@
 
     <variablelist>
 	 <varlistentry>
-	   <term><guimenu>Applications</guimenu> menu</term>
+	   <term><guimenu>System</guimenu> menu</term>
 	   <listitem>
-		<para>Choose <menuchoice><guisubmenu>System Tools</guisubmenu><guimenuitem>Networking</guimenuitem></menuchoice>.</para>
+		<para>Choose <menuchoice><guisubmenu>Administration</guisubmenu><guimenuitem>Networking</guimenuitem></menuchoice>.</para>
 	   </listitem>
 	 </varlistentry>
 
@@ -137,21 +145,21 @@
 	 <varlistentry>
 	   <term><guilabel>Connections</guilabel></term>
 	   <listitem>
-		<para>Shows all the configured network interfaces, it also allows you to modify their settings and to add or delete interfaces</para>
+		<para>Shows all network interfaces, it also allows you to modify their settings.</para>
 	   </listitem>
 	 </varlistentry>
 
 	 <varlistentry>
 	   <term><guilabel>General</guilabel></term>
 	   <listitem>
-		<para>Shows your system host name and domain, it also shows the way your system identifies itself in Windows networks.</para>
+		<para>Allows you to modify your system host name and domain name.</para>
 	   </listitem>
 	 </varlistentry>
 
     	 <varlistentry>
 	   <term><guilabel>DNS</guilabel></term>
 	   <listitem>
-		<para>Contains two sections, the <guilabel>DNS servers</guilabel> are what your computer use for resolving the IP addresses from the domain names. The <guilabel>search domains</guilabel> are the domains in which your system will search any host when any domain is specified.</para>
+		<para>Contains two sections, the <guilabel>DNS servers</guilabel> are what your computer use for resolving the IP addresses from the domain names. The <guilabel>search domains</guilabel> are the default domains in which your system will search any host when no domain is specified.</para>
 	   </listitem>
 	 </varlistentry>
 
@@ -167,57 +175,22 @@
   <sect1 id="tool-usage">
     <title>Usage</title>
 
-    <sect2 id="tool-add-new-interface">
-	 <title>To create a new interface</title>
-	 <para>In the <guilabel>Connections</guilabel> section, press the <guilabel>Add</guilabel> button, depending on the interface type, you will need to provide different data:</para>
-
-	 <variablelist>
-	   <varlistentry>
-		<term>Ethernet and IRLAN interfaces</term>
-		<listitem>
-		  <para>You can specify if you want to configure automatically the interface through DHCP or BOOTP, or if you want to configure it manually providing its IP address, netmask and gateway.</para>
-		</listitem>
-	   </varlistentry>
-
-	   <varlistentry>
-		<term>Wireless interfaces</term>
-		<listitem>
-		  <para>You can specify if you want to configure automatically the interface through DHCP or BOOTP, or if you want to configure it manually providing its IP address, netmask and gateway. You also need to specify the network name (ESSID).</para>
-		</listitem>
-	   </varlistentry>
-
-	   <varlistentry>
-		<term>Parallel line interfaces</term>
-		<listitem>
-		  <para>You have to specify the IP address that the interface will have, and the IP address of the system to which it will be connected. You can also specify that you want the remote host to be the default gateway.</para>
-		</listitem>
-	   </varlistentry>
-
-	   <varlistentry>
-		<term>PPP/Modem interfaces</term>
-		<listitem>
-		  <para>You have to specify the phone number, username and password (this data is provided by the ISP), the modem device will be autodetected.</para>
-		</listitem>
-	   </varlistentry>
-	 </variablelist>
-    </sect2>
-
     <sect2 id="tool-modify-connection">
-	 <title>To modify an already existing interface</title>
+	 <title>To modify a connection settings</title>
 	 <para>In the <guilabel>Connections</guilabel> section, select the interface you want to modify and press the <guilabel>Properties</guilabel> button, depending on the interface type you will be able to modify different data.</para>
 
 	 <variablelist>
 	   <varlistentry>
 		<term>Ethernet and IRLAN interfaces</term>
 		<listitem>
-		  <para>You can modify the way the interface is configured (DHCP, BOOTP or manually), if the interface is configured manually, you can also modify the interface IP address, netmask and gateway.</para>
+		  <para>You can modify the way the interface is configured (DHCP or manually), if the interface is configured manually, you can also modify the interface IP address, netmask and gateway.</para>
 		</listitem>
 	   </varlistentry>
 
 	   <varlistentry>
 		<term>Wireless interfaces</term>
 		<listitem>
-		  <para>You can modify the way the interface is configured (DHCP, BOOTP or manually), if the interface is configured manually, you can also modify the interface IP address, netmask and gateway, you can also modify the network name (ESSID) for this interface.</para>
+		  <para>You can modify the way the interface is configured (DHCP or manually), if the interface is configured manually, you can also modify the interface IP address, netmask and gateway, you can also modify the network name (ESSID) for this interface.</para>
 		</listitem>
 	   </varlistentry>
 
@@ -238,13 +211,8 @@
     </sect2>
 
     <sect2>
-	 <title>To delete an interface</title>
-	 <para>In the <guilabel>Connections</guilabel> section, select the interface you want to delete and press the <guilabel>Delete</guilabel> button.</para>
-    </sect2>
-
-    <sect2>
 	 <title>To activate or deactivate an interface</title>
-	 <para>In the <guilabel>Connections</guilabel> section, select the interface and press the <guilabel>Activate</guilabel> or <guilabel>Deactivate</guilabel> button.</para>
+	 <para>In the <guilabel>Connections</guilabel> section, enable or disable the checkbox beside the interface.</para>
     </sect2>
     
     <sect2>
@@ -253,38 +221,33 @@
     </sect2>
 
     <sect2>
-	 <title>To change the way your system identifies itself in Windows networks</title>
-	 <para>In the <guilabel>General</guilabel> section, change the description or workgroup of your system in Windows networks. You can also specify the WINS server if you need one.</para>
-    </sect2>
-
-    <sect2>
 	 <title>To add a new domain name server</title>
-	 <para>In the <guilabel>DNS</guilabel> section, type the new DNS IP address in the DNS text box and press the <guilabel>Add</guilabel> button.</para>
+	 <para>In the <guilabel>DNS Servers</guilabel> section, press the <guilabel>Add</guilabel> button and fill in the new list row with the new domain name server.</para>
     </sect2>
 
     <sect2>
 	 <title>To delete a domain name server</title>
-	 <para>In the <guilabel>DNS</guilabel> section, select a DNS IP address from the list and press the <guilabel>Delete</guilabel> button.</para>
+	 <para>In the <guilabel>DNS Servers</guilabel> section, select a DNS IP address from the list and press the <guilabel>Delete</guilabel> button.</para>
     </sect2>
 
     <sect2>
 	 <title>To add a new search domain</title>
-	 <para>In the <guilabel>DNS</guilabel> section, type the new domain in the search domain text box and press the <guilabel>Add</guilabel> button.</para>
+	 <para>In the <guilabel>Search Domains</guilabel> section, press the <guilabel>Add</guilabel> button and fill in the new list row with the new search domain.</para>
     </sect2>
 
     <sect2>
 	 <title>To delete a search domain</title>
-	 <para>In the <guilabel>DNS</guilabel> section, select a search domain from the list and press the <guilabel>Delete</guilabel> button.</para>
+	 <para>In the <guilabel>Search Domains</guilabel> section, select a search domain from the list and press the <guilabel>Delete</guilabel> button.</para>
     </sect2>
 
     <sect2>
 	 <title>To add a new host alias</title>
-	 <para>In the <guilabel>Hosts</guilabel> section, type a new IP address and the aliases that will point to it and press the <guilabel>Add</guilabel> button.</para>
+	 <para>In the <guilabel>Hosts</guilabel> section, press the <guilabel>Add</guilabel> button and type an IP address and the aliases that will point to in the window that pops up.</para>
     </sect2>
 
     <sect2>
 	 <title>To modify a host alias</title>
-	 <para>In the <guilabel>Hosts</guilabel> section, select an alias from the list and modify the aliases in the text box.</para>
+	 <para>In the <guilabel>Hosts</guilabel> section, select an alias, press the <guilabel>Properties</guilabel> button from the list and modify the alias settings in the window that pops up.</para>
     </sect2>
 
     <sect2>
@@ -293,18 +256,18 @@
     </sect2>
 
     <sect2 id="tool-add-new-profile">
-	 <title>To create a new profile</title>
-	 <para>Press the <guilabel>Network profiles</guilabel> button, a new window will appear letting you to save your current configuration as a profile pressing the <guilabel>Save current</guilabel> button. You must specify a name for the profile, optionally you can specify a description for this profile.</para>
+	 <title>To save your current network configuration as a "Location"</title>
+	 <para>Press the <guilabel>Add</guilabel> button besides the <guilabel>Locations</guilabel> menu, specify the location name in the window that pops up.</para>
     </sect2>
 
     <sect2>
-	 <title>To delete an already existing profile</title>
-	 <para>Press the <guilabel>Network profiles</guilabel> button, in the network profiles window, select the profile you want to delete and press the <guilabel>Delete</guilabel> button.</para>
+	 <title>To delete a location</title>
+	 <para>Press the <guilabel>Remove</guilabel> button besides the <guilabel>Locations</guilabel> menu, the selected profile will be deleted.</para>
     </sect2>
 
     <sect2>
-	 <title>To switch the current profile</title>
-	 <para>Change the <guilabel>current network profile</guilabel> menu, all the configuration will be switched automatically to the chosen profile.</para>
+	 <title>To switch to a location</title>
+	 <para>Select one location from the <guilabel>Locations</guilabel> menu, all the configuration will be switched automatically to the chosen location.</para>
     </sect2>
   </sect1>
 </article> 
