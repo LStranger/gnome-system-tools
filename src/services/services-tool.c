@@ -29,6 +29,7 @@ static void  gst_services_tool_init           (GstServicesTool      *tool);
 static void  gst_services_tool_finalize       (GObject              *object);
 
 static void  gst_services_tool_update_gui     (GstTool *tool);
+static void  gst_services_tool_update_config  (GstTool *tool);
 
 G_DEFINE_TYPE (GstServicesTool, gst_services_tool, GST_TYPE_TOOL);
 
@@ -40,6 +41,7 @@ gst_services_tool_class_init (GstServicesToolClass *class)
 	
 	object_class->finalize = gst_services_tool_finalize;
 	tool_class->update_gui = gst_services_tool_update_gui;
+	tool_class->update_config = gst_services_tool_update_config;
 }
 
 static void
@@ -79,6 +81,15 @@ gst_services_tool_update_gui (GstTool *tool)
 
 		valid = oobs_list_iter_next (list, &iter);
 	}
+}
+
+static void
+gst_services_tool_update_config (GstTool *tool)
+{
+	GstServicesTool *services_tool = GST_SERVICES_TOOL (tool);
+
+	oobs_object_update (services_tool->services_config);
+	services_tool->default_runlevel = oobs_services_config_get_default_runlevel (services_tool->services_config);
 }
 
 GstTool*
