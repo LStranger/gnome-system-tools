@@ -26,7 +26,8 @@ static void gst_shares_tool_class_init (GstSharesToolClass *class);
 static void gst_shares_tool_init       (GstSharesTool      *tool);
 static void gst_shares_tool_finalize   (GObject            *object);
 
-static void gst_shares_tool_update_gui (GstTool            *tool);
+static void gst_shares_tool_update_gui    (GstTool         *tool);
+static void gst_shares_tool_update_config (GstTool         *tool);
 
 static void gst_shares_tool_update_services_availability (GstSharesTool *tool);
 
@@ -40,6 +41,7 @@ gst_shares_tool_class_init (GstSharesToolClass *class)
 
 	object_class->finalize = gst_shares_tool_finalize;
 	tool_class->update_gui = gst_shares_tool_update_gui;
+	tool_class->update_config = gst_shares_tool_update_config;
 }
 
 static void
@@ -122,6 +124,20 @@ gst_shares_tool_update_gui (GstTool *tool)
 	add_shares (list);
 
 	update_global_smb_config (tool, shares_tool->smb_config);
+}
+
+static void
+gst_shares_tool_update_config (GstTool *tool)
+{
+	GstSharesTool *shares_tool;
+
+	shares_tool = GST_SHARES_TOOL (tool);
+	oobs_object_update (shares_tool->nfs_config);
+	oobs_object_update (shares_tool->smb_config);
+	oobs_object_update (shares_tool->services_config);
+	oobs_object_update (shares_tool->hosts_config);
+	oobs_object_update (shares_tool->ifaces_config);
+	gst_shares_tool_update_services_availability (tool);
 }
 
 static void
