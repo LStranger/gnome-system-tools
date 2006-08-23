@@ -52,6 +52,7 @@ static GObject *gst_time_tool_constructor (GType                  type,
 					   guint                  n_construct_properties,
 					   GObjectConstructParam *construct_params);
 static void  gst_time_tool_update_gui     (GstTool *tool);
+static void  gst_time_tool_update_config  (GstTool *tool);
 
 G_DEFINE_TYPE (GstTimeTool, gst_time_tool, GST_TYPE_TOOL);
 
@@ -64,6 +65,7 @@ gst_time_tool_class_init (GstTimeToolClass *class)
 	object_class->constructor = gst_time_tool_constructor;
 	object_class->finalize = gst_time_tool_finalize;
 	tool_class->update_gui = gst_time_tool_update_gui;
+	tool_class->update_config = gst_time_tool_update_config;
 
 	g_type_class_add_private (object_class,
 				  sizeof (GstTimeToolPrivate));
@@ -470,6 +472,19 @@ gst_time_tool_update_gui (GstTool *tool)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ntp_use), is_active);
 	gtk_widget_set_sensitive (timeserver_button, is_active);
 	g_signal_handlers_unblock_by_func (ntp_use, on_ntp_use_toggled, tool);
+}
+
+static void
+gst_time_tool_update_config (GstTool *tool)
+{
+	GstTimeTool *time_tool;
+
+	time_tool = GST_TIME_TOOL (tool);
+	oobs_object_update (time_tool->time_config);
+	oobs_object_update (time_tool->ntp_config);
+	oobs_object_update (time_tool->services_config);
+
+	get_ntp_service (tool);
 }
 
 GstTool*
