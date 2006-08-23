@@ -36,7 +36,8 @@ static GObject* gst_network_tool_constructor (GType                  type,
 					      guint                  n_construct_properties,
 					      GObjectConstructParam *construct_params);
 
-static void gst_network_tool_update_gui (GstTool *tool);
+static void gst_network_tool_update_gui    (GstTool *tool);
+static void gst_network_tool_update_config (GstTool *tool);
 
 
 G_DEFINE_TYPE (GstNetworkTool, gst_network_tool, GST_TYPE_TOOL);
@@ -50,6 +51,7 @@ gst_network_tool_class_init (GstNetworkToolClass *class)
   object_class->constructor = gst_network_tool_constructor;
   object_class->finalize = gst_network_tool_finalize;
   tool_class->update_gui = gst_network_tool_update_gui;
+  tool_class->update_config = gst_network_tool_update_config;
 }
 
 static void
@@ -261,6 +263,15 @@ gst_network_tool_update_gui (GstTool *tool)
   add_all_interfaces (network_tool);
 }
 
+static void
+gst_network_tool_update_config (GstTool *tool)
+{
+  GstNetworkTool *network_tool;
+
+  network_tool = GST_NETWORK_TOOL (tool);
+  oobs_object_update (network_tool->hosts_config);
+  oobs_object_update (network_tool->ifaces_config);
+}
 
 GstTool*
 gst_network_tool_new (void)
