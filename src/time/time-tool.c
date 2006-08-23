@@ -119,11 +119,11 @@ inhibit_screensaver (GstTimeTool *tool,
 	DBusMessage *message, *reply;
 	DBusMessageIter iter;
 
-	g_return_if_fail ((inhibit && priv->cookie == 0) || (!inhibit && priv->cookie != 0));
-
 	if (inhibit) {
 		const gchar *appname = "Time-admin";
 		const gchar *reason = "Changing time";
+
+		g_return_if_fail (priv->cookie != 0);
 
 		message = dbus_message_new_method_call (SCREENSAVER_SERVICE,
 							SCREENSAVER_PATH,
@@ -136,13 +136,16 @@ inhibit_screensaver (GstTimeTool *tool,
 
 		reply = dbus_connection_send_with_reply_and_block (priv->bus_connection, message, -1, NULL);
 
-		/* get cookie */
-		dbus_message_iter_init (reply, &iter);
-		dbus_message_iter_get_basic (&iter, &priv->cookie);
+		if (reply) {
+			/* get cookie */
+			dbus_message_iter_init (reply, &iter);
+			dbus_message_iter_get_basic (&iter, &priv->cookie);
 
-		dbus_message_unref (message);
-		dbus_message_unref (reply);
-	} else {
+			dbus_message_unref (message);
+			dbus_message_unref (reply);
+		}
+	} else if (!inhibit && priv->cookie != 0) {
+		
 		message = dbus_message_new_method_call (SCREENSAVER_SERVICE,
 							SCREENSAVER_PATH,
 							SCREENSAVER_INTERFACE,
