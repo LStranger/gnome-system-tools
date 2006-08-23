@@ -378,7 +378,7 @@ gst_platform_dialog_set_property (GObject      *object,
 
 	switch (prop_id) {
 	case PROP_SESSION:
-		dialog->session = g_value_get_object (value);
+		dialog->session = g_value_dup_object (value);
 		break;
 	}
 }
@@ -410,6 +410,8 @@ gst_platform_dialog_response (GtkDialog *dialog,
 			oobs_session_set_platform (platform_dialog->session, platform);
 			g_free (platform);
 		}
+	} else {
+		exit (0);
 	}
 }
 

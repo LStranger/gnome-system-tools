@@ -1,3 +1,18 @@
+2006-08-23  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-platform-dialog.c (gst_platform_dialog_set_property): own a
+	reference of the OobsSession object.
+	(gst_platform_dialog_response): exit() unless Ok is pressed.
+	* gst-tool.c (gst_tool_class_init): remove signals, their behavior
+	correspond more to vfuncs
+	(gst_tool_close): made public, now calls the object implementation for
+	the "close" vfunc (gst_tool_impl_close for GstTool)
+	(gst_tool_update_gui): now call the update_gui vfunc
+	(gst_tool_constructor): call the update_config vfunc after getting the
+	platform from the platform dialog.
+	* gst-tool.h (gst_tool_close): added
+	* gst-dialog.c (gst_dialog_response): call gst_tool_close().
+
 2006-08-11  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.15.2

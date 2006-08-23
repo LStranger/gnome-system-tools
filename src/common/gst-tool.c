@@ -56,15 +56,6 @@ enum {
 	PLATFORM_LIST_COL_LAST
 };
 
-enum {
-	UPDATE_GUI,
-	UPDATE_CONFIG,
-	CLOSE,
-	LAST_SIGNAL
-};
-
-static gint signals [LAST_SIGNAL] = { 0 };
-
 static void  gst_tool_class_init   (GstToolClass *class);
 static void  gst_tool_init         (GstTool      *tool);
 static void  gst_tool_finalize     (GObject      *object);
@@ -77,7 +68,7 @@ static void  gst_tool_set_property (GObject      *object,
 				    const GValue *value,
 				    GParamSpec   *pspec);
 
-static void gst_tool_close         (GstTool *tool);
+static void gst_tool_impl_close    (GstTool *tool);
 
 
 enum {
@@ -111,7 +102,7 @@ gst_tool_class_init (GstToolClass *class)
 	object_class->constructor  = gst_tool_constructor;
 	object_class->finalize     = gst_tool_finalize;
 
-	class->close = gst_tool_close;
+	class->close = gst_tool_impl_close;
 	class->update_gui = NULL;
 	class->update_config = NULL;
 
@@ -136,31 +127,6 @@ gst_tool_class_init (GstToolClass *class)
 							      "Tool icon",
 							      NULL,
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
-	signals[UPDATE_GUI] =
-		g_signal_new ("update_gui",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GstToolClass, update_gui),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__VOID,
-			      G_TYPE_NONE, 0);
-	signals[UPDATE_CONFIG] = 
-		g_signal_new ("update_config",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GstToolClass, update_config),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__VOID,
-			      G_TYPE_NONE, 0);
-	signals[CLOSE] = 
-		g_signal_new ("close",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GstToolClass, close),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__VOID,
-			      G_TYPE_NONE, 0);
-
 	g_type_class_add_private (object_class,
 				  sizeof (GstToolPrivate));
 }
@@ -236,6 +202,9 @@ gst_tool_constructor (GType                  type,
 		dialog = gst_platform_dialog_new (tool->session);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
+
+		if (GST_TOOL_GET_CLASS (tool)->update_config)
+			(* GST_TOOL_GET_CLASS (tool)->update_config) (tool);
 	}
 
 	return object;
@@ -270,7 +239,7 @@ gst_tool_finalize (GObject *object)
 }
 
 static void
-gst_tool_close (GstTool *tool)
+gst_tool_impl_close (GstTool *tool)
 {
 	/* FIXME: add things to do when closing the tool */
 	gtk_main_quit ();
@@ -279,7 +248,19 @@ gst_tool_close (GstTool *tool)
 void
 gst_tool_update_gui (GstTool *tool)
 {
-	g_signal_emit (G_OBJECT (tool), signals[UPDATE_GUI], 0, NULL);
+	g_return_if_fail (GST_IS_TOOL (tool));
+
+	if (GST_TOOL_GET_CLASS (tool)->update_gui)
+		(* GST_TOOL_GET_CLASS (tool)->update_gui) (tool);
+}
+
+void
+gst_tool_close (GstTool *tool)
+{
+	g_return_if_fail (GST_IS_TOOL (tool));
+
+	if (GST_TOOL_GET_CLASS (tool)->close)
+		(* GST_TOOL_GET_CLASS (tool)->close) (tool);
 }
 
 

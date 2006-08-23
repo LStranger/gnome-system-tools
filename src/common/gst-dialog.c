@@ -217,7 +217,7 @@ gst_dialog_response (GtkDialog *dialog,
 	case GTK_RESPONSE_CLOSE:
 	case GTK_RESPONSE_DELETE_EVENT:
 		gtk_widget_hide (GTK_WIDGET (dialog));
-		g_signal_emit_by_name (G_OBJECT (priv->tool), "close");
+		gst_tool_close (priv->tool);
 		break;
 	case GTK_RESPONSE_HELP:
 		gst_tool_show_help (priv->tool, NULL);
