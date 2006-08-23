@@ -29,6 +29,7 @@ static void  gst_users_tool_init           (GstUsersTool      *tool);
 static void  gst_users_tool_finalize       (GObject           *object);
 
 static void  gst_users_tool_update_gui     (GstTool *tool);
+static void  gst_users_tool_update_config  (GstTool *tool);
 
 G_DEFINE_TYPE (GstUsersTool, gst_users_tool, GST_TYPE_TOOL);
 
@@ -40,6 +41,7 @@ gst_users_tool_class_init (GstUsersToolClass *class)
 	
 	object_class->finalize = gst_users_tool_finalize;
 	tool_class->update_gui = gst_users_tool_update_gui;
+	tool_class->update_config = gst_users_tool_update_config;
 }
 
 static void
@@ -145,6 +147,25 @@ gst_users_tool_update_gui (GstTool *tool)
 {
 	update_users (GST_USERS_TOOL (tool));
 	update_groups (GST_USERS_TOOL (tool));
+}
+
+static void
+gst_users_tool_update_config (GstTool *tool)
+{
+	GstUsersTool *users_tool;
+
+	users_tool = GST_USERS_TOOL (tool);
+	oobs_object_update (users_tool->users_config);
+	oobs_object_update (users_tool->groups_config);
+
+	g_object_get (G_OBJECT (users_tool->users_config),
+		      "minimum-uid", &users_tool->minimum_uid,
+		      "maximum-uid", &users_tool->maximum_uid,
+		      NULL);
+	g_object_get (G_OBJECT (users_tool->groups_config),
+		      "minimum-gid", &users_tool->minimum_gid,
+		      "maximum-gid", &users_tool->maximum_gid,
+		      NULL);
 }
 
 GstTool*
