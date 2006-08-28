@@ -27,6 +27,7 @@
 G_BEGIN_DECLS
 
 #include "gst-tool.h"
+#include "user-profiles.h"
 
 #define GST_TYPE_USERS_TOOL            (gst_users_tool_get_type ())
 #define GST_USERS_TOOL(obj)            (GTK_CHECK_CAST ((obj), GST_TYPE_USERS_TOOL, GstUsersTool))
@@ -39,6 +40,8 @@ typedef struct _GstUsersToolClass GstUsersToolClass;
 
 struct _GstUsersTool {
 	GstTool tool;
+
+	GstUserProfiles *profiles;
 
 	OobsObject *users_config;
 	OobsObject *groups_config;

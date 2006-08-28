@@ -429,8 +429,11 @@ on_user_settings_login_changed (GtkEditable *editable,
 	if (user_settings_dialog_user_is_new ()) {
 		home_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 
-		g_object_get (GST_USERS_TOOL (tool)->users_config,
-			      "default-home", &base_dir, NULL);
+		base_dir = g_object_get_data (G_OBJECT (home_entry), "default-home");
+
+		if (!base_dir)
+			g_object_get (GST_USERS_TOOL (tool)->users_config,
+				      "default-home", &base_dir, NULL);
 
 		home = g_build_path (G_DIR_SEPARATOR_S,
 				     base_dir,
@@ -440,4 +443,24 @@ on_user_settings_login_changed (GtkEditable *editable,
 		gtk_entry_set_text (GTK_ENTRY (home_entry), home);
 		g_free (home);
 	}
+}
+
+void
+on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gchar *profile_name;
+	GstUserProfile *profile;
+
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+
+	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter))
+		return;
+
+	gtk_tree_model_get (model, &iter, 0, &profile_name, -1);
+	profile = gst_user_profiles_set_current (GST_USERS_TOOL (tool)->profiles, profile_name);
+
+	user_settings_apply_profile (tool, profile);
+	g_free (profile_name);
 }

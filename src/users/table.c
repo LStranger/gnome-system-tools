@@ -111,6 +111,58 @@ setup_shells_combo (GstUsersTool *tool)
 }
 
 void
+table_populate_profiles (GstUsersTool *tool,
+			 GList        *names)
+{
+	GtkWidget *combo;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	combo = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_profile_menu");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
+	while (names) {
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, names->data, -1);
+		names = names->next;
+	}
+}
+
+void
+table_set_default_profile (GstUsersTool *tool)
+{
+	GtkWidget *combo;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GstUserProfile *default_profile;
+	gchar *profile;
+	gboolean valid;
+
+	default_profile = gst_user_profiles_get_default_profile (tool->profiles);
+	combo = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_profile_menu");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter, 0, &profile, -1);
+
+		if (default_profile &&
+		    strcmp (profile, default_profile->name) == 0) {
+			g_signal_handlers_block_by_func (G_OBJECT (combo), on_user_settings_profile_changed, GST_TOOL (tool)->main_dialog);
+			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
+			g_signal_handlers_unblock_by_func (G_OBJECT (combo), on_user_settings_profile_changed, GST_TOOL (tool)->main_dialog);
+			valid = FALSE;
+		} else
+			valid = gtk_tree_model_iter_next (model, &iter);
+
+		g_free (profile);
+	}
+
+	user_settings_apply_profile (tool, default_profile);
+}
+
+void
 create_tables (GstUsersTool *tool)
 {
 	create_users_table (tool);

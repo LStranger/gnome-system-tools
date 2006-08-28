@@ -21,6 +21,7 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include "user-profiles.h"
 #include "users-tool.h"
 #include "gst.h"
 
@@ -84,6 +85,8 @@ gst_users_tool_init (GstUsersTool *tool)
 
 	gst_conf_add_notify (GST_TOOL (tool), "showall",
 			     on_showall_changed, tool);
+
+	tool->profiles = gst_user_profiles_get ();
 }
 
 static void
@@ -91,8 +94,11 @@ gst_users_tool_finalize (GObject *object)
 {
 	GstUsersTool *tool = GST_USERS_TOOL (object);
 
+	g_print ("jojojojoijfowiejfowiejfowiej\n");
+
 	g_object_unref (tool->users_config);
 	g_object_unref (tool->groups_config);
+	g_object_unref (tool->profiles);
 
 	(* G_OBJECT_CLASS (gst_users_tool_parent_class)->finalize) (object);
 }
@@ -143,10 +149,21 @@ update_groups (GstUsersTool *tool)
 }
 
 static void
+update_profiles (GstUsersTool *tool)
+{
+	GList *names = NULL;
+
+	names = gst_user_profiles_get_names (tool->profiles);
+	table_populate_profiles (tool, names);
+	g_list_free (names);
+}
+
+static void
 gst_users_tool_update_gui (GstTool *tool)
 {
 	update_users (GST_USERS_TOOL (tool));
 	update_groups (GST_USERS_TOOL (tool));
+	update_profiles (GST_USERS_TOOL (tool));
 }
 
 static void

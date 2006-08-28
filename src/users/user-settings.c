@@ -39,6 +39,7 @@
 #include "privileges-table.h"
 #include "groups-table.h"
 #include "test-battery.h"
+#include "user-profiles.h"
 
 extern GstTool *tool;
 
@@ -202,21 +203,19 @@ get_main_group (const gchar *name)
 }
 
 static uid_t
-find_new_uid (void)
+find_new_uid (gint uid_min,
+	      gint uid_max)
 {
 	OobsUsersConfig *config;
 	OobsList *list;
 	OobsListIter list_iter;
 	GObject *user;
 	gboolean valid;
-	uid_t new_uid, uid, uid_min, uid_max;
+	uid_t new_uid, uid;
 
 	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
 	list = oobs_users_config_get_users (config);
 	valid = oobs_list_get_iter_first (list, &list_iter);
-	uid_min = GST_USERS_TOOL (tool)->minimum_uid;
-	uid_max = GST_USERS_TOOL (tool)->maximum_uid;
-
 	new_uid = uid_min - 1;
 
 	while (valid) {
@@ -250,6 +249,25 @@ set_login_length (GtkWidget *entry)
 	gtk_entry_set_max_length (GTK_ENTRY (entry), max_len);
 }
 
+static void
+setup_profiles_visibility (GstTool  *tool,
+			   gboolean  is_new)
+{
+	GList *names;
+	GtkWidget *combo, *label;
+	gboolean show;
+
+	names = gst_user_profiles_get_names (GST_USERS_TOOL (tool)->profiles);
+	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
+	label = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_label");
+
+	show = (is_new && g_list_length (names) > 1);
+
+	g_object_set (combo, "visible", show, NULL);
+	g_object_set (label, "visible", show, NULL);
+	g_list_free (names);
+}
+
 GtkWidget *
 user_settings_dialog_new (OobsUser *user)
 {
@@ -257,6 +275,7 @@ user_settings_dialog_new (OobsUser *user)
 	GtkWidget *dialog, *widget;
 	const gchar *login;
 	gchar *title;
+	gint uid;
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	login = (gchar*) oobs_user_get_login_name (user);
@@ -271,7 +290,10 @@ user_settings_dialog_new (OobsUser *user)
 				oobs_users_config_get_default_shell (config));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), find_new_uid ());
+		uid = find_new_uid (GST_USERS_TOOL (tool)->minimum_uid,
+				    GST_USERS_TOOL (tool)->maximum_uid);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
+		setup_profiles_visibility (tool, TRUE);
 	} else {
 		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (FALSE));
 
@@ -287,6 +309,7 @@ user_settings_dialog_new (OobsUser *user)
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
+		setup_profiles_visibility (tool, FALSE);
 	}
 
 	privileges_table_set_from_user (user);
@@ -322,6 +345,9 @@ user_settings_dialog_new (OobsUser *user)
 	/* set manual password */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+
+	if (!login)
+		table_set_default_profile (GST_USERS_TOOL (tool));
 
 	return dialog;
 }
@@ -602,4 +628,37 @@ user_settings_dialog_get_data (OobsUser *user)
 	oobs_user_set_main_group (user, group);
 
 	privileges_table_save (user);
+}
+
+void
+user_settings_apply_profile (GstUsersTool   *users_tool,
+			     GstUserProfile *profile)
+{
+	GstTool *tool;
+	GtkWidget *widget;
+	gint uid;
+
+	if (!profile)
+		return;
+
+	tool = GST_TOOL (users_tool);
+
+	/* default UID */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
+	uid = find_new_uid (profile->uid_min, profile->uid_max);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
+
+	/* default shell */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
+	set_entry_text (GTK_BIN (widget)->child, profile->shell);
+
+	/* default home prefix */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
+	g_object_set_data (G_OBJECT (widget), "default-home", profile->home_prefix);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
+	on_user_settings_login_changed (GTK_EDITABLE (widget), NULL);
+
+	/* default groups */
+	privileges_table_set_from_profile (profile);
 }

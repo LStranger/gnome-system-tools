@@ -18,17 +18,18 @@ EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 users_admin_LDADD = $(GST_TOOL_LIBS) 
 users_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) 
 users_admin_SOURCES = \
-	main.c \
-	passwd.c passwd.h \
-	users-tool.c users-tool.h \
-	callbacks.c callbacks.h \
-	user-settings.c user-settings.h \
-	group-settings.c group-settings.h \
-	users-table.c users-table.h \
-	groups-table.c groups-table.h \
-	table.c table.h  \
-	privileges-table.c privileges-table.h \
-	group-members-table.c group-members-table.h \
-	test-battery.c test-battery.h
+	main.c 			\
+	passwd.c 		\
+	users-tool.c 		\
+	callbacks.c 		\
+	user-settings.c 	\
+	group-settings.c 	\
+	users-table.c 		\
+	groups-table.c 		\
+	table.c table.h 	\
+	privileges-table.c 	\
+	group-members-table.c 	\
+	user-profiles.c		\
+	test-battery.c
 
 toolpixmaps =

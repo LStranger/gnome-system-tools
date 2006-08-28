@@ -52,6 +52,7 @@ void on_user_settings_passwd_changed (GtkEntry*, gpointer);
 void on_user_settings_passwd_random_new (GtkButton*, gpointer);
 void on_user_settings_passwd_toggled (GtkToggleButton*, gpointer);
 void on_user_settings_login_changed (GtkEditable *editable, gpointer data);
+void on_user_settings_profile_changed (GtkWidget *widget, gpointer data);
 
 
 #endif /* CALLBACKS_H */

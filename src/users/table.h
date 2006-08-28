@@ -35,6 +35,8 @@ enum {
 GtkWidget*  popup_menu_create          (GtkWidget *wigdet, gint table);
 void	    create_tables	       (GstUsersTool *tool);
 GList*      table_get_row_references   (gint table, GtkTreeModel **model);
+void        table_populate_profiles    (GstUsersTool *tool, GList *names);
+void        table_set_default_profile  (GstUsersTool *tool);
 
 
 #endif /* __TABLE_H */

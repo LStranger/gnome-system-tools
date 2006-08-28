@@ -27,6 +27,7 @@
 #include "gst.h"
 #include <glib/gi18n.h>
 #include "privileges-table.h"
+#include "user-profiles.h"
 
 extern GstTool *tool;
 
@@ -183,6 +184,54 @@ privileges_table_set_from_user (OobsUser *user)
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 	
+}
+
+static gboolean
+find_group_in_profile (OobsGroup      *group,
+		       GstUserProfile *profile)
+{
+	gchar **groups, *name;
+
+	if (!profile->groups)
+		return FALSE;
+
+	groups = profile->groups;
+	name = oobs_group_get_name (group);
+
+	while (*groups) {
+		if (strcmp (*groups, name) == 0)
+			return TRUE;
+
+		groups++;
+	}
+
+	return FALSE;
+}
+
+void
+privileges_table_set_from_profile (GstUserProfile *profile)
+{
+	GtkWidget *table;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean valid;
+	OobsGroup *group;
+
+	table = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter,
+				    COL_GROUP, &group,
+				    -1);
+
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    COL_MEMBER, find_group_in_profile (group, profile),
+				    -1);
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
 }
 
 void

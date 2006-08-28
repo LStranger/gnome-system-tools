@@ -1,3 +1,31 @@
+2006-08-28  Carlos Garnacho  <carlosg@gnome.org>
+
+	Add back profiles support to users-admin, now the profiles will be a
+	read-only key file located in /etc/gnome-system-tools/users/profiles,
+	distros are supposed to implement that file according to their
+	requirements, I doubt that users ever created a profile, so that's no
+	longer supported.
+
+	* user-profiles.[ch]: added, object to manage user profiles
+	* Makefile.am: add these files.
+	* callbacks.[ch] (on_user_settings_login_changed): add a way to 
+	override the default homedir prefix.
+	(on_user_settings_profile_changed): added, applies a profile when the
+	profiles combo changes.
+	* main.c: connect that callback to the profiles combo
+	* privileges-table.c (find_group_in_profile)
+	(privileges_table_set_from_profile): new functions, set the
+	privileges table state from a profile
+	* table.[ch] (table_populate_profiles) (table_set_default_profile): 
+	Added.
+	* user-settings.[ch] (find_new_uid): pass max_uid and min_uid as
+	parameters.
+	(setup_profiles_visibility): Added.
+	(user_settings_dialog_new): Setup GUI initially according to the 
+	profile.
+	(user_settings_apply_profile): added, changes the UI given a profile.
+	* users-tool.[ch]: add profiles object.
+
 2006-08-23  Carlos Garnacho  <carlosg@gnome.org>
 
 	* users-tool.c (gst_users_tool_update_config): added.
