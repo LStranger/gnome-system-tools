@@ -1,3 +1,16 @@
+2006-08-29  Carlos Garnacho  <carlosg@gnome.org>
+
+	* locations-combo.c (on_combo_changed): do not unref the model, leads
+	to early finalization.
+	(select_matching_profile): separated from fill_model().
+	(on_add_button_clicked) (gst_locations_combo_constructor)
+	(gst_locations_combo_changed): use select_matching_profile() there.
+	(fill_model): simplified.
+	* network-locations.c (concatenate_aliases) (save_hosts_config): do
+	not free those GList elements, we do not own them.
+	* network-tool.c (set_entry_text) (gst_network_tool_update_gui): avoid
+	a possible critical warning.
+
 2006-08-23  Carlos Garnacho  <carlosg@gnome.org>
 
 	* network-tool.c (gst_network_tool_update_config): added.

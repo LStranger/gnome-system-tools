@@ -224,8 +224,6 @@ on_combo_changed (GtkWidget *widget, gpointer data)
 			     _("Changing network location"));
       g_free (str);
     }
-
-  g_object_unref (model);
 }
 
 static void
@@ -277,6 +275,37 @@ check_save_location (GstLocationsCombo *combo, const gchar *name)
 }
 
 static void
+select_matching_profile (GstLocationsCombo *combo)
+{
+  GstLocationsComboPrivate *priv;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  const gchar *current;
+  gchar *profile;
+  gboolean valid;
+
+  priv = combo->_priv;
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->combo));
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  current = gst_network_locations_get_current (GST_NETWORK_LOCATIONS (combo));
+
+  while (valid)
+    {
+      gtk_tree_model_get (model, &iter, 0, &profile, -1);
+
+      if (profile && current && strcmp (profile, current) == 0)
+	{
+	  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->combo), &iter);
+	  valid = FALSE;
+	}
+      else
+	valid = gtk_tree_model_iter_next (model, &iter);
+
+      g_free (profile);
+    }
+}
+
+static void
 on_add_button_clicked (GtkWidget *widget, gpointer data)
 {
   GstLocationsCombo *combo;
@@ -325,7 +354,10 @@ on_add_button_clicked (GtkWidget *widget, gpointer data)
   name = gtk_entry_get_text (GTK_ENTRY (priv->location_entry));
 
   if (response == GTK_RESPONSE_OK && check_save_location (combo, name))
-    gst_network_locations_save_current (GST_NETWORK_LOCATIONS (combo), name);
+    {
+      gst_network_locations_save_current (GST_NETWORK_LOCATIONS (combo), name);
+      select_matching_profile (combo);
+    }
 }
 
 static void
@@ -357,38 +389,25 @@ on_remove_button_clicked (GtkWidget *widget, gpointer data)
     }
 }
 
-static gboolean
+static void
 fill_model (GstLocationsCombo *combo,
-	    GtkTreeModel      *model,
-	    GtkTreeIter       *selected_iter)
+	    GtkTreeModel      *model)
 {
   GList *names;
   GtkTreeIter iter;
-  const gchar *current;
-  gboolean match = FALSE;
 
   gtk_list_store_clear (GTK_LIST_STORE (model));
   names = gst_network_locations_get_names (GST_NETWORK_LOCATIONS (combo));
-  current = gst_network_locations_get_current (GST_NETWORK_LOCATIONS (combo));
 
   while (names)
     {
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, names->data, -1);
-
-      if (current && strcmp (names->data, current) == 0)
-	{
-	  *selected_iter = iter;
-	  match = TRUE;
-	}
-
       names = names->next;
     }
 
   g_list_foreach (names, (GFunc) g_free, NULL);
   g_list_free (names);
-
-  return match;
 }
 
 static GObject*
@@ -407,9 +426,8 @@ gst_locations_combo_constructor (GType                  type,
   priv = GST_LOCATIONS_COMBO_GET_PRIVATE (object);
 
   gtk_combo_box_set_model (GTK_COMBO_BOX (priv->combo), priv->model);
-
-  if (fill_model (GST_LOCATIONS_COMBO (object), priv->model, &selected_iter))
-    gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->combo), &selected_iter);
+  fill_model (GST_LOCATIONS_COMBO (object), priv->model);
+  select_matching_profile (GST_LOCATIONS_COMBO (object));
 
   renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->combo), renderer, TRUE);
@@ -430,16 +448,13 @@ static void
 gst_locations_combo_changed (GstNetworkLocations *locations)
 {
   GstLocationsComboPrivate *priv;
-  GtkTreeIter selected_iter;
 
   priv = GST_LOCATIONS_COMBO_GET_PRIVATE (locations);
 
-  if (fill_model (GST_LOCATIONS_COMBO (locations), priv->model, &selected_iter))
-    {
-      g_signal_handlers_block_by_func (priv->combo, on_combo_changed, locations);
-      gtk_combo_box_set_active_iter (GTK_COMBO_BOX (priv->combo), &selected_iter);
-      g_signal_handlers_unblock_by_func (priv->combo, on_combo_changed, locations);
-    }
+  fill_model (GST_LOCATIONS_COMBO (locations), priv->model);
+  g_signal_handlers_block_by_func (priv->combo, on_combo_changed, locations);
+  select_matching_profile (GST_LOCATIONS_COMBO (locations));
+  g_signal_handlers_unblock_by_func (priv->combo, on_combo_changed, locations);
 }
 
 GstLocationsCombo*

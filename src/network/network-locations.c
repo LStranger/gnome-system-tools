@@ -770,11 +770,9 @@ concatenate_aliases (OobsStaticHost *static_host)
       elem = elem->next;
     }
 
-  g_list_foreach (list, (GFunc) g_free, NULL);
-  g_list_free (list);
-
   s = str->str;
   g_string_free (str, FALSE);
+  g_list_free (list);
 
   return s;
 }
@@ -829,7 +827,6 @@ save_hosts_config (OobsHostsConfig *config,
   arr = list_to_array (list);
   g_key_file_set_string_list (key_file, "general", "dns-servers",
 			      (const gchar**) arr, g_strv_length (arr));
-  g_list_foreach (list, (GFunc) g_free, NULL);
   g_list_free (list);
   g_strfreev (arr);
 
@@ -837,7 +834,6 @@ save_hosts_config (OobsHostsConfig *config,
   arr = list_to_array (list);
   g_key_file_set_string_list (key_file, "general", "search-domains",
 			      (const gchar**) arr, g_strv_length (arr));
-  g_list_foreach (list, (GFunc) g_free, NULL);
   g_list_free (list);
   g_strfreev (arr);
 

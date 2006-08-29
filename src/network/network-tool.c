@@ -230,6 +230,12 @@ add_all_interfaces (GstNetworkTool *network_tool)
 }
 
 static void
+set_entry_text (GtkWidget *entry, const gchar *text)
+{
+  gtk_entry_set_text (GTK_ENTRY (entry), (text) ? text : "");
+}
+
+static void
 gst_network_tool_update_gui (GstTool *tool)
 {
   GstNetworkTool *network_tool;
@@ -250,13 +256,13 @@ gst_network_tool_update_gui (GstTool *tool)
   update_hosts_list (hosts_list);
 
   g_signal_handlers_block_by_func (network_tool->hostname, on_entry_changed, tool->main_dialog);
-  gtk_entry_set_text (network_tool->hostname,
-		      oobs_hosts_config_get_hostname (network_tool->hosts_config));
+  set_entry_text (network_tool->hostname,
+		  oobs_hosts_config_get_hostname (network_tool->hosts_config));
   g_signal_handlers_unblock_by_func (network_tool->hostname, on_entry_changed, tool->main_dialog);
 
   g_signal_handlers_block_by_func (network_tool->domain, on_entry_changed, tool->main_dialog);
-  gtk_entry_set_text (network_tool->domain,
-		      oobs_hosts_config_get_domainname (network_tool->hosts_config));
+  set_entry_text (network_tool->domain,
+		  oobs_hosts_config_get_domainname (network_tool->hosts_config));
   g_signal_handlers_unblock_by_func (network_tool->domain, on_entry_changed, tool->main_dialog);
 
   gtk_list_store_clear (GTK_LIST_STORE (network_tool->interfaces_model));
