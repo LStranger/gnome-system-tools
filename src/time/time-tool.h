@@ -35,6 +35,7 @@ struct _GstTimeTool {
 
 	GtkWidget *ntp_use;
 	GtkWidget *ntp_list;
+	GtkWidget *synchronize_now;
 
 	ETzMap    *tzmap;
 	GtkWidget *timezone_dialog;

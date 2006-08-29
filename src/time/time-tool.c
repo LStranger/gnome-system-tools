@@ -103,6 +103,7 @@ gst_time_tool_init (GstTimeTool *tool)
 	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 
 	priv->bus_connection = dbus_bus_get (DBUS_BUS_SESSION, NULL);
+	priv->cookie = 0;
 
 	tool->time_config = oobs_time_config_get (GST_TOOL (tool)->session);
 	tool->ntp_config = oobs_ntp_config_get (GST_TOOL (tool)->session);
@@ -123,7 +124,7 @@ inhibit_screensaver (GstTimeTool *tool,
 		const gchar *appname = "Time-admin";
 		const gchar *reason = "Changing time";
 
-		g_return_if_fail (priv->cookie != 0);
+		g_return_if_fail (priv->cookie == 0);
 
 		message = dbus_message_new_method_call (SCREENSAVER_SERVICE,
 							SCREENSAVER_PATH,
@@ -377,6 +378,16 @@ on_ntp_use_toggled (GtkWidget *widget,
 
 	oobs_object_commit (GST_TIME_TOOL (tool)->services_config);
 	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "timeserver_button"), active);
+	gtk_widget_set_sensitive (GST_TIME_TOOL (tool)->synchronize_now, !active);
+}
+
+static void
+on_synchronize_now_clicked (GtkWidget *widget, gpointer data)
+{
+	GstTimeTool *tool;
+
+	tool = GST_TIME_TOOL (data);
+	gst_tool_commit_async (tool, tool->ntp_config, _("Synchronizing system clock"));
 }
 
 static GObject*
@@ -406,6 +417,10 @@ gst_time_tool_constructor (GType                  type,
 
 	time_tool->ntp_list = ntp_servers_list_get (time_tool);
 	init_timezone (time_tool);
+
+	time_tool->synchronize_now = gst_dialog_get_widget (GST_TOOL (time_tool)->main_dialog, "synchronize_now_button");
+	g_signal_connect (G_OBJECT (time_tool->synchronize_now), "clicked",
+			  G_CALLBACK (on_synchronize_now_clicked), time_tool);
 
 	return object;
 }
@@ -474,6 +489,7 @@ gst_time_tool_update_gui (GstTool *tool)
 	g_signal_handlers_block_by_func (ntp_use, on_ntp_use_toggled, tool);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ntp_use), is_active);
 	gtk_widget_set_sensitive (timeserver_button, is_active);
+	gtk_widget_set_sensitive (time_tool->synchronize_now, !is_active);
 	g_signal_handlers_unblock_by_func (ntp_use, on_ntp_use_toggled, tool);
 }
 
