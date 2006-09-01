@@ -109,6 +109,28 @@ update_global_smb_config (GstTool       *tool,
 	gtk_entry_set_text (GTK_ENTRY (widget), (str) ? str : "");
 }
 
+static gboolean
+check_servers (GstSharesTool *tool)
+{
+	GtkWidget *dialog;
+
+	if (tool->smb_available || tool->nfs_available)
+		return TRUE;
+
+	dialog = gtk_message_dialog_new (GTK_WINDOW (GST_TOOL (tool)->main_dialog),
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_WARNING,
+					 GTK_BUTTONS_CLOSE,
+					 _("Sharing services are not installed"));
+	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+						    _("You need to install at least either Samba or NFS "
+						      "in order to share your folders."));
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	return FALSE;
+}
+
 static void
 gst_shares_tool_update_gui (GstTool *tool)
 {
@@ -117,13 +139,18 @@ gst_shares_tool_update_gui (GstTool *tool)
 
 	shares_tool = GST_SHARES_TOOL (tool);
 
-	list  = oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (shares_tool->nfs_config));
-	add_shares (list);
+	if (check_servers (shares_tool)) {
+		list  = oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (shares_tool->nfs_config));
+		add_shares (list);
 
-	list = oobs_smb_config_get_shares (OOBS_SMB_CONFIG (shares_tool->smb_config));
-	add_shares (list);
+		list = oobs_smb_config_get_shares (OOBS_SMB_CONFIG (shares_tool->smb_config));
+		add_shares (list);
 
-	update_global_smb_config (tool, shares_tool->smb_config);
+		update_global_smb_config (tool, shares_tool->smb_config);
+	} else {
+		/* disable the whole tool, there's no way to add shares */
+		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "shares_admin"), FALSE);
+	}
 }
 
 static void
