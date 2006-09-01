@@ -1,5 +1,11 @@
 2006-09-01  Carlos Garnacho  <carlosg@gnome.org>
 
+	* table.[ch] (table_clear): add
+	* shares-tool.c (gst_shares_tool_update_gui): clear table before
+	adding shares to it, this function may be called several times.
+
+2006-09-01  Carlos Garnacho  <carlosg@gnome.org>
+
 	* shares-tool.c (check_servers): added, check for NFS or SMB services.
 	(gst_shares_tool_update_gui): set window unsensitive if there are no
 	sharing services.

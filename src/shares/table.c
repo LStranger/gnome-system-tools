@@ -143,6 +143,16 @@ table_create (GstTool *tool)
 			  G_CALLBACK (on_shares_dragged_folder), NULL);
 }
 
+void
+table_clear (void)
+{
+	GtkWidget *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
+	GtkTreeModel *model;
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+}
+
 static GdkPixbuf*
 get_share_icon (OobsShare *share)
 {

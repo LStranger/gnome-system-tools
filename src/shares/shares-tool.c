@@ -135,11 +135,15 @@ static void
 gst_shares_tool_update_gui (GstTool *tool)
 {
 	GstSharesTool *shares_tool;
+	GtkWidget *dialog_notebook;
 	OobsList *list;
 
 	shares_tool = GST_SHARES_TOOL (tool);
+	dialog_notebook = gst_dialog_get_widget (tool->main_dialog, "shares_admin");
 
 	if (check_servers (shares_tool)) {
+		table_clear ();
+
 		list  = oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (shares_tool->nfs_config));
 		add_shares (list);
 
@@ -147,9 +151,10 @@ gst_shares_tool_update_gui (GstTool *tool)
 		add_shares (list);
 
 		update_global_smb_config (tool, shares_tool->smb_config);
+		gtk_widget_set_sensitive (dialog_notebook, TRUE);
 	} else {
-		/* disable the whole tool, there's no way to add shares */
-		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "shares_admin"), FALSE);
+		/* disable the tool UI, there's no way to add shares */
+		gtk_widget_set_sensitive (dialog_notebook, FALSE);
 	}
 }
 
