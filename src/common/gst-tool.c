@@ -200,8 +200,7 @@ gst_tool_constructor (GType                  type,
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 
-		if (GST_TOOL_GET_CLASS (tool)->update_config)
-			(* GST_TOOL_GET_CLASS (tool)->update_config) (tool);
+		gst_tool_update_config (tool);
 	}
 
 	return object;
@@ -249,6 +248,15 @@ gst_tool_update_gui (GstTool *tool)
 
 	if (GST_TOOL_GET_CLASS (tool)->update_gui)
 		(* GST_TOOL_GET_CLASS (tool)->update_gui) (tool);
+}
+
+void
+gst_tool_update_config (GstTool *tool)
+{
+	g_return_if_fail (GST_IS_TOOL (tool));
+
+	if (GST_TOOL_GET_CLASS (tool)->update_config)
+		(* GST_TOOL_GET_CLASS (tool)->update_config) (tool);
 }
 
 void

@@ -109,6 +109,7 @@ gboolean     gst_tool_is_authenticated    (GstTool *tool);
 gboolean     gst_tool_save                (GstTool *tool);
 
 void         gst_tool_update_gui          (GstTool *tool);
+void         gst_tool_update_config       (GstTool *tool);
 void         gst_tool_close               (GstTool *tool);
 
 
