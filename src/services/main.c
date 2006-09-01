@@ -28,7 +28,6 @@
 
 #include "table.h"
 #include "service-settings-table.h"
-#include "gst-report-hook.h"
 #include "callbacks.h"
 
 GstTool *tool;
