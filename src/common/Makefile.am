@@ -3,26 +3,17 @@ noinst_LIBRARIES = libsetuptool.a
 INCLUDES = \
 	$(GST_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
-        -DLIBDIR=\""$(libdir)"\" \
-        -DSYSCONFDIR=\""$(sysconfdir)"\" \
-        -DPREFIX=\""$(prefix)"\" \
+	-DLIBDIR=\""$(libdir)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)"\" \
+	-DPREFIX=\""$(prefix)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-libsetuptool_a_SOURCES =				\
-	gst-xml.c		gst-xml.h		\
-	text.c			text.h			\
-	gst-widget.c		gst-widget.h		\
-	gst-dialog.c		gst-dialog.h		\
-	gst-tool.c		gst-tool.h		\
-	gst-report-hook.c	gst-report-hook.h	\
-	gst-report-line.c	gst-report-line.h	\
-	gst-platform-dialog.c	gst-platform-dialog.h	\
-	gst-ui.c		gst-ui.h		\
-	gst-util.c		gst-util.h		\
-	gst-conf.c		gst-conf.h		\
-	gst-filter.c		gst-filter.h		\
-	gst.h						\
-	gst-marshal.h					\
-	gst-types.h
+libsetuptool_a_SOURCES = \
+	gst-widget.c		\
+	gst-dialog.c		\
+	gst-tool.c		\
+	gst-platform-dialog.c	\
+	gst-conf.c		\
+	gst-filter.c
 
 EXTRA_DIST = CommonMakefile

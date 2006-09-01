@@ -34,10 +34,7 @@
 
 #include "gst-tool.h"
 #include "gst-dialog.h"
-#include "gst-report-line.h"
-#include "gst-report-hook.h"
 #include "gst-platform-dialog.h"
-#include "gst-ui.h"
 #include "gst-marshal.h"
 
 
