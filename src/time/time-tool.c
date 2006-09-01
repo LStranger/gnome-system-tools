@@ -54,6 +54,10 @@ static GObject *gst_time_tool_constructor (GType                  type,
 static void  gst_time_tool_update_gui     (GstTool *tool);
 static void  gst_time_tool_update_config  (GstTool *tool);
 
+static void  on_ntp_use_toggled           (GtkWidget *widget,
+					   gpointer   data);
+
+
 G_DEFINE_TYPE (GstTimeTool, gst_time_tool, GST_TYPE_TOOL);
 
 static void
@@ -339,6 +343,35 @@ init_timezone (GstTimeTool *time_tool)
 	time_tool->timezone_dialog = gst_dialog_get_widget (tool->main_dialog, "time_zone_window");
 }
 
+static gboolean
+check_ntp_support (GstTool  *tool,
+		   gboolean  active)
+{
+	GtkWidget *message, *widget;
+
+	if (GST_TIME_TOOL (tool)->ntp_service)
+		return TRUE;
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "ntp_use");
+	g_signal_handlers_block_by_func (widget, on_ntp_use_toggled, tool);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+	g_signal_handlers_unblock_by_func (widget, on_ntp_use_toggled, tool);
+
+	message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					  GTK_DIALOG_MODAL,
+					  GTK_MESSAGE_INFO,
+					  GTK_BUTTONS_CLOSE,
+					  _("NTP support is not installed"));
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
+						  _("Please install and activate NTP support in the system to enable "
+						    "synchronization of your local time server with "
+						    "internet time servers."));
+	gtk_dialog_run (GTK_DIALOG (message));
+	gtk_widget_destroy (message);
+
+	return FALSE;
+}
+
 static void
 on_ntp_use_toggled (GtkWidget *widget,
 		    gpointer   data)
@@ -349,36 +382,17 @@ on_ntp_use_toggled (GtkWidget *widget,
 	tool = (GstTool *) data;
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-	if (!GST_TIME_TOOL (tool)->ntp_service && active) {
-		GtkWidget *message;
+	if (check_ntp_support (tool, active)) {
+		oobs_service_set_runlevel_configuration (GST_TIME_TOOL (tool)->ntp_service,
+							 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
+							 (active) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
+							 /* FIXME: hardcoded priority? */
+							 50);
 
-		g_signal_handlers_block_by_func (widget, on_ntp_use_toggled, tool);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
-		g_signal_handlers_unblock_by_func (widget, on_ntp_use_toggled, tool);
-
-		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_INFO,
-						  GTK_BUTTONS_CLOSE,
-						  _("NTP support is not installed"));
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
-							  _("Please install and activate NTP support in the system to enable "
-							    "synchronization of your local time server with "
-							    "internet time servers."));
-		gtk_dialog_run (GTK_DIALOG (message));
-		gtk_widget_destroy (message);
-		return;
+		oobs_object_commit (GST_TIME_TOOL (tool)->services_config);
+		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "timeserver_button"), active);
+		gtk_widget_set_sensitive (GST_TIME_TOOL (tool)->synchronize_now, !active);
 	}
-
-	oobs_service_set_runlevel_configuration (GST_TIME_TOOL (tool)->ntp_service,
-						 oobs_services_config_get_default_runlevel (GST_TIME_TOOL (tool)->services_config),
-						 (active) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
-						 /* FIXME: hardcoded priority? */
-						 50);
-
-	oobs_object_commit (GST_TIME_TOOL (tool)->services_config);
-	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "timeserver_button"), active);
-	gtk_widget_set_sensitive (GST_TIME_TOOL (tool)->synchronize_now, !active);
 }
 
 static void
