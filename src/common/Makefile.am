@@ -14,6 +14,7 @@ libsetuptool_a_SOURCES = \
 	gst-tool.c		\
 	gst-platform-dialog.c	\
 	gst-conf.c		\
-	gst-filter.c
+	gst-filter.c		\
+	gst-service-role.c
 
 EXTRA_DIST = CommonMakefile

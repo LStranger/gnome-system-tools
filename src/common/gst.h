@@ -6,3 +6,4 @@
 #include "gst-dialog.h"
 #include "gst-conf.h"
 #include "gst-filter.h"
+#include "gst-service-role.h"
