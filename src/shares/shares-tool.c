@@ -21,6 +21,7 @@
 #include <glib-object.h>
 #include "shares-tool.h"
 #include <glib/gi18n.h>
+#include "gst.h"
 
 static void gst_shares_tool_class_init (GstSharesToolClass *class);
 static void gst_shares_tool_init       (GstSharesTool      *tool);
@@ -179,19 +180,17 @@ gst_shares_tool_update_services_availability (GstSharesTool *tool)
 	OobsListIter iter;
 	GObject *service;
 	gboolean valid;
-	gchar *role;
+	GstServiceRole role;
 
 	services = oobs_services_config_get_services (tool->services_config);
 	valid = oobs_list_get_iter_first (services, &iter);
 
 	while (valid) {
 		service = oobs_list_get (services, &iter);
-		role = oobs_service_get_role (OOBS_SERVICE (service));
+		role = gst_service_get_role (OOBS_SERVICE (service));
 
-		if (strcmp (role, "FILE_SERVER_SMB") == 0)
-			tool->smb_available = TRUE;
-		else if (strcmp (role, "FILE_SERVER_NFS") == 0)
-			tool->nfs_available = TRUE;
+		tool->smb_available = (role == GST_ROLE_FILE_SERVER_SMB);
+		tool->nfs_available = (role == GST_ROLE_FILE_SERVER_NFS);
 
 		g_object_unref (service);
 		valid = oobs_list_iter_next (services, &iter);
