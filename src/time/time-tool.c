@@ -83,16 +83,16 @@ get_ntp_service (GstTimeTool *tool)
 	OobsList *list;
 	OobsListIter iter;
 	gboolean valid;
-	const gchar *role;
+	GstServiceRole role;
 
 	list = oobs_services_config_get_services (tool->services_config);
 	valid = oobs_list_get_iter_first (list, &iter);
 
 	while (valid) {
 		service = oobs_list_get (list, &iter);
-		role = oobs_service_get_role (OOBS_SERVICE (service));
+		role = gst_service_get_role (OOBS_SERVICE (service));
 
-		if (strcmp (role, "NTP_SERVER") == 0)
+		if (role == GST_ROLE_NTP_SERVER)
 			tool->ntp_service = g_object_ref (service);
 
 		g_object_unref (service);
