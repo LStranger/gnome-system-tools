@@ -189,8 +189,10 @@ gst_shares_tool_update_services_availability (GstSharesTool *tool)
 		service = oobs_list_get (services, &iter);
 		role = gst_service_get_role (OOBS_SERVICE (service));
 
-		tool->smb_available = (role == GST_ROLE_FILE_SERVER_SMB);
-		tool->nfs_available = (role == GST_ROLE_FILE_SERVER_NFS);
+		if (role == GST_ROLE_FILE_SERVER_SMB)
+			tool->smb_available = TRUE;
+		else if (role == GST_ROLE_FILE_SERVER_NFS)
+			tool->nfs_available = TRUE;
 
 		g_object_unref (service);
 		valid = oobs_list_iter_next (services, &iter);
