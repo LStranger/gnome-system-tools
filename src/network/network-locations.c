@@ -127,7 +127,8 @@ PropType plip_properties[] = {
   { "active", TYPE_BOOLEAN },
   { "configured", TYPE_BOOLEAN },
   { "address", TYPE_STRING },
-  { "remote-address", TYPE_STRING }
+  { "remote-address", TYPE_STRING },
+  { NULL }
 };
 
 
