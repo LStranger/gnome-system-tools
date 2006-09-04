@@ -83,13 +83,16 @@ static GstDialogSignal signals_after[] = {
 };
 
 static void
-init_standalone_dialog (IfaceSearchTerm search_term, const gchar *term)
+init_standalone_dialog (GstTool         *tool,
+			IfaceSearchTerm  search_term,
+			const gchar     *term)
 {
   GstNetworkTool *network_tool;
   OobsIface      *iface;
   GtkWidget      *d;
 
   network_tool = GST_NETWORK_TOOL (tool);
+  gst_tool_update_gui (tool);
   iface = ifaces_model_search_iface (search_term, term);
 
   if (iface)
@@ -168,9 +171,9 @@ main (int argc, gchar *argv[])
   init_filters ();
 
   if (interface)
-    init_standalone_dialog (SEARCH_DEV, interface);
+    init_standalone_dialog (tool, SEARCH_DEV, interface);
   else if (type)
-    init_standalone_dialog (SEARCH_TYPE, type);
+    init_standalone_dialog (tool, SEARCH_TYPE, type);
   else
     gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 
