@@ -1,5 +1,13 @@
 2006-09-04  Carlos Garnacho  <carlosg@gnome.org>
 
+	* share-settings.[ch] (share_settings_set_name_from_folder):
+	workaround what seems to be a crasher in the async filechooser code.
+	* callbacks.c: code update to match the change above.
+	* main.c (init_standalone_dialog) (main): small fixes to the
+	standalone folder sharing dialog.
+
+2006-09-04  Carlos Garnacho  <carlosg@gnome.org>
+
 	* shares-tool.c (gst_shares_tool_update_services_availability): use
 	gst_service_get_role()
 

@@ -68,8 +68,10 @@ initialize_tables (GstTool *tool)
 }
 
 void
-init_standalone_dialog (const gchar *path)
+init_standalone_dialog (GstTool     *tool,
+			const gchar *path)
 {
+	gst_tool_update_gui (tool);
 	share_settings_dialog_run (path, TRUE);
 }
 
@@ -99,10 +101,11 @@ main (int argc, char *argv[])
 	initialize_filters ();
 
 	if (path)
-		init_standalone_dialog (path);
-	else
+		init_standalone_dialog (tool, path);
+	else {
 		gtk_widget_show (GTK_WIDGET (tool->main_dialog));
+		gtk_main ();
+	}
 
-	gtk_main ();
 	return 0;
 }

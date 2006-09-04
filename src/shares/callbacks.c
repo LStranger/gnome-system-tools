@@ -386,7 +386,11 @@ on_wins_server_focus_out (GtkWidget *widget, GdkEvent *event, gpointer data)
 void
 on_shared_folder_changed (GtkWidget *widget, gpointer data)
 {
-	share_settings_set_name_from_folder ();
+	gchar *path;
+
+	path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget));
+	share_settings_set_name_from_folder (path);
+	g_free (path);
 }
 
 void
