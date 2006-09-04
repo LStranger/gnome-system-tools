@@ -25,17 +25,17 @@
 #define __SERVICE_H
 
 #include <glib.h>
+#include <oobs/oobs.h>
 
 typedef struct _ServiceDescription ServiceDescription;
 
 struct _ServiceDescription {
-	gchar *role;
 	gboolean dangerous;
 	gchar *icon;
 	gchar *description;
 	gchar *long_description;
 };
 
-const ServiceDescription *service_search (const gchar *role);
+const ServiceDescription *service_search (OobsService *service);
 
 #endif /* __SERVICE_H */

@@ -1,3 +1,11 @@
+2006-09-04  Carlos Garnacho  <carlosg@gnome.org>
+
+	* service.[ch]: modified to use (and match with)
+	src/common/gst-service-role.[ch]
+	* table.c (get_service_icon): added, gets the GdkPixbuf matching the
+	service description, if it isn't found a fallback icon is used.
+	(table_add_service): update to new code.
+
 2006-09-01  Carlos Garnacho  <carlosg@gnome.org>
 
 	* main.c: remove an unnecessary #include
