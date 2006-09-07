@@ -32,10 +32,10 @@ struct _GstLocationsComboPrivate
   GstTool *tool;
   GtkTreeModel *model;
   GtkWidget *combo;
-  GtkWidget *add_button;
-  GtkWidget *remove_button;
+  GtkWidget *save_button;
+  GtkWidget *delete_button;
 
-  GtkWidget *add_dialog;
+  GtkWidget *save_dialog;
   GtkWidget *location_entry;
 };
 
@@ -43,8 +43,8 @@ enum {
   PROP_0,
   PROP_TOOL,
   PROP_COMBO,
-  PROP_ADD,
-  PROP_REMOVE
+  PROP_SAVE,
+  PROP_DELETE
 };
 
 static void gst_locations_combo_class_init   (GstLocationsComboClass *class);
@@ -95,17 +95,17 @@ gst_locations_combo_class_init (GstLocationsComboClass *class)
 							GTK_TYPE_COMBO_BOX,
 							G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
   g_object_class_install_property (object_class,
-				   PROP_ADD,
-				   g_param_spec_object ("add",
-							"Add",
-							"Add",
+				   PROP_SAVE,
+				   g_param_spec_object ("save",
+							"Save",
+							"Save",
 							GTK_TYPE_BUTTON,
 							G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
   g_object_class_install_property (object_class,
-				   PROP_REMOVE,
-				   g_param_spec_object ("remove",
-							"Remove",
-							"Remove",
+				   PROP_DELETE,
+				   g_param_spec_object ("delete",
+							"Delete",
+							"Delete",
 							GTK_TYPE_BUTTON,
 							G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
   g_type_class_add_private (object_class,
@@ -134,11 +134,11 @@ gst_locations_combo_finalize (GObject *object)
   if (priv->combo)
     g_object_unref (priv->combo);
 
-  if (priv->add_button)
-    g_object_unref (priv->add_button);
+  if (priv->save_button)
+    g_object_unref (priv->save_button);
 
-  if (priv->remove_button)
-    g_object_unref (priv->remove_button);
+  if (priv->delete_button)
+    g_object_unref (priv->delete_button);
 
   if (priv->model)
     g_object_unref (priv->model);
@@ -163,11 +163,11 @@ gst_locations_combo_set_property (GObject         *object,
     case PROP_COMBO:
       priv->combo = GTK_WIDGET (g_value_dup_object (value));
       break;
-    case PROP_ADD:
-      priv->add_button = GTK_WIDGET (g_value_dup_object (value));
+    case PROP_SAVE:
+      priv->save_button = GTK_WIDGET (g_value_dup_object (value));
       break;
-    case PROP_REMOVE:
-      priv->remove_button = GTK_WIDGET (g_value_dup_object (value));
+    case PROP_DELETE:
+      priv->delete_button = GTK_WIDGET (g_value_dup_object (value));
       break;
     }
 }
@@ -191,11 +191,11 @@ gst_locations_combo_get_property (GObject         *object,
     case PROP_COMBO:
       g_value_set_object (value, priv->combo);
       break;
-    case PROP_ADD:
-      g_value_set_object (value, priv->add_button);
+    case PROP_SAVE:
+      g_value_set_object (value, priv->save_button);
       break;
-    case PROP_REMOVE:
-      g_value_set_object (value, priv->remove_button);
+    case PROP_DELETE:
+      g_value_set_object (value, priv->delete_button);
       break;
     }
 }
@@ -265,7 +265,7 @@ check_save_location (GstLocationsCombo *combo, const gchar *name)
 				   GTK_DIALOG_MODAL,
 				   GTK_MESSAGE_QUESTION,
 				   GTK_BUTTONS_YES_NO,
-				   _("There is already a location with that name"));
+				   _("There is already a location with the same name"));
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 					    _("Overwrite it?"));
   response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -306,33 +306,74 @@ select_matching_profile (GstLocationsCombo *combo)
 }
 
 static void
-on_add_button_clicked (GtkWidget *widget, gpointer data)
+on_save_dialog_response (GtkWidget *widget, gint response, gpointer data)
+{
+  GstLocationsCombo *combo = GST_LOCATIONS_COMBO (data);
+  GstLocationsComboPrivate *priv = GST_LOCATIONS_COMBO_GET_PRIVATE (combo);
+  const gchar *name;
+
+  if (response == GTK_RESPONSE_OK)
+    {
+      name = gtk_entry_get_text (GTK_ENTRY (priv->location_entry));
+
+      /* check if the location already exists
+       * and ask the user if necessary */
+      if (check_save_location (combo, name))
+	{
+	  /* save the data and hide the dialog */
+	  gtk_widget_hide (priv->save_dialog);
+	  gst_network_locations_save_current (GST_NETWORK_LOCATIONS (combo), name);
+	  select_matching_profile (combo);
+	}
+      else
+	gtk_widget_grab_focus (priv->location_entry);
+    }
+  else
+    gtk_widget_hide (priv->save_dialog);
+}
+
+static gboolean
+on_save_dialog_delete_event (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+  /* block the event */
+  return TRUE;
+}
+
+static void
+on_save_button_clicked (GtkWidget *widget, gpointer data)
 {
   GstLocationsCombo *combo;
   GstLocationsComboPrivate *priv;
-  const gchar *name;
-  gint response;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gchar *name;
 
   combo = GST_LOCATIONS_COMBO (data);
   priv = GST_LOCATIONS_COMBO_GET_PRIVATE (combo);
 
-  if (!priv->add_dialog)
+  if (!priv->save_dialog)
     {
       GtkWidget *hbox, *label, *button;
 
-      priv->add_dialog = gtk_dialog_new_with_buttons (_("Add new location"),
-						      GTK_WINDOW (priv->tool->main_dialog),
-						      GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
-						      NULL);
-      gtk_dialog_add_button (GTK_DIALOG (priv->add_dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-      button = gtk_dialog_add_button (GTK_DIALOG (priv->add_dialog), GTK_STOCK_ADD, GTK_RESPONSE_OK);
-      gtk_dialog_set_default_response (GTK_DIALOG (priv->add_dialog), GTK_RESPONSE_OK);
+      priv->save_dialog = gtk_dialog_new_with_buttons (_("Save location"),
+						       GTK_WINDOW (priv->tool->main_dialog),
+						       GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
+						       NULL);
+      gtk_dialog_add_button (GTK_DIALOG (priv->save_dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+      button = gtk_dialog_add_button (GTK_DIALOG (priv->save_dialog), GTK_STOCK_SAVE, GTK_RESPONSE_OK);
+      gtk_dialog_set_default_response (GTK_DIALOG (priv->save_dialog), GTK_RESPONSE_OK);
 
       gtk_widget_set_sensitive (button, FALSE);
 
-      label = gtk_label_new (_("Location name:"));
+      g_signal_connect (G_OBJECT (priv->save_dialog), "response",
+			G_CALLBACK (on_save_dialog_response), combo);
+      g_signal_connect (G_OBJECT (priv->save_dialog), "delete-event",
+			G_CALLBACK (on_save_dialog_delete_event), combo);
+
+      label = gtk_label_new_with_mnemonic (_("_Location name:"));
       priv->location_entry = gtk_entry_new ();
       gtk_entry_set_activates_default (GTK_ENTRY (priv->location_entry), TRUE);
+      gtk_label_set_mnemonic_widget (GTK_LABEL (label), priv->location_entry);
 
       g_signal_connect (G_OBJECT (priv->location_entry), "changed",
 			G_CALLBACK (on_dialog_entry_changed), button);
@@ -343,25 +384,27 @@ on_add_button_clicked (GtkWidget *widget, gpointer data)
       gtk_box_pack_start (GTK_BOX (hbox), priv->location_entry, TRUE, TRUE, 0);
 
       gtk_widget_show_all (hbox);
-      gtk_container_add (GTK_CONTAINER (GTK_DIALOG (priv->add_dialog)->vbox), hbox);
+      gtk_container_add (GTK_CONTAINER (GTK_DIALOG (priv->save_dialog)->vbox), hbox);
     }
 
-  gtk_entry_set_text (GTK_ENTRY (priv->location_entry), "");
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->combo));
 
-  response = gtk_dialog_run (GTK_DIALOG (priv->add_dialog));
-  gtk_widget_hide (priv->add_dialog);
-
-  name = gtk_entry_get_text (GTK_ENTRY (priv->location_entry));
-
-  if (response == GTK_RESPONSE_OK && check_save_location (combo, name))
+  /* set the current location by default */
+  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (priv->combo), &iter))
     {
-      gst_network_locations_save_current (GST_NETWORK_LOCATIONS (combo), name);
-      select_matching_profile (combo);
+      gtk_tree_model_get (model, &iter, 0, &name, -1);
+      gtk_entry_set_text (GTK_ENTRY (priv->location_entry), name);
+      g_free (name);
     }
+  else
+    gtk_entry_set_text (GTK_ENTRY (priv->location_entry), "");
+
+  gtk_widget_grab_focus (priv->location_entry);
+  gtk_widget_show (priv->save_dialog);
 }
 
 static void
-on_remove_button_clicked (GtkWidget *widget, gpointer data)
+on_delete_button_clicked (GtkWidget *widget, gpointer data)
 {
   GstLocationsComboPrivate *priv;
   GtkTreeIter iter;
@@ -379,7 +422,7 @@ on_remove_button_clicked (GtkWidget *widget, gpointer data)
 				       GTK_DIALOG_MODAL,
 				       GTK_MESSAGE_QUESTION,
 				       GTK_BUTTONS_YES_NO,
-				       _("Do you want to remove location \"%s\"?"),
+				       _("Do you want to delete location \"%s\"?"),
 				       name);
       response = gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
@@ -436,10 +479,10 @@ gst_locations_combo_constructor (GType                  type,
 
   g_signal_connect (G_OBJECT (priv->combo), "changed",
 		    G_CALLBACK (on_combo_changed), object);
-  g_signal_connect (G_OBJECT (priv->add_button), "clicked",
-		    G_CALLBACK (on_add_button_clicked), object);
-  g_signal_connect (G_OBJECT (priv->remove_button), "clicked",
-		    G_CALLBACK (on_remove_button_clicked), object);
+  g_signal_connect (G_OBJECT (priv->save_button), "clicked",
+		    G_CALLBACK (on_save_button_clicked), object);
+  g_signal_connect (G_OBJECT (priv->delete_button), "clicked",
+		    G_CALLBACK (on_delete_button_clicked), object);
 
   return object;
 }
@@ -460,13 +503,13 @@ gst_locations_combo_changed (GstNetworkLocations *locations)
 GstLocationsCombo*
 gst_locations_combo_new (GstTool   *tool,
 			 GtkWidget *combo,
-			 GtkWidget *add,
-			 GtkWidget *remove)
+			 GtkWidget *save,
+			 GtkWidget *delete)
 {
   return g_object_new (GST_TYPE_LOCATIONS_COMBO,
 		       "tool", tool,
 		       "combo", combo,
-		       "add", add,
-		       "remove", remove,
+		       "save", save,
+		       "delete", delete,
 		       NULL);
 }
