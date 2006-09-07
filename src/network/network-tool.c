@@ -192,13 +192,15 @@ add_interfaces (GtkTreeView *ifaces_list, OobsList *list)
   OobsListIter iter;
   GObject *iface;
   gboolean valid;
+  gint n_items;
 
   valid = oobs_list_get_iter_first (list, &iter);
+  n_items = oobs_list_get_n_items (list);
 
   while (valid)
     {
       iface = oobs_list_get (list, &iter);
-      ifaces_model_add_interface (OOBS_IFACE (iface));
+      ifaces_model_add_interface (OOBS_IFACE (iface), (n_items > 1));
 
       g_object_unref (iface);
       valid = oobs_list_iter_next (list, &iter);

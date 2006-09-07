@@ -53,6 +53,7 @@ ifaces_model_create (void)
 			      G_TYPE_OBJECT,
 			      G_TYPE_STRING,
 			      G_TYPE_BOOLEAN,
+			      G_TYPE_BOOLEAN,
 			      G_TYPE_BOOLEAN);
   return GTK_TREE_MODEL (store);
 }
@@ -346,7 +347,7 @@ get_iface_secondary_text (OobsIface *iface)
 }
 
 static gchar*
-get_iface_desc (OobsIface *iface)
+get_iface_desc (OobsIface *iface, gboolean show_name)
 {
   gchar *primary_text, *secondary_text, *full_text;
 
@@ -368,7 +369,15 @@ get_iface_desc (OobsIface *iface)
   secondary_text = get_iface_secondary_text (iface);
 
   if (primary_text)
-    full_text = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s", _(primary_text), secondary_text);
+    {
+      if (show_name)
+	full_text = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s (%s)</span>\n%s",
+				     _(primary_text), oobs_iface_get_device_name (iface), secondary_text);
+      else
+	full_text = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s", _(primary_text), secondary_text);
+    }
+  else
+    full_text = g_strdup_printf ("Unknown interface type");
 
   g_free (secondary_text);
   return full_text;
@@ -380,11 +389,15 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
   GtkTreeModel *model;
   OobsIface *iface;
   gchar *desc;
+  gboolean show_name;
 
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
 
-  gtk_tree_model_get (model, iter, COL_OBJECT, &iface, -1);
-  desc = get_iface_desc (OOBS_IFACE (iface));
+  gtk_tree_model_get (model, iter,
+		      COL_OBJECT, &iface,
+		      COL_SHOW_IFACE_NAME, &show_name,
+		      -1);
+  desc = get_iface_desc (OOBS_IFACE (iface), show_name);
 
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
 		      COL_ACTIVE, oobs_iface_get_active (OOBS_IFACE (iface)),
@@ -402,8 +415,8 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
   update_gateways_combo ();
 }
 
-void
-ifaces_model_set_interface_at_iter (OobsIface *iface, GtkTreeIter *iter)
+static void
+ifaces_model_set_interface_at_iter (OobsIface *iface, GtkTreeIter *iter, gboolean show_name)
 {
   GtkTreeModel *model;
 
@@ -413,12 +426,13 @@ ifaces_model_set_interface_at_iter (OobsIface *iface, GtkTreeIter *iter)
 
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
 		      COL_OBJECT, iface,
+		      COL_SHOW_IFACE_NAME, show_name,
 		      -1);
   ifaces_model_modify_interface_at_iter (iter);
 }
 
 void
-ifaces_model_add_interface (OobsIface *iface)
+ifaces_model_add_interface (OobsIface *iface, gboolean show_name)
 {
   GtkTreeModel *model;
   GtkTreeIter   it;
@@ -426,7 +440,7 @@ ifaces_model_add_interface (OobsIface *iface)
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
 
   gtk_list_store_append (GTK_LIST_STORE (model), &it);
-  ifaces_model_set_interface_at_iter (iface, &it);
+  ifaces_model_set_interface_at_iter (iface, &it, show_name);
 }
 
 void

@@ -31,6 +31,7 @@ enum {
   COL_DEV,
   COL_INCONSISTENT,
   COL_HAS_GATEWAY,
+  COL_SHOW_IFACE_NAME,
   COL_LAST
 };
 
@@ -40,8 +41,7 @@ typedef enum {
 } IfaceSearchTerm;
 
 GtkTreeModel* ifaces_model_create                   (void);
-void          ifaces_model_set_interface_at_iter    (OobsIface*, GtkTreeIter*);
-void          ifaces_model_add_interface            (OobsIface*);
+void          ifaces_model_add_interface            (OobsIface*, gboolean);
 void          ifaces_model_modify_interface_at_iter (GtkTreeIter*);
 OobsIface*    ifaces_model_search_iface             (IfaceSearchTerm, const gchar*);
 void          ifaces_model_clear                    (void);
