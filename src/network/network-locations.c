@@ -818,11 +818,13 @@ save_hosts_config (OobsHostsConfig *config,
 {
   GList *list;
   gchar **arr;
+  const gchar *str;
 
-  g_key_file_set_string (key_file, "general", "hostname",
-			 oobs_hosts_config_get_hostname (config));
-  g_key_file_set_string (key_file, "general", "domainname",
-			 oobs_hosts_config_get_domainname (config));
+  str = oobs_hosts_config_get_hostname (config);
+  g_key_file_set_string (key_file, "general", "hostname", (str) ? str : "");
+
+  str = oobs_hosts_config_get_domainname (config);
+  g_key_file_set_string (key_file, "general", "domainname", (str) ? str : "");
 
   list = oobs_hosts_config_get_dns_servers (config);
   arr = list_to_array (list);
