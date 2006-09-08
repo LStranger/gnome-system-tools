@@ -55,6 +55,8 @@ share_settings_set_name_from_folder (const gchar *path)
 {
 	gchar *name;
 
+	g_return_if_fail (path != NULL);
+
 	if (strcmp (path, "/") == 0)
 		name = g_strdup (_("File System"));
 	else
@@ -435,7 +437,7 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 	GtkTreeIter   iter;
 	gboolean      path_exists;
 	gchar        *title;
-	GtkWidget    *name_entry;
+	GtkWidget    *name_entry, *file_chooser;
 
 	share  = NULL;
 	dialog = share_settings_prepare_dialog (path, standalone);
@@ -455,6 +457,12 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 		name_entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 		g_object_set_data (name_entry, "modified", GINT_TO_POINTER (FALSE));
 		gtk_window_set_title (GTK_WINDOW (dialog), "Share Folder");
+
+		if (!path) {
+			/* make sure the path gets filled */
+			file_chooser = gst_dialog_get_widget (tool->main_dialog, "share_path");
+			path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (file_chooser));
+		}
 
 		share_settings_set_name_from_folder (path);
 	}
