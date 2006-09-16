@@ -165,6 +165,22 @@ gst_tool_init (GstTool *tool)
 	g_object_unref (xml);
 }
 
+static void
+show_access_denied_dialog (GstTool *tool)
+{
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new (NULL,
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_CLOSE,
+					 _("The configuration could not be loaded"));
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("You are not allowed to access the system configuration."));
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+}
+
 static GObject*
 gst_tool_constructor (GType                  type,
 		      guint                  n_construct_properties,
@@ -175,6 +191,7 @@ gst_tool_constructor (GType                  type,
 	gchar *widget_name;
 	const gchar *platform;
 	GtkWidget *dialog;
+	OobsResult result;
 
 	object = (* G_OBJECT_CLASS (gst_tool_parent_class)->constructor) (type,
 									  n_construct_properties,
@@ -195,12 +212,23 @@ gst_tool_constructor (GType                  type,
 		g_free (widget_name);
 	}
 
-	if (!oobs_session_get_platform (tool->session)) {
+	result = oobs_session_get_platform (tool->session, NULL);
+
+	switch (result) {
+	case OOBS_RESULT_NO_PLATFORM:
 		dialog = gst_platform_dialog_new (tool->session);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 
 		gst_tool_update_config (tool);
+		break;
+	case OOBS_RESULT_ACCESS_DENIED:
+	case OOBS_RESULT_ERROR:
+		show_access_denied_dialog (tool);
+		exit (-1);
+		break;
+	default:
+		break;
 	}
 
 	return object;
@@ -1294,9 +1322,9 @@ gst_tool_hide_report_window (GstTool *tool)
 }
 
 static void
-on_commit_finalized (OobsObject       *object,
-		     OobsObjectResult  result,
-		     gpointer          data)
+on_commit_finalized (OobsObject *object,
+		     OobsResult  result,
+		     gpointer    data)
 {
 	gst_tool_hide_report_window (GST_TOOL (data));
 }

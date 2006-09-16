@@ -322,11 +322,13 @@ gst_platform_dialog_populate_list (GstPlatformDialog *dialog)
 
 	g_return_if_fail (OOBS_IS_SESSION (dialog->session));
 
+	if (oobs_session_get_supported_platforms (dialog->session, &platforms) != OOBS_RESULT_OK)
+		return;
+
+	list = platforms;
 	priv = dialog->_priv;
 	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (priv->list));
 	store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model)));
-
-	list = platforms = oobs_session_get_supported_platforms (dialog->session);
 
 	while (platforms) {
 		platform = platforms->data;
