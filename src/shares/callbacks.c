@@ -28,7 +28,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include <libgnomevfs/gnome-vfs-uri.h>
 #include <oobs/oobs.h>
 
 #include "shares-tool.h"
@@ -120,14 +119,15 @@ on_shares_dragged_folder (GtkWidget *widget, GdkDragContext *context,
 			  gint x, gint y, GtkSelectionData *selection_data,
 			  guint info, guint time, gpointer gdata)
 {
-	GList    *uris = NULL;
-	gchar    *path;
+	gchar *path, **uris = NULL;
+	gint i = 0;
 
 	if (info == SHARES_DND_URI_LIST) {
-		uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+		uris = g_uri_list_extract_uris((gchar *) selection_data->data);
 
-		if (uris != NULL && uris->data != NULL) {
-			path = g_strdup (gnome_vfs_uri_get_path (uris->data));
+		if (uris != NULL) {
+		    while ( uris[i] != NULL) {
+			path = g_strdup (g_filename_from_uri(uris[i++], NULL, NULL));
 
 			if (g_file_test (path, G_FILE_TEST_IS_DIR)) {
 				share_settings_dialog_run (path, FALSE);
@@ -137,8 +137,10 @@ on_shares_dragged_folder (GtkWidget *widget, GdkDragContext *context,
 			}
 
 			g_free (path);
-			gnome_vfs_uri_list_free (uris);
+		    }	
 		}
+
+		g_strfreev(uris);
 	}
 }
 

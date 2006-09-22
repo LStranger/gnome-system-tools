@@ -10,7 +10,10 @@ include ../common/CommonMakefile
 toolname = shares
 bin_PROGRAMS = shares-admin
 
+if ENABLE_GNOME
 SUBDIRS = nautilus
+endif
+
 INCLUDES = $(GST_TOOL_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
 EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)

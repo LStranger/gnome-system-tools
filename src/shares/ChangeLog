@@ -1,3 +1,10 @@
+2006-09-22  Jani Monoses  <jani.monoses@gmail.com>
+
+	* Makefile.am: do not build nautilus directory if --disable-gnome is
+	present.
+	* callbacks.c (on_shares_dragged_folder): do not use GNOME-VFS to 
+	parse the uri list.
+
 2006-09-08  Carlos Garnacho  <carlosg@gnome.org>
 
 	* share-settings.c (share_settings_dialog_run): make sure the path

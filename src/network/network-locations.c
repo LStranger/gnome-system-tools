@@ -19,7 +19,6 @@
  */
 
 #include <oobs/oobs.h>
-#include <libgnome/gnome-init.h>
 #include <string.h>
 #include "network-locations.h"
 #include <sys/types.h>
@@ -158,6 +157,8 @@ gst_network_locations_class_init (GstNetworkLocationsClass *class)
   g_type_class_add_private (object_class,
 			    sizeof (GstNetworkLocationsPrivate));
 }
+
+#define GNOME_DOT_GNOME ".gnome2/"
 
 static gchar*
 create_dot_dir ()

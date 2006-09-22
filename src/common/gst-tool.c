@@ -26,9 +26,11 @@
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
 
+#ifdef ENABLE_GNOME
 #include <libgnomeui/libgnomeui.h>
 #include <libgnome/gnome-program.h>
 #include <libgnome/gnome-help.h>
+#endif
 
 #include <string.h>
 
@@ -1221,7 +1223,9 @@ try_show_usage_warning (void)
 void
 gst_init_tool (const gchar *app_name, int argc, char *argv [], GOptionEntry *entries)
 {
+#ifdef ENABLE_GNOME
 	GnomeProgram   *program;
+#endif
 	GOptionContext *context;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -1235,18 +1239,22 @@ gst_init_tool (const gchar *app_name, int argc, char *argv [], GOptionEntry *ent
 		g_option_context_parse (context, &argc, &argv, NULL);
 	}
 
+#ifdef ENABLE_GNOME
  	program = gnome_program_init (app_name, VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
 				      GNOME_PARAM_APP_DATADIR, DATADIR,
 				      GNOME_PARAM_HUMAN_READABLE_NAME,
 				      _("GNOME System Tools"),
 				      NULL);
-	/* try_show_usage_warning (); */
+#else
+	gtk_init (&argc, &argv);	
+#endif
 }
 
 void
 gst_tool_show_help (GstTool *tool, gchar *section)
 {
+#ifdef ENABLE_GNOME
 	GError    *error = NULL;
 	gchar     *help_file;
 
@@ -1269,6 +1277,7 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 	}
 
 	g_free (help_file);
+#endif
 }
 
 static gboolean

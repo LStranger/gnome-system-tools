@@ -71,20 +71,46 @@ dnl END: Cracklib checking
 dnl =====================================================
 
 dnl =====================================================
+dnl Check for GNOME
+dnl =====================================================
+
+AC_ARG_ENABLE(gnome,
+	      	[  --enable-gnome        Enable GNOME libraries (default yes)],
+              	enable_gnome="$enableval",
+		enable_gnome=yes)
+
+dnl =====================================================
+dnl END: Check for GNOME
+dnl =====================================================
+
+dnl =====================================================
 dnl Check for Module versions
 dnl =====================================================
 
 PKG_CHECK_MODULES(GST_DEPENDS,[
 			   gtk+-2.0 >= $GTK_REQUIRED
-			   libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED
 			   libglade-2.0 >= $LIBGLADE_REQUIRED
 			   gconf-2.0 >= $GCONF_REQUIRED
 			   liboobs-1 >= $LIBOOBS_REQUIRED
+			   libart-2.0
 			   ])
 
-PKG_CHECK_MODULES(DBUS,[
-			   dbus-1 >= $DBUS_REQUIRED
+
+if test "xyes" = "x$enable_gnome"; then
+	PKG_CHECK_MODULES(GNOME,[
+			   libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED
 			   ])
+	AC_DEFINE([ENABLE_GNOME], [1], [Enable GNOME support.])
+fi
+
+AC_SUBST(GNOME_CFLAGS)
+AC_SUBST(GNOME_LIBS)
+
+AM_CONDITIONAL(ENABLE_GNOME, test x$enable_gnome = xyes)
+
+PKG_CHECK_MODULES(DBUS,[
+		  dbus-1 >= $DBUS_REQUIRED
+		  ])
 
 DBUS_CFLAGS="$DBUS_CFLAGS -DDBUS_API_SUBJECT_TO_CHANGE"
 AC_SUBST(DBUS_LIBS)
@@ -201,8 +227,8 @@ dnl =====================================================
 dnl GST_DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
 GST_DEPRECATED_FLAGS=""
 
-GST_LIBS="$GST_DEPENDS_LIBS"
-GST_CFLAGS="$GST_DEPENDS_CFLAGS $GST_CRACK_LIB_CFLAGS $GST_DEPRECATED_FLAGS"
+GST_LIBS="$GST_DEPENDS_LIBS $GNOME_LIBS"
+GST_CFLAGS="$GST_DEPENDS_CFLAGS $GST_CRACK_LIB_CFLAGS $GST_DEPRECATED_FLAGS $GNOME_CFLAGS"
 
 GST_TOOL_LIBS="\$(top_builddir)/src/common/libsetuptool.a $GST_LIBS"
 GST_TOOL_CFLAGS="$GST_CFLAGS -I\$(top_srcdir)/src/common"
@@ -278,6 +304,7 @@ Configuration (GST):
 	Network tool:      ${enable_network}
 	Time tool:         ${enable_time}
 	Shares tool:       ${enable_shares}
+	GNOME support:     ${enable_gnome}
 
 	Compiler:          ${CC} 
 "
