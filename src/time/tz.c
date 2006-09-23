@@ -103,9 +103,6 @@ tz_load_db (void)
 	/* now sort by country */
 	sort_locations_by_country (tz_db->locations);
 	
-	/* added a NULL pointer at the end of the array to prevent errors. Carlos */
-	g_ptr_array_add (tz_db->locations, (gpointer) NULL);
-
 	g_free (tz_data_file);
 	
 	return tz_db;

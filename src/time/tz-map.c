@@ -166,20 +166,18 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 	int i;
 
 	g_return_if_fail (tzmap != NULL);
-	g_return_if_fail (name != NULL);
 
 	tz_db = e_tz_map_get_tz_db (tzmap);
 	locs = tz_get_locations (tz_db);
 
-	for (i = 0; i < locs->len; i++)
-	{
-		tz_loc = g_ptr_array_index (locs, i);
+	if (name) {
+		for (i = 0; i < locs->len; i++)	{
+			tz_loc = g_ptr_array_index (locs, i);
 
-		if (!strcmp(tz_location_get_zone(tz_loc), name))
-		{
-			tz_location_get_position (tz_loc,
-						  &l_longitude, &l_latitude);
-			break;
+			if (!strcmp(tz_location_get_zone(tz_loc), name)) {
+				tz_location_get_position (tz_loc, &l_longitude, &l_latitude);
+				break;
+			}
 		}
 	}
 
