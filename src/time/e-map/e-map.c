@@ -102,7 +102,6 @@ static void e_map_class_init (EMapClass *class);
 static void e_map_init (EMap *view);
 static void e_map_destroy (GtkObject *object);
 static void e_map_finalize (GObject *object);
-static void e_map_unmap (GtkWidget *widget);
 static void e_map_realize (GtkWidget *widget);
 static void e_map_unrealize (GtkWidget *widget);
 static void e_map_size_request (GtkWidget *widget, GtkRequisition *requisition);
@@ -213,7 +212,6 @@ e_map_class_init (EMapClass *class)
 			      G_TYPE_NONE, 2,
 			      GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
 */
-	widget_class->unmap = e_map_unmap;
 	widget_class->realize = e_map_realize;
 	widget_class->unrealize = e_map_unrealize;
 	widget_class->size_request = e_map_size_request;
@@ -307,20 +305,6 @@ e_map_finalize (GObject *object)
 	if (G_OBJECT_CLASS (parent_class)->finalize)
 		G_OBJECT_CLASS (parent_class)->finalize (object);
 }
-
-
-/* Unmap handler for the map view */
-
-static void
-e_map_unmap (GtkWidget *widget)
-{
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (IS_E_MAP (widget));
-
-	if (GTK_WIDGET_CLASS (parent_class)->unmap)
-		(*GTK_WIDGET_CLASS (parent_class)->unmap) (widget);
-}
-
 
 /* Realize handler for the map view */
 

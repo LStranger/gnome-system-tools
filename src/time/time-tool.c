@@ -624,8 +624,10 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 	gtk_window_set_transient_for (GTK_WINDOW (time_tool->timezone_dialog),
 				      GTK_WINDOW (tool->main_dialog));
 
-	while (gtk_dialog_run (GTK_DIALOG (time_tool->timezone_dialog)) == GTK_RESPONSE_HELP);
+	gtk_widget_show_all (time_tool->timezone_dialog);
+	gtk_dialog_run (GTK_DIALOG (time_tool->timezone_dialog));
 
+	gtk_widget_hide_all (time_tool->timezone_dialog);
 	tz_name     = e_tz_map_get_selected_tz_name (time_tool->tzmap);
 	tz_location = e_tz_map_get_location_by_name (time_tool->tzmap, tz_name);
 
@@ -634,6 +636,4 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 		oobs_object_commit (time_tool->time_config);
 		gtk_label_set_text (GTK_LABEL (label), tz_name);
 	}
-
-	gtk_widget_hide (time_tool->timezone_dialog);
 }

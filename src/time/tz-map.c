@@ -49,6 +49,8 @@ static gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data);
 static gboolean update_map (GtkWidget *w, gpointer data);
 static gboolean out_map (GtkWidget *w,GdkEventCrossing *event, gpointer data);
+static gboolean map (GtkWidget *widget, GdkEvent *event, gpointer data);
+static gboolean unmap (GtkWidget *widget, GdkEvent *event, gpointer data);
 
 ETzMap *
 e_tz_map_new (GstTool *tool)
@@ -80,8 +82,11 @@ e_tz_map_new (GstTool *tool)
 		e_map_add_point (tzmap->map, NULL, tzl->longitude, tzl->latitude,
 				 TZ_MAP_POINT_NORMAL_RGBA);
 	}
-	
-	gtk_timeout_add (100, flash_selected_point, (gpointer) tzmap);
+
+	g_signal_connect (G_OBJECT (tzmap->map), "map-event",
+			  G_CALLBACK (map), tzmap);
+	g_signal_connect (G_OBJECT (tzmap->map), "unmap-event",
+			  G_CALLBACK (unmap), tzmap);
         g_signal_connect(G_OBJECT (tzmap->map), "motion-notify-event",
 			 G_CALLBACK (motion), (gpointer) tzmap);
 	g_signal_connect(G_OBJECT(tzmap->map), "button-press-event",
@@ -96,6 +101,29 @@ e_tz_map_new (GstTool *tool)
 	return tzmap;
 }
 
+static gboolean
+map (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	ETzMap *tzmap = (ETzMap *) data;
+
+	if (!tzmap->timeout_id)
+		tzmap->timeout_id = g_timeout_add (100, flash_selected_point, (gpointer) tzmap);
+
+	return FALSE;
+}
+
+static gboolean
+unmap (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	ETzMap *tzmap = (ETzMap *) data;
+
+	if (tzmap->timeout_id) {
+		g_source_remove (tzmap->timeout_id);
+		tzmap->timeout_id = 0;
+	}
+
+	return FALSE;
+}
 
 TzDB *
 e_tz_map_get_tz_db (ETzMap *tzmap)

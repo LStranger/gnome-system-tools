@@ -41,6 +41,7 @@ struct _ETzMap
 	EMapPoint *point_selected,
 	          *point_hover;
 
+	guint timeout_id;
 	GstTool *tool; /* This is not the way to do it, will fix later */
 };
 

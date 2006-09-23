@@ -1,5 +1,13 @@
 2006-09-23  Carlos Garnacho  <carlosg@gnome.org>
 
+	* tz-map.c. tz-map.h (map) (unmap) (e_tz_map_new): only initialize the 
+	dot blinking timeout when the world map is visible.
+	* time-tool.c (gst_time_tool_run_timezone_dialog): explicitly show and
+	hide the world map widget.
+	* e-map/e-map.c: slight code cleanup.
+
+2006-09-23  Carlos Garnacho  <carlosg@gnome.org>
+
 	* tz-map.c (e_tz_map_set_tz_from_name):
 	* tz.c (tz_load_db): Behave nicely with NULL and empty timezones.
 
