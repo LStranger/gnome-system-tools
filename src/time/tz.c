@@ -76,7 +76,7 @@ tz_load_db (void)
 		if (*buf == '#') continue;
 
 		g_strchomp(buf);
-		tmpstrarr = g_strsplit(buf,"\t", 4);
+		tmpstrarr = g_strsplit(buf,"\t", 6);
 		
 		latstr = g_strdup (tmpstrarr[1]);
 		p = latstr + 1;
@@ -84,15 +84,35 @@ tz_load_db (void)
 		lngstr = g_strdup (p);
 		*p = '\0';
 		
-		loc = g_new (TzLocation, 1);
+		loc = g_new0 (TzLocation, 1);
 		loc->country = g_strdup (tmpstrarr[0]);
 		loc->zone = g_strdup (tmpstrarr[2]);
-		loc->comment = (tmpstrarr[3]) ? g_strdup(tmpstrarr[3]) : NULL;
 		loc->latitude  = convert_pos (latstr, 2);
 		loc->longitude = convert_pos (lngstr, 3);
+		
+#ifdef __sun
+		if (tmpstrarr[3] && *tmpstrarr[3] == '-' && tmpstrarr[4])
+			loc->comment = g_strdup (tmpstrarr[4]);
+
+		if (tmpstrarr[3] && *tmpstrarr[3] != '-' && !islower(loc->zone)) {
+			TzLocation *locgrp;
+
+			/* duplicate entry */
+			locgrp = g_new0 (TzLocation, 1);
+			locgrp->country = g_strdup (tmpstrarr[0]);
+			locgrp->zone = g_strdup (tmpstrarr[3]);
+			locgrp->latitude  = convert_pos (latstr, 2);
+			locgrp->longitude = convert_pos (lngstr, 3);
+			locgrp->comment = (tmpstrarr[4]) ? g_strdup (tmpstrarr[4]) : NULL;
+
+			g_ptr_array_add (tz_db->locations, (gpointer) locgrp);
+		}
+#else
+		loc->comment = (tmpstrarr[3]) ? g_strdup(tmpstrarr[3]) : NULL;
+#endif
 
 		g_ptr_array_add (tz_db->locations, (gpointer) loc);
-		
+
 		g_free (latstr);
 		g_free (lngstr);
 		g_strfreev (tmpstrarr);
@@ -210,6 +230,7 @@ tz_info_from_location (TzLocation *loc)
 	curtime = time (NULL);
 	curzone = localtime (&curtime);
 
+#ifndef __sun
 	/* Currently this solution doesnt seem to work - I get that */
 	/* America/Phoenix uses daylight savings, which is wrong    */
 	tzinfo->tzname_normal = g_strdup (curzone->tm_zone);
@@ -220,6 +241,12 @@ tz_info_from_location (TzLocation *loc)
 		tzinfo->tzname_daylight = NULL;
 
 	tzinfo->utc_offset = curzone->tm_gmtoff;
+#else
+	tzinfo->tzname_normal = NULL;
+	tzinfo->tzname_daylight = NULL;
+	tzinfo->utc_offset = 0;
+#endif
+
 	tzinfo->daylight = curzone->tm_isdst;
 	
 	return tzinfo;

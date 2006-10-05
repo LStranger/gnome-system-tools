@@ -27,8 +27,11 @@
 #define _E_TZ_H
 
 
-#define TZ_DATA_FILE "/usr/share/zoneinfo/zone.tab"
-
+#ifndef __sun
+#  define TZ_DATA_FILE "/usr/share/zoneinfo/zone.tab"
+#else
+#  define TZ_DATA_FILE "/usr/share/lib/zoneinfo/tab/zone_sun.tab"
+#endif
 
 typedef struct _TzDB TzDB;
 typedef struct _TzLocation TzLocation;
