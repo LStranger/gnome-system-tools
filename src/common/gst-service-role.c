@@ -124,6 +124,7 @@ static ServiceRole services[] = {
 	{ "nbd-client",             GST_ROLE_DISK_CLIENT },
 	{ "nbd-server",             GST_ROLE_DISK_SERVER },
 	{ "nessusd",                GST_ROLE_SECURITY_AUDITING },
+	{ "network/nfs/server",     GST_ROLE_FILE_SERVER_NFS },
 	{ "nfs",                    GST_ROLE_FILE_SERVER_NFS },
 	{ "nfs-kernel-server",      GST_ROLE_FILE_SERVER_NFS },
 	{ "nfs-user-server",        GST_ROLE_FILE_SERVER_NFS },
