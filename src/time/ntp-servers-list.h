@@ -29,5 +29,7 @@ GtkWidget*  ntp_servers_list_get   (GstTimeTool *tool);
 void        ntp_servers_list_check (GtkWidget     *list,
 				    OobsListIter  *iter,
 				    OobsNTPServer *server);
+void        on_ntp_addserver       (GtkWidget *widget,
+				    GstDialog *dialog);
 
 #endif /* __NTP_SERVERS_LIST_H__ */

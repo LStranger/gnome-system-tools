@@ -19,6 +19,7 @@
  * Authors: Carlos Garnacho Parro <carlosg@gnome.org>
  */
 
+#include <string.h>
 #include "ntp-servers-list.h"
 #include "time-tool.h"
 #include "gst.h"
@@ -132,6 +133,53 @@ create_model (void)
 }
 
 static void
+toggle_ntp_server (GstTimeTool  *tool,
+		   GtkListStore *store,
+		   GtkTreeIter   iter)
+{
+	OobsListIter *list_iter;
+	gboolean active;
+	OobsList *list;
+	gchar *url;
+
+	list = oobs_ntp_config_get_servers (tool->ntp_config);
+
+	gtk_tree_model_get (GTK_TREE_MODEL (store), &iter,
+			    COL_ACTIVE, &active,
+			    COL_URL, &url,
+			    COL_ITER, &list_iter,
+			    -1);
+	active ^= 1;
+
+	if ((active && list_iter ) ||
+	    (!active && !list_iter))
+		return;
+
+	if (active) {
+		GObject *server;
+		OobsListIter new_list_iter;
+
+		server = (GObject*) oobs_ntp_server_new (url);
+		oobs_list_append (list, &new_list_iter);
+		oobs_list_set (list, &new_list_iter, server);
+
+		gtk_list_store_set (store, &iter,
+				    COL_ACTIVE, active,
+				    COL_ITER, &new_list_iter,
+				    -1);
+	} else {
+		oobs_list_remove (list, list_iter);
+		gtk_list_store_set (store, &iter,
+				    COL_ACTIVE, active,
+				    COL_ITER, NULL,
+				    -1);
+	}
+
+	oobs_object_commit_async (tool->ntp_config, NULL, NULL);
+	g_free (url);
+}
+
+static void
 on_server_toggled (GtkCellRendererToggle *renderer,
 		   gchar		  *path_str,
 		   gpointer		   data)
@@ -150,36 +198,7 @@ on_server_toggled (GtkCellRendererToggle *renderer,
 	}
 
 	tool = g_object_get_data (G_OBJECT (renderer), "tool");
-	list = oobs_ntp_config_get_servers (tool->ntp_config);
-
-	gtk_tree_model_get (GTK_TREE_MODEL (store), &iter,
-			    COL_URL, &url,
-			    COL_ITER, &list_iter,
-			    -1);
-
-	if (list_iter) {
-		oobs_list_remove (list, list_iter);
-
-		gtk_list_store_set (store, &iter,
-				    COL_ACTIVE, FALSE,
-				    COL_ITER, NULL,
-				    -1);
-	} else {
-		GObject *server;
-		OobsListIter new_list_iter;
-
-		server = (GObject*) oobs_ntp_server_new (url);
-		oobs_list_append (list, &new_list_iter);
-		oobs_list_set (list, &new_list_iter, server);
-
-		gtk_list_store_set (store, &iter,
-				    COL_ACTIVE, TRUE,
-				    COL_ITER, &new_list_iter,
-				    -1);
-	}
-
-	oobs_object_commit (tool->ntp_config);
-	g_free (url);
+	toggle_ntp_server (tool, store, iter);
 }
 
 static void
@@ -264,5 +283,46 @@ ntp_servers_list_check (GtkWidget     *ntp_list,
 				    COL_URL, address,
 				    COL_ITER, list_iter,
 				    -1);
+	}
+}
+
+void
+on_ntp_addserver (GtkWidget *widget, GstDialog *dialog)
+{
+	GtkEditable *ntp_entry;
+	GtkTreeView *ntp_list;
+	GtkWidget *item;
+	GtkListStore *store;
+	GtkTreeIter iter;
+	gchar *text;
+	
+	ntp_entry = GTK_EDITABLE (gst_dialog_get_widget (dialog, "ntp_entry"));
+	ntp_list = GTK_TREE_VIEW (gst_dialog_get_widget (dialog, "ntp_list"));
+        store = GTK_LIST_STORE (gtk_tree_view_get_model (ntp_list));
+	
+	text = gtk_editable_get_chars (ntp_entry, 0, -1);
+	g_strstrip (text);
+	
+	if (strchr (text, ' ')) {
+		gtk_widget_grab_focus (GTK_WIDGET (ntp_entry));
+		gtk_editable_select_region (ntp_entry, 0, -1);
+
+		g_free (text);
+		return;
+	}
+
+	if (text && *text) {
+		gtk_editable_delete_text (ntp_entry, 0, -1);
+		gtk_widget_grab_focus (GTK_WIDGET (ntp_entry));
+	
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter,
+				    COL_ACTIVE, FALSE,
+				    COL_DESC, text,
+				    COL_URL, text,
+				    COL_ITER, NULL,
+				    -1);
+		toggle_ntp_server (GST_TIME_TOOL (gst_dialog_get_tool (dialog)), store, iter);
+		g_free (text);
 	}
 }

@@ -41,9 +41,9 @@
 #include "time-tool.h"
 
 #include "tz.h"
-#include "timeserv.h"
 #include "e-map/e-map.h"
 #include "tz-map.h"
+#include "ntp-servers-list.h"
 
 ETzMap *tzmap;
 

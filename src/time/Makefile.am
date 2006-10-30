@@ -21,7 +21,6 @@ time_admin_SOURCES = \
 	time-tool.c	time-tool.h \
 	tz.c		tz.h \
 	tz-map.c	tz-map.h \
-	timeserv.c	timeserv.h \
 	ntp-servers-list.c	ntp-servers-list.h	\
 	main.c
 
