@@ -1,3 +1,13 @@
+2006-10-30  Carlos Garnacho  <carlosg@gnome.org>
+
+	Fix #355849
+
+	* timeserv.[ch]: remove, code moved to ntp-servers-list.[ch]
+	* Makefile.am, main.c: remove timeserv.h
+	* ntp-servers-list.[ch] (toggle_ntp_server): added, safe way to toggle
+	a NTP server usage.
+	(on_ntp_addserver): moved from timeserv.[ch]
+
 2006-10-05  Carlos Garnacho  <carlosg@gnome.org>
 
 	Patch by Darren Kenny  <Darren.Kenny@Sun.COM> and Erast Benson
