@@ -336,7 +336,7 @@ init_timezone (GstTimeTool *time_tool)
 	w = gst_dialog_get_widget (tool->main_dialog, "location_combo");
 	locs = tz_get_locations (e_tz_map_get_tz_db (time_tool->tzmap));
 
-	for (i = 0; g_ptr_array_index (locs, i); i++)
+	for (i = 0; i < locs->len; i++)
 		gtk_combo_box_append_text (GTK_COMBO_BOX (w),
 					   tz_location_get_zone (g_ptr_array_index (locs, i)));
 
