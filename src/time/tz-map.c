@@ -75,8 +75,8 @@ e_tz_map_new (GstTool *tool)
 	      GDK_LEAVE_NOTIFY_MASK | GDK_VISIBILITY_NOTIFY_MASK);
 	
 	locs = tz_get_locations (tzmap->tzdb);
-	
-	for (i = 0; g_ptr_array_index(locs, i); i++)
+
+	for (i = 0; i < locs->len; i++)
 	{
 		tzl = g_ptr_array_index (locs, i);
 		e_map_add_point (tzmap->map, NULL, tzl->longitude, tzl->latitude,
