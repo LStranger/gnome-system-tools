@@ -29,7 +29,6 @@
 #include "gst-widget.h"
 #include "gst-dialog.h"
 #include "gst-conf.h"
-#include "gst-marshal.h"
 
 #define GST_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_DIALOG, GstDialogPrivate))
 
@@ -157,11 +156,21 @@ gst_dialog_constructor (GType                  type,
 
 	if (priv->tool && priv->widget_name) {
 		priv->gui   = glade_xml_new (priv->tool->glade_path, NULL, NULL);
+
+		if (!priv->gui) {
+			g_critical ("glade file not found: %s\n", priv->tool->glade_path);
+
+			/* no point in continuing */
+			exit (-1);
+		}
 		priv->child = gst_dialog_get_widget (dialog, priv->widget_name);
 
 		if (GTK_WIDGET_TOPLEVEL (priv->child)) {
-			g_error ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
-				 "You just need to add the widget inside a GtkWindow so that it can be deparented.", priv->widget_name);
+			g_critical ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
+				    "You just need to add the widget inside a GtkWindow so that it can be deparented.", priv->widget_name);
+
+			/* no point in continuing */
+			exit (-1);
 		}
 
 		gtk_widget_ref (priv->child);

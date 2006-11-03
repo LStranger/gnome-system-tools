@@ -1,3 +1,12 @@
+2006-11-03  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-tool.[ch]: remove heaps of unused code.
+	(gst_init_tool): plug a leak.
+	* gst-marshal.h: ancient, removed.
+	* Makefile.am: remove gst-marshal.h
+	* gst-dialog.c (gst_dialog_constructor): exit if the glade file could
+	not be found.
+
 2006-10-05  Carlos Garnacho  <carlosg@gnome.org>
 
 	* gst-service-role.c: add one test service for SunOS, of course more

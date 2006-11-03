@@ -58,23 +58,6 @@ struct _GstTool {
 	GtkIconTheme *icon_theme;
 	GstDialog *main_dialog;
 
-	/* Remote configuration stuff */
-	/*
-	gboolean remote_config;
-	gchar **remote_hosts;
-	*/
-
-	/* Platform selection */
-	GtkWidget *platform_dialog;
-	GtkWidget *platform_list;
-	GtkWidget *platform_ok_button;
-
-	/* Remote configuration dialog */
-	/*
-	GtkWidget *remote_dialog;
-	GtkWidget *remote_hosts_list;
-	*/
-
 	/* Progress report widgets */
 	GtkWidget *report_window;
 	GtkWidget *report_label;
@@ -82,9 +65,6 @@ struct _GstTool {
 	GtkWidget *report_pixmap;
 	guint      report_timeout_id;
 	guint      report_animate_id;
-
-	GstPlatform *current_platform;         /* Always set from backend report  */
-	GSList      *supported_platforms_list; /* Gets set only if backend breaks */
 };
 
 struct _GstToolClass {
@@ -103,43 +83,20 @@ GType        gst_tool_get_type            (void);
 void         gst_init                     (const gchar *app_name,
 					   int argc, char *argv [],
 					   GOptionEntry *entries);
-
 gboolean     gst_tool_is_authenticated    (GstTool *tool);
-
-gboolean     gst_tool_save                (GstTool *tool);
 
 void         gst_tool_update_gui          (GstTool *tool);
 void         gst_tool_update_config       (GstTool *tool);
 void         gst_tool_close               (GstTool *tool);
 
-
-/* FIXME: is it needed ?
-gboolean     gst_tool_load                (GstTool *tool);
-void         gst_tool_load_try            (GstTool *tool);
-*/
-
-GladeXML    *gst_tool_load_glade_common   (GstTool *tool, const gchar *widget);
-GladeXML    *gst_tool_load_glade          (GstTool *tool, const gchar *widget);
-
-GstDialog   *gst_tool_get_dialog          (GstTool *tool);
-
+GstDialog    *gst_tool_get_dialog         (GstTool *tool);
 GtkIconTheme *gst_tool_get_icon_theme     (GstTool *tool);
-
-
-/* FIXME: is it needed?
-void         gst_tool_add_supported_platform    (GstTool *tool, GstPlatform *platform);
-void         gst_tool_clear_supported_platforms (GstTool *tool);
-*/
-
-void         gst_tool_process_startup (GstTool*);
 
 void         gst_tool_show_help       (GstTool*, gchar*);
 
 void         gst_tool_commit_async    (GstTool     *tool,
 				       OobsObject  *object,
 				       const gchar *message);
-
-
 
 G_END_DECLS
 

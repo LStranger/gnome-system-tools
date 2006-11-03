@@ -26,7 +26,6 @@ headers = \
 	gst-filter.h		\
 	gst-service-role.h	\
 	gst-types.h		\
-	gst-marshal.h		\
 	gst.h
 
 EXTRA_DIST = CommonMakefile $(headers)
