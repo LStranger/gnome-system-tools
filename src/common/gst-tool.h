@@ -29,7 +29,6 @@ G_BEGIN_DECLS
 #include <gtk/gtk.h>
 #include <oobs/oobs.h>
 #include <gconf/gconf-client.h>
-
 #include "gst-types.h"
 
 #define GST_TYPE_TOOL         (gst_tool_get_type ())

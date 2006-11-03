@@ -23,21 +23,6 @@
 #define GST_TYPES_H
 
 #include <glib.h>
-#include <libxml/tree.h>
-
-#define GST_GCONF_ROOT "/apps/gnome-system-tools"
-
-typedef enum {
-	GST_DIALOG_BASIC,
-	GST_DIALOG_ADVANCED,
-	GST_DIALOG_NONE
-} GstDialogComplexity;
-
-typedef enum {
-	GST_REPORT_HOOK_LOAD,
-	GST_REPORT_HOOK_SAVE,
-	GST_REPORT_HOOK_LOADSAVE
-} GstReportHookType;
 
 typedef enum {
 	GST_WIDGET_MODE_HIDDEN,
@@ -45,44 +30,12 @@ typedef enum {
 	GST_WIDGET_MODE_SENSITIVE
 } GstWidgetMode;
 
-typedef enum {
-	GST_MAJOR_SYS     = 0,
-	GST_MAJOR_ERROR   = 1,
-	GST_MAJOR_WARN    = 2,
-	GST_MAJOR_INFO    = 3,
-	GST_MAJOR_DEBUG   = 4,
-	GST_MAJOR_MAX     = 5, /* To make report major array declarations look nice */
-	GST_MAJOR_INVALID = 6  /* Only for validation purposes. Always last in enum */
-} GstReportMajor;
-
 typedef struct _GstDialog           GstDialog;
 typedef struct _GstDialogClass      GstDialogClass;
-
 typedef struct _GstDialogSignal     GstDialogSignal;
 
 typedef struct _GstWidget           GstWidget;
 typedef struct _GstWidgetPolicy     GstWidgetPolicy;
 typedef struct _GstWidgetUserPolicy GstWidgetUserPolicy;
-
-typedef struct _GstReportLine       GstReportLine;
-
-typedef struct _GstReportHook       GstReportHook;
-typedef struct _GstReportHookEntry  GstReportHookEntry;
-
-typedef struct _GstPlatform         GstPlatform;
-
-typedef struct _GstDirectiveEntry   GstDirectiveEntry;
-typedef void (GstDirectiveFunc)    (GstDirectiveEntry *entry);
-
-struct _GstDirectiveEntry {
-	void             *tool;
-	
-	GstDirectiveFunc *callback;
-	gpointer          data;
-
-	xmlDoc           *in_xml;
-	gchar            *report_sign;
-	gchar            *directive;
-};
 
 #endif /* GST_TYPES_H */

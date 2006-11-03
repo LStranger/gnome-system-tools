@@ -25,6 +25,7 @@
 #include <gmodule.h>
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
+#include <stdlib.h>
 #include "gst-tool.h"
 #include "gst-widget.h"
 #include "gst-dialog.h"
@@ -45,8 +46,6 @@ struct _GstDialogPrivate {
 
 	gboolean modified;
 	gboolean frozen;
-
-	GSList *gst_widget_list;
 };
 
 static void gst_dialog_class_init (GstDialogClass *class);
@@ -131,7 +130,7 @@ gst_dialog_init (GstDialog *dialog)
 	priv->modified = FALSE;
 	priv->frozen   = FALSE;
 
-	priv->gst_widget_list = NULL;
+	dialog->gst_widget_list = NULL;
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 				GTK_STOCK_HELP, GTK_RESPONSE_HELP,
@@ -196,7 +195,7 @@ gst_dialog_set_property (GObject      *object,
 
 	switch (prop_id) {
 	case PROP_TOOL:
-		priv->tool = GST_TOOL (g_value_dup_object (value));
+		priv->tool = GST_TOOL (g_value_get_object (value));
 		break;
 	case PROP_WIDGET_NAME:
 		priv->widget_name = g_value_dup_string (value);
@@ -210,7 +209,21 @@ gst_dialog_set_property (GObject      *object,
 static void
 gst_dialog_finalize (GObject *object)
 {
-	/* FIXME: need to free stuff */
+	GstDialog *dialog = GST_DIALOG (object);
+	GstDialogPrivate *priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	if (priv->gui)
+		g_object_unref (priv->gui);
+
+	if (priv->child)
+		gtk_widget_destroy (priv->child);
+
+	g_free (priv->title);
+	g_free (priv->widget_name);
+
+	g_slist_foreach (dialog->gst_widget_list, (GFunc) g_free, NULL);
+	g_slist_free (dialog->gst_widget_list);
+	
 	(* G_OBJECT_CLASS (gst_dialog_parent_class)->finalize) (object);
 }
 
@@ -290,7 +303,7 @@ gst_dialog_apply_widget_policies (GstDialog *dialog)
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
 	/* Hide, show + desensitize or show + sensitize widgets based on access level */
-	for (list = priv->gst_widget_list; list; list = g_slist_next (list)) {
+	for (list = dialog->gst_widget_list; list; list = g_slist_next (list)) {
 		gst_widget_apply_policy (list->data);
 	}
 }
@@ -327,7 +340,6 @@ gst_dialog_freeze_visible (GstDialog *dialog)
 	
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (GST_IS_DIALOG (dialog));
-	g_return_if_fail (dialog->frozen >= 0);
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
@@ -350,7 +362,6 @@ gst_dialog_thaw_visible (GstDialog *dialog)
 
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (GST_IS_DIALOG (dialog));
-	g_return_if_fail (dialog->frozen >= 0);
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
@@ -359,7 +370,7 @@ gst_dialog_thaw_visible (GstDialog *dialog)
 
 	gst_dialog_thaw (dialog);
 
-	if (!dialog->frozen)
+	if (!priv->frozen)
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog), TRUE);
 }
 
@@ -432,8 +443,7 @@ gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup
 
 		if (!xw)
 			xw = gst_widget_new_full (gst_dialog_get_widget (xd, xwup [i].widget), xd,
-						  GST_WIDGET_MODE_SENSITIVE, GST_WIDGET_MODE_SENSITIVE,
-						  FALSE, TRUE);
+						  GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE);
 
 		gst_widget_set_user_mode (xw, xwup [i].mode);
 	}

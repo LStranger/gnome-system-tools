@@ -37,14 +37,6 @@
 #include "gst-dialog.h"
 #include "gst-platform-dialog.h"
 
-#define GST_TOOL_GET_PRIVATE (o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_TOOL, GstToolPrivate))
-
-typedef struct _GstToolPrivate GstToolPrivate;
-
-struct _GstToolPrivate {
-
-};
-
 enum {
 	PLATFORM_LIST_COL_LOGO,
 	PLATFORM_LIST_COL_NAME,
@@ -65,7 +57,6 @@ static void  gst_tool_set_property (GObject      *object,
 				    GParamSpec   *pspec);
 
 static void gst_tool_impl_close    (GstTool *tool);
-
 
 enum {
 	PROP_0,
@@ -110,8 +101,6 @@ gst_tool_class_init (GstToolClass *class)
 							      "Tool icon",
 							      NULL,
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
-	g_type_class_add_private (object_class,
-				  sizeof (GstToolPrivate));
 }
 
 static gboolean
@@ -262,14 +251,33 @@ gst_tool_set_property (GObject      *object,
 static void
 gst_tool_finalize (GObject *object)
 {
-	/* FIXME: free stuff */
+	GstTool *tool = GST_TOOL (object);
+
+	g_free (tool->name);
+	g_free (tool->title);
+	g_free (tool->icon);
+	g_free (tool->glade_path);
+
+	if (tool->session)
+		g_object_unref (tool->session);
+
+	if (tool->main_dialog)
+		gtk_widget_destroy (GTK_WIDGET (tool->main_dialog));
+
+	if (tool->report_window)
+		gtk_widget_destroy (tool->report_window);
+
+	if (tool->gconf_client)
+		g_object_unref (tool->gconf_client);
+
 	(* G_OBJECT_CLASS (gst_tool_parent_class)->finalize) (object);
 }
 
 static void
 gst_tool_impl_close (GstTool *tool)
 {
-	/* FIXME: add things to do when closing the tool */
+	gtk_widget_hide (GTK_WIDGET (tool->main_dialog));
+	g_object_unref (tool);
 	gtk_main_quit ();
 }
 

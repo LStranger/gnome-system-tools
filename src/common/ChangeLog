@@ -1,5 +1,16 @@
 2006-11-03  Carlos Garnacho  <carlosg@gnome.org>
 
+	* gst-types.h: remove some uneeded typedefs and defines.
+	* gst-conf.[ch]: define GST_GCONF_ROOT here.
+	* gst-dialog.[ch]: keep gst_dialog_list public, GstWidget needs it.
+	remove other public fields, private ones are being used. Plug memory
+	leaks. Removed unused struct definitions.
+	* gst-tool.[ch]: plug some leaks.
+	* gst-widget.[ch]: simplify widget policies, there's no longer
+	advanced/basic modes.
+
+2006-11-03  Carlos Garnacho  <carlosg@gnome.org>
+
 	* gst-tool.[ch]: remove heaps of unused code.
 	(gst_init_tool): plug a leak.
 	* gst-marshal.h: ancient, removed.

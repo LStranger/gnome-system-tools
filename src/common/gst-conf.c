@@ -21,10 +21,10 @@
 
 #include <config.h>
 #include <gconf/gconf-client.h>
-
 #include "gst-conf.h"
 #include "gst-tool.h"
 
+#define GST_GCONF_ROOT "/apps/gnome-system-tools"
 
 static gchar *
 gst_conf_make_key (GstTool *tool, const gchar *local_key)

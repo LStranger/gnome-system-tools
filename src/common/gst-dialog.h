@@ -32,13 +32,6 @@
 #define GST_IS_DIALOG(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), GST_TYPE_DIALOG))
 #define GST_IS_DIALOG_CLASS(c) (G_TYPE_CHECK_CLASS_TYPE ((c), GST_TYPE_DIALOG))
 
-typedef gboolean (*GstDialogHookFunc) (GstDialog *dialog, gpointer data);
-
-typedef struct {
-	gpointer data;
-	GstDialogHookFunc func;
-} GstDialogHookEntry;
-
 struct _GstDialogSignal {
 	const char    *widget;
 	const char    *signal_name;
@@ -47,19 +40,10 @@ struct _GstDialogSignal {
 
 struct _GstDialog {
 	GtkDialog dialog;
-	GstTool *tool;
 
-	/* Glade files */
-	GladeXML  *gui;
-	GtkWidget *child;
-
-	gboolean is_modified;
-
-	GstDialogComplexity complexity;
-	gboolean frozen;
-
+	/*<private>*/
+	/* needed by GstWidget */
 	GSList *gst_widget_list;
-	GList *apply_hook_list;
 };
 
 struct _GstDialogClass {
@@ -71,17 +55,9 @@ GType               gst_dialog_get_type            (void);
 GstDialog          *gst_dialog_new                 (GstTool *tool, 
 						    const char *widget, 
 						    const char *title);
-void                gst_dialog_construct           (GstDialog *dialog,
-						    GstTool *tool, 
-						    const char *widget, 
-						    const char *title);
 
 void                gst_dialog_connect_signals     (GstDialog *xd, GstDialogSignal *signals);
 void                gst_dialog_connect_signals_after (GstDialog *xd, GstDialogSignal *signals);
-
-GstDialogComplexity gst_dialog_get_complexity      (GstDialog *xd);
-void                gst_dialog_set_complexity      (GstDialog *xd, GstDialogComplexity c);
-void                gst_dialog_enable_complexity   (GstDialog *xd);
 
 void                gst_dialog_freeze              (GstDialog *xd);
 void                gst_dialog_thaw                (GstDialog *xd);
@@ -105,10 +81,5 @@ void                gst_dialog_widget_set_user_sensitive (GstDialog *xd, const g
 void                gst_dialog_apply_widget_policies (GstDialog*);
 void                gst_dialog_set_widget_policies (GstDialog *xd, const GstWidgetPolicy *xwp);
 void                gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup);
-
-void                gst_dialog_add_apply_hook      (GstDialog *xd, GstDialogHookFunc func, gpointer data);
-gboolean            gst_dialog_run_apply_hooks     (GstDialog *xd);
-
-void                gst_dialog_ask_apply           (GstDialog*);
 
 #endif /* GST_DIALOG_H */

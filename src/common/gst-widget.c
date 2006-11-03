@@ -28,24 +28,15 @@
 void
 gst_widget_apply_policy (GstWidget *xw)
 {
-	GstDialogComplexity complexity;
 	gboolean have_access;
 	GstWidgetMode mode;
+	GstTool *tool;
 
 	g_return_if_fail (xw != NULL);
 
-	complexity = GST_DIALOG_ADVANCED;
-	have_access = gst_tool_is_authenticated (xw->dialog->tool);
-
-	if (complexity == GST_DIALOG_BASIC)
-		mode = xw->basic;
-	else if (complexity == GST_DIALOG_ADVANCED)
-		mode = xw->advanced;
-	else
-	{
-		mode = xw->basic;
-		g_error ("Unhandled complexity.");
-	}
+	tool = gst_dialog_get_tool (xw->dialog);
+	have_access = gst_tool_is_authenticated (tool);
+	mode = xw->mode;
 
 	if (xw->user < mode)
 		mode = xw->user;
@@ -71,7 +62,7 @@ gst_widget_apply_policy (GstWidget *xw)
 
 
 GstWidget *
-gst_widget_new_full (GtkWidget *w, GstDialog *d, GstWidgetMode basic, GstWidgetMode advanced,
+gst_widget_new_full (GtkWidget *w, GstDialog *d, GstWidgetMode mode,
 		     gboolean need_access, gboolean user_sensitive)
 {
 	GstWidget *xw;
@@ -83,8 +74,7 @@ gst_widget_new_full (GtkWidget *w, GstDialog *d, GstWidgetMode basic, GstWidgetM
 
 	xw->widget         = w;
 	xw->dialog         = d;
-	xw->basic          = basic;
-	xw->advanced       = advanced;
+	xw->mode           = mode;
 	xw->need_access    = need_access;
 
 	if (user_sensitive)
@@ -101,9 +91,7 @@ GstWidget *
 gst_widget_new (GstDialog *dialog, GstWidgetPolicy policy)
 {
 	return gst_widget_new_full (gst_dialog_get_widget (dialog, policy.widget),
-				    dialog,
-				    policy.basic, policy.advanced,
-				    policy.need_access, policy.user_sensitive);
+				    dialog, policy.mode, policy.need_access, policy.user_sensitive);
 }
 
 void
