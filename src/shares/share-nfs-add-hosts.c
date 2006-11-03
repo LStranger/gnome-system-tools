@@ -98,36 +98,7 @@ share_nfs_add_hosts_dialog_setup (void)
 static void
 share_nfs_add_ifaces_combo_elements (GtkListStore *store, xmlNodePtr node)
 {
-	GtkTreeIter  iter;
-	GdkPixbuf   *pixbuf;
-	gchar       *dev, *str, *network, *netmask;
-	xmlNodePtr   iface;
-
-	pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/16_ethernet.xpm", NULL);
-
-	for (iface = gst_xml_element_find_first (node, "interface");
-	     iface; iface = gst_xml_element_find_next (iface, "interface")) {
-		dev     = gst_xml_get_child_content (iface, "dev");
-		network = gst_xml_get_child_content (iface, "network");
-		netmask = gst_xml_get_child_content (iface, "mask");
-
-		str = g_strdup_printf (_("Hosts in the %s network"), dev);
-
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter,
-				    0, pixbuf,
-				    1, str,
-				    2, NFS_SHARE_IFACE,
-				    3, network,
-				    4, netmask,
-				    -1);
-		g_free (dev);
-		g_free (str);
-		g_free (network);
-		g_free (netmask);
-	}
-
-	gdk_pixbuf_unref (pixbuf);
+        /* FIXME: add addresses/netmasks from the active network interfaces */
 }
 
 static void
