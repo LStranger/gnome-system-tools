@@ -189,7 +189,7 @@ on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer 
 		return TRUE;
 	}
 
-	/*
+	/* FIXME:
 	if (event->type == GDK_2BUTTON_PRESS ||
 	    event->type == GDK_3BUTTON_PRESS) {
 		show_settings ();
