@@ -96,7 +96,7 @@ share_nfs_add_hosts_dialog_setup (void)
 }
 
 static void
-share_nfs_add_ifaces_combo_elements (GtkListStore *store, xmlNodePtr node)
+share_nfs_add_ifaces_combo_elements (GtkListStore *store)
 {
         /* FIXME: add addresses/netmasks from the active network interfaces */
 }
