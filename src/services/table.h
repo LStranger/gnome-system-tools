@@ -41,7 +41,6 @@ enum {
 };
 
 void			table_create				(void);
-void			table_populate				(xmlNodePtr, gchar*);
 void                    table_empty                             (void);
 
 #endif /* _TABLE_H */
