@@ -181,6 +181,8 @@ e_tz_map_set_location_text (ETzMap *tzmap, const gchar *name)
 		} else {
 			valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (model), &iter);
 		}
+
+		g_free (location);
 	}
 }
 

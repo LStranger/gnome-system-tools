@@ -162,6 +162,7 @@ toggle_ntp_server (GstTimeTool  *tool,
 		server = (GObject*) oobs_ntp_server_new (url);
 		oobs_list_append (list, &new_list_iter);
 		oobs_list_set (list, &new_list_iter, server);
+		g_object_unref (server);
 
 		gtk_list_store_set (store, &iter,
 				    COL_ACTIVE, active,
@@ -176,6 +177,7 @@ toggle_ntp_server (GstTimeTool  *tool,
 	}
 
 	oobs_object_commit_async (tool->ntp_config, NULL, NULL);
+	oobs_list_iter_free (list_iter);
 	g_free (url);
 }
 
@@ -199,6 +201,7 @@ on_server_toggled (GtkCellRendererToggle *renderer,
 
 	tool = g_object_get_data (G_OBJECT (renderer), "tool");
 	toggle_ntp_server (tool, store, iter);
+	gtk_tree_path_free (path);
 }
 
 static void
@@ -251,7 +254,8 @@ ntp_servers_list_check (GtkWidget     *ntp_list,
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	gboolean valid, found;
-	const gchar *str, *address;
+	const gchar *address;
+	gchar *str;
 
 	address = oobs_ntp_server_get_hostname (server);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ntp_list));
@@ -271,6 +275,7 @@ ntp_servers_list_check (GtkWidget     *ntp_list,
 			found = TRUE;
 		}
 
+		g_free (str);
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 
