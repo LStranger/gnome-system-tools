@@ -32,11 +32,7 @@
 #include <string.h>
 #include <time.h>
 
-#include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
-#include <glade/glade.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-
 #include "gst.h"
 #include "time-tool.h"
 
@@ -50,8 +46,6 @@ ETzMap *tzmap;
 static void timezone_button_clicked (GtkWidget *w, gpointer data);
 static void update_tz (GstTimeTool *time_tool);
 static void server_button_clicked (GtkWidget *w, gpointer data);
-static void gst_time_calendar_change_cb (GtkCalendar *, gpointer);
-static void on_server_list_element_toggled (GtkCellRendererToggle*, gchar*, gpointer);
 
 static GstDialogSignal signals[] = {
 	{ "timezone_button",     "clicked",  G_CALLBACK (timezone_button_clicked) },
@@ -115,51 +109,6 @@ gst_time_update_date (GstTimeTool *tool, gint add)
 #undef is_leap_year
 
 static void
-on_server_list_element_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
-{
-	/* FIXME
-	GtkListStore *store = (GtkListStore *)data;
-	GtkTreeModel *model = GTK_TREE_MODEL (store);
-	GtkTreeIter iter;
-	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
-	GstTool *tool = g_object_get_data (G_OBJECT (cell), "tool");
-	gboolean toggle;
-	gchar *server, *p;
-	xmlNodePtr root, node;
-
-	root = gst_xml_doc_get_root (tool->config);
-	node = gst_xml_element_find_first (root, "sync");
-	if (!node) 
-		node = gst_xml_element_add (root, "sync");
-
-	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_tree_model_get (model, &iter, 0, &toggle, 1, &server, -1);
-
-	p = (char *) strchr (server, ' ');
-	if (p) 
-		*p = '\0';  /* Kill comments */
-/*	
-	if (toggle == TRUE) {
-		/* Toggle is set to true, we have to delete entry in XML and set toggle to FALSE */
-/*		toggle = FALSE;
-		for (node = gst_xml_element_find_first (node, "server"); node != NULL; node = gst_xml_element_find_next (node, "server")) {
-			if (strcmp (server, gst_xml_element_get_content (node)) == 0) 
-				gst_xml_element_destroy (node);
-		}
-	} else {
-		/* Toggle is set to false, we have to add a server entry in the XML and set toggle to TRUE */
-/*		toggle = TRUE;
-		node = gst_xml_element_add (node, "server");
-				gst_xml_element_set_content (node, server);
-	}
-
-	gtk_list_store_set (store, &iter, 0, toggle, -1);
-	gtk_tree_path_free (path);
-	gst_dialog_modify (tool->main_dialog);
-*/
-}
-
-static void
 timezone_button_clicked (GtkWidget *w, gpointer data)
 {
 	GstTimeTool *time_tool;
@@ -185,83 +134,6 @@ server_button_clicked (GtkWidget *w, gpointer data)
 	while (gtk_dialog_run (GTK_DIALOG (d)) == GTK_RESPONSE_HELP);
 	gtk_widget_hide (d);
 }
-
-static void
-gst_time_calendar_change_cb (GtkCalendar *calendar, gpointer data)
-{
-	/* FIXME
-	GstTimeTool *tool = (GstTimeTool *)data;
-
-	gst_time_clock_stop (tool);
-	gst_dialog_modify (GST_TOOL (tool)->main_dialog);
-	*/
-}
-
-static void
-gst_time_change (GtkSpinButton *widget, gpointer data)
-{
-	/*
-	GstTimeTool *tool = data;
-	gint value = gtk_spin_button_get_value (widget);
-	gchar *val;
-
-	g_return_if_fail (GTK_IS_SPIN_BUTTON (widget));
-	g_return_if_fail (GST_IS_TIME_TOOL (tool));
-
-	if (widget == GTK_SPIN_BUTTON (tool->seconds)) {
-		if (value > 59) {
-			gtk_spin_button_set_value (widget, value - 60);
-			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->minutes), GTK_SPIN_STEP_FORWARD, 1);
-			tool->min++;
-		} else if (value < 0) {
-			gtk_spin_button_set_value (widget, value + 60);
-			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->minutes), GTK_SPIN_STEP_BACKWARD, 1);
-			tool->min--;
-		}
-	} else if (widget == GTK_SPIN_BUTTON (tool->minutes)) {
-		if (value > 59) {
-			gtk_spin_button_set_value (widget, value - 60);
-			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->hours), GTK_SPIN_STEP_FORWARD, 1);
-			tool->hrs++;
-		} else if (value < 0) {
-			gtk_spin_button_set_value (widget, value + 60);
-			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->hours), GTK_SPIN_STEP_BACKWARD, 1);
-			tool->hrs--;
-		}
-	} else if (widget == GTK_SPIN_BUTTON (tool->hours)) {
-		if (value > 23) {
-			gtk_spin_button_set_value (widget, value - 24);
-			gst_time_update_date (tool, +1);
-		} else if (value < 0) {
-			gst_time_update_date (tool, -1);
-			gtk_spin_button_set_value (widget, value + 24);
-		}
-	}
-
-	gst_dialog_modify (GST_TOOL (tool)->main_dialog);
-	gst_time_clock_stop (tool);
-	
-	/* We have to set it to 01 instead of 1, it's more pretty */
-/*	val = g_strdup_printf ("%02d", value);
-	gtk_entry_set_text (GTK_ENTRY (widget), val);
-	g_free (val);
-*/
-}
-
-/*
-void
-gst_time_set_from_localtime (GstTimeTool *time_tool, gint correction)
-{
-	struct tm *tm;
-	time_t tt;
-
-	tt = time (NULL);
-	tt += correction; 
-	tm = localtime (&tt);
-
-	gst_time_set_full (time_tool, tm);
-}
-*/
 
 int
 main (int argc, char *argv[])
