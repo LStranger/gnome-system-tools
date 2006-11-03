@@ -30,8 +30,6 @@ extern GstTool *tool;
 
 GtkActionEntry popup_menu_items [] = {
   { "Properties",  GTK_STOCK_PROPERTIES, N_("_Properties"), NULL, NULL, G_CALLBACK (on_iface_properties_clicked) },
-  { "Activate",    GTK_STOCK_EXECUTE,    N_("_Activate"),   NULL, NULL, G_CALLBACK (on_activate_button_clicked) },
-  { "Deactivate",  GTK_STOCK_STOP,       N_("_Deactivate"), NULL, NULL, G_CALLBACK (on_deactivate_button_clicked) }
 };
 
 const gchar *ui_description =
@@ -53,40 +51,8 @@ ifaces_model_create (void)
 			      G_TYPE_OBJECT,
 			      G_TYPE_STRING,
 			      G_TYPE_BOOLEAN,
-			      G_TYPE_BOOLEAN,
 			      G_TYPE_BOOLEAN);
   return GTK_TREE_MODEL (store);
-}
-
-static gboolean
-gateways_filter_func (GtkTreeModel *model,
-		      GtkTreeIter  *iter,
-		      gpointer      data)
-{
-  gboolean inconsistent, active, has_gateway;
-
-  gtk_tree_model_get (model, iter,
-		      COL_INCONSISTENT, &inconsistent,
-		      COL_ACTIVE, &active,
-		      COL_HAS_GATEWAY, &has_gateway,
-		      -1);
-
-  return !inconsistent && active && has_gateway;
-}
-
-
-GtkTreeModelFilter*
-gateways_filter_model_create (GtkTreeModel *model)
-{
-  GtkTreeModelFilter *filter_model;
-
-  filter_model = GTK_TREE_MODEL_FILTER (gtk_tree_model_filter_new (model, NULL));
-
-  gtk_tree_model_filter_set_visible_func (filter_model,
-					  gateways_filter_func,
-					  NULL,
-					  NULL);
-  return filter_model;
 }
 
 static GtkWidget*
@@ -267,24 +233,6 @@ ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
   return iface;
 }
 
-static void
-update_gateways_combo (void)
-{
-  GtkTreeModel *model;
-  gint          count;
-
-  /* refilter the gateways model */
-  /* FIXME
-  gtk_tree_model_filter_refilter (GST_NETWORK_TOOL (tool)->gateways_model);
-
-  model = GTK_TREE_MODEL (GST_NETWORK_TOOL (tool)->gateways_model);
-  count = gtk_tree_model_iter_n_children (model, NULL);
-
-  gtk_widget_set_sensitive (GTK_WIDGET (GST_NETWORK_TOOL (tool)->gateways_list), (count > 0));
-  gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "gateways_combo_label"), (count > 0));
-  */
-}
-
 static GdkPixbuf*
 get_iface_pixbuf (OobsIface *iface)
 {
@@ -405,14 +353,10 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
 		      COL_DESC, desc,
 		      COL_DEV, oobs_iface_get_device_name (OOBS_IFACE (iface)),
 		      COL_INCONSISTENT, !oobs_iface_get_configured (OOBS_IFACE (iface)),
-		      /* FIXME
-		      COL_HAS_GATEWAY, gst_iface_has_gateway (GST_IFACE (iface)),
-		      */
 		      -1);
+
   g_object_unref (iface);
   g_free (desc);
-
-  update_gateways_combo ();
 }
 
 static void
@@ -452,91 +396,3 @@ ifaces_model_clear (void)
   gtk_list_store_clear (GTK_LIST_STORE (model));
 }
 
-static void
-add_combo_layout (GtkComboBox *combo)
-{
-  GtkCellRenderer *renderer;
-
-  gtk_cell_layout_clear (GTK_CELL_LAYOUT (combo));
-
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo),
-			      renderer, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo),
-				  renderer,
-				  "markup", COL_DEV,
-				  "visible", COL_HAS_GATEWAY,
-				  NULL);
-  g_object_unref (renderer);
-}
-
-GtkComboBox*
-gateways_combo_create (void)
-{
-  GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "gateways_combo");
-  GtkTreeModel *model;
-
-  model = GTK_TREE_MODEL (GST_NETWORK_TOOL (tool)->gateways_model);
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
-  g_object_unref (model);
-
-  add_combo_layout (GTK_COMBO_BOX (combo));
-
-  return GTK_COMBO_BOX (combo);
-}
-
-void
-gateways_combo_select (gchar *dev)
-{
-  GtkComboBox  *combo = GST_NETWORK_TOOL (tool)->gateways_list;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  gboolean      valid;
-  gchar        *iter_dev;
-
-  g_return_if_fail (dev != NULL);
-
-  /* block/unblock the combobox changed signal */
-  g_signal_handlers_block_by_func (G_OBJECT (combo),
-				   G_CALLBACK (on_gateway_combo_changed), tool->main_dialog);
-
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-  valid = gtk_tree_model_get_iter_first (model, &iter);
-
-  while (valid)
-    {
-      gtk_tree_model_get (model, &iter,
-			  COL_DEV, &iter_dev,
-			  -1);
-
-      if (iter_dev && (strcmp (dev, iter_dev) == 0))
-        {
-	  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
-	  valid = FALSE; /* just exit */
-	}
-      else
-	valid = gtk_tree_model_iter_next (model, &iter);
-
-      g_free (iter_dev);
-    }
-
-  g_signal_handlers_unblock_by_func (G_OBJECT (combo),
-				     G_CALLBACK (on_gateway_combo_changed), tool->main_dialog);
-}
-
-gchar*
-gateways_combo_get_selected (void)
-{
-  GtkComboBox  *combo;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  gchar        *gatewaydev = NULL;
-
-  combo = GST_NETWORK_TOOL (tool)->gateways_list;
-  model = gtk_combo_box_get_model (combo);
-
-  if (gtk_combo_box_get_active_iter (combo, &iter))
-    gtk_tree_model_get (model, &iter, COL_DEV, &gatewaydev, -1);
-
-  return gatewaydev;
-}

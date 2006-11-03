@@ -18,14 +18,8 @@
  * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
-
 #include <string.h>
-
 #include <glib/gi18n.h>
-
 #include "hosts.h"
 #include "gst.h"
 #include "network-tool.h"
@@ -181,6 +175,8 @@ host_aliases_modify_at_iter (GtkTreeIter    *iter,
 		      COL_HOST_OBJECT, host,
 		      COL_HOST_ITER, list_iter,
 		      -1);
+
+  g_free (aliases_str);
 }
 
 void

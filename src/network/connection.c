@@ -146,48 +146,7 @@ ethernet_dialog_check_fields (GstConnectionDialog *dialog)
 static void
 wireless_essid_populate_model (GtkComboBox *combo, const gchar *dev)
 {
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  xmlNodePtr    root, node;
-  xmlDoc       *doc;
-  GdkPixbuf    *locked, *unlocked, *pix;
-  gchar        *essid;
-  gboolean      encrypted;
-
-  /* FIXME
-  model = gtk_combo_box_get_model (combo);
-  gtk_list_store_clear (GTK_LIST_STORE (model));
-
-  doc   = gst_tool_run_get_directive (tool, NULL, "detect_essids", dev, NULL);
-  g_return_if_fail (doc != NULL);
-
-  locked = gtk_icon_theme_load_icon (GST_NETWORK_TOOL (tool)->icon_theme,
-				     "gnome-dev-wavelan-encrypted", 16, 0, NULL);
-  unlocked = gtk_icon_theme_load_icon (GST_NETWORK_TOOL (tool)->icon_theme,
-				       "gnome-dev-wavelan", 16, 0, NULL);
-  root  = gst_xml_doc_get_root (doc);
-
-  for (node = gst_xml_element_find_first (root, "network");
-       node; node = gst_xml_element_find_next (node, "network"))
-    {
-      essid = gst_xml_get_child_content (node, "essid");
-      encrypted = gst_xml_element_get_boolean (node, "encrypted");
-
-      pix = (encrypted) ?
-	g_object_ref (locked) :
-	g_object_ref (unlocked);
-
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			  0, pix, 1, essid, -1);
-
-      g_object_unref (pix);
-      g_free (essid);
-    }
-
-  g_object_unref (locked);
-  g_object_unref (unlocked);
-  */
+  /* FIXME: fill model with available ESSIDs */
 }
 
 static void
@@ -575,20 +534,7 @@ connection_check_fields (GstConnectionDialog *dialog)
 gchar*
 connection_detect_modem (void)
 {
-  xmlNodePtr  root;
-  xmlDoc     *doc;
-  gchar      *device;
-
-  /* FIXME
-  doc= gst_tool_run_get_directive (tool, NULL, "detect_modem", NULL);
-  g_return_val_if_fail (doc != NULL, NULL);
-
-  root   = gst_xml_doc_get_root (doc);
-  device = gst_xml_get_child_content (root, "device");
-  xmlFreeDoc (doc);
-	
-  return device;
-  */
+  /* FIXME: Detect modem */
   return NULL;
 }
 

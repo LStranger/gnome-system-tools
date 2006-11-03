@@ -32,9 +32,6 @@ struct _GstTablePopup
 
 void  on_table_selection_changed   (GtkTreeSelection*, gpointer);
 void  on_iface_properties_clicked  (GtkWidget*, gpointer);
-void  on_activate_button_clicked   (GtkWidget*, gpointer);
-void  on_deactivate_button_clicked (GtkWidget*, gpointer);
-void  on_gateway_combo_changed     (GtkWidget*, gpointer);
 
 void  on_iface_active_changed      (GtkWidget*, gpointer);
 void  on_bootproto_changed         (GtkWidget*, gpointer);

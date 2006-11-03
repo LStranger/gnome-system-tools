@@ -51,9 +51,7 @@ struct _GstNetworkTool
   GstAddressList *search;
 
   GtkTreeModel *interfaces_model;
-  GtkTreeModelFilter *gateways_model;
   GtkTreeView  *interfaces_list;
-  GtkComboBox  *gateways_list;
 
   GtkTreeView *host_aliases_list;
   GstLocationsCombo *location;

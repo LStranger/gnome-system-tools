@@ -28,36 +28,6 @@
 
 extern GstTool *tool;
 
-static void
-enable_iface (OobsIface *iface)
-{
-  /* FIXME
-  GtkWidget *dialog;
-  gboolean   success;
-
-  success = gst_iface_enable (iface);
-  gst_iface_set_auto (iface, success);
-
-  if (!success)
-    {
-      dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-				       GTK_DIALOG_MODAL,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_CLOSE,
-				       _("Could not enable the interface %s"),
-				       gst_iface_get_dev (iface),
-				       NULL);
-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						_("Check that the settings are correct for "
-						  "this network and that the computer is correctly "
-						  "connected to it."),
-						NULL);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-    }
-  */
-}
-
 void
 on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
@@ -285,57 +255,6 @@ on_table_popup_menu (GtkWidget *widget, gpointer data)
   return TRUE;
 }
 
-static void
-enable_disable_iface (GstNetworkTool *network_tool, gboolean enable)
-{
-  /* FIXME
-  GtkTreeSelection *selection;
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  GstIface     *iface;
-
-  selection = gtk_tree_view_get_selection (network_tool->interfaces_list);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-			  COL_OBJECT, &iface,
-			  -1);
-      if (enable)
-	enable_iface (iface);
-      else
-        {
-	  gst_iface_disable (iface);
-	  gst_iface_set_auto (iface, FALSE);
-	}
-
-      ifaces_model_modify_interface_at_iter (&iter);
-      g_object_unref (iface);
-
-      /* we need this to update the buttons state */
-  /*      g_signal_emit_by_name (G_OBJECT (selection), "changed");
-
-      /* update gateway settings */
-  /*      if (gtk_combo_box_get_active (network_tool->gateways_list) == -1)
-	gtk_combo_box_set_active (network_tool->gateways_list, 0);
-
-      gst_dialog_modify (tool->main_dialog);
-    }
-  */
-}
-
-void
-on_activate_button_clicked (GtkWidget *widget, gpointer data)
-{
-  enable_disable_iface (GST_NETWORK_TOOL (tool), TRUE);
-}
-
-void
-on_deactivate_button_clicked (GtkWidget *widget, gpointer data)
-{
-  enable_disable_iface (GST_NETWORK_TOOL (tool), FALSE);
-}
-
 void
 on_host_aliases_add_clicked (GtkWidget *widget, gpointer data)
 {
@@ -403,40 +322,6 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 
   connection_check_netmask (dialog->address, dialog->netmask);
   return FALSE;
-}
-
-void
-on_gateway_combo_changed (GtkWidget *widget, gpointer data)
-{
-  /* FIXME
-
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  OobsIface    *iface;
-  gchar        *dev, *gateway;
-
-  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter))
-    {
-      model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-
-      gtk_tree_model_get (model, &iter,
-			  COL_OBJECT, &iface,
-			  -1);
-
-      /* FIXME: this won't work for DHCP nor PPP ifaces */
-/*      g_object_get (G_OBJECT (iface),
-		    "iface-dev", &dev,
-		    "iface-gateway", &gateway,
-		    NULL);
-
-      if (dev && gateway)
-	gst_tool_run_set_directive (tool, NULL, NULL,
-				    "set_gateway", dev, gateway, NULL);
-
-      g_free (dev);
-      g_free (gateway);
-    }
-*/
 }
 
 gboolean

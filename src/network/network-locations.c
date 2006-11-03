@@ -273,9 +273,10 @@ get_location_key_file (GstNetworkLocations *locations,
   if (!g_key_file_load_from_file (key_file, path, 0, NULL))
     {
       g_key_file_free (key_file);
-      return NULL;
+      key_file =  NULL;
     }
 
+  g_free (path);
   return key_file;
 }
 

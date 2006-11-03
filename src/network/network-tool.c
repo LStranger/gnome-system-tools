@@ -73,7 +73,6 @@ gst_network_tool_finalize (GObject *object)
   g_object_unref (tool->dns);
   g_object_unref (tool->search);
   g_object_unref (tool->interfaces_model);
-  g_object_unref (tool->gateways_model);
   g_free (tool->dialog);
 
   (* G_OBJECT_CLASS (gst_network_tool_parent_class)->finalize) (object);
@@ -136,11 +135,7 @@ gst_network_tool_constructor (GType                  type,
   tool->domain = GTK_ENTRY (widget);
 
   tool->interfaces_model = ifaces_model_create ();
-  tool->gateways_model = gateways_filter_model_create (tool->interfaces_model);
   tool->interfaces_list = ifaces_list_create (tool);
-  /* FIXME
-  tool->gateways_list = gateways_combo_create ();
-  */
   tool->host_aliases_list = host_aliases_list_create (tool);
 
   widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "locations_combo");

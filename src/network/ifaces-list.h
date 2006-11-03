@@ -30,7 +30,6 @@ enum {
   COL_OBJECT,
   COL_DEV,
   COL_INCONSISTENT,
-  COL_HAS_GATEWAY,
   COL_SHOW_IFACE_NAME,
   COL_LAST
 };
@@ -49,9 +48,5 @@ void          ifaces_model_clear                    (void);
 GtkTreeModelFilter* gateways_filter_model_create    (GtkTreeModel *model);
 
 GtkTreeView*  ifaces_list_create                   (GstTool *tool);
-
-GtkComboBox*  gateways_combo_create                (void);
-void          gateways_combo_select                (gchar*);
-gchar*        gateways_combo_get_selected          (void);
 
 #endif /* __IFACES_LIST_H */

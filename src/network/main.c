@@ -35,7 +35,6 @@ GstTool *tool;
 static GstDialogSignal signals[] = {
   /* connections tab */
   { "properties_button",            "clicked", G_CALLBACK (on_iface_properties_clicked) },
-  { "gateways_combo",               "changed", G_CALLBACK (on_gateway_combo_changed) },
   /* general tab */
   { "domain",                       "focus-out-event", G_CALLBACK (on_domain_focus_out) },
   { "hostname",                     "changed", G_CALLBACK (on_entry_changed) },
