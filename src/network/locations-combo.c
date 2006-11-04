@@ -280,7 +280,7 @@ select_matching_profile (GstLocationsCombo *combo)
   GstLocationsComboPrivate *priv;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  const gchar *current;
+  gchar *current;
   gchar *profile;
   gboolean valid;
 
@@ -303,6 +303,8 @@ select_matching_profile (GstLocationsCombo *combo)
 
       g_free (profile);
     }
+
+  g_free (current);
 }
 
 static void

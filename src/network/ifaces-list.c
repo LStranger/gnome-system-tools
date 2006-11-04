@@ -338,6 +338,7 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
   OobsIface *iface;
   gchar *desc;
   gboolean show_name;
+  GdkPixbuf *pixbuf;
 
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
 
@@ -346,15 +347,17 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
 		      COL_SHOW_IFACE_NAME, &show_name,
 		      -1);
   desc = get_iface_desc (OOBS_IFACE (iface), show_name);
+  pixbuf = get_iface_pixbuf (OOBS_IFACE (iface));
 
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
 		      COL_ACTIVE, oobs_iface_get_active (OOBS_IFACE (iface)),
-		      COL_IMAGE, get_iface_pixbuf (OOBS_IFACE (iface)),
+		      COL_IMAGE, pixbuf,
 		      COL_DESC, desc,
 		      COL_DEV, oobs_iface_get_device_name (OOBS_IFACE (iface)),
 		      COL_INCONSISTENT, !oobs_iface_get_configured (OOBS_IFACE (iface)),
 		      -1);
 
+  g_object_unref (pixbuf);
   g_object_unref (iface);
   g_free (desc);
 }

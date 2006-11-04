@@ -476,6 +476,7 @@ compare_interface (GObject  *iface,
 
 	  equal = compare_string (value1, value2);
 	  g_free (value1);
+	  g_free (value2);
 	}
       else if (props[i].type == TYPE_INT)
 	{
@@ -492,6 +493,8 @@ compare_interface (GObject  *iface,
 
       i++;
     }
+
+  g_free (name);
 
   return equal;
 }
@@ -608,6 +611,7 @@ set_static_hosts (OobsHostsConfig *hosts_config,
       static_host = oobs_static_host_new (ip_address, list);
       oobs_list_append (static_hosts, &iter);
       oobs_list_set (static_hosts, &iter, static_host);
+      g_object_unref (static_host);
       g_strfreev (split);
 
       elem++;
@@ -666,6 +670,7 @@ set_interface (GObject  *iface,
 	{
 	  value = g_key_file_get_string (key_file, name, props[i].key, NULL);
 	  g_object_set (iface, props[i].key, value, NULL);
+	  g_free (value);
 	}
       else if (props[i].type == TYPE_INT)
 	{
@@ -680,6 +685,8 @@ set_interface (GObject  *iface,
 
       i++;
     }
+
+  g_free (name);
 }
 
 /* FIXME: merge with save_interfaces_list */
@@ -789,7 +796,7 @@ save_static_hosts (OobsHostsConfig *config,
   gboolean valid;
   GObject *static_host;
   GString *str;
-  gchar **arr;
+  gchar **arr, *aliases;
   gint i = 0;
 
   list = oobs_hosts_config_get_static_hosts (config);
@@ -801,17 +808,20 @@ save_static_hosts (OobsHostsConfig *config,
       static_host = oobs_list_get (list, &iter);
 
       str = g_string_new (oobs_static_host_get_ip_address (OOBS_STATIC_HOST (static_host)));
-      g_string_append (str, concatenate_aliases (OOBS_STATIC_HOST (static_host)));
+      aliases = concatenate_aliases (OOBS_STATIC_HOST (static_host));
+      g_string_append (str, aliases);
       arr[i] = str->str;
 
       g_string_free (str, FALSE);
       g_object_unref (static_host);
+      g_free (aliases);
       valid = oobs_list_iter_next (list, &iter);
       i++;
     }
 
   g_key_file_set_string_list (key_file, "general", "static-hosts",
 			      (const gchar**) arr, g_strv_length (arr));
+  g_strfreev (arr);
 }
 
 static void
@@ -866,6 +876,7 @@ save_interface (GObject     *iface,
 	{
 	  g_object_get (iface, props[i].key, &value, NULL);
 	  g_key_file_set_string (key_file, name, props[i].key, (value) ? value : "");
+	  g_free (value);
 	}
       else if (props[i].type == TYPE_INT)
 	{
@@ -880,6 +891,8 @@ save_interface (GObject     *iface,
 
       i++;
     }
+
+  g_free (name);
 }
 
 static void
@@ -925,6 +938,7 @@ save_current (GstNetworkLocations *locations,
   GKeyFile *key_file;
   GstNetworkLocationsPrivate *priv;
   gchar *contents, *filename, *path;
+  gboolean retval;
 
   priv = GST_NETWORK_LOCATIONS_GET_PRIVATE (locations);
 
@@ -941,8 +955,13 @@ save_current (GstNetworkLocations *locations,
 
   filename = g_filename_from_utf8 (name, -1, NULL, NULL, NULL);
   path = g_build_filename (priv->dot_dir, filename, NULL);
+  retval = g_file_set_contents (path, contents, -1, NULL);
 
-  return g_file_set_contents (path, contents, -1, NULL);
+  g_free (contents);
+  g_free (filename);
+  g_free (path);
+
+  return retval;
 }
 
 gboolean
