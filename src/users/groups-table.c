@@ -77,8 +77,8 @@ create_groups_model (void)
 	store = gtk_list_store_new (COL_GROUP_LAST,
 	                            G_TYPE_STRING,
 	                            G_TYPE_INT,
-	                            G_TYPE_POINTER,
-				    G_TYPE_POINTER);
+				    G_TYPE_OBJECT,
+				    OOBS_TYPE_LIST_ITER);
 	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
 
 	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model),
@@ -131,7 +131,7 @@ groups_table_set_group (OobsGroup *group, OobsListIter *list_iter, GtkTreeIter *
 			    COL_GROUP_NAME, oobs_group_get_name (group),
 			    COL_GROUP_ID, oobs_group_get_gid (group),
 			    COL_GROUP_OBJECT, group,
-			    COL_GROUP_ITER, oobs_list_iter_copy (list_iter),
+			    COL_GROUP_ITER, list_iter,
 			    -1);
 }
 

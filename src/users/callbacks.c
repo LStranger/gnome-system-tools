@@ -245,6 +245,9 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 		oobs_object_commit (GST_USERS_TOOL (tool)->users_config);
 		oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
 	}
+
+	g_object_unref (user);
+	oobs_list_iter_free (list_iter);
 }
 
 void
@@ -345,6 +348,9 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 		groups_table_set_group (group, list_iter, &filter_iter);
 		oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
 	}
+
+	g_object_unref (group);
+	oobs_list_iter_free (list_iter);
 }
 
 void

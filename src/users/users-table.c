@@ -101,8 +101,8 @@ create_users_model (GstUsersTool *tool)
 	                            G_TYPE_STRING,
 				    G_TYPE_INT,
 				    G_TYPE_BOOLEAN,
-				    G_TYPE_POINTER,
-				    G_TYPE_POINTER);
+				    G_TYPE_OBJECT,
+				    OOBS_TYPE_LIST_ITER);
 	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
 
 	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model),
@@ -177,7 +177,7 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 			    COL_USER_HOME, oobs_user_get_home_directory (user),
 			    COL_USER_ID, oobs_user_get_uid (user),
 			    COL_USER_OBJECT, user,
-			    COL_USER_ITER, oobs_list_iter_copy (list_iter),
+			    COL_USER_ITER, list_iter,
 			    -1);
 	if (face)
 		g_object_unref (face);

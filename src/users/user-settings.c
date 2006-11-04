@@ -94,6 +94,7 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 	OobsUser *user;
 	OobsList *users_list;
 	OobsListIter *list_iter;
+	gboolean retval = FALSE;
 
 	if (!gtk_tree_model_get_iter (model, &iter, path))
 		return FALSE;
@@ -109,11 +110,13 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 		oobs_list_remove (users_list, list_iter);
 
 		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-
-		return TRUE;
+		retval = TRUE;
 	}
 
-	return FALSE;
+	g_object_unref (user);
+	oobs_list_iter_free (list_iter);
+
+	return retval;
 }
 
 static void
@@ -158,7 +161,8 @@ set_main_group (OobsUser *user)
 			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
 			break;
 		}
-		
+
+		g_object_unref (group);
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 }
@@ -626,6 +630,7 @@ user_settings_dialog_get_data (OobsUser *user)
 
 	group = get_main_group (oobs_user_get_login_name (user));
 	oobs_user_set_main_group (user, group);
+	g_object_unref (group);
 
 	privileges_table_save (user);
 }
