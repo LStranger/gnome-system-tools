@@ -338,7 +338,7 @@ share_settings_validate (void)
 	if (selected == SHARE_THROUGH_SMB) {
 		widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 		text = gtk_entry_get_text (GTK_ENTRY (widget));
-		
+
 		return (text && *text);
 	}
 
@@ -440,6 +440,7 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 	GtkWidget    *name_entry, *file_chooser;
 
 	share  = NULL;
+	list_iter = NULL;
 	dialog = share_settings_prepare_dialog (path, standalone);
 
 	/* check whether the path already exists */
@@ -491,4 +492,7 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 
 	if (share)
 		g_object_unref (share);
+
+	if (list_iter)
+		oobs_list_iter_free (list_iter);
 }

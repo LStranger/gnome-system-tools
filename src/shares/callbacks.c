@@ -221,6 +221,8 @@ on_delete_share_clicked (GtkWidget *widget, gpointer data)
 		}
 
 		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+		oobs_list_iter_free (list_iter);
+		g_object_unref (share);
 	}
 }
 
