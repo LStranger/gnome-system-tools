@@ -252,7 +252,7 @@ gst_address_list_get_property (GObject    *object,
 }
 
 static GtkWidget*
-popup_menu_create (GtkWidget *widget)
+popup_menu_create (GstAddressList *list)
 {
   GtkUIManager   *ui_manager;
   GtkActionGroup *action_group;
@@ -260,7 +260,7 @@ popup_menu_create (GtkWidget *widget)
 
   action_group = gtk_action_group_new ("MenuActions");
   gtk_action_group_set_translation_domain (action_group, NULL);
-  gtk_action_group_add_actions (action_group, address_list_popup_menu_items, G_N_ELEMENTS (address_list_popup_menu_items), widget);
+  gtk_action_group_add_actions (action_group, address_list_popup_menu_items, G_N_ELEMENTS (address_list_popup_menu_items), list);
 
   ui_manager = gtk_ui_manager_new ();
   gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
@@ -268,7 +268,7 @@ popup_menu_create (GtkWidget *widget)
   if (!gtk_ui_manager_add_ui_from_string (ui_manager, address_list_ui_description, -1, NULL))
     return NULL;
 
-  g_object_set_data (G_OBJECT (widget), "ui-manager", ui_manager);
+  g_object_set_data (G_OBJECT (list), "ui-manager", ui_manager);
   popup = gtk_ui_manager_get_widget (ui_manager, "/MainMenu");
 
   return popup;
@@ -319,7 +319,7 @@ setup_treeview (GstAddressList *list)
   table_popup = g_new0 (GstTablePopup, 1);
   table_popup->setup = NULL;
   table_popup->properties = NULL;
-  table_popup->popup = popup_menu_create (GTK_WIDGET (list->_priv->list));
+  table_popup->popup = popup_menu_create (list);
 
   g_signal_connect (G_OBJECT (list->_priv->list), "button-press-event",
 		    G_CALLBACK (on_table_button_press), table_popup);
