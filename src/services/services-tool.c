@@ -48,7 +48,7 @@ static void
 gst_services_tool_init (GstServicesTool *tool)
 {
 	tool->services_config = oobs_services_config_get (GST_TOOL (tool)->session);
-	tool->default_runlevel = oobs_services_config_get_default_runlevel (tool->services_config);
+	tool->default_runlevel = oobs_services_config_get_default_runlevel (OOBS_SERVICES_CONFIG (tool->services_config));
 }
 
 static void
@@ -89,7 +89,7 @@ gst_services_tool_update_config (GstTool *tool)
 	GstServicesTool *services_tool = GST_SERVICES_TOOL (tool);
 
 	oobs_object_update (services_tool->services_config);
-	services_tool->default_runlevel = oobs_services_config_get_default_runlevel (services_tool->services_config);
+	services_tool->default_runlevel = oobs_services_config_get_default_runlevel (OOBS_SERVICES_CONFIG (services_tool->services_config));
 }
 
 GstTool*

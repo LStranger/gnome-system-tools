@@ -61,7 +61,7 @@ show_settings (void)
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 	g_free (title);
 
-	service_settings_table_set_service (GST_SERVICES_TOOL (tool)->services_config,
+	service_settings_table_set_service (OOBS_SERVICES_CONFIG (GST_SERVICES_TOOL (tool)->services_config),
 					    service);
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));

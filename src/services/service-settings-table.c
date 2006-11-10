@@ -167,7 +167,7 @@ add_columns (GtkWidget    *table,
 {
 	GtkTreeModel *combo_model;
 	GtkCellRenderer *renderer;
-	GtkAdjustment *adjustment;
+	GtkObject *adjustment;
 
 	/* runlevel name */
 	renderer = gtk_cell_renderer_text_new ();
@@ -241,7 +241,8 @@ populate_table (GList       *runlevels,
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	OobsServicesRunlevel *runlevel;
-	gint status, priority;
+	gint priority;
+	OobsServiceStatus status;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "service_settings_table");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));

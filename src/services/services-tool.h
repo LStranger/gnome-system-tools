@@ -39,7 +39,7 @@ struct _GstServicesTool {
 	GstTool tool;
 
 	OobsObject *services_config;
-	OobsServicesRunlevel *default_runlevel;
+	const OobsServicesRunlevel *default_runlevel;
 };
 
 struct _GstServicesToolClass {

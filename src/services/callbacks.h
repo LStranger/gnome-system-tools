@@ -39,7 +39,6 @@ void            on_sequence_ordering_changed            (GtkWidget*,   gpointer)
 gboolean        on_table_button_press_event             (GtkWidget*,   GdkEventButton*, gpointer);
 gboolean        on_table_popup_menu                     (GtkWidget*,   gpointer);
 void            change_runlevel                         (gchar*);
-void            hide_sequence_ordering_toggle_button    (xmlNodePtr);
 
 void            on_service_toggled      (GtkCellRenderer*, gchar*, gpointer);
 void            on_popup_service_enable (GtkAction *action, gpointer data);
