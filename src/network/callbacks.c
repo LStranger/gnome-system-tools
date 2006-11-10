@@ -381,7 +381,7 @@ on_hostname_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 {
   GstNetworkTool *tool;
   gboolean changed;
-  gchar *hostname;
+  const gchar *hostname;
 
   tool = GST_NETWORK_TOOL (gst_dialog_get_tool (GST_DIALOG (data)));
   changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "content-changed"));
@@ -414,7 +414,7 @@ on_hostname_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
       if (res == GTK_RESPONSE_ACCEPT)
 	{
 	  oobs_hosts_config_set_hostname (tool->hosts_config, hostname);
-	  oobs_object_commit (tool->hosts_config);
+	  oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
 	}
       else
 	{
@@ -433,7 +433,7 @@ on_domain_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 {
   GstNetworkTool *tool;
   gboolean changed;
-  gchar *domain;
+  const gchar *domain;
 
   tool = GST_NETWORK_TOOL (gst_dialog_get_tool (GST_DIALOG (data)));
   changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "content-changed"));
@@ -442,7 +442,7 @@ on_domain_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
   if (changed)
     {
       oobs_hosts_config_set_domainname (tool->hosts_config, domain);
-      oobs_object_commit (tool->hosts_config);
+      oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
     }
 
   g_object_set_data (G_OBJECT (widget), "content-changed", GINT_TO_POINTER (FALSE));

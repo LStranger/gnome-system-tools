@@ -266,26 +266,26 @@ get_iface_secondary_text (OobsIface *iface)
     {
       if (OOBS_IS_IFACE_WIRELESS (iface))
 	g_string_append_printf (str, _("<b>Essid:</b> %s "),
-				oobs_iface_wireless_get_essid (iface));
+				oobs_iface_wireless_get_essid (OOBS_IFACE_WIRELESS (iface)));
 
-      if (oobs_iface_ethernet_get_configuration_method (iface) != OOBS_METHOD_DHCP)
+      if (oobs_iface_ethernet_get_configuration_method (OOBS_IFACE_ETHERNET (iface)) != OOBS_METHOD_DHCP)
 	g_string_append_printf (str, _("<b>Address:</b> %s <b>Subnet mask:</b> %s"),
-				oobs_iface_ethernet_get_ip_address (iface),
-				oobs_iface_ethernet_get_network_mask (iface));
+				oobs_iface_ethernet_get_ip_address (OOBS_IFACE_ETHERNET (iface)),
+				oobs_iface_ethernet_get_network_mask (OOBS_IFACE_ETHERNET (iface)));
       else
 	g_string_append_printf (str, _("<b>Address:</b> DHCP"));
     }
   else if (OOBS_IS_IFACE_PLIP (iface))
     {
       g_string_append_printf (str, _("<b>Address:</b> %s <b>Remote address:</b> %s"),
-			      oobs_iface_plip_get_address (iface),
-			      oobs_iface_plip_get_remote_address (iface));
+			      oobs_iface_plip_get_address (OOBS_IFACE_PLIP (iface)),
+			      oobs_iface_plip_get_remote_address (OOBS_IFACE_PLIP (iface)));
     }
   else if (OOBS_IS_IFACE_ISDN (iface))
     {
       g_string_append_printf (str, _("<b>Phone number:</b> %s <b>Login:</b> %s"),
-			      oobs_iface_isdn_get_phone_number (iface),
-			      oobs_iface_isdn_get_login (iface));
+			      oobs_iface_isdn_get_phone_number (OOBS_IFACE_ISDN (iface)),
+			      oobs_iface_isdn_get_login (OOBS_IFACE_ISDN (iface)));
     }
 
   text = str->str;

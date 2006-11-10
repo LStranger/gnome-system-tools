@@ -57,8 +57,8 @@ gst_network_tool_class_init (GstNetworkToolClass *class)
 static void
 gst_network_tool_init (GstNetworkTool *tool)
 {
-  tool->hosts_config = oobs_hosts_config_get (GST_TOOL (tool)->session);
-  tool->ifaces_config = oobs_ifaces_config_get (GST_TOOL (tool)->session);
+  tool->hosts_config = OOBS_HOSTS_CONFIG (oobs_hosts_config_get (GST_TOOL (tool)->session));
+  tool->ifaces_config = OOBS_IFACES_CONFIG (oobs_ifaces_config_get (GST_TOOL (tool)->session));
 }
 
 static void
@@ -84,7 +84,7 @@ save_dns (GList *list, gpointer data)
   GstNetworkTool *tool = (GstNetworkTool *) data;
 
   oobs_hosts_config_set_dns_servers (tool->hosts_config, list);
-  oobs_object_commit (tool->hosts_config);
+  oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
 }
 
 static void
@@ -93,7 +93,7 @@ save_search_domains (GList *list, gpointer data)
   GstNetworkTool *tool = (GstNetworkTool *) data;
 
   oobs_hosts_config_set_search_domains (tool->hosts_config, list);
-  oobs_object_commit (tool->hosts_config);
+  oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
 }
 
 static GObject*
@@ -135,15 +135,15 @@ gst_network_tool_constructor (GType                  type,
   tool->domain = GTK_ENTRY (widget);
 
   tool->interfaces_model = ifaces_model_create ();
-  tool->interfaces_list = ifaces_list_create (tool);
-  tool->host_aliases_list = host_aliases_list_create (tool);
+  tool->interfaces_list = ifaces_list_create (GST_TOOL (tool));
+  tool->host_aliases_list = host_aliases_list_create (GST_TOOL (tool));
 
   widget = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "locations_combo");
   add_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "add_location");
   delete_button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "remove_location");
   tool->location = gst_locations_combo_new (GST_TOOL (tool), widget, add_button, delete_button);
 
-  tool->dialog = connection_dialog_init (tool);
+  tool->dialog = connection_dialog_init (GST_TOOL (tool));
 
   return object;
 }
@@ -253,12 +253,12 @@ gst_network_tool_update_gui (GstTool *tool)
   update_hosts_list (hosts_list);
 
   g_signal_handlers_block_by_func (network_tool->hostname, on_entry_changed, tool->main_dialog);
-  set_entry_text (network_tool->hostname,
+  set_entry_text (GTK_WIDGET (network_tool->hostname),
 		  oobs_hosts_config_get_hostname (network_tool->hosts_config));
   g_signal_handlers_unblock_by_func (network_tool->hostname, on_entry_changed, tool->main_dialog);
 
   g_signal_handlers_block_by_func (network_tool->domain, on_entry_changed, tool->main_dialog);
-  set_entry_text (network_tool->domain,
+  set_entry_text (GTK_WIDGET (network_tool->domain),
 		  oobs_hosts_config_get_domainname (network_tool->hosts_config));
   g_signal_handlers_unblock_by_func (network_tool->domain, on_entry_changed, tool->main_dialog);
 
@@ -272,8 +272,8 @@ gst_network_tool_update_config (GstTool *tool)
   GstNetworkTool *network_tool;
 
   network_tool = GST_NETWORK_TOOL (tool);
-  oobs_object_update (network_tool->hosts_config);
-  oobs_object_update (network_tool->ifaces_config);
+  oobs_object_update (OOBS_OBJECT (network_tool->hosts_config));
+  oobs_object_update (OOBS_OBJECT (network_tool->ifaces_config));
 }
 
 GstTool*

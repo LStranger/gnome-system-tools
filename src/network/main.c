@@ -22,6 +22,7 @@
 #  include <config.h>
 #endif
 
+#include <stdlib.h>
 #include <glade/glade.h>
 #include <glib/gi18n.h>
 
