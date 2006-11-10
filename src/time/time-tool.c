@@ -609,7 +609,7 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 {
 	GstTool *tool;
 	GtkWidget *label;
-	gchar *timezone;
+	const gchar *timezone;
 	gchar *tz_name = NULL;
 	gchar *old_tz_name = NULL;
 	TzLocation *tz_location;
