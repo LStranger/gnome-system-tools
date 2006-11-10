@@ -145,12 +145,12 @@ populate_hosts_completion (GtkListStore *store)
 	GObject *static_host;
 	GList *aliases, *alias;
 
-	list = oobs_hosts_config_get_static_hosts (GST_SHARES_TOOL (tool)->hosts_config);
+	list = oobs_hosts_config_get_static_hosts (OOBS_HOSTS_CONFIG (GST_SHARES_TOOL (tool)->hosts_config));
 	valid = oobs_list_get_iter_first (list, &list_iter);
 
 	while (valid) {
 		static_host = oobs_list_get (list, &list_iter);
-		aliases = alias = oobs_static_host_get_aliases (static_host);
+		aliases = alias = oobs_static_host_get_aliases (OOBS_STATIC_HOST (static_host));
 		g_object_unref (static_host);
 
 		while (alias) {

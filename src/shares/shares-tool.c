@@ -94,7 +94,7 @@ update_global_smb_config (GstTool       *tool,
 			  OobsSMBConfig *config)
 {
 	GtkWidget *widget;
-	gchar *str;
+	const gchar *str;
 	gboolean is_wins_server;
 
 	str = oobs_smb_config_get_workgroup (config);
@@ -151,7 +151,7 @@ gst_shares_tool_update_gui (GstTool *tool)
 		list = oobs_smb_config_get_shares (OOBS_SMB_CONFIG (shares_tool->smb_config));
 		add_shares (list);
 
-		update_global_smb_config (tool, shares_tool->smb_config);
+		update_global_smb_config (tool, OOBS_SMB_CONFIG (shares_tool->smb_config));
 		gtk_widget_set_sensitive (dialog_notebook, TRUE);
 	} else {
 		/* disable the tool UI, there's no way to add shares */
@@ -170,7 +170,7 @@ gst_shares_tool_update_config (GstTool *tool)
 	oobs_object_update (shares_tool->services_config);
 	oobs_object_update (shares_tool->hosts_config);
 	oobs_object_update (shares_tool->ifaces_config);
-	gst_shares_tool_update_services_availability (tool);
+	gst_shares_tool_update_services_availability (shares_tool);
 }
 
 static void
@@ -182,7 +182,7 @@ gst_shares_tool_update_services_availability (GstSharesTool *tool)
 	gboolean valid;
 	GstServiceRole role;
 
-	services = oobs_services_config_get_services (tool->services_config);
+	services = oobs_services_config_get_services (OOBS_SERVICES_CONFIG (tool->services_config));
 	valid = oobs_list_get_iter_first (services, &iter);
 
 	while (valid) {

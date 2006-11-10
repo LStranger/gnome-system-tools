@@ -41,7 +41,7 @@ set_smb_name (const gchar *name)
 
 	entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 
-	modified = GPOINTER_TO_INT (g_object_get_data (entry, "modified"));
+	modified = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (entry), "modified"));
 
 	if (!modified) {
 		g_signal_handlers_block_by_func (entry, on_share_smb_name_modified, tool->main_dialog);
@@ -289,7 +289,7 @@ share_settings_get_share_nfs ()
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
 	path    = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget));
 
-	share = oobs_share_nfs_new (path);
+	share = OOBS_SHARE_NFS (oobs_share_nfs_new (path));
 	nfs_acl_table_insert_elements (share);
 
 	return OOBS_SHARE (share);
@@ -422,7 +422,7 @@ delete_share (GtkTreeIter *iter, OobsShare *share, OobsListIter *list_iter)
 	}
 
 	oobs_list_remove (list, list_iter);
-	table_delete_share_at_iter (&iter);
+	table_delete_share_at_iter (iter);
 
 	oobs_object_commit (config);
 }
@@ -456,7 +456,7 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 		g_free (title);
 	} else {
 		name_entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
-		g_object_set_data (name_entry, "modified", GINT_TO_POINTER (FALSE));
+		g_object_set_data (G_OBJECT (name_entry), "modified", GINT_TO_POINTER (FALSE));
 		gtk_window_set_title (GTK_WINDOW (dialog), "Share Folder");
 
 		if (!path) {

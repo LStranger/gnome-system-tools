@@ -33,7 +33,7 @@ enum {
 };
 
 void    nfs_acl_table_create          (void);
-void    nfs_acl_table_add_element     (OobsShareAclElement*);
-void    nfs_acl_table_insert_elements (OobsShareNFS*);
+void    nfs_acl_table_add_element     (OobsShareAclElement* element);
+void    nfs_acl_table_insert_elements (OobsShareNFS* share);
 
 #endif /* _NFS_ACL_TABLE_H */

@@ -40,7 +40,6 @@ enum {
 
 void      table_create               (GstTool*);
 void      table_clear                (void);
-void      table_add_share_from_node  (xmlNodePtr);
 void      table_add_share            (OobsShare*, OobsListIter*);
 gboolean  table_get_iter_with_path   (const gchar*, GtkTreeIter*);
 OobsShare *table_get_share_at_iter    (GtkTreeIter*, OobsListIter**);

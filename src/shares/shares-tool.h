@@ -25,6 +25,7 @@ G_BEGIN_DECLS
 
 #include <glib.h>
 #include "gst-tool.h"
+#include <oobs/oobs-smbconfig.h>
 
 #define GST_TYPE_SHARES_TOOL         (gst_shares_tool_get_type())
 #define GST_SHARES_TOOL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_SHARES_TOOL, GstSharesTool))
