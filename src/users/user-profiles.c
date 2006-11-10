@@ -122,7 +122,7 @@ gst_user_profiles_init (GstUserProfiles *profiles)
 
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
 
-	priv->profiles = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, free_profile);
+	priv->profiles = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify) free_profile);
 	load_profiles (profiles);
 }
 

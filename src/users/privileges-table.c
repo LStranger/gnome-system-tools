@@ -190,7 +190,8 @@ static gboolean
 find_group_in_profile (OobsGroup      *group,
 		       GstUserProfile *profile)
 {
-	gchar **groups, *name;
+	gchar **groups;
+	const gchar *name;
 
 	if (!profile->groups)
 		return FALSE;

@@ -60,17 +60,17 @@ static GstDialogSignal signals[] = {
 	{ NULL }};
 
 static const GstWidgetPolicy policies[] = {
-	/* Name                     Basic                        Advanced                   Root   User */
-	{ "user_new",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "user_delete",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "user_settings",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "groups_table",           GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
-	{ "group_new",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "group_delete",           GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "group_settings",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "profile_new",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "profile_delete",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "profile_settings",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	/* Name                     Mode                         Root   User */
+	{ "user_new",               GST_WIDGET_MODE_SENSITIVE,   TRUE,  TRUE  },
+	{ "user_delete",            GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
+	{ "user_settings",          GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
+	{ "groups_table",           GST_WIDGET_MODE_SENSITIVE,   FALSE, TRUE  },
+	{ "group_new",              GST_WIDGET_MODE_SENSITIVE,   TRUE,  TRUE  },
+	{ "group_delete",           GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
+	{ "group_settings",         GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
+	{ "profile_new",            GST_WIDGET_MODE_SENSITIVE,   TRUE,  TRUE  },
+	{ "profile_delete",         GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
+	{ "profile_settings",       GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
 	{ NULL }
 };
 

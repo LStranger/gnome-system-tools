@@ -146,7 +146,7 @@ set_main_group (OobsUser *user)
 	main_group = oobs_user_get_main_group (user);
 
 	if (!main_group)
-		main_group = oobs_users_config_get_default_group (GST_USERS_TOOL (tool)->users_config);
+		main_group = oobs_users_config_get_default_group (OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config));
 
 	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));

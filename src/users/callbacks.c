@@ -467,6 +467,6 @@ on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
 	gtk_tree_model_get (model, &iter, 0, &profile_name, -1);
 	profile = gst_user_profiles_set_current (GST_USERS_TOOL (tool)->profiles, profile_name);
 
-	user_settings_apply_profile (tool, profile);
+	user_settings_apply_profile (GST_USERS_TOOL (tool), profile);
 	g_free (profile_name);
 }
