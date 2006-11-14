@@ -541,11 +541,20 @@ check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 	GtkWidget *widget;
 	const gchar *password, *confirmation;
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
-	password = gtk_entry_get_text (GTK_ENTRY (widget));
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
-	confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
+	/* manual password? */
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
+		password = gtk_entry_get_text (GTK_ENTRY (widget));
+
+		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
+		confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
+	}
+	else {
+		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_random_passwd");
+		password = confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
+	}
 
 	if (strlen (password) < 1) {
 		*primary_text = g_strdup (_("Password should not be empty"));
