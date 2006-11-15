@@ -54,7 +54,7 @@ check_user_delete (OobsUser *user)
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
-						 _("Administrator account can not be deleted"));
+						 _("Administrator account cannot be deleted"));
 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 							  _("This would leave the system unusable."));
@@ -442,7 +442,7 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 		*primary_text = g_strdup (_("User name is empty"));
 		*secondary_text = g_strdup (_("A user name must be specified."));
 	} else if (is_user_root (user) && strcmp (login, "root") != 0) {
-		*primary_text = g_strdup (_("User name of the administrator account should not be modified"));
+		*primary_text = g_strdup (_("Administrator account's user name should not be modified"));
 	        *secondary_text = g_strdup (_("This would leave the system unusable."));
 	} else if (!is_valid_name (login)) {
 		*primary_text = g_strdup (_("User name has invalid characters"));
@@ -512,7 +512,7 @@ check_uid (gchar **primary_text, gchar **secondary_text, gpointer data)
 	uid = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
 
 	if (is_user_root (user) && uid != 0) {
-		*primary_text   = g_strdup (_("User ID of the administrator account should not be modified"));
+		*primary_text   = g_strdup (_("Administrator account's user ID should not be modified"));
 		*secondary_text = g_strdup (_("This would leave the system unusable."));
 	}
 }
@@ -556,11 +556,12 @@ check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 		password = confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
 	}
 
-	if (strlen (password) < 1) {
-		*primary_text = g_strdup (_("Password should not be empty"));
-		*secondary_text = g_strdup (_("A password must be provided."));
+	if (strlen (password) < 6) {
+		*primary_text = g_strdup (_("Password is too short"));
+		*secondary_text = g_strdup (_("User passwords must be longer than 6 characters and preferably "
+					      "formed by numbers, letters and special characters."));
 	} else if (strcmp (password, confirmation) != 0) {
-		*primary_text = g_strdup (_("Password confirmation isn't correct"));
+		*primary_text = g_strdup (_("Password confirmation is not correct"));
 		*secondary_text = g_strdup (_("Check that you have provided the same password in both text fields."));
 	}
 }
