@@ -53,6 +53,7 @@ static GObject *gst_time_tool_constructor (GType                  type,
 					   GObjectConstructParam *construct_params);
 static void  gst_time_tool_update_gui     (GstTool *tool);
 static void  gst_time_tool_update_config  (GstTool *tool);
+static void  gst_time_tool_close          (GstTool *tool);
 
 static void  on_ntp_use_toggled           (GtkWidget *widget,
 					   gpointer   data);
@@ -70,6 +71,7 @@ gst_time_tool_class_init (GstTimeToolClass *class)
 	object_class->finalize = gst_time_tool_finalize;
 	tool_class->update_gui = gst_time_tool_update_gui;
 	tool_class->update_config = gst_time_tool_update_config;
+	tool_class->close = gst_time_tool_close;
 
 	g_type_class_add_private (object_class,
 				  sizeof (GstTimeToolPrivate));
@@ -518,6 +520,22 @@ gst_time_tool_update_config (GstTool *tool)
 	oobs_object_update (time_tool->services_config);
 
 	get_ntp_service (tool);
+}
+
+static void
+gst_time_tool_close (GstTool *tool)
+{
+	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
+
+	if (priv->apply_timeout) {
+		/* disable timeout and apply changes
+		 * immediately, the tool is closing! */
+		g_source_remove (priv->apply_timeout);
+		priv->apply_timeout = 0;
+		on_apply_timeout (GST_TIME_TOOL (tool));
+	}
+
+	(* GST_TOOL_CLASS (gst_time_tool_parent_class)->close) (tool);
 }
 
 GstTool*
