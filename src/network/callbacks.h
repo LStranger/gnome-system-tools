@@ -35,10 +35,11 @@ void  on_iface_properties_clicked  (GtkWidget*, gpointer);
 
 void  on_iface_active_changed      (GtkWidget*, gpointer);
 void  on_bootproto_changed         (GtkWidget*, gpointer);
-void  on_connection_cancel_clicked (GtkWidget*, gpointer);
-void  on_connection_ok_clicked     (GtkWidget*, gpointer);
 void  on_detect_modem_clicked      (GtkWidget*, gpointer);
-gboolean on_connection_dialog_close (GtkWidget*, GdkEvent*, gpointer);
+void  on_connection_response       (GtkWidget *widget,
+				    gint       response,
+				    gpointer   data);
+
 
 gboolean on_table_button_press (GtkWidget*, GdkEventButton*, gpointer);
 gboolean on_table_popup_menu   (GtkWidget*, gpointer);

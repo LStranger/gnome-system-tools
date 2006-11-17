@@ -47,11 +47,9 @@ static GstDialogSignal signals[] = {
   /* host aliases dialog */
   { "host_alias_address",           "changed", G_CALLBACK (on_host_aliases_dialog_changed) },
   /* connection dialog */
-  { "connection_config_dialog",     "delete-event", G_CALLBACK (on_connection_dialog_close) },
+  { "connection_config_dialog",     "response", G_CALLBACK (on_connection_response) },
   { "connection_device_active",     "clicked", G_CALLBACK (on_iface_active_changed) },
   { "connection_bootproto",         "changed", G_CALLBACK (on_bootproto_changed) },
-  { "connection_cancel",            "clicked", G_CALLBACK (on_connection_cancel_clicked) },
-  { "connection_ok",                "clicked", G_CALLBACK (on_connection_ok_clicked) },
   { "connection_detect_modem",      "clicked", G_CALLBACK (on_detect_modem_clicked) },
   /* dialog changing detection */
   { "connection_address",           "focus-out-event", G_CALLBACK (on_ip_address_focus_out) },
