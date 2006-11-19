@@ -125,9 +125,6 @@ dnl Check for GST Modules to build
 dnl =====================================================
 
 
-AC_ARG_ENABLE(boot, 
-	      [  --enable-boot           Enable build boot module (default no)], , 
-	      enable_boot=no)
 AC_ARG_ENABLE(network,
 	      [  --enable-network        Enable build network module (default yes)], , 
 	      enable_network=yes)
@@ -140,19 +137,14 @@ AC_ARG_ENABLE(time,
 AC_ARG_ENABLE(users,
 	      [  --enable-users          Enable build users module (default yes)], , 
 	      enable_users=yes)
-AC_ARG_ENABLE(disks,
-	      [  --enable-disks          Enable build disks module (default no)], , 
-	      enable_disks=no)
 AC_ARG_ENABLE(shares,
 	      [  --enable-shares         Enable build shares module (default yes)], , 
 	      enable_shares=yes)
 
-AM_CONDITIONAL(BUILD_BOOT, test x$enable_boot = xyes)
 AM_CONDITIONAL(BUILD_NETWORK, test x$enable_network = xyes)
 AM_CONDITIONAL(BUILD_SERVICES, test x$enable_services = xyes)
 AM_CONDITIONAL(BUILD_TIME, test x$enable_time = xyes)
 AM_CONDITIONAL(BUILD_USERS, test x$enable_users = xyes)
-AM_CONDITIONAL(BUILD_DISKS, test x$enable_disks = xyes)
 AM_CONDITIONAL(BUILD_SHARES, test x$enable_shares = xyes)
 
 dnl =====================================================
@@ -247,6 +239,23 @@ AC_SUBST(GST_TOOL_DEPENDENCIES)
 
 dnl ==================================
 dnl END: GST_LIBS & GST_FLAGS
+dnl ==================================
+
+dnl ==================================
+dnl LIBIW DETECTION
+dnl ==================================
+
+GST_IW_LIBS=
+AC_CHECK_HEADER(iwlib.h, [
+  enable_libiw=yes
+  AC_DEFINE(HAVE_LIBIW_H, "", [whether libiw is available])
+  AC_CHECK_LIB(iw, iw_sockets_open, , [GST_IW_LIBS="-liw"])
+])
+AM_CONDITIONAL(HAVE_LIBIW_H, test x$enable_libiw = xyes)
+AC_SUBST(GST_IW_LIBS)
+
+dnl ==================================
+dnl END: LIBIW DETECTION
 dnl ==================================
 
 dnl ===========================

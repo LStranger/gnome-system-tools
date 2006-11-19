@@ -1,7 +1,3 @@
-if BUILD_BOOT
-boot_SUBDIR = boot
-endif
-
 if BUILD_NETWORK
 network_SUBDIR = network
 endif
@@ -18,15 +14,10 @@ if BUILD_USERS
 users_SUBDIR = users
 endif
 
-if BUILD_DISKS
-disks_SUBDIR = disks
-endif
-
 if BUILD_SHARES
 shares_SUBDIR = shares
 endif
 
-# FIXME: no boot nor disks ATM
 SUBDIRS = \
 	common			\
 	$(network_SUBDIR)	\
