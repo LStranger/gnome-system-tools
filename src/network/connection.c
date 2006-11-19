@@ -23,6 +23,7 @@
 #include "gst.h"
 #include "network-tool.h"
 #include "connection.h"
+#include "essid-list.h"
 
 extern GstTool *tool;
 
@@ -76,18 +77,34 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
   GtkTreeModel *model;
   GtkCellRenderer *renderer;
 
-  model = GTK_TREE_MODEL (gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_STRING));
+  model = GTK_TREE_MODEL (gtk_list_store_new (3, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_INT));
   gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
   g_object_unref (model);
 
-  gtk_combo_box_entry_set_text_column (combo, 1);
+  gtk_cell_layout_clear (GTK_CELL_LAYOUT (combo));
 
-  /* Add the pixbuf cell renderer */
+  /* add "crypted" renderer */
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo),
 			      renderer, FALSE);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo),
 				 renderer, "pixbuf", 0);
+
+  /* add "essid" renderer */
+  renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo),
+			      renderer, TRUE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo),
+				 renderer, "text", 1);
+
+  /* add "quality" renderer */
+  renderer = gtk_cell_renderer_progress_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo),
+			      renderer, FALSE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo),
+				 renderer, "value", 2);
+
+  gtk_combo_box_entry_set_text_column (combo, 1);
 }
 
 static void
@@ -143,19 +160,53 @@ ethernet_dialog_check_fields (GstConnectionDialog *dialog)
 	   (!gateway || gst_filter_check_ip_address (gateway) == GST_ADDRESS_IPV4)));
 }
 
+#ifdef HAVE_LIBIW_H
+/* perhaps there should be a GstEssidListModel class to hide this
+ * stuff, but I'll leave that as a code beautification exercise */
 static void
-wireless_essid_populate_model (GtkComboBox *combo, const gchar *dev)
+on_essid_list_changed (GstEssidList        *list,
+		       GstConnectionDialog *dialog)
 {
-  /* FIXME: fill model with available ESSIDs */
+  GList *elem;
+  GstEssidListEntry *entry;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GdkPixbuf *locked, *unlocked, *pixbuf;
+
+  elem = gst_essid_list_get_list (dialog->essid_list);
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (dialog->essid));
+  gtk_list_store_clear (GTK_LIST_STORE (model));
+
+  locked = gtk_icon_theme_load_icon (tool->icon_theme, "gnome-dev-wavelan-encrypted", 16, 0, NULL);
+  unlocked = gtk_icon_theme_load_icon (tool->icon_theme, "gnome-dev-wavelan", 16, 0, NULL);
+
+  while (elem)
+    {
+      entry = elem->data;
+      pixbuf = (entry->encrypted) ? locked : unlocked;
+
+      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			  0, pixbuf,
+			  1, entry->essid,
+			  2, (gint) (entry->quality * 100),
+			  -1);
+      elem = elem->next;
+    }
+
+  g_object_unref (locked);
+  g_object_unref (unlocked);
 }
+#endif
 
 static void
 wireless_dialog_prepare (GstConnectionDialog *dialog)
 {
-  gchar *essid, *key;
+  gchar *essid, *key, *dev;
   OobsWirelessKeyType key_type;
 
   g_object_get (G_OBJECT (dialog->iface),
+		"device", &dev,
 		"essid", &essid,
 		"key", &key,
 		"key-type", &key_type,
@@ -165,12 +216,16 @@ wireless_dialog_prepare (GstConnectionDialog *dialog)
   gtk_entry_set_text (GTK_ENTRY (GTK_BIN (dialog->essid)->child), (essid) ? essid : "");
   gtk_entry_set_text (GTK_ENTRY (dialog->wep_key), (key) ? key : "");
 
-  /* FIXME
-  wireless_essid_populate_model (GTK_COMBO_BOX (dialog->essid), dev);
-  */
+#ifdef HAVE_LIBIW_H
+  dialog->essid_list = gst_essid_list_new (dev);
+  on_essid_list_changed (dialog->essid_list, dialog);
+  g_signal_connect (G_OBJECT (dialog->essid_list), "changed",
+		    G_CALLBACK (on_essid_list_changed), dialog);
+#endif
 
   g_free (essid);
   g_free (key);
+  g_free (dev);
 }
 
 static void
@@ -568,4 +623,19 @@ connection_dialog_set_sensitive (GstConnectionDialog *dialog, gboolean active)
   gtk_widget_set_sensitive (dialog->options_page,   active);
   gtk_widget_set_sensitive (dialog->isp_frame,      active);
   gtk_widget_set_sensitive (dialog->account_frame,  active);
+}
+
+void
+connection_dialog_hide (GstConnectionDialog *dialog)
+{
+  gtk_widget_hide (dialog->dialog);
+
+#ifdef HAVE_LIBIW_H
+  /* get rid of the essid list, if any */
+  if (dialog->essid_list)
+    {
+      g_object_unref (dialog->essid_list);
+      dialog->essid_list = NULL;
+    }
+#endif
 }

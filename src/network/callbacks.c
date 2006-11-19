@@ -96,7 +96,7 @@ cancel_connection_dialog (GstTool *tool)
 
   dialog = GST_NETWORK_TOOL (tool)->dialog;
   g_object_unref (dialog->iface);
-  gtk_widget_hide (dialog->dialog);
+  connection_dialog_hide (dialog);
 
   if (dialog->standalone)
     gtk_main_quit ();
@@ -110,7 +110,7 @@ accept_connection_dialog (GstTool *tool)
   GtkTreeIter          iter;
 
   dialog = GST_NETWORK_TOOL (tool)->dialog;
-  gtk_widget_hide (dialog->dialog);
+  connection_dialog_hide (dialog);
 
   if (dialog->changed)
     {

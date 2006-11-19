@@ -22,6 +22,8 @@
 #define __CONNECTION_H
 
 #include "gst.h"
+#include "essid-list.h"
+#include "config.h"
 
 typedef struct _GstConnectionDialog GstConnectionDialog;
 
@@ -38,6 +40,10 @@ struct _GstConnectionDialog {
   GtkWidget *options_page;
 
   GtkWidget *connection_configured;
+
+#ifdef HAVE_LIBIW_H
+  GstEssidList *essid_list;
+#endif
 
   /* ethernet */
   GtkWidget *bootproto_combo;
@@ -90,4 +96,6 @@ void connection_save (GstConnectionDialog*);
 void connection_check_fields (GstConnectionDialog*);
 void connection_check_netmask (GtkWidget*, GtkWidget*);
 gchar *connection_detect_modem (void);
+void connection_dialog_hide (GstConnectionDialog *dialog);
+
 #endif /* __CONNECTION_H */

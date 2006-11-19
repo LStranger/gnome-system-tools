@@ -1,3 +1,16 @@
+2006-11-19  Carlos Garnacho  <carlosg@gnome.org>
+
+	* essid-list.[ch]: Added, retrieves a list of available ESSIDs (with
+	their characteristics)
+	* connection.[ch] (connection_essids_combo_init)
+	(wireless_essid_populate_model) (wireless_dialog_prepare): add back 
+	ESSIDs detection.
+	(connection_dialog_hide): new function, hides the dialog and does
+	additional cleanup
+	* callbacks.c (cancel_connection_dialog) (accept_connection_dialog):
+	use connection_dialog_hide().
+	* Makefile.am: optionally build essid-list.[ch] if libiw is available
+
 2006-11-17  Carlos Garnacho  <carlosg@gnome.org>
 
 	* callbacks.[ch] (on_connection_cancel_clicked)
