@@ -28,28 +28,6 @@
 #define GST_PLATFORM_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_PLATFORM_DIALOG, GstPlatformDialogPrivate))
 
 enum {
-	PLATFORM_REDHAT,
-	PLATFORM_DEBIAN,
-	PLATFORM_MANDRAKE,
-	PLATFORM_TURBOLINUX,
-	PLATFORM_SLACKWARE,
-	PLATFORM_SUSE,
-	PLATFORM_FREEBSD,
-	PLATFORM_GENTOO,
-	PLATFORM_PLD,
-	PLATFORM_OPENNA,
-	PLATFORM_FEDORA,
-	PLATFORM_CONECTIVA,
-	PLATFORM_BLACK_PANTHER,
-	PLATFORM_VINE,
-	PLATFORM_SPECIFIX,
-	PLATFORM_ARCHLINUX,
-	PLATFORM_VIDALINUX,
-	PLATFORM_LAST
-};
-
-enum {
-	PLATFORM_LIST_COL_LOGO,
 	PLATFORM_LIST_COL_NAME,
 	PLATFORM_LIST_COL_ID,
 	PLATFORM_LIST_COL_LAST
@@ -59,7 +37,6 @@ typedef struct _GstPlatformDialogPrivate GstPlatformDialogPrivate;
 
 struct _GstPlatformDialogPrivate
 {
-	GdkPixbuf *platforms [PLATFORM_LAST];
 	GtkWidget *list;
 	GtkWidget *ok_button;
 	GtkWidget *cancel_button;
@@ -117,12 +94,22 @@ on_selection_changed (GtkTreeSelection *selection,
 {
 	GstPlatformDialog *dialog;
 	GstPlatformDialogPrivate *priv;
-	gboolean selected;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean selected = FALSE;
+	gchar *id;
 
 	dialog = GST_PLATFORM_DIALOG (data);
 	priv = dialog->_priv;
 
-	selected = gtk_tree_selection_get_selected (selection, NULL, NULL);
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter,
+				    PLATFORM_LIST_COL_ID, &id,
+				    -1);
+
+		selected = (id != NULL);
+	}
+
 	gtk_widget_set_sensitive (priv->ok_button, selected);
 }
 
@@ -130,7 +117,7 @@ static GtkWidget*
 gst_platform_dialog_create_treeview (GstPlatformDialog *dialog)
 {
 	GtkWidget *list;
-	GtkListStore *store;
+	GtkTreeStore *store;
 	GtkTreeModel *sort_model;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
@@ -140,8 +127,7 @@ gst_platform_dialog_create_treeview (GstPlatformDialog *dialog)
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list), TRUE);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list), FALSE);
 
-	store = gtk_list_store_new (PLATFORM_LIST_COL_LAST,
-				    GDK_TYPE_PIXBUF,
+	store = gtk_tree_store_new (PLATFORM_LIST_COL_LAST,
 				    G_TYPE_STRING,
 				    G_TYPE_POINTER);
 
@@ -154,14 +140,6 @@ gst_platform_dialog_create_treeview (GstPlatformDialog *dialog)
 
 	column = gtk_tree_view_column_new ();
 	
-	/* Insert the pixmaps cell */
-	renderer = gtk_cell_renderer_pixbuf_new ();
-	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
-
-	gtk_tree_view_column_pack_start (column, renderer, FALSE);
-	gtk_tree_view_column_add_attribute (column, renderer,
-					    "pixbuf", PLATFORM_LIST_COL_LOGO);
-
 	/* Insert the text cell */
 	renderer = gtk_cell_renderer_text_new ();
 	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
@@ -190,24 +168,6 @@ gst_platform_dialog_init (GstPlatformDialog *dialog)
 	priv = GST_PLATFORM_DIALOG_GET_PRIVATE (dialog);
 	dialog->_priv = priv;
 
-	priv->platforms [PLATFORM_REDHAT] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/redhat.png", NULL);
-	priv->platforms [PLATFORM_DEBIAN] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/debian.png", NULL);
-	priv->platforms [PLATFORM_MANDRAKE] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/mandrake.png", NULL);
-	priv->platforms [PLATFORM_TURBOLINUX] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/turbolinux.png", NULL);
-	priv->platforms [PLATFORM_SLACKWARE] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/slackware.png", NULL);
-	priv->platforms [PLATFORM_SUSE] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/suse.png", NULL);
-	priv->platforms [PLATFORM_FREEBSD] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/freebsd.png", NULL);
-	priv->platforms [PLATFORM_GENTOO] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gentoo.png", NULL);
-	priv->platforms [PLATFORM_PLD] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/pld.png", NULL);
-	priv->platforms [PLATFORM_OPENNA] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/openna.png", NULL);
-	priv->platforms [PLATFORM_FEDORA] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/fedora.png", NULL);
-	priv->platforms [PLATFORM_CONECTIVA] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/conectiva.png", NULL);
-	priv->platforms [PLATFORM_BLACK_PANTHER] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/black_panther.png", NULL);
-	priv->platforms [PLATFORM_VINE] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vine.png", NULL);
-	priv->platforms [PLATFORM_SPECIFIX] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/specifix.png", NULL);
-	priv->platforms [PLATFORM_ARCHLINUX] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/archlinux.png", NULL);
-	priv->platforms [PLATFORM_VIDALINUX] = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vidalinux.png", NULL);
-
 	box = gtk_vbox_new (FALSE, 12);
 	gtk_container_set_border_width (GTK_CONTAINER (box), 6);
 
@@ -235,6 +195,7 @@ gst_platform_dialog_init (GstPlatformDialog *dialog)
 	priv->list = gst_platform_dialog_create_treeview (dialog);
 
 	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), GTK_SHADOW_IN);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
@@ -262,52 +223,97 @@ gst_platform_dialog_finalize (GObject *object)
 	if (dialog->session)
 		g_object_unref (dialog->session);
 
-	for (i = 0; i < PLATFORM_LAST; i++)
-		g_object_unref (priv->platforms [i]);
-
 	(* G_OBJECT_CLASS (gst_platform_dialog_parent_class)->finalize) (object);
 }
 
-static GdkPixbuf*
-name_to_logo (GstPlatformDialogPrivate *priv,
-	      const gchar              *name)
+static GHashTable*
+get_hash_table (GList *platforms)
 {
-	g_return_val_if_fail (name != NULL, NULL);
+	GHashTable *distros;
+	GList *list = platforms;
+	GList *versions;
+	OobsPlatform *platform;
 
-	if (strcmp (name, "Debian GNU/Linux") == 0)
-		return priv->platforms[PLATFORM_DEBIAN];
-	else if (strcmp (name, "Red Hat Linux") == 0)
-		return priv->platforms[PLATFORM_REDHAT];
-	else if (strcmp (name, "OpenNA Linux") == 0)
-		return priv->platforms[PLATFORM_OPENNA];
-	else if (strcmp (name, "Linux Mandrake") == 0)
-		return priv->platforms[PLATFORM_MANDRAKE];
-	else if (strcmp (name, "Black Panther OS") == 0)
-		return priv->platforms[PLATFORM_BLACK_PANTHER];
-	else if (strcmp (name, "Conectiva Linux") == 0)
-		return priv->platforms[PLATFORM_CONECTIVA];
-	else if (strcmp (name, "SuSE Linux") == 0)
-		return priv->platforms[PLATFORM_SUSE];
-	else if (strcmp (name, "Turbolinux") == 0)
-		return priv->platforms[PLATFORM_TURBOLINUX];
-	else if (strcmp (name, "Slackware") == 0)
-		return priv->platforms[PLATFORM_SLACKWARE];
-	else if (strcmp (name, "FreeBSD") == 0)
-		return priv->platforms[PLATFORM_FREEBSD];
-	else if (strcmp (name, "Gentoo Linux") == 0)
-		return priv->platforms[PLATFORM_GENTOO];
-	else if (strcmp (name, "PLD") == 0)
-		return priv->platforms[PLATFORM_PLD];
-	else if (strcmp (name, "Vine Linux") == 0)
-		return priv->platforms[PLATFORM_VINE];
-	else if (strcmp (name, "Fedora Core") == 0)
-		return priv->platforms[PLATFORM_FEDORA];
-	else if (strcmp (name, "Specifix Linux") == 0)
-		return priv->platforms[PLATFORM_SPECIFIX];
-	else if (strcmp (name, "Arch Linux") == 0)
-		return priv->platforms[PLATFORM_ARCHLINUX];
-		
-	return NULL;
+	/* values contain a list of OobsPlatform*, the list must be
+	 * freed, the OobsPlatform structs are managed by liboobs
+	 */
+	distros = g_hash_table_new_full (g_str_hash, g_str_equal,
+					 (GDestroyNotify) g_free,
+					 (GDestroyNotify) g_list_free);
+
+	while (list) {
+		platform = list->data;
+		versions = g_hash_table_lookup (distros, platform->name);
+		g_hash_table_steal (distros, platform->name);
+
+		/* add the version to the distro list */
+		versions = g_list_append (versions, platform);
+		g_hash_table_insert (distros, (gpointer) platform->name, versions);
+
+		list = list->next;
+	}
+
+	return distros;
+}
+
+static gchar *
+get_distro_string (const gchar  *prefix,
+		   OobsPlatform *platform)
+{
+	GString *str;
+	gchar *s;
+
+	str = g_string_new (prefix);
+
+	if (platform->version)
+		g_string_append_printf (str, " %s", platform->version);
+
+	if (platform->codename)
+		g_string_append_printf (str, " (%s)", platform->codename);
+	
+	s = str->str;
+	g_string_free (str, FALSE);
+	return s;
+}
+
+static void
+populate_distro (gchar        *distro,
+		 GList        *versions,
+		 GtkTreeStore *store)
+{
+	GtkTreeIter parent_iter, iter;
+	GList *elem = versions;
+	OobsPlatform *platform;
+	gchar *str;
+
+	if (g_list_length (elem) == 1) {
+		platform = elem->data;
+		str = get_distro_string (distro, platform);
+
+		gtk_tree_store_append (store, &parent_iter, NULL);
+		gtk_tree_store_set (store, &parent_iter,
+				    PLATFORM_LIST_COL_NAME, str,
+				    PLATFORM_LIST_COL_ID, platform->id,
+				    -1);
+		g_free (str);
+	} else {
+		gtk_tree_store_append (store, &parent_iter, NULL);
+		gtk_tree_store_set (store, &parent_iter,
+				    PLATFORM_LIST_COL_NAME, distro,
+				    -1);
+		while (elem) {
+			platform = elem->data;
+			str = get_distro_string (NULL, platform);
+
+			gtk_tree_store_append (store, &iter, &parent_iter);
+			gtk_tree_store_set (store, &iter,
+					    PLATFORM_LIST_COL_NAME, str,
+					    PLATFORM_LIST_COL_ID, platform->id,
+					    -1);
+			elem = elem->next;
+			g_free (str);
+		}
+	}
 }
 
 static void
@@ -315,45 +321,27 @@ gst_platform_dialog_populate_list (GstPlatformDialog *dialog)
 {
 	GstPlatformDialogPrivate *priv;
 	GtkTreeModel *sort_model;
-	GtkListStore *store;
+	GtkTreeStore *store;
 	GtkTreeIter iter;
-	GList *platforms, *list;
+	GList *platforms;
 	OobsPlatform *platform;
 	GString *str;
+	GHashTable *distros;
 
 	g_return_if_fail (OOBS_IS_SESSION (dialog->session));
 
 	if (oobs_session_get_supported_platforms (dialog->session, &platforms) != OOBS_RESULT_OK)
 		return;
 
-	list = platforms;
 	priv = dialog->_priv;
+	distros = get_hash_table (platforms);
+
 	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (priv->list));
-	store = GTK_LIST_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model)));
+	store = GTK_TREE_STORE (gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model)));
 
-	while (platforms) {
-		platform = platforms->data;
-		platforms = platforms->next;
-
-		str = g_string_new (platform->name);
-
-		if (platform->version)
-			g_string_append_printf (str, " %s", platform->version);
-
-		if (platform->codename)
-			g_string_append_printf (str, " (<i>%s</i>)", platform->codename);
-
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter,
-		                    PLATFORM_LIST_COL_LOGO, name_to_logo (priv, platform->name),
-		                    PLATFORM_LIST_COL_NAME, str->str,
-		                    PLATFORM_LIST_COL_ID, platform->id,
-				    -1);
-
-		g_string_free (str, TRUE);
-	}
-
-	g_list_free (list);
+	g_hash_table_foreach (distros, (GHFunc) populate_distro, store);
+	g_hash_table_destroy (distros);
+	g_list_free (platforms);
 }
 
 static GObject*
