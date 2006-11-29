@@ -2,7 +2,7 @@ pixmapdir = $(datadir)/gnome-system-tools/pixmaps
 pixmap_DATA = \
 	world_map-960.png 
 
-icondir = $(datadir)/icons/hicolor/48x48/apps
+icondir = $(datadir)/icons/hicolor/48x48/devices
 icon_DATA = \
 	irda.png	\
 	plip.png
