@@ -1,32 +1,21 @@
-pixmaps_DATA = \
-	16_ethernet.xpm           \
-	archlinux.png		  \
-	black_panther.png         \
-	conectiva.png		  \
-	connection-ethernet.png   \
-	connection-modem.png      \
-	boot.png                  \
-	debian.png                \
-	disks.png		  \
-	fedora.png		  \
-	freebsd.png               \
-	gentoo.png                \
-	gnome-dev-cdrom-data.png  \
-	gnome-dev-cdrom-mixed.png \
-	irda-48.png               \
-	mandrake.png              \
-	openna.png                \
-	pld.png                   \
-	plip-48.png               \
-	ppp.png                   \
-	redhat.png                \
-	slackware.png             \
-	specifix.png              \
-	suse.png                  \
-	turbolinux.png            \
-	vidalinux.png		  \
-	vine.png                  \
-	wavelan-48.png            \
+pixmapdir = $(datadir)/gnome-system-tools/pixmaps
+pixmap_DATA = \
 	world_map-960.png 
 
-EXTRA_DIST = $(pixmaps_DATA)
+icondir = $(datadir)/icons/hicolor/48x48/apps
+icon_DATA = \
+	irda.png	\
+	plip.png
+
+gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
+
+install-data-hook:
+	@-if test -z "$(DESTDIR)"; then \
+		echo "Updating Gtk icon cache."; \
+		$(gtk_update_icon_cache); \
+	else \
+		echo "*** Icon cache not updated.  After install, run this:"; \
+		echo "***   $(gtk_update_icon_cache)"; \
+	fi
+
+EXTRA_DIST = $(pixmap_DATA) $(icon_DATA)
