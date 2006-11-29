@@ -239,26 +239,27 @@ static GdkPixbuf*
 get_iface_pixbuf (OobsIface *iface)
 {
   GdkPixbuf *pixbuf = NULL;
+  const gchar *icon = NULL;
 
   if (OOBS_IS_IFACE_WIRELESS (iface))
-    pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
-				       "gnome-dev-wavelan", 48, 0, NULL);
+    icon = "gnome-dev-wavelan";
   else if (OOBS_IS_IFACE_IRLAN (iface))
-    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/irda-48.png", NULL);
+    icon = "irda";
   else if (OOBS_IS_IFACE_ETHERNET (iface))
-    pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
-				       "gnome-dev-ethernet", 48, 0, NULL);
+    icon = "gnome-dev-ethernet";
   else if (OOBS_IS_IFACE_PLIP (iface))
-    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/plip-48.png", NULL);
+    icon = "plip";
   else if (OOBS_IS_IFACE_ISDN (iface))
+    icon = "gnome-modem";
+
+  if (icon)
     pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
-				       "gnome-modem", 48, 0, NULL);
+				       icon, 48, 0, NULL);
 
   /* fallback to a "generic" icon */
   if (!pixbuf)
     pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
 				       "gnome-fs-network", 48, 0, NULL);
-
   return pixbuf;
 }
 
@@ -369,7 +370,9 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
 		      COL_NOT_INCONSISTENT, configured,
 		      -1);
 
-  g_object_unref (pixbuf);
+  if (pixbuf)
+    g_object_unref (pixbuf);
+
   g_object_unref (iface);
   g_free (desc);
 }
