@@ -484,12 +484,14 @@ compare_interface (GObject  *iface,
 	  g_object_get (iface, props[i].key, &int_value2, NULL);
 	  equal = (int_value1 == int_value2);
 	}
-      else
+      else if (props[i].type == TYPE_BOOLEAN)
 	{
 	  bool_value1 = g_key_file_get_boolean (key_file, name, props[i].key, NULL);
 	  g_object_get (iface, props[i].key, &bool_value2, NULL);
 	  equal = ((bool_value1 == TRUE) == (bool_value2 == TRUE));
 	}
+      else
+	g_assert_not_reached ();
 
       i++;
     }

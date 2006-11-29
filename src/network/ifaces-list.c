@@ -51,6 +51,7 @@ ifaces_model_create (void)
 			      G_TYPE_OBJECT,
 			      G_TYPE_STRING,
 			      G_TYPE_BOOLEAN,
+			      G_TYPE_BOOLEAN,
 			      G_TYPE_BOOLEAN);
   return GTK_TREE_MODEL (store);
 }
@@ -125,6 +126,7 @@ add_list_columns (GtkTreeView  *table,
 					       "Interface",
 					       renderer,
 					       "pixbuf", COL_IMAGE,
+					       "sensitive", COL_NOT_INCONSISTENT,
 					       NULL);
 
   renderer = gtk_cell_renderer_text_new ();
@@ -239,15 +241,23 @@ get_iface_pixbuf (OobsIface *iface)
   GdkPixbuf *pixbuf = NULL;
 
   if (OOBS_IS_IFACE_WIRELESS (iface))
-    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/wavelan-48.png", NULL);
+    pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
+				       "gnome-dev-wavelan", 48, 0, NULL);
   else if (OOBS_IS_IFACE_IRLAN (iface))
     pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/irda-48.png", NULL);
   else if (OOBS_IS_IFACE_ETHERNET (iface))
-    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/connection-ethernet.png", NULL);
+    pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
+				       "gnome-dev-ethernet", 48, 0, NULL);
   else if (OOBS_IS_IFACE_PLIP (iface))
     pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/plip-48.png", NULL);
   else if (OOBS_IS_IFACE_ISDN (iface))
-    pixbuf = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/ppp.png", NULL);
+    pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
+				       "gnome-modem", 48, 0, NULL);
+
+  /* fallback to a "generic" icon */
+  if (!pixbuf)
+    pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
+				       "gnome-fs-network", 48, 0, NULL);
 
   return pixbuf;
 }
@@ -337,7 +347,7 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
   GtkTreeModel *model;
   OobsIface *iface;
   gchar *desc;
-  gboolean show_name;
+  gboolean show_name, configured;
   GdkPixbuf *pixbuf;
 
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
@@ -348,13 +358,15 @@ ifaces_model_modify_interface_at_iter (GtkTreeIter *iter)
 		      -1);
   desc = get_iface_desc (OOBS_IFACE (iface), show_name);
   pixbuf = get_iface_pixbuf (OOBS_IFACE (iface));
+  configured = oobs_iface_get_configured (OOBS_IFACE (iface));
 
   gtk_list_store_set (GTK_LIST_STORE (model), iter,
 		      COL_ACTIVE, oobs_iface_get_active (OOBS_IFACE (iface)),
 		      COL_IMAGE, pixbuf,
 		      COL_DESC, desc,
 		      COL_DEV, oobs_iface_get_device_name (OOBS_IFACE (iface)),
-		      COL_INCONSISTENT, !oobs_iface_get_configured (OOBS_IFACE (iface)),
+		      COL_INCONSISTENT, !configured,
+		      COL_NOT_INCONSISTENT, configured,
 		      -1);
 
   g_object_unref (pixbuf);
