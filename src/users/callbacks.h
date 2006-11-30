@@ -46,6 +46,7 @@ void on_manage_groups_clicked (GtkWidget *widget, gpointer user_data);
 void on_group_new_clicked (GtkButton*, gpointer);
 void on_group_settings_clicked (GtkButton*, gpointer);
 void on_group_delete_clicked (GtkButton*, gpointer);
+void on_groups_dialog_show_help (GtkWidget *widget, gpointer data);
 
 /* user settings dialog callbacks */
 void on_user_settings_passwd_changed (GtkEntry*, gpointer);

@@ -280,7 +280,7 @@ on_manage_groups_clicked (GtkWidget *widget, gpointer user_data)
 	GtkWidget *dialog;
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
-	gtk_dialog_run (GTK_DIALOG (dialog));
+	while (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_HELP);
 	gtk_widget_hide (dialog);
 }
 
@@ -469,4 +469,13 @@ on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
 
 	user_settings_apply_profile (GST_USERS_TOOL (tool), profile);
 	g_free (profile_name);
+}
+
+void
+on_groups_dialog_show_help (GtkWidget *widget, gpointer data)
+{
+	GstDialog *dialog = GST_DIALOG (data);
+	GstTool *tool = gst_dialog_get_tool (dialog);
+
+	gst_tool_show_help (tool, NULL);
 }

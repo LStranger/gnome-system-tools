@@ -57,6 +57,7 @@ static GstDialogSignal signals[] = {
 	{ "group_new",				"clicked",		G_CALLBACK (on_group_new_clicked) },
 	{ "group_settings",			"clicked",		G_CALLBACK (on_group_settings_clicked) },
 	{ "group_delete",			"clicked",       	G_CALLBACK (on_group_delete_clicked) },
+	{ "groups_dialog_help",                 "clicked",              G_CALLBACK (on_groups_dialog_show_help) },
 	{ NULL }};
 
 static const GstWidgetPolicy policies[] = {
