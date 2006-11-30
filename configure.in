@@ -249,7 +249,7 @@ GST_IW_LIBS=
 AC_CHECK_HEADER(iwlib.h, [
   enable_libiw=yes
   AC_DEFINE(HAVE_LIBIW_H, "", [whether libiw is available])
-  AC_CHECK_LIB(iw, iw_sockets_open, , [GST_IW_LIBS="-liw"])
+  AC_HAVE_LIBRARY(iw, [GST_IW_LIBS="-liw"])
 ])
 AM_CONDITIONAL(HAVE_LIBIW_H, test x$enable_libiw = xyes)
 AC_SUBST(GST_IW_LIBS)
