@@ -94,8 +94,6 @@ gst_users_tool_finalize (GObject *object)
 {
 	GstUsersTool *tool = GST_USERS_TOOL (object);
 
-	g_print ("jojojojoijfowiejfowiejfowiej\n");
-
 	g_object_unref (tool->users_config);
 	g_object_unref (tool->groups_config);
 	g_object_unref (tool->profiles);
