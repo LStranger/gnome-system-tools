@@ -277,6 +277,13 @@ static void
 gst_tool_impl_close (GstTool *tool)
 {
 	gtk_widget_hide (GTK_WIDGET (tool->main_dialog));
+
+	/* process necessary events to hide the dialog */
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+
+	/* process pending async requests */
+	oobs_session_process_requests (tool->session);
 	g_object_unref (tool);
 	gtk_main_quit ();
 }
@@ -398,7 +405,8 @@ gst_tool_show_report_window (GstTool *tool, const gchar *report)
 {
 	gchar *markup;
 
-	g_return_if_fail (tool->report_timeout_id == 0);
+	if (tool->report_timeout_id != 0)
+		return;
 
 	if (report) {
 		markup = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>", report);

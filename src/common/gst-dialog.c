@@ -146,6 +146,7 @@ gst_dialog_constructor (GType                  type,
 	GObject *object;
 	GstDialog *dialog;
 	GstDialogPrivate *priv;
+	GtkWidget *toplevel;
 
 	object = (* G_OBJECT_CLASS (gst_dialog_parent_class)->constructor) (type,
 									    n_construct_properties,
@@ -163,6 +164,7 @@ gst_dialog_constructor (GType                  type,
 			exit (-1);
 		}
 		priv->child = gst_dialog_get_widget (dialog, priv->widget_name);
+		toplevel = gtk_widget_get_toplevel (priv->child);
 
 		if (GTK_WIDGET_TOPLEVEL (priv->child)) {
 			g_critical ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
@@ -173,8 +175,10 @@ gst_dialog_constructor (GType                  type,
 		}
 
 		gtk_widget_ref (priv->child);
-		gtk_widget_unparent (priv->child);
+		gtk_container_remove (GTK_CONTAINER (priv->child->parent), priv->child);
 		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), priv->child);
+
+		gtk_widget_destroy (toplevel);
 	}
 
 	if (priv->title)
