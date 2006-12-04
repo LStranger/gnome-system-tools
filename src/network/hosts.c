@@ -324,6 +324,8 @@ host_aliases_dialog_save (GtkTreeIter *iter)
       oobs_static_host_set_ip_address (host, gtk_entry_get_text (GTK_ENTRY (address)));
       oobs_static_host_set_aliases (host, aliases_list);
       host_aliases_modify_at_iter (iter, host, list_iter);
+
+      oobs_list_iter_free (list_iter);
       g_object_unref (host);
     }
   else

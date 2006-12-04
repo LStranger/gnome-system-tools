@@ -310,6 +310,7 @@ on_host_aliases_delete_clicked (GtkWidget *widget, gpointer data)
       oobs_list_remove (hosts_list, list_iter);
       gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
+      oobs_list_iter_free (list_iter);
       oobs_object_commit (OOBS_OBJECT (GST_NETWORK_TOOL (tool)->hosts_config));
     }
 }
