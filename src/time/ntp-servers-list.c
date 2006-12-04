@@ -142,7 +142,7 @@ toggle_ntp_server (GstTimeTool  *tool,
 	OobsList *list;
 	gchar *url;
 
-	list = oobs_ntp_config_get_servers (tool->ntp_config);
+	list = oobs_ntp_config_get_servers (OOBS_NTP_CONFIG (tool->ntp_config));
 
 	gtk_tree_model_get (GTK_TREE_MODEL (store), &iter,
 			    COL_ACTIVE, &active,

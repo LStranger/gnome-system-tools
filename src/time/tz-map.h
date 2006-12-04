@@ -49,8 +49,8 @@ struct _ETzMap
 
 ETzMap     *e_tz_map_new                  (GstTool *tool);
 TzDB       *e_tz_map_get_tz_db            (ETzMap *tzmap);
-void        e_tz_map_set_tz_from_name     (ETzMap *tzmap, gchar *name);
+void        e_tz_map_set_tz_from_name     (ETzMap *tzmap, const gchar *name);
 gchar      *e_tz_map_get_selected_tz_name (ETzMap *tzmap);
-TzLocation *e_tz_map_get_location_by_name (ETzMap *tzmap, gchar *name);
+TzLocation *e_tz_map_get_location_by_name (ETzMap *tzmap, const gchar *name);
 
 #endif

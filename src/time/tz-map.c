@@ -133,7 +133,7 @@ e_tz_map_get_tz_db (ETzMap *tzmap)
 }
 
 TzLocation *
-e_tz_map_get_location_by_name (ETzMap *tzmap, gchar *name)
+e_tz_map_get_location_by_name (ETzMap *tzmap, const gchar *name)
 {
 	TzLocation *tz_loc = NULL;
 	TzDB *tz_db;
@@ -187,7 +187,7 @@ e_tz_map_set_location_text (ETzMap *tzmap, const gchar *name)
 }
 
 void
-e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
+e_tz_map_set_tz_from_name (ETzMap *tzmap, const gchar *name)
 {
 	TzLocation *tz_loc = NULL;
 	TzDB *tz_db;
