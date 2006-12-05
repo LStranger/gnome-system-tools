@@ -80,6 +80,7 @@ PropType wireless_properties[] = {
   { "essid", TYPE_STRING },
   { "key", TYPE_STRING },
   { "key-type", TYPE_INT },
+  { "config-method", TYPE_INT },
   { "ip_address", TYPE_STRING },
   { "ip_mask", TYPE_STRING },
   { "gateway-address", TYPE_STRING },
@@ -668,6 +669,7 @@ set_interface (GObject  *iface,
 
   while (props[i].key)
     {
+      g_print ("!!!! %s   %s\n", name, props[i].key);
       if (props[i].type == TYPE_STRING)
 	{
 	  value = g_key_file_get_string (key_file, name, props[i].key, NULL);
