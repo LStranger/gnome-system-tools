@@ -1,3 +1,10 @@
+2006-12-21  Carlos Garnacho  <carlosg@gnome.org>
+
+	* essid-list.c (gst_essid_list_finalize): do not close the socket used
+	for ioctl with iw_sockets_close(), seems not to be available in all
+	libiw, instead use close() directly (iw_sockets_close() seem to be a
+	wrapper for it). Closes #387618.
+
 2006-12-05  Carlos Garnacho  <carlosg@gnome.org>
 
 	* network-locations.c: save config-method for wireless interfaces.

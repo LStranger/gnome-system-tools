@@ -156,7 +156,7 @@ gst_essid_list_finalize (GObject *object)
     }
 
   if (priv->fd >= 0)
-    iw_sockets_close (priv->fd);
+    close (priv->fd);
 
   g_free (priv->interface);
   g_free (priv->buffer);
