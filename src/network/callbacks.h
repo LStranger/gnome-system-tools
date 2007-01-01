@@ -34,6 +34,8 @@ void  on_table_selection_changed   (GtkTreeSelection*, gpointer);
 void  on_iface_properties_clicked  (GtkWidget*, gpointer);
 
 void  on_iface_active_changed      (GtkWidget*, gpointer);
+void  on_iface_roaming_changed     (GtkWidget *widget, gpointer data);
+
 void  on_bootproto_changed         (GtkWidget*, gpointer);
 void  on_detect_modem_clicked      (GtkWidget*, gpointer);
 void  on_connection_response       (GtkWidget *widget,

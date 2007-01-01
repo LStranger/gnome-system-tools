@@ -24,6 +24,7 @@
 #include "network-tool.h"
 #include "connection.h"
 #include "essid-list.h"
+#include "nm-integration.h"
 
 extern GstTool *tool;
 
@@ -396,6 +397,7 @@ connection_dialog_init (GstTool *tool)
   gcd->options_page = gst_dialog_get_widget (tool->main_dialog, "connection_options_page");
 
   gcd->connection_configured = gst_dialog_get_widget (tool->main_dialog, "connection_device_active");
+  gcd->roaming_configured = gst_dialog_get_widget (tool->main_dialog, "connection_device_roaming");
 
   /* ethernet */
   gcd->bootproto_combo = gst_dialog_get_widget (tool->main_dialog, "connection_bootproto");
@@ -495,6 +497,26 @@ prepare_dialog_layout (GstConnectionDialog *dialog,
 }
 
 void
+general_prepare (GstConnectionDialog *dialog,
+		 OobsIface           *iface)
+{
+  NMState state;
+
+  state = nm_integration_get_state (GST_NETWORK_TOOL (tool));
+
+  if (nm_integration_iface_supported (iface) && state != NM_STATE_UNKNOWN)
+    {
+      gtk_widget_show (dialog->roaming_configured);
+      gtk_widget_hide (dialog->connection_configured);
+    }
+  else
+    {
+      gtk_widget_hide (dialog->roaming_configured);
+      gtk_widget_show (dialog->connection_configured);
+    }
+}
+
+void
 connection_dialog_prepare (GstConnectionDialog *dialog, OobsIface *iface)
 {
   gboolean active;
@@ -511,7 +533,10 @@ connection_dialog_prepare (GstConnectionDialog *dialog, OobsIface *iface)
   prepare_dialog_layout (dialog, iface);
   connection_dialog_set_sensitive (dialog, active);
 
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->roaming_configured), !active);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->connection_configured), active);
+
+  general_prepare (dialog, iface);
 
   if (OOBS_IS_IFACE_ISDN (iface) || OOBS_IS_IFACE_MODEM (iface))
     {

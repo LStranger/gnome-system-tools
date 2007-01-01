@@ -65,6 +65,12 @@ enum {
 	PROP_ICON
 };
 
+typedef struct _GstAsyncData {
+	GstTool *tool;
+	OobsObjectAsyncFunc func;
+	gpointer data;
+} GstAsyncData;
+
 G_DEFINE_ABSTRACT_TYPE (GstTool, gst_tool, G_TYPE_OBJECT);
 
 static void
@@ -439,16 +445,32 @@ on_commit_finalized (OobsObject *object,
 		     OobsResult  result,
 		     gpointer    data)
 {
-	gst_tool_hide_report_window (GST_TOOL (data));
+	GstAsyncData *user_data = (GstAsyncData *) data;
+
+	gst_tool_hide_report_window (user_data->tool);
+
+	if (user_data->func)
+		(* user_data->func) (object, result, user_data->data);
+
+	g_slice_free (GstAsyncData, user_data);
 }
 
 void
-gst_tool_commit_async (GstTool     *tool,
-		       OobsObject  *object,
-		       const gchar *message)
+gst_tool_commit_async (GstTool             *tool,
+		       OobsObject          *object,
+		       const gchar         *message,
+		       OobsObjectAsyncFunc  func,
+		       gpointer             data)
 {
+	GstAsyncData *user_data;
+
+	user_data = g_slice_new (GstAsyncData);
+	user_data->tool = tool;
+	user_data->func = func;
+	user_data->data = data;
+
 	gst_tool_show_report_window (tool, message);
-	oobs_object_commit_async (object, on_commit_finalized, tool);
+	oobs_object_commit_async (object, on_commit_finalized, user_data);
 }
 
 GtkIconTheme*

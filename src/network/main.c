@@ -50,6 +50,7 @@ static GstDialogSignal signals[] = {
   { "connection_config_dialog",     "response", G_CALLBACK (on_connection_response) },
   { "connection_config_dialog",     "delete-event", G_CALLBACK (gtk_true) },
   { "connection_device_active",     "clicked", G_CALLBACK (on_iface_active_changed) },
+  { "connection_device_roaming",    "clicked", G_CALLBACK (on_iface_roaming_changed) },
   { "connection_bootproto",         "changed", G_CALLBACK (on_bootproto_changed) },
   { "connection_detect_modem",      "clicked", G_CALLBACK (on_detect_modem_clicked) },
   /* dialog changing detection */

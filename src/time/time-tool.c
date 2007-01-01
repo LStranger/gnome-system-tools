@@ -159,12 +159,11 @@ inhibit_screensaver (GstTimeTool *tool,
 			/* get cookie */
 			dbus_message_iter_init (reply, &iter);
 			dbus_message_iter_get_basic (&iter, &priv->cookie);
-
-			dbus_message_unref (message);
 			dbus_message_unref (reply);
 		}
+
+		dbus_message_unref (message);
 	} else if (!inhibit && priv->cookie != 0) {
-		
 		message = dbus_message_new_method_call (SCREENSAVER_SERVICE,
 							SCREENSAVER_PATH,
 							SCREENSAVER_INTERFACE,
@@ -407,7 +406,8 @@ on_option_configuration_changed (GtkWidget *widget,
 							 50);
 
 		gst_tool_commit_async (GST_TOOL (time_tool), time_tool->services_config,
-				       (active) ? _("Enabling NTP") : _("Disabling NTP"));
+				       (active) ? _("Enabling NTP") : _("Disabling NTP"),
+				       NULL, NULL);
 	}
 }
 
@@ -417,7 +417,8 @@ on_synchronize_now_clicked (GtkWidget *widget, gpointer data)
 	GstTimeTool *tool;
 
 	tool = GST_TIME_TOOL (data);
-	gst_tool_commit_async (GST_TOOL (tool), tool->ntp_config, _("Synchronizing system clock"));
+	gst_tool_commit_async (GST_TOOL (tool), tool->ntp_config,
+			       _("Synchronizing system clock"), NULL, NULL);
 }
 
 static void

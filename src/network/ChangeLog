@@ -1,3 +1,20 @@
+2007-01-01  Carlos Garnacho  <carlosg@gnome.org>
+
+	* nm-integration.[ch]: new files, contains functions to communicate
+	with NetworkManager daemon.
+	* Makefile.am: add DBus libs and cflags, add files above.
+	* ifaces-list.c (get_iface_secondary_text): show a different text if
+	the interface is deactivated and NM is running (so supposedly managing
+	it).
+	* network-tool.[ch] (gst_network_tool_init): get a DBus connection to
+	talk with NM.
+	* connection.[ch] (connection_dialog_init) (prepare_general):
+	* callbacks.c (on_iface_active_changed) (on_iface_roaming_changed)
+	(toggle_nm) (on_configuration_changed) (accept_connection_dialog):
+	* main.c: Add "enable roaming mode" checkbox, tell NM to "reboot" when
+	an interface has changed it's configuration.
+	* locations-combo.c: use new gst_tool_commit_async() API.
+
 2006-12-21  Carlos Garnacho  <carlosg@gnome.org>
 
 	* essid-list.c (gst_essid_list_finalize): do not close the socket used

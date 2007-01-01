@@ -25,6 +25,7 @@
 #include "ifaces-list.h"
 #include "callbacks.h"
 #include "hosts.h"
+#include "nm-integration.h"
 
 extern GstTool *tool;
 
@@ -65,12 +66,37 @@ void
 on_iface_active_changed (GtkWidget *widget, gpointer data)
 {
   GstConnectionDialog *dialog;
+  GtkWidget *roaming_active;
   gboolean active;
 
   dialog = GST_NETWORK_TOOL (tool)->dialog;
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
   connection_dialog_set_sensitive (dialog, active);
+
+  roaming_active = gst_dialog_get_widget (tool->main_dialog, "connection_device_roaming");
+  g_signal_handlers_block_by_func (roaming_active, on_iface_roaming_changed, data);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (roaming_active), !active);
+  g_signal_handlers_unblock_by_func (roaming_active, on_iface_roaming_changed, data);
+}
+
+void
+on_iface_roaming_changed (GtkWidget *widget, gpointer data)
+{
+  GstConnectionDialog *dialog;
+  GtkWidget *device_active;
+  gboolean active;
+
+  dialog = GST_NETWORK_TOOL (tool)->dialog;
+  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+
+  /* roaming changed and device active have just inverted logics */
+  connection_dialog_set_sensitive (dialog, !active);
+
+  device_active = gst_dialog_get_widget (tool->main_dialog, "connection_device_active");
+  g_signal_handlers_block_by_func (device_active, on_iface_active_changed, data);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (device_active), !active);
+  g_signal_handlers_unblock_by_func (device_active, on_iface_active_changed, data);
 }
 
 void
@@ -102,6 +128,36 @@ cancel_connection_dialog (GstTool *tool)
     gtk_main_quit ();
 }
 
+static gboolean
+toggle_nm (gpointer data)
+{
+  GstNetworkTool *tool = GST_NETWORK_TOOL (data);
+  NMState state;
+
+  state = nm_integration_get_state (tool);
+
+  if (state == NM_STATE_DISCONNECTED ||
+      state == NM_STATE_CONNECTING ||
+      state == NM_STATE_CONNECTED)
+    {
+      /* "reboot" NM */
+      nm_integration_sleep (tool);
+      nm_integration_wake (tool);
+    }
+
+  return FALSE;
+}
+
+static void
+on_configuration_changed (OobsObject *object,
+			  OobsResult  result,
+			  gpointer    data)
+{
+  /* suckety suck, but NM seems not to realize
+   * immediately that the interface status changed */
+  g_timeout_add (2000, toggle_nm, data);
+}
+
 static void
 accept_connection_dialog (GstTool *tool)
 {
@@ -124,7 +180,8 @@ accept_connection_dialog (GstTool *tool)
 	}
 
       gst_tool_commit_async (tool, OOBS_OBJECT (GST_NETWORK_TOOL (tool)->ifaces_config),
-			     _("Changing interface configuration"));
+			     _("Changing interface configuration"),
+			     on_configuration_changed, tool);
     }
 
   g_object_unref (dialog->iface);
@@ -369,7 +426,8 @@ on_iface_toggled (GtkCellRendererToggle *renderer,
 	  ifaces_model_modify_interface_at_iter (&iter);
 
 	  gst_tool_commit_async (tool, OOBS_OBJECT (GST_NETWORK_TOOL (tool)->ifaces_config),
-				 _("Activating network interface"));
+				 _("Changing interface configuration"),
+				 on_configuration_changed, tool);
 	}
 
       g_object_unref (iface);
@@ -457,4 +515,3 @@ on_domain_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 
   return FALSE;
 }
-     

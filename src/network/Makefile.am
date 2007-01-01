@@ -11,11 +11,11 @@ toolname = network
 bin_PROGRAMS = network-admin
 
 ## SUBDIRS =
-INCLUDES = $(GST_TOOL_CFLAGS)
+INCLUDES = $(GST_TOOL_CFLAGS) $(DBUS_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
 EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 
-network_admin_LDADD = $(GST_TOOL_LIBS) $(GST_IW_LIBS)
+network_admin_LDADD = $(GST_TOOL_LIBS) $(GST_IW_LIBS) $(DBUS_LIBS)
 network_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
 
 if HAVE_LIBIW_H
@@ -24,6 +24,7 @@ endif
 
 network_admin_SOURCES = \
 	$(essid_SOURCES)				\
+	nm-integration.c nm-integration.h	\
 	address-list.c	address-list.h		\
 	network-locations.c network-locations.h	\
 	network-tool.c network-tool.h		\

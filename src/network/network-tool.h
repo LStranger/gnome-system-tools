@@ -24,6 +24,7 @@
 G_BEGIN_DECLS
 
 #include <gtk/gtk.h>
+#include <dbus/dbus.h>
 #include "address-list.h"
 #include "locations-combo.h"
 #include "connection.h"
@@ -49,6 +50,9 @@ struct _GstNetworkTool
   /* gui */
   GstAddressList *dns;
   GstAddressList *search;
+
+  /* bus, used for NM integration */
+  DBusConnection *bus_connection;
 
   GtkTreeModel *interfaces_model;
   GtkTreeView  *interfaces_list;

@@ -1,3 +1,9 @@
+2007-01-01  Carlos Garnacho  <carlosg@gnome.org>
+
+	* time-tool.c (inhibit_screensaver): fix possible leak.
+	(on_option_configuration_changed) (on_synchronize_now_clicked): use
+	new gst_tool_commit_async() API.
+
 2006-12-04  Carlos Garnacho  <carlosg@gnome.org>
 
 	* tz-map.[ch], ntp-servers-list.c, time-tool.c: fix compiler warnings.

@@ -40,6 +40,7 @@ struct _GstConnectionDialog {
   GtkWidget *options_page;
 
   GtkWidget *connection_configured;
+  GtkWidget *roaming_configured;
 
 #ifdef HAVE_LIBIW_H
   GstEssidList *essid_list;

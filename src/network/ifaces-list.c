@@ -25,6 +25,7 @@
 #include "callbacks.h"
 #include "ifaces-list.h"
 #include "network-tool.h"
+#include "nm-integration.h"
 
 extern GstTool *tool;
 
@@ -268,11 +269,20 @@ get_iface_secondary_text (OobsIface *iface)
 {
   GString *str;
   gchar *text;
+  NMState state;
 
   str = g_string_new ("");
+  state = nm_integration_get_state (GST_NETWORK_TOOL (tool));
 
   if (!oobs_iface_get_configured (iface))
-    str = g_string_append (str, _("This network interface is not configured"));
+    {
+      if (!nm_integration_iface_supported (iface) ||
+	  state == NM_STATE_UNKNOWN ||
+	  state == NM_STATE_ASLEEP)
+	str = g_string_append (str, _("This network interface is not configured"));
+      else
+	str = g_string_append (str, _("Roaming mode enabled"));
+    }
   else if (OOBS_IS_IFACE_ETHERNET (iface))
     {
       if (OOBS_IS_IFACE_WIRELESS (iface))

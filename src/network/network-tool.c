@@ -59,6 +59,7 @@ gst_network_tool_init (GstNetworkTool *tool)
 {
   tool->hosts_config = OOBS_HOSTS_CONFIG (oobs_hosts_config_get (GST_TOOL (tool)->session));
   tool->ifaces_config = OOBS_IFACES_CONFIG (oobs_ifaces_config_get (GST_TOOL (tool)->session));
+  tool->bus_connection = dbus_bus_get (DBUS_BUS_SYSTEM, NULL);
 }
 
 static void
