@@ -285,16 +285,20 @@ get_iface_secondary_text (OobsIface *iface)
     }
   else if (OOBS_IS_IFACE_ETHERNET (iface))
     {
+      const gchar *config_method;
+
       if (OOBS_IS_IFACE_WIRELESS (iface))
 	g_string_append_printf (str, _("<b>Essid:</b> %s "),
 				oobs_iface_wireless_get_essid (OOBS_IFACE_WIRELESS (iface)));
 
-      if (oobs_iface_ethernet_get_configuration_method (OOBS_IFACE_ETHERNET (iface)) != OOBS_METHOD_DHCP)
+      config_method = oobs_iface_ethernet_get_configuration_method (OOBS_IFACE_ETHERNET (iface));
+
+      if (config_method && strcmp (config_method, "static") == 0)
 	g_string_append_printf (str, _("<b>Address:</b> %s <b>Subnet mask:</b> %s"),
 				oobs_iface_ethernet_get_ip_address (OOBS_IFACE_ETHERNET (iface)),
 				oobs_iface_ethernet_get_network_mask (OOBS_IFACE_ETHERNET (iface)));
       else
-	g_string_append_printf (str, _("<b>Address:</b> DHCP"));
+	g_string_append_printf (str, _("<b>Address:</b> %s"), config_method);
     }
   else if (OOBS_IS_IFACE_PLIP (iface))
     {

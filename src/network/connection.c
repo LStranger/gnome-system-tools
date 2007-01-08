@@ -20,6 +20,7 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include "gst.h"
 #include "network-tool.h"
 #include "connection.h"
@@ -27,6 +28,25 @@
 #include "nm-integration.h"
 
 extern GstTool *tool;
+
+typedef struct
+{
+  const gchar *method;
+  const gchar *desc;
+} Description;
+
+static Description method_descriptions [] = {
+  { "dhcp",   N_("Automatic configuration (DHCP)") },
+  { "ipv4ll", N_("Local Zeroconf network (IPv4 LL)") },
+  { "static", N_("Static IP address") },
+};
+
+static Description key_type_descriptions [] = {
+  { "wep-ascii", N_("WEP key (ascii)") },
+  { "wep-hex", N_("WEP key (hexadecimal)") },
+  { "wpa-psk", N_("WPA") },
+};
+
 
 /* helper for getting whether the string or null if it's empty */
 static gchar*
@@ -38,38 +58,50 @@ get_entry_text (GtkWidget *entry)
   return (!str || !*str) ? NULL : str;
 }
 
-static void
-connection_set_config_method (GstConnectionDialog          *dialog,
-			      OobsIfaceConfigurationMethod  config_method)
+void
+connection_combo_set_value (GtkComboBox *combo,
+			    const gchar *method)
 {
-  gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->bootproto_combo),
-			    (config_method == OOBS_METHOD_STATIC) ? 1 : 0);
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean valid;
+  gchar *elem_method;
+
+  g_return_if_fail (method != NULL);
+
+  model = gtk_combo_box_get_model (combo);
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+
+  while (valid)
+    {
+      gtk_tree_model_get (model, &iter, 1, &elem_method, -1);
+
+      if (strcmp (elem_method, method) == 0)
+	{
+	  gtk_combo_box_set_active_iter (combo, &iter);
+	  valid = FALSE;
+	}
+      else
+	valid = gtk_tree_model_iter_next (model, &iter);
+
+      g_free (elem_method);
+    }
 }
 
-static OobsIfaceConfigurationMethod
-connection_get_config_method (GstConnectionDialog *dialog)
+gchar *
+connection_combo_get_value (GtkComboBox *combo)
 {
-  gint ret;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gchar *ret = NULL;
 
-  ret = gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->bootproto_combo));
-  return (ret == 1) ? OOBS_METHOD_STATIC : OOBS_METHOD_DHCP;
-}
+  if (gtk_combo_box_get_active_iter (combo, &iter))
+    {
+      model = gtk_combo_box_get_model (combo);
+      gtk_tree_model_get (model, &iter, 1, &ret, -1);
+    }
 
-static void
-connection_set_wireless_key_type (GstConnectionDialog *dialog,
-				  OobsWirelessKeyType  key_type)
-{
-  gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->key_type_combo),
-			    (key_type == OOBS_WIRELESS_KEY_ASCII) ? 0 : 1);
-}
-
-static OobsWirelessKeyType
-connection_get_wireless_key_type (GstConnectionDialog *dialog)
-{
-  gint ret;
-
-  ret = gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->key_type_combo));
-  return (ret == 0) ? OOBS_WIRELESS_KEY_ASCII : OOBS_WIRELESS_KEY_HEXADECIMAL;
+  return ret;
 }
 
 static void
@@ -111,8 +143,7 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
 static void
 ethernet_dialog_prepare (GstConnectionDialog *dialog)
 {
-  gchar *address, *netmask, *gateway;
-  OobsIfaceConfigurationMethod config_method;
+  gchar *address, *netmask, *gateway, *config_method;
 
   g_object_get (G_OBJECT (dialog->iface),
 		"ip-address", &address,
@@ -121,11 +152,12 @@ ethernet_dialog_prepare (GstConnectionDialog *dialog)
 		"config-method", &config_method,
 		NULL);
 
-  connection_set_config_method (dialog, config_method);
+  connection_combo_set_value (GTK_COMBO_BOX (dialog->bootproto_combo), config_method);
   gtk_entry_set_text (GTK_ENTRY (dialog->address), (address) ? address : "");
   gtk_entry_set_text (GTK_ENTRY (dialog->netmask), (netmask) ? netmask : "");
   gtk_entry_set_text (GTK_ENTRY (dialog->gateway), (gateway) ? gateway : "");
 
+  g_free (config_method);
   g_free (address);
   g_free (netmask);
   g_free (gateway);
@@ -134,31 +166,39 @@ ethernet_dialog_prepare (GstConnectionDialog *dialog)
 static void
 ethernet_dialog_save (GstConnectionDialog *dialog, gboolean active)
 {
+  gchar *config_method = connection_combo_get_value (GTK_COMBO_BOX (dialog->bootproto_combo));
+
   g_object_set (G_OBJECT (dialog->iface),
 		"ip-address",   get_entry_text (dialog->address),
 		"ip-mask",   get_entry_text (dialog->netmask),
 		"gateway-address",   get_entry_text (dialog->gateway),
-		"config-method", connection_get_config_method (dialog),
+		"config-method", config_method,
 		NULL);
+
+  g_free (config_method);
 }
 
 static gboolean
 ethernet_dialog_check_fields (GstConnectionDialog *dialog)
 {
-  gchar *address, *netmask, *gateway;
-  gboolean active;
+  gchar *address, *netmask, *gateway, *config_method;
+  gboolean active, ret;
 
   address = get_entry_text (dialog->address);
   netmask = get_entry_text (dialog->netmask);
   gateway = get_entry_text (dialog->gateway);
+  config_method = connection_combo_get_value (GTK_COMBO_BOX (dialog->bootproto_combo));
 
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->connection_configured));
 
-  return (!active ||
-	  connection_get_config_method (dialog) == OOBS_METHOD_DHCP ||
-	  (gst_filter_check_ip_address (address) == GST_ADDRESS_IPV4 &&
-	   gst_filter_check_ip_address (netmask) == GST_ADDRESS_IPV4 &&
-	   (!gateway || gst_filter_check_ip_address (gateway) == GST_ADDRESS_IPV4)));
+  ret = (!active ||
+	 config_method && strcmp (config_method, "static") != 0 ||
+	 (gst_filter_check_ip_address (address) == GST_ADDRESS_IPV4 &&
+	  gst_filter_check_ip_address (netmask) == GST_ADDRESS_IPV4 &&
+	  (!gateway || gst_filter_check_ip_address (gateway) == GST_ADDRESS_IPV4)));
+
+  g_free (config_method);
+  return ret;
 }
 
 #ifdef HAVE_LIBIW_H
@@ -203,8 +243,7 @@ on_essid_list_changed (GstEssidList        *list,
 static void
 wireless_dialog_prepare (GstConnectionDialog *dialog)
 {
-  gchar *essid, *key, *dev;
-  OobsWirelessKeyType key_type;
+  gchar *essid, *key, *dev, *key_type;
 
   g_object_get (G_OBJECT (dialog->iface),
 		"device", &dev,
@@ -213,7 +252,7 @@ wireless_dialog_prepare (GstConnectionDialog *dialog)
 		"key-type", &key_type,
 		NULL);
 
-  connection_set_wireless_key_type (dialog, key_type);
+  connection_combo_set_value (GTK_COMBO_BOX (dialog->key_type_combo), key_type);
   gtk_entry_set_text (GTK_ENTRY (GTK_BIN (dialog->essid)->child), (essid) ? essid : "");
   gtk_entry_set_text (GTK_ENTRY (dialog->wep_key), (key) ? key : "");
 
@@ -224,6 +263,7 @@ wireless_dialog_prepare (GstConnectionDialog *dialog)
 		    G_CALLBACK (on_essid_list_changed), dialog);
 #endif
 
+  g_free (key_type);
   g_free (essid);
   g_free (key);
   g_free (dev);
@@ -232,11 +272,15 @@ wireless_dialog_prepare (GstConnectionDialog *dialog)
 static void
 wireless_dialog_save (GstConnectionDialog *dialog)
 {
+  gchar *key_type;
+
+  key_type = connection_combo_get_value (GTK_COMBO_BOX (dialog->key_type_combo));
   g_object_set (G_OBJECT (dialog->iface),
 		"essid",   get_entry_text (GTK_BIN (dialog->essid)->child),
 		"key", get_entry_text (dialog->wep_key),
-		"key-type", connection_get_wireless_key_type (dialog),
+		"key-type", key_type,
 		NULL);
+  g_free (key_type);
 }
 
 static void
@@ -378,6 +422,53 @@ modem_dialog_check_fields (GstConnectionDialog *dialog)
 	  (get_entry_text (GTK_BIN (dialog->serial_port)->child)));
 }
 
+static int
+compare_methods (Description *m1, Description *m2)
+{
+  return strcmp (m1->method, m2->method);
+}
+
+static const gchar*
+method_to_desc (const Description  descriptions[],
+		gint               n_elems,
+		const gchar       *method)
+{
+  Description d, *ret;
+
+  d.method = (gchar*) method;
+  ret = (Description *) bsearch (&d, descriptions, n_elems,
+				 sizeof (Description), compare_methods);
+
+  return (ret) ? ret->desc : method;
+}
+
+static void
+populate_combo (GtkComboBox  *combo,
+		GList        *list,
+		Description   descriptions[],
+		gint          n_elems)
+{
+  GtkListStore *store;
+  GtkTreeIter iter;
+  const gchar *desc;
+
+  store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+
+  while (list)
+    {
+      desc = method_to_desc (descriptions, n_elems, list->data);
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter,
+			  0, _(desc),
+			  1, list->data,
+			  -1);
+      list = list->next;
+    }
+
+  gtk_combo_box_set_model (combo, GTK_TREE_MODEL (store));
+  g_object_unref (store);
+}
+
 GstConnectionDialog*
 connection_dialog_init (GstTool *tool)
 {
@@ -404,11 +495,17 @@ connection_dialog_init (GstTool *tool)
   gcd->address = gst_dialog_get_widget (tool->main_dialog, "connection_address");
   gcd->netmask = gst_dialog_get_widget (tool->main_dialog, "connection_netmask");
   gcd->gateway = gst_dialog_get_widget (tool->main_dialog, "connection_gateway");
+  populate_combo (GTK_COMBO_BOX (gcd->bootproto_combo),
+		  oobs_ifaces_config_get_available_configuration_methods (GST_NETWORK_TOOL (tool)->ifaces_config),
+		  method_descriptions, G_N_ELEMENTS (method_descriptions));
 
   /* wireless */
   gcd->essid   = gst_dialog_get_widget (tool->main_dialog, "connection_essid");
   gcd->wep_key = gst_dialog_get_widget (tool->main_dialog, "connection_wep_key");
   gcd->key_type_combo = gst_dialog_get_widget (tool->main_dialog, "connection_wep_key_type");
+  populate_combo (GTK_COMBO_BOX (gcd->key_type_combo),
+		  oobs_ifaces_config_get_available_key_types (GST_NETWORK_TOOL (tool)->ifaces_config),
+		  key_type_descriptions, G_N_ELEMENTS (key_type_descriptions));
 
   /* plip */
   gcd->local_address  = gst_dialog_get_widget (tool->main_dialog, "connection_local_address");

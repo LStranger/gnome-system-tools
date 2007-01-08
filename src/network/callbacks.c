@@ -103,16 +103,18 @@ void
 on_bootproto_changed (GtkWidget *widget, gpointer data)
 {
   GstConnectionDialog *dialog;
+  gchar *method;
   gboolean enabled;
-  gint     pos;
 
   dialog = GST_NETWORK_TOOL (tool)->dialog;
-  pos = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
-  enabled = (pos == 1);
+  method = connection_combo_get_value (GTK_COMBO_BOX (dialog->bootproto_combo));
+  enabled = (method && strcmp (method, "static") == 0);
 
   gtk_widget_set_sensitive (dialog->address, enabled);
   gtk_widget_set_sensitive (dialog->netmask, enabled);
   gtk_widget_set_sensitive (dialog->gateway, enabled);
+
+  g_free (method);
 }
 
 static void

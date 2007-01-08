@@ -99,4 +99,9 @@ void connection_check_netmask (GtkWidget*, GtkWidget*);
 gchar *connection_detect_modem (void);
 void connection_dialog_hide (GstConnectionDialog *dialog);
 
+gchar *connection_get_config_method (GstConnectionDialog *dialog);
+void   connection_set_config_method (GstConnectionDialog *dialog,
+				     const gchar         *method);
+
+
 #endif /* __CONNECTION_H */
