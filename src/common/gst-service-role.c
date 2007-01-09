@@ -129,6 +129,7 @@ static ServiceRole services[] = {
 	{ "nfs-kernel-server",      GST_ROLE_FILE_SERVER_NFS },
 	{ "nfs-user-server",        GST_ROLE_FILE_SERVER_NFS },
 	{ "nis",                    GST_ROLE_NSS },
+	{ "ntp",                    GST_ROLE_NTP_SERVER },
 	{ "ntp-server",             GST_ROLE_NTP_SERVER },
 	{ "ntp-simple",             GST_ROLE_NTP_SERVER },
 	{ "ntpd",                   GST_ROLE_NTP_SERVER },
