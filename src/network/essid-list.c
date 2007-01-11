@@ -198,7 +198,7 @@ get_scan_info (GstEssidList    *list,
   int ret = 1;
 
   if (!req.u.data.length)
-    return;
+    return NULL;
 
   priv = GST_ESSID_LIST_GET_PRIVATE (list);
   has_range = (iw_get_range_info (priv->fd, priv->interface, &range) >= 0);
@@ -247,8 +247,6 @@ query_essids (GstEssidList *list)
 {
   GstEssidListPrivate *priv;
   struct iwreq req;
-  struct iw_range range;
-  GList *l;
 
   priv = GST_ESSID_LIST_GET_PRIVATE (list);
 
