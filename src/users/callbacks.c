@@ -193,6 +193,7 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 
 	user = oobs_user_new (NULL);
 	dialog = user_settings_dialog_new (user);
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	response = user_settings_dialog_run (dialog, user);
 
 	if (response == GTK_RESPONSE_OK) {
@@ -235,6 +236,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 			    COL_USER_ITER, &list_iter,
 			    -1);
 	dialog = user_settings_dialog_new (user);
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	response = user_settings_dialog_run (dialog, user);
 
 	if (response == GTK_RESPONSE_OK) {
@@ -280,6 +282,7 @@ on_manage_groups_clicked (GtkWidget *widget, gpointer user_data)
 	GtkWidget *dialog;
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	while (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_HELP);
 	gtk_widget_hide (dialog);
 }
@@ -290,6 +293,7 @@ void
 on_group_new_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *dialog;
+	GtkWidget *parent_dialog;
 	OobsGroupsConfig *config;
 	OobsGroup *group;
 	OobsList *groups_list;
@@ -297,7 +301,10 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	gint response;
 
 	group = oobs_group_new (NULL);
+	parent_dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
 	dialog = group_settings_dialog_new (group);
+
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent_dialog));
 	response = group_settings_dialog_run (dialog, group);
 
 	if (response == GTK_RESPONSE_OK) {
@@ -316,7 +323,7 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 void
 on_group_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *table, *dialog;
+	GtkWidget *table, *dialog, *parent_dialog;
 	GtkTreePath *path;
 	GtkTreeModel *model;
 	GtkTreeIter filter_iter, iter;
@@ -339,6 +346,9 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 			    COL_GROUP_ITER, &list_iter,
 			    -1);
 	dialog = group_settings_dialog_new (group);
+	parent_dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
+
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent_dialog));
 	response = group_settings_dialog_run (dialog, group);
 
 	if (response == GTK_RESPONSE_OK) {
