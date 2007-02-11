@@ -128,19 +128,33 @@
 	 </varlistentry>
     </variablelist>
 
-    <para>When you start <application>&tool;</application>, you will be prompted for the administrator password, this is necessary because the changes done with this tool will affect the whole system.</para>
+    <para>When you start <application>&tool;</application>, you may be prompted for the administrator password, this is necessary because the changes done with this tool will affect the whole system.</para>
 
-    <para>After entering the administrator password, the following window is displayed.</para>
+    <para>After entering the administrator password, the time configuration window is displayed.</para>
 
-    <figure id="time-main-window">
-	 <title>&tool; main window</title>
+    <figure id="time-main-window-automatic">
+	 <title>&tool; main window, automatic configuration mode</title>
 	 <screenshot>
 	   <mediaobject>
 		<imageobject>
-		  <imagedata fileref="figures/time-tool.png" format="PNG"/>
+		  <imagedata fileref="figures/time-tool-automatic.png" format="PNG"/>
 		</imageobject>
 		<textobject>
-		  <phrase>Shows &tool; main window.</phrase>
+		  <phrase>Shows &tool; main window, automatic configuration mode.</phrase>
+		</textobject>
+	   </mediaobject>
+	 </screenshot>
+    </figure>
+
+    <figure id="time-main-window-manual">
+	 <title>&tool; main window, manual configuration mode</title>
+	 <screenshot>
+	   <mediaobject>
+		<imageobject>
+		  <imagedata fileref="figures/time-tool-manual.png" format="PNG"/>
+		</imageobject>
+		<textobject>
+		  <phrase>Shows &tool; main window, manual configuration mode.</phrase>
 		</textobject>
 	   </mediaobject>
 	 </screenshot>
@@ -150,13 +164,6 @@
 
     <variablelist>
 	 <varlistentry>
-	   <term>Time and date settings</term>
-	   <listitem>
-		<para>This allows you to change your system time.</para>
-	   </listitem>
-	 </varlistentry>
-
-	 <varlistentry>
 	   <term>Time zone</term>
 	   <listitem>
 		<para>Displays your current timezone, the button displays a map for selecting timezone.</para>
@@ -164,9 +171,30 @@
 	 </varlistentry>
 
 	 <varlistentry>
-	   <term><guilabel>Synchronize with internet servers</guilabel> checkbox</term>
+	   <term>Configuration type</term>
 	   <listitem>
-		<para>This enables or disables your local NTP server, the button beside it displays a list of internet servers.</para>
+	     <para>It can be either:</para>
+	     <variablelist>
+	       <varlistentry>
+	         <term><guilabel>Keep synchronized with Internet servers</guilabel></term>
+		 <listitem>
+		   <para>You will be able to choose from a list of Internet servers to keep your computer clock synchronized automatically.</para>
+		 </listitem>
+	       </varlistentry>
+	       <varlistentry>
+	         <term><guilabel>Manual</guilabel></term>
+		 <listitem>
+		   <para>You will be able to fully specify date and time by hand.</para>
+		 </listitem>
+	       </varlistentry>
+	     </variablelist>
+	   </listitem>
+	 </varlistentry>
+
+	 <varlistentry>
+	   <term><guilabel>Synchronize now</guilabel> button</term>
+	   <listitem>
+		<para>This will allow you to synchronize just once with the selected Internet servers.</para>
 	   </listitem>
 	 </varlistentry>
     </variablelist>
