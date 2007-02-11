@@ -242,16 +242,20 @@ nautilus_shares_init (NautilusShares *shares)
   shares->paths = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   shares->session = oobs_session_get ();
 
-  shares->smb_config = oobs_smb_config_get (shares->session);
-  g_signal_connect (G_OBJECT (shares->smb_config), "changed",
-		    G_CALLBACK (on_shares_changed), shares);
+  if (oobs_session_get_connected (shares->session))
+    {
+      /* FIXME: should monitor connected state */
+      shares->smb_config = oobs_smb_config_get (shares->session);
+      g_signal_connect (G_OBJECT (shares->smb_config), "changed",
+			G_CALLBACK (on_shares_changed), shares);
 
-  shares->nfs_config = oobs_nfs_config_get (shares->session);
-  g_signal_connect (G_OBJECT (shares->nfs_config), "changed",
-		    G_CALLBACK (on_shares_changed), shares);
+      shares->nfs_config = oobs_nfs_config_get (shares->session);
+      g_signal_connect (G_OBJECT (shares->nfs_config), "changed",
+			G_CALLBACK (on_shares_changed), shares);
 
-  /* fill the hash table */
-  update_shared_paths (shares);
+      /* fill the hash table */
+      update_shared_paths (shares);
+    }
 }
 
 void
