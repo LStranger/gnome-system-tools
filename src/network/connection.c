@@ -114,21 +114,13 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
   gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
   g_object_unref (model);
 
-  gtk_cell_layout_clear (GTK_CELL_LAYOUT (combo));
-
   /* add "crypted" renderer */
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo),
 			      renderer, FALSE);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo),
 				 renderer, "pixbuf", 0);
-
-  /* add "essid" renderer */
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo),
-			      renderer, TRUE);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo),
-				 renderer, "text", 1);
+  gtk_cell_layout_reorder (GTK_CELL_LAYOUT (combo), renderer, 0);
 
   /* add "quality" renderer */
   renderer = gtk_cell_renderer_progress_new ();
@@ -137,6 +129,7 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (combo),
 				 renderer, "value", 2);
 
+  /* reuse text cell renderer for the essid */
   gtk_combo_box_entry_set_text_column (combo, 1);
 }
 
@@ -235,8 +228,11 @@ on_essid_list_changed (GstEssidList        *list,
       elem = elem->next;
     }
 
-  g_object_unref (locked);
-  g_object_unref (unlocked);
+  if (locked)
+    g_object_unref (locked);
+
+  if (unlocked)
+    g_object_unref (unlocked);
 }
 #endif
 

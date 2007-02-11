@@ -285,16 +285,12 @@ static GList*
 array_to_list (const gchar **str_list)
 {
   GList *list = NULL;
-  gchar **pos = (gchar**) str_list;
+  gint i;
 
-  while (*pos)
-    {
-      list = g_list_prepend (list, g_strdup (*pos));
-      pos++;
-    }
+  for (i = 0; str_list[i]; i++)
+    list = g_list_prepend (list, g_strdup (str_list[i]));
 
-  list = g_list_reverse (list);
-  return list;
+  return g_list_reverse (list);
 }
 
 static gboolean
@@ -359,8 +355,9 @@ static gboolean
 compare_static_host (const gchar    *str,
 		     OobsStaticHost *static_host)
 {
-  gchar **split, *ip_address;
-  GList *list1, *list2;
+  gchar **split;
+  const gchar *ip_address;
+  GList *list1, *list2 = NULL;
   gboolean equal = TRUE;
 
   split = g_strsplit (str, ";", -1);
@@ -387,27 +384,28 @@ static gboolean
 compare_static_hosts (OobsHostsConfig *hosts_config,
 		      GKeyFile        *key_file)
 {
-  gchar **str_list, **elem;
+  gchar **str_list;
   OobsList *static_hosts;
   OobsListIter iter;
   OobsStaticHost *static_host;
   gboolean valid, equal = TRUE;
+  gint i = 0;
 
-  elem = str_list = g_key_file_get_string_list (key_file, "general", "static-hosts", NULL, NULL);
+  str_list = g_key_file_get_string_list (key_file, "general", "static-hosts", NULL, NULL);
   static_hosts = oobs_hosts_config_get_static_hosts (hosts_config);
   valid = oobs_list_get_iter_first (static_hosts, &iter);
 
-  while (*elem && valid && equal)
+  while (str_list[i] && valid && equal)
     {
       static_host = OOBS_STATIC_HOST (oobs_list_get (static_hosts, &iter));
-      equal = compare_static_host (*elem, static_host);
+      equal = compare_static_host (str_list[i], static_host);
       g_object_unref (static_host);
 
       valid = oobs_list_iter_next (static_hosts, &iter);
-      elem++;
+      i++;
     }
 
-  if (*elem || valid)
+  if (str_list[i] || valid)
     equal = FALSE;
 
   g_strfreev (str_list);
@@ -551,6 +549,7 @@ compare_location (GstNetworkLocations *locations,
 {
   GstNetworkLocationsPrivate *priv;
   GKeyFile *key_file;
+  gboolean equal;
 
   priv = (GstNetworkLocationsPrivate *) locations->_priv;
   key_file = get_location_key_file (locations, name);
@@ -558,15 +557,11 @@ compare_location (GstNetworkLocations *locations,
   if (!key_file)
     return FALSE;
 
-  if (compare_hosts_config (OOBS_HOSTS_CONFIG (locations->hosts_config), key_file) &&
-      compare_interfaces (OOBS_IFACES_CONFIG (locations->ifaces_config), key_file))
-    {
-      g_key_file_free (key_file);
-      return TRUE;
-    }
+  equal = (compare_hosts_config (OOBS_HOSTS_CONFIG (locations->hosts_config), key_file) &&
+	   compare_interfaces (OOBS_IFACES_CONFIG (locations->ifaces_config), key_file));
 
   g_key_file_free (key_file);
-  return FALSE;
+  return equal;
 }
 
 gchar*
