@@ -64,7 +64,7 @@ PropType ethernet_properties[] = {
   { "auto", TYPE_BOOLEAN },
   { "active", TYPE_BOOLEAN },
   { "configured", TYPE_BOOLEAN },
-  { "config-method", TYPE_INT },
+  { "config-method", TYPE_STRING },
   { "ip-address", TYPE_STRING },
   { "ip-mask", TYPE_STRING },
   { "gateway-address", TYPE_STRING },
@@ -79,8 +79,8 @@ PropType wireless_properties[] = {
   { "configured", TYPE_BOOLEAN },
   { "essid", TYPE_STRING },
   { "key", TYPE_STRING },
-  { "key-type", TYPE_INT },
-  { "config-method", TYPE_INT },
+  { "key-type", TYPE_STRING },
+  { "config-method", TYPE_STRING },
   { "ip_address", TYPE_STRING },
   { "ip_mask", TYPE_STRING },
   { "gateway-address", TYPE_STRING },
@@ -455,6 +455,34 @@ compare_hosts_config (OobsHostsConfig *hosts_config,
   return TRUE;
 }
 
+/* code to support/migrate legacy parameters */
+static void
+migrate_old_parameters (GKeyFile    *key_file,
+			const gchar *section,
+			const gchar *key)
+{
+  GError *error = NULL;
+  gint value;
+  gchar *config_method_options[] = { "none", "static", "dhcp" };
+  gchar *key_type_options[] = { "wep-ascii", "wep-hex" };
+  gchar **values = NULL;
+
+  if (strcmp (key, "config-method") == 0)
+    values = config_method_options;
+  else if (strcmp (key, "key-type") == 0)
+    values = key_type_options;
+  else
+    {
+      /* no need to continue */
+      return;
+    }
+
+  value = g_key_file_get_integer (key_file, section, key, &error);
+
+  if (!error)
+    g_key_file_set_string (key_file, section, key, values[value]);
+}
+
 static gboolean
 compare_interface (GObject  *iface,
 		   PropType  props[],
@@ -468,6 +496,8 @@ compare_interface (GObject  *iface,
 
   while (props[i].key && equal)
     {
+      migrate_old_parameters (key_file, name, props[i].key);
+
       if (props[i].type == TYPE_STRING)
 	{
 	  value1 = g_key_file_get_string (key_file, name, props[i].key, NULL);
@@ -664,6 +694,8 @@ set_interface (GObject  *iface,
 
   while (props[i].key)
     {
+      migrate_old_parameters (key_file, name, props[i].key);
+
       if (props[i].type == TYPE_STRING)
 	{
 	  value = g_key_file_get_string (key_file, name, props[i].key, NULL);
