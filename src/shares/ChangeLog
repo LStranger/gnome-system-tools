@@ -1,5 +1,9 @@
 2007-02-12  Carlos Garnacho  <carlosg@gnome.org>
 
+	* main.c (main): call g_thread_init() to avoid GSlice warning.
+
+2007-02-12  Carlos Garnacho  <carlosg@gnome.org>
+
 	* nautilus/nautilus-shares.c (nautilus_shares_init): avoid using a
 	session if it couldn't connect to the bus. Fixes #386081.
 

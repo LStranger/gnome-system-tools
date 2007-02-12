@@ -92,7 +92,8 @@ main (int argc, char *argv[])
 		{ "add-share", 'a', 0, G_OPTION_ARG_STRING, &path, N_("Add a shared path, modifies it if it already exists"), N_("PATH") },
 		{ NULL }
 	};
-	
+
+	g_thread_init (NULL);
 	gst_init_tool ("shares-admin", argc, argv, entries);
 	tool = GST_TOOL (gst_shares_tool_new ());
 
