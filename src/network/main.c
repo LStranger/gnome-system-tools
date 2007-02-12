@@ -162,6 +162,7 @@ main (int argc, gchar *argv[])
     { NULL }
   };
 
+  g_thread_init (NULL);
   gst_init_tool ("network-admin", argc, argv, entries);
   tool = gst_network_tool_new ();
 
