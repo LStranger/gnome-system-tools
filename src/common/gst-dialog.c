@@ -64,6 +64,8 @@ static void gst_dialog_set_property (GObject      *object,
 static void gst_dialog_response (GtkDialog *dialog,
 				 gint       response);
 
+static gboolean gst_dialog_delete_event (GtkWidget   *widget,
+					 GdkEventAny *event);
 static void gst_dialog_map      (GtkWidget *widget);
 
 enum {
@@ -87,6 +89,7 @@ gst_dialog_class_init (GstDialogClass *class)
 	object_class->finalize     = gst_dialog_finalize;
 
 	dialog_class->response     = gst_dialog_response;
+	widget_class->delete_event = gst_dialog_delete_event;
 	widget_class->map          = gst_dialog_map;
 
 	g_object_class_install_property (object_class,
@@ -264,6 +267,14 @@ gst_dialog_map (GtkWidget *widget)
 	gst_dialog_freeze_visible (dialog);
 	gst_tool_update_gui (priv->tool);
 	gst_dialog_thaw_visible (dialog);
+}
+
+static gboolean
+gst_dialog_delete_event (GtkWidget   *widget,
+			 GdkEventAny *event)
+{
+	/* we don't want the dialog to be destroyed at this point */
+	return TRUE;
 }
 
 GstDialog*
