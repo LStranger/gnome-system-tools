@@ -10,7 +10,7 @@ include ../common/CommonMakefile
 toolname = shares
 bin_PROGRAMS = shares-admin
 
-if ENABLE_GNOME
+if BUILD_NAUTILUS
 SUBDIRS = nautilus
 endif
 
