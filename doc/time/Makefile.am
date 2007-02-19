@@ -7,7 +7,8 @@ DOC_INCLUDES =
 DOC_FIGURES = \
 	figures/time-map.png		\
 	figures/time-servers.png	\
-	figures/time-tool.png
+	figures/time-tool-automatic.png	\
+	figures/time-tool-manual.png
 
 DOC_LINGUAS = es fr ru sv
 
