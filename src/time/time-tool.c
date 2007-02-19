@@ -664,6 +664,8 @@ gst_time_tool_close (GstTool *tool)
 		on_apply_timeout (GST_TIME_TOOL (tool));
 	}
 
+	gst_time_tool_stop_clock (GST_TIME_TOOL (tool));
+
 	(* GST_TOOL_CLASS (gst_time_tool_parent_class)->close) (tool);
 }
 
