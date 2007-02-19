@@ -30,6 +30,8 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnome/gnome-program.h>
 #include <libgnome/gnome-help.h>
+#else
+#include <stdlib.h>
 #endif
 
 #include <string.h>
@@ -363,12 +365,45 @@ gst_init_tool (const gchar *app_name, int argc, char *argv [], GOptionEntry *ent
 void
 gst_tool_show_help (GstTool *tool, gchar *section)
 {
-#ifdef ENABLE_GNOME
-	GError    *error = NULL;
-	gchar     *help_file;
+	GdkScreen *screen;
+	GError *error = NULL;
+	gchar *help_file, *help_file_xml, *command, *uri;
+	const gchar **langs, *lang;
+	gint i;
 
+	langs = (const gchar **) g_get_language_names ();
 	help_file = g_strdup_printf ("%s-admin", tool->name);
-	gnome_help_display (help_file, section, &error);
+	help_file_xml = g_strdup_printf ("%s-admin.xml", tool->name);
+
+	for (i = 0; langs[i]; i++) {
+		lang = langs[i];
+
+		if (strchr (lang, '.')) {
+			continue;
+		}
+
+		uri = g_build_filename(DATADIR,
+				       "/gnome/help/",
+				       help_file,
+				       lang,
+				       help_file_xml,
+				       NULL);
+					
+		if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
+                    break;
+		}
+	}
+	
+	if (section) {
+		command = g_strconcat ("gnome-help ghelp://", uri, "?", section, NULL);
+	} else {
+		command = g_strconcat ("gnome-help ghelp://", uri, NULL);
+	}
+
+	screen = gtk_window_get_screen (GTK_WINDOW (tool->main_dialog));
+	gdk_spawn_command_line_on_screen (screen, command, &error);
+	g_free (command);
+	g_free (uri);
 
 	if (error) {
 		GtkWidget *dialog;
@@ -385,8 +420,8 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 		g_error_free (error);
 	}
 
+	g_free (help_file_xml);
 	g_free (help_file);
-#endif
 }
 
 static gboolean
