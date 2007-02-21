@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools-time\n"
-"POT-Creation-Date: 2007-01-02 05:43+0000\n"
-"PO-Revision-Date: 2007-01-29 22:55+0100\n"
+"POT-Creation-Date: 2007-02-12 04:48+0000\n"
+"PO-Revision-Date: 2007-02-22 00:14+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -13,18 +13,24 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/time-admin.xml:140(None)
-msgid "@@image: 'figures/time-tool.png'; md5=4ae9f5ffd16b6fd92a536bf4ec3a91ff"
-msgstr "@@image: 'figures/time-tool.png'; md5=4ae9f5ffd16b6fd92a536bf4ec3a91ff"
+msgid "@@image: 'figures/time-tool-automatic.png'; md5=17b91754494ffd07db2b21012be2a481"
+msgstr "@@image: 'figures/time-tool-automatic.png'; md5=17b91754494ffd07db2b21012be2a481"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/time-admin.xml:192(None)
+#: C/time-admin.xml:154(None)
+msgid "@@image: 'figures/time-tool-manual.png'; md5=265c4d05a4ad6800c484ee67a1604a64"
+msgstr "@@image: 'figures/time-tool-manual.png'; md5=265c4d05a4ad6800c484ee67a1604a64"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: C/time-admin.xml:220(None)
 msgid "@@image: 'figures/time-map.png'; md5=d4174ec320ea061e8363b8baafccde1b"
 msgstr "@@image: 'figures/time-map.png'; md5=d4174ec320ea061e8363b8baafccde1b"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/time-admin.xml:211(None)
+#: C/time-admin.xml:239(None)
 msgid "@@image: 'figures/time-servers.png'; md5=9135e89dd1bd33d832d44faa8f11c4b8"
 msgstr "@@image: 'figures/time-servers.png'; md5=9135e89dd1bd33d832d44faa8f11c4b8"
 
@@ -157,90 +163,114 @@ msgid "Execute the following command: <command>time-admin</command>"
 msgstr "Kör följande kommando: <command>time-admin</command>"
 
 #: C/time-admin.xml:131(para)
-msgid "When you start <application>Time Administration Tool</application>, you will be prompted for the administrator password, this is necessary because the changes done with this tool will affect the whole system."
-msgstr "När du startar <application>Tidsadministrationsverktyg</application> kommer du att bli frågad efter administratörens lösenord. Detta är nödvändigt därför att ändringar som verkställs påverkar hela systemet."
+msgid "When you start <application>Time Administration Tool</application>, you may be prompted for the administrator password, this is necessary because the changes done with this tool will affect the whole system."
+msgstr "När du startar <application>Tidsadministrationsverktyg</application> kommer du att bli tillfrågad om administratörens lösenord. Detta är nödvändigt därför att ändringar som genomförs med det här verktyget påverkar hela systemet."
 
 #: C/time-admin.xml:133(para)
-msgid "After entering the administrator password, the following window is displayed."
-msgstr "Efter att administratörens lösenord har matats kommer följande fönster att visas."
+msgid "After entering the administrator password, the time configuration window is displayed."
+msgstr "Efter att administratörens lösenord har matats in kommer följande konfigurationsfönster att visas."
 
 #: C/time-admin.xml:136(title)
-msgid "Time Administration Tool main window"
-msgstr "Huvudfönstret i Tidsadministrationsverktyg"
+msgid "Time Administration Tool main window, automatic configuration mode"
+msgstr "Huvudfönstret i Tidsadministrationsverktyg, automatiskt konfigurationsläge"
 
 #: C/time-admin.xml:143(phrase)
-msgid "Shows Time Administration Tool main window."
-msgstr "Visar huvudfönstret i Tidsadministrationsverktyg."
+msgid "Shows Time Administration Tool main window, automatic configuration mode."
+msgstr "Visar huvudfönstret i Tidsadministrationsverktyg, automatiskt konfigurationsläge."
 
-#: C/time-admin.xml:149(para)
+#: C/time-admin.xml:150(title)
+msgid "Time Administration Tool main window, manual configuration mode"
+msgstr "Huvudfönstret i Tidsadministrationsverktyg, manuellt konfigurationsläge"
+
+#: C/time-admin.xml:157(phrase)
+msgid "Shows Time Administration Tool main window, manual configuration mode."
+msgstr "Visar huvudfönstret i Tidsadministrationsverktyg, manuellt konfigurationsläge."
+
+#: C/time-admin.xml:163(para)
 msgid "The <application>Time Administration Tool</application> main window contains the following elements:"
 msgstr "Huvudfönstret i <application>Tidsadministrationsverktyg</application> innehåller följande element:"
 
-#: C/time-admin.xml:153(term)
-msgid "Time and date settings"
-msgstr "Tid- och datuminställningar"
-
-#: C/time-admin.xml:155(para)
-msgid "This allows you to change your system time."
-msgstr "Detta låter dig ändra din systemtid."
-
-#: C/time-admin.xml:160(term)
+#: C/time-admin.xml:167(term)
 msgid "Time zone"
 msgstr "Tidszon"
 
-#: C/time-admin.xml:162(para)
+#: C/time-admin.xml:169(para)
 msgid "Displays your current timezone, the button displays a map for selecting timezone."
 msgstr "Visar din aktuella tidszon, knappen visar en karta för att välja tidszon."
 
-#: C/time-admin.xml:167(term)
-msgid "<guilabel>Synchronize with internet servers</guilabel> checkbox"
-msgstr "Kryssrutan <guilabel>Synkronisera med Internetservrar</guilabel>"
+#: C/time-admin.xml:174(term)
+msgid "Configuration type"
+msgstr "Konfigurationstyp"
 
-#: C/time-admin.xml:169(para)
-msgid "This enables or disables your local NTP server, the button beside it displays a list of internet servers."
-msgstr "Detta aktiverar eller inaktiverar din lokala NTP-server, knappen bredvid den visar en lista av Internetservrar."
+#: C/time-admin.xml:176(para)
+msgid "It can be either:"
+msgstr "Den kan vara antingen:"
 
-#: C/time-admin.xml:176(title)
+#: C/time-admin.xml:179(guilabel)
+msgid "Keep synchronized with Internet servers"
+msgstr "Synkronisera med Internetservrar"
+
+#: C/time-admin.xml:181(para)
+msgid "You will be able to choose from a list of Internet servers to keep your computer clock synchronized automatically."
+msgstr "Du kan välja från en lista över Internetservrar för att hålla din klockan i din dator automatiskt synkroniserad."
+
+#: C/time-admin.xml:185(guilabel)
+msgid "Manual"
+msgstr "Manuell"
+
+#: C/time-admin.xml:187(para)
+msgid "You will be able to fully specify date and time by hand."
+msgstr "Du har möjligheten att fullständigt ange datum och tid för hand."
+
+#: C/time-admin.xml:195(term)
+msgid "<guilabel>Synchronize now</guilabel> button"
+msgstr "Knappen <guilabel>Synkronisera nu</guilabel>"
+
+#: C/time-admin.xml:197(para)
+msgid "This will allow you to synchronize just once with the selected Internet servers."
+msgstr "Det här tillåter att du synkroniserar en gång med de valda Internetservrarna."
+
+#: C/time-admin.xml:204(title)
 msgid "Usage"
 msgstr "Användning"
 
-#: C/time-admin.xml:179(title)
+#: C/time-admin.xml:207(title)
 msgid "To change your time or date"
 msgstr "Ändra din tid eller datum"
 
-#: C/time-admin.xml:180(para)
+#: C/time-admin.xml:208(para)
 msgid "Just change the time spin buttons or the date in the calendar."
 msgstr "Ändra tidsknapparna eller datumet i kalendern."
 
-#: C/time-admin.xml:184(title)
+#: C/time-admin.xml:212(title)
 msgid "To change your time zone"
 msgstr "Ändra din tidszon"
 
-#: C/time-admin.xml:185(para)
+#: C/time-admin.xml:213(para)
 msgid "Click on the <guilabel>Select time zone</guilabel> button and select the new location, alternatively you can also select the new location from the list below."
 msgstr "Klicka på knappen <guilabel>Välj tidszon</guilabel> och välj den nya platsen, alternativt kan du även välja den nya platsen från listan nedanför."
 
-#: C/time-admin.xml:188(title)
+#: C/time-admin.xml:216(title)
 msgid "Time Administration Tool map"
 msgstr "Verktygskarta i Tidsadministrationsverktyg"
 
-#: C/time-admin.xml:195(phrase)
+#: C/time-admin.xml:223(phrase)
 msgid "Shows Time Administration Tool map window."
 msgstr "Visar verktygskartefönstret i Tidsadministrationsverktyg."
 
-#: C/time-admin.xml:203(title)
+#: C/time-admin.xml:231(title)
 msgid "To synchronize your local time server with internet time servers"
 msgstr "Synkronisera din lokala tidsserver mot tidsservrar på Internet"
 
-#: C/time-admin.xml:204(para)
+#: C/time-admin.xml:232(para)
 msgid "If the checkbox is disabled, enable it, then click on the <guilabel>Select servers</guilabel> button and select a new server in the list."
 msgstr "Om kryssrutan är inaktiverad, aktivera den, klicka sedan på knappen <guilabel>Välj servrar</guilabel> och välj en ny server i listan."
 
-#: C/time-admin.xml:207(title)
+#: C/time-admin.xml:235(title)
 msgid "Time Administration Tool servers window"
 msgstr "Serverfönstret i Tidsadministrationsverktyget"
 
-#: C/time-admin.xml:214(phrase)
+#: C/time-admin.xml:242(phrase)
 msgid "Shows Time Administration Tool servers window."
 msgstr "Visar serverfönstret i Tidsadministrationsverktyget."
 
@@ -249,10 +279,16 @@ msgstr "Visar serverfönstret i Tidsadministrationsverktyget."
 msgid "translator-credits"
 msgstr "Daniel Nylander <po@danielnylander.se>, 2007"
 
+#~ msgid "Time and date settings"
+#~ msgstr "Tid- och datuminställningar"
+#~ msgid "This allows you to change your system time."
+#~ msgstr "Detta låter dig ändra din systemtid."
 #~ msgid ""
-#~ "@@image: 'figures/time-tool.png'; md5=6204ab3bfd171150a210302ccb098940"
+#~ "This enables or disables your local NTP server, the button beside it "
+#~ "displays a list of internet servers."
 #~ msgstr ""
-#~ "@@image: 'figures/time-tool.png'; md5=6204ab3bfd171150a210302ccb098940"
+#~ "Detta aktiverar eller inaktiverar din lokala NTP-server, knappen bredvid "
+#~ "den visar en lista av Internetservrar."
 #~ msgid "Services Administration Tool"
 #~ msgstr "Tjänsteadministrationsverktyg"
 
