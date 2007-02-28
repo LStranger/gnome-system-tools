@@ -1,38 +1,46 @@
 # French translation of gnome-system-tools-time documentation.
-# Copyright (C) 2006 Free Software Foundation, Inc.
+# Copyright (C) 2006-2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-system-tools
 # documentation package.
 #
-# Jonathan Ernst <jonathan@ernstfamily.ch>, 2006.
+# Jonathan Ernst <jonathan@ernstfamily.ch>, 2006-2007.
 # Claude Paroz <paroz@email.ch>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools-time documentation\n"
-"POT-Creation-Date: 2006-08-15 15:35+0200\n"
-"PO-Revision-Date: 2006-08-15 15:37+0200\n"
-"Last-Translator: Claude Paroz <paroz@email.ch>\n"
+"POT-Creation-Date: 2007-02-28 22:20+0100\n"
+"PO-Revision-Date: 2007-02-28 11:21+0100\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: ../C/time-admin.xml:140(None)
-msgid "@@image: 'figures/time-tool.png'; md5=4ae9f5ffd16b6fd92a536bf4ec3a91ff"
-msgstr "@@image: 'figures/time-tool.png'; md5=4ae9f5ffd16b6fd92a536bf4ec3a91ff"
+msgid ""
+"@@image: 'figures/time-tool-automatic.png'; "
+"md5=17b91754494ffd07db2b21012be2a481"
+msgstr "@@image: 'figures/time-tool-automatic.png'; TODO"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/time-admin.xml:192(None)
+#: ../C/time-admin.xml:154(None)
+msgid ""
+"@@image: 'figures/time-tool-manual.png'; md5=265c4d05a4ad6800c484ee67a1604a64"
+msgstr "@@image: 'figures/time-tool-manual.png'; TODO"
+
+#. When image changes, this message will be marked fuzzy or untranslated for you.
+#. It doesn't matter what you translate it to: it's not used at all.
+#: ../C/time-admin.xml:220(None)
 msgid "@@image: 'figures/time-map.png'; md5=d4174ec320ea061e8363b8baafccde1b"
 msgstr "@@image: 'figures/time-map.png'; md5=d4174ec320ea061e8363b8baafccde1b"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/time-admin.xml:211(None)
+#: ../C/time-admin.xml:239(None)
 msgid ""
 "@@image: 'figures/time-servers.png'; md5=9135e89dd1bd33d832d44faa8f11c4b8"
 msgstr ""
@@ -282,34 +290,49 @@ msgstr "Exécutez la commande suivante : <command>time-admin</command>"
 
 #: ../C/time-admin.xml:131(para)
 msgid ""
-"When you start <application>Time Administration Tool</application>, you will "
+"When you start <application>Time Administration Tool</application>, you may "
 "be prompted for the administrator password, this is necessary because the "
 "changes done with this tool will affect the whole system."
 msgstr ""
-"Le mot de passe d'administration est requis au démarrage de "
-"l'<application>outil de configuration de la date et de l'heure</"
-"application>. C'est nécessaire dès lors que les modifications effectuées "
-"avec cet outil affectent le système entier."
+"Lorsque vous démarrez l'<application>outil de configuration de la date et de "
+"l'heure</application>, le mot de passe d'administration pourra vous être "
+"demandé ; ceci est nécessaire car les modifications effectuées avec cet "
+"outil affectent le système entier."
 
 #: ../C/time-admin.xml:133(para)
 msgid ""
-"After entering the administrator password, the following window is displayed."
+"After entering the administrator password, the time configuration window is "
+"displayed."
 msgstr ""
-"Après avoir saisi le mot de passe d'administration, la fenêtre suivante "
-"apparaît :"
+"Après avoir saisi le mot de passe d'administration, la fenêtre de "
+"configuration de l'horloge est affichée."
 
 #: ../C/time-admin.xml:136(title)
-msgid "Time Administration Tool main window"
+msgid "Time Administration Tool main window, automatic configuration mode"
 msgstr ""
-"Fenêtre principale de l'outil de configuration de la date et de l'heure"
+"Fenêtre principale de l'outil de configuration de la date et de l'heure en "
+"mode de configuration automatique."
 
 #: ../C/time-admin.xml:143(phrase)
-msgid "Shows Time Administration Tool main window."
+msgid ""
+"Shows Time Administration Tool main window, automatic configuration mode."
 msgstr ""
 "Montre la fenêtre principale de l'outil de configuration de la date et de "
-"l'heure"
+"l'heure en mode de configuration automatique."
 
-#: ../C/time-admin.xml:149(para)
+#: ../C/time-admin.xml:150(title)
+msgid "Time Administration Tool main window, manual configuration mode"
+msgstr ""
+"Fenêtre principale de l'outil de configuration de la date et de l'heure en "
+"mode de configuration manuel."
+
+#: ../C/time-admin.xml:157(phrase)
+msgid "Shows Time Administration Tool main window, manual configuration mode."
+msgstr ""
+"Montre la fenêtre principale de l'outil de configuration de la date et de "
+"l'heure en mode de configuration manuel."
+
+#: ../C/time-admin.xml:163(para)
 msgid ""
 "The <application>Time Administration Tool</application> main window contains "
 "the following elements:"
@@ -317,19 +340,11 @@ msgstr ""
 "La fenêtre principale de l'<application>outil de configuration de la date et "
 "de l'heure</application> contient les éléments suivants :"
 
-#: ../C/time-admin.xml:153(term)
-msgid "Time and date settings"
-msgstr "Configuration de la date et de l'heure"
-
-#: ../C/time-admin.xml:155(para)
-msgid "This allows you to change your system time."
-msgstr "Permet la modification de la date et de l'heure du système."
-
-#: ../C/time-admin.xml:160(term)
+#: ../C/time-admin.xml:167(term)
 msgid "Time zone"
 msgstr "Fuseau horaire"
 
-#: ../C/time-admin.xml:162(para)
+#: ../C/time-admin.xml:169(para)
 msgid ""
 "Displays your current timezone, the button displays a map for selecting "
 "timezone."
@@ -337,39 +352,65 @@ msgstr ""
 "Affiche le fuseau horaire actuel. Le bouton correspondant fait apparaître "
 "une carte pour sélectionner un nouveau fuseau horaire."
 
-#: ../C/time-admin.xml:167(term)
-msgid "<guilabel>Synchronize with internet servers</guilabel> checkbox"
-msgstr ""
-"Case à cocher <guilabel>Synchroniser l'horloge avec des serveurs Internet</"
-"guilabel>"
+#: ../C/time-admin.xml:174(term)
+msgid "Configuration type"
+msgstr "Type de configuration"
 
-#: ../C/time-admin.xml:169(para)
+#: ../C/time-admin.xml:176(para)
+msgid "It can be either:"
+msgstr "Il peut s'agit de :"
+
+#: ../C/time-admin.xml:179(guilabel)
+msgid "Keep synchronized with Internet servers"
+msgstr "Reste synchronisé avec des serveurs de temps sur Internet"
+
+#: ../C/time-admin.xml:181(para)
 msgid ""
-"This enables or disables your local NTP server, the button beside it "
-"displays a list of internet servers."
+"You will be able to choose from a list of Internet servers to keep your "
+"computer clock synchronized automatically."
 msgstr ""
-"Permet d'activer ou de désactiver le serveur NTP local. Le bouton "
-"correspondant affiche une liste de serveurs de temps sur Internet."
+"Vous pourrez choisir depuis une liste de serveurs sur Internet qui "
+"permettront de synchroniser automatiquement votre horloge système."
 
-#: ../C/time-admin.xml:176(title)
+#: ../C/time-admin.xml:185(guilabel)
+msgid "Manual"
+msgstr "Manuel"
+
+#: ../C/time-admin.xml:187(para)
+msgid "You will be able to fully specify date and time by hand."
+msgstr "Vous pourrez spécifiez la date et l'heure manuellement."
+
+#: ../C/time-admin.xml:195(term)
+msgid "<guilabel>Synchronize now</guilabel> button"
+msgstr "bouton <guilabel>Synchroniser maintenant</guilabel>"
+
+#: ../C/time-admin.xml:197(para)
+msgid ""
+"This will allow you to synchronize just once with the selected Internet "
+"servers."
+msgstr ""
+"Ceci vous permettra d'effectuer la synchronisation une seule fois avec les "
+"serveurs de temps sélectionnés."
+
+#: ../C/time-admin.xml:204(title)
 msgid "Usage"
 msgstr "Utilisation"
 
-#: ../C/time-admin.xml:179(title)
+#: ../C/time-admin.xml:207(title)
 msgid "To change your time or date"
 msgstr "Modification de la date ou de l'heure"
 
-#: ../C/time-admin.xml:180(para)
+#: ../C/time-admin.xml:208(para)
 msgid "Just change the time spin buttons or the date in the calendar."
 msgstr ""
 "Il suffit d'ajuster l'heure au moyen des boutons de sélection numérique ou "
 "de choisir la date dans le calendrier."
 
-#: ../C/time-admin.xml:184(title)
+#: ../C/time-admin.xml:212(title)
 msgid "To change your time zone"
 msgstr "Modification du fuseau horaire"
 
-#: ../C/time-admin.xml:185(para)
+#: ../C/time-admin.xml:213(para)
 msgid ""
 "Click on the <guilabel>Select time zone</guilabel> button and select the new "
 "location, alternatively you can also select the new location from the list "
@@ -379,21 +420,21 @@ msgstr ""
 "sélectionnez le nouvel emplacement. Il est aussi possible de sélectionner le "
 "nouvel emplacement à partir de la liste au-dessous de la carte."
 
-#: ../C/time-admin.xml:188(title)
+#: ../C/time-admin.xml:216(title)
 msgid "Time Administration Tool map"
 msgstr "Carte de sélection du fuseau horaire"
 
-#: ../C/time-admin.xml:195(phrase)
+#: ../C/time-admin.xml:223(phrase)
 msgid "Shows Time Administration Tool map window."
-msgstr "Affiche la fenêtre contenant la carte de sélection du fuseau horaire"
+msgstr "Affiche la fenêtre contenant la carte de sélection du fuseau horaire."
 
-#: ../C/time-admin.xml:203(title)
+#: ../C/time-admin.xml:231(title)
 msgid "To synchronize your local time server with internet time servers"
 msgstr ""
 "Synchronisation du serveur de temps local avec des serveurs de temps sur "
 "Internet"
 
-#: ../C/time-admin.xml:204(para)
+#: ../C/time-admin.xml:232(para)
 msgid ""
 "If the checkbox is disabled, enable it, then click on the <guilabel>Select "
 "servers</guilabel> button and select a new server in the list."
@@ -402,17 +443,17 @@ msgstr ""
 "<guilabel>Sélectionner des serveurs</guilabel>, puis sélectionnez un nouveau "
 "serveur dans la liste."
 
-#: ../C/time-admin.xml:207(title)
+#: ../C/time-admin.xml:235(title)
 msgid "Time Administration Tool servers window"
 msgstr "Fenêtre de sélection des serveurs de temps"
 
-#: ../C/time-admin.xml:214(phrase)
+#: ../C/time-admin.xml:242(phrase)
 msgid "Shows Time Administration Tool servers window."
-msgstr "Montre la fenêtre de sélection des serveurs de temps"
+msgstr "Montre la fenêtre de sélection des serveurs de temps."
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
 #: ../C/time-admin.xml:0(None)
 msgid "translator-credits"
 msgstr ""
-"Jonathan Ernst <jonathan@ernstfamily.ch>, 2006.\n"
+"Jonathan Ernst <jonathan@ernstfamily.ch>, 2006, 2007.\n"
 "Claude Paroz <paroz@email.ch>, 2006."
