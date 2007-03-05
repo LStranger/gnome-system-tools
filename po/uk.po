@@ -1,14 +1,14 @@
 # Copyright (C) 2000-2002 Free Software Foundation, Inc.
 # Yuri Syrota <rasta@cvs.gnome.org>, 2000.
-# Maxim Dziumanenko <mvd@mylinux.ua>, 2004-2005
+# Maxim Dziumanenko <dziumanenko@gmail.com>, 2004-2007
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-06 12:40+0200\n"
-"PO-Revision-Date: 2006-03-03 13:25+0300\n"
-"Last-Translator: Maxim Dziumanenko <mvd@mylinux.ua>\n"
+"POT-Creation-Date: 2007-03-05 09:02+0200\n"
+"PO-Revision-Date: 2007-03-05 13:25+0300\n"
+"Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,240 +17,8 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid ""
-"Comma separated list of hosts that the GST will be able to access when the "
-"remote configuration option is enabled"
-msgstr ""
-"Список розділених комою вузлів, до яких GST може отримувати доступ, якщо "
-"ввімкнено параметр віддаленого налаштовування"
-
-#: ../gnome-system-tools.schemas.in.h:2
-msgid "Last GST version executed"
-msgstr "Версія GST, що виконувалась минулого разу"
-
-#: ../gnome-system-tools.schemas.in.h:3
-msgid "Preferred bootloader that boot-admin will configure"
-msgstr "Бажаний завантажувач, який буде налаштовуватись утилітою boot-admin"
-
-#: ../gnome-system-tools.schemas.in.h:4
-msgid "Remote hosts"
-msgstr "Віддалені комп'ютери"
-
-#: ../gnome-system-tools.schemas.in.h:5
-msgid ""
-"The GST are able to do remote configuration through SSH, enable this option "
-"to use this feature"
-msgstr ""
-"GST має можливість віддаленого налаштовування через SSH, для використання "
-"цієї функції увімкніть цю функцію"
-
-#: ../gnome-system-tools.schemas.in.h:6
-msgid "The last GST version that this computer has run"
-msgstr "Версія GST, яка була запущена на цьому комп'ютері попереднього разу"
-
-#: ../gnome-system-tools.schemas.in.h:7
-msgid ""
-"This key stores the bootloader that boot-admin will configure if there are "
-"more than one installed, if it's not set or isn't valid, then boot-admin "
-"will ask the user"
-msgstr ""
-"У цьому ключі вказаний завантажувач, який буде налаштовуватись утилітою boot-"
-"admin, при наявності кількох встановлених завантажувачів. Якщо цей параметр "
-"не встановлений, чи некоректний, boot-admin буде питати користувача"
-
-#: ../gnome-system-tools.schemas.in.h:8
-msgid "Whether the tools will use remote administration or not"
-msgstr "Чи будуть утиліти використовувати віддалене адміністрування"
-
-#: ../gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Чи буде утиліта users-admin показувати усі користувачі та групи"
-
-#: ../gnome-system-tools.schemas.in.h:10
-msgid "Whether the warning dialog should be shown or not"
-msgstr ""
-"Чи слід показувати діалогове вікно попередження при запуску не від "
-"користувача root"
-
-#: ../interfaces/boot.glade.in.h:1
-msgid "<b>Security</b>"
-msgstr "<b>Безпека</b>"
-
-#: ../interfaces/boot.glade.in.h:2
-msgid ""
-"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
-"span>\n"
-"\n"
-"please select which do you want to configure"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">У системі знайдено декілька "
-"завантажувачів,</span>\n"
-"\n"
-"виберіть який ви бажаєте налаштувати"
-
-#: ../interfaces/boot.glade.in.h:5 ../interfaces/users.glade.in.h:3
-msgid "<span weight=\"bold\">Basic Settings</span>"
-msgstr "<span weight=\"bold\">Основні параметри</span>"
-
-#: ../interfaces/boot.glade.in.h:6
-msgid "<span weight=\"bold\">Image Settings</span>"
-msgstr "<span weight=\"bold\">Параметри зображення</span>"
-
-#: ../interfaces/boot.glade.in.h:7
-msgid "<span weight=\"bold\">Other Settings</span>"
-msgstr "<span weight=\"bold\">Інші параметри</span>"
-
-#: ../interfaces/boot.glade.in.h:8
-msgid "<span weight=\"bold\">Starting the Computer</span>"
-msgstr "<span weight=\"bold\">Запуск комп'ютера</span>"
-
-#: ../interfaces/boot.glade.in.h:9
-msgid "Ask at boot"
-msgstr "Запитати при завантаженні"
-
-#: ../interfaces/boot.glade.in.h:10 ../src/boot/main.c:71
-msgid "Boot Manager Settings"
-msgstr "Параметри менеджеру завантаження"
-
-#: ../interfaces/boot.glade.in.h:11
-msgid ""
-"Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter parameters passed to the kernel at "
-"boot time."
-msgstr ""
-"Виберіть образ ядра, що завантажуватиметься, та розділ, що буде монтуватись "
-"як кореневий розділ. Також можна ввести додаткові параметри, які будуть "
-"передаватись ядру при завантаженні."
-
-#: ../interfaces/boot.glade.in.h:12
-msgid "Click \"Forward\" to continue"
-msgstr "Клацніть \"Вперед\" для продовження"
-
-#: ../interfaces/boot.glade.in.h:13
-msgid "Confirmation"
-msgstr "Підтвердження"
-
-#. set window title
-#: ../interfaces/boot.glade.in.h:14 ../src/boot/boot-druid.c:442
-#: ../src/boot/boot-druid.c:454
-msgid "Creating a new boot image"
-msgstr "Створення нового образу завантаження"
-
-#: ../interfaces/boot.glade.in.h:15
-msgid "Don't ask me again"
-msgstr "Більше не запитувати"
-
-#: ../interfaces/boot.glade.in.h:16
-msgid "Enable IDE SCSI emulation"
-msgstr "Увімкнути IDE SCSI емуляцію"
-
-#: ../interfaces/boot.glade.in.h:17
-msgid ""
-"Enter a name for the boot image, and specify what kind of operating system "
-"it is."
-msgstr ""
-"Введіть назву завантажувального образу, та вкажіть тип його операційної "
-"системи."
-
-#: ../interfaces/boot.glade.in.h:18
-msgid "Finished"
-msgstr "Завершено"
-
-#: ../interfaces/boot.glade.in.h:19
-msgid "Manual"
-msgstr "Посібник"
-
-#: ../interfaces/boot.glade.in.h:20
-msgid "Number of colors:"
-msgstr "Кількість кольорів:"
-
-#: ../interfaces/boot.glade.in.h:21
-msgid "Other parameters:"
-msgstr "Інші параметри:"
-
-#: ../interfaces/boot.glade.in.h:22
-msgid "Password"
-msgstr "Пароль"
-
-#: ../interfaces/boot.glade.in.h:23
-msgid "Protect with password"
-msgstr "Захистити паролем"
-
-#: ../interfaces/boot.glade.in.h:24
-msgid "Resolution:"
-msgstr "Роздільна здатність:"
-
-#: ../interfaces/boot.glade.in.h:25
-msgid "Seconds to wait before loading default kernel or OS"
-msgstr "Кількість секунд очікування перед завантаженням типового ядра чи ОС"
-
-#: ../interfaces/boot.glade.in.h:26
-msgid "Select a kernel image"
-msgstr "Виберіть образ ядра"
-
-#: ../interfaces/boot.glade.in.h:27
-msgid "Select an initrd image"
-msgstr "Виберіть образ initrd"
-
-#: ../interfaces/boot.glade.in.h:28
-msgid "Specify the partition on which the operating system is installed."
-msgstr "Вкажіть розділ на якому встановлено операційну систему."
-
-#: ../interfaces/boot.glade.in.h:29
-msgid ""
-"The new boot image has been added. Please click \"Apply\" to save your "
-"changes."
-msgstr ""
-"Додано новий завантажувальний образ. Натисніть \"Застосувати\", щоб зберегти "
-"зміни."
-
-#: ../interfaces/boot.glade.in.h:30
-msgid ""
-"This assistant is designed to help you quickly and easily add a new boot "
-"image to your system."
-msgstr ""
-"Цей помічник розроблений, щоб допомогти вам швидко та просто додати новий "
-"завантажувальний образ у систему."
-
-#: ../interfaces/boot.glade.in.h:31
-msgid "Video modes (only frame buffer)"
-msgstr "Відео режими (лише для фреймбуферу)"
-
-#: ../interfaces/boot.glade.in.h:32
-msgid "_Add..."
-msgstr "_Додати..."
-
-#: ../interfaces/boot.glade.in.h:33
-msgid "_Device:"
-msgstr "_Пристрій:"
-
-#: ../interfaces/boot.glade.in.h:34
-msgid "_Edit"
-msgstr "_Правка"
-
-#: ../interfaces/boot.glade.in.h:35 ../src/boot/boot-settings.c:44
-msgid "_Initrd image path:"
-msgstr "Шлях образу _initrd:"
-
-#: ../interfaces/boot.glade.in.h:36
-msgid "_Kernel image path:"
-msgstr "Шлях _ядра:"
-
-#: ../interfaces/boot.glade.in.h:37
-msgid "_Name:"
-msgstr "_Назва:"
-
-#: ../interfaces/boot.glade.in.h:38
-msgid "_Operating system:"
-msgstr "_Операційна система:"
-
-#: ../interfaces/boot.glade.in.h:39
-msgid "_Parameters:"
-msgstr "_Параметри:"
-
-#: ../interfaces/boot.glade.in.h:40
-msgid "_Root file system device:"
-msgstr "Пристрій з _кореневою файловою системою:"
 
 #: ../interfaces/common.glade.in.h:1
 msgid ""
@@ -259,53 +27,19 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Введіть пароль користувача root</span>"
 
 #: ../interfaces/common.glade.in.h:2
-msgid ""
-"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
-"supported by this tool</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Ваша платформа не підтримується цією "
-"утилітою </span>"
-
-#: ../interfaces/common.glade.in.h:3
 msgid "Enter Password"
 msgstr "Введіть пароль"
 
-#: ../interfaces/common.glade.in.h:4
-msgid ""
-"If you know for sure that it works like one of the platforms listed below, "
-"you can select that and continue. Note, however, that this might damage the "
-"system configuration or downright cripple your computer."
-msgstr ""
-"Якщо ви впевнені, що вона подібна до однієї з перелічених нижче платформ, ви "
-"можете вибрати її та продовжити. Проте, зауважте, це може призвести до "
-"пошкодження конфігурації системи або скалічити вашу систему."
-
-#: ../interfaces/common.glade.in.h:5
-msgid "Remote administration"
-msgstr "Віддалене адміністрування"
-
-#: ../interfaces/common.glade.in.h:6
-msgid "Run _Without Password"
-msgstr "Запустити _без паролю"
-
-#: ../interfaces/common.glade.in.h:7
-msgid "Unsupported Platform"
-msgstr "Непідтримувана платформа"
-
-#: ../interfaces/common.glade.in.h:8
-msgid "Use this window to select the computer you wish to configure"
-msgstr ""
-"Використовуйте це вікно для вибору комп'ютера, який бажаєте налаштувати"
-
-#: ../interfaces/common.glade.in.h:9
+#: ../interfaces/common.glade.in.h:3
 msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
-"modify your system configuration."
+"modify\n"
+"your system configuration."
 msgstr ""
-"Для використання цієї програми потрібні права адміністратора (root). Введіть "
-"пароль для зміни конфігурацію системи."
+"Для використання цієї програми потрібні права адміністратора (root).\n"
+"Введіть пароль для зміни конфігурацію системи."
 
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:5
 msgid "_Password:"
 msgstr "_Пароль:"
 
@@ -318,110 +52,98 @@ msgid "<b>Connection settings</b>"
 msgstr "<b>Параметри з'єднання</b>"
 
 #: ../interfaces/network.glade.in.h:3
-msgid "<b>Connection</b>"
-msgstr "<b>З'єднання</b>"
-
-#: ../interfaces/network.glade.in.h:4
 msgid "<b>DNS Servers</b>"
 msgstr "<b>DNS сервери</b>"
 
-#: ../interfaces/network.glade.in.h:5
+#: ../interfaces/network.glade.in.h:4
 msgid "<b>Host Settings</b>"
 msgstr "<b>Параметри вузла</b>"
 
-#: ../interfaces/network.glade.in.h:6
+#: ../interfaces/network.glade.in.h:5
 msgid "<b>Internet service provider data</b>"
 msgstr "<b>Дані постачальника послуг Інтернету</b>"
 
-#: ../interfaces/network.glade.in.h:7
+#: ../interfaces/network.glade.in.h:6
 msgid "<b>Modem settings</b>"
 msgstr "<b>Параметри модему</b>"
 
-#: ../interfaces/network.glade.in.h:8
+#: ../interfaces/network.glade.in.h:7
 msgid "<b>Search Domains</b>"
 msgstr "<b>Пошук доменів</b>"
 
-#: ../interfaces/network.glade.in.h:9
+#: ../interfaces/network.glade.in.h:8
 msgid "<b>Wireless settings</b>"
 msgstr "<b>Параметри бездротового зв'язку</b>"
 
-#: ../interfaces/network.glade.in.h:10
+#: ../interfaces/network.glade.in.h:9
 msgid "Aliases:"
 msgstr "Псевдоніми:"
 
-#: ../interfaces/network.glade.in.h:11
+#: ../interfaces/network.glade.in.h:10
 msgid "C_onfiguration:"
 msgstr "_Конфігурація:"
 
-#: ../interfaces/network.glade.in.h:12
+#: ../interfaces/network.glade.in.h:11
 msgid "Connections"
 msgstr "З'єднання"
 
-#: ../interfaces/network.glade.in.h:13
+#: ../interfaces/network.glade.in.h:12
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:14
+#: ../interfaces/network.glade.in.h:13
 msgid "D_omain name:"
 msgstr "Назва _домену:"
 
+#: ../interfaces/network.glade.in.h:14
+msgid "Delete current location"
+msgstr "Видалити поточне розташування"
+
 #: ../interfaces/network.glade.in.h:15
-msgid "Default _gateway device:"
-msgstr "Типовий _шлюзовий пристрій:"
+msgid "E_nable roaming mode"
+msgstr "_Увімкнути режим роумінгу"
 
 #: ../interfaces/network.glade.in.h:16
-msgid "Device:"
-msgstr "Пристрій:"
-
-#: ../interfaces/network.glade.in.h:17
 msgid "E_nable this connection"
 msgstr "_Увімкнути це з'єднання"
 
-#: ../interfaces/network.glade.in.h:18 ../interfaces/users.glade.in.h:21
+#: ../interfaces/network.glade.in.h:17 ../interfaces/users.glade.in.h:19
 msgid "General"
 msgstr "Загальне"
 
-#: ../interfaces/network.glade.in.h:19
+#: ../interfaces/network.glade.in.h:18
 msgid "Host alias settings"
 msgstr "Параметри псевдонімів вузла"
 
-#: ../interfaces/network.glade.in.h:20
+#: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
 msgstr "Вузли"
 
-#: ../interfaces/network.glade.in.h:21 ../interfaces/shares.glade.in.h:15
+#: ../interfaces/network.glade.in.h:20 ../interfaces/shares.glade.in.h:12
 msgid "IP address:"
 msgstr "IP-адреса:"
 
-#: ../interfaces/network.glade.in.h:22
-msgid "Interface name:"
-msgstr "Назва інтерфейсу:"
-
-#: ../interfaces/network.glade.in.h:23
+#: ../interfaces/network.glade.in.h:21
 msgid "Interface properties"
 msgstr "Властивості інтерфейсу"
 
-#: ../interfaces/network.glade.in.h:24
-msgid "Key _type:"
-msgstr "_Тип ключа:"
-
-#: ../interfaces/network.glade.in.h:25
-msgid "Location name:"
-msgstr "Назва розташування:"
-
-#: ../interfaces/network.glade.in.h:26
+#: ../interfaces/network.glade.in.h:22
 msgid "Location:"
 msgstr "Розташування:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.glade.in.h:23
 msgid "Modem"
 msgstr "Модем"
 
-#: ../interfaces/network.glade.in.h:28
+#: ../interfaces/network.glade.in.h:24
+msgid "Network _password:"
+msgstr "Мережний _пароль:"
+
+#: ../interfaces/network.glade.in.h:25
 msgid "Network name (_ESSID):"
 msgstr "Назва мережі (_ESSID):"
 
-#: ../interfaces/network.glade.in.h:29
+#: ../interfaces/network.glade.in.h:26
 msgid ""
 "Off\n"
 "Low\n"
@@ -433,15 +155,19 @@ msgstr ""
 "Середній\n"
 "Гучно"
 
-#: ../interfaces/network.glade.in.h:33
+#: ../interfaces/network.glade.in.h:30
 msgid "Options"
 msgstr "Параметри"
 
-#: ../interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:31
 msgid "P_assword"
 msgstr "_Пароль"
 
-#: ../interfaces/network.glade.in.h:35
+#: ../interfaces/network.glade.in.h:32
+msgid "Password _type:"
+msgstr "_Тип паролю:"
+
+#: ../interfaces/network.glade.in.h:33
 msgid ""
 "Plain (ASCII)\n"
 "Hexadecimal"
@@ -449,19 +175,11 @@ msgstr ""
 "Звичайний (ASCII)\n"
 "Шістнадцятковий"
 
-#: ../interfaces/network.glade.in.h:37
-msgid "Select location name"
-msgstr "Виберіть назву розташування"
+#: ../interfaces/network.glade.in.h:35
+msgid "Save current network configuration as a location"
+msgstr "Зберегти поточну конфігурацію мережі у файлі"
 
-#: ../interfaces/network.glade.in.h:38
-msgid ""
-"Static IP address\n"
-"DHCP"
-msgstr ""
-"Статична IP адреса\n"
-"DHCP"
-
-#: ../interfaces/network.glade.in.h:40
+#: ../interfaces/network.glade.in.h:36
 msgid ""
 "Tones\n"
 "Pulses"
@@ -469,79 +187,67 @@ msgstr ""
 "Тоновий\n"
 "Імпульсний"
 
-#: ../interfaces/network.glade.in.h:42
+#: ../interfaces/network.glade.in.h:38
 msgid "Use the Internet service provider nameservers"
 msgstr "Використовувати сервери назв постачальника послуг Інтернет"
 
-#: ../interfaces/network.glade.in.h:43
-msgid "WEP _key:"
-msgstr "WEP _ключ:"
-
-#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
-msgid "_Activate"
-msgstr "_Активувати"
-
-#: ../interfaces/network.glade.in.h:45
+#: ../interfaces/network.glade.in.h:39
 msgid "_Autodetect"
 msgstr "Визначити _автоматично"
 
-#: ../interfaces/network.glade.in.h:46 ../src/network/ifaces-list.c:35
-msgid "_Deactivate"
-msgstr "_Деактивувати"
-
-#: ../interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:40
 msgid "_Dial prefix:"
 msgstr "Префікс _набору номера:"
 
-#: ../interfaces/network.glade.in.h:48
+#: ../interfaces/network.glade.in.h:41
 msgid "_Dial type:"
 msgstr "Тип _набору номера:"
 
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:42
 msgid "_Gateway address:"
 msgstr "Адреса _шлюзу:"
 
-#: ../interfaces/network.glade.in.h:50
-msgid "_Hostname:"
-msgstr "Назва _вузла:"
+#: ../interfaces/network.glade.in.h:43
+msgid "_Host name:"
+msgstr "_Назва вузла:"
 
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.glade.in.h:44
 msgid "_IP address:"
 msgstr "_IP-адреса:"
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.glade.in.h:45
 msgid "_Local IP:"
 msgstr "_Локальна IP-адреса:"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.glade.in.h:46
 msgid "_Modem port:"
 msgstr "_Модемний порт:"
 
-#: ../interfaces/network.glade.in.h:54
+#: ../interfaces/network.glade.in.h:47
 msgid "_Phone number:"
 msgstr "_Номер телефону:"
 
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.glade.in.h:48
 msgid "_Remote IP:"
 msgstr "_Віддала IP-адреса:"
 
-#: ../interfaces/network.glade.in.h:56
+#: ../interfaces/network.glade.in.h:49
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Повторювати, якщо з'єднання розривається або не встановлюється"
 
-#: ../interfaces/network.glade.in.h:57
+#: ../interfaces/network.glade.in.h:50
 msgid "_Set modem as default route to internet"
 msgstr "_Встановити модем як типовий маршрут до Інтернет"
 
-#: ../interfaces/network.glade.in.h:58
+#: ../interfaces/network.glade.in.h:51
 msgid "_Subnet mask:"
 msgstr "Маска _мережі:"
 
-#: ../interfaces/network.glade.in.h:59 ../interfaces/users.glade.in.h:61
+#: ../interfaces/network.glade.in.h:52 ../interfaces/users.glade.in.h:55
 msgid "_Username:"
 msgstr "_Ім'я користувача:"
 
-#: ../interfaces/network.glade.in.h:60
+#: ../interfaces/network.glade.in.h:53
 msgid "_Volume:"
 msgstr "_Гучність:"
 
@@ -554,160 +260,137 @@ msgid "Select the services that you wish to activate:"
 msgstr "Виберіть служби, які треба активувати:"
 
 #: ../interfaces/shares.glade.in.h:1
-msgid "<b>Allowed hosts</b>"
+msgid "<b>Allowed Hosts</b>"
 msgstr "<b>Дозволені вузли</b>"
 
 #: ../interfaces/shares.glade.in.h:2
-msgid "<b>Hosts settings</b>"
+msgid "<b>Hosts Settings</b>"
 msgstr "<b>Параметри вузлів</b>"
 
 #: ../interfaces/shares.glade.in.h:3
-msgid "<b>Share properties</b>"
-msgstr "<b>Властивості спільного ресурсу</b>"
+msgid "<b>Share Properties</b>"
+msgstr "<b>Параметри публікації</b>"
 
 #: ../interfaces/shares.glade.in.h:4
-msgid "<b>Shared folder</b>"
+msgid "<b>Shared Folder</b>"
 msgstr "<b>Спільна тека</b>"
 
 #: ../interfaces/shares.glade.in.h:5
-msgid "<b>WINS server</b>"
-msgstr "<b>Сервер WINSr</b>"
+msgid "<b>Windows sharing</b>"
+msgstr "<b>Спільні ресурси</b>"
 
 #: ../interfaces/shares.glade.in.h:6
-msgid "<b>Windows sharing Settings</b>"
-msgstr "<b>Параметри спільних ресурсів Windows</b>"
+msgid "Add allowed hosts"
+msgstr "Додати дозволені вузли"
 
 #: ../interfaces/shares.glade.in.h:7
-msgid "Add allowed hosts"
-msgstr "додати дозволені вузли"
-
-#: ../interfaces/shares.glade.in.h:8
-msgid "Allow _browsing folder"
-msgstr "Дозволити _огляд тек"
-
-#: ../interfaces/shares.glade.in.h:9
 msgid "Allowed hosts:"
 msgstr "Дозволені вузли:"
 
-#: ../interfaces/shares.glade.in.h:10
+#: ../interfaces/shares.glade.in.h:8
 msgid "Comment:"
 msgstr "Коментар:"
 
+#: ../interfaces/shares.glade.in.h:9
+msgid "Domain / _Workgroup:"
+msgstr "Домен / робоча _група:"
+
+#: ../interfaces/shares.glade.in.h:10
+msgid "General Properties"
+msgstr "Загальні властивості"
+
 #: ../interfaces/shares.glade.in.h:11
-msgid "Do not use WINS server"
-msgstr "Не використовувати WINS сервер"
-
-#: ../interfaces/shares.glade.in.h:12
-msgid "Domain / _Workgroup"
-msgstr "Домен / робоча _група"
-
-#: ../interfaces/shares.glade.in.h:13
-msgid "General Windows sharing settings"
-msgstr "Загальні параметри спільних ресурсів Windows"
-
-#: ../interfaces/shares.glade.in.h:14
 msgid "Host name:"
 msgstr "Назва вузла:"
 
-#: ../interfaces/shares.glade.in.h:16
+#: ../interfaces/shares.glade.in.h:13
 msgid "Name:"
 msgstr "Назва:"
 
-#: ../interfaces/shares.glade.in.h:17
+#: ../interfaces/shares.glade.in.h:14
 msgid "Netmask:"
 msgstr "Маска мережі:"
 
-#: ../interfaces/shares.glade.in.h:18
+#: ../interfaces/shares.glade.in.h:15
 msgid "Network:"
 msgstr "Мережа:"
 
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
+#: ../interfaces/shares.glade.in.h:16 ../src/shares/nfs-acl-table.c:56
 msgid "Read only"
 msgstr "Лише читання"
 
+#: ../interfaces/shares.glade.in.h:17
+msgid "Share through:"
+msgstr "Публікація за допомогою:"
+
+#: ../interfaces/shares.glade.in.h:18 ../src/shares/shares.desktop.in.in.h:2
+#: ../src/shares/shares-tool.c:207
+msgid "Shared Folders"
+msgstr "Спільні теки"
+
+#: ../interfaces/shares.glade.in.h:19
+msgid "This computer is a _WINS server"
+msgstr "Цей комп'ютер є сервером _WINS"
+
 #: ../interfaces/shares.glade.in.h:20
-msgid "Share folder"
-msgstr "Спільний доступ"
+msgid "WINS _server:"
+msgstr "_Сервер WINS:"
 
 #: ../interfaces/shares.glade.in.h:21
-msgid "Share with:"
-msgstr "Доступ з:"
-
-#: ../interfaces/shares.glade.in.h:22
-msgid "This computer is a WINS server"
-msgstr "Цей комп'ютер є сервером WINS"
-
-#: ../interfaces/shares.glade.in.h:23
-msgid "Use WINS Server"
-msgstr "Використовувати сервер WINS"
-
-#: ../interfaces/shares.glade.in.h:24
-msgid "Windows sharing settings"
-msgstr "Параметри спільного доступу Windows"
-
-#: ../interfaces/shares.glade.in.h:25
-msgid "_Add host"
-msgstr "_Додати вузол"
-
-#: ../interfaces/shares.glade.in.h:26
-msgid "_Host description:"
-msgstr "_Опис вузла:"
-
-#: ../interfaces/shares.glade.in.h:27
 msgid "_Path:"
 msgstr "_Шлях:"
 
-#: ../interfaces/shares.glade.in.h:28
+#: ../interfaces/shares.glade.in.h:22
 msgid "_Read only"
 msgstr "_Лише читання"
 
 #: ../interfaces/time.glade.in.h:1
-msgid "(unconfigured)"
-msgstr "(не налаштовано)"
-
-#: ../interfaces/time.glade.in.h:2
 msgid "<b>Selection</b>"
 msgstr "<b>Вибір</b>"
 
-#: ../interfaces/time.glade.in.h:3
-msgid "<b>Time zone</b>"
+#: ../interfaces/time.glade.in.h:2
+msgid "<b>Time Zone</b>"
 msgstr "<b>Часовий пояс</b>"
 
-#: ../interfaces/time.glade.in.h:4
+#: ../interfaces/time.glade.in.h:3
 msgid "Add NTP Server"
 msgstr "Додати сервер NTP"
 
-#: ../interfaces/time.glade.in.h:5
+#: ../interfaces/time.glade.in.h:4
 msgid "NTP server"
 msgstr "Сервер NTP"
 
+#: ../interfaces/time.glade.in.h:5
+msgid "Se_lect Servers"
+msgstr "Ви_беріть сервери"
+
 #: ../interfaces/time.glade.in.h:6
-msgid "S_ynchronize clock with Internet servers:"
-msgstr "_Синхронізувати годинники з такими серверами:"
-
-#: ../interfaces/time.glade.in.h:7
-msgid "Se_lect Servers..."
-msgstr "Ви_брати сервери..."
-
-#: ../interfaces/time.glade.in.h:8
 msgid "Time servers"
 msgstr "Сервери часу"
 
-#: ../interfaces/time.glade.in.h:9
+#: ../interfaces/time.glade.in.h:7
+msgid "Time servers:"
+msgstr "Сервери часу:"
+
+#: ../interfaces/time.glade.in.h:8
 msgid "Time zone"
 msgstr "Часовий пояс"
 
-#: ../interfaces/time.glade.in.h:10
+#: ../interfaces/time.glade.in.h:9
 msgid "Time zone:"
 msgstr "Часовий пояс:"
 
+#: ../interfaces/time.glade.in.h:10
+msgid "Unconfigured"
+msgstr "Не налаштовано"
+
 #: ../interfaces/time.glade.in.h:11
-msgid "_Date:"
-msgstr "_Дата:"
+msgid "_Configuration:"
+msgstr "_Конфігурація:"
 
 #: ../interfaces/time.glade.in.h:12
-msgid "_Select Time Zone..."
-msgstr "_Вибір часового поясу..."
+msgid "_Date:"
+msgstr "_Дата:"
 
 #: ../interfaces/time.glade.in.h:13
 msgid "_Time:"
@@ -720,6 +403,10 @@ msgstr "<span weight=\"bold\">Додаткові параметри</span>"
 #: ../interfaces/users.glade.in.h:2
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
 msgstr "<span weight=\"bold\">Автоматичні UID/GID</span>"
+
+#: ../interfaces/users.glade.in.h:3
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span weight=\"bold\">Основні параметри</span>"
 
 #: ../interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Contact Information</span>"
@@ -750,522 +437,246 @@ msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Системні початкові значення</span>"
 
 #: ../interfaces/users.glade.in.h:11
-msgid "<span weight=\"bold\">User Profile</span>"
-msgstr "<span weight=\"bold\">Профіль користувача</span>"
-
-#: ../interfaces/users.glade.in.h:12
 msgid "Account"
 msgstr "Обліковий запис"
 
-#: ../interfaces/users.glade.in.h:13
+#: ../interfaces/users.glade.in.h:12
 msgid "Advanced"
 msgstr "Додатково"
 
-#: ../interfaces/users.glade.in.h:14
-msgid "Allow user to:"
-msgstr "Дозволити користувачу:"
-
-#: ../interfaces/users.glade.in.h:15
+#: ../interfaces/users.glade.in.h:13
 msgid "Assign a random password by default"
 msgstr "Призначати початковий випадковий пароль"
 
-#: ../interfaces/users.glade.in.h:16
+#: ../interfaces/users.glade.in.h:14
 msgid "Check password _quality"
 msgstr "Перевірити _якість пароля"
 
-#: ../interfaces/users.glade.in.h:17
+#: ../interfaces/users.glade.in.h:15
 msgid "Con_firmation:"
 msgstr "_Конфігурація:"
 
-#: ../interfaces/users.glade.in.h:18
+#: ../interfaces/users.glade.in.h:16
 msgid "Days between warning and password expiration:"
 msgstr "Діб між попередженням та закінченням дії паролю:"
 
-#: ../interfaces/users.glade.in.h:19
+#: ../interfaces/users.glade.in.h:17
 msgid "Default _group:"
 msgstr "Типова _група:"
 
-#: ../interfaces/users.glade.in.h:20
+#: ../interfaces/users.glade.in.h:18
 msgid "Default _shell:"
 msgstr "Типова _оболонка:"
 
-#: ../interfaces/users.glade.in.h:22
+#: ../interfaces/users.glade.in.h:20
 msgid "Generate _random password"
 msgstr "Створити _випадковий пароль"
 
-#: ../interfaces/users.glade.in.h:23
+#: ../interfaces/users.glade.in.h:21
 msgid "Group _ID:"
 msgstr "_Ідентифікатор групи:"
 
-#: ../interfaces/users.glade.in.h:24
-msgid "Group _members:"
-msgstr "_Члени групи:"
-
-#: ../interfaces/users.glade.in.h:25
+#: ../interfaces/users.glade.in.h:22
 msgid "Group _name:"
 msgstr "_Назва групи:"
 
-#: ../interfaces/users.glade.in.h:26
+#: ../interfaces/users.glade.in.h:23
 msgid "Group properties"
 msgstr "Властивості групи"
 
-#: ../interfaces/users.glade.in.h:27
-msgid "Groups"
-msgstr "Групи"
+#: ../interfaces/users.glade.in.h:24
+msgid "Groups settings"
+msgstr "Параметри груп"
 
-#: ../interfaces/users.glade.in.h:28
+#: ../interfaces/users.glade.in.h:25
 msgid "Ma_ximum days a password may be used:"
 msgstr "_Максимальна кількість діб дії паролю:"
 
-#: ../interfaces/users.glade.in.h:29
+#: ../interfaces/users.glade.in.h:26
 msgid "Maximum UID:"
 msgstr "Максимальний UID:"
 
-#: ../interfaces/users.glade.in.h:30
+#: ../interfaces/users.glade.in.h:27
 msgid "Mi_nimum days between password changes:"
 msgstr "М_інімальна кількість діб між зміною паролю:"
 
-#: ../interfaces/users.glade.in.h:31
+#: ../interfaces/users.glade.in.h:28
 msgid "Minimum GID:"
 msgstr "Мінімальний GID:"
 
-#: ../interfaces/users.glade.in.h:32
+#: ../interfaces/users.glade.in.h:29
 msgid "Minimum UID:"
 msgstr "Мінімальний UID:"
 
-#: ../interfaces/users.glade.in.h:33
+#: ../interfaces/users.glade.in.h:30
 msgid "Minimum days allowed between password changes:"
 msgstr "Мінімальна кількість діб між змінами паролю:"
 
-#: ../interfaces/users.glade.in.h:34
+#: ../interfaces/users.glade.in.h:31
 msgid "Number of days that a password may be used:"
 msgstr "Кількість діб дії паролю:"
 
-#: ../interfaces/users.glade.in.h:35
+#: ../interfaces/users.glade.in.h:32
 msgid "O_ffice location:"
 msgstr "Розташування _офісу:"
 
-#: ../interfaces/users.glade.in.h:36
+#: ../interfaces/users.glade.in.h:33
 msgid "Password set to: "
 msgstr "Пароль встановлено у: "
 
-#: ../interfaces/users.glade.in.h:37
+#: ../interfaces/users.glade.in.h:34
 msgid "Privileges"
 msgstr "Привілеї"
 
-#: ../interfaces/users.glade.in.h:38
+#: ../interfaces/users.glade.in.h:35
 msgid "Profile _name:"
 msgstr "_Назва профілю:"
 
-#: ../interfaces/users.glade.in.h:39
+#: ../interfaces/users.glade.in.h:36
 msgid "Set password b_y hand"
 msgstr "Встановити пароль в_ручну"
 
-#: ../interfaces/users.glade.in.h:40
-msgid "Show a_ll users and groups"
-msgstr "Показати _усіх користувачів та всі групи"
+#: ../interfaces/users.glade.in.h:37
+msgid "User ID:"
+msgstr "Ідентифікатор користувача:"
 
-#: ../interfaces/users.glade.in.h:41
-msgid "User _ID:"
-msgstr "_Ідентифікатор користувача:"
+#: ../interfaces/users.glade.in.h:38
+msgid "User Privileges"
+msgstr "Привілеї користувача"
 
-#: ../interfaces/users.glade.in.h:42
+#: ../interfaces/users.glade.in.h:39
 msgid "User _password:"
 msgstr "_Пароль користувача:"
 
-#: ../interfaces/users.glade.in.h:43
-msgid "User privileges"
-msgstr "Привілеї користувачів"
-
-#: ../interfaces/users.glade.in.h:44
+#: ../interfaces/users.glade.in.h:40
 msgid "User profiles"
 msgstr "Профілі користувачів"
 
-#: ../interfaces/users.glade.in.h:45
-msgid "Users"
-msgstr "Користувачі"
+#: ../interfaces/users.glade.in.h:41
+msgid "_Add Group"
+msgstr "_Додати групу"
 
-#: ../interfaces/users.glade.in.h:46
-msgid "_Add Group..."
-msgstr "_Додати групу..."
+#: ../interfaces/users.glade.in.h:42
+msgid "_Add Profile"
+msgstr "_Додати профіль"
 
-#: ../interfaces/users.glade.in.h:47
-msgid "_Add Profile..."
-msgstr "_Додати профіль..."
+#: ../interfaces/users.glade.in.h:43
+msgid "_Add User"
+msgstr "_Додати користувача"
 
-#: ../interfaces/users.glade.in.h:48
-msgid "_Add User..."
-msgstr "_Додати користувача..."
-
-#: ../interfaces/users.glade.in.h:49
-msgid "_All users:"
-msgstr "_Всі користувачі:"
-
-#: ../interfaces/users.glade.in.h:50
+#: ../interfaces/users.glade.in.h:44
 msgid "_Comments"
 msgstr "_Коментарі"
 
-#: ../interfaces/users.glade.in.h:51
+#: ../interfaces/users.glade.in.h:45
 msgid "_Days between warning and password expiration:"
 msgstr "_Діб між попередженням та закінченням дії паролю:"
 
-#: ../interfaces/users.glade.in.h:52 ../src/boot/table.c:54
-#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
-#: ../src/shares/table.c:42 ../src/users/table.c:50
+#: ../interfaces/users.glade.in.h:46 ../src/network/address-list.c:77
+#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "В_идалити"
 
-#: ../interfaces/users.glade.in.h:53
-msgid "_Edit User Profiles..."
-msgstr "_Правка профілю користувача..."
-
-#: ../interfaces/users.glade.in.h:54
+#: ../interfaces/users.glade.in.h:47
 msgid "_Generate"
 msgstr "_Загальне"
 
-#: ../interfaces/users.glade.in.h:55
+#: ../interfaces/users.glade.in.h:48
 msgid "_Home directory:"
 msgstr "_Домашній каталог:"
 
-#: ../interfaces/users.glade.in.h:56
+#: ../interfaces/users.glade.in.h:49
 msgid "_Home phone:"
 msgstr "_Домашній телефон:"
 
-#: ../interfaces/users.glade.in.h:57
+#: ../interfaces/users.glade.in.h:50
 msgid "_Main group:"
 msgstr "_Основна група:"
 
-#: ../interfaces/users.glade.in.h:58
+#: ../interfaces/users.glade.in.h:51
+msgid "_Manage Groups"
+msgstr "_Керування групами:"
+
+#: ../interfaces/users.glade.in.h:52
 msgid "_Profile:"
 msgstr "_Профіль:"
 
-#: ../interfaces/users.glade.in.h:59
+#: ../interfaces/users.glade.in.h:53
 msgid "_Real name:"
 msgstr "_Справжнє ім'я:"
 
-#: ../interfaces/users.glade.in.h:60
+#: ../interfaces/users.glade.in.h:54
 msgid "_Shell:"
 msgstr "_Оболонка:"
 
-#: ../interfaces/users.glade.in.h:62
+#: ../interfaces/users.glade.in.h:56
 msgid "_Work phone:"
 msgstr "_Робочий телефон:"
 
-#: ../src/boot/boot-append-gui.c:140
-msgid "32,768"
-msgstr "32.768"
+#: ../src/common/gst-platform-dialog.c:179
+msgid "The platform you are running is not supported by this tool"
+msgstr "Ваша платформа не підтримуються цією програмою"
 
-#: ../src/boot/boot-append-gui.c:141
-msgid "65,536"
-msgstr "65.536"
-
-#: ../src/boot/boot-append-gui.c:142
-msgid "16,777,216"
-msgstr "16.777.216"
-
-#: ../src/boot/boot-append-gui.c:253
-msgid "Invalid VGA value"
-msgstr "Неправильне значення VGA"
-
-#: ../src/boot/boot-append-gui.c:255
-#, c-format
-msgid "\"%s\" is not a valid VGA value."
-msgstr "\"%s\" не є правильним значенням VGA."
-
-#: ../src/boot/boot-druid.c:113
-msgid "Error creating boot image"
-msgstr "Помилка створення завантажувального образу"
-
-#: ../src/boot/boot-druid.c:443
-#, c-format
-msgid "Creating a new boot image (%d of %d)"
-msgstr "Створення нового завантажувального образу (%d з %d)"
-
-#: ../src/boot/boot-druid.c:444
-msgid "Finished creating a new boot image"
-msgstr "Завершено створення нового завантажувального образу"
-
-#: ../src/boot/boot-image.c:43
-msgid "Unknown"
-msgstr "Невідомо"
-
-#: ../src/boot/boot-image.c:44
-msgid "Windows NT"
-msgstr "Windows NT"
-
-#: ../src/boot/boot-image.c:45
-msgid "Windows 9x"
-msgstr "Windows 9x"
-
-#: ../src/boot/boot-image.c:46
-msgid "Dos"
-msgstr "DOS"
-
-#: ../src/boot/boot-image.c:47
-msgid "Linux"
-msgstr "Linux"
-
-#: ../src/boot/boot-image.c:48
-msgid "Linux swap"
-msgstr "Linux swap"
-
-#: ../src/boot/boot-image.c:49
-msgid "GNU/Hurd"
-msgstr "GNU/Hurd"
-
-#: ../src/boot/boot-image.c:279
-#, c-format
-msgid "\"%s\" is an invalid path"
-msgstr "\"%s\" не є правильним шляхом"
-
-#: ../src/boot/boot-image.c:295
-#, c-format
-msgid "\"%s\" already exists, please set another name."
-msgstr "\"%s\" вже існує, виберіть іншу назву."
-
-#: ../src/boot/boot-image.c:301
-#, c-format
-msgid "Invalid image name: \"%s\"."
-msgstr "Неправильна назва образу: \"%s\"."
-
-#: ../src/boot/boot-image.c:314
-#, c-format
-msgid "Invalid image: \"%s\"."
-msgstr "Неправильний образ: \"%s\"."
-
-#: ../src/boot/boot-image.c:332
-#, c-format
-msgid "Invalid root device: \"%s\"."
-msgstr "Неправильний кореневий пристрій: \"%s\"."
-
-#: ../src/boot/boot-settings.c:45
-msgid "_Module path:"
-msgstr "_Шлях модулів:"
-
-#: ../src/boot/boot-settings.c:407
-msgid "Password confirmation is not correct."
-msgstr "Підтвердження паролю некоректне."
-
-#: ../src/boot/boot-settings.c:432
-msgid "Error modifying boot image"
-msgstr "Помилка модифікації завантажувального образу"
-
-#: ../src/boot/boot.desktop.in.in.h:1
-msgid "Boot"
-msgstr "Завантаження"
-
-#: ../src/boot/boot.desktop.in.in.h:2
-msgid "Configure the system boot process"
-msgstr "Налаштовування процесу завантаження системи"
-
-#: ../src/boot/callbacks.c:81
-msgid "Boot Image Editor"
-msgstr "Редактор завантажувального образу"
-
-#: ../src/boot/callbacks.c:179
-msgid "Boot Append Editor"
-msgstr "Редактор доповнень завантаження"
-
-#: ../src/boot/callbacks.c:412
-msgid "Error deleting boot image"
-msgstr "Помилка при видаленні завантажувального образу"
-
-#: ../src/boot/callbacks.c:414
-msgid "Without at least one boot image your computer will not start."
-msgstr ""
-"Система без, принаймні одного, завантажувального образу не зможе запуститись."
-
-#: ../src/boot/callbacks.c:433
-#, c-format
-msgid "Are you sure you want to delete \"%s\"?"
-msgstr "Ви дійсно бажаєте видалити \"%s\"?"
-
-#: ../src/boot/callbacks.c:435
-msgid "This may leave this operating system unbootable."
-msgstr "Це може призвести до неможливості завантаження операційної системи"
-
-#: ../src/boot/callbacks.c:464
-msgid "The configuration will show empty"
-msgstr "Конфігурація буде показана порожньою"
-
-#: ../src/boot/callbacks.c:466
-#, c-format
-msgid "The file \"%s\" is missing or could not be read."
-msgstr "Файл \"%s\" відсутній або його не вдається прочитати"
-
-#: ../src/boot/table.c:43
-msgid "Name"
-msgstr "Назва"
-
-#: ../src/boot/table.c:44
-msgid "Default"
-msgstr "Типовий"
-
-#: ../src/boot/table.c:45
-msgid "Type"
-msgstr "Тип"
-
-#: ../src/boot/table.c:46
-msgid "Kernel Image"
-msgstr "Образ ядра"
-
-#: ../src/boot/table.c:47
-msgid "Device"
-msgstr "Пристрій"
-
-#: ../src/boot/table.c:52 ../src/network/address-list.c:71
-#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
-msgid "_Add"
-msgstr "_Додати"
-
-#: ../src/boot/table.c:53 ../src/network/hosts.c:38
-#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
-#: ../src/users/table.c:49
-msgid "_Properties"
-msgstr "В_ластивості"
-
-#. the proccess was running ssh
-#: ../src/common/gst-auth.c:89
-msgid "The tool could not connect to the computer"
-msgstr "Утиліті не вдається під'єднатись до комп'ютера"
-
-#: ../src/common/gst-auth.c:90
+#. label
+#: ../src/common/gst-platform-dialog.c:185
 msgid ""
-"Check that you have access to this network and that the computer is actually "
-"working and running the SSH daemon"
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
 msgstr ""
-"Перевірте, що у вас є доступ до цієї мережі, що комп'ютер справді працює та "
-"на ньому запущено службу SSH"
+"Якщо ви впевнені, що вона подібна до однієї з перелічених нижче платформ, ви "
+"можете вибрати її та продовжити. Проте, зауважте, це може призвести до "
+"пошкодження конфігурації системи або скалічити вашу систему."
 
-#. the proccess was running su
-#: ../src/common/gst-auth.c:94
-msgid "The entered password is invalid"
-msgstr "Введений вами пароль - неправильний"
+#: ../src/common/gst-platform-dialog.c:212
+msgid "Unsupported platform"
+msgstr "Платформа не підтримуються"
 
-#: ../src/common/gst-auth.c:95
-msgid ""
-"Check that you typed it correctly and that you haven't activated the \"caps "
-"lock\" key"
-msgstr ""
-"Переконайтесь, що ви ввели його правильно та не була натиснута клавіша "
-"\"CapsLock\""
-
-#: ../src/common/gst-auth.c:104
-#, c-format
-msgid "Could not run \"%s\""
-msgstr "Не вдалося запустити \"%s\""
-
-#: ../src/common/gst-auth.c:105
-msgid "Check that you have permissions to run this command"
-msgstr "Перевірте, що ви маєте права для запуску цієї команди"
-
-#: ../src/common/gst-auth.c:107
-msgid "An unexpected error has occurred"
-msgstr "Виникла неочікувана помилка"
-
-#: ../src/common/gst-auth.c:133
-msgid "Could not execute the backend"
-msgstr "Не вдається виконати допоміжну програму"
-
-#: ../src/common/gst-auth.c:134
-msgid "There was an error creating the child process, the tool will close now."
-msgstr ""
-"Помилка при створенні допоміжного процесу, зараз програма завершується."
-
-#: ../src/common/gst-dialog.c:60
-#, c-format
-msgid "Could not find widget: %s"
-msgstr "Не вдалося знайти віджет: %s"
-
-#: ../src/common/gst-dialog.c:383
-msgid "There are changes which have not been applied"
-msgstr "Є не застосовані зміни."
-
-#: ../src/common/gst-dialog.c:385
-msgid "Apply them now?"
-msgstr "Застосувати їх зараз?"
-
-#: ../src/common/gst-dialog.c:492
-#, c-format
-msgid "Error connection signal `%s' in widget `%s'"
-msgstr "Помилка при підключенні сигналу `%s' у віджеті `%s'"
-
-#: ../src/common/gst-tool.c:1026
+#: ../src/common/gst-tool.c:178
 msgid "The configuration could not be loaded"
 msgstr "Не вдається завантажити конфігурацію"
 
-#: ../src/common/gst-tool.c:1028
-msgid "There was an error running the backend script"
-msgstr "Виникла помилка у сценарії компоненту"
+#: ../src/common/gst-tool.c:180
+msgid "You are not allowed to access the system configuration."
+msgstr "У вас немає прав доступу до параметрів системи."
 
-#: ../src/common/gst-tool.c:1509
-#, c-format
-msgid "Welcome to the %s prerelease of the GNOME System Tools"
-msgstr "Ласкаво просимо до %s попереднього випуску системних утиліт GNOME"
-
-#: ../src/common/gst-tool.c:1511
-msgid ""
-"This is still a work in progress, and so it may have serious bugs. Due to "
-"the nature of these tools, bugs may render your computer <span weight=\"bold"
-"\">practically useless</span>, costing time, effort and sanity points. You "
-"have been warned. Thank you for trying out this prerelease of the GNOME "
-"System Tools!"
-msgstr ""
-"Робота досі триває, тому програма може мати серйозні помилки. Враховуючи "
-"характер цих утиліт, помилки можуть зробити ваш комп'ютер <span weight=\"bold"
-"\">практично недієздатним</span>, вимагатимуть часу, зусиль та "
-"розсудливості. Вас попередили. Дякуємо за випробування попереднього випуску "
-"системних утиліт GNOME!"
-
-#: ../src/common/gst-tool.c:1532
-msgid "Warning"
-msgstr "Попередження"
-
-#: ../src/common/gst-tool.c:1552
-msgid "Don't show me this again"
-msgstr "Більше не показувати"
-
-#: ../src/common/gst-tool.c:1609
+#: ../src/common/gst-tool.c:358
 msgid "GNOME System Tools"
 msgstr "Системні утиліти GNOME"
 
-#: ../src/common/gst-tool.c:1755
+#: ../src/common/gst-tool.c:415
 msgid "Could not display help"
 msgstr "Не вдається відобразити довідку"
 
-#: ../src/network/address-list.c:555
+#: ../src/network/address-list.c:76 ../src/network/hosts.c:31
+#: ../src/shares/table.c:38 ../src/users/table.c:38
+msgid "_Add"
+msgstr "_Додати"
+
+#: ../src/network/address-list.c:486
 msgid "Type address"
 msgstr "Тип адреси"
 
-#: ../src/network/callbacks.c:46
-#, c-format
-msgid "Could not enable the interface %s"
-msgstr "Не вдається увімкнути інтерфейс %s"
+#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+msgid "Changing interface configuration"
+msgstr "Зміна параметрів інтерфейу"
 
-#: ../src/network/callbacks.c:50
-msgid ""
-"Check that the settings are correct for this network and that the computer "
-"is correctly connected to it."
-msgstr ""
-"Перевірте, що параметри підходять до цієї мережі та комп'ютер справді "
-"з'єднаний з мережею."
-
-#: ../src/network/callbacks.c:237
+#: ../src/network/callbacks.c:243
 msgid "Could not autodetect modem device"
 msgstr "Не вдається автоматично визначити пристрій модему"
 
-#: ../src/network/callbacks.c:240
+#: ../src/network/callbacks.c:246
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
 "Перевірте, що пристрій не зайнятий та коректно підключений до комп'ютера."
 
-#: ../src/network/callbacks.c:451
+#: ../src/network/callbacks.c:467
 msgid "The host name has changed"
 msgstr "Змінилась назва вузла"
 
-#: ../src/network/callbacks.c:454
+#: ../src/network/callbacks.c:470
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1273,39 +684,134 @@ msgstr ""
 "Це буде перешкоджати запуску нових програм, доведеться вийти та повторно "
 "зайти. Продовжити?"
 
-#: ../src/network/callbacks.c:460
+#: ../src/network/callbacks.c:476
 msgid "Change _Host name"
 msgstr "Змінити назву _вузла"
 
-#: ../src/network/hosts.c:92
+#: ../src/network/connection.c:39
+msgid "Automatic configuration (DHCP)"
+msgstr "Автоматична конфігурація (DHCP)"
+
+#: ../src/network/connection.c:40
+msgid "Local Zeroconf network (IPv4 LL)"
+msgstr "Локальна мережа Zeroconf (IPv4 LL)"
+
+#: ../src/network/connection.c:41
+msgid "Static IP address"
+msgstr "Статична IP адреса"
+
+#: ../src/network/connection.c:45
+msgid "WEP key (ascii)"
+msgstr "Ключ WEP (ascii)"
+
+#: ../src/network/connection.c:46
+msgid "WEP key (hexadecimal)"
+msgstr "Ключ WEP (шістнадцятковий)"
+
+#: ../src/network/connection.c:47
+msgid "WPA"
+msgstr "WPA"
+
+#: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
+#: ../src/shares/table.c:39 ../src/users/table.c:39
+msgid "_Properties"
+msgstr "В_ластивості"
+
+#: ../src/network/hosts.c:89
 msgid "IP Address"
 msgstr "IP-адреса"
 
-#: ../src/network/hosts.c:100
+#: ../src/network/hosts.c:97
 msgid "Aliases"
 msgstr "Псевдоніми"
 
-#: ../src/network/location.c:145
-msgid "Create location"
-msgstr "Створити розташування"
+#: ../src/network/ifaces-list.c:282
+msgid "This network interface is not configured"
+msgstr "Мережний інтерфейс не налаштований"
 
-#: ../src/network/location.c:153
-msgid "Delete current location"
-msgstr "Видалити поточне розташування"
+#: ../src/network/ifaces-list.c:284
+msgid "Roaming mode enabled"
+msgstr "Увімкнено режим роумінгу"
 
-#: ../src/network/location.c:367
-msgid "Do you want to remove this location?"
-msgstr "Видалити це розташування?"
+#: ../src/network/ifaces-list.c:291
+#, c-format
+msgid "<b>Essid:</b> %s "
+msgstr "<b>Essid:</b> %s "
 
-#: ../src/network/location.c:440
-msgid "Changing profile"
-msgstr "Зміна профілю"
+#: ../src/network/ifaces-list.c:297
+#, c-format
+msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
+msgstr "<b>Адреса:</b> %s <b>Маска мережі:</b> %s"
 
-#: ../src/network/main.c:110
+#: ../src/network/ifaces-list.c:301
+#, c-format
+msgid "<b>Address:</b> %s"
+msgstr "<b>Адреса:</b> %s"
+
+#: ../src/network/ifaces-list.c:305
+#, c-format
+msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
+msgstr "<b>Адреса:</b> %s <b>Віддалена адреса:</b> %s"
+
+#: ../src/network/ifaces-list.c:311
+#, c-format
+msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
+msgstr "<b>Номер телефону:</b> %s <b>Обліковий запис:</b> %s"
+
+#: ../src/network/ifaces-list.c:330
+msgid "Wireless connection"
+msgstr "Бездротове з'єднання"
+
+#: ../src/network/ifaces-list.c:332
+msgid "Infrared connection"
+msgstr "Інфра-червоне з'єднання"
+
+#: ../src/network/ifaces-list.c:334
+msgid "Wired connection"
+msgstr "Дротове з'єднання"
+
+#: ../src/network/ifaces-list.c:336
+msgid "Parallel port connection"
+msgstr "З'єднання через паралельний порт"
+
+#: ../src/network/ifaces-list.c:338
+msgid "Modem connection"
+msgstr "Модемне з'єднання"
+
+#: ../src/network/ifaces-list.c:340
+msgid "ISDN connection"
+msgstr "З'єднання ISDN"
+
+#: ../src/network/locations-combo.c:224
+msgid "Changing network location"
+msgstr "Зміна мережного розташування"
+
+#: ../src/network/locations-combo.c:268
+msgid "There is already a location with the same name"
+msgstr "Розташування з такою назвою вже існує"
+
+#: ../src/network/locations-combo.c:270
+msgid "Overwrite it?"
+msgstr "Перезаписати його?"
+
+#: ../src/network/locations-combo.c:358
+msgid "Save location"
+msgstr "Зберегти розташування"
+
+#: ../src/network/locations-combo.c:373
+msgid "_Location name:"
+msgstr "Назва _розташування:"
+
+#: ../src/network/locations-combo.c:425
+#, c-format
+msgid "Do you want to delete location \"%s\"?"
+msgstr "Видалити розташування \"%s\"?"
+
+#: ../src/network/main.c:112
 msgid "The interface does not exist"
 msgstr "Інтерфейс не існує"
 
-#: ../src/network/main.c:112
+#: ../src/network/main.c:114
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -1313,99 +819,453 @@ msgstr ""
 "Перевірте, що пристрій введений правильно та коректно підтримується вашою "
 "системою."
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:160
 msgid "Configure a network interface"
 msgstr "Налаштувати мережний інтерфейс"
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:160
 msgid "INTERFACE"
 msgstr "ІНТЕРФЕЙС"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:161
 msgid "Configure the first network interface with a specific type"
 msgstr "Налаштувати мережний інтерфейс"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:161
 msgid "TYPE"
 msgstr "ТИП"
-
-#: ../src/network/main.c:165
-msgid "Network settings"
-msgstr "Параметри мережі"
 
 #: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
 msgstr "Налаштовування мережних пристроїв та з'єднань"
 
 #: ../src/network/network.desktop.in.in.h:2
-msgid "Networking"
+msgid "Network"
 msgstr "Мережа"
 
-#: ../src/network/network-iface-ethernet.c:302
-msgid "Ethernet connection"
-msgstr "З'єднання Ethernet"
+#: ../src/network/network-tool.c:285
+msgid "Network Settings"
+msgstr "Мережі параметри"
 
-#: ../src/network/network-iface-irlan.c:122
-msgid "Infrared connection"
-msgstr "Інфра-червоне з'єднання"
-
-#: ../src/network/network-iface-isdn.c:330
-msgid "ISDN connection"
-msgstr "З'єднання ISDN"
-
-#: ../src/network/network-iface-modem.c:253
-msgid "Modem connection"
-msgstr "Модемне з'єднання"
-
-#: ../src/network/network-iface-plip.c:211
-msgid "Parallel port connection"
-msgstr "З'єднання через паралельний порт"
-
-#: ../src/network/network-iface-wireless.c:245
-msgid "Wireless connection"
-msgstr "Бездротове з'єднання"
-
-#: ../src/network/network-iface.c:410
+#: ../src/services/callbacks.c:58
 #, c-format
-msgid "Activating interface \"%s\""
-msgstr "Активується інтерфейс \"%s\""
+msgid "Settings for service \"%s\""
+msgstr "Параметри служби \"%s\""
 
-#: ../src/network/network-iface.c:522
+#: ../src/services/callbacks.c:110
 #, c-format
-msgid "The interface %s is not configured"
-msgstr "Інтерфейс %s не налаштований"
+msgid "Are you sure you want to deactivate %s?"
+msgstr "Ви дійсно бажаєте вимкнути \"%s\"?"
 
-#: ../src/network/network-iface.c:524
-#, c-format
-msgid "The interface %s is not active"
-msgstr "Інтерфейс \"%s\" не активний"
-
-#: ../src/network/network-iface.c:526
-#, c-format
-msgid "The interface %s is active"
-msgstr "Інтерфейс \"%s\" не активний"
-
-#: ../src/services/callbacks.c:64
-#, c-format
-msgid "Settings for \"%s\""
-msgstr "Параметри для \"%s\""
-
-#. FIXME: put service name !!!
-#: ../src/services/callbacks.c:153
-msgid "Are you sure you want to deactivate this service?"
-msgstr "Ви дійсно бажаєте деактивувати цю службу?"
-
-#: ../src/services/callbacks.c:156
+#: ../src/services/callbacks.c:114
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
-"data loss"
+"data loss."
 msgstr ""
-"Це може вплинути на поведінку системи у кількох аспектах, можливо, призведе "
-"до втрати даних "
+"Це може вплинути на поведінку системи, та навіть призвести "
+"до втрати даних."
 
-#: ../src/services/main.c:55
-msgid "Services settings"
-msgstr "Параметри служб"
+#: ../src/services/service.c:32
+msgid "Web server"
+msgstr "Веб-сервер"
+
+#: ../src/services/service.c:32
+msgid "Shares your web pages over the Internet"
+msgstr "Публікація веб-сторінок в Інтернет"
+
+#. GST_ROLE_WEB_SERVER
+#: ../src/services/service.c:33
+msgid "Actions scheduler"
+msgstr "Планування дій"
+
+#: ../src/services/service.c:33
+msgid "Executes scheduled actions"
+msgstr "Виконує заплановані дії"
+
+#. GST_ROLE_COMMAND_SCHEDULER
+#: ../src/services/service.c:34
+msgid "Printer service"
+msgstr "Служба друку"
+
+#: ../src/services/service.c:34
+msgid "Allows applications to use printers"
+msgstr "Дозволяє програмам використовувати принтер"
+
+#. GST_ROLE_PRINTER_SERVICE
+#: ../src/services/service.c:35
+msgid "Mail agent"
+msgstr "Поштовий агент"
+
+#: ../src/services/service.c:35
+msgid "Delivers your outgoing mail"
+msgstr "Доставляє вашу пошту"
+
+#. GST_ROLE_MTA
+#: ../src/services/service.c:36
+msgid "MTA authentication service"
+msgstr "Служба аітентифікації MTA"
+
+#. GST_ROLE_MTA_AUTH
+#: ../src/services/service.c:37
+msgid "Mail fetcher"
+msgstr "Отримання пошти"
+
+#: ../src/services/service.c:37
+msgid "Downloads your mail from remote accounts"
+msgstr "Завантажує пошту з віддалених серверів"
+
+#. GST_ROLE_MAIL_FETCHER
+#: ../src/services/service.c:38
+msgid "Graphical login manager"
+msgstr "Графічний менеджер входу"
+
+#: ../src/services/service.c:38
+msgid "Allows users to login graphically"
+msgstr "Дозволяє користувачам входити у графічному режимі"
+
+#. GST_ROLE_DISPLAY_MANAGER
+#: ../src/services/service.c:39
+msgid "Database server"
+msgstr "Сервер баз даних"
+
+#: ../src/services/service.c:39
+msgid "Data storage system"
+msgstr "Система баз даних"
+
+#. GST_ROLE_DATABASE_SERVER
+#. GST_ROLE_FILE_SERVER_SMB
+#. GST_ROLE_FILE_SERVER_FTP
+#: ../src/services/service.c:40 ../src/services/service.c:41
+#: ../src/services/service.c:43
+msgid "Folder sharing service"
+msgstr "Спільний доступ до тек"
+
+#: ../src/services/service.c:40 ../src/services/service.c:41
+msgid "Shares folders over your network"
+msgstr "Спільний доступ до тек з мережі"
+
+#. GST_ROLE_FILE_SERVER_NFS
+#: ../src/services/service.c:42
+msgid "FTP service"
+msgstr "Служба FTP"
+
+#: ../src/services/service.c:42 ../src/services/service.c:43
+msgid "Shares folders over the Internet"
+msgstr "Спільний доступ до файлів з Інтернет"
+
+#. GST_ROLE_FILE_SERVER_TFTP
+#: ../src/services/service.c:44
+msgid "Clock synchronization service"
+msgstr "Служба синхронізації годинників"
+
+#: ../src/services/service.c:44
+msgid "Synchronizes your computer clock with Internet time servers"
+msgstr "Синхронізує годинник вашого комп'ютера з серверами часу в Інтернет"
+
+#. GST_ROLE_NTP_SERVER
+#: ../src/services/service.c:46
+msgid "Antivirus"
+msgstr "Антивірус"
+
+#: ../src/services/service.c:46
+msgid "Analyzes your incoming mail for virus"
+msgstr "Перевіряє вхідну пошту на віруси"
+
+#. GST_ROLE_ANTIVIRUS
+#: ../src/services/service.c:47
+msgid "Firewall"
+msgstr "Мережний фільтр"
+
+#: ../src/services/service.c:47
+msgid "Blocks undesired network access to your computer"
+msgstr "Блокує доступ небажаної мережі до вашому комп'ютеру"
+
+#. GST_ROLE_FIREWALL_MANAGEMENT
+#: ../src/services/service.c:49
+msgid "Dictionary server"
+msgstr "Сервер словників"
+
+#. GST_ROLE_DICTIONARY_SERVER
+#: ../src/services/service.c:50
+msgid "Speech synthesis support"
+msgstr "Підтримка синтезу мовлення"
+
+#. GST_ROLE_SPEECH_SYNTHESIS
+#: ../src/services/service.c:51
+msgid "Computer activity logger"
+msgstr "Журнал активності комп'ютера"
+
+#: ../src/services/service.c:51
+msgid "Keeps a log of your computer activity"
+msgstr "Зберігає у журналі інформацію про активність комп'ютера"
+
+#. GST_ROLE_SYSTEM_LOGGER
+#: ../src/services/service.c:52
+msgid "Remote backup server"
+msgstr "Віддалений сервер резервного копіювання"
+
+#. GST_ROLE_REMOTE_BACKUP
+#: ../src/services/service.c:53
+msgid "Spam filter"
+msgstr "Фільтр спаму"
+
+#. GST_ROLE_SPAM_FILTER
+#: ../src/services/service.c:54
+msgid "Remote shell server"
+msgstr "Сервер віддаленого доступу"
+
+#: ../src/services/service.c:54
+msgid "Secure shell server"
+msgstr "Безпечний сервер віддаленого доступу"
+
+#. GST_ROLE_SECURE_SHELL_SERVER
+#: ../src/services/service.c:55
+msgid "Application server"
+msgstr "Сервер додатків"
+
+#. GST_ROLE_APPLICATION_SERVER
+#: ../src/services/service.c:56
+msgid "Automated crash reports support"
+msgstr "Підтримка автоматичних звітів про несправності"
+
+#. GST_ROLE_AUTOMATED_CRASH_REPORTS_MANAGEMENT
+#: ../src/services/service.c:57
+msgid "System communication bus"
+msgstr "Шина системної комунікації"
+
+#. GST_ROLE_DBUS,
+#: ../src/services/service.c:58
+msgid "System configuration manager"
+msgstr "Менеджер системної конфігурації"
+
+#. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:59
+msgid "School management platform"
+msgstr "Навчальна платформа керування"
+
+#. GST_ROLE_SCHOOL_MANAGEMENT_PLATFORM
+#: ../src/services/service.c:60
+msgid "Network security auditor"
+msgstr "Аудитор мережної безпеки"
+
+#. GST_ROLE_SECURITY_AUDITING
+#: ../src/services/service.c:61
+msgid "Web calendar server"
+msgstr "Сервер веб-календаря"
+
+#. GST_ROLE_WEB_CALENDAR_SERVER
+#: ../src/services/service.c:62
+msgid "OEM configuration manager"
+msgstr "Менеджер налаштовування OEM"
+
+#. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:63
+msgid "Terminal multiplexor"
+msgstr "Термінальний мультиплексор"
+
+#. GST_ROLE_TERMINAL_MULTIPLEXOR
+#: ../src/services/service.c:64
+msgid "Disk quota activation"
+msgstr "Вмикання дискової квоти"
+
+#. GST_ROLE_QUOTA_MANAGEMENT
+#: ../src/services/service.c:65
+msgid "Package index monitor"
+msgstr "Монітор індексу пакетів"
+
+#. GST_ROLE_PACKAGE_INDEX_MONITORING
+#: ../src/services/service.c:66
+msgid "Network service"
+msgstr "Мережна служба "
+
+#. GST_ROLE_NETWORK
+#: ../src/services/service.c:67
+msgid "Dynamic DNS services updater"
+msgstr "Оновлення служб динамічного DNS"
+
+#. GST_ROLE_DYNAMIC_DNS_SERVICE
+#: ../src/services/service.c:68
+msgid "DHCP server"
+msgstr "Сервер DHCP"
+
+#. GST_ROLE_DHCP_SERVER
+#: ../src/services/service.c:69
+msgid "Domain name server"
+msgstr "Сервер доменних імен"
+
+#. GST_ROLE_DNS
+#: ../src/services/service.c:70
+msgid "Proxy cache service"
+msgstr "Служба кешуючого проксі"
+
+#. GST_ROLE_PROXY_CACHE
+#: ../src/services/service.c:71
+msgid "LDAP server"
+msgstr "Сервер LDAP"
+
+#. GST_ROLE_LDAP_SERVER
+#: ../src/services/service.c:72
+msgid "Mailing lists manager"
+msgstr "Менеджер поштових списків"
+
+#. GST_ROLE_MAILING_LISTS_MANAGER
+#: ../src/services/service.c:73
+msgid "Multicast DNS service discovery"
+msgstr "Виявлення служб розподіленого DNS"
+
+#. GST_ROLE_RENDEZVOUS
+#: ../src/services/service.c:74
+msgid "Account information resolver"
+msgstr "Отримання інформації про навчальні записи"
+
+#. GST_ROLE_NSS
+#: ../src/services/service.c:75
+msgid "Virtual Private Network server"
+msgstr "Сервер віртуальної приватної мережі"
+
+#. GST_ROLE_VPN_SERVER
+#: ../src/services/service.c:76
+msgid "Router advertisement server"
+msgstr "Сервер оптимізації маршрутизації"
+
+#. GST_ROLE_ROUTER_ADVERTISEMENT_SERVER
+#: ../src/services/service.c:77
+msgid "IPSec key exchange server"
+msgstr "Сервер обміну ключами IPSec"
+
+#. GST_ROLE_IPSEC_KEY_EXCHANGE_SERVER
+#: ../src/services/service.c:78
+msgid "Disk server"
+msgstr "Дисковий сервер"
+
+#. GST_ROLE_DISK_SERVER
+#: ../src/services/service.c:79
+msgid "Disk client"
+msgstr "Дисковий клієнт"
+
+#. GST_ROLE_DISK_CLIENT
+#: ../src/services/service.c:80
+msgid "Route server"
+msgstr "Маршрутизатор"
+
+#. GST_ROLE_ROUTE_SERVER
+#: ../src/services/service.c:81
+msgid "RPC mapper"
+msgstr "Каталог служб RPC"
+
+#. GST_ROLE_RPC_MAPPER
+#: ../src/services/service.c:82
+msgid "SNMP server"
+msgstr "Сервер SNMP"
+
+#. GST_ROLE_SNMP_SERVER
+#: ../src/services/service.c:83
+msgid "Terminal server client"
+msgstr "Клієнт термінального сервера"
+
+#. GST_ROLE_LTSP_CLIENT
+#: ../src/services/service.c:84
+msgid "Audio settings management"
+msgstr "Керування параметрами звуку"
+
+#. GST_ROLE_AUDIO_MANAGEMENT
+#: ../src/services/service.c:85
+msgid "Volumes mounter"
+msgstr "Підключення розділів"
+
+#: ../src/services/service.c:85
+msgid "Mounts your volumes automatically"
+msgstr "Автоматично підключає ваші розділи"
+
+#. GST_ROLE_AUTOMOUNTER
+#: ../src/services/service.c:86
+msgid "Infrared port management"
+msgstr "Керування інфра-червоним портом"
+
+#. GST_ROLE_INFRARED_MANAGEMENT
+#: ../src/services/service.c:87
+msgid "Braille display management"
+msgstr "Керування дисплеєм Брайля"
+
+#. GST_ROLE_BRAILLE_DISPLAY_MANAGEMENT
+#: ../src/services/service.c:88
+msgid "Bluetooth device management"
+msgstr "Керування пристроями Bluetooth"
+
+#. GST_ROLE_BLUETOOTH_MANAGEMENT
+#: ../src/services/service.c:89
+msgid "Hard disk tuning"
+msgstr "Налаштовування жорсткого диску"
+
+#. GST_ROLE_HDD_MANAGEMENT
+#: ../src/services/service.c:90
+msgid "Hotkeys management"
+msgstr "Керування гарячими клавішами"
+
+#. GST_ROLE_HOTKEYS_MANAGEMENT
+#: ../src/services/service.c:91
+msgid "Power management"
+msgstr "Керування живленням"
+
+#. GST_ROLE_POWER_MANAGEMENT
+#: ../src/services/service.c:92
+msgid "Logical volume management"
+msgstr "Керування логічними томами"
+
+#. GST_ROLE_LVM_MANAGEMENT
+#: ../src/services/service.c:93
+msgid "Cluster management tool"
+msgstr "Інструмент керування кластером"
+
+#. GST_ROLE_CLUSTER_MANAGEMENT
+#: ../src/services/service.c:94
+msgid "Fax settings management"
+msgstr "Керування параметрами факсу"
+
+#. GST_ROLE_FAX_MANAGEMENT
+#: ../src/services/service.c:95
+msgid "RAID disks management"
+msgstr "Керування RAID-масивами"
+
+#. GST_ROLE_RAID_MANAGEMENT
+#: ../src/services/service.c:96
+msgid "Graphic tablets management"
+msgstr "Керування графічними планшетами"
+
+#. GST_ROLE_GRAPHIC_TABLETS_MANAGEMENT
+#: ../src/services/service.c:97
+msgid "CPU Frequency manager"
+msgstr "Керування частотою центрального процесора"
+
+#. GST_ROLE_CPUFREQ_MANAGEMENT
+#: ../src/services/service.c:98
+msgid "Eagle USB ADSL modems manager"
+msgstr "Керування USB ADSL модемами Eagle"
+
+#. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
+#: ../src/services/service.c:99
+msgid "Serial port settings management"
+msgstr "Керування параметрами послідовного порту"
+
+#. GST_ROLE_SERIAL_PORTS_MANAGEMENT
+#: ../src/services/service.c:100
+msgid "ISDN modems manager"
+msgstr "Керування модемами ISDN"
+
+#. GST_ROLE_ISDN_MANAGEMENT
+#: ../src/services/service.c:101
+msgid "Telstra Bigpond Cable Network client"
+msgstr "Клієнт кабельної мережі Telstra Bigpond"
+
+#. GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT
+#: ../src/services/service.c:102
+msgid "Hardware monitor"
+msgstr "Монітор апаратного контролю"
+
+#. GST_ROLE_HARDWARE_MONITORING
+#: ../src/services/service.c:103
+msgid "System monitor"
+msgstr "Системний монітор"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1415,218 +1275,110 @@ msgstr "Визначення служб, що запускатимуться і�
 msgid "Services"
 msgstr "Служби"
 
-#: ../src/services/service.c:32
-msgid "Antivirus"
-msgstr "Антивірус"
+#: ../src/services/service-settings-table.c:73
+#: ../src/services/service-settings-table.c:97
+#: ../src/services/service-settings-table.c:109
+msgid "Start"
+msgstr "Запустити"
 
-#: ../src/services/service.c:32
-msgid "Analyzes your incoming mail for virus"
-msgstr "Перевіряє вхідну пошту на віруси"
+#: ../src/services/service-settings-table.c:79
+#: ../src/services/service-settings-table.c:99
+#: ../src/services/service-settings-table.c:111
+msgid "Stop"
+msgstr "Зупинити"
 
-#: ../src/services/service.c:33
-msgid "Volumes mounter"
-msgstr "Підключення розділів"
+#: ../src/services/service-settings-table.c:85
+#: ../src/services/service-settings-table.c:102
+msgid "Ignore"
+msgstr "Ігнорувати"
 
-#: ../src/services/service.c:33
-msgid "Mounts your volumes automatically"
-msgstr "Автоматично підключає ваші розділи"
+#: ../src/services/service-settings-table.c:175
+msgid "Runlevel"
+msgstr "Рівень запуску"
 
-#: ../src/services/service.c:34
-msgid "Actions scheduler"
-msgstr "Планування дій"
+#: ../src/services/service-settings-table.c:192
+msgid "Status"
+msgstr "Стан"
 
-#: ../src/services/service.c:34
-msgid "Executes scheduled actions"
-msgstr "Виконує заплановані дії"
+#: ../src/services/service-settings-table.c:211
+msgid "Priority"
+msgstr "Пріоритет"
 
-#: ../src/services/service.c:35
-msgid "Database server"
-msgstr "Сервер баз даних"
+#: ../src/services/services-tool.c:100
+msgid "Services settings"
+msgstr "Параметри служб"
 
-#: ../src/services/service.c:35
-msgid "Data storage system"
-msgstr "Система баз даних"
-
-#: ../src/services/service.c:36
-msgid "Graphical login manager"
-msgstr "Графічний менеджер входу"
-
-#: ../src/services/service.c:36
-msgid "Allows users to login graphically"
-msgstr "Дозволяє користувачам входити у графічному режимі"
-
-#: ../src/services/service.c:37
-msgid "Folder sharing service"
-msgstr "Спільний доступ до тек"
-
-#: ../src/services/service.c:37
-msgid "Shares folders over your network"
-msgstr "Спільний доступ до тек з мережі"
-
-#: ../src/services/service.c:38
-msgid "File sharing service"
-msgstr "Спільний доступ до файлів"
-
-#: ../src/services/service.c:38 ../src/services/service.c:39
-msgid "Shares files over the Internet"
-msgstr "Спільний доступ до файлів з Інтернет"
-
-#: ../src/services/service.c:39
-msgid "FTP service"
-msgstr "Служба FTP"
-
-#: ../src/services/service.c:40
-msgid "Mail fetcher"
-msgstr "Отримання пошти"
-
-#: ../src/services/service.c:40
-msgid "Downloads your mail from remote accounts"
-msgstr "Завантажує пошту з віддалених серверів"
-
-#: ../src/services/service.c:41
-msgid "Mail agent"
-msgstr "Поштовий агент"
-
-#: ../src/services/service.c:41
-msgid "Delivers your outgoing mail"
-msgstr "Доставляє вашу пошту"
-
-#: ../src/services/service.c:42
-msgid "Clock synchronization service"
-msgstr "Служба синхронізації годинників"
-
-#: ../src/services/service.c:42
-msgid "Synchronizes your computer clock with Internet time servers"
-msgstr "Синхронізує годинник вашого комп'ютера з серверами часу в Інтернет"
-
-#: ../src/services/service.c:43
-msgid "Printer service"
-msgstr "Служба друку"
-
-#: ../src/services/service.c:43
-msgid "Allows applications to use printers"
-msgstr "Дозволяє програмам використовувати принтер"
-
-#: ../src/services/service.c:44
-msgid "Remote shell server"
-msgstr "Сервер віддаленого доступу"
-
-#: ../src/services/service.c:44
-msgid "Secure shell server"
-msgstr "Безпечний сервер віддаленого доступу"
-
-#: ../src/services/service.c:45
-msgid "Computer activity logger"
-msgstr "Журнал активності комп'ютера"
-
-#: ../src/services/service.c:45
-msgid "Keeps a log of your computer activity"
-msgstr "Зберігає у журналі інформацію про активність комп'ютера"
-
-#: ../src/services/service.c:46
-msgid "Web server"
-msgstr "Веб-сервер"
-
-#: ../src/services/service.c:46
-msgid "Shares your web pages over the Internet"
-msgstr "Публікація веб-сторінок в Інтернет"
-
-#: ../src/shares/callbacks.c:187
+#: ../src/shares/callbacks.c:196
 msgid "Are you sure you want to delete this share?"
 msgstr "Ви дійсно бажаєте видалити цей спільний ресурс?"
 
-#: ../src/shares/callbacks.c:189
+#: ../src/shares/callbacks.c:198
 msgid "Other computers in your network will stop viewing this."
 msgstr "Інші комп'ютери вашої мережі перестануть його бачити."
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:92
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Додайте шлях "
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:92
 msgid "PATH"
 msgstr "ШЛЯХ"
 
-#: ../src/shares/main.c:97
-msgid "Shared folders settings"
-msgstr "Параметри спільних тек"
-
-#: ../src/shares/nautilus/nautilus-shares.c:129
+#: ../src/shares/nautilus/nautilus-shares.c:124
 msgid "_Share folder"
 msgstr "_Спільна тека"
 
-#: ../src/shares/nautilus/nautilus-shares.c:130
+#: ../src/shares/nautilus/nautilus-shares.c:125
 msgid "Share this folder with other computers"
 msgstr "Відкрити доступ до цієї теки іншим комп'ютерам"
 
-#: ../src/shares/nfs-acl-table.c:51
+#: ../src/shares/nfs-acl-table.c:50
 msgid "Allowed host/network"
 msgstr "Дозволені вузли/мережі"
 
-#: ../src/shares/share-nfs-add-hosts.c:114
-#, c-format
-msgid "Hosts in the %s network"
-msgstr "Вузли у мережі %s"
-
-#: ../src/shares/share-nfs-add-hosts.c:146
+#: ../src/shares/share-nfs-add-hosts.c:117
 msgid "Specify hostname"
 msgstr "Вкажіть назву вузла"
 
-#: ../src/shares/share-nfs-add-hosts.c:153
+#: ../src/shares/share-nfs-add-hosts.c:124
 msgid "Specify IP address"
 msgstr "Вкажіть IP-адресу"
 
-#: ../src/shares/share-nfs-add-hosts.c:160
+#: ../src/shares/share-nfs-add-hosts.c:131
 msgid "Specify network"
 msgstr "Вкажіть мережу"
-
-#: ../src/shares/share-settings.c:123
-msgid "Do not share"
-msgstr "Зробити не спільною"
-
-#: ../src/shares/share-settings.c:131
-msgid "SMB"
-msgstr "SMB"
-
-#: ../src/shares/share-settings.c:139
-msgid "NFS"
-msgstr "NFS"
 
 #: ../src/shares/shares.desktop.in.in.h:1
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Налаштувати які теки доступні для вашого мережного оточення"
 
-#: ../src/shares/shares.desktop.in.in.h:2
-msgid "Shared Folders"
-msgstr "Спільні теки"
+#: ../src/shares/share-settings.c:61
+msgid "File System"
+msgstr "Файлова система"
 
-#: ../src/shares/transfer.c:44
+#: ../src/shares/share-settings.c:144
+msgid "Do not share"
+msgstr "Зробити не спільною"
+
+#: ../src/shares/share-settings.c:152
+msgid "Windows networks (SMB)"
+msgstr "Мережі Windows (SMB)"
+
+#: ../src/shares/share-settings.c:160
+msgid "Unix networks (NFS)"
+msgstr "Мережі Unix (NFS)"
+
+#: ../src/shares/shares-tool.c:125
 msgid "Sharing services are not installed"
 msgstr "Служби надання спільного доступу не встановлені"
 
-#: ../src/shares/transfer.c:46
+#: ../src/shares/shares-tool.c:127
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
-"folders. The tool will close now."
+"folders."
 msgstr ""
 "Для надання спільного доступу до ваших тек необхідно встановити принаймні "
-"сервери Samba чи NFS. Зараз програма закривається."
-
-#: ../src/time/main.c:464
-msgid "NTP support is not installed"
-msgstr "Підтримка NTP не запущена"
-
-#: ../src/time/main.c:466
-msgid ""
-"Please install and activate NTP support in the system to enable "
-"synchronization of your local time server with Internet time servers."
-msgstr ""
-"Запустіть та активуйте підтримку NTP у системі, для забезпечення "
-"синхронізації локального серверу часу з серверами часу Інтернет."
-
-#: ../src/time/main.c:762
-msgid "Time and Date Settings"
-msgstr "Параметри дати й часу"
+"сервери Samba чи NFS."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1636,221 +1388,177 @@ msgstr "Змінити системну дату, час і часовий по�
 msgid "Time and Date"
 msgstr "Дата й час"
 
-#: ../src/users/callbacks.c:571
-msgid "Error saving profile"
-msgstr "Помилка при збереженні профілю"
+#: ../src/time/time-tool.c:377
+msgid "NTP support is not installed"
+msgstr "Підтримка NTP не запущена"
 
-#: ../src/users/callbacks.c:613
-msgid "Create New profile"
-msgstr "Створення нового профілю"
-
-#: ../src/users/callbacks.c:649
-#, c-format
-msgid "Settings for profile %s"
-msgstr "Параметри профілю %s"
-
-#: ../src/users/group-settings.c:91
-msgid "Create New Group"
-msgstr "Створення нової групи"
-
-#. Check if gid is available
-#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
-msgid "Invalid group ID"
-msgstr "Неправильний ідентифікатор групи"
-
-#: ../src/users/group-settings.c:165
-msgid "Group ID must be a positive number"
-msgstr "Ідентифікатор групи повинен бути додатнім числом"
-
-#. if group is root
-#: ../src/users/group-settings.c:168
-msgid "Group ID of the \"root\" user should not be modified"
-msgstr "Ідентифікатор групи користувача \"root\" не повинен змінюватись."
-
-#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:218
-#: ../src/users/group-settings.c:288
-msgid "This would leave the system unusable"
-msgstr "Це може привести систему до непрацездатного стану"
-
-#: ../src/users/group-settings.c:173
-#, c-format
-msgid "Group ID %s already exists"
-msgstr "Ідентифікатор групи %s вже існує."
-
-#. If empty.
-#: ../src/users/group-settings.c:198
-msgid "Group name is empty"
-msgstr "Назва групи порожня."
-
-#: ../src/users/group-settings.c:199
-msgid "A group name must be specified"
-msgstr "Необхідно вказати назву групи"
-
-#. If too long.
-#: ../src/users/group-settings.c:202
-msgid "The group name is too long"
-msgstr "Назва групи надто довга"
-
-#: ../src/users/group-settings.c:203
-#, c-format
-msgid "To be valid, the group name should have less than %d character"
-msgid_plural "To be valid, the group name should have less than %d characters"
-msgstr[0] "Допустима назва групи повинна містити менше ніж %i символ."
-msgstr[1] "Допустима назва групи повинна містити менше ніж %i символи."
-msgstr[2] "Допустима назва групи повинна містити менше ніж %i символів."
-
-#. if invalid.
-#: ../src/users/group-settings.c:209
-msgid "Group name has invalid characters"
-msgstr "Назва групи має некоректні символи"
-
-#: ../src/users/group-settings.c:210
-msgid "Please set a valid group name, using only lower case letters"
+#: ../src/time/time-tool.c:379
+msgid ""
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers."
 msgstr ""
-"Встановіть коректну назву групи, використовуючи лише символи нижнього "
-"регістру"
+"Запустіть та активуйте підтримку NTP у системі, для забезпечення "
+"синхронізації локального серверу часу з серверами часу Інтернет."
 
-#. if !exist.
-#: ../src/users/group-settings.c:213
-#, c-format
-msgid "Group \"%s\" already exists"
-msgstr "Група \"%s\" вже існує."
+#: ../src/time/time-tool.c:409
+msgid "Enabling NTP"
+msgstr "Вмикається NTP"
 
-#: ../src/users/group-settings.c:214
-msgid "Please select a different group name"
-msgstr "Виберіть іншу назву облікового запису"
+#: ../src/time/time-tool.c:409
+msgid "Disabling NTP"
+msgstr "Вимикається NTP"
 
-#. if it's the root group
-#: ../src/users/group-settings.c:217
-msgid "Group name of the \"root\" user should not be modified"
-msgstr "Назва групи користувача \"root\" не повинна змінюватись"
+#: ../src/time/time-tool.c:421
+msgid "Synchronizing system clock"
+msgstr "Синхронізація системного годинника"
 
-#: ../src/users/group-settings.c:287
-msgid "The group \"root\" should not be deleted"
-msgstr "Групу \"root\" не можна видаляти"
+#: ../src/time/time-tool.c:527
+msgid "Keep synchronized with Internet servers"
+msgstr "Синхронізувати годинники з серверами у Інтернет"
 
-#: ../src/users/group-settings.c:302
+#: ../src/time/time-tool.c:528
+msgid "Manual"
+msgstr "Посібник"
+
+#: ../src/time/time-tool.c:677
+msgid "Time and Date Settings"
+msgstr "Параметри дати й часу"
+
+#: ../src/users/group-settings.c:52
+msgid "Administrator group can not be deleted"
+msgstr "Групу адміністраторів не можна видаляти"
+
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:305 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:446 ../src/users/user-settings.c:516
+msgid "This would leave the system unusable."
+msgstr "Це може привести систему до непрацездатного стану."
+
+#: ../src/users/group-settings.c:68
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Ви дійсно бажаєте видалити групу \"%s\"?"
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:71
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Це може призвести до появи файлів з неправильним ідентифікатором групи"
 
-#: ../src/users/group-settings.c:364
-#, c-format
-msgid "Settings for Group %s"
-msgstr "Параметри групи %s"
+#: ../src/users/group-settings.c:170
+msgid "New group"
+msgstr "Створити групу"
 
-#: ../src/users/groups-table.c:44
-msgid "Group"
-msgstr "Група"
+#: ../src/users/group-settings.c:178
+#, c-format
+msgid "Group '%s' Properties"
+msgstr "Властивості групи '%s'"
+
+#: ../src/users/group-settings.c:277
+msgid "Group name is empty"
+msgstr "Назва групи порожня."
+
+#: ../src/users/group-settings.c:278
+msgid "A group name must be specified."
+msgstr "Необхідно вказати назву групи."
+
+#: ../src/users/group-settings.c:280
+msgid "Group name of the administrator group user should not be modified"
+msgstr "Назва групи адміністратора не повинна змінюватись"
+
+#: ../src/users/group-settings.c:283
+msgid "Group name has invalid characters"
+msgstr "Назва групи має некоректні символи"
+
+#: ../src/users/group-settings.c:284
+msgid ""
+"Please set a valid group name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Вкажіть коректну назву групи, що починається з латинського символу у нижньому "
+"регістрі, за якими йдуть символи у нижньому регістрі та числа."
+
+#: ../src/users/group-settings.c:288
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "Група \"%s\" вже існує."
+
+#: ../src/users/group-settings.c:289 ../src/users/user-settings.c:454
+msgid "Please select a different user name."
+msgstr "Вкажіть інше ім'я користувача."
+
+#: ../src/users/group-settings.c:304
+msgid "Group ID of the Administrator account should not be modified"
+msgstr "Ідентифікатор групи адміністратора не повинен змінюватись"
 
 #: ../src/users/groups-table.c:45
-msgid "GID"
-msgstr "GID"
+msgid "Group name"
+msgstr "Назва групи"
 
-#: ../src/users/main.c:123
-msgid "User name contains"
-msgstr "Назва користувача містить"
+#: ../src/users/privileges-table.c:49
+msgid "Monitor system logs"
+msgstr "Стежити за системними журналами"
 
-#: ../src/users/main.c:124
-msgid "User ID is"
-msgstr "Користувач:"
+#: ../src/users/privileges-table.c:50
+msgid "Administer the system"
+msgstr "Адмініструвати систему"
 
-#: ../src/users/main.c:125
-msgid "Group name contains"
-msgstr "Назва групи містить"
+#: ../src/users/privileges-table.c:51
+msgid "Use audio devices"
+msgstr "Використовувати аудіо-пристрої"
 
-#: ../src/users/main.c:126
-msgid "User GID is"
-msgstr "GID користувача"
+#: ../src/users/privileges-table.c:52
+msgid "Use CD-ROM drives"
+msgstr "Використовувати пристрої компакт-дисків"
 
-#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
+#: ../src/users/privileges-table.c:53
+msgid "Use modems"
+msgstr "Використовувати модеми"
+
+#: ../src/users/privileges-table.c:54
+msgid "Connect to Internet using a modem"
+msgstr "З'єднуватись з Інтернет, використовуючи модем"
+
+#: ../src/users/privileges-table.c:55
+msgid "Send and receive faxes"
+msgstr "Надсилати та отримувати факси"
+
+#: ../src/users/privileges-table.c:56
+msgid "Use floppy drives"
+msgstr "Використовувати дисководи гнучких дисків"
+
+#: ../src/users/privileges-table.c:57
+msgid "Access external storage devices automatically"
+msgstr "Автоматично отримувати доступ до зовнішніх носіїв даних"
+
+#: ../src/users/privileges-table.c:58
+msgid "Use scanners"
+msgstr "Використовувати сканери"
+
+#: ../src/users/privileges-table.c:59
+msgid "Use tape drives"
+msgstr "Використовувати накопичувачі на магнітній стрічці"
+
+#: ../src/users/privileges-table.c:60
+msgid "Be able to get administrator privileges"
+msgstr "Отримувати привілеї адміністратора"
+
+#: ../src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Додавання і вилучення користувачів і груп"
+
+#: ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Користувачі та групи"
 
-#: ../src/users/passwd.c:168
-msgid "Passwords do not match"
-msgstr "Паролі не співпадають"
-
-#: ../src/users/passwd.c:173
-#, c-format
-msgid ""
-"Bad password: %s.\n"
-"Please try with a new password"
-msgstr ""
-"Поганий пароль: %s.\n"
-"Спробуйте новий пароль"
-
-#: ../src/users/profile-settings.c:125
-msgid "The profile must have a name"
-msgstr "Профіль повинен мати назву"
-
-#: ../src/users/profile-settings.c:130
-msgid "The profile must have a default home"
-msgstr "У профілі повинен бути вказаний домашній каталог"
-
-#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
-msgid "The profile must have a default shell"
-msgstr "У профіль повинна бути вказана типова оболонка"
-
-#: ../src/users/profile-settings.c:208
-msgid "The default profile should not be deleted"
-msgstr "Типовий профіль не модна видаляти"
-
-#: ../src/users/profile-settings.c:209
-msgid "This profile is used for setting default data for new users"
-msgstr ""
-"Цей профіль використовується для встановлення типових параметрів новим "
-"користувачам"
-
-#: ../src/users/profile-settings.c:218
-#, c-format
-msgid "Delete profile \"%s\"?"
-msgstr "Видалити профіль \"%s\"?"
-
-#: ../src/users/profile-settings.c:220
-msgid "You will not be able to recover this profile after pressing \"apply\"."
-msgstr "Після натискання \"Застосувати\", ви не зможете відновити цей профіль."
-
-#. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:39
-msgid "Profile"
-msgstr "Профіль"
-
-#: ../src/users/profiles-table.c:40
-msgid "Comment"
-msgstr "Коментар"
-
-#: ../src/users/search-bar/search-bar.c:228
-msgid "C_lear"
-msgstr "О_чистити"
-
-#: ../src/users/search-bar/search-bar.c:329
-msgid "Choice"
-msgstr "Вибрати"
-
-#: ../src/users/search-bar/search-bar.c:339
-msgid "Text"
-msgstr "Текст"
+#: ../src/users/user-settings.c:57
+msgid "Administrator account cannot be deleted"
+msgstr "Обліковий запис адміністратора видаляти не можна"
 
 #: ../src/users/user-settings.c:73
-msgid "The \"root\" user should not be deleted"
-msgstr "Не можна видаляти обліковий рахунок користувача root."
-
-#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:311
-#: ../src/users/user-settings.c:406 ../src/users/user-settings.c:442
-msgid "This would leave the system unusable."
-msgstr "Це може привести систему до непрацездатного стану."
-
-#: ../src/users/user-settings.c:83
 #, c-format
-msgid "Are you sure you want to delete user \"%s\"?"
-msgstr "Ви дійсно бажаєте видалити обліковий рахунок користувача \"%s\"?"
+msgid "Are you sure you want to delete account \"%s\"?"
+msgstr "Ви дійсно бажаєте видалити обліковий запис \"%s\"?"
 
-#: ../src/users/user-settings.c:85
+#: ../src/users/user-settings.c:76
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1858,43 +1566,32 @@ msgstr ""
 "Це призведе до заборони цьому користувачу доступу до системи, але його "
 "домашній катало не буде видалено."
 
-#: ../src/users/user-settings.c:189
-msgid "User Account Editor"
-msgstr "Редактор облікових рахунків"
+#: ../src/users/user-settings.c:289
+msgid "New user account"
+msgstr "Новий обліковий запис"
 
-#: ../src/users/user-settings.c:285
-msgid "The user name is empty"
+#: ../src/users/user-settings.c:304
+#, c-format
+msgid "Account '%s' Properties"
+msgstr "Властивості облікового запису «%s»"
+
+#: ../src/users/user-settings.c:442
+msgid "User name is empty"
 msgstr "Назва облікового рахунку порожня"
 
-#: ../src/users/user-settings.c:286
+#: ../src/users/user-settings.c:443
 msgid "A user name must be specified."
 msgstr "Необхідно вказати назву облікового рахунку користувача."
 
-#. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:300
-msgid "The user name is too long"
-msgstr "Назва облікового рахунку надто довга"
+#: ../src/users/user-settings.c:445
+msgid "Administrator account's user name should not be modified"
+msgstr "Назву облікового рахунку адміністратора не можна змінювати"
 
-#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:301
-#, c-format
-msgid "To be valid, the user name should have less than %d character"
-msgid_plural "To be valid, the user name should have less than %d characters"
-msgstr[0] ""
-"Коректна назва облікового рахунку повинна містити менше ніж %i символ."
-msgstr[1] ""
-"Коректна назва облікового рахунку повинна містити менше ніж %i символи."
-msgstr[2] ""
-"Коректна назва облікового рахунку повинна містити менше ніж %i символів."
-
-#: ../src/users/user-settings.c:310
-msgid "User name for the \"root\" user should not be modified"
-msgstr "Назва облікового рахунку \"root\" не можна змінювати"
-
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:448
 msgid "User name has invalid characters"
 msgstr "Назва облікового рахунку містить неправильні символи"
 
-#: ../src/users/user-settings.c:317
+#: ../src/users/user-settings.c:449
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1902,37 +1599,25 @@ msgstr ""
 "Вкажіть коректну назву облікового рахунку, що починається з символу нижнього "
 "регістру за якими йдуть символи нижнього регістру та числа."
 
-#: ../src/users/user-settings.c:323
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Назва облікового рахунку \"%s\" вже існує"
 
-#: ../src/users/user-settings.c:324
-msgid "Please select a different user name."
-msgstr "Вкажіть інше ім'я користувача."
-
-#: ../src/users/user-settings.c:349
+#: ../src/users/user-settings.c:480
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Заборонений символ \"%c\" у коментарі"
 
-#: ../src/users/user-settings.c:350
+#: ../src/users/user-settings.c:481
 msgid "Check that this character is not used."
 msgstr "Перевірте, що цей символ не використовується."
 
-#: ../src/users/user-settings.c:398
-msgid "Home directory should not be empty"
-msgstr "Домашній каталог не має бути порожнім"
-
-#: ../src/users/user-settings.c:399
-msgid "Make sure you provide a home directory."
-msgstr "Перевірте, що ви вказали домашній каталог."
-
-#: ../src/users/user-settings.c:401
+#: ../src/users/user-settings.c:498
 msgid "Incomplete path in home directory"
 msgstr "Неповний шлях у домашньому каталозі"
 
-#: ../src/users/user-settings.c:402
+#: ../src/users/user-settings.c:499
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1940,119 +1625,55 @@ msgstr ""
 "Введіть повний шлях домашнього каталогу\n"
 "<span size=\"smaller\">наприклад: /home/john</span>."
 
-#: ../src/users/user-settings.c:405
-msgid "Home directory of the \"root\" user should not be modified"
-msgstr "Не можна змінювати домашній каталог користувача root"
+#: ../src/users/user-settings.c:515
+msgid "Administrator account's user ID should not be modified"
+msgstr "Ідентифікатор користувача облікового рахунку адміністратора можна змінювати"
 
-#: ../src/users/user-settings.c:438
-msgid "Invalid user ID"
-msgstr "Неправильний ідентифікатор користувача"
-
-#: ../src/users/user-settings.c:439
-msgid "User ID must be a positive number."
-msgstr "Ідентифікатор користувача повинен бути додатнім числом."
-
-#: ../src/users/user-settings.c:441
-msgid "User ID of the \"root\" user should not be modified"
-msgstr "Не можна змінювати ідентифікатор облікового запису користувача root."
-
-#: ../src/users/user-settings.c:459
-#, c-format
-msgid "User ID %s already exists"
-msgstr "Користувач з ідентифікатором %s вже існує"
-
-#: ../src/users/user-settings.c:461
-msgid ""
-"Several users may share a single user ID, but it's not common and may lead "
-"to security problems."
-msgstr ""
-"Декілька користувачів мають спільний ідентифікатор користувача, це "
-"незвичайна ситуація, яка може становити загрозу безпеці."
-
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:531
 msgid "Incomplete path in shell"
 msgstr "Неповний шлях у оболонці"
 
-#: ../src/users/user-settings.c:480
+#: ../src/users/user-settings.c:532
 msgid ""
 "Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>."
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr ""
-"Введіть повний шлях до оболонки\n"
-"<span size=\"smaller\">наприклад: /bin/sh</span>"
+"Введіть повний шлях до інтерпретатора командного рядка\n"
+"<span size=\"smaller\">наприклад: /bin/bash</span>"
 
-#: ../src/users/user-settings.c:502
-msgid "Password should not be empty"
-msgstr "Пароль не має бути порожнім"
+#: ../src/users/user-settings.c:560
+msgid "Password is too short"
+msgstr "Пароль надто короткий"
 
-#: ../src/users/user-settings.c:503
-msgid "A password must be provided."
-msgstr "Необхідно вказати пароль."
+#: ../src/users/user-settings.c:561
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Паролі користувачів повинні бути не менш ніж з 6 символів, та бажано, щоб вони складались з цифр, "
+"символів та спеціальних символів."
 
-#: ../src/users/user-settings.c:505
-msgid "Password confirmation isn't correct"
+#: ../src/users/user-settings.c:564
+msgid "Password confirmation is not correct"
 msgstr "Підтвердження паролю некоректне"
 
-#: ../src/users/user-settings.c:506
+#: ../src/users/user-settings.c:565
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Переконайтесь, що ви вказали однаковий пароль у обох текстових полях."
 
-#: ../src/users/user-settings.c:780
-#, c-format
-msgid "Settings for User %s"
-msgstr "Параметри для користувача %s"
-
-#: ../src/users/users-table.c:61
-msgid "User"
-msgstr "Користувач"
-
-#: ../src/users/users-table.c:62
-msgid "Home"
-msgstr "Домівка"
+#: ../src/users/users-table.c:44
+msgid "Name"
+msgstr "Назва"
 
 #: ../src/users/users-table.c:63
-msgid "User details"
-msgstr "Параметри користувача"
+msgid "Login name"
+msgstr "Обліковий запис"
 
-#: ../src/users/users-table.c:64
-msgid "UID"
-msgstr "GID"
+#: ../src/users/users-table.c:70
+msgid "Home directory"
+msgstr "Домашній каталог"
 
-#: ../src/users/users-table.c:65
-msgid "Shell"
-msgstr "Оболонка"
+#: ../src/users/users-tool.c:191
+msgid "Users settings"
+msgstr "Параметри користувачів"
 
-#: ../src/users/users.desktop.in.in.h:1
-msgid "Add or remove users and groups"
-msgstr "Додавання і вилучення користувачів і груп"
-
-#~ msgid "/dev/hda"
-#~ msgstr "/dev/hda"
-
-#~ msgid "/dev/hdb"
-#~ msgstr "/dev/hdb"
-
-#~ msgid "/dev/hdc"
-#~ msgstr "/dev/hdc"
-
-#~ msgid "/dev/hdd"
-#~ msgstr "/dev/hdd"
-
-#~ msgid ""
-#~ "/dev/modem\n"
-#~ "/dev/ttyS0\n"
-#~ "/dev/ttyS1\n"
-#~ "/dev/ttyS2\n"
-#~ "/dev/ttyS3"
-#~ msgstr ""
-#~ "/dev/modem\n"
-#~ "/dev/ttyS0\n"
-#~ "/dev/ttyS1\n"
-#~ "/dev/ttyS2\n"
-#~ "/dev/ttyS3"
-
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "The group name should have less than %i characters for being valid"
-#~ msgstr "Коректна назва групи повинна мати менше ніж %i символів "
