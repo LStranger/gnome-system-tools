@@ -1,18 +1,16 @@
-# translation of gnome-system-tools.HEAD.po to Russian
+# translation of gnome-system-tools to Russian
 # Copyright (C) 2000, 2006 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>, 2000, 2001.
 # Alexander Bokovoy <ab@altlinux.ru>, 2001.
 # Valek Filippov <frob@df.ru>, 2004.
 # Zarubin Pavel aka Gnome <gnome_bin@mail.ru>, 2004.
-#
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools.HEAD\n"
+"Project-Id-Version: gnome-system-tools trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-15 09:06+0400\n"
-"PO-Revision-Date: 2006-10-13 22:00+0000\n"
-"Last-Translator: Igor Zubarev <igor4u@gmail.com>\n"
+"POT-Creation-Date: 2007-03-10 13:10+0300\n"
+"PO-Revision-Date: 2007-03-10 22:00+0000\n"
+"Last-Translator: Nickolay V. shmyrev <nshmyrev@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,62 +19,10 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid ""
-"Comma separated list of hosts that the GST will be able to access when the "
-"remote configuration option is enabled"
-msgstr ""
-"Список узлов, разделённых запятыми, с которых разрешена конфигурация системы "
-"с помощью системных средств."
-
-#: ../gnome-system-tools.schemas.in.h:2
-msgid "Last GST version executed"
-msgstr "Последняя выполнявшаяся версия программы настройки системы"
-
-#: ../gnome-system-tools.schemas.in.h:3
-msgid "Preferred bootloader that boot-admin will configure"
-msgstr ""
-"Предпочтительный загрузчик, конфигурируемый с помощью программы настройки "
-"загрузчика"
-
-#: ../gnome-system-tools.schemas.in.h:4
-msgid "Remote hosts"
-msgstr "Удалённые узлы"
-
-#: ../gnome-system-tools.schemas.in.h:5
-msgid ""
-"The GST are able to do remote configuration through SSH, enable this option "
-"to use this feature"
-msgstr ""
-"Системные средства позволяют настраивать систему удалённо через SSH, "
-"включить такую возможность"
-
-#: ../gnome-system-tools.schemas.in.h:6
-msgid "The last GST version that this computer has run"
-msgstr "Последняя выполнявшаяся на этом узле версия системных средств"
-
-#: ../gnome-system-tools.schemas.in.h:7
-msgid ""
-"This key stores the bootloader that boot-admin will configure if there are "
-"more than one installed, if it's not set or isn't valid, then boot-admin "
-"will ask the user"
-msgstr ""
-"Этот ключ содержит загрузчик по умолчанию для настройки загрузчика. Если "
-"установлено более одного загрузчика, или значение ключа не установлено или "
-"некорректно, программа настройки загрузчика спросит пользователя"
-
-#: ../gnome-system-tools.schemas.in.h:8
-msgid "Whether the tools will use remote administration or not"
-msgstr "Использовать удалённое администрирование"
-
-#: ../gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Показывать все группы и всех пользователей в программе настройки "
 "пользователей"
-
-#: ../gnome-system-tools.schemas.in.h:10
-msgid "Whether the warning dialog should be shown or not"
-msgstr "Показывать диалог с предупреждением"
 
 #: ../interfaces/common.glade.in.h:1
 msgid ""
@@ -138,78 +84,70 @@ msgid "Aliases:"
 msgstr "Псевдонимы:"
 
 #: ../interfaces/network.glade.in.h:10
-msgid ""
-"Automatic Configuration (DHCP)\n"
-"Static IP address"
-msgstr ""
-"Автоматическая настройка (DHCP)\n"
-"Постоянный IP-адрес"
-
-#: ../interfaces/network.glade.in.h:12
 msgid "C_onfiguration:"
 msgstr "К_онфигурация:"
 
-#: ../interfaces/network.glade.in.h:13
+#: ../interfaces/network.glade.in.h:11
 msgid "Connections"
 msgstr "Соединения"
 
-#: ../interfaces/network.glade.in.h:14
+#: ../interfaces/network.glade.in.h:12
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:15
+#: ../interfaces/network.glade.in.h:13
 msgid "D_omain name:"
 msgstr "Имя _домена:"
 
-#: ../interfaces/network.glade.in.h:16
-msgid "Default _gateway device:"
-msgstr "_Шлюз по умолчанию:"
-
-#: ../interfaces/network.glade.in.h:17
+#: ../interfaces/network.glade.in.h:14
 msgid "Delete current location"
 msgstr "Удалить текущее расположение"
 
-#: ../interfaces/network.glade.in.h:18
+#: ../interfaces/network.glade.in.h:15
+msgid "E_nable roaming mode"
+msgstr "Включить реж_им роуминга"
+
+#: ../interfaces/network.glade.in.h:16
 msgid "E_nable this connection"
 msgstr "_Активировать соединение"
 
-#: ../interfaces/network.glade.in.h:19 ../interfaces/users.glade.in.h:19
+#: ../interfaces/network.glade.in.h:17 ../interfaces/users.glade.in.h:19
 msgid "General"
 msgstr "Общие"
 
-#: ../interfaces/network.glade.in.h:20
+#: ../interfaces/network.glade.in.h:18
 msgid "Host alias settings"
 msgstr "Настройки псевдонимов узлов"
 
-#: ../interfaces/network.glade.in.h:21
+#: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
 msgstr "Узлы"
 
-#: ../interfaces/network.glade.in.h:22 ../interfaces/shares.glade.in.h:12
+#: ../interfaces/network.glade.in.h:20 ../interfaces/shares.glade.in.h:12
 msgid "IP address:"
 msgstr "IP адрес:"
 
-#: ../interfaces/network.glade.in.h:23
+#: ../interfaces/network.glade.in.h:21
 msgid "Interface properties"
 msgstr "Свойства интерфейса"
 
-#: ../interfaces/network.glade.in.h:24
+#: ../interfaces/network.glade.in.h:22
 msgid "Location:"
 msgstr "Расположение:"
 
-#: ../interfaces/network.glade.in.h:25
+#: ../interfaces/network.glade.in.h:23
 msgid "Modem"
 msgstr "Модем"
 
-#: ../interfaces/network.glade.in.h:26
+#: ../interfaces/network.glade.in.h:24
 msgid "Network _password:"
 msgstr "Сетевой _пароль:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.glade.in.h:25
 msgid "Network name (_ESSID):"
 msgstr "Сетевое имя (_ESSID):"
 
-#: ../interfaces/network.glade.in.h:28
+#: ../interfaces/network.glade.in.h:26
 msgid ""
 "Off\n"
 "Low\n"
@@ -221,19 +159,19 @@ msgstr ""
 "Средне\n"
 "Громко"
 
-#: ../interfaces/network.glade.in.h:32
+#: ../interfaces/network.glade.in.h:30
 msgid "Options"
 msgstr "Настройки"
 
-#: ../interfaces/network.glade.in.h:33
+#: ../interfaces/network.glade.in.h:31
 msgid "P_assword"
 msgstr "_Пароль"
 
-#: ../interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:32
 msgid "Password _type:"
 msgstr "_Тип пароля:"
 
-#: ../interfaces/network.glade.in.h:35
+#: ../interfaces/network.glade.in.h:33
 msgid ""
 "Plain (ASCII)\n"
 "Hexadecimal"
@@ -241,11 +179,11 @@ msgstr ""
 "Текст (ASCII)\n"
 "Шестнадцатиричный"
 
-#: ../interfaces/network.glade.in.h:37
+#: ../interfaces/network.glade.in.h:35
 msgid "Save current network configuration as a location"
 msgstr "Сохранить текущую конфигурацию сети в файле"
 
-#: ../interfaces/network.glade.in.h:38
+#: ../interfaces/network.glade.in.h:36
 msgid ""
 "Tones\n"
 "Pulses"
@@ -253,67 +191,67 @@ msgstr ""
 "Тональный\n"
 "Импульсный"
 
-#: ../interfaces/network.glade.in.h:40
+#: ../interfaces/network.glade.in.h:38
 msgid "Use the Internet service provider nameservers"
 msgstr "Использовать сервера имен провайдера Интернет"
 
-#: ../interfaces/network.glade.in.h:41
+#: ../interfaces/network.glade.in.h:39
 msgid "_Autodetect"
 msgstr "_Автообнаружение"
 
-#: ../interfaces/network.glade.in.h:42
+#: ../interfaces/network.glade.in.h:40
 msgid "_Dial prefix:"
 msgstr "Префикс при наборе:"
 
-#: ../interfaces/network.glade.in.h:43
+#: ../interfaces/network.glade.in.h:41
 msgid "_Dial type:"
 msgstr "Способ _набора:"
 
-#: ../interfaces/network.glade.in.h:44
+#: ../interfaces/network.glade.in.h:42
 msgid "_Gateway address:"
 msgstr "Адрес _шлюза:"
 
-#: ../interfaces/network.glade.in.h:45
+#: ../interfaces/network.glade.in.h:43
 msgid "_Host name:"
 msgstr "_Имя узла:"
 
-#: ../interfaces/network.glade.in.h:46
+#: ../interfaces/network.glade.in.h:44
 msgid "_IP address:"
 msgstr "_IP адрес:"
 
-#: ../interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:45
 msgid "_Local IP:"
 msgstr "_Локальный IP:"
 
-#: ../interfaces/network.glade.in.h:48
+#: ../interfaces/network.glade.in.h:46
 msgid "_Modem port:"
 msgstr "Порт _модема:"
 
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:47
 msgid "_Phone number:"
 msgstr "Номер _телефона:"
 
-#: ../interfaces/network.glade.in.h:50
+#: ../interfaces/network.glade.in.h:48
 msgid "_Remote IP:"
 msgstr "_Удалённый IP:"
 
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.glade.in.h:49
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Попробовать ещё раз при разрыве или неудаче соединения."
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.glade.in.h:50
 msgid "_Set modem as default route to internet"
 msgstr "Установить _модем как устройство по умолчанию для доступа в Интеренет"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.glade.in.h:51
 msgid "_Subnet mask:"
 msgstr "Маска _подсети:"
 
-#: ../interfaces/network.glade.in.h:54 ../interfaces/users.glade.in.h:55
+#: ../interfaces/network.glade.in.h:52 ../interfaces/users.glade.in.h:55
 msgid "_Username:"
 msgstr "_Имя пользователя:"
 
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.glade.in.h:53
 msgid "_Volume:"
 msgstr "_Громкость:"
 
@@ -411,62 +349,54 @@ msgid "_Read only"
 msgstr "Только _чтение"
 
 #: ../interfaces/time.glade.in.h:1
-msgid "(unconfigured)"
-msgstr "(не настроено)"
-
-#: ../interfaces/time.glade.in.h:2
 msgid "<b>Selection</b>"
 msgstr "<b>Выделение</b>"
 
-#: ../interfaces/time.glade.in.h:3
+#: ../interfaces/time.glade.in.h:2
 msgid "<b>Time Zone</b>"
 msgstr "<b>Часовой пояс</b>"
 
-#: ../interfaces/time.glade.in.h:4
+#: ../interfaces/time.glade.in.h:3
 msgid "Add NTP Server"
 msgstr "Добавить NTP сервер"
 
-#: ../interfaces/time.glade.in.h:5
-msgid "Keep clock s_ynchronized with Internet servers:"
-msgstr "С_инхронизировать время с интернет-серверами:"
-
-#: ../interfaces/time.glade.in.h:6
+#: ../interfaces/time.glade.in.h:4
 msgid "NTP server"
 msgstr "NTP сервер"
 
-#: ../interfaces/time.glade.in.h:7
+#: ../interfaces/time.glade.in.h:5
 msgid "Se_lect Servers"
 msgstr "В_ыберите серверы"
 
-#: ../interfaces/time.glade.in.h:8
-msgid "Synchronize _Now"
-msgstr "Синхронизировать _сейчас"
-
-#: ../interfaces/time.glade.in.h:9
-msgid "Synchronize only once with Internet servers:"
-msgstr "Синхронизировать один раз с сервером в Internet:"
-
-#: ../interfaces/time.glade.in.h:10
+#: ../interfaces/time.glade.in.h:6
 msgid "Time servers"
 msgstr "Серверы времени"
 
-#: ../interfaces/time.glade.in.h:11
+#: ../interfaces/time.glade.in.h:7
+msgid "Time servers:"
+msgstr "Серверы времени:"
+
+#: ../interfaces/time.glade.in.h:8
 msgid "Time zone"
 msgstr "Часовой пояс"
 
-#: ../interfaces/time.glade.in.h:12
+#: ../interfaces/time.glade.in.h:9
 msgid "Time zone:"
 msgstr "Часовой пояс:"
 
-#: ../interfaces/time.glade.in.h:13
+#: ../interfaces/time.glade.in.h:10
+msgid "Unconfigured"
+msgstr "Не настроено"
+
+#: ../interfaces/time.glade.in.h:11
+msgid "_Configuration:"
+msgstr "К_онфигурация:"
+
+#: ../interfaces/time.glade.in.h:12
 msgid "_Date:"
 msgstr "_Дата:"
 
-#: ../interfaces/time.glade.in.h:14
-msgid "_Select Time Zone..."
-msgstr "_Выбрать часовой пояс..."
-
-#: ../interfaces/time.glade.in.h:15
+#: ../interfaces/time.glade.in.h:13
 msgid "_Time:"
 msgstr "_Время:"
 
@@ -647,7 +577,7 @@ msgid "_Days between warning and password expiration:"
 msgstr "_Дней между предупреждением и блокированием пароля:"
 
 #: ../interfaces/users.glade.in.h:46 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:39 ../src/shares/table.c:40 ../src/users/table.c:40
+#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "_Удалить"
 
@@ -687,12 +617,12 @@ msgstr "_Shell:"
 msgid "_Work phone:"
 msgstr "_Рабочий телефон:"
 
-#: ../src/common/gst-platform-dialog.c:218
+#: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
 msgstr "Ваша платформа не поддерживается данной программой"
 
 #. label
-#: ../src/common/gst-platform-dialog.c:224
+#: ../src/common/gst-platform-dialog.c:185
 msgid ""
 "If you know for sure that it works like one of the platforms listed below, "
 "you can select that and continue. Note, however, that this might damage the "
@@ -702,27 +632,27 @@ msgstr ""
 "платформ, перечисленных ниже, Вы можете выбрать её и продолжить. Однако, "
 "велик риск повреждения системной конфигурации, данных и даже компьютера"
 
-#: ../src/common/gst-platform-dialog.c:250
+#: ../src/common/gst-platform-dialog.c:212
 msgid "Unsupported platform"
 msgstr "Платформа не поддерживается"
 
-#: ../src/common/gst-tool.c:179
+#: ../src/common/gst-tool.c:178
 msgid "The configuration could not be loaded"
 msgstr "Не удалось загрузить конфигурацию"
 
-#: ../src/common/gst-tool.c:181
+#: ../src/common/gst-tool.c:180
 msgid "You are not allowed to access the system configuration."
 msgstr "У вас нет разрешения на доступ к настройкам системы."
 
-#: ../src/common/gst-tool.c:1247
+#: ../src/common/gst-tool.c:358
 msgid "GNOME System Tools"
 msgstr "Утилиты настройки системы"
 
-#: ../src/common/gst-tool.c:1271
+#: ../src/common/gst-tool.c:415
 msgid "Could not display help"
 msgstr "Не удалось отобразить справку"
 
-#: ../src/network/address-list.c:76 ../src/network/hosts.c:37
+#: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:38
 msgid "_Add"
 msgstr "_Добавить"
@@ -731,29 +661,25 @@ msgstr "_Добавить"
 msgid "Type address"
 msgstr "Введите адрес"
 
-#: ../src/network/callbacks.c:157
+#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
 msgid "Changing interface configuration"
 msgstr "Изменение настроек интерфейса"
 
-#: ../src/network/callbacks.c:200
+#: ../src/network/callbacks.c:243
 msgid "Could not autodetect modem device"
 msgstr "Не удалось найти модем"
 
-#: ../src/network/callbacks.c:203
+#: ../src/network/callbacks.c:246
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr "Проверьте что устройство не занято и подключено к Вашему компьютеру."
 
-#: ../src/network/callbacks.c:479
-msgid "Activating network interface"
-msgstr "Активация сетевого интерфейса"
-
-#: ../src/network/callbacks.c:514
+#: ../src/network/callbacks.c:467
 msgid "The host name has changed"
 msgstr "Имя узла изменено"
 
-#: ../src/network/callbacks.c:517
+#: ../src/network/callbacks.c:470
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -761,80 +687,101 @@ msgstr ""
 "Это не позволит вам запускать новые приложения и поэтому вам будет нужно "
 "войти заново. Продолжить в любом случае?"
 
-#: ../src/network/callbacks.c:523
+#: ../src/network/callbacks.c:476
 msgid "Change _Host name"
 msgstr "Изменить имя _узла"
 
-#: ../src/network/hosts.c:38 ../src/network/ifaces-list.c:32
+#: ../src/network/connection.c:39
+msgid "Automatic configuration (DHCP)"
+msgstr "Автоматическая настройка (DHCP)"
+
+#: ../src/network/connection.c:40
+msgid "Local Zeroconf network (IPv4 LL)"
+msgstr "Локальная сеть Zeroconf (IPv4 уровень)"
+
+#: ../src/network/connection.c:41
+msgid "Static IP address"
+msgstr "Статический адрес IP"
+
+#: ../src/network/connection.c:45
+msgid "WEP key (ascii)"
+msgstr "Ключ WEP (ascii)"
+
+#: ../src/network/connection.c:46
+msgid "WEP key (hexadecimal)"
+msgstr "Ключ WEP (шестнадцатиричный)"
+
+#: ../src/network/connection.c:47
+msgid "WPA"
+msgstr "WPA"
+
+#: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
 msgid "_Properties"
 msgstr "_Параметры"
 
-#: ../src/network/hosts.c:95
+#: ../src/network/hosts.c:89
 msgid "IP Address"
 msgstr "IP адрес"
 
-#: ../src/network/hosts.c:103
+#: ../src/network/hosts.c:97
 msgid "Aliases"
 msgstr "Псевдонимы"
 
-#: ../src/network/ifaces-list.c:33
-msgid "_Activate"
-msgstr "_Включить"
-
-#: ../src/network/ifaces-list.c:34
-msgid "_Deactivate"
-msgstr "В_ыключить"
-
-#: ../src/network/ifaces-list.c:316
+#: ../src/network/ifaces-list.c:282
 msgid "This network interface is not configured"
 msgstr "Этот сетевой интерфейс не настроен"
 
-#: ../src/network/ifaces-list.c:320
+#: ../src/network/ifaces-list.c:284
+msgid "Roaming mode enabled"
+msgstr "Включён режим роуминга"
+
+#: ../src/network/ifaces-list.c:291
 #, c-format
 msgid "<b>Essid:</b> %s "
 msgstr "<b>Essid:</b> %s "
 
-#: ../src/network/ifaces-list.c:324
+#: ../src/network/ifaces-list.c:297
 #, c-format
 msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
 msgstr "<b>Адрес:</b> %s <b>Маска подсети:</b> %s"
 
-#: ../src/network/ifaces-list.c:328
-msgid "<b>Address:</b> DHCP"
-msgstr "<b>Адрес:</b> DHCP"
+#: ../src/network/ifaces-list.c:301
+#, c-format
+msgid "<b>Address:</b> %s"
+msgstr "<b>Адрес:</b> %s"
 
-#: ../src/network/ifaces-list.c:332
+#: ../src/network/ifaces-list.c:305
 #, c-format
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
 msgstr "<b>Адрес:</b> %s <b>Удалённый адрес:</b> %s"
 
-#: ../src/network/ifaces-list.c:338
+#: ../src/network/ifaces-list.c:311
 #, c-format
 msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
 msgstr "<b>Номер телефона:</b> %s <b>Учётная запись:</b> %s"
 
-#: ../src/network/ifaces-list.c:357
+#: ../src/network/ifaces-list.c:330
 msgid "Wireless connection"
 msgstr "Беспроводное соединение"
 
-#: ../src/network/ifaces-list.c:359
+#: ../src/network/ifaces-list.c:332
 msgid "Infrared connection"
 msgstr "Инфракрасное соединение"
 
-#: ../src/network/ifaces-list.c:361
+#: ../src/network/ifaces-list.c:334
 msgid "Wired connection"
 msgstr "Проводное подключение"
 
-#: ../src/network/ifaces-list.c:363
+#: ../src/network/ifaces-list.c:336
 msgid "Parallel port connection"
 msgstr "Соединение через параллельный порт"
 
-#: ../src/network/ifaces-list.c:365
+#: ../src/network/ifaces-list.c:338
 msgid "Modem connection"
 msgstr "Соединение по модему"
 
-#: ../src/network/ifaces-list.c:367
+#: ../src/network/ifaces-list.c:340
 msgid "ISDN connection"
 msgstr "ISDN соединение"
 
@@ -895,10 +842,10 @@ msgid "Configure network devices and connections"
 msgstr "Настроить сетевые устройства и соединения"
 
 #: ../src/network/network.desktop.in.in.h:2
-msgid "Networking"
-msgstr "Сетевые настройки"
+msgid "Network"
+msgstr "Сеть"
 
-#: ../src/network/network-tool.c:289
+#: ../src/network/network-tool.c:285
 msgid "Network Settings"
 msgstr "Сетевые настройки"
 
@@ -1391,20 +1338,15 @@ msgstr "Опубликовать папку для доступа с удалё�
 msgid "Allowed host/network"
 msgstr "Разрешённые узлы/сети"
 
-#: ../src/shares/share-nfs-add-hosts.c:114
-#, c-format
-msgid "Hosts in the %s network"
-msgstr "Узлы в сети %s"
-
-#: ../src/shares/share-nfs-add-hosts.c:146
+#: ../src/shares/share-nfs-add-hosts.c:117
 msgid "Specify hostname"
 msgstr "Задать узел"
 
-#: ../src/shares/share-nfs-add-hosts.c:153
+#: ../src/shares/share-nfs-add-hosts.c:124
 msgid "Specify IP address"
 msgstr "Задать IP адрес"
 
-#: ../src/shares/share-nfs-add-hosts.c:160
+#: ../src/shares/share-nfs-add-hosts.c:131
 msgid "Specify network"
 msgstr "Задать сеть"
 
@@ -1448,11 +1390,11 @@ msgstr "Установка времени, даты и часового пояс
 msgid "Time and Date"
 msgstr "Дата и время"
 
-#: ../src/time/time-tool.c:364
+#: ../src/time/time-tool.c:377
 msgid "NTP support is not installed"
 msgstr "Поддержка протокола NTP не установлена"
 
-#: ../src/time/time-tool.c:366
+#: ../src/time/time-tool.c:379
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1460,11 +1402,27 @@ msgstr ""
 "Установите и активируйте поддержку NTP для обеспечения возможности "
 "синхронизации локального сервера времени с серверами времени в Интернет."
 
-#: ../src/time/time-tool.c:404
+#: ../src/time/time-tool.c:409
+msgid "Enabling NTP"
+msgstr "Включение NTP"
+
+#: ../src/time/time-tool.c:409
+msgid "Disabling NTP"
+msgstr "Выключение NTP"
+
+#: ../src/time/time-tool.c:421
 msgid "Synchronizing system clock"
 msgstr "Синхронизация системный часов"
 
+#: ../src/time/time-tool.c:527
+msgid "Keep synchronized with Internet servers"
+msgstr "С_инхронизировать время с интернет-серверами"
+
 #: ../src/time/time-tool.c:528
+msgid "Manual"
+msgstr "Вручную"
+
+#: ../src/time/time-tool.c:677
 msgid "Time and Date Settings"
 msgstr "Настройки даты и времени"
 
@@ -1472,9 +1430,9 @@ msgstr "Настройки даты и времени"
 msgid "Administrator group can not be deleted"
 msgstr "Группа администраторов не может быть удалена"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:278
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:442 ../src/users/user-settings.c:512
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:305 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:446 ../src/users/user-settings.c:516
 msgid "This would leave the system unusable."
 msgstr "Это может сделать систему непригодной к использованию"
 
@@ -1487,32 +1445,32 @@ msgstr "Вы уверены в том что хотите удалить гру�
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Могут остаться файлы с неверным идентификатором группы."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:170
 msgid "New group"
 msgstr "Создать группу"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:178
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Свойства группы «%s»"
 
-#: ../src/users/group-settings.c:274
+#: ../src/users/group-settings.c:277
 msgid "Group name is empty"
 msgstr "Название группы пусто"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:278
 msgid "A group name must be specified."
 msgstr "Имя группы должно быть указано."
 
-#: ../src/users/group-settings.c:277
+#: ../src/users/group-settings.c:280
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Имя группы администратора не может быть изменено"
 
-#: ../src/users/group-settings.c:280
+#: ../src/users/group-settings.c:283
 msgid "Group name has invalid characters"
 msgstr "Имя группы содержит запрещённые символы"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:284
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1520,16 +1478,16 @@ msgstr ""
 "Пожалуйста установите корректное имя группы, состоящее из латинской буквы в "
 "нижнем регистре и следующих за ней латинских букв в нижнем регистре и цифр."
 
-#: ../src/users/group-settings.c:285
+#: ../src/users/group-settings.c:288
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Группа «%s» уже существует"
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:450
+#: ../src/users/group-settings.c:289 ../src/users/user-settings.c:454
 msgid "Please select a different user name."
 msgstr "Пожалуйста, выберите другое имя пользователя."
 
-#: ../src/users/group-settings.c:301
+#: ../src/users/group-settings.c:304
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "ID группы администратора не может быть изменено"
 
@@ -1594,7 +1552,7 @@ msgid "Users and Groups"
 msgstr "Пользователи и группы"
 
 #: ../src/users/user-settings.c:57
-msgid "Administrator account can not be deleted"
+msgid "Administrator account cannot be deleted"
 msgstr "Невозможно удалить учётную запись администратора"
 
 #: ../src/users/user-settings.c:73
@@ -1609,32 +1567,32 @@ msgid ""
 msgstr ""
 "Доступ пользователя в систему будет запрещён, но домашний каталог останется."
 
-#: ../src/users/user-settings.c:285
+#: ../src/users/user-settings.c:289
 msgid "New user account"
 msgstr "Новая учётная запись"
 
-#: ../src/users/user-settings.c:300
+#: ../src/users/user-settings.c:304
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Настройки учётной записи «%s»"
 
-#: ../src/users/user-settings.c:438
+#: ../src/users/user-settings.c:442
 msgid "User name is empty"
 msgstr "Имя пользователя пусто"
 
-#: ../src/users/user-settings.c:439
+#: ../src/users/user-settings.c:443
 msgid "A user name must be specified."
 msgstr "Должно быть указано имя пользователя."
 
-#: ../src/users/user-settings.c:441
-msgid "User name of the administrator account should not be modified"
-msgstr "Имя пользователя администратора не может быть изменено"
+#: ../src/users/user-settings.c:445
+msgid "Administrator account's user name should not be modified"
+msgstr "Невозможно изменить имя учётной записи администратора"
 
-#: ../src/users/user-settings.c:444
+#: ../src/users/user-settings.c:448
 msgid "User name has invalid characters"
 msgstr "Имя пользователя содержит запрещённые символы"
 
-#: ../src/users/user-settings.c:445
+#: ../src/users/user-settings.c:449
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1642,25 +1600,25 @@ msgstr ""
 "Пожалуйста выберите допустимое имя пользователя, используя только символы "
 "нижнего регистра и цифры."
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Пользователь «%s» уже существует"
 
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:480
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "В комментариях невозможно использовать символ «%c»"
 
-#: ../src/users/user-settings.c:477
+#: ../src/users/user-settings.c:481
 msgid "Check that this character is not used."
 msgstr "Проверьте что данные символы не используются."
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:498
 msgid "Incomplete path in home directory"
 msgstr "Неполный путь к домашнему каталогу."
 
-#: ../src/users/user-settings.c:495
+#: ../src/users/user-settings.c:499
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1668,15 +1626,15 @@ msgstr ""
 "Укажите полный путь к домашнему каталогу\n"
 "<span size=\"smaller\">например: /home/john</span>."
 
-#: ../src/users/user-settings.c:511
-msgid "User ID of the administrator account should not be modified"
-msgstr "Невозможно изменять идентификатор учётной записи администратора"
+#: ../src/users/user-settings.c:515
+msgid "Administrator account's user ID should not be modified"
+msgstr "Невозможно изменить пользовательский идентификатор администратора"
 
-#: ../src/users/user-settings.c:527
+#: ../src/users/user-settings.c:531
 msgid "Incomplete path in shell"
 msgstr "Неполный путь к командной строке"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:532
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1684,19 +1642,23 @@ msgstr ""
 "Введите полный путь до интерпретатора командной строки\n"
 "<span size=\"smaller\">например: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:547
-msgid "Password should not be empty"
-msgstr "Пароль не должен быть пустым"
+#: ../src/users/user-settings.c:560
+msgid "Password is too short"
+msgstr "Пароль слишком короткий"
 
-#: ../src/users/user-settings.c:548
-msgid "A password must be provided."
-msgstr "Должен быть указан пароль."
+#: ../src/users/user-settings.c:561
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Пароль пользователя должен содержать более 6 символов, и, желательно, "
+"состоять из чисел, букв и даже специальных символов."
 
-#: ../src/users/user-settings.c:550
-msgid "Password confirmation isn't correct"
+#: ../src/users/user-settings.c:564
+msgid "Password confirmation is not correct"
 msgstr "Подтверждение пароля не совпадает с самим паролем"
 
-#: ../src/users/user-settings.c:551
+#: ../src/users/user-settings.c:565
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Убедитесь, что вы написали одинаковые пароли в обоих полях ввода."
 
@@ -1712,7 +1674,7 @@ msgstr "Учётная запись"
 msgid "Home directory"
 msgstr "Домашний каталог"
 
-#: ../src/users/users-tool.c:193
+#: ../src/users/users-tool.c:191
 msgid "Users settings"
 msgstr "Настройки пользователей"
 
