@@ -428,7 +428,7 @@ add_synchronize_now_button (GstTimeTool *tool)
 	GtkWidget *box, *image, *label;
 
 	image = gtk_image_new_from_stock ("gnome-stock-timer", GTK_ICON_SIZE_BUTTON);
-	label = gtk_label_new_with_mnemonic ("_Synchronize now");
+	label = gtk_label_new_with_mnemonic _("_Synchronize now");
 
 	box   = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 0);
