@@ -479,8 +479,18 @@ migrate_old_parameters (GKeyFile    *key_file,
 
   value = g_key_file_get_integer (key_file, section, key, &error);
 
-  if (!error)
-    g_key_file_set_string (key_file, section, key, values[value]);
+  if (error)
+    return;
+
+  /* sanity check */
+  if ((values == config_method_options && (value < 0 || value > 2)) ||
+      (values == key_type_options && (value < 0 || value > 1)))
+    {
+      g_critical ("Incorrect value %d in old value for key '%s'", value, key);
+      return;
+    }
+
+  g_key_file_set_string (key_file, section, key, values[value]);
 }
 
 static gboolean

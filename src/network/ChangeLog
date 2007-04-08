@@ -1,3 +1,9 @@
+2007-04-09  Carlos Garnacho  <carlosg@gnome.org>
+
+	* network-locations.c (migrate_old_parameters): Do a sanity check on
+	the integer value and bail out if it doesn't match what we expect.
+	Avoids #422969.
+
 2007-03-12  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.18.0
