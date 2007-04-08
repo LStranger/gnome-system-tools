@@ -64,6 +64,29 @@ on_group_member_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer 
 	gtk_tree_path_free (path);
 }
 
+static void
+user_name_cell_data_func (GtkCellLayout   *layout,
+			  GtkCellRenderer *renderer,
+			  GtkTreeModel    *model,
+			  GtkTreeIter     *iter,
+			  gpointer         data)
+{
+	OobsUser *user;
+	const gchar *name;
+
+	gtk_tree_model_get (model, iter,
+			    COL_USER_OBJECT, &user,
+			    -1);
+
+	name = oobs_user_get_full_name (user);
+
+	if (!name || !*name)
+		name = oobs_user_get_login_name (user);
+
+	g_object_set (renderer, "text", name, NULL);
+	g_object_unref (user);
+}
+
 void
 create_group_members_table (void)
 {
@@ -88,10 +111,9 @@ create_group_members_table (void)
 
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_end (column, renderer, TRUE);
-	gtk_tree_view_column_set_attributes (column,
-					     renderer,
-					     "text", COL_USER_NAME,
-					     NULL);
+	gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
+					    user_name_cell_data_func,
+					    NULL, NULL);
 
 	gtk_tree_view_insert_column (GTK_TREE_VIEW (list), column, 0);
 }
