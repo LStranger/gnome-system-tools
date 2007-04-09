@@ -48,6 +48,7 @@ static gboolean flash_selected_point (gpointer data);
 static gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer data);
 static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data);
 static gboolean update_map (GtkWidget *w, gpointer data);
+static gboolean in_map (GtkWidget *w, GdkEventCrossing *event, gpointer data);
 static gboolean out_map (GtkWidget *w,GdkEventCrossing *event, gpointer data);
 static gboolean map (GtkWidget *widget, GdkEvent *event, gpointer data);
 static gboolean unmap (GtkWidget *widget, GdkEvent *event, gpointer data);
@@ -91,6 +92,8 @@ e_tz_map_new (GstTool *tool)
 			 G_CALLBACK (motion), (gpointer) tzmap);
 	g_signal_connect(G_OBJECT(tzmap->map), "button-press-event",
 			 G_CALLBACK (button_pressed), (gpointer) tzmap);
+        g_signal_connect(G_OBJECT (tzmap->map), "enter-notify-event",
+	                 G_CALLBACK (in_map), (gpointer) tzmap);
         g_signal_connect(G_OBJECT (tzmap->map), "leave-notify-event",
 	                 G_CALLBACK (out_map), (gpointer) tzmap);
 	
@@ -311,16 +314,14 @@ flash_selected_point (gpointer data)
 	return TRUE;
 }
 
-
-static gboolean
-motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
+static void
+update_hover_point (ETzMap  *tzmap,
+		    gdouble  x_coord,
+		    gdouble  y_coord)
 {
-	ETzMap *tzmap;
 	double longitude, latitude;
 
-	tzmap = (ETzMap *) data;
-
-	e_map_window_to_world (tzmap->map, (double) event->x, (double) event->y,
+	e_map_window_to_world (tzmap->map, x_coord, y_coord,
 			       &longitude, &latitude);
 
 	if (tzmap->point_hover && tzmap->point_hover != tzmap->point_selected)
@@ -339,10 +340,33 @@ motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 
 	gtk_label_set_text (GTK_LABEL (((GstTimeTool *) tzmap->tool)->map_hover_label),
 			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_hover)));
+}
 
+static gboolean
+motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
+{
+	ETzMap *tzmap;
+	gdouble x_coord, y_coord;
+
+	tzmap = (ETzMap *) data;
+
+	gdk_event_get_coords ((GdkEvent *) event, &x_coord, &y_coord);
+	update_hover_point (tzmap, x_coord, y_coord);
 	return TRUE;
 }
 
+static gboolean
+in_map (GtkWidget *w, GdkEventCrossing *event, gpointer data)
+{
+	ETzMap *tzmap;
+	gdouble x_coord, y_coord;
+
+	tzmap = (ETzMap *) data;
+
+	gdk_event_get_coords ((GdkEvent *) event, &x_coord, &y_coord);
+	update_hover_point (tzmap, x_coord, y_coord);
+	return TRUE;
+}
 
 static gboolean
 out_map (GtkWidget *w, GdkEventCrossing *event, gpointer data)

@@ -329,7 +329,7 @@ e_map_realize (GtkWidget *widget)
 	attr.colormap = gdk_rgb_get_colormap ();
 	attr.event_mask = gtk_widget_get_events (widget) |
 	  GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK |
-	  GDK_POINTER_MOTION_MASK;
+	  GDK_POINTER_MOTION_MASK | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK;
 
 	attr_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 

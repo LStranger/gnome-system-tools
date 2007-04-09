@@ -1,3 +1,13 @@
+2007-04-09  Carlos Garnacho  <carlosg@gnome.org>
+
+	* e-map.c (e_map_realize): set leave and enter notify to the event
+	mask.
+	* tz-map.c (update_hover_point): moved functionality from the motion
+	handler, updates the hover point.
+	(motion): call update_hover_point.
+	(in_map): new function, updates the hover point when the pointer
+	enters the map. Fixes #417386.
+
 2007-03-30  Claudio Saavedra  <csaavedra@alumnos.utalca.cl>
 
 	* time-tool.c: (add_synchronize_now_button): Fix build (string 
