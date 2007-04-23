@@ -2,14 +2,14 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Christopher R. Gabriel <cgabriel@softwarelibero.org>, 2000.
 # Roberto Rosselli Del Turco <rosselli@ling.unipi.it>, 2004.
-# Francesco Marletta <francesco.marletta@tiscali.it>, 2004-2006.
+# Francesco Marletta <francesco.marletta@tiscali.it>, 2004-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 0.31.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-27 23:44+0200\n"
-"PO-Revision-Date: 2006-03-09 16:42+0100\n"
+"POT-Creation-Date: 2007-04-23 16:02+0200\n"
+"PO-Revision-Date: 2007-04-23 16:02+0200\n"
 "Last-Translator: Francesco Marletta <francesco.marletta@tiscali.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -18,242 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid ""
-"Comma separated list of hosts that the GST will be able to access when the "
-"remote configuration option is enabled"
-msgstr ""
-"Lista di host, separati da virgole, ai quali GST sarà in grado di accedere "
-"quando è abilitata l'opzione di configurazione remota"
-
-#: ../gnome-system-tools.schemas.in.h:2
-msgid "Last GST version executed"
-msgstr "Ultima versione GST eseguita"
-
-#: ../gnome-system-tools.schemas.in.h:3
-msgid "Preferred bootloader that boot-admin will configure"
-msgstr "Gestore d'avvio preferito da configurare mediante boot-admin"
-
-#: ../gnome-system-tools.schemas.in.h:4
-msgid "Remote hosts"
-msgstr "Host remoti"
-
-#: ../gnome-system-tools.schemas.in.h:5
-msgid ""
-"The GST are able to do remote configuration through SSH, enable this option "
-"to use this feature"
-msgstr ""
-"Gli GST sono in grado di effettuare una configurazione remota via SSH, "
-"abilitare questa opzione per sfruttare questa caratteristica"
-
-#: ../gnome-system-tools.schemas.in.h:6
-msgid "The last GST version that this computer has run"
-msgstr "L'ultima versione degli GST eseguita su questo computer"
-
-#: ../gnome-system-tools.schemas.in.h:7
-msgid ""
-"This key stores the bootloader that boot-admin will configure if there are "
-"more than one installed, if it's not set or isn't valid, then boot-admin "
-"will ask the user"
-msgstr ""
-"Questa chiave memorizza il gestore di avvio che verrà configurato mediante "
-"boot-admin se ce n'è più di uno installato, se non è impostata o non "
-"contiene un valore valido, boot-admin chiederà all'utente"
-
-#: ../gnome-system-tools.schemas.in.h:8
-msgid "Whether the tools will use remote administration or not"
-msgstr "Indica se gli strumenti useranno o meno l'amministrazione remota"
-
-#: ../gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Indica se lo strumento di amministrazione degli utenti deve mostrare o meno "
 "tutti gli utenti e gruppi"
-
-#: ../gnome-system-tools.schemas.in.h:10
-msgid "Whether the warning dialog should be shown or not"
-msgstr "Indica se mostrare o meno il messaggio di avvertimento"
-
-#: ../interfaces/boot.glade.in.h:1
-msgid "<b>Security</b>"
-msgstr "<b>Sicurezza</b>"
-
-#: ../interfaces/boot.glade.in.h:2
-msgid ""
-"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
-"span>\n"
-"\n"
-"please select which do you want to configure"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">Sono stati trovati diversi gestori "
-"d'avvio</span>\n"
-"\n"
-"selezionare quello che si vuole configurare"
-
-#: ../interfaces/boot.glade.in.h:5 ../interfaces/users.glade.in.h:3
-msgid "<span weight=\"bold\">Basic Settings</span>"
-msgstr "<span weight=\"bold\">Impostazioni di base</span>"
-
-#: ../interfaces/boot.glade.in.h:6
-msgid "<span weight=\"bold\">Image Settings</span>"
-msgstr "<span weight=\"bold\">Impostazioni immagine</span>"
-
-#: ../interfaces/boot.glade.in.h:7
-msgid "<span weight=\"bold\">Other Settings</span>"
-msgstr "<span weight=\"bold\">Altre impostazioni</span>"
-
-#: ../interfaces/boot.glade.in.h:8
-msgid "<span weight=\"bold\">Starting the Computer</span>"
-msgstr "<span weight=\"bold\">Avvio del computer</span>"
-
-#: ../interfaces/boot.glade.in.h:9
-msgid "Ask at boot"
-msgstr "Chiedi all'avvio"
-
-#: ../interfaces/boot.glade.in.h:10 ../src/boot/main.c:71
-msgid "Boot Manager Settings"
-msgstr "Impostazioni del gestore d'avvio"
-
-#: ../interfaces/boot.glade.in.h:11
-msgid ""
-"Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter parameters passed to the kernel at "
-"boot time."
-msgstr ""
-"Scegliere un'immagine del kernel per l'avvio, e una partizione da montare "
-"come partizione di root. Opzionalmente, è anche possibile aggiungere dei "
-"parametri da passare al kernel al momento dell'avvio."
-
-# [NdT] dato che si riferisce ad un pulsante uso i caporali
-#: ../interfaces/boot.glade.in.h:12
-msgid "Click \"Forward\" to continue"
-msgstr "Fare clic su «Avanti» per continuare"
-
-#: ../interfaces/boot.glade.in.h:13
-msgid "Confirmation"
-msgstr "Conferma"
-
-#. set window title
-#: ../interfaces/boot.glade.in.h:14 ../src/boot/boot-druid.c:442
-#: ../src/boot/boot-druid.c:454
-msgid "Creating a new boot image"
-msgstr "Creazione di una nuova immagine di avvio"
-
-#: ../interfaces/boot.glade.in.h:15
-msgid "Don't ask me again"
-msgstr "Non chiederlo più"
-
-#: ../interfaces/boot.glade.in.h:16
-msgid "Enable IDE SCSI emulation"
-msgstr "Abilita l'emulazione SCSI per IDE"
-
-#: ../interfaces/boot.glade.in.h:17
-msgid ""
-"Enter a name for the boot image, and specify what kind of operating system "
-"it is."
-msgstr ""
-"Inserire un nome per l'immagine di avvio e specificare il tipo di sistema "
-"operativo."
-
-#: ../interfaces/boot.glade.in.h:18
-msgid "Finished"
-msgstr "Finito"
-
-#: ../interfaces/boot.glade.in.h:19
-msgid "Manual"
-msgstr "Manuale"
-
-#: ../interfaces/boot.glade.in.h:20
-msgid "Number of colors:"
-msgstr "Numero di colori:"
-
-#: ../interfaces/boot.glade.in.h:21
-msgid "Other parameters:"
-msgstr "Altri parametri:"
-
-#: ../interfaces/boot.glade.in.h:22
-msgid "Password"
-msgstr "Password"
-
-#: ../interfaces/boot.glade.in.h:23
-msgid "Protect with password"
-msgstr "Proteggi con password"
-
-#: ../interfaces/boot.glade.in.h:24
-msgid "Resolution:"
-msgstr "Risoluzione:"
-
-#: ../interfaces/boot.glade.in.h:25
-msgid "Seconds to wait before loading default kernel or OS"
-msgstr "Secondi da attendere prima del caricamento del kernel o SO predefinito"
-
-#: ../interfaces/boot.glade.in.h:26
-msgid "Select a kernel image"
-msgstr "Selezionare un'immagine kernel"
-
-#: ../interfaces/boot.glade.in.h:27
-msgid "Select an initrd image"
-msgstr "Selezionare un'immagine initrd"
-
-#: ../interfaces/boot.glade.in.h:28
-msgid "Specify the partition on which the operating system is installed."
-msgstr ""
-"Specificare la partizione sulla quale è installato il sistema operativo."
-
-#: ../interfaces/boot.glade.in.h:29
-msgid ""
-"The new boot image has been added. Please click \"Apply\" to save your "
-"changes."
-msgstr ""
-"La nuova immagine di avvio è stata aggiunta. Fare clic su «Applica» per "
-"salvare i cambiamenti."
-
-#: ../interfaces/boot.glade.in.h:30
-msgid ""
-"This assistant is designed to help you quickly and easily add a new boot "
-"image to your system."
-msgstr ""
-"Questo assistente è concepito per aiutare ad aggiungere rapidamente e "
-"facilmente una nuova immagine di avvio al sistema."
-
-#: ../interfaces/boot.glade.in.h:31
-msgid "Video modes (only frame buffer)"
-msgstr "Modalità video (solo frame buffer)"
-
-#: ../interfaces/boot.glade.in.h:32
-msgid "_Add..."
-msgstr "A_ggiungi..."
-
-#: ../interfaces/boot.glade.in.h:33
-msgid "_Device:"
-msgstr "_Device:"
-
-#: ../interfaces/boot.glade.in.h:34
-msgid "_Edit"
-msgstr "_Modifica"
-
-#: ../interfaces/boot.glade.in.h:35 ../src/boot/boot-settings.c:44
-msgid "_Initrd image path:"
-msgstr "Percorso dell'immagine _initrd:"
-
-#: ../interfaces/boot.glade.in.h:36
-msgid "_Kernel image path:"
-msgstr "Percorso dell'immagine del _kernel:"
-
-#: ../interfaces/boot.glade.in.h:37
-msgid "_Name:"
-msgstr "_Nome:"
-
-#: ../interfaces/boot.glade.in.h:38
-msgid "_Operating system:"
-msgstr "Sistema _operativo:"
-
-#: ../interfaces/boot.glade.in.h:39
-msgid "_Parameters:"
-msgstr "_Parametri:"
-
-#: ../interfaces/boot.glade.in.h:40
-msgid "_Root file system device:"
-msgstr "Device del file system _root:"
 
 # [ndT] non ho messo "propria password.." in quanto non è che ogni utente ha
 #       una passworddi root, ma ce ne è solo una per il sistema in esame
@@ -264,55 +32,19 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Inserire la password di root</span>"
 
 #: ../interfaces/common.glade.in.h:2
-msgid ""
-"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
-"supported by this tool</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">La piattaforma utilizzata non è "
-"supportata da questo strumento</span>"
-
-#: ../interfaces/common.glade.in.h:3
 msgid "Enter Password"
 msgstr "Inserire la password"
 
-#: ../interfaces/common.glade.in.h:4
-msgid ""
-"If you know for sure that it works like one of the platforms listed below, "
-"you can select that and continue. Note, however, that this might damage the "
-"system configuration or downright cripple your computer."
-msgstr ""
-"Se si ha la certezza che il funzionamento è simile a quello di una delle "
-"piattaforme elencate qui sotto, è possibile selezionarla e continuare. Si "
-"noti, tuttavia, che questo potrebbe danneggiare la configurazione del "
-"sistema o addirittura bloccare il computer."
-
-#: ../interfaces/common.glade.in.h:5
-msgid "Remote administration"
-msgstr "Amministrazione remota"
-
-#: ../interfaces/common.glade.in.h:6
-msgid "Run _Without Password"
-msgstr "Esegui _senza password"
-
-#: ../interfaces/common.glade.in.h:7
-msgid "Unsupported Platform"
-msgstr "Piattaforma non supportata"
-
-#: ../interfaces/common.glade.in.h:8
-msgid "Use this window to select the computer you wish to configure"
-msgstr ""
-"Utilizzare questa finestra per selezionare il computer che si desidera "
-"configurare"
-
-#: ../interfaces/common.glade.in.h:9
+#: ../interfaces/common.glade.in.h:3
 msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
-"modify your system configuration."
+"modify\n"
+"your system configuration."
 msgstr ""
-"Per usare questo strumento sono necessari i privilegi di amministratore. "
+"Per usare questo strumento sono necessari i privilegi di amministratore.\n"
 "Inserire una password per modificare la configurazione del sistema."
 
-#: ../interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:5
 msgid "_Password:"
 msgstr "_Password:"
 
@@ -325,113 +57,100 @@ msgid "<b>Connection settings</b>"
 msgstr "<b>Impostazioni di connessione</b>"
 
 #: ../interfaces/network.glade.in.h:3
-msgid "<b>Connection</b>"
-msgstr "<b>Connessione</b>"
-
-#: ../interfaces/network.glade.in.h:4
 msgid "<b>DNS Servers</b>"
 msgstr "<b>Server DNS</b>"
 
-#: ../interfaces/network.glade.in.h:5
+#: ../interfaces/network.glade.in.h:4
 msgid "<b>Host Settings</b>"
 msgstr "<b>Impostazioni host</b>"
 
-#: ../interfaces/network.glade.in.h:6
+#: ../interfaces/network.glade.in.h:5
 msgid "<b>Internet service provider data</b>"
 msgstr "<b>Dati del fornitore di servizi Internet (ISP)</b>"
 
-#: ../interfaces/network.glade.in.h:7
+#: ../interfaces/network.glade.in.h:6
 msgid "<b>Modem settings</b>"
 msgstr "<b>Impostazioni modem</b>"
 
-#: ../interfaces/network.glade.in.h:8
+#: ../interfaces/network.glade.in.h:7
 msgid "<b>Search Domains</b>"
 msgstr "<b>Domini di ricerca</b>"
 
-#: ../interfaces/network.glade.in.h:9
+#: ../interfaces/network.glade.in.h:8
 msgid "<b>Wireless settings</b>"
 msgstr "<b>Impostazioni wireless</b>"
 
-#: ../interfaces/network.glade.in.h:10
+#: ../interfaces/network.glade.in.h:9
 msgid "Aliases:"
 msgstr "Alias:"
 
-#: ../interfaces/network.glade.in.h:11
+#: ../interfaces/network.glade.in.h:10
 msgid "C_onfiguration:"
 msgstr "C_onfigurazione:"
 
-#: ../interfaces/network.glade.in.h:12
+#: ../interfaces/network.glade.in.h:11
 msgid "Connections"
 msgstr "Connessioni"
 
-#: ../interfaces/network.glade.in.h:13
+#: ../interfaces/network.glade.in.h:12
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:14
+#: ../interfaces/network.glade.in.h:13
 msgid "D_omain name:"
 msgstr "Nome _dominio:"
 
-# [ndT] qui non so se tradurre device in quanto forse si riferisce a /dev/quaccheccosa
+#: ../interfaces/network.glade.in.h:14
+msgid "Delete current location"
+msgstr "Elimina postazione attuale"
+
 #: ../interfaces/network.glade.in.h:15
-msgid "Default _gateway device:"
-msgstr "Interfaccia del _gateway predefinito:"
+msgid "E_nable roaming mode"
+msgstr "A_bilitare modalità roaming"
 
 #: ../interfaces/network.glade.in.h:16
-msgid "Device:"
-msgstr "Dispositivo:"
-
-#: ../interfaces/network.glade.in.h:17
 msgid "E_nable this connection"
 msgstr "A_bilitare questa connessione"
 
-#: ../interfaces/network.glade.in.h:18 ../interfaces/users.glade.in.h:21
+#: ../interfaces/network.glade.in.h:17 ../interfaces/users.glade.in.h:19
 msgid "General"
 msgstr "Generale"
 
 # [NdT] o "Nomi alternaviti dell'host" ?
-#: ../interfaces/network.glade.in.h:19
+#: ../interfaces/network.glade.in.h:18
 msgid "Host alias settings"
 msgstr "Impostazioni alias dell'host"
 
-#: ../interfaces/network.glade.in.h:20
+#: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
 msgstr "Host"
 
-#: ../interfaces/network.glade.in.h:21 ../interfaces/shares.glade.in.h:15
+#: ../interfaces/network.glade.in.h:20 ../interfaces/shares.glade.in.h:12
 msgid "IP address:"
 msgstr "Indirizzo IP:"
 
-#: ../interfaces/network.glade.in.h:22
-msgid "Interface name:"
-msgstr "Nome interfaccia:"
-
-#: ../interfaces/network.glade.in.h:23
+#: ../interfaces/network.glade.in.h:21
 msgid "Interface properties"
 msgstr "Proprietà interfaccia"
 
-#: ../interfaces/network.glade.in.h:24
-msgid "Key _type:"
-msgstr "_Tipo di chiave:"
-
-#: ../interfaces/network.glade.in.h:25
-msgid "Location name:"
-msgstr "Nome della postazione:"
-
-#: ../interfaces/network.glade.in.h:26
+#: ../interfaces/network.glade.in.h:22
 msgid "Location:"
 msgstr "Postazione:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.glade.in.h:23
 msgid "Modem"
 msgstr "Modem"
 
-#: ../interfaces/network.glade.in.h:28
+#: ../interfaces/network.glade.in.h:24
+msgid "Network _password:"
+msgstr "_Password di rete:"
+
+#: ../interfaces/network.glade.in.h:25
 msgid "Network name (_ESSID):"
 msgstr "Nome della rete (_ESSID):"
 
 # [NdT] sono i livelli di volume
-#: ../interfaces/network.glade.in.h:29
+#: ../interfaces/network.glade.in.h:26
 msgid ""
 "Off\n"
 "Low\n"
@@ -443,15 +162,19 @@ msgstr ""
 "Medio\n"
 "Alto"
 
-#: ../interfaces/network.glade.in.h:33
+#: ../interfaces/network.glade.in.h:30
 msgid "Options"
 msgstr "Opzioni"
 
-#: ../interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:31
 msgid "P_assword"
 msgstr "P_assword"
 
-#: ../interfaces/network.glade.in.h:35
+#: ../interfaces/network.glade.in.h:32
+msgid "Password _type:"
+msgstr "_Tipo di password:"
+
+#: ../interfaces/network.glade.in.h:33
 msgid ""
 "Plain (ASCII)\n"
 "Hexadecimal"
@@ -459,19 +182,11 @@ msgstr ""
 "Semplice (ASCII)\n"
 "Esadecimale"
 
-#: ../interfaces/network.glade.in.h:37
-msgid "Select location name"
-msgstr "Selezionare il nome del posto"
+#: ../interfaces/network.glade.in.h:35
+msgid "Save current network configuration as a location"
+msgstr "Salva la configurazione di rete corrente come postazione"
 
-#: ../interfaces/network.glade.in.h:38
-msgid ""
-"Static IP address\n"
-"DHCP"
-msgstr ""
-"Indirizzo IP statico\n"
-"DHCP"
-
-#: ../interfaces/network.glade.in.h:40
+#: ../interfaces/network.glade.in.h:36
 msgid ""
 "Tones\n"
 "Pulses"
@@ -479,79 +194,67 @@ msgstr ""
 "Toni\n"
 "Impulsi"
 
-#: ../interfaces/network.glade.in.h:42
+#: ../interfaces/network.glade.in.h:38
 msgid "Use the Internet service provider nameservers"
 msgstr "Usare i server di nomi del fornitore di accesso Internet"
 
-#: ../interfaces/network.glade.in.h:43
-msgid "WEP _key:"
-msgstr "Chiave _WEP:"
-
-#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
-msgid "_Activate"
-msgstr "_Attiva"
-
-#: ../interfaces/network.glade.in.h:45
+#: ../interfaces/network.glade.in.h:39
 msgid "_Autodetect"
 msgstr "Riconoscimento _automatico"
 
-#: ../interfaces/network.glade.in.h:46 ../src/network/ifaces-list.c:35
-msgid "_Deactivate"
-msgstr "_Disattiva"
-
-#: ../interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:40
 msgid "_Dial prefix:"
 msgstr "_Prefisso di chiamata:"
 
-#: ../interfaces/network.glade.in.h:48
+#: ../interfaces/network.glade.in.h:41
 msgid "_Dial type:"
 msgstr "_Tipo di chiamata:"
 
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:42
 msgid "_Gateway address:"
 msgstr "Indirizzo del _gateway:"
 
-#: ../interfaces/network.glade.in.h:50
-msgid "_Hostname:"
+#: ../interfaces/network.glade.in.h:43
+msgid "_Host name:"
 msgstr "Nome _host:"
 
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.glade.in.h:44
 msgid "_IP address:"
 msgstr "Indirizzo _IP:"
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.glade.in.h:45
 msgid "_Local IP:"
 msgstr "IP _locale:"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.glade.in.h:46
 msgid "_Modem port:"
 msgstr "Porta del _modem:"
 
-#: ../interfaces/network.glade.in.h:54
+#: ../interfaces/network.glade.in.h:47
 msgid "_Phone number:"
 msgstr "Numero di _telefono:"
 
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.glade.in.h:48
 msgid "_Remote IP:"
 msgstr "IP _remoto:"
 
-#: ../interfaces/network.glade.in.h:56
+#: ../interfaces/network.glade.in.h:49
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Riprova se la connessione si interrompe o non parte"
 
-#: ../interfaces/network.glade.in.h:57
+#: ../interfaces/network.glade.in.h:50
 msgid "_Set modem as default route to internet"
 msgstr "Imposta il modem come _percorso predefinito per internet"
 
-#: ../interfaces/network.glade.in.h:58
+#: ../interfaces/network.glade.in.h:51
 msgid "_Subnet mask:"
 msgstr "Maschera di _rete:"
 
-#: ../interfaces/network.glade.in.h:59 ../interfaces/users.glade.in.h:61
+#: ../interfaces/network.glade.in.h:52 ../interfaces/users.glade.in.h:55
 msgid "_Username:"
 msgstr "Nome _utente:"
 
-#: ../interfaces/network.glade.in.h:60
+#: ../interfaces/network.glade.in.h:53
 msgid "_Volume:"
 msgstr "_Volume:"
 
@@ -564,160 +267,137 @@ msgid "Select the services that you wish to activate:"
 msgstr "Selezionare i servizi che si desidera attivare:"
 
 #: ../interfaces/shares.glade.in.h:1
-msgid "<b>Allowed hosts</b>"
+msgid "<b>Allowed Hosts</b>"
 msgstr "<b>Host ammessi</b>"
 
 #: ../interfaces/shares.glade.in.h:2
-msgid "<b>Hosts settings</b>"
+msgid "<b>Hosts Settings</b>"
 msgstr "<b>Impostazioni host</b>"
 
 #: ../interfaces/shares.glade.in.h:3
-msgid "<b>Share properties</b>"
+msgid "<b>Share Properties</b>"
 msgstr "<b>Proprietà condivisione</b>"
 
 #: ../interfaces/shares.glade.in.h:4
-msgid "<b>Shared folder</b>"
+msgid "<b>Shared Folder</b>"
 msgstr "<b>Cartella condivisa</b>"
 
 #: ../interfaces/shares.glade.in.h:5
-msgid "<b>WINS server</b>"
-msgstr "<b>Server WINS</b>"
+msgid "<b>Windows sharing</b>"
+msgstr "<b>Condivisioni Windows</b>"
 
 #: ../interfaces/shares.glade.in.h:6
-msgid "<b>Windows sharing Settings</b>"
-msgstr "<b>Impostazioni condivisioni Windows</b>"
-
-#: ../interfaces/shares.glade.in.h:7
 msgid "Add allowed hosts"
 msgstr "Aggiungi host ammessi"
 
-#: ../interfaces/shares.glade.in.h:8
-msgid "Allow _browsing folder"
-msgstr "Consenti di _sfogliare cartella"
-
-#: ../interfaces/shares.glade.in.h:9
+#: ../interfaces/shares.glade.in.h:7
 msgid "Allowed hosts:"
 msgstr "Host ammessi:"
 
-#: ../interfaces/shares.glade.in.h:10
+#: ../interfaces/shares.glade.in.h:8
 msgid "Comment:"
 msgstr "Commento:"
 
+#: ../interfaces/shares.glade.in.h:9
+msgid "Domain / _Workgroup:"
+msgstr "Dominio / _Gruppo di lavoro:"
+
+#: ../interfaces/shares.glade.in.h:10
+msgid "General Properties"
+msgstr "Proprietà generali"
+
 #: ../interfaces/shares.glade.in.h:11
-msgid "Do not use WINS server"
-msgstr "Non usare un server WINS"
-
-#: ../interfaces/shares.glade.in.h:12
-msgid "Domain / _Workgroup"
-msgstr "Dominio / _Gruppo di lavoro"
-
-#: ../interfaces/shares.glade.in.h:13
-msgid "General Windows sharing settings"
-msgstr "Impostazioni generali delle condivisioni Windows"
-
-#: ../interfaces/shares.glade.in.h:14
 msgid "Host name:"
 msgstr "Nome host:"
 
-#: ../interfaces/shares.glade.in.h:16
+#: ../interfaces/shares.glade.in.h:13
 msgid "Name:"
 msgstr "Nome:"
 
-#: ../interfaces/shares.glade.in.h:17
+#: ../interfaces/shares.glade.in.h:14
 msgid "Netmask:"
 msgstr "Maschera di rete:"
 
-#: ../interfaces/shares.glade.in.h:18
+#: ../interfaces/shares.glade.in.h:15
 msgid "Network:"
 msgstr "Rete:"
 
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
+#: ../interfaces/shares.glade.in.h:16 ../src/shares/nfs-acl-table.c:56
 msgid "Read only"
 msgstr "Sola lettura"
 
-#: ../interfaces/shares.glade.in.h:20
-msgid "Share folder"
-msgstr "Condividi cartella"
-
-#: ../interfaces/shares.glade.in.h:21
-msgid "Share with:"
+#: ../interfaces/shares.glade.in.h:17
+msgid "Share through:"
 msgstr "Condividi tramite:"
 
-#: ../interfaces/shares.glade.in.h:22
-msgid "This computer is a WINS server"
-msgstr "Questo computer è un server WINS"
+#: ../interfaces/shares.glade.in.h:18 ../src/shares/shares.desktop.in.in.h:2
+#: ../src/shares/shares-tool.c:207
+msgid "Shared Folders"
+msgstr "Cartelle condivise"
 
-#: ../interfaces/shares.glade.in.h:23
-msgid "Use WINS Server"
-msgstr "Usare un server WINS"
+#: ../interfaces/shares.glade.in.h:19
+msgid "This computer is a _WINS server"
+msgstr "Questo computer è un server _WINS"
 
-#: ../interfaces/shares.glade.in.h:24
-msgid "Windows sharing settings"
-msgstr "Impostazioni condivisioni Windows"
+#: ../interfaces/shares.glade.in.h:20
+msgid "WINS _server:"
+msgstr "_Server WINS:"
 
-#: ../interfaces/shares.glade.in.h:25
-msgid "_Add host"
-msgstr "A_ggiungi host"
-
-#: ../interfaces/shares.glade.in.h:26
-msgid "_Host description:"
-msgstr "_Descrizione host:"
-
-#: ../interfaces/shares.glade.in.h:27
+#: ../interfaces/shares.glade.in.h:21
 msgid "_Path:"
 msgstr "_Percorso:"
 
-#: ../interfaces/shares.glade.in.h:28
+#: ../interfaces/shares.glade.in.h:22
 msgid "_Read only"
 msgstr "Sola _lettura"
 
 #: ../interfaces/time.glade.in.h:1
-msgid "(unconfigured)"
-msgstr "(non configurato)"
-
-#: ../interfaces/time.glade.in.h:2
 msgid "<b>Selection</b>"
 msgstr "<b>Selezione</b>"
 
-#: ../interfaces/time.glade.in.h:3
-msgid "<b>Time zone</b>"
+#: ../interfaces/time.glade.in.h:2
+msgid "<b>Time Zone</b>"
 msgstr "<b>Fuso orario</b>"
 
-#: ../interfaces/time.glade.in.h:4
+#: ../interfaces/time.glade.in.h:3
 msgid "Add NTP Server"
 msgstr "Aggiungi server NTP"
 
-#: ../interfaces/time.glade.in.h:5
+#: ../interfaces/time.glade.in.h:4
 msgid "NTP server"
 msgstr "Server NTP"
 
+#: ../interfaces/time.glade.in.h:5
+msgid "Se_lect Servers"
+msgstr "Se_leziona server"
+
 #: ../interfaces/time.glade.in.h:6
-msgid "S_ynchronize clock with Internet servers:"
-msgstr "S_incronizza l'orologio con i server Internet:"
-
-#: ../interfaces/time.glade.in.h:7
-msgid "Se_lect Servers..."
-msgstr "Se_leziona server..."
-
-#: ../interfaces/time.glade.in.h:8
 msgid "Time servers"
 msgstr "Server orari"
 
-#: ../interfaces/time.glade.in.h:9
+#: ../interfaces/time.glade.in.h:7
+msgid "Time servers:"
+msgstr "Server orari:"
+
+#: ../interfaces/time.glade.in.h:8
 msgid "Time zone"
 msgstr "Fuso orario"
 
-#: ../interfaces/time.glade.in.h:10
+#: ../interfaces/time.glade.in.h:9
 msgid "Time zone:"
 msgstr "Fuso orario:"
 
+#: ../interfaces/time.glade.in.h:10
+msgid "Unconfigured"
+msgstr "Non configurato"
+
 #: ../interfaces/time.glade.in.h:11
-msgid "_Date:"
-msgstr "_Data:"
+msgid "_Configuration:"
+msgstr "_Configurazione:"
 
 #: ../interfaces/time.glade.in.h:12
-msgid "_Select Time Zone..."
-msgstr "_Seleziona fuso orario..."
+msgid "_Date:"
+msgstr "_Data:"
 
 #: ../interfaces/time.glade.in.h:13
 msgid "_Time:"
@@ -730,6 +410,10 @@ msgstr "<span weight=\"bold\">Impostazioni avanzate</span>"
 #: ../interfaces/users.glade.in.h:2
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
 msgstr "<span weight=\"bold\">UID/GID automatico</span>"
+
+#: ../interfaces/users.glade.in.h:3
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span weight=\"bold\">Impostazioni di base</span>"
 
 #: ../interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Contact Information</span>"
@@ -760,525 +444,249 @@ msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Predefiniti di sistema</span>"
 
 #: ../interfaces/users.glade.in.h:11
-msgid "<span weight=\"bold\">User Profile</span>"
-msgstr "<span weight=\"bold\">Profilo utente</span>"
-
-#: ../interfaces/users.glade.in.h:12
 msgid "Account"
 msgstr "Account"
 
-#: ../interfaces/users.glade.in.h:13
+#: ../interfaces/users.glade.in.h:12
 msgid "Advanced"
 msgstr "Avanzato"
 
-#: ../interfaces/users.glade.in.h:14
-msgid "Allow user to:"
-msgstr "Consentire all'utente di:"
-
-#: ../interfaces/users.glade.in.h:15
+#: ../interfaces/users.glade.in.h:13
 msgid "Assign a random password by default"
 msgstr "Assegnare una password casuale come opzione predefinita"
 
-#: ../interfaces/users.glade.in.h:16
+#: ../interfaces/users.glade.in.h:14
 msgid "Check password _quality"
 msgstr "Controllare la _qualità della password"
 
-#: ../interfaces/users.glade.in.h:17
+#: ../interfaces/users.glade.in.h:15
 msgid "Con_firmation:"
 msgstr "Con_ferma:"
 
-#: ../interfaces/users.glade.in.h:18
+#: ../interfaces/users.glade.in.h:16
 msgid "Days between warning and password expiration:"
 msgstr "Giorni tra l'avvertimento e la scadenza della password:"
 
-#: ../interfaces/users.glade.in.h:19
+#: ../interfaces/users.glade.in.h:17
 msgid "Default _group:"
 msgstr "_Gruppo predefinito:"
 
-#: ../interfaces/users.glade.in.h:20
+#: ../interfaces/users.glade.in.h:18
 msgid "Default _shell:"
 msgstr "_Shell predefinita:"
 
-#: ../interfaces/users.glade.in.h:22
+#: ../interfaces/users.glade.in.h:20
 msgid "Generate _random password"
 msgstr "Gene_ra password casuale"
 
-#: ../interfaces/users.glade.in.h:23
+#: ../interfaces/users.glade.in.h:21
 msgid "Group _ID:"
 msgstr "_ID del gruppo:"
 
-#: ../interfaces/users.glade.in.h:24
-msgid "Group _members:"
-msgstr "_Membri del gruppo:"
-
-#: ../interfaces/users.glade.in.h:25
+#: ../interfaces/users.glade.in.h:22
 msgid "Group _name:"
 msgstr "_Nome del gruppo:"
 
-#: ../interfaces/users.glade.in.h:26
+#: ../interfaces/users.glade.in.h:23
 msgid "Group properties"
 msgstr "Proprietà del gruppo"
 
-#: ../interfaces/users.glade.in.h:27
-msgid "Groups"
-msgstr "Gruppi"
+#: ../interfaces/users.glade.in.h:24
+msgid "Groups settings"
+msgstr "Impostazioni gruppi"
 
-#: ../interfaces/users.glade.in.h:28
+#: ../interfaces/users.glade.in.h:25
 msgid "Ma_ximum days a password may be used:"
 msgstr "Numero ma_ssimo di giorni di utilizzo della password:"
 
-#: ../interfaces/users.glade.in.h:29
+#: ../interfaces/users.glade.in.h:26
 msgid "Maximum UID:"
 msgstr "UID massimo:"
 
-#: ../interfaces/users.glade.in.h:30
+#: ../interfaces/users.glade.in.h:27
 msgid "Mi_nimum days between password changes:"
 msgstr "Numero mi_nimo di giorni tra cambi di password:"
 
-#: ../interfaces/users.glade.in.h:31
+#: ../interfaces/users.glade.in.h:28
 msgid "Minimum GID:"
 msgstr "GID minimo:"
 
-#: ../interfaces/users.glade.in.h:32
+#: ../interfaces/users.glade.in.h:29
 msgid "Minimum UID:"
 msgstr "UID minimo:"
 
-#: ../interfaces/users.glade.in.h:33
+#: ../interfaces/users.glade.in.h:30
 msgid "Minimum days allowed between password changes:"
 msgstr "Numero minimo di giorni consentito tra cambi di password:"
 
-#: ../interfaces/users.glade.in.h:34
+#: ../interfaces/users.glade.in.h:31
 msgid "Number of days that a password may be used:"
 msgstr "Numero di giorni in cui può essere utilizzata una password:"
 
-#: ../interfaces/users.glade.in.h:35
+#: ../interfaces/users.glade.in.h:32
 msgid "O_ffice location:"
 msgstr "Indirizzo u_fficio:"
 
-#: ../interfaces/users.glade.in.h:36
+#: ../interfaces/users.glade.in.h:33
 msgid "Password set to: "
 msgstr "Password impostata a: "
 
-#: ../interfaces/users.glade.in.h:37
+#: ../interfaces/users.glade.in.h:34
 msgid "Privileges"
 msgstr "Privilegi"
 
-#: ../interfaces/users.glade.in.h:38
+#: ../interfaces/users.glade.in.h:35
 msgid "Profile _name:"
 msgstr "_Nome del profilo:"
 
-#: ../interfaces/users.glade.in.h:39
+#: ../interfaces/users.glade.in.h:36
 msgid "Set password b_y hand"
 msgstr "Imposta password a _mano"
 
-#: ../interfaces/users.glade.in.h:40
-msgid "Show a_ll users and groups"
-msgstr "Mostrare tutti gli _utenti e i gruppi"
+#: ../interfaces/users.glade.in.h:37
+msgid "User ID:"
+msgstr "ID utente:"
 
-#: ../interfaces/users.glade.in.h:41
-msgid "User _ID:"
-msgstr "_ID utente:"
+#: ../interfaces/users.glade.in.h:38
+msgid "User Privileges"
+msgstr "Privilegi utente"
 
-#: ../interfaces/users.glade.in.h:42
+#: ../interfaces/users.glade.in.h:39
 msgid "User _password:"
 msgstr "_Password utente:"
 
-#: ../interfaces/users.glade.in.h:43
-msgid "User privileges"
-msgstr "Privilegi utente"
-
-#: ../interfaces/users.glade.in.h:44
+#: ../interfaces/users.glade.in.h:40
 msgid "User profiles"
 msgstr "Profili utente"
 
-#: ../interfaces/users.glade.in.h:45
-msgid "Users"
-msgstr "Utenti"
+#: ../interfaces/users.glade.in.h:41
+msgid "_Add Group"
+msgstr "_Aggiungi gruppo"
 
-#: ../interfaces/users.glade.in.h:46
-msgid "_Add Group..."
-msgstr "_Aggiungi gruppo..."
+#: ../interfaces/users.glade.in.h:42
+msgid "_Add Profile"
+msgstr "_Aggiungi profilo"
 
-#: ../interfaces/users.glade.in.h:47
-msgid "_Add Profile..."
-msgstr "_Aggiungi profilo..."
+#: ../interfaces/users.glade.in.h:43
+msgid "_Add User"
+msgstr "_Aggiungi utente"
 
-#: ../interfaces/users.glade.in.h:48
-msgid "_Add User..."
-msgstr "_Aggiungi utente..."
-
-#: ../interfaces/users.glade.in.h:49
-msgid "_All users:"
-msgstr "_Tutti gli utenti:"
-
-#: ../interfaces/users.glade.in.h:50
+#: ../interfaces/users.glade.in.h:44
 msgid "_Comments"
 msgstr "_Commenti"
 
-#: ../interfaces/users.glade.in.h:51
+#: ../interfaces/users.glade.in.h:45
 msgid "_Days between warning and password expiration:"
 msgstr "_Giorni tra l'avvertimento e la scadenza della password:"
 
-#: ../interfaces/users.glade.in.h:52 ../src/boot/table.c:54
-#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
-#: ../src/shares/table.c:42 ../src/users/table.c:50
+#: ../interfaces/users.glade.in.h:46 ../src/network/address-list.c:77
+#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "_Elimina"
 
-#: ../interfaces/users.glade.in.h:53
-msgid "_Edit User Profiles..."
-msgstr "_Modifica profili utenti..."
-
-#: ../interfaces/users.glade.in.h:54
+#: ../interfaces/users.glade.in.h:47
 msgid "_Generate"
 msgstr "_Genera"
 
-#: ../interfaces/users.glade.in.h:55
+#: ../interfaces/users.glade.in.h:48
 msgid "_Home directory:"
 msgstr "Directory _home:"
 
-#: ../interfaces/users.glade.in.h:56
+#: ../interfaces/users.glade.in.h:49
 msgid "_Home phone:"
 msgstr "Telefono di _casa:"
 
-#: ../interfaces/users.glade.in.h:57
+#: ../interfaces/users.glade.in.h:50
 msgid "_Main group:"
 msgstr "Gruppo _principale:"
 
-#: ../interfaces/users.glade.in.h:58
+#: ../interfaces/users.glade.in.h:51
+msgid "_Manage Groups"
+msgstr "_Gestisci gruppi"
+
+#: ../interfaces/users.glade.in.h:52
 msgid "_Profile:"
 msgstr "_Profilo:"
 
-#: ../interfaces/users.glade.in.h:59
+#: ../interfaces/users.glade.in.h:53
 msgid "_Real name:"
 msgstr "Nome _reale:"
 
-#: ../interfaces/users.glade.in.h:60
+#: ../interfaces/users.glade.in.h:54
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: ../interfaces/users.glade.in.h:62
+#: ../interfaces/users.glade.in.h:56
 msgid "_Work phone:"
 msgstr "Telefono di _lavoro:"
 
-#: ../src/boot/boot-append-gui.c:140
-msgid "32,768"
-msgstr "32.768"
+#: ../src/common/gst-platform-dialog.c:179
+msgid "The platform you are running is not supported by this tool"
+msgstr "La piattaforma in uso non è supportata da questo strumento"
 
-#: ../src/boot/boot-append-gui.c:141
-msgid "65,536"
-msgstr "65.536"
-
-#: ../src/boot/boot-append-gui.c:142
-msgid "16,777,216"
-msgstr "16.777.216"
-
-#: ../src/boot/boot-append-gui.c:253
-msgid "Invalid VGA value"
-msgstr "Valore VGA non valido"
-
-#: ../src/boot/boot-append-gui.c:255
-#, c-format
-msgid "\"%s\" is not a valid VGA value."
-msgstr "\"%s\" non è un valore VGA valido."
-
-#: ../src/boot/boot-druid.c:113
-msgid "Error creating boot image"
-msgstr "Errore nel creare l'immagine di avvio"
-
-#: ../src/boot/boot-druid.c:443
-#, c-format
-msgid "Creating a new boot image (%d of %d)"
-msgstr "Creazione di una nuova immagine di boot (%d di %d)"
-
-#: ../src/boot/boot-druid.c:444
-msgid "Finished creating a new boot image"
-msgstr "Creazione di una nuova immagine di boot effettuata"
-
-#: ../src/boot/boot-image.c:43
-msgid "Unknown"
-msgstr "Sconosciuto"
-
-#: ../src/boot/boot-image.c:44
-msgid "Windows NT"
-msgstr "Windows NT"
-
-#: ../src/boot/boot-image.c:45
-msgid "Windows 9x"
-msgstr "Windows 9x"
-
-#: ../src/boot/boot-image.c:46
-msgid "Dos"
-msgstr "DOS"
-
-#: ../src/boot/boot-image.c:47
-msgid "Linux"
-msgstr "Linux"
-
-#: ../src/boot/boot-image.c:48
-msgid "Linux swap"
-msgstr "Linux swap"
-
-#: ../src/boot/boot-image.c:49
-msgid "GNU/Hurd"
-msgstr "GNU/Hurd"
-
-#: ../src/boot/boot-image.c:279
-#, c-format
-msgid "\"%s\" is an invalid path"
-msgstr "\"%s\" è un percorso non valido"
-
-#: ../src/boot/boot-image.c:295
-#, c-format
-msgid "\"%s\" already exists, please set another name."
-msgstr "L'immagine \"%s\" esiste già, scegliere un altro nome."
-
-#: ../src/boot/boot-image.c:301
-#, c-format
-msgid "Invalid image name: \"%s\"."
-msgstr "Nome dell'immagine non valido: \"%s\"."
-
-#: ../src/boot/boot-image.c:314
-#, c-format
-msgid "Invalid image: \"%s\"."
-msgstr "Immagine non valida: \"%s\"."
-
-#: ../src/boot/boot-image.c:332
-#, c-format
-msgid "Invalid root device: \"%s\"."
-msgstr "Device radice non valido: \"%s\"."
-
-#: ../src/boot/boot-settings.c:45
-msgid "_Module path:"
-msgstr "Percorso del _modulo:"
-
-#: ../src/boot/boot-settings.c:407
-msgid "Password confirmation is not correct."
-msgstr "La password di conferma non è corretta."
-
-#: ../src/boot/boot-settings.c:432
-msgid "Error modifying boot image"
-msgstr "Errore nel modificare l'immagine di avvio"
-
-#: ../src/boot/boot.desktop.in.in.h:1
-msgid "Boot"
-msgstr "Avvio"
-
-#: ../src/boot/boot.desktop.in.in.h:2
-msgid "Configure the system boot process"
-msgstr "Configura il processo di avvio del sistema"
-
-#: ../src/boot/callbacks.c:81
-msgid "Boot Image Editor"
-msgstr "Editor dell'immagine di avvio"
-
-#: ../src/boot/callbacks.c:179
-msgid "Boot Append Editor"
-msgstr "Editor dei parametri di avvio"
-
-#: ../src/boot/callbacks.c:412
-msgid "Error deleting boot image"
-msgstr "Errore nel cancellare l'immagine di avvio"
-
-#: ../src/boot/callbacks.c:414
-msgid "Without at least one boot image your computer will not start."
-msgstr "Non è possibile avviare il sistema senza almeno un'immagine di avvio."
-
-#: ../src/boot/callbacks.c:433
-#, c-format
-msgid "Are you sure you want to delete \"%s\"?"
-msgstr "Eliminare veramente \"%s\"?"
-
-#: ../src/boot/callbacks.c:435
-msgid "This may leave this operating system unbootable."
-msgstr "In questo modo il sistema operativo potrebbe non essere avviabile."
-
-#: ../src/boot/callbacks.c:464
-msgid "The configuration will show empty"
-msgstr "La configurazione verrà mostrata vuota"
-
-#: ../src/boot/callbacks.c:466
-#, c-format
-msgid "The file \"%s\" is missing or could not be read."
-msgstr "Il file \"%s\" manca o non può essere letto."
-
-#: ../src/boot/table.c:43
-msgid "Name"
-msgstr "Nome"
-
-#: ../src/boot/table.c:44
-msgid "Default"
-msgstr "Predefinito"
-
-#: ../src/boot/table.c:45
-msgid "Type"
-msgstr "Tipo"
-
-#: ../src/boot/table.c:46
-msgid "Kernel Image"
-msgstr "Immagine kernel"
-
-#: ../src/boot/table.c:47
-msgid "Device"
-msgstr "Dispositivo"
-
-#: ../src/boot/table.c:52 ../src/network/address-list.c:71
-#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
-msgid "_Add"
-msgstr "A_ggiungi"
-
-#: ../src/boot/table.c:53 ../src/network/hosts.c:38
-#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
-#: ../src/users/table.c:49
-msgid "_Properties"
-msgstr "Pr_oprietà"
-
-#. the proccess was running ssh
-#: ../src/common/gst-auth.c:89
-msgid "The tool could not connect to the computer"
-msgstr "Lo strumento non può connettersi al computer"
-
-#: ../src/common/gst-auth.c:90
+#. label
+#: ../src/common/gst-platform-dialog.c:185
 msgid ""
-"Check that you have access to this network and that the computer is actually "
-"working and running the SSH daemon"
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
 msgstr ""
-"Controllare che si disponga dell'accesso a questa rete, che il computer "
-"funzioni ed abbia il demone SSH in esecuzione"
+"Se si ha la certezza che il funzionamento è simile a quello di una delle "
+"piattaforme elencate qui sotto, è possibile selezionarla e continuare. Si "
+"noti, tuttavia, che questo potrebbe danneggiare la configurazione del "
+"sistema o addirittura bloccare il computer."
 
-#  the proccess was running su
-#. the proccess was running su
-#: ../src/common/gst-auth.c:94
-msgid "The entered password is invalid"
-msgstr "La password inserita non è valida"
+#: ../src/common/gst-platform-dialog.c:212
+msgid "Unsupported platform"
+msgstr "Piattaforma non supportata"
 
-#: ../src/common/gst-auth.c:95
-msgid ""
-"Check that you typed it correctly and that you haven't activated the \"caps "
-"lock\" key"
-msgstr ""
-"Controllare che si è digitato correttamente e che non si è attivato il tasto "
-"\"blocco maiuscole\""
-
-#: ../src/common/gst-auth.c:104
-#, c-format
-msgid "Could not run \"%s\""
-msgstr "Impossibile eseguire \"%s\""
-
-#: ../src/common/gst-auth.c:105
-msgid "Check that you have permissions to run this command"
-msgstr "Controllare che si disponga dei permessi per eseguire questo comando"
-
-#: ../src/common/gst-auth.c:107
-msgid "An unexpected error has occurred"
-msgstr "Si è verificato un errore inatteso"
-
-#: ../src/common/gst-auth.c:133
-msgid "Could not execute the backend"
-msgstr "Impossibile eseguire il backend"
-
-#: ../src/common/gst-auth.c:134
-msgid "There was an error creating the child process, the tool will close now."
-msgstr ""
-"Si è verificato un errore nel creare il processo figlio, lo strumento adesso "
-"verrà chiuso."
-
-#: ../src/common/gst-dialog.c:60
-#, c-format
-msgid "Could not find widget: %s"
-msgstr "Impossibile trovare il widget: %s"
-
-#: ../src/common/gst-dialog.c:383
-msgid "There are changes which have not been applied"
-msgstr "Alcuni cambiamenti non sono stati applicati"
-
-#: ../src/common/gst-dialog.c:385
-msgid "Apply them now?"
-msgstr "Applicarli adesso?"
-
-#: ../src/common/gst-dialog.c:492
-#, c-format
-msgid "Error connection signal `%s' in widget `%s'"
-msgstr "Errore nel segnale di connessione \"%s\" nel widget \"%s\""
-
-#: ../src/common/gst-tool.c:1026
+#: ../src/common/gst-tool.c:178
 msgid "The configuration could not be loaded"
 msgstr "La configurazione non può essere caricata"
 
-#: ../src/common/gst-tool.c:1028
-msgid "There was an error running the backend script"
-msgstr "Si è verificato un errore nell'esecuzione dello script di backend"
-
-#: ../src/common/gst-tool.c:1509
-#, c-format
-msgid "Welcome to the %s prerelease of the GNOME System Tools"
-msgstr "Benvenuto alla versione preliminare %s degli GNOME System Tools"
-
-#: ../src/common/gst-tool.c:1511
-msgid ""
-"This is still a work in progress, and so it may have serious bugs. Due to "
-"the nature of these tools, bugs may render your computer <span weight=\"bold"
-"\">practically useless</span>, costing time, effort and sanity points. You "
-"have been warned. Thank you for trying out this prerelease of the GNOME "
-"System Tools!"
+#: ../src/common/gst-tool.c:180
+msgid "You are not allowed to access the system configuration."
 msgstr ""
-"Questo programma è tutt'ora un lavoro in corso, e in quanto tale potrebbe "
-"contenere bug pericolosi. Data la natura di questi strumenti, i bug "
-"potrebbero rendere il computer <span weight=\"bold\">del tutto "
-"inutilizzabile</span>, e costare tempo, fatica e punti sanità (mentale). "
-"Siete stati avvertiti. Grazie di testare questa versione preliminare degli "
-"GNOME System Tools!"
+"Non si dispone del permesso per accedere alla configurazione di sistema."
 
-#: ../src/common/gst-tool.c:1532
-msgid "Warning"
-msgstr "Avvertimento"
-
-#: ../src/common/gst-tool.c:1552
-msgid "Don't show me this again"
-msgstr "Non mostrarlo di nuovo"
-
-#: ../src/common/gst-tool.c:1609
+#: ../src/common/gst-tool.c:358
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
-#: ../src/common/gst-tool.c:1755
+#: ../src/common/gst-tool.c:415
 msgid "Could not display help"
 msgstr "Impossibile visualizzare la guida"
 
-#: ../src/network/address-list.c:555
+#: ../src/network/address-list.c:76 ../src/network/hosts.c:31
+#: ../src/shares/table.c:38 ../src/users/table.c:38
+msgid "_Add"
+msgstr "A_ggiungi"
+
+#: ../src/network/address-list.c:486
 msgid "Type address"
 msgstr "Digitare l'indirizzo"
 
-#: ../src/network/callbacks.c:46
-#, c-format
-msgid "Could not enable the interface %s"
-msgstr "Impossibile abilitare l'interfaccia %s"
+#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+msgid "Changing interface configuration"
+msgstr "Cambiamento configurazione dell'interfaccia"
 
-#: ../src/network/callbacks.c:50
-msgid ""
-"Check that the settings are correct for this network and that the computer "
-"is correctly connected to it."
-msgstr ""
-"Controllare che le impostazioni per questa rete siano corrette e che il "
-"computer sia correttamente connesso alla rete."
-
-#: ../src/network/callbacks.c:237
+#: ../src/network/callbacks.c:243
 msgid "Could not autodetect modem device"
 msgstr "Impossibile riconoscere automaticamente il dispositivo modem"
 
-#: ../src/network/callbacks.c:240
+#: ../src/network/callbacks.c:246
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
-"Controllare che il dispositivo non sia occupato e che sia corettamente "
+"Controllare che il dispositivo non sia occupato e che sia correttamente "
 "collegato al computer."
 
-#: ../src/network/callbacks.c:451
+#: ../src/network/callbacks.c:467
 msgid "The host name has changed"
 msgstr "Il nome dell'host è cambiato"
 
-#: ../src/network/callbacks.c:454
+#: ../src/network/callbacks.c:470
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1286,41 +694,136 @@ msgstr ""
 "Questo impedirà l'avvio di nuove applicazioni, pertanto sarà necessario "
 "effettuare un nuovo login. Continuare comunque?"
 
-#: ../src/network/callbacks.c:460
+#: ../src/network/callbacks.c:476
 msgid "Change _Host name"
 msgstr "Cambia nome _host"
 
-#: ../src/network/hosts.c:92
+#: ../src/network/connection.c:39
+msgid "Automatic configuration (DHCP)"
+msgstr "Configurazione automatica (DHCP)"
+
+#: ../src/network/connection.c:40
+msgid "Local Zeroconf network (IPv4 LL)"
+msgstr "Rete Zeroconf locale (IPv4 LL)"
+
+#: ../src/network/connection.c:41
+msgid "Static IP address"
+msgstr "Indirizzo IP statico"
+
+#: ../src/network/connection.c:45
+msgid "WEP key (ascii)"
+msgstr "Chiave WEP (ascii)"
+
+#: ../src/network/connection.c:46
+msgid "WEP key (hexadecimal)"
+msgstr "Chiave WEP (esadecimale)"
+
+#: ../src/network/connection.c:47
+msgid "WPA"
+msgstr "WPA"
+
+#: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
+#: ../src/shares/table.c:39 ../src/users/table.c:39
+msgid "_Properties"
+msgstr "Pr_oprietà"
+
+#: ../src/network/hosts.c:89
 msgid "IP Address"
 msgstr "Indirizzo IP"
 
-#: ../src/network/hosts.c:100
+#: ../src/network/hosts.c:97
 msgid "Aliases"
 msgstr "Alias"
 
-#: ../src/network/location.c:145
-msgid "Create location"
-msgstr "Crea postazione"
+#: ../src/network/ifaces-list.c:282
+msgid "This network interface is not configured"
+msgstr "Questa interfaccia di rete non è configurata"
 
-#: ../src/network/location.c:153
-msgid "Delete current location"
-msgstr "Elimina postazione attuale"
+#: ../src/network/ifaces-list.c:284
+msgid "Roaming mode enabled"
+msgstr "Modalità roaming abilitata"
 
-#: ../src/network/location.c:367
-msgid "Do you want to remove this location?"
-msgstr "Si vuole rimuovere questa postazione?"
+#: ../src/network/ifaces-list.c:291
+#, c-format
+msgid "<b>Essid:</b> %s "
+msgstr "<b>Essid:</b> %s "
 
-#: ../src/network/location.c:440
-msgid "Changing profile"
-msgstr "Cambiamento del profilo"
+#: ../src/network/ifaces-list.c:297
+#, c-format
+msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
+msgstr "<b>Indirizzo:</b> %s <b>Maschera di rete:</b> %s"
 
-#: ../src/network/main.c:110
+#: ../src/network/ifaces-list.c:301
+#, c-format
+msgid "<b>Address:</b> %s"
+msgstr "<b>Indirizzo:</b> %s"
+
+#: ../src/network/ifaces-list.c:305
+#, c-format
+msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
+msgstr "<b>Indirizzo:</b> %s <b>Indirizzo remoto:</b> %s"
+
+#: ../src/network/ifaces-list.c:311
+#, c-format
+msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
+msgstr "<b>Numero di telefono:</b> %s <b>Login:</b> %s"
+
+#: ../src/network/ifaces-list.c:330
+msgid "Wireless connection"
+msgstr "Connessione wireless"
+
+#: ../src/network/ifaces-list.c:332
+msgid "Infrared connection"
+msgstr "Connessione via infrarossi"
+
+#: ../src/network/ifaces-list.c:334
+msgid "Wired connection"
+msgstr "Connessione cablata"
+
+#: ../src/network/ifaces-list.c:336
+msgid "Parallel port connection"
+msgstr "Connessione via porta parallela"
+
+#: ../src/network/ifaces-list.c:338
+msgid "Modem connection"
+msgstr "Connessione via modem"
+
+#: ../src/network/ifaces-list.c:340
+msgid "ISDN connection"
+msgstr "Connessione via ISDN"
+
+#: ../src/network/locations-combo.c:224
+msgid "Changing network location"
+msgstr "Cambio postazione di rete in corso"
+
+#: ../src/network/locations-combo.c:268
+msgid "There is already a location with the same name"
+msgstr "Esiste già una postazione con lo stesso nome"
+
+#: ../src/network/locations-combo.c:270
+msgid "Overwrite it?"
+msgstr "Sovrascriverla?"
+
+#: ../src/network/locations-combo.c:358
+msgid "Save location"
+msgstr "Salva postazione"
+
+#: ../src/network/locations-combo.c:373
+msgid "_Location name:"
+msgstr "Nome della _postazione:"
+
+#: ../src/network/locations-combo.c:425
+#, c-format
+msgid "Do you want to delete location \"%s\"?"
+msgstr "Si vuole rimuovere la postazione \"%s\"?"
+
+#: ../src/network/main.c:112
 msgid "The interface does not exist"
 msgstr "L'interfaccia non esiste"
 
 # [NdT] ho messo la frase al femminile perché è chiaro che si riferisce
 #       al messaggio di prima, quindi ad una interfaccia (non esistente)
-#: ../src/network/main.c:112
+#: ../src/network/main.c:114
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -1328,99 +831,456 @@ msgstr ""
 "Controllare che sia stata digitata correttamente e che sia correttamente "
 "supportata dal proprio sistema."
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:160
 msgid "Configure a network interface"
 msgstr "Configura un'interfaccia di rete"
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:160
 msgid "INTERFACE"
 msgstr "INTERFACCIA"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:161
 msgid "Configure the first network interface with a specific type"
 msgstr "Configura la prima interfaccia di rete di uno specifico tipo"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:161
 msgid "TYPE"
 msgstr "TIPO"
-
-#: ../src/network/main.c:165
-msgid "Network settings"
-msgstr "Impostazioni di rete"
 
 #: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
 msgstr "Configura i dispositivi e le connessioni di rete"
 
 #: ../src/network/network.desktop.in.in.h:2
-msgid "Networking"
+msgid "Network"
 msgstr "Rete"
 
-#: ../src/network/network-iface-ethernet.c:302
-msgid "Ethernet connection"
-msgstr "Connessione via ethernet"
+#: ../src/network/network-tool.c:285
+msgid "Network Settings"
+msgstr "Impostazioni di rete"
 
-#: ../src/network/network-iface-irlan.c:122
-msgid "Infrared connection"
-msgstr "Connessione via infrarossi"
-
-#: ../src/network/network-iface-isdn.c:330
-msgid "ISDN connection"
-msgstr "Connessione via ISDN"
-
-#: ../src/network/network-iface-modem.c:253
-msgid "Modem connection"
-msgstr "Connessione via modem"
-
-#: ../src/network/network-iface-plip.c:211
-msgid "Parallel port connection"
-msgstr "Connessione via porta parallela"
-
-#: ../src/network/network-iface-wireless.c:245
-msgid "Wireless connection"
-msgstr "Connessione wireless"
-
-#: ../src/network/network-iface.c:410
+#: ../src/services/callbacks.c:58
 #, c-format
-msgid "Activating interface \"%s\""
-msgstr "Attivazione dell'interfaccia \"%s\""
+msgid "Settings for service \"%s\""
+msgstr "Impostazioni per il servizio \"%s\""
 
-#: ../src/network/network-iface.c:522
+#: ../src/services/callbacks.c:110
 #, c-format
-msgid "The interface %s is not configured"
-msgstr "L'interfaccia \"%s\" non è configurata"
+msgid "Are you sure you want to deactivate %s?"
+msgstr "Si vuole veramente disattivare %s?"
 
-#: ../src/network/network-iface.c:524
-#, c-format
-msgid "The interface %s is not active"
-msgstr "L'interfaccia \"%s\" non è attiva"
-
-#: ../src/network/network-iface.c:526
-#, c-format
-msgid "The interface %s is active"
-msgstr "L'interfaccia \"%s\" è attiva"
-
-#: ../src/services/callbacks.c:64
-#, c-format
-msgid "Settings for \"%s\""
-msgstr "Impostazioni per \"%s\""
-
-#. FIXME: put service name !!!
-#: ../src/services/callbacks.c:153
-msgid "Are you sure you want to deactivate this service?"
-msgstr " Disattivare veramente questo servizio?"
-
-#: ../src/services/callbacks.c:156
+#: ../src/services/callbacks.c:114
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
-"data loss"
+"data loss."
 msgstr ""
 "Questo può influenzare il comportamento del sistema in vari modi, "
-"possibilmente causando una perdita di dati"
+"possibilmente causando perdita di dati."
 
-#: ../src/services/main.c:55
-msgid "Services settings"
-msgstr "Impostazioni servizi"
+#: ../src/services/service.c:32
+msgid "Web server"
+msgstr "Server web"
+
+#: ../src/services/service.c:32
+msgid "Shares your web pages over the Internet"
+msgstr "Condivisione della pagine web su Internet"
+
+#. GST_ROLE_WEB_SERVER
+#: ../src/services/service.c:33
+msgid "Actions scheduler"
+msgstr "Pianificatore azioni"
+
+#: ../src/services/service.c:33
+msgid "Executes scheduled actions"
+msgstr "Esegue le azioni pianificate"
+
+#. GST_ROLE_COMMAND_SCHEDULER
+#: ../src/services/service.c:34
+msgid "Printer service"
+msgstr "Servizio di stampa"
+
+#: ../src/services/service.c:34
+msgid "Allows applications to use printers"
+msgstr "Permette alle applicazioni di usare le stampanti"
+
+#. GST_ROLE_PRINTER_SERVICE
+#: ../src/services/service.c:35
+msgid "Mail agent"
+msgstr "Agente di posta"
+
+#: ../src/services/service.c:35
+msgid "Delivers your outgoing mail"
+msgstr "Consegna la posta in uscita"
+
+#. GST_ROLE_MTA
+#: ../src/services/service.c:36
+msgid "MTA authentication service"
+msgstr "Servizio di autenticazione MTA"
+
+#. GST_ROLE_MTA_AUTH
+#: ../src/services/service.c:37
+msgid "Mail fetcher"
+msgstr "Prelievo posta"
+
+#: ../src/services/service.c:37
+msgid "Downloads your mail from remote accounts"
+msgstr "Scarica la posta da account remoti"
+
+#. GST_ROLE_MAIL_FETCHER
+#: ../src/services/service.c:38
+msgid "Graphical login manager"
+msgstr "Gestore accessi grafico"
+
+#: ../src/services/service.c:38
+msgid "Allows users to login graphically"
+msgstr "Permette agli utenti di effettuare il login graficamente"
+
+#. GST_ROLE_DISPLAY_MANAGER
+#: ../src/services/service.c:39
+msgid "Database server"
+msgstr "Server database"
+
+#: ../src/services/service.c:39
+msgid "Data storage system"
+msgstr "Sistema di memorizzazione dati"
+
+#. GST_ROLE_DATABASE_SERVER
+#. GST_ROLE_FILE_SERVER_SMB
+#. GST_ROLE_FILE_SERVER_FTP
+#: ../src/services/service.c:40 ../src/services/service.c:41
+#: ../src/services/service.c:43
+msgid "Folder sharing service"
+msgstr "Servizio condivisione cartelle"
+
+#: ../src/services/service.c:40 ../src/services/service.c:41
+msgid "Shares folders over your network"
+msgstr "Condivisione cartelle attraverso la rete"
+
+#. GST_ROLE_FILE_SERVER_NFS
+#: ../src/services/service.c:42
+msgid "FTP service"
+msgstr "Servizio FTP"
+
+#: ../src/services/service.c:42 ../src/services/service.c:43
+msgid "Shares folders over the Internet"
+msgstr "Condivisione cartelle attraverso Internet"
+
+#. GST_ROLE_FILE_SERVER_TFTP
+#: ../src/services/service.c:44
+msgid "Clock synchronization service"
+msgstr "Servizio di sincronizzazione orologio"
+
+#: ../src/services/service.c:44
+msgid "Synchronizes your computer clock with Internet time servers"
+msgstr "Sincronizza l'orologio del computer con i server orari su Internet"
+
+#. GST_ROLE_NTP_SERVER
+#: ../src/services/service.c:46
+msgid "Antivirus"
+msgstr "Antivirus"
+
+#: ../src/services/service.c:46
+msgid "Analyzes your incoming mail for virus"
+msgstr "Analizza la posta in arrivo alla ricerca di virus"
+
+#. GST_ROLE_ANTIVIRUS
+#: ../src/services/service.c:47
+msgid "Firewall"
+msgstr "Firewall"
+
+#: ../src/services/service.c:47
+msgid "Blocks undesired network access to your computer"
+msgstr "Blocca gli accessi indesiderati al proprio computer"
+
+#. GST_ROLE_FIREWALL_MANAGEMENT
+#: ../src/services/service.c:49
+msgid "Dictionary server"
+msgstr "Server dizionario"
+
+#. GST_ROLE_DICTIONARY_SERVER
+#: ../src/services/service.c:50
+msgid "Speech synthesis support"
+msgstr "Supporto alla sintesi vocale"
+
+#. GST_ROLE_SPEECH_SYNTHESIS
+#: ../src/services/service.c:51
+msgid "Computer activity logger"
+msgstr "Registro attività del computer"
+
+#: ../src/services/service.c:51
+msgid "Keeps a log of your computer activity"
+msgstr "Mantiene traccia delle attività del computer"
+
+#. GST_ROLE_SYSTEM_LOGGER
+#: ../src/services/service.c:52
+msgid "Remote backup server"
+msgstr "Server backup remoto"
+
+#. GST_ROLE_REMOTE_BACKUP
+#: ../src/services/service.c:53
+msgid "Spam filter"
+msgstr "Filtro spam"
+
+#. GST_ROLE_SPAM_FILTER
+#: ../src/services/service.c:54
+msgid "Remote shell server"
+msgstr "Server di shell remota"
+
+#: ../src/services/service.c:54
+msgid "Secure shell server"
+msgstr "Server di shell sicura"
+
+#. GST_ROLE_SECURE_SHELL_SERVER
+#: ../src/services/service.c:55
+msgid "Application server"
+msgstr "Server applicazioni"
+
+#. GST_ROLE_APPLICATION_SERVER
+#: ../src/services/service.c:56
+msgid "Automated crash reports support"
+msgstr "Supporto automatizzato ai rapporti sui crash"
+
+#. GST_ROLE_AUTOMATED_CRASH_REPORTS_MANAGEMENT
+#: ../src/services/service.c:57
+msgid "System communication bus"
+msgstr "Bus di comunicazione di sistema"
+
+#. GST_ROLE_DBUS,
+#: ../src/services/service.c:58
+msgid "System configuration manager"
+msgstr "Gestore configurazione di sistema"
+
+# [NdT] non ho idea di cosa sia
+#. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:59
+msgid "School management platform"
+msgstr "Piattaforma di gestione scolastica"
+
+#. GST_ROLE_SCHOOL_MANAGEMENT_PLATFORM
+#: ../src/services/service.c:60
+msgid "Network security auditor"
+msgstr "Revisore per la sicurezza di rete"
+
+#. GST_ROLE_SECURITY_AUDITING
+#: ../src/services/service.c:61
+msgid "Web calendar server"
+msgstr "Server calendario web"
+
+#. GST_ROLE_WEB_CALENDAR_SERVER
+#: ../src/services/service.c:62
+msgid "OEM configuration manager"
+msgstr "Gestore configurazione OEM"
+
+#. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:63
+msgid "Terminal multiplexor"
+msgstr "Multiplazione terminale"
+
+#. GST_ROLE_TERMINAL_MULTIPLEXOR
+#: ../src/services/service.c:64
+msgid "Disk quota activation"
+msgstr "Attivazione quota disco"
+
+#. GST_ROLE_QUOTA_MANAGEMENT
+#: ../src/services/service.c:65
+msgid "Package index monitor"
+msgstr "Monitor indice pacchetti"
+
+#. GST_ROLE_PACKAGE_INDEX_MONITORING
+#: ../src/services/service.c:66
+msgid "Network service"
+msgstr "Servizio di rete"
+
+#. GST_ROLE_NETWORK
+#: ../src/services/service.c:67
+msgid "Dynamic DNS services updater"
+msgstr "Aggiornamento servizi DNS dinamici"
+
+#. GST_ROLE_DYNAMIC_DNS_SERVICE
+#: ../src/services/service.c:68
+msgid "DHCP server"
+msgstr "Server DHCP"
+
+#. GST_ROLE_DHCP_SERVER
+#: ../src/services/service.c:69
+msgid "Domain name server"
+msgstr "Server nomi di dominio"
+
+#. GST_ROLE_DNS
+#: ../src/services/service.c:70
+msgid "Proxy cache service"
+msgstr "Servizio cache del proxy"
+
+#. GST_ROLE_PROXY_CACHE
+#: ../src/services/service.c:71
+msgid "LDAP server"
+msgstr "Server LDAP"
+
+#. GST_ROLE_LDAP_SERVER
+#: ../src/services/service.c:72
+msgid "Mailing lists manager"
+msgstr "Gestore liste di posta"
+
+#. GST_ROLE_MAILING_LISTS_MANAGER
+#: ../src/services/service.c:73
+msgid "Multicast DNS service discovery"
+msgstr "Scoperta servizio DNS multicast"
+
+#. GST_ROLE_RENDEZVOUS
+#: ../src/services/service.c:74
+msgid "Account information resolver"
+msgstr "Risolutore informazioni di account"
+
+#. GST_ROLE_NSS
+#: ../src/services/service.c:75
+msgid "Virtual Private Network server"
+msgstr "Server per Reti Private Virtuali"
+
+# [NdT] dare un'occhiata a: http://www.networksorcery.com/enp/protocol/icmp/msg9.htm
+#. GST_ROLE_VPN_SERVER
+#: ../src/services/service.c:76
+msgid "Router advertisement server"
+msgstr "Server per annuncio router"
+
+#. GST_ROLE_ROUTER_ADVERTISEMENT_SERVER
+#: ../src/services/service.c:77
+msgid "IPSec key exchange server"
+msgstr "Server scambio chiavi IPSec"
+
+#. GST_ROLE_IPSEC_KEY_EXCHANGE_SERVER
+#: ../src/services/service.c:78
+msgid "Disk server"
+msgstr "Server dischi"
+
+#. GST_ROLE_DISK_SERVER
+#: ../src/services/service.c:79
+msgid "Disk client"
+msgstr "Client dischi"
+
+#. GST_ROLE_DISK_CLIENT
+#: ../src/services/service.c:80
+msgid "Route server"
+msgstr "Server instradamento"
+
+#. GST_ROLE_ROUTE_SERVER
+#: ../src/services/service.c:81
+msgid "RPC mapper"
+msgstr "Mappatore RPC"
+
+#. GST_ROLE_RPC_MAPPER
+#: ../src/services/service.c:82
+msgid "SNMP server"
+msgstr "Server SNMP"
+
+# [NdT] oppure metto "Client 'Terminal server'" ?
+#. GST_ROLE_SNMP_SERVER
+#: ../src/services/service.c:83
+msgid "Terminal server client"
+msgstr "Client server di terminale"
+
+#. GST_ROLE_LTSP_CLIENT
+#: ../src/services/service.c:84
+msgid "Audio settings management"
+msgstr "Gestione impostazioni audio"
+
+#. GST_ROLE_AUDIO_MANAGEMENT
+#: ../src/services/service.c:85
+msgid "Volumes mounter"
+msgstr "Montaggio volumi"
+
+#: ../src/services/service.c:85
+msgid "Mounts your volumes automatically"
+msgstr "Monta automaticamente i volumi"
+
+#. GST_ROLE_AUTOMOUNTER
+#: ../src/services/service.c:86
+msgid "Infrared port management"
+msgstr "Gestione porta infrarossi"
+
+#. GST_ROLE_INFRARED_MANAGEMENT
+#: ../src/services/service.c:87
+msgid "Braille display management"
+msgstr "Gestione visualizzazione Braille"
+
+#. GST_ROLE_BRAILLE_DISPLAY_MANAGEMENT
+#: ../src/services/service.c:88
+msgid "Bluetooth device management"
+msgstr "Gestione dispositivo Bluetooth"
+
+#. GST_ROLE_BLUETOOTH_MANAGEMENT
+#: ../src/services/service.c:89
+msgid "Hard disk tuning"
+msgstr "Regolazione disco rigido"
+
+#. GST_ROLE_HDD_MANAGEMENT
+#: ../src/services/service.c:90
+msgid "Hotkeys management"
+msgstr "Gestione tasti scorciatoia"
+
+#. GST_ROLE_HOTKEYS_MANAGEMENT
+#: ../src/services/service.c:91
+msgid "Power management"
+msgstr "Gestione energia"
+
+#. GST_ROLE_POWER_MANAGEMENT
+#: ../src/services/service.c:92
+msgid "Logical volume management"
+msgstr "Gestione volumi logici"
+
+#. GST_ROLE_LVM_MANAGEMENT
+#: ../src/services/service.c:93
+msgid "Cluster management tool"
+msgstr "Strumento gestione cluster"
+
+#. GST_ROLE_CLUSTER_MANAGEMENT
+#: ../src/services/service.c:94
+msgid "Fax settings management"
+msgstr "Gestione impostazioni fax"
+
+#. GST_ROLE_FAX_MANAGEMENT
+#: ../src/services/service.c:95
+msgid "RAID disks management"
+msgstr "Gestione dischi RAID"
+
+#. GST_ROLE_RAID_MANAGEMENT
+#: ../src/services/service.c:96
+msgid "Graphic tablets management"
+msgstr "Gestione tavolette grafiche"
+
+#. GST_ROLE_GRAPHIC_TABLETS_MANAGEMENT
+#: ../src/services/service.c:97
+msgid "CPU Frequency manager"
+msgstr "Gestore frequenze CPU"
+
+#. GST_ROLE_CPUFREQ_MANAGEMENT
+#: ../src/services/service.c:98
+msgid "Eagle USB ADSL modems manager"
+msgstr "Gestore modem ADSL Eagle USB"
+
+#. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
+#: ../src/services/service.c:99
+msgid "Serial port settings management"
+msgstr "Gestione impostazioni porta seriale"
+
+#. GST_ROLE_SERIAL_PORTS_MANAGEMENT
+#: ../src/services/service.c:100
+msgid "ISDN modems manager"
+msgstr "Gestore modem ISDN"
+
+#. GST_ROLE_ISDN_MANAGEMENT
+#: ../src/services/service.c:101
+msgid "Telstra Bigpond Cable Network client"
+msgstr "Client rete cablata Telstra Bigpond"
+
+#. GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT
+#: ../src/services/service.c:102
+msgid "Hardware monitor"
+msgstr "Monitor hardware"
+
+#. GST_ROLE_HARDWARE_MONITORING
+#: ../src/services/service.c:103
+msgid "System monitor"
+msgstr "Monitor di sistema"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1430,220 +1290,112 @@ msgstr "Configura i servizi che verranno lanciati alla partenza del sistema"
 msgid "Services"
 msgstr "Servizi"
 
-#: ../src/services/service.c:32
-msgid "Antivirus"
-msgstr "Antivirus"
+#: ../src/services/service-settings-table.c:73
+#: ../src/services/service-settings-table.c:97
+#: ../src/services/service-settings-table.c:109
+msgid "Start"
+msgstr "Avvia"
 
-#: ../src/services/service.c:32
-msgid "Analyzes your incoming mail for virus"
-msgstr "Analizza la posta in arrivo alla ricerca di virus"
+#: ../src/services/service-settings-table.c:79
+#: ../src/services/service-settings-table.c:99
+#: ../src/services/service-settings-table.c:111
+msgid "Stop"
+msgstr "Ferma"
 
-#: ../src/services/service.c:33
-msgid "Volumes mounter"
-msgstr "Montaggio volumi"
+#: ../src/services/service-settings-table.c:85
+#: ../src/services/service-settings-table.c:102
+msgid "Ignore"
+msgstr "Ignora"
 
-#: ../src/services/service.c:33
-msgid "Mounts your volumes automatically"
-msgstr "Monta automaticamente i volumi"
+#: ../src/services/service-settings-table.c:175
+msgid "Runlevel"
+msgstr "Runlevel"
 
-#: ../src/services/service.c:34
-msgid "Actions scheduler"
-msgstr "Pianificatore azioni"
+#: ../src/services/service-settings-table.c:192
+msgid "Status"
+msgstr "Stato"
 
-#: ../src/services/service.c:34
-msgid "Executes scheduled actions"
-msgstr "Esegue le azioni pianificate"
+#: ../src/services/service-settings-table.c:211
+msgid "Priority"
+msgstr "Priorità"
 
-#: ../src/services/service.c:35
-msgid "Database server"
-msgstr "Server database"
+#: ../src/services/services-tool.c:100
+msgid "Services settings"
+msgstr "Impostazioni servizi"
 
-#: ../src/services/service.c:35
-msgid "Data storage system"
-msgstr "Sistema di memorizzazione dati"
-
-#: ../src/services/service.c:36
-msgid "Graphical login manager"
-msgstr "Gestore accessi grafico"
-
-#: ../src/services/service.c:36
-msgid "Allows users to login graphically"
-msgstr "Permette agli utenti di effettuare il login graficamente"
-
-#: ../src/services/service.c:37
-msgid "Folder sharing service"
-msgstr "Servizio condivisione cartelle"
-
-#: ../src/services/service.c:37
-msgid "Shares folders over your network"
-msgstr "Condivisione cartelle attraverso la rete"
-
-#: ../src/services/service.c:38
-msgid "File sharing service"
-msgstr "Servizio condivisione file"
-
-#: ../src/services/service.c:38 ../src/services/service.c:39
-msgid "Shares files over the Internet"
-msgstr "Condivisione file attraverso Internet"
-
-#: ../src/services/service.c:39
-msgid "FTP service"
-msgstr "Servizio FTP"
-
-#: ../src/services/service.c:40
-msgid "Mail fetcher"
-msgstr "Prelievo posta"
-
-#: ../src/services/service.c:40
-msgid "Downloads your mail from remote accounts"
-msgstr "Scarica la posta da account remoti"
-
-#: ../src/services/service.c:41
-msgid "Mail agent"
-msgstr "Agente di posta"
-
-#: ../src/services/service.c:41
-msgid "Delivers your outgoing mail"
-msgstr "Consegna la posta in uscita"
-
-#: ../src/services/service.c:42
-msgid "Clock synchronization service"
-msgstr "Servizio di sincronizzazione orologio"
-
-#: ../src/services/service.c:42
-msgid "Synchronizes your computer clock with Internet time servers"
-msgstr "Sincronizza l'orologio del computer con i server orari su Internet"
-
-#: ../src/services/service.c:43
-msgid "Printer service"
-msgstr "Servizio di stampa"
-
-#: ../src/services/service.c:43
-msgid "Allows applications to use printers"
-msgstr "Permette alle applicazioni di usare le stampanti"
-
-#: ../src/services/service.c:44
-msgid "Remote shell server"
-msgstr "Server di shell remota"
-
-#: ../src/services/service.c:44
-msgid "Secure shell server"
-msgstr "Server di shell sicura"
-
-#: ../src/services/service.c:45
-msgid "Computer activity logger"
-msgstr "Registro attività del computer"
-
-#: ../src/services/service.c:45
-msgid "Keeps a log of your computer activity"
-msgstr "Mantiene traccia delle attività del computer"
-
-#: ../src/services/service.c:46
-msgid "Web server"
-msgstr "Server web"
-
-#: ../src/services/service.c:46
-msgid "Shares your web pages over the Internet"
-msgstr "Condivisione della pagine web su Internet"
-
-#: ../src/shares/callbacks.c:187
+#: ../src/shares/callbacks.c:196
 msgid "Are you sure you want to delete this share?"
 msgstr "Si vuole davvero eliminare questa condivisione?"
 
 # [NdT] si riferisce ad una "condivisione", quindi femminile
-#: ../src/shares/callbacks.c:189
+#: ../src/shares/callbacks.c:198
 msgid "Other computers in your network will stop viewing this."
 msgstr "Altri computer nella rete non potranno più vederla."
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:92
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Aggiunge un percorso condiviso, lo modifica se esiste già"
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:92
 msgid "PATH"
 msgstr "PERCORSO"
 
-#: ../src/shares/main.c:97
-msgid "Shared folders settings"
-msgstr "Impostazioni cartelle condivise"
-
-#: ../src/shares/nautilus/nautilus-shares.c:129
+#: ../src/shares/nautilus/nautilus-shares.c:124
 msgid "_Share folder"
 msgstr "_Condividi cartella"
 
-#: ../src/shares/nautilus/nautilus-shares.c:130
+#: ../src/shares/nautilus/nautilus-shares.c:125
 msgid "Share this folder with other computers"
 msgstr "Condivide questa cartella con altri computer"
 
-#: ../src/shares/nfs-acl-table.c:51
+#: ../src/shares/nfs-acl-table.c:50
 msgid "Allowed host/network"
 msgstr "Rete/Host consentiti"
 
-#: ../src/shares/share-nfs-add-hosts.c:114
-#, c-format
-msgid "Hosts in the %s network"
-msgstr "Host nella rete %s"
-
-#: ../src/shares/share-nfs-add-hosts.c:146
+#: ../src/shares/share-nfs-add-hosts.c:117
 msgid "Specify hostname"
 msgstr "Specificare il nome dell'host"
 
-#: ../src/shares/share-nfs-add-hosts.c:153
+#: ../src/shares/share-nfs-add-hosts.c:124
 msgid "Specify IP address"
 msgstr "Specificare l'indirizzo IP"
 
-#: ../src/shares/share-nfs-add-hosts.c:160
+#: ../src/shares/share-nfs-add-hosts.c:131
 msgid "Specify network"
 msgstr "Specificare la rete"
-
-#: ../src/shares/share-settings.c:123
-msgid "Do not share"
-msgstr "Non condividere"
-
-#: ../src/shares/share-settings.c:131
-msgid "SMB"
-msgstr "SMB"
-
-#: ../src/shares/share-settings.c:139
-msgid "NFS"
-msgstr "NFS"
 
 # [NdT] non mi piace molto, ma non mi viene niente di meglio per ora
 #: ../src/shares/shares.desktop.in.in.h:1
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Configura quali cartelle saranno disponibili in rete"
 
-#: ../src/shares/shares.desktop.in.in.h:2
-msgid "Shared Folders"
-msgstr "Cartelle condivise"
+#: ../src/shares/share-settings.c:61
+msgid "File System"
+msgstr "File System"
 
-#: ../src/shares/transfer.c:44
+#: ../src/shares/share-settings.c:144
+msgid "Do not share"
+msgstr "Non condividere"
+
+#: ../src/shares/share-settings.c:152
+msgid "Windows networks (SMB)"
+msgstr "Reti Windows (SMB)"
+
+#: ../src/shares/share-settings.c:160
+msgid "Unix networks (NFS)"
+msgstr "Reti Unix (NFS)"
+
+#: ../src/shares/shares-tool.c:125
 msgid "Sharing services are not installed"
 msgstr "I servizi di condivisione non sono installati"
 
-#: ../src/shares/transfer.c:46
+#: ../src/shares/shares-tool.c:127
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
-"folders. The tool will close now."
+"folders."
 msgstr ""
-"È necessario installare almeno Samba o NFS per poter condividere le proprie "
-"cartelle. Lo strumento adesso verrà chiuso."
-
-#: ../src/time/main.c:464
-msgid "NTP support is not installed"
-msgstr "Il supporto NTP non è installato"
-
-#: ../src/time/main.c:466
-msgid ""
-"Please install and activate NTP support in the system to enable "
-"synchronization of your local time server with Internet time servers."
-msgstr ""
-"Installare ed attivare il supporto NTP nel sistema per abilitare la "
-"sincronizzazione del server orario locale con i server orari di internet."
-
-#: ../src/time/main.c:762
-msgid "Time and Date Settings"
-msgstr "Impostazioni di ora e data"
+"È necessario installare o Samba o NFS per poter condividere le proprie "
+"cartelle."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1653,224 +1405,188 @@ msgstr "Cambia l'ora, la data e il fuso orario del sistema"
 msgid "Time and Date"
 msgstr "Ora e data"
 
-#: ../src/users/callbacks.c:571
-msgid "Error saving profile"
-msgstr "Errore nel salvare il profilo"
+#: ../src/time/time-tool.c:377
+msgid "NTP support is not installed"
+msgstr "Il supporto NTP non è installato"
 
-#: ../src/users/callbacks.c:613
-msgid "Create New profile"
-msgstr "Crea nuovo profilo"
+#: ../src/time/time-tool.c:379
+msgid ""
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers."
+msgstr ""
+"Installare ed attivare il supporto NTP nel sistema per abilitare la "
+"sincronizzazione del server orario locale con i server orari di internet."
 
-#: ../src/users/callbacks.c:649
-#, c-format
-msgid "Settings for profile %s"
-msgstr "Impostazioni per il profilo %s"
+#: ../src/time/time-tool.c:409
+msgid "Enabling NTP"
+msgstr "Abilitazione NTP in corso"
 
-#: ../src/users/group-settings.c:91
-msgid "Create New Group"
-msgstr "Crea nuovo gruppo"
+#: ../src/time/time-tool.c:409
+msgid "Disabling NTP"
+msgstr "Disabilitazione NTP in corso"
 
-#. Check if gid is available
-#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
-msgid "Invalid group ID"
-msgstr "ID di gruppo non valido"
+#: ../src/time/time-tool.c:421
+msgid "Synchronizing system clock"
+msgstr "Sincronizzazione orologio di sistema in corso"
 
-#: ../src/users/group-settings.c:165
-msgid "Group ID must be a positive number"
-msgstr "L'ID del gruppo deve essere un numero positivo"
+#: ../src/time/time-tool.c:431
+msgid "_Synchronize now"
+msgstr "_Sincronizza ora"
 
-#  if it's the root group
-#. if group is root
-#: ../src/users/group-settings.c:168
-msgid "Group ID of the \"root\" user should not be modified"
-msgstr "L'ID di gruppo dell'utente \"root\" non dovrebbe essere modificato"
+#: ../src/time/time-tool.c:527
+msgid "Keep synchronized with Internet servers"
+msgstr "Mantenere sincronizzato con i server Internet"
 
-#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:218
-#: ../src/users/group-settings.c:288
-msgid "This would leave the system unusable"
-msgstr "Questo lascerà il sistema inutilizzabile"
+#: ../src/time/time-tool.c:528
+msgid "Manual"
+msgstr "Manuale"
 
-#: ../src/users/group-settings.c:173
-#, c-format
-msgid "Group ID %s already exists"
-msgstr "L'ID di gruppo %s esiste già"
+#: ../src/time/time-tool.c:677
+msgid "Time and Date Settings"
+msgstr "Impostazioni di ora e data"
 
-#. If empty.
-#: ../src/users/group-settings.c:198
-msgid "Group name is empty"
-msgstr "Il nome del gruppo è vuoto"
+#: ../src/users/group-settings.c:52
+msgid "Administrator group can not be deleted"
+msgstr "Il gruppo di amministrazione non può essere eliminato"
 
-#: ../src/users/group-settings.c:199
-msgid "A group name must be specified"
-msgstr "Il nome del gruppo deve essere specificato"
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:305 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:446 ../src/users/user-settings.c:516
+msgid "This would leave the system unusable."
+msgstr "Questo lascerà il sistema inutilizzabile."
 
-#. If too long.
-#: ../src/users/group-settings.c:202
-msgid "The group name is too long"
-msgstr "Il nome del gruppo è troppo lungo"
-
-#: ../src/users/group-settings.c:203
-#, c-format
-msgid "To be valid, the group name should have less than %d character"
-msgid_plural "To be valid, the group name should have less than %d characters"
-msgstr[0] ""
-"Per essere valido, il nome del gruppo deve avere meno di %d carattere"
-msgstr[1] ""
-"Per essere valido, il nome del gruppo deve avere meno di %d caratteri"
-
-#. if invalid.
-#: ../src/users/group-settings.c:209
-msgid "Group name has invalid characters"
-msgstr "Il nome del gruppo contiene caratteri non validi"
-
-#: ../src/users/group-settings.c:210
-msgid "Please set a valid group name, using only lower case letters"
-msgstr "Impostare un nome di gruppo valido, usando solo lettere minuscole"
-
-#. if !exist.
-#: ../src/users/group-settings.c:213
-#, c-format
-msgid "Group \"%s\" already exists"
-msgstr "L'ID di gruppo \"%s\" esiste già"
-
-#: ../src/users/group-settings.c:214
-msgid "Please select a different group name"
-msgstr "Scegliere un nome di gruppo diverso"
-
-#. if it's the root group
-#: ../src/users/group-settings.c:217
-msgid "Group name of the \"root\" user should not be modified"
-msgstr "Il nome del gruppo dell'utente \"root\" non dovrebbe essere modificato"
-
-#: ../src/users/group-settings.c:287
-msgid "The group \"root\" should not be deleted"
-msgstr "Il gruppo \"root\" non dovrebbe essere eliminato"
-
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:68
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Si vuole davvero eliminare il gruppo \"%s\"?"
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:71
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr ""
 "Questo potrebbe lasciare dei file con ID di gruppo non valido nel file "
 "system."
 
-#: ../src/users/group-settings.c:364
-#, c-format
-msgid "Settings for Group %s"
-msgstr "Impostazioni per il gruppo %s"
+#: ../src/users/group-settings.c:170
+msgid "New group"
+msgstr "Nuovo gruppo"
 
-#: ../src/users/groups-table.c:44
-msgid "Group"
-msgstr "Gruppo"
+#: ../src/users/group-settings.c:178
+#, c-format
+msgid "Group '%s' Properties"
+msgstr "Proprietà del gruppo \"%s\""
+
+#: ../src/users/group-settings.c:277
+msgid "Group name is empty"
+msgstr "Il nome del gruppo è vuoto"
+
+#: ../src/users/group-settings.c:278
+msgid "A group name must be specified."
+msgstr "Deve essere specificato il nome del gruppo."
+
+#: ../src/users/group-settings.c:280
+msgid "Group name of the administrator group user should not be modified"
+msgstr ""
+"Il nome del gruppo del gruppo di amministrazione non dovrebbe essere "
+"modificato"
+
+#: ../src/users/group-settings.c:283
+msgid "Group name has invalid characters"
+msgstr "Il nome del gruppo contiene caratteri non validi"
+
+#: ../src/users/group-settings.c:284
+msgid ""
+"Please set a valid group name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Impostare un nome di gruppo valido utilizzando una lettera minuscola seguita "
+"da altre lettere minuscole e da numeri."
+
+#: ../src/users/group-settings.c:288
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "L'ID di gruppo \"%s\" esiste già"
+
+#: ../src/users/group-settings.c:289 ../src/users/user-settings.c:454
+msgid "Please select a different user name."
+msgstr "Scegliere un nome utente diverso."
+
+#  if it's the root group
+#: ../src/users/group-settings.c:304
+msgid "Group ID of the Administrator account should not be modified"
+msgstr ""
+"L'ID di gruppo dell'account di amministrazione non dovrebbe essere modificato"
 
 #: ../src/users/groups-table.c:45
-msgid "GID"
-msgstr "GID"
+msgid "Group name"
+msgstr "Nome del gruppo"
 
-#: ../src/users/main.c:123
-msgid "User name contains"
-msgstr "Il nome dell'utente contiene"
+#: ../src/users/privileges-table.c:49
+msgid "Monitor system logs"
+msgstr "Monitorare i log di sistema"
 
-#: ../src/users/main.c:124
-msgid "User ID is"
-msgstr "L'ID dell'utente è"
+#: ../src/users/privileges-table.c:50
+msgid "Administer the system"
+msgstr "Amministrare il sistema"
 
-#: ../src/users/main.c:125
-msgid "Group name contains"
-msgstr "Il nome del gruppo contiene"
+#: ../src/users/privileges-table.c:51
+msgid "Use audio devices"
+msgstr "Usare i dispositivi audio"
 
-#: ../src/users/main.c:126
-msgid "User GID is"
-msgstr "Il GID dell'utente è"
+#: ../src/users/privileges-table.c:52
+msgid "Use CD-ROM drives"
+msgstr "Usare le unità CD-ROM"
 
-#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
+#: ../src/users/privileges-table.c:53
+msgid "Use modems"
+msgstr "Usare i modem"
+
+#: ../src/users/privileges-table.c:54
+msgid "Connect to Internet using a modem"
+msgstr "Connettere ad Internet usando un modem"
+
+#: ../src/users/privileges-table.c:55
+msgid "Send and receive faxes"
+msgstr "Inviare e ricevere fax"
+
+#: ../src/users/privileges-table.c:56
+msgid "Use floppy drives"
+msgstr "Usare le unità floppy"
+
+#: ../src/users/privileges-table.c:57
+msgid "Access external storage devices automatically"
+msgstr "Accedere automaticamente ai dispositivi di memoria esterni"
+
+#: ../src/users/privileges-table.c:58
+msgid "Use scanners"
+msgstr "Usare gli scanner"
+
+#: ../src/users/privileges-table.c:59
+msgid "Use tape drives"
+msgstr "Usare le unità a nastro"
+
+#: ../src/users/privileges-table.c:60
+msgid "Be able to get administrator privileges"
+msgstr "Capace di acquisire i privilegi di amministratore"
+
+#: ../src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Aggiunge o rimuove utenti e gruppi"
+
+#: ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Utenti e gruppi"
 
-#: ../src/users/passwd.c:168
-msgid "Passwords do not match"
-msgstr "Le password non corrispondono"
-
-#: ../src/users/passwd.c:173
-#, c-format
-msgid ""
-"Bad password: %s.\n"
-"Please try with a new password"
-msgstr ""
-"Password non appropriata: %s.\n"
-"Provare con una password diversa"
-
-#: ../src/users/profile-settings.c:125
-msgid "The profile must have a name"
-msgstr "Il profilo deve avere un nome"
-
-#: ../src/users/profile-settings.c:130
-msgid "The profile must have a default home"
-msgstr "Il profilo deve avere una home predefinita"
-
-#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
-msgid "The profile must have a default shell"
-msgstr "Il profilo deve avere una shell predefinita"
-
-#: ../src/users/profile-settings.c:208
-msgid "The default profile should not be deleted"
-msgstr "Il profilo predefinito non dovrebbe essere eliminato"
-
-#: ../src/users/profile-settings.c:209
-msgid "This profile is used for setting default data for new users"
-msgstr ""
-"Questo profilo è usato per impostare i dati predefiniti per i nuovi utenti"
-
-#: ../src/users/profile-settings.c:218
-#, c-format
-msgid "Delete profile \"%s\"?"
-msgstr "Eliminare il profilo \"%s\"?"
-
-#: ../src/users/profile-settings.c:220
-msgid "You will not be able to recover this profile after pressing \"apply\"."
-msgstr ""
-"Non sarà possibile recuperare questo profilo dopo aver premuto «Applica»."
-
-#. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:39
-msgid "Profile"
-msgstr "Profilo"
-
-#: ../src/users/profiles-table.c:40
-msgid "Comment"
-msgstr "Commento"
-
-#: ../src/users/search-bar/search-bar.c:228
-msgid "C_lear"
-msgstr "Pu_lisci"
-
-#: ../src/users/search-bar/search-bar.c:329
-msgid "Choice"
-msgstr "Scelta"
-
-#: ../src/users/search-bar/search-bar.c:339
-msgid "Text"
-msgstr "Testo"
+#: ../src/users/user-settings.c:57
+msgid "Administrator account cannot be deleted"
+msgstr "L'account di amministrazione non può essere eliminato"
 
 #: ../src/users/user-settings.c:73
-msgid "The \"root\" user should not be deleted"
-msgstr "L'utente \"root\" non dovrebbe essere eliminato"
-
-#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:311
-#: ../src/users/user-settings.c:406 ../src/users/user-settings.c:442
-msgid "This would leave the system unusable."
-msgstr "Questo lascerà il sistema inutilizzabile."
-
-#: ../src/users/user-settings.c:83
 #, c-format
-msgid "Are you sure you want to delete user \"%s\"?"
-msgstr "Si vuole davvero cancellare l'utente \"%s\"?"
+msgid "Are you sure you want to delete account \"%s\"?"
+msgstr "Si vuole davvero eliminare l'account \"%s\"?"
 
 # [NdT] questo messaggio si riferisce a quello appena qui sopra
-#: ../src/users/user-settings.c:85
+#: ../src/users/user-settings.c:76
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1878,41 +1594,33 @@ msgstr ""
 "Questo disabiliterà l'accesso di questo utente al sistema senza cancellarne "
 "la directory home."
 
-#: ../src/users/user-settings.c:189
-msgid "User Account Editor"
-msgstr "Editor degli account utenti"
+#: ../src/users/user-settings.c:289
+msgid "New user account"
+msgstr "Nuovo account utente"
 
-#: ../src/users/user-settings.c:285
-msgid "The user name is empty"
+#: ../src/users/user-settings.c:304
+#, c-format
+msgid "Account '%s' Properties"
+msgstr "Proprietà dell'account \"%s\""
+
+#: ../src/users/user-settings.c:442
+msgid "User name is empty"
 msgstr "Il nome utente è vuoto"
 
-#: ../src/users/user-settings.c:286
+#: ../src/users/user-settings.c:443
 msgid "A user name must be specified."
 msgstr "Il nome utente deve essere specificato."
 
-#. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:300
-msgid "The user name is too long"
-msgstr "Il nome utente è troppo lungo"
+#: ../src/users/user-settings.c:445
+msgid "Administrator account's user name should not be modified"
+msgstr ""
+"Il nome utente dell'account di amministrazione non dovrebbe essere modificato"
 
-#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:301
-#, c-format
-msgid "To be valid, the user name should have less than %d character"
-msgid_plural "To be valid, the user name should have less than %d characters"
-msgstr[0] ""
-"Per essere valido, il nome dell'utente deve avere meno di %d carattere"
-msgstr[1] ""
-"Per essere valido, il nome dell'utente deve avere meno di %d caratteri"
-
-#: ../src/users/user-settings.c:310
-msgid "User name for the \"root\" user should not be modified"
-msgstr "Il nome utente dell'utente \"root\" non dovrebbe essere modificato"
-
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:448
 msgid "User name has invalid characters"
 msgstr "Il nome utente contiene caratteri non validi"
 
-#: ../src/users/user-settings.c:317
+#: ../src/users/user-settings.c:449
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1920,37 +1628,25 @@ msgstr ""
 "Impostare un nome utente valido utilizzando una lettera minuscola seguita da "
 "altre lettere minuscole e da numeri."
 
-#: ../src/users/user-settings.c:323
+#: ../src/users/user-settings.c:453
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Il nome utente \"%s\" esiste già"
 
-#: ../src/users/user-settings.c:324
-msgid "Please select a different user name."
-msgstr "Scegliere un nome utente diverso."
-
-#: ../src/users/user-settings.c:349
+#: ../src/users/user-settings.c:480
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Carattere \"%c\" nel commento non valido"
 
-#: ../src/users/user-settings.c:350
+#: ../src/users/user-settings.c:481
 msgid "Check that this character is not used."
 msgstr "Controllare che questo carattere non sia usato."
 
-#: ../src/users/user-settings.c:398
-msgid "Home directory should not be empty"
-msgstr "La directory home non dovrebbe essere vuota"
-
-#: ../src/users/user-settings.c:399
-msgid "Make sure you provide a home directory."
-msgstr "Assicurarsi di aver fornito una directory home."
-
-#: ../src/users/user-settings.c:401
+#: ../src/users/user-settings.c:498
 msgid "Incomplete path in home directory"
 msgstr "Percorso della directory home incompleto"
 
-#: ../src/users/user-settings.c:402
+#: ../src/users/user-settings.c:499
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1958,88 +1654,55 @@ msgstr ""
 "Inserire il percorso completo per la directory home\n"
 "<span size=\"smaller\">es.: /home/mario</span>."
 
-#: ../src/users/user-settings.c:405
-msgid "Home directory of the \"root\" user should not be modified"
-msgstr "La directory home dell'utente \"root\" non dovrebbe essere modificata"
-
-#: ../src/users/user-settings.c:438
-msgid "Invalid user ID"
-msgstr "ID utente non valido"
-
-#: ../src/users/user-settings.c:439
-msgid "User ID must be a positive number."
-msgstr "L'ID utente deve essere un numero positivo."
-
-#: ../src/users/user-settings.c:441
-msgid "User ID of the \"root\" user should not be modified"
-msgstr "L'ID utente dell'utente \"root\" non dovrebbe essere modificato"
-
-#: ../src/users/user-settings.c:459
-#, c-format
-msgid "User ID %s already exists"
-msgstr "L'ID utente %s esiste già"
-
-#: ../src/users/user-settings.c:461
-msgid ""
-"Several users may share a single user ID, but it's not common and may lead "
-"to security problems."
+#: ../src/users/user-settings.c:515
+msgid "Administrator account's user ID should not be modified"
 msgstr ""
-"Diversi utenti possono condividere lo stesso ID utente, ma non è una scelta "
-"comune e può portare problemi di sicurezza."
+"L'ID utente dell'account di amministrazione non dovrebbe essere modificato"
 
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:531
 msgid "Incomplete path in shell"
 msgstr "Percorso della shell incompleto"
 
-#: ../src/users/user-settings.c:480
+#: ../src/users/user-settings.c:532
 msgid ""
 "Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>."
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr ""
 "Inserire il percorso completo per la shell\n"
-"<span size=\"smaller\">es.: /bin/sh</span>."
+"<span size=\"smaller\">es.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:502
-msgid "Password should not be empty"
-msgstr "La password non dovrebbe essere vuota"
+#: ../src/users/user-settings.c:560
+msgid "Password is too short"
+msgstr "La password è troppo corta"
 
-#: ../src/users/user-settings.c:503
-msgid "A password must be provided."
-msgstr "Deve essere fornita una password."
+#: ../src/users/user-settings.c:561
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Le password utente devono essere più lunghe di 6 caratteri e formate "
+"preferibilmente da numeri, lettere e caratteri speciali."
 
-#: ../src/users/user-settings.c:505
-msgid "Password confirmation isn't correct"
+#: ../src/users/user-settings.c:564
+msgid "Password confirmation is not correct"
 msgstr "La password di conferma non è corretta"
 
-#: ../src/users/user-settings.c:506
+#: ../src/users/user-settings.c:565
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Controllare che si sia fornita la stessa password in entrambi i campi."
 
-#: ../src/users/user-settings.c:780
-#, c-format
-msgid "Settings for User %s"
-msgstr "Impostazioni per l'utente %s"
-
-#: ../src/users/users-table.c:61
-msgid "User"
-msgstr "Utente"
-
-#: ../src/users/users-table.c:62
-msgid "Home"
-msgstr "Home"
+#: ../src/users/users-table.c:44
+msgid "Name"
+msgstr "Nome"
 
 #: ../src/users/users-table.c:63
-msgid "User details"
-msgstr "Dettagli utente"
+msgid "Login name"
+msgstr "Nome accesso"
 
-#: ../src/users/users-table.c:64
-msgid "UID"
-msgstr "UID"
+#: ../src/users/users-table.c:70
+msgid "Home directory"
+msgstr "Directory home"
 
-#: ../src/users/users-table.c:65
-msgid "Shell"
-msgstr "Shell"
-
-#: ../src/users/users.desktop.in.in.h:1
-msgid "Add or remove users and groups"
-msgstr "Aggiunge o rimuove utenti e gruppi"
+#: ../src/users/users-tool.c:191
+msgid "Users settings"
+msgstr "Impostazioni utenti"
