@@ -1,3 +1,13 @@
+2007-06-18  Carlos Garnacho  <carlosg@gnome.org>
+
+	* main.c: include services-tool.h. Fixes #441646 (patch by Sven
+	Arvidsson)
+	* callbacks.c (show_settings): do not leak a reference
+	(on_service_toggled): fix a compiler warning.
+	* table.c (service_get_active): fix a compiler warning.
+	* service-settings-table.c (add_columns): do not possibly unref the
+	adjustment too early.
+
 2007-04-09  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.18.1

@@ -212,7 +212,6 @@ add_columns (GtkWidget    *table,
 						     renderer,
 						     "text", COL_PRIORITY,
 						     NULL);
-	g_object_unref (adjustment);
 
 	g_signal_connect (G_OBJECT (renderer), "edited",
 			  G_CALLBACK (on_priority_edited), model);

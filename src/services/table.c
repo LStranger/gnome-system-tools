@@ -152,7 +152,7 @@ service_get_active (OobsService *service)
 	guint status;
 	gint priority;
 
-	rl = GST_SERVICES_TOOL (tool)->default_runlevel;
+	rl = (OobsServicesRunlevel *) GST_SERVICES_TOOL (tool)->default_runlevel;
 	oobs_service_get_runlevel_configuration (service, rl, &status, &priority);
 
 	return (status == OOBS_SERVICE_START);

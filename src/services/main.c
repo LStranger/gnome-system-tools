@@ -27,6 +27,7 @@
 #include "gst.h"
 
 #include "table.h"
+#include "services-tool.h"
 #include "service-settings-table.h"
 #include "callbacks.h"
 

@@ -70,6 +70,7 @@ show_settings (void)
 
 	service_settings_table_save (service);
 	oobs_object_commit (GST_SERVICES_TOOL (tool)->services_config);
+	g_object_unref (service);
 }
 
 static void
@@ -148,7 +149,7 @@ on_service_toggled (GtkCellRenderer *renderer, gchar *path_str, gpointer data)
 	if (new_value || !dangerous || show_warning_dialog (tool, service)) {
 		OobsServicesRunlevel *rl;
 		
-		rl = GST_SERVICES_TOOL (tool)->default_runlevel;
+		rl = (OobsServicesRunlevel *) GST_SERVICES_TOOL (tool)->default_runlevel;
 		oobs_service_set_runlevel_configuration (service, rl,
 							 (new_value) ? OOBS_SERVICE_START : OOBS_SERVICE_IGNORE,
 							 /* FIXME: hardcoded value... */
