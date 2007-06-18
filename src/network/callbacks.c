@@ -26,6 +26,7 @@
 #include "callbacks.h"
 #include "hosts.h"
 #include "nm-integration.h"
+#include "connection.h"
 
 extern GstTool *tool;
 
