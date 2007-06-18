@@ -45,7 +45,7 @@ struct _PrivilegeDescription {
 };
 
 /* keep this sorted, or you'll go to hell */
-static PrivilegeDescription descriptions[] = {
+static const PrivilegeDescription descriptions[] = {
 	{ "adm", N_("Monitor system logs") },
 	{ "admin", N_("Administer the system") },
 	{ "audio", N_("Use audio devices") },
@@ -72,12 +72,12 @@ compare_groups (const void *p1, const void *p2)
 static const PrivilegeDescription*
 privilege_search (const gchar *group)
 {
-	PrivilegeDescription p;
+	PrivilegeDescription p = { 0, };
 
-	p.group = (gchar *) group;
+	p.group = group;
 
-	return bsearch (&group, descriptions, G_N_ELEMENTS (descriptions),
-			sizeof (PrivilegeDescription), compare_groups);
+	return (const PrivilegeDescription *) bsearch (&p, descriptions, G_N_ELEMENTS (descriptions),
+						       sizeof (PrivilegeDescription), compare_groups);
 }
 
 
