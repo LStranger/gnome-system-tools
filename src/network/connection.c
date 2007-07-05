@@ -35,16 +35,17 @@ typedef struct
   const gchar *desc;
 } Description;
 
-static Description method_descriptions [] = {
+static const Description method_descriptions [] = {
   { "dhcp",   N_("Automatic configuration (DHCP)") },
   { "ipv4ll", N_("Local Zeroconf network (IPv4 LL)") },
   { "static", N_("Static IP address") },
 };
 
-static Description key_type_descriptions [] = {
+static const Description key_type_descriptions [] = {
   { "wep-ascii", N_("WEP key (ascii)") },
   { "wep-hex", N_("WEP key (hexadecimal)") },
-  { "wpa-psk", N_("WPA") },
+  { "wpa-psk", N_("WPA Personal") },
+  { "wpa2-psk", N_("WPA2 Personal") },
 };
 
 
@@ -439,10 +440,10 @@ method_to_desc (const Description  descriptions[],
 }
 
 static void
-populate_combo (GtkComboBox  *combo,
-		GList        *list,
-		Description   descriptions[],
-		gint          n_elems)
+populate_combo (GtkComboBox       *combo,
+		GList             *list,
+		const Description  descriptions[],
+		gint               n_elems)
 {
   GtkListStore *store;
   GtkTreeIter iter;
