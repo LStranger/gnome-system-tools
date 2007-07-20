@@ -5,16 +5,16 @@
 # Christian Neumair <chris@gnome-de.org>, 2002-2004.
 # Hendrik Brandt <heb@gnome-de.org>, 2004-2005.
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2005.
-# Hendrik Richter <hendrikr@gnome.org>, 2006.
+# Hendrik Richter <hendrikr@gnome.org>, 2006, 2007.
 # Jochen Skulj <jochen@jochenskulj.de>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-09 03:40+0000\n"
-"PO-Revision-Date: 2007-02-27 13:44+0100\n"
-"Last-Translator: Thomas Gier <info@thomasgier.de>\n"
+"POT-Creation-Date: 2007-07-20 19:38+0200\n"
+"PO-Revision-Date: 2007-07-20 19:43+0200\n"
+"Last-Translator: Hendrik Richter <hendrikr@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,9 @@ msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
 "modify\n"
 "your system configuration."
-msgstr "Um dieses Werkzeug zu verwenden, benötigen Sie Administratorrechte. Bitte geben Sie ein Passwort ein, um Ihre Systemkonfiguration zu ändern."
+msgstr ""
+"Um dieses Werkzeug zu verwenden, benötigen Sie Administratorrechte. Bitte "
+"geben Sie ein Passwort ein, um Ihre Systemkonfiguration zu ändern."
 
 #: ../interfaces/common.glade.in.h:5
 msgid "_Password:"
@@ -639,19 +641,19 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Nicht unterstützte Plattform"
 
-#: ../src/common/gst-tool.c:176
+#: ../src/common/gst-tool.c:178
 msgid "The configuration could not be loaded"
 msgstr "Die Konfiguration konnte nicht geladen werden"
 
-#: ../src/common/gst-tool.c:178
+#: ../src/common/gst-tool.c:180
 msgid "You are not allowed to access the system configuration."
 msgstr "Sie haben keine Berechtigung, auf die Systemkonfiguration zuzugreifen."
 
-#: ../src/common/gst-tool.c:356
+#: ../src/common/gst-tool.c:358
 msgid "GNOME System Tools"
 msgstr "GNOME-Systemwerkzeuge"
 
-#: ../src/common/gst-tool.c:380
+#: ../src/common/gst-tool.c:415
 msgid "Could not display help"
 msgstr "Hilfe konnte nicht angezeigt werden"
 
@@ -664,15 +666,15 @@ msgstr "_Hinzufügen"
 msgid "Type address"
 msgstr "Adresse eingeben"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "Schnittstellenkonfiguration ändern"
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "Das Modem-Gerät konnte nicht automatisch erkannt werden"
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -680,11 +682,11 @@ msgstr ""
 "Stellen Sie sicher, dass das Gerät nicht belegt und richtig mit dem Computer "
 "verbunden ist."
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "Der Rechnername wurde geändert"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -692,7 +694,7 @@ msgstr ""
 "Dies hindert Sie daran, neue Anwendungen zu starten. Daher müssen Sie sich "
 "erneut anmelden. Dennoch fortfahren?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "_Rechnername ändern"
 
@@ -710,15 +712,19 @@ msgstr "Statische IP-Adresse"
 
 #: ../src/network/connection.c:45
 msgid "WEP key (ascii)"
-msgstr "WEP-SChlüssel (ASCII)"
+msgstr "WEP-Schlüssel (ASCII)"
 
 #: ../src/network/connection.c:46
 msgid "WEP key (hexadecimal)"
 msgstr "WEP-Schlüssel (hexadezimal)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA-Personal"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2-Personal"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -802,15 +808,15 @@ msgstr "Es ist bereits ein Standort mit dem gleichen Namen vorhanden"
 msgid "Overwrite it?"
 msgstr "Soll dieser überschrieben werden?"
 
-#: ../src/network/locations-combo.c:360
+#: ../src/network/locations-combo.c:358
 msgid "Save location"
 msgstr "Standort speichern"
 
-#: ../src/network/locations-combo.c:375
+#: ../src/network/locations-combo.c:373
 msgid "_Location name:"
 msgstr "_Standortname:"
 
-#: ../src/network/locations-combo.c:427
+#: ../src/network/locations-combo.c:425
 #, c-format
 msgid "Do you want to delete location \"%s\"?"
 msgstr "Möchten Sie den Standort »%s« löschen?"
@@ -860,12 +866,12 @@ msgstr "Netzwerkeinstellungen"
 msgid "Settings for service \"%s\""
 msgstr "Einstellungen für Dienst »%s«"
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Sind Sie sicher, dass Sie »%s« deaktivieren möchten?"
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1390,8 +1396,8 @@ msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
 msgstr ""
-"Sie müssen zumindest entweder Samba oder NFS installieren, um Ihre "
-"Ordner freigeben zu können."
+"Sie müssen zumindest entweder Samba oder NFS installieren, um Ihre Ordner "
+"freigeben zu können."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1424,7 +1430,11 @@ msgstr "NTP deaktivieren"
 
 #: ../src/time/time-tool.c:421
 msgid "Synchronizing system clock"
-msgstr "Systemuhr synchronisieren"
+msgstr "Systemuhr wird synchronisiert"
+
+#: ../src/time/time-tool.c:431
+msgid "_Synchronize now"
+msgstr "Jetzt _synchronisieren"
 
 #: ../src/time/time-tool.c:527
 msgid "Keep synchronized with Internet servers"
@@ -1434,7 +1444,7 @@ msgstr "Synchronisierung mit Internet-Servern aufrecht erhalten"
 msgid "Manual"
 msgstr "Manuell"
 
-#: ../src/time/time-tool.c:675
+#: ../src/time/time-tool.c:677
 msgid "Time and Date Settings"
 msgstr "Zeit- und Datumseinstellungen"
 
@@ -1578,7 +1588,9 @@ msgstr "Sind Sie sicher, dass Sie die Gruppe »%s« löschen wollen?"
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
-msgstr "Hierdurch wird der Zugriff des Benutzers auf das System unterbunden, ohne dessen persönlichen Ordner zu löschen"
+msgstr ""
+"Hierdurch wird der Zugriff des Benutzers auf das System unterbunden, ohne "
+"dessen persönlichen Ordner zu löschen"
 
 #: ../src/users/user-settings.c:289
 msgid "New user account"
@@ -1643,7 +1655,8 @@ msgstr ""
 
 #: ../src/users/user-settings.c:515
 msgid "Administrator account's user ID should not be modified"
-msgstr "Die Benutzerkennung des Administratorkontos sollte nicht geändert werden"
+msgstr ""
+"Die Benutzerkennung des Administratorkontos sollte nicht geändert werden"
 
 #: ../src/users/user-settings.c:531
 msgid "Incomplete path in shell"
@@ -1694,6 +1707,9 @@ msgstr "Persönliches Verzeichnis"
 #: ../src/users/users-tool.c:191
 msgid "Users settings"
 msgstr "Einstellungen des Benutzers"
+
+#~ msgid "WPA"
+#~ msgstr "WPA"
 
 #~ msgid ""
 #~ "Comma separated list of hosts that the GST will be able to access when "
