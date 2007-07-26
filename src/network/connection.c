@@ -619,7 +619,7 @@ connection_dialog_prepare (GstConnectionDialog *dialog, OobsIface *iface)
   dialog->iface = g_object_ref (iface);
   active = oobs_iface_get_configured (dialog->iface);
 
-  title = g_strdup_printf ("Settings for interface %s\n",
+  title = g_strdup_printf (_("%s Properties\n"),
 			   oobs_iface_get_device_name (dialog->iface));
   gtk_window_set_title (GTK_WINDOW (dialog->dialog), title);
   g_free (title);
