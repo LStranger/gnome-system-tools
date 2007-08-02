@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.17.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-08 21:44+0200\n"
-"PO-Revision-Date: 2007-05-08 21:44+0200\n"
+"POT-Creation-Date: 2007-08-02 16:09+0200\n"
+"PO-Revision-Date: 2007-08-02 16:13+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgid "<b>Account data</b>"
 msgstr "<b>Kontodata</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
+msgid "<b>Connection Settings</b>"
 msgstr "<b>Innstillinger for tilkobling</b>"
 
 #: ../interfaces/network.glade.in.h:3
@@ -65,7 +65,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<p>Data for internettilbyder</p>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>Innstillinger for modem</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -73,7 +73,7 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>Søkedomener</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr "<b>Innstillinger for trådløs</b>"
 
 #: ../interfaces/network.glade.in.h:9
@@ -113,8 +113,8 @@ msgid "General"
 msgstr "Generelt"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
-msgstr "Innstillinger for alias for vert"
+msgid "Host Alias Properties"
+msgstr "Egenskaper for vertsalias"
 
 #: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
@@ -657,26 +657,26 @@ msgstr "_Legg til"
 msgid "Type address"
 msgstr "Type adresse"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "Endrer konfigurasjon for grensesnitt"
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "Kunne ikke gjenkjenne modemenhet automatisk"
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
 "Sjekk at enheten ikke er opptatt og at den er koblet riktig til datamaskinen."
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "Vertsnavnet er endret"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -684,7 +684,7 @@ msgstr ""
 "Dette vil hindre deg i å starte nye programmer, og derfor vil du måtte logge "
 "inn på nytt. Fortsett likevel?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "Endre _vertsnavn"
 
@@ -709,8 +709,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "WEP-nøkkel (heksadesimal)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA personlig"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 personlig"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "Egenskaper for %s\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -850,12 +859,12 @@ msgstr "Innstillinger for nettverk"
 msgid "Settings for service \"%s\""
 msgstr "Innstillinger for tjeneste «%s»"
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Er du sikker på at du vil deaktivere %s?"
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1038,12 +1047,12 @@ msgstr "Konfigurasjonshåndterer for systemet"
 #. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:59
 msgid "School management platform"
-msgstr ""
+msgstr "Plattform for håndtering av skoler"
 
 #. GST_ROLE_SCHOOL_MANAGEMENT_PLATFORM
 #: ../src/services/service.c:60
 msgid "Network security auditor"
-msgstr ""
+msgstr "Revisor for nettverkssikkerhet"
 
 #. GST_ROLE_SECURITY_AUDITING
 #: ../src/services/service.c:61
@@ -1053,12 +1062,12 @@ msgstr "HTTP-basert kalendertjener"
 #. GST_ROLE_WEB_CALENDAR_SERVER
 #: ../src/services/service.c:62
 msgid "OEM configuration manager"
-msgstr ""
+msgstr "OEM konfigurasjonsstyring"
 
 #. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:63
 msgid "Terminal multiplexor"
-msgstr ""
+msgstr "Terminalmultipleksing"
 
 #. GST_ROLE_TERMINAL_MULTIPLEXOR
 #: ../src/services/service.c:64
@@ -1068,7 +1077,7 @@ msgstr "Aktivering av diskkvoter"
 #. GST_ROLE_QUOTA_MANAGEMENT
 #: ../src/services/service.c:65
 msgid "Package index monitor"
-msgstr ""
+msgstr "Overvåking av pakkeindeks"
 
 #. GST_ROLE_PACKAGE_INDEX_MONITORING
 #: ../src/services/service.c:66
@@ -1078,7 +1087,7 @@ msgstr "Nettverkstjeneste"
 #. GST_ROLE_NETWORK
 #: ../src/services/service.c:67
 msgid "Dynamic DNS services updater"
-msgstr ""
+msgstr "Dynamisk DNS-tjenesteoppdatering"
 
 #. GST_ROLE_DYNAMIC_DNS_SERVICE
 #: ../src/services/service.c:68
@@ -1108,17 +1117,17 @@ msgstr "Håndtering av e-postlister"
 #. GST_ROLE_MAILING_LISTS_MANAGER
 #: ../src/services/service.c:73
 msgid "Multicast DNS service discovery"
-msgstr ""
+msgstr "Multicast DNS-tjenesteoppdaging"
 
 #. GST_ROLE_RENDEZVOUS
 #: ../src/services/service.c:74
 msgid "Account information resolver"
-msgstr ""
+msgstr "Oppslag av kontoinformasjon"
 
 #. GST_ROLE_NSS
 #: ../src/services/service.c:75
 msgid "Virtual Private Network server"
-msgstr ""
+msgstr "Virtual Private Network-tjener"
 
 #. GST_ROLE_VPN_SERVER
 #: ../src/services/service.c:76
@@ -1163,7 +1172,7 @@ msgstr "Terminaltjenerklient"
 #. GST_ROLE_LTSP_CLIENT
 #: ../src/services/service.c:84
 msgid "Audio settings management"
-msgstr ""
+msgstr "Håndtering av lydinnstillinger"
 
 #. GST_ROLE_AUDIO_MANAGEMENT
 #: ../src/services/service.c:85
@@ -1182,7 +1191,7 @@ msgstr "Håndtering av infrarøde porter"
 #. GST_ROLE_INFRARED_MANAGEMENT
 #: ../src/services/service.c:87
 msgid "Braille display management"
-msgstr ""
+msgstr "Braille skjermhåndtering"
 
 #. GST_ROLE_BRAILLE_DISPLAY_MANAGEMENT
 #: ../src/services/service.c:88
@@ -1192,12 +1201,12 @@ msgstr "Håndtering av bluetooth-enheter"
 #. GST_ROLE_BLUETOOTH_MANAGEMENT
 #: ../src/services/service.c:89
 msgid "Hard disk tuning"
-msgstr ""
+msgstr "Harddisk tuning"
 
 #. GST_ROLE_HDD_MANAGEMENT
 #: ../src/services/service.c:90
 msgid "Hotkeys management"
-msgstr ""
+msgstr "Håndtering av snarveitaster"
 
 #. GST_ROLE_HOTKEYS_MANAGEMENT
 #: ../src/services/service.c:91
@@ -1217,12 +1226,12 @@ msgstr "Håndtering av klynger"
 #. GST_ROLE_CLUSTER_MANAGEMENT
 #: ../src/services/service.c:94
 msgid "Fax settings management"
-msgstr ""
+msgstr "Håndtering av innstillinger for faks"
 
 #. GST_ROLE_FAX_MANAGEMENT
 #: ../src/services/service.c:95
 msgid "RAID disks management"
-msgstr ""
+msgstr "Håndtering av RAID-disker"
 
 #. GST_ROLE_RAID_MANAGEMENT
 #: ../src/services/service.c:96
@@ -1237,22 +1246,22 @@ msgstr "CPU-frekvenshåndterer"
 #. GST_ROLE_CPUFREQ_MANAGEMENT
 #: ../src/services/service.c:98
 msgid "Eagle USB ADSL modems manager"
-msgstr ""
+msgstr "Håndtering av Eagle USB ADSL-modem"
 
 #. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
 #: ../src/services/service.c:99
 msgid "Serial port settings management"
-msgstr ""
+msgstr "Håndtering av innstillinger for seriellport"
 
 #. GST_ROLE_SERIAL_PORTS_MANAGEMENT
 #: ../src/services/service.c:100
 msgid "ISDN modems manager"
-msgstr ""
+msgstr "Håndtering av ISDN-modem"
 
 #. GST_ROLE_ISDN_MANAGEMENT
 #: ../src/services/service.c:101
 msgid "Telstra Bigpond Cable Network client"
-msgstr ""
+msgstr "Håndtering av Telstra Bigpond kabelnettverksklient"
 
 #. GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT
 #: ../src/services/service.c:102
