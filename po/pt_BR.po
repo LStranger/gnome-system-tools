@@ -8,14 +8,15 @@
 # Guilherme de S. Pastore <gpastore@gnome.org>, 2005, 2007.
 # Raphael Higino <phhigino@gmail.com>, 2004, 2005, 2007.
 # Washington Lins <washington-lins@uol.com.br>, 2007.
+# Og Maciel <ogmaciel@gnome.org>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-30 21:01-0300\n"
-"PO-Revision-Date: 2007-04-08 10:03-0400\n"
-"Last-Translator: Guilherme de S. Pastore <gpastore@gnome.org>\n"
+"POT-Creation-Date: 2007-08-05 12:06-0300\n"
+"PO-Revision-Date: 2007-08-05 12:52-0300\n"
+"Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 
 #: ../gnome-system-tools.schemas.in.h:1
 msgid "Whether the users-admin tool should show all users and groups or not"
-msgstr "Se a ferramenta users-admin mostrará ou não todos os usuários e grupos"
+msgstr "Mostrar ou não todos os usuários e grupos na ferramenta de administração de usuários"
 
 #: ../interfaces/common.glade.in.h:1
 msgid ""
@@ -35,7 +36,7 @@ msgstr ""
 
 #: ../interfaces/common.glade.in.h:2
 msgid "Enter Password"
-msgstr "Digite a senha"
+msgstr "Digite a Senha"
 
 #: ../interfaces/common.glade.in.h:3
 msgid ""
@@ -55,8 +56,8 @@ msgid "<b>Account data</b>"
 msgstr "<b>Dados da conta</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
-msgstr "<b>Configurações de conexão</b>"
+msgid "<b>Connection Settings</b>"
+msgstr "<b>Configurações da Conexão</b>"
 
 #: ../interfaces/network.glade.in.h:3
 msgid "<b>DNS Servers</b>"
@@ -71,16 +72,16 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<b>Dados do provedor de internet</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
-msgstr "<b>Configurações de modem</b>"
+msgid "<b>Modem Settings</b>"
+msgstr "<b>Configurações do Modem</b>"
 
 #: ../interfaces/network.glade.in.h:7
 msgid "<b>Search Domains</b>"
 msgstr "<b>Domínios de Pesquisa</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
-msgstr "<b>Configurações de wireless</b>"
+msgid "<b>Wireless Settings</b>"
+msgstr "<b>Configurações de Conexão Sem Fio</b>"
 
 #: ../interfaces/network.glade.in.h:9
 msgid "Aliases:"
@@ -104,7 +105,7 @@ msgstr "Nome do d_omínio:"
 
 #: ../interfaces/network.glade.in.h:14
 msgid "Delete current location"
-msgstr "Excluir localização atual"
+msgstr "Exclui a localização atual"
 
 #: ../interfaces/network.glade.in.h:15
 msgid "E_nable roaming mode"
@@ -119,8 +120,8 @@ msgid "General"
 msgstr "Geral"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
-msgstr "Configurações de apelidos de máquinas"
+msgid "Host Alias Properties"
+msgstr "Configurações de Apelidos de Máquinas"
 
 #: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
@@ -184,7 +185,7 @@ msgstr ""
 
 #: ../interfaces/network.glade.in.h:35
 msgid "Save current network configuration as a location"
-msgstr "Salvar a configuração de rede atual como uma localização"
+msgstr "Salva a configuração de rede atual como uma localização"
 
 #: ../interfaces/network.glade.in.h:36
 msgid ""
@@ -623,7 +624,7 @@ msgstr "_Telefone do trabalho:"
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
 msgstr ""
-"A plataforma que você está executando não é suportada por esta ferramenta"
+"Esta ferramenta não dá suporte à plataforma que você está usando"
 
 #. label
 #: ../src/common/gst-platform-dialog.c:185
@@ -642,7 +643,7 @@ msgstr "Plataforma não suportada"
 
 #: ../src/common/gst-tool.c:178
 msgid "The configuration could not be loaded"
-msgstr "A configuração não pôde ser carregada"
+msgstr "Não foi possível carregar a configuração"
 
 #: ../src/common/gst-tool.c:180
 msgid "You are not allowed to access the system configuration."
@@ -718,8 +719,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "Chave WEP (hexadecimal)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA Pessoal"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 Pessoal"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "Propriedades de %s\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -769,7 +779,7 @@ msgstr "<b>Número do telefone:</b> %s <b>Log-in:</b> %s"
 
 #: ../src/network/ifaces-list.c:330
 msgid "Wireless connection"
-msgstr "Conexão wireless"
+msgstr "Conexão sem fio"
 
 #: ../src/network/ifaces-list.c:332
 msgid "Infrared connection"
@@ -903,7 +913,7 @@ msgstr "Permite que aplicações usem impressoras"
 #. GST_ROLE_PRINTER_SERVICE
 #: ../src/services/service.c:35
 msgid "Mail agent"
-msgstr "Agente de email"
+msgstr "Agente de e-mail"
 
 #: ../src/services/service.c:35
 msgid "Delivers your outgoing mail"
@@ -1091,7 +1101,7 @@ msgstr "Serviço de rede"
 #. GST_ROLE_NETWORK
 #: ../src/services/service.c:67
 msgid "Dynamic DNS services updater"
-msgstr "Atualizador de serviçõs DNS dinâmicos"
+msgstr "Atualizador de serviços DNS dinâmicos"
 
 #. GST_ROLE_DYNAMIC_DNS_SERVICE
 #: ../src/services/service.c:68
@@ -1171,7 +1181,7 @@ msgstr "Servidor SNMP"
 #. GST_ROLE_SNMP_SERVER
 #: ../src/services/service.c:83
 msgid "Terminal server client"
-msgstr "Cliente Terminal server"
+msgstr "Cliente de servidor de terminal"
 
 #. GST_ROLE_LTSP_CLIENT
 #: ../src/services/service.c:84
@@ -1567,7 +1577,7 @@ msgstr "Usuários e Grupos"
 
 #: ../src/users/user-settings.c:57
 msgid "Administrator account cannot be deleted"
-msgstr "A conta do Administrador não pode sr excluída"
+msgstr "Não é possível excluir a conta do administrador"
 
 #: ../src/users/user-settings.c:73
 #, c-format
@@ -1694,6 +1704,9 @@ msgstr "Diretório pessoal"
 #: ../src/users/users-tool.c:191
 msgid "Users settings"
 msgstr "Configurações dos usuários"
+
+#~ msgid "WPA"
+#~ msgstr "WPA"
 
 #~ msgid ""
 #~ "Comma separated list of hosts that the GST will be able to access when "
