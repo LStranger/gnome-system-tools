@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-30 20:36+0100\n"
-"PO-Revision-Date: 2007-04-02 11:06+0530\n"
+"POT-Creation-Date: 2007-07-27 04:47+0100\n"
+"PO-Revision-Date: 2007-08-06 18:01+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -63,7 +64,7 @@ msgid "<b>Account data</b>"
 msgstr "<b>ખાતા માહિતી</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
+msgid "<b>Connection Settings</b>"
 msgstr "<b>જોડાણ સુયોજનો</b>"
 
 #: ../interfaces/network.glade.in.h:3
@@ -79,7 +80,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<b>ઈન્ટરનેટ સેવા પૂરી પાડનાર માહિતી</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>મોડેમ સુયોજનો</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -87,7 +88,7 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>શોધ ડોમેઈનો</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr "<b>વાયરલેસ સુયોજનો</b>"
 
 #: ../interfaces/network.glade.in.h:9
@@ -127,8 +128,8 @@ msgid "General"
 msgstr "સામાન્ય"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
-msgstr "યજમાન ઉપનામ સુયોજનો"
+msgid "Host Alias Properties"
+msgstr "યજમાન ઉપનામ ગુણધર્મો"
 
 #: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
@@ -672,25 +673,25 @@ msgstr "ઉમેરો (_A)"
 msgid "Type address"
 msgstr "સરનામું લખો"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "ઈન્ટરફેસ રૂપરેખાંકન બદલી રહ્યા છીએ"
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "મોડેમ ઉપકરણ આપોઆપ શોધી શકાયું નહિં"
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr "ચકાસો કે ઉપકરણ વ્યસ્ત તો નથી અને તે યોગ્ય રીતે તમારા કમ્પ્યૂટર સાથે જોડાયેલ છે ને."
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "યજમાનનું નામ બદલાયેલ છે"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -698,7 +699,7 @@ msgstr ""
 "આ તમને નવા કાર્યક્રમો લાવવાથી બચાવે છે, અને તેથી તમારે ફરીથી પ્રવેશ કરવો પડશે. કોઈપણ "
 "રીતે ચાલુ રાખવું છે?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "યજમાનનું નામ બદલો (_H)"
 
@@ -723,8 +724,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "WEP કી (hexadecimal)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA વ્યક્તિગત"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 વ્યક્તિગત"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "%s ગુણધર્મો\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -864,12 +874,12 @@ msgstr "નેટવર્ક સુયોજનો"
 msgid "Settings for service \"%s\""
 msgstr "સેવા \"%s\" માટે સુયોજનો"
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "શું તમે ખરેખર %s ને અસક્રિય કરવા માંગો છો?"
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
