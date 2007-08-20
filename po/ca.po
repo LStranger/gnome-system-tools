@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-02 23:53+0200\n"
-"PO-Revision-Date: 2007-07-03 00:01+0200\n"
+"POT-Creation-Date: 2007-08-20 23:57+0200\n"
+"PO-Revision-Date: 2007-08-20 23:57+0200\n"
 "Last-Translator: Josep Puigdemont i Casamajó <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">Entreu la contrasenya de superusuari</"
+"<span weight=\"bold\" size=\"larger\">Entreu la contrasenya del superusuari</"
 "span>"
 
 #: ../interfaces/common.glade.in.h:2
@@ -54,7 +54,7 @@ msgid "<b>Account data</b>"
 msgstr "<b>Dades del compte</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
+msgid "<b>Connection Settings</b>"
 msgstr "<b>Paràmetres de la connexió</b>"
 
 #: ../interfaces/network.glade.in.h:3
@@ -67,10 +67,10 @@ msgstr "<b>Paràmetres de l'ordinador central</b>"
 
 #: ../interfaces/network.glade.in.h:5
 msgid "<b>Internet service provider data</b>"
-msgstr "<b>Dades del proveïdor de serveis d'internet</b>"
+msgstr "<b>Dades del proveïdor de serveis d'Internet</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>Paràmetres del mòdem</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -78,7 +78,7 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>Dominis de cerca</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr "<b>Paràmetres de la xarxa sense fil</b>"
 
 #: ../interfaces/network.glade.in.h:9
@@ -118,7 +118,7 @@ msgid "General"
 msgstr "General"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
+msgid "Host Alias Properties"
 msgstr "Paràmetres dels àlies dels ordinadors"
 
 #: ../interfaces/network.glade.in.h:19
@@ -163,7 +163,7 @@ msgstr ""
 
 #: ../interfaces/network.glade.in.h:30
 msgid "Options"
-msgstr "_Opcions"
+msgstr "Opcions"
 
 #: ../interfaces/network.glade.in.h:31
 msgid "P_assword"
@@ -243,7 +243,7 @@ msgstr "_Reintenta la connexió en cas que es talli o falli la inicialització"
 
 #: ../interfaces/network.glade.in.h:50
 msgid "_Set modem as default route to internet"
-msgstr "E_stableix el mòdem com la ruta predeterminada a internet"
+msgstr "E_stableix el mòdem com la ruta predeterminada a Internet"
 
 #: ../interfaces/network.glade.in.h:51
 msgid "_Subnet mask:"
@@ -287,7 +287,7 @@ msgstr "<b>Compartició amb Windows</b>"
 
 #: ../interfaces/shares.glade.in.h:6
 msgid "Add allowed hosts"
-msgstr "Afegeix ordinadors permesos"
+msgstr "Afegiu ordinadors permesos"
 
 #: ../interfaces/shares.glade.in.h:7
 msgid "Allowed hosts:"
@@ -361,7 +361,7 @@ msgstr "<b>Fus horari</b>"
 
 #: ../interfaces/time.glade.in.h:3
 msgid "Add NTP Server"
-msgstr "Afegeix servidor NTP"
+msgstr "Afegeix un servidor NTP"
 
 #: ../interfaces/time.glade.in.h:4
 msgid "NTP server"
@@ -389,7 +389,7 @@ msgstr "Fus horari:"
 
 #: ../interfaces/time.glade.in.h:10
 msgid "Unconfigured"
-msgstr "Sense configurar"
+msgstr "Sense configuració"
 
 #: ../interfaces/time.glade.in.h:11
 msgid "_Configuration:"
@@ -590,7 +590,7 @@ msgstr "_Genera"
 
 #: ../interfaces/users.glade.in.h:48
 msgid "_Home directory:"
-msgstr "Directori _personal:"
+msgstr "Directori _inicial:"
 
 #: ../interfaces/users.glade.in.h:49
 msgid "_Home phone:"
@@ -631,7 +631,7 @@ msgid ""
 "you can select that and continue. Note, however, that this might damage the "
 "system configuration or downright cripple your computer."
 msgstr ""
-"Si esteu segur que funciona igual que alguna de les plataformes que "
+"Si esteu segur que funciona igual que en alguna de les plataformes que "
 "apareixen a sota, la podeu seleccionar i continuar. Tingueu en compte que "
 "pot provocar danys a la configuració del sistema o al funcionament normal de "
 "l'ordinador."
@@ -718,8 +718,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "Clau WEP (hexadecimal)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA personal"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 personal"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "Propietats de %s\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -821,13 +830,14 @@ msgstr "Voleu suprimir la ubicació «%s»?"
 msgid "The interface does not exist"
 msgstr "La interfície no existeix"
 
+# Nnota: "la interfície" (josep)
 #: ../src/network/main.c:114
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
 msgstr ""
-"Assegureu-vos que estigui escrit correctament i que l'ordinador l'implementi "
-"correctament."
+"Assegureu-vos que estigui escrita correctament i que l'ordinador "
+"l'implementi correctament."
 
 #: ../src/network/main.c:160
 msgid "Configure a network interface"
@@ -1049,7 +1059,7 @@ msgstr "Bus de comunicacions del sistema"
 #. GST_ROLE_DBUS,
 #: ../src/services/service.c:58
 msgid "System configuration manager"
-msgstr "Gestor de configuració del sistema"
+msgstr "Gestor de la configuració del sistema"
 
 #. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:59
@@ -1069,7 +1079,7 @@ msgstr "Servidor de calendari web"
 #. GST_ROLE_WEB_CALENDAR_SERVER
 #: ../src/services/service.c:62
 msgid "OEM configuration manager"
-msgstr "Gestor de configuració OEM"
+msgstr "Gestor de la configuració OEM"
 
 #. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:63
@@ -1344,7 +1354,7 @@ msgstr "CAMÍ"
 
 #: ../src/shares/nautilus/nautilus-shares.c:124
 msgid "_Share folder"
-msgstr "_Comparteix carpeta"
+msgstr "_Comparteix la carpeta"
 
 #: ../src/shares/nautilus/nautilus-shares.c:125
 msgid "Share this folder with other computers"
@@ -1436,7 +1446,7 @@ msgstr "_Sincronitza ara"
 
 #: ../src/time/time-tool.c:527
 msgid "Keep synchronized with Internet servers"
-msgstr "Mantén-lo sincronitzat amb els servidors d'internet"
+msgstr "Mantén-lo sincronitzat amb els servidors d'Internet"
 
 #: ../src/time/time-tool.c:528
 msgid "Manual"
@@ -1539,7 +1549,7 @@ msgstr "Utilització de mòdems"
 
 #: ../src/users/privileges-table.c:54
 msgid "Connect to Internet using a modem"
-msgstr "Connexió a internet amb mòdem"
+msgstr "Connexió a Internet amb mòdem"
 
 #: ../src/users/privileges-table.c:55
 msgid "Send and receive faxes"
@@ -1575,7 +1585,7 @@ msgstr "Usuaris i grups"
 
 #: ../src/users/user-settings.c:57
 msgid "Administrator account cannot be deleted"
-msgstr "El compte de l'administrador no es pot suprimir"
+msgstr "No es pot suprimir el compte de l'administrador"
 
 #: ../src/users/user-settings.c:73
 #, c-format
@@ -1609,7 +1619,7 @@ msgstr "S'ha d'especificar un nom d'usuari."
 
 #: ../src/users/user-settings.c:445
 msgid "Administrator account's user name should not be modified"
-msgstr "El nom del compte de l'administrador no s'hauria de modificar"
+msgstr "No s'hauria de modificar el nom del compte de l'administrador"
 
 #: ../src/users/user-settings.c:448
 msgid "User name has invalid characters"
@@ -1651,7 +1661,7 @@ msgstr ""
 
 #: ../src/users/user-settings.c:515
 msgid "Administrator account's user ID should not be modified"
-msgstr "L'ID del compte d'usuari de l'administrador no s'hauria de modificar"
+msgstr "No s'hauria de modificar l'ID del compte d'usuari de l'administrador"
 
 #: ../src/users/user-settings.c:531
 msgid "Incomplete path in shell"
@@ -1674,7 +1684,7 @@ msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
 msgstr ""
-"La contrasenya de l'usuari ha de tenir més de 6 caràcters, i és preferible "
+"La contrasenya de l'usuari ha de ser de més de 6 caràcters, i és preferible "
 "que contingui nombres, lletres, i caràcters especials."
 
 #: ../src/users/user-settings.c:564
@@ -1700,6 +1710,9 @@ msgstr "Directori personal"
 #: ../src/users/users-tool.c:191
 msgid "Users settings"
 msgstr "Paràmetres dels usuaris"
+
+#~ msgid "WPA"
+#~ msgstr "WPA"
 
 #~ msgid ""
 #~ "Comma separated list of hosts that the GST will be able to access when "
@@ -3281,9 +3294,6 @@ msgstr "Paràmetres dels usuaris"
 
 #~ msgid "Play Audio"
 #~ msgstr "Reprodueix l'àudio"
-
-#~ msgid "Properties"
-#~ msgstr "Propietats"
 
 #~ msgid "Read DVD"
 #~ msgstr "Llegeix el DVD"
