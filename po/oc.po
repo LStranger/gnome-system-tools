@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-30 21:34+0200\n"
-"PO-Revision-Date: 2007-08-19 20:08+0200\n"
+"POT-Creation-Date: 2007-08-19 20:16+0100\n"
+"PO-Revision-Date: 2007-08-21 00:16+0200\n"
 "Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
@@ -46,8 +46,8 @@ msgid "<b>Account data</b>"
 msgstr ""
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
-msgstr "<b>Paramètres de connexion</b>"
+msgid "<b>Connection Settings</b>"
+msgstr ""
 
 #: ../interfaces/network.glade.in.h:3
 msgid "<b>DNS Servers</b>"
@@ -62,7 +62,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr ""
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr ""
 
 #: ../interfaces/network.glade.in.h:7
@@ -70,7 +70,7 @@ msgid "<b>Search Domains</b>"
 msgstr ""
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr ""
 
 #: ../interfaces/network.glade.in.h:9
@@ -110,7 +110,7 @@ msgid "General"
 msgstr "General"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
+msgid "Host Alias Properties"
 msgstr ""
 
 #: ../interfaces/network.glade.in.h:19
@@ -316,7 +316,7 @@ msgstr ""
 #: ../interfaces/shares.glade.in.h:18 ../src/shares/shares.desktop.in.in.h:2
 #: ../src/shares/shares-tool.c:207
 msgid "Shared Folders"
-msgstr ""
+msgstr "Repertòris partejats"
 
 #: ../interfaces/shares.glade.in.h:19
 msgid "This computer is a _WINS server"
@@ -376,7 +376,7 @@ msgstr "Pas configurat"
 
 #: ../interfaces/time.glade.in.h:11
 msgid "_Configuration:"
-msgstr ""
+msgstr "_Configuracion :"
 
 #: ../interfaces/time.glade.in.h:12
 msgid "_Date:"
@@ -540,7 +540,7 @@ msgstr "_Mot de pas de l'utilizaire :"
 
 #: ../interfaces/users.glade.in.h:40
 msgid "User profiles"
-msgstr ""
+msgstr "Perfils d'utilizaire"
 
 #: ../interfaces/users.glade.in.h:41
 msgid "_Add Group"
@@ -548,7 +548,7 @@ msgstr "_Apondre un grop"
 
 #: ../interfaces/users.glade.in.h:42
 msgid "_Add Profile"
-msgstr ""
+msgstr "_Apondre un perfil"
 
 #: ../interfaces/users.glade.in.h:43
 msgid "_Add User"
@@ -589,7 +589,7 @@ msgstr ""
 
 #: ../interfaces/users.glade.in.h:52
 msgid "_Profile:"
-msgstr ""
+msgstr "_Perfil :"
 
 #: ../interfaces/users.glade.in.h:53
 msgid "_Real name:"
@@ -644,31 +644,31 @@ msgstr "_Apondre"
 msgid "Type address"
 msgstr "Tipe d'adreça"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr ""
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr ""
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "Lo nom de l'òste a cambiat"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
 msgstr ""
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "Cambiar lo nom d'ò_ste"
 
@@ -686,15 +686,24 @@ msgstr ""
 
 #: ../src/network/connection.c:45
 msgid "WEP key (ascii)"
-msgstr ""
+msgstr "Clau WEP (ascii)"
 
 #: ../src/network/connection.c:46
 msgid "WEP key (hexadecimal)"
 msgstr ""
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr ""
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr ""
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr ""
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -730,7 +739,7 @@ msgstr ""
 #: ../src/network/ifaces-list.c:301
 #, c-format
 msgid "<b>Address:</b> %s"
-msgstr ""
+msgstr "<b>Adreça :</b> %s"
 
 #: ../src/network/ifaces-list.c:305
 #, c-format
@@ -834,12 +843,12 @@ msgstr "Paramètres ret"
 msgid "Settings for service \"%s\""
 msgstr ""
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr ""
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1136,7 +1145,7 @@ msgstr ""
 #. GST_ROLE_RPC_MAPPER
 #: ../src/services/service.c:82
 msgid "SNMP server"
-msgstr ""
+msgstr "Servidor SNMP"
 
 #. GST_ROLE_SNMP_SERVER
 #: ../src/services/service.c:83
@@ -1265,7 +1274,7 @@ msgstr "Aviar"
 #: ../src/services/service-settings-table.c:99
 #: ../src/services/service-settings-table.c:111
 msgid "Stop"
-msgstr "Arrèst"
+msgstr "Arrestar"
 
 #: ../src/services/service-settings-table.c:85
 #: ../src/services/service-settings-table.c:102
@@ -1306,7 +1315,7 @@ msgstr ""
 
 #: ../src/shares/nautilus/nautilus-shares.c:124
 msgid "_Share folder"
-msgstr ""
+msgstr "_Partejar lo repertòri"
 
 #: ../src/shares/nautilus/nautilus-shares.c:125
 msgid "Share this folder with other computers"
@@ -1643,7 +1652,10 @@ msgstr "Repertòri personal"
 
 #: ../src/users/users-tool.c:191
 msgid "Users settings"
-msgstr ""
+msgstr "Paramètres d'utilizaire"
+
+#~ msgid "WPA"
+#~ msgstr "WPA"
 
 #~ msgid ""
 #~ "Comma separated list of hosts that the GST will be able to access when "
