@@ -26,9 +26,9 @@ noinst_LIBRARIES = libemap.a
 libemap_a_CFLAGS = \
 	$(GNOME_CFLAGS) \
 	$(GDK_PIXBUF_CFLAGS)
-	
+
 BUILT_SOURCES= e-map-marshal.c e-map-marshal.h
 
 libemap_a_SOURCES = \
 	e-map.c e-map.h \
-	e-map-marshal.c e-map-marshal.h
+	$(BUILT_SOURCES)
