@@ -1,11 +1,9 @@
 INCLUDES = \
-	$(GNOME_INCLUDEDIR)	\
-	$(GNOME_XML_CFLAGS)	\
 	-DMAP_DIR=\""$(pixmapsdir)"\" \
 	$(GST_TOOL_CFLAGS)
 
 LDADD = -lm $(GST_TOOL_LIBS)
-LIBS+=$(LDADD)
+LIBS += $(LDADD)
 
 EXTRA_DIST= e-map-marshal.list
 
@@ -23,9 +21,7 @@ $(e_map_la_OBJECTS): e-map-marshal.h
 
 noinst_LIBRARIES = libemap.a
 
-libemap_a_CFLAGS = \
-	$(GNOME_CFLAGS) \
-	$(GDK_PIXBUF_CFLAGS)
+#libemap_a_CFLAGS =
 
 BUILT_SOURCES= e-map-marshal.c e-map-marshal.h
 

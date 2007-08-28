@@ -333,9 +333,6 @@ gst_tool_is_authenticated (GstTool *tool)
 void
 gst_init_tool (const gchar *app_name, int argc, char *argv [], GOptionEntry *entries)
 {
-#ifdef ENABLE_GNOME
-	GnomeProgram   *program;
-#endif
 	GOptionContext *context;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -350,16 +347,7 @@ gst_init_tool (const gchar *app_name, int argc, char *argv [], GOptionEntry *ent
 		g_option_context_free (context);
 	}
 
-#ifdef ENABLE_GNOME
- 	program = gnome_program_init (app_name, VERSION,
-				      LIBGNOMEUI_MODULE, argc, argv,
-				      GNOME_PARAM_APP_DATADIR, DATADIR,
-				      GNOME_PARAM_HUMAN_READABLE_NAME,
-				      _("GNOME System Tools"),
-				      NULL);
-#else
-	gtk_init (&argc, &argv);	
-#endif
+	gtk_init (&argc, &argv);
 }
 
 void
