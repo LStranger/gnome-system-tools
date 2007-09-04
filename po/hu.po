@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-30 20:36+0100\n"
-"PO-Revision-Date: 2007-04-09 09:06+0200\n"
+"POT-Creation-Date: 2007-08-29 04:01+0100\n"
+"PO-Revision-Date: 2007-09-04 02:27+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -51,8 +51,8 @@ msgid "<b>Account data</b>"
 msgstr "<b>Hozzáférés adatai</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
-msgstr "<span weight=\"bold\">Kapcsolat beállításai</span>"
+msgid "<b>Connection Settings</b>"
+msgstr "<b>Kapcsolat beállításai</b>"
 
 #: ../interfaces/network.glade.in.h:3
 msgid "<b>DNS Servers</b>"
@@ -67,7 +67,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<b>Internetszolgáltató adatai</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>Modem beállításai</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -75,7 +75,7 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>Keresési tartományok</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr "<b>Vezeték nélküli hálózat beállításai</b>"
 
 #: ../interfaces/network.glade.in.h:9
@@ -115,7 +115,7 @@ msgid "General"
 msgstr "Általános"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
+msgid "Host Alias Properties"
 msgstr "Kiszolgáló álnévbeállításai"
 
 #: ../interfaces/network.glade.in.h:19
@@ -643,11 +643,7 @@ msgstr "A beállítás nem tölthető be"
 msgid "You are not allowed to access the system configuration."
 msgstr "Nem jogosult a rendszerbeállítások elérésére."
 
-#: ../src/common/gst-tool.c:358
-msgid "GNOME System Tools"
-msgstr "GNOME Rendszereszközök"
-
-#: ../src/common/gst-tool.c:415
+#: ../src/common/gst-tool.c:403
 msgid "Could not display help"
 msgstr "A súgó megjelenítése sikertelen"
 
@@ -660,15 +656,15 @@ msgstr "Hozzá_adás"
 msgid "Type address"
 msgstr "Adja meg a címet"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "A hálózati eszköz beállításának módosítása."
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "Nem lehet automatikusan felismerni a modemeszközt"
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -676,11 +672,11 @@ msgstr ""
 "Ellenőrizze, hogy az eszköz nem foglalt és megfelelően van csatlakoztatva a "
 "számítógéphez"
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "A gépnév megváltozott"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -688,7 +684,7 @@ msgstr ""
 "Ez megakadályozza új alkalmazások elindítását, ezért újra be kell "
 "jelentkeznie. Mindenképp folytatja?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "_Gépnév megváltoztatása"
 
@@ -713,8 +709,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "WEP kulcs (hexadecimális)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "Személyes WPA"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "Személyes WPA2"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "%s tulajdonságai\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -854,12 +859,12 @@ msgstr "Hálózati beállítások"
 msgid "Settings for service \"%s\""
 msgstr "A(z) \"%s\" szolgáltatás beállításai"
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Biztosan le kívánja állítani ezt: %s ?"
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
