@@ -32,6 +32,10 @@ static void  gst_users_tool_finalize       (GObject           *object);
 static void  gst_users_tool_update_gui     (GstTool *tool);
 static void  gst_users_tool_update_config  (GstTool *tool);
 
+static GObject* gst_users_tool_constructor (GType                  type,
+					    guint                  n_construct_properties,
+					    GObjectConstructParam *construct_params);
+
 G_DEFINE_TYPE (GstUsersTool, gst_users_tool, GST_TYPE_TOOL);
 
 static void
@@ -39,7 +43,8 @@ gst_users_tool_class_init (GstUsersToolClass *class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (class);
 	GstToolClass *tool_class = GST_TOOL_CLASS (class);
-	
+
+	object_class->constructor = gst_users_tool_constructor;
 	object_class->finalize = gst_users_tool_finalize;
 	tool_class->update_gui = gst_users_tool_update_gui;
 	tool_class->update_config = gst_users_tool_update_config;
@@ -52,10 +57,12 @@ on_showall_changed (GConfClient *client,
 		    gpointer     data)
 {
 	GstTool *tool = GST_TOOL (data);
+	GConfValue *value;
 	GtkWidget *widget;
 	GtkTreeModel *model;
 
-	GST_USERS_TOOL (tool)->showall ^= 1;
+	value = gconf_entry_get_value (entry);
+	GST_USERS_TOOL (tool)->showall = gconf_value_get_bool (value);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "users_table");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
@@ -81,12 +88,28 @@ gst_users_tool_init (GstUsersTool *tool)
 		      "maximum-gid", &tool->maximum_gid,
 		      NULL);
 
-	tool->showall = gst_conf_get_boolean (GST_TOOL (tool), "showall");
+	tool->profiles = gst_user_profiles_get ();
+}
+
+static GObject*
+gst_users_tool_constructor (GType                  type,
+			    guint                  n_construct_properties,
+			    GObjectConstructParam *construct_params)
+{
+	GObject *object;
+	GstTool *tool;
+
+	object = (* G_OBJECT_CLASS (gst_users_tool_parent_class)->constructor) (type,
+										n_construct_properties,
+										construct_params);
+
+	tool = GST_TOOL (object);
+	GST_USERS_TOOL (tool)->showall = gst_conf_get_boolean (GST_TOOL (tool), "showall");
 
 	gst_conf_add_notify (GST_TOOL (tool), "showall",
 			     on_showall_changed, tool);
 
-	tool->profiles = gst_user_profiles_get ();
+	return object;
 }
 
 static void
