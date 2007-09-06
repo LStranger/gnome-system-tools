@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-30 21:34+0200\n"
-"PO-Revision-Date: 2007-03-30 21:33+0200\n"
-"Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
+"POT-Creation-Date: 2007-09-06 09:48+0200\n"
+"PO-Revision-Date: 2007-09-06 09:50+0200\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,8 +58,8 @@ msgid "<b>Account data</b>"
 msgstr "<b>Données du compte</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
-msgstr "<b>Paramètres de la connexion</b>"
+msgid "<b>Connection Settings</b>"
+msgstr "<b>Paramètres de connexion</b>"
 
 #: ../interfaces/network.glade.in.h:3
 msgid "<b>DNS Servers</b>"
@@ -74,7 +74,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<b>Données du fournisseur d'accès Internet</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>Paramètres du modem</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -82,8 +82,8 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>Domaines de recherche</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
-msgstr "<b>Paramètres du réseau sans fil</b>"
+msgid "<b>Wireless Settings</b>"
+msgstr "<b>Paramètres de connexion sans fil</b>"
 
 #: ../interfaces/network.glade.in.h:9
 msgid "Aliases:"
@@ -122,8 +122,8 @@ msgid "General"
 msgstr "Général"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
-msgstr "Réglages des alias de l'hôte"
+msgid "Host Alias Properties"
+msgstr "Propriétés d'alias de l'hôte"
 
 #: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
@@ -652,11 +652,7 @@ msgstr "La configuration n'a pas pu être chargée"
 msgid "You are not allowed to access the system configuration."
 msgstr "Vous n'êtes pas autorisé à accéder à la configuration du système."
 
-#: ../src/common/gst-tool.c:358
-msgid "GNOME System Tools"
-msgstr "Outils système GNOME"
-
-#: ../src/common/gst-tool.c:415
+#: ../src/common/gst-tool.c:403
 msgid "Could not display help"
 msgstr "Impossible d'afficher l'aide"
 
@@ -669,15 +665,15 @@ msgstr "A_jouter"
 msgid "Type address"
 msgstr "Saisissez l'adresse"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "Changement de la configuration de l'interface"
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "Impossible de détecter automatiquement le modem"
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -685,11 +681,11 @@ msgstr ""
 "Vérifiez que le périphérique est correctement branché et qu'il n'est pas "
 "occupé."
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "Le nom de l'hôte a changé"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -697,7 +693,7 @@ msgstr ""
 "Ceci vous empêchera de lancer de nouvelles applications et vous obligera à "
 "vous reconnecter. Voulez-vous continuer ?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "Changer le nom d'_hôte"
 
@@ -722,8 +718,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "Clé WEP (hexadécimal)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA personnel"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 personnel"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "Propriétés de %s\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -865,12 +870,12 @@ msgstr "Réglages du réseau"
 msgid "Settings for service \"%s\""
 msgstr "Paramètres pour le service « %s »"
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Êtes-vous sûr de vouloir désactiver « %s » ?"
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1700,9 +1705,15 @@ msgstr "Nom de connexion"
 msgid "Home directory"
 msgstr "Dossier personnel"
 
-#: ../src/users/users-tool.c:191
+#: ../src/users/users-tool.c:214
 msgid "Users settings"
 msgstr "Réglages utilisateurs"
+
+#~ msgid "GNOME System Tools"
+#~ msgstr "Outils système GNOME"
+
+#~ msgid "WPA"
+#~ msgstr "WPA"
 
 #~ msgid ""
 #~ "Comma separated list of hosts that the GST will be able to access when "
