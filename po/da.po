@@ -37,8 +37,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-10 23:31+0200\n"
-"PO-Revision-Date: 2007-04-10 23:32+0100\n"
+"POT-Creation-Date: 2007-09-09 02:53+0200\n"
+"PO-Revision-Date: 2007-09-08 17:31+0200\n"
 "Last-Translator: Peter Bach <bach.peter@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -51,8 +51,11 @@ msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Om users-admin-værktøjet skal vise alle brugere og grupper eller ej"
 
 #: ../interfaces/common.glade.in.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Indtast venligst administrator-adgangskoden</span>"
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Indtast venligst administrator-"
+"adgangskoden</span>"
 
 #: ../interfaces/common.glade.in.h:2
 msgid "Enter Password"
@@ -60,7 +63,8 @@ msgstr "Indtast adgangskode"
 
 #: ../interfaces/common.glade.in.h:3
 msgid ""
-"You need administrator privileges to use this tool. Enter a password to modify\n"
+"You need administrator privileges to use this tool. Enter a password to "
+"modify\n"
 "your system configuration."
 msgstr ""
 "Du skal have administratorrettigheder for at bruge dette værktøj. Indtast\n"
@@ -75,7 +79,7 @@ msgid "<b>Account data</b>"
 msgstr "<b>Kontooplysninger</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
+msgid "<b>Connection Settings</b>"
 msgstr "<b>Indstillinger for forbindelse</b>"
 
 #: ../interfaces/network.glade.in.h:3
@@ -91,7 +95,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<b>Data for internetudbyder</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>Modem-indstillinger</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -99,7 +103,7 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>Søgedomæner</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr "<b>Trådløse indstillinger</b>"
 
 #: ../interfaces/network.glade.in.h:9
@@ -134,21 +138,19 @@ msgstr "A_ktivér roaming"
 msgid "E_nable this connection"
 msgstr "_Aktivér denne forbindelse"
 
-#: ../interfaces/network.glade.in.h:17
-#: ../interfaces/users.glade.in.h:19
+#: ../interfaces/network.glade.in.h:17 ../interfaces/users.glade.in.h:19
 msgid "General"
 msgstr "Generelt"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
-msgstr "Indstillinger for vært-aliaser"
+msgid "Host Alias Properties"
+msgstr "Egenskaber for værts-alias"
 
 #: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
 msgstr "Værter"
 
-#: ../interfaces/network.glade.in.h:20
-#: ../interfaces/shares.glade.in.h:12
+#: ../interfaces/network.glade.in.h:20 ../interfaces/shares.glade.in.h:12
 msgid "IP address:"
 msgstr "IP-adresse:"
 
@@ -274,8 +276,7 @@ msgstr "Sæt _modem som standardrute til internettet"
 msgid "_Subnet mask:"
 msgstr "_Undernetmaske:"
 
-#: ../interfaces/network.glade.in.h:52
-#: ../interfaces/users.glade.in.h:55
+#: ../interfaces/network.glade.in.h:52 ../interfaces/users.glade.in.h:55
 msgid "_Username:"
 msgstr "Br_ugernavn:"
 
@@ -347,8 +348,7 @@ msgstr "Netmaske:"
 msgid "Network:"
 msgstr "Netværk:"
 
-#: ../interfaces/shares.glade.in.h:16
-#: ../src/shares/nfs-acl-table.c:56
+#: ../interfaces/shares.glade.in.h:16 ../src/shares/nfs-acl-table.c:56
 msgid "Read only"
 msgstr "Skrivebeskyttet"
 
@@ -357,8 +357,7 @@ msgstr "Skrivebeskyttet"
 msgid "Share through:"
 msgstr "Del med:"
 
-#: ../interfaces/shares.glade.in.h:18
-#: ../src/shares/shares.desktop.in.in.h:2
+#: ../interfaces/shares.glade.in.h:18 ../src/shares/shares.desktop.in.in.h:2
 #: ../src/shares/shares-tool.c:207
 msgid "Shared Folders"
 msgstr "Delte mapper"
@@ -607,11 +606,8 @@ msgstr "_Kommentarer"
 msgid "_Days between warning and password expiration:"
 msgstr "_Dage mellem advarsel og adgangskodes udløb:"
 
-#: ../interfaces/users.glade.in.h:46
-#: ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33
-#: ../src/shares/table.c:40
-#: ../src/users/table.c:40
+#: ../interfaces/users.glade.in.h:46 ../src/network/address-list.c:77
+#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "_Slet"
 
@@ -657,8 +653,14 @@ msgstr "Den systemplatform du anvender, understøttes ikke af dette værktøj"
 
 #. label
 #: ../src/common/gst-platform-dialog.c:185
-msgid "If you know for sure that it works like one of the platforms listed below, you can select that and continue. Note, however, that this might damage the system configuration or downright cripple your computer."
-msgstr "Hvis du med sikkerhed ved at platformen virker ligesom en af platformene nedenfor, kan du vælge den og fortsætte. Bemærk dog at dette kan ødelægge systemopsætningen eller direkte forhindre maskinen i at virke."
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
+msgstr ""
+"Hvis du med sikkerhed ved at platformen virker ligesom en af platformene "
+"nedenfor, kan du vælge den og fortsætte. Bemærk dog at dette kan ødelægge "
+"systemopsætningen eller direkte forhindre maskinen i at virke."
 
 #: ../src/common/gst-platform-dialog.c:212
 msgid "Unsupported platform"
@@ -672,18 +674,12 @@ msgstr "Konfigurationen kunne ikke indlæses"
 msgid "You are not allowed to access the system configuration."
 msgstr "Du har ikke adgang til systemindstillingerne."
 
-#: ../src/common/gst-tool.c:358
-msgid "GNOME System Tools"
-msgstr "Systemværktøjer"
-
-#: ../src/common/gst-tool.c:415
+#: ../src/common/gst-tool.c:403
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjælp"
 
-#: ../src/network/address-list.c:76
-#: ../src/network/hosts.c:31
-#: ../src/shares/table.c:38
-#: ../src/users/table.c:38
+#: ../src/network/address-list.c:76 ../src/network/hosts.c:31
+#: ../src/shares/table.c:38 ../src/users/table.c:38
 msgid "_Add"
 msgstr "_Tilføj"
 
@@ -691,28 +687,34 @@ msgstr "_Tilføj"
 msgid "Type address"
 msgstr "Indtast adresse"
 
-#: ../src/network/callbacks.c:185
-#: ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "Ændrer grænsefladeopsætning"
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "Kunne ikke finde modemenheden automatisk"
 
-#: ../src/network/callbacks.c:246
-msgid "Check that the device is not busy and that is correctly attached to the computer."
-msgstr "Kontrollér at enheden er korrekt forbundet til computeren og ikke er optaget."
+#: ../src/network/callbacks.c:247
+msgid ""
+"Check that the device is not busy and that is correctly attached to the "
+"computer."
+msgstr ""
+"Kontrollér at enheden er korrekt forbundet til computeren og ikke er optaget."
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "Værtsnavn er ændret"
 
-#: ../src/network/callbacks.c:470
-msgid "This will prevent you from launching new applications, and so you will have to log in again. Continue anyway?"
-msgstr "Dette vil hindre dig i at starte nye programmer, så du må logge på igen. Fortsæt alligevel?"
+#: ../src/network/callbacks.c:471
+msgid ""
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
+msgstr ""
+"Dette vil hindre dig i at starte nye programmer, så du må logge på igen. "
+"Fortsæt alligevel?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "Ændr _værtsnavn"
 
@@ -737,13 +739,20 @@ msgid "WEP key (hexadecimal)"
 msgstr "WEP-nøgle (hexadecimal)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA personlig"
 
-#: ../src/network/hosts.c:32
-#: ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39
-#: ../src/users/table.c:39
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 personlig"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "%s-egenskaber\n"
+
+#: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
+#: ../src/shares/table.c:39 ../src/users/table.c:39
 msgid "_Properties"
 msgstr "_Egenskaber"
 
@@ -844,8 +853,12 @@ msgstr "Grænsefladen findes ikke"
 
 # 'Det' eller 'den'?
 #: ../src/network/main.c:114
-msgid "Check that it is correctly typed and that it is correctly supported by your system."
-msgstr "Kontrollér at det er indtastet korrekt og at det understøttes korrekt af dit system."
+msgid ""
+"Check that it is correctly typed and that it is correctly supported by your "
+"system."
+msgstr ""
+"Kontrollér at det er indtastet korrekt og at det understøttes korrekt af dit "
+"system."
 
 #: ../src/network/main.c:160
 msgid "Configure a network interface"
@@ -881,14 +894,18 @@ msgstr "Netværksindstillinger"
 msgid "Settings for service \"%s\""
 msgstr "Indstillinger for tjenesten \"%s\""
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Er du sikker på at du vil deaktivere %s?"
 
-#: ../src/services/callbacks.c:114
-msgid "This may affect your system behavior in several ways, possibly leading to data loss."
-msgstr "Dette kan påvirke dit systems opførsel på flere måder og muligvis føre til datatab."
+#: ../src/services/callbacks.c:115
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss."
+msgstr ""
+"Dette kan påvirke dit systems opførsel på flere måder og muligvis føre til "
+"datatab."
 
 #: ../src/services/service.c:32
 msgid "Web server"
@@ -960,14 +977,12 @@ msgstr "Datalagringssystem"
 #. GST_ROLE_DATABASE_SERVER
 #. GST_ROLE_FILE_SERVER_SMB
 #. GST_ROLE_FILE_SERVER_FTP
-#: ../src/services/service.c:40
-#: ../src/services/service.c:41
+#: ../src/services/service.c:40 ../src/services/service.c:41
 #: ../src/services/service.c:43
 msgid "Folder sharing service"
 msgstr "Mappedelingstjeneste"
 
-#: ../src/services/service.c:40
-#: ../src/services/service.c:41
+#: ../src/services/service.c:40 ../src/services/service.c:41
 msgid "Shares folders over your network"
 msgstr "Deler mapper over netværket"
 
@@ -976,8 +991,7 @@ msgstr "Deler mapper over netværket"
 msgid "FTP service"
 msgstr "FTP-tjeneste"
 
-#: ../src/services/service.c:42
-#: ../src/services/service.c:43
+#: ../src/services/service.c:42 ../src/services/service.c:43
 msgid "Shares folders over the Internet"
 msgstr "Deler mapper på Internet"
 
@@ -1408,8 +1422,12 @@ msgid "Sharing services are not installed"
 msgstr "Delingstjenester er ikke installeret"
 
 #: ../src/shares/shares-tool.c:127
-msgid "You need to install at least either Samba or NFS in order to share your folders."
-msgstr "Du er nødt til som minimum at installere enten Samba eller NFS for at dele dine mapper."
+msgid ""
+"You need to install at least either Samba or NFS in order to share your "
+"folders."
+msgstr ""
+"Du er nødt til som minimum at installere enten Samba eller NFS for at dele "
+"dine mapper."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1424,8 +1442,12 @@ msgid "NTP support is not installed"
 msgstr "NTP-understøttelse er ikke installeret"
 
 #: ../src/time/time-tool.c:379
-msgid "Please install and activate NTP support in the system to enable synchronization of your local time server with internet time servers."
-msgstr "Installér og aktivér venligst NTP-understøttelse på systemet for at aktivere synkronisering af din lokale tidsserver med tidsservere på internettet."
+msgid ""
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers."
+msgstr ""
+"Installér og aktivér venligst NTP-understøttelse på systemet for at aktivere "
+"synkronisering af din lokale tidsserver med tidsservere på internettet."
 
 #: ../src/time/time-tool.c:409
 msgid "Enabling NTP"
@@ -1459,12 +1481,9 @@ msgstr "Indstillinger for dato og klokkeslæt"
 msgid "Administrator group can not be deleted"
 msgstr "Administratorgruppen kan ikke slettes"
 
-#: ../src/users/group-settings.c:55
-#: ../src/users/group-settings.c:281
-#: ../src/users/group-settings.c:305
-#: ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:446
-#: ../src/users/user-settings.c:516
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:305 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:446 ../src/users/user-settings.c:516
 msgid "This would leave the system unusable."
 msgstr "Dette ville efterlade systemet ubrugeligt."
 
@@ -1503,16 +1522,19 @@ msgid "Group name has invalid characters"
 msgstr "Gruppenavn har ugyldige tegn"
 
 #: ../src/users/group-settings.c:284
-msgid "Please set a valid group name consisting of a lower case letter followed by lower case letters and numbers."
-msgstr "Angiv venligst et gyldigt brugernavn med et lille bogstav efterfulgt af kun små bogstaver og tal."
+msgid ""
+"Please set a valid group name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Angiv venligst et gyldigt brugernavn med et lille bogstav efterfulgt af kun "
+"små bogstaver og tal."
 
 #: ../src/users/group-settings.c:288
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Gruppen \"%s\" findes allerede"
 
-#: ../src/users/group-settings.c:289
-#: ../src/users/user-settings.c:454
+#: ../src/users/group-settings.c:289 ../src/users/user-settings.c:454
 msgid "Please select a different user name."
 msgstr "Vælg venligst et andet brugernavn."
 
@@ -1591,8 +1613,12 @@ msgid "Are you sure you want to delete account \"%s\"?"
 msgstr "Er du sikker på at du vil slette kontoen \"%s\"?"
 
 #: ../src/users/user-settings.c:76
-msgid "This will disable this user's access to the system without deleting the user's home directory."
-msgstr "Dette vil deaktivere denne brugers adgang til systemet uden at slette brugerens hjemmemappe."
+msgid ""
+"This will disable this user's access to the system without deleting the "
+"user's home directory."
+msgstr ""
+"Dette vil deaktivere denne brugers adgang til systemet uden at slette "
+"brugerens hjemmemappe."
 
 #: ../src/users/user-settings.c:289
 msgid "New user account"
@@ -1621,8 +1647,12 @@ msgid "User name has invalid characters"
 msgstr "Brugernavnet har ugyldige tegn"
 
 #: ../src/users/user-settings.c:449
-msgid "Please set a valid user name consisting of a lower case letter followed by lower case letters and numbers."
-msgstr "Angiv venligst et gyldigt brugernavn med et lille bogstav efterfulgt af kun små bogstaver og tal."
+msgid ""
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Angiv venligst et gyldigt brugernavn med et lille bogstav efterfulgt af kun "
+"små bogstaver og tal."
 
 #: ../src/users/user-settings.c:453
 #, c-format
@@ -1671,8 +1701,12 @@ msgid "Password is too short"
 msgstr "Adgangskoden er for kort"
 
 #: ../src/users/user-settings.c:561
-msgid "User passwords must be longer than 6 characters and preferably formed by numbers, letters and special characters."
-msgstr "Brugeradgangskoder skal være længere end 6 tegn og helst bestå af tal, bogstaver og specialtegn."
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Brugeradgangskoder skal være længere end 6 tegn og helst bestå af tal, "
+"bogstaver og specialtegn."
 
 #: ../src/users/user-settings.c:564
 msgid "Password confirmation is not correct"
@@ -1680,7 +1714,8 @@ msgstr "Bekræftelsen af adgangskoden er ikke korrekt"
 
 #: ../src/users/user-settings.c:565
 msgid "Check that you have provided the same password in both text fields."
-msgstr "Kontrollér at du har angivet den samme adgangskode i begge tekstfelter."
+msgstr ""
+"Kontrollér at du har angivet den samme adgangskode i begge tekstfelter."
 
 #: ../src/users/users-table.c:44
 msgid "Name"
@@ -1694,9 +1729,15 @@ msgstr "Brugernavn"
 msgid "Home directory"
 msgstr "Hjemmemappe"
 
-#: ../src/users/users-tool.c:191
+#: ../src/users/users-tool.c:214
 msgid "Users settings"
 msgstr "Brugerindstillinger"
+
+#~ msgid "GNOME System Tools"
+#~ msgstr "Systemværktøjer"
+
+#~ msgid "WPA"
+#~ msgstr "WPA"
 
 #~ msgid ""
 #~ "Comma separated list of hosts that the GST will be able to access when "
@@ -1704,20 +1745,26 @@ msgstr "Brugerindstillinger"
 #~ msgstr ""
 #~ "Kommeadskilt liste af værter som kan tilgås når fjernkonfigurationsnøglen "
 #~ "er sand"
+
 #~ msgid "Last GST version executed"
 #~ msgstr "Sidste GST-version kørt"
+
 #~ msgid "Preferred bootloader that boot-admin will configure"
 #~ msgstr "Foretrukken startindlæser som boot-admin vil konfigurere"
+
 #~ msgid "Remote hosts"
 #~ msgstr "Fjerne værter"
+
 #~ msgid ""
 #~ "The GST are able to do remote configuration through SSH, enable this "
 #~ "option to use this feature"
 #~ msgstr ""
 #~ "GST kan fjernkonfigureres gennem SSH; aktivér denne nøgle for at benytte "
 #~ "faciliteten"
+
 #~ msgid "The last GST version that this computer has run"
 #~ msgstr "Det sidste version af GST som denne maskine har kørt"
+
 #~ msgid ""
 #~ "This key stores the bootloader that boot-admin will configure if there "
 #~ "are more than one installed, if it's not set or isn't valid, then boot-"
@@ -1726,12 +1773,16 @@ msgstr "Brugerindstillinger"
 #~ "Denne nøgle gemmer den startindlæser som boot-admin vil konfigurere hvis "
 #~ "der er mere end én installeret; hvis nøglen ikke er sat eller ikke er "
 #~ "gyldig, vil boot-admin spørge brugeren"
+
 #~ msgid "Whether the tools will use remote administration or not"
 #~ msgstr "Om værktøjerne skal benytte fjernadministration eller ej"
+
 #~ msgid "Whether the warning dialog should be shown or not"
 #~ msgstr "Om advarselsvinduet skal vises eller ej"
+
 #~ msgid "<b>Security</b>"
 #~ msgstr "<b>Sikkerhed</b>"
+
 #~ msgid ""
 #~ "<span size=\"larger\" weight=\"bold\">Several bootloaders have been "
 #~ "found</span>\n"
@@ -1742,16 +1793,22 @@ msgstr "Brugerindstillinger"
 #~ "på systemet</span>\n"
 #~ "\n"
 #~ "vælg den du ønsker at konfigurere"
+
 #~ msgid "<span weight=\"bold\">Image Settings</span>"
 #~ msgstr "<span weight=\"bold\">Aftryksindstillinger</span>"
+
 #~ msgid "<span weight=\"bold\">Other Settings</span>"
 #~ msgstr "<span weight=\"bold\">Andre indstillinger</span>"
+
 #~ msgid "<span weight=\"bold\">Starting the Computer</span>"
 #~ msgstr "<span weight=\"bold\">Start af maskinen</span>"
+
 #~ msgid "Ask at boot"
 #~ msgstr "Spørg ved start"
+
 #~ msgid "Boot Manager Settings"
 #~ msgstr "Startindstillinger"
+
 #~ msgid ""
 #~ "Choose a kernel image to boot, and a partition to mount as the root "
 #~ "partition. Optionally, you may also enter parameters passed to the kernel "
@@ -1760,246 +1817,356 @@ msgstr "Brugerindstillinger"
 #~ "Vælg et kerneaftryk der skal startes, og den partition der skal monteres "
 #~ "som rodpartitionen. Du kan også indtaste ekstra parametre som bliver "
 #~ "videregivet til kernen ved maskinstart."
+
 #~ msgid "Click \"Forward\" to continue"
 #~ msgstr "Klik på \"Fremad\" for at fortsætte"
+
 #~ msgid "Confirmation"
 #~ msgstr "Bekræftelse"
+
 #~ msgid "Creating a new boot image"
 #~ msgstr "Oprettelse af nyt startaftryk"
+
 #~ msgid "Don't ask me again"
 #~ msgstr "Spørg mig ikke igen"
+
 #~ msgid "Enable IDE SCSI emulation"
 #~ msgstr "Aktivér IDE-SCSI-emulering"
+
 #~ msgid ""
 #~ "Enter a name for the boot image, and specify what kind of operating "
 #~ "system it is."
 #~ msgstr ""
 #~ "Indtast et navn for startaftrykket og angiv hvilket styresystem det er."
+
 #~ msgid "Finished"
 #~ msgstr "Fuldført"
+
 #~ msgid "Number of colors:"
 #~ msgstr "Antal farver:"
+
 #~ msgid "Other parameters:"
 #~ msgstr "Andre parametre:"
+
 #~ msgid "Password"
 #~ msgstr "Adgangskode"
+
 #~ msgid "Protect with password"
 #~ msgstr "Beskyt med adgangskode"
+
 #~ msgid "Resolution:"
 #~ msgstr "Opløsning:"
+
 #~ msgid "Seconds to wait before loading default kernel or OS"
 #~ msgstr "Sekunder før indlæsning af forvalgt kerne eller styresystem"
+
 #~ msgid "Select a kernel image"
 #~ msgstr "Vælg et kerneaftryk"
+
 #~ msgid "Select an initrd image"
 #~ msgstr "Vælg et initrd-aftryk"
+
 #~ msgid "Specify the partition on which the operating system is installed."
 #~ msgstr "Angiv den partition som styresystemet er installeret på."
+
 #~ msgid ""
 #~ "The new boot image has been added. Please click \"Apply\" to save your "
 #~ "changes."
 #~ msgstr ""
 #~ "Det nye startaftryk er blevet tilføjet. Klik på \"Anvend\" for at gemme "
 #~ "ændringerne."
+
 #~ msgid ""
 #~ "This assistant is designed to help you quickly and easily add a new boot "
 #~ "image to your system."
 #~ msgstr ""
 #~ "Denne hjælper er beregnet på at hjælpe dig med hurtigt og let at få "
 #~ "tilføjet et nyt startaftryk til systemet."
+
 #~ msgid "Video modes (only frame buffer)"
 #~ msgstr "Videotilstande (kun framebuffer)"
+
 #~ msgid "_Add..."
 #~ msgstr "_Tilføj..."
+
 #~ msgid "_Device:"
 #~ msgstr "_Enhed:"
+
 #~ msgid "_Edit"
 #~ msgstr "_Redigér"
+
 #~ msgid "_Initrd image path:"
 #~ msgstr "Sti til _initrd-aftryk:"
+
 #~ msgid "_Kernel image path:"
 #~ msgstr "Sti til _kerneaftryk:"
+
 #~ msgid "_Name:"
 #~ msgstr "_Navn:"
+
 #~ msgid "_Operating system:"
 #~ msgstr "_Styresystem:"
+
 #~ msgid "_Parameters:"
 #~ msgstr "_Parametre:"
+
 #~ msgid "_Root file system device:"
 #~ msgstr "Enhed til _rodfilsystem:"
+
 #~ msgid "Remote administration"
 #~ msgstr "Fjernadministration"
+
 #~ msgid "Run _Without Password"
 #~ msgstr "Kør _uden adgangskode"
+
 #~ msgid "Use this window to select the computer you wish to configure"
 #~ msgstr "Benyt dette vindue til at vælge den maskine du vil konfigurere"
+
 #~ msgid "<b>Connection</b>"
 #~ msgstr "<b>Forbindelse</b>"
+
 #~ msgid "Default _gateway device:"
 #~ msgstr "Forvalgt _netværksenhed:"
+
 #~ msgid "Device:"
 #~ msgstr "Enhed:"
+
 #~ msgid "Interface name:"
 #~ msgstr "Forbindelsesnavn:"
+
 #~ msgid "Key _type:"
 #~ msgstr "Nøgle_type:"
+
 #~ msgid "Select location name"
 #~ msgstr "Vælg stednavn"
+
 #~ msgid "WEP _key:"
 #~ msgstr "WEP-n_øgle:"
+
 #~ msgid "_Activate"
 #~ msgstr "Akti_vér"
+
 #~ msgid "_Deactivate"
 #~ msgstr "_Deaktivér"
+
 #~ msgid "_Hostname:"
 #~ msgstr "V_ærtsnavn:"
+
 #~ msgid "<b>Hosts settings</b>"
 #~ msgstr "<b>Indstillinger for værter</b>"
+
 #~ msgid "<b>WINS server</b>"
 #~ msgstr "<b>WINS-server</b>"
+
 #~ msgid "Allow _browsing folder"
 #~ msgstr "Tillad visnin_g af mappe"
+
 #~ msgid "Do not use WINS server"
 #~ msgstr "Brug ikke WINS-server"
+
 #~ msgid "General Windows sharing settings"
 #~ msgstr " Generelle indstillinger for Windows-deling"
+
 #~ msgid "Windows sharing settings"
 #~ msgstr "Indstillinger for Windows-deling"
+
 #~ msgid "_Add host"
 #~ msgstr "_Tilføj vært"
+
 #~ msgid "_Host description:"
 #~ msgstr "_Beskrivelse af vært:"
+
 #~ msgid "S_ynchronize clock with Internet servers:"
 #~ msgstr "S_ynkronisér ur med internetservere:"
+
 #~ msgid "_Select Time Zone..."
 #~ msgstr "Vælg tids_zone..."
+
 #~ msgid "<span weight=\"bold\">User Profile</span>"
 #~ msgstr "<span weight=\"bold\">Brugerprofil</span>"
+
 #~ msgid "Allow user to:"
 #~ msgstr "Alle bruger at:"
+
 #~ msgid "Group _members:"
 #~ msgstr "Gruppe_medlemmer:"
+
 #~ msgid "Groups"
 #~ msgstr "Grupper"
+
 #~ msgid "Show a_ll users and groups"
 #~ msgstr "_Vis alle brugere og grupper"
+
 #~ msgid "Users"
 #~ msgstr "Brugere"
+
 #~ msgid "_All users:"
 #~ msgstr "_Alle brugere:"
+
 #~ msgid "_Edit User Profiles..."
 #~ msgstr "_Redigér brugerprofiler..."
+
 #~ msgid "32,768"
 #~ msgstr "32,768"
+
 #~ msgid "65,536"
 #~ msgstr "65,536"
+
 #~ msgid "16,777,216"
 #~ msgstr "16,777,216"
+
 #~ msgid "Invalid VGA value"
 #~ msgstr "Ugyldig VGA-værdi"
+
 #~ msgid "\"%s\" is not a valid VGA value."
 #~ msgstr "\"%s\" er ikke en gyldig VGA-værdi."
+
 #~ msgid "Error creating boot image"
 #~ msgstr "Fejl ved oprettelse af startaftryk"
+
 #~ msgid "Creating a new boot image (%d of %d)"
 #~ msgstr "Oprettelse af nyt startaftryk (%d af %d)"
+
 #~ msgid "Finished creating a new boot image"
 #~ msgstr "Færdig med oprettelse af nyt startaftryk"
+
 #~ msgid "Unknown"
 #~ msgstr "Ukendt"
+
 #~ msgid "Windows NT"
 #~ msgstr "Windows-NT"
+
 #~ msgid "Windows 9x"
 #~ msgstr "Windows 9x"
+
 #~ msgid "Dos"
 #~ msgstr "DOS"
+
 #~ msgid "Linux"
 #~ msgstr "Linux"
+
 #~ msgid "Linux swap"
 #~ msgstr "Linux-swap"
+
 #~ msgid "GNU/Hurd"
 #~ msgstr "GNU/Hurd"
+
 #~ msgid "\"%s\" is an invalid path"
 #~ msgstr "\"%s\" er en ugyldig sti"
+
 #~ msgid "\"%s\" already exists, please set another name."
 #~ msgstr "\"%s\" findes allerede, angiv venligst et andet navn."
+
 #~ msgid "Invalid image name: \"%s\"."
 #~ msgstr "Ugyldigt aftryksnavn: \"%s\"."
+
 #~ msgid "Invalid image: \"%s\"."
 #~ msgstr "Ugyldigt aftryk: \"%s\"."
+
 #~ msgid "Invalid root device: \"%s\"."
 #~ msgstr "Ugyldig rodenhed: \"%s\"."
+
 #~ msgid "_Module path:"
 #~ msgstr "_Modulsti:"
+
 #~ msgid "Error modifying boot image"
 #~ msgstr "Fejl ved ændring af startaftryk"
+
 #~ msgid "Boot"
 #~ msgstr "Maskinstart"
+
 #~ msgid "Configure the system boot process"
 #~ msgstr "Konfigurér systemets startprocedure"
+
 #~ msgid "Boot Image Editor"
 #~ msgstr "Startaftrykredigering"
+
 #~ msgid "Boot Append Editor"
 #~ msgstr "Starttilvalgsredigering"
+
 #~ msgid "Error deleting boot image"
 #~ msgstr "Fejl ved sletning af startaftryk"
+
 #~ msgid "Without at least one boot image your computer will not start."
 #~ msgstr "Uden mindst ét startaftryk kan din maskine ikke starte."
+
 #~ msgid "This may leave this operating system unbootable."
 #~ msgstr "Dette kan gøre det umuligt at starte dette styresystem."
+
 #~ msgid "The configuration will show empty"
 #~ msgstr "Konfigurationen vil se tom ud"
+
 #~ msgid "The file \"%s\" is missing or could not be read."
 #~ msgstr "Filen \"%s\" mangler eller kan ikke læses."
+
 #~ msgid "Default"
 #~ msgstr "Standard"
+
 #~ msgid "Type"
 #~ msgstr "Type"
+
 #~ msgid "Kernel Image"
 #~ msgstr "Kerneaftryk"
+
 #~ msgid "Device"
 #~ msgstr "Enhed"
+
 #~ msgid "The tool could not connect to the computer"
 #~ msgstr "Værktøjet kunne ikke tilslutte til maskinen"
+
 #~ msgid ""
 #~ "Check that you have access to this network and that the computer is "
 #~ "actually working and running the SSH daemon"
 #~ msgstr ""
 #~ "Kontroller at du har adgang til dette netværk, og at maskinen faktisk "
 #~ "virker og kører SSH-tjenesten"
+
 #~ msgid "The entered password is invalid"
 #~ msgstr "Den indtastede adgangskode er ugyldig"
+
 #~ msgid ""
 #~ "Check that you typed it correctly and that you haven't activated the "
 #~ "\"caps lock\" key"
 #~ msgstr ""
 #~ "Kontroller at du indtastede den korrekt og at du ikke har aktiveret Caps "
 #~ "Lock-tasten"
+
 #~ msgid "Could not run \"%s\""
 #~ msgstr "Kunne ikke køre \"%s\""
+
 #~ msgid "Check that you have permissions to run this command"
 #~ msgstr "Kontroller at du har rettigheder til at køre denne kommando"
+
 #~ msgid "An unexpected error has occurred"
 #~ msgstr "En uventet fejl opstod"
+
 #~ msgid "Could not execute the backend"
 #~ msgstr "Kunne ikke starte bagenden"
+
 #~ msgid ""
 #~ "There was an error creating the child process, the tool will close now."
 #~ msgstr ""
 #~ "Der opstod en fejl under oprettelse af underprocessen, værktøjet lukkes "
 #~ "nu."
+
 #~ msgid "Could not find widget: %s"
 #~ msgstr "Kunne ikke finde kontrol: %s"
+
 #~ msgid "There are changes which have not been applied"
 #~ msgstr "Der er ændringer som ikke er aktiveret"
+
 #~ msgid "Apply them now?"
 #~ msgstr "Aktivér disse nu?"
+
 #~ msgid "Error connection signal `%s' in widget `%s'"
 #~ msgstr "Fejl ved forbindelse af signalet '%s' i kontrollen '%s'"
+
 #~ msgid "There was an error running the backend script"
 #~ msgstr "Der opstod en fejl ved kørsel af bagendeprogrammet"
+
 #~ msgid "Welcome to the %s prerelease of the GNOME System Tools"
 #~ msgstr "Velkommen til præversion %s af systemværktøjerne til Gnome"
+
 #~ msgid ""
 #~ "This is still a work in progress, and so it may have serious bugs. Due to "
 #~ "the nature of these tools, bugs may render your computer <span weight="
@@ -2012,64 +2179,92 @@ msgstr "Brugerindstillinger"
 #~ "taget <b>fuldstændig ubrugelig</b> og koste tid og en god del "
 #~ "arbejdsindsats fra din side. Du er blevet advaret. Tak, fordi du prøver "
 #~ "denne tidlige udgave af systemværktøjerne!"
+
 #~ msgid "Warning"
 #~ msgstr "Advarsel"
+
 #~ msgid "Don't show me this again"
 #~ msgstr "Vis ikke dette vindue igen"
+
 #~ msgid "Could not enable the interface %s"
 #~ msgstr "Kunne ikke aktivere grænsefladen %s"
+
 #~ msgid ""
 #~ "Check that the settings are correct for this network and that the "
 #~ "computer is correctly connected to it."
 #~ msgstr ""
 #~ "Kontrollér at indstillingerne passer til dette netværk og at maskinen er "
 #~ "forbundet korrekt til det."
+
 #~ msgid "Do you want to remove this location?"
 #~ msgstr "Vil du slette dette sted?"
+
 #~ msgid "Changing profile"
 #~ msgstr "Ændrer profil"
+
 #~ msgid "Networking"
 #~ msgstr "Netværk"
+
 #~ msgid "Ethernet connection"
 #~ msgstr "Ethernetforbindelse"
+
 #~ msgid "Activating interface \"%s\""
 #~ msgstr "Aktiverer grænsefladen \"%s\""
+
 #~ msgid "The interface %s is not active"
 #~ msgstr "Grænsefladen %s er ikke aktiv"
+
 #~ msgid "The interface %s is active"
 #~ msgstr "Grænsefladen %s er aktiv"
+
 #~ msgid "Settings for \"%s\""
 #~ msgstr "Indstillinger for \"%s\""
+
 #~ msgid "Are you sure you want to deactivate this service?"
 #~ msgstr "Er du sikker på at du vil deaktivere denne tjeneste?"
+
 #~ msgid "File sharing service"
 #~ msgstr "Fildelingstjeneste"
+
 #~ msgid "Shared folders settings"
 #~ msgstr "Indstillinger for delte mapper"
+
 #~ msgid "Hosts in the %s network"
 #~ msgstr "Værter i %s-netværket"
+
 #~ msgid "SMB"
 #~ msgstr "SMB"
+
 #~ msgid "NFS"
 #~ msgstr "NFS"
+
 #~ msgid "Error saving profile"
 #~ msgstr "Fejl ved gemning af profil"
+
 #~ msgid "Create New profile"
 #~ msgstr "Opret ny profil"
+
 #~ msgid "Settings for profile %s"
 #~ msgstr "Indstillinger for profilen %s"
+
 #~ msgid "Create New Group"
 #~ msgstr "Opret en ny gruppe"
+
 #~ msgid "Invalid group ID"
 #~ msgstr "Ugyldig gruppe-id"
+
 #~ msgid "Group ID must be a positive number"
 #~ msgstr "Gruppe-id skal være et positivt tal"
+
 #~ msgid "This would leave the system unusable"
 #~ msgstr "Dette ville efterlade systemet ubrugeligt"
+
 #~ msgid "Group ID %s already exists"
 #~ msgstr "Gruppe-id \"%s\" findes allerede"
+
 #~ msgid "The group name is too long"
 #~ msgstr "Gruppenavnet er for langt"
+
 #~ msgid "To be valid, the group name should have less than %d character"
 #~ msgid_plural ""
 #~ "To be valid, the group name should have less than %d characters"
@@ -2077,26 +2272,36 @@ msgstr "Brugerindstillinger"
 #~ "Brugernavnet skal være på mindre end %d tegn for at være gyldigt."
 #~ msgstr[1] ""
 #~ "Brugernavnet skal være på mindre end %d tegn for at være gyldigt."
+
 #~ msgid "Please set a valid group name, using only lower case letters"
 #~ msgstr "Angiv venligst et gyldigt gruppenavn med kun små bogstaver"
+
 #~ msgid "Please select a different group name"
 #~ msgstr "Vælg venligst et andet gruppenavn"
+
 #~ msgid "The group \"root\" should not be deleted"
 #~ msgstr "Gruppen \"root\" bør ikke slettes"
+
 #~ msgid "Settings for Group %s"
 #~ msgstr "Indstillinger for gruppen %s"
+
 #~ msgid "Group"
 #~ msgstr "Gruppe"
+
 #~ msgid "GID"
 #~ msgstr "Gruppe-id"
+
 #~ msgid "User name contains"
 #~ msgstr "Brugernavn indeholder"
+
 #~ msgid "User ID is"
 #~ msgstr "Bruger-id er"
+
 #~ msgid "Group name contains"
 #~ msgstr "Gruppenavn indeholder"
+
 #~ msgid "User GID is"
 #~ msgstr "Brugers gruppe-id er"
+
 #~ msgid "Passwords do not match"
 #~ msgstr "Adgangskoder er ikke ens"
-
