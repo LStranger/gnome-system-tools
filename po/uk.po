@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-05 09:02+0200\n"
-"PO-Revision-Date: 2007-03-05 13:25+0300\n"
+"POT-Creation-Date: 2007-09-12 13:03+0300\n"
+"PO-Revision-Date: 2007-09-12 13:25+0300\n"
 "Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgid "<b>Account data</b>"
 msgstr "<b>Дані облікового запису</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
+msgid "<b>Connection Settings</b>"
 msgstr "<b>Параметри з'єднання</b>"
 
 #: ../interfaces/network.glade.in.h:3
@@ -64,7 +64,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<b>Дані постачальника послуг Інтернету</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>Параметри модему</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -72,7 +72,7 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>Пошук доменів</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr "<b>Параметри бездротового зв'язку</b>"
 
 #: ../interfaces/network.glade.in.h:9
@@ -112,7 +112,7 @@ msgid "General"
 msgstr "Загальне"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
+msgid "Host Alias Properties"
 msgstr "Параметри псевдонімів вузла"
 
 #: ../interfaces/network.glade.in.h:19
@@ -640,11 +640,7 @@ msgstr "Не вдається завантажити конфігурацію"
 msgid "You are not allowed to access the system configuration."
 msgstr "У вас немає прав доступу до параметрів системи."
 
-#: ../src/common/gst-tool.c:358
-msgid "GNOME System Tools"
-msgstr "Системні утиліти GNOME"
-
-#: ../src/common/gst-tool.c:415
+#: ../src/common/gst-tool.c:403
 msgid "Could not display help"
 msgstr "Не вдається відобразити довідку"
 
@@ -657,26 +653,26 @@ msgstr "_Додати"
 msgid "Type address"
 msgstr "Тип адреси"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "Зміна параметрів інтерфейу"
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "Не вдається автоматично визначити пристрій модему"
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
 "Перевірте, що пристрій не зайнятий та коректно підключений до комп'ютера."
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "Змінилась назва вузла"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -684,7 +680,7 @@ msgstr ""
 "Це буде перешкоджати запуску нових програм, доведеться вийти та повторно "
 "зайти. Продовжити?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "Змінити назву _вузла"
 
@@ -709,8 +705,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "Ключ WEP (шістнадцятковий)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "Особистий WPA"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "Особистий WPA2"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "Властивості %s\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -852,18 +857,17 @@ msgstr "Мережі параметри"
 msgid "Settings for service \"%s\""
 msgstr "Параметри служби \"%s\""
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Ви дійсно бажаєте вимкнути \"%s\"?"
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
 msgstr ""
-"Це може вплинути на поведінку системи, та навіть призвести "
-"до втрати даних."
+"Це може вплинути на поведінку системи, та навіть призвести до втрати даних."
 
 #: ../src/services/service.c:32
 msgid "Web server"
@@ -1412,6 +1416,10 @@ msgstr "Вимикається NTP"
 msgid "Synchronizing system clock"
 msgstr "Синхронізація системного годинника"
 
+#: ../src/time/time-tool.c:431
+msgid "_Synchronize now"
+msgstr "Син_хронізувати"
+
 #: ../src/time/time-tool.c:527
 msgid "Keep synchronized with Internet servers"
 msgstr "Синхронізувати годинники з серверами у Інтернет"
@@ -1473,8 +1481,8 @@ msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr ""
-"Вкажіть коректну назву групи, що починається з латинського символу у нижньому "
-"регістрі, за якими йдуть символи у нижньому регістрі та числа."
+"Вкажіть коректну назву групи, що починається з латинського символу у "
+"нижньому регістрі, за якими йдуть символи у нижньому регістрі та числа."
 
 #: ../src/users/group-settings.c:288
 #, c-format
@@ -1627,7 +1635,8 @@ msgstr ""
 
 #: ../src/users/user-settings.c:515
 msgid "Administrator account's user ID should not be modified"
-msgstr "Ідентифікатор користувача облікового рахунку адміністратора можна змінювати"
+msgstr ""
+"Ідентифікатор користувача облікового рахунку адміністратора можна змінювати"
 
 #: ../src/users/user-settings.c:531
 msgid "Incomplete path in shell"
@@ -1650,8 +1659,8 @@ msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
 msgstr ""
-"Паролі користувачів повинні бути не менш ніж з 6 символів, та бажано, щоб вони складались з цифр, "
-"символів та спеціальних символів."
+"Паролі користувачів повинні бути не менш ніж з 6 символів, та бажано, щоб "
+"вони складались з цифр, символів та спеціальних символів."
 
 #: ../src/users/user-settings.c:564
 msgid "Password confirmation is not correct"
@@ -1673,7 +1682,12 @@ msgstr "Обліковий запис"
 msgid "Home directory"
 msgstr "Домашній каталог"
 
-#: ../src/users/users-tool.c:191
+#: ../src/users/users-tool.c:214
 msgid "Users settings"
 msgstr "Параметри користувачів"
 
+#~ msgid "GNOME System Tools"
+#~ msgstr "Системні утиліти GNOME"
+
+#~ msgid "WPA"
+#~ msgstr "WPA"
