@@ -128,9 +128,6 @@ gst_locations_combo_finalize (GObject *object)
 
   priv = GST_LOCATIONS_COMBO_GET_PRIVATE (object);
 
-  if (priv->tool)
-    g_object_unref (priv->tool);
-
   if (priv->combo)
     g_object_unref (priv->combo);
 
@@ -158,7 +155,7 @@ gst_locations_combo_set_property (GObject         *object,
   switch (prop_id)
     {
     case PROP_TOOL:
-      priv->tool = GST_TOOL (g_value_dup_object (value));
+      priv->tool = GST_TOOL (g_value_get_object (value));
       break;
     case PROP_COMBO:
       priv->combo = GTK_WIDGET (g_value_dup_object (value));

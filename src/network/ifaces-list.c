@@ -407,6 +407,36 @@ ifaces_model_set_interface_at_iter (OobsIface *iface, GtkTreeIter *iter, gboolea
   ifaces_model_modify_interface_at_iter (iter);
 }
 
+static void
+iface_state_changed (OobsIface *iface,
+		     gpointer   user_data)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  OobsIface *model_iface;
+  gboolean valid, found;
+
+  found = FALSE;
+  model = GST_NETWORK_TOOL (tool)->interfaces_model;
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+
+  while (valid && !found)
+    {
+      gtk_tree_model_get (model, &iter,
+			  COL_OBJECT, &model_iface,
+			  -1);
+
+      if (iface == model_iface)
+	{
+	  ifaces_model_modify_interface_at_iter (&iter);
+	  found = TRUE;
+	}
+
+      g_object_unref (iface);
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
+}
+
 void
 ifaces_model_add_interface (OobsIface *iface, gboolean show_name)
 {
@@ -417,6 +447,9 @@ ifaces_model_add_interface (OobsIface *iface, gboolean show_name)
 
   gtk_list_store_append (GTK_LIST_STORE (model), &it);
   ifaces_model_set_interface_at_iter (iface, &it, show_name);
+
+  g_signal_connect (iface, "state-changed",
+		    G_CALLBACK (iface_state_changed), tool);
 }
 
 void
