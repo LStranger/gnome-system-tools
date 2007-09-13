@@ -27,9 +27,8 @@ AC_PROG_MAKE_SET
 dnl glib-genmarshal
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
-LIBOOBS_REQUIRED=2.17.5
-GTK_REQUIRED=2.9.0
-LIBGLADE_REQUIRED=2.4.0
+LIBOOBS_REQUIRED=2.21.0
+GTK_REQUIRED=2.11.3
 GCONF_REQUIRED=2.2.0
 DBUS_REQUIRED=0.32
 
@@ -75,7 +74,6 @@ dnl =====================================================
 
 PKG_CHECK_MODULES(GST_DEPENDS,[
 			   gtk+-2.0 >= $GTK_REQUIRED
-			   libglade-2.0 >= $LIBGLADE_REQUIRED
 			   gconf-2.0 >= $GCONF_REQUIRED
 			   liboobs-1 >= $LIBOOBS_REQUIRED
 			   ])
@@ -152,15 +150,15 @@ dnl ========================================================
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
   pixmapsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
-  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces", [path where glade files will be installed])
-  interfacesdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
+  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/ui", [path where UI files will be installed])
+  interfacesdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/ui"
   AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${ac_default_prefix}/${BINDIRNAME}", [frontend files path])
   AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${ac_default_prefix}/${DATADIRNAME}/control-center-2.0/capplets", [capplets directory])
 else
   AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
   pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
-  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces", [path where glade files will be installed])
-  interfacesdir="${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
+  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/ui", [path where UI files will be installed])
+  interfacesdir="${prefix}/${DATADIRNAME}/${PACKAGE}/ui"
   AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${prefix}/${BINDIRNAME}", [frontend files path])
   AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${prefix}/${DATADIRNAME}/control-center-2.0/capplets", [capplets directory])
 fi
