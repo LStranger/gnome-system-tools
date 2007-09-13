@@ -1,5 +1,15 @@
 2007-09-13  Carlos Garnacho  <carlosg@gnome.org>
 
+	Use GtkBuilder.
+
+	* *.glade.in: moved to
+	* *.glade: Added, keep them around in case we need them.
+	* *.ui: Added, these are the GtkBuilder ui files.
+	* Makefile.am: install UI files
+	* fix.pl: remove, it hasn't been needed for quite some time.
+
+2007-09-13  Carlos Garnacho  <carlosg@gnome.org>
+
 	* common.glade.in: remove obsolete "icon" property, the image no
 	longer exists.
 

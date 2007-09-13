@@ -1,20 +1,11 @@
 interfaces = \
-	boot.glade	\
-	common.glade	\
-	disks.glade	\
-	network.glade	\
-	services.glade  \
-	shares.glade	\
-	time.glade	\
-	users.glade
+	common.ui	\
+	network.ui	\
+	services.ui	\
+	shares.ui	\
+	time.ui		\
+	users.ui
 
 interfaces_DATA = $(interfaces)
 
-EXTRA_DIST = \
-	$(interfaces:.glade=.glade.in)	\
-	fix.pl
-
-CLEANFILES = $(interfaces)
-
-$(interfaces): %.glade: %.glade.in
-	$(top_srcdir)/interfaces/fix.pl $(pixmapsdir) < $< > $@
+#EXTRA_DIST = 
