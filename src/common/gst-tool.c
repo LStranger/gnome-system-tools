@@ -118,42 +118,42 @@ report_window_close_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
 	return TRUE;
 }
 
-static GladeXML*
-gst_tool_load_glade_common (GstTool *tool, const gchar *widget)
+static GtkBuilder *
+gst_tool_load_common_ui (GstTool *tool)
 {
-	GladeXML *xml;
-	
+	GtkBuilder *builder;
+
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
-	g_return_val_if_fail (tool->glade_common_path != NULL, NULL);
+	g_return_val_if_fail (tool->common_ui_path != NULL, NULL);
 
-	xml = glade_xml_new (tool->glade_common_path, widget, NULL);
+	builder = gtk_builder_new ();
 
-	if (!xml) {
-		g_error ("Could not load %s\n", tool->glade_common_path);
+	if (!gtk_builder_add_from_file (builder, tool->common_ui_path, NULL)) {
+		g_error ("Could not load %s\n", tool->common_ui_path);
 	}
 
-	return xml;
+	return builder;
 }
 
 static void
 gst_tool_init (GstTool *tool)
 {
-	GdkPixbuf *pixbuf;
-	GladeXML  *xml;
+	GdkPixbuf  *pixbuf;
+	GtkBuilder *builder;
 
 	tool->icon_theme = gtk_icon_theme_get_default ();
-	tool->glade_common_path  = INTERFACES_DIR "/common.glade";
+	tool->common_ui_path  = INTERFACES_DIR "/common.ui";
 
 	tool->session = oobs_session_get ();
 	tool->gconf_client = gconf_client_get_default ();
 
-	xml = gst_tool_load_glade_common (tool, "report_window");
+	builder = gst_tool_load_common_ui (tool);
 
-	tool->report_window = glade_xml_get_widget (xml, "report_window");
-	tool->report_label = glade_xml_get_widget (xml, "report_label");
-	tool->report_progress = glade_xml_get_widget (xml, "report_progress");
-	tool->report_pixmap = glade_xml_get_widget (xml, "report_pixmap");
+	tool->report_window = GTK_WIDGET (gtk_builder_get_object (builder, "report_window"));
+	tool->report_label = GTK_WIDGET (gtk_builder_get_object (builder, "report_label"));
+	tool->report_progress = GTK_WIDGET (gtk_builder_get_object (builder, "report_progress"));
+	tool->report_pixmap = GTK_WIDGET (gtk_builder_get_object (builder, "report_pixmap"));
 	g_signal_connect (G_OBJECT (tool->report_window), "delete_event",
 			  G_CALLBACK (report_window_close_cb), tool);
 
@@ -163,7 +163,7 @@ gst_tool_init (GstTool *tool)
 	if (pixbuf)
 		gdk_pixbuf_unref (pixbuf);
 
-	g_object_unref (xml);
+	g_object_unref (builder);
 }
 
 static void
@@ -206,7 +206,7 @@ gst_tool_constructor (GType                  type,
 		gtk_window_set_default_icon_name (tool->icon);
 
 	if (tool->name) {
-		tool->glade_path = g_strdup_printf (INTERFACES_DIR "/%s.glade", tool->name);
+		tool->ui_path = g_strdup_printf (INTERFACES_DIR "/%s.ui", tool->name);
 
 		widget_name = g_strdup_printf ("%s_admin", tool->name);
 		tool->main_dialog = gst_dialog_new (tool, widget_name, tool->title);
@@ -264,7 +264,7 @@ gst_tool_finalize (GObject *object)
 	g_free (tool->name);
 	g_free (tool->title);
 	g_free (tool->icon);
-	g_free (tool->glade_path);
+	g_free (tool->ui_path);
 
 	if (tool->session)
 		g_object_unref (tool->session);
@@ -292,6 +292,8 @@ gst_tool_impl_close (GstTool *tool)
 
 	/* process pending async requests */
 	oobs_session_process_requests (tool->session);
+
+
 	g_object_unref (tool);
 	gtk_main_quit ();
 }
@@ -376,12 +378,12 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 				       lang,
 				       help_file_xml,
 				       NULL);
-					
+
 		if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
                     break;
 		}
 	}
-	
+
 	if (section) {
 		command = g_strconcat ("gnome-help ghelp://", uri, "?", section, NULL);
 	} else {

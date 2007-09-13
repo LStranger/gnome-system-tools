@@ -25,7 +25,6 @@
 
 G_BEGIN_DECLS
 
-#include <glade/glade.h>
 #include <gtk/gtk.h>
 #include <oobs/oobs.h>
 #include <gconf/gconf-client.h>
@@ -51,8 +50,8 @@ struct _GstTool {
 	OobsSession *session;
 	GConfClient *gconf_client;
 
-	char *glade_path;
-	char *glade_common_path;
+	char *ui_path;
+	char *common_ui_path;
 
 	GtkIconTheme *icon_theme;
 	GstDialog *main_dialog;

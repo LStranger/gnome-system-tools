@@ -41,8 +41,8 @@ struct _GstDialogPrivate {
 	gchar   *title;
 	gchar   *widget_name;
 
-	GladeXML  *gui;
-	GtkWidget *child;
+	GtkBuilder *builder;
+	GtkWidget  *child;
 
 	gboolean modified;
 	gboolean frozen;
@@ -127,7 +127,7 @@ gst_dialog_init (GstDialog *dialog)
 
 	priv->tool  = NULL;
 	priv->title = NULL;
-	priv->gui   = NULL;
+	priv->builder = NULL;
 	priv->child = NULL;
 
 	priv->modified = FALSE;
@@ -158,10 +158,10 @@ gst_dialog_constructor (GType                  type,
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
 	if (priv->tool && priv->widget_name) {
-		priv->gui   = glade_xml_new (priv->tool->glade_path, NULL, NULL);
+		priv->builder = gtk_builder_new ();
 
-		if (!priv->gui) {
-			g_critical ("glade file not found: %s\n", priv->tool->glade_path);
+		if (!gtk_builder_add_from_file (priv->builder, priv->tool->ui_path, NULL)) {
+			g_critical ("UI file not found: %s\n", priv->tool->ui_path);
 
 			/* no point in continuing */
 			exit (-1);
@@ -170,7 +170,7 @@ gst_dialog_constructor (GType                  type,
 		toplevel = gtk_widget_get_toplevel (priv->child);
 
 		if (GTK_WIDGET_TOPLEVEL (priv->child)) {
-			g_critical ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
+			g_critical ("The widget \"%s\" should not be a toplevel widget in the .ui file\n"
 				    "You just need to add the widget inside a GtkWindow so that it can be deparented.", priv->widget_name);
 
 			/* no point in continuing */
@@ -219,8 +219,8 @@ gst_dialog_finalize (GObject *object)
 	GstDialog *dialog = GST_DIALOG (object);
 	GstDialogPrivate *priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	if (priv->gui)
-		g_object_unref (priv->gui);
+	if (priv->builder)
+		g_object_unref (priv->builder);
 
 	if (priv->child)
 		gtk_widget_destroy (priv->child);
@@ -302,9 +302,9 @@ gst_dialog_get_widget (GstDialog *dialog, const char *widget)
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	g_return_val_if_fail (priv->gui != NULL, NULL);
+	g_return_val_if_fail (priv->builder != NULL, NULL);
 
-	w = glade_xml_get_widget (priv->gui, widget);
+	w = GTK_WIDGET (gtk_builder_get_object (priv->builder, widget));
 
 	if (!w)
 		g_error ("Could not find widget: %s", widget);

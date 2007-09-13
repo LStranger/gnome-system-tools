@@ -22,7 +22,6 @@
 #ifndef GST_DIALOG_H
 #define GST_DIALOG_H
 
-#include <glade/glade.h>
 #include "gst-types.h"
 #include "gst-tool.h"
 
