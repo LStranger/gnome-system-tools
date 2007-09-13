@@ -527,6 +527,8 @@ connection_dialog_init (GstTool *tool)
   gcd->isp_frame      = gst_dialog_get_widget (tool->main_dialog, "isp_data");
   gcd->account_frame  = gst_dialog_get_widget (tool->main_dialog, "isp_account_data");
 
+  gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (gcd->serial_port), 0);
+
   connection_essids_combo_init (GTK_COMBO_BOX_ENTRY (gcd->essid));
 
   return gcd;

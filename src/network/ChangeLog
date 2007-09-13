@@ -1,3 +1,18 @@
+2007-09-13  Carlos Garnacho  <carlosg@gnome.org>
+
+	* connection.c (connection_dialog_init): set text column for the
+	serial port combobox properly. It was relying on libglade before.
+	* main.c: remove glade include.
+
+2007-09-13  Carlos Garnacho  <carlosg@gnome.org>
+
+	* locations-combo.c: Do not create circular references with the
+	GstNetworkTool object.
+	* network-tool.c (gst_network_tool_finalize): unref the
+	GstLocationsCombo.
+	* ifaces-list.c: listen to OobsIface::state-changed to update the ui
+	properly.
+
 2007-09-03  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.19.92
