@@ -94,7 +94,6 @@ setup_shells_combo (GstUsersTool *tool)
 	GList *shells;
 
 	combo = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_shell");
-
 	model = GTK_TREE_MODEL (gtk_list_store_new (1, G_TYPE_STRING));
 	shells = oobs_users_config_get_available_shells (OOBS_USERS_CONFIG (tool->users_config));
 
@@ -108,6 +107,8 @@ setup_shells_combo (GstUsersTool *tool)
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
 	g_object_unref (model);
+
+	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (combo), 0);
 }
 
 void
