@@ -54,7 +54,7 @@ const ServiceDescription descriptions[] = {
 	{ FALSE, "gnome-terminal",     N_("Remote shell server"),             N_("Secure shell server") },                      /* GST_ROLE_SECURE_SHELL_SERVER */
 	{ FALSE, "stock_script",       N_("Application server"),              NULL }, /* GST_ROLE_APPLICATION_SERVER */
 	{ FALSE, NULL,                 N_("Automated crash reports support"), NULL }, /* GST_ROLE_AUTOMATED_CRASH_REPORTS_MANAGEMENT */
-	{ FALSE, NULL,                 N_("System communication bus"),        NULL }, /* GST_ROLE_DBUS, */
+	{ TRUE,  NULL,                 N_("System communication bus"),        NULL }, /* GST_ROLE_DBUS, */
 	{ FALSE, "gtk-preferences",    N_("System configuration manager"),    NULL }, /* GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT */
 	{ FALSE, NULL,                 N_("School management platform"),      NULL }, /* GST_ROLE_SCHOOL_MANAGEMENT_PLATFORM */
 	{ FALSE, "stock_lock",         N_("Network security auditor"),        NULL }, /* GST_ROLE_SECURITY_AUDITING */
