@@ -11,15 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-11 02:54+0200\n"
-"PO-Revision-Date: 2007-03-11 02:54+0200\n"
+"POT-Creation-Date: 2007-09-16 14:16+0300\n"
+"PO-Revision-Date: 2007-09-16 14:18+0300\n"
 "Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
@@ -27,8 +26,7 @@ msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Ar users-admin įrankis turėtų rodyti visus naudotojus ir grupes, ar ne"
 
 #: ../interfaces/common.glade.in.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+msgid "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
 msgstr "<span weight=\"bold\" size=\"larger\">Įveskite root slaptažodį</span>"
 
 #: ../interfaces/common.glade.in.h:2
@@ -53,7 +51,7 @@ msgid "<b>Account data</b>"
 msgstr "<b>Abonemento duomenys</b>"
 
 #: ../interfaces/network.glade.in.h:2
-msgid "<b>Connection settings</b>"
+msgid "<b>Connection Settings</b>"
 msgstr "<b>Prisijungimų nustatymai</b>"
 
 #: ../interfaces/network.glade.in.h:3
@@ -69,7 +67,7 @@ msgid "<b>Internet service provider data</b>"
 msgstr "<b>Interneto paslaugų tiekėjo duomenys</b>"
 
 #: ../interfaces/network.glade.in.h:6
-msgid "<b>Modem settings</b>"
+msgid "<b>Modem Settings</b>"
 msgstr "<b>Modemo nustatymai</b>"
 
 #: ../interfaces/network.glade.in.h:7
@@ -77,7 +75,7 @@ msgid "<b>Search Domains</b>"
 msgstr "<b>Paieškos sritys</b>"
 
 #: ../interfaces/network.glade.in.h:8
-msgid "<b>Wireless settings</b>"
+msgid "<b>Wireless Settings</b>"
 msgstr "<b>Bevielio ryšio nustatymai</b>"
 
 #: ../interfaces/network.glade.in.h:9
@@ -117,8 +115,8 @@ msgid "General"
 msgstr "Pagrindiniai"
 
 #: ../interfaces/network.glade.in.h:18
-msgid "Host alias settings"
-msgstr "Hostų alijasų nustatymai"
+msgid "Host Alias Properties"
+msgstr "Kompiuterių vardų nustatymai"
 
 #: ../interfaces/network.glade.in.h:19
 msgid "Hosts"
@@ -645,11 +643,7 @@ msgstr "Konfigūracija negalėjo būti įkelta"
 msgid "You are not allowed to access the system configuration."
 msgstr "Jums neleidžiama prieiti prie sistemos konfigūracijos."
 
-#: ../src/common/gst-tool.c:358
-msgid "GNOME System Tools"
-msgstr "GNOME sistemos įrankiai"
-
-#: ../src/common/gst-tool.c:415
+#: ../src/common/gst-tool.c:403
 msgid "Could not display help"
 msgstr "Nepavyko parodyti žinyno"
 
@@ -662,15 +656,15 @@ msgstr "_Pridėti"
 msgid "Type address"
 msgstr "Įveskite adresą"
 
-#: ../src/network/callbacks.c:185 ../src/network/callbacks.c:431
+#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
 msgid "Changing interface configuration"
 msgstr "Keičiama sąsajos konfigūracija"
 
-#: ../src/network/callbacks.c:243
+#: ../src/network/callbacks.c:244
 msgid "Could not autodetect modem device"
 msgstr "Nepavyko automatiškai aptikti modemo įrenginio"
 
-#: ../src/network/callbacks.c:246
+#: ../src/network/callbacks.c:247
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -678,11 +672,11 @@ msgstr ""
 "Patikrinkite ar įrenginys nėra užimtas ir ar tinkamai prijungtas prie "
 "kompiuterio."
 
-#: ../src/network/callbacks.c:467
+#: ../src/network/callbacks.c:468
 msgid "The host name has changed"
 msgstr "Kompiuterio vardas pakeistas"
 
-#: ../src/network/callbacks.c:470
+#: ../src/network/callbacks.c:471
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -690,7 +684,7 @@ msgstr ""
 "Tai neleis Jums paleisti naujų programų, todėl Jūs turėsite prisijungti iš "
 "naujo. Vistiek tęsti?"
 
-#: ../src/network/callbacks.c:476
+#: ../src/network/callbacks.c:477
 msgid "Change _Host name"
 msgstr "Pakeisti _kompiuterio vardą"
 
@@ -715,8 +709,17 @@ msgid "WEP key (hexadecimal)"
 msgstr "WEP raktas (šešioliktainis)"
 
 #: ../src/network/connection.c:47
-msgid "WPA"
-msgstr "WPA"
+msgid "WPA Personal"
+msgstr "WPA asmeninis"
+
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 asmeninis"
+
+#: ../src/network/connection.c:622
+#, c-format
+msgid "%s Properties\n"
+msgstr "%s savybės\n"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -821,8 +824,7 @@ msgstr "Ši sąsaja neegzistuoja"
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
-msgstr ""
-"Patikrinkite ar parašyta teisingai ir ar ją tinkamai palaiko Jūsų sistema."
+msgstr "Patikrinkite ar parašyta teisingai ir ar ją tinkamai palaiko Jūsų sistema."
 
 #: ../src/network/main.c:160
 msgid "Configure a network interface"
@@ -857,12 +859,12 @@ msgstr "Tinklo nustatymai"
 msgid "Settings for service \"%s\""
 msgstr "Paslaugos „%s“ nustatymai"
 
-#: ../src/services/callbacks.c:110
+#: ../src/services/callbacks.c:111
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Ar tikrai norite deaktyvuoti „%s“?"
 
-#: ../src/services/callbacks.c:114
+#: ../src/services/callbacks.c:115
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1415,9 +1417,13 @@ msgstr "Išjungiamas NTP"
 msgid "Synchronizing system clock"
 msgstr "Sinchronizuojamas sistemos laikrodis"
 
+#: ../src/time/time-tool.c:431
+msgid "_Synchronize now"
+msgstr "Sinchronizuoti _dabar"
+
 #: ../src/time/time-tool.c:527
 msgid "Keep synchronized with Internet servers"
-msgstr "Sinchronizuoti laikrodį su Interneto serveriais"
+msgstr "Reguliariai sinchronizuoti laikrodį su Interneto serveriais"
 
 #: ../src/time/time-tool.c:528
 msgid "Manual"
@@ -1444,8 +1450,7 @@ msgstr "Ar tikrai norite pašalinti grupę „%s“?"
 
 #: ../src/users/group-settings.c:71
 msgid "This may leave files with invalid group ID in the filesystem."
-msgstr ""
-"Šis veiksmas gali palikti failus su netinkamu grupės ID failų sistemoje."
+msgstr "Šis veiksmas gali palikti failus su netinkamu grupės ID failų sistemoje."
 
 #: ../src/users/group-settings.c:170
 msgid "New group"
@@ -1466,8 +1471,7 @@ msgstr "Turi būti nurodytas grupės vardas."
 
 #: ../src/users/group-settings.c:280
 msgid "Group name of the administrator group user should not be modified"
-msgstr ""
-"Administratoriaus grupės naudotojo grupės vardas neturėtų būti keičiamas"
+msgstr "Administratoriaus grupės naudotojo grupės vardas neturėtų būti keičiamas"
 
 #: ../src/users/group-settings.c:283
 msgid "Group name has invalid characters"
@@ -1678,6 +1682,7 @@ msgstr "Prisijungimo vardas"
 msgid "Home directory"
 msgstr "Namų aplankas"
 
-#: ../src/users/users-tool.c:191
+#: ../src/users/users-tool.c:214
 msgid "Users settings"
 msgstr "Naudotojų nustatymai"
+
