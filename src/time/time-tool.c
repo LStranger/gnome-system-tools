@@ -123,11 +123,14 @@ gst_time_tool_init (GstTimeTool *tool)
 	priv->bus_connection = dbus_bus_get (DBUS_BUS_SESSION, NULL);
 	priv->cookie = 0;
 
-	tool->time_config = oobs_time_config_get (GST_TOOL (tool)->session);
-	tool->ntp_config = oobs_ntp_config_get (GST_TOOL (tool)->session);
-	tool->services_config = oobs_services_config_get (GST_TOOL (tool)->session);
+	tool->time_config = oobs_time_config_get ();
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->time_config);
 
-	get_ntp_service (tool);
+	tool->ntp_config = oobs_ntp_config_get ();
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->ntp_config);
+
+	tool->services_config = oobs_services_config_get ();
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->services_config);
 }
 
 static void
@@ -641,14 +644,7 @@ gst_time_tool_update_gui (GstTool *tool)
 static void
 gst_time_tool_update_config (GstTool *tool)
 {
-	GstTimeTool *time_tool;
-
-	time_tool = GST_TIME_TOOL (tool);
-	oobs_object_update (time_tool->time_config);
-	oobs_object_update (time_tool->ntp_config);
-	oobs_object_update (time_tool->services_config);
-
-	get_ntp_service (time_tool);
+	get_ntp_service (GST_TIME_TOOL (tool));
 }
 
 static void
