@@ -76,17 +76,11 @@ on_showall_changed (GConfClient *client,
 static void
 gst_users_tool_init (GstUsersTool *tool)
 {
-	tool->users_config = oobs_users_config_get (GST_TOOL (tool)->session);
-	tool->groups_config = oobs_groups_config_get (GST_TOOL (tool)->session);
+	tool->users_config = oobs_users_config_get ();
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->users_config);
 
-	g_object_get (G_OBJECT (tool->users_config),
-		      "minimum-uid", &tool->minimum_uid,
-		      "maximum-uid", &tool->maximum_uid,
-		      NULL);
-	g_object_get (G_OBJECT (tool->groups_config),
-		      "minimum-gid", &tool->minimum_gid,
-		      "maximum-gid", &tool->maximum_gid,
-		      NULL);
+	tool->groups_config = oobs_groups_config_get ();
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->groups_config);
 
 	tool->profiles = gst_user_profiles_get ();
 }
@@ -193,8 +187,6 @@ gst_users_tool_update_config (GstTool *tool)
 	GstUsersTool *users_tool;
 
 	users_tool = GST_USERS_TOOL (tool);
-	oobs_object_update (users_tool->users_config);
-	oobs_object_update (users_tool->groups_config);
 
 	g_object_get (G_OBJECT (users_tool->users_config),
 		      "minimum-uid", &users_tool->minimum_uid,
