@@ -163,6 +163,8 @@ gst_tool_init (GstTool *tool)
 	if (pixbuf)
 		gdk_pixbuf_unref (pixbuf);
 
+	tool->objects = g_ptr_array_new ();
+
 	g_object_unref (builder);
 }
 
@@ -220,8 +222,6 @@ gst_tool_constructor (GType                  type,
 		dialog = gst_platform_dialog_new (tool->session);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
-
-		gst_tool_update_config (tool);
 		break;
 	case OOBS_RESULT_ACCESS_DENIED:
 	case OOBS_RESULT_ERROR:
@@ -231,6 +231,8 @@ gst_tool_constructor (GType                  type,
 	default:
 		break;
 	}
+
+	gst_tool_update_async (tool);
 
 	return object;
 }
@@ -277,6 +279,8 @@ gst_tool_finalize (GObject *object)
 
 	if (tool->gconf_client)
 		g_object_unref (tool->gconf_client);
+
+	g_ptr_array_free (tool->objects, FALSE);
 
 	(* G_OBJECT_CLASS (gst_tool_parent_class)->finalize) (object);
 }
@@ -498,8 +502,50 @@ gst_tool_commit_async (GstTool             *tool,
 	oobs_object_commit_async (object, on_commit_finalized, user_data);
 }
 
+static void
+update_async_func (OobsObject *object,
+		   OobsResult  result,
+		   gpointer    data)
+{
+	GstTool *tool = GST_TOOL (data);
+	gst_dialog_thaw (tool->main_dialog);
+
+	if (gst_dialog_get_freeze_level (tool->main_dialog) == 0) {
+		/* everything is now updated */
+		gst_tool_update_config (tool);
+		gst_tool_update_gui (tool);
+	}
+}
+
+void
+gst_tool_update_async (GstTool *tool)
+{
+	gint i;
+
+	g_return_if_fail (GST_IS_TOOL (tool));
+
+	for (i = 0; i < tool->objects->len; i++) {
+		OobsObject *object = g_ptr_array_index (tool->objects, i);
+
+		gst_dialog_freeze (tool->main_dialog);
+		oobs_object_update_async (object,
+					  update_async_func,
+					  tool);
+	}
+}
+
 GtkIconTheme*
 gst_tool_get_icon_theme (GstTool *tool)
 {
 	return tool->icon_theme;
+}
+
+void
+gst_tool_add_configuration_object (GstTool    *tool,
+				   OobsObject *object)
+{
+	g_return_if_fail (GST_IS_TOOL (tool));
+	g_return_if_fail (OOBS_IS_OBJECT (object));
+
+	g_ptr_array_add (tool->objects, object);
 }

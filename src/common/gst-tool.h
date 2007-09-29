@@ -48,6 +48,7 @@ struct _GstTool {
 	gchar *icon;
 
 	OobsSession *session;
+	GPtrArray   *objects;
 	GConfClient *gconf_client;
 
 	char *ui_path;
@@ -97,6 +98,12 @@ void         gst_tool_commit_async    (GstTool             *tool,
 				       const gchar         *message,
 				       OobsObjectAsyncFunc  func,
 				       gpointer             data);
+
+void         gst_tool_update_async    (GstTool             *tool);
+
+void         gst_tool_add_configuration_object (GstTool    *tool,
+						OobsObject *object);
+
 
 G_END_DECLS
 

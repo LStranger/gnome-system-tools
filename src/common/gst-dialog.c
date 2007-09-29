@@ -44,8 +44,8 @@ struct _GstDialogPrivate {
 	GtkBuilder *builder;
 	GtkWidget  *child;
 
-	gboolean modified;
-	gboolean frozen;
+	guint    frozen;
+	guint    modified : 1;
 };
 
 static void gst_dialog_class_init (GstDialogClass *class);
@@ -66,7 +66,11 @@ static void gst_dialog_response (GtkDialog *dialog,
 
 static gboolean gst_dialog_delete_event (GtkWidget   *widget,
 					 GdkEventAny *event);
-static void gst_dialog_map      (GtkWidget *widget);
+static void     gst_dialog_map          (GtkWidget   *widget);
+static void     gst_dialog_realize      (GtkWidget   *widget);
+
+static void     gst_dialog_set_cursor   (GstDialog     *dialog,
+					 GdkCursorType  cursor_type);
 
 enum {
 	PROP_0,
@@ -91,6 +95,7 @@ gst_dialog_class_init (GstDialogClass *class)
 	dialog_class->response     = gst_dialog_response;
 	widget_class->delete_event = gst_dialog_delete_event;
 	widget_class->map          = gst_dialog_map;
+	widget_class->realize      = gst_dialog_realize;
 
 	g_object_class_install_property (object_class,
 					 PROP_TOOL,
@@ -266,10 +271,20 @@ gst_dialog_map (GtkWidget *widget)
 	(* GTK_WIDGET_CLASS (gst_dialog_parent_class)->map) (widget);
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	gst_tool_update_async (priv->tool);
+}
 
-	gst_dialog_freeze_visible (dialog);
-	gst_tool_update_gui (priv->tool);
-	gst_dialog_thaw_visible (dialog);
+static void
+gst_dialog_realize (GtkWidget *widget)
+{
+	GstDialogPrivate *priv;
+
+	(* GTK_WIDGET_CLASS (gst_dialog_parent_class)->realize) (widget);
+
+	priv = GST_DIALOG_GET_PRIVATE (widget);
+
+	if (priv->frozen > 0)
+		gst_dialog_set_cursor (GST_DIALOG (widget), GDK_WATCH);
 }
 
 static gboolean
@@ -326,70 +341,68 @@ gst_dialog_apply_widget_policies (GstDialog *dialog)
 	}
 }
 
+static void
+gst_dialog_set_cursor (GstDialog     *dialog,
+		       GdkCursorType  cursor_type)
+{
+	GdkCursor *cursor;
+
+	g_return_if_fail (GTK_WIDGET_REALIZED (dialog));
+
+	cursor = gdk_cursor_new (GDK_WATCH);
+	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, cursor);
+	gdk_cursor_unref (cursor);
+}
+
 void
 gst_dialog_freeze (GstDialog *dialog)
 {
 	GstDialogPrivate *priv;
 
-	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (GST_IS_DIALOG (dialog));
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
-	priv->frozen = TRUE;
+
+	if (priv->frozen == 0) {
+		if (GTK_WIDGET (dialog)->window)
+			gst_dialog_set_cursor (dialog, GDK_WATCH);
+
+		gtk_widget_set_sensitive (GTK_WIDGET (dialog), FALSE);
+	}
+
+	priv->frozen++;
 }
 
-void 
+void
 gst_dialog_thaw (GstDialog *dialog)
 {
 	GstDialogPrivate *priv;
 
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (GST_IS_DIALOG (dialog));
-
-	priv = GST_DIALOG_GET_PRIVATE (dialog);
-	priv->frozen = FALSE;
-}
-
-void
-gst_dialog_freeze_visible (GstDialog *dialog)
-{
-	GstDialogPrivate *priv;
-	GdkCursor *cursor;
-	
-	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (GST_IS_DIALOG (dialog));
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	if (GTK_WIDGET (dialog)->window) {
-		cursor = gdk_cursor_new (GDK_WATCH);
-		gdk_window_set_cursor (GTK_WIDGET (dialog)->window, cursor);
-		gdk_cursor_unref (cursor);
-	}
+	g_return_if_fail (priv->frozen != 0);
 
-	if (!priv->frozen)
-		gtk_widget_set_sensitive (GTK_WIDGET (dialog), FALSE);
-	
-	gst_dialog_freeze (dialog);
-}
+	priv->frozen--;
 
-void
-gst_dialog_thaw_visible (GstDialog *dialog)
-{
-	GstDialogPrivate *priv;
+	if (priv->frozen == 0) {
+		if (GTK_WIDGET (dialog)->window)
+			gdk_window_set_cursor (GTK_WIDGET (dialog)->window, NULL);
 
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (GST_IS_DIALOG (dialog));
-
-	priv = GST_DIALOG_GET_PRIVATE (dialog);
-
-	if (GTK_WIDGET (dialog)->window)
-		gdk_window_set_cursor (GTK_WIDGET (dialog)->window, NULL);
-
-	gst_dialog_thaw (dialog);
-
-	if (!priv->frozen)
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog), TRUE);
+	}
+}
+
+guint
+gst_dialog_get_freeze_level (GstDialog *dialog)
+{
+	GstDialogPrivate *priv;
+
+	g_return_if_fail (GST_IS_DIALOG (dialog));
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	return priv->frozen;
 }
 
 gboolean

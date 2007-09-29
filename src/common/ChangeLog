@@ -1,3 +1,17 @@
+2007-09-29  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-dialog.[ch]: improve freeze/thaw logic, make it so you have to 
+	thaw it as many times as you froze it.
+	* gst-tool.[ch] (gst_tool_add_configuration_object): new function,
+	adds the object to an internal list.
+	(gst_tool_update_async): new function, updates asynchronously all
+	objects in the internal list, freezing the dialog during the
+	operation. This has also changed the gst_tool_update_config() role,
+	now it just updates relevant information inside the tool
+	implementation, it's no longer responsible of updating the 
+	configuration objects itself.
+	(gst_tool_constructor): call gst_tool_update_async().
+
 2007-09-26  Carlos Garnacho  <carlosg@gnome.org>
 
 	* gst-service-role.c: put courier in the right position, spotted by

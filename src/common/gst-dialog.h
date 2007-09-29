@@ -60,9 +60,7 @@ void                gst_dialog_connect_signals_after (GstDialog *xd, GstDialogSi
 
 void                gst_dialog_freeze              (GstDialog *xd);
 void                gst_dialog_thaw                (GstDialog *xd);
-
-void                gst_dialog_freeze_visible      (GstDialog *xd);
-void                gst_dialog_thaw_visible        (GstDialog *xd);
+guint               gst_dialog_get_freeze_level    (GstDialog *dialog);
 
 gboolean            gst_dialog_get_modified        (GstDialog *xd);
 void                gst_dialog_set_modified        (GstDialog *xd, gboolean state);
