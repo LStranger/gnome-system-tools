@@ -50,14 +50,20 @@ gst_shares_tool_init (GstSharesTool *tool)
 {
 	GstTool *gst_tool = GST_TOOL (tool);
 
-	tool->nfs_config = oobs_nfs_config_get (gst_tool->session);
-	tool->smb_config = oobs_smb_config_get (gst_tool->session);
+	tool->nfs_config = oobs_nfs_config_get ();
+	gst_tool_add_configuration_object (gst_tool, tool->nfs_config);
 
-	tool->services_config = oobs_services_config_get (gst_tool->session);
-	tool->hosts_config = oobs_hosts_config_get (gst_tool->session);
-	tool->ifaces_config = oobs_ifaces_config_get (gst_tool->session);
+	tool->smb_config = oobs_smb_config_get ();
+	gst_tool_add_configuration_object (gst_tool, tool->smb_config);
 
-	gst_shares_tool_update_services_availability (tool);
+	tool->services_config = oobs_services_config_get ();
+	gst_tool_add_configuration_object (gst_tool, tool->services_config);
+
+	tool->hosts_config = oobs_hosts_config_get ();
+	gst_tool_add_configuration_object (gst_tool, tool->hosts_config);
+
+	tool->ifaces_config = oobs_ifaces_config_get ();
+	gst_tool_add_configuration_object (gst_tool, tool->ifaces_config);
 }
 
 static void
@@ -165,11 +171,6 @@ gst_shares_tool_update_config (GstTool *tool)
 	GstSharesTool *shares_tool;
 
 	shares_tool = GST_SHARES_TOOL (tool);
-	oobs_object_update (shares_tool->nfs_config);
-	oobs_object_update (shares_tool->smb_config);
-	oobs_object_update (shares_tool->services_config);
-	oobs_object_update (shares_tool->hosts_config);
-	oobs_object_update (shares_tool->ifaces_config);
 	gst_shares_tool_update_services_availability (shares_tool);
 }
 

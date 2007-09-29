@@ -245,11 +245,11 @@ nautilus_shares_init (NautilusShares *shares)
   if (oobs_session_get_connected (shares->session))
     {
       /* FIXME: should monitor connected state */
-      shares->smb_config = oobs_smb_config_get (shares->session);
+      shares->smb_config = oobs_smb_config_get ();
       g_signal_connect (G_OBJECT (shares->smb_config), "changed",
 			G_CALLBACK (on_shares_changed), shares);
 
-      shares->nfs_config = oobs_nfs_config_get (shares->session);
+      shares->nfs_config = oobs_nfs_config_get ();
       g_signal_connect (G_OBJECT (shares->nfs_config), "changed",
 			G_CALLBACK (on_shares_changed), shares);
 
