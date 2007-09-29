@@ -37,7 +37,6 @@ static GObject* gst_network_tool_constructor (GType                  type,
 					      GObjectConstructParam *construct_params);
 
 static void gst_network_tool_update_gui    (GstTool *tool);
-static void gst_network_tool_update_config (GstTool *tool);
 
 
 G_DEFINE_TYPE (GstNetworkTool, gst_network_tool, GST_TYPE_TOOL);
@@ -51,14 +50,16 @@ gst_network_tool_class_init (GstNetworkToolClass *class)
   object_class->constructor = gst_network_tool_constructor;
   object_class->finalize = gst_network_tool_finalize;
   tool_class->update_gui = gst_network_tool_update_gui;
-  tool_class->update_config = gst_network_tool_update_config;
 }
 
 static void
 gst_network_tool_init (GstNetworkTool *tool)
 {
-  tool->hosts_config = OOBS_HOSTS_CONFIG (oobs_hosts_config_get (GST_TOOL (tool)->session));
-  tool->ifaces_config = OOBS_IFACES_CONFIG (oobs_ifaces_config_get (GST_TOOL (tool)->session));
+  tool->hosts_config = OOBS_HOSTS_CONFIG (oobs_hosts_config_get ());
+  gst_tool_add_configuration_object (GST_TOOL (tool), tool->hosts_config);
+  tool->ifaces_config = OOBS_IFACES_CONFIG (oobs_ifaces_config_get ());
+  gst_tool_add_configuration_object (GST_TOOL (tool), tool->ifaces_config);
+
   tool->bus_connection = dbus_bus_get (DBUS_BUS_SYSTEM, NULL);
 }
 
@@ -266,16 +267,6 @@ gst_network_tool_update_gui (GstTool *tool)
 
   gtk_list_store_clear (GTK_LIST_STORE (network_tool->interfaces_model));
   add_all_interfaces (network_tool);
-}
-
-static void
-gst_network_tool_update_config (GstTool *tool)
-{
-  GstNetworkTool *network_tool;
-
-  network_tool = GST_NETWORK_TOOL (tool);
-  oobs_object_update (OOBS_OBJECT (network_tool->hosts_config));
-  oobs_object_update (OOBS_OBJECT (network_tool->ifaces_config));
 }
 
 GstTool*

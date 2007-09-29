@@ -32,8 +32,6 @@ typedef struct _GstNetworkLocationsPrivate GstNetworkLocationsPrivate;
 
 struct _GstNetworkLocationsPrivate
 {
-  OobsSession *session;
-
   gchar *dot_dir;
   guint monitor_timeout;
   time_t last_mtime;
@@ -202,9 +200,8 @@ gst_network_locations_init (GstNetworkLocations *locations)
 
   locations->_priv = priv = GST_NETWORK_LOCATIONS_GET_PRIVATE (locations);
 
-  priv->session = oobs_session_get ();
-  locations->ifaces_config = oobs_ifaces_config_get (priv->session);
-  locations->hosts_config = oobs_hosts_config_get (priv->session);
+  locations->ifaces_config = oobs_ifaces_config_get ();
+  locations->hosts_config = oobs_hosts_config_get ();
 
   priv->dot_dir = create_dot_dir ();
 
