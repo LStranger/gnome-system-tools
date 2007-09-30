@@ -61,6 +61,9 @@ gst_network_tool_init (GstNetworkTool *tool)
   gst_tool_add_configuration_object (GST_TOOL (tool), tool->ifaces_config);
 
   tool->bus_connection = dbus_bus_get (DBUS_BUS_SYSTEM, NULL);
+
+  g_signal_connect_swapped (tool->ifaces_config, "changed",
+			    G_CALLBACK (gst_tool_update_async), tool);
 }
 
 static void
