@@ -46,6 +46,11 @@ enum {
 	PLATFORM_LIST_COL_LAST
 };
 
+enum {
+	OPERATION_COMMIT,
+	OPERATION_UPDATE
+};
+
 static void  gst_tool_class_init   (GstToolClass *class);
 static void  gst_tool_init         (GstTool      *tool);
 static void  gst_tool_finalize     (GObject      *object);
@@ -169,17 +174,27 @@ gst_tool_init (GstTool *tool)
 }
 
 static void
-show_access_denied_dialog (GstTool *tool)
+show_access_denied_dialog (GstTool *tool,
+			   gint     operation)
 {
 	GtkWidget *dialog;
+	const gchar *primary_text, *secondary_text;
 
-	dialog = gtk_message_dialog_new (NULL,
+	if (operation == OPERATION_UPDATE) {
+		primary_text = N_("The configuration could not be loaded");
+		secondary_text = N_("You are not allowed to access the system configuration.");
+	} else {
+		primary_text = N_("The configuration could not be saved");
+		secondary_text = N_("You are not allowed to modify the system configuration.");
+	}
+
+	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 					 GTK_DIALOG_MODAL,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_CLOSE,
-					 _("The configuration could not be loaded"));
+					 _(primary_text));
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _("You are not allowed to access the system configuration."));
+						  _(secondary_text));
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }
@@ -225,7 +240,7 @@ gst_tool_constructor (GType                  type,
 		break;
 	case OOBS_RESULT_ACCESS_DENIED:
 	case OOBS_RESULT_ERROR:
-		show_access_denied_dialog (tool);
+		show_access_denied_dialog (tool, OPERATION_UPDATE);
 		exit (-1);
 		break;
 	default:
@@ -478,6 +493,16 @@ on_commit_finalized (OobsObject *object,
 
 	gst_tool_hide_report_window (user_data->tool);
 
+	switch (result) {
+	case OOBS_RESULT_ACCESS_DENIED:
+		show_access_denied_dialog (user_data->tool, OPERATION_COMMIT);
+		break;
+	case OOBS_RESULT_OK:
+	default:
+		/* FIXME: handle other errors */
+		break;
+	}
+
 	if (user_data->func)
 		(* user_data->func) (object, result, user_data->data);
 
@@ -498,7 +523,9 @@ gst_tool_commit_async (GstTool             *tool,
 	user_data->func = func;
 	user_data->data = data;
 
-	gst_tool_show_report_window (tool, message);
+	if (message)
+		gst_tool_show_report_window (tool, message);
+
 	oobs_object_commit_async (object, on_commit_finalized, user_data);
 }
 
