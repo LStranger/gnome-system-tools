@@ -24,18 +24,15 @@
 #include "gst-widget.h"
 #include "gst-dialog.h"
 
-
 void
 gst_widget_apply_policy (GstWidget *xw)
 {
 	gboolean have_access;
 	GstWidgetMode mode;
-	GstTool *tool;
 
 	g_return_if_fail (xw != NULL);
 
-	tool = gst_dialog_get_tool (xw->dialog);
-	have_access = gst_tool_is_authenticated (tool);
+	have_access = gst_dialog_is_authenticated (xw->dialog);
 	mode = xw->mode;
 
 	if (xw->user < mode)
@@ -83,7 +80,7 @@ gst_widget_new_full (GtkWidget *w, GstDialog *d, GstWidgetMode mode,
 		xw->user = GST_WIDGET_MODE_INSENSITIVE;
 
 	d->gst_widget_list = g_slist_prepend (d->gst_widget_list, xw);
-	
+
 	return xw;
 }
 

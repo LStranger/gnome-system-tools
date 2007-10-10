@@ -79,4 +79,6 @@ void                gst_dialog_apply_widget_policies (GstDialog*);
 void                gst_dialog_set_widget_policies (GstDialog *xd, const GstWidgetPolicy *xwp);
 void                gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup);
 
+gboolean            gst_dialog_is_authenticated      (GstDialog *dialog);
+
 #endif /* GST_DIALOG_H */

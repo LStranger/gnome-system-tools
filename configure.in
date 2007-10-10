@@ -31,6 +31,7 @@ LIBOOBS_REQUIRED=2.21.0
 GTK_REQUIRED=2.11.3
 GCONF_REQUIRED=2.2.0
 DBUS_REQUIRED=0.32
+POLICYKIT_REQUIRED=0.5.0
 
 
 dnl =====================================================
@@ -85,6 +86,17 @@ PKG_CHECK_MODULES(DBUS,[
 DBUS_CFLAGS="$DBUS_CFLAGS -DDBUS_API_SUBJECT_TO_CHANGE"
 AC_SUBST(DBUS_LIBS)
 AC_SUBST(DBUS_CFLAGS)
+
+PKG_CHECK_MODULES(POLKIT, polkit-dbus >= $POLICYKIT_REQUIRED, have_polkit=yes, have_polkit=no)
+
+if test "$have_polkit" = "yes"; then
+  AC_DEFINE(HAVE_POLKIT, [1], [whether PolKit was found])
+fi
+
+AC_SUBST(POLKIT_LIBS)
+AC_SUBST(POLKIT_CFLAGS)
+AM_CONDITIONAL(HAVE_POLKIT, test x$have_polkit = xyes)
+
 
 dnl =====================================================
 dnl END: Check for Module versions
@@ -193,8 +205,8 @@ dnl =====================================================
 dnl GST_DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
 GST_DEPRECATED_FLAGS=""
 
-GST_LIBS="$GST_DEPENDS_LIBS"
-GST_CFLAGS="$GST_DEPENDS_CFLAGS $GST_CRACK_LIB_CFLAGS $GST_DEPRECATED_FLAGS"
+GST_LIBS="$GST_DEPENDS_LIBS $POLKIT_LIBS"
+GST_CFLAGS="$GST_DEPENDS_CFLAGS $POLKIT_CFLAGS $GST_DEPRECATED_FLAGS"
 
 GST_TOOL_LIBS="\$(top_builddir)/src/common/libsetuptool.a $GST_LIBS"
 GST_TOOL_CFLAGS="$GST_CFLAGS -I\$(top_srcdir)/src/common"
@@ -287,6 +299,7 @@ Configuration (GST):
 	Time tool:         ${enable_time}
 	Shares tool:       ${enable_shares}
 	Nautilus support:  ${enable_nautilus}
+	Use PolKit:        ${have_polkit}
 
 	Compiler:          ${CC}
 "

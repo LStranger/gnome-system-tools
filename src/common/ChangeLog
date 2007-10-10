@@ -1,5 +1,20 @@
 2007-10-10  Carlos Garnacho  <carlosg@gnome.org>
 
+	Add optional PolicyKit support.
+
+	* gst-polkit-button.[ch]: Added, implementation of a button that takes
+	care of all the authentication process.
+	* Makefile.am: optionally compile it.
+	* gst-dialog.[ch]: Add a GstPolKitButton if PolicyKit is used.
+	(gst_dialog_is_authenticated): Move here.
+	(gst_dialog_map): No longer needed, the configuration is already
+	updated inconditionally in the GstTool constructor.
+	* gst-tool.[ch] (gst_tool_is_authenticated): removed from here.
+	* gst-widget.c: update callers.
+	* gst-widget.h: make GstWidget struct a bit more compact.
+
+2007-10-10  Carlos Garnacho  <carlosg@gnome.org>
+
 	* gst-tool.c (show_access_denied_dialog) (gst_tool_constructor)
 	(on_commit_finalized) (gst_tool_commit_async): prepare it to show
 	access denied dialog on commit operations too.

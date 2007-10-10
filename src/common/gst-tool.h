@@ -82,7 +82,6 @@ GType        gst_tool_get_type            (void);
 void         gst_init                     (const gchar *app_name,
 					   int argc, char *argv [],
 					   GOptionEntry *entries);
-gboolean     gst_tool_is_authenticated    (GstTool *tool);
 
 void         gst_tool_update_gui          (GstTool *tool);
 void         gst_tool_update_config       (GstTool *tool);

@@ -29,9 +29,9 @@ struct _GstWidget {
 	GtkWidget     *widget;
 	GstDialog     *dialog;
 
-	GstWidgetMode  mode;
-	GstWidgetMode  user;
-	gboolean       need_access;
+	GstWidgetMode  mode : 2;
+	GstWidgetMode  user : 2;
+	guint          need_access : 1;
 };
 
 struct _GstWidgetPolicy {

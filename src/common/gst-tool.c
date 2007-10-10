@@ -344,13 +344,6 @@ gst_tool_close (GstTool *tool)
 		(* GST_TOOL_GET_CLASS (tool)->close) (tool);
 }
 
-gboolean
-gst_tool_is_authenticated (GstTool *tool)
-{
-	/* FIXME */
-	return TRUE;
-}
-
 void
 gst_init_tool (const gchar *app_name, int argc, char *argv [], GOptionEntry *entries)
 {

@@ -9,23 +9,18 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES = \
-	gst-widget.c		\
-	gst-dialog.c		\
-	gst-tool.c		\
-	gst-platform-dialog.c	\
-	gst-conf.c		\
-	gst-filter.c		\
-	gst-service-role.c
-
-headers = \
-	gst-widget.h		\
-	gst-dialog.h		\
-	gst-tool.h		\
-	gst-platform-dialog.h	\
-	gst-conf.h		\
-	gst-filter.h		\
-	gst-service-role.h	\
-	gst-types.h		\
+	gst-widget.c		gst-widget.h \
+	gst-dialog.c		gst-dialog.h \
+	gst-tool.c		gst-tool.h \
+	gst-platform-dialog.c	gst-platform-dialog.h \
+	gst-conf.c		gst-conf.h \
+	gst-filter.c		gst-filter.h \
+	gst-service-role.c	gst-service-role.h \
+	gst-types.h \
 	gst.h
+
+if HAVE_POLKIT
+libsetuptool_a_SOURCES += gst-polkit-button.c gst-polkit-button.h
+endif
 
 EXTRA_DIST = CommonMakefile $(headers)

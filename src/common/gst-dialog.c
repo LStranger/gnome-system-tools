@@ -31,6 +31,10 @@
 #include "gst-dialog.h"
 #include "gst-conf.h"
 
+#ifdef HAVE_POLKIT
+#include "gst-polkit-button.h"
+#endif
+
 #define GST_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_DIALOG, GstDialogPrivate))
 
 typedef struct _GstDialogPrivate GstDialogPrivate;
@@ -43,13 +47,16 @@ struct _GstDialogPrivate {
 
 	GtkBuilder *builder;
 	GtkWidget  *child;
+#ifdef HAVE_POLKIT
+	GtkWidget  *polkit_button;
+#endif
 
 	guint    frozen;
 	guint    modified : 1;
 };
 
 static void gst_dialog_class_init (GstDialogClass *class);
-static void gst_dialog_init       (GstDialog      *group);
+static void gst_dialog_init       (GstDialog      *dialog);
 static void gst_dialog_finalize   (GObject        *object);
 
 static GObject*	gst_dialog_constructor (GType                  type,
@@ -66,7 +73,6 @@ static void gst_dialog_response (GtkDialog *dialog,
 
 static gboolean gst_dialog_delete_event (GtkWidget   *widget,
 					 GdkEventAny *event);
-static void     gst_dialog_map          (GtkWidget   *widget);
 static void     gst_dialog_realize      (GtkWidget   *widget);
 
 static void     gst_dialog_set_cursor   (GstDialog     *dialog,
@@ -94,7 +100,6 @@ gst_dialog_class_init (GstDialogClass *class)
 
 	dialog_class->response     = gst_dialog_response;
 	widget_class->delete_event = gst_dialog_delete_event;
-	widget_class->map          = gst_dialog_map;
 	widget_class->realize      = gst_dialog_realize;
 
 	g_object_class_install_property (object_class,
@@ -123,10 +128,20 @@ gst_dialog_class_init (GstDialogClass *class)
 }
 
 static void
+gst_dialog_set_sensitivity (GstDialog *dialog)
+{
+	GstDialogPrivate *priv;
+	gboolean authenticated;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+	authenticated = gst_dialog_is_authenticated (dialog);
+	gtk_widget_set_sensitive (priv->child, authenticated);
+}
+
+static void
 gst_dialog_init (GstDialog *dialog)
 {
 	GstDialogPrivate *priv;
-	GtkWidget *button;
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
@@ -136,9 +151,19 @@ gst_dialog_init (GstDialog *dialog)
 	priv->child = NULL;
 
 	priv->modified = FALSE;
-	priv->frozen   = FALSE;
 
 	dialog->gst_widget_list = NULL;
+
+#ifdef HAVE_POLKIT
+	priv->polkit_button = gst_polkit_button_new (NULL, _("_Unlock"));
+	gtk_widget_show (priv->polkit_button);
+
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
+				      priv->polkit_button, GTK_RESPONSE_NONE);
+
+	g_signal_connect_swapped (priv->polkit_button, "changed",
+				  G_CALLBACK (gst_dialog_set_sensitivity), dialog);
+#endif
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 				GTK_STOCK_HELP, GTK_RESPONSE_HELP,
@@ -186,8 +211,19 @@ gst_dialog_constructor (GType                  type,
 		gtk_container_remove (GTK_CONTAINER (priv->child->parent), priv->child);
 		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), priv->child);
 
+		gst_dialog_set_sensitivity (dialog);
+
 		gtk_widget_destroy (toplevel);
 	}
+
+#ifdef HAVE_POLKIT
+	if (priv->tool) {
+		const gchar *action;
+
+		action = oobs_session_get_authentication_action (priv->tool->session);
+		gst_polkit_button_set_action (GST_POLKIT_BUTTON (priv->polkit_button), action);
+	}
+#endif
 
 	if (priv->title)
 		gtk_window_set_title (GTK_WINDOW (dialog), priv->title);
@@ -235,7 +271,7 @@ gst_dialog_finalize (GObject *object)
 
 	g_slist_foreach (dialog->gst_widget_list, (GFunc) g_free, NULL);
 	g_slist_free (dialog->gst_widget_list);
-	
+
 	(* G_OBJECT_CLASS (gst_dialog_parent_class)->finalize) (object);
 }
 
@@ -260,18 +296,6 @@ gst_dialog_response (GtkDialog *dialog,
 		gst_tool_show_help (priv->tool, NULL);
 		break;
 	}
-}
-
-static void
-gst_dialog_map (GtkWidget *widget)
-{
-	GstDialog *dialog = GST_DIALOG (widget);
-	GstDialogPrivate *priv;
-
-	(* GTK_WIDGET_CLASS (gst_dialog_parent_class)->map) (widget);
-
-	priv = GST_DIALOG_GET_PRIVATE (dialog);
-	gst_tool_update_async (priv->tool);
 }
 
 static void
@@ -439,7 +463,7 @@ gst_dialog_modify (GstDialog *dialog)
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	if (priv->frozen || !gst_tool_is_authenticated (priv->tool))
+	if (priv->frozen || !gst_dialog_is_authenticated (dialog))
 		return;
 
 	gst_dialog_set_modified (dialog, TRUE);
@@ -460,6 +484,8 @@ gst_dialog_set_widget_policies (GstDialog *dialog, const GstWidgetPolicy *wp)
 	for (i = 0; wp [i].widget; i++) {
 		w = gst_widget_new (dialog, wp [i]);
 	}
+
+	gst_dialog_apply_widget_policies (dialog);
 }
 
 void
@@ -583,4 +609,18 @@ void
 gst_dialog_connect_signals_after (GstDialog *dialog, GstDialogSignal *signals)
 {
 	dialog_connect_signals (dialog, signals, TRUE);
+}
+
+gboolean
+gst_dialog_is_authenticated (GstDialog *dialog)
+{
+#ifdef HAVE_POLKIT
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	return gst_polkit_button_get_authenticated (GST_POLKIT_BUTTON (priv->polkit_button));
+#else
+	return TRUE;
+#endif
 }
