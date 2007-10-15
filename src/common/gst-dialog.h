@@ -39,10 +39,6 @@ struct _GstDialogSignal {
 
 struct _GstDialog {
 	GtkDialog dialog;
-
-	/*<private>*/
-	/* needed by GstWidget */
-	GSList *gst_widget_list;
 };
 
 struct _GstDialogClass {
@@ -68,17 +64,12 @@ void                gst_dialog_modify              (GstDialog *xd);
 void                gst_dialog_modify_cb           (GtkWidget *w, gpointer data);
 
 GtkWidget          *gst_dialog_get_widget          (GstDialog *xd, const char *widget);
-GstWidget          *gst_dialog_get_gst_widget      (GstDialog *xd, const gchar *name);
+void                gst_dialog_try_set_sensitive   (GstDialog *xd, GtkWidget *w, gboolean sensitive);
 
 GstTool            *gst_dialog_get_tool            (GstDialog *xd);
 
-void                gst_dialog_widget_set_user_mode (GstDialog *xs, const gchar *name, GstWidgetMode mode);
-void                gst_dialog_widget_set_user_sensitive (GstDialog *xd, const gchar *name, gboolean state);
-
-void                gst_dialog_apply_widget_policies (GstDialog*);
-void                gst_dialog_set_widget_policies (GstDialog *xd, const GstWidgetPolicy *xwp);
-void                gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup);
-
 gboolean            gst_dialog_is_authenticated      (GstDialog *dialog);
+void                gst_dialog_require_authentication_for_widget  (GstDialog *xd, GtkWidget *w);
+void                gst_dialog_require_authentication_for_widgets (GstDialog *xd, const gchar **names);
 
 #endif /* GST_DIALOG_H */

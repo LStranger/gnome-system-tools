@@ -43,14 +43,26 @@ actions_set_sensitive (gint table, gint count)
 {
 	switch (table) {
 	case TABLE_USERS:
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_new", TRUE);
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_delete", (count > 0));
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", (count == 1));
+		gst_dialog_try_set_sensitive (tool->main_dialog,
+					      gst_dialog_get_widget (tool->main_dialog, "user_new"),
+					      TRUE);
+		gst_dialog_try_set_sensitive (tool->main_dialog,
+					      gst_dialog_get_widget (tool->main_dialog, "user_delete"),
+					      (count > 0));
+		gst_dialog_try_set_sensitive (tool->main_dialog,
+					      gst_dialog_get_widget (tool->main_dialog, "user_settings"),
+					      (count == 1));
 		break;
 	case TABLE_GROUPS:
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_new", TRUE);
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_delete", (count > 0));
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", (count == 1));
+		gst_dialog_try_set_sensitive (tool->main_dialog,
+					      gst_dialog_get_widget (tool->main_dialog, "group_new"),
+					      TRUE);
+		gst_dialog_try_set_sensitive (tool->main_dialog,
+					      gst_dialog_get_widget (tool->main_dialog, "group_delete"),
+					      (count > 0));
+		gst_dialog_try_set_sensitive (tool->main_dialog,
+					      gst_dialog_get_widget (tool->main_dialog, "group_settings"),
+					      (count == 1));
 		break;
 	default:
 		g_assert_not_reached ();

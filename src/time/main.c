@@ -41,6 +41,17 @@
 #include "tz-map.h"
 #include "ntp-servers-list.h"
 
+static const gchar *policy_widgets [] = {
+	"timezone_button",
+	"configuration_options",
+	"timeserver_button",
+	"hours",
+	"minutes",
+	"seconds",
+	"calendar",
+	NULL
+};
+
 ETzMap *tzmap;
 
 static void timezone_button_clicked (GtkWidget *w, gpointer data);
@@ -143,6 +154,7 @@ main (int argc, char *argv[])
 	gst_init_tool ("time-admin", argc, argv, NULL);
 	tool = GST_TOOL (gst_time_tool_new ());
 
+	gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();

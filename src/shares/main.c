@@ -58,6 +58,24 @@ static GstDialogSignal signals [] = {
 	{ NULL }
 };
 
+static const gchar *policy_widgets [] = {
+	"add_share",
+	"delete_share",
+	"smb_workgroup",
+	"smb_is_wins",
+	"smb_wins_server",
+	"share_path",
+	"share_type",
+	"share_smb_name",
+	"share_smb_comment",
+	"share_smb_readonly",
+	"share_nfs_acl",
+	"share_nfs_add",
+	"share_nfs_delete",
+	"share_properties_cancel",
+	NULL
+};
+
 void
 initialize_tables (GstTool *tool)
 {
@@ -98,6 +116,7 @@ main (int argc, char *argv[])
 	tool = GST_TOOL (gst_shares_tool_new ());
 
 	initialize_tables (tool);
+	gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 	initialize_filters ();
 

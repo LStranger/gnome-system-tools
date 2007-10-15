@@ -1,3 +1,12 @@
+2007-10-15  Denis Washington  <denisw@svn.gnome.org>
+
+	* gst-widget.[ch]: Removed.
+	* gst-dialog.[ch]: Replaced the code that simply sets the
+	top-level container insensitive with new function
+	gst_dialog_require_authentication_for_widget[s](), which
+	is used by the tools to mark certain controls as requiring
+	authentication, and remove all references to GstWidget.
+
 2007-10-10  Carlos Garnacho  <carlosg@gnome.org>
 
 	Add optional PolicyKit support.

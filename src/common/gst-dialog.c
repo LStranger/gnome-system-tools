@@ -27,7 +27,6 @@
 #include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
 #include "gst-tool.h"
-#include "gst-widget.h"
 #include "gst-dialog.h"
 #include "gst-conf.h"
 
@@ -49,10 +48,18 @@ struct _GstDialogPrivate {
 	GtkWidget  *child;
 #ifdef HAVE_POLKIT
 	GtkWidget  *polkit_button;
+	GSList     *policy_list;
 #endif
 
 	guint    frozen;
 	guint    modified : 1;
+};
+
+struct _GstWidgetPolicy {
+	GtkWidget *widget;
+
+	gboolean need_access;
+	gboolean was_sensitive;
 };
 
 static void gst_dialog_class_init (GstDialogClass *class);
@@ -77,6 +84,10 @@ static void     gst_dialog_realize      (GtkWidget   *widget);
 
 static void     gst_dialog_set_cursor   (GstDialog     *dialog,
 					 GdkCursorType  cursor_type);
+
+static void             gst_dialog_unlock                (GstDialog *dialog);
+static GstWidgetPolicy *gst_dialog_get_policy_for_widget (GstDialog *dialog,
+							  GtkWidget *widget);
 
 enum {
 	PROP_0,
@@ -128,17 +139,6 @@ gst_dialog_class_init (GstDialogClass *class)
 }
 
 static void
-gst_dialog_set_sensitivity (GstDialog *dialog)
-{
-	GstDialogPrivate *priv;
-	gboolean authenticated;
-
-	priv = GST_DIALOG_GET_PRIVATE (dialog);
-	authenticated = gst_dialog_is_authenticated (dialog);
-	gtk_widget_set_sensitive (priv->child, authenticated);
-}
-
-static void
 gst_dialog_init (GstDialog *dialog)
 {
 	GstDialogPrivate *priv;
@@ -152,7 +152,7 @@ gst_dialog_init (GstDialog *dialog)
 
 	priv->modified = FALSE;
 
-	dialog->gst_widget_list = NULL;
+	priv->policy_list = NULL;
 
 #ifdef HAVE_POLKIT
 	priv->polkit_button = gst_polkit_button_new (NULL, _("_Unlock"));
@@ -162,7 +162,7 @@ gst_dialog_init (GstDialog *dialog)
 				      priv->polkit_button, GTK_RESPONSE_NONE);
 
 	g_signal_connect_swapped (priv->polkit_button, "changed",
-				  G_CALLBACK (gst_dialog_set_sensitivity), dialog);
+				  G_CALLBACK (gst_dialog_unlock), dialog);
 #endif
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
@@ -210,8 +210,6 @@ gst_dialog_constructor (GType                  type,
 		gtk_widget_ref (priv->child);
 		gtk_container_remove (GTK_CONTAINER (priv->child->parent), priv->child);
 		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), priv->child);
-
-		gst_dialog_set_sensitivity (dialog);
 
 		gtk_widget_destroy (toplevel);
 	}
@@ -269,8 +267,8 @@ gst_dialog_finalize (GObject *object)
 	g_free (priv->title);
 	g_free (priv->widget_name);
 
-	g_slist_foreach (dialog->gst_widget_list, (GFunc) g_free, NULL);
-	g_slist_free (dialog->gst_widget_list);
+	g_slist_foreach (priv->policy_list, (GFunc) g_free, NULL);
+	g_slist_free (priv->policy_list);
 
 	(* G_OBJECT_CLASS (gst_dialog_parent_class)->finalize) (object);
 }
@@ -351,17 +349,18 @@ gst_dialog_get_widget (GstDialog *dialog, const char *widget)
 	return w;
 }
 
-void
-gst_dialog_apply_widget_policies (GstDialog *dialog)
+static void
+gst_dialog_unlock (GstDialog *dialog)
 {
 	GstDialogPrivate *priv;
 	GSList *list;
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	/* Hide, show + desensitize or show + sensitize widgets based on access level */
-	for (list = dialog->gst_widget_list; list; list = g_slist_next (list)) {
-		gst_widget_apply_policy (list->data);
+	for (list = priv->policy_list; list; list = g_slist_next (list)) {
+		GstWidgetPolicy *policy;
+		policy = (GstWidgetPolicy *) list->data;
+		gtk_widget_set_sensitive (policy->widget, policy->was_sensitive);
 	}
 }
 
@@ -475,64 +474,6 @@ gst_dialog_modify_cb (GtkWidget *w, gpointer data)
 	gst_dialog_modify (data);
 }
 
-void
-gst_dialog_set_widget_policies (GstDialog *dialog, const GstWidgetPolicy *wp)
-{
-	GstWidget *w;
-	int i;
-
-	for (i = 0; wp [i].widget; i++) {
-		w = gst_widget_new (dialog, wp [i]);
-	}
-
-	gst_dialog_apply_widget_policies (dialog);
-}
-
-void
-gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup)
-{
-	GstWidget *xw;
-	int i;
-
-	for (i = 0; xwup [i].widget; i++)
-	{
-		xw = gst_dialog_get_gst_widget (xd, xwup [i].widget);
-
-		if (!xw)
-			xw = gst_widget_new_full (gst_dialog_get_widget (xd, xwup [i].widget), xd,
-						  GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE);
-
-		gst_widget_set_user_mode (xw, xwup [i].mode);
-	}
-
-	gst_dialog_apply_widget_policies (xd);
-}
-
-GstWidget *
-gst_dialog_get_gst_widget (GstDialog *xd, const gchar *name)
-{
-	GstWidget *xw = NULL;
-	GtkWidget *widget;
-	GSList *list;
-
-	g_return_val_if_fail (xd != NULL, NULL);
-
-	widget = gst_dialog_get_widget (xd, name);
-
-	for (list = xd->gst_widget_list; list; list = g_slist_next (list))
-	{
-		if (((GstWidget *) list->data)->widget == widget)
-		{
-			xw = list->data;
-			break;
-		}
-	}
-
-	if (xw == NULL)
-		g_warning ("Widget %s not found in policy table.", name);
-	return (xw);
-}
-
 GstTool*
 gst_dialog_get_tool (GstDialog *dialog)
 {
@@ -542,30 +483,98 @@ gst_dialog_get_tool (GstDialog *dialog)
 	return priv->tool;
 }
 
-void
-gst_dialog_widget_set_user_mode (GstDialog *xd, const gchar *name, GstWidgetMode mode)
+static GstWidgetPolicy *
+gst_dialog_get_policy_for_widget (GstDialog *dialog, GtkWidget *widget)
 {
-	GstWidget *xw;
+	GstDialogPrivate *priv;
+	GstWidgetPolicy *policy = NULL;
+	GSList *list;
 
-	g_return_if_fail (xd != NULL);
+	g_return_val_if_fail (GST_IS_DIALOG (dialog), NULL);
 
-	xw = gst_dialog_get_gst_widget (xd, name);
-	g_return_if_fail (xw != NULL);
-	
-	gst_widget_set_user_mode (xw, mode);
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	for (list = priv->policy_list; list; list = g_slist_next (list)) {
+		if (((GstWidgetPolicy *) list->data)->widget == widget) {
+			policy = list->data;
+			break;
+		}
+	}
+
+	return policy;
 }
 
 void
-gst_dialog_widget_set_user_sensitive (GstDialog *xd, const gchar *name, gboolean state)
+gst_dialog_require_authenticaion_for_widget (GstDialog *xd, GtkWidget *w)
 {
-	GstWidget *xw;
+#ifdef HAVE_POLKIT
+	GstDialogPrivate *priv;
+	GstWidgetPolicy *p;
+	int i = 0;
 
-	g_return_if_fail (xd != NULL);
-	
-	xw = gst_dialog_get_gst_widget (xd, name);
-	g_return_if_fail (xw != NULL);
+	priv = GST_DIALOG_GET_PRIVATE (xd);
+	p = g_new0 (GstWidgetPolicy, 1);
 
-	gst_widget_set_user_sensitive (xw, state);
+	p->widget = w;
+
+	g_object_get (G_OBJECT (w), "sensitive", &i, NULL);
+	p->was_sensitive = i;
+
+	priv->policy_list = g_slist_prepend (priv->policy_list, p);
+
+	gtk_widget_set_sensitive (w, FALSE);
+#endif
+}
+
+void
+gst_dialog_require_authentication_for_widgets (GstDialog *xd, const gchar **names)
+{
+#ifdef HAVE_POLKIT
+	g_return_if_fail (GST_IS_DIALOG (xd));
+
+	for (; *names != NULL; names++) {
+		GstDialogPrivate *priv;
+		GtkWidget *w;
+
+		priv = GST_DIALOG_GET_PRIVATE (xd);
+		w = gst_dialog_get_widget (xd, *names);
+		g_return_if_fail (w != NULL);
+
+		gst_dialog_require_authenticaion_for_widget (xd, w);
+	}
+#endif
+}
+
+void
+gst_dialog_try_set_sensitive (GstDialog *dialog, GtkWidget *w, gboolean sensitive)
+{
+#ifdef HAVE_POLKIT
+	gboolean real_sensitive;
+
+	g_return_if_fail (GST_IS_DIALOG (dialog));
+
+	if (sensitive) {
+		GstWidgetPolicy *policy;
+
+		policy = gst_dialog_get_policy_for_widget (dialog, w);
+
+		if (policy != NULL) {
+			policy->was_sensitive = TRUE;
+			real_sensitive = gst_dialog_is_authenticated (dialog);
+		}
+		else {
+			real_sensitive = TRUE;
+		}
+			
+	}
+	else {
+		real_sensitive = FALSE;
+	}
+
+	gtk_widget_set_sensitive (w, real_sensitive);
+#else
+	gtk_widget_set_sensitive (w, sensitive);
+#endif
 }
 
 static void

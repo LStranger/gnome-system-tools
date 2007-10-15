@@ -9,7 +9,6 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES = \
-	gst-widget.c		gst-widget.h \
 	gst-dialog.c		gst-dialog.h \
 	gst-tool.c		gst-tool.h \
 	gst-platform-dialog.c	gst-platform-dialog.h \

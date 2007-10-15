@@ -81,6 +81,27 @@ static GstDialogSignal signals_after[] = {
   { NULL }
 };
 
+static const gchar *policy_widgets [] = {
+	"locations_combo",
+	"add_location",
+	"remove_location",
+	"interfaces_list",
+	"properties_button",
+	"hostname",
+	"domain",
+	"dns_list",
+	"dns_list_add",
+	"dns_list_delete",
+	"search_domain_list",
+	"search_domain_add",
+	"search_domain_delete",
+	"host_aliases_list",
+	"host_aliases_add",
+	"host_aliases_properties",
+	"host_aliases_delete",
+	NULL
+};
+
 static void
 init_standalone_dialog (GstTool         *tool,
 			IfaceSearchTerm  search_term,
@@ -165,6 +186,7 @@ main (int argc, gchar *argv[])
   gst_init_tool ("network-admin", argc, argv, entries);
   tool = gst_network_tool_new ();
 
+  gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
   gst_dialog_connect_signals (tool->main_dialog, signals);
   gst_dialog_connect_signals_after (tool->main_dialog, signals_after);
   set_text_buffers_callback ();

@@ -60,19 +60,19 @@ static GstDialogSignal signals[] = {
 	{ "groups_dialog_help",                 "clicked",              G_CALLBACK (on_groups_dialog_show_help) },
 	{ NULL }};
 
-static const GstWidgetPolicy policies[] = {
-	/* Name                     Mode                         Root   User */
-	{ "user_new",               GST_WIDGET_MODE_SENSITIVE,   TRUE,  TRUE  },
-	{ "user_delete",            GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
-	{ "user_settings",          GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
-	{ "groups_table",           GST_WIDGET_MODE_SENSITIVE,   FALSE, TRUE  },
-	{ "group_new",              GST_WIDGET_MODE_SENSITIVE,   TRUE,  TRUE  },
-	{ "group_delete",           GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
-	{ "group_settings",         GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
-	{ "profile_new",            GST_WIDGET_MODE_SENSITIVE,   TRUE,  TRUE  },
-	{ "profile_delete",         GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
-	{ "profile_settings",       GST_WIDGET_MODE_SENSITIVE,   TRUE,  FALSE },
-	{ NULL }
+static const gchar *policy_widgets [] = {
+	"users_table",
+	"user_new",
+	"user_delete",
+	"user_settings",
+	"groups_table",
+	"group_new",
+	"group_delete",
+	"group_settings",
+	"profile_new",
+	"profile_delete",
+	"profile_settings",
+	NULL
 };
 
 static void
@@ -95,7 +95,7 @@ main (int argc, char *argv[])
 	gst_init_tool ("users-admin", argc, argv, NULL);
 	tool = GST_TOOL (gst_users_tool_new ());
 
-	gst_dialog_set_widget_policies (tool->main_dialog, policies);
+	gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 	main_window_prepare (GST_USERS_TOOL (tool));
 

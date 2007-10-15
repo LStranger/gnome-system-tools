@@ -42,16 +42,16 @@ extern GstTool *tool;
 void
 on_shares_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
-	GtkWidget *settings_button, *delete_button;
+	GtkWidget *edit_share, *delete_share;
 	gboolean   active;
 
-	settings_button = gst_dialog_get_widget (tool->main_dialog, "edit_share");
-	delete_button   = gst_dialog_get_widget (tool->main_dialog, "delete_share");
+	edit_share = gst_dialog_get_widget (tool->main_dialog, "edit_share");
+	delete_share = gst_dialog_get_widget (tool->main_dialog, "delete_share");
 
 	active = (gtk_tree_selection_count_selected_rows (selection) > 0);
 
-	gtk_widget_set_sensitive (settings_button, active);
-	gtk_widget_set_sensitive (delete_button, active);
+	gst_dialog_try_set_sensitive (tool->main_dialog, edit_share, active);
+	gst_dialog_try_set_sensitive (tool->main_dialog, delete_share, active);
 }
 
 static void
