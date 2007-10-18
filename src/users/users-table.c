@@ -44,13 +44,17 @@ add_user_columns (GtkTreeView *treeview)
 	gtk_tree_view_column_set_title (column, _("Name"));
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column, renderer,
-					     "pixbuf", COL_USER_FACE, NULL);
+					     "pixbuf", COL_USER_FACE,
+					     "sensitive", COL_USER_SENSITIVE,
+					     NULL);
 
 	/* User full name */
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes (column, renderer,
-					     "text", COL_USER_NAME, NULL);
+					     "text", COL_USER_NAME,
+					     "sensitive", COL_USER_SENSITIVE,
+					      NULL);
 
 	gtk_tree_view_column_set_resizable (column, TRUE);
 	gtk_tree_view_column_set_sort_column_id (column, 0);
@@ -62,14 +66,18 @@ add_user_columns (GtkTreeView *treeview)
 	renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("Login name"),
 							   renderer,
-							   "text", COL_USER_LOGIN, NULL);
+							   "text", COL_USER_LOGIN,
+							   "sensitive", COL_USER_SENSITIVE,
+							    NULL);
 	gtk_tree_view_insert_column (treeview, column, -1);
 
 	/* Home directory */
 	renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("Home directory"),
 							   renderer,
-							   "text", COL_USER_HOME, NULL);
+							   "text", COL_USER_HOME,
+							   "sensitive", COL_USER_SENSITIVE,
+							   NULL);
 	gtk_tree_view_insert_column (treeview, column, -1);
 }
 
@@ -102,7 +110,8 @@ create_users_model (GstUsersTool *tool)
 				    G_TYPE_INT,
 				    G_TYPE_BOOLEAN,
 				    G_TYPE_OBJECT,
-				    OOBS_TYPE_LIST_ITER);
+				    OOBS_TYPE_LIST_ITER,
+				    G_TYPE_BOOLEAN);
 	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
 
 	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model),
@@ -178,6 +187,7 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 			    COL_USER_ID, oobs_user_get_uid (user),
 			    COL_USER_OBJECT, user,
 			    COL_USER_ITER, list_iter,
+			    COL_USER_SENSITIVE, gst_dialog_is_authenticated (tool->main_dialog) || oobs_user_get_active (user),
 			    -1);
 	if (face)
 		g_object_unref (face);

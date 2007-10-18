@@ -35,6 +35,7 @@ enum {
 	COL_USER_MEMBER, /* used in group members dialog */
 	COL_USER_OBJECT,
 	COL_USER_ITER,
+	COL_USER_SENSITIVE,
 	COL_USER_LAST
 };
 

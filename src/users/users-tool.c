@@ -21,6 +21,7 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include "callbacks.h"
 #include "user-profiles.h"
 #include "users-tool.h"
 #include "gst.h"
@@ -102,6 +103,9 @@ gst_users_tool_constructor (GType                  type,
 
 	gst_conf_add_notify (GST_TOOL (tool), "showall",
 			     on_showall_changed, tool);
+
+	g_signal_connect (G_OBJECT (tool->main_dialog), "unlocked",
+			  G_CALLBACK (on_unlocked), NULL);
 
 	return object;
 }

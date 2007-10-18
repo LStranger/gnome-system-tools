@@ -1,3 +1,12 @@
+2007-10-18  Denis Washington  <denisw@svn.gnome.org>
+
+	* callbacks.[ch]:
+	* main.c:
+	* users-table.c:
+	* users-tool.c: Allow an unauthenticated user to change some of his
+	own properties, e.g. the password. All other users are shown insensitive
+	and cannot be edited (frontend-wise; restrictions in s-t-b will follow).
+
 2007-10-15  Denis Washington  <denisw@svn.gnome.org>
 
 	* main.c: Use gst_dialog_require_authentication_for_widgets() to

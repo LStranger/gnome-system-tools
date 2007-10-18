@@ -61,10 +61,8 @@ static GstDialogSignal signals[] = {
 	{ NULL }};
 
 static const gchar *policy_widgets [] = {
-	"users_table",
 	"user_new",
 	"user_delete",
-	"user_settings",
 	"groups_table",
 	"group_new",
 	"group_delete",
@@ -72,6 +70,16 @@ static const gchar *policy_widgets [] = {
 	"profile_new",
 	"profile_delete",
 	"profile_settings",
+	"user_settings_name",
+	"user_settings_profile_menu",
+	"user_privileges",
+	"user_settings_home",
+	"user_settings_shell",
+	"user_settings_uid",
+	"user_passwd_max",
+	"user_passwd_min",
+	"user_passwd_days",
+	"user_settings_group",
 	NULL
 };
 

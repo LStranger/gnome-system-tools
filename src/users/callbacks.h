@@ -29,6 +29,7 @@
 #include "gst.h"
 
 /* Main dialog general callbacks */
+void      on_unlocked (GstDialog*);
 void      on_table_clicked (GtkTreeSelection*, gpointer);
 gboolean  on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
 gboolean  on_table_popup_menu   (GtkTreeView*, GtkWidget*);

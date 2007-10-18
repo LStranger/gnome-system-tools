@@ -96,6 +96,13 @@ enum {
 	PROP_TITLE
 };
 
+enum {
+	UNLOCKED,
+	LAST_SIGNAL
+};
+
+static guint signals [LAST_SIGNAL] = { 0 };
+
 G_DEFINE_TYPE (GstDialog, gst_dialog, GTK_TYPE_DIALOG);
 
 static void
@@ -134,6 +141,16 @@ gst_dialog_class_init (GstDialogClass *class)
 							      "title",
 							      NULL,
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+
+	signals [UNLOCKED] =
+		g_signal_new ("unlocked",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GstDialogClass, unlocked),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+
 	g_type_class_add_private (object_class,
 				  sizeof (GstDialogPrivate));
 }
@@ -362,6 +379,8 @@ gst_dialog_unlock (GstDialog *dialog)
 		policy = (GstWidgetPolicy *) list->data;
 		gtk_widget_set_sensitive (policy->widget, policy->was_sensitive);
 	}
+
+	g_signal_emit (dialog, signals [UNLOCKED], 0);
 }
 
 static void
