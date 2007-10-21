@@ -1,7 +1,15 @@
+2007-10-21  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-dialog.c: do not surround widget policies code with ifdef
+	HAVE_POLKIT, less ifdefs is less clutter, and the essential code was
+	already protected. (Also fixes #488650, noticed by Claudio Saavedra,
+	thanks!)
+	(gst_dialog_require_authentication_for_widget): fix typo in function
+	name. check gst_dialog_is_authenticated() to set widget sensitivity.
+
 2007-10-17  Denis Washington  <denisw@svn.gnome.org>
 
 	* gst-dialog.[ch]: Added "unlocked" signal.
-
 
 2007-10-15  Denis Washington  <denisw@svn.gnome.org>
 

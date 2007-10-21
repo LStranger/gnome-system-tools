@@ -48,8 +48,8 @@ struct _GstDialogPrivate {
 	GtkWidget  *child;
 #ifdef HAVE_POLKIT
 	GtkWidget  *polkit_button;
-	GSList     *policy_list;
 #endif
+	GSList     *policy_list;
 
 	guint    frozen;
 	guint    modified : 1;
@@ -524,31 +524,25 @@ gst_dialog_get_policy_for_widget (GstDialog *dialog, GtkWidget *widget)
 }
 
 void
-gst_dialog_require_authenticaion_for_widget (GstDialog *xd, GtkWidget *w)
+gst_dialog_require_authentication_for_widget (GstDialog *xd, GtkWidget *w)
 {
-#ifdef HAVE_POLKIT
 	GstDialogPrivate *priv;
 	GstWidgetPolicy *p;
-	int i = 0;
 
 	priv = GST_DIALOG_GET_PRIVATE (xd);
 	p = g_new0 (GstWidgetPolicy, 1);
 
 	p->widget = w;
-
-	g_object_get (G_OBJECT (w), "sensitive", &i, NULL);
-	p->was_sensitive = i;
+	p->was_sensitive = GTK_WIDGET_SENSITIVE (w);
 
 	priv->policy_list = g_slist_prepend (priv->policy_list, p);
 
-	gtk_widget_set_sensitive (w, FALSE);
-#endif
+	gtk_widget_set_sensitive (w, gst_dialog_is_authenticated (xd));
 }
 
 void
 gst_dialog_require_authentication_for_widgets (GstDialog *xd, const gchar **names)
 {
-#ifdef HAVE_POLKIT
 	g_return_if_fail (GST_IS_DIALOG (xd));
 
 	for (; *names != NULL; names++) {
@@ -559,17 +553,13 @@ gst_dialog_require_authentication_for_widgets (GstDialog *xd, const gchar **name
 		w = gst_dialog_get_widget (xd, *names);
 		g_return_if_fail (w != NULL);
 
-		gst_dialog_require_authenticaion_for_widget (xd, w);
+		gst_dialog_require_authentication_for_widget (xd, w);
 	}
-#endif
 }
 
 void
 gst_dialog_try_set_sensitive (GstDialog *dialog, GtkWidget *w, gboolean sensitive)
 {
-#ifdef HAVE_POLKIT
-	gboolean real_sensitive;
-
 	g_return_if_fail (GST_IS_DIALOG (dialog));
 
 	if (sensitive) {
@@ -577,23 +567,13 @@ gst_dialog_try_set_sensitive (GstDialog *dialog, GtkWidget *w, gboolean sensitiv
 
 		policy = gst_dialog_get_policy_for_widget (dialog, w);
 
-		if (policy != NULL) {
+		if (policy) {
 			policy->was_sensitive = TRUE;
-			real_sensitive = gst_dialog_is_authenticated (dialog);
+			sensitive = gst_dialog_is_authenticated (dialog);
 		}
-		else {
-			real_sensitive = TRUE;
-		}
-			
-	}
-	else {
-		real_sensitive = FALSE;
 	}
 
-	gtk_widget_set_sensitive (w, real_sensitive);
-#else
 	gtk_widget_set_sensitive (w, sensitive);
-#endif
 }
 
 static void
