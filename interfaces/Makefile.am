@@ -8,4 +8,4 @@ interfaces = \
 
 interfaces_DATA = $(interfaces)
 
-#EXTRA_DIST = 
+EXTRA_DIST = $(interfaces)
