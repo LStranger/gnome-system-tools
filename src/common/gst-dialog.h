@@ -22,7 +22,8 @@
 #ifndef GST_DIALOG_H
 #define GST_DIALOG_H
 
-#include "gst-types.h"
+G_BEGIN_DECLS
+
 #include "gst-tool.h"
 
 #define GST_TYPE_DIALOG        (gst_dialog_get_type ())
@@ -31,10 +32,14 @@
 #define GST_IS_DIALOG(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), GST_TYPE_DIALOG))
 #define GST_IS_DIALOG_CLASS(c) (G_TYPE_CHECK_CLASS_TYPE ((c), GST_TYPE_DIALOG))
 
+typedef struct _GstDialog       GstDialog;
+typedef struct _GstDialogClass  GstDialogClass;
+typedef struct _GstDialogSignal GstDialogSignal;
+
 struct _GstDialogSignal {
-	const char    *widget;
-	const char    *signal_name;
-	GCallback  func;
+	const char *widget;
+	const char *signal_name;
+	GCallback   func;
 };
 
 struct _GstDialog {
@@ -70,8 +75,10 @@ void                gst_dialog_try_set_sensitive   (GstDialog *xd, GtkWidget *w,
 
 GstTool            *gst_dialog_get_tool            (GstDialog *xd);
 
-gboolean            gst_dialog_is_authenticated      (GstDialog *dialog);
+gboolean            gst_dialog_is_authenticated    (GstDialog *dialog);
 void                gst_dialog_require_authentication_for_widget  (GstDialog *xd, GtkWidget *w);
 void                gst_dialog_require_authentication_for_widgets (GstDialog *xd, const gchar **names);
+
+G_END_DECLS
 
 #endif /* GST_DIALOG_H */

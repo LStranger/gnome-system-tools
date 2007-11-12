@@ -1,5 +1,18 @@
 2007-11-12  Carlos Garnacho  <carlosg@gnome.org>
 
+	Made a couple of improvements to widget policies handling.
+
+	* gst-dialog.c: reduce GstWidgetPolicy size to sizeof(gushort). Attach
+	it through g_object_set_qdata(), so it doesn't have to run through the
+	whole list to find a widget.
+	* gst-types.h: get rid of it, it has now little use.
+	* gst-dialog.h, gst-tool.h: move the things defined there to these
+	files.
+	* Makefile.am: remove gst-types.h
+	* gst.h: remove gst-types.h include
+
+2007-11-12  Carlos Garnacho  <carlosg@gnome.org>
+
 	* gst-polkit-action.[ch]: Added, keeps track of a PolicyKit action and
 	the corresponding permissions management.
 	* gst-polkit-button.[ch]: Use GstPolKitAction underneath.

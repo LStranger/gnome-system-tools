@@ -15,7 +15,6 @@ libsetuptool_a_SOURCES = \
 	gst-conf.c		gst-conf.h \
 	gst-filter.c		gst-filter.h \
 	gst-service-role.c	gst-service-role.h \
-	gst-types.h \
 	gst.h
 
 if HAVE_POLKIT

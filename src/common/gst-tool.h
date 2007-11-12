@@ -23,12 +23,17 @@
 #ifndef __GST_TOOL_H
 #define __GST_TOOL_H
 
+#include <gtk/gtk.h>
+
 G_BEGIN_DECLS
 
-#include <gtk/gtk.h>
 #include <oobs/oobs.h>
 #include <gconf/gconf-client.h>
-#include "gst-types.h"
+
+typedef struct _GstTool      GstTool;
+typedef struct _GstToolClass GstToolClass;
+
+#include "gst-dialog.h"
 
 #define GST_TYPE_TOOL         (gst_tool_get_type ())
 #define GST_TOOL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o),  GST_TYPE_TOOL, GstTool))
@@ -36,9 +41,6 @@ G_BEGIN_DECLS
 #define GST_IS_TOOL(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o),  GST_TYPE_TOOL))
 #define GST_IS_TOOL_CLASS(c)  (G_TYPE_CHECK_CLASS_TYPE ((c),     GST_TYPE_TOOL))
 #define GST_TOOL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o),   GST_TYPE_TOOL, GstToolClass))
-
-typedef struct _GstTool      GstTool;
-typedef struct _GstToolClass GstToolClass;
 
 struct _GstTool {
 	GObject object;

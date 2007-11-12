@@ -26,6 +26,8 @@
 #ifndef _E_TZ_MAP_H
 #define _E_TZ_MAP_H
 
+#include "gst-tool.h"
+
 #define TZ_MAP_POINT_NORMAL_RGBA 0xc070a0ff
 #define TZ_MAP_POINT_HOVER_RGBA 0xffff60ff
 #define TZ_MAP_POINT_SELECTED_1_RGBA 0xff60e0ff
