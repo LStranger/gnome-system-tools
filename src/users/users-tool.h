@@ -45,6 +45,7 @@ struct _GstUsersTool {
 
 	OobsObject *users_config;
 	OobsObject *groups_config;
+	OobsObject *self_config;
 	gint minimum_uid;
 	gint maximum_uid;
 	gint minimum_gid;

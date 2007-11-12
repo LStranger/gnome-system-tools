@@ -83,6 +83,9 @@ gst_users_tool_init (GstUsersTool *tool)
 	tool->groups_config = oobs_groups_config_get ();
 	gst_tool_add_configuration_object (GST_TOOL (tool), tool->groups_config);
 
+	tool->self_config = oobs_self_config_get ();
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->self_config);
+
 	tool->profiles = gst_user_profiles_get ();
 }
 
