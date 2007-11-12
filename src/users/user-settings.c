@@ -164,9 +164,10 @@ set_main_group (OobsUser *user)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	OobsGroup *main_group, *group;
-	gboolean valid;
+	gboolean valid, found;
 
 	main_group = oobs_user_get_main_group (user);
+	found = FALSE;
 
 	if (!main_group)
 		main_group = oobs_users_config_get_default_group (OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config));
@@ -175,19 +176,22 @@ set_main_group (OobsUser *user)
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 
-	while (valid) {
+	while (valid && !found) {
 		gtk_tree_model_get (model, &iter,
 				    COL_GROUP_OBJECT, &group,
 				    -1);
 
 		if (main_group == group) {
 			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
-			break;
+			found = TRUE;
 		}
 
 		g_object_unref (group);
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
+
+	if (!found)
+		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), -1);
 }
 
 static OobsGroup*

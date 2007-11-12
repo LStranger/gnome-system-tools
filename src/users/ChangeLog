@@ -1,5 +1,10 @@
 2007-11-12  Carlos Garnacho  <carlosg@gnome.org>
 
+	* user-settings.c (set_main_group): make sure that the combobox
+	selection is resetted if the user has no main group.
+
+2007-11-12  Carlos Garnacho  <carlosg@gnome.org>
+
 	* callbacks.c (on_user_settings_clicked): use OobsSelfConfig if the
 	tool is not authenticated and the edited user is the requester one.
 	* users-tool.[ch]: add OobsSelfConfig.
