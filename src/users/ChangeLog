@@ -1,5 +1,10 @@
 2007-11-12  Carlos Garnacho  <carlosg@gnome.org>
 
+	* privileges-table.c: use a GtkTreeModelFilter so groups with no
+	description are not shown, but taken into account anyway.
+
+2007-11-12  Carlos Garnacho  <carlosg@gnome.org>
+
 	* user-settings.c (set_main_group): make sure that the combobox
 	selection is resetted if the user has no main group.
 
