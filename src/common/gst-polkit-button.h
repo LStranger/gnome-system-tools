@@ -40,7 +40,7 @@ struct GstPolKitButton {
 struct GstPolKitButtonClass {
 	GtkButtonClass parent_class;
 
-	void (* changed) (GstPolKitButtonClass *button);
+	void (* changed) (GstPolKitButton *button);
 };
 
 GType                  gst_polkit_button_get_type   (void) G_GNUC_CONST;
