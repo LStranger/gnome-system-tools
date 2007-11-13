@@ -149,12 +149,6 @@ group_settings_find_new_gid (void)
 	return new_gid;
 }
 
-static void
-set_entry_text (GtkWidget *entry, const gchar *text)
-{
-	gtk_entry_set_text (GTK_ENTRY (entry), (text) ? text : "");
-}
-
 GtkWidget*
 group_settings_dialog_new (OobsGroup *group)
 {
@@ -184,7 +178,8 @@ group_settings_dialog_new (OobsGroup *group)
 	}
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
-	set_entry_text (widget, name);
+	gtk_entry_set_text (GTK_ENTRY (widget), (name) ? name : "");
+	gtk_widget_set_sensitive (widget, (name == NULL));
 
 	group_members_table_set_from_group (group);
 
@@ -333,9 +328,6 @@ void
 group_settings_dialog_get_data (OobsGroup *group)
 {
 	GtkWidget *widget;
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
-	oobs_group_set_name (group, gtk_entry_get_text (GTK_ENTRY (widget)));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
 	oobs_group_set_gid (group, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));

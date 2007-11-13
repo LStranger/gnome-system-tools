@@ -349,6 +349,7 @@ user_settings_dialog_new (OobsUser *user)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
 	set_entry_text (widget, login);
 	set_login_length (widget);
+	gtk_widget_set_sensitive (widget, (login == NULL));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
 	set_entry_text (widget, oobs_user_get_full_name (user));
@@ -626,9 +627,6 @@ user_settings_dialog_get_data (OobsUser *user)
 	OobsGroup *group;
 	gchar *str;
 	gboolean password_changed;
-	
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
-	oobs_user_set_login_name (user, gtk_entry_get_text (GTK_ENTRY (widget)));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
 	oobs_user_set_full_name (user, gtk_entry_get_text (GTK_ENTRY (widget)));
