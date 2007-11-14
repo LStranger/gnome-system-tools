@@ -25,7 +25,10 @@
 
 #include <config.h>
 #include "gst.h"
+
+#ifdef HAVE_POLKIT
 #include "gst-polkit-action.h"
+#endif
 
 #include "passwd.h"
 #include "callbacks.h"
@@ -328,12 +331,14 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 
 			/* change self, only if it is the modified user */
 			if (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object))) {
+#ifdef HAVE_POLKIT
 				GstPolKitAction *action;
 				action = gst_polkit_action_new (oobs_object_get_authentication_action (object),
 								GTK_WIDGET (tool->main_dialog));
 
 				if (gst_polkit_action_authenticate (action))
 					oobs_object_commit (GST_USERS_TOOL (tool)->self_config);
+#endif
 			}
 		}
 	}
