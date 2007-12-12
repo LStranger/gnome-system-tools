@@ -1,3 +1,13 @@
+2007-12-12  Carlos Garnacho  <carlosg@gnome.org>
+
+	* network-tool.[ch]: keep a pointer to the hosts edition dialog.
+	* hosts.[ch] (host_aliases_run_dialog): pass a GstNetworkTool. Set
+	editing mode when the dialog is running.
+	* callbacks.c (on_iface_properties_clicked) (on_connection_response):
+	Set editing mode when the iface configuration dialog is running.
+	(on_table_popup_menu) (on_host_aliases_properties_clicked): update
+	host_aliases_run_dialog() callers.
+
 2007-11-25  Carlos Garnacho  <carlosg@gnome.org>
 
 	* connection.[ch] (connection_dialog_update): Added, updates combo

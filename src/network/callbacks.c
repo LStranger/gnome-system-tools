@@ -59,6 +59,8 @@ on_iface_properties_clicked (GtkWidget *widget, gpointer data)
       dialog = GST_NETWORK_TOOL (tool)->dialog;
       connection_dialog_prepare (dialog, iface);
       gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), GTK_WINDOW (tool->main_dialog));
+
+      gst_dialog_add_edit_dialog (tool->main_dialog, dialog->dialog);
       gtk_widget_show (dialog->dialog);
     }
 }
@@ -198,6 +200,7 @@ on_connection_response (GtkWidget *widget,
 			gint       response,
 			gpointer   data)
 {
+  GstConnectionDialog *connection_dialog;
   GstDialog *dialog = GST_DIALOG (data);
   GstTool *tool = gst_dialog_get_tool (dialog);
 
@@ -205,6 +208,9 @@ on_connection_response (GtkWidget *widget,
     accept_connection_dialog (tool);
   else
     cancel_connection_dialog (tool);
+
+  connection_dialog = GST_NETWORK_TOOL (tool)->dialog;
+  gst_dialog_remove_edit_dialog (tool->main_dialog, connection_dialog->dialog);
 }
 
 void
@@ -332,7 +338,7 @@ on_table_popup_menu (GtkWidget *widget, gpointer data)
 void
 on_host_aliases_add_clicked (GtkWidget *widget, gpointer data)
 {
-  host_aliases_run_dialog (NULL);
+  host_aliases_run_dialog (GST_NETWORK_TOOL (tool), NULL);
 }
 
 void
@@ -347,7 +353,7 @@ on_host_aliases_properties_clicked (GtkWidget *widget, gpointer data)
   selection = gtk_tree_view_get_selection (list);
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    host_aliases_run_dialog (&iter);
+    host_aliases_run_dialog (GST_NETWORK_TOOL (tool), &iter);
 }
 
 void

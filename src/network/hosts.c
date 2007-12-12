@@ -346,11 +346,13 @@ host_aliases_dialog_save (GtkTreeIter *iter)
 }
 
 void
-host_aliases_run_dialog (GtkTreeIter *iter)
+host_aliases_run_dialog (GstNetworkTool *network_tool,
+			 GtkTreeIter    *iter)
 {
+  GstTool *tool;
+  GtkWidget *dialog;
   GtkTreeView *list;
   GtkTreeModel *model;
-  GtkWidget *dialog;
   gint response;
   OobsStaticHost *host = NULL;
 
@@ -364,12 +366,17 @@ host_aliases_run_dialog (GtkTreeIter *iter)
 			  -1);
     }
 
-  dialog = gst_dialog_get_widget (tool->main_dialog, "host_aliases_edit_dialog");
+  tool = GST_TOOL (network_tool);
+  dialog = network_tool->host_aliases_dialog;
   host_aliases_dialog_prepare (host);
 
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
+  gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (GST_TOOL (tool)->main_dialog));
   response = gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_hide (dialog);
+
+  gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
 
   if (response == GTK_RESPONSE_OK)
     host_aliases_dialog_save (iter);

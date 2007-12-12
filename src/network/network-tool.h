@@ -64,6 +64,7 @@ struct _GstNetworkTool
   GtkEntry *domain;
 
   GstConnectionDialog *dialog;
+  GtkWidget *host_aliases_dialog;
 };
 
 struct _GstNetworkToolClass
