@@ -33,7 +33,11 @@ enum {
 };
 
 void          share_settings_set_name_from_folder (const gchar*);
-void          share_settings_dialog_run        (const gchar*, gboolean);
+void          share_settings_dialog_run           (const gchar*,
+						   gboolean);
+void          share_settings_dialog_run_for_iter  (const gchar*,
+						   GtkTreeIter*,
+						   gboolean);
 void          share_settings_create_combo      (void);
 gboolean      share_settings_validate          (void);
 

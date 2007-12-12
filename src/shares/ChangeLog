@@ -1,5 +1,16 @@
 2007-12-12  Carlos Garnacho  <carlosg@gnome.org>
 
+	Do not mistake shares when there are two shares of different type for
+	the same path. (#356547, patch by John Finlay <finlay@moeraki.com>)
+
+	* share-settings.[ch] (share_settings_dialog_run_for_iter): new
+	function, runs the share settings dialog for one specific iter in the
+	shares table.
+	* callbacks.c (on_edit_share_clicked): call it here for the selected
+	iter.
+
+2007-12-12  Carlos Garnacho  <carlosg@gnome.org>
+
         * callbacks.c (on_delete_share_clicked) (on_share_nfs_add_clicked):
         * share-settings.c (share_settings_dialog_run): Turn editing
 	mode on when any dialog is running.

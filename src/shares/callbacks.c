@@ -167,7 +167,7 @@ on_edit_share_clicked (GtkWidget *widget, gpointer data)
 
 	gtk_tree_model_get (model, &iter, COL_PATH, &path, -1);
 
-	share_settings_dialog_run (path, FALSE);
+	share_settings_dialog_run_for_iter (path, &iter, FALSE);
 	g_free (path);
 }
 

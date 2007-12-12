@@ -430,12 +430,24 @@ delete_share (GtkTreeIter *iter, OobsShare *share, OobsListIter *list_iter)
 void
 share_settings_dialog_run (const gchar *path, gboolean standalone)
 {
+	GtkTreeIter   iter;
+
+	/* check whether the path already exists */
+	if (table_get_iter_with_path (path, &iter))
+		share_settings_dialog_run_for_iter (path, &iter, standalone);
+	else
+		share_settings_dialog_run_for_iter (path, NULL, standalone);
+}
+
+void
+share_settings_dialog_run_for_iter (const gchar *path,
+				    GtkTreeIter *iter,
+				    gboolean standalone)
+{
 	GtkWidget    *dialog;
 	gint          response;
 	OobsShare    *new_share, *share;
 	OobsListIter *list_iter;
-	GtkTreeIter   iter;
-	gboolean      path_exists;
 	gchar        *title;
 	GtkWidget    *name_entry, *file_chooser;
 
@@ -443,11 +455,8 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 	list_iter = NULL;
 	dialog = share_settings_prepare_dialog (path, standalone);
 
-	/* check whether the path already exists */
-	path_exists = table_get_iter_with_path (path, &iter);
-
-	if (path_exists) {
-		share = table_get_share_at_iter (&iter, &list_iter);
+	if (iter) {
+		share = table_get_share_at_iter (iter, &list_iter);
 		share_settings_set_share (share);
 
 		title = g_strdup_printf ("Settings for folder '%s'",
@@ -482,13 +491,13 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 		if (new_share) {
 			/* FIXME: check type, and move
 			 * share between lists if necessary */
-			if (path_exists)
-				modify_share (new_share, share, list_iter, &iter);
+			if (iter)
+				modify_share (new_share, share, list_iter, iter);
 			else
 				add_new_share (new_share);
 		} else {
-			if (path_exists)
-				delete_share (&iter, share, list_iter);
+			if (iter)
+				delete_share (iter, share, list_iter);
 		}
 	}
 
