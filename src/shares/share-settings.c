@@ -468,9 +468,13 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 		share_settings_set_name_from_folder (path);
 	}
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_hide (dialog);
+
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
 
 	if (response == GTK_RESPONSE_OK) {
 		new_share = share_settings_get_share ();

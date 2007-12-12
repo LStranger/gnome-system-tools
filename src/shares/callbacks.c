@@ -201,8 +201,12 @@ on_delete_share_clicked (GtkWidget *widget, gpointer data)
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				NULL);
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
+
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
 
 	if (response == GTK_RESPONSE_ACCEPT) {
 		gtk_tree_model_get (model, &iter,
@@ -286,9 +290,13 @@ on_share_nfs_add_clicked (GtkWidget *widget, gpointer data)
 
 	dialog = share_nfs_add_hosts_dialog_prepare ();
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_hide (dialog);
+
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
 
 	if (response == GTK_RESPONSE_OK) {
 		if (!share_nfs_add_hosts_dialog_get_data (&host, &read_only))
