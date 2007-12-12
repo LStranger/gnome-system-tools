@@ -492,17 +492,11 @@ connection_dialog_init (GstTool *tool)
   gcd->address = gst_dialog_get_widget (tool->main_dialog, "connection_address");
   gcd->netmask = gst_dialog_get_widget (tool->main_dialog, "connection_netmask");
   gcd->gateway = gst_dialog_get_widget (tool->main_dialog, "connection_gateway");
-  populate_combo (GTK_COMBO_BOX (gcd->bootproto_combo),
-		  oobs_ifaces_config_get_available_configuration_methods (GST_NETWORK_TOOL (tool)->ifaces_config),
-		  method_descriptions, G_N_ELEMENTS (method_descriptions));
 
   /* wireless */
   gcd->essid   = gst_dialog_get_widget (tool->main_dialog, "connection_essid");
   gcd->wep_key = gst_dialog_get_widget (tool->main_dialog, "connection_wep_key");
   gcd->key_type_combo = gst_dialog_get_widget (tool->main_dialog, "connection_wep_key_type");
-  populate_combo (GTK_COMBO_BOX (gcd->key_type_combo),
-		  oobs_ifaces_config_get_available_key_types (GST_NETWORK_TOOL (tool)->ifaces_config),
-		  key_type_descriptions, G_N_ELEMENTS (key_type_descriptions));
 
   /* plip */
   gcd->local_address  = gst_dialog_get_widget (tool->main_dialog, "connection_local_address");
@@ -744,6 +738,18 @@ connection_dialog_set_sensitive (GstConnectionDialog *dialog, gboolean active)
   gtk_widget_set_sensitive (dialog->options_page,   active);
   gtk_widget_set_sensitive (dialog->isp_frame,      active);
   gtk_widget_set_sensitive (dialog->account_frame,  active);
+}
+
+void
+connection_dialog_update (GstConnectionDialog *gcd)
+{
+  populate_combo (GTK_COMBO_BOX (gcd->bootproto_combo),
+		  oobs_ifaces_config_get_available_configuration_methods (GST_NETWORK_TOOL (tool)->ifaces_config),
+		  method_descriptions, G_N_ELEMENTS (method_descriptions));
+
+  populate_combo (GTK_COMBO_BOX (gcd->key_type_combo),
+		  oobs_ifaces_config_get_available_key_types (GST_NETWORK_TOOL (tool)->ifaces_config),
+		  key_type_descriptions, G_N_ELEMENTS (key_type_descriptions));
 }
 
 void

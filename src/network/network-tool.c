@@ -270,6 +270,8 @@ gst_network_tool_update_gui (GstTool *tool)
 
   gtk_list_store_clear (GTK_LIST_STORE (network_tool->interfaces_model));
   add_all_interfaces (network_tool);
+
+  connection_dialog_update (network_tool->dialog);
 }
 
 GstTool*

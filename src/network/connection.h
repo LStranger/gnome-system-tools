@@ -103,6 +103,7 @@ gchar *connection_get_config_method (GstConnectionDialog *dialog);
 void   connection_set_config_method (GstConnectionDialog *dialog,
 				     const gchar         *method);
 gchar *connection_combo_get_value   (GtkComboBox         *combo);
+void   connection_dialog_update     (GstConnectionDialog *gcd);
 
 
 #endif /* __CONNECTION_H */
