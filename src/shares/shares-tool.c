@@ -20,12 +20,17 @@
 
 #include <glib-object.h>
 #include "shares-tool.h"
+#include "users-table.h"
 #include <glib/gi18n.h>
 #include "gst.h"
 
 static void gst_shares_tool_class_init (GstSharesToolClass *class);
 static void gst_shares_tool_init       (GstSharesTool      *tool);
 static void gst_shares_tool_finalize   (GObject            *object);
+
+static GObject * gst_shares_tool_constructor (GType                  type,
+					      guint                  n_construct_properties,
+					      GObjectConstructParam *construct_params);
 
 static void gst_shares_tool_update_gui    (GstTool         *tool);
 static void gst_shares_tool_update_config (GstTool         *tool);
@@ -40,6 +45,7 @@ gst_shares_tool_class_init (GstSharesToolClass *class)
 	GObjectClass *object_class = G_OBJECT_CLASS (class);
 	GstToolClass *tool_class = GST_TOOL_CLASS (class);
 
+	object_class->constructor = gst_shares_tool_constructor;
 	object_class->finalize = gst_shares_tool_finalize;
 	tool_class->update_gui = gst_shares_tool_update_gui;
 	tool_class->update_config = gst_shares_tool_update_config;
@@ -64,6 +70,24 @@ gst_shares_tool_init (GstSharesTool *tool)
 
 	tool->ifaces_config = oobs_ifaces_config_get ();
 	gst_tool_add_configuration_object (gst_tool, tool->ifaces_config);
+
+	tool->users_config = oobs_users_config_get ();
+	gst_tool_add_configuration_object (gst_tool, tool->users_config);
+}
+
+static GObject *
+gst_shares_tool_constructor (GType                  type,
+			     guint                  n_construct_properties,
+			     GObjectConstructParam *construct_params)
+{
+	GObject *object;
+
+	object = (* G_OBJECT_CLASS (gst_shares_tool_parent_class)->constructor) (type,
+										 n_construct_properties,
+										 construct_params);
+	users_table_create (GST_TOOL (object));
+
+	return object;
 }
 
 static void
@@ -163,6 +187,8 @@ gst_shares_tool_update_gui (GstTool *tool)
 		/* disable the tool UI, there's no way to add shares */
 		gtk_widget_set_sensitive (dialog_notebook, FALSE);
 	}
+
+	users_table_set_config (shares_tool);
 }
 
 static void

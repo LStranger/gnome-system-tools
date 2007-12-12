@@ -22,6 +22,7 @@ shares_admin_LDADD = $(GST_TOOL_LIBS)
 shares_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
 shares_admin_SOURCES = \
 	table.c table.h \
+	users-table.c users-table.h \
 	nfs-acl-table.c nfs-acl-table.h \
 	callbacks.c callbacks.h \
 	share-settings.c share-settings.h \

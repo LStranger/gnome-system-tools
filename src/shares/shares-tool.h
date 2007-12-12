@@ -25,7 +25,7 @@ G_BEGIN_DECLS
 
 #include <glib.h>
 #include "gst-tool.h"
-#include <oobs/oobs-smbconfig.h>
+#include <oobs/oobs.h>
 
 #define GST_TYPE_SHARES_TOOL         (gst_shares_tool_get_type())
 #define GST_SHARES_TOOL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_SHARES_TOOL, GstSharesTool))
@@ -47,6 +47,7 @@ struct _GstSharesTool {
 	OobsObject *services_config;
 	OobsObject *hosts_config;
 	OobsObject *ifaces_config;
+	OobsObject *users_config;
 
 	gboolean smb_available : 1;
 	gboolean nfs_available : 1;

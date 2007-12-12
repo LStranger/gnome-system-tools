@@ -1,3 +1,14 @@
+2007-12-12  Carlos Garnacho  <carlosg@gnome.org>
+
+	Add SMB password handling. Fixes #438052.
+
+	* users-table.[ch]: Added, populates the table with system users,
+	allowing to enable them and set a password.
+	* Makefile.am: Added these files.
+	* main.c: lock the users table when the tool is not authenticated.
+	* shares-tool.[ch]: get also users config, and initialize/populate
+	users table.
+
 2007-11-14  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.21.2.1
