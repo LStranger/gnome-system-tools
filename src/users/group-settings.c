@@ -74,7 +74,10 @@ check_group_delete (OobsGroup *group)
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				NULL);
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
+
 	gtk_widget_destroy (dialog);
 
 	return (reply == GTK_RESPONSE_ACCEPT);
@@ -313,6 +316,8 @@ group_settings_dialog_run (GtkWidget *dialog, OobsGroup *group)
 		NULL
 	};
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+
 	do {
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -321,6 +326,8 @@ group_settings_dialog_run (GtkWidget *dialog, OobsGroup *group)
 	} while (!valid);
 
 	gtk_widget_hide (dialog);
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
+
 	return response;
 }
 

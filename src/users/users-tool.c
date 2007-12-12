@@ -133,6 +133,7 @@ update_users (GstUsersTool *tool)
 	GObject *user;
 	gboolean valid;
 
+	users_table_clear ();
 	list = oobs_users_config_get_users (OOBS_USERS_CONFIG (tool->users_config));
 
 	valid = oobs_list_get_iter_first (list, &iter);
@@ -154,6 +155,8 @@ update_groups (GstUsersTool *tool)
 	GObject *group;
 	gboolean valid;
 
+	groups_table_clear ();
+	privileges_table_clear ();
 	list = oobs_groups_config_get_groups (OOBS_GROUPS_CONFIG (tool->groups_config));
 
 	valid = oobs_list_get_iter_first (list, &iter);

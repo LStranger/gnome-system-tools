@@ -146,3 +146,13 @@ groups_table_add_group (OobsGroup *group, OobsListIter *list_iter)
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	groups_table_set_group (group, list_iter, &iter);
 }
+
+void
+groups_table_clear (void)
+{
+	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
+	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
+	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+}

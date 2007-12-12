@@ -40,6 +40,7 @@ enum {
 };
 
 void	create_users_table	(GstUsersTool *tool);
+void    users_table_clear       (void);
 void    users_table_set_user    (OobsUser     *user,
 				 OobsListIter *list_iter,
 				 GtkTreeIter  *iter);

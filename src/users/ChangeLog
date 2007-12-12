@@ -1,3 +1,19 @@
+2007-12-12  Carlos Garnacho  <carlosg@gnome.org>
+
+	Use editing mode, which will ask whether to update the configuration
+	if a modifiation is in course and the underlying configuration changes
+	(file monitoring was added in s-t-b 2.5.4). Everything together fixes
+	#488859.
+
+	* group-settings.c (check_group_delete) (group_settings_dialog_run):
+	* user-settings.c (check_user_delete) (user_settings_dialog_run): Turn
+	editing mode on when the dialogs are running.
+
+	* groups-table.[ch] (groups_table_clear): Added.
+	* privileges-table.[ch] (privileges_table_clear): Added.
+	* users-table.[ch] (users_table_clear): Added.
+	* users-tool.c (update_users) (update_groups): Use these here.
+
 2007-11-14  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.21.2.1

@@ -293,3 +293,16 @@ privileges_table_save (OobsUser *user)
 		valid = gtk_tree_model_iter_next (child_model, &iter);
 	}
 }
+
+void
+privileges_table_clear (void)
+{
+	GtkWidget *table;
+	GtkTreeModel *model, *child_model;
+
+	table = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	child_model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
+
+	gtk_list_store_clear (GTK_LIST_STORE (child_model));
+}

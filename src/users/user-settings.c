@@ -103,7 +103,10 @@ check_user_delete (OobsUser *user)
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				NULL);
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
+
 	gtk_widget_destroy (dialog);
 
 	return (response == GTK_RESPONSE_ACCEPT);
@@ -609,6 +612,8 @@ user_settings_dialog_run (GtkWidget *dialog, OobsUser *user)
 		NULL
 	};
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+
 	do {
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -617,6 +622,8 @@ user_settings_dialog_run (GtkWidget *dialog, OobsUser *user)
 	} while (!valid);
 
 	gtk_widget_hide (dialog);
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
+
 	return response;
 }
 

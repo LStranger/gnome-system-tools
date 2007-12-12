@@ -204,3 +204,13 @@ users_table_add_user (OobsUser *user, OobsListIter *list_iter)
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	users_table_set_user (user, list_iter, &iter);
 }
+
+void
+users_table_clear (void)
+{
+        GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+        GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
+        GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+
+        gtk_list_store_clear (GTK_LIST_STORE (model));
+}
