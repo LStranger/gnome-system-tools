@@ -135,15 +135,20 @@ server_button_clicked (GtkWidget *w, gpointer data)
 {
 	GtkWidget *d;
 	GstDialog *dialog;
+	GstTool *tool;
 
 	dialog = GST_DIALOG (data);
+	tool = gst_dialog_get_tool (dialog);
 
 	d = gst_dialog_get_widget (dialog, "time_server_window");
 
-	gtk_window_set_transient_for (GTK_WINDOW (d), GTK_WINDOW (dialog));
+	gst_dialog_add_edit_dialog (tool->main_dialog, d);
 
-	while (gtk_dialog_run (GTK_DIALOG (d)) == GTK_RESPONSE_HELP);
+	gtk_window_set_transient_for (GTK_WINDOW (d), GTK_WINDOW (dialog));
+	gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_hide (d);
+
+	gst_dialog_remove_edit_dialog (tool->main_dialog, d);
 }
 
 int

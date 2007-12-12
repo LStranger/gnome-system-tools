@@ -769,10 +769,14 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 	gtk_window_set_transient_for (GTK_WINDOW (time_tool->timezone_dialog),
 				      GTK_WINDOW (tool->main_dialog));
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, time_tool->timezone_dialog);
+
 	gtk_widget_show_all (time_tool->timezone_dialog);
 	gtk_dialog_run (GTK_DIALOG (time_tool->timezone_dialog));
-
 	gtk_widget_hide_all (time_tool->timezone_dialog);
+
+	gst_dialog_remove_edit_dialog (tool->main_dialog, time_tool->timezone_dialog);
+
 	tz_name     = e_tz_map_get_selected_tz_name (time_tool->tzmap);
 	tz_location = e_tz_map_get_location_by_name (time_tool->tzmap, tz_name);
 
