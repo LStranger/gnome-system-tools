@@ -79,6 +79,14 @@ gboolean            gst_dialog_is_authenticated    (GstDialog *dialog);
 void                gst_dialog_require_authentication_for_widget  (GstDialog *xd, GtkWidget *w);
 void                gst_dialog_require_authentication_for_widgets (GstDialog *xd, const gchar **names);
 
+void                gst_dialog_add_edit_dialog     (GstDialog *dialog,
+						    GtkWidget *edit_dialog);
+void                gst_dialog_remove_edit_dialog  (GstDialog *dialog,
+						    GtkWidget *edit_dialog);
+void                gst_dialog_stop_editing        (GstDialog *dialog);
+gboolean            gst_dialog_get_editing         (GstDialog *dialog);
+
+
 G_END_DECLS
 
 #endif /* GST_DIALOG_H */

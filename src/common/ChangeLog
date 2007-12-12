@@ -1,3 +1,15 @@
+2007-12-12  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-dialog.[ch] (gst_dialog_add_edit_dialog)
+	(gst_dialog_remove_edit_dialog) (gst_dialog_stop_editing)
+	(gst_dialog_get_editing): New API to specify that a group of dialogs
+	is in the process of changing the configuration and control them.
+	* gst-tool.c (gst_tool_add_configuration_object): listen to the
+	changed signal, call
+	(configuration_object_changed): Show a "Update config?" dialog if the
+	user has opened a dialog that might be doing some change to the
+	configuration.
+
 2007-11-14  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.21.2.1

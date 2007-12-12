@@ -52,6 +52,8 @@ struct _GstDialogPrivate {
 #endif
 	GSList     *policy_widgets;
 
+	GSList     *edit_dialogs;
+
 	guint    frozen;
 	guint    modified : 1;
 };
@@ -634,4 +636,55 @@ gst_dialog_is_authenticated (GstDialog *dialog)
 #else
 	return TRUE;
 #endif
+}
+
+gboolean
+gst_dialog_get_editing (GstDialog *dialog)
+{
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	return (priv->edit_dialogs != NULL);
+}
+
+void
+gst_dialog_add_edit_dialog (GstDialog *dialog,
+			    GtkWidget *edit_dialog)
+{
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	priv->edit_dialogs = g_slist_prepend (priv->edit_dialogs, edit_dialog);
+}
+
+void
+gst_dialog_remove_edit_dialog (GstDialog *dialog,
+			       GtkWidget *edit_dialog)
+{
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	priv->edit_dialogs = g_slist_remove (priv->edit_dialogs, edit_dialog);
+}
+
+void
+gst_dialog_stop_editing (GstDialog *dialog)
+{
+	GstDialogPrivate *priv;
+	GSList *dialogs;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	for (dialogs= priv->edit_dialogs; dialogs; dialogs = dialogs->next) {
+		/* hide dialogs, if they were running inside
+		 * gtk_dialog_run (), the loop will shutdown
+		 */
+		gtk_widget_hide (GTK_WIDGET (dialogs->data));
+	}
+
+	g_slist_free (priv->edit_dialogs);
+	priv->edit_dialogs = NULL;
 }

@@ -560,6 +560,34 @@ gst_tool_get_icon_theme (GstTool *tool)
 	return tool->icon_theme;
 }
 
+static void
+configuration_object_changed (OobsObject *object,
+			      GstTool    *tool)
+{
+	gboolean do_update = TRUE;
+
+	if (gst_dialog_get_editing (tool->main_dialog)) {
+		GtkWidget *dialog;
+		gint response;
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_QUESTION,
+						 GTK_BUTTONS_YES_NO,
+						 _("The system configuration has potentially changed."));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  _("Update content? This will lose any modification in course."));
+		response = gtk_dialog_run (GTK_DIALOG (dialog));
+		do_update = (response == GTK_RESPONSE_YES);
+		gtk_widget_hide (dialog);
+	}
+
+	if (do_update) {
+		gst_dialog_stop_editing (tool->main_dialog);
+		gst_tool_update_async (tool);
+	}
+}
+
 void
 gst_tool_add_configuration_object (GstTool    *tool,
 				   OobsObject *object)
@@ -568,4 +596,7 @@ gst_tool_add_configuration_object (GstTool    *tool,
 	g_return_if_fail (OOBS_IS_OBJECT (object));
 
 	g_ptr_array_add (tool->objects, object);
+
+	g_signal_connect (object, "changed",
+			  G_CALLBACK (configuration_object_changed), tool);
 }
