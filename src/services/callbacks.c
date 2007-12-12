@@ -42,6 +42,7 @@ show_settings (void)
 	GtkTreeIter iter;
 	OobsService *service;
 	gchar *script, *title;
+	gint response;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "services_list");
 	dialog = gst_dialog_get_widget (tool->main_dialog, "service_settings_dialog");
@@ -64,12 +65,19 @@ show_settings (void)
 	service_settings_table_set_service (OOBS_SERVICES_CONFIG (GST_SERVICES_TOOL (tool)->services_config),
 					    service);
 
+	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
-	gtk_dialog_run (GTK_DIALOG (dialog));
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_hide (dialog);
 
-	service_settings_table_save (service);
-	oobs_object_commit (GST_SERVICES_TOOL (tool)->services_config);
+	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
+
+	if (response != GTK_RESPONSE_NONE) {
+		service_settings_table_save (service);
+		oobs_object_commit (GST_SERVICES_TOOL (tool)->services_config);
+	}
+
 	g_object_unref (service);
 }
 
