@@ -13,12 +13,12 @@
 # Jorge González <jorgegonz@svn.gnome.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools.HEAD.es\n"
+"Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-29 23:53+0000\n"
-"PO-Revision-Date: 2007-11-01 13:56+0100\n"
+"POT-Creation-Date: 2007-12-12 00:27+0000\n"
+"PO-Revision-Date: 2007-12-13 15:22+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Spanish <traductores@es.gnome.org>\n"
+"Language-Team: Spanish <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,7 @@ msgstr ""
 "Indica si la herramienta de administración de usuarios debe mostrar todos "
 "los usuarios y grupos o no"
 
-#: ../src/common/gst-dialog.c:175
+#: ../src/common/gst-dialog.c:179
 msgid "_Unlock"
 msgstr "_Desbloquear"
 
@@ -57,11 +57,11 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Plataforma no soportada"
 
-#: ../src/common/gst-polkit-button.c:181
+#: ../src/common/gst-polkit-button.c:126
 msgid "This action is allowed"
 msgstr "Esta acción está permitida"
 
-#: ../src/common/gst-polkit-button.c:195
+#: ../src/common/gst-polkit-button.c:140
 msgid "This action is not allowed"
 msgstr "Esta acción no está permitida"
 
@@ -85,6 +85,14 @@ msgstr "No se le permite modificar la configuración del sistema."
 msgid "Could not display help"
 msgstr "No se pudo mostrar la ayuda"
 
+#: ../src/common/gst-tool.c:577
+msgid "The system configuration has potentially changed."
+msgstr "La configuración del sistema ha cambiado."
+
+#: ../src/common/gst-tool.c:579
+msgid "Update content? This will lose any modification in course."
+msgstr "¿Actualizar el contenido? Se perderá cualquier modificación en curso."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:38
 msgid "_Add"
@@ -99,15 +107,15 @@ msgstr "_Borrar"
 msgid "Type address"
 msgstr "Teclee la dirección"
 
-#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
+#: ../src/network/callbacks.c:188 ../src/network/callbacks.c:438
 msgid "Changing interface configuration"
 msgstr "Cambiando configuración del interfaz"
 
-#: ../src/network/callbacks.c:244
+#: ../src/network/callbacks.c:250
 msgid "Could not autodetect modem device"
 msgstr "No se pudo autodetectar el dispositivo módem"
 
-#: ../src/network/callbacks.c:247
+#: ../src/network/callbacks.c:253
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -115,11 +123,11 @@ msgstr ""
 "Compruebe que el dispositivo no esté ocupado y que está conectado "
 "correctamente al equipo."
 
-#: ../src/network/callbacks.c:468
+#: ../src/network/callbacks.c:474
 msgid "The host name has changed"
 msgstr "El nombre del equipo ha cambiado"
 
-#: ../src/network/callbacks.c:471
+#: ../src/network/callbacks.c:477
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -127,7 +135,7 @@ msgstr ""
 "Esto le impedirá ejecutar aplicaciones nuevas, y por tanto deberá iniciar "
 "una sesión de nuevo. ¿Quiere continuar de todas formas?"
 
-#: ../src/network/callbacks.c:477
+#: ../src/network/callbacks.c:483
 msgid "Change _Host name"
 msgstr "Cambiar nombre del _equipo"
 
@@ -159,7 +167,7 @@ msgstr "WPA personal"
 msgid "WPA2 Personal"
 msgstr "WPA2 personal"
 
-#: ../src/network/connection.c:624
+#: ../src/network/connection.c:618
 #, c-format
 msgid "%s Properties\n"
 msgstr "Propiedades de %s\n"
@@ -295,21 +303,21 @@ msgstr "Configurar los dispositivos de red y las conexiones"
 msgid "Network"
 msgstr "Red"
 
-#: ../src/network/network-tool.c:280
+#: ../src/network/network-tool.c:283
 msgid "Network Settings"
 msgstr "Configuración de la red"
 
-#: ../src/services/callbacks.c:58
+#: ../src/services/callbacks.c:59
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Configuración para el servicio «%s»"
 
-#: ../src/services/callbacks.c:111
+#: ../src/services/callbacks.c:119
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "¿Seguro que desea desactivar «%s»?"
 
-#: ../src/services/callbacks.c:115
+#: ../src/services/callbacks.c:123
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -768,11 +776,11 @@ msgstr "¿Está seguro de que desea borrar esta carpeta compartida?"
 msgid "Other computers in your network will stop viewing this."
 msgstr "Otros equipos en su red dejarán de ver esto."
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:111
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Al añadir una ruta compartida, se modifica su ya existe"
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:111
 msgid "PATH"
 msgstr "RUTA"
 
@@ -808,7 +816,7 @@ msgstr "Especifique la red"
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Configure qué carpetas están disponibles para su red local"
 
-#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:208
+#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:234
 msgid "Shared Folders"
 msgstr "Carpetas compartidas"
 
@@ -828,11 +836,11 @@ msgstr "Redes Windows (SMB)"
 msgid "Unix networks (NFS)"
 msgstr "Redes UNIX (NFS)"
 
-#: ../src/shares/shares-tool.c:131
+#: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
 msgstr "Los servicios de compartición no están instalados"
 
-#: ../src/shares/shares-tool.c:133
+#: ../src/shares/shares-tool.c:157
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -890,9 +898,9 @@ msgstr "Ajustes de hora y fecha"
 msgid "Administrator group can not be deleted"
 msgstr "El grupo del administrador no se puede borrar"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:281
-#: ../src/users/group-settings.c:305 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:469 ../src/users/user-settings.c:539
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:477 ../src/users/user-settings.c:547
 msgid "This would leave the system unusable."
 msgstr "Esto podría dejar el sistema inutilizable."
 
@@ -905,32 +913,32 @@ msgstr "¿Está seguro que desea borrar el grupo «%s»?"
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Esto puede dejar archivos con ID de grupo inválido en el sistema de archivos."
 
-#: ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:167
 msgid "New group"
 msgstr "Grupo nuevo"
 
-#: ../src/users/group-settings.c:178
+#: ../src/users/group-settings.c:175
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Propiedades del grupo «%s»"
 
-#: ../src/users/group-settings.c:277
+#: ../src/users/group-settings.c:275
 msgid "Group name is empty"
 msgstr "El nombre del grupo está vacío"
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:276
 msgid "A group name must be specified."
 msgstr "Debe especificarse un nombre de grupo."
 
-#: ../src/users/group-settings.c:280
+#: ../src/users/group-settings.c:278
 msgid "Group name of the administrator group user should not be modified"
 msgstr "El nombre de grupo del administrador no debería modificarse"
 
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:281
 msgid "Group name has invalid characters"
 msgstr "El nombre de grupo tiene caracteres inválidos"
 
-#: ../src/users/group-settings.c:284
+#: ../src/users/group-settings.c:282
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -938,16 +946,16 @@ msgstr ""
 "Establezca un nombre de usuario válido, consistente en una letra minúscula "
 "seguida de letras minúsculas y/o números."
 
-#: ../src/users/group-settings.c:288
+#: ../src/users/group-settings.c:286
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "El grupo «%s» ya existe"
 
-#: ../src/users/group-settings.c:289 ../src/users/user-settings.c:477
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:485
 msgid "Please select a different user name."
 msgstr "Por favor seleccione un nombre de usuario diferente."
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:302
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "El ID del grupo de la cuenta de administrador no debería modificarse"
 
@@ -1032,32 +1040,32 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Actualmente este usuario está usando este equipo"
 
-#: ../src/users/user-settings.c:312
+#: ../src/users/user-settings.c:319
 msgid "New user account"
 msgstr "Cuenta de usuario nueva"
 
-#: ../src/users/user-settings.c:327
+#: ../src/users/user-settings.c:334
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Propiedades de la cuenta «%s»"
 
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:473
 msgid "User name is empty"
 msgstr "El nombre de usuario está vacío"
 
-#: ../src/users/user-settings.c:466
+#: ../src/users/user-settings.c:474
 msgid "A user name must be specified."
 msgstr "Debe especificar un nombre de usuario."
 
-#: ../src/users/user-settings.c:468
+#: ../src/users/user-settings.c:476
 msgid "Administrator account's user name should not be modified"
 msgstr "El nombre de usuario del administrador no se debería modificar"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:479
 msgid "User name has invalid characters"
 msgstr "El nombre de usuario tiene caracteres inválidos"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:480
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1065,25 +1073,25 @@ msgstr ""
 "Establezca un nombre de usuario válido, consistente en una letra minúscula "
 "seguida de letras minúsculas y/o números."
 
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:484
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "El nombre de usuario «%s» ya existe"
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:511
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Carácter inválido «%c» en comentario"
 
-#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:512
 msgid "Check that this character is not used."
 msgstr "Compruebe que este carácter no se use."
 
-#: ../src/users/user-settings.c:521
+#: ../src/users/user-settings.c:529
 msgid "Incomplete path in home directory"
 msgstr "Ruta incompleta en el directorio personal"
 
-#: ../src/users/user-settings.c:522
+#: ../src/users/user-settings.c:530
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1091,15 +1099,15 @@ msgstr ""
 "Escriba la ruta completa para el directorio personal\n"
 "<span size=\"smaller\">ej: /home/juan</span>."
 
-#: ../src/users/user-settings.c:538
+#: ../src/users/user-settings.c:546
 msgid "Administrator account's user ID should not be modified"
 msgstr "El ID de la cuenta de usuario del administrador no debería modificarse"
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:562
 msgid "Incomplete path in shell"
 msgstr "Ruta incompleta en el shell"
 
-#: ../src/users/user-settings.c:555
+#: ../src/users/user-settings.c:563
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1107,11 +1115,11 @@ msgstr ""
 "Introduzca una ruta completa para la shell\n"
 "<span size=\"smaller\">ej: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:583
+#: ../src/users/user-settings.c:591
 msgid "Password is too short"
 msgstr "La contraseña es demasiado corta"
 
-#: ../src/users/user-settings.c:584
+#: ../src/users/user-settings.c:592
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1119,11 +1127,11 @@ msgstr ""
 "Las contraseñas de usuario deben ser más largas que 6 caracteres y "
 "preferiblemente formadas por números, letras y caracteres especiales."
 
-#: ../src/users/user-settings.c:587
+#: ../src/users/user-settings.c:595
 msgid "Password confirmation is not correct"
 msgstr "La confirmación de la contraseña es incorrecta"
 
-#: ../src/users/user-settings.c:588
+#: ../src/users/user-settings.c:596
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Compruebe que ha proporcionado la misma contraseña en ambos campos de texto."
 
@@ -1139,7 +1147,7 @@ msgstr "Nombre de usuario"
 msgid "Home directory"
 msgstr "Directorio personal"
 
-#: ../src/users/users-tool.c:210
+#: ../src/users/users-tool.c:216
 msgid "Users settings"
 msgstr "Opciones de los usuarios"
 
