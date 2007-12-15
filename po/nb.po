@@ -1,14 +1,14 @@
 # Norwegian (bokmål) translation of gnome-system-tools.
 # Copyright (C) 2001-2004, 2005 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 2001-2006.
+# Kjartan Maraas <kmaraas@gnome.org>, 2001-2007.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools 2.17.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-27 21:22+0200\n"
-"PO-Revision-Date: 2007-10-27 21:23+0200\n"
+"Project-Id-Version: gnome-system-tools 2.21.x\n"
+"Report-Msgid-Bugs-To:\n"
+"POT-Creation-Date: 2007-12-15 12:32+0100\n"
+"PO-Revision-Date: 2007-12-15 12:33+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Om users-admin skal vise alle brukere og grupper eller ikke"
 
-#: ../src/common/gst-dialog.c:175
+#: ../src/common/gst-dialog.c:179
 msgid "_Unlock"
 msgstr "_Lås opp"
 
@@ -42,6 +42,14 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Plattform som ikke er støttet"
 
+#: ../src/common/gst-polkit-button.c:126
+msgid "This action is allowed"
+msgstr "Denne handlingen er tillatt"
+
+#: ../src/common/gst-polkit-button.c:140
+msgid "This action is not allowed"
+msgstr "Denne handlingen er ikke tillatt"
+
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
 msgstr "Konfigurasjonen kunne ikke lastes"
@@ -62,6 +70,14 @@ msgstr "Du har ikke tilgang til å endre systemkonfigurasjonen."
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjelp"
 
+#: ../src/common/gst-tool.c:577
+msgid "The system configuration has potentially changed."
+msgstr "Systemkonfigurasjonen kan ha blitt endret."
+
+#: ../src/common/gst-tool.c:579
+msgid "Update content? This will lose any modification in course."
+msgstr "Oppdater innholdet? Du vil miste dine endringer."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:38
 msgid "_Add"
@@ -76,26 +92,26 @@ msgstr "_Slett"
 msgid "Type address"
 msgstr "Type adresse"
 
-#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
+#: ../src/network/callbacks.c:188 ../src/network/callbacks.c:438
 msgid "Changing interface configuration"
 msgstr "Endrer konfigurasjon for grensesnitt"
 
-#: ../src/network/callbacks.c:244
+#: ../src/network/callbacks.c:250
 msgid "Could not autodetect modem device"
 msgstr "Kunne ikke gjenkjenne modemenhet automatisk"
 
-#: ../src/network/callbacks.c:247
+#: ../src/network/callbacks.c:253
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
 "Sjekk at enheten ikke er opptatt og at den er koblet riktig til datamaskinen."
 
-#: ../src/network/callbacks.c:468
+#: ../src/network/callbacks.c:474
 msgid "The host name has changed"
 msgstr "Vertsnavnet er endret"
 
-#: ../src/network/callbacks.c:471
+#: ../src/network/callbacks.c:477
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -103,7 +119,7 @@ msgstr ""
 "Dette vil hindre deg i å starte nye programmer, og derfor vil du måtte logge "
 "inn på nytt. Fortsett likevel?"
 
-#: ../src/network/callbacks.c:477
+#: ../src/network/callbacks.c:483
 msgid "Change _Host name"
 msgstr "Endre _vertsnavn"
 
@@ -135,7 +151,7 @@ msgstr "WPA personlig"
 msgid "WPA2 Personal"
 msgstr "WPA2 personlig"
 
-#: ../src/network/connection.c:624
+#: ../src/network/connection.c:618
 #, c-format
 msgid "%s Properties\n"
 msgstr "Egenskaper for %s\n"
@@ -269,21 +285,21 @@ msgstr "Konfigurer nettverksenheter og tilkoblinger"
 msgid "Network"
 msgstr "Nettverk"
 
-#: ../src/network/network-tool.c:280
+#: ../src/network/network-tool.c:283
 msgid "Network Settings"
 msgstr "Innstillinger for nettverk"
 
-#: ../src/services/callbacks.c:58
+#: ../src/services/callbacks.c:59
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Innstillinger for tjeneste «%s»"
 
-#: ../src/services/callbacks.c:111
+#: ../src/services/callbacks.c:119
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Er du sikker på at du vil deaktivere %s?"
 
-#: ../src/services/callbacks.c:115
+#: ../src/services/callbacks.c:123
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -741,11 +757,11 @@ msgstr "Er du sikker på at du vil slette den delte ressursen"
 msgid "Other computers in your network will stop viewing this."
 msgstr "Andre datamaskiner i ditt nettverk vil ikke kunne se dette."
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:111
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Legg til en delt sti, endrer den hvis den allerede eksisterer"
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:111
 msgid "PATH"
 msgstr "STI"
 
@@ -781,7 +797,7 @@ msgstr "Oppgi nettverk"
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Konfigurer mapper som skal gjøres tilgjengelig for ditt nettverk"
 
-#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:208
+#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:234
 msgid "Shared Folders"
 msgstr "Delte mapper"
 
@@ -801,11 +817,11 @@ msgstr "Windows nettverk (SMB)"
 msgid "Unix networks (NFS)"
 msgstr "Unix nettverk (NFS)"
 
-#: ../src/shares/shares-tool.c:131
+#: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
 msgstr "Støtte for deling er ikke installert"
 
-#: ../src/shares/shares-tool.c:133
+#: ../src/shares/shares-tool.c:157
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -863,9 +879,9 @@ msgstr "Innstillinger for tid og dato"
 msgid "Administrator group can not be deleted"
 msgstr "Administratorgruppen kan ikke slettes"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:281
-#: ../src/users/group-settings.c:305 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:469 ../src/users/user-settings.c:539
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:477 ../src/users/user-settings.c:547
 msgid "This would leave the system unusable."
 msgstr "Dette kan gjøre systemet ubrukelig."
 
@@ -878,32 +894,32 @@ msgstr "Er du sikker på at du vil slette gruppen «%s»?"
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Dette vil etterlate filer med ugyldig gruppe-ID i i filsystemet."
 
-#: ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:167
 msgid "New group"
 msgstr "Ny gruppe"
 
-#: ../src/users/group-settings.c:178
+#: ../src/users/group-settings.c:175
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Egenskaper for gruppe «%s»"
 
-#: ../src/users/group-settings.c:277
+#: ../src/users/group-settings.c:275
 msgid "Group name is empty"
 msgstr "Gruppenavnet er tomt"
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:276
 msgid "A group name must be specified."
 msgstr "Et gruppenavn må oppgis."
 
-#: ../src/users/group-settings.c:280
+#: ../src/users/group-settings.c:278
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Gruppenavn for administrator-brukeren bør ikke endres"
 
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:281
 msgid "Group name has invalid characters"
 msgstr "Gruppenavnet har ugyldige tegn"
 
-#: ../src/users/group-settings.c:284
+#: ../src/users/group-settings.c:282
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -911,16 +927,16 @@ msgstr ""
 "Sett et gyldig brukernavn som består bare av en liten bokstav fulgt av små "
 "bokstaver og tall."
 
-#: ../src/users/group-settings.c:288
+#: ../src/users/group-settings.c:286
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Gruppen «%s» eksisterer allerede"
 
-#: ../src/users/group-settings.c:289 ../src/users/user-settings.c:477
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:485
 msgid "Please select a different user name."
 msgstr "Vennligst velg et annet brukernavn."
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:302
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Gruppe-ID for administrator-brukeren bør ikke endres"
 
@@ -1005,56 +1021,56 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Denne brukeren er aktiv på denne datamaskinen nå"
 
-#: ../src/users/user-settings.c:312
+#: ../src/users/user-settings.c:319
 msgid "New user account"
 msgstr "Ny brukerkonto"
 
-#: ../src/users/user-settings.c:327
+#: ../src/users/user-settings.c:334
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Egenskaper for konto «%s»"
 
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:473
 msgid "User name is empty"
 msgstr "Brukernavnet er tomt"
 
-#: ../src/users/user-settings.c:466
+#: ../src/users/user-settings.c:474
 msgid "A user name must be specified."
 msgstr "Et brukernavn må oppgis."
 
-#: ../src/users/user-settings.c:468
+#: ../src/users/user-settings.c:476
 msgid "Administrator account's user name should not be modified"
 msgstr "Navn på administratorkontoen bør ikke endres"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:479
 msgid "User name has invalid characters"
 msgstr "Brukernavnet har ugyldige tegn"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:480
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "Velg et brukernavn som består bare av små bokstaver og tall."
 
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:484
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Brukernavn «%s» eksisterer allerede"
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:511
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Ugyldig tegn «%c» i kommentar"
 
-#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:512
 msgid "Check that this character is not used."
 msgstr "Sjekk at dette tegnet ikke brukes."
 
-#: ../src/users/user-settings.c:521
+#: ../src/users/user-settings.c:529
 msgid "Incomplete path in home directory"
 msgstr "Ugyldig sti i hjemmemappen"
 
-#: ../src/users/user-settings.c:522
+#: ../src/users/user-settings.c:530
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1062,15 +1078,15 @@ msgstr ""
 "Vennligst oppgi full sti til hjemmemappen\n"
 "<span size=\"smaller\">f.eks: /home/john</span>."
 
-#: ../src/users/user-settings.c:538
+#: ../src/users/user-settings.c:546
 msgid "Administrator account's user ID should not be modified"
 msgstr "Bruker-ID for administrator-brukeren bør ikke endres"
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:562
 msgid "Incomplete path in shell"
 msgstr "Ufullferdig sti i skallet"
 
-#: ../src/users/user-settings.c:555
+#: ../src/users/user-settings.c:563
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1078,11 +1094,11 @@ msgstr ""
 "Vennligst oppgi full sti for skallet\n"
 "<span size=\"smaller\">f.eks: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:583
+#: ../src/users/user-settings.c:591
 msgid "Password is too short"
 msgstr "Passordet er for kort"
 
-#: ../src/users/user-settings.c:584
+#: ../src/users/user-settings.c:592
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1090,11 +1106,11 @@ msgstr ""
 "Brukerpassord må være lengre enn 6 tegn og helst utformet av tall, bokstaver "
 "og spesielle tegn."
 
-#: ../src/users/user-settings.c:587
+#: ../src/users/user-settings.c:595
 msgid "Password confirmation is not correct"
 msgstr "Bekreftelse av passord er ikke korrekt"
 
-#: ../src/users/user-settings.c:588
+#: ../src/users/user-settings.c:596
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Sjekk at du har oppgitt samme passord i begge tekstfeltene."
 
@@ -1110,452 +1126,6 @@ msgstr "Innloggingsnavn"
 msgid "Home directory"
 msgstr "Hjemmemappe"
 
-#: ../src/users/users-tool.c:210
+#: ../src/users/users-tool.c:216
 msgid "Users settings"
 msgstr "Instillinger for bruker"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
-#~ "span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Vennligst oppgi passord for root</"
-#~ "span>"
-
-#~ msgid "Enter Password"
-#~ msgstr "Oppgi passord"
-
-#~ msgid ""
-#~ "You need administrator privileges to use this tool. Enter a password to "
-#~ "modify\n"
-#~ "your system configuration."
-#~ msgstr ""
-#~ "Du trenger administratorrettigheter for å bruke dette verktøyet. Oppgi et "
-#~ "passord for å\n"
-#~ "endre systemkonfigurasjonen."
-
-#~ msgid "_Password:"
-#~ msgstr "_Passord:"
-
-#~ msgid "<b>Account data</b>"
-#~ msgstr "<b>Kontodata</b>"
-
-#~ msgid "<b>Connection Settings</b>"
-#~ msgstr "<b>Innstillinger for tilkobling</b>"
-
-#~ msgid "<b>DNS Servers</b>"
-#~ msgstr "<b>DNS-tjenere</b>"
-
-#~ msgid "<b>Host Settings</b>"
-#~ msgstr "<b>Innstillinger for vert</b>"
-
-#~ msgid "<b>Internet service provider data</b>"
-#~ msgstr "<p>Data for internettilbyder</p>"
-
-#~ msgid "<b>Modem Settings</b>"
-#~ msgstr "<b>Innstillinger for modem</b>"
-
-#~ msgid "<b>Search Domains</b>"
-#~ msgstr "<b>Søkedomener</b>"
-
-#~ msgid "<b>Wireless Settings</b>"
-#~ msgstr "<b>Innstillinger for trådløs</b>"
-
-#~ msgid "Aliases:"
-#~ msgstr "Alias:"
-
-#~ msgid "C_onfiguration:"
-#~ msgstr "K_onfigurasjon:"
-
-#~ msgid "Connections"
-#~ msgstr "Tilkoblinger"
-
-#~ msgid "DNS"
-#~ msgstr "DNS"
-
-#~ msgid "D_omain name:"
-#~ msgstr "D_omenenavn:"
-
-#~ msgid "Delete current location"
-#~ msgstr "Slett aktiv lokasjon"
-
-#~ msgid "E_nable roaming mode"
-#~ msgstr "Aktiver _nomademodus"
-
-#~ msgid "E_nable this connection"
-#~ msgstr "_Aktiver denne tilkoblingen"
-
-#~ msgid "General"
-#~ msgstr "Generelt"
-
-#~ msgid "Host Alias Properties"
-#~ msgstr "Egenskaper for vertsalias"
-
-#~ msgid "Hosts"
-#~ msgstr "Verter"
-
-#~ msgid "IP address:"
-#~ msgstr "IP-adresse:"
-
-#~ msgid "Interface properties"
-#~ msgstr "Egenskaper for grensesnitt"
-
-#~ msgid "Location:"
-#~ msgstr "Lokasjon:"
-
-#~ msgid "Modem"
-#~ msgstr "Modem"
-
-#~ msgid "Network _password:"
-#~ msgstr "Nettverks_passord:"
-
-#~ msgid "Network name (_ESSID):"
-#~ msgstr "Nettverksnavn (_ESSID):"
-
-#~ msgid ""
-#~ "Off\n"
-#~ "Low\n"
-#~ "Medium\n"
-#~ "Loud"
-#~ msgstr ""
-#~ "Av\n"
-#~ "Lavt\n"
-#~ "Middels\n"
-#~ "Høyt"
-
-#~ msgid "Options"
-#~ msgstr "Alternativer"
-
-#~ msgid "P_assword"
-#~ msgstr "P_assord"
-
-#~ msgid "Password _type:"
-#~ msgstr "_Type passord:"
-
-#~ msgid ""
-#~ "Plain (ASCII)\n"
-#~ "Hexadecimal"
-#~ msgstr ""
-#~ "Vanlig ((ASCII)\n"
-#~ "Heksadesimal"
-
-#~ msgid "Save current network configuration as a location"
-#~ msgstr "Lagre denne nettverkskonfigurasjonen som en lokasjon"
-
-#~ msgid ""
-#~ "Tones\n"
-#~ "Pulses"
-#~ msgstr ""
-#~ "Tone\n"
-#~ "Puls"
-
-#~ msgid "Use the Internet service provider nameservers"
-#~ msgstr "Bruk internettleverandøren sine navnetjenere"
-
-#~ msgid "_Autodetect"
-#~ msgstr "Gjenkjenn _automatisk"
-
-#~ msgid "_Dial prefix:"
-#~ msgstr "_Bruk prefiks:"
-
-#~ msgid "_Dial type:"
-#~ msgstr "_Ringetype:"
-
-#~ msgid "_Gateway address:"
-#~ msgstr "_Gateway-adresse:"
-
-#~ msgid "_Host name:"
-#~ msgstr "_Vertsnavn:"
-
-#~ msgid "_IP address:"
-#~ msgstr "_IP-adresse:"
-
-#~ msgid "_Local IP:"
-#~ msgstr "_Lokal IP:"
-
-#~ msgid "_Modem port:"
-#~ msgstr "_Modemport:"
-
-#~ msgid "_Phone number:"
-#~ msgstr "_Telefonnummer:"
-
-#~ msgid "_Remote IP:"
-#~ msgstr "Ekste_rn IP:"
-
-#~ msgid "_Retry if the connection breaks or fails to start"
-#~ msgstr "P_røv på nytt hvis forbindelsen går ned eller ikke starter"
-
-#~ msgid "_Set modem as default route to internet"
-#~ msgstr "_Sett modem som forvalgt rute til Internett"
-
-#~ msgid "_Subnet mask:"
-#~ msgstr "_Subnettmaske:"
-
-#~ msgid "_Username:"
-#~ msgstr "Br_ukernavn:"
-
-#~ msgid "_Volume:"
-#~ msgstr "_Volum:"
-
-#~ msgid "Advanced settings:"
-#~ msgstr "Avanserte instillinger:"
-
-#~ msgid "Select the services that you wish to activate:"
-#~ msgstr "Velg tjenestene du ønsker å aktivere:"
-
-#~ msgid "<b>Allowed Hosts</b>"
-#~ msgstr "<b>Tillatte verter</b>"
-
-#~ msgid "<b>Hosts Settings</b>"
-#~ msgstr "<b>Innstillinger for vert</b>"
-
-#~ msgid "<b>Share Properties</b>"
-#~ msgstr "<b>Egenskaper for delt ressurs</b>"
-
-#~ msgid "<b>Shared Folder</b>"
-#~ msgstr "<b>Delt mappe</b>"
-
-#~ msgid "<b>Windows sharing</b>"
-#~ msgstr "<b>Delt ressurs for Windows</b>"
-
-#~ msgid "Add allowed hosts"
-#~ msgstr "Legg til tillatte verter"
-
-#~ msgid "Allowed hosts:"
-#~ msgstr "Tillatte verter:"
-
-#~ msgid "Comment:"
-#~ msgstr "Kommentar:"
-
-#~ msgid "Domain / _Workgroup:"
-#~ msgstr "Domene / _Arbeidsgruppe:"
-
-#~ msgid "General Properties"
-#~ msgstr "Generelle egenskaper"
-
-#~ msgid "Host name:"
-#~ msgstr "Vertsnavn:"
-
-#~ msgid "Name:"
-#~ msgstr "Navn:"
-
-#~ msgid "Netmask:"
-#~ msgstr "Nettmaske:"
-
-#~ msgid "Network:"
-#~ msgstr "Nettverk:"
-
-#~ msgid "Share through:"
-#~ msgstr "Del via:"
-
-#~ msgid "This computer is a _WINS server"
-#~ msgstr "Denne datamaskinen er en _WINS-tjener"
-
-#~ msgid "WINS _server:"
-#~ msgstr "WINS-_tjener:"
-
-#~ msgid "_Path:"
-#~ msgstr "_Sti:"
-
-#~ msgid "_Read only"
-#~ msgstr "Sk_rivebeskyttet"
-
-#~ msgid "<b>Selection</b>"
-#~ msgstr "<b>Utvalg</b>"
-
-#~ msgid "<b>Time Zone</b>"
-#~ msgstr "<b>Tidssone</b>"
-
-#~ msgid "Add NTP Server"
-#~ msgstr "Legg til NTP-tjener"
-
-#~ msgid "NTP server"
-#~ msgstr "NTP-tjener"
-
-#~ msgid "Se_lect Servers"
-#~ msgstr "Ve_lg tjenere"
-
-#~ msgid "Time servers"
-#~ msgstr "Tidtjenere"
-
-#~ msgid "Time servers:"
-#~ msgstr "Tidtjenere:"
-
-#~ msgid "Time zone"
-#~ msgstr "Tidssone"
-
-#~ msgid "Time zone:"
-#~ msgstr "Tidssone:"
-
-#~ msgid "Unconfigured"
-#~ msgstr "Ikke konfigurert"
-
-#~ msgid "_Configuration:"
-#~ msgstr "_Konfigurasjon:"
-
-#~ msgid "_Date:"
-#~ msgstr "_Dato:"
-
-#~ msgid "_Time:"
-#~ msgstr "_Tid:"
-
-#~ msgid "<span weight=\"bold\">Advanced Settings</span>"
-#~ msgstr "<span weight=\"bold\">Avanserte innstillinger</span>"
-
-#~ msgid "<span weight=\"bold\">Automatic UID/GID</span>"
-#~ msgstr "<span weight=\"bold\">Automatisk UID/GID</span>"
-
-#~ msgid "<span weight=\"bold\">Basic Settings</span>"
-#~ msgstr "<span weight=\"bold\">Grunnleggende innstillinger</span>"
-
-#~ msgid "<span weight=\"bold\">Contact Information</span>"
-#~ msgstr "<span weight=\"bold\">Kontaktinformasjon</span>"
-
-#~ msgid "<span weight=\"bold\">Group Members</span>"
-#~ msgstr "<span weight=\"bold\">Gruppemedlemmer</span>"
-
-#~ msgid "<span weight=\"bold\">Optional Settings</span>"
-#~ msgstr "<span weight=\"bold\">Alternative innstillinger</span>"
-
-#~ msgid "<span weight=\"bold\">Password Settings</span>"
-#~ msgstr "<span weight=\"bold\">Innstillinger for passord</span>"
-
-#~ msgid "<span weight=\"bold\">Password</span>"
-#~ msgstr "<span weight=\"bold\">Passord</span>"
-
-#~ msgid "<span weight=\"bold\">Profile Settings</span>"
-#~ msgstr "<span weight=\"bold\">Innstillinger for profil</span>"
-
-#~ msgid "<span weight=\"bold\">System Defaults</span>"
-#~ msgstr "<span weight=\"bold\">Forvalg for systemet</span>"
-
-#~ msgid "Account"
-#~ msgstr "Konto"
-
-#~ msgid "Advanced"
-#~ msgstr "Avansert"
-
-#~ msgid "Assign a random password by default"
-#~ msgstr "Tildel et tilfeldig passord som standard"
-
-#~ msgid "Check password _quality"
-#~ msgstr "Sjekk _kvalitet på passord"
-
-#~ msgid "Con_firmation:"
-#~ msgstr "Bekre_ftelse:"
-
-#~ msgid "Days between warning and password expiration:"
-#~ msgstr "Dager mellom advarsel og utløp av passord:"
-
-#~ msgid "Default _group:"
-#~ msgstr "Forvalgt _gruppe:"
-
-#~ msgid "Default _shell:"
-#~ msgstr "Forvalgt _skall:"
-
-#~ msgid "Generate _random password"
-#~ msgstr "Genere_r et tilfeldig passord"
-
-#~ msgid "Group _ID:"
-#~ msgstr "Gruppe-_ID:"
-
-#~ msgid "Group _name:"
-#~ msgstr "Gruppe_navn:"
-
-#~ msgid "Group properties"
-#~ msgstr "Egenskaper for gruppe"
-
-#~ msgid "Groups settings"
-#~ msgstr "Instillinger for grupper"
-
-#~ msgid "Ma_ximum days a password may be used:"
-#~ msgstr "Ma_ksimalt antall dager et passord kan brukes:"
-
-#~ msgid "Maximum UID:"
-#~ msgstr "Maksmum UID:"
-
-#~ msgid "Mi_nimum days between password changes:"
-#~ msgstr "Mi_nimum antall dager mellom passordendringer:"
-
-#~ msgid "Minimum GID:"
-#~ msgstr "Minimum GID:"
-
-#~ msgid "Minimum UID:"
-#~ msgstr "Minimum UID:"
-
-#~ msgid "Minimum days allowed between password changes:"
-#~ msgstr "Minimum antall dager tillatt mellom passordendringer:"
-
-#~ msgid "Number of days that a password may be used:"
-#~ msgstr "Antall dager et passord kan brukes:"
-
-#~ msgid "O_ffice location:"
-#~ msgstr "K_ontorlokasjon:"
-
-#~ msgid "Password set to: "
-#~ msgstr "Passord satt til: "
-
-#~ msgid "Privileges"
-#~ msgstr "Rettigheter"
-
-#~ msgid "Profile _name:"
-#~ msgstr "Profil_navn:"
-
-#~ msgid "Set password b_y hand"
-#~ msgstr "Sett passord for _hånd"
-
-#~ msgid "User ID:"
-#~ msgstr "Bruker-ID:"
-
-#~ msgid "User Privileges"
-#~ msgstr "Brukerrettigheter"
-
-#~ msgid "User _password:"
-#~ msgstr "Bruker_passord:"
-
-#~ msgid "User profiles"
-#~ msgstr "Brukerprofiler"
-
-#~ msgid "_Add Group"
-#~ msgstr "_Legg til gruppe"
-
-#~ msgid "_Add Profile"
-#~ msgstr "_Legg til profil"
-
-#~ msgid "_Add User"
-#~ msgstr "_Legg til bruker"
-
-#~ msgid "_Comments"
-#~ msgstr "_Kommentarer"
-
-#~ msgid "_Days between warning and password expiration:"
-#~ msgstr "_Dager mellom advarel og utløp av passord:"
-
-#~ msgid "_Generate"
-#~ msgstr "_Generer"
-
-#~ msgid "_Home directory:"
-#~ msgstr "_Hjemmemappe:"
-
-#~ msgid "_Home phone:"
-#~ msgstr "_Hjemmetelefon:"
-
-#~ msgid "_Main group:"
-#~ msgstr "Hoved_gruppe:"
-
-#~ msgid "_Manage Groups"
-#~ msgstr "_Håndter grupper"
-
-#~ msgid "_Profile:"
-#~ msgstr "_Profil:"
-
-#~ msgid "_Real name:"
-#~ msgstr "Fullt _navn:"
-
-#~ msgid "_Shell:"
-#~ msgstr "_Skall:"
-
-#~ msgid "_Work phone:"
-#~ msgstr "_Arbeidstelefon:"
-
-#~ msgid "GNOME System Tools"
-#~ msgstr "GNOME systemverktøy"
