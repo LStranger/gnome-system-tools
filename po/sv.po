@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-17 00:13+0200\n"
-"PO-Revision-Date: 2007-10-17 00:14+0100\n"
+"POT-Creation-Date: 2007-12-17 16:37+0100\n"
+"PO-Revision-Date: 2007-12-17 16:38+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Huruvida användaradministrationsverktyget ska visa alla användare och grupper eller inte"
 
-#: ../src/common/gst-dialog.c:158
+#: ../src/common/gst-dialog.c:179
 msgid "_Unlock"
 msgstr "Lås _upp"
 
@@ -39,6 +39,14 @@ msgstr "Om du är säker på att det fungerar som en av de plattformar som anges
 #: ../src/common/gst-platform-dialog.c:212
 msgid "Unsupported platform"
 msgstr "Plattformen stöds inte"
+
+#: ../src/common/gst-polkit-button.c:126
+msgid "This action is allowed"
+msgstr "Den här åtgärden tillåts"
+
+#: ../src/common/gst-polkit-button.c:140
+msgid "This action is not allowed"
+msgstr "Den här åtgärden tillåts inte"
 
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
@@ -60,6 +68,14 @@ msgstr "Du tillåts inte att ändra systemkonfigurationen."
 msgid "Could not display help"
 msgstr "Kunde inte visa hjälp"
 
+#: ../src/common/gst-tool.c:577
+msgid "The system configuration has potentially changed."
+msgstr "Systemkonfigurationen har möjligen ändrats."
+
+#: ../src/common/gst-tool.c:579
+msgid "Update content? This will lose any modification in course."
+msgstr ""
+
 #: ../src/network/address-list.c:76
 #: ../src/network/hosts.c:31
 #: ../src/shares/table.c:38
@@ -78,28 +94,28 @@ msgstr "_Ta bort"
 msgid "Type address"
 msgstr "Typadress"
 
-#: ../src/network/callbacks.c:186
-#: ../src/network/callbacks.c:432
+#: ../src/network/callbacks.c:188
+#: ../src/network/callbacks.c:438
 msgid "Changing interface configuration"
 msgstr "Ändrar gränssnittskonfiguration"
 
-#: ../src/network/callbacks.c:244
+#: ../src/network/callbacks.c:250
 msgid "Could not autodetect modem device"
 msgstr "Kunde inte automatiskt detektera modemenheten"
 
-#: ../src/network/callbacks.c:247
+#: ../src/network/callbacks.c:253
 msgid "Check that the device is not busy and that is correctly attached to the computer."
 msgstr "Kontrollera att enheten inte är upptagen och att den är korrekt ansluten till datorn."
 
-#: ../src/network/callbacks.c:468
+#: ../src/network/callbacks.c:474
 msgid "The host name has changed"
 msgstr "Värdnamnet har ändrats"
 
-#: ../src/network/callbacks.c:471
+#: ../src/network/callbacks.c:477
 msgid "This will prevent you from launching new applications, and so you will have to log in again. Continue anyway?"
 msgstr "Detta kommer att hindra dig från att starta nya program, och därför kommer du att behöva logga in igen. Fortsätta ändå?"
 
-#: ../src/network/callbacks.c:477
+#: ../src/network/callbacks.c:483
 msgid "Change _Host name"
 msgstr "Ändra _värdnamnet"
 
@@ -131,7 +147,7 @@ msgstr "WPA-personlig"
 msgid "WPA2 Personal"
 msgstr "WPA2-personlig"
 
-#: ../src/network/connection.c:624
+#: ../src/network/connection.c:618
 #, c-format
 msgid "%s Properties\n"
 msgstr "Egenskaper för %s\n"
@@ -265,21 +281,21 @@ msgstr "Konfigurera nätverksenheter och nätverksanslutningar"
 msgid "Network"
 msgstr "Nätverk"
 
-#: ../src/network/network-tool.c:280
+#: ../src/network/network-tool.c:283
 msgid "Network Settings"
 msgstr "Nätverksinställningar"
 
-#: ../src/services/callbacks.c:58
+#: ../src/services/callbacks.c:59
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Inställningar för tjänsten \"%s\""
 
-#: ../src/services/callbacks.c:111
+#: ../src/services/callbacks.c:119
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Är du säker på att du vill inaktivera %s?"
 
-#: ../src/services/callbacks.c:115
+#: ../src/services/callbacks.c:123
 msgid "This may affect your system behavior in several ways, possibly leading to data loss."
 msgstr "Detta kan påverka ditt systems beteende på många sätt, och kan möjligen leda till förlust av data."
 
@@ -737,11 +753,11 @@ msgstr "Är du säker på att du vill ta bort denna utdelning?"
 msgid "Other computers in your network will stop viewing this."
 msgstr "Andra datorer i ditt nätverk kommer att sluta visa detta."
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:111
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Lägg till en delad sökväg, ändrar det om det redan finns"
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:111
 msgid "PATH"
 msgstr "SÖKVÄG"
 
@@ -778,7 +794,7 @@ msgid "Configure which folders are available for your network neighborhood"
 msgstr "Konfigurera vilka mappar som är tillgängliga för ditt nätverk"
 
 #: ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:208
+#: ../src/shares/shares-tool.c:234
 msgid "Shared Folders"
 msgstr "Delade mappar"
 
@@ -798,11 +814,11 @@ msgstr "Windows-nätverk (SMB)"
 msgid "Unix networks (NFS)"
 msgstr "Unix-nätverk (NFS)"
 
-#: ../src/shares/shares-tool.c:131
+#: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
 msgstr "Utdelningstjänster är inte installerade"
 
-#: ../src/shares/shares-tool.c:133
+#: ../src/shares/shares-tool.c:157
 msgid "You need to install at least either Samba or NFS in order to share your folders."
 msgstr "Du måste åtminstone installera antingen Samba eller NFS för att kunna dela dina mappar."
 
@@ -855,11 +871,11 @@ msgid "Administrator group can not be deleted"
 msgstr "Administratörsgruppen kan inte tas bort"
 
 #: ../src/users/group-settings.c:55
-#: ../src/users/group-settings.c:281
-#: ../src/users/group-settings.c:305
+#: ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:303
 #: ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:469
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:477
+#: ../src/users/user-settings.c:547
 msgid "This would leave the system unusable."
 msgstr "Detta skulle lämna systemet i ett oanvändbart tillstånd."
 
@@ -872,46 +888,46 @@ msgstr "Är du säker på att du vill ta bort gruppen \"%s\"?"
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Detta kan lämna filer med ogiltiga grupp-id i filsystemet."
 
-#: ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:167
 msgid "New group"
 msgstr "Ny grupp"
 
-#: ../src/users/group-settings.c:178
+#: ../src/users/group-settings.c:175
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Egenskaper för gruppen \"%s\""
 
-#: ../src/users/group-settings.c:277
+#: ../src/users/group-settings.c:275
 msgid "Group name is empty"
 msgstr "Gruppnamnet är tomt"
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:276
 msgid "A group name must be specified."
 msgstr "Ett gruppnamn måste anges."
 
-#: ../src/users/group-settings.c:280
+#: ../src/users/group-settings.c:278
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Gruppnamnet för administratörsgruppanvändaren bör inte ändras"
 
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:281
 msgid "Group name has invalid characters"
 msgstr "Gruppnamnet har ogiltiga tecken"
 
-#: ../src/users/group-settings.c:284
+#: ../src/users/group-settings.c:282
 msgid "Please set a valid group name consisting of a lower case letter followed by lower case letters and numbers."
 msgstr "Ställ in ett giltigt gruppnamn som består av en liten bokstav följt av små bokstäver och siffror."
 
-#: ../src/users/group-settings.c:288
+#: ../src/users/group-settings.c:286
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Gruppen \"%s\" finns redan"
 
-#: ../src/users/group-settings.c:289
-#: ../src/users/user-settings.c:477
+#: ../src/users/group-settings.c:287
+#: ../src/users/user-settings.c:485
 msgid "Please select a different user name."
 msgstr "Välj ett annat användarnamn."
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:302
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Grupp-id för administratörskontot bör inte ändras"
 
@@ -992,54 +1008,54 @@ msgstr "Detta kommer att inaktivera användarens åtkomst till systemet utan att
 msgid "This user is currently using this computer"
 msgstr "Den här användaren använder för närvarande datorn"
 
-#: ../src/users/user-settings.c:312
+#: ../src/users/user-settings.c:319
 msgid "New user account"
 msgstr "Nytt användarkonto"
 
-#: ../src/users/user-settings.c:327
+#: ../src/users/user-settings.c:334
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Egenskaper för kontot \"%s\""
 
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:473
 msgid "User name is empty"
 msgstr "Användarnamnet är tomt"
 
-#: ../src/users/user-settings.c:466
+#: ../src/users/user-settings.c:474
 msgid "A user name must be specified."
 msgstr "Ett användarnamn måste anges."
 
-#: ../src/users/user-settings.c:468
+#: ../src/users/user-settings.c:476
 msgid "Administrator account's user name should not be modified"
 msgstr "Användarnamnet för administratörskontot bör inte ändras"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:479
 msgid "User name has invalid characters"
 msgstr "Användarnamnet har ogiltiga tecken"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:480
 msgid "Please set a valid user name consisting of a lower case letter followed by lower case letters and numbers."
 msgstr "Ställ in ett giltigt användarnamn som består av en liten bokstav följt av små bokstäver och siffror."
 
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:484
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Användarnamnet \"%s\" finns redan"
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:511
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Ogiltigt tecken \"%c\" i kommentar"
 
-#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:512
 msgid "Check that this character is not used."
 msgstr "Kontrollera att detta tecken inte används."
 
-#: ../src/users/user-settings.c:521
+#: ../src/users/user-settings.c:529
 msgid "Incomplete path in home directory"
 msgstr "Ofullständig sökväg i hemkatalogen"
 
-#: ../src/users/user-settings.c:522
+#: ../src/users/user-settings.c:530
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1047,15 +1063,15 @@ msgstr ""
 "Ange fullständig sökväg till hemkatalogen\n"
 "<span size=\"smaller\">t.ex.: /home/johan</span>."
 
-#: ../src/users/user-settings.c:538
+#: ../src/users/user-settings.c:546
 msgid "Administrator account's user ID should not be modified"
 msgstr "Användar-id för administratörskontot bör inte ändras"
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:562
 msgid "Incomplete path in shell"
 msgstr "Ofullständig sökväg i skal"
 
-#: ../src/users/user-settings.c:555
+#: ../src/users/user-settings.c:563
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1063,19 +1079,19 @@ msgstr ""
 "Ange fullständig sökväg till skalet\n"
 "<span size=\"smaller\">t.ex.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:583
+#: ../src/users/user-settings.c:591
 msgid "Password is too short"
 msgstr "Lösenordet är för kort"
 
-#: ../src/users/user-settings.c:584
+#: ../src/users/user-settings.c:592
 msgid "User passwords must be longer than 6 characters and preferably formed by numbers, letters and special characters."
 msgstr "Användarlösenord måste vara längre än 6 tecken och föredragsvis konstruerade av siffror, bokstäver och specialtecken."
 
-#: ../src/users/user-settings.c:587
+#: ../src/users/user-settings.c:595
 msgid "Password confirmation is not correct"
 msgstr "Lösenordsbekräftelsen är inte korrekt"
 
-#: ../src/users/user-settings.c:588
+#: ../src/users/user-settings.c:596
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Kontrollera att du har angett samma lösenord i båda textfälten."
 
@@ -1083,15 +1099,15 @@ msgstr "Kontrollera att du har angett samma lösenord i båda textfälten."
 msgid "Name"
 msgstr "Namn"
 
-#: ../src/users/users-table.c:63
+#: ../src/users/users-table.c:67
 msgid "Login name"
 msgstr "Inloggningsnamn"
 
-#: ../src/users/users-table.c:70
+#: ../src/users/users-table.c:76
 msgid "Home directory"
 msgstr "Hemkatalog"
 
-#: ../src/users/users-tool.c:206
+#: ../src/users/users-tool.c:216
 msgid "Users settings"
 msgstr "Användarinställningar"
 
