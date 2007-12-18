@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 00:27+0000\n"
-"PO-Revision-Date: 2007-12-13 15:22+0100\n"
+"POT-Creation-Date: 2007-12-18 00:33+0000\n"
+"PO-Revision-Date: 2007-12-18 18:47+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -107,15 +107,15 @@ msgstr "_Borrar"
 msgid "Type address"
 msgstr "Teclee la dirección"
 
-#: ../src/network/callbacks.c:188 ../src/network/callbacks.c:438
+#: ../src/network/callbacks.c:237 ../src/network/callbacks.c:487
 msgid "Changing interface configuration"
 msgstr "Cambiando configuración del interfaz"
 
-#: ../src/network/callbacks.c:250
+#: ../src/network/callbacks.c:299
 msgid "Could not autodetect modem device"
 msgstr "No se pudo autodetectar el dispositivo módem"
 
-#: ../src/network/callbacks.c:253
+#: ../src/network/callbacks.c:302
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -123,11 +123,11 @@ msgstr ""
 "Compruebe que el dispositivo no esté ocupado y que está conectado "
 "correctamente al equipo."
 
-#: ../src/network/callbacks.c:474
+#: ../src/network/callbacks.c:523
 msgid "The host name has changed"
 msgstr "El nombre del equipo ha cambiado"
 
-#: ../src/network/callbacks.c:477
+#: ../src/network/callbacks.c:526
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -135,7 +135,7 @@ msgstr ""
 "Esto le impedirá ejecutar aplicaciones nuevas, y por tanto deberá iniciar "
 "una sesión de nuevo. ¿Quiere continuar de todas formas?"
 
-#: ../src/network/callbacks.c:483
+#: ../src/network/callbacks.c:532
 msgid "Change _Host name"
 msgstr "Cambiar nombre del _equipo"
 
@@ -167,7 +167,23 @@ msgstr "WPA personal"
 msgid "WPA2 Personal"
 msgstr "WPA2 personal"
 
-#: ../src/network/connection.c:618
+#: ../src/network/connection.c:52
+msgid "GPRS/UMTS"
+msgstr "GPRS/UMTS"
+
+#: ../src/network/connection.c:53
+msgid "ISDN modem"
+msgstr "Módem RDSI"
+
+#: ../src/network/connection.c:54
+msgid "Serial modem"
+msgstr "Módem serie"
+
+#: ../src/network/connection.c:55
+msgid "PPPoE"
+msgstr "PPPoE"
+
+#: ../src/network/connection.c:759
 #, c-format
 msgid "%s Properties\n"
 msgstr "Propiedades de %s\n"
@@ -185,62 +201,58 @@ msgstr "Dirección IP"
 msgid "Aliases"
 msgstr "Alias"
 
-#: ../src/network/ifaces-list.c:282
+#: ../src/network/ifaces-list.c:280
 msgid "This network interface is not configured"
 msgstr "Este interfaz de red no está configurado"
 
-#: ../src/network/ifaces-list.c:284
+#: ../src/network/ifaces-list.c:282
 msgid "Roaming mode enabled"
 msgstr "Habilitar el modo itinerante"
 
-#: ../src/network/ifaces-list.c:291
+#: ../src/network/ifaces-list.c:289
 #, c-format
 msgid "<b>Essid:</b> %s "
 msgstr "<b>Essid:</b> %s "
 
-#: ../src/network/ifaces-list.c:297
+#: ../src/network/ifaces-list.c:295
 #, c-format
 msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
 msgstr "<b>Dirección:</b> %s <b>Máscara de subred:</b> %s"
 
-#: ../src/network/ifaces-list.c:301
+#: ../src/network/ifaces-list.c:299
 #, c-format
 msgid "<b>Address:</b> %s"
 msgstr "<b>Dirección:</b> %s"
 
-#: ../src/network/ifaces-list.c:305
+#: ../src/network/ifaces-list.c:303
 #, c-format
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
 msgstr "<b>Dirección:</b> %s <b>Dirección remota:</b> %s"
 
-#: ../src/network/ifaces-list.c:311
+#: ../src/network/ifaces-list.c:309
 #, c-format
 msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
 msgstr "<b>Número de teléfono:</b> %s <b>Usuario:</b> %s"
 
-#: ../src/network/ifaces-list.c:330
+#: ../src/network/ifaces-list.c:328
 msgid "Wireless connection"
 msgstr "Conexión inalámbrica"
 
-#: ../src/network/ifaces-list.c:332
+#: ../src/network/ifaces-list.c:330
 msgid "Infrared connection"
 msgstr "Conexión infraroja"
 
-#: ../src/network/ifaces-list.c:334
+#: ../src/network/ifaces-list.c:332
 msgid "Wired connection"
 msgstr "Conexión alámbrica"
 
-#: ../src/network/ifaces-list.c:336
+#: ../src/network/ifaces-list.c:334
 msgid "Parallel port connection"
 msgstr "Conexión por puerto paralelo"
 
-#: ../src/network/ifaces-list.c:338
-msgid "Modem connection"
-msgstr "Conexión por módem"
-
-#: ../src/network/ifaces-list.c:340
-msgid "ISDN connection"
-msgstr "Conexión RDSI"
+#: ../src/network/ifaces-list.c:336
+msgid "Point to point connection"
+msgstr "Conexión punto a punto"
 
 #: ../src/network/locations-combo.c:221
 msgid "Changing network location"
@@ -267,11 +279,11 @@ msgstr "Nombre de la _ubicación:"
 msgid "Do you want to delete location \"%s\"?"
 msgstr "¿Quiere borrar la ubicación «%s»?"
 
-#: ../src/network/main.c:132
+#: ../src/network/main.c:135
 msgid "The interface does not exist"
 msgstr "El interfaz no existe"
 
-#: ../src/network/main.c:134
+#: ../src/network/main.c:137
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -279,19 +291,19 @@ msgstr ""
 "Compruebe que el dispositivo no esté escrito correctamente  que esté "
 "soportado por su sistema."
 
-#: ../src/network/main.c:180
+#: ../src/network/main.c:183
 msgid "Configure a network interface"
 msgstr "Configurar una interfaz de red local"
 
-#: ../src/network/main.c:180
+#: ../src/network/main.c:183
 msgid "INTERFACE"
 msgstr "INTERFAZ"
 
-#: ../src/network/main.c:181
+#: ../src/network/main.c:184
 msgid "Configure the first network interface with a specific type"
 msgstr "Configurar el primer interfaz de red con un tipo específico"
 
-#: ../src/network/main.c:181
+#: ../src/network/main.c:184
 msgid "TYPE"
 msgstr "TIPO"
 
@@ -303,7 +315,7 @@ msgstr "Configurar los dispositivos de red y las conexiones"
 msgid "Network"
 msgstr "Red"
 
-#: ../src/network/network-tool.c:283
+#: ../src/network/network-tool.c:280
 msgid "Network Settings"
 msgstr "Configuración de la red"
 
