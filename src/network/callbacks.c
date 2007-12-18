@@ -120,6 +120,55 @@ on_bootproto_changed (GtkWidget *widget, gpointer data)
   g_free (method);
 }
 
+void
+on_ppp_type_changed (GtkWidget *widget, gpointer data)
+{
+  GstConnectionDialog *dialog;
+  gchar *type;
+
+  dialog = GST_NETWORK_TOOL (tool)->dialog;
+  type = connection_combo_get_value (GTK_COMBO_BOX (dialog->ppp_type_combo));
+
+  on_dialog_changed (widget, data);
+
+  if (!type)
+    return;
+
+  if (strcmp (type, "modem") == 0)
+    {
+      gtk_widget_show (dialog->modem_page);
+      gtk_widget_show (dialog->isp_frame);
+      gtk_widget_show (dialog->modem_settings_table);
+      gtk_widget_show (dialog->modem_isp_table);
+      gtk_widget_hide (dialog->pppoe_settings_table);
+      gtk_widget_hide (dialog->gprs_isp_table);
+    }
+  else if (strcmp (type, "isdn") == 0)
+    {
+      gtk_widget_show (dialog->isp_frame);
+      gtk_widget_show (dialog->modem_isp_table);
+      gtk_widget_hide (dialog->modem_page);
+      gtk_widget_hide (dialog->gprs_isp_table);
+    }
+  else if (strcmp (type, "pppoe") == 0)
+    {
+      gtk_widget_show (dialog->modem_page);
+      gtk_widget_show (dialog->pppoe_settings_table);
+      gtk_widget_show (dialog->modem_isp_table);
+      gtk_widget_hide (dialog->isp_frame);
+      gtk_widget_hide (dialog->modem_settings_table);
+    }
+  else if (strcmp (type, "gprs") == 0)
+    {
+      gtk_widget_show (dialog->modem_page);
+      gtk_widget_show (dialog->isp_frame);
+      gtk_widget_show (dialog->modem_settings_table);
+      gtk_widget_show (dialog->gprs_isp_table);
+      gtk_widget_hide (dialog->modem_isp_table);
+      gtk_widget_hide (dialog->pppoe_settings_table);
+    }
+}
+
 static void
 cancel_connection_dialog (GstTool *tool)
 {

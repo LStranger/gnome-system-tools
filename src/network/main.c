@@ -54,6 +54,7 @@ static GstDialogSignal signals[] = {
   { "connection_detect_modem",      "clicked", G_CALLBACK (on_detect_modem_clicked) },
   /* dialog changing detection */
   { "connection_address",           "focus-out-event", G_CALLBACK (on_ip_address_focus_out) },
+  { "connection_ppp_type",          "changed", G_CALLBACK (on_ppp_type_changed) },
   { "connection_device_active",     "toggled", G_CALLBACK (on_dialog_changed) },
   { "connection_essid",             "changed", G_CALLBACK (on_dialog_changed) },
   { "connection_wep_key_type",      "changed", G_CALLBACK (on_dialog_changed) },
@@ -73,6 +74,8 @@ static GstDialogSignal signals[] = {
   { "connection_password",          "changed", G_CALLBACK (on_dialog_changed) },
   { "connection_default_gw",        "toggled", G_CALLBACK (on_dialog_changed) },
   { "connection_persist",           "toggled", G_CALLBACK (on_dialog_changed) },
+  { "connection_apn",               "changed", G_CALLBACK (on_dialog_changed) },
+  { "connection_pppoe_ethernet",    "changed", G_CALLBACK (on_dialog_changed) },
   { NULL }
 };
 

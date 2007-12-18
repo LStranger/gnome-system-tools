@@ -48,6 +48,12 @@ static const Description key_type_descriptions [] = {
   { "wpa2-psk", N_("WPA2 Personal") },
 };
 
+static const Description ppp_type_descriptions [] = {
+  { "gprs", N_("GPRS/UMTS") },
+  { "isdn", N_("ISDN modem") },
+  { "modem", N_("Serial modem") },
+  { "pppoe", N_("PPPoE") }
+};
 
 /* helper for getting whether the string or null if it's empty */
 static gchar*
@@ -132,6 +138,60 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
 
   /* reuse text cell renderer for the essid */
   gtk_combo_box_entry_set_text_column (combo, 1);
+}
+
+static void
+pppoe_combo_cell_func (GtkCellLayout   *layout,
+		       GtkCellRenderer *renderer,
+		       GtkTreeModel    *model,
+		       GtkTreeIter     *iter,
+		       gpointer         user_data)
+{
+  OobsIface *iface;
+
+  gtk_tree_model_get (model, iter, 0, &iface, -1);
+  g_object_set (renderer, "text", oobs_iface_get_device_name (iface), NULL);
+  g_object_unref (iface);
+}
+
+static void
+connection_pppoe_combo_init (GtkComboBox *combo)
+{
+  GtkCellRenderer *renderer;
+
+  renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
+
+  gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (combo), renderer,
+				      pppoe_combo_cell_func, NULL, NULL);
+}
+
+static void
+connection_pppoe_combo_set_interface (GtkComboBox       *combo,
+				      OobsIfaceEthernet *ethernet)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gboolean valid;
+  OobsIfaceEthernet *iface;
+
+  model = gtk_combo_box_get_model (combo);
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+
+  while (valid)
+    {
+      gtk_tree_model_get (model, &iter, 0, &iface, -1);
+
+      if (ethernet == iface)
+	{
+	  gtk_combo_box_set_active_iter (combo, &iter);
+	  return;
+	}
+
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  gtk_combo_box_set_active (combo, -1);
 }
 
 static void
@@ -322,20 +382,31 @@ plip_dialog_check_fields (GstConnectionDialog *dialog)
 }
 
 static void
-isdn_dialog_prepare (GstConnectionDialog *dialog)
+ppp_dialog_prepare (GstConnectionDialog *dialog)
 {
   gchar    *login, *password, *phone_number, *phone_prefix;
+  gchar    *serial_port, *connection_type, *apn;
   gboolean  default_gw, peerdns, persist;
+  gint      volume, dial_type;
+  OobsIfaceEthernet *ethernet;
 
   g_object_get (G_OBJECT (dialog->iface),
+		"connection-type", &connection_type,
                 "login", &login,
                 "password", &password,
                 "phone-number", &phone_number,
                 "phone-prefix", &phone_prefix,
-                "default-gw", &default_gw,
-                "peer-dns", &peerdns,
+                "default-gateway", &default_gw,
+                "use-peer-dns", &peerdns,
                 "persistent", &persist,
+                "serial-port", &serial_port,
+                "volume", &volume,
+                "dial-type", &dial_type,
+		"apn", &apn,
+		"ethernet", &ethernet,
                 NULL);
+
+  connection_combo_set_value (GTK_COMBO_BOX (dialog->ppp_type_combo), connection_type);
 
   gtk_entry_set_text (GTK_ENTRY (dialog->login),
                       (login) ? login : "");
@@ -349,49 +420,11 @@ isdn_dialog_prepare (GstConnectionDialog *dialog)
   gtk_entry_set_text (GTK_ENTRY (dialog->dial_prefix),
                       (phone_prefix) ? phone_prefix : "");
 
+  gtk_entry_set_text (GTK_ENTRY (dialog->apn), (apn) ? apn : "");
+
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->default_gw), default_gw);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->peerdns), peerdns);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->persist), persist);
-
-  g_free (login);
-  g_free (password);
-  g_free (phone_number);
-  g_free (phone_prefix);
-}
-
-static void
-isdn_dialog_save (GstConnectionDialog *dialog)
-{
-  g_object_set (G_OBJECT (dialog->iface),
-                "login",        get_entry_text (dialog->login),
-                "password",     get_entry_text (dialog->password),
-                "phone-number", get_entry_text (dialog->phone_number),
-                "phone-prefix", get_entry_text (dialog->dial_prefix),
-                "default-gw",   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->default_gw)),
-                "peer-dns",     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->peerdns)),
-                "persistent",   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->persist)),
-                NULL);
-}
-
-static gboolean
-isdn_dialog_check_fields (GstConnectionDialog *dialog)
-{
-  return ((!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->connection_configured))) ||
-	  ((get_entry_text (dialog->login)) &&
-	   (get_entry_text (dialog->phone_number))));
-}
-
-static void
-modem_dialog_prepare (GstConnectionDialog *dialog)
-{
-  gchar *serial_port;
-  gint   volume, dial_type;
-
-  g_object_get (G_OBJECT (dialog->iface),
-                "serial-port", &serial_port,
-                "volume", &volume,
-                "dial-type", &dial_type,
-                NULL);
 
   gtk_entry_set_text (GTK_ENTRY (GTK_BIN (dialog->serial_port)->child),
                       (serial_port) ? serial_port : "");
@@ -399,24 +432,87 @@ modem_dialog_prepare (GstConnectionDialog *dialog)
   gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->volume), volume);
   gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->dial_type), dial_type);
 
+  connection_pppoe_combo_set_interface (GTK_COMBO_BOX (dialog->pppoe_interface_combo), ethernet);
+
+  if (ethernet)
+    g_object_unref (ethernet);
+
+  g_free (login);
+  g_free (password);
+  g_free (phone_number);
+  g_free (phone_prefix);
   g_free (serial_port);
+  g_free (apn);
 }
 
 static void
-modem_dialog_save (GstConnectionDialog *dialog)
+ppp_dialog_save (GstConnectionDialog *dialog)
 {
+  gchar *connection_type;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  OobsIfaceEthernet *ethernet = NULL;
+
+  connection_type = connection_combo_get_value (GTK_COMBO_BOX (dialog->ppp_type_combo));
+
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (dialog->pppoe_interface_combo));
+
+  if (gtk_tree_model_get_iter_first (model, &iter))
+    gtk_tree_model_get (model, &iter, 0, &ethernet, -1);
+
   g_object_set (G_OBJECT (dialog->iface),
+		"connection-type", connection_type,
+                "login",        get_entry_text (dialog->login),
+                "password",     get_entry_text (dialog->password),
+                "phone-number", get_entry_text (dialog->phone_number),
+                "phone-prefix", get_entry_text (dialog->dial_prefix),
+                "default-gateway", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->default_gw)),
+                "use-peer-dns", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->peerdns)),
+                "persistent",   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->persist)),
                 "serial-port",  get_entry_text (GTK_BIN (dialog->serial_port)->child),
                 "volume",       gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->volume)),
                 "dial-type",    gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->dial_type)),
-		NULL);
+		"apn",          get_entry_text (dialog->apn),
+		"ethernet",     ethernet,
+                NULL);
+
+  if (ethernet)
+    g_object_unref (ethernet);
+
+  g_free (connection_type);
 }
 
 static gboolean
-modem_dialog_check_fields (GstConnectionDialog *dialog)
+ppp_dialog_check_fields (GstConnectionDialog *dialog)
 {
-  return ((!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->connection_configured))) ||
-	  (get_entry_text (GTK_BIN (dialog->serial_port)->child)));
+  gchar *connection_type;
+  gboolean valid = TRUE;
+
+  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->connection_configured)))
+    return TRUE;
+
+  connection_type = connection_combo_get_value (GTK_COMBO_BOX (dialog->ppp_type_combo));
+
+  if (!connection_type)
+    return FALSE;
+
+  if (strcmp (connection_type, "modem") == 0)
+    valid = (get_entry_text (dialog->login) &&
+	     get_entry_text (dialog->phone_number) &&
+	     get_entry_text (GTK_BIN (dialog->serial_port)->child));
+  else if (strcmp (connection_type, "isdn") == 0)
+    valid = (get_entry_text (dialog->login) &&
+	     get_entry_text (dialog->phone_number));
+  else if (strcmp (connection_type, "pppoe") == 0)
+    valid = (get_entry_text (dialog->login) &&
+	     gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->pppoe_interface_combo)) != -1);
+  else if (strcmp (connection_type, "gprs") == 0)
+    valid = (get_entry_text (dialog->apn) &&
+	     get_entry_text (GTK_BIN (dialog->serial_port)->child));
+
+  g_free (connection_type);
+
+  return valid;
 }
 
 static int
@@ -466,6 +562,39 @@ populate_combo (GtkComboBox       *combo,
   g_object_unref (store);
 }
 
+static void
+populate_ethernet_interfaces (GstConnectionDialog *dialog,
+			      GstNetworkTool      *tool)
+{
+  GtkListStore *store;
+  GtkTreeIter iter;
+  OobsList *list;
+  OobsListIter list_iter;
+  gboolean valid;
+
+  list = oobs_ifaces_config_get_ifaces (tool->ifaces_config, OOBS_IFACE_TYPE_ETHERNET);
+  valid = oobs_list_get_iter_first (list, &list_iter);
+
+  store = gtk_list_store_new (1, OOBS_TYPE_IFACE_ETHERNET);
+
+  while (valid)
+    {
+      GObject *iface;
+
+      iface = oobs_list_get (list, &list_iter);
+
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter, 0, iface, -1);
+      g_object_unref (iface);
+
+      valid = oobs_list_iter_next (list, &list_iter);
+    }
+
+  gtk_combo_box_set_model (GTK_COMBO_BOX (dialog->pppoe_interface_combo),
+			   GTK_TREE_MODEL (store));
+  g_object_unref (store);
+}
+
 GstConnectionDialog*
 connection_dialog_init (GstTool *tool)
 {
@@ -503,6 +632,8 @@ connection_dialog_init (GstTool *tool)
   gcd->remote_address = gst_dialog_get_widget (tool->main_dialog, "connection_remote_address");
 
   /* modem */
+  gcd->ppp_type_combo = gst_dialog_get_widget (tool->main_dialog, "connection_ppp_type");
+  gcd->ppp_type_box = gst_dialog_get_widget (tool->main_dialog, "connection_ppp_type_box");
   gcd->login        = gst_dialog_get_widget (tool->main_dialog, "connection_login");
   gcd->password     = gst_dialog_get_widget (tool->main_dialog, "connection_password");
   gcd->serial_port  = gst_dialog_get_widget (tool->main_dialog, "connection_serial_port");
@@ -515,6 +646,14 @@ connection_dialog_init (GstTool *tool)
   gcd->peerdns      = gst_dialog_get_widget (tool->main_dialog, "connection_peerdns");
   gcd->persist      = gst_dialog_get_widget (tool->main_dialog, "connection_persist");
 
+  gcd->pppoe_interface_combo = gst_dialog_get_widget (tool->main_dialog, "connection_pppoe_ethernet");
+  gcd->apn = gst_dialog_get_widget (tool->main_dialog, "connection_apn");
+
+  gcd->pppoe_settings_table = gst_dialog_get_widget (tool->main_dialog, "connection_pppoe_settings_table");
+  gcd->modem_settings_table = gst_dialog_get_widget (tool->main_dialog, "connection_modem_settings_table");
+  gcd->modem_isp_table = gst_dialog_get_widget (tool->main_dialog, "connection_modem_isp_table");
+  gcd->gprs_isp_table = gst_dialog_get_widget (tool->main_dialog, "connection_gprs_isp_table");
+
   gcd->wireless_frame = gst_dialog_get_widget (tool->main_dialog, "connection_wireless");
   gcd->ethernet_frame = gst_dialog_get_widget (tool->main_dialog, "connection_ethernet");
   gcd->plip_frame     = gst_dialog_get_widget (tool->main_dialog, "connection_plip");
@@ -524,6 +663,7 @@ connection_dialog_init (GstTool *tool)
   gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (gcd->serial_port), 0);
 
   connection_essids_combo_init (GTK_COMBO_BOX_ENTRY (gcd->essid));
+  connection_pppoe_combo_init (GTK_COMBO_BOX (gcd->pppoe_interface_combo));
 
   return gcd;
 }
@@ -532,7 +672,7 @@ static void
 prepare_dialog_layout (GstConnectionDialog *dialog,
 		       OobsIface           *iface)
 {
-  if (OOBS_IS_IFACE_ISDN (iface))
+  if (OOBS_IS_IFACE_PPP (iface))
     {
       gtk_widget_hide (dialog->wireless_frame);
       gtk_widget_hide (dialog->ethernet_frame);
@@ -540,6 +680,7 @@ prepare_dialog_layout (GstConnectionDialog *dialog,
       gtk_widget_show (dialog->options_page);
       gtk_widget_show (dialog->isp_frame);
       gtk_widget_show (dialog->account_frame);
+      gtk_widget_show (dialog->ppp_type_box);
 
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (dialog->notebook), TRUE);
       gtk_notebook_set_show_border (GTK_NOTEBOOK (dialog->notebook), TRUE);
@@ -548,10 +689,9 @@ prepare_dialog_layout (GstConnectionDialog *dialog,
       gtk_container_set_border_width (GTK_CONTAINER (dialog->general_page), 12);
       gtk_container_set_border_width (GTK_CONTAINER (dialog->notebook), 6);
 
-      if (OOBS_IS_IFACE_MODEM (iface))
-	gtk_widget_show (dialog->modem_page);
-      else
-	gtk_widget_hide (dialog->modem_page);
+      gtk_widget_show (dialog->modem_page);
+
+      /* FIXME: hide/show things depending on PPP type */
     }
   else
     {
@@ -560,6 +700,7 @@ prepare_dialog_layout (GstConnectionDialog *dialog,
       gtk_widget_hide (dialog->options_page);
       gtk_widget_hide (dialog->isp_frame);
       gtk_widget_hide (dialog->account_frame);
+      gtk_widget_hide (dialog->ppp_type_box);
 
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (dialog->notebook), FALSE);
       gtk_notebook_set_show_border (GTK_NOTEBOOK (dialog->notebook), FALSE);
@@ -628,13 +769,8 @@ connection_dialog_prepare (GstConnectionDialog *dialog, OobsIface *iface)
 
   general_prepare (dialog, iface);
 
-  if (OOBS_IS_IFACE_ISDN (iface) || OOBS_IS_IFACE_MODEM (iface))
-    {
-      isdn_dialog_prepare (dialog);
-
-      if (OOBS_IS_IFACE_MODEM (iface))
-	modem_dialog_prepare (dialog);
-    }
+  if (OOBS_IS_IFACE_PPP (iface))
+    ppp_dialog_prepare (dialog);
   else
     {
       if (OOBS_IS_IFACE_WIRELESS (iface))
@@ -660,14 +796,8 @@ connection_save (GstConnectionDialog *dialog)
 
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->connection_configured));
 
-  if (OOBS_IS_IFACE_MODEM (dialog->iface) ||
-      OOBS_IS_IFACE_ISDN (dialog->iface))
-    {
-      if (OOBS_IS_IFACE_MODEM (dialog->iface))
-	modem_dialog_save (dialog);
-
-      isdn_dialog_save (dialog);
-    }
+  if (OOBS_IS_IFACE_PPP (dialog->iface))
+    ppp_dialog_save (dialog);
   else if (OOBS_IS_IFACE_ETHERNET (dialog->iface))
     {
       if (OOBS_IS_IFACE_WIRELESS (dialog->iface))
@@ -692,11 +822,8 @@ connection_check_fields (GstConnectionDialog *dialog)
     active = ethernet_dialog_check_fields (dialog);
   else if (OOBS_IS_IFACE_PLIP (dialog->iface))
     active = plip_dialog_check_fields (dialog);
-  else if (OOBS_IS_IFACE_MODEM (dialog->iface))
-    active = (isdn_dialog_check_fields (dialog) &&
-	      modem_dialog_check_fields (dialog));
-  else
-    active = isdn_dialog_check_fields (dialog);
+  else if (OOBS_IS_IFACE_PPP (dialog->iface))
+    active = ppp_dialog_check_fields (dialog);
 
   gtk_widget_set_sensitive (dialog->ok_button, active);
 }
@@ -738,6 +865,7 @@ connection_dialog_set_sensitive (GstConnectionDialog *dialog, gboolean active)
   gtk_widget_set_sensitive (dialog->options_page,   active);
   gtk_widget_set_sensitive (dialog->isp_frame,      active);
   gtk_widget_set_sensitive (dialog->account_frame,  active);
+  gtk_widget_set_sensitive (dialog->ppp_type_box,   active);
 }
 
 void
@@ -750,6 +878,12 @@ connection_dialog_update (GstConnectionDialog *gcd)
   populate_combo (GTK_COMBO_BOX (gcd->key_type_combo),
 		  oobs_ifaces_config_get_available_key_types (GST_NETWORK_TOOL (tool)->ifaces_config),
 		  key_type_descriptions, G_N_ELEMENTS (key_type_descriptions));
+
+  populate_combo (GTK_COMBO_BOX (gcd->ppp_type_combo),
+		  oobs_ifaces_config_get_available_ppp_types (GST_NETWORK_TOOL (tool)->ifaces_config),
+		  ppp_type_descriptions, G_N_ELEMENTS (ppp_type_descriptions));
+
+  populate_ethernet_interfaces (gcd, GST_NETWORK_TOOL (tool));
 }
 
 void

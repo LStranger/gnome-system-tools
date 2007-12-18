@@ -1,3 +1,17 @@
+2007-12-18  Carlos Garnacho  <carlosg@gnome.org>
+
+	Adapt to latest liboobs changes. Replace OobsIfaceModem and
+	OobsIfaceISDN with OobsIfacePPP.
+
+	* callbacks.[ch] (on_ppp_type_changed): added, updates PPP interface
+	configuration dialog when the connection type changes.
+	* connection.[ch]: Necessary changes to adapt to OobsIfacePPP, dialog
+	preparation, plus values checking, retrieving and saving.
+	* ifaces-list.c:
+	* network-tool.c:
+	* network-location.c: switch to OobsIfacePPP.
+	* main.c: connect new dialog fields signals.
+
 2007-12-12  Carlos Garnacho  <carlosg@gnome.org>
 
 	* network-tool.[ch]: keep a pointer to the hosts edition dialog.

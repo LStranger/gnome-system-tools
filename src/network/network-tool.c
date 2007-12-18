@@ -226,10 +226,7 @@ add_all_interfaces (GstNetworkTool *network_tool)
   ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_PLIP);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_MODEM);
-  add_interfaces (network_tool->interfaces_list, ifaces_list);
-
-  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_ISDN);
+  ifaces_list = oobs_ifaces_config_get_ifaces (network_tool->ifaces_config, OOBS_IFACE_TYPE_PPP);
   add_interfaces (network_tool->interfaces_list, ifaces_list);
 }
 

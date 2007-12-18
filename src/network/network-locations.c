@@ -87,7 +87,7 @@ PropType wireless_properties[] = {
   { NULL }
 };
 
-PropType isdn_properties[] = {
+PropType ppp_properties[] = {
   { "auto", TYPE_BOOLEAN },
   { "active", TYPE_BOOLEAN },
   { "configured", TYPE_BOOLEAN },
@@ -95,23 +95,8 @@ PropType isdn_properties[] = {
   { "password", TYPE_STRING },
   { "phone-number", TYPE_STRING },
   { "phone-prefix", TYPE_STRING },
-  { "default-gw", TYPE_BOOLEAN },
-  { "peer-dns", TYPE_BOOLEAN },
-  { "persistent", TYPE_BOOLEAN },
-  { "peer-noauth", TYPE_BOOLEAN },
-  { NULL }
-};
-
-PropType modem_properties[] = {
-  { "auto", TYPE_BOOLEAN },
-  { "active", TYPE_BOOLEAN },
-  { "configured", TYPE_BOOLEAN },
-  { "login", TYPE_STRING },
-  { "password", TYPE_STRING },
-  { "phone-number", TYPE_STRING },
-  { "phone-prefix", TYPE_STRING },
-  { "default-gw", TYPE_BOOLEAN },
-  { "peer-dns", TYPE_BOOLEAN },
+  { "default-gateway", TYPE_BOOLEAN },
+  { "use-peer-dns", TYPE_BOOLEAN },
   { "persistent", TYPE_BOOLEAN },
   { "peer-noauth", TYPE_BOOLEAN },
   { "serial-port", TYPE_STRING },
@@ -573,8 +558,7 @@ compare_interfaces (OobsIfacesConfig *config,
       !compare_interfaces_list (config, OOBS_IFACE_TYPE_WIRELESS, wireless_properties, key_file) ||
       !compare_interfaces_list (config, OOBS_IFACE_TYPE_IRLAN, ethernet_properties, key_file) ||
       !compare_interfaces_list (config, OOBS_IFACE_TYPE_PLIP, plip_properties, key_file) ||
-      !compare_interfaces_list (config, OOBS_IFACE_TYPE_MODEM, modem_properties, key_file) ||
-      !compare_interfaces_list (config, OOBS_IFACE_TYPE_ISDN, isdn_properties, key_file))
+      !compare_interfaces_list (config, OOBS_IFACE_TYPE_PPP, ppp_properties, key_file))
     return FALSE;
 
   return TRUE;
@@ -759,8 +743,7 @@ set_interfaces_config (OobsIfacesConfig *config,
   set_interfaces_list (config, OOBS_IFACE_TYPE_WIRELESS, wireless_properties, key_file);
   set_interfaces_list (config, OOBS_IFACE_TYPE_IRLAN, ethernet_properties, key_file);
   set_interfaces_list (config, OOBS_IFACE_TYPE_PLIP, plip_properties, key_file);
-  set_interfaces_list (config, OOBS_IFACE_TYPE_MODEM, modem_properties, key_file);
-  set_interfaces_list (config, OOBS_IFACE_TYPE_ISDN, isdn_properties, key_file);
+  set_interfaces_list (config, OOBS_IFACE_TYPE_PPP, ppp_properties, key_file);
 }
 
 gboolean
@@ -964,8 +947,7 @@ save_interfaces (OobsIfacesConfig *config,
   save_interfaces_list (config, OOBS_IFACE_TYPE_WIRELESS, wireless_properties, key_file);
   save_interfaces_list (config, OOBS_IFACE_TYPE_IRLAN, ethernet_properties, key_file);
   save_interfaces_list (config, OOBS_IFACE_TYPE_PLIP, plip_properties, key_file);
-  save_interfaces_list (config, OOBS_IFACE_TYPE_MODEM, modem_properties, key_file);
-  save_interfaces_list (config, OOBS_IFACE_TYPE_ISDN, isdn_properties, key_file);
+  save_interfaces_list (config, OOBS_IFACE_TYPE_PPP, ppp_properties, key_file);
 }
 
 static gboolean

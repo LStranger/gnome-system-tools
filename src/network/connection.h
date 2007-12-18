@@ -28,7 +28,7 @@
 typedef struct _GstConnectionDialog GstConnectionDialog;
 
 struct _GstConnectionDialog {
-  OobsIface  *iface;
+  OobsIface *iface;
   gboolean   changed;
   gboolean   standalone;
   GtkWidget *dialog;
@@ -61,13 +61,22 @@ struct _GstConnectionDialog {
   GtkWidget *local_address;
   GtkWidget *remote_address;
 
-  /* isdn */
+  /* ppp */
+  GtkWidget *ppp_type_combo;
+  GtkWidget *ppp_type_box;
   GtkWidget *login;
   GtkWidget *password;
   GtkWidget *phone_number;
   GtkWidget *dial_prefix;
 
-  /* modem */
+  GtkWidget *pppoe_interface_combo;
+  GtkWidget *apn;
+
+  GtkWidget *pppoe_settings_table;
+  GtkWidget *modem_settings_table;
+  GtkWidget *modem_isp_table;
+  GtkWidget *gprs_isp_table;
+
   GtkWidget *ppp_login;
   GtkWidget *ppp_password;
   GtkWidget *serial_port;

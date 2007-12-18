@@ -69,4 +69,8 @@ gboolean on_domain_focus_out   (GtkWidget     *widget,
 				GdkEventFocus *event,
 				gpointer       data);
 
+void on_ppp_type_changed    (GtkWidget *widget,
+			     gpointer   data);
+
+
 #endif /* __CALLBACKS_H */

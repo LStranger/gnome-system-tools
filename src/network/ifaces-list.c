@@ -89,7 +89,7 @@ iface_to_priority (OobsIface *iface)
     return 2;
   else if (OOBS_IS_IFACE_ETHERNET (iface))
     return 4;
-  else if (OOBS_IS_IFACE_MODEM (iface) || OOBS_IS_IFACE_ISDN (iface))
+  else if (OOBS_IS_IFACE_PPP (iface))
     return 3;
   else
     return 1;
@@ -187,10 +187,8 @@ iface_to_type (OobsIface *iface)
     return "ethernet";
   else if (OOBS_IS_IFACE_PLIP (iface))
     return "plip";
-  else if (OOBS_IS_IFACE_MODEM (iface))
-    return "modem";
-  else if (OOBS_IS_IFACE_ISDN (iface))
-    return "isdn";
+  else if (OOBS_IS_IFACE_PPP (iface))
+    return "ppp";
 
   return "unknown";
 }
@@ -250,7 +248,7 @@ get_iface_pixbuf (OobsIface *iface)
     icon = "gnome-dev-ethernet";
   else if (OOBS_IS_IFACE_PLIP (iface))
     icon = "plip";
-  else if (OOBS_IS_IFACE_ISDN (iface))
+  else if (OOBS_IS_IFACE_PPP (iface))
     icon = "gnome-modem";
 
   if (icon)
@@ -306,11 +304,11 @@ get_iface_secondary_text (OobsIface *iface)
 			      oobs_iface_plip_get_address (OOBS_IFACE_PLIP (iface)),
 			      oobs_iface_plip_get_remote_address (OOBS_IFACE_PLIP (iface)));
     }
-  else if (OOBS_IS_IFACE_ISDN (iface))
+  else if (OOBS_IS_IFACE_PPP (iface))
     {
       g_string_append_printf (str, _("<b>Phone number:</b> %s <b>Login:</b> %s"),
-			      oobs_iface_isdn_get_phone_number (OOBS_IFACE_ISDN (iface)),
-			      oobs_iface_isdn_get_login (OOBS_IFACE_ISDN (iface)));
+			      oobs_iface_ppp_get_phone_number (OOBS_IFACE_PPP (iface)),
+			      oobs_iface_ppp_get_login (OOBS_IFACE_PPP (iface)));
     }
 
   text = str->str;
@@ -334,10 +332,8 @@ get_iface_desc (OobsIface *iface, gboolean show_name)
     primary_text = N_("Wired connection");
   else if (OOBS_IS_IFACE_PLIP (iface))
     primary_text = N_("Parallel port connection");
-  else if (OOBS_IS_IFACE_MODEM (iface))
-    primary_text = N_("Modem connection");
-  else if (OOBS_IS_IFACE_ISDN (iface))
-    primary_text = N_("ISDN connection");
+  else if (OOBS_IS_IFACE_PPP (iface))
+    primary_text = N_("Point to point connection");
 
   secondary_text = get_iface_secondary_text (iface);
 
