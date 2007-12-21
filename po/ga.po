@@ -1,2101 +1,1137 @@
-# Irish translation of gnome-system-tools 
-# Copyright (C) 2003,2004 Free Software Foundation, Inc.
+# Irish translations for gnome-system-tools package.
+# Copyright (C) 2003-2007 Free Software Foundation, Inc.
 # Paul Duffy <dubhthach@frink.nuigalway.ie>, 2003.
 # Alastair McKinstry <mckinstry@computer.org>, 2004.
+# Seán de Búrca <leftmostcat@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-17 03:59+0100\n"
-"PO-Revision-Date: 2004-02-04 17:25+0100\n"
-"Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
+"POT-Creation-Date: 2007-12-21 13:54-0700\n"
+"PO-Revision-Date: 2007-12-21 13:54-0700\n"
+"Last-Translator: Seán de Búrca <leftmostcat@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gnome-system-tools.schemas.in.h:1
-msgid ""
-"Comma separated list of hosts that the GST will be able to access when the "
-"remote configuration option is enabled"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:2
-msgid "Dialog complexity for the boot-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:3
-msgid "Dialog complexity for the network-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:4
-msgid "Dialog complexity for the services-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:5
-msgid "Dialog complexity for the time-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:6
-msgid "Dialog complexity for the users-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:7
-msgid "Last GST version executed"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:8
-msgid "Remote hosts"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:9
-msgid ""
-"The GNOME System Tools have two data display modes: basic mode and advanced "
-"mode, the basic mode is intended to show less options than the advanced mode"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:10
-msgid ""
-"The GST are able to do remote configuration through SSH, enable this option "
-"to use this feature"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:11
-msgid "The last GST version that this computer has run"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:12
-msgid "Whether the tools will use remote administration or not"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:13
+#: ../gnome-system-tools.schemas.in.h:1
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 
-#: gnome-system-tools.schemas.in.h:14
-msgid "Whether the warning dialog should be shown or not"
+#: ../src/common/gst-dialog.c:179
+msgid "_Unlock"
+msgstr "_Díghlasáil"
+
+#: ../src/common/gst-platform-dialog.c:179
+msgid "The platform you are running is not supported by this tool"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
-msgid "*"
-msgstr "*"
-
-#: interfaces/boot.glade.in.h:2
-msgid "/dev/hda"
-msgstr "/dev/hda"
-
-#: interfaces/boot.glade.in.h:3
-msgid "/dev/hdb"
-msgstr "/dev/hdb"
-
-#: interfaces/boot.glade.in.h:4
-msgid "/dev/hdc"
-msgstr "/dev/hdc"
-
-#: interfaces/boot.glade.in.h:5
-msgid "/dev/hdd"
-msgstr "/dev/hdd"
-
-#: interfaces/boot.glade.in.h:6
-msgid "1024x768"
-msgstr "1024x768"
-
-#: interfaces/boot.glade.in.h:7
-msgid "1280x1024"
-msgstr "1280x1024"
-
-#: interfaces/boot.glade.in.h:8
-msgid "16,777,216"
-msgstr "16,777,216"
-
-#: interfaces/boot.glade.in.h:9
-msgid "256"
-msgstr "256"
-
-#: interfaces/boot.glade.in.h:10
-msgid "32,768"
-msgstr "32,768"
-
-#: interfaces/boot.glade.in.h:11
-msgid "640x480"
-msgstr "640x480"
-
-#: interfaces/boot.glade.in.h:12
-msgid "65,536"
-msgstr "65,536"
-
-#: interfaces/boot.glade.in.h:13
-msgid "800x600"
-msgstr "800x600"
-
-#: interfaces/boot.glade.in.h:14
-msgid "<b>Security</b>"
-msgstr "<b>Slándáil</b>"
-
-#: interfaces/boot.glade.in.h:15 interfaces/users.glade.in.h:4
-msgid "<span weight=\"bold\">Basic Settings</span>"
-msgstr "<span weight=\"bold\">Roghnachais Bunusach</span>"
-
-#: interfaces/boot.glade.in.h:16
-msgid "<span weight=\"bold\">Image Settings</span>"
-msgstr "<span weight=\"bold\">Roghnachais Íomha</span>"
-
-#: interfaces/boot.glade.in.h:17
-msgid "<span weight=\"bold\">Other Settings</span>"
-msgstr "<span weight=\"bold\">Roghnachais Eile</span>"
-
-#: interfaces/boot.glade.in.h:18
-msgid "<span weight=\"bold\">Starting the Computer</span>"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:19
-msgid "Ask at boot"
-msgstr "Ceist a chuir ag tosú"
-
-#: interfaces/boot.glade.in.h:20
-msgid ""
-"Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter append parameters which are passed "
-"to the kernel at boot time."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:21
-msgid "Click \"Forward\" to continue"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:22
-msgid "Confirmation"
-msgstr ""
-
-#. set window title
-#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
-#: src/boot/boot-druid.c:441
-msgid "Creating a new boot image"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:24
-msgid "Enable IDE SCSI emulation"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:25
-msgid ""
-"Enter a name for the boot image, and specify what kind of operating system "
-"it is."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:42
-msgid "Finished"
-msgstr "Críochnaithe"
-
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
-#: src/network/connection.c:1843
-msgid "Manual"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:28
-msgid "Modify the settings for an operating system or kernel."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:29
-msgid "Number of colors:"
-msgstr "Uimhir na dathanna:"
-
-#: interfaces/boot.glade.in.h:30
-msgid "Other parameters:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:31
-msgid "Password"
-msgstr "Pasfhocal:"
-
-#: interfaces/boot.glade.in.h:32
-msgid "Protect with password"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:33
-msgid "Resolution:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:34
-msgid "Seconds to wait before loading default kernel or OS"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:35
-msgid "Specify the partition on which the operating system is installed."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:36
-msgid ""
-"The new boot image has been added. Please click \"Apply\" to save your "
-"changes."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:37
-msgid ""
-"This assistant is designed to help you quickly and easily add a new boot "
-"image to your system."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:38
-msgid "Use this dialog to modify kernel parameters."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:39
-msgid ""
-"Use this tool to specify which operating systems users can choose at startup."
-msgstr ""
-
-#: interfaces/boot.glade.in.h:40
-msgid "Video modes (only frame buffer)"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:41
-msgid "_Add..."
-msgstr "_Suimigh..."
-
-#: interfaces/boot.glade.in.h:42
-msgid "_Device:"
-msgstr "_Gaireas:"
-
-#: interfaces/boot.glade.in.h:43
-msgid "_Edit"
-msgstr "_Eagar"
-
-#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
-msgid "_Initrd image path:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:45
-msgid "_Kernel image path:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:46
-msgid "_Name:"
-msgstr "Ai_nm:"
-
-#: interfaces/boot.glade.in.h:47
-msgid "_Operating system:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:48
-msgid "_Parameters:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:49
-msgid "_Root file system device:"
-msgstr ""
-
-#: interfaces/common.glade.in.h:2
-msgid ""
-"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
-"supported by this tool</span>"
-msgstr ""
-
-#: interfaces/common.glade.in.h:3
-msgid ""
-"<span weight=\"bold\" size=\"larger\">To run this tool, you need "
-"administrator privileges</span>"
-msgstr ""
-
-#: interfaces/common.glade.in.h:4
-msgid "Complexity"
-msgstr ""
-
-#: interfaces/common.glade.in.h:5
-#, fuzzy
-msgid "Enter Password"
-msgstr "Passfhocal:"
-
-#: interfaces/common.glade.in.h:6
+#. label
+#: ../src/common/gst-platform-dialog.c:185
 msgid ""
 "If you know for sure that it works like one of the platforms listed below, "
 "you can select that and continue. Note, however, that this might damage the "
 "system configuration or downright cripple your computer."
 msgstr ""
 
-#: interfaces/common.glade.in.h:7
-msgid "Remote administration"
-msgstr ""
-
-#: interfaces/common.glade.in.h:8
-msgid "Run _Without Password"
-msgstr "_Rith gan passfhocal"
-
-#: interfaces/common.glade.in.h:9
-msgid "Scanning system configuration..."
-msgstr ""
-
-#: interfaces/common.glade.in.h:10
-msgid ""
-"To acquire such privileges, enter your root password below. If you don't "
-"specify a password, you will be  unable to modify your system configuration."
-msgstr ""
-
-#: interfaces/common.glade.in.h:11
-msgid "Unsupported Platform"
+#: ../src/common/gst-platform-dialog.c:212
+#, fuzzy
+msgid "Unsupported platform"
 msgstr "Córas Gan tacaigh"
 
-#: interfaces/common.glade.in.h:12
-msgid "Use this window to select the computer you wish to configure"
+#: ../src/common/gst-polkit-button.c:126
+msgid "This action is allowed"
 msgstr ""
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
-msgid "_Password:"
-msgstr "_Pasfhocal:"
-
-#: interfaces/network.glade.in.h:2
-msgid "/dev/modem"
-msgstr "/dev/modem"
-
-#: interfaces/network.glade.in.h:3
-msgid "/dev/ttyS0"
-msgstr "/dev/ttyS0"
-
-#: interfaces/network.glade.in.h:4
-msgid "/dev/ttyS1"
-msgstr "/dev/ttyS1"
-
-#: interfaces/network.glade.in.h:5
-msgid "/dev/ttyS2"
-msgstr "/dev/ttyS2"
-
-#: interfaces/network.glade.in.h:6
-msgid "/dev/ttyS3"
-msgstr "/dev/ttyS3"
-
-#: interfaces/network.glade.in.h:7
-msgid "<b>Profile Settings</b>"
+#: ../src/common/gst-polkit-button.c:140
+msgid "This action is not allowed"
 msgstr ""
 
-#: interfaces/network.glade.in.h:8
-msgid "<span weight=\"bold\">Access Settings</span>"
+#: ../src/common/gst-tool.c:184
+msgid "The configuration could not be loaded"
 msgstr ""
 
-#: interfaces/network.glade.in.h:9
-msgid "<span weight=\"bold\">Account Data</span>"
+#: ../src/common/gst-tool.c:185
+msgid "You are not allowed to access the system configuration."
 msgstr ""
 
-#: interfaces/network.glade.in.h:10
-msgid "<span weight=\"bold\">Connection settings</span>"
+#: ../src/common/gst-tool.c:187
+msgid "The configuration could not be saved"
 msgstr ""
 
-#: interfaces/network.glade.in.h:11
-msgid "<span weight=\"bold\">Connection</span>"
+#: ../src/common/gst-tool.c:188
+msgid "You are not allowed to modify the system configuration."
 msgstr ""
 
-#: interfaces/network.glade.in.h:12
-msgid "<span weight=\"bold\">DNS Servers</span>"
+#: ../src/common/gst-tool.c:417
+msgid "Could not display help"
+msgstr "Níorbh fhéidir cabhair a thaispeáint"
+
+#: ../src/common/gst-tool.c:577
+msgid "The system configuration has potentially changed."
 msgstr ""
 
-#: interfaces/network.glade.in.h:13
-msgid "<span weight=\"bold\">Host Settings</span>"
+#: ../src/common/gst-tool.c:579
+msgid "Update content? This will lose any modification in course."
 msgstr ""
 
-#: interfaces/network.glade.in.h:14
-msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
-msgstr ""
+#: ../src/network/address-list.c:76 ../src/network/hosts.c:31
+#: ../src/shares/table.c:38 ../src/users/table.c:38
+msgid "_Add"
+msgstr "Cuir _Leis"
 
-#: interfaces/network.glade.in.h:15
-msgid "<span weight=\"bold\">PPP Settings</span>"
-msgstr ""
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:40
+msgid "_Delete"
+msgstr "_Scrios"
 
-#: interfaces/network.glade.in.h:16
-msgid "<span weight=\"bold\">Search Domains</span>"
-msgstr ""
+#: ../src/network/address-list.c:486
+#, fuzzy
+msgid "Type address"
+msgstr "Seoladh Ip"
 
-#: interfaces/network.glade.in.h:17
-msgid "<span weight=\"bold\">Windows Networking</span>"
-msgstr ""
-
-#: interfaces/network.glade.in.h:18
-msgid "<span weight=\"bold\">Wireless settings:</span>"
-msgstr ""
-
-#: interfaces/network.glade.in.h:19
-msgid "A_liases:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:20 interfaces/users.glade.in.h:13
-msgid "Account"
-msgstr "Cúntas:"
-
-#: interfaces/network.glade.in.h:21
-msgid "Activate"
-msgstr ""
-
-#: interfaces/network.glade.in.h:22
-msgid "Activate when the computer _starts"
-msgstr ""
-
-#: interfaces/network.glade.in.h:23
-msgid "Address configuration"
+#: ../src/network/callbacks.c:237 ../src/network/callbacks.c:487
+#, fuzzy
+msgid "Changing interface configuration"
 msgstr "Cumraíocht Sheoladh"
 
-#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
-msgid "Advanced"
-msgstr "Árdmodh"
-
-#: interfaces/network.glade.in.h:25
-msgid "Advanced PPP connection tuning."
+#: ../src/network/callbacks.c:299
+msgid "Could not autodetect modem device"
 msgstr ""
 
-#: interfaces/network.glade.in.h:26
-msgid "Aliases of other computers."
-msgstr ""
-
-#: interfaces/network.glade.in.h:27
-msgid "Allow activation control for all _users"
-msgstr ""
-
-#: interfaces/network.glade.in.h:28
-msgid "Auto"
-msgstr "Uath."
-
-#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
-msgid "BOOTP"
-msgstr "BOOTP"
-
-#: interfaces/network.glade.in.h:30
-msgid "Co_nfiguration:"
-msgstr "_Cumraiocht:"
-
-#: interfaces/network.glade.in.h:31
-msgid "Connection _name:"
-msgstr "Ainm _Cheangal:"
-
-#: interfaces/network.glade.in.h:32
-msgid "Connection name"
-msgstr "Ainm Cheangal"
-
-#: interfaces/network.glade.in.h:33
-msgid "Connection type"
-msgstr "Saghas Cheangal"
-
-#: interfaces/network.glade.in.h:34
-msgid "Connections"
-msgstr ""
-
-#. set window titles
-#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
-msgid "Creating a new network connection"
-msgstr ""
-
-#: interfaces/network.glade.in.h:36
-msgid "Current network profile:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
-msgid "DHCP"
-msgstr "DHCP"
-
-#: interfaces/network.glade.in.h:38
-msgid "DNS"
-msgstr "DNS"
-
-#: interfaces/network.glade.in.h:39
-msgid "Default gateway device:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:40
-msgid "Device:"
-msgstr "Gaireas:"
-
-#: interfaces/network.glade.in.h:41
-msgid "Domain / _Workgroup:"
-msgstr "Fearannas / _Grupa-Oibre:"
-
-#: interfaces/network.glade.in.h:43
-msgid "General"
-msgstr "Gineréal"
-
-#: interfaces/network.glade.in.h:44
-msgid "Hosts"
-msgstr "Óstanna"
-
-#: interfaces/network.glade.in.h:45
-msgid "How the names of other computers are found."
-msgstr ""
-
-#: interfaces/network.glade.in.h:46
-msgid "How this computer is identified."
-msgstr ""
-
-#: interfaces/network.glade.in.h:47
-msgid "How to access other computers."
-msgstr ""
-
-#: interfaces/network.glade.in.h:48
-msgid "How to dial up to the Internet."
-msgstr ""
-
-#: interfaces/network.glade.in.h:49
-msgid "ISP phone number"
-msgstr ""
-
-#: interfaces/network.glade.in.h:50
-msgid "Interface properties"
-msgstr ""
-
-#: interfaces/network.glade.in.h:52
-msgid "Modem _volume:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:53
-msgid "Network name:"
-msgstr "Ainm Líon:"
-
-#: interfaces/network.glade.in.h:54
-msgid "Network profiles"
-msgstr ""
-
-#: interfaces/network.glade.in.h:55
-msgid "Network profiles can be used to store different network configurations."
-msgstr ""
-
-#: interfaces/network.glade.in.h:56
-msgid "Networking Settings"
-msgstr ""
-
-#: interfaces/network.glade.in.h:57
-msgid "New network profile"
-msgstr ""
-
-#: interfaces/network.glade.in.h:58
+#: ../src/network/callbacks.c:302
 msgid ""
-"Next, please enter the user name and password which were assigned to you by "
-"your ISP."
+"Check that the device is not busy and that is correctly attached to the "
+"computer."
 msgstr ""
 
-#: interfaces/network.glade.in.h:59
+#: ../src/network/callbacks.c:523
+msgid "The host name has changed"
+msgstr ""
+
+#: ../src/network/callbacks.c:526
 msgid ""
-"Now, please enter the address that this network device will have, and the "
-"remote address to which it will be connected."
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
 msgstr ""
 
-#: interfaces/network.glade.in.h:60
-msgid "Now, please enter the address that this network device will have."
-msgstr ""
-
-#: interfaces/network.glade.in.h:61
-msgid "Now, please give this connection a name."
-msgstr ""
-
-#: interfaces/network.glade.in.h:62
-msgid "Number to _access an external line:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:63
-msgid "Number to get to an _external line:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:64
-msgid "PPPD _options:"
-msgstr "_Roghnachais PPPD:"
-
-#: interfaces/network.glade.in.h:65
-msgid "Pa_ssword (confirm):"
-msgstr "Pa_sfhocali (arís):"
-
-#: interfaces/network.glade.in.h:66
-msgid "Phone _number:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:67
-msgid ""
-"Please enter the phone number you use to connect to the internet. This "
-"number is provided by your ISP."
-msgstr ""
-
-#: interfaces/network.glade.in.h:68
-msgid ""
-"Please select the wireless device that you want to configure and set the "
-"network name for this interface"
-msgstr ""
-
-#: interfaces/network.glade.in.h:69
-msgid "Please, give this network profile a name and a description."
-msgstr ""
-
-#: interfaces/network.glade.in.h:70
-msgid "Please, select which type of connection you would like to add."
-msgstr ""
-
-#: interfaces/network.glade.in.h:71 interfaces/users.glade.in.h:38
-msgid "Profile _name:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:72
-msgid "Pulses"
-msgstr ""
-
-#: interfaces/network.glade.in.h:73
-msgid "Se_condary:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:74
-msgid "Set _DNS servers manually"
-msgstr ""
-
-#: interfaces/network.glade.in.h:75
-msgid "Set modem as default _route to internet"
-msgstr ""
-
-#: interfaces/network.glade.in.h:76
-msgid ""
-"This assistant will help you configure a new \n"
-"network connection."
-msgstr ""
-
-#: interfaces/network.glade.in.h:78
-msgid ""
-"To continue configuring your network connection, click \"Next\". To quit, "
-"click \"Cancel\"."
-msgstr ""
-
-#: interfaces/network.glade.in.h:79
-msgid "Tones"
-msgstr ""
-
-#: interfaces/network.glade.in.h:80
-msgid "Use \"Auto\" if unsure."
-msgstr ""
-
-#: interfaces/network.glade.in.h:81
-msgid "Use this dialog for setting the configuration for this interface"
-msgstr ""
-
-#: interfaces/network.glade.in.h:82
-msgid "Username and password"
-msgstr ""
-
-#: interfaces/network.glade.in.h:83
-msgid "WI_NS server:"
-msgstr "Friothálaí WI_NS:"
-
-#: interfaces/network.glade.in.h:84
-msgid "Wireless device:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:85
-msgid "Wireless settings"
-msgstr ""
-
-#: interfaces/network.glade.in.h:86
-msgid ""
-"You are about to create a new network connection. Please click \"Apply\" to "
-"save your changes."
-msgstr ""
-
-#: interfaces/network.glade.in.h:87
-msgid "_Autodetect"
-msgstr ""
-
-#: interfaces/network.glade.in.h:88
-msgid "_Comment:"
-msgstr "_Nota:"
-
-#: interfaces/network.glade.in.h:89
-msgid "_Configuration:"
-msgstr "_Cumraíocht:"
-
-#: interfaces/network.glade.in.h:90
-msgid "_Deactivate"
-msgstr ""
-
-#: interfaces/network.glade.in.h:91 interfaces/users.glade.in.h:55
-msgid "_Delete"
-msgstr "_Dealaigh"
-
-#: interfaces/network.glade.in.h:92
-msgid "_Description:"
-msgstr "_Tuarascail:"
-
-#: interfaces/network.glade.in.h:93
-msgid "_Dial type:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:94
-msgid "_Domain name:"
-msgstr "Ainm an _Fearannas:"
-
-#: interfaces/network.glade.in.h:95
-msgid "_Enable Windows networking"
-msgstr ""
-
-#: interfaces/network.glade.in.h:96
-msgid "_Ethernet"
-msgstr "_Ethernet"
-
-#: interfaces/network.glade.in.h:97
-msgid "_Gateway address:"
-msgstr "Seoladh _Geata:"
-
-#: interfaces/network.glade.in.h:98
-msgid "_Hostname:"
-msgstr "_Óstainm:"
-
-#: interfaces/network.glade.in.h:99
-msgid "_IP address:"
-msgstr "seoladh _IP:"
-
-#: interfaces/network.glade.in.h:100
-msgid "_IR LAN"
-msgstr "_IR LAN"
-
-#: interfaces/network.glade.in.h:101
-msgid "_Local IP address:"
-msgstr "Seoladh IP _Áitiúl:"
-
-#: interfaces/network.glade.in.h:102
-msgid "_Local IP:"
-msgstr "IP _Áitiúl:"
-
-#: interfaces/network.glade.in.h:103
-msgid "_Modem (PPP)"
-msgstr "_Modéim (PPP):"
-
-#: interfaces/network.glade.in.h:104
-msgid "_Modem port:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:105
-msgid "_Network Profiles"
-msgstr ""
-
-#: interfaces/network.glade.in.h:106
-msgid "_Network name:"
-msgstr "Ainm _Lín:"
-
-#: interfaces/network.glade.in.h:107
-msgid "_Parallel Line"
-msgstr ""
-
-#: interfaces/network.glade.in.h:109
-msgid "_Phone number:"
-msgstr "Uimhir _Guthán:"
-
-#: interfaces/network.glade.in.h:110
-msgid "_Primary:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:111
-msgid "_Remote IP address:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:112
-msgid "_Remote IP:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:113
-msgid "_Retry if the connection breaks or fails to start"
-msgstr ""
-
-#: interfaces/network.glade.in.h:114
-msgid "_Save Current"
-msgstr ""
-
-#: interfaces/network.glade.in.h:115
-msgid "_Start PPP as soon as modem connects"
-msgstr ""
-
-#: interfaces/network.glade.in.h:116
-msgid "_Subnet mask:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:117
-msgid "_Update DNS when this connection becomes active"
-msgstr ""
-
-#: interfaces/network.glade.in.h:118
-msgid "_Use remote IP as default gateway"
-msgstr ""
-
-#: interfaces/network.glade.in.h:119 interfaces/users.glade.in.h:65
-msgid "_Username:"
-msgstr "Ainm an _èsáideoir:"
-
-#: interfaces/network.glade.in.h:120
-msgid "_Wireless"
-msgstr ""
-
-#: interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">Description</span>"
-msgstr ""
-
-#: interfaces/services.glade.in.h:2
-msgid "<span weight=\"bold\">General Information</span>"
-msgstr ""
-
-#: interfaces/services.glade.in.h:3
-msgid "<span weight=\"bold\">Service Settings</span>"
-msgstr ""
-
-#: interfaces/services.glade.in.h:4
-msgid "Click on an item in the list to show it's description."
-msgstr ""
-
-#: interfaces/services.glade.in.h:5
-msgid "Description:"
-msgstr "Tuarascail:"
-
-#: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr ""
-
-#: interfaces/services.glade.in.h:7
-msgid "Priority:"
-msgstr ""
-
-#: interfaces/services.glade.in.h:8
-msgid "Service _Properties"
-msgstr ""
-
-#: interfaces/services.glade.in.h:9
-msgid "Service:"
-msgstr "Seirbhís:"
-
-#: interfaces/services.glade.in.h:10
-msgid "Use this tool to specify which services to run"
-msgstr ""
-
-#: interfaces/time.glade.in.h:1
-msgid "(unconfigured)"
-msgstr ""
-
-#: interfaces/time.glade.in.h:3
-msgid ":"
-msgstr ":"
-
-#: interfaces/time.glade.in.h:4
-msgid "<span weight=\"bold\">Time Configuration</span>"
-msgstr ""
+#: ../src/network/callbacks.c:532
+msgid "Change _Host name"
+msgstr "Athraigh Ó_stainm"
 
-#: interfaces/time.glade.in.h:5
-msgid ""
-"Please select the current date and time. You can also specify a time zone "
-"and a time server."
-msgstr ""
-
-#: interfaces/time.glade.in.h:6
-msgid "S_ynchronize clock with Internet servers:"
-msgstr ""
-
-#: interfaces/time.glade.in.h:7
-msgid "Se_lect Servers..."
-msgstr ""
-
-#: interfaces/time.glade.in.h:8
-msgid "Select the servers you wish to use for time synchronization."
-msgstr ""
-
-#: interfaces/time.glade.in.h:9
-msgid "Time zone:"
-msgstr ""
-
-#: interfaces/time.glade.in.h:10
-msgid "To select a time zone, click on one of the dots on the map"
-msgstr ""
-
-#: interfaces/time.glade.in.h:11
-msgid "_Date:"
-msgstr "_Dáta:"
-
-#: interfaces/time.glade.in.h:12
-msgid "_Select Time Zone..."
-msgstr ""
-
-#: interfaces/time.glade.in.h:13
-msgid "_Time:"
-msgstr "_Am:"
-
-#: interfaces/users.glade.in.h:2
-msgid "<span weight=\"bold\">Advanced Settings</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:3
-msgid "<span weight=\"bold\">Automatic UID/GID</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:5
-msgid "<span weight=\"bold\">Contact Information</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:6
-msgid "<span weight=\"bold\">Group Members</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:7
-msgid "<span weight=\"bold\">Optional Settings</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:8
-msgid "<span weight=\"bold\">Password Settings</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:9
-msgid "<span weight=\"bold\">Password</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:10
-msgid "<span weight=\"bold\">Profile Settings</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:11
-msgid "<span weight=\"bold\">System Defaults</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:12
-msgid "<span weight=\"bold\">User Profile</span>"
-msgstr ""
-
-#: interfaces/users.glade.in.h:15
-msgid "Assign a random password by default"
-msgstr ""
-
-#: interfaces/users.glade.in.h:16
-msgid "Check password _quality"
-msgstr ""
-
-#: interfaces/users.glade.in.h:17
-msgid "Con_firmation:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:18
-msgid "Days between warning and password expiration:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:19
-msgid "Default _group:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:20
-msgid "Default _shell:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:21
-msgid "Generate _random password"
-msgstr ""
-
-#: interfaces/users.glade.in.h:22
-msgid "Group Properties"
-msgstr ""
-
-#: interfaces/users.glade.in.h:23
-msgid "Group _ID:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:24
-msgid "Group _members:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:25
-msgid "Group _name:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:26
-msgid "Groups"
-msgstr ""
-
-#: interfaces/users.glade.in.h:27
-msgid "Ma_ximum days a password may be used:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:28
-msgid "Maximum UID:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:29
-msgid "Mi_nimum days between password changes:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:30
-msgid "Minimum GID:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:31
-msgid "Minimum UID:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:32
-msgid "Minimum days allowed between password changes:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:33
-msgid "Number of days that a password may be used:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:34
-msgid "O_ffice location:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:35
-msgid ""
-"On this page, you can define the system defaults which will be assigned to "
-"new users."
-msgstr ""
-
-#: interfaces/users.glade.in.h:36
-msgid "Other Groups"
-msgstr ""
-
-#: interfaces/users.glade.in.h:37
-msgid "Password set to: "
-msgstr ""
-
-#: interfaces/users.glade.in.h:39
-msgid "Set password b_y hand"
-msgstr ""
-
-#: interfaces/users.glade.in.h:40
-msgid "Show a_ll users and groups"
-msgstr ""
-
-#: interfaces/users.glade.in.h:41
-msgid ""
-"This is the list of the groups available on the system. Create new groups or "
-"edit existing groups with this dialog."
-msgstr ""
-
-#: interfaces/users.glade.in.h:42
-msgid ""
-"This is the list of the users available on the system. Create new users or "
-"edit existing user settings with this dialog."
-msgstr ""
-
-#: interfaces/users.glade.in.h:43
-msgid "User Profiles"
-msgstr ""
-
-#: interfaces/users.glade.in.h:44
-msgid "User _ID:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:45
-msgid "User _password:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:46
-msgid ""
-"User profiles can be used as templates to facilitate the creation of new "
-"users."
-msgstr ""
-
-#: interfaces/users.glade.in.h:47
-msgid "Users"
-msgstr "Úsáideoirí"
-
-#: interfaces/users.glade.in.h:48
-msgid "_Add Group..."
-msgstr "_Suimigh Grupa..."
-
-#: interfaces/users.glade.in.h:49
-msgid "_Add Profile..."
-msgstr ""
-
-#: interfaces/users.glade.in.h:50
-msgid "_Add User..."
-msgstr "_Suimigh Úsáideoir:"
-
-#: interfaces/users.glade.in.h:51
-msgid "_All users:"
-msgstr "_Gach úsáideoirí:"
-
-#: interfaces/users.glade.in.h:52
-msgid "_Available groups:"
-msgstr ""
+#: ../src/network/connection.c:39
+msgid "Automatic configuration (DHCP)"
+msgstr "Cumraíocht uathoibríoch (DHCP)"
 
-#: interfaces/users.glade.in.h:53
-msgid "_Comments"
-msgstr ""
-
-#: interfaces/users.glade.in.h:54
-msgid "_Days between warning and password expiration:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:56
-msgid "_Edit User Profiles..."
-msgstr ""
-
-#: interfaces/users.glade.in.h:57
-msgid "_Generate Password"
-msgstr ""
+#: ../src/network/connection.c:40
+msgid "Local Zeroconf network (IPv4 LL)"
+msgstr "Líonra Zeroconf logánta (IPv4 LL)"
 
-#: interfaces/users.glade.in.h:58
-msgid "_Home directory:"
-msgstr ""
+#: ../src/network/connection.c:41
+msgid "Static IP address"
+msgstr "Seoladh IP statach"
 
-#: interfaces/users.glade.in.h:59
-msgid "_Home phone:"
-msgstr ""
+#: ../src/network/connection.c:45
+msgid "WEP key (ascii)"
+msgstr "Eochair WEP (ascii)"
 
-#: interfaces/users.glade.in.h:60
-msgid "_Main group:"
-msgstr ""
+#: ../src/network/connection.c:46
+msgid "WEP key (hexadecimal)"
+msgstr "Eochair WEP (heicsidheachúlach)"
 
-#: interfaces/users.glade.in.h:61
-msgid "_Profile:"
-msgstr ""
+#: ../src/network/connection.c:47
+msgid "WPA Personal"
+msgstr "WPA Pearsanta"
 
-#: interfaces/users.glade.in.h:62
-msgid "_Real name:"
-msgstr ""
+#: ../src/network/connection.c:48
+msgid "WPA2 Personal"
+msgstr "WPA2 Pearsanta"
 
-#: interfaces/users.glade.in.h:63
-msgid "_Shell:"
-msgstr ""
+#: ../src/network/connection.c:52
+msgid "GPRS/UMTS"
+msgstr "GPRS/UMTS"
 
-#: interfaces/users.glade.in.h:64
-msgid "_User's groups:"
-msgstr ""
+#: ../src/network/connection.c:53
+msgid "ISDN modem"
+msgstr "Móideim ISDN"
 
-#: interfaces/users.glade.in.h:66
-msgid "_Work phone:"
-msgstr ""
+#: ../src/network/connection.c:54
+msgid "Serial modem"
+msgstr "Móideim srathach"
 
-#: interfaces/users.glade.in.h:67
-msgid "profiles_table"
-msgstr ""
+#: ../src/network/connection.c:55
+msgid "PPPoE"
+msgstr "PPPoE"
 
-#: src/boot/boot-append-gui.c:226
+#: ../src/network/connection.c:759
 #, c-format
-msgid "vga=%s is not a valid vga value"
-msgstr ""
-
-#: src/boot/boot-druid.c:430
-#, c-format
-msgid "Creating a new boot image (%d of %d)"
-msgstr ""
-
-#: src/boot/boot-druid.c:431
-msgid "Finished creating a new boot image"
-msgstr ""
-
-#: src/boot/boot-image.c:40 src/network/profile.c:467
-msgid "Unknown"
-msgstr "Gan fhois"
-
-#: src/boot/boot-image.c:41
-msgid "Windows NT"
-msgstr "Windows NT"
-
-#: src/boot/boot-image.c:42
-msgid "Windows 9x"
-msgstr "Windows 9x"
-
-#: src/boot/boot-image.c:43
-msgid "Dos"
-msgstr "Dos"
-
-#: src/boot/boot-image.c:44
-msgid "Linux"
-msgstr "Linux"
-
-#: src/boot/boot-image.c:45
-msgid "Linux swap"
-msgstr ""
-
-#: src/boot/boot-image.c:46
-msgid "GNU/Hurd"
-msgstr "GNU/Hurd"
-
-#: src/boot/boot-image.c:278
-#, c-format
-msgid "Invalid path: %s"
-msgstr ""
-
-#: src/boot/boot-image.c:294
-#, c-format
-msgid "Image '%s' already exists, please set another name."
-msgstr ""
-
-#: src/boot/boot-image.c:300
-#, c-format
-msgid "Invalid image name: '%s'"
-msgstr ""
-
-#: src/boot/boot-image.c:313
-#, c-format
-msgid "Invalid image: '%s'"
-msgstr ""
-
-#: src/boot/boot-image.c:331
-#, c-format
-msgid "Invalid root device: '%s'"
-msgstr ""
-
-#: src/boot/boot-settings.c:43
-msgid "_Module path:"
-msgstr ""
-
-#: src/boot/boot-settings.c:360 src/users/user-settings.c:502
-msgid "Password confirmation isn't correct."
-msgstr ""
-
-#: src/boot/boot.desktop.in.in.h:1
-msgid "Boot"
-msgstr ""
-
-#: src/boot/boot.desktop.in.in.h:2
-msgid "Configure the system boot process"
-msgstr ""
-
-#: src/boot/callbacks.c:75
-msgid "Boot Image Editor"
-msgstr ""
-
-#: src/boot/callbacks.c:169
-msgid "Boot Append Editor"
-msgstr ""
-
-#: src/boot/callbacks.c:390
-msgid ""
-"Without at least one boot image,\n"
-"your system will not start.\n"
-msgstr ""
-
-#: src/boot/callbacks.c:405
-#, c-format
-msgid "Are you sure you want to delete '%s'?"
-msgstr ""
-
-#: src/boot/callbacks.c:450
-#, c-format
-msgid ""
-"The file ``%s'' is missing or could not be read:\n"
-"The configuration will show empty."
-msgstr ""
-
-#: src/boot/main.c:73
-msgid "Boot Manager Settings"
-msgstr ""
-
-#: src/boot/table.c:41
-msgid "Name"
-msgstr "Ainm"
-
-#: src/boot/table.c:42
-msgid "Default"
-msgstr "Loicéad"
-
-#: src/boot/table.c:43 src/network/connection.c:479
-msgid "Type"
-msgstr "Saghas"
-
-#: src/boot/table.c:44
-msgid "Kernel Image"
-msgstr ""
-
-#: src/boot/table.c:45 src/network/connection.c:495
-msgid "Device"
-msgstr "Gaireas"
-
-#: src/boot/table.c:50 src/network/connection.c:57
-msgid "/_Add ..."
-msgstr "/_Suimigh..."
-
-#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
-msgid "/_Properties"
-msgstr "/_Álbachtaí"
-
-#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
-msgid "/_Delete"
-msgstr "/_Dealaigh"
-
-#. the proccess was running ssh
-#: src/common/gst-auth.c:83
-msgid "Could not connect to the computer."
-msgstr ""
-
-#. the proccess was running su
-#: src/common/gst-auth.c:86
-msgid "The password you entered is invalid."
-msgstr ""
-
-#: src/common/gst-auth.c:89
-msgid "An unexpected error has occurred."
-msgstr ""
-
-#: src/common/gst-dialog.c:61
-#, c-format
-msgid "Could not find widget: %s"
-msgstr ""
-
-#: src/common/gst-dialog.c:93
-msgid " More _Options"
-msgstr ""
-
-#: src/common/gst-dialog.c:94
-msgid " Fewer _Options"
-msgstr ""
-
-#: src/common/gst-dialog.c:507
-msgid ""
-"There are changes which haven't been applied.\n"
-"Apply them now?"
-msgstr ""
-
-#: src/common/gst-dialog.c:624
-#, c-format
-msgid "Error connection signal `%s' in widget `%s'"
-msgstr ""
-
-#: src/common/gst-tool.c:820
-#, c-format
-msgid "Skipping %s directive..."
-msgstr ""
-
-#: src/common/gst-tool.c:951
-msgid "Skipping actual save..."
-msgstr ""
-
-#: src/common/gst-tool.c:1024
-msgid ""
-"There was an error running the backend script,\n"
-"and the configuration could not be loaded."
-msgstr ""
-
-#: src/common/gst-tool.c:1505
-#, c-format
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
-"GNOME System Tools</span>"
-msgstr ""
-
-#: src/common/gst-tool.c:1508
-msgid ""
-"This is still a work in progress, and so it may have serious bugs. Due to "
-"the nature of these tools, bugs may render your computer <span weight=\"bold"
-"\">practically useless</span>, costing time, effort and sanity points. You "
-"have been warned. Thank you for trying out this prerelease of the GNOME "
-"System Tools!"
-msgstr ""
-
-#: src/common/gst-tool.c:1529
-msgid "Warning"
-msgstr ""
-
-#: src/common/gst-tool.c:1549
-msgid "Don't show me this again"
-msgstr ""
-
-#: src/common/gst-tool.c:1623
-msgid "GNOME System Tools"
-msgstr "Uirlisí an Córas le haighaidh GNOME"
-
-#: src/common/gst-ui.c:396
-msgid "Please restart your GNOME session for these changes to take effect."
-msgstr ""
-
-#: src/network/callbacks.c:365
-#, c-format
-msgid "Remove connection %s: \"%s\"?"
-msgstr ""
-
-#: src/network/callbacks.c:367
-#, c-format
-msgid "Remove connection %s?"
-msgstr ""
-
-#: src/network/callbacks.c:463
-msgid ""
-"You don't have SMB support installed. Please install SMB support in the "
-"system to enable windows networking."
-msgstr ""
-
-#: src/network/callbacks.c:466
-msgid "SMB support missing."
-msgstr ""
-
-#: src/network/callbacks.c:518
-msgid ""
-"The host name has changed. This will prevent you from launching new "
-"applications, and so you will have to log in again. Continue anyway?"
-msgstr ""
-
-#: src/network/callbacks.c:566
-msgid ""
-"wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate."
-msgstr ""
-
-#: src/network/callbacks.c:593
-msgid ""
-"wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate. Continue anyway?"
-msgstr ""
-
-#: src/network/callbacks.c:620
-msgid ""
-"The default gateway device is not activated. This will prevent you from "
-"connecting to the Internet. Continue anyway?"
-msgstr ""
-
-#: src/network/callbacks.c:675
-msgid ""
-"The default gateway device is missing gateway information. Please provide "
-"this information to proceed, or choose another default gateway device."
-msgstr ""
-
-#: src/network/callbacks.c:721
-msgid ""
-"The program redhat-config-network-cmd could not be found. This could render "
-"missing connections under the connections tab. Please install the redhat-"
-"config-network rpm package to avoid this."
-msgstr ""
-
-#: src/network/callbacks.c:758
-#, c-format
-msgid "Do you want to enable interface %s?"
-msgstr ""
-
-#: src/network/callbacks.c:768
-#, c-format
-msgid "Do you want to disable interface %s?"
-msgstr ""
-
-#: src/network/callbacks.c:855
-msgid ""
-"Could not autodetect modem device, check that this is not busy and that it's "
-"correctly attached"
-msgstr ""
-
-#: src/network/callbacks.c:907
-#, fuzzy
-msgid "Silent"
-msgstr "comhad"
-
-#: src/network/callbacks.c:909
-msgid "Low"
-msgstr ""
-
-#: src/network/callbacks.c:911
-msgid "Medium"
-msgstr ""
-
-#: src/network/callbacks.c:913
-msgid "Loud"
-msgstr ""
-
-#: src/network/connection.c:45
-msgid "Other type"
-msgstr ""
-
-#: src/network/connection.c:46
-msgid "Ethernet LAN card"
-msgstr ""
-
-#: src/network/connection.c:47
-msgid "Wireless LAN card"
-msgstr ""
-
-#: src/network/connection.c:48
-msgid "Modem or transfer cable"
-msgstr ""
-
-#: src/network/connection.c:49
-msgid "Parallel line"
-msgstr ""
-
-#: src/network/connection.c:50
-msgid "Infrared LAN"
-msgstr ""
-
-#: src/network/connection.c:51
-msgid "Loopback interface"
-msgstr ""
-
-#: src/network/connection.c:52
-msgid "Unknown interface type"
-msgstr ""
-
-#: src/network/connection.c:59
-msgid "/_Configure"
-msgstr ""
-
-#: src/network/connection.c:507
-msgid "Status"
-msgstr "Stádas"
-
-#: src/network/connection.c:516 src/network/profiles-table.c:62
-msgid "Description"
-msgstr "Tuarascail"
-
-#: src/network/connection.c:1707
-msgid ""
-"The IP address or netmask for the interface was left empty. Please enter "
-"valid IP addresses in those fields to continue."
-msgstr ""
-
-#: src/network/connection.c:1714
-msgid ""
-"The IP address or remote address for the interface was left empty. Please "
-"enter valid IP addresses in those fields to continue."
-msgstr ""
-
-#: src/network/connection.c:1720
-msgid ""
-"You chose to set the DNS servers for this connection manually, but left the "
-"IP address for the primary DNS empty. Please enter the IP for the primary "
-"DNS or uncheck the manual DNS option."
-msgstr ""
-
-#: src/network/connection.c:1726
-msgid ""
-"The modem device that the connection will use was left empty. Please enter a "
-"device or press \"autodetect\" to continue."
-msgstr ""
-
-#: src/network/connection.c:1731
-msgid ""
-"The phone number that the connection will use was left empty. Please enter a "
-"valid phone number to continue."
-msgstr ""
-
-#: src/network/connection.c:2082
-#, c-format
-msgid "The interface %s doesn't exist."
-msgstr ""
-
-#: src/network/dns.c:163 src/network/hosts.c:174
+msgid "%s Properties\n"
+msgstr "Airíonna %s\n"
+
+#: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
+#: ../src/shares/table.c:39 ../src/users/table.c:39
+msgid "_Properties"
+msgstr "_Airíonna"
+
+#: ../src/network/hosts.c:89
 msgid "IP Address"
 msgstr "Seoladh IP"
 
-#: src/network/hosts.c:182
+#: ../src/network/hosts.c:97
 msgid "Aliases"
+msgstr "Ailiasanna"
+
+#: ../src/network/ifaces-list.c:280
+msgid "This network interface is not configured"
 msgstr ""
 
-#: src/network/main.c:190
-msgid "Run the connection assistant."
+#: ../src/network/ifaces-list.c:282
+msgid "Roaming mode enabled"
 msgstr ""
 
-#: src/network/main.c:191
-msgid "Run the PPP connection assistant."
+#: ../src/network/ifaces-list.c:289
+#, c-format
+msgid "<b>Essid:</b> %s "
+msgstr "<b>Essid:</b> %s "
+
+#: ../src/network/ifaces-list.c:295
+#, c-format
+msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
+msgstr "<b>Seoladh:</b> %s <b>Masc fo-ghréasán:</b> %s"
+
+#: ../src/network/ifaces-list.c:299
+#, c-format
+msgid "<b>Address:</b> %s"
+msgstr "<b>Seoladh:</b> %s"
+
+#: ../src/network/ifaces-list.c:303
+#, c-format
+msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
+msgstr "<b>Seoladh:</b> %s <b>Seoladh cianda:</b> %s"
+
+#: ../src/network/ifaces-list.c:309
+#, c-format
+msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
+msgstr "<b>Uimhir fón:</b> %s <b>Logáil isteach:</b> %s"
+
+#: ../src/network/ifaces-list.c:328
+msgid "Wireless connection"
+msgstr "Nascadh gan sreang"
+
+#: ../src/network/ifaces-list.c:330
+msgid "Infrared connection"
 msgstr ""
 
-#: src/network/main.c:192
-msgid "Run the ethernet connection assistant."
+#: ../src/network/ifaces-list.c:332
+msgid "Wired connection"
 msgstr ""
 
-#: src/network/main.c:193
-msgid "Run the wlan connection assistant."
+#: ../src/network/ifaces-list.c:334
+msgid "Parallel port connection"
 msgstr ""
 
-#: src/network/main.c:194
-msgid "Run the parallel port connection assistant."
+#: ../src/network/ifaces-list.c:336
+msgid "Point to point connection"
 msgstr ""
 
-#: src/network/main.c:195
-msgid "Run the irlan connection assistant."
+#: ../src/network/locations-combo.c:221
+msgid "Changing network location"
 msgstr ""
 
-#: src/network/main.c:196
+#: ../src/network/locations-combo.c:265
+msgid "There is already a location with the same name"
+msgstr ""
+
+#: ../src/network/locations-combo.c:267
+msgid "Overwrite it?"
+msgstr "Forscríobh é?"
+
+#: ../src/network/locations-combo.c:355
+msgid "Save location"
+msgstr "Sábháil suíomh"
+
+#: ../src/network/locations-combo.c:370
+msgid "_Location name:"
+msgstr "Ainm _suímh:"
+
+#: ../src/network/locations-combo.c:422
+#, fuzzy, c-format
+msgid "Do you want to delete location \"%s\"?"
+msgstr "An bhfuil tú cinnte faoi an èsáideoir %s a scíosa"
+
+#: ../src/network/main.c:135
+msgid "The interface does not exist"
+msgstr ""
+
+#: ../src/network/main.c:137
+msgid ""
+"Check that it is correctly typed and that it is correctly supported by your "
+"system."
+msgstr ""
+
+#: ../src/network/main.c:183
 msgid "Configure a network interface"
 msgstr ""
 
-#: src/network/main.c:196
-msgid "interface"
+#: ../src/network/main.c:183
+msgid "INTERFACE"
+msgstr "COMHÉADAN"
+
+#: ../src/network/main.c:184
+msgid "Configure the first network interface with a specific type"
 msgstr ""
 
-#: src/network/main.c:203
-msgid "Network Settings"
-msgstr ""
+#: ../src/network/main.c:184
+msgid "TYPE"
+msgstr "CINEÁL"
 
-#: src/network/network-druid.c:64
-#, c-format
-msgid "Creating a new network connection (%d of %d)"
-msgstr ""
-
-#: src/network/network-druid.c:65
-msgid "Finished creating a new network connection"
-msgstr ""
-
-#: src/network/network.desktop.in.in.h:1
+#: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
 msgstr ""
 
-#: src/network/network.desktop.in.in.h:2
-msgid "Networking"
-msgstr ""
+#: ../src/network/network.desktop.in.in.h:2
+msgid "Network"
+msgstr "Líonra"
 
-#: src/network/profile.c:43
+#: ../src/network/network-tool.c:280
+msgid "Network Settings"
+msgstr "Sainroghanna Líonra"
+
+#: ../src/services/callbacks.c:59
 #, c-format
-msgid "Are you sure you want to delete profile %s?"
+msgid "Settings for service \"%s\""
 msgstr ""
 
-#: src/network/profiles-table.c:53
-msgid "Profile name"
+#: ../src/services/callbacks.c:119
+#, fuzzy, c-format
+msgid "Are you sure you want to deactivate %s?"
+msgstr "An bhfuil tú cinnte faoi an èsáideoir %s a scíosa"
+
+#: ../src/services/callbacks.c:123
+msgid ""
+"This may affect your system behavior in several ways, possibly leading to "
+"data loss."
 msgstr ""
 
-#: src/services/callbacks.c:45
-msgid "No description available."
+#: ../src/services/service.c:32
+msgid "Web server"
+msgstr "Freastalaí gréasáin"
+
+#: ../src/services/service.c:32
+msgid "Shares your web pages over the Internet"
 msgstr ""
 
-#: src/services/callbacks.c:301
-#, c-format
-msgid "Settings for service %s"
+#. GST_ROLE_WEB_SERVER
+#: ../src/services/service.c:33
+msgid "Actions scheduler"
 msgstr ""
 
-#: src/services/main.c:62
-msgid "Services Settings"
+#: ../src/services/service.c:33
+msgid "Executes scheduled actions"
 msgstr ""
 
-#: src/services/services.desktop.in.in.h:1
+#. GST_ROLE_COMMAND_SCHEDULER
+#: ../src/services/service.c:34
+msgid "Printer service"
+msgstr ""
+
+#: ../src/services/service.c:34
+msgid "Allows applications to use printers"
+msgstr ""
+
+#. GST_ROLE_PRINTER_SERVICE
+#: ../src/services/service.c:35
+#, fuzzy
+msgid "Mail agent"
+msgstr "comhad"
+
+#: ../src/services/service.c:35
+msgid "Delivers your outgoing mail"
+msgstr ""
+
+#. GST_ROLE_MTA
+#: ../src/services/service.c:36
+msgid "MTA authentication service"
+msgstr ""
+
+#. GST_ROLE_MTA_AUTH
+#: ../src/services/service.c:37
+msgid "Mail fetcher"
+msgstr ""
+
+#: ../src/services/service.c:37
+msgid "Downloads your mail from remote accounts"
+msgstr ""
+
+#. GST_ROLE_MAIL_FETCHER
+#: ../src/services/service.c:38
+msgid "Graphical login manager"
+msgstr ""
+
+#: ../src/services/service.c:38
+msgid "Allows users to login graphically"
+msgstr ""
+
+#. GST_ROLE_DISPLAY_MANAGER
+#: ../src/services/service.c:39
+#, fuzzy
+msgid "Database server"
+msgstr "Friothálaí nua:"
+
+#: ../src/services/service.c:39
+msgid "Data storage system"
+msgstr ""
+
+#. GST_ROLE_DATABASE_SERVER
+#. GST_ROLE_FILE_SERVER_SMB
+#. GST_ROLE_FILE_SERVER_FTP
+#: ../src/services/service.c:40 ../src/services/service.c:41
+#: ../src/services/service.c:43
+msgid "Folder sharing service"
+msgstr ""
+
+#: ../src/services/service.c:40 ../src/services/service.c:41
+msgid "Shares folders over your network"
+msgstr ""
+
+#. GST_ROLE_FILE_SERVER_NFS
+#: ../src/services/service.c:42
+msgid "FTP service"
+msgstr "Seirbhís FTP"
+
+#: ../src/services/service.c:42 ../src/services/service.c:43
+msgid "Shares folders over the Internet"
+msgstr ""
+
+#. GST_ROLE_FILE_SERVER_TFTP
+#: ../src/services/service.c:44
+msgid "Clock synchronization service"
+msgstr ""
+
+#: ../src/services/service.c:44
+msgid "Synchronizes your computer clock with Internet time servers"
+msgstr ""
+
+#. GST_ROLE_NTP_SERVER
+#: ../src/services/service.c:46
+msgid "Antivirus"
+msgstr "Frithvíreas"
+
+#: ../src/services/service.c:46
+msgid "Analyzes your incoming mail for virus"
+msgstr ""
+
+#. GST_ROLE_ANTIVIRUS
+#: ../src/services/service.c:47
+msgid "Firewall"
+msgstr "Balla Dóiteáin"
+
+#: ../src/services/service.c:47
+msgid "Blocks undesired network access to your computer"
+msgstr ""
+
+#. GST_ROLE_FIREWALL_MANAGEMENT
+#: ../src/services/service.c:49
+msgid "Dictionary server"
+msgstr ""
+
+#. GST_ROLE_DICTIONARY_SERVER
+#: ../src/services/service.c:50
+msgid "Speech synthesis support"
+msgstr ""
+
+#. GST_ROLE_SPEECH_SYNTHESIS
+#: ../src/services/service.c:51
+msgid "Computer activity logger"
+msgstr ""
+
+#: ../src/services/service.c:51
+msgid "Keeps a log of your computer activity"
+msgstr ""
+
+#. GST_ROLE_SYSTEM_LOGGER
+#: ../src/services/service.c:52
+msgid "Remote backup server"
+msgstr ""
+
+#. GST_ROLE_REMOTE_BACKUP
+#: ../src/services/service.c:53
+msgid "Spam filter"
+msgstr ""
+
+#. GST_ROLE_SPAM_FILTER
+#: ../src/services/service.c:54
+msgid "Remote shell server"
+msgstr ""
+
+#: ../src/services/service.c:54
+msgid "Secure shell server"
+msgstr ""
+
+#. GST_ROLE_SECURE_SHELL_SERVER
+#: ../src/services/service.c:55
+msgid "Application server"
+msgstr ""
+
+#. GST_ROLE_APPLICATION_SERVER
+#: ../src/services/service.c:56
+msgid "Automated crash reports support"
+msgstr ""
+
+#. GST_ROLE_AUTOMATED_CRASH_REPORTS_MANAGEMENT
+#: ../src/services/service.c:57
+msgid "System communication bus"
+msgstr ""
+
+#. GST_ROLE_DBUS,
+#: ../src/services/service.c:58
+#, fuzzy
+msgid "System configuration manager"
+msgstr "Cumraíocht Sheoladh"
+
+#. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:59
+msgid "School management platform"
+msgstr ""
+
+#. GST_ROLE_SCHOOL_MANAGEMENT_PLATFORM
+#: ../src/services/service.c:60
+msgid "Network security auditor"
+msgstr ""
+
+#. GST_ROLE_SECURITY_AUDITING
+#: ../src/services/service.c:61
+msgid "Web calendar server"
+msgstr ""
+
+#. GST_ROLE_WEB_CALENDAR_SERVER
+#: ../src/services/service.c:62
+#, fuzzy
+msgid "OEM configuration manager"
+msgstr "Cumraíocht Sheoladh"
+
+#. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:63
+msgid "Terminal multiplexor"
+msgstr ""
+
+#. GST_ROLE_TERMINAL_MULTIPLEXOR
+#: ../src/services/service.c:64
+msgid "Disk quota activation"
+msgstr ""
+
+#. GST_ROLE_QUOTA_MANAGEMENT
+#: ../src/services/service.c:65
+msgid "Package index monitor"
+msgstr ""
+
+#. GST_ROLE_PACKAGE_INDEX_MONITORING
+#: ../src/services/service.c:66
+msgid "Network service"
+msgstr "Seirbhís líonra"
+
+#. GST_ROLE_NETWORK
+#: ../src/services/service.c:67
+msgid "Dynamic DNS services updater"
+msgstr ""
+
+#. GST_ROLE_DYNAMIC_DNS_SERVICE
+#: ../src/services/service.c:68
+msgid "DHCP server"
+msgstr "Freastalaí DHCP"
+
+#. GST_ROLE_DHCP_SERVER
+#: ../src/services/service.c:69
+#, fuzzy
+msgid "Domain name server"
+msgstr "Ainm an _Fearannas:"
+
+#. GST_ROLE_DNS
+#: ../src/services/service.c:70
+msgid "Proxy cache service"
+msgstr ""
+
+#. GST_ROLE_PROXY_CACHE
+#: ../src/services/service.c:71
+msgid "LDAP server"
+msgstr "Freastalaí LDAP"
+
+#. GST_ROLE_LDAP_SERVER
+#: ../src/services/service.c:72
+msgid "Mailing lists manager"
+msgstr ""
+
+#. GST_ROLE_MAILING_LISTS_MANAGER
+#: ../src/services/service.c:73
+msgid "Multicast DNS service discovery"
+msgstr ""
+
+#. GST_ROLE_RENDEZVOUS
+#: ../src/services/service.c:74
+msgid "Account information resolver"
+msgstr ""
+
+#. GST_ROLE_NSS
+#: ../src/services/service.c:75
+msgid "Virtual Private Network server"
+msgstr ""
+
+#. GST_ROLE_VPN_SERVER
+#: ../src/services/service.c:76
+msgid "Router advertisement server"
+msgstr ""
+
+#. GST_ROLE_ROUTER_ADVERTISEMENT_SERVER
+#: ../src/services/service.c:77
+msgid "IPSec key exchange server"
+msgstr ""
+
+#. GST_ROLE_IPSEC_KEY_EXCHANGE_SERVER
+#: ../src/services/service.c:78
+#, fuzzy
+msgid "Disk server"
+msgstr "Friothálaí nua:"
+
+#. GST_ROLE_DISK_SERVER
+#: ../src/services/service.c:79
+msgid "Disk client"
+msgstr ""
+
+#. GST_ROLE_DISK_CLIENT
+#: ../src/services/service.c:80
+#, fuzzy
+msgid "Route server"
+msgstr "Friothálaí nua:"
+
+#. GST_ROLE_ROUTE_SERVER
+#: ../src/services/service.c:81
+msgid "RPC mapper"
+msgstr ""
+
+#. GST_ROLE_RPC_MAPPER
+#: ../src/services/service.c:82
+msgid "SNMP server"
+msgstr "Freastalaí SNMP"
+
+#. GST_ROLE_SNMP_SERVER
+#: ../src/services/service.c:83
+msgid "Terminal server client"
+msgstr ""
+
+#. GST_ROLE_LTSP_CLIENT
+#: ../src/services/service.c:84
+msgid "Audio settings management"
+msgstr ""
+
+#. GST_ROLE_AUDIO_MANAGEMENT
+#: ../src/services/service.c:85
+msgid "Volumes mounter"
+msgstr ""
+
+#: ../src/services/service.c:85
+msgid "Mounts your volumes automatically"
+msgstr ""
+
+#. GST_ROLE_AUTOMOUNTER
+#: ../src/services/service.c:86
+msgid "Infrared port management"
+msgstr ""
+
+#. GST_ROLE_INFRARED_MANAGEMENT
+#: ../src/services/service.c:87
+msgid "Braille display management"
+msgstr ""
+
+#. GST_ROLE_BRAILLE_DISPLAY_MANAGEMENT
+#: ../src/services/service.c:88
+msgid "Bluetooth device management"
+msgstr ""
+
+#. GST_ROLE_BLUETOOTH_MANAGEMENT
+#: ../src/services/service.c:89
+msgid "Hard disk tuning"
+msgstr ""
+
+#. GST_ROLE_HDD_MANAGEMENT
+#: ../src/services/service.c:90
+msgid "Hotkeys management"
+msgstr ""
+
+#. GST_ROLE_HOTKEYS_MANAGEMENT
+#: ../src/services/service.c:91
+msgid "Power management"
+msgstr ""
+
+#. GST_ROLE_POWER_MANAGEMENT
+#: ../src/services/service.c:92
+msgid "Logical volume management"
+msgstr ""
+
+#. GST_ROLE_LVM_MANAGEMENT
+#: ../src/services/service.c:93
+msgid "Cluster management tool"
+msgstr ""
+
+#. GST_ROLE_CLUSTER_MANAGEMENT
+#: ../src/services/service.c:94
+msgid "Fax settings management"
+msgstr ""
+
+#. GST_ROLE_FAX_MANAGEMENT
+#: ../src/services/service.c:95
+msgid "RAID disks management"
+msgstr ""
+
+#. GST_ROLE_RAID_MANAGEMENT
+#: ../src/services/service.c:96
+msgid "Graphic tablets management"
+msgstr ""
+
+#. GST_ROLE_GRAPHIC_TABLETS_MANAGEMENT
+#: ../src/services/service.c:97
+msgid "CPU Frequency manager"
+msgstr ""
+
+#. GST_ROLE_CPUFREQ_MANAGEMENT
+#: ../src/services/service.c:98
+msgid "Eagle USB ADSL modems manager"
+msgstr ""
+
+#. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
+#: ../src/services/service.c:99
+msgid "Serial port settings management"
+msgstr ""
+
+#. GST_ROLE_SERIAL_PORTS_MANAGEMENT
+#: ../src/services/service.c:100
+msgid "ISDN modems manager"
+msgstr ""
+
+#. GST_ROLE_ISDN_MANAGEMENT
+#: ../src/services/service.c:101
+msgid "Telstra Bigpond Cable Network client"
+msgstr ""
+
+#. GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT
+#: ../src/services/service.c:102
+msgid "Hardware monitor"
+msgstr ""
+
+#. GST_ROLE_HARDWARE_MONITORING
+#: ../src/services/service.c:103
+msgid "System monitor"
+msgstr ""
+
+#: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
 msgstr ""
 
-#: src/services/services.desktop.in.in.h:2
-#, fuzzy
+#: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
-msgstr "Friothálaí"
+msgstr "Seirbhísí"
 
-#: src/services/table.c:55
-msgid "Active"
+#: ../src/services/service-settings-table.c:73
+#: ../src/services/service-settings-table.c:97
+#: ../src/services/service-settings-table.c:109
+msgid "Start"
+msgstr "Tosaigh"
+
+#: ../src/services/service-settings-table.c:79
+#: ../src/services/service-settings-table.c:99
+#: ../src/services/service-settings-table.c:111
+msgid "Stop"
+msgstr "Stad"
+
+#: ../src/services/service-settings-table.c:85
+#: ../src/services/service-settings-table.c:102
+msgid "Ignore"
 msgstr ""
 
-#: src/services/table.c:65
-msgid "Service"
-msgstr ""
+#: ../src/services/service-settings-table.c:175
+msgid "Runlevel"
+msgstr "Leibhéal Reatha"
 
-#: src/time/main.c:313
+#: ../src/services/service-settings-table.c:192
+msgid "Status"
+msgstr "Stádas"
+
+#: ../src/services/service-settings-table.c:211
+msgid "Priority"
+msgstr "Tosaíocht"
+
+#: ../src/services/services-tool.c:99
+msgid "Services settings"
+msgstr "Socruithe seirbhísí"
+
+#: ../src/shares/callbacks.c:196
 #, fuzzy
-msgid "Time Zone"
-msgstr "Réigiúin an Am"
-
-#: src/time/main.c:423
-#, fuzzy
-msgid "Time Servers"
-msgstr "Friothálaí"
-
-#: src/time/main.c:501
-msgid ""
-"You don't have NTP support running. Please run NTP support in the system to "
-"enable server synchronization."
-msgstr ""
-
-#: src/time/main.c:808
-msgid "Time and Date Settings"
-msgstr ""
-
-#: src/time/time.desktop.in.in.h:1
-msgid "Change system time, date, and timezone"
-msgstr ""
-
-#: src/time/time.desktop.in.in.h:2
-#, fuzzy
-msgid "Time and Date"
-msgstr "Réigiúin an Am"
-
-#: src/users/callbacks.c:598
-msgid "Create New profile"
-msgstr ""
-
-#: src/users/callbacks.c:629
-#, c-format
-msgid "Settings for profile %s"
-msgstr ""
-
-#: src/users/group-settings.c:111
-msgid "Create New Group"
-msgstr ""
-
-#: src/users/group-settings.c:165 src/users/user-settings.c:457
-msgid "User id must be a positive number."
-msgstr ""
-
-#: src/users/group-settings.c:169
-msgid "Such group id already exists."
-msgstr ""
-
-#: src/users/group-settings.c:191
-msgid "Group name is empty."
-msgstr "Tá an ainm le haighadh an Grúpa folamh."
-
-#: src/users/group-settings.c:195
-msgid "The group name is too long."
-msgstr ""
-
-#: src/users/group-settings.c:199
-msgid "Please set a valid group name, using only lower-case letters."
-msgstr ""
-
-#: src/users/group-settings.c:203
-msgid "Group already exists."
-msgstr ""
-
-#: src/users/group-settings.c:272
-msgid "The root group must not be deleted."
-msgstr ""
-
-#: src/users/group-settings.c:279
-#, c-format
-msgid "Are you sure you want to delete group %s?"
-msgstr ""
-
-#: src/users/group-settings.c:342
-#, c-format
-msgid "Settings for Group %s"
-msgstr ""
-
-#: src/users/groups-table.c:44 src/users/users-table.c:51
-msgid "Group"
-msgstr "Grúpa"
-
-#: src/users/groups-table.c:45
-msgid "GID"
-msgstr "GID"
-
-#: src/users/main.c:120
-msgid "User name contains"
-msgstr ""
-
-#: src/users/main.c:121
-msgid "User ID is"
-msgstr ""
-
-#: src/users/main.c:122
-msgid "Group name contains"
-msgstr ""
-
-#: src/users/main.c:123
-msgid "User GID is"
-msgstr ""
-
-#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
-msgid "Users and Groups"
-msgstr "èsáideoirí agus Grúpanna"
-
-#: src/users/passwd.c:266
-msgid "Passwords doesn't match."
-msgstr ""
-
-#: src/users/passwd.c:271
-#, c-format
-msgid ""
-"Bad password: %s.\n"
-"Please try with a new password."
-msgstr ""
-"Passfhocal go dona: %s.\n"
-"Baint triail as passfhocal nua."
-
-#: src/users/profile-settings.c:129
-msgid "The profile must have a name"
-msgstr ""
-
-#: src/users/profile-settings.c:134
-msgid "The profile must have a default home"
-msgstr ""
-
-#: src/users/profile-settings.c:139 src/users/profile-settings.c:144
-msgid "The profile must have a default shell"
-msgstr ""
-
-#: src/users/profile-settings.c:214
-msgid "The profile Default must not be deleted."
-msgstr ""
-
-#: src/users/profile-settings.c:221
-#, c-format
-msgid "Are you sure you want to delete the profile called %s?"
-msgstr "An bhfuil tú cinnte faoi an próifíl %s a scíosa?"
-
-#. Column name,          Adv_state_show,	Basic_state_show
-#: src/users/profiles-table.c:38
-msgid "Profile"
-msgstr "Próifíl"
-
-#: src/users/profiles-table.c:39
-msgid "Comment"
-msgstr "Trácht"
-
-#: src/users/search-bar/search-bar.c:200
-msgid "_Search"
-msgstr "_Cuardaigh"
-
-#: src/users/search-bar/search-bar.c:238
-msgid "C_lear"
-msgstr "G_lan"
-
-#: src/users/search-bar/search-bar.c:346
-msgid "Choice"
-msgstr "Roghnú"
-
-#: src/users/search-bar/search-bar.c:356
-msgid "Text"
-msgstr "Téasc"
-
-#: src/users/table.c:47
-msgid "/_Add User ..."
-msgstr "/èsáideoir _Nua"
-
-#: src/users/table.c:54
-msgid "/_Add group ..."
-msgstr "/Grúpa _Nua ..."
-
-#: src/users/user-settings.c:120
-msgid "The root user must not be deleted."
-msgstr ""
-
-#: src/users/user-settings.c:127
-#, c-format
-msgid "Are you sure you want to delete user %s?"
+msgid "Are you sure you want to delete this share?"
 msgstr "An bhfuil tú cinnte faoi an èsáideoir %s a scíosa"
 
-#: src/users/user-settings.c:208
-msgid "User Account Editor"
-msgstr "Eagarthóir le haighaidh cuntas na èsáideoirí"
-
-#: src/users/user-settings.c:335
-msgid "The username is empty."
-msgstr "Tá an anim le haighaidh an èsáideoir folamh"
-
-#: src/users/user-settings.c:343
-msgid "The username is too long."
-msgstr "Tá an anim le haighaidh an èsáideoir ró fhada"
-
-#: src/users/user-settings.c:347
-msgid "root username shouldn't be modified."
+#: ../src/shares/callbacks.c:198
+msgid "Other computers in your network will stop viewing this."
 msgstr ""
 
-#: src/users/user-settings.c:351
+#: ../src/shares/main.c:111
+msgid "Add a shared path, modifies it if it already exists"
+msgstr ""
+
+#: ../src/shares/main.c:111
+msgid "PATH"
+msgstr "CONAIR"
+
+#: ../src/shares/nautilus/nautilus-shares.c:124
+msgid "_Share folder"
+msgstr ""
+
+#: ../src/shares/nautilus/nautilus-shares.c:125
+msgid "Share this folder with other computers"
+msgstr ""
+
+#: ../src/shares/nfs-acl-table.c:50
+msgid "Allowed host/network"
+msgstr ""
+
+#: ../src/shares/nfs-acl-table.c:56
+msgid "Read only"
+msgstr "Léamh amháin"
+
+#: ../src/shares/share-nfs-add-hosts.c:117
+msgid "Specify hostname"
+msgstr ""
+
+#: ../src/shares/share-nfs-add-hosts.c:124
+#, fuzzy
+msgid "Specify IP address"
+msgstr "seoladh IP"
+
+#: ../src/shares/share-nfs-add-hosts.c:131
+msgid "Specify network"
+msgstr ""
+
+#: ../src/shares/shares.desktop.in.in.h:1
+msgid "Configure which folders are available for your network neighborhood"
+msgstr ""
+
+#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:234
+msgid "Shared Folders"
+msgstr "Comhfhillteáin"
+
+#: ../src/shares/share-settings.c:61
+msgid "File System"
+msgstr "Córas Comhad"
+
+#: ../src/shares/share-settings.c:144
+msgid "Do not share"
+msgstr ""
+
+#: ../src/shares/share-settings.c:152
+msgid "Windows networks (SMB)"
+msgstr "Líonraí Windows (SMB)"
+
+#: ../src/shares/share-settings.c:160
+msgid "Unix networks (NFS)"
+msgstr "Líonraí Unix (NFS)"
+
+#: ../src/shares/shares-tool.c:155
+msgid "Sharing services are not installed"
+msgstr ""
+
+#: ../src/shares/shares-tool.c:157
 msgid ""
-"Please set a valid username consisting of a lower case letter followed by "
+"You need to install at least either Samba or NFS in order to share your "
+"folders."
+msgstr ""
+
+#: ../src/time/time.desktop.in.in.h:1
+msgid "Change system time, date, and timezone"
+msgstr "Athraigh am an chórais, dáta, agus crios ama"
+
+#: ../src/time/time.desktop.in.in.h:2
+msgid "Time and Date"
+msgstr "Am agus Dáta"
+
+#: ../src/time/time-tool.c:380
+msgid "NTP support is not installed"
+msgstr ""
+
+#: ../src/time/time-tool.c:382
+msgid ""
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers."
+msgstr ""
+
+#: ../src/time/time-tool.c:412
+msgid "Enabling NTP"
+msgstr ""
+
+#: ../src/time/time-tool.c:412
+msgid "Disabling NTP"
+msgstr ""
+
+#: ../src/time/time-tool.c:424
+msgid "Synchronizing system clock"
+msgstr ""
+
+#: ../src/time/time-tool.c:434
+msgid "_Synchronize now"
+msgstr ""
+
+#: ../src/time/time-tool.c:530
+msgid "Keep synchronized with Internet servers"
+msgstr ""
+
+#: ../src/time/time-tool.c:531
+msgid "Manual"
+msgstr "De Láimh"
+
+#: ../src/time/time-tool.c:673
+msgid "Time and Date Settings"
+msgstr "Socruithe Ama agus Dáta"
+
+#: ../src/users/group-settings.c:52
+msgid "Administrator group can not be deleted"
+msgstr ""
+
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:477 ../src/users/user-settings.c:547
+msgid "This would leave the system unusable."
+msgstr ""
+
+#: ../src/users/group-settings.c:68
+#, fuzzy, c-format
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "An bhfuil tú cinnte faoi an èsáideoir %s a scíosa"
+
+#: ../src/users/group-settings.c:71
+msgid "This may leave files with invalid group ID in the filesystem."
+msgstr ""
+
+#: ../src/users/group-settings.c:167
+msgid "New group"
+msgstr "Grúpa nua"
+
+#: ../src/users/group-settings.c:175
+#, c-format
+msgid "Group '%s' Properties"
+msgstr "Airíonna Ghrúpa '%s'"
+
+#: ../src/users/group-settings.c:275
+msgid "Group name is empty"
+msgstr "Is folamh é an t-ainm grúpa"
+
+#: ../src/users/group-settings.c:276
+msgid "A group name must be specified."
+msgstr ""
+
+#: ../src/users/group-settings.c:278
+msgid "Group name of the administrator group user should not be modified"
+msgstr ""
+
+#: ../src/users/group-settings.c:281
+msgid "Group name has invalid characters"
+msgstr ""
+
+#: ../src/users/group-settings.c:282
+msgid ""
+"Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr ""
 
-#: src/users/user-settings.c:355
+#: ../src/users/group-settings.c:286
 #, c-format
-msgid ""
-"Username \"%s\" already exists.\n"
-"\n"
-"Please select a different Username"
+msgid "Group \"%s\" already exists"
 msgstr ""
 
-#: src/users/user-settings.c:377
-#, c-format
-msgid "Invalid character '%c' in comment."
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:485
+msgid "Please select a different user name."
 msgstr ""
 
-#: src/users/user-settings.c:423
-msgid "Home directory must not be empty."
+#: ../src/users/group-settings.c:302
+msgid "Group ID of the Administrator account should not be modified"
 msgstr ""
 
-#: src/users/user-settings.c:426
-msgid "Please enter full path for home directory."
+#: ../src/users/groups-table.c:45
+msgid "Group name"
+msgstr "Ainm grúpa"
+
+#: ../src/users/privileges-table.c:49
+msgid "Monitor system logs"
 msgstr ""
 
-#: src/users/user-settings.c:429
-msgid "root home shouldn't be modified."
+#: ../src/users/privileges-table.c:50
+msgid "Administer the system"
 msgstr ""
 
-#: src/users/user-settings.c:459
-msgid "root uid shouldn't be modified."
+#: ../src/users/privileges-table.c:51
+msgid "Use audio devices"
 msgstr ""
 
-#: src/users/user-settings.c:461
-msgid "Such user id already exists."
+#: ../src/users/privileges-table.c:52
+msgid "Use CD-ROM drives"
 msgstr ""
 
-#: src/users/user-settings.c:481
-msgid "Please give shell with full path."
+#: ../src/users/privileges-table.c:53
+msgid "Use modems"
+msgstr "Úsáid móideimí"
+
+#: ../src/users/privileges-table.c:54
+msgid "Connect to Internet using a modem"
 msgstr ""
 
-#: src/users/user-settings.c:499
-msgid "Password must not be empty."
+#: ../src/users/privileges-table.c:55
+msgid "Send and receive faxes"
 msgstr ""
 
-#: src/users/user-settings.c:778
-#, c-format
-msgid "Settings for User %s"
+#: ../src/users/privileges-table.c:56
+msgid "Use floppy drives"
 msgstr ""
 
-#. Column name,          Adv_state_show,	Basic_state_show
-#: src/users/users-table.c:46
-msgid "User"
-msgstr "èsáideoir"
-
-#: src/users/users-table.c:47
-msgid "Home"
-msgstr "Baile"
-
-#: src/users/users-table.c:48
-msgid "User details"
+#: ../src/users/privileges-table.c:57
+msgid "Access external storage devices automatically"
 msgstr ""
 
-#: src/users/users-table.c:49
-msgid "UID"
-msgstr "èID"
+#: ../src/users/privileges-table.c:58
+msgid "Use scanners"
+msgstr ""
 
-#: src/users/users-table.c:50
-msgid "Shell"
-msgstr "Sliogán"
+#: ../src/users/privileges-table.c:59
+msgid "Use tape drives"
+msgstr ""
 
-#: src/users/users.desktop.in.in.h:1
-#, fuzzy
+#: ../src/users/privileges-table.c:60
+msgid "Be able to get administrator privileges"
+msgstr ""
+
+#: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
-msgstr "èsáideoirí agus grúpanna."
+msgstr "Cuir leis nó bain úsáideoirí agus grúpaí"
 
-#~ msgid "Resolution"
-#~ msgstr "Fuascailt"
+#: ../src/users/users.desktop.in.in.h:2
+msgid "Users and Groups"
+msgstr "Úsáideoirí agus Grúpaí"
 
-#~ msgid "Enter Password - GNOME System Tools"
-#~ msgstr "Scíobh an Passfhocal - Uirlisí an Córas le haighaidh GNOME"
+#: ../src/users/user-settings.c:57
+msgid "Administrator account cannot be deleted"
+msgstr ""
 
-#~ msgid "_Domain :"
-#~ msgstr "Fearannas"
+#: ../src/users/user-settings.c:71
+#, fuzzy, c-format
+msgid "Are you sure you want to delete account \"%s\"?"
+msgstr "An bhfuil tú cinnte faoi an èsáideoir %s a scíosa"
 
-#~ msgid "DNS_2 :"
-#~ msgstr "DNS_2 :"
+#: ../src/users/user-settings.c:74
+msgid ""
+"This will disable this user's access to the system without deleting the "
+"user's home directory."
+msgstr ""
 
-#~ msgid "DNS_1 :"
-#~ msgstr "DNS_1 :"
+#: ../src/users/user-settings.c:84
+msgid "This user is currently using this computer"
+msgstr ""
 
-#~ msgid "_Edit Hosts..."
-#~ msgstr "_Eagar na óstríomhaireanna..."
+#: ../src/users/user-settings.c:319
+msgid "New user account"
+msgstr "Cuntas úsáideora nua"
 
-#~ msgid "Router :"
-#~ msgstr "Bealachtóir :"
+#: ../src/users/user-settings.c:334
+#, c-format
+msgid "Account '%s' Properties"
+msgstr "Airíonna Chuntas '%s'"
 
-#~ msgid "Hosts Editor"
-#~ msgstr "Eagarthóir na óstríomhaireanna"
+#: ../src/users/user-settings.c:473
+msgid "User name is empty"
+msgstr "Is folamh é an t-ainm úsáideora"
 
-#~ msgid "Hosts :"
-#~ msgstr "óstríomhaireanna :"
+#: ../src/users/user-settings.c:474
+msgid "A user name must be specified."
+msgstr ""
 
-#~ msgid "host"
-#~ msgstr "óstríomhaire"
+#: ../src/users/user-settings.c:476
+msgid "Administrator account's user name should not be modified"
+msgstr ""
 
-#~ msgid "Ip Address"
-#~ msgstr "Seoladh Ip"
+#: ../src/users/user-settings.c:479
+msgid "User name has invalid characters"
+msgstr ""
 
-#~ msgid "Host Info : "
-#~ msgstr "Eolas faoin óstríomhaire: "
+#: ../src/users/user-settings.c:480
+msgid ""
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
 
-#~ msgid "_Hostname :"
-#~ msgstr "Anim an óstríomhaire :"
+#: ../src/users/user-settings.c:484
+#, c-format
+msgid "User name \"%s\" already exists"
+msgstr ""
 
-#~ msgid "_MAC address :"
-#~ msgstr "Seoladh _MAC :"
+#: ../src/users/user-settings.c:511
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr ""
 
-#~ msgid "_IP address :"
-#~ msgstr "Seoladh _IP :"
+#: ../src/users/user-settings.c:512
+msgid "Check that this character is not used."
+msgstr ""
 
-#~ msgid "_Comment :"
-#~ msgstr "_Trácht"
+#: ../src/users/user-settings.c:529
+msgid "Incomplete path in home directory"
+msgstr ""
 
-#~ msgid "Type:"
-#~ msgstr "Saghas:"
+#: ../src/users/user-settings.c:530
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>."
+msgstr ""
 
-#~ msgid "Choose Location"
-#~ msgstr "Pioc áit"
+#: ../src/users/user-settings.c:546
+msgid "Administrator account's user ID should not be modified"
+msgstr ""
 
-#~ msgid "Current:"
-#~ msgstr "An áit seo:"
+#: ../src/users/user-settings.c:562
+msgid "Incomplete path in shell"
+msgstr ""
 
-#~ msgid "Edit Location"
-#~ msgstr "Eagar an áit"
+#: ../src/users/user-settings.c:563
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
+msgstr ""
 
-#~ msgid "Edit:"
-#~ msgstr "Eagar:"
+#: ../src/users/user-settings.c:591
+msgid "Password is too short"
+msgstr ""
 
-#~ msgid "                           "
-#~ msgstr "                           "
+#: ../src/users/user-settings.c:592
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
 
-#~ msgid "\n"
-#~ msgstr "\n"
+#: ../src/users/user-settings.c:595
+msgid "Password confirmation is not correct"
+msgstr ""
 
-#~ msgid "_Settings..."
-#~ msgstr "Na _Suíomheanna..."
+#: ../src/users/user-settings.c:596
+msgid "Check that you have provided the same password in both text fields."
+msgstr ""
 
-#~ msgid "_Help"
-#~ msgstr "_Cabhair"
+#: ../src/users/users-table.c:44
+msgid "Name"
+msgstr "Ainm"
 
-#~ msgid "New Location"
-#~ msgstr "áit Nua"
+#: ../src/users/users-table.c:67
+msgid "Login name"
+msgstr "Ainm logála isteach"
 
-#~ msgid "Name:"
-#~ msgstr "Ainm:"
+#: ../src/users/users-table.c:76
+msgid "Home directory"
+msgstr "Comhadlann baile"
 
-#~ msgid "Edit Date/Time"
-#~ msgstr "Eagar an Dáta/Am"
-
-#~ msgid "Location:"
-#~ msgstr "áit:"
-
-#~ msgid "Boston Office"
-#~ msgstr "Offig sa Bostáin"
-
-#~ msgid "Date"
-#~ msgstr "Dáta"
-
-#~ msgid "Time"
-#~ msgstr "Am"
-
-#~ msgid "AM"
-#~ msgstr "RN"
-
-#~ msgid "PM"
-#~ msgstr "IN"
-
-#~ msgid "Date/time"
-#~ msgstr "Dáta/am"
-
-#~ msgid "Date/Time "
-#~ msgstr "Dáta/Am"
-
-#~ msgid "Size"
-#~ msgstr "Meid"
-
-#~ msgid "Select  Swap File"
-#~ msgstr "Pioc Comhad Swap"
-
-#~ msgid "OK"
-#~ msgstr "Ceart go leoir"
-
-#~ msgid "MB"
-#~ msgstr "MB"
-
-#~ msgid "Size:"
-#~ msgstr "Meid:"
-
-#~ msgid "Swap type:"
-#~ msgstr "Saghas swap:"
-
-#~ msgid "IP address:"
-#~ msgstr "seoladh IP"
-
-#~ msgid "Delete"
-#~ msgstr "Scríos"
-
-#~ msgid "New:"
-#~ msgstr "Nua:"
-
-#~ msgid "Domain Name Service (DNS)"
-#~ msgstr "Córas Ainm Fearannais (CAF)"
-
-#~ msgid "New server:"
-#~ msgstr "Friothálaí nua:"
-
-#~ msgid "Use WINS server:"
-#~ msgstr "Baint triail as friothálaí WINS"
-
-#~ msgid "IP address"
-#~ msgstr "seoladh IP"
-
-#~ msgid " Names"
-#~ msgstr " "
-
-#~ msgid "DNS _Servers:"
-#~ msgstr "_Friothálaí CAF"
-
-#~ msgid "Sea_rch domains:"
-#~ msgstr "Cua_rdaigh tríd na Fearannaseanna"
-
-#~ msgid "2.422"
-#~ msgstr "2.422"
-
-#~ msgid "Comments"
-#~ msgstr "Tráchtanna"
+#: ../src/users/users-tool.c:216
+msgid "Users settings"
+msgstr "Socruithe úsáideoirí"
