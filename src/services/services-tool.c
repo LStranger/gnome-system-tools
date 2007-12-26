@@ -96,7 +96,7 @@ gst_services_tool_new (void)
 {
 	return g_object_new (GST_TYPE_SERVICES_TOOL,
 			     "name", "services",
-			     "title", _("Services settings"),
+			     "title", _("Services Settings"),
 			     "icon", "gnome-fs-server",
 			     NULL);
 }
