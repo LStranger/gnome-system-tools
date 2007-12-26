@@ -49,6 +49,7 @@ static const gchar *policy_widgets [] = {
 	"minutes",
 	"seconds",
 	"calendar",
+	"update_time",
 	NULL
 };
 

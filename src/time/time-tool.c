@@ -425,30 +425,6 @@ on_synchronize_now_clicked (GtkWidget *widget, gpointer data)
 }
 
 static void
-add_synchronize_now_button (GstTimeTool *tool)
-{
-	GtkDialog *dialog = GTK_DIALOG (GST_TOOL (tool)->main_dialog);
-	GtkWidget *box, *image, *label;
-
-	image = gtk_image_new_from_stock ("gnome-stock-timer", GTK_ICON_SIZE_BUTTON);
-	label = gtk_label_new_with_mnemonic (_("_Synchronize now"));
-
-	box   = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 0);
-	gtk_box_pack_end (GTK_BOX (box), label, TRUE, TRUE, 0);
-
-	tool->synchronize_now = gtk_button_new ();
-	gtk_container_add (GTK_CONTAINER (tool->synchronize_now), box);
-	gtk_widget_show_all (tool->synchronize_now);
-
-	gtk_box_pack_end (GTK_BOX (dialog->action_area), tool->synchronize_now, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (dialog->action_area), tool->synchronize_now, 0);
-
-	g_signal_connect (G_OBJECT (tool->synchronize_now), "clicked",
-			  G_CALLBACK (on_synchronize_now_clicked), tool);
-}
-
-static void
 on_option_changed (GtkWidget   *combo,
 		   GstTimeTool *time_tool)
 {
@@ -474,8 +450,6 @@ on_option_changed (GtkWidget   *combo,
 
 	gtk_container_add (GTK_CONTAINER (container), widget);
 	gtk_widget_show_all (container);
-
-	gtk_widget_set_sensitive (time_tool->synchronize_now, (option == CONFIGURATION_MANUAL));
 }
 
 static void
@@ -547,6 +521,7 @@ gst_time_tool_constructor (GType                  type,
 {
 	GObject *object;
 	GstTimeTool *time_tool;
+	GtkWidget *widget;
 
 	object = (* G_OBJECT_CLASS (gst_time_tool_parent_class)->constructor) (type,
 									       n_construct_properties,
@@ -564,8 +539,11 @@ gst_time_tool_constructor (GType                  type,
 
 	time_tool->ntp_list = ntp_servers_list_get (time_tool);
 	init_timezone (time_tool);
-	add_synchronize_now_button (time_tool);
 	add_options_combo (time_tool);
+
+	time_tool->synchronize_now = gst_dialog_get_widget (GST_TOOL (time_tool)->main_dialog, "update_time");
+	g_signal_connect (G_OBJECT (time_tool->synchronize_now), "clicked",
+			  G_CALLBACK (on_synchronize_now_clicked), time_tool);
 
 	gtk_window_set_resizable (GTK_WINDOW (GST_TOOL (time_tool)->main_dialog), FALSE);
 
