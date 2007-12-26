@@ -121,7 +121,7 @@ get_file_items (NautilusMenuProvider *provider,
     return NULL;
 
   menu_item = nautilus_menu_item_new ("NautilusShares::share",
-				      _("_Share folder"),
+				      _("_Share Folder..."),
 				      _("Share this folder with other computers"),
 				      "gnome-fs-share");
   g_signal_connect (G_OBJECT (menu_item),
