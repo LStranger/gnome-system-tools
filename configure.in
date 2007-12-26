@@ -209,7 +209,7 @@ GST_LIBS="$GST_DEPENDS_LIBS $POLKIT_LIBS"
 GST_CFLAGS="$GST_DEPENDS_CFLAGS $POLKIT_CFLAGS $GST_DEPRECATED_FLAGS"
 
 GST_TOOL_LIBS="\$(top_builddir)/src/common/libsetuptool.a $GST_LIBS"
-GST_TOOL_CFLAGS="$GST_CFLAGS -I\$(top_srcdir)/src/common"
+GST_TOOL_CFLAGS="-I\$(top_srcdir)/src/common $GST_CFLAGS"
 
 GST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
 GST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in" 
