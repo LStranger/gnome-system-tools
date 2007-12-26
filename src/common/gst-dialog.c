@@ -201,6 +201,7 @@ gst_dialog_constructor (GType                  type,
 	GstDialog *dialog;
 	GstDialogPrivate *priv;
 	GtkWidget *toplevel;
+	GError *error = NULL;
 
 	object = (* G_OBJECT_CLASS (gst_dialog_parent_class)->constructor) (type,
 									    n_construct_properties,
@@ -211,8 +212,9 @@ gst_dialog_constructor (GType                  type,
 	if (priv->tool && priv->widget_name) {
 		priv->builder = gtk_builder_new ();
 
-		if (!gtk_builder_add_from_file (priv->builder, priv->tool->ui_path, NULL)) {
-			g_critical ("UI file not found: %s\n", priv->tool->ui_path);
+		if (!gtk_builder_add_from_file (priv->builder, priv->tool->ui_path, &error)) {
+			g_critical ("Error loading UI: %s", error->message);
+			g_error_free (error);
 
 			/* no point in continuing */
 			exit (-1);
