@@ -118,10 +118,17 @@ static void
 gst_time_tool_init (GstTimeTool *tool)
 {
 	OobsList *list;
+	DBusError error;
 	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 
-	priv->bus_connection = dbus_bus_get (DBUS_BUS_SESSION, NULL);
+	dbus_error_init (&error);
+	priv->bus_connection = dbus_bus_get (DBUS_BUS_SESSION, &error);
 	priv->cookie = 0;
+
+	if (dbus_error_is_set (&error)) {
+		g_warning (error.message);
+		dbus_error_free (&error);
+	}
 
 	tool->time_config = oobs_time_config_get ();
 	gst_tool_add_configuration_object (GST_TOOL (tool), tool->time_config);
@@ -140,6 +147,9 @@ inhibit_screensaver (GstTimeTool *tool,
 	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 	DBusMessage *message, *reply;
 	DBusMessageIter iter;
+
+	if (!priv->bus_connection)
+		return;
 
 	if (inhibit) {
 		const gchar *appname = "Time-admin";
