@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GNOME System Tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-10 00:50+0100\n"
-"PO-Revision-Date: 2007-10-21 14:22+0300\n"
+"POT-Creation-Date: 2007-12-26 02:25+0000\n"
+"PO-Revision-Date: 2008-01-01 12:24+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,10 @@ msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Kas kasutajate haldamise vahend peab näitama kõiki kasutajaid ja gruppe või "
 "mitte"
+
+#: ../src/common/gst-dialog.c:179
+msgid "_Unlock"
+msgstr ""
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -49,6 +53,14 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Toetamata platvorm"
 
+#: ../src/common/gst-polkit-button.c:126
+msgid "This action is allowed"
+msgstr "See tegevus on lubatud"
+
+#: ../src/common/gst-polkit-button.c:140
+msgid "This action is not allowed"
+msgstr "See tegevus pole lubatud"
+
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
 msgstr "Seadistusi pole võimalik laadida"
@@ -65,9 +77,17 @@ msgstr "Seadistusi pole võimalik salvestada"
 msgid "You are not allowed to modify the system configuration."
 msgstr "Sul pole lubatud süsteemi sätteid muuta."
 
-#: ../src/common/gst-tool.c:424
+#: ../src/common/gst-tool.c:417
 msgid "Could not display help"
 msgstr "Abiteavet pole võimalik kuvada"
+
+#: ../src/common/gst-tool.c:577
+msgid "The system configuration has potentially changed."
+msgstr ""
+
+#: ../src/common/gst-tool.c:579
+msgid "Update content? This will lose any modification in course."
+msgstr ""
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:38
@@ -83,25 +103,25 @@ msgstr "_Eemalda"
 msgid "Type address"
 msgstr "Sisesta aadress"
 
-#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
+#: ../src/network/callbacks.c:237 ../src/network/callbacks.c:487
 msgid "Changing interface configuration"
 msgstr "Liidese sätete muutmine"
 
-#: ../src/network/callbacks.c:244
+#: ../src/network/callbacks.c:299
 msgid "Could not autodetect modem device"
 msgstr "Modemi seadet pole võimalik automaatselt tuvastada"
 
-#: ../src/network/callbacks.c:247
+#: ../src/network/callbacks.c:302
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr "Veendu, et seade poleks hõivatud ja on arvutiga korralikult ühendatud."
 
-#: ../src/network/callbacks.c:468
+#: ../src/network/callbacks.c:523
 msgid "The host name has changed"
 msgstr "Hosti nimi on muudetud"
 
-#: ../src/network/callbacks.c:471
+#: ../src/network/callbacks.c:526
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -109,7 +129,7 @@ msgstr ""
 "See keelab uute rakenduste käivitamist ja seetõttu pead Sa uuesti sisse "
 "logima. Kas jätkata ikkagi?"
 
-#: ../src/network/callbacks.c:477
+#: ../src/network/callbacks.c:532
 msgid "Change _Host name"
 msgstr "Muuda _hostinime"
 
@@ -141,10 +161,26 @@ msgstr "Isiklik WPA"
 msgid "WPA2 Personal"
 msgstr "Isiklik WPA2"
 
-#: ../src/network/connection.c:624
+#: ../src/network/connection.c:52
+msgid "GPRS/UMTS"
+msgstr "GPRS/UMTS"
+
+#: ../src/network/connection.c:53
+msgid "ISDN modem"
+msgstr "ISDN-modem"
+
+#: ../src/network/connection.c:54
+msgid "Serial modem"
+msgstr "Järjestikmodem"
+
+#: ../src/network/connection.c:55
+msgid "PPPoE"
+msgstr "PPPoE"
+
+#: ../src/network/connection.c:759
 #, c-format
-msgid "%s Properties\n"
-msgstr "%s - omadused\n"
+msgid "%s Properties"
+msgstr "%s - omadused"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -159,62 +195,58 @@ msgstr "IP-aadress"
 msgid "Aliases"
 msgstr "Aliased"
 
-#: ../src/network/ifaces-list.c:282
+#: ../src/network/ifaces-list.c:280
 msgid "This network interface is not configured"
 msgstr "Võrguliides pole seadistatud"
 
-#: ../src/network/ifaces-list.c:284
+#: ../src/network/ifaces-list.c:282
 msgid "Roaming mode enabled"
 msgstr "Uitrežiim on lubatud"
 
-#: ../src/network/ifaces-list.c:291
+#: ../src/network/ifaces-list.c:289
 #, c-format
 msgid "<b>Essid:</b> %s "
 msgstr "<b>ESSID:</b> %s "
 
-#: ../src/network/ifaces-list.c:297
+#: ../src/network/ifaces-list.c:295
 #, c-format
 msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
 msgstr "<b>Aadress:</b> %s <b>Alamvõrgu mask:</b> %s"
 
-#: ../src/network/ifaces-list.c:301
+#: ../src/network/ifaces-list.c:299
 #, c-format
 msgid "<b>Address:</b> %s"
 msgstr "<b>Aadress:</b> %s"
 
-#: ../src/network/ifaces-list.c:305
+#: ../src/network/ifaces-list.c:303
 #, c-format
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
 msgstr "<b>Aadress:</b> %s <b>Kaugaadress:</b> %s"
 
-#: ../src/network/ifaces-list.c:311
+#: ../src/network/ifaces-list.c:309
 #, c-format
 msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
 msgstr "<b>Telefoninumber:</b> %s <b>Login:</b> %s"
 
-#: ../src/network/ifaces-list.c:330
+#: ../src/network/ifaces-list.c:328
 msgid "Wireless connection"
 msgstr "Traadita ühendu"
 
-#: ../src/network/ifaces-list.c:332
+#: ../src/network/ifaces-list.c:330
 msgid "Infrared connection"
 msgstr "Infrapunaliidese ühendus"
 
-#: ../src/network/ifaces-list.c:334
+#: ../src/network/ifaces-list.c:332
 msgid "Wired connection"
 msgstr "Traadiga ühendus"
 
-#: ../src/network/ifaces-list.c:336
+#: ../src/network/ifaces-list.c:334
 msgid "Parallel port connection"
 msgstr "Rööpvärati ühendus"
 
-#: ../src/network/ifaces-list.c:338
-msgid "Modem connection"
-msgstr "Modemiühendus"
-
-#: ../src/network/ifaces-list.c:340
-msgid "ISDN connection"
-msgstr "ISDN ühendus"
+#: ../src/network/ifaces-list.c:336
+msgid "Point to point connection"
+msgstr "Punktist punkti ühendus"
 
 #: ../src/network/locations-combo.c:221
 msgid "Changing network location"
@@ -241,11 +273,11 @@ msgstr "_Asukoha nimi:"
 msgid "Do you want to delete location \"%s\"?"
 msgstr "Kas soovid asukohta \"%s\" kustutada?"
 
-#: ../src/network/main.c:111
+#: ../src/network/main.c:135
 msgid "The interface does not exist"
 msgstr "Liidest pole olemas"
 
-#: ../src/network/main.c:113
+#: ../src/network/main.c:137
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -253,19 +285,19 @@ msgstr ""
 "Kontrolli, kas see on õigest sisestatud ja see on Sinu süsteemi poolt "
 "toetatud."
 
-#: ../src/network/main.c:159
+#: ../src/network/main.c:183
 msgid "Configure a network interface"
 msgstr "Võrguliidese seadistamine"
 
-#: ../src/network/main.c:159
+#: ../src/network/main.c:183
 msgid "INTERFACE"
 msgstr "LIIDES"
 
-#: ../src/network/main.c:160
+#: ../src/network/main.c:184
 msgid "Configure the first network interface with a specific type"
 msgstr "Esimese võrguliidese seadistamine määratud tüübi abil"
 
-#: ../src/network/main.c:160
+#: ../src/network/main.c:184
 msgid "TYPE"
 msgstr "TÜÜP"
 
@@ -281,17 +313,17 @@ msgstr "Võrk"
 msgid "Network Settings"
 msgstr "Võrgusätted"
 
-#: ../src/services/callbacks.c:58
+#: ../src/services/callbacks.c:59
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Teenuse \"%s\" sätted"
 
-#: ../src/services/callbacks.c:111
+#: ../src/services/callbacks.c:119
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Kas soovid deaktiveerida \"%s\"?"
 
-#: ../src/services/callbacks.c:115
+#: ../src/services/callbacks.c:123
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -739,7 +771,7 @@ msgid "Priority"
 msgstr "Prioriteet"
 
 #: ../src/services/services-tool.c:99
-msgid "Services settings"
+msgid "Services Settings"
 msgstr "Teenuste sätted"
 
 #: ../src/shares/callbacks.c:196
@@ -750,17 +782,17 @@ msgstr "Kas soovid kustutada seda jagatud kataloogi?"
 msgid "Other computers in your network will stop viewing this."
 msgstr "Teised võrgus olevad arvutid ei näe seda enam."
 
-#: ../src/shares/main.c:92
+#: ../src/shares/main.c:111
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Jagatud raja lisamine või selle muutmine olemasolu korral"
 
-#: ../src/shares/main.c:92
+#: ../src/shares/main.c:111
 msgid "PATH"
 msgstr "RADA"
 
 #: ../src/shares/nautilus/nautilus-shares.c:124
-msgid "_Share folder"
-msgstr "_Jaga kataloog"
+msgid "_Share Folder..."
+msgstr "_Jaga kataloog..."
 
 #: ../src/shares/nautilus/nautilus-shares.c:125
 msgid "Share this folder with other computers"
@@ -790,7 +822,7 @@ msgstr "Võrgu määramine"
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Võrgunaabritele jagavate kataloogide seadistamine"
 
-#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:208
+#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:234
 msgid "Shared Folders"
 msgstr "Jagatud kataloogid"
 
@@ -810,11 +842,11 @@ msgstr "Windows'i võrgud (SMB)"
 msgid "Unix networks (NFS)"
 msgstr "Unix'i võrgud (NFS)"
 
-#: ../src/shares/shares-tool.c:131
+#: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
 msgstr "Jagamisteenused ei ole paigaldatud"
 
-#: ../src/shares/shares-tool.c:133
+#: ../src/shares/shares-tool.c:157
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -853,19 +885,15 @@ msgstr "NTP keelamine"
 msgid "Synchronizing system clock"
 msgstr "Süsteemse kella sünkroniseerimine"
 
-#: ../src/time/time-tool.c:434
-msgid "_Synchronize now"
-msgstr "_Sünkroniseeri kohe"
-
-#: ../src/time/time-tool.c:530
+#: ../src/time/time-tool.c:504
 msgid "Keep synchronized with Internet servers"
 msgstr "Internetis olevate serveritega sünkroonis hoidmine"
 
-#: ../src/time/time-tool.c:531
+#: ../src/time/time-tool.c:505
 msgid "Manual"
 msgstr "Käsitsi"
 
-#: ../src/time/time-tool.c:673
+#: ../src/time/time-tool.c:651
 msgid "Time and Date Settings"
 msgstr "Kella ja kuupäeva sätted"
 
@@ -873,9 +901,9 @@ msgstr "Kella ja kuupäeva sätted"
 msgid "Administrator group can not be deleted"
 msgstr "Administraatori gruppi pole võimalik kustutada"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:281
-#: ../src/users/group-settings.c:305 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:469 ../src/users/user-settings.c:539
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:477 ../src/users/user-settings.c:547
 msgid "This would leave the system unusable."
 msgstr "See võib mõjuda halvasti süsteemi stabiilsusele."
 
@@ -888,32 +916,32 @@ msgstr "Kas soovid eemaldada gruppi \"%s\"?"
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Selle tagajärjel võivad failisüsteemi jääda failid vigase grupi ID'ga."
 
-#: ../src/users/group-settings.c:170
+#: ../src/users/group-settings.c:167
 msgid "New group"
 msgstr "Uus grupp"
 
-#: ../src/users/group-settings.c:178
+#: ../src/users/group-settings.c:175
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Grupi '%s' omadused"
 
-#: ../src/users/group-settings.c:277
+#: ../src/users/group-settings.c:275
 msgid "Group name is empty"
 msgstr "Grupi nimi on tühi"
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:276
 msgid "A group name must be specified."
 msgstr "Grupi nimi peab olema määratud."
 
-#: ../src/users/group-settings.c:280
+#: ../src/users/group-settings.c:278
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Administraatori kasutajagrupi nime ei tohiks muuta"
 
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:281
 msgid "Group name has invalid characters"
 msgstr "Grupinimi sisaldab lubamatuid sümboleid"
 
-#: ../src/users/group-settings.c:284
+#: ../src/users/group-settings.c:282
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -921,16 +949,16 @@ msgstr ""
 "Palun sisesta korrektne grupinimi, kasutades esimese tähena väiketähte, "
 "millele järgnevad ainult väiketähed ja/või numbrid."
 
-#: ../src/users/group-settings.c:288
+#: ../src/users/group-settings.c:286
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Grupp \"%s\" on juba olemas"
 
-#: ../src/users/group-settings.c:289 ../src/users/user-settings.c:477
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:485
 msgid "Please select a different user name."
 msgstr "Palun vali mõni muu kasutajanimi."
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:302
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Administraatori grupi ID-d ei tohiks muuta"
 
@@ -1015,32 +1043,32 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Kasutaja pruugib hetkel seda arvutit"
 
-#: ../src/users/user-settings.c:312
+#: ../src/users/user-settings.c:319
 msgid "New user account"
 msgstr "Uus kasutajakonto"
 
-#: ../src/users/user-settings.c:327
+#: ../src/users/user-settings.c:334
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Konto '%s' omadused"
 
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:473
 msgid "User name is empty"
 msgstr "Kasutajanimi on tühi"
 
-#: ../src/users/user-settings.c:466
+#: ../src/users/user-settings.c:474
 msgid "A user name must be specified."
 msgstr "Kasutajanimi peab olema määratud."
 
-#: ../src/users/user-settings.c:468
+#: ../src/users/user-settings.c:476
 msgid "Administrator account's user name should not be modified"
 msgstr "Administraatori konto kasutajamine ei tohiks muuta"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:479
 msgid "User name has invalid characters"
 msgstr "Kasutajanimi sisaldab lubamatuid sümboleid"
 
-#: ../src/users/user-settings.c:472
+#: ../src/users/user-settings.c:480
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1048,25 +1076,25 @@ msgstr ""
 "Palun sisesta korrektne grupinimi, kasutades esimese tähena väiketähte, "
 "millele järgnevad ainult väiketähed ja/või numbrid."
 
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:484
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Kasutaja nimega \"%s\" on juba olemas"
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:511
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Kommentaaris on lubamatu sümbol \"%c\""
 
-#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:512
 msgid "Check that this character is not used."
 msgstr "Veendu, et seda sümbolit poleks kasutusel."
 
-#: ../src/users/user-settings.c:521
+#: ../src/users/user-settings.c:529
 msgid "Incomplete path in home directory"
 msgstr "Mittetäielik kodukataloogi rada"
 
-#: ../src/users/user-settings.c:522
+#: ../src/users/user-settings.c:530
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1074,15 +1102,15 @@ msgstr ""
 "Palun sisesta kodukataloogi täielik rada\n"
 "<span size=\"smaller\">näiteks: /home/jaan</span>."
 
-#: ../src/users/user-settings.c:538
+#: ../src/users/user-settings.c:546
 msgid "Administrator account's user ID should not be modified"
 msgstr "Administraatori konto kasutaja ID-d ei tohiks muuta"
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:562
 msgid "Incomplete path in shell"
 msgstr "Mittetäielik kestprogrammi rada"
 
-#: ../src/users/user-settings.c:555
+#: ../src/users/user-settings.c:563
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1090,11 +1118,11 @@ msgstr ""
 "Palun sisesta kestprogrammi täielik rada\n"
 "<span size=\"smaller\">näiteks: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:583
+#: ../src/users/user-settings.c:591
 msgid "Password is too short"
 msgstr "Parool on liiga lühike"
 
-#: ../src/users/user-settings.c:584
+#: ../src/users/user-settings.c:592
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1102,11 +1130,11 @@ msgstr ""
 "Kasutajate paroolid peavad olema pikemad kui 6 märki ja eelistatavalt "
 "sisaldama ka numbreid, tähti ja erimärke."
 
-#: ../src/users/user-settings.c:587
+#: ../src/users/user-settings.c:595
 msgid "Password confirmation is not correct"
 msgstr "Paroolikontroll ei ole korras"
 
-#: ../src/users/user-settings.c:588
+#: ../src/users/user-settings.c:596
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
 
@@ -1114,17 +1142,26 @@ msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
 msgid "Name"
 msgstr "Nimi"
 
-#: ../src/users/users-table.c:63
+#: ../src/users/users-table.c:67
 msgid "Login name"
 msgstr "Sisselogimisnimi"
 
-#: ../src/users/users-table.c:70
+#: ../src/users/users-table.c:76
 msgid "Home directory"
 msgstr "Kodukataloog"
 
-#: ../src/users/users-tool.c:206
-msgid "Users settings"
+#: ../src/users/users-tool.c:216
+msgid "Users Settings"
 msgstr "Kasutajate sätted"
+
+#~ msgid "Modem connection"
+#~ msgstr "Modemiühendus"
+
+#~ msgid "ISDN connection"
+#~ msgstr "ISDN ühendus"
+
+#~ msgid "_Synchronize now"
+#~ msgstr "_Sünkroniseeri kohe"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
