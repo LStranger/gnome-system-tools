@@ -1,5 +1,10 @@
 2008-01-02  Carlos Garnacho  <carlosg@gnome.org>
 
+	* user-settings.c (check_home): Check whether the home directory
+	doesn't exist, Fixes #300016.
+
+2008-01-02  Carlos Garnacho  <carlosg@gnome.org>
+
 	* user-settings.c (user_settings_dialog_new): Do not set anything in
 	the password fields when editing an user, so it doesn't mislead users
 	believing that it contains the actual user password. Fixes #169574.

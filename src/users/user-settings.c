@@ -523,9 +523,12 @@ check_home (gchar **primary_text, gchar **secondary_text, gpointer data)
 	home = gtk_entry_get_text (GTK_ENTRY (widget));
 
 	if (strlen (home) < 1 || !g_path_is_absolute (home)) {
-		*primary_text   = g_strdup (N_("Incomplete path in home directory"));
-		*secondary_text = g_strdup (N_("Please enter full path for home directory\n"
-					       "<span size=\"smaller\">i.e.: /home/john</span>."));
+		*primary_text   = g_strdup (_("Incomplete path in home directory"));
+		*secondary_text = g_strdup (_("Please enter full path for home directory\n"
+					      "<span size=\"smaller\">i.e.: /home/john</span>."));
+	} else if (g_file_test (home, G_FILE_TEST_EXISTS)) {
+		*primary_text   = g_strdup (_("Home directory already exists"));
+		*secondary_text = g_strdup (_("Please enter a different home directory path."));
 	}
 }
 
