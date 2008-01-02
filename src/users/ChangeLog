@@ -1,3 +1,16 @@
+2008-01-02  Carlos Garnacho  <carlosg@gnome.org>
+
+	* callbacks.c (on_user_new_clicked): Do not create an user with NULL
+	login name here.
+	(on_user_settings_login_changed): Do not check whether the user is
+	new, old users can't change login name anymore.
+	* user-settings.[ch] (user_settings_dialog_get_data): Instead create
+	the user here if we're creating a new user. Fixes #505115.
+	(set_main_group) (user_settings_dialog_new) (is_user_root)
+	(check_login) (user_settings_dialog_run): Adapt to the possibility of
+	having a NULL user.
+	(user_settings_dialog_is_new): Remove, no longer used.
+
 2007-12-26  Carlos Garnacho  <carlosg@gnome.org>
 
 	* users-tool.c: Use HIG compliant capitalization for window title.

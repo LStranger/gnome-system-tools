@@ -169,13 +169,19 @@ set_main_group (OobsUser *user)
 	OobsGroup *main_group, *group;
 	gboolean valid, found;
 
+	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
+
+	if (!user) {
+		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), -1);
+		return;
+	}
+
 	main_group = oobs_user_get_main_group (user);
 	found = FALSE;
 
 	if (!main_group)
 		main_group = oobs_users_config_get_default_group (OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config));
 
-	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 
@@ -307,15 +313,14 @@ user_settings_dialog_new (OobsUser *user)
 {
 	OobsUsersConfig *config;
 	GtkWidget *dialog, *widget;
-	const gchar *login;
+	const gchar *login = NULL;
 	gchar *title;
 	gint uid;
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	login = (gchar*) oobs_user_get_login_name (user);
+	g_object_set_data (G_OBJECT (dialog), "user", user);
 
-	if (!login) {
-		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (TRUE));
+	if (!user) {
 		gtk_window_set_title (GTK_WINDOW (dialog), _("New user account"));
 
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
@@ -329,8 +334,7 @@ user_settings_dialog_new (OobsUser *user)
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
 		setup_profiles_visibility (tool, TRUE);
 	} else {
-		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (FALSE));
-
+		login = oobs_user_get_login_name (user);
 		title = g_strdup_printf (_("Account '%s' Properties"), login);
 		gtk_window_set_title (GTK_WINDOW (dialog), title);
 		g_free (title);
@@ -355,16 +359,16 @@ user_settings_dialog_new (OobsUser *user)
 	gtk_widget_set_sensitive (widget, (login == NULL));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
-	set_entry_text (widget, oobs_user_get_full_name (user));
+	set_entry_text (widget, (user) ? oobs_user_get_full_name (user) : NULL);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
-	set_entry_text (widget, oobs_user_get_room_number (user));
+	set_entry_text (widget, (user) ? oobs_user_get_room_number (user) : NULL);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_wphone");
-	set_entry_text (widget, oobs_user_get_work_phone_number (user));
+	set_entry_text (widget, (user) ? oobs_user_get_work_phone_number (user) : NULL);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_hphone");
-	set_entry_text (widget, oobs_user_get_home_phone_number (user));
+	set_entry_text (widget, (user) ? oobs_user_get_home_phone_number (user) : NULL);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
 	set_entry_text (widget, (login) ? "password" : NULL);
@@ -387,22 +391,15 @@ user_settings_dialog_new (OobsUser *user)
 	return dialog;
 }
 
-gboolean
-user_settings_dialog_user_is_new (void)
-{
-	GtkWidget *dialog;
-	gboolean is_new;
-
-	dialog = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	is_new = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (dialog), "is_new"));
-
-	return is_new;
-}
-
 static gboolean
 is_user_root (OobsUser *user)
 {
-	const gchar *login = oobs_user_get_login_name (user);
+	const gchar *login;
+
+	if (!user)
+		return FALSE;
+
+	login = oobs_user_get_login_name (user);
 
 	if (!login)
 		return FALSE;
@@ -480,7 +477,7 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 		*secondary_text = g_strdup (_("Please set a valid user name consisting of "
 					      "a lower case letter followed by lower case "
 					      "letters and numbers."));
-	} else if (user_settings_dialog_user_is_new () && login_exists (login)) {
+	} else if (!user && login_exists (login)) {
 		*primary_text = g_strdup_printf (_("User name \"%s\" already exists"), login);
 		*secondary_text = g_strdup (_("Please select a different user name."));
 	}
@@ -598,10 +595,11 @@ check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 }
 
 gint
-user_settings_dialog_run (GtkWidget *dialog, OobsUser *user)
+user_settings_dialog_run (GtkWidget *dialog)
 {
 	gint response;
 	gboolean valid;
+	OobsUser *user;
 	TestBattery battery[] = {
 		check_login,
 		check_comments,
@@ -613,6 +611,7 @@ user_settings_dialog_run (GtkWidget *dialog, OobsUser *user)
 	};
 
 	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+	user = user_settings_dialog_get_data (dialog);
 
 	do {
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -627,13 +626,21 @@ user_settings_dialog_run (GtkWidget *dialog, OobsUser *user)
 	return response;
 }
 
-void
-user_settings_dialog_get_data (OobsUser *user)
+OobsUser *
+user_settings_dialog_get_data (GtkWidget *dialog)
 {
 	GtkWidget *widget;
 	OobsGroup *group;
+	OobsUser *user;
 	gchar *str;
 	gboolean password_changed;
+
+	user = g_object_get_data (G_OBJECT (dialog), "user");
+
+	if (!user) {
+		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
+		user = oobs_user_new (gtk_entry_get_text (GTK_ENTRY (widget)));
+	}
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
 	oobs_user_set_full_name (user, gtk_entry_get_text (GTK_ENTRY (widget)));
@@ -675,6 +682,8 @@ user_settings_dialog_get_data (OobsUser *user)
 	g_object_unref (group);
 
 	privileges_table_save (user);
+
+	return user;
 }
 
 void

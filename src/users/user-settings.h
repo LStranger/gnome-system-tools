@@ -26,12 +26,10 @@
 
 gboolean        user_delete                      (GtkTreeModel *model,
 						  GtkTreePath *path);
-GtkWidget*      user_settings_dialog_new         (OobsUser *user);
-gboolean        user_settings_dialog_user_is_new (void);
-gint            user_settings_dialog_run         (GtkWidget *dialog,
-						  OobsUser *user);
+GtkWidget *     user_settings_dialog_new         (OobsUser *user);
+gint            user_settings_dialog_run         (GtkWidget *dialog);
 
-void            user_settings_dialog_get_data    (OobsUser *user);
+OobsUser *      user_settings_dialog_get_data    (GtkWidget *dialog);
 void            user_settings_apply_profile      (GstUsersTool *tool, GstUserProfile *profile);
 
 
