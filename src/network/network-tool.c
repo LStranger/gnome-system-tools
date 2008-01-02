@@ -278,6 +278,6 @@ gst_network_tool_new (void)
   return g_object_new (GST_TYPE_NETWORK_TOOL,
 		       "name", "network",
 		       "title", _("Network Settings"),
-		       "icon", "gnome-fs-network",
+		       "icon", "preferences-system-network",
 		       NULL);
 }

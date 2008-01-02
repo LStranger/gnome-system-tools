@@ -258,7 +258,7 @@ get_iface_pixbuf (OobsIface *iface)
   /* fallback to a "generic" icon */
   if (!pixbuf)
     pixbuf = gtk_icon_theme_load_icon (gst_tool_get_icon_theme (tool),
-				       "gnome-fs-network", 48, 0, NULL);
+				       "preferences-system-network", 48, 0, NULL);
   return pixbuf;
 }
 
