@@ -371,11 +371,11 @@ user_settings_dialog_new (OobsUser *user)
 	set_entry_text (widget, (user) ? oobs_user_get_home_phone_number (user) : NULL);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
-	set_entry_text (widget, (login) ? "password" : NULL);
+	set_entry_text (widget, NULL);
 	g_object_set_data (G_OBJECT (widget), "changed", GINT_TO_POINTER (FALSE));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
-	set_entry_text (widget, (login) ? "password" : NULL);
+	set_entry_text (widget, NULL);
 
 	/* set always the first page */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
@@ -568,6 +568,7 @@ check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 	OobsUser *user = OOBS_USER (data);
 	GtkWidget *widget;
 	const gchar *password, *confirmation;
+	gboolean changed = TRUE;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
 
@@ -575,14 +576,17 @@ check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
 		password = gtk_entry_get_text (GTK_ENTRY (widget));
+		changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "changed"));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
 		confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
-	}
-	else {
+	} else {
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_random_passwd");
 		password = confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
 	}
+
+	if (!changed)
+		return;
 
 	if (strlen (password) < 6) {
 		*primary_text = g_strdup (_("Password is too short"));
