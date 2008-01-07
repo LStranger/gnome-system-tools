@@ -131,11 +131,11 @@ update_button_state (GstPolKitButton *button)
 	case POLKIT_RESULT_ONLY_VIA_SELF_AUTH:
 	case POLKIT_RESULT_ONLY_VIA_SELF_AUTH_KEEP_SESSION:
 	case POLKIT_RESULT_ONLY_VIA_SELF_AUTH_KEEP_ALWAYS:
+	case POLKIT_RESULT_UNKNOWN:
 		image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_BUTTON);
 		sensitive = TRUE;
 		break;
 	case POLKIT_RESULT_NO:
-	case POLKIT_RESULT_UNKNOWN:
 		image = gtk_image_new_from_stock (GTK_STOCK_NO, GTK_ICON_SIZE_BUTTON);
 		tooltip = N_("This action is not allowed");
 		break;
@@ -230,9 +230,28 @@ static void
 gst_polkit_button_clicked (GtkButton *button)
 {
 	GstPolKitButtonPriv *priv;
+	PolKitResult result;
 
 	priv = GST_POLKIT_BUTTON_GET_PRIVATE (button);
 	gst_polkit_action_authenticate (priv->action);
+	result = gst_polkit_action_get_result (priv->action);
+
+	if (result == POLKIT_RESULT_UNKNOWN) {
+		GtkWidget *dialog, *toplevel;
+
+		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (button));
+		dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 _("Could not authenticate"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  _("An unexpected error has occurred."));
+
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+	}
+
 	update_button_state (GST_POLKIT_BUTTON (button));
 }
 

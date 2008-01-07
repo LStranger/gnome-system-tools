@@ -330,24 +330,33 @@ async_reply_cb (DBusPendingCall *pending_call,
 	GstPolKitActionPriv *priv;
 	DBusMessage *reply;
 	DBusMessageIter iter;
+	DBusError error;
 	gboolean authenticated = FALSE;
 	gboolean was_authenticated;
 
 	action = GST_POLKIT_ACTION (data);
 	priv = GST_POLKIT_ACTION_GET_PRIVATE (action);
+	dbus_error_init (&error);
 
 	reply = dbus_pending_call_steal_reply (pending_call);
-	dbus_message_iter_init (reply, &iter);
-	dbus_message_iter_get_basic (&iter, &authenticated);
 
-	was_authenticated = (priv->result == POLKIT_RESULT_YES);
+	if (dbus_set_error_from_message (&error, reply)) {
+		g_critical (error.message);
+		dbus_error_free (&error);
+		priv->result = POLKIT_RESULT_UNKNOWN;
+	} else {
+		dbus_message_iter_init (reply, &iter);
+		dbus_message_iter_get_basic (&iter, &authenticated);
 
-	if (was_authenticated != authenticated) {
-		priv->result = (authenticated) ?
-			POLKIT_RESULT_YES : can_caller_do_action (action);
+		was_authenticated = (priv->result == POLKIT_RESULT_YES);
 
-		g_object_notify (G_OBJECT (action), "authenticated");
-		g_signal_emit (action, signals [CHANGED], 0);
+		if (was_authenticated != authenticated) {
+			priv->result = (authenticated) ?
+				POLKIT_RESULT_YES : can_caller_do_action (action);
+
+			g_object_notify (G_OBJECT (action), "authenticated");
+			g_signal_emit (action, signals [CHANGED], 0);
+		}
 	}
 
 	gtk_grab_remove (priv->invisible);
