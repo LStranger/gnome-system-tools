@@ -1,3 +1,12 @@
+2008-01-07  Carlos Garnacho  <carlosg@gnome.org>
+
+	* user-settings.c (user_settings_dialog_new) (check_login)
+	(check_comments) (check_home) (check_uid) (check_shell)
+	(check_password) (user_settings_dialog_run)
+	(user_settings_dialog_get_data): avoid having to call
+	user_settings_dialog_get_data() too early, creating a NULL OobsUser in
+	consequence.
+
 2008-01-02  Carlos Garnacho  <carlosg@gnome.org>
 
 	* user-settings.c (check_home): Check whether the home directory

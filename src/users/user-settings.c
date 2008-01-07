@@ -318,9 +318,9 @@ user_settings_dialog_new (OobsUser *user)
 	gint uid;
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	g_object_set_data (G_OBJECT (dialog), "user", user);
 
 	if (!user) {
+		g_object_set_data (G_OBJECT (dialog), "user", NULL);
 		gtk_window_set_title (GTK_WINDOW (dialog), _("New user account"));
 
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
@@ -334,6 +334,10 @@ user_settings_dialog_new (OobsUser *user)
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
 		setup_profiles_visibility (tool, TRUE);
 	} else {
+		g_object_set_data_full (G_OBJECT (dialog), "user",
+					g_object_ref (user),
+					(GDestroyNotify) g_object_unref);
+
 		login = oobs_user_get_login_name (user);
 		title = g_strdup_printf (_("Account '%s' Properties"), login);
 		gtk_window_set_title (GTK_WINDOW (dialog), title);
@@ -459,19 +463,17 @@ is_valid_name (const gchar *name)
 static void
 check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
-	OobsUser *user = OOBS_USER (data);
+	OobsUser *user;
 	GtkWidget *widget;
 	const gchar *login;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
 	login = gtk_entry_get_text (GTK_ENTRY (widget));
+	user = g_object_get_data (G_OBJECT (data), "user");
 
 	if (strlen (login) < 1) {
 		*primary_text = g_strdup (_("User name is empty"));
 		*secondary_text = g_strdup (_("A user name must be specified."));
-	} else if (is_user_root (user) && strcmp (login, "root") != 0) {
-		*primary_text = g_strdup (_("Administrator account's user name should not be modified"));
-	        *secondary_text = g_strdup (_("This would leave the system unusable."));
 	} else if (!is_valid_name (login)) {
 		*primary_text = g_strdup (_("User name has invalid characters"));
 		*secondary_text = g_strdup (_("Please set a valid user name consisting of "
@@ -486,7 +488,6 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 static void
 check_comments (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
-	OobsUser *user = OOBS_USER (data);
 	GtkWidget *name, *room_number, *wphone, *hphone;
 	gchar *comment, *ch;
 
@@ -515,18 +516,19 @@ check_comments (gchar **primary_text, gchar **secondary_text, gpointer data)
 static void
 check_home (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
-	OobsUser *user = OOBS_USER (data);
+	OobsUser *user;
 	GtkWidget *widget;
 	const gchar *home;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 	home = gtk_entry_get_text (GTK_ENTRY (widget));
+	user = g_object_get_data (G_OBJECT (data), "user");
 
 	if (strlen (home) < 1 || !g_path_is_absolute (home)) {
 		*primary_text   = g_strdup (_("Incomplete path in home directory"));
 		*secondary_text = g_strdup (_("Please enter full path for home directory\n"
 					      "<span size=\"smaller\">i.e.: /home/john</span>."));
-	} else if (g_file_test (home, G_FILE_TEST_EXISTS)) {
+	} else if (!user && g_file_test (home, G_FILE_TEST_EXISTS)) {
 		*primary_text   = g_strdup (_("Home directory already exists"));
 		*secondary_text = g_strdup (_("Please enter a different home directory path."));
 	}
@@ -535,12 +537,13 @@ check_home (gchar **primary_text, gchar **secondary_text, gpointer data)
 static void
 check_uid (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
-	OobsUser *user = OOBS_USER (data);
+	OobsUser *user;
 	GtkWidget *widget;
 	gint uid;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 	uid = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+	user = g_object_get_data (G_OBJECT (data), "user");
 
 	if (is_user_root (user) && uid != 0) {
 		*primary_text   = g_strdup (_("Administrator account's user ID should not be modified"));
@@ -551,7 +554,6 @@ check_uid (gchar **primary_text, gchar **secondary_text, gpointer data)
 static void
 check_shell (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
-	OobsUser *user = OOBS_USER (data);
 	GtkWidget *widget;
 	const gchar *path;
 
@@ -568,12 +570,13 @@ check_shell (gchar **primary_text, gchar **secondary_text, gpointer data)
 static void
 check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
-	OobsUser *user = OOBS_USER (data);
+	OobsUser *user;
 	GtkWidget *widget;
 	const gchar *password, *confirmation;
 	gboolean changed = TRUE;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
+	user = g_object_get_data (G_OBJECT (data), "user");
 
 	/* manual password? */
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
@@ -588,7 +591,7 @@ check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 		password = confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
 	}
 
-	if (!changed)
+	if (user && !changed)
 		return;
 
 	if (strlen (password) < 6) {
@@ -606,7 +609,6 @@ user_settings_dialog_run (GtkWidget *dialog)
 {
 	gint response;
 	gboolean valid;
-	OobsUser *user;
 	TestBattery battery[] = {
 		check_login,
 		check_comments,
@@ -618,13 +620,11 @@ user_settings_dialog_run (GtkWidget *dialog)
 	};
 
 	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
-	user = user_settings_dialog_get_data (dialog);
 
 	do {
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
-
 		valid = (response == GTK_RESPONSE_OK) ?
-			test_battery_run (battery, GTK_WINDOW (dialog), user) : TRUE;
+			test_battery_run (battery, GTK_WINDOW (dialog), dialog) : TRUE;
 	} while (!valid);
 
 	gtk_widget_hide (dialog);
@@ -639,14 +639,20 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 	GtkWidget *widget;
 	OobsGroup *group;
 	OobsUser *user;
-	gchar *str;
+	const gchar *str;
 	gboolean password_changed;
 
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
+	str = gtk_entry_get_text (GTK_ENTRY (widget));
 	user = g_object_get_data (G_OBJECT (dialog), "user");
 
+	if (!str || !*str)
+		return NULL;
+
 	if (!user) {
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
-		user = oobs_user_new (gtk_entry_get_text (GTK_ENTRY (widget)));
+		user = oobs_user_new (str);
+		g_object_set_data_full (G_OBJECT (dialog), "user",
+					user, (GDestroyNotify) g_object_unref);
 	}
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
