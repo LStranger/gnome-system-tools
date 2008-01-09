@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-03 21:33+0000\n"
-"PO-Revision-Date: 2008-01-04 20:16+0100\n"
+"POT-Creation-Date: 2008-01-07 23:05+0000\n"
+"PO-Revision-Date: 2008-01-09 15:06+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <<gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,6 +64,14 @@ msgstr "Esta acción está permitida"
 #: ../src/common/gst-polkit-button.c:140
 msgid "This action is not allowed"
 msgstr "Esta acción no está permitida"
+
+#: ../src/common/gst-polkit-button.c:247
+msgid "Could not authenticate"
+msgstr "No se pudo autenticar"
+
+#: ../src/common/gst-polkit-button.c:249
+msgid "An unexpected error has occurred."
+msgstr "Ocurrió un error inesperado."
 
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
@@ -908,7 +916,7 @@ msgstr "El grupo del administrador no se puede borrar"
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
 #: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:550
 msgid "This would leave the system unusable."
 msgstr "Esto podría dejar el sistema inutilizable."
 
@@ -959,7 +967,7 @@ msgstr ""
 msgid "Group \"%s\" already exists"
 msgstr "El grupo «%s» ya existe"
 
-#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:482
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
 msgid "Please select a different user name."
 msgstr "Por favor seleccione un nombre de usuario diferente."
 
@@ -1052,28 +1060,24 @@ msgstr "Actualmente este usuario está usando este equipo"
 msgid "New user account"
 msgstr "Cuenta de usuario nueva"
 
-#: ../src/users/user-settings.c:338
+#: ../src/users/user-settings.c:342
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Propiedades de la cuenta «%s»"
 
-#: ../src/users/user-settings.c:470
+#: ../src/users/user-settings.c:475
 msgid "User name is empty"
 msgstr "El nombre de usuario está vacío"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:476
 msgid "A user name must be specified."
 msgstr "Debe especificar un nombre de usuario."
 
-#: ../src/users/user-settings.c:473
-msgid "Administrator account's user name should not be modified"
-msgstr "El nombre de usuario del administrador no se debería modificar"
-
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:478
 msgid "User name has invalid characters"
 msgstr "El nombre de usuario tiene caracteres inválidos"
 
-#: ../src/users/user-settings.c:477
+#: ../src/users/user-settings.c:479
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1081,25 +1085,25 @@ msgstr ""
 "Establezca un nombre de usuario válido, consistente en una letra minúscula "
 "seguida de letras minúsculas y/o números."
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "El nombre de usuario «%s» ya existe"
 
-#: ../src/users/user-settings.c:508
+#: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Carácter inválido «%c» en comentario"
 
-#: ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr "Compruebe que este carácter no se use."
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr "Ruta incompleta en el directorio personal"
 
-#: ../src/users/user-settings.c:527
+#: ../src/users/user-settings.c:529
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1107,23 +1111,23 @@ msgstr ""
 "Escriba la ruta completa para el directorio personal\n"
 "<span size=\"smaller\">ej: /home/juan</span>."
 
-#: ../src/users/user-settings.c:530
+#: ../src/users/user-settings.c:532
 msgid "Home directory already exists"
 msgstr "El directorio personal ya existe"
 
-#: ../src/users/user-settings.c:531
+#: ../src/users/user-settings.c:533
 msgid "Please enter a different home directory path."
 msgstr "Por favor seleccione una ruta para el directorio personal diferente."
 
-#: ../src/users/user-settings.c:546
+#: ../src/users/user-settings.c:549
 msgid "Administrator account's user ID should not be modified"
 msgstr "El ID de la cuenta de usuario del administrador no debería modificarse"
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
 msgstr "Ruta incompleta en el shell"
 
-#: ../src/users/user-settings.c:563
+#: ../src/users/user-settings.c:565
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1131,11 +1135,11 @@ msgstr ""
 "Introduzca una ruta completa para la shell\n"
 "<span size=\"smaller\">ej: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:598
 msgid "Password is too short"
 msgstr "La contraseña es demasiado corta"
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:599
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1143,11 +1147,11 @@ msgstr ""
 "Las contraseñas de usuario deben ser más largas que 6 caracteres y "
 "preferiblemente formadas por números, letras y caracteres especiales."
 
-#: ../src/users/user-settings.c:599
+#: ../src/users/user-settings.c:602
 msgid "Password confirmation is not correct"
 msgstr "La confirmación de la contraseña es incorrecta"
 
-#: ../src/users/user-settings.c:600
+#: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Compruebe que ha proporcionado la misma contraseña en ambos campos de texto."
 
