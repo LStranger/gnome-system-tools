@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-25 22:24-0700\n"
-"PO-Revision-Date: 2007-12-25 22:24-0700\n"
+"POT-Creation-Date: 2008-01-08 18:04-0700\n"
+"PO-Revision-Date: 2008-01-08 18:04-0700\n"
 "Last-Translator: Seán de Búrca <leftmostcat@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,14 @@ msgstr ""
 
 #: ../src/common/gst-polkit-button.c:140
 msgid "This action is not allowed"
+msgstr ""
+
+#: ../src/common/gst-polkit-button.c:247
+msgid "Could not authenticate"
+msgstr ""
+
+#: ../src/common/gst-polkit-button.c:249
+msgid "An unexpected error has occurred."
 msgstr ""
 
 #: ../src/common/gst-tool.c:184
@@ -286,7 +294,7 @@ msgstr "CINEÁL"
 
 #: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
-msgstr ""
+msgstr "Cumraigh gléasanna agus naisc líonra"
 
 #: ../src/network/network.desktop.in.in.h:2
 msgid "Network"
@@ -332,7 +340,7 @@ msgstr ""
 #. GST_ROLE_COMMAND_SCHEDULER
 #: ../src/services/service.c:34
 msgid "Printer service"
-msgstr ""
+msgstr "Seirbhís phrintéara"
 
 #: ../src/services/service.c:34
 msgid "Allows applications to use printers"
@@ -841,37 +849,37 @@ msgstr "Athraigh am an chórais, dáta, agus crios ama"
 msgid "Time and Date"
 msgstr "Am agus Dáta"
 
-#: ../src/time/time-tool.c:380
+#: ../src/time/time-tool.c:390
 msgid "NTP support is not installed"
 msgstr ""
 
-#: ../src/time/time-tool.c:382
+#: ../src/time/time-tool.c:392
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr ""
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Enabling NTP"
 msgstr "NTP á Chumasú"
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Disabling NTP"
 msgstr "NTP á Dhíchumasú"
 
-#: ../src/time/time-tool.c:424
+#: ../src/time/time-tool.c:434
 msgid "Synchronizing system clock"
 msgstr ""
 
-#: ../src/time/time-tool.c:504
+#: ../src/time/time-tool.c:514
 msgid "Keep synchronized with Internet servers"
 msgstr ""
 
-#: ../src/time/time-tool.c:505
+#: ../src/time/time-tool.c:515
 msgid "Manual"
 msgstr "De Láimh"
 
-#: ../src/time/time-tool.c:651
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Socruithe Ama agus Dáta"
 
@@ -881,7 +889,7 @@ msgstr ""
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
 #: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:477 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:550
 msgid "This would leave the system unusable."
 msgstr ""
 
@@ -930,7 +938,7 @@ msgstr ""
 msgid "Group \"%s\" already exists"
 msgstr "Tá grúpa \"%s\" ann cheana"
 
-#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:485
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
 msgid "Please select a different user name."
 msgstr ""
 
@@ -952,7 +960,7 @@ msgstr "Bainistigh an córas"
 
 #: ../src/users/privileges-table.c:51
 msgid "Use audio devices"
-msgstr ""
+msgstr "Úsáid gléasanna fuaime"
 
 #: ../src/users/privileges-table.c:52
 msgid "Use CD-ROM drives"
@@ -1017,90 +1025,94 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr ""
 
-#: ../src/users/user-settings.c:319
+#: ../src/users/user-settings.c:324
 msgid "New user account"
 msgstr "Cuntas úsáideora nua"
 
-#: ../src/users/user-settings.c:334
+#: ../src/users/user-settings.c:342
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Airíonna Chuntas '%s'"
 
-#: ../src/users/user-settings.c:473
+#: ../src/users/user-settings.c:475
 msgid "User name is empty"
 msgstr "Is folamh é an t-ainm úsáideora"
 
-#: ../src/users/user-settings.c:474
+#: ../src/users/user-settings.c:476
 msgid "A user name must be specified."
 msgstr ""
 
-#: ../src/users/user-settings.c:476
-msgid "Administrator account's user name should not be modified"
-msgstr ""
-
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:478
 msgid "User name has invalid characters"
 msgstr ""
 
-#: ../src/users/user-settings.c:480
+#: ../src/users/user-settings.c:479
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr ""
 
-#: ../src/users/user-settings.c:484
+#: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Tá ainm úsáideora \"%s\" ann cheana"
 
-#: ../src/users/user-settings.c:511
+#: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
-msgstr ""
+msgstr "Carachtar neamhbhailí \"%s\" i nóta"
 
-#: ../src/users/user-settings.c:512
+#: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr ""
 
-#: ../src/users/user-settings.c:529
+#: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr ""
 
-#: ../src/users/user-settings.c:530
+#: ../src/users/user-settings.c:529
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
 msgstr ""
 
-#: ../src/users/user-settings.c:546
+#: ../src/users/user-settings.c:532
+msgid "Home directory already exists"
+msgstr "Tá an chomhadlann bhaile ann cheana"
+
+#: ../src/users/user-settings.c:533
+msgid "Please enter a different home directory path."
+msgstr ""
+
+#: ../src/users/user-settings.c:549
 msgid "Administrator account's user ID should not be modified"
 msgstr ""
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
 msgstr ""
 
-#: ../src/users/user-settings.c:563
+#: ../src/users/user-settings.c:565
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr ""
 
-#: ../src/users/user-settings.c:591
+#: ../src/users/user-settings.c:598
 msgid "Password is too short"
 msgstr "Is róghairid é an focal faire"
 
-#: ../src/users/user-settings.c:592
+#: ../src/users/user-settings.c:599
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
 msgstr ""
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:602
 msgid "Password confirmation is not correct"
 msgstr ""
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 
@@ -1114,7 +1126,7 @@ msgstr "Ainm logála isteach"
 
 #: ../src/users/users-table.c:76
 msgid "Home directory"
-msgstr "Comhadlann baile"
+msgstr "Comhadlann bhaile"
 
 #: ../src/users/users-tool.c:216
 msgid "Users Settings"
