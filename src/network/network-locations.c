@@ -38,8 +38,8 @@ struct _GstNetworkLocationsPrivate
 };
 
 enum {
-	CHANGED,
-	LAST_SIGNAL
+  CHANGED,
+  LAST_SIGNAL
 };
 
 static gint signals [LAST_SIGNAL] = { 0 };
@@ -47,73 +47,20 @@ static gint signals [LAST_SIGNAL] = { 0 };
 enum {
   TYPE_INT,
   TYPE_BOOLEAN,
-  TYPE_STRING
+  TYPE_STRING,
+  TYPE_ETHERNET
 };
 
 typedef struct _PropType PropType;
 
 struct _PropType {
-  const gchar *key;
+  gchar *key;
   gint type;
 };
 
-/* FIXME: oh, introspection, where are thou? */
-PropType ethernet_properties[] = {
-  { "auto", TYPE_BOOLEAN },
-  { "active", TYPE_BOOLEAN },
-  { "configured", TYPE_BOOLEAN },
-  { "config-method", TYPE_STRING },
-  { "ip-address", TYPE_STRING },
-  { "ip-mask", TYPE_STRING },
-  { "gateway-address", TYPE_STRING },
-  { "network-address", TYPE_STRING },
-  { "broadcast-address", TYPE_STRING },
-  { NULL }
-};
-
-PropType wireless_properties[] = {
-  { "auto", TYPE_BOOLEAN },
-  { "active", TYPE_BOOLEAN },
-  { "configured", TYPE_BOOLEAN },
-  { "essid", TYPE_STRING },
-  { "key", TYPE_STRING },
-  { "key-type", TYPE_STRING },
-  { "config-method", TYPE_STRING },
-  { "ip_address", TYPE_STRING },
-  { "ip_mask", TYPE_STRING },
-  { "gateway-address", TYPE_STRING },
-  { "network-address", TYPE_STRING },
-  { "broadcast-address", TYPE_STRING },
-  { NULL }
-};
-
-PropType ppp_properties[] = {
-  { "auto", TYPE_BOOLEAN },
-  { "active", TYPE_BOOLEAN },
-  { "configured", TYPE_BOOLEAN },
-  { "login", TYPE_STRING },
-  { "password", TYPE_STRING },
-  { "phone-number", TYPE_STRING },
-  { "phone-prefix", TYPE_STRING },
-  { "default-gateway", TYPE_BOOLEAN },
-  { "use-peer-dns", TYPE_BOOLEAN },
-  { "persistent", TYPE_BOOLEAN },
-  { "peer-noauth", TYPE_BOOLEAN },
-  { "serial-port", TYPE_STRING },
-  { "volume", TYPE_INT },
-  { "dial-type", TYPE_INT },
-  { NULL }
-};
-
-PropType plip_properties[] = {
-  { "auto", TYPE_BOOLEAN },
-  { "active", TYPE_BOOLEAN },
-  { "configured", TYPE_BOOLEAN },
-  { "address", TYPE_STRING },
-  { "remote-address", TYPE_STRING },
-  { NULL }
-};
-
+typedef gboolean (InterfaceForeachFunc) (OobsIface *iface,
+					 GPtrArray *props,
+					 GKeyFile  *key_file);
 
 static void   gst_network_locations_class_init (GstNetworkLocationsClass *class);
 static void   gst_network_locations_init       (GstNetworkLocations *locations);
@@ -155,7 +102,7 @@ create_dot_dir ()
 			  NULL);
 
   if (!g_file_test (dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR))
-    mkdir (dir, 0700);
+    g_mkdir_with_parents (dir, 0700);
 
   return dir;
 }
@@ -475,46 +422,128 @@ migrate_old_parameters (GKeyFile    *key_file,
   g_key_file_set_string (key_file, section, key, values[value]);
 }
 
-static gboolean
-compare_interface (GObject  *iface,
-		   PropType  props[],
-		   GKeyFile *key_file)
+static GPtrArray *
+get_interface_properties (OobsIface *iface)
 {
-  gchar *name, *value1, *value2;
-  gint int_value1, int_value2, i = 0;
-  gboolean bool_value1, bool_value2, equal = TRUE;
+  GPtrArray *array;
+  GParamSpec **params;
+  gint n_params, i;
+
+  params = g_object_class_list_properties (G_OBJECT_GET_CLASS (iface), &n_params);
+  array = g_ptr_array_sized_new (n_params);
+
+  for (i = 0; i < n_params; i++)
+    {
+      PropType *prop;
+      GType value_type;
+      gint type;
+
+      value_type = params[i]->value_type;
+
+      /* we don't want the interface name in the list */
+      if (strcmp (params[i]->name, "device") == 0)
+	continue;
+
+      if (value_type == G_TYPE_STRING)
+	type = TYPE_STRING;
+      else if (value_type == G_TYPE_BOOLEAN)
+	type = TYPE_BOOLEAN;
+      else if (value_type == G_TYPE_INT ||
+	       g_type_is_a (value_type, G_TYPE_ENUM))
+	type = TYPE_INT;
+      else if (value_type == OOBS_TYPE_IFACE_ETHERNET)
+	type = TYPE_ETHERNET;
+      else
+	{
+	  g_warning ("Unknown type for property '%s' (%s) in interface type '%s', can't store it properly in locations",
+		     params[i]->name, g_type_name (value_type), G_OBJECT_TYPE_NAME (iface));
+	  continue;
+	}
+
+      prop = g_slice_new (PropType);
+      prop->key = g_strdup (params[i]->name);
+      prop->type = type;
+
+      g_ptr_array_add (array, prop);
+    }
+
+  g_free (params);
+
+  return array;
+}
+
+static void
+free_prop (PropType *prop)
+{
+  g_free (prop->key);
+  g_slice_free (PropType, prop);
+}
+
+static gboolean
+compare_interface (OobsIface *iface,
+		   GPtrArray *props,
+		   GKeyFile  *key_file)
+{
+  gboolean equal = FALSE;
+  gchar *name;
+  gint i;
 
   g_object_get (iface, "device", &name, NULL);
 
-  while (props[i].key && equal)
+  for (i = 0; i < props->len; i++)
     {
-      migrate_old_parameters (key_file, name, props[i].key);
+      PropType *prop;
 
-      if (props[i].type == TYPE_STRING)
+      prop = g_ptr_array_index (props, i);
+      migrate_old_parameters (key_file, name, prop->key);
+
+      if (prop->type == TYPE_STRING)
 	{
-	  value1 = g_key_file_get_string (key_file, name, props[i].key, NULL);
-	  g_object_get (iface, props[i].key, &value2, NULL);
+	  gchar *value1, *value2;
+
+	  value1 = g_key_file_get_string (key_file, name, prop->key, NULL);
+	  g_object_get (iface, prop->key, &value2, NULL);
 
 	  equal = compare_string (value1, value2);
 	  g_free (value1);
 	  g_free (value2);
 	}
-      else if (props[i].type == TYPE_INT)
+      else if (prop->type == TYPE_INT)
 	{
-	  int_value1 = g_key_file_get_integer (key_file, name, props[i].key, NULL);
-	  g_object_get (iface, props[i].key, &int_value2, NULL);
-	  equal = (int_value1 == int_value2);
+	  gint value1, value2;
+
+	  value1 = g_key_file_get_integer (key_file, name, prop->key, NULL);
+	  g_object_get (iface, prop->key, &value2, NULL);
+	  equal = (value1 == value2);
 	}
-      else if (props[i].type == TYPE_BOOLEAN)
+      else if (prop->type == TYPE_BOOLEAN)
 	{
-	  bool_value1 = g_key_file_get_boolean (key_file, name, props[i].key, NULL);
-	  g_object_get (iface, props[i].key, &bool_value2, NULL);
-	  equal = ((bool_value1 == TRUE) == (bool_value2 == TRUE));
+	  gboolean value1, value2;
+
+	  value1 = g_key_file_get_boolean (key_file, name, prop->key, NULL);
+	  g_object_get (iface, prop->key, &value2, NULL);
+	  equal = ((value1 == TRUE) == (value2 == TRUE));
+	}
+      else if (prop->type == TYPE_ETHERNET)
+	{
+	  OobsIfaceEthernet *ethernet;
+	  gchar *value1, *value2;
+
+	  value1 = g_key_file_get_string (key_file, name, prop->key, NULL);
+	  g_object_get (iface, prop->key, &ethernet, NULL);
+	  g_object_get (ethernet, "device", &value2, NULL);
+
+	  equal = compare_string (value1, value2);
+
+	  g_free (value1);
+	  g_free (value2);
+	  g_object_unref (ethernet);
 	}
       else
 	g_assert_not_reached ();
 
-      i++;
+      if (!equal)
+	break;
     }
 
   g_free (name);
@@ -522,43 +551,52 @@ compare_interface (GObject  *iface,
   return equal;
 }
 
-/* FIXME: merge with save_interfaces_list */
 static gboolean
-compare_interfaces_list (OobsIfacesConfig *config,
-			 gint              iface_type,
-			 PropType          props[],
-			 GKeyFile         *key_file)
+interfaces_list_foreach (OobsIfacesConfig     *config,
+			 OobsIfaceType         iface_type,
+			 InterfaceForeachFunc  func,
+			 GKeyFile             *key_file)
 {
-
   OobsList *list;
   OobsListIter iter;
-  gboolean valid, equal = TRUE;
+  gboolean valid, cont = TRUE;
   GObject *iface;
+  GPtrArray *props = NULL;
 
   list = oobs_ifaces_config_get_ifaces (config, iface_type);
   valid = oobs_list_get_iter_first (list, &iter);
 
-  while (valid && equal)
+  while (valid && cont)
     {
       iface = oobs_list_get (list, &iter);
-      equal = compare_interface (iface, props, key_file);
+
+      if (!props)
+	props = get_interface_properties (OOBS_IFACE (iface));
+
+      cont = func (OOBS_IFACE (iface), props, key_file);
       g_object_unref (iface);
 
       valid = oobs_list_iter_next (list, &iter);
     }
 
-  return equal;
+  if (props)
+    {
+      g_ptr_array_foreach (props, (GFunc) free_prop, NULL);
+      g_ptr_array_free (props, FALSE);
+    }
+
+  return cont;
 }
 
 static gboolean
 compare_interfaces (OobsIfacesConfig *config,
 		    GKeyFile         *key_file)
 {
-  if (!compare_interfaces_list (config, OOBS_IFACE_TYPE_ETHERNET, ethernet_properties, key_file) ||
-      !compare_interfaces_list (config, OOBS_IFACE_TYPE_WIRELESS, wireless_properties, key_file) ||
-      !compare_interfaces_list (config, OOBS_IFACE_TYPE_IRLAN, ethernet_properties, key_file) ||
-      !compare_interfaces_list (config, OOBS_IFACE_TYPE_PLIP, plip_properties, key_file) ||
-      !compare_interfaces_list (config, OOBS_IFACE_TYPE_PPP, ppp_properties, key_file))
+  if (!interfaces_list_foreach (config, OOBS_IFACE_TYPE_ETHERNET, compare_interface, key_file) ||
+      !interfaces_list_foreach (config, OOBS_IFACE_TYPE_WIRELESS, compare_interface, key_file) ||
+      !interfaces_list_foreach (config, OOBS_IFACE_TYPE_IRLAN, compare_interface, key_file) ||
+      !interfaces_list_foreach (config, OOBS_IFACE_TYPE_PLIP, compare_interface, key_file) ||
+      !interfaces_list_foreach (config, OOBS_IFACE_TYPE_PPP, compare_interface, key_file))
     return FALSE;
 
   return TRUE;
@@ -668,82 +706,100 @@ set_hosts_config (OobsHostsConfig *hosts_config,
   set_static_hosts (hosts_config, key_file);
 }
 
-static void
-set_interface (GObject  *iface,
-	       PropType  props[],
-	       GKeyFile *key_file)
+static OobsIface *
+get_ethernet_iface_by_name (const gchar *name)
 {
-  gchar *name, *value;
-  gint int_value;
-  gboolean bool_value;
-  gint i = 0;
-
-  if (!props)
-    return;
-
-  g_object_get (iface, "device", &name, NULL);
-
-  while (props[i].key)
-    {
-      migrate_old_parameters (key_file, name, props[i].key);
-
-      if (props[i].type == TYPE_STRING)
-	{
-	  value = g_key_file_get_string (key_file, name, props[i].key, NULL);
-	  g_object_set (iface, props[i].key, value, NULL);
-	  g_free (value);
-	}
-      else if (props[i].type == TYPE_INT)
-	{
-	  int_value = g_key_file_get_integer (key_file, name, props[i].key, NULL);
-	  g_object_set (iface, props[i].key, int_value, NULL);
-	}
-      else
-	{
-	  bool_value = g_key_file_get_boolean (key_file, name, props[i].key, NULL);
-	  g_object_set (iface, props[i].key, bool_value, NULL);
-	}
-
-      i++;
-    }
-
-  g_free (name);
-}
-
-/* FIXME: merge with save_interfaces_list */
-static void
-set_interfaces_list (OobsIfacesConfig *config,
-		     gint              iface_type,
-		     PropType          props[],
-		     GKeyFile         *key_file)
-{
+  OobsIfacesConfig *config;
   OobsList *list;
   OobsListIter iter;
+  OobsIface *iface;
   gboolean valid;
-  GObject *iface;
 
-  list = oobs_ifaces_config_get_ifaces (config, iface_type);
+  config = OOBS_IFACES_CONFIG (oobs_ifaces_config_get ());
+  list = oobs_ifaces_config_get_ifaces (config, OOBS_IFACE_TYPE_ETHERNET);
   valid = oobs_list_get_iter_first (list, &iter);
 
   while (valid)
     {
-      iface = oobs_list_get (list, &iter);
-      set_interface (iface, props, key_file);
-      g_object_unref (iface);
+      iface = OOBS_IFACE (oobs_list_get (list, &iter));
 
+      if (strcmp (name, oobs_iface_get_device_name (iface)) == 0)
+	return iface;
+
+      g_object_unref (iface);
       valid = oobs_list_iter_next (list, &iter);
     }
+
+  return NULL;
+}
+
+static gboolean
+set_interface (OobsIface *iface,
+	       GPtrArray *props,
+	       GKeyFile  *key_file)
+{
+  gchar *name;
+  gint i;
+
+  g_object_get (iface, "device", &name, NULL);
+
+  for (i = 0; i < props->len; i++)
+    {
+      PropType *prop;
+
+      prop = g_ptr_array_index (props, i);
+      migrate_old_parameters (key_file, name, prop->key);
+
+      if (prop->type == TYPE_STRING)
+	{
+	  gchar *value;
+
+	  value = g_key_file_get_string (key_file, name, prop->key, NULL);
+	  g_object_set (iface, prop->key, value, NULL);
+	  g_free (value);
+	}
+      else if (prop->type == TYPE_INT)
+	{
+	  gint value;
+
+	  value = g_key_file_get_integer (key_file, name, prop->key, NULL);
+	  g_object_set (iface, prop->key, value, NULL);
+	}
+      else if (prop->type == TYPE_BOOLEAN)
+	{
+	  gboolean value;
+
+	  value = g_key_file_get_boolean (key_file, name, prop->key, NULL);
+	  g_object_set (iface, prop->key, value, NULL);
+	}
+      else if (prop->type == TYPE_ETHERNET)
+	{
+	  gchar *value;
+	  OobsIface *ethernet;
+
+	  value = g_key_file_get_string (key_file, name, prop->key, NULL);
+	  ethernet = get_ethernet_iface_by_name (value);
+	  g_object_set (iface, prop->key, ethernet, NULL);
+
+	  g_object_unref (ethernet);
+	  g_free (value);
+	}
+    }
+
+  g_free (name);
+
+  return TRUE;
 }
 
 static void
 set_interfaces_config (OobsIfacesConfig *config,
 		       GKeyFile         *key_file)
 {
-  set_interfaces_list (config, OOBS_IFACE_TYPE_ETHERNET, ethernet_properties, key_file);
-  set_interfaces_list (config, OOBS_IFACE_TYPE_WIRELESS, wireless_properties, key_file);
-  set_interfaces_list (config, OOBS_IFACE_TYPE_IRLAN, ethernet_properties, key_file);
-  set_interfaces_list (config, OOBS_IFACE_TYPE_PLIP, plip_properties, key_file);
-  set_interfaces_list (config, OOBS_IFACE_TYPE_PPP, ppp_properties, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_ETHERNET, set_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_WIRELESS, set_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_IRLAN, set_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_PLIP, set_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_PPP, set_interface, key_file);
 }
 
 gboolean
@@ -875,79 +931,73 @@ save_hosts_config (OobsHostsConfig *config,
   save_static_hosts (config, key_file);
 }
 
-static void
-save_interface (GObject     *iface,
-		PropType     props[],
-		GKeyFile    *key_file)
+static gboolean
+save_interface (OobsIface *iface,
+		GPtrArray *props,
+		GKeyFile  *key_file)
 {
-  gchar *name, *value;
-  gint int_value;
-  gboolean bool_value;
-  gint i = 0;
-
-  if (!props)
-    return;
+  gchar *name;
+  gint i;
 
   g_object_get (iface, "device", &name, NULL);
 
-  while (props[i].key)
+  for (i = 0; i < props->len; i++)
     {
-      if (props[i].type == TYPE_STRING)
+      PropType *prop;
+
+      prop = g_ptr_array_index (props, i);
+
+      if (prop->type == TYPE_STRING)
 	{
-	  g_object_get (iface, props[i].key, &value, NULL);
-	  g_key_file_set_string (key_file, name, props[i].key, (value) ? value : "");
+	  gchar *value;
+
+	  g_object_get (iface, prop->key, &value, NULL);
+	  g_key_file_set_string (key_file, name, prop->key, (value) ? value : "");
 	  g_free (value);
 	}
-      else if (props[i].type == TYPE_INT)
+      else if (prop->type == TYPE_INT)
 	{
-	  g_object_get (iface, props[i].key, &int_value, NULL);
-	  g_key_file_set_integer (key_file, name, props[i].key, int_value);
-	}
-      else
-	{
-	  g_object_get (iface, props[i].key, &bool_value, NULL);
-	  g_key_file_set_boolean (key_file, name, props[i].key, bool_value);
-	}
+	  gint value;
 
-      i++;
+	  g_object_get (iface, prop->key, &value, NULL);
+	  g_key_file_set_integer (key_file, name, prop->key, value);
+	}
+      else if (prop->type == TYPE_BOOLEAN)
+	{
+	  gboolean value;
+
+	  g_object_get (iface, prop->key, &value, NULL);
+	  g_key_file_set_boolean (key_file, name, prop->key, value);
+	}
+      else if (prop->type == TYPE_ETHERNET)
+	{
+	  OobsIface *ethernet;
+	  gchar *value;
+
+	  g_object_get (iface, prop->key, &ethernet, NULL);
+	  g_object_get (ethernet, "device", &value, NULL);
+
+	  g_key_file_set_string (key_file, name, prop->key, value);
+
+	  g_free (value);
+	  g_object_unref (ethernet);
+	}
     }
 
   g_free (name);
-}
 
-static void
-save_interfaces_list (OobsIfacesConfig *config,
-		      gint              iface_type,
-		      PropType          props[],
-		      GKeyFile         *key_file)
-{
-  OobsList *list;
-  OobsListIter iter;
-  gboolean valid;
-  GObject *iface;
-
-  list = oobs_ifaces_config_get_ifaces (config, iface_type);
-  valid = oobs_list_get_iter_first (list, &iter);
-
-  while (valid)
-    {
-      iface = oobs_list_get (list, &iter);
-      save_interface (iface, props, key_file);
-      g_object_unref (iface);
-
-      valid = oobs_list_iter_next (list, &iter);
-    }
+  return TRUE;
 }
 
 static void
 save_interfaces (OobsIfacesConfig *config,
 		 GKeyFile         *key_file)
 {
-  save_interfaces_list (config, OOBS_IFACE_TYPE_ETHERNET, ethernet_properties, key_file);
-  save_interfaces_list (config, OOBS_IFACE_TYPE_WIRELESS, wireless_properties, key_file);
-  save_interfaces_list (config, OOBS_IFACE_TYPE_IRLAN, ethernet_properties, key_file);
-  save_interfaces_list (config, OOBS_IFACE_TYPE_PLIP, plip_properties, key_file);
-  save_interfaces_list (config, OOBS_IFACE_TYPE_PPP, ppp_properties, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_ETHERNET, save_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_WIRELESS, save_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_IRLAN, save_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_PLIP, save_interface, key_file);
+  interfaces_list_foreach (config, OOBS_IFACE_TYPE_PPP, save_interface, key_file);
 }
 
 static gboolean
