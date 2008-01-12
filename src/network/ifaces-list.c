@@ -306,9 +306,27 @@ get_iface_secondary_text (OobsIface *iface)
     }
   else if (OOBS_IS_IFACE_PPP (iface))
     {
-      g_string_append_printf (str, _("<b>Phone number:</b> %s <b>Login:</b> %s"),
-			      oobs_iface_ppp_get_phone_number (OOBS_IFACE_PPP (iface)),
-			      oobs_iface_ppp_get_login (OOBS_IFACE_PPP (iface)));
+      const gchar *type;
+
+      type = oobs_iface_ppp_get_connection_type (OOBS_IFACE_PPP (iface));
+
+      if (strcmp (type, "modem") == 0 ||
+	  strcmp (type, "isdn") == 0)
+	g_string_append_printf (str, _("<b>Type:</b> %s <b>Phone number:</b> %s"),
+				type, oobs_iface_ppp_get_phone_number (OOBS_IFACE_PPP (iface)));
+      else if (strcmp (type, "gprs") == 0)
+	g_string_append_printf (str, _("<b>Type:</b> %s <b>Access point name:</b> %s"),
+				type, oobs_iface_ppp_get_apn (OOBS_IFACE_PPP (iface)));
+      else if (strcmp (type, "pppoe") == 0)
+	{
+	  OobsIfaceEthernet *ethernet;
+
+	  ethernet = oobs_iface_ppp_get_ethernet (OOBS_IFACE_PPP (iface));
+	  g_string_append_printf (str, _("<b>Type:</b> %s <b>Ethernet interface:</b> %s"),
+				  type, oobs_iface_get_device_name (OOBS_IFACE (ethernet)));
+	}
+      else
+	g_string_append_printf (str, _("<b>Type:</b> %s"), type);
     }
 
   text = str->str;
