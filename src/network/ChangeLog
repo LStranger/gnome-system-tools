@@ -1,5 +1,11 @@
 2008-01-12  Carlos Garnacho  <carlosg@gnome.org>
 
+	* network-locations.c (get_ethernet_iface_by_name) (set_interface):
+	prevent a crash if the property didn't exist previously in the config
+	file.
+
+2008-01-12  Carlos Garnacho  <carlosg@gnome.org>
+
 	* ifaces-list.c (get_iface_secondary_text): Improve descriptive text 
 	for PPP interfaces.
 

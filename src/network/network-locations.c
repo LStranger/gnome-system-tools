@@ -723,7 +723,7 @@ get_ethernet_iface_by_name (const gchar *name)
     {
       iface = OOBS_IFACE (oobs_list_get (list, &iter));
 
-      if (strcmp (name, oobs_iface_get_device_name (iface)) == 0)
+      if (compare_string (name, oobs_iface_get_device_name (iface)))
 	return iface;
 
       g_object_unref (iface);
@@ -779,9 +779,13 @@ set_interface (OobsIface *iface,
 
 	  value = g_key_file_get_string (key_file, name, prop->key, NULL);
 	  ethernet = get_ethernet_iface_by_name (value);
-	  g_object_set (iface, prop->key, ethernet, NULL);
 
-	  g_object_unref (ethernet);
+	  if (ethernet)
+	    {
+	      g_object_set (iface, prop->key, ethernet, NULL);
+	      g_object_unref (ethernet);
+	    }
+
 	  g_free (value);
 	}
     }
