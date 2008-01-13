@@ -1,5 +1,12 @@
 2008-01-13  Carlos Garnacho  <carlosg@gnome.org>
 
+	* main.c (policy_widgets)
+	* callbacks.c (on_dialog_validate): Do not set sensitivity to TRUE in
+	the "Share" button in the edit share dialog if the user is not
+	allowed.
+
+2008-01-13  Carlos Garnacho  <carlosg@gnome.org>
+
 	* nautilus/nautilus-shares.[ch]: Update configuration and invalidate 
 	the edited NautilusFileInfo item when the spawned shares-admin quits.
 	Also, show the menu item insensitive if there's already one

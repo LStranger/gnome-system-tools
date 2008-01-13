@@ -72,7 +72,7 @@ static const gchar *policy_widgets [] = {
 	"share_nfs_acl",
 	"share_nfs_add",
 	"share_nfs_delete",
-	"share_properties_cancel",
+	"share_properties_ok",
 	"users_table",
 	NULL
 };

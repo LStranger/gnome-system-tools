@@ -344,7 +344,8 @@ on_dialog_validate (GtkWidget *widget, gpointer data)
 	GtkWidget *ok_button;
 
 	ok_button = gst_dialog_get_widget (tool->main_dialog, "share_properties_ok");
-	gtk_widget_set_sensitive (ok_button, share_settings_validate ());
+	gst_dialog_try_set_sensitive (tool->main_dialog, ok_button,
+				      share_settings_validate ());
 }
 
 void
