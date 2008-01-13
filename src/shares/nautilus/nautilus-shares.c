@@ -212,28 +212,34 @@ add_paths (GHashTable *paths,
     }
 }
 
-static gboolean
-return_true (gpointer key, gpointer value, gpointer data)
-{
-  return TRUE;
-}
-
 static void
 update_shared_paths (NautilusShares *shares)
 {
   /* clean up the paths */
-  g_hash_table_foreach_remove (shares->paths, return_true, NULL);
+  g_hash_table_remove_all (shares->paths);
 
   add_paths (shares->paths, oobs_smb_config_get_shares (OOBS_SMB_CONFIG (shares->smb_config)));
   add_paths (shares->paths, oobs_nfs_config_get_shares (OOBS_NFS_CONFIG (shares->nfs_config)));
 }
 
 static void
+share_object_updated (OobsObject *object,
+		      OobsResult  result,
+		      gpointer    user_data)
+{
+  NautilusShares *shares;
+
+  shares = NAUTILUS_SHARES (user_data);
+  update_shared_paths (shares);
+}
+
+static void
 on_shares_changed (OobsObject     *object,
 		   NautilusShares *shares)
 {
-  oobs_object_update (object);
-  update_shared_paths (shares);
+  oobs_object_update_async (object,
+			    share_object_updated,
+			    shares);
 }
 
 static void
@@ -244,17 +250,19 @@ nautilus_shares_init (NautilusShares *shares)
 
   if (oobs_session_get_connected (shares->session))
     {
-      /* FIXME: should monitor connected state */
       shares->smb_config = oobs_smb_config_get ();
       g_signal_connect (G_OBJECT (shares->smb_config), "changed",
 			G_CALLBACK (on_shares_changed), shares);
+      oobs_object_update_async (shares->smb_config,
+				share_object_updated,
+				shares);
 
       shares->nfs_config = oobs_nfs_config_get ();
       g_signal_connect (G_OBJECT (shares->nfs_config), "changed",
 			G_CALLBACK (on_shares_changed), shares);
-
-      /* fill the hash table */
-      update_shared_paths (shares);
+      oobs_object_update_async (shares->nfs_config,
+				share_object_updated,
+				shares);
     }
 }
 

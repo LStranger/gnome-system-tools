@@ -1,3 +1,10 @@
+2008-01-13  Carlos Garnacho  <carlosg@gnome.org>
+
+	* nautilus/nautilus-shares.c (nautilus_shares_init)
+	(on_shares_changed) (share_object_updated): Update configuration
+	objects asynchronously, Fixes #498407.
+	(update_shares_path): use g_hash_table_remove_all() to remove paths.
+
 2007-12-26  Carlos Garnacho  <carlosg@gnome.org>
 
 	* nautilus/nautilus-shares.c: Use correct HIG capitalization and
