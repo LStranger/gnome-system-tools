@@ -75,6 +75,7 @@ void                gst_dialog_try_set_sensitive   (GstDialog *xd, GtkWidget *w,
 
 GstTool            *gst_dialog_get_tool            (GstDialog *xd);
 
+void                gst_dialog_authenticate        (GstDialog *dialog);
 gboolean            gst_dialog_is_authenticated    (GstDialog *dialog);
 void                gst_dialog_require_authentication_for_widget  (GstDialog *xd, GtkWidget *w);
 void                gst_dialog_require_authentication_for_widgets (GstDialog *xd, const gchar **names);
