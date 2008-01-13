@@ -4,8 +4,7 @@ INCLUDES = $(NAUTILUS_CFLAGS)				\
 	-I$(top_srcdir)					\
 	-I$(top_builddir)
 
-# FIXME: get this from the .pc file
-nautilus_extensiondir=$(libdir)/nautilus/extensions-1.0
+nautilus_extensiondir=$(NAUTILUSDIR)
 
 nautilus_extension_LTLIBRARIES=libnautilus-gst-shares.la
 

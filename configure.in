@@ -256,6 +256,10 @@ PKG_CHECK_MODULES(NAUTILUS,[
 AC_SUBST(NAUTILUS_LIBS)
 AC_SUBST(NAUTILUS_CFLAGS)
 
+dnl Determine the install dir for nautilus extension.
+NAUTILUSDIR=`pkg-config --variable=extensiondir libnautilus-extension`
+AC_SUBST(NAUTILUSDIR)
+
 dnl ===========================
 dnl END: NAUTILUS EXTENSION
 dnl ===========================
