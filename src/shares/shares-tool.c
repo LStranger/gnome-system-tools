@@ -189,6 +189,11 @@ gst_shares_tool_update_gui (GstTool *tool)
 	}
 
 	users_table_set_config (shares_tool);
+
+	if (shares_tool->path) {
+		gst_dialog_authenticate (tool->main_dialog);
+		share_settings_dialog_run (shares_tool->path, TRUE);
+	}
 }
 
 static void

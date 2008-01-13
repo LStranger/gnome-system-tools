@@ -469,7 +469,7 @@ share_settings_dialog_run_for_iter (const gchar *path,
 		gtk_window_set_title (GTK_WINDOW (dialog), "Share Folder");
 
 		if (!path) {
-			/* make sure the path gets filled */
+			/* make sure the path entry gets filled in */
 			file_chooser = gst_dialog_get_widget (tool->main_dialog, "share_path");
 			path = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (file_chooser));
 		}
@@ -508,4 +508,7 @@ share_settings_dialog_run_for_iter (const gchar *path,
 
 	if (list_iter)
 		oobs_list_iter_free (list_iter);
+
+	if (standalone)
+		gtk_main_quit ();
 }

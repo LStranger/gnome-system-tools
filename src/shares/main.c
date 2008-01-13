@@ -87,14 +87,6 @@ initialize_tables (GstTool *tool)
 }
 
 void
-init_standalone_dialog (GstTool     *tool,
-			const gchar *path)
-{
-	gst_tool_update_gui (tool);
-	share_settings_dialog_run (path, TRUE);
-}
-
-void
 initialize_filters (void)
 {
 	gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "share_nfs_address")), GST_FILTER_IPV4);
@@ -122,11 +114,11 @@ main (int argc, char *argv[])
 	initialize_filters ();
 
 	if (path)
-		init_standalone_dialog (tool, path);
-	else {
+		GST_SHARES_TOOL (tool)->path = path;
+	else
 		gtk_widget_show (GTK_WIDGET (tool->main_dialog));
-		gtk_main ();
-	}
+
+	gtk_main ();
 
 	return 0;
 }

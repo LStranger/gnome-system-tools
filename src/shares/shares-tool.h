@@ -49,8 +49,10 @@ struct _GstSharesTool {
 	OobsObject *ifaces_config;
 	OobsObject *users_config;
 
-	gboolean smb_available : 1;
-	gboolean nfs_available : 1;
+	gchar *path;
+
+	guint smb_available : 1;
+	guint nfs_available : 1;
 };
 
 struct _GstSharesToolClass {

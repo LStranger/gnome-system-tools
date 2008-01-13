@@ -1,5 +1,17 @@
 2008-01-13  Carlos Garnacho  <carlosg@gnome.org>
 
+	* main.c (init_standalone_dialog): Removed, do not run the standalone 
+	dialog here.
+	(main): set path in the standalone case, run always the main loop, as
+	we now have to wait until the config is loaded before running the
+	dialog.
+	* shares-tool.[ch] (gst_shares_tool_update_gui): Instead run it here
+	now that the config has been retrieved.
+	* share-settings.c (share_settings_dialog_run_for_iter): quit the main
+	loop after running the standalone dialog.
+
+2008-01-13  Carlos Garnacho  <carlosg@gnome.org>
+
 	* main.c (policy_widgets)
 	* callbacks.c (on_dialog_validate): Do not set sensitivity to TRUE in
 	the "Share" button in the edit share dialog if the user is not
