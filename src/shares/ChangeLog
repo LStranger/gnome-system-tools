@@ -1,5 +1,12 @@
 2008-01-13  Carlos Garnacho  <carlosg@gnome.org>
 
+	* nautilus/nautilus-shares.[ch]: Update configuration and invalidate 
+	the edited NautilusFileInfo item when the spawned shares-admin quits.
+	Also, show the menu item insensitive if there's already one
+	shares-admin instance spawned from nautilus.
+
+2008-01-13  Carlos Garnacho  <carlosg@gnome.org>
+
 	* nautilus/nautilus-shares.c (nautilus_shares_init)
 	(on_shares_changed) (share_object_updated): Update configuration
 	objects asynchronously, Fixes #498407.

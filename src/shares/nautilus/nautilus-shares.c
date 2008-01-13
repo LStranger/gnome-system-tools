@@ -33,6 +33,8 @@
 
 static GType type = 0;
 
+static void nautilus_shares_update (NautilusShares *shares);
+
 static gboolean
 is_directory_local (NautilusFileInfo *info)
 {
@@ -75,22 +77,53 @@ get_path_from_file_info (NautilusFileInfo *info)
 }
 
 static void
+shares_admin_watch_func (GPid     pid,
+			 gint     status,
+			 gpointer user_data)
+{
+  NautilusShares *shares;
+
+  shares = NAUTILUS_SHARES (user_data);
+  g_spawn_close_pid (shares->pid);
+  shares->pid = 0;
+
+  nautilus_shares_update (shares);
+}
+
+static void
 on_menu_item_activate (NautilusMenuItem *menu_item,
 		       gpointer          data)
 {
+  NautilusShares *shares;
   NautilusFileInfo *info;
-  GString *cmd;
-  gchar *dir;
+  gchar **args, *dir;
+  GError *error = NULL;
 
-  cmd  = g_string_new ("shares-admin ");
   info = g_object_get_data (G_OBJECT (menu_item), "file");
+  shares = g_object_get_data (G_OBJECT (menu_item), "shares");
   dir  = get_path_from_file_info (info);
 
-  g_string_append_printf (cmd, "--add-share=\"%s\"", dir);
+  args = g_new0 (char *, 3);
+  args[0] = g_strdup ("shares-admin");
+  args[1] = g_strdup_printf ("--add-share=%s", dir);
 
-  g_spawn_command_line_async (cmd->str, NULL);
+  g_spawn_async (NULL, args, NULL,
+		 G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH,
+		 NULL, NULL, &shares->pid, &error);
 
-  g_string_free (cmd, TRUE);
+  if (error)
+    {
+      g_warning (error->message);
+      g_error_free (error);
+      shares->pid = 0;
+    }
+  else
+    {
+      shares->file_info = g_object_ref (info);
+      g_child_watch_add (shares->pid, shares_admin_watch_func, shares);
+    }
+
+  g_strfreev (args);
   g_free (dir);
 }
 
@@ -99,11 +132,13 @@ get_file_items (NautilusMenuProvider *provider,
 		GtkWidget            *window,
 		GList                *files)
 {
+  NautilusShares *shares;
   gboolean one_item, is_local, is_dir;
   NautilusFileInfo *info;
   NautilusMenuItem *menu_item;
   GList            *items = NULL;
 
+  shares = NAUTILUS_SHARES (provider);
   one_item = (files && !files->next);
 
   if (!one_item)
@@ -124,11 +159,15 @@ get_file_items (NautilusMenuProvider *provider,
 				      _("_Share Folder..."),
 				      _("Share this folder with other computers"),
 				      "gnome-fs-share");
+
+  /* do not allow running more than one instance from nautilus at the same time */
+  g_object_set (menu_item, "sensitive", (shares->pid == 0), NULL);
   g_signal_connect (G_OBJECT (menu_item),
 		    "activate",
 		    G_CALLBACK (on_menu_item_activate), NULL);
-  g_object_set_data (G_OBJECT (menu_item),
-		     "file", info);
+
+  g_object_set_data (G_OBJECT (menu_item), "file", info);
+  g_object_set_data (G_OBJECT (menu_item), "shares", provider);
 
   return g_list_append (NULL, menu_item);
 }
@@ -230,16 +269,35 @@ share_object_updated (OobsObject *object,
   NautilusShares *shares;
 
   shares = NAUTILUS_SHARES (user_data);
+  shares->objects_updating--;
+
+  if (shares->objects_updating > 0)
+    return;
+
   update_shared_paths (shares);
+
+  if (!shares->pid != 0 && shares->file_info)
+    {
+      /* shares admin has just exited, invalidate file info */
+      nautilus_file_info_invalidate_extension_info (shares->file_info);
+      g_object_unref (shares->file_info);
+      shares->file_info = NULL;
+    }
 }
 
 static void
-on_shares_changed (OobsObject     *object,
-		   NautilusShares *shares)
+nautilus_shares_update_object (NautilusShares *shares,
+			       OobsObject     *object)
 {
-  oobs_object_update_async (object,
-			    share_object_updated,
-			    shares);
+  shares->objects_updating++;
+  oobs_object_update_async (object, share_object_updated, shares);
+}
+
+static void
+nautilus_shares_update (NautilusShares *shares)
+{
+  nautilus_shares_update_object (shares, shares->smb_config);
+  nautilus_shares_update_object (shares, shares->nfs_config);
 }
 
 static void
@@ -251,18 +309,14 @@ nautilus_shares_init (NautilusShares *shares)
   if (oobs_session_get_connected (shares->session))
     {
       shares->smb_config = oobs_smb_config_get ();
-      g_signal_connect (G_OBJECT (shares->smb_config), "changed",
-			G_CALLBACK (on_shares_changed), shares);
-      oobs_object_update_async (shares->smb_config,
-				share_object_updated,
-				shares);
+      g_signal_connect_swapped (G_OBJECT (shares->smb_config), "changed",
+				G_CALLBACK (nautilus_shares_update_object), shares);
 
       shares->nfs_config = oobs_nfs_config_get ();
-      g_signal_connect (G_OBJECT (shares->nfs_config), "changed",
-			G_CALLBACK (on_shares_changed), shares);
-      oobs_object_update_async (shares->nfs_config,
-				share_object_updated,
-				shares);
+      g_signal_connect_swapped (G_OBJECT (shares->nfs_config), "changed",
+				G_CALLBACK (nautilus_shares_update_object), shares);
+
+      nautilus_shares_update (shares);
     }
 }
 

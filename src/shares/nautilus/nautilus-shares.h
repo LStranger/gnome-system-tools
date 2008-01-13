@@ -26,6 +26,7 @@
 
 #include <glib-object.h>
 #include <oobs/oobs.h>
+#include <libnautilus-extension/nautilus-file-info.h>
 
 G_BEGIN_DECLS
 
@@ -44,6 +45,13 @@ struct _NautilusShares {
   OobsObject *nfs_config;
 
   GHashTable *paths;
+
+  gint objects_updating;
+
+  GPid pid;
+
+  /* current file info */
+  NautilusFileInfo *file_info;
 };
 
 struct _NautilusSharesClass {
