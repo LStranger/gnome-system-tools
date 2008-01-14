@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.21.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-03 22:31+0100\n"
-"PO-Revision-Date: 2008-01-03 22:33+0100\n"
+"POT-Creation-Date: 2008-01-14 11:19+0100\n"
+"PO-Revision-Date: 2008-01-14 12:18+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -49,6 +49,14 @@ msgstr "Denne handlingen er tillatt"
 #: ../src/common/gst-polkit-button.c:140
 msgid "This action is not allowed"
 msgstr "Denne handlingen er ikke tillatt"
+
+#: ../src/common/gst-polkit-button.c:247
+msgid "Could not authenticate"
+msgstr "Kunne ikke autentisere"
+
+#: ../src/common/gst-polkit-button.c:249
+msgid "An unexpected error has occurred."
+msgstr "En uventet feil har oppstått."
 
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
@@ -213,28 +221,43 @@ msgstr "<b>Adresse:</b> %s"
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
 msgstr "<b>Adresse:</b> %s <b>Ekstern adresse:</b> %s"
 
-#: ../src/network/ifaces-list.c:309
+#: ../src/network/ifaces-list.c:315
 #, c-format
-msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
-msgstr "<b>Telefonnummer:</b> %s <b>Login:</b> %s"
+msgid "<b>Type:</b> %s <b>Phone number:</b> %s"
+msgstr "<b>Type:</b> %s <b>Telefonnummer:</b> %s"
 
-#: ../src/network/ifaces-list.c:328
+#: ../src/network/ifaces-list.c:318
+#, c-format
+msgid "<b>Type:</b> %s <b>Access point name:</b> %s"
+msgstr "<b>Type:</b> %s <b>Navn på aksesspunkt:</b> %s"
+
+#: ../src/network/ifaces-list.c:325
+#, c-format
+msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
+msgstr "<b>Type:</b> %s <b>Ethernet-grensesnitt:</b> %s"
+
+#: ../src/network/ifaces-list.c:329
+#, c-format
+msgid "<b>Type:</b> %s"
+msgstr "<b>Type:</b> %s"
+
+#: ../src/network/ifaces-list.c:346
 msgid "Wireless connection"
 msgstr "Trådløs tilkobling"
 
-#: ../src/network/ifaces-list.c:330
+#: ../src/network/ifaces-list.c:348
 msgid "Infrared connection"
 msgstr "Infrarød tilkobling"
 
-#: ../src/network/ifaces-list.c:332
+#: ../src/network/ifaces-list.c:350
 msgid "Wired connection"
 msgstr "Tilkobling med kabel"
 
-#: ../src/network/ifaces-list.c:334
+#: ../src/network/ifaces-list.c:352
 msgid "Parallel port connection"
 msgstr "Tilkobling via parallellport."
 
-#: ../src/network/ifaces-list.c:336
+#: ../src/network/ifaces-list.c:354
 msgid "Point to point connection"
 msgstr "Punkt-til-punkt tilkobling"
 
@@ -769,19 +792,19 @@ msgstr "Er du sikker på at du vil slette den delte ressursen"
 msgid "Other computers in your network will stop viewing this."
 msgstr "Andre datamaskiner i ditt nettverk vil ikke kunne se dette."
 
-#: ../src/shares/main.c:111
+#: ../src/shares/main.c:103
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Legg til en delt sti, endrer den hvis den allerede eksisterer"
 
-#: ../src/shares/main.c:111
+#: ../src/shares/main.c:103
 msgid "PATH"
 msgstr "STI"
 
-#: ../src/shares/nautilus/nautilus-shares.c:124
+#: ../src/shares/nautilus/nautilus-shares.c:159
 msgid "_Share Folder..."
 msgstr "_Del mappe..."
 
-#: ../src/shares/nautilus/nautilus-shares.c:125
+#: ../src/shares/nautilus/nautilus-shares.c:160
 msgid "Share this folder with other computers"
 msgstr "Del denne mappen med andre datamaskiner"
 
@@ -809,7 +832,7 @@ msgstr "Oppgi nettverk"
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Konfigurer mapper som skal gjøres tilgjengelig for ditt nettverk"
 
-#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:234
+#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:239
 msgid "Shared Folders"
 msgstr "Delte mapper"
 
@@ -889,7 +912,7 @@ msgstr "Administratorgruppen kan ikke slettes"
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
 #: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:550
 msgid "This would leave the system unusable."
 msgstr "Dette kan gjøre systemet ubrukelig."
 
@@ -940,7 +963,7 @@ msgstr ""
 msgid "Group \"%s\" already exists"
 msgstr "Gruppen «%s» eksisterer allerede"
 
-#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:482
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
 msgid "Please select a different user name."
 msgstr "Vennligst velg et annet brukernavn."
 
@@ -1033,52 +1056,48 @@ msgstr "Denne brukeren er aktiv på denne datamaskinen nå"
 msgid "New user account"
 msgstr "Ny brukerkonto"
 
-#: ../src/users/user-settings.c:338
+#: ../src/users/user-settings.c:342
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Egenskaper for konto «%s»"
 
-#: ../src/users/user-settings.c:470
+#: ../src/users/user-settings.c:475
 msgid "User name is empty"
 msgstr "Brukernavnet er tomt"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:476
 msgid "A user name must be specified."
 msgstr "Et brukernavn må oppgis."
 
-#: ../src/users/user-settings.c:473
-msgid "Administrator account's user name should not be modified"
-msgstr "Navn på administratorkontoen bør ikke endres"
-
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:478
 msgid "User name has invalid characters"
 msgstr "Brukernavnet har ugyldige tegn"
 
-#: ../src/users/user-settings.c:477
+#: ../src/users/user-settings.c:479
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "Velg et brukernavn som består bare av små bokstaver og tall."
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Brukernavn «%s» eksisterer allerede"
 
-#: ../src/users/user-settings.c:508
+#: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Ugyldig tegn «%c» i kommentar"
 
-#: ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr "Sjekk at dette tegnet ikke brukes."
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr "Ugyldig sti i hjemmemappen"
 
-#: ../src/users/user-settings.c:527
+#: ../src/users/user-settings.c:529
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1086,23 +1105,23 @@ msgstr ""
 "Vennligst oppgi full sti til hjemmemappen\n"
 "<span size=\"smaller\">f.eks: /home/john</span>."
 
-#: ../src/users/user-settings.c:530
+#: ../src/users/user-settings.c:532
 msgid "Home directory already exists"
 msgstr "Hjemmekatalog eksisterer allerede"
 
-#: ../src/users/user-settings.c:531
+#: ../src/users/user-settings.c:533
 msgid "Please enter a different home directory path."
 msgstr "Vennligst velg en annen stil til hjemmekatalogen."
 
-#: ../src/users/user-settings.c:546
+#: ../src/users/user-settings.c:549
 msgid "Administrator account's user ID should not be modified"
 msgstr "Bruker-ID for administrator-brukeren bør ikke endres"
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
 msgstr "Ufullferdig sti i skallet"
 
-#: ../src/users/user-settings.c:563
+#: ../src/users/user-settings.c:565
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1110,11 +1129,11 @@ msgstr ""
 "Vennligst oppgi full sti for skallet\n"
 "<span size=\"smaller\">f.eks: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:598
 msgid "Password is too short"
 msgstr "Passordet er for kort"
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:599
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1122,11 +1141,11 @@ msgstr ""
 "Brukerpassord må være lengre enn 6 tegn og helst utformet av tall, bokstaver "
 "og spesielle tegn."
 
-#: ../src/users/user-settings.c:599
+#: ../src/users/user-settings.c:602
 msgid "Password confirmation is not correct"
 msgstr "Bekreftelse av passord er ikke korrekt"
 
-#: ../src/users/user-settings.c:600
+#: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Sjekk at du har oppgitt samme passord i begge tekstfeltene."
 
