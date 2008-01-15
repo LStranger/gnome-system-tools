@@ -20,21 +20,20 @@
 
 #include <oobs/oobs.h>
 #include <string.h>
+#include <gio/gio.h>
 #include "network-locations.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define MONITOR_TIMEOUT 500
 #define GST_NETWORK_LOCATIONS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_NETWORK_LOCATIONS, GstNetworkLocationsPrivate))
 
 typedef struct _GstNetworkLocationsPrivate GstNetworkLocationsPrivate;
 
 struct _GstNetworkLocationsPrivate
 {
+  GFileMonitor *directory_monitor;
   gchar *dot_dir;
-  guint monitor_timeout;
-  time_t last_mtime;
 };
 
 enum {
@@ -107,28 +106,35 @@ create_dot_dir ()
   return dir;
 }
 
-static gboolean
-on_monitor_timeout (gpointer data)
+static void
+directory_monitor_changed (GFileMonitor      *monitor,
+			   GFile             *file,
+			   GFile             *other_file,
+			   GFileMonitorEvent  event,
+			   gpointer           data)
 {
-  GstNetworkLocationsPrivate *priv;
-  struct stat st;
+  GstNetworkLocations *locations;
 
-  priv = GST_NETWORK_LOCATIONS (data)->_priv;
-  stat (priv->dot_dir, &st);
+  locations = GST_NETWORK_LOCATIONS (data);
 
-  if (st.st_mtime != priv->last_mtime)
+  switch (event)
     {
-      priv->last_mtime = st.st_mtime;
-      g_signal_emit (data, signals[CHANGED], 0);
+    case G_FILE_MONITOR_EVENT_CHANGED:
+    case G_FILE_MONITOR_EVENT_DELETED:
+    case G_FILE_MONITOR_EVENT_CREATED:
+      g_signal_emit (locations, signals[CHANGED], 0);
+      break;
+    default:
+      break;
     }
-
-  return TRUE;
 }
 
 static void
 gst_network_locations_init (GstNetworkLocations *locations)
 {
   GstNetworkLocationsPrivate *priv;
+  GFile *file;
+  GError *error = NULL;
 
   locations->_priv = priv = GST_NETWORK_LOCATIONS_GET_PRIVATE (locations);
 
@@ -137,7 +143,19 @@ gst_network_locations_init (GstNetworkLocations *locations)
 
   priv->dot_dir = create_dot_dir ();
 
-  priv->monitor_timeout = g_timeout_add (MONITOR_TIMEOUT, on_monitor_timeout, locations);
+  file = g_file_new_for_path (priv->dot_dir);
+  priv->directory_monitor = g_file_monitor_directory (file, G_FILE_MONITOR_NONE, NULL, &error);
+
+  if (priv->directory_monitor)
+    g_signal_connect (priv->directory_monitor, "changed",
+		      G_CALLBACK (directory_monitor_changed), locations);
+  else if (error)
+    {
+      g_warning (error->message);
+      g_error_free (error);
+    }
+
+  g_object_unref (file);
 }
 
 static void
@@ -148,8 +166,11 @@ gst_network_locations_finalize (GObject *object)
   priv = GST_NETWORK_LOCATIONS (object)->_priv;
 
   g_free (priv->dot_dir);
-  g_source_remove (priv->monitor_timeout);
-  priv->monitor_timeout = 0;
+
+  if (priv->directory_monitor)
+    g_object_unref (priv->directory_monitor);
+
+  G_OBJECT_CLASS (gst_network_locations_parent_class)->finalize (object);
 }
 
 GstNetworkLocations*
