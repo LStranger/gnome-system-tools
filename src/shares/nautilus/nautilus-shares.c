@@ -22,9 +22,8 @@
  */
 
 #include <config.h>
+#include <gio/gio.h>
 #include <glib/gi18n-lib.h>
-#include <libgnomevfs/gnome-vfs-uri.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
 #include <libnautilus-extension/nautilus-extension-types.h>
 #include <libnautilus-extension/nautilus-file-info.h>
 #include <libnautilus-extension/nautilus-menu-provider.h>
@@ -38,16 +37,16 @@ static void nautilus_shares_update (NautilusShares *shares);
 static gboolean
 is_directory_local (NautilusFileInfo *info)
 {
-  GnomeVFSURI *uri;
-  gchar       *str;
-  gboolean     is_local;
+  gchar    *str;
+  GFile    *file;
+  gboolean  is_local;
 
   str = nautilus_file_info_get_uri (info);
-  uri = gnome_vfs_uri_new (str);
+  file = g_file_new_for_uri (str);
 
-  is_local = gnome_vfs_uri_is_local (uri);
+  is_local = g_file_is_native (file);
 
-  gnome_vfs_uri_unref (uri);
+  g_object_unref (file);
   g_free (str);
 
   return is_local;
@@ -56,22 +55,16 @@ is_directory_local (NautilusFileInfo *info)
 static char *
 get_path_from_file_info (NautilusFileInfo *info)
 {
-  GnomeVFSURI *uri     = NULL;
-  gchar       *escaped = NULL;
-  gchar       *path    = NULL;
+  GFile *file;
+  gchar *str, *path;
 
-  uri = gnome_vfs_uri_new (nautilus_file_info_get_uri (info));
+  str = nautilus_file_info_get_uri (info);
+  file = g_file_new_for_uri (str);
 
-  if (uri)
-    {
-      escaped = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);
+  path = g_file_get_path (file);
 
-      if (escaped)
-	path = gnome_vfs_unescape_string (escaped, NULL);
-	
-      gnome_vfs_uri_unref (uri);
-      g_free (escaped);
-    }
+  g_object_unref (file);
+  g_free (str);
 
   return path;
 }
