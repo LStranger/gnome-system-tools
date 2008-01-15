@@ -29,6 +29,7 @@ AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 LIBOOBS_REQUIRED=2.21.3
 GTK_REQUIRED=2.11.3
+GLIB_REQUIRED=2.15.3
 GCONF_REQUIRED=2.2.0
 DBUS_REQUIRED=0.32
 POLICYKIT_REQUIRED=0.5
@@ -228,6 +229,21 @@ dnl END: GST_LIBS & GST_FLAGS
 dnl ==================================
 
 dnl ==================================
+dnl GIO
+dnl ==================================
+
+PKG_CHECK_MODULES(GIO,[
+		  gio-2.0 >= $GLIB_REQUIRED
+		  ])
+
+AC_SUBST(GIO_LIBS)
+AC_SUBST(GIO_CFLAGS)
+
+dnl ==================================
+dnl END: GIO
+dnl ==================================
+
+dnl ==================================
 dnl LIBIW DETECTION
 dnl ==================================
 
@@ -251,6 +267,7 @@ dnl ===========================
 PKG_CHECK_MODULES(NAUTILUS,[
 	   libnautilus-extension >= 2.9.3
 	   liboobs-1 >= $LIBOOBS_REQUIRED
+	   gio-2.0   >= $GLIB_REQUIRED
 	   ])
 
 AC_SUBST(NAUTILUS_LIBS)
