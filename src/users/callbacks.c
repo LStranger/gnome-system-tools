@@ -338,6 +338,8 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 
 				if (gst_polkit_action_authenticate (action))
 					oobs_object_commit (GST_USERS_TOOL (tool)->self_config);
+
+				g_object_unref (action);
 #endif
 			}
 		}
