@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-27 13:21+0100\n"
+"POT-Creation-Date: 2008-01-20 16:47+0100\n"
 "PO-Revision-Date: 2007-12-27 13:33+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -47,6 +47,14 @@ msgstr ""
 
 #: ../src/common/gst-polkit-button.c:140
 msgid "This action is not allowed"
+msgstr ""
+
+#: ../src/common/gst-polkit-button.c:247
+msgid "Could not authenticate"
+msgstr ""
+
+#: ../src/common/gst-polkit-button.c:249
+msgid "An unexpected error has occurred."
 msgstr ""
 
 #: ../src/common/gst-tool.c:184
@@ -165,7 +173,7 @@ msgstr ""
 
 #: ../src/network/connection.c:759
 #, c-format
-msgid "%s Properties\n"
+msgid "%s Properties"
 msgstr ""
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
@@ -209,28 +217,43 @@ msgstr "<b>Adreça :</b> %s"
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
 msgstr ""
 
-#: ../src/network/ifaces-list.c:309
+#: ../src/network/ifaces-list.c:315
 #, c-format
-msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
+msgid "<b>Type:</b> %s <b>Phone number:</b> %s"
 msgstr ""
 
-#: ../src/network/ifaces-list.c:328
+#: ../src/network/ifaces-list.c:318
+#, c-format
+msgid "<b>Type:</b> %s <b>Access point name:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:325
+#, c-format
+msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:329
+#, c-format
+msgid "<b>Type:</b> %s"
+msgstr "<b>Tipe :</b> %s"
+
+#: ../src/network/ifaces-list.c:346
 msgid "Wireless connection"
 msgstr "Connexion inalambrica"
 
-#: ../src/network/ifaces-list.c:330
+#: ../src/network/ifaces-list.c:348
 msgid "Infrared connection"
 msgstr ""
 
-#: ../src/network/ifaces-list.c:332
+#: ../src/network/ifaces-list.c:350
 msgid "Wired connection"
 msgstr ""
 
-#: ../src/network/ifaces-list.c:334
+#: ../src/network/ifaces-list.c:352
 msgid "Parallel port connection"
 msgstr ""
 
-#: ../src/network/ifaces-list.c:336
+#: ../src/network/ifaces-list.c:354
 msgid "Point to point connection"
 msgstr ""
 
@@ -753,7 +776,8 @@ msgid "Priority"
 msgstr "Prioritat"
 
 #: ../src/services/services-tool.c:99
-msgid "Services settings"
+#
+msgid "Services Settings"
 msgstr ""
 
 #: ../src/shares/callbacks.c:196
@@ -764,19 +788,20 @@ msgstr ""
 msgid "Other computers in your network will stop viewing this."
 msgstr ""
 
-#: ../src/shares/main.c:111
+#: ../src/shares/main.c:103
 msgid "Add a shared path, modifies it if it already exists"
 msgstr ""
 
-#: ../src/shares/main.c:111
+#: ../src/shares/main.c:103
 msgid "PATH"
 msgstr "CAMIN"
 
-#: ../src/shares/nautilus/nautilus-shares.c:124
-msgid "_Share folder"
-msgstr "_Partejar lo repertòri"
+#: ../src/shares/nautilus/nautilus-shares.c:152
+#
+msgid "_Share Folder..."
+msgstr "_Partejar lo repertòri..."
 
-#: ../src/shares/nautilus/nautilus-shares.c:125
+#: ../src/shares/nautilus/nautilus-shares.c:153
 msgid "Share this folder with other computers"
 msgstr ""
 
@@ -804,7 +829,7 @@ msgstr ""
 msgid "Configure which folders are available for your network neighborhood"
 msgstr ""
 
-#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:234
+#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:239
 msgid "Shared Folders"
 msgstr "Repertòris partejats"
 
@@ -842,41 +867,37 @@ msgstr "Cambiar la data, l'ora e lo fus orari"
 msgid "Time and Date"
 msgstr "Ora e data"
 
-#: ../src/time/time-tool.c:380
+#: ../src/time/time-tool.c:390
 msgid "NTP support is not installed"
 msgstr ""
 
-#: ../src/time/time-tool.c:382
+#: ../src/time/time-tool.c:392
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr ""
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Enabling NTP"
 msgstr ""
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Disabling NTP"
 msgstr ""
 
-#: ../src/time/time-tool.c:424
+#: ../src/time/time-tool.c:434
 msgid "Synchronizing system clock"
 msgstr ""
 
-#: ../src/time/time-tool.c:434
-msgid "_Synchronize now"
-msgstr ""
-
-#: ../src/time/time-tool.c:530
+#: ../src/time/time-tool.c:514
 msgid "Keep synchronized with Internet servers"
 msgstr ""
 
-#: ../src/time/time-tool.c:531
+#: ../src/time/time-tool.c:515
 msgid "Manual"
 msgstr "Manual"
 
-#: ../src/time/time-tool.c:673
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Configuracion de la data e de l'ora"
 
@@ -886,7 +907,7 @@ msgstr ""
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
 #: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:477 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:550
 msgid "This would leave the system unusable."
 msgstr ""
 
@@ -935,7 +956,7 @@ msgstr ""
 msgid "Group \"%s\" already exists"
 msgstr "Lo grop \"%s\" existís ja"
 
-#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:485
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
 msgid "Please select a different user name."
 msgstr ""
 
@@ -1022,90 +1043,95 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr ""
 
-#: ../src/users/user-settings.c:319
+#: ../src/users/user-settings.c:324
 msgid "New user account"
 msgstr ""
 
-#: ../src/users/user-settings.c:334
+#: ../src/users/user-settings.c:342
 #, c-format
 msgid "Account '%s' Properties"
 msgstr ""
 
-#: ../src/users/user-settings.c:473
+#: ../src/users/user-settings.c:475
 msgid "User name is empty"
 msgstr "Lo nom d'utilizaire es void"
 
-#: ../src/users/user-settings.c:474
+#: ../src/users/user-settings.c:476
 msgid "A user name must be specified."
 msgstr ""
 
-#: ../src/users/user-settings.c:476
-msgid "Administrator account's user name should not be modified"
-msgstr ""
-
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:478
 msgid "User name has invalid characters"
 msgstr ""
 
-#: ../src/users/user-settings.c:480
+#: ../src/users/user-settings.c:479
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr ""
 
-#: ../src/users/user-settings.c:484
+#: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "L'utilizaire \"%s\" existís ja"
 
-#: ../src/users/user-settings.c:511
+#: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr ""
 
-#: ../src/users/user-settings.c:512
+#: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr ""
 
-#: ../src/users/user-settings.c:529
+#: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr ""
 
-#: ../src/users/user-settings.c:530
+#: ../src/users/user-settings.c:529
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
 msgstr ""
 
-#: ../src/users/user-settings.c:546
+#: ../src/users/user-settings.c:532
+#
+msgid "Home directory already exists"
+msgstr "Lo repertòri personal existís ja"
+
+#: ../src/users/user-settings.c:533
+msgid "Please enter a different home directory path."
+msgstr ""
+
+#: ../src/users/user-settings.c:549
 msgid "Administrator account's user ID should not be modified"
 msgstr ""
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
 msgstr ""
 
-#: ../src/users/user-settings.c:563
+#: ../src/users/user-settings.c:565
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr ""
 
-#: ../src/users/user-settings.c:591
+#: ../src/users/user-settings.c:598
 msgid "Password is too short"
 msgstr ""
 
-#: ../src/users/user-settings.c:592
+#: ../src/users/user-settings.c:599
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
 msgstr ""
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:602
 msgid "Password confirmation is not correct"
 msgstr ""
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 
@@ -1122,209 +1148,6 @@ msgid "Home directory"
 msgstr "Repertòri personal"
 
 #: ../src/users/users-tool.c:216
-msgid "Users settings"
-msgstr "Paramètres d'utilizaire"
-
-#~ msgid "Enter Password"
-#~ msgstr "Picatz lo mot de pas"
-
-#~ msgid "_Password:"
-#~ msgstr "Mot de _pas :"
-
-#~ msgid "<b>DNS Servers</b>"
-#~ msgstr "<b>Servidors DNS</b>"
-
-#~ msgid "<b>Host Settings</b>"
-#~ msgstr "<b>Paramètres de l'òste</b>"
-
-#~ msgid "C_onfiguration:"
-#~ msgstr "_Configuracion :"
-
-#~ msgid "Connections"
-#~ msgstr "Connexions"
-
-#~ msgid "DNS"
-#~ msgstr "DNS"
-
-#~ msgid "D_omain name:"
-#~ msgstr "Nom de _domeni :"
-
-#~ msgid "Delete current location"
-#~ msgstr "Suprimir l'emplaçament actiu"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Hosts"
-#~ msgstr "Òstes"
-
-#~ msgid "IP address:"
-#~ msgstr "Adreça IP :"
-
-#~ msgid "Interface properties"
-#~ msgstr "Paramètres de l'interfaç"
-
-#~ msgid "Location:"
-#~ msgstr "Emplaçament :"
-
-#~ msgid "Options"
-#~ msgstr "Opcions"
-
-#~ msgid "P_assword"
-#~ msgstr "_Mot de pas"
-
-#~ msgid "_Autodetect"
-#~ msgstr "Detectar _automaticament"
-
-#~ msgid "_Host name:"
-#~ msgstr "Nom d'_òste :"
-
-#~ msgid "_IP address:"
-#~ msgstr "Adreça _IP :"
-
-#~ msgid "_Local IP:"
-#~ msgstr "IP _locala :"
-
-#~ msgid "_Username:"
-#~ msgstr "_Nom d'utilizaire :"
-
-#~ msgid "_Volume:"
-#~ msgstr "_Volum :"
-
-#~ msgid "Add allowed hosts"
-#~ msgstr "Apondre d'òstes autorisats"
-
-#~ msgid "Allowed hosts:"
-#~ msgstr "Òstes autorisats :"
-
-#~ msgid "Comment:"
-#~ msgstr "Comentari :"
-
-#~ msgid "Host name:"
-#~ msgstr "Nom d'òste :"
-
-#~ msgid "Name:"
-#~ msgstr "Nom :"
-
-#~ msgid "Netmask:"
-#~ msgstr "Masqueta ret :"
-
-#~ msgid "Network:"
-#~ msgstr "Ret :"
-
-#~ msgid "_Read only"
-#~ msgstr "_Lectura sola"
-
-#~ msgid "<b>Selection</b>"
-#~ msgstr "<b>Seleccion</b>"
-
-#~ msgid "<b>Time Zone</b>"
-#~ msgstr "<b>Fus orari</b>"
-
-#~ msgid "Add NTP Server"
-#~ msgstr "Apondre un servidor NTP"
-
-#~ msgid "NTP server"
-#~ msgstr "Servidor NTP"
-
-#~ msgid "Time servers"
-#~ msgstr "Servidors d'ora"
-
-#~ msgid "Time zone"
-#~ msgstr "Fus orari"
-
-#~ msgid "Time zone:"
-#~ msgstr "Fus orari :"
-
-#~ msgid "Unconfigured"
-#~ msgstr "Pas configurat"
-
-#~ msgid "_Configuration:"
-#~ msgstr "_Configuracion :"
-
-#~ msgid "_Date:"
-#~ msgstr "_Data :"
-
-#~ msgid "_Time:"
-#~ msgstr "_Ora :"
-
-#~ msgid "<span weight=\"bold\">Basic Settings</span>"
-#~ msgstr "<span weight=\"bold\">Paramètres de basa</span>"
-
-#~ msgid "<span weight=\"bold\">Group Members</span>"
-#~ msgstr "<span weight=\"bold\">Sòcis del grop</span>"
-
-#~ msgid "<span weight=\"bold\">Password Settings</span>"
-#~ msgstr "<span weight=\"bold\">Opcions dels mots de pas</span>"
-
-#~ msgid "<span weight=\"bold\">Password</span>"
-#~ msgstr "<span weight=\"bold\">Mot de pas</span>"
-
-#~ msgid "Account"
-#~ msgstr "Compte"
-
-#~ msgid "Advanced"
-#~ msgstr "A_vançat"
-
-#~ msgid "Con_firmation:"
-#~ msgstr "Con_firmacion :"
-
-#~ msgid "Default _group:"
-#~ msgstr "_Grop per defaut :"
-
-#~ msgid "Group _ID:"
-#~ msgstr "_ID del grop :"
-
-#~ msgid "Group _name:"
-#~ msgstr "_Nom del grop :"
-
-#~ msgid "Group properties"
-#~ msgstr "Propietats del grop"
-
-#~ msgid "Privileges"
-#~ msgstr "Privilegis"
-
-#~ msgid "Profile _name:"
-#~ msgstr "_Nom del perfil :"
-
-#~ msgid "User ID:"
-#~ msgstr "ID utilizaire :"
-
-#~ msgid "User _password:"
-#~ msgstr "_Mot de pas de l'utilizaire :"
-
-#~ msgid "User profiles"
-#~ msgstr "Perfils d'utilizaire"
-
-#~ msgid "_Add Group"
-#~ msgstr "_Apondre un grop"
-
-#~ msgid "_Add Profile"
-#~ msgstr "_Apondre un perfil"
-
-#~ msgid "_Add User"
-#~ msgstr "_Apondre un utilizaire"
-
-#~ msgid "_Comments"
-#~ msgstr "_Comentaris"
-
-#~ msgid "_Home directory:"
-#~ msgstr "_Repertòri personal :"
-
-#~ msgid "_Home phone:"
-#~ msgstr "Telefòn ostal :"
-
-#~ msgid "_Main group:"
-#~ msgstr "Grop _principal :"
-
-#~ msgid "_Profile:"
-#~ msgstr "_Perfil :"
-
-#~ msgid "_Real name:"
-#~ msgstr "Nom _complet :"
-
-#~ msgid "_Shell:"
-#~ msgstr "_Shell :"
-
-#~ msgid "ISDN connection"
-#~ msgstr "Connexion ISDN"
+#
+msgid "Users Settings"
+msgstr "Paramètres dels utilizaires"
