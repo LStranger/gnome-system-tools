@@ -7,13 +7,13 @@
 #
 # Xoán Pedracova Varela <xpedra@gts.tsc.uvigo.es>, 2000.
 # Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005, 2006.
-# Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2007.
+# Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-14 15:24+0100\n"
-"PO-Revision-Date: 2007-11-14 15:26+0100\n"
+"POT-Creation-Date: 2008-02-02 19:45+0100\n"
+"PO-Revision-Date: 2008-02-02 19:50+0100\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Indica se a ferramenta de administración de usuarios debe mostrar ou non "
 "todos os usuarios e grupos"
 
-#: ../src/common/gst-dialog.c:177
+#: ../src/common/gst-dialog.c:179
 msgid "_Unlock"
 msgstr "_Desbloquear"
 
@@ -59,6 +59,14 @@ msgstr "Estalle permitida esta acción"
 msgid "This action is not allowed"
 msgstr "Non lle está permitida esta acción"
 
+#: ../src/common/gst-polkit-button.c:247
+msgid "Could not authenticate"
+msgstr "Non se puido autenticar"
+
+#: ../src/common/gst-polkit-button.c:249
+msgid "An unexpected error has occurred."
+msgstr "Ocorreu un erro inesperado."
+
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
 msgstr "Non se puido cargar a configuración"
@@ -79,6 +87,14 @@ msgstr "Non lle está permitido modificar á configuración do sistema."
 msgid "Could not display help"
 msgstr "Non se pode mostrar a axuda"
 
+#: ../src/common/gst-tool.c:577
+msgid "The system configuration has potentially changed."
+msgstr "A configuración do sistema cambiou."
+
+#: ../src/common/gst-tool.c:579
+msgid "Update content? This will lose any modification in course."
+msgstr "Actualizar o contido? Perderase calquer modificación en curso."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:38
 msgid "_Add"
@@ -93,15 +109,15 @@ msgstr "E_liminar"
 msgid "Type address"
 msgstr "Tipo de enderezo"
 
-#: ../src/network/callbacks.c:186 ../src/network/callbacks.c:432
+#: ../src/network/callbacks.c:237 ../src/network/callbacks.c:487
 msgid "Changing interface configuration"
 msgstr "Cambiar a configuración da interface"
 
-#: ../src/network/callbacks.c:244
+#: ../src/network/callbacks.c:299
 msgid "Could not autodetect modem device"
 msgstr "Non se pode detectar automaticamente o dispositivo de módem"
 
-#: ../src/network/callbacks.c:247
+#: ../src/network/callbacks.c:302
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
@@ -109,11 +125,11 @@ msgstr ""
 "Verifique que o dispositivo non está ocupado e que está conectado "
 "correctamente ao computador."
 
-#: ../src/network/callbacks.c:468
+#: ../src/network/callbacks.c:523
 msgid "The host name has changed"
 msgstr "Cambiou o nome do host"
 
-#: ../src/network/callbacks.c:471
+#: ../src/network/callbacks.c:526
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -121,7 +137,7 @@ msgstr ""
 "Isto impediralle iniciar aplicacións novas e por tanto terá que iniciar unha "
 "nova sesión. Quere continuar de todas as formas?"
 
-#: ../src/network/callbacks.c:477
+#: ../src/network/callbacks.c:532
 msgid "Change _Host name"
 msgstr "Cambiar o nome do _host"
 
@@ -153,10 +169,26 @@ msgstr "WPA persoal"
 msgid "WPA2 Personal"
 msgstr "WPA2 persoal"
 
-#: ../src/network/connection.c:624
+#: ../src/network/connection.c:52
+msgid "GPRS/UMTS"
+msgstr "GPRS/UMTS"
+
+#: ../src/network/connection.c:53
+msgid "ISDN modem"
+msgstr "Módem RDSI"
+
+#: ../src/network/connection.c:54
+msgid "Serial modem"
+msgstr "Módem serie"
+
+#: ../src/network/connection.c:55
+msgid "PPPoE"
+msgstr "PPPoE"
+
+#: ../src/network/connection.c:759
 #, c-format
-msgid "%s Properties\n"
-msgstr "%s Propiedades\n"
+msgid "%s Properties"
+msgstr "Propiedades de %s"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -171,62 +203,73 @@ msgstr "Enderezo IP"
 msgid "Aliases"
 msgstr "Alias"
 
-#: ../src/network/ifaces-list.c:282
+#: ../src/network/ifaces-list.c:280
 msgid "This network interface is not configured"
 msgstr "Esta interface de rede non está configurada"
 
-#: ../src/network/ifaces-list.c:284
+#: ../src/network/ifaces-list.c:282
 msgid "Roaming mode enabled"
 msgstr "O modo itinerante está activado"
 
-#: ../src/network/ifaces-list.c:291
+#: ../src/network/ifaces-list.c:289
 #, c-format
 msgid "<b>Essid:</b> %s "
 msgstr "<b>Essid:</b> %s "
 
-#: ../src/network/ifaces-list.c:297
+#: ../src/network/ifaces-list.c:295
 #, c-format
 msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
 msgstr "<b>Enderezo:</b> %s <b>Máscara de subrede:</b> %s"
 
-#: ../src/network/ifaces-list.c:301
+#: ../src/network/ifaces-list.c:299
 #, c-format
 msgid "<b>Address:</b> %s"
 msgstr "<b>Enderezo:</b> %s"
 
-#: ../src/network/ifaces-list.c:305
+#: ../src/network/ifaces-list.c:303
 #, c-format
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
 msgstr "<b>Enderezo:</b> %s <b>Enderezo remoto:</b> %s"
 
-#: ../src/network/ifaces-list.c:311
+#: ../src/network/ifaces-list.c:315
 #, c-format
-msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
-msgstr "<b>Número de teléfono:</b> %s <b>Usuario:</b> %s"
+msgid "<b>Type:</b> %s <b>Phone number:</b> %s"
+msgstr "<b>Tipo:</b> %s <b>Número de teléfono:</b> %s"
 
-#: ../src/network/ifaces-list.c:330
+#: ../src/network/ifaces-list.c:318
+#, c-format
+msgid "<b>Type:</b> %s <b>Access point name:</b> %s"
+msgstr "<b>Tipo:</b> %s <b>Nome do punto de acceso:</b> %s"
+
+#: ../src/network/ifaces-list.c:325
+#, c-format
+msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
+msgstr "<b>Tipo:</b> %s <b>Interface Ethernet:</b> %s"
+
+#: ../src/network/ifaces-list.c:329
+#, c-format
+msgid "<b>Type:</b> %s"
+msgstr "<b>Tipo:</b> %s"
+
+#: ../src/network/ifaces-list.c:346
 msgid "Wireless connection"
 msgstr "Conexión sen fíos"
 
-#: ../src/network/ifaces-list.c:332
+#: ../src/network/ifaces-list.c:348
 msgid "Infrared connection"
 msgstr "Conexión por infravermellos"
 
-#: ../src/network/ifaces-list.c:334
+#: ../src/network/ifaces-list.c:350
 msgid "Wired connection"
 msgstr "Conexión por cable"
 
-#: ../src/network/ifaces-list.c:336
+#: ../src/network/ifaces-list.c:352
 msgid "Parallel port connection"
 msgstr "Conexión por porto paralelo"
 
-#: ../src/network/ifaces-list.c:338
-msgid "Modem connection"
-msgstr "Conexión por módem"
-
-#: ../src/network/ifaces-list.c:340
-msgid "ISDN connection"
-msgstr "Conexión RDSI"
+#: ../src/network/ifaces-list.c:354
+msgid "Point to point connection"
+msgstr "Conexión punto a punto"
 
 #: ../src/network/locations-combo.c:221
 msgid "Changing network location"
@@ -253,29 +296,29 @@ msgstr "Nome da _localización:"
 msgid "Do you want to delete location \"%s\"?"
 msgstr "Quere eliminar a localización \"%s\"?"
 
-#: ../src/network/main.c:132
+#: ../src/network/main.c:135
 msgid "The interface does not exist"
 msgstr "A interface non existe"
 
-#: ../src/network/main.c:134
+#: ../src/network/main.c:137
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
 msgstr "Verifique que está escrita correctamente e que é soportado polo sistema."
 
-#: ../src/network/main.c:180
+#: ../src/network/main.c:183
 msgid "Configure a network interface"
 msgstr "Configurar unha interface de rede"
 
-#: ../src/network/main.c:180
+#: ../src/network/main.c:183
 msgid "INTERFACE"
 msgstr "INTERFACE"
 
-#: ../src/network/main.c:181
+#: ../src/network/main.c:184
 msgid "Configure the first network interface with a specific type"
 msgstr "Configurar a primeira interface de rede cun tipo específico"
 
-#: ../src/network/main.c:181
+#: ../src/network/main.c:184
 msgid "TYPE"
 msgstr "TIPO"
 
@@ -291,17 +334,17 @@ msgstr "Rede"
 msgid "Network Settings"
 msgstr "Configuración de rede"
 
-#: ../src/services/callbacks.c:58
+#: ../src/services/callbacks.c:59
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Configuración do servizo \"%s\""
 
-#: ../src/services/callbacks.c:111
+#: ../src/services/callbacks.c:119
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Está seguro de que quere desactivar %s?"
 
-#: ../src/services/callbacks.c:115
+#: ../src/services/callbacks.c:123
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -749,7 +792,7 @@ msgid "Priority"
 msgstr "Prioridade"
 
 #: ../src/services/services-tool.c:99
-msgid "Services settings"
+msgid "Services Settings"
 msgstr "Configuración dos servizos"
 
 #: ../src/shares/callbacks.c:196
@@ -760,19 +803,19 @@ msgstr "Está seguro de que quere eliminar esta compartición?"
 msgid "Other computers in your network will stop viewing this."
 msgstr "Outros equipos na súa rede deixarán de ver isto."
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:103
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Engadir un camiño compartido, modifícase se xa existe"
 
-#: ../src/shares/main.c:110
+#: ../src/shares/main.c:103
 msgid "PATH"
 msgstr "CAMIÑO"
 
-#: ../src/shares/nautilus/nautilus-shares.c:124
-msgid "_Share folder"
-msgstr "_Compartir o cartafol"
+#: ../src/shares/nautilus/nautilus-shares.c:152
+msgid "_Share Folder..."
+msgstr "_Compartir o cartafol..."
 
-#: ../src/shares/nautilus/nautilus-shares.c:125
+#: ../src/shares/nautilus/nautilus-shares.c:153
 msgid "Share this folder with other computers"
 msgstr "Compartir este cartafol con outros computadores"
 
@@ -800,7 +843,7 @@ msgstr "Especifique a rede"
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Configurar os cartafoles que están dispoñibles para outros usuarios da rede"
 
-#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:208
+#: ../src/shares/shares.desktop.in.in.h:2 ../src/shares/shares-tool.c:239
 msgid "Shared Folders"
 msgstr "Cartafoles compartidos"
 
@@ -820,11 +863,11 @@ msgstr "Redes Windows (SMB)"
 msgid "Unix networks (NFS)"
 msgstr "Redes Unix (NFS)"
 
-#: ../src/shares/shares-tool.c:131
+#: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
 msgstr "Os servizos para compartir ficheiros non están instalados"
 
-#: ../src/shares/shares-tool.c:133
+#: ../src/shares/shares-tool.c:157
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -840,11 +883,11 @@ msgstr "Cambiar a hora, data e fuso horario do sistema"
 msgid "Time and Date"
 msgstr "Hora e data"
 
-#: ../src/time/time-tool.c:380
+#: ../src/time/time-tool.c:390
 msgid "NTP support is not installed"
 msgstr "O soporte NTP non está instalado"
 
-#: ../src/time/time-tool.c:382
+#: ../src/time/time-tool.c:392
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -852,31 +895,27 @@ msgstr ""
 "Instale e active o soporte NTP no sistema para activar a sincronización do "
 "seu servidor de hora local cos servidores de hora de Internet."
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Enabling NTP"
 msgstr "Activación de NTP"
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Disabling NTP"
 msgstr "Desactivación de NTP"
 
-#: ../src/time/time-tool.c:424
+#: ../src/time/time-tool.c:434
 msgid "Synchronizing system clock"
 msgstr "Sincronización do reloxo de sistema"
 
-#: ../src/time/time-tool.c:434
-msgid "_Synchronize now"
-msgstr "_Sincronizar agora"
-
-#: ../src/time/time-tool.c:530
+#: ../src/time/time-tool.c:514
 msgid "Keep synchronized with Internet servers"
 msgstr "Manter sincronizado cos servidores de Internet"
 
-#: ../src/time/time-tool.c:531
+#: ../src/time/time-tool.c:515
 msgid "Manual"
 msgstr "Manual"
 
-#: ../src/time/time-tool.c:673
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Definicións de hora e data"
 
@@ -884,9 +923,9 @@ msgstr "Definicións de hora e data"
 msgid "Administrator group can not be deleted"
 msgstr "Non se pode eliminar o grupo administrador"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:276
-#: ../src/users/group-settings.c:300 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:544
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:550
 msgid "This would leave the system unusable."
 msgstr "Isto podería inutilizar o sistema"
 
@@ -901,32 +940,32 @@ msgstr ""
 "Isto pode deixar ficheiros con ID de grupo non válido no sistema de "
 "ficheiros."
 
-#: ../src/users/group-settings.c:164
+#: ../src/users/group-settings.c:167
 msgid "New group"
 msgstr "Novo grupo"
 
-#: ../src/users/group-settings.c:172
+#: ../src/users/group-settings.c:175
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Propiedades do grupo '%s'"
 
-#: ../src/users/group-settings.c:272
+#: ../src/users/group-settings.c:275
 msgid "Group name is empty"
 msgstr "O nome do grupo está baleiro"
 
-#: ../src/users/group-settings.c:273
+#: ../src/users/group-settings.c:276
 msgid "A group name must be specified."
 msgstr "Ten que especificar un nome de grupo."
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:278
 msgid "Group name of the administrator group user should not be modified"
 msgstr "O nome do grupo administrador non se debería modificar"
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:281
 msgid "Group name has invalid characters"
 msgstr "O nome de grupo ten caracteres non válidos"
 
-#: ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:282
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -934,16 +973,16 @@ msgstr ""
 "Insira un nome de grupo válido, que sexa unha letra minúscula seguida de "
 "letras minúsculas e números."
 
-#: ../src/users/group-settings.c:283
+#: ../src/users/group-settings.c:286
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "O grupo \"%s\" xa existe"
 
-#: ../src/users/group-settings.c:284 ../src/users/user-settings.c:482
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
 msgid "Please select a different user name."
 msgstr "Seleccione un nome de usuario diferente."
 
-#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:302
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "O ID de grupo da conta Administrador non se debería modificar"
 
@@ -1028,32 +1067,28 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Este usuario xa está usando actualmente este computador"
 
-#: ../src/users/user-settings.c:316
+#: ../src/users/user-settings.c:324
 msgid "New user account"
 msgstr "Nova conta de usuario"
 
-#: ../src/users/user-settings.c:331
+#: ../src/users/user-settings.c:342
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Propiedades da conta '%s'"
 
-#: ../src/users/user-settings.c:470
+#: ../src/users/user-settings.c:475
 msgid "User name is empty"
 msgstr "O nome de usuario está baleiro"
 
-#: ../src/users/user-settings.c:471
+#: ../src/users/user-settings.c:476
 msgid "A user name must be specified."
 msgstr "Ten que especificar un nome de usuario."
 
-#: ../src/users/user-settings.c:473
-msgid "Administrator account's user name should not be modified"
-msgstr "O nome de usuario da conta administrador non se debería modificar"
-
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:478
 msgid "User name has invalid characters"
 msgstr "O nome de usuario ten caracteres non válidos"
 
-#: ../src/users/user-settings.c:477
+#: ../src/users/user-settings.c:479
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1061,25 +1096,25 @@ msgstr ""
 "Insira un nome de usuario válido, que sexa unha letra minúscula seguida de "
 "letras minúsculas e números."
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "O nome de usuario \"%s\" xa existe"
 
-#: ../src/users/user-settings.c:508
+#: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Carácter non válido \"%c\" no comentario"
 
-#: ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr "Verifique que este carácter non está en uso."
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr "Camiño incompleto no directorio home"
 
-#: ../src/users/user-settings.c:527
+#: ../src/users/user-settings.c:529
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1087,15 +1122,23 @@ msgstr ""
 "Introduza o camiño completo para o directorio home\n"
 "<span size=\"smaller\">por exemplo: /home/alba</span>."
 
-#: ../src/users/user-settings.c:543
+#: ../src/users/user-settings.c:532
+msgid "Home directory already exists"
+msgstr "O directorio persoal xa existe"
+
+#: ../src/users/user-settings.c:533
+msgid "Please enter a different home directory path."
+msgstr "Introduza unha ruta do directorio persoal distinta."
+
+#: ../src/users/user-settings.c:549
 msgid "Administrator account's user ID should not be modified"
 msgstr "O ID de usuario da conta administrador non se debería modificar"
 
-#: ../src/users/user-settings.c:559
+#: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
 msgstr "Camiño incompleto no intérprete de comandos"
 
-#: ../src/users/user-settings.c:560
+#: ../src/users/user-settings.c:565
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1103,11 +1146,11 @@ msgstr ""
 "Introduza o camiño completo para o intérprete de comandos\n"
 "<span size=\"smaller\">por exemplo: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:588
+#: ../src/users/user-settings.c:598
 msgid "Password is too short"
 msgstr "O contrasinal é demasiado curto"
 
-#: ../src/users/user-settings.c:589
+#: ../src/users/user-settings.c:599
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1115,11 +1158,11 @@ msgstr ""
 "Os contrasinais de usuario deben ter máis de seis caracteres e estar "
 "preferiblemente compostos por números, letras e caracteres especiais."
 
-#: ../src/users/user-settings.c:592
+#: ../src/users/user-settings.c:602
 msgid "Password confirmation is not correct"
 msgstr "A confirmación do contrasinal non é correcta"
 
-#: ../src/users/user-settings.c:593
+#: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Verifique que proporcionou o mesmo contrasinal nos dous campos de texto."
 
@@ -1135,7 +1178,7 @@ msgstr "Nome de usuario"
 msgid "Home directory"
 msgstr "Directorio persoal"
 
-#: ../src/users/users-tool.c:213
-msgid "Users settings"
-msgstr "Configuracións de usuario"
+#: ../src/users/users-tool.c:216
+msgid "Users Settings"
+msgstr "Configuracións dos usuarios"
 
