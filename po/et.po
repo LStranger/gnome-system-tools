@@ -2,20 +2,20 @@
 # Estonian translation of Gnome System Tools.
 #
 # Copyright (C) 2002, 2005, 2006 Free Software Foundation, Inc.
-# Copyright (C) 2007 The GNOME Project
+# Copyright (C) 2007, 2008 The GNOME Project
 # This file is distributed under the same license as the gnome-system-tools
 # package.
 #
 # Tõivo Leedjärv <toivo@linux.ee>, 2002.
-# Ivar Smolin <okul@linux.ee>, 2005-2007.
+# Ivar Smolin <okul@linux.ee>, 2005-2008.
 # Priit Laes <amd@store20.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: GNOME System Tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-26 02:25+0000\n"
-"PO-Revision-Date: 2008-01-01 12:24+0200\n"
+"POT-Creation-Date: 2008-01-12 18:26+0000\n"
+"PO-Revision-Date: 2008-02-04 07:45+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +61,14 @@ msgstr "See tegevus on lubatud"
 msgid "This action is not allowed"
 msgstr "See tegevus pole lubatud"
 
+#: ../src/common/gst-polkit-button.c:247
+msgid "Could not authenticate"
+msgstr "Autentimine pole võimalik"
+
+#: ../src/common/gst-polkit-button.c:249
+msgid "An unexpected error has occurred."
+msgstr "Leidis aset ootamatu viga."
+
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
 msgstr "Seadistusi pole võimalik laadida"
@@ -83,11 +91,11 @@ msgstr "Abiteavet pole võimalik kuvada"
 
 #: ../src/common/gst-tool.c:577
 msgid "The system configuration has potentially changed."
-msgstr ""
+msgstr "Süsteemi sätteid on tõenäoliselt muudetud."
 
 #: ../src/common/gst-tool.c:579
 msgid "Update content? This will lose any modification in course."
-msgstr ""
+msgstr "Kas uuendada sisu? Sel juhul lähevad tehtud muudatused kaotsi."
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:38
@@ -223,28 +231,43 @@ msgstr "<b>Aadress:</b> %s"
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
 msgstr "<b>Aadress:</b> %s <b>Kaugaadress:</b> %s"
 
-#: ../src/network/ifaces-list.c:309
+#: ../src/network/ifaces-list.c:315
 #, c-format
-msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
-msgstr "<b>Telefoninumber:</b> %s <b>Login:</b> %s"
+msgid "<b>Type:</b> %s <b>Phone number:</b> %s"
+msgstr "<b>Liik:</b> %s <b>Telefoninumber:</b> %s"
 
-#: ../src/network/ifaces-list.c:328
+#: ../src/network/ifaces-list.c:318
+#, c-format
+msgid "<b>Type:</b> %s <b>Access point name:</b> %s"
+msgstr "<b>Liik:</b> %s <b>Access point'i nimi:</b> %s"
+
+#: ../src/network/ifaces-list.c:325
+#, c-format
+msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
+msgstr "<b>Liik:</b> %s <b>Etherneti võrguliides:</b> %s"
+
+#: ../src/network/ifaces-list.c:329
+#, c-format
+msgid "<b>Type:</b> %s"
+msgstr "<b>Liik:</b> %s"
+
+#: ../src/network/ifaces-list.c:346
 msgid "Wireless connection"
 msgstr "Traadita ühendu"
 
-#: ../src/network/ifaces-list.c:330
+#: ../src/network/ifaces-list.c:348
 msgid "Infrared connection"
 msgstr "Infrapunaliidese ühendus"
 
-#: ../src/network/ifaces-list.c:332
+#: ../src/network/ifaces-list.c:350
 msgid "Wired connection"
 msgstr "Traadiga ühendus"
 
-#: ../src/network/ifaces-list.c:334
+#: ../src/network/ifaces-list.c:352
 msgid "Parallel port connection"
 msgstr "Rööpvärati ühendus"
 
-#: ../src/network/ifaces-list.c:336
+#: ../src/network/ifaces-list.c:354
 msgid "Point to point connection"
 msgstr "Punktist punkti ühendus"
 
@@ -861,11 +884,11 @@ msgstr "Kellaaja, kuupäeva ja ajavööndi muutmine"
 msgid "Time and Date"
 msgstr "Kellaaeg ja kuupäev"
 
-#: ../src/time/time-tool.c:380
+#: ../src/time/time-tool.c:390
 msgid "NTP support is not installed"
 msgstr "NTP tugi ei ole paigaldatud"
 
-#: ../src/time/time-tool.c:382
+#: ../src/time/time-tool.c:392
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -873,27 +896,27 @@ msgstr ""
 "Kohaliku ajaserveri sünkroniseerimiseks Internetis olevate ajaserveritega "
 "pead sa paigaldama ja aktiveerima süsteemis NTP toe."
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Enabling NTP"
 msgstr "NTP lubamine"
 
-#: ../src/time/time-tool.c:412
+#: ../src/time/time-tool.c:422
 msgid "Disabling NTP"
 msgstr "NTP keelamine"
 
-#: ../src/time/time-tool.c:424
+#: ../src/time/time-tool.c:434
 msgid "Synchronizing system clock"
 msgstr "Süsteemse kella sünkroniseerimine"
 
-#: ../src/time/time-tool.c:504
+#: ../src/time/time-tool.c:514
 msgid "Keep synchronized with Internet servers"
 msgstr "Internetis olevate serveritega sünkroonis hoidmine"
 
-#: ../src/time/time-tool.c:505
+#: ../src/time/time-tool.c:515
 msgid "Manual"
 msgstr "Käsitsi"
 
-#: ../src/time/time-tool.c:651
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Kella ja kuupäeva sätted"
 
@@ -903,7 +926,7 @@ msgstr "Administraatori gruppi pole võimalik kustutada"
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
 #: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:477 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:550
 msgid "This would leave the system unusable."
 msgstr "See võib mõjuda halvasti süsteemi stabiilsusele."
 
@@ -954,7 +977,7 @@ msgstr ""
 msgid "Group \"%s\" already exists"
 msgstr "Grupp \"%s\" on juba olemas"
 
-#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:485
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
 msgid "Please select a different user name."
 msgstr "Palun vali mõni muu kasutajanimi."
 
@@ -1043,32 +1066,28 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Kasutaja pruugib hetkel seda arvutit"
 
-#: ../src/users/user-settings.c:319
+#: ../src/users/user-settings.c:324
 msgid "New user account"
 msgstr "Uus kasutajakonto"
 
-#: ../src/users/user-settings.c:334
+#: ../src/users/user-settings.c:342
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Konto '%s' omadused"
 
-#: ../src/users/user-settings.c:473
+#: ../src/users/user-settings.c:475
 msgid "User name is empty"
 msgstr "Kasutajanimi on tühi"
 
-#: ../src/users/user-settings.c:474
+#: ../src/users/user-settings.c:476
 msgid "A user name must be specified."
 msgstr "Kasutajanimi peab olema määratud."
 
-#: ../src/users/user-settings.c:476
-msgid "Administrator account's user name should not be modified"
-msgstr "Administraatori konto kasutajamine ei tohiks muuta"
-
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:478
 msgid "User name has invalid characters"
 msgstr "Kasutajanimi sisaldab lubamatuid sümboleid"
 
-#: ../src/users/user-settings.c:480
+#: ../src/users/user-settings.c:479
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1076,25 +1095,25 @@ msgstr ""
 "Palun sisesta korrektne grupinimi, kasutades esimese tähena väiketähte, "
 "millele järgnevad ainult väiketähed ja/või numbrid."
 
-#: ../src/users/user-settings.c:484
+#: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Kasutaja nimega \"%s\" on juba olemas"
 
-#: ../src/users/user-settings.c:511
+#: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Kommentaaris on lubamatu sümbol \"%c\""
 
-#: ../src/users/user-settings.c:512
+#: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr "Veendu, et seda sümbolit poleks kasutusel."
 
-#: ../src/users/user-settings.c:529
+#: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr "Mittetäielik kodukataloogi rada"
 
-#: ../src/users/user-settings.c:530
+#: ../src/users/user-settings.c:529
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1102,15 +1121,23 @@ msgstr ""
 "Palun sisesta kodukataloogi täielik rada\n"
 "<span size=\"smaller\">näiteks: /home/jaan</span>."
 
-#: ../src/users/user-settings.c:546
+#: ../src/users/user-settings.c:532
+msgid "Home directory already exists"
+msgstr "Kodukataloog on juba olemas"
+
+#: ../src/users/user-settings.c:533
+msgid "Please enter a different home directory path."
+msgstr "Palun määra kodukataloogi jaoks mõni muu rada."
+
+#: ../src/users/user-settings.c:549
 msgid "Administrator account's user ID should not be modified"
 msgstr "Administraatori konto kasutaja ID-d ei tohiks muuta"
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
 msgstr "Mittetäielik kestprogrammi rada"
 
-#: ../src/users/user-settings.c:563
+#: ../src/users/user-settings.c:565
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1118,11 +1145,11 @@ msgstr ""
 "Palun sisesta kestprogrammi täielik rada\n"
 "<span size=\"smaller\">näiteks: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:591
+#: ../src/users/user-settings.c:598
 msgid "Password is too short"
 msgstr "Parool on liiga lühike"
 
-#: ../src/users/user-settings.c:592
+#: ../src/users/user-settings.c:599
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1130,11 +1157,11 @@ msgstr ""
 "Kasutajate paroolid peavad olema pikemad kui 6 märki ja eelistatavalt "
 "sisaldama ka numbreid, tähti ja erimärke."
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:602
 msgid "Password confirmation is not correct"
 msgstr "Paroolikontroll ei ole korras"
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
 
@@ -1153,6 +1180,12 @@ msgstr "Kodukataloog"
 #: ../src/users/users-tool.c:216
 msgid "Users Settings"
 msgstr "Kasutajate sätted"
+
+#~ msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
+#~ msgstr "<b>Telefoninumber:</b> %s <b>Login:</b> %s"
+
+#~ msgid "Administrator account's user name should not be modified"
+#~ msgstr "Administraatori konto kasutajamine ei tohiks muuta"
 
 #~ msgid "Modem connection"
 #~ msgstr "Modemiühendus"
