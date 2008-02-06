@@ -26,6 +26,7 @@
 #include "connection.h"
 #include "essid-list.h"
 #include "nm-integration.h"
+#include "callbacks.h"
 
 extern GstTool *tool;
 
@@ -138,6 +139,9 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
 
   /* reuse text cell renderer for the essid */
   gtk_combo_box_entry_set_text_column (combo, 1);
+
+  g_signal_connect (GTK_BIN (combo)->child, "changed",
+		    G_CALLBACK (on_dialog_changed), tool);
 }
 
 static void
@@ -338,6 +342,12 @@ wireless_dialog_save (GstConnectionDialog *dialog)
 		"key-type", key_type,
 		NULL);
   g_free (key_type);
+}
+
+static gboolean
+wireless_dialog_check_fields (GstConnectionDialog *dialog)
+{
+  return (get_entry_text (GTK_BIN (dialog->essid)->child) != NULL);
 }
 
 static void
@@ -816,8 +826,10 @@ connection_check_fields (GstConnectionDialog *dialog)
 {
   gboolean active = FALSE;
 
-  if (OOBS_IS_IFACE_ETHERNET (dialog->iface) ||
-      OOBS_IS_IFACE_WIRELESS (dialog->iface) ||
+  if (OOBS_IS_IFACE_WIRELESS (dialog->iface))
+    active = (ethernet_dialog_check_fields (dialog) &&
+	      wireless_dialog_check_fields (dialog));
+  else if (OOBS_IS_IFACE_ETHERNET (dialog->iface) ||
       OOBS_IS_IFACE_IRLAN    (dialog->iface))
     active = ethernet_dialog_check_fields (dialog);
   else if (OOBS_IS_IFACE_PLIP (dialog->iface))
