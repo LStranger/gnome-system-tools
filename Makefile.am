@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = doc interfaces pixmaps src po
+SUBDIRS = doc icons interfaces pixmaps src po
 
 distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 
