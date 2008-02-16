@@ -567,19 +567,27 @@ configuration_object_changed (OobsObject *object,
 	gboolean do_update = TRUE;
 
 	if (gst_dialog_get_editing (tool->main_dialog)) {
-		GtkWidget *dialog;
+		GtkWidget *parent, *dialog;
 		gint response;
 
-		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		if (tool->configuration_changed_dialog)
+			return;
+
+		parent = gst_dialog_get_topmost_edit_dialog (tool->main_dialog);
+		dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_QUESTION,
 						 GTK_BUTTONS_YES_NO,
 						 _("The system configuration has potentially changed."));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 							  _("Update content? This will lose any modification in course."));
+		tool->configuration_changed_dialog = dialog;
+
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
 		do_update = (response == GTK_RESPONSE_YES);
-		gtk_widget_hide (dialog);
+
+		gtk_widget_destroy (dialog);
+		tool->configuration_changed_dialog = NULL;
 	}
 
 	if (do_update) {

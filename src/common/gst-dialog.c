@@ -650,6 +650,19 @@ gst_dialog_get_editing (GstDialog *dialog)
 	return (priv->edit_dialogs != NULL);
 }
 
+GtkWidget *
+gst_dialog_get_topmost_edit_dialog (GstDialog *dialog)
+{
+	GstDialogPrivate *priv;
+
+	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	if (!priv->edit_dialogs)
+		return NULL;
+
+	return GTK_WIDGET (priv->edit_dialogs->data);
+}
+
 void
 gst_dialog_add_edit_dialog (GstDialog *dialog,
 			    GtkWidget *edit_dialog)

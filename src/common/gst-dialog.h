@@ -86,6 +86,7 @@ void                gst_dialog_remove_edit_dialog  (GstDialog *dialog,
 						    GtkWidget *edit_dialog);
 void                gst_dialog_stop_editing        (GstDialog *dialog);
 gboolean            gst_dialog_get_editing         (GstDialog *dialog);
+GtkWidget *         gst_dialog_get_topmost_edit_dialog (GstDialog *dialog);
 
 
 G_END_DECLS

@@ -1,3 +1,10 @@
+2008-02-16  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-dialog.[ch] (gst_dialog_get_topmost_edit_dialog): Added.
+	* gst-tool.[ch] (configuration_object_changed): Use topmost edit
+	dialog as the parent for the "configuration changed" dialog. Also, do
+	not show another of these dialogs if there's already one present.
+
 2008-02-12  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.21.91

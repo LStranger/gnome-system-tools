@@ -58,6 +58,7 @@ struct _GstTool {
 
 	GtkIconTheme *icon_theme;
 	GstDialog *main_dialog;
+	GtkWidget *configuration_changed_dialog;
 
 	/* Progress report widgets */
 	GtkWidget *report_window;
