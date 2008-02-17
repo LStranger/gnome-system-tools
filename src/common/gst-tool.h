@@ -60,6 +60,8 @@ struct _GstTool {
 	GstDialog *main_dialog;
 	GtkWidget *configuration_changed_dialog;
 
+	time_t last_commit_time;
+
 	/* Progress report widgets */
 	GtkWidget *report_window;
 	GtkWidget *report_label;

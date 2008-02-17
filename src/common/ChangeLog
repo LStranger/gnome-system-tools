@@ -1,3 +1,11 @@
+2008-02-17  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-tool.[ch] (gst_tool_add_configuration_object)
+	(configuration_object_committed) (configuration_object_changed)
+	(gst_tool_commit_async): Do not reload the configuration if there's a
+	quite certain possibility that the tool is the one that caused the
+	change.
+
 2008-02-16  Carlos Garnacho  <carlosg@gnome.org>
 
 	* gst-dialog.[ch] (gst_dialog_get_topmost_edit_dialog): Added.

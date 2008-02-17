@@ -25,6 +25,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
+#include <time.h>
 
 #ifdef ENABLE_GNOME
 #include <libgnomeui/libgnomeui.h>
@@ -516,6 +517,8 @@ gst_tool_commit_async (GstTool             *tool,
 	user_data->func = func;
 	user_data->data = data;
 
+	tool->last_commit_time = time (NULL);
+
 	if (message)
 		gst_tool_show_report_window (tool, message);
 
@@ -565,6 +568,18 @@ configuration_object_changed (OobsObject *object,
 			      GstTool    *tool)
 {
 	gboolean do_update = TRUE;
+	time_t current_time;
+
+	current_time = time (NULL);
+
+	/* If we get ::changed shortly after having committed,
+	 * there's a good chance that the tool has been the
+	 * origin of the change. Of course there could be the
+	 * possibility that this isn't true, but will happen
+	 * quite rarely.
+	 */
+	if (current_time - tool->last_commit_time <= 2)
+		return;
 
 	if (gst_dialog_get_editing (tool->main_dialog)) {
 		GtkWidget *parent, *dialog;
@@ -596,6 +611,13 @@ configuration_object_changed (OobsObject *object,
 	}
 }
 
+static void
+configuration_object_committed (OobsObject *object,
+				GstTool    *tool)
+{
+	tool->last_commit_time = time (NULL);
+}
+
 void
 gst_tool_add_configuration_object (GstTool    *tool,
 				   OobsObject *object)
@@ -607,4 +629,6 @@ gst_tool_add_configuration_object (GstTool    *tool,
 
 	g_signal_connect (object, "changed",
 			  G_CALLBACK (configuration_object_changed), tool);
+	g_signal_connect (object, "committed",
+			  G_CALLBACK (configuration_object_committed), tool);
 }
