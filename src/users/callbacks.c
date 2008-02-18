@@ -172,6 +172,9 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer da
 	selection = gtk_tree_view_get_selection (treeview);
 	cont = gtk_tree_selection_count_selected_rows (selection);
 
+	if (event->window != gtk_tree_view_get_bin_window (treeview))
+		return FALSE;
+
 	if (event->button == 3)	{
 		gtk_widget_grab_focus (GTK_WIDGET (treeview));
 		
