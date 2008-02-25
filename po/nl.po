@@ -4,15 +4,16 @@
 # Copyright (C) 2002,2003 Free Software Foundation, Inc.
 # Ronald Bultje <rbultje@ronald.bitfreak.net>, 2002.
 # Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>, 2003.
-# Tino Meinen <a.t.meinen@chello.nl>, 2003, 2004, 2005, 2006.
+# Tino Meinen <a.t.meinen@chello.nl>, 2003, 2004, 2005, 2006, 2008.
 #
+# foo service, wordt alleen vertaald met foo
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-15 22:05+0100\n"
-"PO-Revision-Date: 2008-02-15 22:05+0100\n"
-"Last-Translator: Jaap Haitsma <jaap@haitsma.org>\n"
+"POT-Creation-Date: 2008-02-15 21:31+0000\n"
+"PO-Revision-Date: 2008-02-24 22:58+0100\n"
+"Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,12 +52,12 @@ msgstr "_Wachtwoord:"
 # verbindingsgegevens?
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
-msgstr "<b>Account-gegevens</b>"
+msgstr "<b>Accountgegevens</b>"
 
 # verbindingsinstellingen
 #: ../interfaces/network.ui.h:2
 msgid "<b>Connection Settings</b>"
-msgstr "<b>Verbinding instellingen</b>"
+msgstr "<b>Verbindingsinstellingen</b>"
 
 #: ../interfaces/network.ui.h:3
 msgid "<b>DNS Servers</b>"
@@ -68,7 +69,7 @@ msgstr "<b>Host-instellingen</b>"
 
 #: ../interfaces/network.ui.h:5
 msgid "<b>Internet service provider data</b>"
-msgstr "<b>Internetprovider gegevens</b>"
+msgstr "<b>Internetprovider-gegevens</b>"
 
 #: ../interfaces/network.ui.h:6
 msgid "<b>Modem Settings</b>"
@@ -84,7 +85,7 @@ msgstr "<b>Draadloze instellingen</b>"
 
 #: ../interfaces/network.ui.h:9
 msgid "Access point name:"
-msgstr "Accountnaam:"
+msgstr "Accesspoint-naam:"
 
 #: ../interfaces/network.ui.h:10
 msgid "Aliases:"
@@ -96,7 +97,7 @@ msgstr "_Configuratie:"
 
 #: ../interfaces/network.ui.h:12
 msgid "Connection type:"
-msgstr "Verbindingstype"
+msgstr "Verbindingstype:"
 
 #: ../interfaces/network.ui.h:13
 msgid "Connections"
@@ -114,9 +115,10 @@ msgstr "_Domeinnaam:"
 msgid "Delete current location"
 msgstr "Huidige locatie verwijderen"
 
+# zwervende modus/roaming/verkennen/wandelen/
 #: ../interfaces/network.ui.h:17
 msgid "E_nable roaming mode"
-msgstr "Zet roaming aan"
+msgstr "_Roaming modus aanzetten"
 
 #: ../interfaces/network.ui.h:18
 msgid "E_nable this connection"
@@ -198,7 +200,7 @@ msgstr "_Inbeltype:"
 
 #: ../interfaces/network.ui.h:37
 msgid "_Gateway address:"
-msgstr "_Gateway adres:"
+msgstr "_Gateway-adres:"
 
 #: ../interfaces/network.ui.h:38
 msgid "_Host name:"
@@ -214,7 +216,7 @@ msgstr "_Lokale IP:"
 
 #: ../interfaces/network.ui.h:41
 msgid "_Modem port:"
-msgstr "_Modem poort:"
+msgstr "_Modempoort:"
 
 #: ../interfaces/network.ui.h:42
 msgid "_Phone number:"
@@ -252,9 +254,9 @@ msgstr "Geavanceerde instellingen:"
 
 #: ../interfaces/services.ui.h:2
 msgid "Select the services that you wish to activate:"
-msgstr "Selecteer de services die u wilt activeren:"
+msgstr "Selecteer de systeemdiensten die u wilt activeren:"
 
-# hosts toestaan
+# hosts toestaan/vertrouwde hosts/
 #: ../interfaces/shares.ui.h:1
 msgid "<b>Allowed Hosts</b>"
 msgstr "<b>Toegestane hosts</b>"
@@ -276,14 +278,17 @@ msgstr "<b>Gedeelde map</b>"
 msgid "<b>Windows sharing</b>"
 msgstr "<b>Windows delen</b>"
 
+# wachtwoord/geef wachtwoord voor gebruiker
 #: ../interfaces/shares.ui.h:6
 msgid "<span size=\"larger\" weight=\"bold\">Enter password for user:</span>"
 msgstr "<span size=\"larger\" weight=\"bold\">Wachtwoord</span>"
 
+# vertrouwde hosts
 #: ../interfaces/shares.ui.h:7
 msgid "Add allowed hosts"
 msgstr "Toegestane hosts toevoegen"
 
+# vertrouwde hosts
 #: ../interfaces/shares.ui.h:8
 msgid "Allowed hosts:"
 msgstr "Toegestane hosts:"
@@ -296,8 +301,8 @@ msgstr "Opmerking:"
 msgid "Domain / _Workgroup:"
 msgstr "Domein / _Werkgroep:"
 
+# wachtwoord/geef wachtwoord voor gebruiker
 #: ../interfaces/shares.ui.h:11
-#, fuzzy
 msgid "Enter password for user"
 msgstr "Geef wachtwoord voor gebruiker"
 
@@ -375,6 +380,7 @@ msgstr "NTP-server"
 msgid "Se_lect Servers"
 msgstr "S_ervers selecteren"
 
+# gelijkzetten/synchroniseren
 #: ../interfaces/time.ui.h:6
 msgid "Synchronize now"
 msgstr "Nu synchronizeren"
@@ -469,7 +475,7 @@ msgstr "Wachtwoord_kwaliteit testen"
 
 #: ../interfaces/users.ui.h:15
 msgid "Con_firmation:"
-msgstr "Bevestiging:"
+msgstr "_Bevestiging:"
 
 #: ../interfaces/users.ui.h:16
 msgid "Days between warning and password expiration:"
@@ -629,13 +635,15 @@ msgstr "_Shell:"
 msgid "_Work phone:"
 msgstr "_Werktelefoon:"
 
+# openmaken/openen/ontgrendelen
 #: ../src/common/gst-dialog.c:179
 msgid "_Unlock"
 msgstr "_Ontgrendelen"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
-msgstr "Het door u gebruikte platform wordt niet ondersteund door dit programma"
+msgstr ""
+"Het door u gebruikte platform wordt niet ondersteund door dit programma"
 
 #. label
 #: ../src/common/gst-platform-dialog.c:185
@@ -661,14 +669,12 @@ msgid "This action is not allowed"
 msgstr "Deze actie is niet toegestaan"
 
 #: ../src/common/gst-polkit-button.c:247
-#, fuzzy
 msgid "Could not authenticate"
-msgstr "Kon modem niet automatisch detecteren"
+msgstr "Aanmeldingscontrole mislukt"
 
 #: ../src/common/gst-polkit-button.c:249
-#, fuzzy
 msgid "An unexpected error has occurred."
-msgstr "Er is een onverwachte fout opgetreden"
+msgstr "Er is een onverwachte fout opgetreden."
 
 #: ../src/common/gst-tool.c:184
 msgid "The configuration could not be loaded"
@@ -676,29 +682,29 @@ msgstr "De configuratie kon niet worden geladen"
 
 #: ../src/common/gst-tool.c:185
 msgid "You are not allowed to access the system configuration."
-msgstr ""
+msgstr "U heeft geen toegang tot de systeemconfiguratie."
 
 #: ../src/common/gst-tool.c:187
-#, fuzzy
 msgid "The configuration could not be saved"
 msgstr "De configuratie kon niet worden opgeslagen"
 
 #: ../src/common/gst-tool.c:188
 msgid "You are not allowed to modify the system configuration."
-msgstr ""
+msgstr "U heeft geen toestemming de systeemconfiguratie te wijzigen."
 
 #: ../src/common/gst-tool.c:417
 msgid "Could not display help"
 msgstr "Kan hulp niet weergeven"
 
+# potentially?
 #: ../src/common/gst-tool.c:577
-#, fuzzy
 msgid "The system configuration has potentially changed."
-msgstr "De configuratie kon niet worden geladen"
+msgstr "De systeemconfiguratie is mogelijk gewijzigd."
 
+# bestaande/lopende/op handen zijnde/komende/
 #: ../src/common/gst-tool.c:579
 msgid "Update content? This will lose any modification in course."
-msgstr ""
+msgstr "Inhoud bijwerken? De bestaande wijzigingen zullen verloren gaan."
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:38
@@ -749,45 +755,40 @@ msgid "Change _Host name"
 msgstr "_Hostnaam wijzigen"
 
 #: ../src/network/connection.c:40
-#, fuzzy
 msgid "Automatic configuration (DHCP)"
-msgstr ""
-"Automatisch configuratie (DHCP)\n"
-"Statisch IP-adres"
+msgstr "Automatisch configuratie (DHCP)"
 
 #: ../src/network/connection.c:41
 msgid "Local Zeroconf network (IPv4 LL)"
-msgstr ""
+msgstr "Lokaal zeroconf netwerk (IPv4 LL)"
 
 #: ../src/network/connection.c:42
 msgid "Static IP address"
 msgstr "Statisch IP-adres"
 
-
 #: ../src/network/connection.c:46
 msgid "WEP key (ascii)"
-msgstr "WEP sleutel (ascii)"
+msgstr "WEP-sleutel (ascii)"
 
 #: ../src/network/connection.c:47
 msgid "WEP key (hexadecimal)"
-msgstr "WEP sleutel (hexadecimaal)"
+msgstr "WEP-sleutel (hexadecimaal)"
 
 #: ../src/network/connection.c:48
 msgid "WPA Personal"
-msgstr "WPA Personal"
+msgstr "WPA-persoonlijk"
 
 #: ../src/network/connection.c:49
 msgid "WPA2 Personal"
-msgstr "WPA2 Personal"
+msgstr "WPA2-persoonlijk"
 
 #: ../src/network/connection.c:53
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
 #: ../src/network/connection.c:54
-#, fuzzy
 msgid "ISDN modem"
-msgstr "ISDN modem"
+msgstr "ISDN-modem"
 
 #: ../src/network/connection.c:55
 msgid "Serial modem"
@@ -800,7 +801,7 @@ msgstr "PPPoE"
 #: ../src/network/connection.c:769
 #, c-format
 msgid "%s Properties"
-msgstr "%s Eigenschappen"
+msgstr "%s eigenschappen"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39 ../src/users/table.c:39
@@ -821,7 +822,7 @@ msgstr "Deze netwerkinterface is niet geconfigureerd"
 
 #: ../src/network/ifaces-list.c:282
 msgid "Roaming mode enabled"
-msgstr "Roamin mode staat aan"
+msgstr "Roaming mode aangezet"
 
 #: ../src/network/ifaces-list.c:289
 #, c-format
@@ -834,36 +835,35 @@ msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
 msgstr "<b>Adres:</b> %s <b>Subnetmasker:</b> %s"
 
 #: ../src/network/ifaces-list.c:299
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Address:</b> %s"
-msgstr "<b>Adres:</b> DHCP"
+msgstr "<b>Adres:</b> %s"
 
 # extern adres/adres op afstand
 #: ../src/network/ifaces-list.c:303
 #, c-format
 msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
-msgstr "<b>Adres:</b> %s <b>Adres op afstand:</b> %s"
+msgstr "<b>Adres:</b> %s <b>Extern adres:</b> %s"
 
 #: ../src/network/ifaces-list.c:315
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Type:</b> %s <b>Phone number:</b> %s"
-msgstr "<b>Adres:</b> %s <b>Subnetmasker:</b> %s"
+msgstr "<b>Type:</b> %s <b>Telefoonnummer:</b> %s"
 
-# extern adres/adres op afstand
 #: ../src/network/ifaces-list.c:318
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Type:</b> %s <b>Access point name:</b> %s"
-msgstr "<b>Adres:</b> %s <b>Adres op afstand:</b> %s"
+msgstr "<b>Type:</b> %s <b>Naam van accesspoint:</b> %s"
 
 #: ../src/network/ifaces-list.c:325
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
-msgstr "<b>Adres:</b> %s <b>Subnetmasker:</b> %s"
+msgstr "<b>Type:</b> %s <b>Ethernet-interface:</b> %s"
 
 #: ../src/network/ifaces-list.c:329
-#, fuzzy, c-format
+#, c-format
 msgid "<b>Type:</b> %s"
-msgstr "<b>Essid:</b> %s "
+msgstr "<b>Type:</b> %s "
 
 #: ../src/network/ifaces-list.c:346
 msgid "Wireless connection"
@@ -873,6 +873,7 @@ msgstr "Draadloze verbinding"
 msgid "Infrared connection"
 msgstr "Infraroodverbinding"
 
+# kabel/draad
 #: ../src/network/ifaces-list.c:350
 msgid "Wired connection"
 msgstr "Draadverbinding"
@@ -882,9 +883,8 @@ msgid "Parallel port connection"
 msgstr "Paralelle poort-verbinding"
 
 #: ../src/network/ifaces-list.c:354
-#, fuzzy
 msgid "Point to point connection"
-msgstr "Poort waar de printer aan verbonden is."
+msgstr "Point-to-point verbinding"
 
 #: ../src/network/locations-combo.c:221
 msgid "Changing network location"
@@ -892,7 +892,6 @@ msgstr "Netwerklocatie wijzigen"
 
 # onder die naam/met die naam
 #: ../src/network/locations-combo.c:265
-#, fuzzy
 msgid "There is already a location with the same name"
 msgstr "Er is al een locatie met die naam"
 
@@ -901,19 +900,17 @@ msgid "Overwrite it?"
 msgstr "Overschrijven?"
 
 #: ../src/network/locations-combo.c:355
-#, fuzzy
 msgid "Save location"
-msgstr "Locatie verwijderen"
+msgstr "Locatie opslaan"
 
 #: ../src/network/locations-combo.c:370
-#, fuzzy
 msgid "_Location name:"
-msgstr "Locatienaam:"
+msgstr "_Locatienaam:"
 
 #: ../src/network/locations-combo.c:422
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to delete location \"%s\"?"
-msgstr "Wilt u locatie ‘%s’ verwijderen?"
+msgstr "Wilt u de locatie ‘%s’ verwijderen?"
 
 #: ../src/network/main.c:135
 msgid "The interface does not exist"
@@ -949,9 +946,8 @@ msgid "Configure network devices and connections"
 msgstr "Netwerkapparaten en -verbindingen instellen"
 
 #: ../src/network/network.desktop.in.in.h:2
-#, fuzzy
 msgid "Network"
-msgstr "Netwerk:"
+msgstr "Netwerk"
 
 #: ../src/network/network-tool.c:280
 msgid "Network Settings"
@@ -960,7 +956,7 @@ msgstr "Netwerkinstellingen"
 #: ../src/services/callbacks.c:59
 #, c-format
 msgid "Settings for service \"%s\""
-msgstr "Instellingen voor service \"%s\""
+msgstr "Instellingen voor systeemdienst ‘%s’"
 
 #: ../src/services/callbacks.c:119
 #, c-format
@@ -1000,7 +996,7 @@ msgstr "Voert ingeplande acties uit"
 #. GST_ROLE_COMMAND_SCHEDULER
 #: ../src/services/service.c:34
 msgid "Printer service"
-msgstr "Printer-service"
+msgstr "Printer"
 
 # van printers/van een printer
 #: ../src/services/service.c:34
@@ -1024,9 +1020,8 @@ msgstr "Verstuurt uw e-mail"
 # klok/tijd
 #. GST_ROLE_MTA
 #: ../src/services/service.c:36
-#, fuzzy
 msgid "MTA authentication service"
-msgstr "Tijdsynchronisatie"
+msgstr "MTA-aanmeldingscontrole"
 
 # agent/assistent/
 # gaat hier om sendmail/postfix
@@ -1074,11 +1069,10 @@ msgstr "Deelt mappen via uw netwerk"
 #. GST_ROLE_FILE_SERVER_NFS
 #: ../src/services/service.c:42
 msgid "FTP service"
-msgstr "FTP-service"
+msgstr "FTP"
 
 # toegangkelijk maken via het internet.
 #: ../src/services/service.c:42 ../src/services/service.c:43
-#, fuzzy
 msgid "Shares folders over the Internet"
 msgstr "Deelt bestanden via het internet"
 
@@ -1092,6 +1086,8 @@ msgstr "Tijdsynchronisatie"
 msgid "Synchronizes your computer clock with Internet time servers"
 msgstr "Houdt de klok op uw computer synchroon met tijservers op het internet"
 
+# BUG. translator comments staan vanaf hier op de verkeerde plek
+# (eentje verschoven)
 #. GST_ROLE_NTP_SERVER
 #: ../src/services/service.c:46
 msgid "Antivirus"
@@ -1108,18 +1104,18 @@ msgstr "Firewall"
 
 #: ../src/services/service.c:47
 msgid "Blocks undesired network access to your computer"
-msgstr ""
+msgstr "Blokkeert ongewenst netwerkverkeer naar uw computer"
 
 #. GST_ROLE_FIREWALL_MANAGEMENT
 #: ../src/services/service.c:49
-#, fuzzy
 msgid "Dictionary server"
-msgstr "Databaseserver"
+msgstr "Woordenboekserver"
 
+# spraak genereren
 #. GST_ROLE_DICTIONARY_SERVER
 #: ../src/services/service.c:50
 msgid "Speech synthesis support"
-msgstr ""
+msgstr "Spraaksysthese-ondersteuning"
 
 #. GST_ROLE_SPEECH_SYNTHESIS
 #: ../src/services/service.c:51
@@ -1132,15 +1128,13 @@ msgstr "Hiermee wordt een logboek van de computeractiviteit bijgehouden"
 
 #. GST_ROLE_SYSTEM_LOGGER
 #: ../src/services/service.c:52
-#, fuzzy
 msgid "Remote backup server"
-msgstr "Externe shell"
+msgstr "Externe reservekopie-server"
 
 #. GST_ROLE_REMOTE_BACKUP
 #: ../src/services/service.c:53
-#, fuzzy
 msgid "Spam filter"
-msgstr "Map delen"
+msgstr "Spamfilter"
 
 #. GST_ROLE_SPAM_FILTER
 #: ../src/services/service.c:54
@@ -1150,177 +1144,161 @@ msgstr "Externe shell"
 # ssh er tussen haakjes achter zetten?
 #: ../src/services/service.c:54
 msgid "Secure shell server"
-msgstr "Beveiligde shell"
+msgstr "Beveiligde shell (ssh)"
 
-# van printers/van een printer
 #. GST_ROLE_SECURE_SHELL_SERVER
 #: ../src/services/service.c:55
-#, fuzzy
 msgid "Application server"
-msgstr "Hierdoor kunnen toepassingen gebruik maken van een printer"
+msgstr "Programmaserver"
 
 #. GST_ROLE_APPLICATION_SERVER
 #: ../src/services/service.c:56
 msgid "Automated crash reports support"
-msgstr ""
+msgstr "Geautomatiseerd melding maken bij vastlopers"
 
+# dbus
 #. GST_ROLE_AUTOMATED_CRASH_REPORTS_MANAGEMENT
 #: ../src/services/service.c:57
 msgid "System communication bus"
-msgstr ""
+msgstr "Systeembus voor communicatie"
 
 #. GST_ROLE_DBUS,
 #: ../src/services/service.c:58
-#, fuzzy
 msgid "System configuration manager"
-msgstr "Bezig met systeem-analyse."
+msgstr "Systeemconfiguratiebeheer"
 
 #. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:59
 msgid "School management platform"
-msgstr ""
+msgstr "Schoolbeheerplatform"
 
 #. GST_ROLE_SCHOOL_MANAGEMENT_PLATFORM
 #: ../src/services/service.c:60
 msgid "Network security auditor"
-msgstr ""
+msgstr "Netwerkbeveiligingscontrole"
 
 #. GST_ROLE_SECURITY_AUDITING
 #: ../src/services/service.c:61
-#, fuzzy
 msgid "Web calendar server"
-msgstr "Web-server"
+msgstr "Web-agendaserver"
 
 #. GST_ROLE_WEB_CALENDAR_SERVER
 #: ../src/services/service.c:62
-#, fuzzy
 msgid "OEM configuration manager"
-msgstr "Adresconfiguratie"
+msgstr "OEM configuratiebeheer"
 
 #. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:63
 msgid "Terminal multiplexor"
-msgstr ""
+msgstr "Terminal multiplexer"
 
 #. GST_ROLE_TERMINAL_MULTIPLEXOR
 #: ../src/services/service.c:64
-#, fuzzy
 msgid "Disk quota activation"
-msgstr "Schijven & partities"
+msgstr "Quota op schijfruimte activeren"
 
 #. GST_ROLE_QUOTA_MANAGEMENT
 #: ../src/services/service.c:65
 msgid "Package index monitor"
-msgstr ""
+msgstr "Pakketindex-monitor"
 
 #. GST_ROLE_PACKAGE_INDEX_MONITORING
 #: ../src/services/service.c:66
-#, fuzzy
 msgid "Network service"
-msgstr "Netwerkprofielen"
+msgstr "Netwerk"
 
+# domeinnaamserver-updater
 #. GST_ROLE_NETWORK
 #: ../src/services/service.c:67
 msgid "Dynamic DNS services updater"
-msgstr ""
+msgstr "Dynamische DNS-updater"
 
 #. GST_ROLE_DYNAMIC_DNS_SERVICE
 #: ../src/services/service.c:68
-#, fuzzy
 msgid "DHCP server"
-msgstr "NTP-server"
+msgstr "DHCP-server"
 
 #. GST_ROLE_DHCP_SERVER
 #: ../src/services/service.c:69
-#, fuzzy
 msgid "Domain name server"
-msgstr "Fout in domeinnaam-servers"
+msgstr "Domeinnaamserver"
 
 #. GST_ROLE_DNS
 #: ../src/services/service.c:70
-#, fuzzy
 msgid "Proxy cache service"
-msgstr "Printer-service"
+msgstr "Proxy cache"
 
 #. GST_ROLE_PROXY_CACHE
 #: ../src/services/service.c:71
-#, fuzzy
 msgid "LDAP server"
-msgstr "NTP-server"
+msgstr "LDAP-server"
 
 #. GST_ROLE_LDAP_SERVER
 #: ../src/services/service.c:72
-#, fuzzy
 msgid "Mailing lists manager"
-msgstr "Grafische aanmelding"
+msgstr "Mailinglijstbeheer"
 
+# achterhalen/onderzoeken/opsporen/speurtocht
 #. GST_ROLE_MAILING_LISTS_MANAGER
 #: ../src/services/service.c:73
 msgid "Multicast DNS service discovery"
-msgstr ""
+msgstr "Multicast DNS-service opsporen"
 
 #. GST_ROLE_RENDEZVOUS
 #: ../src/services/service.c:74
-#, fuzzy
 msgid "Account information resolver"
-msgstr "Monitor-informatie"
+msgstr "Accountinformatie onderzoeker"
 
 #. GST_ROLE_NSS
 #: ../src/services/service.c:75
 msgid "Virtual Private Network server"
-msgstr ""
+msgstr "Virtual Private Network-server"
 
 #. GST_ROLE_VPN_SERVER
 #: ../src/services/service.c:76
-#, fuzzy
 msgid "Router advertisement server"
-msgstr "Externe shell"
+msgstr "Router-aankondigingsserver"
 
-# ssh er tussen haakjes achter zetten?
 #. GST_ROLE_ROUTER_ADVERTISEMENT_SERVER
 #: ../src/services/service.c:77
-#, fuzzy
 msgid "IPSec key exchange server"
-msgstr "Beveiligde shell"
+msgstr "IPSec-sleuteluitwisselingsserver"
 
 #. GST_ROLE_IPSEC_KEY_EXCHANGE_SERVER
 #: ../src/services/service.c:78
-#, fuzzy
 msgid "Disk server"
-msgstr "Tijd-servers"
+msgstr "Schijf-server"
 
 #. GST_ROLE_DISK_SERVER
 #: ../src/services/service.c:79
 msgid "Disk client"
-msgstr ""
+msgstr "Schijf-cliënt"
 
 #. GST_ROLE_DISK_CLIENT
 #: ../src/services/service.c:80
-#, fuzzy
 msgid "Route server"
-msgstr "Web-server"
+msgstr "Route-server"
 
 #. GST_ROLE_ROUTE_SERVER
 #: ../src/services/service.c:81
 msgid "RPC mapper"
-msgstr ""
+msgstr "RPC-mapper"
 
 #. GST_ROLE_RPC_MAPPER
 #: ../src/services/service.c:82
-#, fuzzy
 msgid "SNMP server"
-msgstr "NTP-server"
+msgstr "SNMP-server"
 
 #. GST_ROLE_SNMP_SERVER
 #: ../src/services/service.c:83
 msgid "Terminal server client"
-msgstr ""
+msgstr "Terminal server-cliënt"
 
+# Alsa-utils
 #. GST_ROLE_LTSP_CLIENT
 #: ../src/services/service.c:84
-#, fuzzy
 msgid "Audio settings management"
-msgstr "Locatiebeheer"
+msgstr "Audio-instellingenbeheer"
 
 #. GST_ROLE_AUDIO_MANAGEMENT
 #: ../src/services/service.c:85
@@ -1330,115 +1308,108 @@ msgstr "Volumen aankoppelen"
 # verwisselbare media/volumen
 #: ../src/services/service.c:85
 msgid "Mounts your volumes automatically"
-msgstr "Koppelt uw volumen automatisch aan."
+msgstr "Koppelt uw volumen automatisch aan"
 
 #. GST_ROLE_AUTOMOUNTER
 #: ../src/services/service.c:86
-#, fuzzy
 msgid "Infrared port management"
-msgstr "Infraroodverbinding"
+msgstr "Infrarood-verbindingenbeheer"
 
 #. GST_ROLE_INFRARED_MANAGEMENT
 #: ../src/services/service.c:87
 msgid "Braille display management"
-msgstr ""
+msgstr "Braille-apparatenbeheer"
 
 #. GST_ROLE_BRAILLE_DISPLAY_MANAGEMENT
 #: ../src/services/service.c:88
 msgid "Bluetooth device management"
-msgstr ""
+msgstr "Bluetooth-apparatenbeheer"
 
 #. GST_ROLE_BLUETOOTH_MANAGEMENT
 #: ../src/services/service.c:89
 msgid "Hard disk tuning"
-msgstr ""
+msgstr "Harde schijfprestaties optimaliseren"
 
 #. GST_ROLE_HDD_MANAGEMENT
 #: ../src/services/service.c:90
-#, fuzzy
 msgid "Hotkeys management"
-msgstr "Locatiebeheer"
+msgstr "Sneltoetsenbeheer"
 
 #. GST_ROLE_HOTKEYS_MANAGEMENT
 #: ../src/services/service.c:91
-#, fuzzy
 msgid "Power management"
-msgstr "Locatiebeheer"
+msgstr "Energiebeheer"
 
 #. GST_ROLE_POWER_MANAGEMENT
 #: ../src/services/service.c:92
-#, fuzzy
 msgid "Logical volume management"
-msgstr "Locatiebeheer"
+msgstr "Logisch volumenbeheer"
 
 #. GST_ROLE_LVM_MANAGEMENT
 #: ../src/services/service.c:93
 msgid "Cluster management tool"
-msgstr ""
+msgstr "Clusterbeheer"
 
 #. GST_ROLE_CLUSTER_MANAGEMENT
 #: ../src/services/service.c:94
-#, fuzzy
 msgid "Fax settings management"
-msgstr "Locatiebeheer"
+msgstr "Fax-instellingenbeheer"
 
 #. GST_ROLE_FAX_MANAGEMENT
 #: ../src/services/service.c:95
 msgid "RAID disks management"
-msgstr ""
+msgstr "RAID-beheer"
 
 #. GST_ROLE_RAID_MANAGEMENT
 #: ../src/services/service.c:96
-#, fuzzy
 msgid "Graphic tablets management"
-msgstr "Grafische aanmelding"
+msgstr "Grafische tableaus-beheer"
 
 #. GST_ROLE_GRAPHIC_TABLETS_MANAGEMENT
 #: ../src/services/service.c:97
 msgid "CPU Frequency manager"
-msgstr ""
+msgstr "CPU-frequentiebeheer"
 
 #. GST_ROLE_CPUFREQ_MANAGEMENT
 #: ../src/services/service.c:98
 msgid "Eagle USB ADSL modems manager"
-msgstr ""
+msgstr "Eagle USB-ADSL-modemsbeheer"
 
 #. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
 #: ../src/services/service.c:99
 msgid "Serial port settings management"
-msgstr ""
+msgstr "Seriële poortinstellingen"
 
 #. GST_ROLE_SERIAL_PORTS_MANAGEMENT
 #: ../src/services/service.c:100
 msgid "ISDN modems manager"
-msgstr ""
+msgstr "ISDN-modemsbeheer"
 
 #. GST_ROLE_ISDN_MANAGEMENT
 #: ../src/services/service.c:101
 msgid "Telstra Bigpond Cable Network client"
-msgstr ""
+msgstr "Telstra Bigpond Cable Network-cliënt"
 
 #. GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT
 #: ../src/services/service.c:102
 msgid "Hardware monitor"
-msgstr ""
+msgstr "Hardwaremonitor"
 
 #. GST_ROLE_HARDWARE_MONITORING
 #: ../src/services/service.c:103
 msgid "System monitor"
-msgstr ""
+msgstr "Systeemmonitor"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
-msgstr ""
-"Configureren welke services bij starten van de computer geactiveerd worden"
+msgstr "Configureren welke systeemdiensten bij het starten van de computer geactiveerd worden"
 
-# Voorzieningen is toch lelijk. Services is vrij ingebakken. 
-# Service wordt ook veel in het Nederlands gebruikt.
-# anders kan ook nog: Diensten
+# Voorzieningen is toch lelijk. Services ziet er toch te onvertaald uit.
+# uiteindelijk gekozen voor systeemdiensten (tino 24-02-2008)
+# Staat ook in het menu: Systeem -> Beheer -> Systeemdiensten
 #: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
-msgstr "Services"
+msgstr "Systeemdiensten"
 
 #: ../src/services/service-settings-table.c:73
 #: ../src/services/service-settings-table.c:97
@@ -1469,10 +1440,10 @@ msgstr "Status"
 msgid "Priority"
 msgstr "Prioriteit"
 
+# venstertitel
 #: ../src/services/services-tool.c:99
-#, fuzzy
 msgid "Services Settings"
-msgstr "Services instellingen"
+msgstr "Systeemdiensten instellingen"
 
 #: ../src/shares/callbacks.c:196
 msgid "Are you sure you want to delete this share?"
@@ -1491,9 +1462,8 @@ msgid "PATH"
 msgstr "PAD"
 
 #: ../src/shares/nautilus/nautilus-shares.c:152
-#, fuzzy
 msgid "_Share Folder..."
-msgstr "_Map delen"
+msgstr "_Map delen..."
 
 # deel deze map met...
 #: ../src/shares/nautilus/nautilus-shares.c:153
@@ -1538,16 +1508,13 @@ msgstr "Unix netwerk (NFS)"
 
 #: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
-msgstr "Delen-services is niet geïnstalleerd"
+msgstr "Systeemdiensten voor het delen van mappen zijn niet geïnstalleerd"
 
 #: ../src/shares/shares-tool.c:157
-#, fuzzy
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
-msgstr ""
-"U moet in ieder geval Samba of NFS installeren om uw mappen te kunnen delen. "
-"Het programma zal nu sluiten."
+msgstr "U moet in ieder geval Samba of NFS installeren om mappen te kunnen delen."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1570,22 +1537,20 @@ msgstr ""
 "een tijdserver van het internet te kunnen synchroniseren."
 
 #: ../src/time/time-tool.c:422
-#, fuzzy
 msgid "Enabling NTP"
-msgstr "Aanzetten :"
+msgstr "NTP aanzetten"
 
 #: ../src/time/time-tool.c:422
 msgid "Disabling NTP"
-msgstr ""
+msgstr "NTP uitzetten"
 
 #: ../src/time/time-tool.c:434
 msgid "Synchronizing system clock"
-msgstr ""
+msgstr "Gelijkzetten van de systeemklok"
 
 #: ../src/time/time-tool.c:514
-#, fuzzy
 msgid "Keep synchronized with Internet servers"
-msgstr "Klok synchroon houden met gekozen servers"
+msgstr "Klok synchroon houden met internetservers"
 
 #: ../src/time/time-tool.c:515
 msgid "Manual"
@@ -1593,7 +1558,7 @@ msgstr "Handmatig"
 
 #: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
-msgstr "Tijd en datum instellingen"
+msgstr "Tijd en datum-instellingen"
 
 #: ../src/users/group-settings.c:52
 msgid "Administrator group can not be deleted"
@@ -1608,7 +1573,7 @@ msgstr "Dit zou het systeem onbruikbaar maken."
 #: ../src/users/group-settings.c:68
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
-msgstr "Weet u zeker dat u de groep \"%s\" wilt verwijderen?"
+msgstr "Weet u zeker dat u de groep ‘%s’ wilt verwijderen?"
 
 #: ../src/users/group-settings.c:71
 msgid "This may leave files with invalid group ID in the filesystem."
@@ -1623,7 +1588,7 @@ msgstr "Nieuwe groep"
 #: ../src/users/group-settings.c:175
 #, c-format
 msgid "Group '%s' Properties"
-msgstr "Eigenschappen groep '%s'"
+msgstr "Eigenschappen groep ‘%s’"
 
 #: ../src/users/group-settings.c:275
 msgid "Group name is empty"
@@ -1655,7 +1620,7 @@ msgstr ""
 #: ../src/users/group-settings.c:286
 #, c-format
 msgid "Group \"%s\" already exists"
-msgstr "Groep \"%s\" bestaat al"
+msgstr "Groep ‘%s’ bestaat al"
 
 # kies ipv selecteer
 #: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
@@ -1735,14 +1700,13 @@ msgid "Users and Groups"
 msgstr "Gebruikers en groepen"
 
 #: ../src/users/user-settings.c:57
-#, fuzzy
 msgid "Administrator account cannot be deleted"
 msgstr "Het account van de systeembeheerder kan niet verwijderd worden"
 
 #: ../src/users/user-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "Weet u zeker dat u account \"%s\" wilt verwijderen?"
+msgstr "Weet u zeker dat u account ‘%s’ wilt verwijderen?"
 
 #: ../src/users/user-settings.c:74
 msgid ""
@@ -1752,9 +1716,11 @@ msgstr ""
 "Dit zal de toegang tot het systeem voor deze gebruiker ontzeggen, maar zijn "
 "persoonlijke map zal niet verwijderd worden."
 
+# is momenteel actief op deze computer
+# deze computer is nu in gebruik bij deze gebruiker
 #: ../src/users/user-settings.c:84
 msgid "This user is currently using this computer"
-msgstr ""
+msgstr "Deze gebruiker gebruikt momenteel deze computer"
 
 #: ../src/users/user-settings.c:324
 msgid "New user account"
@@ -1763,7 +1729,7 @@ msgstr "Nieuw gebruikersaccount"
 #: ../src/users/user-settings.c:342
 #, c-format
 msgid "Account '%s' Properties"
-msgstr "Eigenschappen voor account '%s'"
+msgstr "Eigenschappen voor account ‘%s’"
 
 # wat is er mis gegaan?
 #: ../src/users/user-settings.c:475
@@ -1789,17 +1755,18 @@ msgstr ""
 #: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
-msgstr "Gebruikersnaam \"%s\" bestaat al"
+msgstr "Gebruikersnaam ‘%s’ bestaat al"
 
 #: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
-msgstr "Ongeldig teken \"%c\" in opmerking"
+msgstr "Ongeldig teken ‘%c’ in opmerking"
 
 #: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr "Controleer dat dit teken niet wordt gebruikt."
 
+# voor/in
 #: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr "Onvolledig pad voor de persoonlijke map"
@@ -1813,21 +1780,17 @@ msgstr ""
 "<span size=\"smaller\">bijvoorbeeld: /home/jan</span>."
 
 #: ../src/users/user-settings.c:532
-#, fuzzy
 msgid "Home directory already exists"
-msgstr "Persoonlijke map"
+msgstr "Persoonlijke map bestaat al"
 
 # kies ipv selecteer
 #: ../src/users/user-settings.c:533
-#, fuzzy
 msgid "Please enter a different home directory path."
-msgstr "Kies een andere gebruikersnaam."
+msgstr "Kies een andere persoonlijke map."
 
 #: ../src/users/user-settings.c:549
-#, fuzzy
 msgid "Administrator account's user ID should not be modified"
-msgstr ""
-"Groeps-ID van het account van de systeembeheerder mag niet gewijzigd worden"
+msgstr "De groeps-ID van het account van de systeembeheerder mag niet gewijzigd worden"
 
 #: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
@@ -1842,22 +1805,19 @@ msgstr ""
 "<span size=\"smaller\">bijvoorbeeld: /bin/bash</span>."
 
 #: ../src/users/user-settings.c:598
-#, fuzzy
 msgid "Password is too short"
-msgstr "Wachtwoord verandert in:"
+msgstr "Het wachtwoord is te kort"
 
 #: ../src/users/user-settings.c:599
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
-msgstr ""
+msgstr "Wachtwoorden voor gebruikers moeten langer dan 6 tekens zijn en opgebouwd zijn uit cijfers, letters en speciale tekens."
 
-# onjuist/niet juist
-# wat bedoelen ze hier mee?
+# onjuist/niet juist/incorrect
 #: ../src/users/user-settings.c:602
-#, fuzzy
 msgid "Password confirmation is not correct"
-msgstr "Wachtwoordbevestiging is niet juist."
+msgstr "Wachtwoordbevestiging is niet juist"
 
 #: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
@@ -1877,7 +1837,6 @@ msgid "Home directory"
 msgstr "Persoonlijke map"
 
 #: ../src/users/users-tool.c:216
-#, fuzzy
 msgid "Users Settings"
 msgstr "Gebruikersinstellingen"
 
@@ -1996,9 +1955,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Networking"
 #~ msgstr "Netwerk"
-
-#~ msgid "File sharing service"
-#~ msgstr "Bestanden delen"
 
 #~ msgid "Hosts in the %s network"
 #~ msgstr "Hosts in het netwerk %s"
@@ -2174,14 +2130,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "_Edit"
 #~ msgstr "Be_werken"
 
-# BUG: het is geen pad, gewoon en naam van een image
-#~ msgid "_Initrd image path:"
-#~ msgstr "I_nitrd-image:"
-
-# BUG: het is geen pad, gewoon en naam van een image
-#~ msgid "_Kernel image path:"
-#~ msgstr "_Kernel-image:"
-
 #~ msgid "_Name:"
 #~ msgstr "_Naam:"
 
@@ -2259,20 +2207,8 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "_All users:"
 #~ msgstr "Alle gebr_uikers:"
 
-#~ msgid "32,768"
-#~ msgstr "32,768"
-
-#~ msgid "65,536"
-#~ msgstr "65,536"
-
-#~ msgid "16,777,216"
-#~ msgstr "16,777,216"
-
 #~ msgid "Invalid VGA value"
 #~ msgstr "Ongeldige VGA-waarde"
-
-#~ msgid "\"%s\" is not a valid VGA value."
-#~ msgstr "\"%s\" is geen geldige VGA-waarde"
 
 #~ msgid "Error creating boot image"
 #~ msgstr "Fout bij aanmaken nieuw opstart-image"
@@ -2303,24 +2239,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "GNU/Hurd"
 #~ msgstr "GNU/Hurd"
-
-#~ msgid "\"%s\" is an invalid path"
-#~ msgstr "\"%s\" is een ongeldig pad"
-
-#~ msgid "\"%s\" already exists, please set another name."
-#~ msgstr "\"%s\" bestaat al, gebruik een andere naam."
-
-# image/opstartbestand
-#~ msgid "Invalid image name: \"%s\"."
-#~ msgstr "Ongeldige naam van image: \"%s\"."
-
-# Ongeldig opstartbestand
-#~ msgid "Invalid image: \"%s\"."
-#~ msgstr "Ongeldig image: \"%s\"."
-
-# partitie/station/schijf/
-#~ msgid "Invalid root device: \"%s\"."
-#~ msgstr "Ongeldige root-partitie: \"%s\"."
 
 # Map ipv pad gebruikt
 #~ msgid "_Module path:"
@@ -2356,9 +2274,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "The configuration will show empty"
 #~ msgstr "De configuratie zou weg zijn"
 
-#~ msgid "The file \"%s\" is missing or could not be read."
-#~ msgstr "Het bestand \"%s\" ontbreekt of kon niet worden gelezen."
-
 #~ msgid "Default"
 #~ msgstr "Standaard"
 
@@ -2367,11 +2282,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Kernel Image"
 #~ msgstr "Kernel-image"
-
-# is tabelkop in opstartbeheer, laat partities zien:
-# /dev/hda1 etc.
-#~ msgid "Device"
-#~ msgstr "Partitie"
 
 # verbinding krijgen/leggen
 #~ msgid "The tool could not connect to the computer"
@@ -2397,9 +2307,6 @@ msgstr "Gebruikersinstellingen"
 #~ "\"caps lock\" key"
 #~ msgstr ""
 #~ "Controleer of u het juist heeft getypt en of \"Caps Lock\" niet aanstaat"
-
-#~ msgid "Could not run \"%s\""
-#~ msgstr "Kon \"%s\" niet uitvoeren"
 
 #~ msgid "Check that you have permissions to run this command"
 #~ msgstr "Controleer of u de rechten heeft om deze opdracht uit te voeren"
@@ -2473,9 +2380,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "The interface %s is active"
 #~ msgstr "De interface %s is actief"
 
-#~ msgid "Settings for \"%s\""
-#~ msgstr "Instellingen voor \"%s\""
-
 # deactiveren/uitschakelen
 #~ msgid "Are you sure you want to deactivate this service?"
 #~ msgstr "Weet u zeker dat u deze service wilt uitschakelen?"
@@ -2529,9 +2433,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "Please select a different group name"
 #~ msgstr "Selecteer een andere groepsnaam"
 
-#~ msgid "The group \"root\" should not be deleted"
-#~ msgstr "De groep \"root\" mag niet verwijderd worden"
-
 #~ msgid "Settings for Group %s"
 #~ msgstr "Instellingen voor groep %s"
 
@@ -2580,9 +2481,6 @@ msgstr "Gebruikersinstellingen"
 #~ "Dit profiel wordt gebruikt voor om nieuwe gebruikers standaard "
 #~ "instellingen te geven"
 
-#~ msgid "Delete profile \"%s\"?"
-#~ msgstr "Profiel \"%s\" verwijderen?"
-
 # "as soon as" ipv "after" 
 #~ msgid ""
 #~ "You will not be able to recover this profile after pressing \"apply\"."
@@ -2606,9 +2504,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "The \"root\" user should not be deleted"
 #~ msgstr "De gebruiker \"root\" mag niet verwijderd worden"
-
-#~ msgid "Are you sure you want to delete user \"%s\"?"
-#~ msgstr "Weet u zeker dat u gebruiker \"%s\" wilt verwijderen?"
 
 #~ msgid "User Account Editor"
 #~ msgstr "Gebruikersaccount bewerken"
@@ -2695,9 +2590,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "<span weight=\"bold\">General Information</span>"
 #~ msgstr "<span weight=\"bold\">Algemene informatie</span>"
 
-#~ msgid "<span weight=\"bold\">Service Settings</span>"
-#~ msgstr "<span weight=\"bold\">Voorzieningen</span>"
-
 #~ msgid "Description:"
 #~ msgstr "Beschrijving:"
 
@@ -2731,9 +2623,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Active"
 #~ msgstr "Actief"
-
-#~ msgid "Service"
-#~ msgstr "Voorziening"
 
 #~ msgid "*"
 #~ msgstr "*"
@@ -3035,9 +2924,6 @@ msgstr "Gebruikersinstellingen"
 #~ "Dit zal elke netwerkverbinding met dit apparaat uitschakelen zodra u op "
 #~ "\"toepassen\" klikt"
 
-#~ msgid "Are you sure you want to delete connection \"%s\"?"
-#~ msgstr "Weet u zeker dat u verbinding \"%s\" wilt verwijderen?"
-
 #~ msgid "SMB Support is not running"
 #~ msgstr "Geen ondersteuning voor SMB aanwezig"
 
@@ -3108,9 +2994,6 @@ msgstr "Gebruikersinstellingen"
 # (moet in overeenstemming zijn met de vorige berichten)
 #~ msgid "_Enable"
 #~ msgstr "_Inschakelen"
-
-#~ msgid "Do you want to disable interface \"%s\"?"
-#~ msgstr "Wilt u interface \"%s\" uitschakelen?"
 
 #~ msgid "This will disable network access through this interface"
 #~ msgstr "Dit zal netwerktoegang door deze interface uitschakelen"
@@ -3232,9 +3115,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Finished creating a new network connection"
 #~ msgstr "Nieuwe netwerkverbinding aangemaakt"
-
-#~ msgid "Are you sure you want to delete profile \"%s\"?"
-#~ msgstr "Weet u zeker dat u het profiel \"%s\" wilt verwijderen?"
 
 #~ msgid "Profile name"
 #~ msgstr "Profielnaam"
@@ -3433,17 +3313,8 @@ msgstr "Gebruikersinstellingen"
 #~ "Dit is het standaardprofiel voor het instellen van data voor nieuwe "
 #~ "gebruikers"
 
-#~ msgid "Delete profile \"%s\""
-#~ msgstr "Profiel \"%s\" verwijderen"
-
 #~ msgid "_Search"
 #~ msgstr "_Zoeken"
-
-#~ msgid "/_Add User ..."
-#~ msgstr "/Gebruiker _toevoegen ..."
-
-#~ msgid "/_Add group ..."
-#~ msgstr "/Groep _toevoegen ..."
 
 #~ msgid "Root username shouldn't be modified."
 #~ msgstr "Gebruikersnaam root mag niet worden gewijzigd."
@@ -3468,9 +3339,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Please restart your GNOME session for these changes to take effect."
 #~ msgstr "Herstart uw GNOME sessie om deze wijzigingen toe te passen."
-
-#~ msgid "Remove connection %s: \"%s\"?"
-#~ msgstr "Verbinding %s verwijderen, ``%s''?"
 
 #~ msgid "Such group id already exists."
 #~ msgstr "Dit groepsID bestaat al."
@@ -3546,9 +3414,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Boot Image Wizard"
 #~ msgstr "Opstart Image DruÃ¯de"
-
-#~ msgid "%s"
-#~ msgstr "%s"
 
 #~ msgid "Enter Password - GNOME System Tools"
 #~ msgstr "Wachtwoord invoeren - GNOME System Tools"
@@ -3795,9 +3660,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "User Profiles - GNOME System Tools"
 #~ msgstr "Gebruikersprofielen - GNOME System Tools"
 
-#~ msgid "%s - GNOME System Tools"
-#~ msgstr "%s - GNOME System Tools"
-
 #~ msgid "The name of this computer"
 #~ msgstr "De naam van deze computer"
 
@@ -3876,12 +3738,6 @@ msgstr "Gebruikersinstellingen"
 #~ "Gebruikersnaam: %s\n"
 #~ "\n"
 #~ "Wachtwoord: %s"
-
-#~ msgid "Time Zone - GNOME System Tools"
-#~ msgstr "Tijdzone - GNOME System Tools"
-
-#~ msgid "Time Servers - GNOME System Tools"
-#~ msgstr "Tijdservers - GNOME System Tools"
 
 #~ msgid "Comments"
 #~ msgstr "Commentaar"
@@ -4118,9 +3974,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "Style"
 #~ msgstr "Stijl"
 
-#~ msgid "   Configure...   "
-#~ msgstr "   Instellen...   "
-
 #~ msgid " Exit and come back later after installing."
 #~ msgstr " Afsluiten en na het installeren opnieuw proberen."
 
@@ -4178,9 +4031,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Banner Removal (Junkbuster)"
 #~ msgstr "Banners verwijderen (Junkbuster)"
-
-#~ msgid "Configure DHCP Service"
-#~ msgstr "DHCP voorziening instellen"
 
 #~ msgid ""
 #~ "Congratulations! This computer is now\n"
@@ -4280,15 +4130,6 @@ msgstr "Gebruikersinstellingen"
 #~ msgstr ""
 #~ "Er is geen DHCP server geinstalleerd of een\n"
 #~ "andere vereiste component is niet geinstalleerd."
-
-#~ msgid "\n"
-#~ msgstr "\n"
-
-#~ msgid "                           "
-#~ msgstr "                           "
-
-#~ msgid "AM"
-#~ msgstr "AM"
 
 #~ msgid "Boston Office"
 #~ msgstr "Kantoor in Boston"
@@ -4657,12 +4498,6 @@ msgstr "Gebruikersinstellingen"
 #~ "In dit venster kunt u nieuwe printers toevoegen of bestaande printers "
 #~ "wijzigen."
 
-#~ msgid "True Color"
-#~ msgstr "Ware Kleuren"
-
-#~ msgid "Username used to connect to the server."
-#~ msgstr "Gebruikersnaam om met de server te verbinden."
-
 #~ msgid "_1"
 #~ msgstr "_1"
 
@@ -4681,14 +4516,8 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "_Device Name:"
 #~ msgstr "_Apparaatnaam:"
 
-#~ msgid "_Direct Network Printer"
-#~ msgstr "_Directe Netwerkprinter"
-
 #~ msgid "_Fast Text Printing"
 #~ msgstr "_Snel tekst afdrukken"
-
-#~ msgid "_Local Printer"
-#~ msgstr "_Lokale Printer"
 
 #~ msgid "_Remote Name:"
 #~ msgstr "Naam van ande_re kant:"
@@ -4702,23 +4531,11 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "Configuration Restoration"
 #~ msgstr "Instellingen Herstellen"
 
-#~ msgid "Create..."
-#~ msgstr "Creëren..."
-
 #~ msgid "Destroy..."
 #~ msgstr "Verwijderen..."
 
 #~ msgid "Edit this Location"
 #~ msgstr "Deze locatie wijzigen"
-
-#~ msgid "Parent Location:"
-#~ msgstr "Ouder-locatie:"
-
-#~ msgid "Rename..."
-#~ msgstr "Hernoemen..."
-
-#~ msgid "Restore all tools"
-#~ msgstr "Herstel al het gereedschap"
 
 #~ msgid "View Logs..."
 #~ msgstr "Logboeken bekijken..."
@@ -4726,29 +4543,11 @@ msgstr "Gebruikersinstellingen"
 #~ msgid "days ago"
 #~ msgstr "dagen geleden"
 
-#~ msgid " Edit clients... "
-#~ msgstr " CliÃ«nten wijzigen... "
-
-#~ msgid " _Edit clients... "
-#~ msgstr " CliÃ«nt_en wijzigen... "
-
-#~ msgid "Access control"
-#~ msgstr "Toegangsbeheer"
-
 #~ msgid "Add..."
 #~ msgstr "Toevoegen..."
 
 #~ msgid "Allow writing"
 #~ msgstr "Schrijftoegang"
-
-#~ msgid "Browseable"
-#~ msgstr "Zichtbaar"
-
-#~ msgid "Client"
-#~ msgstr "CliÃ«nt"
-
-#~ msgid "Clients"
-#~ msgstr "CliÃ«nten"
 
 #~ msgid "Do not _remount this share after computer reboots"
 #~ msgstr "Deze map niet herkoppelen nadat de computer opnieuw is opgestart"
@@ -4759,9 +4558,6 @@ msgstr "Gebruikersinstellingen"
 
 #~ msgid "Export"
 #~ msgstr "Export"
-
-#~ msgid "Export Clients"
-#~ msgstr "Export CliÃ«nten"
 
 #~ msgid "Export Settings"
 #~ msgstr "Export instellingen"
@@ -4869,8 +4665,8 @@ msgstr "Gebruikersinstellingen"
 #~ "\"10.10.10.*\" or \" *.gnome.org\".  "
 #~ msgstr ""
 #~ "In dit venster kunt u cliÃ«ntpatronen definiÃ«ren die bepalen welke "
-#~ "cliÃ«nten toegang hebben tot uw via NFS gedeelde map. CliÃ«ntpatronen zijn "
-#~ "over het algemeen in de vorm \"10.10.10.*\" of \"*.gnome.org\".  "
+#~ "cliÃ«nten toegang hebben tot uw via NFS gedeelde map. CliÃ«ntpatronen "
+#~ "zijn over het algemeen in de vorm \"10.10.10.*\" of \"*.gnome.org\".  "
 
 #~ msgid "Writable"
 #~ msgstr "Schrijfbaar"
