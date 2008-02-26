@@ -74,6 +74,9 @@ privilege_search (const gchar *group)
 {
 	PrivilegeDescription p = { 0, };
 
+	if (!group)
+		return NULL;
+
 	p.group = group;
 
 	return (const PrivilegeDescription *) bsearch (&p, descriptions, G_N_ELEMENTS (descriptions),
