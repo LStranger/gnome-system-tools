@@ -1,3 +1,9 @@
+2008-02-26  Carlos Garnacho  <carlosg@gnome.org>
+
+	* gst-polkit-action.c (gst_polkit_action_init): Do not spew extra
+	critical warnings if any of the DBusConnections can't be created.
+	Fixes what can be fixed in #518796.
+
 2008-02-25  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.21.92

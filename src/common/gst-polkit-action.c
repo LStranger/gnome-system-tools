@@ -161,7 +161,6 @@ gst_polkit_action_init (GstPolKitAction *action)
 	dbus_error_init (&error);
 	priv->pk_context = polkit_context_new ();
 	priv->system_bus = dbus_bus_get (DBUS_BUS_SYSTEM, &error);
-	dbus_connection_set_exit_on_disconnect (priv->system_bus, FALSE);
 
 	priv->main_loop = g_main_loop_new (NULL, FALSE);
 
@@ -171,17 +170,19 @@ gst_polkit_action_init (GstPolKitAction *action)
 	if (dbus_error_is_set (&error)) {
 		g_critical ("Cannot create system bus: %s", error.message);
 		dbus_error_free (&error);
+	} else {
+		dbus_connection_set_exit_on_disconnect (priv->system_bus, FALSE);
 	}
 
 	priv->session_bus = dbus_bus_get (DBUS_BUS_SESSION, &error);
-	dbus_connection_set_exit_on_disconnect (priv->session_bus, FALSE);
 
 	if (dbus_error_is_set (&error)) {
 		g_critical ("Cannot create session bus: %s", error.message);
 		dbus_error_free (&error);
+	} else {
+		dbus_connection_set_exit_on_disconnect (priv->session_bus, FALSE);
+		dbus_connection_setup_with_g_main (priv->session_bus, NULL);
 	}
-
-	dbus_connection_setup_with_g_main (priv->session_bus, NULL);
 
 	/* FIXME: listen when polkit configuration changes */
 
