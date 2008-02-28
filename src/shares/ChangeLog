@@ -1,3 +1,9 @@
+2008-02-28  Carlos Garnacho  <carlosg@gnome.org>
+
+	* nautilus/nautilus-shares.c (file_get_share_status_file): remove
+	wrongly placed g_return_if_fail on an uninitialized variable. Fixes
+	#519295 (Vincent Untz).
+
 2008-02-25  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.21.92

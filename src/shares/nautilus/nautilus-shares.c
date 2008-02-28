@@ -178,8 +178,6 @@ file_get_share_status_file (NautilusShares   *shares,
   char *path;
   gboolean status;
 
-  g_return_val_if_fail (path != NULL, FALSE);
-
   if (!nautilus_file_info_is_directory(file) || !is_directory_local (file))
     status = FALSE;
   else
