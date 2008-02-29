@@ -28,6 +28,9 @@
 
 #define GST_NETWORK_LOCATIONS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_NETWORK_LOCATIONS, GstNetworkLocationsPrivate))
 
+/* utf8 char to replace regular slash in location filenames */
+#define SLASH "\342\201\204"
+
 typedef struct _GstNetworkLocationsPrivate GstNetworkLocationsPrivate;
 
 struct _GstNetworkLocationsPrivate
@@ -184,6 +187,27 @@ gst_network_locations_get (void)
   return GST_NETWORK_LOCATIONS (locations);
 }
 
+static gchar *
+replace_string (const gchar *str,
+		const gchar *old,
+		const gchar *new)
+{
+  gchar *new_str;
+
+  if (strstr (str, old))
+    {
+      gchar **splitted_name;
+
+      splitted_name = g_strsplit (str, old, -1);
+      new_str = g_strjoinv (new, splitted_name);
+      g_strfreev (splitted_name);
+    }
+  else
+    new_str = g_strdup (str);
+
+  return new_str;
+}
+
 GList*
 gst_network_locations_get_names (GstNetworkLocations *locations)
 {
@@ -201,7 +225,15 @@ gst_network_locations_get_names (GstNetworkLocations *locations)
     return NULL;
 
   while ((name = g_dir_read_name (dir)) != NULL)
-    list = g_list_prepend (list, strdup (name));
+    {
+      gchar *str, *filename;
+
+      filename = g_filename_to_utf8 (name, -1, NULL, NULL, NULL);
+      str = replace_string (filename, SLASH, "/");
+      list = g_list_prepend (list, str);
+
+      g_free (filename);
+    }
 
   g_dir_close (dir);
 
@@ -214,12 +246,15 @@ get_location_key_file (GstNetworkLocations *locations,
 {
   GstNetworkLocationsPrivate *priv;
   GKeyFile *key_file;
-  gchar *path;
+  gchar *filename, *str, *path;
 
   priv = (GstNetworkLocationsPrivate *) locations->_priv;
   key_file = g_key_file_new ();
   g_key_file_set_list_separator (key_file, ',');
-  path = g_build_filename (priv->dot_dir, name, NULL);
+
+  filename = g_filename_from_utf8 (name, -1, NULL, NULL, NULL);
+  str = replace_string (filename, "/", SLASH);
+  path = g_build_filename (priv->dot_dir, str, NULL);
 
   if (!g_key_file_load_from_file (key_file, path, 0, NULL))
     {
@@ -227,7 +262,10 @@ get_location_key_file (GstNetworkLocations *locations,
       key_file =  NULL;
     }
 
+  g_free (filename);
   g_free (path);
+  g_free (str);
+
   return key_file;
 }
 
@@ -1062,13 +1100,24 @@ gboolean
 gst_network_locations_save_current (GstNetworkLocations *locations,
 				    const gchar         *name)
 {
+  gchar *filename, *str;
+  gboolean result;
+
   g_return_val_if_fail (GST_IS_NETWORK_LOCATIONS (locations), FALSE);
   g_return_val_if_fail (name && *name, FALSE);
 
   /* Unset the previous configuration with the same name, if any */
-  gst_network_locations_delete_location (locations, name);
+  gst_network_locations_delete_location (locations, filename);
 
-  return save_current (locations, name);
+  filename = g_filename_from_utf8 (name, -1, NULL, NULL, NULL);
+  str = replace_string (filename, "/", SLASH);
+
+  result = save_current (locations, str);
+
+  g_free (filename);
+  g_free (str);
+
+  return result;
 }
 
 gboolean
@@ -1076,16 +1125,20 @@ gst_network_locations_delete_location (GstNetworkLocations *locations,
 				       const gchar         *name)
 {
   GstNetworkLocationsPrivate *priv;
-  gchar *location_path;
+  gchar *filename, *str, *location_path;
   gboolean success;
 
   g_return_val_if_fail (GST_IS_NETWORK_LOCATIONS (locations), FALSE);
 
   priv = GST_NETWORK_LOCATIONS_GET_PRIVATE (locations);
-  location_path = g_build_filename (priv->dot_dir, name, NULL);
+
+  filename = g_filename_from_utf8 (name, -1, NULL, NULL, NULL);
+  str = replace_string (filename, "/", SLASH);
+  location_path = g_build_filename (priv->dot_dir, str, NULL);
 
   g_unlink (location_path);
   g_free (location_path);
+  g_free (filename);
 
   return success;
 }

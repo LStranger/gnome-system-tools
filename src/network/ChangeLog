@@ -1,3 +1,11 @@
+2008-02-29  Carlos Garnacho  <carlosg@gnome.org>
+
+	* network-locations.c (replace_string) (get_location_key_file)
+	(gst_network_locations_save_current)
+	(gst_network_locations_delete_location): Slash can be prone to being
+	used in a location name, replace it with char 0x2044, so the location
+	file can be saved. Fixes #519270.
+
 2008-02-25  Carlos Garnacho  <carlosg@gnome.org>
 
 	* Release 2.21.92
