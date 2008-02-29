@@ -1,5 +1,10 @@
 2008-02-29  Carlos Garnacho  <carlosg@gnome.org>
 
+	* network-locations.c (compare_interface) (save_interface): Take into
+	account the case where OobsIfacePPP::ethernet is NULL. Fixes #519268.
+
+2008-02-29  Carlos Garnacho  <carlosg@gnome.org>
+
 	* network-locations.c (replace_string) (get_location_key_file)
 	(gst_network_locations_save_current)
 	(gst_network_locations_delete_location): Slash can be prone to being

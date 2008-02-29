@@ -589,14 +589,20 @@ compare_interface (OobsIface *iface,
 	  gchar *value1, *value2;
 
 	  value1 = g_key_file_get_string (key_file, name, prop->key, NULL);
+	  value2 = NULL;
+
 	  g_object_get (iface, prop->key, &ethernet, NULL);
-	  g_object_get (ethernet, "device", &value2, NULL);
+
+	  if (ethernet)
+	    {
+	      g_object_get (ethernet, "device", &value2, NULL);
+	      g_object_unref (ethernet);
+	    }
 
 	  equal = compare_string (value1, value2);
 
 	  g_free (value1);
 	  g_free (value2);
-	  g_object_unref (ethernet);
 	}
       else
 	g_assert_not_reached ();
@@ -1035,15 +1041,18 @@ save_interface (OobsIface *iface,
       else if (prop->type == TYPE_ETHERNET)
 	{
 	  OobsIface *ethernet;
-	  gchar *value;
+	  gchar *value = NULL;
 
 	  g_object_get (iface, prop->key, &ethernet, NULL);
-	  g_object_get (ethernet, "device", &value, NULL);
 
-	  g_key_file_set_string (key_file, name, prop->key, value);
+	  if (ethernet)
+	    {
+	      g_object_get (ethernet, "device", &value, NULL);
+	      g_object_unref (ethernet);
+	    }
 
+	  g_key_file_set_string (key_file, name, prop->key, (value) ? value : "");
 	  g_free (value);
-	  g_object_unref (ethernet);
 	}
     }
 
