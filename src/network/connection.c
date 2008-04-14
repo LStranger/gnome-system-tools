@@ -802,8 +802,9 @@ connection_dialog_prepare (GstConnectionDialog *dialog, OobsIface *iface)
 void
 connection_save (GstConnectionDialog *dialog)
 {
-  gboolean active;
+  gboolean active, was_configured;
 
+  was_configured = oobs_iface_get_configured (dialog->iface);
   active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->connection_configured));
 
   if (OOBS_IS_IFACE_PPP (dialog->iface))
@@ -819,6 +820,16 @@ connection_save (GstConnectionDialog *dialog)
     plip_dialog_save (dialog);
 
   oobs_iface_set_configured (dialog->iface, active);
+
+  if (!was_configured)
+    oobs_iface_set_active (dialog->iface, TRUE);
+
+  /* sync auto and active, this may happen either because
+   * it was just set active, or the interface was already
+   * manually configured, but not marked as auto.
+   */
+  if (oobs_iface_get_active (dialog->iface))
+    oobs_iface_set_auto (dialog->iface, TRUE);
 }
 
 void
