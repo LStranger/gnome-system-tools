@@ -2,317 +2,42 @@
 # translation of gnome-system-tools.HEAD.sk.po to Slovak
 # translation of sk.po to Slovak
 # ximian-setup-tools Slovak translation.
-# Copyright (C) 2001,2002,2003 Free Software Foundation, Inc.
+# Copyright (C) 2001,2002,2003,2008 Free Software Foundation, Inc.
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2001.2002,2003.
 # Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>, 2002.
 # Stanislav Visnovsky <visnovsky@kde.org>, 2003.
 # Ivan Noris <vix@vazka.sk>, 2005.
-# 
+# Pavol Klačanský <pavolzetor@gmail.com>, 2008.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.sk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-20 13:21+0200\n"
-"PO-Revision-Date: 2005-10-20 20:27+0200\n"
-"Last-Translator: Ivan Noris <vix@vazka.sk>\n"
+"POT-Creation-Date: 2008-09-23 09:24+0200\n"
+"PO-Revision-Date: 2008-09-19 17:49+0200\n"
+"Last-Translator: Pavol Klačanský <pavolzetor@gmail.com>\n"
 "Language-Team: Slovak <sk-i18n@linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural= (n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid ""
-"Comma separated list of hosts that the GST will be able to access when the "
-"remote configuration option is enabled"
-msgstr ""
-"Čiarkami oddelený zoznam hostiteľov, ku ktorým bude mať GST prístup pri "
-"zapnutí vzdialenej správy."
-
-#: ../gnome-system-tools.schemas.in.h:2
-msgid "Last GST version executed"
-msgstr "Posledná spustená verzia GST"
-
-#: ../gnome-system-tools.schemas.in.h:3
-msgid "Preferred bootloader that boot-admin will configure"
-msgstr "Preferovaný zavádzač systému, ktorý bude boot admin konfigurovať"
-
-#: ../gnome-system-tools.schemas.in.h:4
-msgid "Remote hosts"
-msgstr "Vzdialení hostitelia"
-
-#: ../gnome-system-tools.schemas.in.h:5
-msgid ""
-"The GST are able to do remote configuration through SSH, enable this option "
-"to use this feature"
-msgstr ""
-"GST môže vykonávať vzdialenú správu pomocou SSH. Túto funkciu zapnete touto "
-"voľbou"
-
-#: ../gnome-system-tools.schemas.in.h:6
-msgid "The last GST version that this computer has run"
-msgstr "Posledná verzia GST spustená na tomto počítači"
-
-#: ../gnome-system-tools.schemas.in.h:7
-msgid ""
-"This key stores the bootloader that boot-admin will configure if there are "
-"more than one installed, if it's not set or isn't valid, then boot-admin "
-"will ask the user"
-msgstr ""
-"Tento kľúč obsahuje zavádzač systému, ktorý bude boot-admin konfigurovať, ak "
-"je nainštalovaný viac než jeden. Ak nie je nastavený alebo je neplatný, boot-"
-"admin sa spýta používateľa"
-
-#: ../gnome-system-tools.schemas.in.h:8
-msgid "Whether the tools will use remote administration or not"
-msgstr "Či nástroje budú používať vzdialenú správu"
-
-#: ../gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Či má nástroj pre používateľov zobraziť všetkých používateľov a skupiny"
 
-#: ../gnome-system-tools.schemas.in.h:10
-msgid "Whether the warning dialog should be shown or not"
-msgstr "Či sa má zobrazovať varovanie"
-
-#: ../interfaces/boot.glade.in.h:1
-msgid "/dev/hda"
-msgstr "/dev/hda"
-
-#: ../interfaces/boot.glade.in.h:2
-msgid "/dev/hdb"
-msgstr "/dev/hdb"
-
-#: ../interfaces/boot.glade.in.h:3
-msgid "/dev/hdc"
-msgstr "/dev/hdc"
-
-#: ../interfaces/boot.glade.in.h:4
-msgid "/dev/hdd"
-msgstr "/dev/hdd"
-
-#: ../interfaces/boot.glade.in.h:5
-msgid "<b>Security</b>"
-msgstr "<b>Zabezpečenie</b>"
-
-#: ../interfaces/boot.glade.in.h:6
-msgid ""
-"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
-"span>\n"
-"\n"
-"please select which do you want to configure"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">Bolo nájdených niekoľko zavádzačov "
-"systému</span>\n"
-"\n"
-"prosím, vyberte ten, ktorý chcete konfigurovať"
-
-#: ../interfaces/boot.glade.in.h:9 ../interfaces/users.glade.in.h:3
-msgid "<span weight=\"bold\">Basic Settings</span>"
-msgstr "<span weight=\"bold\">Základné nastavenia</span>"
-
-#: ../interfaces/boot.glade.in.h:10
-msgid "<span weight=\"bold\">Image Settings</span>"
-msgstr "<span weight=\"bold\">Nastavenie obrazu</span>"
-
-#: ../interfaces/boot.glade.in.h:11
-msgid "<span weight=\"bold\">Other Settings</span>"
-msgstr "<span weight=\"bold\">Ostatné nastavenia</span>"
-
-#: ../interfaces/boot.glade.in.h:12
-msgid "<span weight=\"bold\">Starting the Computer</span>"
-msgstr "<span weight=\"bold\">Spustenie počítača</span>"
-
-#: ../interfaces/boot.glade.in.h:13
-msgid "Ask at boot"
-msgstr "Pýtať sa pri štarte počítača"
-
-#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:71
-msgid "Boot Manager Settings"
-msgstr "Nastavenie správcu zavedenia systému"
-
-#: ../interfaces/boot.glade.in.h:15
-msgid ""
-"Choose a kernel image to boot, and a partition to mount as the root "
-"partition. Optionally, you may also enter parameters passed to the kernel at "
-"boot time."
-msgstr ""
-"Vyberte obraz kernelu, ktorý chcete spustiť, a oddiel, ktorý chcete pripojiť "
-"ako koreňový. Môžete tiež zadať prídavné parametre, ktoré budú pri štarte "
-"odovzdané kernelu."
-
-#: ../interfaces/boot.glade.in.h:16
-msgid "Click \"Forward\" to continue"
-msgstr "Pre pokračovanie stlačte \"Nasledujúci\""
-
-#: ../interfaces/boot.glade.in.h:17
-msgid "Confirmation"
-msgstr "Potvrdenie"
-
-#. set window title
-#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:442
-#: ../src/boot/boot-druid.c:454
-msgid "Creating a new boot image"
-msgstr "Vytváram nový obraz zavádzača systému"
-
-#: ../interfaces/boot.glade.in.h:19
-msgid "Don't ask me again"
-msgstr "Nabudúce sa už nepýtať"
-
-#: ../interfaces/boot.glade.in.h:20
-msgid "Enable IDE SCSI emulation"
-msgstr "Povoliť emuláciu IDE SCSI"
-
-#: ../interfaces/boot.glade.in.h:21
-msgid ""
-"Enter a name for the boot image, and specify what kind of operating system "
-"it is."
-msgstr "Zadajte meno a typ operačného systému pre zavádzací obraz."
-
-#: ../interfaces/boot.glade.in.h:22
-msgid "Finished"
-msgstr "Dokončené"
-
-#: ../interfaces/boot.glade.in.h:23
-msgid "Manual"
-msgstr "Ručne"
-
-#: ../interfaces/boot.glade.in.h:24
-msgid "Number of colors:"
-msgstr "Počet farieb:"
-
-#: ../interfaces/boot.glade.in.h:25
-msgid "Other parameters:"
-msgstr "Iné parametre:"
-
-#: ../interfaces/boot.glade.in.h:26
-msgid "Password"
-msgstr "Heslo"
-
-#: ../interfaces/boot.glade.in.h:27
-msgid "Protect with password"
-msgstr "Chrániť heslom"
-
-#: ../interfaces/boot.glade.in.h:28
-msgid "Resolution:"
-msgstr "Rozlíšenie:"
-
-#: ../interfaces/boot.glade.in.h:29
-msgid "Seconds to wait before loading default kernel or OS"
-msgstr "Sekúnd pred načítaním štandardného jadra alebo OS"
-
-#: ../interfaces/boot.glade.in.h:30
-msgid "Select a kernel image"
-msgstr "Vyberte obraz kernelu"
-
-#: ../interfaces/boot.glade.in.h:31
-msgid "Select an initrd image"
-msgstr "Vyberte obraz initrd"
-
-#: ../interfaces/boot.glade.in.h:32
-msgid "Specify the partition on which the operating system is installed."
-msgstr "Zadajte oddiel, na ktorom je nainštalovaný operačný systém."
-
-#: ../interfaces/boot.glade.in.h:33
-msgid ""
-"The new boot image has been added. Please click \"Apply\" to save your "
-"changes."
-msgstr ""
-"Vytvorili ste nový zavádzací obraz. Stlačením \"Použiť\" uložíte zmeny."
-
-#: ../interfaces/boot.glade.in.h:34
-msgid ""
-"This assistant is designed to help you quickly and easily add a new boot "
-"image to your system."
-msgstr ""
-"Tento sprievodca vám pomôže jednoducho a rýchlo pridať zavádzací obraz pre "
-"váš systém."
-
-#: ../interfaces/boot.glade.in.h:35
-msgid "Video modes (only frame buffer)"
-msgstr "Video režimy (iba pre framebuffer)"
-
-#: ../interfaces/boot.glade.in.h:36
-msgid "_Add..."
-msgstr "_Pridať..."
-
-#: ../interfaces/boot.glade.in.h:37
-msgid "_Device:"
-msgstr "_Zariadenie:"
-
-#: ../interfaces/boot.glade.in.h:38
-msgid "_Edit"
-msgstr "_Upraviť"
-
-#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:44
-msgid "_Initrd image path:"
-msgstr "Cesta k počiatočnému _ramdisku (initrd):"
-
-#: ../interfaces/boot.glade.in.h:40
-msgid "_Kernel image path:"
-msgstr "_Cesta k obrazu kernelu:"
-
-#: ../interfaces/boot.glade.in.h:41
-msgid "_Name:"
-msgstr "_Meno:"
-
-#: ../interfaces/boot.glade.in.h:42
-msgid "_Operating system:"
-msgstr "_Operačný systém:"
-
-#: ../interfaces/boot.glade.in.h:43
-msgid "_Parameters:"
-msgstr "_Parametre:"
-
-#: ../interfaces/boot.glade.in.h:44
-msgid "_Root file system device:"
-msgstr "Zariadenie _koreňového systému súborov:"
-
-#: ../interfaces/common.glade.in.h:1
+#: ../interfaces/common.ui.h:1
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"larger\">Zadajte heslo používateľa root</span>"
 
-#: ../interfaces/common.glade.in.h:2
-msgid ""
-"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
-"supported by this tool</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Platforma, na ktorej pracujete, nie je "
-"týmto nástrojom podporovaná</span>"
-
-#: ../interfaces/common.glade.in.h:3
+#: ../interfaces/common.ui.h:2
 msgid "Enter Password"
 msgstr "Zadajte heslo"
 
-#: ../interfaces/common.glade.in.h:4
-msgid ""
-"If you know for sure that it works like one of the platforms listed below, "
-"you can select that and continue. Note, however, that this might damage the "
-"system configuration or downright cripple your computer."
-msgstr ""
-"Ak máte istotu, že funguje rovnako ako niektorá zo zoznamu, môžete to skúsiť "
-"a pokračovať. Uvedomte si však, že môžete poškodiť konfiguráciu systému "
-"alebo znefunkčniť počítač."
-
-#: ../interfaces/common.glade.in.h:5
-msgid "Remote administration"
-msgstr "Vzdialená správa systému"
-
-#: ../interfaces/common.glade.in.h:6
-msgid "Run _Without Password"
-msgstr "_Spustiť bez hesla"
-
-#: ../interfaces/common.glade.in.h:7
-msgid "Unsupported Platform"
-msgstr "Nepodporovaná platforma"
-
-#: ../interfaces/common.glade.in.h:8
-msgid "Use this window to select the computer you wish to configure"
-msgstr "Použite toto okno pre výber počítača, ktorý chcete konfigurovať"
-
-#: ../interfaces/common.glade.in.h:9
+#: ../interfaces/common.ui.h:3
 msgid ""
 "You need administrator privileges to use this tool. Enter a password to "
 "modify\n"
@@ -322,973 +47,688 @@ msgstr ""
 "heslo pre zmenu\n"
 "konfigurácie vášho systému."
 
-#: ../interfaces/common.glade.in.h:11
+#: ../interfaces/common.ui.h:5
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: ../interfaces/network.glade.in.h:1
-msgid ""
-"/dev/modem\n"
-"/dev/ttyS0\n"
-"/dev/ttyS1\n"
-"/dev/ttyS2\n"
-"/dev/ttyS3"
-msgstr ""
-"/dev/modem\n"
-"/dev/ttyS0\n"
-"/dev/ttyS1\n"
-"/dev/ttyS2\n"
-"/dev/ttyS3"
-
-#: ../interfaces/network.glade.in.h:6
+#: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
 msgstr "<b>Údaje o účte</b>"
 
-#: ../interfaces/network.glade.in.h:7
-msgid "<b>Connection settings</b>"
-msgstr "<b>Nastavenie pripojenia</b>"
+#: ../interfaces/network.ui.h:2
+msgid "<b>Connection Settings</b>"
+msgstr "<b>Nastavenia pripojenia</b>"
 
-#: ../interfaces/network.glade.in.h:8
-msgid "<b>Connection</b>"
-msgstr "<b>Pripojenie</b>"
-
-#: ../interfaces/network.glade.in.h:9
+#: ../interfaces/network.ui.h:3
 msgid "<b>DNS Servers</b>"
 msgstr "<b>DNS servery</b>"
 
-#: ../interfaces/network.glade.in.h:10
+#: ../interfaces/network.ui.h:4
 msgid "<b>Host Settings</b>"
-msgstr "<b>Nastavenie hostiteľa</b>"
+msgstr "<b>Nastavenia hostiteľa</b>"
 
-#: ../interfaces/network.glade.in.h:11
+#: ../interfaces/network.ui.h:5
 msgid "<b>Internet service provider data</b>"
 msgstr "<b>Údaje o poskytovateľovi Internetu</b>"
 
-#: ../interfaces/network.glade.in.h:12
-msgid "<b>Modem settings</b>"
-msgstr "<b>Nastavenie modemu</b>"
+#: ../interfaces/network.ui.h:6
+msgid "<b>Modem Settings</b>"
+msgstr "<b>Nastavenia modemu</b>"
 
-#: ../interfaces/network.glade.in.h:13
+#: ../interfaces/network.ui.h:7
 msgid "<b>Search Domains</b>"
 msgstr "<b>Prehľadávané domény</b>"
 
-#: ../interfaces/network.glade.in.h:14
-msgid "<b>Wireless settings</b>"
-msgstr "<b>Nastavenie bezdrôtovej siete</b>"
+#: ../interfaces/network.ui.h:8
+msgid "<b>Wireless Settings</b>"
+msgstr "<b>Nastavenia bezdrôtovej siete</b>"
 
-#: ../interfaces/network.glade.in.h:15
+#: ../interfaces/network.ui.h:9
+msgid "Access point name:"
+msgstr ""
+
+#: ../interfaces/network.ui.h:10
 msgid "Aliases:"
 msgstr "Aliasy:"
 
-#: ../interfaces/network.glade.in.h:16
-msgid "C_onfiguration:"
-msgstr "K_onfigurácia:"
+#: ../interfaces/network.ui.h:11
+msgid "Con_figuration:"
+msgstr "Kon_figurácia:"
 
-#: ../interfaces/network.glade.in.h:17
+#: ../interfaces/network.ui.h:12
+msgid "Connection type:"
+msgstr "Typ pripojenia:"
+
+#: ../interfaces/network.ui.h:13
 msgid "Connections"
 msgstr "Spojenia"
 
-#: ../interfaces/network.glade.in.h:18
+#: ../interfaces/network.ui.h:14
 msgid "DNS"
 msgstr "DNS"
 
-#: ../interfaces/network.glade.in.h:19
+#: ../interfaces/network.ui.h:15
 msgid "D_omain name:"
 msgstr "D_oménové meno:"
 
-#: ../interfaces/network.glade.in.h:20
-msgid "Default _gateway device:"
-msgstr "Zariadenie štandardnej _brány:"
+#: ../interfaces/network.ui.h:16
+msgid "Delete current location"
+msgstr "Vymazať aktuálne umiestnenie"
 
-#: ../interfaces/network.glade.in.h:21
-msgid "Device:"
-msgstr "Zariadenie:"
+#: ../interfaces/network.ui.h:17
+msgid "E_nable roaming mode"
+msgstr ""
 
-#: ../interfaces/network.glade.in.h:22
+#: ../interfaces/network.ui.h:18
 msgid "E_nable this connection"
 msgstr "A_ktivovať toto pripojenie"
 
-#: ../interfaces/network.glade.in.h:23 ../interfaces/users.glade.in.h:20
+#: ../interfaces/network.ui.h:19
+#, fuzzy
+msgid "Ethernet interface:"
+msgstr "rozhranie"
+
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:19
 msgid "General"
 msgstr "Všeobecné"
 
-#: ../interfaces/network.glade.in.h:24
-msgid "Host alias settings"
-msgstr "Nastavenie aliasov hostiteľa"
+#: ../interfaces/network.ui.h:21
+msgid "Host Alias Properties"
+msgstr "Predvoľby aliasov hostiteľa"
 
-#: ../interfaces/network.glade.in.h:25
+#: ../interfaces/network.ui.h:22
 msgid "Hosts"
 msgstr "Hostitelia"
 
-#: ../interfaces/network.glade.in.h:26 ../interfaces/shares.glade.in.h:15
+#: ../interfaces/network.ui.h:23 ../interfaces/shares.ui.h:14
 msgid "IP address:"
 msgstr "IP adresa:"
 
-#: ../interfaces/network.glade.in.h:27
+#: ../interfaces/network.ui.h:24
 msgid "Interface properties"
 msgstr "Vlastnosti rozhrania"
 
-#: ../interfaces/network.glade.in.h:28
-msgid "Key _type:"
-msgstr "_Typ kľúča:"
-
-#: ../interfaces/network.glade.in.h:29
-msgid "Location name:"
-msgstr "Názov umiestnenia:"
-
-#: ../interfaces/network.glade.in.h:30
+#: ../interfaces/network.ui.h:25
 msgid "Location:"
 msgstr "Umiestnenie:"
 
-#: ../interfaces/network.glade.in.h:31
+#: ../interfaces/network.ui.h:26
 msgid "Modem"
 msgstr "Modem"
 
-#: ../interfaces/network.glade.in.h:32
+#: ../interfaces/network.ui.h:27
+msgid "Network _password:"
+msgstr "_Heslo siete:"
+
+#: ../interfaces/network.ui.h:28
 msgid "Network name (_ESSID):"
 msgstr "Meno siete (_ESSID):"
 
-#: ../interfaces/network.glade.in.h:33
-msgid ""
-"Off\n"
-"Low\n"
-"Medium\n"
-"Loud"
-msgstr ""
-"Vypnuté\n"
-"Nízka\n"
-"Stredná\n"
-"Hlasná"
-
-#: ../interfaces/network.glade.in.h:37
+#: ../interfaces/network.ui.h:29
 msgid "Options"
 msgstr "Nastavenia"
 
-#: ../interfaces/network.glade.in.h:38
+#: ../interfaces/network.ui.h:30
 msgid "P_assword"
 msgstr "_Heslo"
 
-#: ../interfaces/network.glade.in.h:39
-msgid ""
-"Plain (ASCII)\n"
-"Hexadecimal"
+#: ../interfaces/network.ui.h:31
+#, fuzzy
+msgid "Password _type:"
+msgstr "_Heslo:"
+
+#: ../interfaces/network.ui.h:32
+msgid "Save current network configuration as a location"
 msgstr ""
-"Text (ASCII)\n"
-"Hexadecimálne"
 
-#: ../interfaces/network.glade.in.h:41
-msgid "Select location name"
-msgstr "Vyberte meno umiestnenia"
-
-#: ../interfaces/network.glade.in.h:42
-msgid ""
-"Static IP address\n"
-"DHCP"
-msgstr ""
-"Statická IP adresa\n"
-"DHCP"
-
-#: ../interfaces/network.glade.in.h:44
-msgid ""
-"Tones\n"
-"Pulses"
-msgstr ""
-"Tóny\n"
-"Pulzy"
-
-#: ../interfaces/network.glade.in.h:46
+#: ../interfaces/network.ui.h:33
 msgid "Use the Internet service provider nameservers"
 msgstr "Použiť DNS servery poskytovateľa internetu"
 
-#: ../interfaces/network.glade.in.h:47
-msgid "WEP _key:"
-msgstr "WEB _kľúč:"
-
-#: ../interfaces/network.glade.in.h:48 ../src/network/ifaces-list.c:34
-msgid "_Activate"
-msgstr "_Aktivovať"
-
-#: ../interfaces/network.glade.in.h:49
+#: ../interfaces/network.ui.h:34
 msgid "_Autodetect"
 msgstr "_Automaticky nájsť"
 
-#: ../interfaces/network.glade.in.h:50 ../src/network/ifaces-list.c:35
-msgid "_Deactivate"
-msgstr "_Deaktivovať"
-
-#: ../interfaces/network.glade.in.h:51
+#: ../interfaces/network.ui.h:35
 msgid "_Dial prefix:"
 msgstr "Predvoľba _vytáčania:"
 
-#: ../interfaces/network.glade.in.h:52
+#: ../interfaces/network.ui.h:36
 msgid "_Dial type:"
 msgstr "Typ _vytáčania:"
 
-#: ../interfaces/network.glade.in.h:53
+#: ../interfaces/network.ui.h:37
 msgid "_Gateway address:"
 msgstr "Adresa _brány:"
 
-#: ../interfaces/network.glade.in.h:54
-msgid "_Hostname:"
-msgstr "Meno _hostiteľa:"
+#: ../interfaces/network.ui.h:38
+msgid "_Host name:"
+msgstr "Názov _hostiteľa:"
 
-#: ../interfaces/network.glade.in.h:55
+#: ../interfaces/network.ui.h:39
 msgid "_IP address:"
 msgstr "_IP adresa:"
 
-#: ../interfaces/network.glade.in.h:56
+#: ../interfaces/network.ui.h:40
 msgid "_Local IP:"
 msgstr "_Lokálne IP:"
 
-#: ../interfaces/network.glade.in.h:57
+#: ../interfaces/network.ui.h:41
 msgid "_Modem port:"
 msgstr "_Port modemu:"
 
-#: ../interfaces/network.glade.in.h:58
+#: ../interfaces/network.ui.h:42
 msgid "_Phone number:"
 msgstr "_Telefónne číslo:"
 
-#: ../interfaces/network.glade.in.h:59
+#: ../interfaces/network.ui.h:43
 msgid "_Remote IP:"
 msgstr "_Vzdialené IP:"
 
-#: ../interfaces/network.glade.in.h:60
+#: ../interfaces/network.ui.h:44
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Skúsiť znovu, ak spojenie spadne alebo sa nespustí"
 
-#: ../interfaces/network.glade.in.h:61
+#: ../interfaces/network.ui.h:45
 msgid "_Set modem as default route to internet"
 msgstr "_Nastaviť modem ako štandardné smerovanie na internet"
 
-#: ../interfaces/network.glade.in.h:62
+#: ../interfaces/network.ui.h:46
 msgid "_Subnet mask:"
 msgstr "Sieťová _maska:"
 
-#: ../interfaces/network.glade.in.h:63 ../interfaces/users.glade.in.h:60
+#: ../interfaces/network.ui.h:47 ../interfaces/users.ui.h:55
 msgid "_Username:"
 msgstr "Meno po_užívateľa:"
 
-#: ../interfaces/network.glade.in.h:64
+#: ../interfaces/network.ui.h:48
 msgid "_Volume:"
 msgstr "_Hlasitosť:"
 
-#: ../interfaces/services.glade.in.h:1
+#: ../interfaces/services.ui.h:1
 msgid "Advanced settings:"
-msgstr "Rozšírené nastavenie:"
+msgstr "Rozšírené nastavenia:"
 
-#: ../interfaces/services.glade.in.h:2
+#: ../interfaces/services.ui.h:2
 msgid "Select the services that you wish to activate:"
 msgstr "Vyberte služby, ktoré chcete aktivovať:"
 
-#: ../interfaces/shares.glade.in.h:1
-msgid "<b>Allowed hosts</b>"
+#: ../interfaces/shares.ui.h:1
+msgid "<b>Allowed Hosts</b>"
 msgstr "<b>Povolení hostitelia</b>"
 
-#: ../interfaces/shares.glade.in.h:2
-msgid "<b>Hosts settings</b>"
-msgstr "<b>Nastavenie hostiteľa</b>"
+#: ../interfaces/shares.ui.h:2
+msgid "<b>Hosts Settings</b>"
+msgstr "<b>Nastavenia hostiteľa</b>"
 
-#: ../interfaces/shares.glade.in.h:3
-msgid "<b>Share properties</b>"
+#: ../interfaces/shares.ui.h:3
+msgid "<b>Share Properties</b>"
 msgstr "<b>Vlastnosti zdieľania</b>"
 
-#: ../interfaces/shares.glade.in.h:4
-msgid "<b>Shared folder</b>"
+#: ../interfaces/shares.ui.h:4
+msgid "<b>Shared Folder</b>"
 msgstr "<b>Zdieľaný priečinok</b>"
 
-#: ../interfaces/shares.glade.in.h:5
-msgid "<b>WINS server</b>"
-msgstr "<b>Server WINS</b>"
+#: ../interfaces/shares.ui.h:5
+msgid "<b>Windows sharing</b>"
+msgstr "<b>Zdieľanie Windows</b>"
 
-#: ../interfaces/shares.glade.in.h:6
-msgid "<b>Windows sharing Settings</b>"
-msgstr "<b>Nastavenie zdieľania Windows</b>"
+#: ../interfaces/shares.ui.h:6
+msgid "<span size=\"larger\" weight=\"bold\">Enter password for user:</span>"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Zadajte heslo pre používateľa:</span>"
 
-#: ../interfaces/shares.glade.in.h:7
+#: ../interfaces/shares.ui.h:7
 msgid "Add allowed hosts"
 msgstr "Pridať povolených hostiteľov"
 
-#: ../interfaces/shares.glade.in.h:8
-msgid "Allow _browsing folder"
-msgstr "Povoliť _prezeranie priečinkov"
-
-#: ../interfaces/shares.glade.in.h:9
+#: ../interfaces/shares.ui.h:8
 msgid "Allowed hosts:"
 msgstr "Povolení hostitelia:"
 
-#: ../interfaces/shares.glade.in.h:10
+#: ../interfaces/shares.ui.h:9
 msgid "Comment:"
 msgstr "Komentár:"
 
-#: ../interfaces/shares.glade.in.h:11
-msgid "Do not use WINS server"
-msgstr "Nepoužívat WINS server"
+#: ../interfaces/shares.ui.h:10
+msgid "Domain / _Workgroup:"
+msgstr "Doména / _pracovná skupina:"
 
-#: ../interfaces/shares.glade.in.h:12
-msgid "Domain / _Workgroup"
-msgstr "Doména / _skupina"
+#: ../interfaces/shares.ui.h:11
+msgid "Enter password for user"
+msgstr "Zadajte heslo pre používateľa"
 
-#: ../interfaces/shares.glade.in.h:13
-msgid "General Windows sharing settings"
-msgstr "Všeobecné nastavenia zdieľania Windows"
+#: ../interfaces/shares.ui.h:12
+msgid "General Properties"
+msgstr "Všeobecné vlastnosti"
 
-#: ../interfaces/shares.glade.in.h:14
+#: ../interfaces/shares.ui.h:13
 msgid "Host name:"
 msgstr "Meno hostiteľa:"
 
-#: ../interfaces/shares.glade.in.h:16
+#: ../interfaces/shares.ui.h:15
 msgid "Name:"
 msgstr "Meno:"
 
-#: ../interfaces/shares.glade.in.h:17
+#: ../interfaces/shares.ui.h:16
 msgid "Netmask:"
 msgstr "Sieťová maska:"
 
-#: ../interfaces/shares.glade.in.h:18
+#: ../interfaces/shares.ui.h:17
 msgid "Network:"
 msgstr "Sieť:"
 
-#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:57
+#: ../interfaces/shares.ui.h:18 ../src/shares/nfs-acl-table.c:56
 msgid "Read only"
 msgstr "Len na čítanie"
 
-#: ../interfaces/shares.glade.in.h:20
-msgid "Share folder"
-msgstr "Zdieľať priečinok"
+#: ../interfaces/shares.ui.h:19
+msgid "Share through:"
+msgstr "Zdieľať cez:"
 
-#: ../interfaces/shares.glade.in.h:21
-msgid "Share with:"
-msgstr "Zdieľať s:"
+#: ../interfaces/shares.ui.h:20 ../src/shares/shares.desktop.in.in.h:2
+#: ../src/shares/shares-tool.c:239
+msgid "Shared Folders"
+msgstr "Zdieľané priečinky"
 
-#: ../interfaces/shares.glade.in.h:22
-msgid "This computer is a WINS server"
+#: ../interfaces/shares.ui.h:21
+#, fuzzy
+msgid "This computer is a _WINS server"
 msgstr "Tento počítač je WINS server"
 
-#: ../interfaces/shares.glade.in.h:23
-msgid "Use WINS Server"
-msgstr "Použiť server WINS"
-
-#: ../interfaces/shares.glade.in.h:24
-msgid "Windows sharing settings"
-msgstr "Nastavenie zdieľania Windows"
-
-#: ../interfaces/shares.glade.in.h:25
-msgid "_Add host"
-msgstr "_Pridať hostiteľa"
-
-#: ../interfaces/shares.glade.in.h:26
-msgid "_Host description:"
-msgstr "_Popis hostiteľa:"
-
-#: ../interfaces/shares.glade.in.h:27
-msgid "_Path:"
-msgstr "_Cesta:"
-
-#: ../interfaces/shares.glade.in.h:28
-msgid "_Read only"
-msgstr "_Len na čítanie"
-
-#: ../interfaces/time.glade.in.h:1
-msgid "(unconfigured)"
-msgstr "(nenastavená)"
-
-#: ../interfaces/time.glade.in.h:2
-msgid ":"
-msgstr ":"
-
-#: ../interfaces/time.glade.in.h:3
-msgid "<b>Selection</b>"
-msgstr "<b>Výber</b>"
-
-#: ../interfaces/time.glade.in.h:4
-msgid "<b>Time zone</b>"
-msgstr "<b>Časová zóna</b>"
-
-#: ../interfaces/time.glade.in.h:5
-msgid "Add NTP Server"
-msgstr "Pridať NTP server"
-
-#: ../interfaces/time.glade.in.h:6
-msgid "NTP server"
-msgstr "NTP server"
-
-#: ../interfaces/time.glade.in.h:7
-msgid "S_ynchronize clock with Internet servers:"
-msgstr "Udržiavať _hodiny synchronizované s internetovými servrami:"
-
-#: ../interfaces/time.glade.in.h:8
-msgid "Se_lect Servers..."
-msgstr "Vybrať _servery..."
-
-#: ../interfaces/time.glade.in.h:9
-msgid "Time servers"
-msgstr "Časové servery"
-
-#: ../interfaces/time.glade.in.h:10
-msgid "Time zone"
-msgstr "Časová zóna"
-
-#: ../interfaces/time.glade.in.h:11
-msgid "Time zone:"
-msgstr "Časová zóna:"
-
-#: ../interfaces/time.glade.in.h:12
-msgid "_Date:"
-msgstr "_Dátum:"
-
-#: ../interfaces/time.glade.in.h:13
-msgid "_Select Time Zone..."
-msgstr "Vybrať časovú _zónu..."
-
-#: ../interfaces/time.glade.in.h:14
-msgid "_Time:"
-msgstr "Ča_s:"
-
-#: ../interfaces/users.glade.in.h:1
-msgid "<span weight=\"bold\">Advanced Settings</span>"
-msgstr "<span weight=\"bold\">Pokročilé nastavenia</span>"
-
-#: ../interfaces/users.glade.in.h:2
-msgid "<span weight=\"bold\">Automatic UID/GID</span>"
-msgstr "<span weight=\"bold\">Automatické UID/GID</span>"
-
-#: ../interfaces/users.glade.in.h:4
-msgid "<span weight=\"bold\">Contact Information</span>"
-msgstr "<span weight=\"bold\">Kontaktná informácia</span>"
-
-#: ../interfaces/users.glade.in.h:5
-msgid "<span weight=\"bold\">Group Members</span>"
-msgstr "<span weight=\"bold\">Členovia skupiny</span>"
-
-#: ../interfaces/users.glade.in.h:6
-msgid "<span weight=\"bold\">Optional Settings</span>"
-msgstr "<span weight=\"bold\">Nepovinné nastavenia</span>"
-
-#: ../interfaces/users.glade.in.h:7
-msgid "<span weight=\"bold\">Password Settings</span>"
-msgstr "<span weight=\"bold\">Nastavenia hesla</span>"
-
-#: ../interfaces/users.glade.in.h:8
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Heslo</span>"
-
-#: ../interfaces/users.glade.in.h:9
-msgid "<span weight=\"bold\">Profile Settings</span>"
-msgstr "<span weight=\"bold\">Nastavenie profilu</span>"
-
-#: ../interfaces/users.glade.in.h:10
-msgid "<span weight=\"bold\">System Defaults</span>"
-msgstr "<span weight=\"bold\">Štandardné nastavenia systému</span>"
-
-#: ../interfaces/users.glade.in.h:11
-msgid "<span weight=\"bold\">User Profile</span>"
-msgstr "<span weight=\"bold\">Profil používateľov</span>"
-
-#: ../interfaces/users.glade.in.h:12
-msgid "Account"
-msgstr "Účet"
-
-#: ../interfaces/users.glade.in.h:13
-msgid "Advanced"
-msgstr "Pokročilé"
-
-#: ../interfaces/users.glade.in.h:14
-msgid "Assign a random password by default"
-msgstr "Štandardne priradiť náhodné heslo"
-
-#: ../interfaces/users.glade.in.h:15
-msgid "Check password _quality"
-msgstr "Skontrolovať k_valitu hesla"
-
-#: ../interfaces/users.glade.in.h:16
-msgid "Con_firmation:"
-msgstr "_Potvrdenie:"
-
-#: ../interfaces/users.glade.in.h:17
-msgid "Days between warning and password expiration:"
-msgstr "Dní medzi varovaním a vypršaním hesla: "
-
-#: ../interfaces/users.glade.in.h:18
-msgid "Default _group:"
-msgstr "Štandardná _skupina:"
-
-#: ../interfaces/users.glade.in.h:19
-msgid "Default _shell:"
-msgstr "Štandardný s_hell:"
-
-#: ../interfaces/users.glade.in.h:21
-msgid "Generate _random password"
-msgstr "Generovať _náhodné heslo"
-
-#: ../interfaces/users.glade.in.h:22
-msgid "Group _ID:"
-msgstr "ID skupiny:"
-
-#: ../interfaces/users.glade.in.h:23
-msgid "Group _members:"
-msgstr "Č_lenovia skupiny:"
-
-#: ../interfaces/users.glade.in.h:24
-msgid "Group _name:"
-msgstr "_Meno skupiny:"
-
-#: ../interfaces/users.glade.in.h:25
-msgid "Group properties"
-msgstr "Vlastnosti skupiny"
-
-#: ../interfaces/users.glade.in.h:26
-msgid "Groups"
-msgstr "Skupiny"
-
-#: ../interfaces/users.glade.in.h:27
-msgid "Ma_ximum days a password may be used:"
-msgstr "Heslo môže byť použité ma_x. dní:"
-
-#: ../interfaces/users.glade.in.h:28
-msgid "Maximum UID:"
-msgstr "Maximálne UID:"
-
-#: ../interfaces/users.glade.in.h:29
-msgid "Mi_nimum days between password changes:"
-msgstr "Mini_málna doba medzi zmenami hesla:"
-
-#: ../interfaces/users.glade.in.h:30
-msgid "Minimum GID:"
-msgstr "Minimálne GID:"
-
-#: ../interfaces/users.glade.in.h:31
-msgid "Minimum UID:"
-msgstr "Minimálne UID:"
-
-#: ../interfaces/users.glade.in.h:32
-msgid "Minimum days allowed between password changes:"
-msgstr "Minimálny počet dní medzi zmenami hesla:"
-
-#: ../interfaces/users.glade.in.h:33
-msgid "Number of days that a password may be used:"
-msgstr "Počet dní platnosti hesla:"
-
-#: ../interfaces/users.glade.in.h:34
-msgid "O_ffice location:"
-msgstr "Adresa _kancelárie:"
-
-#: ../interfaces/users.glade.in.h:35
-msgid "Password set to: "
-msgstr "Heslo nastavené na: "
-
-#: ../interfaces/users.glade.in.h:36
-msgid "Privileges"
-msgstr "Práva"
-
-#: ../interfaces/users.glade.in.h:37
-msgid "Profile _name:"
-msgstr "Meno _profilu:"
-
-#: ../interfaces/users.glade.in.h:38
-msgid "Set password b_y hand"
-msgstr "Nastaviť heslo _ručne"
-
-#: ../interfaces/users.glade.in.h:39
-msgid "Show a_ll users and groups"
-msgstr "_Zobraziť všetkých používateľov a skupiny"
-
-#: ../interfaces/users.glade.in.h:40
-msgid "User _ID:"
-msgstr "Používateľské _ID:"
-
-#: ../interfaces/users.glade.in.h:41
-msgid "User _password:"
-msgstr "_Heslo používateľa:"
-
-#: ../interfaces/users.glade.in.h:42
-msgid "User privileges"
-msgstr "Práva používateľov"
-
-#: ../interfaces/users.glade.in.h:43
-msgid "User profiles"
-msgstr "Profily používateľov"
-
-#: ../interfaces/users.glade.in.h:44
+#: ../interfaces/shares.ui.h:22
 msgid "Users"
 msgstr "Používatelia"
 
-#: ../interfaces/users.glade.in.h:45
-msgid "_Add Group..."
-msgstr "_Pridať skupinu..."
+#: ../interfaces/shares.ui.h:23
+msgid "WINS _server:"
+msgstr "WINS _server:"
 
-#: ../interfaces/users.glade.in.h:46
-msgid "_Add Profile..."
-msgstr "_Pridať profil..."
+#: ../interfaces/shares.ui.h:24
+msgid "_Path:"
+msgstr "_Cesta:"
 
-#: ../interfaces/users.glade.in.h:47
-msgid "_Add User..."
-msgstr "_Pridať používateľa..."
+#: ../interfaces/shares.ui.h:25
+msgid "_Read only"
+msgstr "_Len na čítanie"
 
-#: ../interfaces/users.glade.in.h:48
-msgid "_All users:"
-msgstr "_Všetci používatelia:"
+#: ../interfaces/time.ui.h:1
+msgid "<b>Selection</b>"
+msgstr "<b>Výber</b>"
 
-#: ../interfaces/users.glade.in.h:49
+#: ../interfaces/time.ui.h:2
+msgid "<b>Time Zone</b>"
+msgstr "<b>Časová zóna</b>"
+
+#: ../interfaces/time.ui.h:3
+msgid "Add NTP Server"
+msgstr "Pridať NTP server"
+
+#: ../interfaces/time.ui.h:4
+msgid "NTP server"
+msgstr "NTP server"
+
+#: ../interfaces/time.ui.h:5
+msgid "Se_lect Servers"
+msgstr "Vybrať _servery"
+
+#: ../interfaces/time.ui.h:6
+msgid "Synchronize now"
+msgstr "Synchronizovať teraz"
+
+#: ../interfaces/time.ui.h:7
+msgid "Time servers"
+msgstr "Časové servery"
+
+#: ../interfaces/time.ui.h:8
+msgid "Time servers:"
+msgstr "Časové servery:"
+
+#: ../interfaces/time.ui.h:9
+msgid "Time zone"
+msgstr "Časová zóna"
+
+#: ../interfaces/time.ui.h:10
+msgid "Time zone:"
+msgstr "Časová zóna:"
+
+#: ../interfaces/time.ui.h:11
+#, fuzzy
+msgid "Unconfigured"
+msgstr "(nenastavená)"
+
+#: ../interfaces/time.ui.h:12
+msgid "_Configuration:"
+msgstr "_Nastavenie:"
+
+#: ../interfaces/time.ui.h:13
+msgid "_Date:"
+msgstr "_Dátum:"
+
+#: ../interfaces/time.ui.h:14
+msgid "_Time:"
+msgstr "Ča_s:"
+
+#: ../interfaces/users.ui.h:1
+msgid "<span weight=\"bold\">Advanced Settings</span>"
+msgstr "<span weight=\"bold\">Pokročilé nastavenia</span>"
+
+#: ../interfaces/users.ui.h:2
+msgid "<span weight=\"bold\">Automatic UID/GID</span>"
+msgstr "<span weight=\"bold\">Automatické UID/GID</span>"
+
+#: ../interfaces/users.ui.h:3
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span weight=\"bold\">Základné nastavenia</span>"
+
+#: ../interfaces/users.ui.h:4
+msgid "<span weight=\"bold\">Contact Information</span>"
+msgstr "<span weight=\"bold\">Kontaktné informácie</span>"
+
+#: ../interfaces/users.ui.h:5
+msgid "<span weight=\"bold\">Group Members</span>"
+msgstr "<span weight=\"bold\">Členovia skupiny</span>"
+
+#: ../interfaces/users.ui.h:6
+msgid "<span weight=\"bold\">Optional Settings</span>"
+msgstr "<span weight=\"bold\">Nepovinné nastavenia</span>"
+
+#: ../interfaces/users.ui.h:7
+msgid "<span weight=\"bold\">Password Settings</span>"
+msgstr "<span weight=\"bold\">Nastavenia hesla</span>"
+
+#: ../interfaces/users.ui.h:8
+msgid "<span weight=\"bold\">Password</span>"
+msgstr "<span weight=\"bold\">Heslo</span>"
+
+#: ../interfaces/users.ui.h:9
+msgid "<span weight=\"bold\">Profile Settings</span>"
+msgstr "<span weight=\"bold\">Nastavenie profilu</span>"
+
+#: ../interfaces/users.ui.h:10
+msgid "<span weight=\"bold\">System Defaults</span>"
+msgstr "<span weight=\"bold\">Štandardné nastavenia systému</span>"
+
+#: ../interfaces/users.ui.h:11
+msgid "Account"
+msgstr "Účet"
+
+#: ../interfaces/users.ui.h:12
+msgid "Advanced"
+msgstr "Pokročilé"
+
+#: ../interfaces/users.ui.h:13
+msgid "Assign a random password by default"
+msgstr "Štandardne priradiť náhodné heslo"
+
+#: ../interfaces/users.ui.h:14
+msgid "Check password _quality"
+msgstr "Skontrolovať k_valitu hesla"
+
+#: ../interfaces/users.ui.h:15
+msgid "Con_firmation:"
+msgstr "_Potvrdenie:"
+
+#: ../interfaces/users.ui.h:16
+msgid "Days between warning and password expiration:"
+msgstr "Dní medzi varovaním a vypršaním hesla: "
+
+#: ../interfaces/users.ui.h:17
+msgid "Default _group:"
+msgstr "Štandardná _skupina:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Default _shell:"
+msgstr "Štandardný s_hell:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Generate _random password"
+msgstr "Generovať _náhodné heslo"
+
+#: ../interfaces/users.ui.h:21
+msgid "Group _ID:"
+msgstr "_ID skupiny:"
+
+#: ../interfaces/users.ui.h:22
+msgid "Group _name:"
+msgstr "_Názov skupiny:"
+
+#: ../interfaces/users.ui.h:23
+msgid "Group properties"
+msgstr "Vlastnosti skupiny"
+
+#: ../interfaces/users.ui.h:24
+msgid "Groups settings"
+msgstr "Nastavenia skupín"
+
+#: ../interfaces/users.ui.h:25
+msgid "Ma_ximum days a password may be used:"
+msgstr "Heslo môže byť použité ma_x. dní:"
+
+#: ../interfaces/users.ui.h:26
+msgid "Maximum UID:"
+msgstr "Maximálne UID:"
+
+#: ../interfaces/users.ui.h:27
+msgid "Mi_nimum days between password changes:"
+msgstr "Mini_málna doba medzi zmenami hesla:"
+
+#: ../interfaces/users.ui.h:28
+msgid "Minimum GID:"
+msgstr "Minimálne GID:"
+
+#: ../interfaces/users.ui.h:29
+msgid "Minimum UID:"
+msgstr "Minimálne UID:"
+
+#: ../interfaces/users.ui.h:30
+msgid "Minimum days allowed between password changes:"
+msgstr "Minimálny počet dní medzi zmenami hesla:"
+
+#: ../interfaces/users.ui.h:31
+msgid "Number of days that a password may be used:"
+msgstr "Počet dní platnosti hesla:"
+
+#: ../interfaces/users.ui.h:32
+msgid "O_ffice location:"
+msgstr "Adresa _kancelárie:"
+
+#: ../interfaces/users.ui.h:33
+msgid "Password set to: "
+msgstr "Heslo nastavené na: "
+
+#: ../interfaces/users.ui.h:34
+msgid "Privileges"
+msgstr "Práva"
+
+#: ../interfaces/users.ui.h:35
+msgid "Profile _name:"
+msgstr "Meno _profilu:"
+
+#: ../interfaces/users.ui.h:36
+msgid "Set password b_y hand"
+msgstr "Nastaviť heslo _ručne"
+
+#: ../interfaces/users.ui.h:37
+msgid "User ID:"
+msgstr "ID používateľa:"
+
+#: ../interfaces/users.ui.h:38
+msgid "User Privileges"
+msgstr "Používateľské práva"
+
+#: ../interfaces/users.ui.h:39
+msgid "User _password:"
+msgstr "_Heslo používateľa:"
+
+#: ../interfaces/users.ui.h:40
+msgid "User profiles"
+msgstr "Profily používateľov"
+
+#: ../interfaces/users.ui.h:41
+msgid "_Add Group"
+msgstr "Prid_ať skupinu"
+
+#: ../interfaces/users.ui.h:42
+msgid "_Add Profile"
+msgstr "Prid_ať profil"
+
+#: ../interfaces/users.ui.h:43
+msgid "_Add User"
+msgstr "Prid_ať používateľa"
+
+#: ../interfaces/users.ui.h:44
 msgid "_Comments"
 msgstr "_Komentáre"
 
-#: ../interfaces/users.glade.in.h:50
+#: ../interfaces/users.ui.h:45
 msgid "_Days between warning and password expiration:"
 msgstr "_Dní medzi varovaním a vypršaním hesla: "
 
-#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:54
-#: ../src/network/address-list.c:72 ../src/network/hosts.c:39
-#: ../src/shares/table.c:42 ../src/users/table.c:50
+#: ../interfaces/users.ui.h:46 ../src/network/address-list.c:77
+#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "_Odstrániť"
 
-#: ../interfaces/users.glade.in.h:52
-msgid "_Edit User Profiles..."
-msgstr "_Upraviť profily používateľov..."
-
-#: ../interfaces/users.glade.in.h:53
+#: ../interfaces/users.ui.h:47
 msgid "_Generate"
 msgstr "Vy_generovať"
 
-#: ../interfaces/users.glade.in.h:54
+#: ../interfaces/users.ui.h:48
 msgid "_Home directory:"
 msgstr "_Domovský priečinok:"
 
-#: ../interfaces/users.glade.in.h:55
+#: ../interfaces/users.ui.h:49
 msgid "_Home phone:"
 msgstr "Telefón _domov:"
 
-#: ../interfaces/users.glade.in.h:56
+#: ../interfaces/users.ui.h:50
 msgid "_Main group:"
 msgstr "_Hlavná skupina:"
 
-#: ../interfaces/users.glade.in.h:57
+#: ../interfaces/users.ui.h:51
+msgid "_Manage Groups"
+msgstr "_Spravovať skupiny"
+
+#: ../interfaces/users.ui.h:52
 msgid "_Profile:"
 msgstr "_Profil:"
 
-#: ../interfaces/users.glade.in.h:58
+#: ../interfaces/users.ui.h:53
 msgid "_Real name:"
 msgstr "_Skutočné meno:"
 
-#: ../interfaces/users.glade.in.h:59
+#: ../interfaces/users.ui.h:54
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: ../interfaces/users.glade.in.h:61
+#: ../interfaces/users.ui.h:56
 msgid "_Work phone:"
 msgstr "Telefón do _zamestnania:"
 
-#: ../src/boot/boot-append-gui.c:140
-msgid "32,768"
-msgstr "32,768"
+#: ../src/common/gst-dialog.c:179
+msgid "_Unlock"
+msgstr "_Odomknúť"
 
-#: ../src/boot/boot-append-gui.c:141
-msgid "65,536"
-msgstr "65,536"
-
-#: ../src/boot/boot-append-gui.c:142
-msgid "16,777,216"
-msgstr "16,777,216"
-
-#: ../src/boot/boot-append-gui.c:253
-msgid "Invalid VGA value"
-msgstr "Neplatná hodnota pre VGA"
-
-#: ../src/boot/boot-append-gui.c:255
-#, c-format
-msgid "\"%s\" is not a valid VGA value."
-msgstr "\"%s\" nie je platná hodnota pre VGA."
-
-#: ../src/boot/boot-druid.c:113
-msgid "Error creating boot image"
-msgstr "Chyba pri vytváraní obrazu zavádzača"
-
-#: ../src/boot/boot-druid.c:443
-#, c-format
-msgid "Creating a new boot image (%d of %d)"
-msgstr "Vytvorenie nového obrazu zavádzača (%d z %d)"
-
-#: ../src/boot/boot-druid.c:444
-msgid "Finished creating a new boot image"
-msgstr "Vytvorenie nového obrazu zavádzača ukončené"
-
-#: ../src/boot/boot-image.c:43
-msgid "Unknown"
-msgstr "Neznámy"
-
-#: ../src/boot/boot-image.c:44
-msgid "Windows NT"
-msgstr "Windows NT"
-
-#: ../src/boot/boot-image.c:45
-msgid "Windows 9x"
-msgstr "Windows 9x"
-
-#: ../src/boot/boot-image.c:46
-msgid "Dos"
-msgstr "Dos"
-
-#: ../src/boot/boot-image.c:47
-msgid "Linux"
-msgstr "Linux"
-
-#: ../src/boot/boot-image.c:48
-msgid "Linux swap"
-msgstr "Linux odkladací priestor"
-
-#: ../src/boot/boot-image.c:49
-msgid "GNU/Hurd"
-msgstr "GNU/Hurd"
-
-#: ../src/boot/boot-image.c:279
-#, c-format
-msgid "\"%s\" is an invalid path"
-msgstr "\"%s\" nie je platná cesta"
-
-#: ../src/boot/boot-image.c:295
-#, c-format
-msgid "\"%s\" already exists, please set another name."
-msgstr "\"%s\" už existuje, prosím, vyberte iné meno."
-
-#: ../src/boot/boot-image.c:301
-#, c-format
-msgid "Invalid image name: \"%s\"."
-msgstr "Neplatné meno obrazu: \"%s\"."
-
-#: ../src/boot/boot-image.c:314
-#, c-format
-msgid "Invalid image: \"%s\"."
-msgstr "Neplatný obraz: \"%s\"."
-
-#: ../src/boot/boot-image.c:332
-#, c-format
-msgid "Invalid root device: \"%s\"."
-msgstr "Neplatné koreňové zariadenie: \"%s\"."
-
-#: ../src/boot/boot-settings.c:45
-msgid "_Module path:"
-msgstr "_Cesta modulu:"
-
-#: ../src/boot/boot-settings.c:407
-msgid "Password confirmation is not correct."
-msgstr "Potvrdenie hesla nie je správne."
-
-#: ../src/boot/boot-settings.c:432
-msgid "Error modifying boot image"
-msgstr "Chyba pri úprave obrazu zavádzača"
-
-#: ../src/boot/boot.desktop.in.in.h:1
-msgid "Boot"
-msgstr "Zavádzanie systému"
-
-#: ../src/boot/boot.desktop.in.in.h:2
-msgid "Configure the system boot process"
-msgstr "Nastavenie zavádzača systému"
-
-#: ../src/boot/callbacks.c:81
-msgid "Boot Image Editor"
-msgstr "Editor zavádzacích obrazov"
-
-#: ../src/boot/callbacks.c:179
-msgid "Boot Append Editor"
-msgstr "Editor ďalších parametrov zavádzania"
-
-#: ../src/boot/callbacks.c:412
-msgid "Error deleting boot image"
-msgstr "Chyba pri vymazávaní zavádzacieho obrazu"
-
-#: ../src/boot/callbacks.c:414
-msgid "Without at least one boot image your computer will not start."
-msgstr "Ak nemáte aspoň jeden zavádzací obraz, váš systém sa nespustí."
-
-#: ../src/boot/callbacks.c:433
-#, c-format
-msgid "Are you sure you want to delete \"%s\"?"
-msgstr "Naozaj chcete odstrániť \"%s\"?"
-
-#: ../src/boot/callbacks.c:435
-msgid "This may leave this operating system unbootable."
-msgstr "Toto môže spôsobiť, že operačný systém nenaštartuje."
-
-#: ../src/boot/callbacks.c:464
-msgid "The configuration will show empty"
-msgstr "Bude sa zobrazovať prázdna konfigurácia"
-
-#: ../src/boot/callbacks.c:466
-msgid "The file \"%s\" is missing or could not be read."
-msgstr "Súbor \"%s\" chýba alebo ho nie je možné prečítať."
-
-#: ../src/boot/table.c:43
-msgid "Name"
-msgstr "Meno"
-
-#: ../src/boot/table.c:44
-msgid "Default"
-msgstr "Štandardný"
-
-#: ../src/boot/table.c:45
-msgid "Type"
-msgstr "Typ"
-
-#: ../src/boot/table.c:46
-msgid "Kernel Image"
-msgstr "Obraz kernelu"
-
-#: ../src/boot/table.c:47
-msgid "Device"
-msgstr "Zariadenie"
-
-#: ../src/boot/table.c:52 ../src/network/address-list.c:71
-#: ../src/network/hosts.c:37 ../src/shares/table.c:40 ../src/users/table.c:48
-msgid "_Add"
-msgstr "_Pridať"
-
-#: ../src/boot/table.c:53 ../src/network/hosts.c:38
-#: ../src/network/ifaces-list.c:33 ../src/shares/table.c:41
-#: ../src/users/table.c:49
-msgid "_Properties"
-msgstr "_Vlastnosti"
-
-#. the proccess was running ssh
-#: ../src/common/gst-auth.c:88
-msgid "The tool could not connect to the computer"
-msgstr "Nepodarilo sa pripojiť k počítaču"
-
-#: ../src/common/gst-auth.c:89
-msgid ""
-"Check that you have access to this network and that the computer is actually "
-"working and running SSHD"
+#: ../src/common/gst-platform-dialog.c:179
+#, fuzzy
+msgid "The platform you are running is not supported by this tool"
 msgstr ""
-"Skontrolujte, či máte prístup do tejto siete a že je na počítači spustený "
-"SSHD"
+"<span weight=\"bold\" size=\"larger\">Platforma, na ktorej pracujete, nie je "
+"týmto nástrojom podporovaná</span>"
 
-#. the proccess was running su
-#: ../src/common/gst-auth.c:93
-msgid "The entered password is invalid"
-msgstr "Zadané heslo nie je platné"
-
-#: ../src/common/gst-auth.c:94
+#. label
+#: ../src/common/gst-platform-dialog.c:185
 msgid ""
-"Check that you typed it correctly and that you haven't activated the \"caps "
-"lock\" key"
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
 msgstr ""
-"Skontrolujte, či ste ho zadali správne a či nemáte zapnutý \"Caps lock\""
+"Ak máte istotu, že funguje rovnako ako niektorá zo zoznamu, môžete to skúsiť "
+"a pokračovať. Uvedomte si však, že môžete poškodiť konfiguráciu systému "
+"alebo znefunkčniť počítač."
 
-#: ../src/common/gst-auth.c:103
-#, c-format
-msgid "Could not run \"%s\""
-msgstr "Nepodarilo sa spustiť \"%s\""
+#: ../src/common/gst-platform-dialog.c:212
+msgid "Unsupported platform"
+msgstr "Nepodporovaná platforma"
 
-#: ../src/common/gst-auth.c:104
-msgid "Check that you have permissions to run this command"
-msgstr "Skontrolujte, či máte právo spustiť tento príkaz"
+#: ../src/common/gst-polkit-button.c:126
+msgid "This action is allowed"
+msgstr "Táto akcia je povolená"
 
-#: ../src/common/gst-auth.c:106
-msgid "An unexpected error has occurred"
+#: ../src/common/gst-polkit-button.c:140
+msgid "This action is not allowed"
+msgstr "Táto akcia nie je povolená"
+
+#: ../src/common/gst-polkit-button.c:247
+#, fuzzy
+msgid "Could not authenticate"
+msgstr "Nepodarilo sa povoliť rozhranie %s"
+
+#: ../src/common/gst-polkit-button.c:249
+#, fuzzy
+msgid "An unexpected error has occurred."
 msgstr "Nastala neočakávaná chyba"
 
-#: ../src/common/gst-auth.c:132
-msgid "Could not execute the backend"
-msgstr "Nepodarilo sa spustiť backend"
-
-#: ../src/common/gst-auth.c:133
-msgid "There was an error creating the child process, the tool will close now."
-msgstr "Pri spúšťaní procesu potomka nastala chyba, nástroj teraz skončí."
-
-#: ../src/common/gst-dialog.c:60
-#, c-format
-msgid "Could not find widget: %s"
-msgstr "Nie je možné nájsť prvok: %s"
-
-#: ../src/common/gst-dialog.c:383
-msgid "There are changes which have not been applied"
-msgstr "Niektoré zmeny ste ešte nepotvrdili"
-
-#: ../src/common/gst-dialog.c:385
-msgid "Apply them now?"
-msgstr "Chcete ich potvrdiť teraz?"
-
-#: ../src/common/gst-dialog.c:492
-#, c-format
-msgid "Error connection signal `%s' in widget `%s'"
-msgstr "Signál chyby spojenia `%s' v prvku `%s'"
-
-#: ../src/common/gst-tool.c:1026
+#: ../src/common/gst-tool.c:185
 msgid "The configuration could not be loaded"
 msgstr "Konfiguráciu sa nepodarilo načítať"
 
-#: ../src/common/gst-tool.c:1028
-msgid "There was an error running the backend script"
-msgstr "Nastala chyba pri spustení skriptu backendu"
+#: ../src/common/gst-tool.c:186
+msgid "You are not allowed to access the system configuration."
+msgstr "Nemáte povolený prístup ku konfigurácii systému."
 
-#: ../src/common/gst-tool.c:1509
-#, c-format
-msgid "Welcome to the %s prerelease of the GNOME System Tools"
-msgstr "Víta vás %s testovacia verzia Systémových nástrojov GNOME"
+#: ../src/common/gst-tool.c:188
+msgid "The configuration could not be saved"
+msgstr "Konfigurácia nemohla byť uložená"
 
-#: ../src/common/gst-tool.c:1511
-msgid ""
-"This is still a work in progress, and so it may have serious bugs. Due to "
-"the nature of these tools, bugs may render your computer <span weight=\"bold"
-"\">practically useless</span>, costing time, effort and sanity points. You "
-"have been warned. Thank you for trying out this prerelease of the GNOME "
-"System Tools!"
-msgstr ""
-"Tento balík je neustále vyvíjaný, takže môže obsahovať významné chyby. "
-"Pretože je tento balík určený na správu počítača, chyby môžu spôsobiť jeho "
-"<span weight=\"bold\">úplne znefunkčnenie</span>. Varovali sme vás. Sme "
-"radi, že ste sa rozhodli vyskúšať Systémové nástroje GNOME!"
+#: ../src/common/gst-tool.c:189
+msgid "You are not allowed to modify the system configuration."
+msgstr "Nemáte povolené upraviť konfiguráciu systému."
 
-#: ../src/common/gst-tool.c:1532
-msgid "Warning"
-msgstr "Varovanie"
-
-#: ../src/common/gst-tool.c:1552
-msgid "Don't show me this again"
-msgstr "Nabudúce už túto správu nezobrazovať"
-
-#: ../src/common/gst-tool.c:1609
-msgid "GNOME System Tools"
-msgstr "Systémové nástroje GNOME"
-
-#: ../src/common/gst-tool.c:1755
+#: ../src/common/gst-tool.c:418
 msgid "Could not display help"
 msgstr "Nepodarilo sa zobraziť pomocníka"
 
-#: ../src/network/address-list.c:555
+#: ../src/common/gst-tool.c:596
+#, fuzzy
+msgid "The system configuration has potentially changed."
+msgstr "Konfiguráciu sa nepodarilo načítať"
+
+#: ../src/common/gst-tool.c:598
+msgid "Update content? This will lose any modification in course."
+msgstr ""
+
+#: ../src/network/address-list.c:76 ../src/network/hosts.c:31
+#: ../src/shares/table.c:38 ../src/users/table.c:38
+msgid "_Add"
+msgstr "_Pridať"
+
+#: ../src/network/address-list.c:486
 msgid "Type address"
 msgstr "Zadajte adresu"
 
-#: ../src/network/callbacks.c:46
-#, c-format
-msgid "Could not enable the interface %s"
-msgstr "Nepodarilo sa povoliť rozhranie %s"
+#: ../src/network/callbacks.c:237 ../src/network/callbacks.c:487
+#, fuzzy
+msgid "Changing interface configuration"
+msgstr "Kontrolujem konfiguráciu systému..."
 
-#: ../src/network/callbacks.c:50
-msgid ""
-"Check that the settings are correct for this network and that the computer "
-"is correctly connected to it."
-msgstr ""
-"Skontrolujte, či sú nastavenia pre túto sieť správne a že je počítač do nej "
-"správne pripojený."
-
-#: ../src/network/callbacks.c:237
+#: ../src/network/callbacks.c:299
 msgid "Could not autodetect modem device"
 msgstr "Nepodarilo sa automaticky zistiť zariadenie modemu"
 
-#: ../src/network/callbacks.c:240
+#: ../src/network/callbacks.c:302
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
 msgstr ""
-"Skontrolujte, či nie je zariadenie práve používané a či je správne "
-"pripojené."
+"Skontrolujte, či nie je zariadenie práve používané a či je správne pripojené."
 
-#: ../src/network/callbacks.c:451
+#: ../src/network/callbacks.c:523
 msgid "The host name has changed"
 msgstr "Meno hostiteľa sa zmenilo"
 
-#: ../src/network/callbacks.c:454
+#: ../src/network/callbacks.c:526
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1296,137 +736,637 @@ msgstr ""
 "To vám zabráni spúšťať nové aplikácie, takže sa budete musieť znovu "
 "prihlásiť. Chcete napriek tomu pokračovať?"
 
-#: ../src/network/callbacks.c:460
+#: ../src/network/callbacks.c:532
 msgid "Change _Host name"
 msgstr "Zmeniť meno _hostiteľa"
 
-#: ../src/network/hosts.c:92
+#: ../src/network/connection.c:40
+msgid "Automatic configuration (DHCP)"
+msgstr "Automatická konfigurácia (DHCP)"
+
+#: ../src/network/connection.c:41
+msgid "Local Zeroconf network (IPv4 LL)"
+msgstr ""
+
+#: ../src/network/connection.c:42
+msgid "Static IP address"
+msgstr "Statická IP adresa"
+
+#: ../src/network/connection.c:46
+msgid "WEP key (ascii)"
+msgstr "WEP kľúč (ascii)"
+
+#: ../src/network/connection.c:47
+msgid "WEP key (hexadecimal)"
+msgstr "WEP kľúč (hexadecimal)"
+
+#: ../src/network/connection.c:48
+msgid "WPA Personal"
+msgstr ""
+
+#: ../src/network/connection.c:49
+msgid "WPA2 Personal"
+msgstr ""
+
+#: ../src/network/connection.c:53
+msgid "GPRS/UMTS"
+msgstr "GPRS/UMTS"
+
+#: ../src/network/connection.c:54
+msgid "ISDN modem"
+msgstr "ISDN modem"
+
+#: ../src/network/connection.c:55
+msgid "Serial modem"
+msgstr ""
+
+#: ../src/network/connection.c:56
+msgid "PPPoE"
+msgstr "PPPoE"
+
+#: ../src/network/connection.c:769
+#, c-format
+msgid "%s Properties"
+msgstr "Vlastnosti %s"
+
+#: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
+#: ../src/shares/table.c:39 ../src/users/table.c:39
+msgid "_Properties"
+msgstr "_Vlastnosti"
+
+#: ../src/network/hosts.c:89
 msgid "IP Address"
 msgstr "IP adresa"
 
-#: ../src/network/hosts.c:100
+#: ../src/network/hosts.c:97
 msgid "Aliases"
 msgstr "Aliasy"
 
-#: ../src/network/location.c:145
-msgid "Create location"
-msgstr "Vytvoriť umiestnenie"
+#: ../src/network/ifaces-list.c:280
+msgid "This network interface is not configured"
+msgstr "Sieťové rozhranie nie je nakonfigurované"
 
-#: ../src/network/location.c:153
-msgid "Delete current location"
-msgstr "Vymazať aktuálne umiestnenie"
+#: ../src/network/ifaces-list.c:282
+msgid "Roaming mode enabled"
+msgstr ""
 
-#: ../src/network/location.c:367
-msgid "Do you want to remove this location?"
-msgstr "Chcete odstrániť toto umiestnenie?"
+#: ../src/network/ifaces-list.c:289
+#, c-format
+msgid "<b>Essid:</b> %s "
+msgstr ""
 
-#: ../src/network/location.c:440
-msgid "Changing profile"
-msgstr "Mením profil"
+#: ../src/network/ifaces-list.c:295
+#, c-format
+msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
+msgstr ""
 
-#: ../src/network/main.c:110
+#: ../src/network/ifaces-list.c:299
+#, c-format
+msgid "<b>Address:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:303
+#, c-format
+msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:315
+#, c-format
+msgid "<b>Type:</b> %s <b>Phone number:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:318
+#, c-format
+msgid "<b>Type:</b> %s <b>Access point name:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:325
+#, c-format
+msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:329
+#, c-format
+msgid "<b>Type:</b> %s"
+msgstr ""
+
+#: ../src/network/ifaces-list.c:346
+msgid "Wireless connection"
+msgstr "Bezdrôtové pripojenie"
+
+#: ../src/network/ifaces-list.c:348
+msgid "Infrared connection"
+msgstr "Infračervené pripojenie"
+
+#: ../src/network/ifaces-list.c:350
+#, fuzzy
+msgid "Wired connection"
+msgstr "Bezdrôtové pripojenie"
+
+#: ../src/network/ifaces-list.c:352
+msgid "Parallel port connection"
+msgstr "Pripojenie pomocou paralelného portu"
+
+#: ../src/network/ifaces-list.c:354
+#, fuzzy
+msgid "Point to point connection"
+msgstr "Pripojenie pomocou paralelného portu"
+
+#: ../src/network/locations-combo.c:221
+#, fuzzy
+msgid "Changing network location"
+msgstr "Vytvára sa nové sieťové pripojenie"
+
+#: ../src/network/locations-combo.c:265
+msgid "There is already a location with the same name"
+msgstr ""
+
+#: ../src/network/locations-combo.c:267
+msgid "Overwrite it?"
+msgstr ""
+
+#: ../src/network/locations-combo.c:355
+msgid "Save location"
+msgstr "Uložiť umiestnenie"
+
+#: ../src/network/locations-combo.c:370
+msgid "_Location name:"
+msgstr "Názov _umiestnenia:"
+
+#: ../src/network/locations-combo.c:422
+#, fuzzy, c-format
+msgid "Do you want to delete location \"%s\"?"
+msgstr "Naozaj chcete odstrániť pripojenie \"%s\"?"
+
+#: ../src/network/main.c:135
 msgid "The interface does not exist"
 msgstr "Rozhranie neexistuje"
 
-#: ../src/network/main.c:112
+#: ../src/network/main.c:137
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
 msgstr "Skontrolujte, či je správne zadané a podporované vaším systémom"
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:183
 msgid "Configure a network interface"
 msgstr "Nastaviť sieťové rozhranie"
 
-#: ../src/network/main.c:157
+#: ../src/network/main.c:183
 msgid "INTERFACE"
 msgstr "ROZHRANIE"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:184
 msgid "Configure the first network interface with a specific type"
 msgstr "Nastaviť prvé sieťové rozhranie určitého typu"
 
-#: ../src/network/main.c:158
+#: ../src/network/main.c:184
 msgid "TYPE"
 msgstr "TYP"
-
-#: ../src/network/main.c:165
-msgid "Network settings"
-msgstr "Nastavenie siete"
 
 #: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
 msgstr "Nastavenie sieťových rozhraní a pripojení"
 
 #: ../src/network/network.desktop.in.in.h:2
-msgid "Networking"
+msgid "Network"
 msgstr "Sieť"
 
-#: ../src/network/network-iface-ethernet.c:302
-msgid "Ethernet connection"
-msgstr "Ethernetové pripojenie"
+#: ../src/network/network-tool.c:280
+msgid "Network Settings"
+msgstr "Nastavenia siete"
 
-#: ../src/network/network-iface-irlan.c:122
-msgid "Infrared connection"
-msgstr "Infračervené pripojenie"
-
-#: ../src/network/network-iface-isdn.c:330
-msgid "ISDN connection"
-msgstr "ISDN pripojenie"
-
-#: ../src/network/network-iface-modem.c:253
-msgid "Modem connection"
-msgstr "Modemové pripojenie"
-
-#: ../src/network/network-iface-plip.c:211
-msgid "Parallel port connection"
-msgstr "Pripojenie pomocou paralelného portu"
-
-#: ../src/network/network-iface-wireless.c:245
-msgid "Wireless connection"
-msgstr "Bezdrôtové pripojenie"
-
-#: ../src/network/network-iface.c:410
+#: ../src/services/callbacks.c:59
 #, c-format
-msgid "Activating interface \"%s\""
-msgstr "Aktivujem rozhranie \"%s\""
+msgid "Settings for service \"%s\""
+msgstr "Nastavenia pre službu \"%s\""
 
-#: ../src/network/network-iface.c:522
+#: ../src/services/callbacks.c:119
 #, c-format
-msgid "The interface %s is not configured"
-msgstr "Rozhranie %s nie je nakonfigurované"
+msgid "Are you sure you want to deactivate %s?"
+msgstr "Naozaj chcete deaktivovať %s?"
 
-#: ../src/network/network-iface.c:524
-#, c-format
-msgid "The interface %s is not active"
-msgstr "Rozhranie %s nie je aktívne"
-
-#: ../src/network/network-iface.c:526
-#, c-format
-msgid "The interface %s is active"
-msgstr "Rozhranie %s je aktívne"
-
-#: ../src/services/callbacks.c:64
-#, c-format
-msgid "Settings for \"%s\""
-msgstr "Nastavenie pre \"%s\""
-
-#. FIXME: put service name !!!
-#: ../src/services/callbacks.c:153
-msgid "Are you sure you want to deactivate this service?"
-msgstr "Naozaj chcete deaktivovať túto službu?"
-
-#: ../src/services/callbacks.c:156
+#: ../src/services/callbacks.c:123
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
-"data loss"
+"data loss."
 msgstr ""
-"Toto môže ovplyvniť správanie sa systému niekoľkými spôsobmi a môže "
-"viesť aj k strate dát"
+"Toto môže ovplyvniť správanie sa systému niekoľkými spôsobmi a môže viesť aj "
+"k strate údajov."
 
-#: ../src/services/main.c:55
-msgid "Services settings"
-msgstr "Nastavenia služieb"
+#: ../src/services/service.c:32
+msgid "Web server"
+msgstr "Webový server"
+
+#: ../src/services/service.c:32
+msgid "Shares your web pages over the Internet"
+msgstr "Zdieľa vaše webové stránky cez internet"
+
+#. GST_ROLE_WEB_SERVER
+#: ../src/services/service.c:33
+msgid "Actions scheduler"
+msgstr "Plánovač úloh"
+
+#: ../src/services/service.c:33
+msgid "Executes scheduled actions"
+msgstr "Spúšťa naplánované úlohy"
+
+#. GST_ROLE_COMMAND_SCHEDULER
+#: ../src/services/service.c:34
+msgid "Printer service"
+msgstr "Služba tlače"
+
+#: ../src/services/service.c:34
+msgid "Allows applications to use printers"
+msgstr "Umožňuje aplikáciám používať tlačiarne"
+
+#. GST_ROLE_PRINTER_SERVICE
+#: ../src/services/service.c:35
+msgid "Mail agent"
+msgstr "Poštový agent"
+
+#: ../src/services/service.c:35
+msgid "Delivers your outgoing mail"
+msgstr "Doručuje vašu odchádzajúcu poštu"
+
+#. GST_ROLE_MTA
+#: ../src/services/service.c:36
+#, fuzzy
+msgid "MTA authentication service"
+msgstr "Služba synchronizácie času"
+
+#. GST_ROLE_MTA_AUTH
+#: ../src/services/service.c:37
+msgid "Mail fetcher"
+msgstr "Sťahovač pošty"
+
+#: ../src/services/service.c:37
+msgid "Downloads your mail from remote accounts"
+msgstr "Sťahuje vašu poštu zo vzdialených účtov"
+
+#. GST_ROLE_MAIL_FETCHER
+#: ../src/services/service.c:38
+msgid "Graphical login manager"
+msgstr "Grafický správca prihlásení"
+
+#: ../src/services/service.c:38
+msgid "Allows users to login graphically"
+msgstr "Umožní používateľom prihlásiť sa do grafického prostredia"
+
+#. GST_ROLE_DISPLAY_MANAGER
+#: ../src/services/service.c:39
+msgid "Database server"
+msgstr "Databázový server"
+
+#: ../src/services/service.c:39
+msgid "Data storage system"
+msgstr "Systém na uchovávanie dát"
+
+#. GST_ROLE_DATABASE_SERVER
+#. GST_ROLE_FILE_SERVER_SMB
+#. GST_ROLE_FILE_SERVER_FTP
+#: ../src/services/service.c:40 ../src/services/service.c:41
+#: ../src/services/service.c:43
+msgid "Folder sharing service"
+msgstr "Služba zdieľania priečinkov"
+
+#: ../src/services/service.c:40 ../src/services/service.c:41
+msgid "Shares folders over your network"
+msgstr "Zdieľanie súborov cez sieť"
+
+#. GST_ROLE_FILE_SERVER_NFS
+#: ../src/services/service.c:42
+msgid "FTP service"
+msgstr "Služba FTP"
+
+#: ../src/services/service.c:42 ../src/services/service.c:43
+msgid "Shares folders over the Internet"
+msgstr "Zdieľanie súborov cez internet"
+
+#. GST_ROLE_FILE_SERVER_TFTP
+#: ../src/services/service.c:44
+msgid "Clock synchronization service"
+msgstr "Služba synchronizácie času"
+
+#: ../src/services/service.c:44
+msgid "Synchronizes your computer clock with Internet time servers"
+msgstr "Synchronizuje vaše počítačové hodiny s internetovými servermi"
+
+#. GST_ROLE_NTP_SERVER
+#: ../src/services/service.c:46
+msgid "Antivirus"
+msgstr "Antivírus"
+
+#: ../src/services/service.c:46
+msgid "Analyzes your incoming mail for virus"
+msgstr "Kontroluje prichádzajúcu poštu na prítomnosť vírusov"
+
+#. GST_ROLE_ANTIVIRUS
+#: ../src/services/service.c:47
+msgid "Firewall"
+msgstr "Firewall"
+
+#: ../src/services/service.c:47
+msgid "Blocks undesired network access to your computer"
+msgstr ""
+
+#. GST_ROLE_FIREWALL_MANAGEMENT
+#: ../src/services/service.c:49
+#, fuzzy
+msgid "Dictionary server"
+msgstr "Databázový server"
+
+#. GST_ROLE_DICTIONARY_SERVER
+#: ../src/services/service.c:50
+msgid "Speech synthesis support"
+msgstr ""
+
+#. GST_ROLE_SPEECH_SYNTHESIS
+#: ../src/services/service.c:51
+msgid "Computer activity logger"
+msgstr "Zaznamenávanie aktivity počítača"
+
+#: ../src/services/service.c:51
+msgid "Keeps a log of your computer activity"
+msgstr "Udržiava záznamy aktivity počítača"
+
+#. GST_ROLE_SYSTEM_LOGGER
+#: ../src/services/service.c:52
+#, fuzzy
+msgid "Remote backup server"
+msgstr "Server remote shell"
+
+#. GST_ROLE_REMOTE_BACKUP
+#: ../src/services/service.c:53
+msgid "Spam filter"
+msgstr "Filter spamu"
+
+#. GST_ROLE_SPAM_FILTER
+#: ../src/services/service.c:54
+msgid "Remote shell server"
+msgstr "Server remote shell"
+
+#: ../src/services/service.c:54
+msgid "Secure shell server"
+msgstr "Server SSH"
+
+#. GST_ROLE_SECURE_SHELL_SERVER
+#: ../src/services/service.c:55
+#, fuzzy
+msgid "Application server"
+msgstr "Umožňuje aplikáciám používať tlačiarne"
+
+#. GST_ROLE_APPLICATION_SERVER
+#: ../src/services/service.c:56
+msgid "Automated crash reports support"
+msgstr ""
+
+#. GST_ROLE_AUTOMATED_CRASH_REPORTS_MANAGEMENT
+#: ../src/services/service.c:57
+msgid "System communication bus"
+msgstr ""
+
+#. GST_ROLE_DBUS,
+#: ../src/services/service.c:58
+#, fuzzy
+msgid "System configuration manager"
+msgstr "Kontrolujem konfiguráciu systému..."
+
+#. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:59
+msgid "School management platform"
+msgstr ""
+
+#. GST_ROLE_SCHOOL_MANAGEMENT_PLATFORM
+#: ../src/services/service.c:60
+#, fuzzy
+msgid "Network security auditor"
+msgstr "Nastavenie siete"
+
+#. GST_ROLE_SECURITY_AUDITING
+#: ../src/services/service.c:61
+#, fuzzy
+msgid "Web calendar server"
+msgstr "Web server"
+
+#. GST_ROLE_WEB_CALENDAR_SERVER
+#: ../src/services/service.c:62
+msgid "OEM configuration manager"
+msgstr "Správca OEM konfigurácie"
+
+#. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
+#: ../src/services/service.c:63
+msgid "Terminal multiplexor"
+msgstr ""
+
+#. GST_ROLE_TERMINAL_MULTIPLEXOR
+#: ../src/services/service.c:64
+msgid "Disk quota activation"
+msgstr ""
+
+#. GST_ROLE_QUOTA_MANAGEMENT
+#: ../src/services/service.c:65
+msgid "Package index monitor"
+msgstr "Monitor indexu balíkov"
+
+#. GST_ROLE_PACKAGE_INDEX_MONITORING
+#: ../src/services/service.c:66
+msgid "Network service"
+msgstr "Sieťová služba"
+
+#. GST_ROLE_NETWORK
+#: ../src/services/service.c:67
+msgid "Dynamic DNS services updater"
+msgstr ""
+
+#. GST_ROLE_DYNAMIC_DNS_SERVICE
+#: ../src/services/service.c:68
+msgid "DHCP server"
+msgstr "DHCP server"
+
+#. GST_ROLE_DHCP_SERVER
+#: ../src/services/service.c:69
+msgid "Domain name server"
+msgstr "Domain name server"
+
+#. GST_ROLE_DNS
+#: ../src/services/service.c:70
+#, fuzzy
+msgid "Proxy cache service"
+msgstr "Služba tlače"
+
+#. GST_ROLE_PROXY_CACHE
+#: ../src/services/service.c:71
+msgid "LDAP server"
+msgstr "LDAP server"
+
+#. GST_ROLE_LDAP_SERVER
+#: ../src/services/service.c:72
+msgid "Mailing lists manager"
+msgstr ""
+
+#. GST_ROLE_MAILING_LISTS_MANAGER
+#: ../src/services/service.c:73
+msgid "Multicast DNS service discovery"
+msgstr ""
+
+#. GST_ROLE_RENDEZVOUS
+#: ../src/services/service.c:74
+msgid "Account information resolver"
+msgstr ""
+
+#. GST_ROLE_NSS
+#: ../src/services/service.c:75
+msgid "Virtual Private Network server"
+msgstr "Virtuálny súkromný sieťový server"
+
+#. GST_ROLE_VPN_SERVER
+#: ../src/services/service.c:76
+#, fuzzy
+msgid "Router advertisement server"
+msgstr "Server remote shell"
+
+#. GST_ROLE_ROUTER_ADVERTISEMENT_SERVER
+#: ../src/services/service.c:77
+#, fuzzy
+msgid "IPSec key exchange server"
+msgstr "Server SSH"
+
+#. GST_ROLE_IPSEC_KEY_EXCHANGE_SERVER
+#: ../src/services/service.c:78
+#, fuzzy
+msgid "Disk server"
+msgstr "Časové servery"
+
+#. GST_ROLE_DISK_SERVER
+#: ../src/services/service.c:79
+msgid "Disk client"
+msgstr ""
+
+#. GST_ROLE_DISK_CLIENT
+#: ../src/services/service.c:80
+#, fuzzy
+msgid "Route server"
+msgstr "Web server"
+
+#. GST_ROLE_ROUTE_SERVER
+#: ../src/services/service.c:81
+msgid "RPC mapper"
+msgstr ""
+
+#. GST_ROLE_RPC_MAPPER
+#: ../src/services/service.c:82
+msgid "SNMP server"
+msgstr "SNMP server"
+
+#. GST_ROLE_SNMP_SERVER
+#: ../src/services/service.c:83
+msgid "Terminal server client"
+msgstr ""
+
+#. GST_ROLE_LTSP_CLIENT
+#: ../src/services/service.c:84
+msgid "Audio settings management"
+msgstr "Správa nastavení zvuku"
+
+#. GST_ROLE_AUDIO_MANAGEMENT
+#: ../src/services/service.c:85
+msgid "Volumes mounter"
+msgstr "Pripájanie diskov"
+
+#: ../src/services/service.c:85
+msgid "Mounts your volumes automatically"
+msgstr "Automaticky pripája disky"
+
+#. GST_ROLE_AUTOMOUNTER
+#: ../src/services/service.c:86
+msgid "Infrared port management"
+msgstr "Správa infračerveného portu"
+
+#. GST_ROLE_INFRARED_MANAGEMENT
+#: ../src/services/service.c:87
+msgid "Braille display management"
+msgstr ""
+
+#. GST_ROLE_BRAILLE_DISPLAY_MANAGEMENT
+#: ../src/services/service.c:88
+msgid "Bluetooth device management"
+msgstr "Správa Bluetooth zariadení"
+
+#. GST_ROLE_BLUETOOTH_MANAGEMENT
+#: ../src/services/service.c:89
+msgid "Hard disk tuning"
+msgstr ""
+
+#. GST_ROLE_HDD_MANAGEMENT
+#: ../src/services/service.c:90
+msgid "Hotkeys management"
+msgstr "Správa klavesových skratiek"
+
+#. GST_ROLE_HOTKEYS_MANAGEMENT
+#: ../src/services/service.c:91
+msgid "Power management"
+msgstr "Správa napájania"
+
+#. GST_ROLE_POWER_MANAGEMENT
+#: ../src/services/service.c:92
+msgid "Logical volume management"
+msgstr ""
+
+#. GST_ROLE_LVM_MANAGEMENT
+#: ../src/services/service.c:93
+msgid "Cluster management tool"
+msgstr ""
+
+#. GST_ROLE_CLUSTER_MANAGEMENT
+#: ../src/services/service.c:94
+msgid "Fax settings management"
+msgstr "Správa nastavení faxu"
+
+#. GST_ROLE_FAX_MANAGEMENT
+#: ../src/services/service.c:95
+msgid "RAID disks management"
+msgstr ""
+
+#. GST_ROLE_RAID_MANAGEMENT
+#: ../src/services/service.c:96
+msgid "Graphic tablets management"
+msgstr "Správa grafických tabletov"
+
+#. GST_ROLE_GRAPHIC_TABLETS_MANAGEMENT
+#: ../src/services/service.c:97
+msgid "CPU Frequency manager"
+msgstr "Správca frekvencie CPU"
+
+#. GST_ROLE_CPUFREQ_MANAGEMENT
+#: ../src/services/service.c:98
+msgid "Eagle USB ADSL modems manager"
+msgstr ""
+
+#. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
+#: ../src/services/service.c:99
+msgid "Serial port settings management"
+msgstr ""
+
+#. GST_ROLE_SERIAL_PORTS_MANAGEMENT
+#: ../src/services/service.c:100
+msgid "ISDN modems manager"
+msgstr "Správca ISDN modemov"
+
+#. GST_ROLE_ISDN_MANAGEMENT
+#: ../src/services/service.c:101
+msgid "Telstra Bigpond Cable Network client"
+msgstr ""
+
+#. GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT
+#: ../src/services/service.c:102
+msgid "Hardware monitor"
+msgstr "Monitor hardvéru"
+
+#. GST_ROLE_HARDWARE_MONITORING
+#: ../src/services/service.c:103
+msgid "System monitor"
+msgstr "Monitor systému"
 
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
@@ -1436,218 +1376,112 @@ msgstr "Nastavenie služieb, ktoré sa budú pri štarte systému spúšťať"
 msgid "Services"
 msgstr "Služby"
 
-#: ../src/services/service.c:32
-msgid "Antivirus"
-msgstr "Antivírus"
+#: ../src/services/service-settings-table.c:73
+#: ../src/services/service-settings-table.c:97
+#: ../src/services/service-settings-table.c:109
+msgid "Start"
+msgstr "Spustiť"
 
-#: ../src/services/service.c:32
-msgid "Analyzes your incoming mail for virus"
-msgstr "Kontroluje prichádzajúcu poštu na prítomnosť vírusov"
+#: ../src/services/service-settings-table.c:79
+#: ../src/services/service-settings-table.c:99
+#: ../src/services/service-settings-table.c:111
+#, fuzzy
+msgid "Stop"
+msgstr "Zastavená"
 
-#: ../src/services/service.c:33
-msgid "Volumes mounter"
-msgstr "Pripájanie diskov"
+#: ../src/services/service-settings-table.c:85
+#: ../src/services/service-settings-table.c:102
+msgid "Ignore"
+msgstr "Ignorovať"
 
-#: ../src/services/service.c:33
-msgid "Mounts your volumes automatically"
-msgstr "Automaticky pripája disky"
+#: ../src/services/service-settings-table.c:175
+msgid "Runlevel"
+msgstr ""
 
-#: ../src/services/service.c:34
-msgid "Actions scheduler"
-msgstr "Plánovač úloh"
+#: ../src/services/service-settings-table.c:192
+msgid "Status"
+msgstr "Stav"
 
-#: ../src/services/service.c:34
-msgid "Executes scheduled actions"
-msgstr "Spúšťa naplánované úlohy"
+#: ../src/services/service-settings-table.c:211
+msgid "Priority"
+msgstr "Priorita"
 
-#: ../src/services/service.c:35
-msgid "Database server"
-msgstr "Databázový server"
+#: ../src/services/services-tool.c:99
+msgid "Services Settings"
+msgstr "Nastavenia služieb"
 
-#: ../src/services/service.c:35
-msgid "Data storage system"
-msgstr "Systém na uchovávanie dát"
-
-#: ../src/services/service.c:36
-msgid "Graphical login manager"
-msgstr "Grafický správca prihlásení"
-
-#: ../src/services/service.c:36
-msgid "Allows users to login graphically"
-msgstr "Umožní používateľom prihlásiť sa do grafického prostredia"
-
-#: ../src/services/service.c:37
-msgid "Folder sharing service"
-msgstr "Služba zdieľania priečinkov"
-
-#: ../src/services/service.c:37
-msgid "Shares folders through your network"
-msgstr "Zdieľať tento priečinok cez sieť"
-
-#: ../src/services/service.c:38
-msgid "File sharing service"
-msgstr "Služba zdieľania súborov"
-
-#: ../src/services/service.c:38 ../src/services/service.c:39
-msgid "Shares files though internet"
-msgstr "Zdieľať súbory cez internet"
-
-#: ../src/services/service.c:39
-msgid "FTP service"
-msgstr "Služba FTP"
-
-#: ../src/services/service.c:40
-msgid "Mail fetcher"
-msgstr "Sťahovač pošty"
-
-#: ../src/services/service.c:40
-msgid "Downloads your mail from remote accounts"
-msgstr "Sťahuje vašu poštu zo vzdialených účtov"
-
-#: ../src/services/service.c:41
-msgid "Mail agent"
-msgstr "Poštový agent"
-
-#: ../src/services/service.c:41
-msgid "Delivers your mails through internet"
-msgstr "Doručuje vašu poštu cez internet"
-
-#: ../src/services/service.c:42
-msgid "Clock synchronization service"
-msgstr "Služba synchronizácie času"
-
-#: ../src/services/service.c:42
-msgid "Synchronizes your computer clock with internet time servers"
-msgstr "Udržiava hodiny synchronizované s internetovými servrami"
-
-#: ../src/services/service.c:43
-msgid "Printer service"
-msgstr "Služba tlače"
-
-#: ../src/services/service.c:43
-msgid "Allows applications to use printers"
-msgstr "Umožňuje aplikáciám používať tlačiarne"
-
-#: ../src/services/service.c:44
-msgid "Remote shell server"
-msgstr "Server remote shell"
-
-#: ../src/services/service.c:44
-msgid "Secure shell server"
-msgstr "Server SSH"
-
-#: ../src/services/service.c:45
-msgid "Computer activity logger"
-msgstr "Zaznamenávanie aktivity počítača"
-
-#: ../src/services/service.c:45
-msgid "Keeps a log of your computer activity"
-msgstr "Udržiava záznamy aktivity počítača"
-
-#: ../src/services/service.c:46
-msgid "Web server"
-msgstr "Web server"
-
-#: ../src/services/service.c:46
-msgid "Shares your web pages through internet"
-msgstr "Zdieľa vaše web stránky cez internet"
-
-#: ../src/shares/callbacks.c:187
+#: ../src/shares/callbacks.c:196
 msgid "Are you sure you want to delete this share?"
 msgstr "Naozaj chcete odstrániť toto zdieľanie?"
 
-#: ../src/shares/callbacks.c:189
+#: ../src/shares/callbacks.c:198
 msgid "Other computers in your network will stop viewing this."
 msgstr "Ostatné počítače vo vašej sieti to prestanú vidieť."
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:103
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Pridať zdieľanú cestu, ak existuje, bude upravená"
 
-#: ../src/shares/main.c:90
+#: ../src/shares/main.c:103
 msgid "PATH"
 msgstr "CESTA"
 
-#: ../src/shares/main.c:97
-msgid "Shared folders settings"
-msgstr "Nastavenie zdieľaných priečinkov"
+#: ../src/shares/nautilus/nautilus-shares.c:152
+msgid "_Share Folder..."
+msgstr "_Zdieľať priečinok..."
 
-#: ../src/shares/nautilus/nautilus-shares.c:129
-msgid "_Share folder"
-msgstr "_Zdieľať priečinok"
-
-#: ../src/shares/nautilus/nautilus-shares.c:130
+#: ../src/shares/nautilus/nautilus-shares.c:153
 msgid "Share this folder with other computers"
 msgstr "Zdieľať tento priečinok s inými počítačmi"
 
-#: ../src/shares/nfs-acl-table.c:51
+#: ../src/shares/nfs-acl-table.c:50
 msgid "Allowed host/network"
 msgstr "Povolený hostiteľ/sieť"
 
-#: ../src/shares/share-nfs-add-hosts.c:114
-#, c-format
-msgid "Hosts in the %s network"
-msgstr "Hostitelia v sieti %s"
-
-#: ../src/shares/share-nfs-add-hosts.c:146
+#: ../src/shares/share-nfs-add-hosts.c:117
 msgid "Specify hostname"
-msgstr "Zadajte meno hostiteľa"
+msgstr "Zadajte názov hostiteľa"
 
-#: ../src/shares/share-nfs-add-hosts.c:153
+#: ../src/shares/share-nfs-add-hosts.c:124
 msgid "Specify IP address"
 msgstr "Zadajte IP adresu"
 
-#: ../src/shares/share-nfs-add-hosts.c:160
+#: ../src/shares/share-nfs-add-hosts.c:131
 msgid "Specify network"
 msgstr "Zadajte sieť"
-
-#: ../src/shares/share-settings.c:123
-msgid "Do not share"
-msgstr "Nezdieľať"
-
-#: ../src/shares/share-settings.c:131
-msgid "SMB"
-msgstr "SMB"
-
-#: ../src/shares/share-settings.c:139
-msgid "NFS"
-msgstr "NFS"
 
 #: ../src/shares/shares.desktop.in.in.h:1
 msgid "Configure which folders are available for your network neighborhood"
 msgstr "Nastaviť, ktoré priečinky sú dostupné pre vaše okolité počítače"
 
-#: ../src/shares/shares.desktop.in.in.h:2
-msgid "Shared Folders"
-msgstr "Zdieľané priečinky"
+#: ../src/shares/share-settings.c:61
+msgid "File System"
+msgstr "Súborový systém"
 
-#: ../src/shares/transfer.c:44
+#: ../src/shares/share-settings.c:144
+msgid "Do not share"
+msgstr "Nezdieľať"
+
+#: ../src/shares/share-settings.c:152
+msgid "Windows networks (SMB)"
+msgstr "Siete Windows (SMB)"
+
+#: ../src/shares/share-settings.c:160
+msgid "Unix networks (NFS)"
+msgstr "Siete Unix (NFS)"
+
+#: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
 msgstr "Služby zdieľania nie sú nainštalované"
 
-#: ../src/shares/transfer.c:46
+#: ../src/shares/shares-tool.c:157
+#, fuzzy
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
-"folders. The tool will close now."
+"folders."
 msgstr ""
 "Na zdieľanie priečinkov musíte nainštalovať buď Samba alebo NFS. Nástroj "
 "teraz skončí."
-
-#: ../src/time/main.c:464
-msgid "NTP support is not installed"
-msgstr "Podpora NTP nie je nainštalovaná"
-
-#: ../src/time/main.c:466
-msgid ""
-"Please install and activate NTP support in the system to enable "
-"synchronization of your local time server with internet time servers."
-msgstr ""
-"Prosím, nainštalujte a aktivujte podporu NTP, aby ste mohli synchronizovať "
-"váš lokálny časový server s internetovými časovými servermi."
-
-#: ../src/time/main.c:762
-msgid "Time and Date Settings"
-msgstr "Nastavenie času a dátumu"
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1657,256 +1491,216 @@ msgstr "Zmena dátumu, času a časová zóna"
 msgid "Time and Date"
 msgstr "Dátum a čas"
 
-#: ../src/users/callbacks.c:571
-msgid "Error saving profile"
-msgstr "Nastala chyba pri ukladaní profilu"
+#: ../src/time/time-tool.c:390
+msgid "NTP support is not installed"
+msgstr "Podpora NTP nie je nainštalovaná"
 
-#: ../src/users/callbacks.c:613
-msgid "Create New profile"
-msgstr "Vytvoriť nový profil"
+#: ../src/time/time-tool.c:392
+msgid ""
+"Please install and activate NTP support in the system to enable "
+"synchronization of your local time server with internet time servers."
+msgstr ""
+"Prosím, nainštalujte a aktivujte podporu NTP, aby ste mohli synchronizovať "
+"váš lokálny časový server s internetovými časovými servermi."
 
-#: ../src/users/callbacks.c:649
-#, c-format
-msgid "Settings for profile %s"
-msgstr "Nastavenie pre profil %s"
+#: ../src/time/time-tool.c:422
+msgid "Enabling NTP"
+msgstr ""
 
-#: ../src/users/group-settings.c:91
-msgid "Create New Group"
-msgstr "Vytvoriť novú skupinu"
+#: ../src/time/time-tool.c:422
+msgid "Disabling NTP"
+msgstr ""
 
-#. Check if gid is available
-#: ../src/users/group-settings.c:164 ../src/users/group-settings.c:172
-msgid "Invalid group ID"
-msgstr "Neplatné ID skupiny"
+#: ../src/time/time-tool.c:434
+msgid "Synchronizing system clock"
+msgstr "Prebieha synchronizácia systémových hodín"
 
-#: ../src/users/group-settings.c:165
-msgid "Group ID must be a positive number"
-msgstr "ID skupiny musí byť kladné celé číslo"
+#: ../src/time/time-tool.c:514
+msgid "Keep synchronized with Internet servers"
+msgstr "Udržiavať synchronizované s internetovými servermi:"
 
-#. if group is root
-#: ../src/users/group-settings.c:168
-msgid "Group ID of the \"root\" user should not be modified"
-msgstr "ID skupiny používateľa \"root\" by nemalo byť upravované"
+#: ../src/time/time-tool.c:515
+msgid "Manual"
+msgstr "Ručne"
 
-#: ../src/users/group-settings.c:169 ../src/users/group-settings.c:215
-#: ../src/users/group-settings.c:285
-msgid "This would leave the system unusable"
-msgstr "Toto môže spôsobiť, že sa systém stane nepoužiteľným"
+#: ../src/time/time-tool.c:661
+msgid "Time and Date Settings"
+msgstr "Nastavenie času a dátumu"
 
-#: ../src/users/group-settings.c:173
-#, c-format
-msgid "Group ID %s already exists"
-msgstr "ID skupiny %s už existuje"
+#: ../src/users/group-settings.c:52
+msgid "Administrator group can not be deleted"
+msgstr "Administrátorská skupina nemôže byť odstránená"
 
-#. If empty.
-#: ../src/users/group-settings.c:198
-msgid "Group name is empty"
-msgstr "Meno skupiny je prázdne"
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
+#: ../src/users/user-settings.c:550
+msgid "This would leave the system unusable."
+msgstr "Toto môže spôsobiť, že sa systém stane nepoužiteľným."
 
-#: ../src/users/group-settings.c:199
-msgid "A group name must be specified"
-msgstr "Meno skupiny musí byť určené"
-
-#. If too long.
-#: ../src/users/group-settings.c:202
-msgid "The group name is too long"
-msgstr "Meno skupiny je príliš dlhé"
-
-#: ../src/users/group-settings.c:203
-#, c-format
-msgid "The group name should have less than %i characters for being valid"
-msgstr "Meno skupiny by nemalo maž menej ako %i znakov, aby bolo platné"
-
-#. if invalid.
-#: ../src/users/group-settings.c:206
-msgid "Group name has invalid characters"
-msgstr "Meno skupiny obsahuje neplatné znaky"
-
-#: ../src/users/group-settings.c:207
-msgid "Please set a valid group name, using only lower case letters"
-msgstr "Prosím, zadajte platné meno skupiny, použite iba malé písmená"
-
-#. if !exist.
-#: ../src/users/group-settings.c:210
-#, c-format
-msgid "Group \"%s\" already exists"
-msgstr "Skupina \"%s\" už existuje"
-
-#: ../src/users/group-settings.c:211
-msgid "Please select a different group name"
-msgstr "Prosím, vyberte iné meno skupiny"
-
-#. if it's the root group
-#: ../src/users/group-settings.c:214
-msgid "Group name of the \"root\" user should not be modified"
-msgstr "Meno skupiny používateľa \"root\" by nemalo byť upravované"
-
-#: ../src/users/group-settings.c:284
-msgid "The group \"root\" should not be deleted"
-msgstr "Skupina \"root\" by nemala byť odstránená"
-
-#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:68
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Naozaj chcete odstrániť skupinu \"%s\"?"
 
-#: ../src/users/group-settings.c:301
+#: ../src/users/group-settings.c:71
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr ""
 "Toto môže spôsobiť, že na vašich súborových systémoch zostanú súbory s "
 "neplatným ID skupiny."
 
-#: ../src/users/group-settings.c:361
-#, c-format
-msgid "Settings for Group %s"
-msgstr "Nastavenie pre skupinu %s"
+#: ../src/users/group-settings.c:167
+msgid "New group"
+msgstr "Nová skupina"
 
-#: ../src/users/groups-table.c:44
-msgid "Group"
-msgstr "Skupina"
+#: ../src/users/group-settings.c:175
+#, c-format
+msgid "Group '%s' Properties"
+msgstr "Vlastnosti skupiny '%s'"
+
+#: ../src/users/group-settings.c:275
+msgid "Group name is empty"
+msgstr "Názov skupiny je prázdny"
+
+#: ../src/users/group-settings.c:276
+msgid "A group name must be specified."
+msgstr "Názov skupiny musí byť určený."
+
+#: ../src/users/group-settings.c:278
+#, fuzzy
+msgid "Group name of the administrator group user should not be modified"
+msgstr "Meno skupiny používateľa \"root\" by nemalo byť upravované"
+
+#: ../src/users/group-settings.c:281
+msgid "Group name has invalid characters"
+msgstr "Meno skupiny obsahuje neplatné znaky"
+
+#: ../src/users/group-settings.c:282
+#, fuzzy
+msgid ""
+"Please set a valid group name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Prosím, zadajte platné používateľské meno, použite iba malé písmená a "
+"číslice. Meno musí začínať písmenom."
+
+#: ../src/users/group-settings.c:286
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "Skupina \"%s\" už existuje"
+
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
+msgid "Please select a different user name."
+msgstr "Prosím, vyberte iné meno používateľa."
+
+#: ../src/users/group-settings.c:302
+#, fuzzy
+msgid "Group ID of the Administrator account should not be modified"
+msgstr "ID skupiny používateľa \"root\" by nemalo byť upravované"
 
 #: ../src/users/groups-table.c:45
-msgid "GID"
-msgstr "GID"
+msgid "Group name"
+msgstr "Názov skupiny"
 
-#: ../src/users/main.c:123
-msgid "User name contains"
-msgstr "Meno používateľa obsahuje"
+#: ../src/users/privileges-table.c:49
+msgid "Monitor system logs"
+msgstr "Monitorovať systémové záznamy"
 
-#: ../src/users/main.c:124
-msgid "User ID is"
-msgstr "Používateľské ID je"
+#: ../src/users/privileges-table.c:50
+msgid "Administer the system"
+msgstr "Spravovať systém"
 
-#: ../src/users/main.c:125
-msgid "Group name contains"
-msgstr "Meno skupiny obsahuje"
+#: ../src/users/privileges-table.c:51
+msgid "Use audio devices"
+msgstr "Používať zvukové zariadenia"
 
-#: ../src/users/main.c:126
-msgid "User GID is"
-msgstr "GID používateľa je"
+#: ../src/users/privileges-table.c:52
+msgid "Use CD-ROM drives"
+msgstr "Používať mechaniky CD-ROM"
 
-#: ../src/users/main.c:245 ../src/users/users.desktop.in.in.h:2
+#: ../src/users/privileges-table.c:53
+msgid "Use modems"
+msgstr "Používať modemy"
+
+#: ../src/users/privileges-table.c:54
+msgid "Connect to Internet using a modem"
+msgstr "Pripájať k internetu pomocou modemu"
+
+#: ../src/users/privileges-table.c:55
+msgid "Send and receive faxes"
+msgstr "Posielať a prijímať faxy"
+
+#: ../src/users/privileges-table.c:56
+msgid "Use floppy drives"
+msgstr "Používať disketové mechaniky"
+
+#: ../src/users/privileges-table.c:57
+msgid "Access external storage devices automatically"
+msgstr "Automatický prístup k vonkajším úložným zariadeniam"
+
+#: ../src/users/privileges-table.c:58
+msgid "Use scanners"
+msgstr "Používať skenery"
+
+#: ../src/users/privileges-table.c:59
+#, fuzzy
+msgid "Use tape drives"
+msgstr "Práva používateľov"
+
+#: ../src/users/privileges-table.c:60
+msgid "Be able to get administrator privileges"
+msgstr ""
+
+#: ../src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Pridanie alebo odstránenie používateľov a skupín"
+
+#: ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Používatelia a skupiny"
 
-#: ../src/users/passwd.c:168
-msgid "Passwords do not match"
-msgstr "Heslá nie sú rovnaké"
-
-#: ../src/users/passwd.c:173
-#, c-format
-msgid ""
-"Bad password: %s.\n"
-"Please try with a new password"
+#: ../src/users/user-settings.c:57
+msgid "Administrator account cannot be deleted"
 msgstr ""
-"Neplatné heslo: %s\n"
-"Prosím, skúste iné heslo"
 
-#: ../src/users/profile-settings.c:125
-msgid "The profile must have a name"
-msgstr "Profil musí mať meno"
-
-#: ../src/users/profile-settings.c:130
-msgid "The profile must have a default home"
-msgstr "Profil musí mať štandardný domovský priečinok"
-
-#: ../src/users/profile-settings.c:135 ../src/users/profile-settings.c:140
-msgid "The profile must have a default shell"
-msgstr "Profil musí mať štandardný shell."
-
-#: ../src/users/profile-settings.c:208
-msgid "The default profile should not be deleted"
-msgstr "Štandardný profil by ste nemali odstraňovať"
-
-#: ../src/users/profile-settings.c:209
-msgid "This profile is used for setting default data for new users"
-msgstr ""
-"Tento profil sa používa pre nastavenie štandardných nastavení pre nových "
-"používateľov"
-
-#: ../src/users/profile-settings.c:218
+#: ../src/users/user-settings.c:71
 #, c-format
-msgid "Delete profile \"%s\"?"
-msgstr "Vymazať profil \"%s\"?"
+msgid "Are you sure you want to delete account \"%s\"?"
+msgstr "Naozaj chcete odstrániť účet \"%s\"?"
 
-#: ../src/users/profile-settings.c:220
-msgid "You will not be able to recover this profile after pressing \"apply\"."
-msgstr "Ak stlačíte \"Použiť\", tento profil nebude možné obnoviť."
-
-#. Column name,          Adv_state_show,	Basic_state_show
-#: ../src/users/profiles-table.c:39
-msgid "Profile"
-msgstr "Profil"
-
-#: ../src/users/profiles-table.c:40
-msgid "Comment"
-msgstr "Komentár"
-
-#: ../src/users/search-bar/search-bar.c:228
-msgid "C_lear"
-msgstr "Vyči_stiť"
-
-#: ../src/users/search-bar/search-bar.c:329
-msgid "Choice"
-msgstr "Výber"
-
-#: ../src/users/search-bar/search-bar.c:339
-msgid "Text"
-msgstr "Text"
-
-#: ../src/users/user-settings.c:73
-msgid "The \"root\" user should not be deleted"
-msgstr "Používateľ \"root\" nesmie byť odstránený"
-
-#: ../src/users/user-settings.c:74 ../src/users/user-settings.c:305
-#: ../src/users/user-settings.c:400 ../src/users/user-settings.c:436
-msgid "This would leave the system unusable."
-msgstr "Toto môže spôsobiť, že sa systém stane nepoužiteľným."
-
-#: ../src/users/user-settings.c:83
-#, c-format
-msgid "Are you sure you want to delete user \"%s\"?"
-msgstr "Naozaj chcete odstrániť používateľa \"%s\"?"
-
-#: ../src/users/user-settings.c:85
+#: ../src/users/user-settings.c:74
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
 msgstr ""
-"Týmto zakážete tomuto používateľovi prístup do systému bez vymazania jeho "
-"domáceho priečinka."
+"Týmto zakážete tomuto používateľovi prístup do systému bez odstránenia jeho "
+"domovského priečinka."
 
-#: ../src/users/user-settings.c:189
-msgid "User Account Editor"
-msgstr "Editor účtu používateľa"
+#: ../src/users/user-settings.c:84
+msgid "This user is currently using this computer"
+msgstr "Tento používateľ práve používa počítač"
 
-#: ../src/users/user-settings.c:285
-msgid "The user name is empty"
+#: ../src/users/user-settings.c:324
+msgid "New user account"
+msgstr "Nový používateľský účet"
+
+#: ../src/users/user-settings.c:342
+#, c-format
+msgid "Account '%s' Properties"
+msgstr "Vlastnosti účtu '%s'"
+
+#: ../src/users/user-settings.c:475
+msgid "User name is empty"
 msgstr "Používateľské meno je prázdne"
 
-#: ../src/users/user-settings.c:286
+#: ../src/users/user-settings.c:476
 msgid "A user name must be specified."
 msgstr "Musí byť špecifikované používateľské meno."
 
-#. = sizeof (ut.ut_name)
-#: ../src/users/user-settings.c:292 ../src/users/user-settings.c:297
-msgid "The user name is too long"
-msgstr "Používateľské meno je príliš dlhé"
-
-#: ../src/users/user-settings.c:293 ../src/users/user-settings.c:298
-#, c-format
-msgid "To be valid, the user name should have less than %i characters."
-msgstr "Platné meno používateľa musí mať menej ako %i znakov."
-
-#: ../src/users/user-settings.c:304
-msgid "User name for the \"root\" user should not be modified"
-msgstr "Používateľské meno \"root\" nesmie byť upravované"
-
-#: ../src/users/user-settings.c:310
+#: ../src/users/user-settings.c:478
 msgid "User name has invalid characters"
 msgstr "Meno používateľa obsahuje neplatné znaky"
 
-#: ../src/users/user-settings.c:311
+#: ../src/users/user-settings.c:479
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1914,37 +1708,25 @@ msgstr ""
 "Prosím, zadajte platné používateľské meno, použite iba malé písmená a "
 "číslice. Meno musí začínať písmenom."
 
-#: ../src/users/user-settings.c:317
+#: ../src/users/user-settings.c:483
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Používateľ \"%s\" už existuje"
 
-#: ../src/users/user-settings.c:318
-msgid "Please select a different user name."
-msgstr "Prosím, vyberte iné meno používateľa."
-
-#: ../src/users/user-settings.c:343
+#: ../src/users/user-settings.c:509
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Neplatný znak \"%c\" v komentári"
 
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:510
 msgid "Check that this character is not used."
 msgstr "Skontrolujte či sa tento znak nepoužíva."
 
-#: ../src/users/user-settings.c:392
-msgid "Home directory should not be empty"
-msgstr "Domovský priečinok by nemal byť prázdny"
-
-#: ../src/users/user-settings.c:393
-msgid "Make sure you provide a home directory."
-msgstr "Uistite sa, že zadávate domovský priečinok."
-
-#: ../src/users/user-settings.c:395
+#: ../src/users/user-settings.c:528
 msgid "Incomplete path in home directory"
 msgstr "Neúplná cesta k domovskom priečinku"
 
-#: ../src/users/user-settings.c:396
+#: ../src/users/user-settings.c:529
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1952,91 +1734,771 @@ msgstr ""
 "Zadajte plnú cestu k domovskému priečinku\n"
 "<span size=\"smaller\">napr. /home/john</span>."
 
-#: ../src/users/user-settings.c:399
-msgid "Home directory of the \"root\" user should not be modified"
-msgstr "Domovský priečinok používateľa \"root\" by nemal byť upravovaný"
+#: ../src/users/user-settings.c:532
+#, fuzzy
+msgid "Home directory already exists"
+msgstr "Domovský priečinok by nemal byť prázdny"
 
-#: ../src/users/user-settings.c:432
-msgid "Invalid user ID"
-msgstr "Neplatné používateľské ID"
+#: ../src/users/user-settings.c:533
+msgid "Please enter a different home directory path."
+msgstr "Prosím, zadajte iné umiestnenie domovského priečinku."
 
-#: ../src/users/user-settings.c:433
-msgid "User ID must be a positive number."
-msgstr "ID používateľa musí byť kladné celé číslo."
+#: ../src/users/user-settings.c:549
+#, fuzzy
+msgid "Administrator account's user ID should not be modified"
+msgstr "Používateľské meno \"root\" nesmie byť upravované"
 
-#: ../src/users/user-settings.c:435
-msgid "User ID of the \"root\" user should not be modified"
-msgstr "Používateľské ID používateľa \"root\" by nemalo byť upravované"
-
-#: ../src/users/user-settings.c:453
-#, c-format
-msgid "User ID %s already exists"
-msgstr "Používateľské ID %s už existuje"
-
-#: ../src/users/user-settings.c:455
-msgid ""
-"Several users may share a single user ID, but it's not common and may lead "
-"to security problems."
-msgstr ""
-"Viacerí používatelia môžu používať ten istý používateľský identifikátor, ale "
-"nie je to bežné a môže to viesť k bezpečnostným problémom."
-
-#: ../src/users/user-settings.c:473
+#: ../src/users/user-settings.c:564
 msgid "Incomplete path in shell"
 msgstr "Neúplná cesta v shelli"
 
-#: ../src/users/user-settings.c:474
+#: ../src/users/user-settings.c:565
 msgid ""
 "Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/sh</span>."
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr ""
-"Prosím zadajte plnú cestu k shellu\n"
+"Prosím zadajte celú cestu k shellu\n"
 "<span size=\"smaller\">napr.: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:496
-msgid "Password should not be empty"
-msgstr "Heslo by nemalo byť prázdne."
+#: ../src/users/user-settings.c:598
+msgid "Password is too short"
+msgstr "Heslo je príliš krátke"
 
-#: ../src/users/user-settings.c:497
-msgid "A password must be provided."
-msgstr "Heslo nesmie byť prázdne."
+#: ../src/users/user-settings.c:599
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Používateľské meno musí byť dlhšie ako 6 znakov a pokiaľ možno tvorené "
+"číslicami, písmenami a špeciálnymi znakmi."
 
-#: ../src/users/user-settings.c:499
-msgid "Password confirmation isn't correct"
+#: ../src/users/user-settings.c:602
+msgid "Password confirmation is not correct"
 msgstr "Potvrdenie hesla nie je správne"
 
-#: ../src/users/user-settings.c:500
+#: ../src/users/user-settings.c:603
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Skontrolujte, či ste zadali rovnaké heslo v oboch poliach."
 
-#: ../src/users/user-settings.c:774
-#, c-format
-msgid "Settings for User %s"
-msgstr "Nastavenie pre používateľa %s"
+#: ../src/users/users-table.c:44
+msgid "Name"
+msgstr "Meno"
 
-#: ../src/users/users-table.c:61
-msgid "User"
-msgstr "Používateľ"
+#: ../src/users/users-table.c:67
+msgid "Login name"
+msgstr "Prihlasovacie meno"
 
-#: ../src/users/users-table.c:62
-msgid "Home"
+#: ../src/users/users-table.c:76
+msgid "Home directory"
 msgstr "Domovský priečinok"
 
-#: ../src/users/users-table.c:63
-msgid "User details"
-msgstr "Detailné informácie o používateľovi"
+#: ../src/users/users-tool.c:216
+msgid "Users Settings"
+msgstr "Nastavenia používateľov"
 
-#: ../src/users/users-table.c:64
-msgid "UID"
-msgstr "UID"
+#~ msgid ""
+#~ "Comma separated list of hosts that the GST will be able to access when "
+#~ "the remote configuration option is enabled"
+#~ msgstr ""
+#~ "Čiarkami oddelený zoznam hostiteľov, ku ktorým bude mať GST prístup pri "
+#~ "zapnutí vzdialenej správy."
 
-#: ../src/users/users-table.c:65
-msgid "Shell"
-msgstr "Shell"
+#~ msgid "Last GST version executed"
+#~ msgstr "Posledná spustená verzia GST"
 
-#: ../src/users/users.desktop.in.in.h:1
-msgid "Add or remove users and groups"
-msgstr "Pridanie alebo odstránenie používateľov a skupiny"
+#~ msgid "Preferred bootloader that boot-admin will configure"
+#~ msgstr "Preferovaný zavádzač systému, ktorý bude boot admin konfigurovať"
+
+#~ msgid "Remote hosts"
+#~ msgstr "Vzdialení hostitelia"
+
+#~ msgid ""
+#~ "The GST are able to do remote configuration through SSH, enable this "
+#~ "option to use this feature"
+#~ msgstr ""
+#~ "GST môže vykonávať vzdialenú správu pomocou SSH. Túto funkciu zapnete "
+#~ "touto voľbou"
+
+#~ msgid "The last GST version that this computer has run"
+#~ msgstr "Posledná verzia GST spustená na tomto počítači"
+
+#~ msgid ""
+#~ "This key stores the bootloader that boot-admin will configure if there "
+#~ "are more than one installed, if it's not set or isn't valid, then boot-"
+#~ "admin will ask the user"
+#~ msgstr ""
+#~ "Tento kľúč obsahuje zavádzač systému, ktorý bude boot-admin konfigurovať, "
+#~ "ak je nainštalovaný viac než jeden. Ak nie je nastavený alebo je "
+#~ "neplatný, boot-admin sa spýta používateľa"
+
+#~ msgid "Whether the tools will use remote administration or not"
+#~ msgstr "Či nástroje budú používať vzdialenú správu"
+
+#~ msgid "Whether the warning dialog should be shown or not"
+#~ msgstr "Či sa má zobrazovať varovanie"
+
+#~ msgid "/dev/hda"
+#~ msgstr "/dev/hda"
+
+#~ msgid "/dev/hdb"
+#~ msgstr "/dev/hdb"
+
+#~ msgid "/dev/hdc"
+#~ msgstr "/dev/hdc"
+
+#~ msgid "/dev/hdd"
+#~ msgstr "/dev/hdd"
+
+#~ msgid "<b>Security</b>"
+#~ msgstr "<b>Zabezpečenie</b>"
+
+#~ msgid ""
+#~ "<span size=\"larger\" weight=\"bold\">Several bootloaders have been "
+#~ "found</span>\n"
+#~ "\n"
+#~ "please select which do you want to configure"
+#~ msgstr ""
+#~ "<span size=\"larger\" weight=\"bold\">Bolo nájdených niekoľko zavádzačov "
+#~ "systému</span>\n"
+#~ "\n"
+#~ "prosím, vyberte ten, ktorý chcete konfigurovať"
+
+#~ msgid "<span weight=\"bold\">Image Settings</span>"
+#~ msgstr "<span weight=\"bold\">Nastavenie obrazu</span>"
+
+#~ msgid "<span weight=\"bold\">Other Settings</span>"
+#~ msgstr "<span weight=\"bold\">Ostatné nastavenia</span>"
+
+#~ msgid "<span weight=\"bold\">Starting the Computer</span>"
+#~ msgstr "<span weight=\"bold\">Spustenie počítača</span>"
+
+#~ msgid "Ask at boot"
+#~ msgstr "Pýtať sa pri štarte počítača"
+
+#~ msgid "Boot Manager Settings"
+#~ msgstr "Nastavenie správcu zavedenia systému"
+
+#~ msgid ""
+#~ "Choose a kernel image to boot, and a partition to mount as the root "
+#~ "partition. Optionally, you may also enter parameters passed to the kernel "
+#~ "at boot time."
+#~ msgstr ""
+#~ "Vyberte obraz kernelu, ktorý chcete spustiť, a oddiel, ktorý chcete "
+#~ "pripojiť ako koreňový. Môžete tiež zadať prídavné parametre, ktoré budú "
+#~ "pri štarte odovzdané kernelu."
+
+#~ msgid "Click \"Forward\" to continue"
+#~ msgstr "Pre pokračovanie stlačte \"Nasledujúci\""
+
+#~ msgid "Confirmation"
+#~ msgstr "Potvrdenie"
+
+#~ msgid "Creating a new boot image"
+#~ msgstr "Vytváram nový obraz zavádzača systému"
+
+#~ msgid "Don't ask me again"
+#~ msgstr "Nabudúce sa už nepýtať"
+
+#~ msgid "Enable IDE SCSI emulation"
+#~ msgstr "Povoliť emuláciu IDE SCSI"
+
+#~ msgid ""
+#~ "Enter a name for the boot image, and specify what kind of operating "
+#~ "system it is."
+#~ msgstr "Zadajte meno a typ operačného systému pre zavádzací obraz."
+
+#~ msgid "Finished"
+#~ msgstr "Dokončené"
+
+#~ msgid "Number of colors:"
+#~ msgstr "Počet farieb:"
+
+#~ msgid "Other parameters:"
+#~ msgstr "Iné parametre:"
+
+#~ msgid "Password"
+#~ msgstr "Heslo"
+
+#~ msgid "Protect with password"
+#~ msgstr "Chrániť heslom"
+
+#~ msgid "Resolution:"
+#~ msgstr "Rozlíšenie:"
+
+#~ msgid "Seconds to wait before loading default kernel or OS"
+#~ msgstr "Sekúnd pred načítaním štandardného jadra alebo OS"
+
+#~ msgid "Select a kernel image"
+#~ msgstr "Vyberte obraz kernelu"
+
+#~ msgid "Select an initrd image"
+#~ msgstr "Vyberte obraz initrd"
+
+#~ msgid "Specify the partition on which the operating system is installed."
+#~ msgstr "Zadajte oddiel, na ktorom je nainštalovaný operačný systém."
+
+#~ msgid ""
+#~ "The new boot image has been added. Please click \"Apply\" to save your "
+#~ "changes."
+#~ msgstr ""
+#~ "Vytvorili ste nový zavádzací obraz. Stlačením \"Použiť\" uložíte zmeny."
+
+#~ msgid ""
+#~ "This assistant is designed to help you quickly and easily add a new boot "
+#~ "image to your system."
+#~ msgstr ""
+#~ "Tento sprievodca vám pomôže jednoducho a rýchlo pridať zavádzací obraz "
+#~ "pre váš systém."
+
+#~ msgid "Video modes (only frame buffer)"
+#~ msgstr "Video režimy (iba pre framebuffer)"
+
+#~ msgid "_Add..."
+#~ msgstr "_Pridať..."
+
+#~ msgid "_Device:"
+#~ msgstr "_Zariadenie:"
+
+#~ msgid "_Edit"
+#~ msgstr "_Upraviť"
+
+#~ msgid "_Initrd image path:"
+#~ msgstr "Cesta k počiatočnému _ramdisku (initrd):"
+
+#~ msgid "_Kernel image path:"
+#~ msgstr "_Cesta k obrazu kernelu:"
+
+#~ msgid "_Name:"
+#~ msgstr "_Meno:"
+
+#~ msgid "_Operating system:"
+#~ msgstr "_Operačný systém:"
+
+#~ msgid "_Parameters:"
+#~ msgstr "_Parametre:"
+
+#~ msgid "_Root file system device:"
+#~ msgstr "Zariadenie _koreňového systému súborov:"
+
+#~ msgid "Remote administration"
+#~ msgstr "Vzdialená správa systému"
+
+#~ msgid "Run _Without Password"
+#~ msgstr "_Spustiť bez hesla"
+
+#~ msgid "Use this window to select the computer you wish to configure"
+#~ msgstr "Použite toto okno pre výber počítača, ktorý chcete konfigurovať"
+
+#~ msgid ""
+#~ "/dev/modem\n"
+#~ "/dev/ttyS0\n"
+#~ "/dev/ttyS1\n"
+#~ "/dev/ttyS2\n"
+#~ "/dev/ttyS3"
+#~ msgstr ""
+#~ "/dev/modem\n"
+#~ "/dev/ttyS0\n"
+#~ "/dev/ttyS1\n"
+#~ "/dev/ttyS2\n"
+#~ "/dev/ttyS3"
+
+#~ msgid "<b>Connection</b>"
+#~ msgstr "<b>Pripojenie</b>"
+
+#~ msgid "Default _gateway device:"
+#~ msgstr "Zariadenie štandardnej _brány:"
+
+#~ msgid "Device:"
+#~ msgstr "Zariadenie:"
+
+#~ msgid "Key _type:"
+#~ msgstr "_Typ kľúča:"
+
+#~ msgid ""
+#~ "Off\n"
+#~ "Low\n"
+#~ "Medium\n"
+#~ "Loud"
+#~ msgstr ""
+#~ "Vypnuté\n"
+#~ "Nízka\n"
+#~ "Stredná\n"
+#~ "Hlasná"
+
+#~ msgid ""
+#~ "Plain (ASCII)\n"
+#~ "Hexadecimal"
+#~ msgstr ""
+#~ "Text (ASCII)\n"
+#~ "Hexadecimálne"
+
+#~ msgid "Select location name"
+#~ msgstr "Vyberte meno umiestnenia"
+
+#~ msgid ""
+#~ "Tones\n"
+#~ "Pulses"
+#~ msgstr ""
+#~ "Tóny\n"
+#~ "Pulzy"
+
+#~ msgid "WEP _key:"
+#~ msgstr "WEB _kľúč:"
+
+#~ msgid "_Activate"
+#~ msgstr "_Aktivovať"
+
+#~ msgid "_Deactivate"
+#~ msgstr "_Deaktivovať"
+
+#~ msgid "<b>Hosts settings</b>"
+#~ msgstr "<b>Nastavenie hostiteľa</b>"
+
+#~ msgid "<b>WINS server</b>"
+#~ msgstr "<b>Server WINS</b>"
+
+#~ msgid "Allow _browsing folder"
+#~ msgstr "Povoliť _prezeranie priečinkov"
+
+#~ msgid "Do not use WINS server"
+#~ msgstr "Nepoužívat WINS server"
+
+#~ msgid "General Windows sharing settings"
+#~ msgstr "Všeobecné nastavenia zdieľania Windows"
+
+#~ msgid "Windows sharing settings"
+#~ msgstr "Nastavenie zdieľania Windows"
+
+#~ msgid "_Add host"
+#~ msgstr "_Pridať hostiteľa"
+
+#~ msgid "_Host description:"
+#~ msgstr "_Popis hostiteľa:"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid "_Select Time Zone..."
+#~ msgstr "Vybrať časovú _zónu..."
+
+#~ msgid "<span weight=\"bold\">User Profile</span>"
+#~ msgstr "<span weight=\"bold\">Profil používateľov</span>"
+
+#~ msgid "Group _members:"
+#~ msgstr "Č_lenovia skupiny:"
+
+#~ msgid "Groups"
+#~ msgstr "Skupiny"
+
+#~ msgid "Show a_ll users and groups"
+#~ msgstr "_Zobraziť všetkých používateľov a skupiny"
+
+#~ msgid "_All users:"
+#~ msgstr "_Všetci používatelia:"
+
+#~ msgid "_Edit User Profiles..."
+#~ msgstr "_Upraviť profily používateľov..."
+
+#~ msgid "32,768"
+#~ msgstr "32,768"
+
+#~ msgid "65,536"
+#~ msgstr "65,536"
+
+#~ msgid "16,777,216"
+#~ msgstr "16,777,216"
+
+#~ msgid "Invalid VGA value"
+#~ msgstr "Neplatná hodnota pre VGA"
+
+#~ msgid "\"%s\" is not a valid VGA value."
+#~ msgstr "\"%s\" nie je platná hodnota pre VGA."
+
+#~ msgid "Error creating boot image"
+#~ msgstr "Chyba pri vytváraní obrazu zavádzača"
+
+#~ msgid "Creating a new boot image (%d of %d)"
+#~ msgstr "Vytvorenie nového obrazu zavádzača (%d z %d)"
+
+#~ msgid "Finished creating a new boot image"
+#~ msgstr "Vytvorenie nového obrazu zavádzača ukončené"
+
+#~ msgid "Unknown"
+#~ msgstr "Neznámy"
+
+#~ msgid "Windows NT"
+#~ msgstr "Windows NT"
+
+#~ msgid "Windows 9x"
+#~ msgstr "Windows 9x"
+
+#~ msgid "Dos"
+#~ msgstr "Dos"
+
+#~ msgid "Linux"
+#~ msgstr "Linux"
+
+#~ msgid "Linux swap"
+#~ msgstr "Linux odkladací priestor"
+
+#~ msgid "GNU/Hurd"
+#~ msgstr "GNU/Hurd"
+
+#~ msgid "\"%s\" is an invalid path"
+#~ msgstr "\"%s\" nie je platná cesta"
+
+#~ msgid "\"%s\" already exists, please set another name."
+#~ msgstr "\"%s\" už existuje, prosím, vyberte iné meno."
+
+#~ msgid "Invalid image name: \"%s\"."
+#~ msgstr "Neplatné meno obrazu: \"%s\"."
+
+#~ msgid "Invalid image: \"%s\"."
+#~ msgstr "Neplatný obraz: \"%s\"."
+
+#~ msgid "Invalid root device: \"%s\"."
+#~ msgstr "Neplatné koreňové zariadenie: \"%s\"."
+
+#~ msgid "_Module path:"
+#~ msgstr "_Cesta modulu:"
+
+#~ msgid "Error modifying boot image"
+#~ msgstr "Chyba pri úprave obrazu zavádzača"
+
+#~ msgid "Boot"
+#~ msgstr "Zavádzanie systému"
+
+#~ msgid "Configure the system boot process"
+#~ msgstr "Nastavenie zavádzača systému"
+
+#~ msgid "Boot Image Editor"
+#~ msgstr "Editor zavádzacích obrazov"
+
+#~ msgid "Boot Append Editor"
+#~ msgstr "Editor ďalších parametrov zavádzania"
+
+#~ msgid "Error deleting boot image"
+#~ msgstr "Chyba pri vymazávaní zavádzacieho obrazu"
+
+#~ msgid "Without at least one boot image your computer will not start."
+#~ msgstr "Ak nemáte aspoň jeden zavádzací obraz, váš systém sa nespustí."
+
+#~ msgid "This may leave this operating system unbootable."
+#~ msgstr "Toto môže spôsobiť, že operačný systém nenaštartuje."
+
+#~ msgid "The configuration will show empty"
+#~ msgstr "Bude sa zobrazovať prázdna konfigurácia"
+
+#~ msgid "The file \"%s\" is missing or could not be read."
+#~ msgstr "Súbor \"%s\" chýba alebo ho nie je možné prečítať."
+
+#~ msgid "Default"
+#~ msgstr "Štandardný"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Kernel Image"
+#~ msgstr "Obraz kernelu"
+
+#~ msgid "Device"
+#~ msgstr "Zariadenie"
+
+#~ msgid "The tool could not connect to the computer"
+#~ msgstr "Nepodarilo sa pripojiť k počítaču"
+
+#~ msgid ""
+#~ "Check that you have access to this network and that the computer is "
+#~ "actually working and running SSHD"
+#~ msgstr ""
+#~ "Skontrolujte, či máte prístup do tejto siete a že je na počítači spustený "
+#~ "SSHD"
+
+#~ msgid "The entered password is invalid"
+#~ msgstr "Zadané heslo nie je platné"
+
+#~ msgid ""
+#~ "Check that you typed it correctly and that you haven't activated the "
+#~ "\"caps lock\" key"
+#~ msgstr ""
+#~ "Skontrolujte, či ste ho zadali správne a či nemáte zapnutý \"Caps lock\""
+
+#~ msgid "Could not run \"%s\""
+#~ msgstr "Nepodarilo sa spustiť \"%s\""
+
+#~ msgid "Check that you have permissions to run this command"
+#~ msgstr "Skontrolujte, či máte právo spustiť tento príkaz"
+
+#~ msgid "Could not execute the backend"
+#~ msgstr "Nepodarilo sa spustiť backend"
+
+#~ msgid ""
+#~ "There was an error creating the child process, the tool will close now."
+#~ msgstr "Pri spúšťaní procesu potomka nastala chyba, nástroj teraz skončí."
+
+#~ msgid "Could not find widget: %s"
+#~ msgstr "Nie je možné nájsť prvok: %s"
+
+#~ msgid "There are changes which have not been applied"
+#~ msgstr "Niektoré zmeny ste ešte nepotvrdili"
+
+#~ msgid "Apply them now?"
+#~ msgstr "Chcete ich potvrdiť teraz?"
+
+#~ msgid "Error connection signal `%s' in widget `%s'"
+#~ msgstr "Signál chyby spojenia `%s' v prvku `%s'"
+
+#~ msgid "There was an error running the backend script"
+#~ msgstr "Nastala chyba pri spustení skriptu backendu"
+
+#~ msgid "Welcome to the %s prerelease of the GNOME System Tools"
+#~ msgstr "Víta vás %s testovacia verzia Systémových nástrojov GNOME"
+
+#~ msgid ""
+#~ "This is still a work in progress, and so it may have serious bugs. Due to "
+#~ "the nature of these tools, bugs may render your computer <span weight="
+#~ "\"bold\">practically useless</span>, costing time, effort and sanity "
+#~ "points. You have been warned. Thank you for trying out this prerelease of "
+#~ "the GNOME System Tools!"
+#~ msgstr ""
+#~ "Tento balík je neustále vyvíjaný, takže môže obsahovať významné chyby. "
+#~ "Pretože je tento balík určený na správu počítača, chyby môžu spôsobiť "
+#~ "jeho <span weight=\"bold\">úplne znefunkčnenie</span>. Varovali sme vás. "
+#~ "Sme radi, že ste sa rozhodli vyskúšať Systémové nástroje GNOME!"
+
+#~ msgid "Warning"
+#~ msgstr "Varovanie"
+
+#~ msgid "Don't show me this again"
+#~ msgstr "Nabudúce už túto správu nezobrazovať"
+
+#~ msgid "GNOME System Tools"
+#~ msgstr "Systémové nástroje GNOME"
+
+#~ msgid ""
+#~ "Check that the settings are correct for this network and that the "
+#~ "computer is correctly connected to it."
+#~ msgstr ""
+#~ "Skontrolujte, či sú nastavenia pre túto sieť správne a že je počítač do "
+#~ "nej správne pripojený."
+
+#~ msgid "Do you want to remove this location?"
+#~ msgstr "Chcete odstrániť toto umiestnenie?"
+
+#~ msgid "Changing profile"
+#~ msgstr "Mením profil"
+
+#~ msgid "Networking"
+#~ msgstr "Sieť"
+
+#~ msgid "Ethernet connection"
+#~ msgstr "Ethernetové pripojenie"
+
+#~ msgid "ISDN connection"
+#~ msgstr "ISDN pripojenie"
+
+#~ msgid "Modem connection"
+#~ msgstr "Modemové pripojenie"
+
+#~ msgid "Activating interface \"%s\""
+#~ msgstr "Aktivujem rozhranie \"%s\""
+
+#~ msgid "The interface %s is not active"
+#~ msgstr "Rozhranie %s nie je aktívne"
+
+#~ msgid "The interface %s is active"
+#~ msgstr "Rozhranie %s je aktívne"
+
+#~ msgid "Settings for \"%s\""
+#~ msgstr "Nastavenie pre \"%s\""
+
+#~ msgid "Are you sure you want to deactivate this service?"
+#~ msgstr "Naozaj chcete deaktivovať túto službu?"
+
+#~ msgid "File sharing service"
+#~ msgstr "Služba zdieľania súborov"
+
+#~ msgid "Shared folders settings"
+#~ msgstr "Nastavenie zdieľaných priečinkov"
+
+#~ msgid "Hosts in the %s network"
+#~ msgstr "Hostitelia v sieti %s"
+
+#~ msgid "SMB"
+#~ msgstr "SMB"
+
+#~ msgid "NFS"
+#~ msgstr "NFS"
+
+#~ msgid "Error saving profile"
+#~ msgstr "Nastala chyba pri ukladaní profilu"
+
+#~ msgid "Create New profile"
+#~ msgstr "Vytvoriť nový profil"
+
+#~ msgid "Settings for profile %s"
+#~ msgstr "Nastavenie pre profil %s"
+
+#~ msgid "Invalid group ID"
+#~ msgstr "Neplatné ID skupiny"
+
+#~ msgid "Group ID must be a positive number"
+#~ msgstr "ID skupiny musí byť kladné celé číslo"
+
+#~ msgid "This would leave the system unusable"
+#~ msgstr "Toto môže spôsobiť, že sa systém stane nepoužiteľným"
+
+#~ msgid "Group ID %s already exists"
+#~ msgstr "ID skupiny %s už existuje"
+
+#~ msgid "The group name is too long"
+#~ msgstr "Meno skupiny je príliš dlhé"
+
+#~ msgid "The group name should have less than %i characters for being valid"
+#~ msgstr "Meno skupiny by nemalo maž menej ako %i znakov, aby bolo platné"
+
+#~ msgid "Please set a valid group name, using only lower case letters"
+#~ msgstr "Prosím, zadajte platné meno skupiny, použite iba malé písmená"
+
+#~ msgid "Please select a different group name"
+#~ msgstr "Prosím, vyberte iné meno skupiny"
+
+#~ msgid "The group \"root\" should not be deleted"
+#~ msgstr "Skupina \"root\" by nemala byť odstránená"
+
+#~ msgid "Settings for Group %s"
+#~ msgstr "Nastavenie pre skupinu %s"
+
+#~ msgid "Group"
+#~ msgstr "Skupina"
+
+#~ msgid "GID"
+#~ msgstr "GID"
+
+#~ msgid "User name contains"
+#~ msgstr "Meno používateľa obsahuje"
+
+#~ msgid "User ID is"
+#~ msgstr "Používateľské ID je"
+
+#~ msgid "Group name contains"
+#~ msgstr "Meno skupiny obsahuje"
+
+#~ msgid "User GID is"
+#~ msgstr "GID používateľa je"
+
+#~ msgid "Passwords do not match"
+#~ msgstr "Heslá nie sú rovnaké"
+
+#~ msgid ""
+#~ "Bad password: %s.\n"
+#~ "Please try with a new password"
+#~ msgstr ""
+#~ "Neplatné heslo: %s\n"
+#~ "Prosím, skúste iné heslo"
+
+#~ msgid "The profile must have a name"
+#~ msgstr "Profil musí mať meno"
+
+#~ msgid "The profile must have a default home"
+#~ msgstr "Profil musí mať štandardný domovský priečinok"
+
+#~ msgid "The profile must have a default shell"
+#~ msgstr "Profil musí mať štandardný shell."
+
+#~ msgid "The default profile should not be deleted"
+#~ msgstr "Štandardný profil by ste nemali odstraňovať"
+
+#~ msgid "This profile is used for setting default data for new users"
+#~ msgstr ""
+#~ "Tento profil sa používa pre nastavenie štandardných nastavení pre nových "
+#~ "používateľov"
+
+#~ msgid "Delete profile \"%s\"?"
+#~ msgstr "Vymazať profil \"%s\"?"
+
+#~ msgid ""
+#~ "You will not be able to recover this profile after pressing \"apply\"."
+#~ msgstr "Ak stlačíte \"Použiť\", tento profil nebude možné obnoviť."
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Comment"
+#~ msgstr "Komentár"
+
+#~ msgid "C_lear"
+#~ msgstr "Vyči_stiť"
+
+#~ msgid "Choice"
+#~ msgstr "Výber"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "The \"root\" user should not be deleted"
+#~ msgstr "Používateľ \"root\" nesmie byť odstránený"
+
+#~ msgid "Are you sure you want to delete user \"%s\"?"
+#~ msgstr "Naozaj chcete odstrániť používateľa \"%s\"?"
+
+#~ msgid "User Account Editor"
+#~ msgstr "Editor účtu používateľa"
+
+#~ msgid "The user name is too long"
+#~ msgstr "Používateľské meno je príliš dlhé"
+
+#~ msgid "To be valid, the user name should have less than %i characters."
+#~ msgstr "Platné meno používateľa musí mať menej ako %i znakov."
+
+#~ msgid "Make sure you provide a home directory."
+#~ msgstr "Uistite sa, že zadávate domovský priečinok."
+
+#~ msgid "Home directory of the \"root\" user should not be modified"
+#~ msgstr "Domovský priečinok používateľa \"root\" by nemal byť upravovaný"
+
+#~ msgid "Invalid user ID"
+#~ msgstr "Neplatné používateľské ID"
+
+#~ msgid "User ID must be a positive number."
+#~ msgstr "ID používateľa musí byť kladné celé číslo."
+
+#~ msgid "User ID of the \"root\" user should not be modified"
+#~ msgstr "Používateľské ID používateľa \"root\" by nemalo byť upravované"
+
+#~ msgid "User ID %s already exists"
+#~ msgstr "Používateľské ID %s už existuje"
+
+#~ msgid ""
+#~ "Several users may share a single user ID, but it's not common and may "
+#~ "lead to security problems."
+#~ msgstr ""
+#~ "Viacerí používatelia môžu používať ten istý používateľský identifikátor, "
+#~ "ale nie je to bežné a môže to viesť k bezpečnostným problémom."
+
+#~ msgid "Password should not be empty"
+#~ msgstr "Heslo by nemalo byť prázdne."
+
+#~ msgid "A password must be provided."
+#~ msgstr "Heslo nesmie byť prázdne."
+
+#~ msgid "Password confirmation isn't correct"
+#~ msgstr "Potvrdenie hesla nie je správne"
+
+#~ msgid "Settings for User %s"
+#~ msgstr "Nastavenie pre používateľa %s"
+
+#~ msgid "User"
+#~ msgstr "Používateľ"
+
+#~ msgid "Home"
+#~ msgstr "Domovský priečinok"
+
+#~ msgid "UID"
+#~ msgstr "UID"
+
+#~ msgid "Shell"
+#~ msgstr "Shell"
 
 #~ msgid "<span weight=\"bold\">General Information</span>"
 #~ msgstr "<span weight=\"bold\">Všeobecné informácie</span>"
@@ -2053,14 +2515,8 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgid "Service:"
 #~ msgstr "Služba:"
 
-#~ msgid "Status:"
-#~ msgstr "Stav:"
-
 #~ msgid "_Order list by startup sequence"
 #~ msgstr "Z_oradiť zoznam podľa poradia spúšťania"
-
-#~ msgid "_Start"
-#~ msgstr "_Spustiť"
 
 #~ msgid "_Startup sequence:"
 #~ msgstr "Poradie _spúšťania:"
@@ -2071,14 +2527,8 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgid "Running"
 #~ msgstr "Beží"
 
-#~ msgid "Stopped"
-#~ msgstr "Zastavená"
-
 #~ msgid "Could not get info"
 #~ msgstr "Nie je možné získať informácie"
-
-#~ msgid "Settings for service %s"
-#~ msgstr "Nastavenie pre službu %s"
 
 #~ msgid "Active"
 #~ msgstr "Aktívne"
@@ -2108,9 +2558,6 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgstr ""
 #~ "<span weight=\"bold\" size=\"larger\">Na spustenie tohto nástroja "
 #~ "potrebujete administrátorské práva</span>"
-
-#~ msgid "Scanning system configuration..."
-#~ msgstr "Kontrolujem konfiguráciu systému..."
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
@@ -2157,17 +2604,8 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgid "Add search domain"
 #~ msgstr "Pridať prehľadávanú doménu"
 
-#~ msgid "Address configuration"
-#~ msgstr "Nastavenie adresy"
-
 #~ msgid "Allow activation control for all _users"
 #~ msgstr "Povoliť aktiváciu _všetkým používateľom"
-
-#~ msgid "Connection type"
-#~ msgstr "Typ pripojenia"
-
-#~ msgid "Creating a new network connection"
-#~ msgstr "Vytvára sa nové sieťové pripojenie"
 
 #~ msgid "Current network profile:"
 #~ msgstr "Aktuálny sieťový profil"
@@ -2288,9 +2726,6 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgid "_Apply and activate connection"
 #~ msgstr "_Použiť a aktivovať pripojenie"
 
-#~ msgid "_Configuration:"
-#~ msgstr "_Nastavenie:"
-
 #~ msgid "_Ethernet"
 #~ msgstr "_Ethernet"
 
@@ -2389,9 +2824,6 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgstr ""
 #~ "Toto zakáže všetky sieťové pripojenia pre toto rozhranie, akonáhle "
 #~ "stlačíte \"Použiť\""
-
-#~ msgid "Are you sure you want to delete connection \"%s\"?"
-#~ msgstr "Naozaj chcete odstrániť pripojenie \"%s\"?"
 
 #~ msgid "SMB Support is not running"
 #~ msgstr "Podpora SMB nie je spustená"
@@ -2495,9 +2927,6 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgid "Unknown interface type"
 #~ msgstr "Neznámy typ rozhrania"
 
-#~ msgid "Automatic (DHCP)"
-#~ msgstr "Automatické (DHCP)"
-
 #~ msgid "Automatic (BOOTP)"
 #~ msgstr "Automatické (BOOTP)"
 
@@ -2520,9 +2949,6 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 #~ msgstr ""
 #~ "IP adresa alebo vzdialená adresa rozhrania je prázdna. Pre pokračovanie "
 #~ "musíte zadať platné hodnoty IP."
-
-#~ msgid "Error in domain name servers"
-#~ msgstr "Chyba v doménových nameserveroch"
 
 #~ msgid ""
 #~ "You chose to set the domain name servers for this connection manually, "
@@ -2567,9 +2993,6 @@ msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 
 #~ msgid "Run the irlan connection assistant."
 #~ msgstr "Spustiť sprievodcu pre pripojenie irlan."
-
-#~ msgid "interface"
-#~ msgstr "rozhranie"
 
 #~ msgid "Creating a new network connection (%d of %d)"
 #~ msgstr "Vytvára sa nové sieťové pripojenie (%d z %d)"
