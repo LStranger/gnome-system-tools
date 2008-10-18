@@ -6,5 +6,5 @@ DOC_ENTITIES = legal.xml
 DOC_INCLUDES =
 DOC_FIGURES = figures/network-tool.png
 
-DOC_LINGUAS = ca es fr oc sv
+DOC_LINGUAS = ca de es fr oc sv
 
