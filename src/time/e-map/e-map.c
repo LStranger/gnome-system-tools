@@ -1318,7 +1318,7 @@ scroll_to (EMap *view, int x, int y)
 
 	gdk_draw_drawable (window, gc, window, src_x, src_y, dest_x, dest_y, width - abs (xofs), height - abs (yofs));
 
-	gdk_gc_unref (gc);
+	g_object_unref (gc);
 
 	/* Add the scrolled-in region */
 
@@ -1579,7 +1579,7 @@ blowup_window_area (GdkWindow *window, gint area_x, gint area_y, gint target_x, 
 
 	/* Free our GC */
 
-	gdk_gc_unref (gc);
+	g_object_unref (gc);
 }
 
 
