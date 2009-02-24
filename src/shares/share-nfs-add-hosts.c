@@ -132,7 +132,7 @@ share_nfs_add_static_combo_elements (GtkListStore *store)
 			    2, NFS_SHARE_NETWORK,
 			    3, NULL,
 			    -1);
-	gdk_pixbuf_unref (pixbuf);
+	g_object_unref (pixbuf);
 }
 
 static void

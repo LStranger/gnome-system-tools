@@ -167,7 +167,7 @@ gst_tool_init (GstTool *tool)
 	gtk_image_set_from_pixbuf (GTK_IMAGE (tool->report_pixmap), pixbuf);
 
 	if (pixbuf)
-		gdk_pixbuf_unref (pixbuf);
+		g_object_unref (pixbuf);
 
 	tool->objects = g_ptr_array_new ();
 

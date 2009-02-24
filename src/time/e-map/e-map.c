@@ -288,13 +288,13 @@ e_map_finalize (GObject *object)
 
 	if (priv->map_pixbuf)
 	{
-		gdk_pixbuf_unref (priv->map_pixbuf);
+		g_object_unref (priv->map_pixbuf);
 		priv->map_pixbuf = NULL;
 	}
 
 	if (priv->map_render_pixbuf)
 	{
-		gdk_pixbuf_unref (priv->map_render_pixbuf);
+		g_object_unref (priv->map_render_pixbuf);
 		priv->map_render_pixbuf = NULL;
 	}
 
@@ -993,7 +993,7 @@ load_map_background (EMap *view, gchar *name)
 /*	pb0 = tool_load_image (name);*/
 	if (!pb0) return (FALSE);
 
-	if (priv->map_pixbuf) gdk_pixbuf_unref (priv->map_pixbuf);
+	if (priv->map_pixbuf) g_object_unref (priv->map_pixbuf);
 	priv->map_pixbuf = pb0;
 	update_render_pixbuf (view, TRUE);
 
@@ -1037,7 +1037,7 @@ update_render_pixbuf (EMap *map, gboolean render_overlays)
 
 	/* Reallocate the pixbuf */
 
-	if (priv->map_render_pixbuf) gdk_pixbuf_unref (priv->map_render_pixbuf);
+	if (priv->map_render_pixbuf) g_object_unref (priv->map_render_pixbuf);
 	priv->map_render_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE,	/* No alpha */
 						  8, width, height);
 
