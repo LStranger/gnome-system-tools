@@ -20,7 +20,7 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <gdk/gdkpixbuf.h>
+#include <gdk/gdk.h>
 #include "gst.h"
 #include "callbacks.h"
 #include "ifaces-list.h"

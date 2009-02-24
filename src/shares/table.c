@@ -22,7 +22,7 @@
  */
 
 #include <glib/gi18n.h>
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include "gst-tool.h"
 #include "gst.h"
 #include "table.h"

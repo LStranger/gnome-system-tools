@@ -23,7 +23,7 @@
 #ifndef E_MAP_H
 #define E_MAP_H
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 
 #define TYPE_E_MAP            (e_map_get_type ())
 #define E_MAP(obj)            (GTK_CHECK_CAST ((obj), TYPE_E_MAP, EMap))

@@ -24,7 +24,7 @@
 #ifndef _SHARE_NFS_ACL_H
 #define _SHARE_NFS_ACL_H
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 
 enum {
 	NFS_SHARE_IFACE,

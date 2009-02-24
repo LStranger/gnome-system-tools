@@ -24,7 +24,7 @@
 #ifndef _SHARE_SETTINGS_H
 #define _SHARE_SETTINGS_H
 
-#include <gtk/gtkwidget.h>
+#include <gtk/gtk.h>
 
 enum {
 	SHARE_DONT_SHARE,
