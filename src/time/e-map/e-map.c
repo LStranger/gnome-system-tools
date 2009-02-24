@@ -280,10 +280,10 @@ e_map_finalize (GObject *object)
 	view = E_MAP (object);
 	priv = view->priv;
 
-	gtk_object_unref (GTK_OBJECT (priv->hadj));
+	g_object_unref (G_OBJECT (priv->hadj));
 	priv->hadj = NULL;
 
-	gtk_object_unref (GTK_OBJECT (priv->vadj));
+	g_object_unref (G_OBJECT (priv->vadj));
 	priv->vadj = NULL;
 
 	if (priv->map_pixbuf)
