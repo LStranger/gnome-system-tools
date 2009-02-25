@@ -87,7 +87,7 @@ main (int argc, char *argv[])
 			 G_CALLBACK (button_pressed), NULL);
 
 	gtk_widget_show_all(window);
-	id = gtk_timeout_add(100, flash, NULL);
+	id = g_timeout_add(100, flash, NULL);
 	gtk_main();
 	return(0);
 }

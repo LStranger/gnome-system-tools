@@ -230,7 +230,7 @@ gst_dialog_constructor (GType                  type,
 			exit (-1);
 		}
 
-		gtk_widget_ref (priv->child);
+		g_object_ref (priv->child);
 		gtk_container_remove (GTK_CONTAINER (priv->child->parent), priv->child);
 		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), priv->child);
 

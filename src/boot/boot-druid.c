@@ -38,10 +38,10 @@ static void boot_druid_finalize   (GObject *obj);
 
 static GtkWindowClass *parent_class;
 
-GtkType
+GType
 boot_druid_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
 		static const GTypeInfo type_info = {
@@ -67,7 +67,7 @@ boot_druid_class_init (BootDruidClass *class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	parent_class = gtk_type_class (gtk_window_get_type ());
+	parent_class = g_type_class_peek (gtk_window_get_type ());
 
 	/* override methods */
 	object_class->finalize = boot_druid_finalize;

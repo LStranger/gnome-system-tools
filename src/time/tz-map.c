@@ -371,7 +371,7 @@ static gboolean
 out_map (GtkWidget *w, GdkEventCrossing *event, gpointer data)
 {
 	ETzMap *tzmap;
-	char *old_zone;
+	const char *old_zone;
    
 	tzmap = (ETzMap *) data;
 
@@ -383,7 +383,7 @@ out_map (GtkWidget *w, GdkEventCrossing *event, gpointer data)
 
 	tzmap->point_hover = NULL;
    
-	gtk_label_get (GTK_LABEL (((GstTimeTool *) tzmap->tool)->map_hover_label), &old_zone);
+	old_zone = gtk_label_get_text (GTK_LABEL (((GstTimeTool *) tzmap->tool)->map_hover_label));
 	if (strcmp (old_zone, ""))
 		gtk_label_set_text (GTK_LABEL (((GstTimeTool *) tzmap->tool)->map_hover_label), "");
    

@@ -44,32 +44,6 @@
 
 extern GstTool *tool;
 
-/*GtkItemFactoryEntry popup_partition_menu_items[] = {
-	{ N_("/_Format"), NULL, NULL, POPUP_PARTITION_FORMAT, "<StockItem>", GTK_STOCK_DELETE },
-	{ N_("/_Delete"), NULL, NULL, POPUP_PARTITION_REMOVE, "<StockItem>", GTK_STOCK_REMOVE }
-	};*/
-
-/*static char *
-disks_partition_item_factory_trans (const char *path, gpointer data)
-{
-	return _((gchar*)path);
-}*/
-
-/*static GtkItemFactory *
-gst_disks_partition_popup_item_factory_create (GtkWidget *treeview)
-{
-	GtkItemFactory *item_factory;
-
-	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
-	gtk_item_factory_set_translate_func (item_factory, disks_partition_item_factory_trans,
-					     NULL, NULL);
-	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (popup_partition_menu_items),
-				       popup_partition_menu_items,
-				       (gpointer) treeview);
-
-	return item_factory;
-}*/
-
 gchar *
 gst_storage_get_human_readable_size (const gulong size)
 {
@@ -228,7 +202,6 @@ gst_disks_gui_partition_list_new ()
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeSelection *selection;
-	/*GtkItemFactory *item_factory;*/
 
 	model = GTK_TREE_MODEL (gtk_tree_store_new (PARTITION_LIST_LAST,
 						    G_TYPE_STRING,
@@ -252,11 +225,6 @@ gst_disks_gui_partition_list_new ()
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (gst_on_partition_list_selection_change),
 			  NULL);
-
-	/*item_factory = gst_disks_partition_popup_item_factory_create (treeview);
-	g_signal_connect (G_OBJECT (treeview), "button_press_event",
-			  G_CALLBACK (gst_on_partition_list_button_press),
-			  (gpointer) item_factory);*/
 
 	return (treeview);
 }

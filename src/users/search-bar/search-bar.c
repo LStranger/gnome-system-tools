@@ -315,7 +315,7 @@ class_init (SearchBarClass *klass)
 
 	g_object_class = G_OBJECT_CLASS(klass);
 
-	parent_class = gtk_type_class (gtk_hbox_get_type ());
+	parent_class = g_type_class_peek (gtk_hbox_get_type ());
 
 	g_object_class->set_property = impl_set_property;
 	g_object_class->get_property = impl_get_property;
@@ -407,7 +407,7 @@ search_bar_new (SearchBarItem *option_items)
 	return widget;
 }
 
-GtkType
+GType
 search_bar_get_type (void)
 {
 	static GType type = 0;

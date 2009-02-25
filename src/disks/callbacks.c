@@ -102,7 +102,7 @@ gst_on_storage_list_selection_change (GtkTreeSelection *selection, gpointer gdat
 						  gst_disks_storage_setup_properties_widget (storage);
 						  
 						  gtk_widget_set_sensitive (storage_list, TRUE);
-						  gdk_cursor_destroy (cursor);
+						  gdk_cursor_unref (cursor);
 						  gdk_window_set_cursor (main_window->window, NULL);
 						  
 						  
@@ -144,7 +144,7 @@ gst_on_storage_list_selection_change (GtkTreeSelection *selection, gpointer gdat
 						  gst_disks_storage_setup_properties_widget (storage);
 						  
 						  gtk_widget_set_sensitive (storage_list, TRUE);
-						  gdk_cursor_destroy (cursor);
+						  gdk_cursor_unref (cursor);
 						  gdk_window_set_cursor (main_window->window, NULL);
 						  
 						  g_object_get (G_OBJECT (storage), "empty", &cd_empty,
@@ -527,30 +527,6 @@ gst_on_play_button_clicked (GtkWidget *button, gpointer gdata)
 				    }
 			 }
 	   }
-}
-
-gboolean
-gst_on_partition_list_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
-{
-	GtkTreePath *path;
-	GtkItemFactory *factory;
-
-	factory = (GtkItemFactory *) gdata;
-
-	if (event->button == 3)
-	{
-		gtk_widget_grab_focus (GTK_WIDGET (treeview));
-		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
-		{
-			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
-			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
-
-			gtk_item_factory_popup (factory, event->x_root, event->y_root,
-						event->button, event->time);
-		}
-		return TRUE;
-	}
-	return FALSE;
 }
 
 void

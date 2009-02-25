@@ -56,7 +56,7 @@ typedef struct {
 	
 } BootDruidClass;
 
-GtkType boot_druid_get_type (void);
+GType boot_druid_get_type (void);
 
 BootDruid *boot_druid_new (void);
 

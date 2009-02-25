@@ -143,10 +143,10 @@ static GtkWidgetClass *parent_class;
  * Return value: The type ID of the #EMap class.
  **/
 
-GtkType
+GType
 e_map_get_type (void)
 {
-	static GtkType e_map_type = 0;
+	static GType e_map_type = 0;
 
 	if (!e_map_type)
 	{
@@ -185,7 +185,7 @@ e_map_class_init (EMapClass *class)
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
 
-	parent_class = gtk_type_class (GTK_TYPE_WIDGET);
+	parent_class = g_type_class_peek (GTK_TYPE_WIDGET);
 
 	object_class->destroy = e_map_destroy;
 	
@@ -534,7 +534,8 @@ e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustm
 	{
 		priv->hadj = hadj;
 		g_object_ref (G_OBJECT (priv->hadj));
-		gtk_object_sink (GTK_OBJECT (priv->hadj));
+		g_object_ref_sink (G_OBJECT (priv->hadj));
+		g_object_unref (G_OBJECT (priv->hadj));
 
 		priv->hadj_signal_id = g_signal_connect (G_OBJECT (priv->hadj),
 							 "value_changed",
@@ -548,7 +549,8 @@ e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustm
 	{
 		priv->vadj = vadj;
 		g_object_ref (G_OBJECT (priv->vadj));
-		gtk_object_sink (GTK_OBJECT (priv->vadj));
+		g_object_ref_sink (G_OBJECT (priv->vadj));
+		g_object_unref (G_OBJECT (priv->vadj));
 
 		priv->vadj_signal_id = g_signal_connect (G_OBJECT (priv->vadj),
 							 "value_changed",

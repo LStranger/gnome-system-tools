@@ -69,7 +69,7 @@ struct _SearchBarClass
 	void (*menu_activated) (SearchBar *search, int item);
 };
 
-GtkType    search_bar_get_type   (void);
+GType    search_bar_get_type   (void);
 
 void       search_bar_clear_search (SearchBar *search_bar);
 void       search_bar_set_option   (SearchBar *search_bar, SearchBarItem *option_items);

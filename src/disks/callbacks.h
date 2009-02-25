@@ -35,7 +35,6 @@ void gst_on_format_button_clicked           (GtkWidget *button, gpointer gdata);
 void gst_on_mount_button_clicked            (GtkWidget *button, gpointer gdata);
 void gst_on_browse_button_clicked           (GtkWidget *button, gpointer gdata);
 void gst_on_play_button_clicked             (GtkWidget *button, gpointer gdata);
-gboolean gst_on_partition_list_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
 void     gst_on_speed_property_changed      (GObject *object, GParamSpec *spec, gpointer gdata);
 void  gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry);
 void  gst_disks_storage_update_device_speed (GtkWidget *w, gpointer gdata);
