@@ -27,10 +27,10 @@ G_BEGIN_DECLS
 #include "gst-tool.h"
 
 #define GST_TYPE_SERVICES_TOOL            (gst_services_tool_get_type ())
-#define GST_SERVICES_TOOL(obj)            (GTK_CHECK_CAST ((obj), GST_TYPE_SERVICES_TOOL, GstServicesTool))
-#define GST_SERVICES_TOOL_CLASS(class)    (GTK_CHECK_CLASS_CAST ((class), GST_TYPE_SERVICES_TOOL, GstServicesToolClass))
-#define GST_IS_SERVICES_TOOL(obj)         (GTK_CHECK_TYPE ((obj), GST_TYPE_SERVICES_TOOL))
-#define GST_IS_SERVICES_TOOL_CLASS(class) (GTK_CHECK_CLASS_TYPE ((class), GST_TYPE_SERVICES_TOOL))
+#define GST_SERVICES_TOOL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_SERVICES_TOOL, GstServicesTool))
+#define GST_SERVICES_TOOL_CLASS(class)    (G_TYPE_CHECK_CLASS_CAST ((class), GST_TYPE_SERVICES_TOOL, GstServicesToolClass))
+#define GST_IS_SERVICES_TOOL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_SERVICES_TOOL))
+#define GST_IS_SERVICES_TOOL_CLASS(class) (G_TYPE_CHECK_CLASS_TYPE ((class), GST_TYPE_SERVICES_TOOL))
 
 typedef struct _GstServicesTool      GstServicesTool;
 typedef struct _GstServicesToolClass GstServicesToolClass;

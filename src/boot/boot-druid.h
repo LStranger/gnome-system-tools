@@ -32,10 +32,10 @@
 G_BEGIN_DECLS
 
 #define BOOT_DRUID_TYPE        (boot_druid_get_type ())
-#define BOOT_DRUID(o)          (GTK_CHECK_CAST ((o), BOOT_DRUID_TYPE, BootDruid))
-#define BOOT_DRUID_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BOOT_DRUID_TYPE, BootDruidClass))
-#define BOOT_IS_DRUID(o)       (GTK_CHECK_TYPE ((o), BOOT_DRUID_TYPE))
-#define BOOT_IS_DRUID_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BOOT_DRUID_TYPE))
+#define BOOT_DRUID(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o), BOOT_DRUID_TYPE, BootDruid))
+#define BOOT_DRUID_CLASS(k)    (G_TYPE_CHECK_CLASS_CAST((k), BOOT_DRUID_TYPE, BootDruidClass))
+#define BOOT_IS_DRUID(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), BOOT_DRUID_TYPE))
+#define BOOT_IS_DRUID_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), BOOT_DRUID_TYPE))
 
 typedef struct {
 	GtkWindow parent;

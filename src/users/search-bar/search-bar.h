@@ -30,10 +30,10 @@ extern "C" {
 #include <gtk/gtk.h>
 
 #define SEARCH_BAR_TYPE			(search_bar_get_type ())
-#define SEARCH_BAR(obj)			(GTK_CHECK_CAST ((obj), SEARCH_BAR_TYPE, SearchBar))
-#define SEARCH_BAR_CLASS(klass)		(GTK_CHECK_CLASS_CAST ((klass), SEARCH_BAR_TYPE, SearchBarClass))
-#define IS_SEARCH_BAR(obj)		(GTK_CHECK_TYPE ((obj), SEARCH_BAR_TYPE))
-#define IS_SEARCH_BAR_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), SEARCH_BAR_TYPE))
+#define SEARCH_BAR(obj)			(G_TYPE_CHECK_INSTANCE_CAST ((obj), SEARCH_BAR_TYPE, SearchBar))
+#define SEARCH_BAR_CLASS(klass)		(G_TYPE_CHECK_CLASS_CAST ((klass), SEARCH_BAR_TYPE, SearchBarClass))
+#define IS_SEARCH_BAR(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), SEARCH_BAR_TYPE))
+#define IS_SEARCH_BAR_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), SEARCH_BAR_TYPE))
 
 typedef struct {
 	char *text;

@@ -11,10 +11,10 @@ G_BEGIN_DECLS
 #include "tz-map.h"
 
 #define GST_TYPE_TIME_TOOL            (gst_time_tool_get_type ())
-#define GST_TIME_TOOL(obj)            (GTK_CHECK_CAST ((obj), GST_TYPE_TIME_TOOL, GstTimeTool))
-#define GST_TIME_TOOL_CLASS(class)    (GTK_CHECK_CLASS_CAST ((class), GST_TYPE_TIME_TOOL, GstTimeToolClass))
-#define GST_IS_TIME_TOOL(obj)         (GTK_CHECK_TYPE ((obj), GST_TYPE_TIME_TOOL))
-#define GST_IS_TIME_TOOL_CLASS(class) (GTK_CHECK_CLASS_TYPE ((class), GST_TYPE_TIME_TOOL))
+#define GST_TIME_TOOL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_TIME_TOOL, GstTimeTool))
+#define GST_TIME_TOOL_CLASS(class)    (G_TYPE_CHECK_CLASS_CAST ((class), GST_TYPE_TIME_TOOL, GstTimeToolClass))
+#define GST_IS_TIME_TOOL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_TIME_TOOL))
+#define GST_IS_TIME_TOOL_CLASS(class) (G_TYPE_CHECK_CLASS_TYPE ((class), GST_TYPE_TIME_TOOL))
 
 typedef struct _GstTimeTool      GstTimeTool;
 typedef struct _GstTimeToolClass GstTimeToolClass;

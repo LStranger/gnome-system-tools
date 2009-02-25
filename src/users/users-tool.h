@@ -30,10 +30,10 @@ G_BEGIN_DECLS
 #include "user-profiles.h"
 
 #define GST_TYPE_USERS_TOOL            (gst_users_tool_get_type ())
-#define GST_USERS_TOOL(obj)            (GTK_CHECK_CAST ((obj), GST_TYPE_USERS_TOOL, GstUsersTool))
-#define GST_USERS_TOOL_CLASS(class)    (GTK_CHECK_CLASS_CAST ((class), GST_TYPE_USERS_TOOL, GstUsersToolClass))
-#define GST_IS_USERS_TOOL(obj)         (GTK_CHECK_TYPE ((obj), GST_TYPE_USERS_TOOL))
-#define GST_IS_USERS_TOOL_CLASS(class) (GTK_CHECK_CLASS_TYPE ((class), GST_TYPE_USERS_TOOL))
+#define GST_USERS_TOOL(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_USERS_TOOL, GstUsersTool))
+#define GST_USERS_TOOL_CLASS(class)    (G_TYPE_CHECK_CLASS_CAST ((class), GST_TYPE_USERS_TOOL, GstUsersToolClass))
+#define GST_IS_USERS_TOOL(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GST_TYPE_USERS_TOOL))
+#define GST_IS_USERS_TOOL_CLASS(class) (G_TYPE_CHECK_CLASS_TYPE ((class), GST_TYPE_USERS_TOOL))
 
 typedef struct _GstUsersTool      GstUsersTool;
 typedef struct _GstUsersToolClass GstUsersToolClass;
