@@ -8,7 +8,7 @@ DOC_FIGURES = \
 	figures/service-properties.png	\
 	figures/services-tool.png
 
-DOC_LINGUAS = ca de el es fr oc sv
+DOC_LINGUAS = ca de el es fr oc sv it
 
 # this isn't still ported to gnome-doc-utils
 SUBDIRS = nl 
