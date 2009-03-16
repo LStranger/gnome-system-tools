@@ -6,4 +6,4 @@ DOC_ENTITIES = legal.xml
 DOC_INCLUDES = 
 DOC_FIGURES = figures/users-tool.png
 
-DOC_LINGUAS = ca de el es fr oc pt_BR ru sv it
+DOC_LINGUAS = ca de el en_GB es fr oc pt_BR ru sv it
