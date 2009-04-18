@@ -5,4 +5,4 @@ DOC_MODULE = shares-admin
 DOC_ENTITIES = legal.xml
 DOC_INCLUDES = 
 DOC_FIGURES = figures/shares-tool.png
-DOC_LINGUAS = ca de el en_GB fr oc pt_BR sv es it
+DOC_LINGUAS = ca de el en_GB fr oc pt_BR sv es it zh_CN
