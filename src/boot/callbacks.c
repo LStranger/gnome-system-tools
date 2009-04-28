@@ -79,7 +79,7 @@ boot_image_editor_construct (BootImageEditor *editor, BootImage *image)
 	gtk_widget_reparent (w, GTK_DIALOG (editor->dialog)->vbox);
 
 	gtk_window_set_title (GTK_WINDOW (editor->dialog), _("Boot Image Editor"));
-	gtk_window_set_policy (GTK_WINDOW (editor->dialog), FALSE, TRUE, TRUE);
+	gtk_window_set_resizable (GTK_WINDOW (editor->dialog), FALSE);
 	gtk_window_set_modal (GTK_WINDOW (editor->dialog), TRUE);
 
 	boot_settings_gui_setup (editor->gui, GTK_DIALOG (editor->dialog)->vbox);
@@ -177,7 +177,7 @@ boot_append_editor_construct (BootAppendEditor *editor, BootSettingsGui *setting
 	gtk_widget_reparent (w, GTK_DIALOG (editor->dialog)->vbox);
 
 	gtk_window_set_title (GTK_WINDOW (editor->dialog), _("Boot Append Editor"));
-	gtk_window_set_policy (GTK_WINDOW (editor->dialog), FALSE, TRUE, TRUE);
+	gtk_window_set_resizable (GTK_WINDOW (editor->dialog), FALSE);
 	gtk_window_set_modal (GTK_WINDOW (editor->dialog), TRUE);
 
 	boot_append_gui_setup (editor->gui, settings);

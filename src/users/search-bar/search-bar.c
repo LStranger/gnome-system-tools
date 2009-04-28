@@ -55,7 +55,7 @@ enum {
 static void
 emit_query_changed (SearchBar *sb)
 {
-	gtk_signal_emit(GTK_OBJECT (sb), sb_signals [QUERY_CHANGED]);
+	g_signal_emit(G_OBJECT(sb), sb_signals [QUERY_CHANGED], 0);
 }
 
 

@@ -1777,8 +1777,8 @@ set_scroll_area (EMap *view)
 	if (priv->map_render_pixbuf)
 		priv->vadj->upper = gdk_pixbuf_get_height (priv->map_render_pixbuf);
 
-	gtk_signal_emit_by_name (GTK_OBJECT (priv->hadj), "changed");
-	gtk_signal_emit_by_name (GTK_OBJECT (priv->vadj), "changed");
+	g_signal_emit_by_name(G_OBJECT(priv->hadj), "changed");
+	g_signal_emit_by_name(G_OBJECT(priv->vadj), "changed");
 
 	priv->xofs = CLAMP (priv->xofs, 0, priv->hadj->upper - priv->hadj->page_size);
 	priv->yofs = CLAMP (priv->yofs, 0, priv->vadj->upper - priv->vadj->page_size);
