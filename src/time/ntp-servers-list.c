@@ -95,6 +95,7 @@ struct NtpServer {
 	{ "time1.stupi.se", "Stockholm, Sweden" },
 	{ "goodtime.ijs.si", "Ljubljana, Slovenia" },
 	{ "ntp2.ja.net", "United Kingdom" },
+	{ "laikas.pfi.lt", "Lithuania" },
 	{ NULL }
 };
 
