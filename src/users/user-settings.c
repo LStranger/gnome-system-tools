@@ -38,6 +38,7 @@
 #include "user-settings.h"
 #include "privileges-table.h"
 #include "groups-table.h"
+#include "group-settings.h"
 #include "test-battery.h"
 #include "user-profiles.h"
 
@@ -242,6 +243,74 @@ get_main_group (const gchar *name)
 	return group;
 }
 
+/* Retrieve the NO_PASSWD_LOGIN_GROUP.
+ * Don't forget to unref the returned group when done. */
+static OobsGroup *
+get_no_passwd_login_group ()
+{
+	OobsGroupsConfig *config;
+	OobsList *groups_list;
+	OobsListIter iter;
+	OobsGroup *group;
+	gboolean valid;
+	const gchar *group_name;
+	gid_t gid;
+
+	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+	groups_list = oobs_groups_config_get_groups (config);
+	valid = oobs_list_get_iter_first (groups_list, &iter);
+
+	while (valid) {
+		group = OOBS_GROUP (oobs_list_get (groups_list, &iter));
+		group_name = oobs_group_get_name (group);
+
+		if (group_name && strcmp (NO_PASSWD_LOGIN_GROUP, group_name) == 0)
+			return group;
+
+		valid = oobs_list_iter_next (groups_list, &iter);
+	}
+
+	return NULL;
+}
+
+static gboolean
+is_user_in_group (OobsUser  *user,
+		  OobsGroup *group)
+{
+	OobsUser *tmp_user;
+	GList *users = NULL;
+	GList *l;
+
+	if (!user || !group)
+		return FALSE;
+
+	users = oobs_group_get_users (group);
+	for (l = users; l; l = l->next) {
+		tmp_user = l->data;
+		if (tmp_user == user)
+			break;
+	}
+	g_list_free (users);
+
+	return l != NULL;
+}
+
+static gboolean
+is_user_root (OobsUser *user)
+{
+	const gchar *login;
+
+	if (!user)
+		return FALSE;
+
+	login = oobs_user_get_login_name (user);
+
+	if (!login)
+		return FALSE;
+
+	return (strcmp (login, "root") == 0);
+}
+
 static uid_t
 find_new_uid (gint uid_min,
 	      gint uid_max)
@@ -312,6 +381,7 @@ GtkWidget *
 user_settings_dialog_new (OobsUser *user)
 {
 	OobsUsersConfig *config;
+	OobsGroup *no_passwd_login_group;
 	GtkWidget *dialog, *widget;
 	const gchar *login = NULL;
 	gchar *title;
@@ -389,26 +459,29 @@ user_settings_dialog_new (OobsUser *user)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 
+	/* set option to skip password check at login */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
+	no_passwd_login_group = get_no_passwd_login_group ();
+	/* root should not be allowed to login without password,
+	 * and we disable the feature if the group does not exist */
+	if (is_user_root (user) || no_passwd_login_group == NULL) {
+		gtk_widget_set_sensitive (widget, FALSE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+	}
+	else {
+		gtk_widget_set_sensitive (widget, TRUE);
+		if (is_user_in_group (user, no_passwd_login_group))
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+		else
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+	}
+	if (no_passwd_login_group)
+		g_object_unref (no_passwd_login_group);
+
 	if (!login)
 		table_set_default_profile (GST_USERS_TOOL (tool));
 
 	return dialog;
-}
-
-static gboolean
-is_user_root (OobsUser *user)
-{
-	const gchar *login;
-
-	if (!user)
-		return FALSE;
-
-	login = oobs_user_get_login_name (user);
-
-	if (!login)
-		return FALSE;
-
-	return (strcmp (login, "root") == 0);
 }
 
 static gboolean
@@ -638,6 +711,10 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 {
 	GtkWidget *widget;
 	OobsGroup *group;
+	OobsGroup *no_passwd_login_group;
+	OobsGroupsConfig *groups_config;
+	OobsList *groups_list;
+	OobsListIter list_iter;
 	OobsUser *user;
 	const gchar *str;
 	gboolean password_changed;
@@ -690,6 +767,19 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 		oobs_user_set_password (user, gtk_entry_get_text (GTK_ENTRY (widget)));
 	}
 
+	/* allowed to login without password? */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
+	no_passwd_login_group = get_no_passwd_login_group ();
+	if (!is_user_root (user) && no_passwd_login_group != NULL) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+			oobs_group_add_user (no_passwd_login_group, user);
+		else
+			oobs_group_remove_user (no_passwd_login_group, user);
+	}
+	if (no_passwd_login_group)
+		g_object_unref (no_passwd_login_group);
+
+	/* set main group */
 	group = get_main_group (oobs_user_get_login_name (user));
 	oobs_user_set_main_group (user, group);
 	g_object_unref (group);

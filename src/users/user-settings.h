@@ -24,6 +24,8 @@
 #ifndef __USER_SETTINGS_H
 #define __USER_SETTINGS_H
 
+#define NO_PASSWD_LOGIN_GROUP "nopasswdlogin"
+
 gboolean        user_delete                      (GtkTreeModel *model,
 						  GtkTreePath *path);
 GtkWidget *     user_settings_dialog_new         (OobsUser *user);
