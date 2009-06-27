@@ -177,6 +177,8 @@ privileges_table_add_group (OobsGroup *group, OobsListIter *list_iter)
 	GtkTreeIter iter;
 
 	p = privilege_search (oobs_group_get_name (group));
+	if (p == NULL) /* Ignore groups that don't match a privilege */
+		return;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
