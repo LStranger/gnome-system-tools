@@ -459,14 +459,14 @@ share_settings_dialog_run_for_iter (const gchar *path,
 		share = table_get_share_at_iter (iter, &list_iter);
 		share_settings_set_share (share);
 
-		title = g_strdup_printf ("Settings for folder '%s'",
+		title = g_strdup_printf (_("Settings for folder '%s'"),
 					 oobs_share_get_path (share));
 		gtk_window_set_title (GTK_WINDOW (dialog), title);
 		g_free (title);
 	} else {
 		name_entry = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 		g_object_set_data (G_OBJECT (name_entry), "modified", GINT_TO_POINTER (FALSE));
-		gtk_window_set_title (GTK_WINDOW (dialog), "Share Folder");
+		gtk_window_set_title (GTK_WINDOW (dialog), _("Share Folder"));
 
 		if (!path) {
 			/* make sure the path entry gets filled in */
