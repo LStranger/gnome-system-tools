@@ -27,13 +27,7 @@
 #include <gconf/gconf-client.h>
 #include <time.h>
 
-#ifdef ENABLE_GNOME
-#include <libgnomeui/libgnomeui.h>
-#include <libgnome/gnome-program.h>
-#include <libgnome/gnome-help.h>
-#else
 #include <stdlib.h>
-#endif
 
 #include <string.h>
 #include "gst-tool.h"
