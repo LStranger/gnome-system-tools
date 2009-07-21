@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2009-03-18 17:20+0000\n"
-"PO-Revision-Date: 2009-04-03 09:04+0200\n"
+"POT-Creation-Date: 2009-07-16 01:25+0000\n"
+"PO-Revision-Date: 2009-07-17 17:31+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -120,7 +120,7 @@ msgstr "_אפשר חיבור זה"
 msgid "Ethernet interface:"
 msgstr "מנשק Ethernet:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:19
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
 msgid "General"
 msgstr "כללי"
 
@@ -228,7 +228,7 @@ msgstr "_קבע את המודם כנתיב ברירת המחדל לאינטרנ�
 msgid "_Subnet mask:"
 msgstr "מסיכת _תת רשת:"
 
-#: ../interfaces/network.ui.h:47 ../interfaces/users.ui.h:55
+#: ../interfaces/network.ui.h:47 ../interfaces/users.ui.h:57
 msgid "_Username:"
 msgstr "_שם משתמש:"
 
@@ -313,31 +313,35 @@ msgid "Read only"
 msgstr "קריאה בלבד"
 
 #: ../interfaces/shares.ui.h:19
+msgid "Share"
+msgstr "שיתוף"
+
+#: ../interfaces/shares.ui.h:20
 msgid "Share through:"
 msgstr "שתף דרך:"
 
-#: ../interfaces/shares.ui.h:20 ../src/shares/shares.desktop.in.in.h:2
+#: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
 #: ../src/shares/shares-tool.c:239
 msgid "Shared Folders"
 msgstr "תיקיות משותפות"
 
-#: ../interfaces/shares.ui.h:21
+#: ../interfaces/shares.ui.h:22
 msgid "This computer is a _WINS server"
 msgstr "מחשב זה הוא _שרת WINS"
 
-#: ../interfaces/shares.ui.h:22
+#: ../interfaces/shares.ui.h:23
 msgid "Users"
 msgstr "משתמשים"
 
-#: ../interfaces/shares.ui.h:23
+#: ../interfaces/shares.ui.h:24
 msgid "WINS _server:"
 msgstr "_שרתי WINS:"
 
-#: ../interfaces/shares.ui.h:24
+#: ../interfaces/shares.ui.h:25
 msgid "_Path:"
 msgstr "_נתיב:"
 
-#: ../interfaces/shares.ui.h:25
+#: ../interfaces/shares.ui.h:26
 msgid "_Read only"
 msgstr "קריאה _בלבד"
 
@@ -446,171 +450,183 @@ msgid "Advanced"
 msgstr "מתקדם"
 
 #: ../interfaces/users.ui.h:13
+msgid ""
+"Allow this user to open a local session without entering his password. The "
+"password will still be required to perform administrative tasks."
+msgstr ""
+"אפשר למשתמש זה לפתוח את סביבת ההפעלה ללא הזנת סיסמתו. הסיסמה עדיין תדרש "
+"לביצוע משימות ניהוליות."
+
+#: ../interfaces/users.ui.h:14
 msgid "Assign a random password by default"
 msgstr "בחר בסיסמה אקראית כברירת מחדל"
 
-#: ../interfaces/users.ui.h:14
+#: ../interfaces/users.ui.h:15
 msgid "Check password _quality"
 msgstr "בדוק את _איכות הסיסמה"
 
-#: ../interfaces/users.ui.h:15
+#: ../interfaces/users.ui.h:16
 msgid "Con_firmation:"
 msgstr "_אישור:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:17
 msgid "Days between warning and password expiration:"
 msgstr "ימים בין אזהרה ותפוגת הסיסמה:"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:18
 msgid "Default _group:"
 msgstr "_קבוצת ברירת המחדל"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:19
 msgid "Default _shell:"
 msgstr "_מעטפת ברירת המחדל:"
 
 #: ../interfaces/users.ui.h:20
+msgid "Don't ask for password on _login"
+msgstr "לא לבקש _סיסמה להתחברות"
+
+#: ../interfaces/users.ui.h:22
 msgid "Generate _random password"
 msgstr "צור סיסמה _אקראית"
 
-#: ../interfaces/users.ui.h:21
+#: ../interfaces/users.ui.h:23
 msgid "Group _ID:"
 msgstr "_זיהוי קבוצה:"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:24
 msgid "Group _name:"
 msgstr "שם קבוצה:"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:25
 msgid "Group properties"
 msgstr "מאפייני קבוצה"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:26
 msgid "Groups settings"
 msgstr "הגדרות קבוצות"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:27
 msgid "Ma_ximum days a password may be used:"
 msgstr "מספר הימים המקסימלי שאפשר להשתמש בסיסמה:"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:28
 msgid "Maximum UID:"
 msgstr "מספר זיהוי משתמש מקסימלי:"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:29
 msgid "Mi_nimum days between password changes:"
 msgstr "מספר הימים המינימלי בין החלפת סיסמאות:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:30
 msgid "Minimum GID:"
 msgstr "מספר זיהוי קבוצה מינימלי:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:31
 msgid "Minimum UID:"
 msgstr "מספר זיהוי משתמש מינימלי:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:32
 msgid "Minimum days allowed between password changes:"
 msgstr "מספר הימים המינימלי המורשה בין כל החלפת סיסמאות"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:33
 msgid "Number of days that a password may be used:"
 msgstr "מספר הימים שאפשר להשתמש בסיסמה:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:34
 msgid "O_ffice location:"
 msgstr "מיקום _משרד:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:35
 msgid "Password set to: "
 msgstr "הסיסמה נקבעה ל: "
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:36
 msgid "Privileges"
 msgstr "הרשאות"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:37
 msgid "Profile _name:"
 msgstr "שם _פרופיל:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:38
 msgid "Set password b_y hand"
 msgstr "קבע סיסמה _ידנית"
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:39
 msgid "User ID:"
 msgstr "מספר זיהוי משתמש:"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:40
 msgid "User Privileges"
 msgstr "הרשאות משתמש"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:41
 msgid "User _password:"
 msgstr "_סיסמת משתמש:"
 
-#: ../interfaces/users.ui.h:40
+#: ../interfaces/users.ui.h:42
 msgid "User profiles"
 msgstr "פרופילי משתמש"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:43
 msgid "_Add Group"
 msgstr "הוסף _קבוצה"
 
-#: ../interfaces/users.ui.h:42
+#: ../interfaces/users.ui.h:44
 msgid "_Add Profile"
 msgstr "הוסף _פרופיל"
 
-#: ../interfaces/users.ui.h:43
+#: ../interfaces/users.ui.h:45
 msgid "_Add User"
 msgstr "_הוסף משתמש"
 
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:46
 msgid "_Comments"
 msgstr "_הערות"
 
-#: ../interfaces/users.ui.h:45
+#: ../interfaces/users.ui.h:47
 msgid "_Days between warning and password expiration:"
 msgstr "_מספר ימים לפני תפוגת הסיסמה לשליחת אזהרה:"
 
-#: ../interfaces/users.ui.h:46 ../src/network/address-list.c:77
+#: ../interfaces/users.ui.h:48 ../src/network/address-list.c:77
 #: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "_מחק"
 
-#: ../interfaces/users.ui.h:47
+#: ../interfaces/users.ui.h:49
 msgid "_Generate"
 msgstr "_ייצר"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:50
 msgid "_Home directory:"
 msgstr "ספריית ה_בית:"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:51
 msgid "_Home phone:"
 msgstr "טלפון ב_בית:"
 
-#: ../interfaces/users.ui.h:50
+#: ../interfaces/users.ui.h:52
 msgid "_Main group:"
 msgstr "קבוצה _ראשית"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:53
 msgid "_Manage Groups"
 msgstr "_נהל קבוצות"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:54
 msgid "_Profile:"
 msgstr "_פרופיל:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:55
 msgid "_Real name:"
 msgstr "שם _אמיתי:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:56
 msgid "_Shell:"
 msgstr "_מעטפת:"
 
-#: ../interfaces/users.ui.h:56
+#: ../interfaces/users.ui.h:58
 msgid "_Work phone:"
 msgstr "טלפון ב_עבודה:"
 
@@ -1432,6 +1448,15 @@ msgstr "רשתות Windows (SMB)"
 msgid "Unix networks (NFS)"
 msgstr "רשתות Unix (NFS)"
 
+#: ../src/shares/share-settings.c:462
+#, c-format
+msgid "Settings for folder '%s'"
+msgstr "הגדרות עבור התיקייה '%s'"
+
+#: ../src/shares/share-settings.c:469
+msgid "Share Folder"
+msgstr "שיתוף תיקייה"
+
 #: ../src/shares/shares-tool.c:155
 msgid "Sharing services are not installed"
 msgstr "שירותי שיתוף לא מותקנים"
@@ -1491,8 +1516,8 @@ msgid "Administrator group can not be deleted"
 msgstr "קבוצת מנהלי המערכת אינה ניתנת למחיקה"
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:550
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
+#: ../src/users/user-settings.c:623
 msgid "This would leave the system unusable."
 msgstr "פעולה זו תשאיר את המערכת במצב בלתי שמיש."
 
@@ -1541,7 +1566,7 @@ msgstr "נא לקבוע שם קבוצה שמתחיל באות קטנה ומכי�
 msgid "Group \"%s\" already exists"
 msgstr "הקבוצה \"%s\" כבר קיימת"
 
-#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
+#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:557
 msgid "Please select a different user name."
 msgstr "נא לבחור שם משתמש אחר."
 
@@ -1609,72 +1634,72 @@ msgstr "הוספה או הסרה של משתמשים וקבוצות"
 msgid "Users and Groups"
 msgstr "משתמשים וקבוצות"
 
-#: ../src/users/user-settings.c:57
+#: ../src/users/user-settings.c:58
 msgid "Administrator account cannot be deleted"
 msgstr "חשבון מנהל המערכת אינו ניתן למחיקה"
 
-#: ../src/users/user-settings.c:71
+#: ../src/users/user-settings.c:72
 #, c-format
 msgid "Are you sure you want to delete account \"%s\"?"
 msgstr "האם אתה בטוח שברצונך למחוק את \"%s\"?"
 
-#: ../src/users/user-settings.c:74
+#: ../src/users/user-settings.c:75
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
 msgstr ""
 "אפשרות זו תמנע מהמשתמש גישה למערכת ללא מחיקת תכולת ספריית הבית של המשתמש."
 
-#: ../src/users/user-settings.c:84
+#: ../src/users/user-settings.c:85
 msgid "This user is currently using this computer"
 msgstr "משתמש זה עושה שימוש במחשב זה כרגע"
 
-#: ../src/users/user-settings.c:324
+#: ../src/users/user-settings.c:394
 msgid "New user account"
 msgstr "חשבון משתמש חדש"
 
-#: ../src/users/user-settings.c:342
+#: ../src/users/user-settings.c:412
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "מאפייני החשבון '%s'"
 
-#: ../src/users/user-settings.c:475
+#: ../src/users/user-settings.c:548
 msgid "User name is empty"
 msgstr "שם המשתמש ריק"
 
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:549
 msgid "A user name must be specified."
 msgstr "יש להזין שם משתמש."
 
-#: ../src/users/user-settings.c:478
+#: ../src/users/user-settings.c:551
 msgid "User name has invalid characters"
 msgstr "שם המשתמש מכיל תווים לא חוקיים"
 
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:552
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "יש לקבוע שם משתמש המתחיל באות קטנה ומכיל אותיות קטנות ומספרים בלבד."
 
-#: ../src/users/user-settings.c:483
+#: ../src/users/user-settings.c:556
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "שם המשתמש \"%s\" כבר קיים במערכת"
 
-#: ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:582
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "התוו \"%c\" בהערה לא חוקי"
 
-#: ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:583
 msgid "Check that this character is not used."
 msgstr "ודא שתוו זה אינו בשימוש"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:601
 msgid "Incomplete path in home directory"
 msgstr "נתיב לא מלא בספריית הבית"
 
-#: ../src/users/user-settings.c:529
+#: ../src/users/user-settings.c:602
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1682,23 +1707,23 @@ msgstr ""
 "אנא הכנס נתיב מלא לספריית הבית\n"
 "<span size=\"smaller\">לדוגמה: /home/john</span>."
 
-#: ../src/users/user-settings.c:532
+#: ../src/users/user-settings.c:605
 msgid "Home directory already exists"
 msgstr "ספריית הבית כבר קיימת"
 
-#: ../src/users/user-settings.c:533
+#: ../src/users/user-settings.c:606
 msgid "Please enter a different home directory path."
 msgstr "אנא הכנס נתיב שונה לספריית הבית."
 
-#: ../src/users/user-settings.c:549
+#: ../src/users/user-settings.c:622
 msgid "Administrator account's user ID should not be modified"
 msgstr "אין לשנות את מספר מזהה החשבון של מנהל המערכת"
 
-#: ../src/users/user-settings.c:564
+#: ../src/users/user-settings.c:637
 msgid "Incomplete path in shell"
 msgstr "נתיב לא מלא עבור המעטפת"
 
-#: ../src/users/user-settings.c:565
+#: ../src/users/user-settings.c:638
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1706,11 +1731,11 @@ msgstr ""
 "אנא הכנס נתיב מלא למעטפת\n"
 "<span size=\"smaller\">לדוגמה: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:598
+#: ../src/users/user-settings.c:671
 msgid "Password is too short"
 msgstr "הסיסמה קצרה מדי"
 
-#: ../src/users/user-settings.c:599
+#: ../src/users/user-settings.c:672
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1718,11 +1743,11 @@ msgstr ""
 "סיסמת משתמש חייבת להכיל לפחות 6 תווים ועדיף לכלול בה גם כמה מספרים, אותיות "
 "ותווים מיוחדים"
 
-#: ../src/users/user-settings.c:602
+#: ../src/users/user-settings.c:675
 msgid "Password confirmation is not correct"
 msgstr "אימות סיסמה שגוי"
 
-#: ../src/users/user-settings.c:603
+#: ../src/users/user-settings.c:676
 msgid "Check that you have provided the same password in both text fields."
 msgstr "בדוק שהקלדת את אותה הסיסמה בשתי התיבות."
 
