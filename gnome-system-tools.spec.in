@@ -4,8 +4,7 @@
 %define rel      	%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
 %define sysconfdir	/etc
 
-%define gtk2_version 2.0.0
-%define libgnomeui_version 2.0.0
+%define gtk2_version 2.12.0
 
 Summary:	GNOME System Tools
 Name: 		gnome-system-tools
@@ -17,8 +16,6 @@ Source0:	%{name}-%{version}.tar.gz
 BuildRoot: 	/var/tmp/%{name}-%{version}-root
 URL: 		http://www.gnome.org/projects/gst/
 Requires:       gtk2 >= %{gtk2_version}
-Requires:       libgnomeui >= %{libgnomeui_version}
-Requires:       libglade2
 Requires:       libxml2
 Requires:       wvdial
 Requires:       usermode
@@ -27,7 +24,6 @@ Requires:       pam
 Prereq:         GConf2
 Prereq:         /usr/bin/gconftool-2
 BuildRequires:  gtk2-devel >= %{gtk2_version}
-BuildRequires:  libglade2-devel
 
 %description
 Day-to-day system management on Unix systems is a
