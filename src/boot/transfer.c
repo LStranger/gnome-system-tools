@@ -25,7 +25,6 @@
 
 #include <gtk/gtk.h>
 
-#include <glade/glade.h>
 #include <gconf/gconf-client.h>
 #include "gst.h"
 

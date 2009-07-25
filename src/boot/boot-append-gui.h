@@ -31,7 +31,7 @@ typedef struct
 {
 	   GtkWidget *top;
 	   BootSettingsGui *settings;
-	   GladeXML  *xml;
+	   GtkBuilder *builder;
 	   
 	   /* vga modes */
 	   GtkCheckButton *append_vga;

@@ -183,13 +183,13 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	if (type == TYPE_LINUX)
 	{
 		gst_ui_entry_set_text (GTK_BIN (config->gui->root)->child, "");
-		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+		next_page = GNOME_DRUID_PAGE (gtk_builder_get_object (config->gui->builder,
 								    "druidImagePage"));
 	}
 	else
 	{
 		gst_ui_entry_set_text (GTK_BIN (config->gui->device)->child, "");
-		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+		next_page = GNOME_DRUID_PAGE (gtk_builder_get_object (config->gui->builder,
 								    "druidOtherPage"));
 	}
 	
@@ -246,7 +246,8 @@ other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 		return TRUE;
 	}
 
-	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidFinishPage"));	
+	next_page = GNOME_DRUID_PAGE (gtk_builder_get_object (config->gui->builder,
+							      "druidFinishPage"));
 	gnome_druid_set_page (druid, next_page);
 
 	return TRUE;
@@ -330,7 +331,8 @@ image_back (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	GnomeDruidPage *next_page;
 	BootDruid      *config = data;
 
-	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidIdentityPage"));
+	next_page = GNOME_DRUID_PAGE (gtk_builder_get_object (config->gui->builder,
+							      "druidIdentityPage"));
 	gnome_druid_set_page (druid, next_page);
 
 	return TRUE;
@@ -382,10 +384,10 @@ druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 	type = label_to_type (buf);
 
 	if (type == TYPE_LINUX)
-		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+		next_page = GNOME_DRUID_PAGE (gtk_builder_get_object (config->gui->builder,
 								    "druidImagePage"));
 	else
-		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+		next_page = GNOME_DRUID_PAGE (gtk_builder_get_object (config->gui->builder,
 								    "druidOtherPage"));
 
 	gnome_druid_set_page (druid, next_page);
@@ -446,7 +448,8 @@ construct (BootDruid *druid)
 	druid->gui = boot_settings_gui_new (image, GTK_WIDGET (druid));
 
         /* get our toplevel widget and reparent it */
-	widget = glade_xml_get_widget (druid->gui->xml, "druid_druid");
+	widget = GTK_WIDGET (gtk_builder_get_object (druid->gui->builder,
+						     "druid_druid"));
 	gtk_widget_reparent (widget, GTK_WIDGET (druid));
 	druid->druid = GNOME_DRUID (widget);
 	
@@ -458,7 +461,8 @@ construct (BootDruid *druid)
 	for (i = 0; pages[i].name != NULL; i++) {
 		GtkWidget *page;
 
-		page = glade_xml_get_widget (druid->gui->xml, pages[i].name);
+		page = GTK_WIDGET (gtk_builder_get_object (druid->gui->builder,
+							   pages[i].name));
 
 		if (pages[i].next_func)
 			g_signal_connect (G_OBJECT (page), "next",
@@ -480,17 +484,20 @@ construct (BootDruid *druid)
 
 	/* Reparent "interesting" widgets. */
 	
-	vbox = glade_xml_get_widget (druid->gui->xml, "druid_identity_vbox");
+	vbox = GTK_WIDGET (gtk_builder_get_object (druid->gui->builder,
+						   "druid_identity_vbox"));
 	widget = druid->gui->basic_frame;
 	gtk_widget_reparent (widget, vbox);
 	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);
 
-	vbox = glade_xml_get_widget (druid->gui->xml, "druid_image_vbox");
+	vbox = GTK_WIDGET (gtk_builder_get_object (druid->gui->builder,
+						   "druid_image_vbox"));
 	widget = druid->gui->image_frame;
 	gtk_widget_reparent (widget, vbox);
 	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);
 
-	vbox = glade_xml_get_widget (druid->gui->xml, "druid_other_vbox");
+	vbox = GTK_WIDGET (gtk_builder_get_object (druid->gui->builder,
+						   "druid_other_vbox"));
 	widget = druid->gui->other_frame;
 	gtk_widget_reparent (widget, vbox);
 	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);

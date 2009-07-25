@@ -110,39 +110,47 @@ BootSettingsGui *
 boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 {
 	BootSettingsGui *gui;
+	GError* error = NULL;
 
 	if (!image)
 		return NULL;
 
 	gui = g_new0 (BootSettingsGui, 1);
 	gui->image = image;
-	gui->xml = glade_xml_new (tool->glade_path, NULL, NULL);
+
+	gui->builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, ui_path, &error))
+	{
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+		return NULL;
+	}
 	gui->top = parent;
 
 	/* Basic frame */
-	gui->basic_frame = glade_xml_get_widget (gui->xml, "settings_basic_frame");
-	gui->name = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_name"));
-	gui->type = glade_xml_get_widget (gui->xml, "settings_type");
+	gui->basic_frame = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_basic_frame"));
+	gui->name = GTK_ENTRY (gtk_builder_get_object (gui->builder, "settings_name"));
+	gui->type = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_type"));
 
 	/* Image frame */
-	gui->image_frame = glade_xml_get_widget (gui->xml, "settings_image_frame");
-	gui->image_widget = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image"));
-	gui->root = glade_xml_get_widget (gui->xml, "settings_root");
-	gui->initrd_label = glade_xml_get_widget (gui->xml, "settings_initrd_label");
-	gui->initrd_widget = glade_xml_get_widget (gui->xml, "settings_initrd");
-	gui->append = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_append"));
-	gui->append_browse = GTK_BUTTON (glade_xml_get_widget (gui->xml, "settings_append_browse"));
+	gui->image_frame = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_image_frame"));
+	gui->image_widget = GTK_ENTRY (gtk_builder_get_object (gui->builder, "settings_image"));
+	gui->root = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_root"));
+	gui->initrd_label = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_initrd_label"));
+	gui->initrd_widget = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_initrd"));
+	gui->append = GTK_ENTRY (gtk_builder_get_object (gui->builder, "settings_append"));
+	gui->append_browse = GTK_BUTTON (gtk_builder_get_object (gui->builder, "settings_append_browse"));
 
 	/* Other frame */
-	gui->other_frame = glade_xml_get_widget (gui->xml, "settings_other_frame");
-	gui->device = glade_xml_get_widget (gui->xml, "settings_device");
+	gui->other_frame = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_other_frame"));
+	gui->device = GTK_WIDGET (gtk_builder_get_object (gui->builder, "settings_device"));
 
 	/* Security frame */
-	gui->use_password = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "settings_use_password"));
-	gui->pass_label = GTK_LABEL (glade_xml_get_widget (gui->xml, "settings_pass_label"));
-	gui->confirm_label = GTK_LABEL (glade_xml_get_widget (gui->xml, "settings_confirm_label"));
-	gui->password = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_password"));
-	gui->password_confirm = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_password_confirm"));
+	gui->use_password = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "settings_use_password"));
+	gui->pass_label = GTK_LABEL (gtk_builder_get_object (gui->builder, "settings_pass_label"));
+	gui->confirm_label = GTK_LABEL (gtk_builder_get_object (gui->builder, "settings_confirm_label"));
+	gui->password = GTK_ENTRY (gtk_builder_get_object (gui->builder, "settings_password"));
+	gui->password_confirm = GTK_ENTRY (gtk_builder_get_object (gui->builder, "settings_password_confirm"));
 
 	boot_settings_fill_type_list (gui);
 
@@ -441,7 +449,7 @@ boot_settings_gui_destroy (BootSettingsGui *gui)
 {
 	if (gui) {
 		boot_image_destroy (gui->image);
-		g_object_unref (G_OBJECT (gui->xml));
+		g_object_unref (gui->builder);
 		g_free (gui);
 	}
 }

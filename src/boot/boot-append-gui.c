@@ -159,38 +159,46 @@ BootAppendGui *
 boot_append_gui_new (BootSettingsGui *settings, GtkWidget *parent)
 {
 	   BootAppendGui *gui;
+	   GError* error = NULL;
 	   
 	   if (!settings)
 			 return NULL;
 	   
 	   gui = g_new0 (BootAppendGui, 1);
 	   gui->settings = settings;
-	   gui->xml = glade_xml_new (tool->glade_path, NULL, NULL);
+	   gui->builder = gtk_builder_new ();
+	   if (!gtk_builder_add_from_file (builder, tool->ui_path, &error))
+	   {
+			 g_warning ("Couldn't load builder file: %s", error->message);
+			 g_error_free (error);
+			 return NULL;
+	   }
+
 	   gui->top = parent;
 	   
 	   /* Vga modes */
-	   gui->append_vga         = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_vga"));
+	   gui->append_vga         = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "append_vga"));
 	   
-	   gui->append_vga_manual  = GTK_RADIO_BUTTON (glade_xml_get_widget (gui->xml, "append_vga_manual"));
-	   gui->append_vga_ask     = GTK_RADIO_BUTTON (glade_xml_get_widget (gui->xml, "append_vga_ask"));
+	   gui->append_vga_manual  = GTK_RADIO_BUTTON (gtk_builder_get_object (gui->builder, "append_vga_manual"));
+	   gui->append_vga_ask     = GTK_RADIO_BUTTON (gtk_builder_get_object (gui->builder, "append_vga_ask"));
 	   
-	   gui->append_label_colors = GTK_LABEL (glade_xml_get_widget (gui->xml, "append_label_colors"));
-	   gui->append_menu_colors  = GTK_COMBO_BOX (glade_xml_get_widget (gui->xml, "append_menu_colors"));
-	   gui->append_label_res    = GTK_LABEL (glade_xml_get_widget (gui->xml, "append_label_res"));
-	   gui->append_menu_res     = GTK_COMBO_BOX (glade_xml_get_widget (gui->xml, "append_menu_res"));
+	   gui->append_label_colors = GTK_LABEL (gtk_builder_get_object (gui->builder, "append_label_colors"));
+	   gui->append_menu_colors  = GTK_COMBO_BOX (gtk_builder_get_object (gui->builder, "append_menu_colors"));
+	   gui->append_label_res    = GTK_LABEL (gtk_builder_get_object (gui->builder, "append_label_res"));
+	   gui->append_menu_res     = GTK_COMBO_BOX (gtk_builder_get_object (gui->builder, "append_menu_res"));
 	   
 	   /* Scsi Emulation Devices */
-	   gui->append_scsi     = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_scsi"));
+	   gui->append_scsi     = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "append_scsi"));
 	   
-	   gui->append_scsi_hda = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_scsi_hda"));
-	   gui->append_scsi_hdb = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_scsi_hdb"));
-	   gui->append_scsi_hdc = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_scsi_hdc"));
-	   gui->append_scsi_hdd = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_scsi_hdd"));
+	   gui->append_scsi_hda = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "append_scsi_hda"));
+	   gui->append_scsi_hdb = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "append_scsi_hdb"));
+	   gui->append_scsi_hdc = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "append_scsi_hdc"));
+	   gui->append_scsi_hdd = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "append_scsi_hdd"));
 	   
 	   /* Others */
-	   gui->append_others       = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_others"));
+	   gui->append_others       = GTK_CHECK_BUTTON (gtk_builder_get_object (gui->builder, "append_others"));
 	   
-	   gui->append_entry_others = GTK_ENTRY (glade_xml_get_widget (gui->xml, "append_entry_others"));
+	   gui->append_entry_others = GTK_ENTRY (gtk_builder_get_object (gui->builder, "append_entry_others"));
 	   
 	   /* Connect signals */
 	   g_signal_connect (G_OBJECT (gui->append_vga), "toggled",
@@ -495,7 +503,7 @@ boot_append_gui_destroy (BootAppendGui *gui)
 {
 	   if (gui) 
 	   {
-			 g_object_unref (G_OBJECT (gui->xml));
+			 g_object_unref (gui->builder);
 			 g_free (gui);
 	   }
 }

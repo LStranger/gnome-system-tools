@@ -75,7 +75,7 @@ boot_image_editor_construct (BootImageEditor *editor, BootImage *image)
 	if (!editor->gui)
 		return FALSE;
 
-	w = glade_xml_get_widget (editor->gui->xml, "boot_settings_editor");
+	w = GTK_WIDGET (gtk_builder_get_object (editor->gui->builder, "boot_settings_editor"));
 	gtk_widget_reparent (w, GTK_DIALOG (editor->dialog)->vbox);
 
 	gtk_window_set_title (GTK_WINDOW (editor->dialog), _("Boot Image Editor"));
@@ -91,20 +91,28 @@ static BootImageEditor *
 boot_image_editor_new (BootImage *image)
 {
 	BootImageEditor *new;
-	GladeXML *xml;
+	GtkBuilder *builder;
+	GError* error = NULL;
 
 	if (!image)
 		return NULL;
 
 	new = g_new0 (BootImageEditor, 1);
 
-	xml = glade_xml_new (tool->glade_path, "boot_dialog", NULL);
-	new->dialog = GTK_DIALOG (glade_xml_get_widget (xml, "boot_dialog"));
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, boot_dialog, &error))
+	{
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+		return NULL;
+	}
 
-	g_signal_connect (G_OBJECT (glade_xml_get_widget (xml, "boot_dialog_help")),
+	new->dialog = GTK_DIALOG (gtk_builder_get_object (builder, "boot_dialog"));
+
+	g_signal_connect (G_OBJECT (gtk_builder_get_object (builder, "boot_dialog_help")),
 			  "clicked", G_CALLBACK (on_boot_help_button_clicked), NULL);
 
-	g_object_unref (xml);
+	g_object_unref (builder);
 	
 	if (boot_image_editor_construct (new, image))
 		return new;
@@ -173,7 +181,7 @@ boot_append_editor_construct (BootAppendEditor *editor, BootSettingsGui *setting
 	if (!editor->gui)
 		return FALSE;
 
-	w = glade_xml_get_widget (editor->gui->xml, "boot_append_editor");
+	w = GTK_WIDGET (gtk_builder_get_object (editor->gui->xml, "boot_append_editor"));
 	gtk_widget_reparent (w, GTK_DIALOG (editor->dialog)->vbox);
 
 	gtk_window_set_title (GTK_WINDOW (editor->dialog), _("Boot Append Editor"));
@@ -189,20 +197,27 @@ static BootAppendEditor *
 boot_append_editor_new (BootSettingsGui *settings)
 {
 	BootAppendEditor *new;
-	GladeXML *xml;
+	GtkBuilder *builder;
+	GError* error = NULL;
 
 	if (!settings)
 		return NULL;
 
 	new = g_new0 (BootAppendEditor, 1);
 
-	xml = glade_xml_new (tool->glade_path, "boot_dialog", NULL);
-	new->dialog = GTK_DIALOG (glade_xml_get_widget (xml, "boot_dialog"));
+	builder = gtk_builder_new ();
+	if (!gtk_builder_add_from_file (builder, boot_dialog, &error))
+	{
+		g_warning ("Couldn't load builder file: %s", error->message);
+		g_error_free (error);
+		return NULL;
+	}
+	new->dialog = GTK_DIALOG (gtk_builder_get_object (builder, "boot_dialog"));
 
-	g_signal_connect (G_OBJECT (glade_xml_get_widget (xml, "boot_dialog_help")),
+	g_signal_connect (gtk_builder_get_object (builder, "boot_dialog_help"),
 			  "clicked", G_CALLBACK (on_boot_help_button_clicked), NULL);
 
-	g_object_unref (xml);
+	g_object_unref (builder);
 
 	if (boot_append_editor_construct (new, settings))
 		return new;
