@@ -66,7 +66,7 @@ mv %{buildroot}/%{_bindir} %{buildroot}/%{_sbindir}
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{sysconfdir}/security/console.apps
 mkdir -p %{buildroot}/%{sysconfdir}/pam.d
-for wrappedapp in boot network services time users ; do
+for wrappedapp in network services time users ; do
         ln -sf consolehelper %{buildroot}/%{_bindir}/${wrappedapp}-admin
 
         # If we add the console.app file to the dist we should install it this way
