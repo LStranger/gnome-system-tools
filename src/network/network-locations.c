@@ -1116,7 +1116,7 @@ gst_network_locations_save_current (GstNetworkLocations *locations,
   g_return_val_if_fail (name && *name, FALSE);
 
   /* Unset the previous configuration with the same name, if any */
-  gst_network_locations_delete_location (locations, filename);
+  gst_network_locations_delete_location (locations, name);
 
   filename = g_filename_from_utf8 (name, -1, NULL, NULL, NULL);
   str = replace_string (filename, "/", SLASH);
