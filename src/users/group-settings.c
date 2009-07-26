@@ -341,3 +341,19 @@ group_settings_dialog_get_data (OobsGroup *group)
 
 	group_members_table_save (group);
 }
+
+OobsGroup *
+group_settings_dialog_get_group (void)
+{
+	GtkWidget *widget;
+	OobsGroup *group;
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
+	group  = oobs_group_new(gtk_entry_get_text (GTK_ENTRY (widget)));
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
+	oobs_group_set_gid (group, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
+
+	group_members_table_save (group);
+
+	return group;
+}

@@ -407,7 +407,7 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	response = group_settings_dialog_run (dialog, group);
 
 	if (response == GTK_RESPONSE_OK) {
-		group_settings_dialog_get_data (group);
+		group = group_settings_dialog_get_group ();
 
 		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 		groups_list = oobs_groups_config_get_groups (config);
