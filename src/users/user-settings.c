@@ -416,9 +416,6 @@ user_settings_dialog_new (OobsUser *user)
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
 		set_entry_text (GTK_BIN (widget)->child, oobs_user_get_shell (user));
 
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-		set_entry_text (widget, oobs_user_get_home_directory (user));
-
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
 		setup_profiles_visibility (tool, FALSE);
@@ -480,6 +477,11 @@ user_settings_dialog_new (OobsUser *user)
 
 	if (!login)
 		table_set_default_profile (GST_USERS_TOOL (tool));
+
+	if (user) {
+		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
+		set_entry_text (widget, oobs_user_get_home_directory (user));
+	}
 
 	return dialog;
 }
