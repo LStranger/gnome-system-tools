@@ -163,7 +163,7 @@ group_settings_dialog_new (OobsGroup *group)
 	name = oobs_group_get_name (group);
 
 	if (!name) {
-		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (FALSE));
+		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (TRUE));
 		gtk_window_set_title (GTK_WINDOW (dialog), _("New group"));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
@@ -212,8 +212,8 @@ is_group_root (OobsGroup *group)
 	return (strcmp (name, "root") == 0);
 }
 
-static gboolean
-group_exists (const gchar *name)
+gboolean
+group_settings_group_exists (const gchar *name)
 {
 	OobsGroupsConfig *config;
 	OobsList *groups_list;
@@ -282,9 +282,9 @@ check_name (gchar **primary_text, gchar **secondary_text, gpointer data)
 		*secondary_text = g_strdup (_("Please set a valid group name consisting of "
 					      "a lower case letter followed by lower case "
 					      "letters and numbers."));
-	} else if (group_settings_dialog_group_is_new () && group_exists (name)) {
+	} else if (group_settings_dialog_group_is_new () && group_settings_group_exists (name)) {
 		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), name);
-		*secondary_text = g_strdup (_("Please select a different user name."));
+		*secondary_text = g_strdup (_("Please choose a different group name."));
 	}
 }
 

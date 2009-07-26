@@ -36,6 +36,7 @@ gint         group_settings_dialog_run          (GtkWidget    *dialog,
 						 OobsGroup    *group);
 
 gid_t        group_settings_find_new_gid        (void);
+gboolean     group_settings_group_exists	(const gchar *name);
 void         group_settings_dialog_get_data     (OobsGroup    *group);
 OobsGroup *  group_settings_dialog_get_group    (void);
 

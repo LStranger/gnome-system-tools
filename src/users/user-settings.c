@@ -557,6 +557,9 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 	} else if (!user && login_exists (login)) {
 		*primary_text = g_strdup_printf (_("User name \"%s\" already exists"), login);
 		*secondary_text = g_strdup (_("Please select a different user name."));
+	} else if (group_settings_group_exists (login)) {
+		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), login);
+		*secondary_text = g_strdup (_("Please choose a different group name."));
 	}
 }
 
