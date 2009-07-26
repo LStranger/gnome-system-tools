@@ -1,3 +1,5 @@
+include $(top_srcdir)/DirsMakefile
+
 interfaces = \
 	common.ui	\
 	network.ui	\

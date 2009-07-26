@@ -1,0 +1,11 @@
+# Set the common directories.
+# This file is included in src/common/CommonMakefile,
+# in src/common/Makefile.am and in interfaces/Makefile.am
+
+pixmapsdir = $(pkgdatadir)/pixmaps
+interfacesdir = $(pkgdatadir)/ui
+
+INCLUDES = -DPIXMAPS_DIR=\""$(pixmapsdir)"\"		\
+	   -DINTERFACES_DIR=\""$(interfacesdir)"\"	\
+	   -DFRONTEND_DIR=\""$(frontenddir)"\"		\
+	   -DDESKTOP_DATA_DIR=\""$(desktopdatadir)"\"

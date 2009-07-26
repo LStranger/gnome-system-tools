@@ -167,33 +167,6 @@ dnl ========================================================
 dnl END : Translations
 dnl ========================================================
 
-dnl ========================================================
-dnl Set dirs
-dnl ========================================================
-
-if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
-  pixmapsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
-  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/ui", [path where UI files will be installed])
-  interfacesdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/ui"
-  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${ac_default_prefix}/${BINDIRNAME}", [frontend files path])
-  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${ac_default_prefix}/${DATADIRNAME}/control-center-2.0/capplets", [capplets directory])
-else
-  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
-  pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
-  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/ui", [path where UI files will be installed])
-  interfacesdir="${prefix}/${DATADIRNAME}/${PACKAGE}/ui"
-  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${prefix}/${BINDIRNAME}", [frontend files path])
-  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${prefix}/${DATADIRNAME}/control-center-2.0/capplets", [capplets directory])
-fi
-
-AC_SUBST(pixmapsdir)
-AC_SUBST(interfacesdir)
-
-dnl ==============================================================
-dnl END: Set dirs
-dnl ==============================================================
-
 dnl =====================================================
 dnl GCONF
 dnl =====================================================

@@ -1,6 +1,8 @@
+include $(top_srcdir)/DirsMakefile
+
 noinst_LIBRARIES = libsetuptool.a
 
-INCLUDES = \
+INCLUDES += \
 	$(GST_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DLIBDIR=\""$(libdir)"\" \
