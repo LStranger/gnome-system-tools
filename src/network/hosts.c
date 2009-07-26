@@ -358,7 +358,7 @@ host_aliases_run_dialog (GstNetworkTool *network_tool,
 
   if (iter)
     {
-      list = GST_NETWORK_TOOL (tool)->host_aliases_list;
+      list = network_tool->host_aliases_list;
       model = gtk_tree_view_get_model (list);
 
       gtk_tree_model_get (model, iter,
