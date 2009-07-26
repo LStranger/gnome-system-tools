@@ -405,7 +405,7 @@ gst_polkit_action_authenticate (GstPolKitAction *action)
 	dbus_message_iter_append_basic (&iter, DBUS_TYPE_STRING, &priv->action);
 	dbus_message_iter_append_basic (&iter, DBUS_TYPE_UINT32, &xid);
 
-	dbus_connection_send_with_reply (priv->session_bus, message, &pending_call, -1);
+	dbus_connection_send_with_reply (priv->session_bus, message, &pending_call, INT_MAX);
 
 	if (pending_call) {
 		dbus_pending_call_set_notify (pending_call, async_reply_cb,
