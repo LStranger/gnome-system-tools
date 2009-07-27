@@ -101,6 +101,7 @@ const ServiceDescription descriptions[] = {
 	{ FALSE, NULL,                 N_("Telstra Bigpond Cable Network client"), NULL }, /* GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT */
 	{ FALSE, NULL,                 N_("Hardware monitor"),                NULL }, /* GST_ROLE_HARDWARE_MONITORING */
 	{ FALSE, NULL,                 N_("System monitor"),                  NULL }, /* GST_ROLE_SYSTEM_MONITORING */
+	{ FALSE, NULL,                 N_("Virtual Machine management"),      NULL }, /* GST_ROLE_VIRTUAL_MACHINE_MANAGEMENT */
 	{ FALSE }
 };
 
