@@ -1,3 +1,85 @@
+GNOME System Tools Version 2.27.2, 2009-07-27
+-----------------------------------------------
+
+The GNOME System Tools version 2.27.2 have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. The frontends knows nothing about the underlying system and provide the same user interface across the different types of systems. Internally they use the Liboobs library.
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - Removed not built code of the old boot druid. This removed the dependency on libgnomeui via GnomeDruid. (Stéphane Demurget)
+  - Remove useless headers drawing dependencies on libgnome and libgnomeui. (Andre Klapper)
+  - Complete migration to GtkBuilder. The g-s-t no longer require libglade now. (Javier Jardón)
+  - Much upstreaming of patches from Debian and Ubuntu (please read the notice at the end of the announcement).
+  - Other old patches from Bugzilla applied.
+
+  Common
+  ======
+  - Don't use default D-Bus timeout when asking PolicyKit for authentication. (Chris Coulson)
+  - Partly fix broken jhbuild by taking into account installation prefix. (Milan Bouchet-Valat)
+
+  Network
+  =======
+  - Fix crash when editing properties of a host. (Josselin Mouette)
+  - Fix crash when saving network location. (Milan Bouchet-Valat)
+
+  Services
+  ========
+  - Update the list of boot services and reorder it. (Jeremy Guitton, Alex Magaz, Andy Owen and Martin Pitt)
+
+  Time
+  ====
+  - Add a new time server from Lithuania. (Andrius Burokas)
+  - Fix a bug with the clock spin button that made it skip certain values. (James Westby)
+
+  Users
+  =====
+  - Move GECOS fields to a new "Contact information" tab, making the main tab simpler and allowing the dialog to fit on small screens like netbooks. (Milan Bouchet-Valat, Michael Terry)
+  - Don't allow a new user or group to overwrite an existing group with all of its members (Milan Bouchet-Valat, James Westby)
+  - Never reset the home dir of an existing user to its default. (Martin Pitt, James Westby)
+  - Fix group creation, which did not work at all. (James Westby)
+  - Fix wrong string (Loïc Minier, thanks to Kenrick Bingham and Goswin von Brederlow).
+
+  Documentation
+  =============
+  - Add missing screenshot to Makefile.am. (Pedro Villavicencio)
+
+  Translation
+  ===========
+  - et, courtesy of Ivar Smolin
+  - fi, courtesy of Ilkka Tuohela
+  - gu, courtesy of Sweta Kothari
+  - he, courtesy of Yaron Shahrabani
+  - pt_BR, courtesy of Leonardo Ferreira Fontenelle
+  - sv, courtesy of Daniel Nylander
+  - ta, courtesy of Dr.T.Vasudevan
+  - uk, courtesy of wanderlust
+
+  Notice to packagers
+  ===================
+  Many patches from Debian and Ubuntu have been upstream in this release. Here's the list of the patches to drop:
+    10_add_missing_services.patch
+    23_users_update_model.patch (obsolete since the 2.22 series, see bgo#489187)
+    26_users_home_dir.patch
+    50_min-max-gid.patch
+    51_users_fit_575_height.patch
+    85_users_fix_add_group.patch
+    86_disable_existing_group_for_new_username.patch
+    91_time_admin_adjustment.patch
+    92_postgresql_versions.patch
+    93_polkit_dbus_timeout.patch
+
+  Thanks to anyone involved in this release, especially downstream for all the patches accumulated for so long!
+
+Downloading
+===========
+You can get it from :
+ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/2.27/
+
+
 GNOME System Tools Version 2.27.1, 2009-07-03
 -----------------------------------------------
 
