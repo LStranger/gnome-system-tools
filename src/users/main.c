@@ -94,7 +94,7 @@ main_window_prepare (GstUsersTool *tool)
 	/* This sucks, but calculating the needed size for simple mode based on the
 	 * hidden widgets plus the tabs size is going to be ugly. Chema
 	 */
-	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog), 450, 300);
+	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog), 550, 300);
 }
 
 int
