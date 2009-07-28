@@ -50,13 +50,17 @@ static const PrivilegeDescription descriptions[] = {
 	{ "admin", N_("Administer the system") },
 	{ "audio", N_("Use audio devices") },
 	{ "cdrom", N_("Use CD-ROM drives") },
+	{ "cdwrite", N_("Burn CDs / DVDs") },
 	{ "dialout", N_("Use modems") },
 	{ "dip", N_("Connect to Internet using a modem") },
 	{ "fax", N_("Send and receive faxes") },
 	{ "floppy", N_("Use floppy drives") },
 	{ "plugdev", N_("Access external storage devices automatically") },
+	{ "proc", N_("Access /proc filesystem") },
 	{ "scanner", N_("Use scanners") },
 	{ "tape", N_("Use tape drives") },
+	{ "usb", N_("Use USB devices") },
+	{ "video", N_("Use video devices") },
 	{ "wheel", N_("Be able to get administrator privileges") },
 };
 
