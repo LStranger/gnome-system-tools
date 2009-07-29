@@ -30,9 +30,9 @@ show_error_message (GtkWindow *parent, gchar *primary_text, gchar *secondary_tex
 					 GTK_DIALOG_MODAL,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_CLOSE,
-					 primary_text);
+					 "%s", primary_text);
 	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
-						    secondary_text);
+						    "%s", secondary_text);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }

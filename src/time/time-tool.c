@@ -126,7 +126,7 @@ gst_time_tool_init (GstTimeTool *tool)
 	priv->cookie = 0;
 
 	if (dbus_error_is_set (&error)) {
-		g_warning (error.message);
+		g_warning ("%s", error.message);
 		dbus_error_free (&error);
 	}
 

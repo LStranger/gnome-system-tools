@@ -187,9 +187,9 @@ show_access_denied_dialog (GstTool *tool,
 					 GTK_DIALOG_MODAL,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_CLOSE,
-					 _(primary_text));
+					 "%s", _(primary_text));
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _(secondary_text));
+						  "%s", _(secondary_text));
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }
@@ -411,7 +411,7 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 						 GTK_BUTTONS_CLOSE,
 						 _("Could not display help"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-							  error->message);
+							  "%s", error->message);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		g_error_free (error);

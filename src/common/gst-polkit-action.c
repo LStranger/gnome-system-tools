@@ -134,7 +134,7 @@ can_caller_do_action (GstPolKitAction *action)
 	caller = polkit_caller_new_from_pid (priv->system_bus, getpid (), &error);
 
 	if (dbus_error_is_set (&error)) {
-		g_critical (error.message);
+		g_critical ("%s", error.message);
 		dbus_error_free (&error);
 		return POLKIT_RESULT_NO;
 	}
@@ -342,7 +342,7 @@ async_reply_cb (DBusPendingCall *pending_call,
 	reply = dbus_pending_call_steal_reply (pending_call);
 
 	if (dbus_set_error_from_message (&error, reply)) {
-		g_critical (error.message);
+		g_critical ("%s", error.message);
 		dbus_error_free (&error);
 		priv->result = POLKIT_RESULT_UNKNOWN;
 	} else {

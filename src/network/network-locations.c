@@ -154,7 +154,7 @@ gst_network_locations_init (GstNetworkLocations *locations)
 		      G_CALLBACK (directory_monitor_changed), locations);
   else if (error)
     {
-      g_warning (error->message);
+      g_warning ("%s", error->message);
       g_error_free (error);
     }
 
@@ -921,7 +921,7 @@ concatenate_aliases (OobsStaticHost *static_host)
 
   while (elem)
     {
-      g_string_append_printf (str, ";%s", elem->data);
+      g_string_append_printf (str, ";%s", (gchar *)elem->data);
       elem = elem->next;
     }
 
