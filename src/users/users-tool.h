@@ -62,6 +62,8 @@ GType    gst_users_tool_get_type           (void);
 
 GstTool *gst_users_tool_new                (void);
 
+void     gst_users_tool_update_gui         (GstTool *tool);
+
 
 G_END_DECLS
 

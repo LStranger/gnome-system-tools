@@ -29,8 +29,6 @@
 static void  gst_users_tool_class_init     (GstUsersToolClass *class);
 static void  gst_users_tool_init           (GstUsersTool      *tool);
 static void  gst_users_tool_finalize       (GObject           *object);
-
-static void  gst_users_tool_update_gui     (GstTool *tool);
 static void  gst_users_tool_update_config  (GstTool *tool);
 
 static GObject* gst_users_tool_constructor (GType                  type,
@@ -185,7 +183,7 @@ update_profiles (GstUsersTool *tool)
 	g_list_free (names);
 }
 
-static void
+void
 gst_users_tool_update_gui (GstTool *tool)
 {
 	update_users (GST_USERS_TOOL (tool));
