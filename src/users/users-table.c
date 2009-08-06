@@ -71,16 +71,6 @@ add_user_columns (GtkTreeView *treeview)
 							    NULL);
 	gtk_tree_view_column_set_expand (column, TRUE);
 	gtk_tree_view_insert_column (treeview, column, -1);
-
-	/* Home directory */
-	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Home directory"),
-							   renderer,
-							   "text", COL_USER_HOME,
-							   "sensitive", COL_USER_SENSITIVE,
-							   NULL);
-	gtk_tree_view_column_set_expand (column, TRUE);
-	gtk_tree_view_insert_column (treeview, column, -1);
 }
 
 static gboolean
