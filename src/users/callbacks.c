@@ -96,8 +96,6 @@ actions_set_sensitive (gint table, gint count, OobsUser *user)
 
 		sensitive = count == 1 && gst_dialog_is_authenticated (tool->main_dialog)
 				       || (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
-		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "user_settings"),
-					  sensitive);
 		break;
 	case TABLE_GROUPS:
 		gst_dialog_try_set_sensitive (tool->main_dialog,

@@ -427,7 +427,6 @@ user_settings_set (OobsUser *user)
 	gchar *title;
 	gint uid;
 
-	dialog = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
 
 	/* Set this before setting the UID so that it's not rejected */

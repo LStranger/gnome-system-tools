@@ -49,7 +49,6 @@ static GstDialogSignal signals[] = {
 
 	/* Main dialog callbacks, users tab */
 	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
-	{ "user_settings",             		"clicked",       	G_CALLBACK (on_user_settings_clicked) },
 	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
 	{ "manage_groups",                      "clicked",              G_CALLBACK (on_manage_groups_clicked) },
 	
