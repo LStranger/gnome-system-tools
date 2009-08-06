@@ -27,6 +27,7 @@
 
 #include "table.h"
 #include "users-table.h"
+#include "user-settings.h"
 #include "callbacks.h"
 
 extern GstTool *tool;
@@ -137,22 +138,6 @@ create_users_table (GstUsersTool *tool)
 			  G_CALLBACK (on_table_popup_menu), NULL);
 }
 
-static GdkPixbuf*
-get_user_face (const gchar *homedir)
-{
-	gchar *face_path = g_strdup_printf ("%s/.face", homedir);
-	GdkPixbuf *pixbuf;
-
-	pixbuf = gdk_pixbuf_new_from_file_at_size (face_path, 48, 48, NULL);
-
-	if (!pixbuf)
-		pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "stock_person", 48, 0, NULL);
-
-	g_free (face_path);
-
-	return pixbuf;
-}
-
 void
 users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter)
 {
@@ -164,11 +149,14 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 	const char *name;
 	const char *login;
 	char *label;
+	gboolean sensitive;
 
-	face = get_user_face (oobs_user_get_home_directory (user));
+	face = user_settings_get_user_face (user, 48);
 	name = oobs_user_get_full_name (user);
 	login = oobs_user_get_login_name (user);
 	label = g_strdup_printf ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>", name, login);
+	sensitive = gst_dialog_is_authenticated (tool->main_dialog) ||
+	            (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_USER_FACE, face,

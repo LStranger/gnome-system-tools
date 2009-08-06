@@ -33,6 +33,7 @@ gint            user_settings_dialog_run         (GtkWidget *dialog);
 
 OobsUser *      user_settings_dialog_get_data    (GtkWidget *dialog);
 void            user_settings_apply_profile      (GstUsersTool *tool, GstUserProfile *profile);
+GdkPixbuf *     user_settings_get_user_face      (OobsUser *user, int size);
 
 
 #endif /* USER_SETTINGS_H */

@@ -417,6 +417,25 @@ setup_profiles_visibility (GstTool  *tool,
 	g_list_free (names);
 }
 
+GdkPixbuf *
+user_settings_get_user_face (OobsUser *user, int size)
+{
+	GdkPixbuf *pixbuf;
+	const gchar *homedir;
+	gchar *face_path;
+
+	homedir = oobs_user_get_home_directory (user);
+	face_path = g_strdup_printf ("%s/.face", homedir);
+	pixbuf = gdk_pixbuf_new_from_file_at_size (face_path, size, size, NULL);
+
+	if (!pixbuf)
+		pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "stock_person", size, 0, NULL);
+
+	g_free (face_path);
+
+	return pixbuf;
+}
+
 void
 user_settings_set (OobsUser *user)
 {
@@ -426,6 +445,7 @@ user_settings_set (OobsUser *user)
 	const gchar *login = NULL;
 	gchar *title;
 	gint uid;
+	GdkPixbuf *face;
 
 	notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
 
@@ -484,6 +504,11 @@ user_settings_set (OobsUser *user)
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
 	set_entry_text (widget, (user) ? oobs_user_get_full_name (user) : NULL);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_face");
+	face = user_settings_get_user_face (user, 60);
+	gtk_image_set_from_pixbuf (GTK_IMAGE (widget), face);
+	g_object_unref (face);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
 	set_entry_text (widget, (user) ? oobs_user_get_room_number (user) : NULL);
