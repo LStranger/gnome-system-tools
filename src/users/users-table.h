@@ -30,6 +30,7 @@ enum {
 	COL_USER_FACE,
 	COL_USER_NAME,
 	COL_USER_LOGIN,
+	COL_USER_LABEL,
 	COL_USER_HOME,
 	COL_USER_ID,
 	COL_USER_MEMBER, /* used in group members dialog */

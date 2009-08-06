@@ -36,40 +36,31 @@ add_user_columns (GtkTreeView *treeview)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
-	guint i;
+
+	column = gtk_tree_view_column_new ();
 
 	/* Face */
 	renderer = gtk_cell_renderer_pixbuf_new ();
-	column = gtk_tree_view_column_new ();
-	gtk_tree_view_column_set_title (column, _("Name"));
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column, renderer,
 					     "pixbuf", COL_USER_FACE,
 					     "sensitive", COL_USER_SENSITIVE,
 					     NULL);
-
-	/* User full name */
+	g_object_set (G_OBJECT (renderer),
+		      "xpad", 3,
+		      "ypad", 6,
+		      NULL);
+	/* User full name and login, on two lines */
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes (column, renderer,
-					     "text", COL_USER_NAME,
-					     "sensitive", COL_USER_SENSITIVE,
-					      NULL);
+					     "markup", COL_USER_LABEL,
+					     NULL);
+	g_object_set (G_OBJECT (renderer),
+		      "xpad", 3,
+		      "ypad", 6,
+		      NULL);
 
-	gtk_tree_view_column_set_resizable (column, TRUE);
-	gtk_tree_view_column_set_sort_column_id (column, 0);
-	gtk_tree_view_column_set_expand (column, TRUE);
-
-	gtk_tree_view_insert_column (treeview, column, -1);
-
-	/* Login name */
-	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Login name"),
-							   renderer,
-							   "text", COL_USER_LOGIN,
-							   "sensitive", COL_USER_SENSITIVE,
-							    NULL);
-	gtk_tree_view_column_set_expand (column, TRUE);
 	gtk_tree_view_insert_column (treeview, column, -1);
 }
 
@@ -96,6 +87,7 @@ create_users_model (GstUsersTool *tool)
 	
 	store = gtk_list_store_new (COL_USER_LAST,
 				    GDK_TYPE_PIXBUF,
+	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
@@ -151,10 +143,10 @@ get_user_face (const gchar *homedir)
 	gchar *face_path = g_strdup_printf ("%s/.face", homedir);
 	GdkPixbuf *pixbuf;
 
-	pixbuf = gdk_pixbuf_new_from_file_at_size (face_path, 24, 24, NULL);
+	pixbuf = gdk_pixbuf_new_from_file_at_size (face_path, 48, 48, NULL);
 
 	if (!pixbuf)
-		pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "stock_person", 24, 0, NULL);
+		pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "stock_person", 48, 0, NULL);
 
 	g_free (face_path);
 
@@ -169,22 +161,27 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 	OobsObject *object = GST_USERS_TOOL (tool)->self_config;
 	GdkPixbuf *face;
-	gboolean sensitive;
+	const char *name;
+	const char *login;
+	char *label;
 
 	face = get_user_face (oobs_user_get_home_directory (user));
-	sensitive = gst_dialog_is_authenticated (tool->main_dialog) ||
-	            (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
+	name = oobs_user_get_full_name (user);
+	login = oobs_user_get_login_name (user);
+	label = g_strdup_printf ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>", name, login);
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_USER_FACE, face,
-			    COL_USER_NAME, oobs_user_get_full_name (user),
-			    COL_USER_LOGIN, oobs_user_get_login_name (user),
+			    COL_USER_NAME, name,
+			    COL_USER_LOGIN, login,
+			    COL_USER_LABEL, label,
 			    COL_USER_HOME, oobs_user_get_home_directory (user),
 			    COL_USER_ID, oobs_user_get_uid (user),
 			    COL_USER_OBJECT, user,
 			    COL_USER_ITER, list_iter,
 			    COL_USER_SENSITIVE, sensitive,
 			    -1);
+	g_free (label);
 	if (face)
 		g_object_unref (face);
 }
