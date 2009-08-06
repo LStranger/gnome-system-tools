@@ -61,8 +61,6 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkWindow" id="users_dialog">
-    <property name="default_width">652</property>
-    <property name="default_height">418</property>
     <child>
       <object class="GtkVBox" id="users_admin">
         <property name="visible">True</property>
@@ -76,8 +74,8 @@
               <object class="GtkScrolledWindow" id="users_table_sw">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">automatic</property>
-                <property name="vscrollbar_policy">automatic</property>
+                <property name="hscrollbar_policy">never</property>
+                <property name="vscrollbar_policy">never</property>
                 <property name="shadow_type">etched-in</property>
                 <child>
                   <object class="GtkTreeView" id="users_table">

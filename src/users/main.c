@@ -90,11 +90,6 @@ main_window_prepare (GstUsersTool *tool)
 
 	/* For random password generation. */
 	srand (time (NULL));
-
-	/* This sucks, but calculating the needed size for simple mode based on the
-	 * hidden widgets plus the tabs size is going to be ugly. Chema
-	 */
-	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog), 550, 300);
 }
 
 int
