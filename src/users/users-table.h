@@ -39,13 +39,14 @@ enum {
 	COL_USER_LAST
 };
 
-void	create_users_table	(GstUsersTool *tool);
-void    users_table_clear       (void);
-void    users_table_set_user    (OobsUser     *user,
-				 OobsListIter *list_iter,
-				 GtkTreeIter  *iter);
-void    users_table_add_user    (OobsUser     *user,
-				 OobsListIter *list_iter);
+void	create_users_table	 (GstUsersTool *tool);
+void    users_table_clear        (void);
+void    users_table_set_user     (OobsUser     *user,
+				  OobsListIter *list_iter,
+				  GtkTreeIter  *iter);
+void    users_table_add_user     (OobsUser     *user,
+				  OobsListIter *list_iter);
+void	users_table_select_first (void);
 
 void    users_table_actions_set_sensitive (gint      table,
 					   gint      count,

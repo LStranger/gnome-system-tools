@@ -126,7 +126,7 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 	table = GPOINTER_TO_INT (data);
 	count = gtk_tree_selection_count_selected_rows (selection);
 
-	if (table == TABLE_USERS && count == 1 && !gst_dialog_is_authenticated (tool->main_dialog)) {
+	if (table == TABLE_USERS && count == 1) {
 		GtkTreeModel *model;
 		GList *selected;
 		GtkTreePath *path;
@@ -140,6 +140,11 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 	}
 
 	actions_set_sensitive (table, count, user);
+
+	/* Show the settings for the selected user */
+	user_settings_set (user);
+	if (user)
+		g_object_unref (user);
 }
 
 static void
@@ -286,11 +291,11 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	OobsList *users_list;
 	OobsListIter list_iter;
 	gint response;
-
+#if 0
 	dialog = user_settings_dialog_new (NULL);
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	response = user_settings_dialog_run (dialog);
-
+#endif
 	if (response == GTK_RESPONSE_OK) {
 		user = user_settings_dialog_get_data (dialog);
 
@@ -335,10 +340,12 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 			    COL_USER_OBJECT, &user,
 			    COL_USER_ITER, &list_iter,
 			    -1);
+#if 0
 	dialog = user_settings_dialog_new (user);
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	response = user_settings_dialog_run (dialog);
 	g_object_unref (user);
+#endif
 
 	if (response == GTK_RESPONSE_OK) {
 		gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),

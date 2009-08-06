@@ -417,8 +417,8 @@ setup_profiles_visibility (GstTool  *tool,
 	g_list_free (names);
 }
 
-GtkWidget *
-user_settings_dialog_new (OobsUser *user)
+void
+user_settings_set (OobsUser *user)
 {
 	OobsUsersConfig *config;
 	OobsGroup *no_passwd_login_group;
@@ -435,9 +435,6 @@ user_settings_dialog_new (OobsUser *user)
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, G_MAXINT32);
 
 	if (!user) {
-		g_object_set_data (G_OBJECT (dialog), "user", NULL);
-		gtk_window_set_title (GTK_WINDOW (dialog), _("New user account"));
-
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
 		set_entry_text (GTK_BIN (widget)->child,
@@ -452,14 +449,7 @@ user_settings_dialog_new (OobsUser *user)
 
 		setup_profiles_visibility (tool, TRUE);
 	} else {
-		g_object_set_data_full (G_OBJECT (dialog), "user",
-					g_object_ref (user),
-					(GDestroyNotify) g_object_unref);
-
 		login = oobs_user_get_login_name (user);
-		title = g_strdup_printf (_("Account '%s' Properties"), login);
-		gtk_window_set_title (GTK_WINDOW (dialog), title);
-		g_free (title);
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
 		set_entry_text (GTK_BIN (widget)->child, oobs_user_get_shell (user));
@@ -546,8 +536,6 @@ user_settings_dialog_new (OobsUser *user)
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 		set_entry_text (widget, oobs_user_get_home_directory (user));
 	}
-
-	return dialog;
 }
 
 static gboolean

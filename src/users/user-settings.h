@@ -28,7 +28,7 @@
 
 gboolean        user_delete                      (GtkTreeModel *model,
 						  GtkTreePath *path);
-GtkWidget *     user_settings_dialog_new         (OobsUser *user);
+void	        user_settings_set	         (OobsUser *user);
 gint            user_settings_dialog_run         (GtkWidget *dialog);
 
 OobsUser *      user_settings_dialog_get_data    (GtkWidget *dialog);

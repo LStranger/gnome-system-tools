@@ -145,6 +145,8 @@ update_users (GstUsersTool *tool)
 		g_object_unref (user);
 		valid = oobs_list_iter_next (list, &iter);
 	}
+
+	users_table_select_first ();
 }
 
 static void

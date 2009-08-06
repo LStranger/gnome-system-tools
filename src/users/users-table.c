@@ -210,3 +210,14 @@ users_table_clear (void)
 
         gtk_list_store_clear (GTK_LIST_STORE (model));
 }
+
+void
+users_table_select_first (void)
+{
+	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	GtkTreePath *first_user = gtk_tree_path_new_first ();
+
+	gtk_tree_selection_select_path (selection, first_user);
+}
+
