@@ -209,31 +209,10 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer da
 		return TRUE;
 	}
 
-	if (cont != 0 && (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)) {
-		if (!gst_dialog_is_authenticated (tool->main_dialog)) {
-			GtkTreeModel *model;
-			GList *selected;
-			GtkTreePath *path;
-			GtkTreeIter iter;
-			OobsUser *user;
-			OobsObject *object;
-
-			selected = gtk_tree_selection_get_selected_rows (selection, &model);
-			path = (GtkTreePath *) selected->data;
-
-			gtk_tree_model_get_iter (model, &iter, path);
-			gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
-
-			object = GST_USERS_TOOL (tool)->self_config;
-			if (user != oobs_self_config_get_user (OOBS_SELF_CONFIG (object)))
-				return FALSE;
-		}
-
-		if (table == TABLE_USERS)
-			on_user_settings_clicked (NULL, NULL);
-		else if (table == TABLE_GROUPS)
-			on_group_settings_clicked (NULL, NULL);
-	}
+	if (cont != 0 && (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)
+	    && (table == TABLE_GROUPS)
+	    && gst_dialog_is_authenticated (tool->main_dialog))
+		on_group_settings_clicked (NULL, NULL);
 
 	return FALSE;
 }
@@ -338,12 +317,11 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 			    COL_USER_OBJECT, &user,
 			    COL_USER_ITER, &list_iter,
 			    -1);
-#if 0
+#if 0 /* FIXME: adapt this code to work when applying changes */
 	dialog = user_settings_dialog_new (user);
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	response = user_settings_dialog_run (dialog);
 	g_object_unref (user);
-#endif
 
 	if (response == GTK_RESPONSE_OK) {
 		gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
@@ -374,6 +352,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 #endif
 		}
 	}
+#endif
 
 	oobs_list_iter_free (list_iter);
 }
