@@ -31,7 +31,7 @@
 #include "gst-conf.h"
 
 #ifdef HAVE_POLKIT
-#include "gst-polkit-button.h"
+#include <polkitgtk/polkitgtk.h>
 #endif
 
 #define GST_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_DIALOG, GstDialogPrivate))
@@ -174,22 +174,6 @@ gst_dialog_init (GstDialog *dialog)
 	priv->modified = FALSE;
 
 	priv->policy_widgets = NULL;
-
-#ifdef HAVE_POLKIT
-	priv->polkit_button = gst_polkit_button_new (NULL, _("_Unlock"));
-	gtk_widget_show (priv->polkit_button);
-
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog),
-				      priv->polkit_button, GTK_RESPONSE_NONE);
-
-	g_signal_connect_swapped (priv->polkit_button, "changed",
-				  G_CALLBACK (gst_dialog_unlock), dialog);
-#endif
-
-	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-				GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-				NULL);
 }
 
 static GObject*
@@ -240,11 +224,24 @@ gst_dialog_constructor (GType                  type,
 #ifdef HAVE_POLKIT
 	if (priv->tool) {
 		const gchar *action;
+		GtkWidget *action_area;
 
 		action = oobs_session_get_authentication_action (priv->tool->session);
-		gst_polkit_button_set_action (GST_POLKIT_BUTTON (priv->polkit_button), action);
+		priv->polkit_button = polkit_lock_button_new (action);
+		gtk_widget_show (priv->polkit_button);
+
+		action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+		gtk_box_pack_start (GTK_BOX (action_area), priv->polkit_button, TRUE, TRUE, 0);
+
+		g_signal_connect_swapped (priv->polkit_button, "changed",
+					  G_CALLBACK (gst_dialog_unlock), dialog);
 	}
 #endif
+
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+				GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				NULL);
 
 	if (priv->title)
 		gtk_window_set_title (GTK_WINDOW (dialog), priv->title);
@@ -634,7 +631,9 @@ gst_dialog_is_authenticated (GstDialog *dialog)
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	return gst_polkit_button_get_authenticated (GST_POLKIT_BUTTON (priv->polkit_button));
+	return (polkit_lock_button_get_is_authorized (POLKIT_LOCK_BUTTON (priv->polkit_button)) ||
+		(polkit_lock_button_get_can_obtain (POLKIT_LOCK_BUTTON (priv->polkit_button)) &&
+		!polkit_lock_button_get_is_visible (POLKIT_LOCK_BUTTON (priv->polkit_button))));
 #else
 	return TRUE;
 #endif

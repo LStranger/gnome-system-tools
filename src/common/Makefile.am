@@ -19,10 +19,4 @@ libsetuptool_a_SOURCES = \
 	gst-service-role.c	gst-service-role.h \
 	gst.h
 
-if HAVE_POLKIT
-libsetuptool_a_SOURCES += \
-	gst-polkit-action.c gst-polkit-action.h \
-	gst-polkit-button.c gst-polkit-button.h
-endif
-
 EXTRA_DIST = CommonMakefile $(headers)

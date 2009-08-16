@@ -26,10 +26,6 @@
 #include <config.h>
 #include "gst.h"
 
-#ifdef HAVE_POLKIT
-#include "gst-polkit-action.h"
-#endif
-
 #include "passwd.h"
 #include "callbacks.h"
 #include "table.h"
