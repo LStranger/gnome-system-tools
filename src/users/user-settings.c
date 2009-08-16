@@ -147,15 +147,6 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 }
 
 static void
-setup_groups_combo (GtkWidget *widget)
-{
-	GtkWidget *table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
-
-	gtk_combo_box_set_model (GTK_COMBO_BOX (widget), model);
-}
-
-static void
 set_entry_text (GtkWidget *entry, const gchar *text)
 {
 	gtk_entry_set_text (GTK_ENTRY (entry), (text) ? text : "");

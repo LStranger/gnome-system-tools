@@ -80,9 +80,16 @@ setup_groups_combo (void)
 {
 	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	GtkWidget *table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	GtkCellRenderer *cell;
+	GtkTreeModel *model;
 
+	cell = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT (combo), cell, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT (combo), cell, "text", 0, NULL);
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
+	g_object_unref (model);
 }
 
 static void
@@ -115,8 +122,14 @@ static void
 setup_profiles_combo (void)
 {
 	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
-	GtkTreeModel *model = GTK_TREE_MODEL (gtk_list_store_new (1, G_TYPE_STRING));
+	GtkTreeModel *model;
+	GtkCellRenderer *cell;
 
+	cell = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT (combo), cell, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT (combo), cell, "text", 0, NULL);
+
+	model = GTK_TREE_MODEL (gtk_list_store_new (1, G_TYPE_STRING));
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
 	g_object_unref (model);
 }
