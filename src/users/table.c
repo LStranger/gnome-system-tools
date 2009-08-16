@@ -111,6 +111,16 @@ setup_shells_combo (GstUsersTool *tool)
 	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (combo), 0);
 }
 
+static void
+setup_profiles_combo (void)
+{
+	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
+	GtkTreeModel *model = GTK_TREE_MODEL (gtk_list_store_new (1, G_TYPE_STRING));
+
+	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
+	g_object_unref (model);
+}
+
 void
 table_populate_profiles (GstUsersTool *tool,
 			 GList        *names)
@@ -172,6 +182,7 @@ create_tables (GstUsersTool *tool)
 	create_group_members_table ();
 
 	/* not strictly tables, but uses a model */
+	setup_profiles_combo ();
 	setup_groups_combo ();
 	setup_shells_combo (tool);
 }
