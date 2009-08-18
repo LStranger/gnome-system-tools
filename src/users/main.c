@@ -72,6 +72,7 @@ static const gchar *policy_widgets [] = {
 	"profile_settings",
 	"user_settings_name",
 	"user_settings_profile_menu",
+	"user_passwd_no_check",
 	"user_privileges",
 	"user_settings_home",
 	"user_settings_shell",

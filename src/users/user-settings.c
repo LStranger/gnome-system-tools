@@ -457,7 +457,7 @@ user_settings_dialog_new (OobsUser *user)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
 	}
 	else {
-		gtk_widget_set_sensitive (widget, TRUE);
+		gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
 		if (is_user_in_group (user, no_passwd_login_group))
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 		else
