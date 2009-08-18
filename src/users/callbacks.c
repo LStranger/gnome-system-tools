@@ -68,6 +68,9 @@ on_unlocked (GstDialog *dialog)
 static void
 actions_set_sensitive (gint table, gint count, OobsUser *user)
 {
+	OobsObject *object = GST_USERS_TOOL (tool)->self_config;
+	gboolean sensitive;
+
 	switch (table) {
 	case TABLE_USERS:
 		gst_dialog_try_set_sensitive (tool->main_dialog,
@@ -77,9 +80,10 @@ actions_set_sensitive (gint table, gint count, OobsUser *user)
 					      gst_dialog_get_widget (tool->main_dialog, "user_delete"),
 					      (count > 0));
 
-		
+		sensitive = count == 1 && gst_dialog_is_authenticated (tool->main_dialog)
+				       || (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
 		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "user_settings"),
-					  (count == 1 && (gst_dialog_is_authenticated (tool->main_dialog) || oobs_user_get_active (user))));
+					  sensitive);
 		break;
 	case TABLE_GROUPS:
 		gst_dialog_try_set_sensitive (tool->main_dialog,
@@ -195,6 +199,7 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer da
 			GtkTreePath *path;
 			GtkTreeIter iter;
 			OobsUser *user;
+			OobsObject *object;
 
 			selected = gtk_tree_selection_get_selected_rows (selection, &model);
 			path = (GtkTreePath *) selected->data;
@@ -202,7 +207,8 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer da
 			gtk_tree_model_get_iter (model, &iter, path);
 			gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
 
-			if (!oobs_user_get_active (user))
+			object = GST_USERS_TOOL (tool)->self_config;
+			if (user != oobs_self_config_get_user (OOBS_SELF_CONFIG (object)))
 				return FALSE;
 		}
 
@@ -325,22 +331,17 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 			/* change users/groups configuration */
 			oobs_object_commit (GST_USERS_TOOL (tool)->users_config);
 			oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
+#ifdef HAVE_POLKIT
+		/* With PolicyKit1, we don't have to check for authorizations: just try to commit,
+		 * the backend will trigger authentication if possible, or fail */
 		} else {
 			OobsObject *object = GST_USERS_TOOL (tool)->self_config;
 
 			/* change self, only if it is the modified user */
 			if (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object))) {
-#ifdef HAVE_POLKIT
-				GstPolKitAction *action;
-				action = gst_polkit_action_new (oobs_object_get_authentication_action (object),
-								GTK_WIDGET (tool->main_dialog));
-
-				if (gst_polkit_action_authenticate (action))
-					oobs_object_commit (GST_USERS_TOOL (tool)->self_config);
-
-				g_object_unref (action);
-#endif
+				oobs_object_commit (GST_USERS_TOOL (tool)->self_config);
 			}
+#endif
 		}
 	}
 

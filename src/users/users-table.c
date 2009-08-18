@@ -177,9 +177,13 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
 	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
 	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	OobsObject *object = GST_USERS_TOOL (tool)->self_config;
 	GdkPixbuf *face;
+	gboolean sensitive;
 
 	face = get_user_face (oobs_user_get_home_directory (user));
+	sensitive = gst_dialog_is_authenticated (tool->main_dialog) ||
+	            (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_USER_FACE, face,
@@ -189,7 +193,7 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 			    COL_USER_ID, oobs_user_get_uid (user),
 			    COL_USER_OBJECT, user,
 			    COL_USER_ITER, list_iter,
-			    COL_USER_SENSITIVE, gst_dialog_is_authenticated (tool->main_dialog) || oobs_user_get_active (user),
+			    COL_USER_SENSITIVE, sensitive,
 			    -1);
 	if (face)
 		g_object_unref (face);
