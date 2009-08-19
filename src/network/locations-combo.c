@@ -216,7 +216,7 @@ on_combo_changed (GtkWidget *widget, gpointer data)
       gst_network_locations_set_location (locations, str);
       gst_tool_update_gui (priv->tool);
 
-      oobs_object_commit (locations->hosts_config);
+      gst_tool_commit (priv->tool, locations->hosts_config);
       gst_tool_commit_async (priv->tool, locations->ifaces_config,
 			     _("Changing network location"), NULL, NULL);
       g_free (str);

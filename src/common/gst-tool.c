@@ -194,6 +194,42 @@ show_access_denied_dialog (GstTool *tool,
 	gtk_widget_destroy (dialog);
 }
 
+/* Handle all oobs errors but OOBS_RESULT_NO_PLATFORM, which should happen in specific cases */
+static void
+show_oobs_error_dialog (GstTool   *tool,
+			int        operation,
+			OobsResult result)
+{
+	GtkWidget *dialog;
+	const gchar *primary_text, *secondary_text;
+
+	/* Complex case to treat separately */
+	if (result == OOBS_RESULT_ACCESS_DENIED) {
+		show_access_denied_dialog (tool, operation);
+		return;
+	}
+
+	if (operation == OPERATION_UPDATE)
+		primary_text = N_("The configuration could not be loaded");
+	else
+		primary_text = N_("The configuration could not be saved");
+
+	if (result == OOBS_RESULT_MALFORMED_DATA)
+		secondary_text = N_("Invalid data was found.");
+	else /* OOBS_RESULT_ERROR */
+		secondary_text = N_("An unknown error occurred.");
+
+	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_CLOSE,
+					 "%s", _(primary_text));
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  "%s", _(secondary_text));
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+}
+
 static GObject*
 gst_tool_constructor (GType                  type,
 		      guint                  n_construct_properties,
@@ -226,20 +262,14 @@ gst_tool_constructor (GType                  type,
 	}
 
 	result = oobs_session_get_platform (tool->session, NULL);
-
-	switch (result) {
-	case OOBS_RESULT_NO_PLATFORM:
+	if (result == OOBS_RESULT_NO_PLATFORM) {
 		dialog = gst_platform_dialog_new (tool->session);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
-		break;
-	case OOBS_RESULT_ACCESS_DENIED:
-	case OOBS_RESULT_ERROR:
-		show_access_denied_dialog (tool, OPERATION_UPDATE);
+	}
+	else if (result != OOBS_RESULT_OK) {
+		show_oobs_error_dialog (tool, OPERATION_UPDATE, result);
 		exit (-1);
-		break;
-	default:
-		break;
 	}
 
 	gst_tool_update_async (tool);
@@ -472,6 +502,19 @@ gst_tool_hide_report_window (GstTool *tool)
 	gtk_widget_hide (tool->report_window);
 }
 
+/* Simple wrapper around oobs_object_commit(), that shows an error if needed */
+OobsResult
+gst_tool_commit (GstTool    *tool,
+		 OobsObject *object)
+{
+	OobsResult result = oobs_object_commit (object);
+
+	if (result != OOBS_RESULT_OK)
+		show_oobs_error_dialog (tool, OPERATION_COMMIT, result);
+
+	return result;
+}
+
 static void
 on_commit_finalized (OobsObject *object,
 		     OobsResult  result,
@@ -481,15 +524,8 @@ on_commit_finalized (OobsObject *object,
 
 	gst_tool_hide_report_window (user_data->tool);
 
-	switch (result) {
-	case OOBS_RESULT_ACCESS_DENIED:
-		show_access_denied_dialog (user_data->tool, OPERATION_COMMIT);
-		break;
-	case OOBS_RESULT_OK:
-	default:
-		/* FIXME: handle other errors */
-		break;
-	}
+	if (result != OOBS_RESULT_OK)
+		show_oobs_error_dialog (user_data->tool, OPERATION_COMMIT, result);
 
 	if (user_data->func)
 		(* user_data->func) (object, result, user_data->data);

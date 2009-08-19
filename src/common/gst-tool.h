@@ -97,6 +97,9 @@ GtkIconTheme *gst_tool_get_icon_theme     (GstTool *tool);
 
 void         gst_tool_show_help       (GstTool*, gchar*);
 
+OobsResult   gst_tool_commit          (GstTool *tool,
+				       OobsObject *object);
+
 void         gst_tool_commit_async    (GstTool             *tool,
 				       OobsObject          *object,
 				       const gchar         *message,

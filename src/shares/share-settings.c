@@ -377,10 +377,10 @@ modify_share (OobsShare *new_share, OobsShare *old_share, OobsListIter *list_ite
 
 	table_modify_share_at_iter (iter, new_share, list_iter);
 
-	oobs_object_commit (new_config);
+	gst_tool_commit (tool, new_config);
 
 	if (old_config != new_config)
-		oobs_object_commit (old_config);
+		gst_tool_commit (tool, old_config);
 }
 
 static void
@@ -404,7 +404,7 @@ add_new_share (OobsShare *share)
 
 	table_add_share (share, &iter);
 
-	oobs_object_commit (config);
+	gst_tool_commit (tool, config);
 }
 
 static void
@@ -424,7 +424,7 @@ delete_share (GtkTreeIter *iter, OobsShare *share, OobsListIter *list_iter)
 	oobs_list_remove (list, list_iter);
 	table_delete_share_at_iter (iter);
 
-	oobs_object_commit (config);
+	gst_tool_commit (tool, config);
 }
 
 void

@@ -90,7 +90,7 @@ save_dns (GList *list, gpointer data)
   GstNetworkTool *tool = (GstNetworkTool *) data;
 
   oobs_hosts_config_set_dns_servers (tool->hosts_config, list);
-  oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
+  gst_tool_commit (GST_TOOL (tool), OOBS_OBJECT (tool->hosts_config));
 }
 
 static void
@@ -99,7 +99,7 @@ save_search_domains (GList *list, gpointer data)
   GstNetworkTool *tool = (GstNetworkTool *) data;
 
   oobs_hosts_config_set_search_domains (tool->hosts_config, list);
-  oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
+  gst_tool_commit (GST_TOOL (tool), OOBS_OBJECT (tool->hosts_config));
 }
 
 static GObject*

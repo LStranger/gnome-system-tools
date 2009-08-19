@@ -342,7 +342,7 @@ host_aliases_dialog_save (GtkTreeIter *iter)
       host_aliases_add (host, &list_iter);
     }
 
-  oobs_object_commit (OOBS_OBJECT (GST_NETWORK_TOOL (tool)->hosts_config));
+    gst_tool_commit (tool, OOBS_OBJECT (GST_NETWORK_TOOL (tool)->hosts_config));
 }
 
 void

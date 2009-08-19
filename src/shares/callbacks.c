@@ -217,11 +217,11 @@ on_delete_share_clicked (GtkWidget *widget, gpointer data)
 		if (OOBS_IS_SHARE_NFS (share)) {
 			list = oobs_nfs_config_get_shares OOBS_NFS_CONFIG ((GST_SHARES_TOOL (tool)->nfs_config));
 			oobs_list_remove (list, list_iter);
-			oobs_object_commit (GST_SHARES_TOOL (tool)->nfs_config);
+			gst_tool_commit (tool, GST_SHARES_TOOL (tool)->nfs_config);
 		} else {
 			list = oobs_smb_config_get_shares OOBS_SMB_CONFIG ((GST_SHARES_TOOL (tool)->smb_config));
 			oobs_list_remove (list, list_iter);
-			oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
+			gst_tool_commit (tool, GST_SHARES_TOOL (tool)->smb_config);
 		}
 
 		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
@@ -363,7 +363,7 @@ on_is_wins_toggled (GtkWidget *widget, gpointer data)
 	gtk_widget_set_sensitive (entry, !is_wins_server);
 
 	oobs_smb_config_set_is_wins_server (OOBS_SMB_CONFIG (GST_SHARES_TOOL (tool)->smb_config), is_wins_server);
-	oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
+	gst_tool_commit (tool, GST_SHARES_TOOL (tool)->smb_config);
 }
 
 gboolean
@@ -376,7 +376,7 @@ on_workgroup_focus_out (GtkWidget *widget, GdkEvent *event, gpointer data)
 
 	if (workgroup && *workgroup) {
 		oobs_smb_config_set_workgroup (OOBS_SMB_CONFIG (GST_SHARES_TOOL (tool)->smb_config), workgroup);
-		oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
+		gst_tool_commit (tool, GST_SHARES_TOOL (tool)->smb_config);
 	}
 	g_free (workgroup);
 
@@ -392,7 +392,7 @@ on_wins_server_focus_out (GtkWidget *widget, GdkEvent *event, gpointer data)
 	wins_server = g_strdup (gtk_entry_get_text (GTK_ENTRY (widget)));
 
 	oobs_smb_config_set_wins_server (OOBS_SMB_CONFIG (GST_SHARES_TOOL (tool)->smb_config), wins_server);
-	oobs_object_commit (GST_SHARES_TOOL (tool)->smb_config);
+	gst_tool_commit (tool, GST_SHARES_TOOL (tool)->smb_config);
 	g_free (wins_server);
 
 	return FALSE;

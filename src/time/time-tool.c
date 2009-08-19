@@ -209,7 +209,7 @@ on_apply_timeout (GstTimeTool *tool)
 				   (gint) year, (gint) month, (gint) day,
 				   (gint) hour, (gint) minute, (gint)second);
 
-	oobs_object_commit (tool->time_config);
+	gst_tool_commit (GST_TOOL (tool), tool->time_config);
 	gst_time_tool_start_clock (tool);
 
 	inhibit_screensaver (tool, FALSE);
@@ -770,7 +770,7 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 
 	if (!timezone || strcmp (tz_name, timezone) != 0) {
 		oobs_time_config_set_timezone (OOBS_TIME_CONFIG (time_tool->time_config), tz_name);
-		oobs_object_commit (time_tool->time_config);
+		gst_tool_commit (GST_TOOL (time_tool), time_tool->time_config);
 		gtk_label_set_text (GTK_LABEL (label), tz_name);
 	}
 }

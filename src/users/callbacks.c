@@ -286,8 +286,8 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 		oobs_list_set (users_list, &list_iter, user);
 
 		users_table_add_user (user, &list_iter);
-		oobs_object_commit (GST_USERS_TOOL (tool)->users_config);
-		oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
 }
 
@@ -329,8 +329,8 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 
 		if (gst_dialog_is_authenticated (tool->main_dialog)) {
 			/* change users/groups configuration */
-			oobs_object_commit (GST_USERS_TOOL (tool)->users_config);
-			oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
+			gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
+			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 #ifdef HAVE_POLKIT
 		/* With PolicyKit1, we don't have to check for authorizations: just try to commit,
 		 * the backend will trigger authentication if possible, or fail */
@@ -339,7 +339,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 
 			/* change self, only if it is the modified user */
 			if (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object))) {
-				oobs_object_commit (GST_USERS_TOOL (tool)->self_config);
+				gst_tool_commit (tool, GST_USERS_TOOL (tool)->self_config);
 			}
 #endif
 		}
@@ -369,7 +369,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
 	g_list_free (list);
 
-	oobs_object_commit (GST_USERS_TOOL (tool)->users_config);
+	gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
 }
 
 void
@@ -412,7 +412,7 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 		oobs_list_set (groups_list, &list_iter, group);
 
 		groups_table_add_group (group, &list_iter);
-		oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
 }
 
@@ -452,7 +452,7 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 								  &filter_iter, &iter);
 		group_settings_dialog_get_data (group);
 		groups_table_set_group (group, list_iter, &filter_iter);
-		oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
 
 	g_object_unref (group);
@@ -480,7 +480,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
 	g_list_free (list);
 
-	oobs_object_commit (GST_USERS_TOOL (tool)->groups_config);
+	gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 }
 
 /* User settings callbacks */

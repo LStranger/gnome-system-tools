@@ -426,7 +426,7 @@ on_host_aliases_delete_clicked (GtkWidget *widget, gpointer data)
       gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
       oobs_list_iter_free (list_iter);
-      oobs_object_commit (OOBS_OBJECT (GST_NETWORK_TOOL (tool)->hosts_config));
+      gst_tool_commit (tool, OOBS_OBJECT (GST_NETWORK_TOOL (tool)->hosts_config));
     }
 }
 
@@ -538,7 +538,7 @@ on_hostname_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
       if (res == GTK_RESPONSE_ACCEPT)
 	{
 	  oobs_hosts_config_set_hostname (tool->hosts_config, hostname);
-	  oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
+	  gst_tool_commit (GST_TOOL (tool), OOBS_OBJECT (tool->hosts_config));
 	}
       else
 	{
@@ -566,7 +566,7 @@ on_domain_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
   if (changed)
     {
       oobs_hosts_config_set_domainname (tool->hosts_config, domain);
-      oobs_object_commit (OOBS_OBJECT (tool->hosts_config));
+      gst_tool_commit (GST_TOOL (tool), OOBS_OBJECT (tool->hosts_config));
     }
 
   g_object_set_data (G_OBJECT (widget), "content-changed", GINT_TO_POINTER (FALSE));

@@ -222,7 +222,7 @@ get_main_group (const gchar *name)
 		oobs_list_set (groups_list, &list_iter, group);
 
 		groups_table_add_group (group, &list_iter);
-		oobs_object_commit (OOBS_OBJECT (config));
+		gst_tool_commit (tool, OOBS_OBJECT (config));
 
 		return group;
 	}

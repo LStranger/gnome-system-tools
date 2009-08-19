@@ -75,7 +75,7 @@ show_settings (void)
 
 	if (response != GTK_RESPONSE_NONE) {
 		service_settings_table_save (service);
-		oobs_object_commit (GST_SERVICES_TOOL (tool)->services_config);
+		gst_tool_commit (tool, GST_SERVICES_TOOL (tool)->services_config);
 	}
 
 	g_object_unref (service);
@@ -162,7 +162,7 @@ on_service_toggled (GtkCellRenderer *renderer, gchar *path_str, gpointer data)
 							 (new_value) ? OOBS_SERVICE_START : OOBS_SERVICE_IGNORE,
 							 /* FIXME: hardcoded value... */
 							 50);
-		oobs_object_commit (GST_SERVICES_TOOL (tool)->services_config);
+		gst_tool_commit (tool, GST_SERVICES_TOOL (tool)->services_config);
 
 		gtk_list_store_set (GTK_LIST_STORE (model),
 				    &iter,
