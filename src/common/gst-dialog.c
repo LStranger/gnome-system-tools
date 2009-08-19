@@ -88,7 +88,7 @@ static void     gst_dialog_realize      (GtkWidget   *widget);
 static void     gst_dialog_set_cursor   (GstDialog     *dialog,
 					 GdkCursorType  cursor_type);
 
-static void             gst_dialog_unlock                (GstDialog *dialog);
+static void             gst_dialog_lock_changed          (GstDialog *dialog);
 static GstWidgetPolicy *gst_dialog_get_policy_for_widget (GtkWidget *widget);
 
 enum {
@@ -99,7 +99,7 @@ enum {
 };
 
 enum {
-	UNLOCKED,
+	LOCK_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -146,11 +146,11 @@ gst_dialog_class_init (GstDialogClass *class)
 							      NULL,
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
 
-	signals [UNLOCKED] =
-		g_signal_new ("unlocked",
+	signals [LOCK_CHANGED] =
+		g_signal_new ("lock-changed",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GstDialogClass, unlocked),
+			      G_STRUCT_OFFSET (GstDialogClass, lock_changed),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
@@ -234,7 +234,7 @@ gst_dialog_constructor (GType                  type,
 		gtk_box_pack_start (GTK_BOX (action_area), priv->polkit_button, TRUE, TRUE, 0);
 
 		g_signal_connect_swapped (priv->polkit_button, "changed",
-					  G_CALLBACK (gst_dialog_unlock), dialog);
+					  G_CALLBACK (gst_dialog_lock_changed), dialog);
 	}
 #endif
 
@@ -369,7 +369,7 @@ gst_dialog_get_widget (GstDialog *dialog, const char *widget)
 }
 
 static void
-gst_dialog_unlock (GstDialog *dialog)
+gst_dialog_lock_changed (GstDialog *dialog)
 {
 	GstDialogPrivate *priv;
 	GSList *list;
@@ -381,11 +381,15 @@ gst_dialog_unlock (GstDialog *dialog)
 		GstWidgetPolicy *policy;
 
 		widget = list->data;
-		policy = gst_dialog_get_policy_for_widget (widget);
-		gtk_widget_set_sensitive (widget, policy->was_sensitive);
+		if (gst_dialog_is_authenticated (dialog)) {
+			policy = gst_dialog_get_policy_for_widget (widget);
+			gtk_widget_set_sensitive (widget, policy->was_sensitive);
+		}
+		else
+			gtk_widget_set_sensitive (widget, FALSE);
 	}
 
-	g_signal_emit (dialog, signals [UNLOCKED], 0);
+	g_signal_emit (dialog, signals [LOCK_CHANGED], 0);
 }
 
 static void

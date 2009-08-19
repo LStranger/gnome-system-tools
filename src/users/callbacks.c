@@ -37,30 +37,44 @@
 
 extern GstTool *tool;
 
-/* Unlock signal */
-
+/* PolkitLockButton state has changed, reflect this in the UI */
 void
-on_unlocked (GstDialog *dialog)
+on_lock_changed (GstDialog *dialog)
 {
 	GtkWidget *users_table;
 	GtkTreeModel *model, *store;
+	GtkTreeSelection *selection;
 	GtkTreeIter iter;
+	OobsUser *self, *user;
 	gboolean valid;
+	gboolean is_authenticated;
 
 	users_table = gst_dialog_get_widget (dialog, "users_table");
 
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
 	store = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
+
+	is_authenticated = gst_dialog_is_authenticated (tool->main_dialog);
+	self = oobs_self_config_get_user (OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config));
 
 	valid = gtk_tree_model_get_iter_first (store, &iter);
 
 	while (valid) {
-		gtk_list_store_set (GTK_LIST_STORE (store), &iter,
-				    COL_USER_SENSITIVE, TRUE,
+		gtk_tree_model_get (store, &iter,
+				    COL_USER_OBJECT, &user,
 				    -1);
 
+		gtk_list_store_set (GTK_LIST_STORE (store), &iter,
+				    COL_USER_SENSITIVE, is_authenticated | (user == self),
+				    -1);
+
+		g_object_unref (user);
 		valid = gtk_tree_model_iter_next (store, &iter);
 	}
+
+	/* Update the status depending on the selected user */
+	on_table_selection_changed (selection, NULL);
 }
 
 /* Common stuff to users and groups tables */
@@ -103,7 +117,7 @@ actions_set_sensitive (gint table, gint count, OobsUser *user)
 }
 
 void
-on_table_clicked (GtkTreeSelection *selection, gpointer data)
+on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
 	gint count, table;
 	gboolean active;

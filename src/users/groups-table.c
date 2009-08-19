@@ -111,7 +111,7 @@ create_groups_table (void)
 				(GDestroyNotify) gtk_widget_destroy);
 
 	g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK (on_table_clicked),
+			  G_CALLBACK (on_table_selection_changed),
 			  GINT_TO_POINTER (TABLE_GROUPS));
 	g_signal_connect (G_OBJECT (groups_table), "button_press_event",
 			  G_CALLBACK (on_table_button_press),

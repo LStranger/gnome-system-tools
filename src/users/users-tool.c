@@ -107,8 +107,8 @@ gst_users_tool_constructor (GType                  type,
 	gst_conf_add_notify (GST_TOOL (tool), "showall",
 			     on_showall_changed, tool);
 
-	g_signal_connect (G_OBJECT (tool->main_dialog), "unlocked",
-			  G_CALLBACK (on_unlocked), NULL);
+	g_signal_connect (G_OBJECT (tool->main_dialog), "lock_changed",
+			  G_CALLBACK (on_lock_changed), NULL);
 
 	return object;
 }

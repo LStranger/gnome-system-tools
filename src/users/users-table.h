@@ -47,5 +47,9 @@ void    users_table_set_user    (OobsUser     *user,
 void    users_table_add_user    (OobsUser     *user,
 				 OobsListIter *list_iter);
 
+void    users_table_actions_set_sensitive (gint      table,
+					   gint      count,
+					   OobsUser *user);
+
 #endif /* _USERS_TABLE_H */
 

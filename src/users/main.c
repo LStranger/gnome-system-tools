@@ -60,7 +60,7 @@ static GstDialogSignal signals[] = {
 	{ "groups_dialog_help",                 "clicked",              G_CALLBACK (on_groups_dialog_show_help) },
 	{ NULL }};
 
-static const gchar *policy_widgets [] = {
+const gchar *policy_widgets [] = {
 	"user_new",
 	"user_delete",
 	"groups_table",

@@ -49,7 +49,7 @@ struct _GstDialog {
 struct _GstDialogClass {
 	GtkDialogClass parent_class;
 
-	void (* unlocked) (GstDialogClass *button);
+	void (* lock_changed) (GstDialogClass *button);
 };
 
 GType               gst_dialog_get_type            (void);
