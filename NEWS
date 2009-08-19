@@ -1,3 +1,56 @@
+GNOME System Tools Version 2.27.3, 2009-08-20
+-----------------------------------------------
+
+The GNOME System Tools version 2.27.3 have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. The frontends know nothing about the underlying system and provide the same user interface across the different types of systems. Internally they use the Liboobs library.
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - Port to PolicyKit1. This bumps the dependency on the system-tools-backends to 2.8. We now depend on libpolkit-gtk-1 instead of PolicyKit itself. (Milan Bouchet-Valat)
+  - Fix compiler warnings with printf()s (Robert Ancell)
+  - Don't mark for translation filesystem path strings (Claude Paroz)
+  - Add groups and services used by PLD (Patryk Zawadzki)
+  - Always report detailed errors when committing configuration changes (Milan Bouchet-Valat)
+
+  Services
+  ========
+  - Support Gentoo services management (Jeremy Guitton)
+
+  Users
+  =====
+  - Fix user profiles combo by creating its model (removes warnings and makes it work!) (Milan Bouchet-Valat)
+  - Fix showing profiles and groups in user settings (Milan Bouchet-Valat)
+  - Various fixes with regard to authorizations and widget's sensitivity (Milan Bouchet-Valat)
+  - Fix warnings about GtkAdjustment page-size property (Milan Bouchet-Valat)
+
+  Translation
+  ===========
+  - bg, courtesy of Yavor Doganov
+  - bn, courtesy of Maruf Ovee
+  - es, courtesy of Jorge González
+  - et, courtesy of Ivar Smolin
+  - fi, courtesy of Tommi Vainikainen
+  - fr, courtesy of Claude Paroz
+  - ga, courtesy of Seán de Búrca
+  - gl, courtesy of Antón Méixome
+  - he, courtesy of Yaron Shahrabani
+  - nb, courtesy of Kjartan Maraas
+  - pt_BR, courtesy of Djavan Fagundes
+  - sv, courtesy of Daniel Nylander
+  - ta, courtesy of Dr.T.Vasudevan
+
+  Thanks to anyone involved in this release; downstream patches have not completely been committed yet, and patchers are still active!
+
+Downloading
+===========
+You can get it from :
+ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/2.27/
+
+
 GNOME System Tools Version 2.27.2, 2009-07-27
 -----------------------------------------------
 
