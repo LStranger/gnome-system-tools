@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-19 07:52+0300\n"
-"PO-Revision-Date: 2009-08-19 07:52+0300\n"
+"POT-Creation-Date: 2009-08-22 18:52+0300\n"
+"PO-Revision-Date: 2009-08-22 18:52+0300\n"
 "Last-Translator: Yavor Doganov <yavor@gnu.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -265,7 +265,7 @@ msgstr "На_стройване модема като стандартна вр�
 msgid "_Subnet mask:"
 msgstr "Ма_ска на мрежата:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:58
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
 msgid "_Username:"
 msgstr "Потребителско _име:"
 
@@ -611,75 +611,75 @@ msgid "User _password:"
 msgstr "_Парола на потребителя:"
 
 #: ../interfaces/users.ui.h:43
+msgid "User must log out before you can change his ID."
+msgstr "Потребителят трабва да не е влязъл, за да промените идентификатора му."
+
+#: ../interfaces/users.ui.h:44
 msgid "User profiles"
 msgstr "Профили на потребителите"
 
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:45
 msgid "_Add Group"
 msgstr "Добавяне на _група"
 
-#: ../interfaces/users.ui.h:45
+#: ../interfaces/users.ui.h:46
 msgid "_Add Profile"
 msgstr "Добавяне на про_фил"
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:47
 msgid "_Add User"
 msgstr "Добавяне на _потребител"
 
-#: ../interfaces/users.ui.h:47
+#: ../interfaces/users.ui.h:48
 msgid "_Comments"
 msgstr "_Коментари"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:49
 msgid "_Days between warning and password expiration:"
 msgstr "_Дни между предупреждението и изтичането на паролата:"
 
-#: ../interfaces/users.ui.h:49 ../src/network/address-list.c:77
+#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
 #: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "_Изтриване"
 
-#: ../interfaces/users.ui.h:50
+#: ../interfaces/users.ui.h:51
 msgid "_Generate"
 msgstr "_Генериране"
 
 # Дублира се с бутона „_Добре“.
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:52
 msgid "_Home directory:"
 msgstr "До_машна папка:"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:53
 msgid "_Home phone:"
 msgstr "До_машен телефон:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:54
 msgid "_Main group:"
 msgstr "_Главна група:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:55
 msgid "_Manage Groups"
 msgstr "_Управление на групите"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:56
 msgid "_Profile:"
 msgstr "_Профил:"
 
-#: ../interfaces/users.ui.h:56
+#: ../interfaces/users.ui.h:57
 msgid "_Real name:"
 msgstr "Ис_тинско име:"
 
 # Дублира се с бутона „_Отказване“.
-#: ../interfaces/users.ui.h:57
+#: ../interfaces/users.ui.h:58
 msgid "_Shell:"
 msgstr "О_бвивка:"
 
-#: ../interfaces/users.ui.h:59
+#: ../interfaces/users.ui.h:60
 msgid "_Work phone:"
 msgstr "_Служебен телефон:"
-
-#: ../src/common/gst-dialog.c:179
-msgid "_Unlock"
-msgstr "_Отключване"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -700,23 +700,7 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Неподдържана платформа"
 
-#: ../src/common/gst-polkit-button.c:126
-msgid "This action is allowed"
-msgstr "Това действие е позволено"
-
-#: ../src/common/gst-polkit-button.c:140
-msgid "This action is not allowed"
-msgstr "Това действие не е позволено"
-
-#: ../src/common/gst-polkit-button.c:247
-msgid "Could not authenticate"
-msgstr "Неуспех при удостоверяването"
-
-#: ../src/common/gst-polkit-button.c:249
-msgid "An unexpected error has occurred."
-msgstr "Възникна неочаквана грешка."
-
-#: ../src/common/gst-tool.c:179
+#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
 msgid "The configuration could not be loaded"
 msgstr "Настройките не могат да бъдат заредени"
 
@@ -724,7 +708,7 @@ msgstr "Настройките не могат да бъдат заредени"
 msgid "You are not allowed to access the system configuration."
 msgstr "Нямате права за достъп до системните настройки."
 
-#: ../src/common/gst-tool.c:182
+#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
 msgid "The configuration could not be saved"
 msgstr "Неуспех при запазването на настройките"
 
@@ -732,15 +716,24 @@ msgstr "Неуспех при запазването на настройките
 msgid "You are not allowed to modify the system configuration."
 msgstr "Нямате права да променяте системните настройки."
 
-#: ../src/common/gst-tool.c:412
+#: ../src/common/gst-tool.c:218
+msgid "Invalid data was found."
+msgstr "Открити са неправилни данни."
+
+#. OOBS_RESULT_ERROR
+#: ../src/common/gst-tool.c:220
+msgid "An unknown error occurred."
+msgstr "Възникна непозната грешка."
+
+#: ../src/common/gst-tool.c:442
 msgid "Could not display help"
 msgstr "Помощта не може да бъде показана"
 
-#: ../src/common/gst-tool.c:590
+#: ../src/common/gst-tool.c:626
 msgid "The system configuration has potentially changed."
 msgstr "Настройките на системата бяха най-вероятно променени."
 
-#: ../src/common/gst-tool.c:592
+#: ../src/common/gst-tool.c:628
 msgid "Update content? This will lose any modification in course."
 msgstr "Искате ли да ги обновите? Това ще доведе до загуба на промените ви."
 
@@ -1578,7 +1571,7 @@ msgstr "Групата на администраторите не може да 
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
 #: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:619
+#: ../src/users/user-settings.c:636
 msgid "This would leave the system unusable."
 msgstr "Това ще направи системата неизползваема."
 
@@ -1626,7 +1619,7 @@ msgstr ""
 "Задайте име за групата, което е от малки букви следвано от малки букви и "
 "цифри."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:552
+#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:569
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Групата „%s“ вече съществува"
@@ -1746,47 +1739,47 @@ msgstr "Нов потребител"
 msgid "Account '%s' Properties"
 msgstr "Настройки на потребителя „%s“"
 
-#: ../src/users/user-settings.c:541
+#: ../src/users/user-settings.c:558
 msgid "User name is empty"
 msgstr "Името на потребителя е празно"
 
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:559
 msgid "A user name must be specified."
 msgstr "Трябва да зададете име на потребителя."
 
-#: ../src/users/user-settings.c:544
+#: ../src/users/user-settings.c:561
 msgid "User name has invalid characters"
 msgstr "Името на потребителя съдържа неправилни знаци"
 
-#: ../src/users/user-settings.c:545
+#: ../src/users/user-settings.c:562
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "Задайте име, което е от малки букви следвано от малки букви и цифри."
 
-#: ../src/users/user-settings.c:549
+#: ../src/users/user-settings.c:566
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Потребителят „%s“ вече съществува"
 
-#: ../src/users/user-settings.c:550 ../src/users/user-settings.c:553
+#: ../src/users/user-settings.c:567 ../src/users/user-settings.c:570
 msgid "Please choose a different user name."
 msgstr "Изберете различно име на потребител."
 
-#: ../src/users/user-settings.c:578
+#: ../src/users/user-settings.c:595
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Неправилен знак „%c“ в коментара"
 
-#: ../src/users/user-settings.c:579
+#: ../src/users/user-settings.c:596
 msgid "Check that this character is not used."
 msgstr "Проверете дали този знак се използва."
 
-#: ../src/users/user-settings.c:597
+#: ../src/users/user-settings.c:614
 msgid "Incomplete path in home directory"
 msgstr "Пътят за домашна папка не е пълен"
 
-#: ../src/users/user-settings.c:598
+#: ../src/users/user-settings.c:615
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1794,23 +1787,23 @@ msgstr ""
 "Въведете пълния път до домашната папка\n"
 "<span size=\"smaller\">например: /home/ivancho</span>."
 
-#: ../src/users/user-settings.c:601
+#: ../src/users/user-settings.c:618
 msgid "Home directory already exists"
 msgstr "Домашната папка вече съществува"
 
-#: ../src/users/user-settings.c:602
+#: ../src/users/user-settings.c:619
 msgid "Please enter a different home directory path."
 msgstr "Въведете друг път за домашната папка."
 
-#: ../src/users/user-settings.c:618
+#: ../src/users/user-settings.c:635
 msgid "Administrator account's user ID should not be modified"
 msgstr "Идентификаторът на администратора (root) не трябва да се променя"
 
-#: ../src/users/user-settings.c:633
+#: ../src/users/user-settings.c:650
 msgid "Incomplete path in shell"
 msgstr "Непълен път в обвивката"
 
-#: ../src/users/user-settings.c:634
+#: ../src/users/user-settings.c:651
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1818,11 +1811,11 @@ msgstr ""
 "Въведете пълния път за обвивката.\n"
 "<span size=\"smaller\">например: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:667
+#: ../src/users/user-settings.c:684
 msgid "Password is too short"
 msgstr "Паролата е прекалено кратка"
 
-#: ../src/users/user-settings.c:668
+#: ../src/users/user-settings.c:685
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1830,11 +1823,11 @@ msgstr ""
 "Паролата на потребителя трябва да е повече от 6 знака и за предпочитане да "
 "съдържа цифри, букви и специални знаци."
 
-#: ../src/users/user-settings.c:671
+#: ../src/users/user-settings.c:688
 msgid "Password confirmation is not correct"
 msgstr "Невярно потвърждаване на паролата"
 
-#: ../src/users/user-settings.c:672
+#: ../src/users/user-settings.c:689
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Проверете дали сте въвели една и съща парола в двете текстови полета."
 
