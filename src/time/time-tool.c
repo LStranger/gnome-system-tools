@@ -348,6 +348,7 @@ init_timezone (GstTimeTool *time_tool)
 {
 	GstTool *tool = GST_TOOL (time_tool);
 	GtkWidget *w;
+	GtkCellRenderer *cell;
 	GPtrArray *locs;
 	GList *combo_locs = NULL;
 	int i;
@@ -360,6 +361,9 @@ init_timezone (GstTimeTool *time_tool)
 	gtk_widget_show (GTK_WIDGET (time_tool->tzmap->map));
 
 	w = gst_dialog_get_widget (tool->main_dialog, "location_combo");
+	cell = gtk_cell_renderer_text_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (w), cell, TRUE);
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (w), cell, "text", 0, NULL);
 	locs = tz_get_locations (e_tz_map_get_tz_db (time_tool->tzmap));
 
 	for (i = 0; i < locs->len; i++)
