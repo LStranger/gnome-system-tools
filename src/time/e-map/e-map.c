@@ -233,7 +233,7 @@ e_map_init (EMap *view)
 	priv = g_new0 (EMapPrivate, 1);
 	view->priv = priv;
 
-	load_map_background (view, MAP_DIR"/world_map-960.png");
+	load_map_background (view, PIXMAPS_DIR"/world_map-960.png");
 	priv->frozen = FALSE;
 	priv->smooth_zoom = TRUE;
 	priv->zoom_state = E_MAP_ZOOMED_OUT;

@@ -1,5 +1,6 @@
-INCLUDES = \
-	-DMAP_DIR=\""$(pixmapsdir)"\" \
+include ../../../DirsMakefile
+
+INCLUDES += \
 	$(GST_TOOL_CFLAGS)
 
 LDADD = -lm $(GST_TOOL_LIBS)
