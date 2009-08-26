@@ -379,6 +379,7 @@ user_settings_dialog_new (OobsUser *user)
 	gint uid;
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+	notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
 
 	if (!user) {
 		g_object_set_data (G_OBJECT (dialog), "user", NULL);
@@ -393,6 +394,9 @@ user_settings_dialog_new (OobsUser *user)
 		uid = find_new_uid (GST_USERS_TOOL (tool)->minimum_uid,
 				    GST_USERS_TOOL (tool)->maximum_uid);
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
+		gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
+		gtk_widget_hide (notice);
+
 		setup_profiles_visibility (tool, TRUE);
 	} else {
 		g_object_set_data_full (G_OBJECT (dialog), "user",
@@ -408,17 +412,16 @@ user_settings_dialog_new (OobsUser *user)
 		set_entry_text (GTK_BIN (widget)->child, oobs_user_get_shell (user));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
 		/* Show a notice if the user is logged in,
 		 * except if we don't have the required permissions to edit UID anyway */
 		if (is_user_root (user)) {
-			gst_dialog_try_set_sensitive (tool->main_dialog,widget, FALSE);
+			gst_dialog_try_set_sensitive (tool->main_dialog, widget, FALSE);
 			gtk_widget_hide (notice);
 		}
 		else if (oobs_user_get_active (user) &&
 			 gst_dialog_is_authenticated (tool->main_dialog)) {
-			gst_dialog_try_set_sensitive (tool->main_dialog,widget, FALSE);
+			gst_dialog_try_set_sensitive (tool->main_dialog, widget, FALSE);
 			gtk_widget_show (notice);
 		}
 		else {
