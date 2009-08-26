@@ -25,3 +25,5 @@ time_admin_SOURCES = \
 	main.c
 
 toolpixmaps =
+
+-include $(top_srcdir)/git.mk

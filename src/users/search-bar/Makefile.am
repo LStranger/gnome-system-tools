@@ -28,3 +28,5 @@ libsearchbar_a_SOURCES =   \
 	search-bar-marshal.c \
 	search-bar-marshal.h 
 
+
+-include $(top_srcdir)/git.mk

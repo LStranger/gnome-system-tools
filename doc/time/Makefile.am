@@ -14,3 +14,5 @@ DOC_LINGUAS = ca cs de el en_GB es fr it oc pt_BR ru sv zh_CN
 
 # This isn't still ported to gnome-doc-utils
 SUBDIRS = nl
+
+-include $(top_srcdir)/git.mk

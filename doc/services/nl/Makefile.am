@@ -8,3 +8,5 @@ include $(top_srcdir)/xmldocs.make
 
 dist-hook: app-dist-hook
 
+
+-include $(top_srcdir)/git.mk

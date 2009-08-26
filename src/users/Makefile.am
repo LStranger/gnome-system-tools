@@ -33,3 +33,5 @@ users_admin_SOURCES = \
 	test-battery.c		test-battery.h
 
 toolpixmaps =
+
+-include $(top_srcdir)/git.mk

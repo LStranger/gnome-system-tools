@@ -20,3 +20,5 @@ libsetuptool_a_SOURCES = \
 	gst.h
 
 EXTRA_DIST = CommonMakefile $(headers)
+
+-include $(top_srcdir)/git.mk

@@ -15,3 +15,5 @@ libnautilus_gst_shares_la_SOURCES =     		\
 libnautilus_gst_shares_la_LDFLAGS = -module -avoid-version
 libnautilus_gst_shares_la_LIBADD  = $(NAUTILUS_LIBS)
 
+
+-include $(top_srcdir)/git.mk

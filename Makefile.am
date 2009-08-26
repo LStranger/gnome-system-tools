@@ -41,3 +41,5 @@ DISTCLEANFILES = \
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
+
+-include $(top_srcdir)/git.mk

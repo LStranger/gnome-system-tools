@@ -26,3 +26,5 @@ services_admin_SOURCES = \
 	services-tool.c		services-tool.h
 
 toolpixmaps =
+
+-include $(top_srcdir)/git.mk

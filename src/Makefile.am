@@ -25,3 +25,5 @@ SUBDIRS = \
 	$(shares_SUBDIR)	\
 	$(time_SUBDIR)		\
 	$(users_SUBDIR)
+
+-include $(top_srcdir)/git.mk
