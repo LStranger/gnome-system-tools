@@ -39,6 +39,22 @@ DISTCLEANFILES = \
 	gnome-doc-utils.make \
 	gnome-system-tools.pc
 
+MAINTAINERCLEANFILES = \
+	INSTALL
+	aclocal.m4              \
+	config.guess            \
+	config.h.in             \
+	config.sub              \
+	depcomp                 \
+	install-sh              \
+	ltmain.sh               \
+	missing                 \
+	mkinstalldirs           \
+	omf.make                \
+        xmldocs.make            \
+	`find "$(srcdir)" -type f -name Makefile.in -print`
+
+
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
 
