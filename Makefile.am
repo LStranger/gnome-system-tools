@@ -40,7 +40,7 @@ DISTCLEANFILES = \
 	gnome-system-tools.pc
 
 MAINTAINERCLEANFILES = \
-	INSTALL
+	INSTALL			\
 	aclocal.m4              \
 	config.guess            \
 	config.h.in             \
@@ -51,7 +51,7 @@ MAINTAINERCLEANFILES = \
 	missing                 \
 	mkinstalldirs           \
 	omf.make                \
-        xmldocs.make            \
+        xmldocs.make		\
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
 
