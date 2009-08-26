@@ -12,14 +12,14 @@
 # Hugo Doria <hugodoria@gmail.com>, 2007-2008.
 # Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2007-2009.
 # Thadeu Lima de Souza Cascardo <cascardo@holoscopio.com>, 2009.
+# Djavan Fagundes <dnoway@gmail.com>m 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"system-tools&component=general\n"
-"POT-Creation-Date: 2009-08-14 12:47+0000\n"
-"PO-Revision-Date: 2009-08-15 11:12-0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-08-25 20:27-0400\n"
+"PO-Revision-Date: 2009-08-25 20:53-0300\n"
 "Last-Translator: Djavan Fagundes <dnoway@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -272,7 +272,7 @@ msgstr "_Definir o modem como rota padrão para a Internet"
 msgid "_Subnet mask:"
 msgstr "Máscara de _sub-rede:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:58
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
 msgid "_Username:"
 msgstr "Nome de _usuário:"
 
@@ -617,74 +617,74 @@ msgid "User _password:"
 msgstr "_Senha do usuário:"
 
 #: ../interfaces/users.ui.h:43
+msgid "User must log out before you can change his ID."
+msgstr "O usuário deve encerrar a sessão antes de poder mudar seu ID."
+
+#: ../interfaces/users.ui.h:44
 msgid "User profiles"
 msgstr "Perfis de usuário"
 
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:45
 msgid "_Add Group"
 msgstr "_Adicionar grupo"
 
-#: ../interfaces/users.ui.h:45
+#: ../interfaces/users.ui.h:46
 msgid "_Add Profile"
 msgstr "_Adicionar perfil"
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:47
 msgid "_Add User"
 msgstr "_Adicionar usuário"
 
-#: ../interfaces/users.ui.h:47
+#: ../interfaces/users.ui.h:48
 msgid "_Comments"
 msgstr "_Comentários"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:49
 msgid "_Days between warning and password expiration:"
 msgstr "_Dias entre o aviso e a expiração da senha:"
 
-#: ../interfaces/users.ui.h:49 ../src/network/address-list.c:77
+#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
 #: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "E_xcluir"
 
-#: ../interfaces/users.ui.h:50
+#: ../interfaces/users.ui.h:51
 msgid "_Generate"
 msgstr "_Gerar"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:52
 msgid "_Home directory:"
 msgstr "_Diretório pessoal:"
 
 # _Casa colide com _Cancelar
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:53
 msgid "_Home phone:"
 msgstr "Telefone de c_asa:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:54
 msgid "_Main group:"
 msgstr "Grupo _principal:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:55
 msgid "_Manage Groups"
 msgstr "_Gerenciar grupos"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:56
 msgid "_Profile:"
 msgstr "_Perfil:"
 
-#: ../interfaces/users.ui.h:56
+#: ../interfaces/users.ui.h:57
 msgid "_Real name:"
 msgstr "Nome _real:"
 
-#: ../interfaces/users.ui.h:57
+#: ../interfaces/users.ui.h:58
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: ../interfaces/users.ui.h:59
+#: ../interfaces/users.ui.h:60
 msgid "_Work phone:"
 msgstr "_Telefone do trabalho:"
-
-#: ../src/common/gst-dialog.c:179
-msgid "_Unlock"
-msgstr "_Desbloquear"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -705,23 +705,7 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Plataforma sem suporte"
 
-#: ../src/common/gst-polkit-button.c:126
-msgid "This action is allowed"
-msgstr "Esta ação é permitida"
-
-#: ../src/common/gst-polkit-button.c:140
-msgid "This action is not allowed"
-msgstr "Esta ação não é permitida"
-
-#: ../src/common/gst-polkit-button.c:247
-msgid "Could not authenticate"
-msgstr "Não foi possível autenticar"
-
-#: ../src/common/gst-polkit-button.c:249
-msgid "An unexpected error has occurred."
-msgstr "Um erro inesperado ocorreu."
-
-#: ../src/common/gst-tool.c:179
+#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
 msgid "The configuration could not be loaded"
 msgstr "Não foi possível carregar a configuração"
 
@@ -729,7 +713,7 @@ msgstr "Não foi possível carregar a configuração"
 msgid "You are not allowed to access the system configuration."
 msgstr "Você não tem permissão para acessar a configuração do sistema."
 
-#: ../src/common/gst-tool.c:182
+#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
 msgid "The configuration could not be saved"
 msgstr "Não foi possível salvar a configuração"
 
@@ -737,15 +721,24 @@ msgstr "Não foi possível salvar a configuração"
 msgid "You are not allowed to modify the system configuration."
 msgstr "Você não tem permissão para modificar a configuração do sistema."
 
-#: ../src/common/gst-tool.c:412
+#: ../src/common/gst-tool.c:218
+msgid "Invalid data was found."
+msgstr "Dados inválidos foram encontradas."
+
+#. OOBS_RESULT_ERROR
+#: ../src/common/gst-tool.c:220
+msgid "An unknown error occurred."
+msgstr "Um erro inesperado ocorreu."
+
+#: ../src/common/gst-tool.c:442
 msgid "Could not display help"
 msgstr "Não foi possível exibir a ajuda"
 
-#: ../src/common/gst-tool.c:590
+#: ../src/common/gst-tool.c:626
 msgid "The system configuration has potentially changed."
 msgstr "Talvez a configuração do sistema tenha sido alterada."
 
-#: ../src/common/gst-tool.c:592
+#: ../src/common/gst-tool.c:628
 msgid "Update content? This will lose any modification in course."
 msgstr "Atualizar o conteúdo? Modificações não salvas serão perdidas."
 
@@ -1541,11 +1534,11 @@ msgstr "Altere a hora, a data e o fuso horário do sistema"
 msgid "Time and Date"
 msgstr "Hora e data"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "O suporte a NTP não está instalado"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1554,27 +1547,27 @@ msgstr ""
 "sincronização do seu servidor de horário local com servidores de horário na "
 "Internet."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:426
 msgid "Enabling NTP"
 msgstr "Habilitando NTP"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:426
 msgid "Disabling NTP"
 msgstr "Desabilitando NTP"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:438
 msgid "Synchronizing system clock"
 msgstr "Sincronizando relógio do sistema"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:518
 msgid "Keep synchronized with Internet servers"
 msgstr "Manter sincronizado com servidores na Internet"
 
-#: ../src/time/time-tool.c:515
+#: ../src/time/time-tool.c:519
 msgid "Manual"
 msgstr "Manual"
 
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:665
 msgid "Time and Date Settings"
 msgstr "Configurações de data e hora"
 
@@ -1584,7 +1577,7 @@ msgstr "O grupo administrador não pode ser excluído"
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
 #: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:636
 msgid "This would leave the system unusable."
 msgstr "Isso deixaria o sistema inutilizável."
 
@@ -1631,7 +1624,7 @@ msgstr ""
 "Por favor, defina um nome de grupo válido, consistindo de uma letra "
 "minúscula seguida por letras minúsculas e números."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:561
+#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:569
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "O grupo \"%s\" já existe"
@@ -1665,34 +1658,50 @@ msgid "Use CD-ROM drives"
 msgstr "Usar unidades de CD-ROM"
 
 #: ../src/users/privileges-table.c:53
+msgid "Burn CDs / DVDs"
+msgstr "Gravar CDs / DVDs"
+
+#: ../src/users/privileges-table.c:54
 msgid "Use modems"
 msgstr "Usar modems"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:55
 msgid "Connect to Internet using a modem"
 msgstr "Conectar à Internet usando um modem"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:56
 msgid "Send and receive faxes"
 msgstr "Enviar e receber faxes"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:57
 msgid "Use floppy drives"
 msgstr "Usar unidades flexíveis"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:58
 msgid "Access external storage devices automatically"
 msgstr "Acessar dispositivos de armazenamento externo automaticamente"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:59
+msgid "Access /proc filesystem"
+msgstr "Acessar /proc do sistema de arquivos"
+
+#: ../src/users/privileges-table.c:60
 msgid "Use scanners"
 msgstr "Usar scanners"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Use tape drives"
 msgstr "Usar unidades de fita"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
+msgid "Use USB devices"
+msgstr "Usar dispositivos USB"
+
+#: ../src/users/privileges-table.c:63
+msgid "Use video devices"
+msgstr "Usar dispositivos de vídeo"
+
+#: ../src/users/privileges-table.c:64
 msgid "Be able to get administrator privileges"
 msgstr "Estar apto a obter privilégios de administrador"
 
@@ -1725,28 +1734,28 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Este usuário está usando o computador no momento"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:385
 msgid "New user account"
 msgstr "Nova conta de usuário"
 
-#: ../src/users/user-settings.c:412
+#: ../src/users/user-settings.c:403
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Propriedades da conta \"%s\""
 
-#: ../src/users/user-settings.c:550
+#: ../src/users/user-settings.c:558
 msgid "User name is empty"
 msgstr "O nome do usuário está vazio"
 
-#: ../src/users/user-settings.c:551
+#: ../src/users/user-settings.c:559
 msgid "A user name must be specified."
 msgstr "Um nome de usuário deve ser especificado."
 
-#: ../src/users/user-settings.c:553
+#: ../src/users/user-settings.c:561
 msgid "User name has invalid characters"
 msgstr "O nome do usuário tem caracteres inválidos"
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:562
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1754,31 +1763,31 @@ msgstr ""
 "Por favor, defina um nome de usuário válido, consistindo de uma letra "
 "minúscula seguida por letras minúsculas e números."
 
-#: ../src/users/user-settings.c:558
+#: ../src/users/user-settings.c:566
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "O nome de usuário \"%s\" já existe"
 
-#: ../src/users/user-settings.c:559 ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:567 ../src/users/user-settings.c:570
 msgid "Please choose a different user name."
 msgstr "Por favor, escolha um nome de usuário diferente."
 
-#: ../src/users/user-settings.c:587
+#: ../src/users/user-settings.c:595
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Caractere \"%c\" inválido no comentário"
 
-#: ../src/users/user-settings.c:588
+#: ../src/users/user-settings.c:596
 msgid "Check that this character is not used."
 msgstr "Verifique se esse caractere está sendo usado."
 
-#: ../src/users/user-settings.c:606
+#: ../src/users/user-settings.c:614
 msgid "Incomplete path in home directory"
 msgstr "Caminho incompleto no diretório pessoal"
 
 # Por favor, não altere o nome do usuário na tradução abaixo
 # Eu sei que não está "correto", mas é uma homenagem a minha namorada
-#: ../src/users/user-settings.c:607
+#: ../src/users/user-settings.c:615
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1786,23 +1795,23 @@ msgstr ""
 "Por favor, digite o caminho completo para o diretório pessoal\n"
 "<span size=\"smaller\">p.ex.: /home/luciana</span>."
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:618
 msgid "Home directory already exists"
 msgstr "Diretório pessoal já existe"
 
-#: ../src/users/user-settings.c:611
+#: ../src/users/user-settings.c:619
 msgid "Please enter a different home directory path."
 msgstr "Por favor, escolha um caminho diferente para o diretório pessoal."
 
-#: ../src/users/user-settings.c:627
+#: ../src/users/user-settings.c:635
 msgid "Administrator account's user ID should not be modified"
 msgstr "O ID de usuário da conta do Administrador não deve ser modificado"
 
-#: ../src/users/user-settings.c:642
+#: ../src/users/user-settings.c:650
 msgid "Incomplete path in shell"
 msgstr "Caminho incompleto na shell"
 
-#: ../src/users/user-settings.c:643
+#: ../src/users/user-settings.c:651
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1810,11 +1819,11 @@ msgstr ""
 "Por favor, digite o caminho completo para a shell\n"
 "<span size=\"smaller\">p.ex.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:676
+#: ../src/users/user-settings.c:684
 msgid "Password is too short"
 msgstr "A senha é curta demais"
 
-#: ../src/users/user-settings.c:677
+#: ../src/users/user-settings.c:685
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1822,11 +1831,11 @@ msgstr ""
 "As senhas de usuário devem ter mais de 6 caracteres e ser preferencialmente "
 "formadas por números, letras e caracteres especiais."
 
-#: ../src/users/user-settings.c:680
+#: ../src/users/user-settings.c:688
 msgid "Password confirmation is not correct"
 msgstr "A confirmação da senha não está correta"
 
-#: ../src/users/user-settings.c:681
+#: ../src/users/user-settings.c:689
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Verifique se você digitou a mesma senha em ambas as caixas de texto."
 
@@ -1845,6 +1854,18 @@ msgstr "Diretório pessoal"
 #: ../src/users/users-tool.c:216
 msgid "Users Settings"
 msgstr "Configurações de usuários"
+
+#~ msgid "_Unlock"
+#~ msgstr "_Desbloquear"
+
+#~ msgid "This action is allowed"
+#~ msgstr "Esta ação é permitida"
+
+#~ msgid "This action is not allowed"
+#~ msgstr "Esta ação não é permitida"
+
+#~ msgid "Could not authenticate"
+#~ msgstr "Não foi possível autenticar"
 
 #~ msgid "<span weight=\"bold\">Contact Information</span>"
 #~ msgstr "<span weight=\"bold\">Informações de Contato</span>"
