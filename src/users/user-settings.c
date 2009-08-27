@@ -207,31 +207,38 @@ get_main_group (const gchar *name)
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
 	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter)) {
-		/* create new group for the user */
-		OobsGroupsConfig *config;
-		OobsList *groups_list;
-		OobsListIter list_iter;
+		group =	group_settings_get_group_from_name (name);
+		/* Most standard case when creating user:
+		 * no group using the login already exists, so create it */
+		if (group == NULL) {
+			OobsGroupsConfig *config;
+			OobsList *groups_list;
+			OobsListIter list_iter;
 
-		group = oobs_group_new (name);
-		oobs_group_set_gid (group, group_settings_find_new_gid ());
+			group = oobs_group_new (name);
+			oobs_group_set_gid (group, group_settings_find_new_gid ());
 
-		/* FIXME: this should be in a generic function */
-		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
-		groups_list = oobs_groups_config_get_groups (config);
-		oobs_list_append (groups_list, &list_iter);
-		oobs_list_set (groups_list, &list_iter, group);
+			/* FIXME: this should be in a generic function */
+			config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+			groups_list = oobs_groups_config_get_groups (config);
+			oobs_list_append (groups_list, &list_iter);
+			oobs_list_set (groups_list, &list_iter, group);
 
-		groups_table_add_group (group, &list_iter);
-		gst_tool_commit (tool, OOBS_OBJECT (config));
+			groups_table_add_group (group, &list_iter);
+			gst_tool_commit (tool, OOBS_OBJECT (config));
+
+			return group;
+		}
+		else /* Group exists, use it */
+			return group;
+	}
+	else { /* Group has been chosen in the list, use it */
+		gtk_tree_model_get (model, &iter,
+				    COL_GROUP_OBJECT, &group,
+				    -1);
 
 		return group;
 	}
-
-	gtk_tree_model_get (model, &iter,
-			    COL_GROUP_OBJECT, &group,
-			    -1);
-
-	return group;
 }
 
 /* Retrieve the NO_PASSWD_LOGIN_GROUP.
@@ -551,6 +558,7 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
 	OobsUser *user;
 	GtkWidget *widget;
+	GtkWidget *combo;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	const gchar *login;
@@ -561,14 +569,7 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
 	login = gtk_entry_get_text (GTK_ENTRY (widget));
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
-	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter)) {
-		model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-		gtk_tree_model_get (model, &iter, COL_GROUP_NAME, &group, -1);
-		g_object_unref (model);
-	}
-	else /* If no main group is selected, login will be used to create it, so check that it's possible */
-		group = g_strdup (login);
+	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 
 	if (strlen (login) < 1) {
 		*primary_text = g_strdup (_("User name is empty"));
@@ -581,12 +582,13 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 	} else if (!user && login_exists (login)) {
 		*primary_text = g_strdup_printf (_("User name \"%s\" already exists"), login);
 		*secondary_text = g_strdup (_("Please choose a different user name."));
-	} else if (!user && group_settings_group_exists (group)) {
-		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), group);
+	/* Check that the new user won't be added to an already existing group
+	 * without that group being explicitly chosen in the list (temporary security check) */
+	} else if (!user && gtk_combo_box_get_active (GTK_COMBO_BOX (combo)) == -1
+	                 && group_settings_group_exists (login)) {
+		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), login);
 		*secondary_text = g_strdup (_("Please choose a different user name."));
 	}
-
-	g_free (group);
 }
 
 static void
@@ -812,6 +814,7 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 
 	/* set main group */
 	group = get_main_group (oobs_user_get_login_name (user));
+	oobs_group_add_user (group, user);
 	oobs_user_set_main_group (user, group);
 	g_object_unref (group);
 

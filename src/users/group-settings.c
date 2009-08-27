@@ -212,13 +212,14 @@ is_group_root (OobsGroup *group)
 	return (strcmp (name, "root") == 0);
 }
 
-gboolean
-group_settings_group_exists (const gchar *name)
+/* Get the OobsGroup corresponding to a name, or NULL if it does not exist */
+OobsGroup *
+group_settings_get_group_from_name (const gchar *name)
 {
 	OobsGroupsConfig *config;
 	OobsList *groups_list;
 	OobsListIter iter;
-	GObject *group;
+	OobsGroup *group;
 	gboolean valid;
 	const gchar *group_name;
 
@@ -227,17 +228,29 @@ group_settings_group_exists (const gchar *name)
 	valid = oobs_list_get_iter_first (groups_list, &iter);
 
 	while (valid) {
-		group = oobs_list_get (groups_list, &iter);
-		group_name = oobs_group_get_name (OOBS_GROUP (group));
-		g_object_unref (group);
+		group = OOBS_GROUP (oobs_list_get (groups_list, &iter));
+		group_name = oobs_group_get_name (group);
 
 		if (group_name && strcmp (name, group_name) == 0)
-			return TRUE;
+			return group;
 
 		valid = oobs_list_iter_next (groups_list, &iter);
 	}
 
-	return FALSE;
+	return NULL;
+}
+
+gboolean
+group_settings_group_exists (const gchar *name)
+{
+	OobsGroup *group = group_settings_get_group_from_name (name);
+
+	if (group) {
+		g_object_unref (group);
+		return TRUE;
+	}
+	else
+		return FALSE;
 }
 
 /* FIXME: this function is duplicated in user-settings.c */
