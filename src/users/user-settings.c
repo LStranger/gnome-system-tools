@@ -551,11 +551,24 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
 	OobsUser *user;
 	GtkWidget *widget;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 	const gchar *login;
+	gchar *group;
+
+	user = g_object_get_data (G_OBJECT (data), "user");
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
 	login = gtk_entry_get_text (GTK_ENTRY (widget));
-	user = g_object_get_data (G_OBJECT (data), "user");
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter)) {
+		model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+		gtk_tree_model_get (model, &iter, COL_GROUP_NAME, &group, -1);
+		g_object_unref (model);
+	}
+	else /* If no main group is selected, login will be used to create it, so check that it's possible */
+		group = g_strdup (login);
 
 	if (strlen (login) < 1) {
 		*primary_text = g_strdup (_("User name is empty"));
@@ -568,10 +581,12 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 	} else if (!user && login_exists (login)) {
 		*primary_text = g_strdup_printf (_("User name \"%s\" already exists"), login);
 		*secondary_text = g_strdup (_("Please choose a different user name."));
-	} else if (!user && group_settings_group_exists (login)) {
-		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), login);
+	} else if (!user && group_settings_group_exists (group)) {
+		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), group);
 		*secondary_text = g_strdup (_("Please choose a different user name."));
 	}
+
+	g_free (group);
 }
 
 static void
