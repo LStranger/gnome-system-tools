@@ -185,8 +185,7 @@ group_settings_dialog_new (OobsGroup *group)
 	gtk_widget_set_sensitive (widget, (name == NULL));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0
-				   GST_USERS_TOOL (tool)->maximum_gid);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, G_MAXINT32);
 
 	group_members_table_set_from_group (group);
 

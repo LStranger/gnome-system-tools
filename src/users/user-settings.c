@@ -388,6 +388,10 @@ user_settings_dialog_new (OobsUser *user)
 	dialog = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
 
+	/* Set this before setting the UID so that it's not rejected */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, G_MAXINT32);
+
 	if (!user) {
 		g_object_set_data (G_OBJECT (dialog), "user", NULL);
 		gtk_window_set_title (GTK_WINDOW (dialog), _("New user account"));
@@ -500,10 +504,6 @@ user_settings_dialog_new (OobsUser *user)
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 		set_entry_text (widget, oobs_user_get_home_directory (user));
 	}
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0
-				   GST_USERS_TOOL (tool)->maximum_uid);
 
 	return dialog;
 }
