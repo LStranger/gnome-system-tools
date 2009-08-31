@@ -309,6 +309,34 @@ is_user_root (OobsUser *user)
 	return (strcmp (login, "root") == 0);
 }
 
+static gboolean
+uid_exists (uid_t uid)
+{
+	OobsUsersConfig *config;
+	OobsList *list;
+	OobsListIter list_iter;
+	GObject *user;
+	gboolean valid;
+	uid_t user_uid;
+
+	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
+	list = oobs_users_config_get_users (config);
+	valid = oobs_list_get_iter_first (list, &list_iter);
+
+	while (valid) {
+		user = oobs_list_get (list, &list_iter);
+		uid = oobs_user_get_uid (OOBS_USER (user));
+		g_object_unref (user);
+
+		if (user_uid == uid)
+			return TRUE;
+
+		valid = oobs_list_iter_next (list, &list_iter);
+	}
+
+	return FALSE;
+}
+
 static uid_t
 find_new_uid (gint uid_min,
 	      gint uid_max)
@@ -658,6 +686,11 @@ check_uid (gchar **primary_text, gchar **secondary_text, gpointer data)
 	if (is_user_root (user) && uid != 0) {
 		*primary_text   = g_strdup (_("Administrator account's user ID should not be modified"));
 		*secondary_text = g_strdup (_("This would leave the system unusable."));
+	}
+
+	if (!user && uid_exists (uid)) {
+		*primary_text   = g_strdup_printf (_("User ID %d is already used"), uid);
+		*secondary_text = g_strdup (_("Please choose a different numeric identifier for the new user."));
 	}
 }
 
