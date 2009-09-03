@@ -168,33 +168,7 @@ gst_tool_init (GstTool *tool)
 	g_object_unref (builder);
 }
 
-static void
-show_access_denied_dialog (GstTool *tool,
-			   gint     operation)
-{
-	GtkWidget *dialog;
-	const gchar *primary_text, *secondary_text;
-
-	if (operation == OPERATION_UPDATE) {
-		primary_text = N_("The configuration could not be loaded");
-		secondary_text = N_("You are not allowed to access the system configuration.");
-	} else {
-		primary_text = N_("The configuration could not be saved");
-		secondary_text = N_("You are not allowed to modify the system configuration.");
-	}
-
-	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-					 GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_ERROR,
-					 GTK_BUTTONS_CLOSE,
-					 "%s", _(primary_text));
-	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  "%s", _(secondary_text));
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
-}
-
-/* Handle all oobs errors but OOBS_RESULT_NO_PLATFORM, which should happen in specific cases */
+/* Handle all oobs errors but OOBS_RESULT_NO_PLATFORM, which should only happen on start */
 static void
 show_oobs_error_dialog (GstTool   *tool,
 			int        operation,
@@ -203,18 +177,18 @@ show_oobs_error_dialog (GstTool   *tool,
 	GtkWidget *dialog;
 	const gchar *primary_text, *secondary_text;
 
-	/* Complex case to treat separately */
-	if (result == OOBS_RESULT_ACCESS_DENIED) {
-		show_access_denied_dialog (tool, operation);
-		return;
-	}
-
 	if (operation == OPERATION_UPDATE)
 		primary_text = N_("The configuration could not be loaded");
-	else
+	else /* OPERATION_COMMIT */
 		primary_text = N_("The configuration could not be saved");
 
-	if (result == OOBS_RESULT_MALFORMED_DATA)
+	if (result == OOBS_RESULT_ACCESS_DENIED) {
+		if (operation == OPERATION_UPDATE)
+			secondary_text = N_("You are not allowed to access the system configuration.");
+		else /* OPERATION_COMMIT */
+			secondary_text = N_("You are not allowed to modify the system configuration.");
+	}
+	else if (result == OOBS_RESULT_MALFORMED_DATA)
 		secondary_text = N_("Invalid data was found.");
 	else /* OOBS_RESULT_ERROR */
 		secondary_text = N_("An unknown error occurred.");
