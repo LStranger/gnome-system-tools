@@ -226,9 +226,9 @@ set_main_group (OobsUser *user)
 			oobs_list_append (groups_list, &list_iter);
 			oobs_list_set (groups_list, &list_iter, group);
 
-			groups_table_add_group (group, &list_iter);
-
-			if (gst_tool_commit (tool, OOBS_OBJECT (config)) != OOBS_RESULT_OK)
+			if (gst_tool_commit (tool, OOBS_OBJECT (config)) == OOBS_RESULT_OK)
+				groups_table_add_group (group, &list_iter);
+			else
 				group = NULL; /* See below */
 		}
 		/* Else group exists, use it */
