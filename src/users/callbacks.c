@@ -294,14 +294,19 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	if (response == GTK_RESPONSE_OK) {
 		user = user_settings_dialog_get_data (dialog);
 
+		if (!user) /* Means an error has already occurred and been displayed, stop here */
+			return;
+
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
 		users_list = oobs_users_config_get_users (config);
 		oobs_list_append (users_list, &list_iter);
 		oobs_list_set (users_list, &list_iter, user);
 
 		users_table_add_user (user, &list_iter);
-		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
-		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+
+		/* Avoid committing group changes if the user has not been created */
+		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
 }
 
@@ -339,6 +344,10 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 		gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
 								  &filter_iter, &iter);
 		user = user_settings_dialog_get_data (dialog);
+
+		if (!user) /* Means an error has already occurred and been displayed, stop here */
+			return;
+
 		users_table_set_user (user, list_iter, &filter_iter);
 
 		if (gst_dialog_is_authenticated (tool->main_dialog)) {

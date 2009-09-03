@@ -225,9 +225,12 @@ get_main_group (const gchar *name)
 			oobs_list_set (groups_list, &list_iter, group);
 
 			groups_table_add_group (group, &list_iter);
-			gst_tool_commit (tool, OOBS_OBJECT (config));
-
-			return group;
+			if (gst_tool_commit (tool, OOBS_OBJECT (config)) == OOBS_RESULT_OK)
+				return group;
+			else
+			/* Don't go beyond that point, something bad is happening,
+			 * gst_tool_commit () must already have displayed an error */
+				return NULL;
 		}
 		else /* Group exists, use it */
 			return group;
@@ -818,6 +821,12 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 
 	/* set main group */
 	group = get_main_group (oobs_user_get_login_name (user));
+
+	/* If NULL, group could not be found or created, which means
+	 * we won't be able to create the new user anyway, so stop here */
+	if (!group)
+		return NULL;
+
 	oobs_group_add_user (group, user);
 	oobs_user_set_main_group (user, group);
 	g_object_unref (group);
