@@ -153,7 +153,7 @@ set_entry_text (GtkWidget *entry, const gchar *text)
 }
 
 static void
-set_main_group (OobsUser *user)
+select_main_group (OobsUser *user)
 {
 	GtkWidget *combo;
 	GtkTreeModel *model;
@@ -195,14 +195,16 @@ set_main_group (OobsUser *user)
 		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), -1);
 }
 
-static OobsGroup*
-get_main_group (const gchar *name)
+static gboolean
+set_main_group (OobsUser *user)
 {
 	GtkWidget *combo;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	OobsGroup *group;
+	const gchar *name;
 
+	name = oobs_user_get_login_name (user);
 	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
@@ -225,22 +227,28 @@ get_main_group (const gchar *name)
 			oobs_list_set (groups_list, &list_iter, group);
 
 			groups_table_add_group (group, &list_iter);
-			if (gst_tool_commit (tool, OOBS_OBJECT (config)) == OOBS_RESULT_OK)
-				return group;
-			else
-			/* Don't go beyond that point, something bad is happening,
-			 * gst_tool_commit () must already have displayed an error */
-				return NULL;
+
+			if (gst_tool_commit (tool, OOBS_OBJECT (config)) != OOBS_RESULT_OK)
+				group = NULL; /* See below */
 		}
-		else /* Group exists, use it */
-			return group;
+		/* Else group exists, use it */
 	}
 	else { /* Group has been chosen in the list, use it */
 		gtk_tree_model_get (model, &iter,
 				    COL_GROUP_OBJECT, &group,
 				    -1);
+	}
 
-		return group;
+	if (group) {
+		oobs_group_add_user (group, user);
+		oobs_user_set_main_group (user, group);
+		g_object_unref (group);
+		return TRUE;
+	}
+	else {
+		/* Something bad is happening, don't try to create the user.
+		 * gst_tool_commit () must already have displayed an error. */
+		return FALSE;
 	}
 }
 
@@ -447,7 +455,7 @@ user_settings_dialog_new (OobsUser *user)
 	}
 
 	privileges_table_set_from_user (user);
-	set_main_group (user);
+	select_main_group (user);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
 	set_entry_text (widget, login);
@@ -819,17 +827,10 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 	if (no_passwd_login_group)
 		g_object_unref (no_passwd_login_group);
 
-	/* set main group */
-	group = get_main_group (oobs_user_get_login_name (user));
-
 	/* If NULL, group could not be found or created, which means
 	 * we won't be able to create the new user anyway, so stop here */
-	if (!group)
+	if (!set_main_group (user));
 		return NULL;
-
-	oobs_group_add_user (group, user);
-	oobs_user_set_main_group (user, group);
-	g_object_unref (group);
 
 	privileges_table_save (user);
 
