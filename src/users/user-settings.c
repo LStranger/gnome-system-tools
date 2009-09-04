@@ -202,7 +202,12 @@ set_main_group (OobsUser *user)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	OobsGroup *group;
+	OobsGroupsConfig *config;
+	OobsList *groups_list;
+	OobsListIter list_iter;
 	const gchar *name;
+	gboolean is_group_new = FALSE;
+
 
 	name = oobs_user_get_login_name (user);
 	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
@@ -213,10 +218,7 @@ set_main_group (OobsUser *user)
 		/* Most standard case when creating user:
 		 * no group using the login already exists, so create it */
 		if (group == NULL) {
-			OobsGroupsConfig *config;
-			OobsList *groups_list;
-			OobsListIter list_iter;
-
+			is_group_new = TRUE;
 			group = oobs_group_new (name);
 			oobs_group_set_gid (group, group_settings_find_new_gid ());
 
@@ -225,11 +227,6 @@ set_main_group (OobsUser *user)
 			groups_list = oobs_groups_config_get_groups (config);
 			oobs_list_append (groups_list, &list_iter);
 			oobs_list_set (groups_list, &list_iter, group);
-
-			if (gst_tool_commit (tool, OOBS_OBJECT (config)) == OOBS_RESULT_OK)
-				groups_table_add_group (group, &list_iter);
-			else
-				group = NULL; /* See below */
 		}
 		/* Else group exists, use it */
 	}
@@ -239,17 +236,23 @@ set_main_group (OobsUser *user)
 				    -1);
 	}
 
-	if (group) {
-		oobs_group_add_user (group, user);
+	oobs_group_add_user (group, user);
+
+	/* Try to commit before doing anything, to avoid displaying wrong data */
+	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config) == OOBS_RESULT_OK) {
+		if (is_group_new)
+			groups_table_add_group (group, &list_iter);
+
+		/* This will be committed with the user himself */
 		oobs_user_set_main_group (user, group);
+
 		g_object_unref (group);
 		return TRUE;
 	}
-	else {
-		/* Something bad is happening, don't try to create the user.
-		 * gst_tool_commit () must already have displayed an error. */
-		return FALSE;
-	}
+
+	/* Something bad is happening, don't try to create the user.
+	 * gst_tool_commit () must already have displayed an error. */
+	return FALSE;
 }
 
 /* Retrieve the NO_PASSWD_LOGIN_GROUP.
@@ -827,9 +830,9 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 	if (no_passwd_login_group)
 		g_object_unref (no_passwd_login_group);
 
-	/* If NULL, group could not be found or created, which means
+	/* If FALSE, group could not be found or created, which means
 	 * we won't be able to create the new user anyway, so stop here */
-	if (!set_main_group (user));
+	if (!set_main_group (user))
 		return NULL;
 
 	privileges_table_save (user);
