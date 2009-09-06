@@ -1,3 +1,75 @@
+GNOME System Tools Version 2.27.92, 2009-09-06
+-----------------------------------------------
+
+The GNOME System Tools version 2.27.92 have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. The frontends know nothing about the underlying system and provide the same user interface across the different types of systems. Internally they use the Liboobs library.
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - Improve .gitignore and MAINTAINERCLEAN files lists (Luca Ferretti)
+
+  Network
+  =======
+  - Remove empty space around buttons on the right (Milan)
+
+  Services
+  ========
+  - Fix circular symbolic link in documentation (Koop Mast - Bug 593373)
+
+  Shares
+  ======
+  - Use icon from the icon naming specification (Luca Ferretti)
+
+  Time
+  ====
+  - Fix crash due to empty time zone list (regression in 2.27.2) (Milan)
+  - Fix missing time zones map (idem) (Milan)
+  - Correctly detect NTP support when we've just installed it (Milan)
+
+  Users
+  =====
+  - Prevent changing root's UID, and that of currently logged in users. Show a notice about that. (Milan - Bug 395056)
+  - Always check that committing changes is successful before showing them (Milan)
+  - Don't try to create the user if we could not create its main group. This avoids showing three identical error dialogs when failing. (Milan)
+  - Allow new users to explicitly choose in the list an existing group for main group (Milan)
+  - Set UID and GID range to [0;MAX_UINT32], since those values are allowed (for manual selection only) (Milan)
+
+  Translation
+  ===========
+  - ar, courtesy of Khaled Hosny
+  - bg, courtesy of Yavor Doganov
+  - bn_IN, courtesy of Runa Bhattacharjee
+  - ca, courtesy of Josep Puigdemont i Casamajó
+  - ca@valencia, courtesy of Carles Ferrando Garcia
+  - es, courtesy of Jorge González
+  - et, courtesy of Ivar Smolin
+  - eu, courtesy of Iñaki Larrañaga Murgoitio
+  - fr, courtesy of Claude Paroz
+  - gl, courtesy of Antón Méixome
+  - gu, courtesy of Sweta Kothari
+  - he, courtesy of Mark Krapivner
+  - ko, courtesy of Changwoo Ryu
+  - pt_BR, courtesy of Djavan Fagundes
+  - pt, courtesy of Duarte Loreto
+  - sv, courtesy of Daniel Nylander
+  - ta, courtesy of I. Felix
+  - te, courtesy of Krishna Babu K
+  - tr, courtesy of Baris Cicek
+  - zh_HK, courtesy of Chao-Hsiung Liao
+  - zh_TW, courtesy of Chao-Hsiung Liao
+
+  Thanks to anyone involved in this release!
+
+Downloading
+===========
+You can get it from :
+ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/2.27/
+
+
 GNOME System Tools Version 2.27.3, 2009-08-20
 -----------------------------------------------
 
