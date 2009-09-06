@@ -44,6 +44,10 @@
 
 extern GstTool *tool;
 
+static gboolean is_user_in_group (OobsUser  *user,
+				  OobsGroup *group);
+
+
 static gboolean
 check_user_delete (OobsUser *user)
 {
@@ -236,23 +240,26 @@ set_main_group (OobsUser *user)
 				    -1);
 	}
 
-	oobs_group_add_user (group, user);
+	if (!is_user_in_group (user, group))
+		oobs_group_add_user (group, user);
 
 	/* Try to commit before doing anything, to avoid displaying wrong data */
-	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config) == OOBS_RESULT_OK) {
-		if (is_group_new)
+	if (is_group_new) {
+		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config) == OOBS_RESULT_OK)
 			groups_table_add_group (group, &list_iter);
-
-		/* This will be committed with the user himself */
-		oobs_user_set_main_group (user, group);
-
-		g_object_unref (group);
-		return TRUE;
+		else {
+			/* Something bad is happening, don't try to create the user.
+			 * gst_tool_commit () must already have displayed an error. */
+			g_object_unref (group);
+			return FALSE;
+		}
 	}
 
-	/* Something bad is happening, don't try to create the user.
-	 * gst_tool_commit () must already have displayed an error. */
-	return FALSE;
+	/* This will be committed with the user himself */
+	oobs_user_set_main_group (user, group);
+
+	g_object_unref (group);
+	return TRUE;
 }
 
 /* Retrieve the NO_PASSWD_LOGIN_GROUP.

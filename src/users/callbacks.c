@@ -363,7 +363,6 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 			/* change self, only if it is the modified user */
 			if (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)) &&
 			    gst_tool_commit (tool, GST_USERS_TOOL (tool)->self_config) == OOBS_RESULT_OK) {
-				gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 				users_table_set_user (user, list_iter, &filter_iter);
 			}
 #endif
