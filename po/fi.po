@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-12 22:32+0300\n"
+"POT-Creation-Date: 2009-09-12 22:33+0300\n"
 "PO-Revision-Date: 2009-09-12 22:31+0300\n"
 "Last-Translator: Tommi Vainikainen <thv@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -1539,8 +1539,8 @@ msgid "Administrator group can not be deleted"
 msgstr "Ylläpitäjän ryhmää ei voi poistaa"
 
 #: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
-#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:702
+#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:65
+#: ../src/users/user-settings.c:681
 msgid "This would leave the system unusable."
 msgstr "Tämä voi jättää järjestelmän käyttökelvottomaksi."
 
@@ -1586,7 +1586,7 @@ msgstr ""
 "Valitse kelvollinen ryhmän nimi, joka alkaa pienellä kirjaimella ja joka "
 "koostuu pienistä kirjaimista ja numeroista."
 
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
+#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:614
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Ryhmä \"%s\" on jo olemassa"
@@ -1675,16 +1675,16 @@ msgstr "Lisää tai poista käyttäjiä ja ryhmiä"
 msgid "Users and Groups"
 msgstr "Käyttäjät ja ryhmät"
 
-#: ../src/users/user-settings.c:58
+#: ../src/users/user-settings.c:62
 msgid "Administrator account cannot be deleted"
 msgstr "Ylläpitäjän tunnusta ei voi poistaa"
 
-#: ../src/users/user-settings.c:72
+#: ../src/users/user-settings.c:76
 #, c-format
 msgid "Are you sure you want to delete account \"%s\"?"
 msgstr "Haluatko varmasti poistaa tilin \"%s\"?"
 
-#: ../src/users/user-settings.c:75
+#: ../src/users/user-settings.c:79
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1692,32 +1692,32 @@ msgstr ""
 "Tämä estää annetun käyttäjän pääsyn järjestelmään, mutta hänen "
 "kotihakemistoaan ei tuhota."
 
-#: ../src/users/user-settings.c:85
+#: ../src/users/user-settings.c:89
 msgid "This user is currently using this computer"
 msgstr "Tämä käyttäjä käyttää tietokonetta tällä hetkellä"
 
-#: ../src/users/user-settings.c:439
+#: ../src/users/user-settings.c:418
 msgid "New user account"
 msgstr "Uusi käyttäjätunnus"
 
-#: ../src/users/user-settings.c:460
+#: ../src/users/user-settings.c:439
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Tilin \"%s\" ominaisuudet"
 
-#: ../src/users/user-settings.c:621
+#: ../src/users/user-settings.c:600
 msgid "User name is empty"
 msgstr "Käyttäjäntunnus on tyhjä"
 
-#: ../src/users/user-settings.c:622
+#: ../src/users/user-settings.c:601
 msgid "A user name must be specified."
 msgstr "Käyttäjätunnus tulee määritellä."
 
-#: ../src/users/user-settings.c:624
+#: ../src/users/user-settings.c:603
 msgid "User name has invalid characters"
 msgstr "Käyttäjätunnuksessa on virheellisiä merkkejä"
 
-#: ../src/users/user-settings.c:625
+#: ../src/users/user-settings.c:604
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1725,29 +1725,29 @@ msgstr ""
 "Valitse käyttäjätunnus, joka alkaa pienellä kirjaimella ja jossa tämän "
 "jälkeen on pieniä kirjaimia ja numeroita."
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:608
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Käyttäjätunnus ”%s” on jo olemassa"
 
-#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
+#: ../src/users/user-settings.c:609 ../src/users/user-settings.c:615
 msgid "Please choose a different user name."
 msgstr "Valitse toinen käyttäjätunnus."
 
-#: ../src/users/user-settings.c:661
+#: ../src/users/user-settings.c:640
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Virheellinen merkki ”%c” kommentissa"
 
-#: ../src/users/user-settings.c:662
+#: ../src/users/user-settings.c:641
 msgid "Check that this character is not used."
 msgstr "Tarkista ettei tätä merkkiä käytetä."
 
-#: ../src/users/user-settings.c:680
+#: ../src/users/user-settings.c:659
 msgid "Incomplete path in home directory"
 msgstr "Polku kotihakemistoon ei ole täydellinen"
 
-#: ../src/users/user-settings.c:681
+#: ../src/users/user-settings.c:660
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1755,32 +1755,23 @@ msgstr ""
 "Anna kotihakemiston koko polku\n"
 "<span size=\"smaller\">esimerkiksi /home/jaakko</span>."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:663
 msgid "Home directory already exists"
 msgstr "Kotihakemisto on jo olemassa"
 
-#: ../src/users/user-settings.c:685
+#: ../src/users/user-settings.c:664
 msgid "Please enter a different home directory path."
 msgstr "Valitse toinen kotihakemiston polku."
 
-#: ../src/users/user-settings.c:701
+#: ../src/users/user-settings.c:680
 msgid "Administrator account's user ID should not be modified"
 msgstr "Järjestelmän ylläpitäjän käyttäjätunnistetta ei pidä vaihtaa"
 
-#: ../src/users/user-settings.c:706
-#, c-format
-msgid "User ID %d is already used"
-msgstr "Käyttäjätunnus %d on jo käytössä"
-
-#: ../src/users/user-settings.c:707
-msgid "Please choose a different numeric identifier for the new user."
-msgstr "Valitse eri numerotunniste uudelle käyttäjälle."
-
-#: ../src/users/user-settings.c:721
+#: ../src/users/user-settings.c:695
 msgid "Incomplete path in shell"
 msgstr "Epätäydellinen polku komentotulkille"
 
-#: ../src/users/user-settings.c:722
+#: ../src/users/user-settings.c:696
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1788,11 +1779,11 @@ msgstr ""
 "Anna komentotulkin koko polku\n"
 "<span size=\"smaller\">esimerkiksi: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:755
+#: ../src/users/user-settings.c:729
 msgid "Password is too short"
 msgstr "Salasana on liian lyhyt"
 
-#: ../src/users/user-settings.c:756
+#: ../src/users/user-settings.c:730
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1800,11 +1791,11 @@ msgstr ""
 "Käyttäjän salasanan täytyy olla pidempi kuin 6 merkkiä, ja mielellään tulee "
 "sisältää numeroita, kirjaimia ja erikoismerkkejä."
 
-#: ../src/users/user-settings.c:759
+#: ../src/users/user-settings.c:733
 msgid "Password confirmation is not correct"
 msgstr "Salasanan varmistus ei ole oikein"
 
-#: ../src/users/user-settings.c:760
+#: ../src/users/user-settings.c:734
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Varmista että kirjoitit saman salasanan molempiin tekstikenttiin."
 
@@ -1823,6 +1814,12 @@ msgstr "Kotihakemisto"
 #: ../src/users/users-tool.c:216
 msgid "Users Settings"
 msgstr "Käyttäjien asetukset"
+
+#~ msgid "User ID %d is already used"
+#~ msgstr "Käyttäjätunnus %d on jo käytössä"
+
+#~ msgid "Please choose a different numeric identifier for the new user."
+#~ msgstr "Valitse eri numerotunniste uudelle käyttäjälle."
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
