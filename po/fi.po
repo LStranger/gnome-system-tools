@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-14 15:34+0300\n"
-"PO-Revision-Date: 2009-08-14 15:41+0300\n"
+"POT-Creation-Date: 2009-09-12 22:32+0300\n"
+"PO-Revision-Date: 2009-09-12 22:31+0300\n"
 "Last-Translator: Tommi Vainikainen <thv@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,29 +22,6 @@ msgstr ""
 #: ../gnome-system-tools.schemas.in.h:1
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Näyttääkö user-admin työkalu kaikki käyttäjät ja ryhmät vai ei"
-
-#: ../interfaces/common.ui.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Syötä ylläpitäjän salasana</span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "Syötä salasana"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
-msgstr ""
-"Tämä työkalun käyttö vaatii ylläpitäjän oikeudet. Syötä salasana, jotta voit "
-"muuttaa järjestelmän asetuksia."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "_Salasana:"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -262,7 +239,7 @@ msgstr "A_seta modeemi Internet-yhteyden oletusyhdyskäytäväksi"
 msgid "_Subnet mask:"
 msgstr "_Verkkopeite:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:58
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
 msgid "_Username:"
 msgstr "_Käyttäjätunnus:"
 
@@ -605,73 +582,74 @@ msgid "User _password:"
 msgstr "Käyttäjän _salasana:"
 
 #: ../interfaces/users.ui.h:43
+msgid "User must log out before you can change his ID."
+msgstr ""
+"Käyttäjän täytyy kirjautua ulos ennen kuin voit vaihtaa hänen tunnistetta."
+
+#: ../interfaces/users.ui.h:44
 msgid "User profiles"
 msgstr "Käyttäjäprofiilit"
 
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:45
 msgid "_Add Group"
 msgstr "_Lisää ryhmä"
 
-#: ../interfaces/users.ui.h:45
+#: ../interfaces/users.ui.h:46
 msgid "_Add Profile"
 msgstr "_Lisää profiili"
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:47
 msgid "_Add User"
 msgstr "_Lisää käyttäjä"
 
-#: ../interfaces/users.ui.h:47
+#: ../interfaces/users.ui.h:48
 msgid "_Comments"
 msgstr "_Kommentit"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:49
 msgid "_Days between warning and password expiration:"
 msgstr "_Päiviä varoituksen ja vanhenemisen välissä:"
 
-#: ../interfaces/users.ui.h:49 ../src/network/address-list.c:77
+#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
 #: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
 msgid "_Delete"
 msgstr "_Poista"
 
-#: ../interfaces/users.ui.h:50
+#: ../interfaces/users.ui.h:51
 msgid "_Generate"
 msgstr "_Luo"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:52
 msgid "_Home directory:"
 msgstr "Koti_hakemisto:"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:53
 msgid "_Home phone:"
 msgstr "_Kotipuhelin:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:54
 msgid "_Main group:"
 msgstr "_Pääryhmä:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:55
 msgid "_Manage Groups"
 msgstr "_Hallitse ryhmiä"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:56
 msgid "_Profile:"
 msgstr "_Profiili:"
 
-#: ../interfaces/users.ui.h:56
+#: ../interfaces/users.ui.h:57
 msgid "_Real name:"
 msgstr "_Koko nimi::"
 
-#: ../interfaces/users.ui.h:57
+#: ../interfaces/users.ui.h:58
 msgid "_Shell:"
 msgstr "_Komentotulkki:"
 
-#: ../interfaces/users.ui.h:59
+#: ../interfaces/users.ui.h:60
 msgid "_Work phone:"
 msgstr "_Työpuhelin:"
-
-#: ../src/common/gst-dialog.c:179
-msgid "_Unlock"
-msgstr "Avaa l_ukitus"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -692,47 +670,42 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Alusta ei ole tuettu"
 
-#: ../src/common/gst-polkit-button.c:126
-msgid "This action is allowed"
-msgstr "Tämä toiminto on sallittu"
-
-#: ../src/common/gst-polkit-button.c:140
-msgid "This action is not allowed"
-msgstr "Tämä toiminto ei ole sallittu"
-
-#: ../src/common/gst-polkit-button.c:247
-msgid "Could not authenticate"
-msgstr "Ei voitu tunnistautua"
-
-#: ../src/common/gst-polkit-button.c:249
-msgid "An unexpected error has occurred."
-msgstr "Tapahtui odottamaton virhe."
-
-#: ../src/common/gst-tool.c:179
+#: ../src/common/gst-tool.c:181
 msgid "The configuration could not be loaded"
 msgstr "Asetuksia ei voitu ladata"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "Sinulla ei ole oikeuksia avata järjestelmäasetuksia."
-
-#: ../src/common/gst-tool.c:182
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:183
 msgid "The configuration could not be saved"
 msgstr "Asetusta ei voitu tallentaa"
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:187
+msgid "You are not allowed to access the system configuration."
+msgstr "Sinulla ei ole oikeuksia avata järjestelmäasetuksia."
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:189
 msgid "You are not allowed to modify the system configuration."
 msgstr "Oikeutesi eivät riitä tämän järjestelmäasetuksen muuttamiseen."
 
-#: ../src/common/gst-tool.c:412
+#: ../src/common/gst-tool.c:192
+msgid "Invalid data was found."
+msgstr "Löytyi virheellistä tietoa."
+
+#. OOBS_RESULT_ERROR
+#: ../src/common/gst-tool.c:194
+msgid "An unknown error occurred."
+msgstr "Tapahtui tuntematon virhe."
+
+#: ../src/common/gst-tool.c:416
 msgid "Could not display help"
 msgstr "Ohjetta ei voitu näyttää"
 
-#: ../src/common/gst-tool.c:590
+#: ../src/common/gst-tool.c:600
 msgid "The system configuration has potentially changed."
 msgstr "Järjestelmän määritykset ovat ehkä muuttuneet."
 
-#: ../src/common/gst-tool.c:592
+#: ../src/common/gst-tool.c:602
 msgid "Update content? This will lose any modification in course."
 msgstr "Päivitetäänkö sisältö? Tämä hukkaa kaikki tehdyt muutokset."
 
@@ -1525,11 +1498,11 @@ msgstr "Muuta järjestelmän aikaa, päiväystä ja aikavyöhykettä"
 msgid "Time and Date"
 msgstr "Aika ja päiväys"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:397
 msgid "NTP support is not installed"
 msgstr "NTP-tukea ei ole asennettu"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:399
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1537,27 +1510,27 @@ msgstr ""
 "Asenna ja käynnistä NTP-tuki järjestelmään, jos haluat synkronoida "
 "paikallisen kellopalvelimesi Internetin kellopalvelinten kanssa."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Enabling NTP"
 msgstr "Otetaan NTP käyttöön"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Disabling NTP"
 msgstr "Poistetaan NTP käytöstä"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:441
 msgid "Synchronizing system clock"
 msgstr "Järjestelmän kellon synkronointi"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:521
 msgid "Keep synchronized with Internet servers"
 msgstr "Pidä ajassa Internetin palvelinten kanssa"
 
-#: ../src/time/time-tool.c:515
+#: ../src/time/time-tool.c:522
 msgid "Manual"
 msgstr "Käsin valittu"
 
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:668
 msgid "Time and Date Settings"
 msgstr "Ajan ja päiväyksen asetukset"
 
@@ -1565,9 +1538,9 @@ msgstr "Ajan ja päiväyksen asetukset"
 msgid "Administrator group can not be deleted"
 msgstr "Ylläpitäjän ryhmää ei voi poistaa"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:628
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
+#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
+#: ../src/users/user-settings.c:702
 msgid "This would leave the system unusable."
 msgstr "Tämä voi jättää järjestelmän käyttökelvottomaksi."
 
@@ -1589,23 +1562,23 @@ msgstr "Uusi ryhmä"
 msgid "Group '%s' Properties"
 msgstr "Ryhmän \"%s\" ominaisuudet"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:291
 msgid "Group name is empty"
 msgstr "Ryhmän nimi on tyhjä"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:292
 msgid "A group name must be specified."
 msgstr "Ryhmän nimi täytyy määritellä."
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:294
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Järjestelmän ylläpitäjän ryhmän nimeä ei pidä vaihtaa"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:297
 msgid "Group name has invalid characters"
 msgstr "Ryhmän nimessä on virheellisiä merkkejä"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:298
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1613,16 +1586,16 @@ msgstr ""
 "Valitse kelvollinen ryhmän nimi, joka alkaa pienellä kirjaimella ja joka "
 "koostuu pienistä kirjaimista ja numeroista."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:561
+#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Ryhmä \"%s\" on jo olemassa"
 
-#: ../src/users/group-settings.c:287
+#: ../src/users/group-settings.c:303
 msgid "Please choose a different group name."
 msgstr "Valitse toinen ryhmätunnus."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:318
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Järjestelmän ylläpitäjän ryhmätunnistetta ei pidä vaihtaa"
 
@@ -1647,34 +1620,50 @@ msgid "Use CD-ROM drives"
 msgstr "Käyttää CD-ROM-asemia"
 
 #: ../src/users/privileges-table.c:53
+msgid "Burn CDs / DVDs"
+msgstr "Polttaa CD/DVD-levyjä"
+
+#: ../src/users/privileges-table.c:54
 msgid "Use modems"
 msgstr "Käyttää modeemeja"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:55
 msgid "Connect to Internet using a modem"
 msgstr "Yhdistää Internetiin modeemilla"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:56
 msgid "Send and receive faxes"
 msgstr "Lähettää ja vastaanottaa fakseja"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:57
 msgid "Use floppy drives"
 msgstr "Käyttää levykeasemia"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:58
 msgid "Access external storage devices automatically"
 msgstr "Käyttää ulkoisia tallennuslaitteita automaattisesti"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:59
+msgid "Access /proc filesystem"
+msgstr "Käyttää /proc-tiedostojärjestelmään"
+
+#: ../src/users/privileges-table.c:60
 msgid "Use scanners"
 msgstr "Käyttää kuvanlukijoita"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Use tape drives"
 msgstr "Käyttää nauha-asemia"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
+msgid "Use USB devices"
+msgstr "Käyttää USB-laitteita"
+
+#: ../src/users/privileges-table.c:63
+msgid "Use video devices"
+msgstr "Käyttää videolaitteita"
+
+#: ../src/users/privileges-table.c:64
 msgid "Be able to get administrator privileges"
 msgstr "Pystyy ottamaan ylläpitäjän oikeudet käyttöön"
 
@@ -1707,28 +1696,28 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Tämä käyttäjä käyttää tietokonetta tällä hetkellä"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:439
 msgid "New user account"
 msgstr "Uusi käyttäjätunnus"
 
-#: ../src/users/user-settings.c:412
+#: ../src/users/user-settings.c:460
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Tilin \"%s\" ominaisuudet"
 
-#: ../src/users/user-settings.c:550
+#: ../src/users/user-settings.c:621
 msgid "User name is empty"
 msgstr "Käyttäjäntunnus on tyhjä"
 
-#: ../src/users/user-settings.c:551
+#: ../src/users/user-settings.c:622
 msgid "A user name must be specified."
 msgstr "Käyttäjätunnus tulee määritellä."
 
-#: ../src/users/user-settings.c:553
+#: ../src/users/user-settings.c:624
 msgid "User name has invalid characters"
 msgstr "Käyttäjätunnuksessa on virheellisiä merkkejä"
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:625
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1736,29 +1725,29 @@ msgstr ""
 "Valitse käyttäjätunnus, joka alkaa pienellä kirjaimella ja jossa tämän "
 "jälkeen on pieniä kirjaimia ja numeroita."
 
-#: ../src/users/user-settings.c:558
+#: ../src/users/user-settings.c:629
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Käyttäjätunnus ”%s” on jo olemassa"
 
-#: ../src/users/user-settings.c:559 ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
 msgid "Please choose a different user name."
 msgstr "Valitse toinen käyttäjätunnus."
 
-#: ../src/users/user-settings.c:587
+#: ../src/users/user-settings.c:661
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Virheellinen merkki ”%c” kommentissa"
 
-#: ../src/users/user-settings.c:588
+#: ../src/users/user-settings.c:662
 msgid "Check that this character is not used."
 msgstr "Tarkista ettei tätä merkkiä käytetä."
 
-#: ../src/users/user-settings.c:606
+#: ../src/users/user-settings.c:680
 msgid "Incomplete path in home directory"
 msgstr "Polku kotihakemistoon ei ole täydellinen"
 
-#: ../src/users/user-settings.c:607
+#: ../src/users/user-settings.c:681
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1766,23 +1755,32 @@ msgstr ""
 "Anna kotihakemiston koko polku\n"
 "<span size=\"smaller\">esimerkiksi /home/jaakko</span>."
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:684
 msgid "Home directory already exists"
 msgstr "Kotihakemisto on jo olemassa"
 
-#: ../src/users/user-settings.c:611
+#: ../src/users/user-settings.c:685
 msgid "Please enter a different home directory path."
 msgstr "Valitse toinen kotihakemiston polku."
 
-#: ../src/users/user-settings.c:627
+#: ../src/users/user-settings.c:701
 msgid "Administrator account's user ID should not be modified"
 msgstr "Järjestelmän ylläpitäjän käyttäjätunnistetta ei pidä vaihtaa"
 
-#: ../src/users/user-settings.c:642
+#: ../src/users/user-settings.c:706
+#, c-format
+msgid "User ID %d is already used"
+msgstr "Käyttäjätunnus %d on jo käytössä"
+
+#: ../src/users/user-settings.c:707
+msgid "Please choose a different numeric identifier for the new user."
+msgstr "Valitse eri numerotunniste uudelle käyttäjälle."
+
+#: ../src/users/user-settings.c:721
 msgid "Incomplete path in shell"
 msgstr "Epätäydellinen polku komentotulkille"
 
-#: ../src/users/user-settings.c:643
+#: ../src/users/user-settings.c:722
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1790,11 +1788,11 @@ msgstr ""
 "Anna komentotulkin koko polku\n"
 "<span size=\"smaller\">esimerkiksi: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:676
+#: ../src/users/user-settings.c:755
 msgid "Password is too short"
 msgstr "Salasana on liian lyhyt"
 
-#: ../src/users/user-settings.c:677
+#: ../src/users/user-settings.c:756
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1802,11 +1800,11 @@ msgstr ""
 "Käyttäjän salasanan täytyy olla pidempi kuin 6 merkkiä, ja mielellään tulee "
 "sisältää numeroita, kirjaimia ja erikoismerkkejä."
 
-#: ../src/users/user-settings.c:680
+#: ../src/users/user-settings.c:759
 msgid "Password confirmation is not correct"
 msgstr "Salasanan varmistus ei ole oikein"
 
-#: ../src/users/user-settings.c:681
+#: ../src/users/user-settings.c:760
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Varmista että kirjoitit saman salasanan molempiin tekstikenttiin."
 
@@ -1825,6 +1823,38 @@ msgstr "Kotihakemisto"
 #: ../src/users/users-tool.c:216
 msgid "Users Settings"
 msgstr "Käyttäjien asetukset"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
+#~ "span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">Syötä ylläpitäjän salasana</span>"
+
+#~ msgid "Enter Password"
+#~ msgstr "Syötä salasana"
+
+#~ msgid ""
+#~ "You need administrator privileges to use this tool. Enter a password to "
+#~ "modify\n"
+#~ "your system configuration."
+#~ msgstr ""
+#~ "Tämä työkalun käyttö vaatii ylläpitäjän oikeudet. Syötä salasana, jotta "
+#~ "voit muuttaa järjestelmän asetuksia."
+
+#~ msgid "_Password:"
+#~ msgstr "_Salasana:"
+
+#~ msgid "_Unlock"
+#~ msgstr "Avaa l_ukitus"
+
+#~ msgid "This action is allowed"
+#~ msgstr "Tämä toiminto on sallittu"
+
+#~ msgid "This action is not allowed"
+#~ msgstr "Tämä toiminto ei ole sallittu"
+
+#~ msgid "Could not authenticate"
+#~ msgstr "Ei voitu tunnistautua"
 
 #~ msgid "<span weight=\"bold\">Contact Information</span>"
 #~ msgstr "<span weight=\"bold\">Yhteystiedot</span>"
