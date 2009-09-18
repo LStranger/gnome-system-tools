@@ -110,6 +110,7 @@ static ServiceRole services[] = {
 	{ "kdm",                    GST_ROLE_DISPLAY_MANAGER },
 	{ "keepalived",             GST_ROLE_CLUSTER_MANAGEMENT },
 	{ "klogd",                  GST_ROLE_SYSTEM_LOGGER },
+	{ "landscape-client",       GST_ROLE_SYSTEM_MONITORING },
 	{ "lighttpd",               GST_ROLE_WEB_SERVER },
 	{ "lm-sensors",             GST_ROLE_HARDWARE_MONITORING },
 	{ "lpd",                    GST_ROLE_PRINTER_SERVICE },
