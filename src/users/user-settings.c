@@ -339,7 +339,7 @@ uid_exists (uid_t uid)
 
 	while (valid) {
 		user = oobs_list_get (list, &list_iter);
-		uid = oobs_user_get_uid (OOBS_USER (user));
+		user_uid = oobs_user_get_uid (OOBS_USER (user));
 		g_object_unref (user);
 
 		if (user_uid == uid)
