@@ -250,11 +250,13 @@ dnl ===========================
 dnl NAUTILUS EXTENSION
 dnl ===========================
 
-PKG_CHECK_MODULES(NAUTILUS,[
-	   libnautilus-extension >= 2.9.3
-	   liboobs-1 >= $LIBOOBS_REQUIRED
-	   gio-2.0   >= $GLIB_REQUIRED
-	   ])
+if test "x$enable_nautilus" = "xyes"; then
+	PKG_CHECK_MODULES(NAUTILUS,[
+		   libnautilus-extension >= 2.9.3
+		   liboobs-1 >= $LIBOOBS_REQUIRED
+		   gio-2.0   >= $GLIB_REQUIRED
+		   ])
+fi
 
 AC_SUBST(NAUTILUS_LIBS)
 AC_SUBST(NAUTILUS_CFLAGS)
