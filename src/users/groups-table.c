@@ -55,6 +55,11 @@ add_group_columns (GtkTreeView *treeview)
 static gboolean
 groups_model_filter (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
+	/* Temporary hack to show system groups without forcing to show system users,
+	 * which would make the users list quite messy */
+	return TRUE;
+
+#if 0
 	GstUsersTool *tool = (GstUsersTool *) data;
 	gint gid;
 
@@ -66,6 +71,7 @@ groups_model_filter (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 		(gid == 0 ||
 		 (gid >= tool->minimum_gid &&
 		  gid <= tool->maximum_gid)));
+#endif
 }
 
 static GtkTreeModel*
