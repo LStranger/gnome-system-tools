@@ -159,9 +159,11 @@ on_service_toggled (GtkCellRenderer *renderer, gchar *path_str, gpointer data)
 		
 		rl = (OobsServicesRunlevel *) GST_SERVICES_TOOL (tool)->default_runlevel;
 		oobs_service_set_runlevel_configuration (service, rl,
-							 (new_value) ? OOBS_SERVICE_START : OOBS_SERVICE_IGNORE,
-							 /* FIXME: hardcoded value... */
-							 50);
+							/* If the user toggled this service, we have to assume
+							 * we must not ignore it, i.e. start or stop it */
+							 (new_value) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
+							 /* Keep the previous priority */
+							 0);
 		gst_tool_commit (tool, GST_SERVICES_TOOL (tool)->services_config);
 
 		gtk_list_store_set (GTK_LIST_STORE (model),
