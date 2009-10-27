@@ -9,16 +9,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.master.ta\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2009-08-25 06:17+0000\n"
-"PO-Revision-Date: 2009-08-25 16:46+0530\n"
-"Last-Translator: I. Felix <ifelix@redhat.com>\n"
-"Language-Team: Tamil <fedora-trans-ta@redhat.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-27 12:40+0530\n"
+"PO-Revision-Date: 2009-10-27 12:46+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
+"Language-Team: Tamil <Ubuntu-l10n-tam@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -28,27 +29,6 @@ msgstr ""
 #: ../gnome-system-tools.schemas.in.h:1
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "users-admin கருவி எல்லா பயனீட்டாளரையும் குழுக்களையும் காட்ட வேண்டுமா"
-
-#: ../interfaces/common.ui.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">உங்கள் ரூட் கடவுச்சொல்லை உள்ளிடவும்</span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "கடவுச்சொல்லை உள்ளிடு"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
-msgstr ""
-"இந்த கருவியை பயன்படுத்த, மேலாளர்  உரிமைகள் தேவை.\n"
-"உங்கள் கணினி அமைப்புகளை மாற்ற கடவுச்சொல்லை உள்ளிடவும்."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "(_P)கடவுச்சொல்:"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -695,41 +675,42 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "துணை இல்லாத தளம்"
 
-#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
+#: ../src/common/gst-tool.c:181
 msgid "The configuration could not be loaded"
 msgstr "வடிவமைப்பை ஏற்ற இயலவில்லை"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "நீங்கள் கணினி வடிவமைப்பை அணுக அனுமதி இல்லை"
-
-#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:183
 msgid "The configuration could not be saved"
 msgstr "கட்டமைப்பை சேமிக்க முடியவில்லை"
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:187
+msgid "You are not allowed to access the system configuration."
+msgstr "நீங்கள் கணினி வடிவமைப்பை அணுக அனுமதி இல்லை"
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:189
 msgid "You are not allowed to modify the system configuration."
 msgstr "நீங்கள் கணினி வடிவமைப்பை திருத்த அனுமதி இல்லை."
 
-#: ../src/common/gst-tool.c:218
+#: ../src/common/gst-tool.c:192
 msgid "Invalid data was found."
 msgstr "தவறான தரவு கண்டுபிடிக்கப்பட்டது"
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:220
-#| msgid "An unexpected error has occurred."
+#: ../src/common/gst-tool.c:194
 msgid "An unknown error occurred."
 msgstr "ஒரு தெரியாத பிழை ஏற்பட்டது."
 
-#: ../src/common/gst-tool.c:442
+#: ../src/common/gst-tool.c:416
 msgid "Could not display help"
 msgstr "உதவியை காட்ட முடியவில்லை"
 
-#: ../src/common/gst-tool.c:626
+#: ../src/common/gst-tool.c:600
 msgid "The system configuration has potentially changed."
 msgstr "கணினி கட்டமைப்புக்கு போதுமான அளவு மாற்றமடைந்தது"
 
-#: ../src/common/gst-tool.c:628
+#: ../src/common/gst-tool.c:602
 msgid "Update content? This will lose any modification in course."
 msgstr "உள்ளடக்கத்தை மேம்படுத்த வேண்டுமா? இது எந்த மாற்றத்தை இழக்கும்."
 
@@ -1518,11 +1499,11 @@ msgstr "கணினி நேரம், தேதி மற்றும் இ�
 msgid "Time and Date"
 msgstr "தேதி மற்றும் நேரம்"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:397
 msgid "NTP support is not installed"
 msgstr "NTP துணை நிறுவப்படவில்லை"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:399
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1530,27 +1511,27 @@ msgstr ""
 "இணைய நேர சேவையகங்களுடன் உங்கள் உள்ளமை சேவயகத்தை ஒத்திசைக்க தயவு செய்து என்டிபி ஐ "
 "நிறுவி செயல்படுத்துக."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Enabling NTP"
 msgstr "என்டிபி ஐ செயல் படுத்துக"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Disabling NTP"
 msgstr "என்டிபி ஐ செயல் நீக்குக"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:441
 msgid "Synchronizing system clock"
 msgstr "கணினி கடிகார ஒத்திசைவாக்கம்"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:521
 msgid "Keep synchronized with Internet servers"
 msgstr "இணைய நேர சேவையகங்களுடன் எப்போதும் ஒத்திசைத்து வை"
 
-#: ../src/time/time-tool.c:515
+#: ../src/time/time-tool.c:522
 msgid "Manual"
 msgstr "கைமுறை"
 
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:668
 msgid "Time and Date Settings"
 msgstr "தேதி மற்றும் நேர அமைப்புகள்"
 
@@ -1558,9 +1539,9 @@ msgstr "தேதி மற்றும் நேர அமைப்புகள
 msgid "Administrator group can not be deleted"
 msgstr "நிர்வாகி குழுவினை அழிக்க முடியவில்லை"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:636
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
+#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
+#: ../src/users/user-settings.c:702
 msgid "This would leave the system unusable."
 msgstr "இது கணினியை உபயோகமற்றதாக்கும்."
 
@@ -1582,23 +1563,23 @@ msgstr "புதிய குழு"
 msgid "Group '%s' Properties"
 msgstr "குழு '%s' பண்புகள்"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:291
 msgid "Group name is empty"
 msgstr "குழு பெயர் காலியாக உள்ளது"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:292
 msgid "A group name must be specified."
 msgstr "ஒரு குழு பெயரை குறிப்பிட வேண்டும்."
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:294
 msgid "Group name of the administrator group user should not be modified"
 msgstr "நிர்வாகி குழு பயனர் இன் குழு பெயர் மாற்றப்படக்கூடாது"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:297
 msgid "Group name has invalid characters"
 msgstr "குழு பெயரில் செல்லாத எழுத்துக்கள் உள்ளது"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:298
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1606,16 +1587,16 @@ msgstr ""
 "தயவு செய்து கீழ்நிலை எழுத்து கொண்டு பின்னால் கீழ்நிலை எழுத்துக்கள் மற்றும் எண்கள் கொண்ட "
 "செல்லுபடியாகும் குழுப்பெயரை அமைக்கவும்."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:569
+#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "குழு \"%s\" ஏற்கெனவே உள்ளது"
 
-#: ../src/users/group-settings.c:287
+#: ../src/users/group-settings.c:303
 msgid "Please choose a different group name."
 msgstr "வேறு குழு பெயரை தேர்ந்தெடுக்கவும்."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:318
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "நிர்வாகி கணக்கின் குழு அடையாளம் மாற்றப்படக்கூடாது"
 
@@ -1660,32 +1641,50 @@ msgid "Use floppy drives"
 msgstr "நெகிழ்வட்டு இயக்கிகளை பயன்படுத்து"
 
 #: ../src/users/privileges-table.c:58
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "பயனர் இடைவெளி கோப்பு அமைப்பை (FUSE) ஏற்றுக "
+
+#: ../src/users/privileges-table.c:59
+msgid "Configure printers"
+msgstr "அச்சுப் பொறிகளை அமைக்கவும்"
+
+#: ../src/users/privileges-table.c:60
+msgid "Connect to wireless and ethernet networks"
+msgstr "கம்பியில்லா மற்றும் ஈதர்நெட் வலையில் இணைக்கவும்"
+
+#: ../src/users/privileges-table.c:61
 msgid "Access external storage devices automatically"
 msgstr "புற சேமிப்பு சாதனங்களை தானியங்கியாக அணுகு"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:62
+msgid "Suspend and hibernate the computer"
+msgstr "கணினியை இடைநீக்கி மற்றும் செயலற்றதாக்கு"
+
+#: ../src/users/privileges-table.c:63
 msgid "Access /proc filesystem"
 msgstr "/proc filesystem ஐ அணுகு"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:64
 msgid "Use scanners"
 msgstr "வருடிகளை பயன்படுத்து"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:65
 msgid "Use tape drives"
 msgstr "டேப் இயக்கிகளை பயன்படுத்து"
 
-#: ../src/users/privileges-table.c:62
-#| msgid "Use audio devices"
+#: ../src/users/privileges-table.c:66
 msgid "Use USB devices"
 msgstr "USB சாதனங்களை பயன்படுத்து"
 
-#: ../src/users/privileges-table.c:63
-#| msgid "Use audio devices"
+#: ../src/users/privileges-table.c:67
+msgid "Use VirtualBox virtualization solution"
+msgstr "வெர்சுசல் பாக்ஸ் மெய்நிகர் தீர்வை பயன் படுத்துக"
+
+#: ../src/users/privileges-table.c:68
 msgid "Use video devices"
 msgstr "வீடியோ சாதனங்களை பயன்படுத்து"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:69
 msgid "Be able to get administrator privileges"
 msgstr "நிர்வாகி உரிமைகள் பெற இயல வேண்டும்."
 
@@ -1716,28 +1715,28 @@ msgstr "இது பயனரின் இல்ல அடைவை நீக�
 msgid "This user is currently using this computer"
 msgstr "இந்த பயனர் இந்த கணினியை தற்போது பயன்படுத்துகிறார்"
 
-#: ../src/users/user-settings.c:385
+#: ../src/users/user-settings.c:439
 msgid "New user account"
 msgstr "புதிய பயனர் கணக்கு "
 
-#: ../src/users/user-settings.c:403
+#: ../src/users/user-settings.c:460
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "கணக்கு '%s' பண்புகள்"
 
-#: ../src/users/user-settings.c:558
+#: ../src/users/user-settings.c:621
 msgid "User name is empty"
 msgstr "பயனர் பெயர் வெறுமையாக உள்ளது"
 
-#: ../src/users/user-settings.c:559
+#: ../src/users/user-settings.c:622
 msgid "A user name must be specified."
 msgstr "பயனர் பெயரை குறிப்பிட வேண்டும்"
 
-#: ../src/users/user-settings.c:561
+#: ../src/users/user-settings.c:624
 msgid "User name has invalid characters"
 msgstr "பயனீட்டாளர் பெயரில் செல்லாத எழுத்துக்கள் உள்ளது"
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:625
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1745,29 +1744,29 @@ msgstr ""
 "தயவு செய்து கீழ்நிலை எழுத்து கொண்டு பின்னால் கீழ்நிலை எழுத்துக்கள் மற்றும் எண்கள் கொண்ட "
 "செல்லுபடியாகும் பயனர் பெயரை அமைக்கவும்."
 
-#: ../src/users/user-settings.c:566
+#: ../src/users/user-settings.c:629
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "பயனீட்டாளர் பெயர் \"%s\" ஏற்கெனவே உள்ளது"
 
-#: ../src/users/user-settings.c:567 ../src/users/user-settings.c:570
+#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
 msgid "Please choose a different user name."
 msgstr "தயவு செய்து வேறு பயனர் பெயரை தேர்ந்தெடுக்கவும்."
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:661
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "\"%c\" கட்டளையில் செல்லாத எழுத்துக்கள் "
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:662
 msgid "Check that this character is not used."
 msgstr "இந்த எழுத்து பயன்பாட்டில் இல்லை என சரிபார்க்கவும்."
 
-#: ../src/users/user-settings.c:614
+#: ../src/users/user-settings.c:680
 msgid "Incomplete path in home directory"
 msgstr "இல்ல அடைவில் முழுமையடையாத பாதை உள்ளது"
 
-#: ../src/users/user-settings.c:615
+#: ../src/users/user-settings.c:681
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1775,23 +1774,31 @@ msgstr ""
 "இல்ல அடைவின் முழு பாதையையும் உள்ளிடவும்\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
 
-#: ../src/users/user-settings.c:618
+#: ../src/users/user-settings.c:684
 msgid "Home directory already exists"
 msgstr "இல்ல அடைவு ஏற்கனவே உள்ளது"
 
-#: ../src/users/user-settings.c:619
+#: ../src/users/user-settings.c:685
 msgid "Please enter a different home directory path."
 msgstr "வேறு முகப்பு அடைவு பாதையை உள்ளிடவும்."
 
-#: ../src/users/user-settings.c:635
+#: ../src/users/user-settings.c:701
 msgid "Administrator account's user ID should not be modified"
 msgstr "நிர்வாகி கணக்கின்  பயனர் அடையாளம் மாற்றப்படலாகாது."
 
-#: ../src/users/user-settings.c:650
+#: ../src/users/user-settings.c:706, c-format
+msgid "User ID %d is already used"
+msgstr "பயனீட்டாளர் பெயர் %d ஏற்கெனவே உள்ளது"
+
+#: ../src/users/user-settings.c:707
+msgid "Please choose a different numeric identifier for the new user."
+msgstr "தயவு செய்து புதிய பயனருக்கு வேறு எண் குறிப்பை தேர்ந்தெடுக்கவும்."
+
+#: ../src/users/user-settings.c:721
 msgid "Incomplete path in shell"
 msgstr "செல்லில் முழுமையடையாத பாதை உள்ளது"
 
-#: ../src/users/user-settings.c:651
+#: ../src/users/user-settings.c:722
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1799,11 +1806,11 @@ msgstr ""
 "ஷெல்லின் முழுப்பாதையையும் உள்ளிடவும்\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:755
 msgid "Password is too short"
 msgstr "கடவுச்சொல் மிகச் சிறியதாக உள்ளது"
 
-#: ../src/users/user-settings.c:685
+#: ../src/users/user-settings.c:756
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1811,11 +1818,11 @@ msgstr ""
 "பயனர் கடவுச்சொற்கள் ஆறு எண் எழுத்துக்கள் குறியீடுகள் மேல் கொண்டு இருக்க வேண்டும் மற்றும் எண் "
 "எழுத்துக்கள் மற்றும் சிறப்பு குறியீடுகள் ஆல் உருவாக்கப்பட வேண்டும்."
 
-#: ../src/users/user-settings.c:688
+#: ../src/users/user-settings.c:759
 msgid "Password confirmation is not correct"
 msgstr "கடவுச்சொல் உறுதிப்படுத்தல் சரியல்ல"
 
-#: ../src/users/user-settings.c:689
+#: ../src/users/user-settings.c:760
 msgid "Check that you have provided the same password in both text fields."
 msgstr "இரு உரை புலங்களிலும் ஒரே கடவுச்சொல் உள்ளிடப்பட்டதா என சரிபார்க்கவும்."
 
@@ -1835,3 +1842,22 @@ msgstr "இல்ல அடைவு"
 msgid "Users Settings"
 msgstr "பயனர்கள் அமைவுகள்"
 
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
+#~ "span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">உங்கள் ரூட் கடவுச்சொல்லை உள்ளிடவும்</span>"
+
+#~ msgid "Enter Password"
+#~ msgstr "கடவுச்சொல்லை உள்ளிடு"
+
+#~ msgid ""
+#~ "You need administrator privileges to use this tool. Enter a password to "
+#~ "modify\n"
+#~ "your system configuration."
+#~ msgstr ""
+#~ "இந்த கருவியை பயன்படுத்த, மேலாளர்  உரிமைகள் தேவை.\n"
+#~ "உங்கள் கணினி அமைப்புகளை மாற்ற கடவுச்சொல்லை உள்ளிடவும்."
+
+#~ msgid "_Password:"
+#~ msgstr "(_P)கடவுச்சொல்:"
