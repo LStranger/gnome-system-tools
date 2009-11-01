@@ -203,6 +203,7 @@ gst_dialog_constructor (GType                  type,
 			/* no point in continuing */
 			exit (-1);
 		}
+		gtk_builder_connect_signals (priv->builder, NULL);
 		priv->child = gst_dialog_get_widget (dialog, priv->widget_name);
 		toplevel = gtk_widget_get_toplevel (priv->child);
 
