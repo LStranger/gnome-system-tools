@@ -162,6 +162,10 @@ group_settings_dialog_new (OobsGroup *group)
 	dialog = gst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	name = oobs_group_get_name (group);
 
+	/* Set this before setting the GID so that it's not rejected */
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, G_MAXINT32);
+
 	if (!name) {
 		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (TRUE));
 		gtk_window_set_title (GTK_WINDOW (dialog), _("New group"));
@@ -183,9 +187,6 @@ group_settings_dialog_new (OobsGroup *group)
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
 	gtk_entry_set_text (GTK_ENTRY (widget), (name) ? name : "");
 	gtk_widget_set_sensitive (widget, (name == NULL));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, G_MAXINT32);
 
 	group_members_table_set_from_group (group);
 
