@@ -184,11 +184,33 @@ update_profiles (GstUsersTool *tool)
 }
 
 static void
+update_shells (GstUsersTool *tool)
+{
+	GtkWidget *combo;
+	GtkTreeModel *model;
+	GList *shells;
+	GtkTreeIter iter;
+
+	combo = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_shell");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	shells = oobs_users_config_get_available_shells (OOBS_USERS_CONFIG (tool->users_config));
+
+	while (shells) {
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    0, shells->data,
+				    -1);
+		shells = shells->next;
+	}
+}
+
+static void
 gst_users_tool_update_gui (GstTool *tool)
 {
 	update_users (GST_USERS_TOOL (tool));
 	update_groups (GST_USERS_TOOL (tool));
 	update_profiles (GST_USERS_TOOL (tool));
+	update_shells (GST_USERS_TOOL (tool));
 }
 
 static void

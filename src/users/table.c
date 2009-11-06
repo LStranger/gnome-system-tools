@@ -97,20 +97,9 @@ setup_shells_combo (GstUsersTool *tool)
 {
 	GtkWidget *combo;
 	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GList *shells;
 
 	combo = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_shell");
 	model = GTK_TREE_MODEL (gtk_list_store_new (1, G_TYPE_STRING));
-	shells = oobs_users_config_get_available_shells (OOBS_USERS_CONFIG (tool->users_config));
-
-	while (shells) {
-		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-				    0, shells->data,
-				    -1);
-		shells = shells->next;
-	}
 
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
 	g_object_unref (model);
