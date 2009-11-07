@@ -1274,7 +1274,9 @@ scroll_to (EMap *view, int x, int y)
 	int width, height;
 	int src_x, src_y;
 	int dest_x, dest_y;
+#if 0  /* see comment below */
 	GdkEvent *event;
+#endif
 
 	priv = view->priv;
 
@@ -1350,6 +1352,11 @@ scroll_to (EMap *view, int x, int y)
 
 	/* Process graphics exposures */
 
+	/* XXX gdk_event_get_graphics_expose() is deprecated now.
+	 *     The map widget seems to work fine without this logic
+	 *     (I think it was just an optimization) but leaving it
+	 *     intact in case I'm wrong and we need to rewrite it. */
+#if 0
 	while ((event = gdk_event_get_graphics_expose (window)) != NULL)
 	{
 		gtk_widget_event (GTK_WIDGET (view), event);
@@ -1362,6 +1369,7 @@ scroll_to (EMap *view, int x, int y)
 
 		gdk_event_free (event);
 	}
+#endif
 }
 
 
