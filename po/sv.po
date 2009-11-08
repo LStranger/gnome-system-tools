@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 20:14+0200\n"
-"PO-Revision-Date: 2009-08-23 20:15+0100\n"
+"POT-Creation-Date: 2009-11-08 21:28+0100\n"
+"PO-Revision-Date: 2009-11-08 22:08+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -22,26 +22,6 @@ msgstr ""
 #: ../gnome-system-tools.schemas.in.h:1
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Huruvida användaradministrationsverktyget ska visa alla användare och grupper eller inte"
-
-#: ../interfaces/common.ui.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Ange ditt rootlösenord</span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "Ange lösenord"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to modify\n"
-"your system configuration."
-msgstr ""
-"För att använda detta verktyg behöver du administratörsrättigheter. Ange ett lösenord\n"
-"för att ändra din systemkonfiguration."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "_Lösenord:"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -687,42 +667,42 @@ msgstr "Om du är säker på att det fungerar som en av de plattformar som anges
 msgid "Unsupported platform"
 msgstr "Plattformen stöds inte"
 
-#: ../src/common/gst-tool.c:179
-#: ../src/common/gst-tool.c:213
+#: ../src/common/gst-tool.c:181
 msgid "The configuration could not be loaded"
 msgstr "Konfigurationen kunde inte läsas in"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "Du tillåts inte komma åt systemkonfigurationen."
-
-#: ../src/common/gst-tool.c:182
-#: ../src/common/gst-tool.c:215
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:183
 msgid "The configuration could not be saved"
 msgstr "Konfigurationen kunde inte sparas"
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:187
+msgid "You are not allowed to access the system configuration."
+msgstr "Du tillåts inte komma åt systemkonfigurationen."
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:189
 msgid "You are not allowed to modify the system configuration."
 msgstr "Du tillåts inte att ändra systemkonfigurationen."
 
-#: ../src/common/gst-tool.c:218
+#: ../src/common/gst-tool.c:192
 msgid "Invalid data was found."
 msgstr "Ogiltig data hittades."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:220
+#: ../src/common/gst-tool.c:194
 msgid "An unknown error occurred."
 msgstr "Ett okänt fel har inträffat."
 
-#: ../src/common/gst-tool.c:442
+#: ../src/common/gst-tool.c:416
 msgid "Could not display help"
 msgstr "Kunde inte visa hjälp"
 
-#: ../src/common/gst-tool.c:626
+#: ../src/common/gst-tool.c:600
 msgid "The system configuration has potentially changed."
 msgstr "Systemkonfigurationen har möjligen ändrats."
 
-#: ../src/common/gst-tool.c:628
+#: ../src/common/gst-tool.c:602
 msgid "Update content? This will lose any modification in course."
 msgstr "Uppdatera innehållet? Detta innebär att ändringar går förlorade."
 
@@ -1505,35 +1485,35 @@ msgstr "Ändra systemtid, datum och tidszon."
 msgid "Time and Date"
 msgstr "Tid och datum"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:397
 msgid "NTP support is not installed"
 msgstr "Stöd för NTP är inte installerat"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:399
 msgid "Please install and activate NTP support in the system to enable synchronization of your local time server with internet time servers."
 msgstr "Installera och aktivera NTP-stöd på systemet för att aktivera synkronisering av din lokala tidsserver med Internet-tidsservrar."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Enabling NTP"
 msgstr "Aktiverar NTP"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Disabling NTP"
 msgstr "Inaktiverar NTP"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:441
 msgid "Synchronizing system clock"
 msgstr "Synkroniserar systemklocka"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:521
 msgid "Keep synchronized with Internet servers"
 msgstr "Synkronisera med Internetservrar"
 
-#: ../src/time/time-tool.c:515
+#: ../src/time/time-tool.c:522
 msgid "Manual"
 msgstr "Manuell"
 
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:668
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
 
@@ -1542,10 +1522,10 @@ msgid "Administrator group can not be deleted"
 msgstr "Administratörsgruppen kan inte tas bort"
 
 #: ../src/users/group-settings.c:55
-#: ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303
+#: ../src/users/group-settings.c:296
+#: ../src/users/group-settings.c:320
 #: ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:636
+#: ../src/users/user-settings.c:702
 msgid "This would leave the system unusable."
 msgstr "Detta skulle lämna systemet i ett oanvändbart tillstånd."
 
@@ -1558,46 +1538,46 @@ msgstr "Är du säker på att du vill ta bort gruppen \"%s\"?"
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Detta kan lämna filer med ogiltiga grupp-id i filsystemet."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:171
 msgid "New group"
 msgstr "Ny grupp"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:179
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Egenskaper för gruppen \"%s\""
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:292
 msgid "Group name is empty"
 msgstr "Gruppnamnet är tomt"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:293
 msgid "A group name must be specified."
 msgstr "Ett gruppnamn måste anges."
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:295
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Gruppnamnet för administratörsgruppanvändaren bör inte ändras"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:298
 msgid "Group name has invalid characters"
 msgstr "Gruppnamnet har ogiltiga tecken"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:299
 msgid "Please set a valid group name consisting of a lower case letter followed by lower case letters and numbers."
 msgstr "Ställ in ett giltigt gruppnamn som består av en liten bokstav följt av små bokstäver och siffror."
 
-#: ../src/users/group-settings.c:286
-#: ../src/users/user-settings.c:569
+#: ../src/users/group-settings.c:303
+#: ../src/users/user-settings.c:635
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Gruppen \"%s\" finns redan"
 
-#: ../src/users/group-settings.c:287
+#: ../src/users/group-settings.c:304
 msgid "Please choose a different group name."
 msgstr "Välj ett annat gruppnamn."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:319
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Grupp-id för administratörskontot bör inte ändras"
 
@@ -1642,30 +1622,50 @@ msgid "Use floppy drives"
 msgstr "Använd diskettenheter"
 
 #: ../src/users/privileges-table.c:58
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Montera filsystem i användarrymden (FUSE)"
+
+#: ../src/users/privileges-table.c:59
+msgid "Configure printers"
+msgstr "Konfigurera skrivare"
+
+#: ../src/users/privileges-table.c:60
+msgid "Connect to wireless and ethernet networks"
+msgstr "Anslut till trådlösa och ethernet-nätverk"
+
+#: ../src/users/privileges-table.c:61
 msgid "Access external storage devices automatically"
 msgstr "Kom åt externa lagringsenheter automatiskt"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:62
+msgid "Suspend and hibernate the computer"
+msgstr "Försätt datorn i vänteläge eller viloläge"
+
+#: ../src/users/privileges-table.c:63
 msgid "Access /proc filesystem"
 msgstr "Kom åt filsystemet /proc"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:64
 msgid "Use scanners"
 msgstr "Använd bildläsare"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:65
 msgid "Use tape drives"
 msgstr "Använd bandenheter"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:66
 msgid "Use USB devices"
 msgstr "Använd USB-enheter"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:67
+msgid "Use VirtualBox virtualization solution"
+msgstr "Använd virtualiseringslösningen VirtualBox"
+
+#: ../src/users/privileges-table.c:68
 msgid "Use video devices"
 msgstr "Använd videoenheter"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:69
 msgid "Be able to get administrator privileges"
 msgstr "Möjligheten att få administratörsprivilegier"
 
@@ -1694,55 +1694,55 @@ msgstr "Detta kommer att inaktivera användarens åtkomst till systemet utan att
 msgid "This user is currently using this computer"
 msgstr "Den här användaren använder för närvarande datorn"
 
-#: ../src/users/user-settings.c:385
+#: ../src/users/user-settings.c:439
 msgid "New user account"
 msgstr "Nytt användarkonto"
 
-#: ../src/users/user-settings.c:403
+#: ../src/users/user-settings.c:460
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Egenskaper för kontot \"%s\""
 
-#: ../src/users/user-settings.c:558
+#: ../src/users/user-settings.c:621
 msgid "User name is empty"
 msgstr "Användarnamnet är tomt"
 
-#: ../src/users/user-settings.c:559
+#: ../src/users/user-settings.c:622
 msgid "A user name must be specified."
 msgstr "Ett användarnamn måste anges."
 
-#: ../src/users/user-settings.c:561
+#: ../src/users/user-settings.c:624
 msgid "User name has invalid characters"
 msgstr "Användarnamnet har ogiltiga tecken"
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:625
 msgid "Please set a valid user name consisting of a lower case letter followed by lower case letters and numbers."
 msgstr "Ställ in ett giltigt användarnamn som består av en liten bokstav följt av små bokstäver och siffror."
 
-#: ../src/users/user-settings.c:566
+#: ../src/users/user-settings.c:629
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Användarnamnet \"%s\" finns redan"
 
-#: ../src/users/user-settings.c:567
-#: ../src/users/user-settings.c:570
+#: ../src/users/user-settings.c:630
+#: ../src/users/user-settings.c:636
 msgid "Please choose a different user name."
 msgstr "Välj ett annat användarnamn."
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:661
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Ogiltigt tecken \"%c\" i kommentar"
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:662
 msgid "Check that this character is not used."
 msgstr "Kontrollera att detta tecken inte används."
 
-#: ../src/users/user-settings.c:614
+#: ../src/users/user-settings.c:680
 msgid "Incomplete path in home directory"
 msgstr "Ofullständig sökväg i hemkatalogen"
 
-#: ../src/users/user-settings.c:615
+#: ../src/users/user-settings.c:681
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1750,23 +1750,32 @@ msgstr ""
 "Ange fullständig sökväg till hemkatalogen\n"
 "<span size=\"smaller\">t.ex.: /home/johan</span>."
 
-#: ../src/users/user-settings.c:618
+#: ../src/users/user-settings.c:684
 msgid "Home directory already exists"
 msgstr "Hemkatalogen finns redan"
 
-#: ../src/users/user-settings.c:619
+#: ../src/users/user-settings.c:685
 msgid "Please enter a different home directory path."
 msgstr "Ange en annan sökväg för hemkatalog."
 
-#: ../src/users/user-settings.c:635
+#: ../src/users/user-settings.c:701
 msgid "Administrator account's user ID should not be modified"
 msgstr "Användar-id för administratörskontot bör inte ändras"
 
-#: ../src/users/user-settings.c:650
+#: ../src/users/user-settings.c:706
+#, c-format
+msgid "User ID %d is already used"
+msgstr "Användar-id %d används redan"
+
+#: ../src/users/user-settings.c:707
+msgid "Please choose a different numeric identifier for the new user."
+msgstr "Välj en annan numerisk identifierare för den nya användaren."
+
+#: ../src/users/user-settings.c:721
 msgid "Incomplete path in shell"
 msgstr "Ofullständig sökväg i skal"
 
-#: ../src/users/user-settings.c:651
+#: ../src/users/user-settings.c:722
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1774,19 +1783,19 @@ msgstr ""
 "Ange fullständig sökväg till skalet\n"
 "<span size=\"smaller\">t.ex.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:755
 msgid "Password is too short"
 msgstr "Lösenordet är för kort"
 
-#: ../src/users/user-settings.c:685
+#: ../src/users/user-settings.c:756
 msgid "User passwords must be longer than 6 characters and preferably formed by numbers, letters and special characters."
 msgstr "Användarlösenord måste vara längre än 6 tecken och föredragsvis konstruerade av siffror, bokstäver och specialtecken."
 
-#: ../src/users/user-settings.c:688
+#: ../src/users/user-settings.c:759
 msgid "Password confirmation is not correct"
 msgstr "Lösenordsbekräftelsen är inte korrekt"
 
-#: ../src/users/user-settings.c:689
+#: ../src/users/user-settings.c:760
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Kontrollera att du har angett samma lösenord i båda textfälten."
 
@@ -1802,10 +1811,26 @@ msgstr "Inloggningsnamn"
 msgid "Home directory"
 msgstr "Hemkatalog"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/users-tool.c:238
 msgid "Users Settings"
 msgstr "Användarinställningar"
 
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
+#~ "span>"
+#~ msgstr "<span weight=\"bold\" size=\"larger\">Ange ditt rootlösenord</span>"
+#~ msgid "Enter Password"
+#~ msgstr "Ange lösenord"
+#~ msgid ""
+#~ "You need administrator privileges to use this tool. Enter a password to "
+#~ "modify\n"
+#~ "your system configuration."
+#~ msgstr ""
+#~ "För att använda detta verktyg behöver du administratörsrättigheter. Ange "
+#~ "ett lösenord\n"
+#~ "för att ändra din systemkonfiguration."
+#~ msgid "_Password:"
+#~ msgstr "_Lösenord:"
 #~ msgid "/dev/modem"
 #~ msgstr "/dev/modem"
 #~ msgid "/dev/ttyS0"
@@ -2335,6 +2360,4 @@ msgstr "Användarinställningar"
 #~ msgstr "Ogiltigt användar-id"
 #~ msgid "User ID must be a positive number."
 #~ msgstr "Användar-id måste vara ett positivt tal."
-#~ msgid "User ID %s already exists"
-#~ msgstr "Användar-id \"%s\" finns redan"
 
