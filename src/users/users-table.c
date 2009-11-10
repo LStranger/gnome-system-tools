@@ -206,3 +206,31 @@ users_table_select_first (void)
 	gtk_tree_selection_select_path (selection, first_user);
 }
 
+/*
+ * Convenience function to get the first selected user of the table,
+ * i.e. the one whose settings are currently shown.
+ * Don't forget to unref the return value
+ */
+OobsUser *
+users_table_get_current (void)
+{
+	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	GtkTreeModel *model;
+	GList *selected;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	OobsUser *user;
+
+	selected = gtk_tree_selection_get_selected_rows (selection, &model);
+
+	/* Only choose the first selected user */
+	path = (GtkTreePath *) selected->data;
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	g_list_foreach (selected, (GFunc) gtk_tree_path_free, NULL);
+	g_list_free (selected);
+
+	gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
+	return user;
+}

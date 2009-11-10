@@ -124,17 +124,8 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 	table = GPOINTER_TO_INT (data);
 	count = gtk_tree_selection_count_selected_rows (selection);
 
-	if (table == TABLE_USERS && count == 1) {
-		GtkTreeModel *model;
-		GList *selected;
-		GtkTreePath *path;
-		GtkTreeIter iter;
-
-		selected = gtk_tree_selection_get_selected_rows (selection, &model);
-		path = (GtkTreePath *) selected->data;
-
-		gtk_tree_model_get_iter (model, &iter, path);
-		gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
+	if (table == TABLE_USERS) {
+		user = users_table_get_current ();
 	}
 
 	actions_set_sensitive (table, count, user);
