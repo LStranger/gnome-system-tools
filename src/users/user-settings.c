@@ -18,7 +18,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
+ *          Milan Bouchet-Valat <nalimilan@club.fr>.
  */
 
 #include <config.h>
@@ -398,25 +399,6 @@ set_login_length (GtkWidget *entry)
 	gtk_entry_set_max_length (GTK_ENTRY (entry), max_len);
 }
 
-static void
-setup_profiles_visibility (GstTool  *tool,
-			   gboolean  is_new)
-{
-	GList *names;
-	GtkWidget *combo, *label;
-	gboolean show;
-
-	names = gst_user_profiles_get_names (GST_USERS_TOOL (tool)->profiles);
-	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
-	label = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_label");
-
-	show = (is_new && g_list_length (names) > 1);
-
-	g_object_set (combo, "visible", show, NULL);
-	g_object_set (label, "visible", show, NULL);
-	g_list_free (names);
-}
-
 GdkPixbuf *
 user_settings_get_user_face (OobsUser *user, int size)
 {
@@ -465,8 +447,6 @@ user_settings_set (OobsUser *user)
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
 		gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
 		gtk_widget_hide (notice);
-
-		setup_profiles_visibility (tool, TRUE);
 	} else {
 		login = oobs_user_get_login_name (user);
 
@@ -490,20 +470,13 @@ user_settings_set (OobsUser *user)
 			gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
 			gtk_widget_hide (notice);
 		}
-
-		setup_profiles_visibility (tool, FALSE);
 	}
 
 	privileges_table_set_from_user (user);
 	select_main_group (user);
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
-	set_entry_text (widget, login);
-	set_login_length (widget);
-	gtk_widget_set_sensitive (widget, (login == NULL));
-
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
-	set_entry_text (widget, (user) ? oobs_user_get_full_name (user) : NULL);
+	gtk_label_set_text (GTK_LABEL (widget),  oobs_user_get_full_name (user));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_face");
 	face = user_settings_get_user_face (user, 60);
@@ -529,29 +502,6 @@ user_settings_set (OobsUser *user)
 	/* set always the first page */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
-
-	/* set manual password */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-
-	/* set option to skip password check at login */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
-	no_passwd_login_group = get_no_passwd_login_group ();
-	/* root should not be allowed to login without password,
-	 * and we disable the feature if the group does not exist */
-	if (is_user_root (user) || no_passwd_login_group == NULL) {
-		gtk_widget_set_sensitive (widget, FALSE);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
-	}
-	else {
-		gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
-		if (is_user_in_group (user, no_passwd_login_group))
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-		else
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
-	}
-	if (no_passwd_login_group)
-		g_object_unref (no_passwd_login_group);
 
 	if (!login)
 		table_set_default_profile (GST_USERS_TOOL (tool));
@@ -635,8 +585,8 @@ check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 	} else if (!is_valid_name (login)) {
 		*primary_text = g_strdup (_("User name has invalid characters"));
 		*secondary_text = g_strdup (_("Please set a valid user name consisting of "
-					      "a lower case letter followed by lower case "
-					      "letters and numbers."));
+		                              "a lower case letter followed by lower case "
+		                              "letters and numbers."));
 	} else if (!user && login_exists (login)) {
 		*primary_text = g_strdup_printf (_("User name \"%s\" already exists"), login);
 		*secondary_text = g_strdup (_("Please choose a different user name."));
@@ -779,7 +729,6 @@ user_settings_dialog_run (GtkWidget *dialog)
 	gint response;
 	gboolean valid;
 	TestBattery battery[] = {
-		check_login,
 		check_comments,
 		check_home,
 		check_uid,
@@ -849,32 +798,6 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 	oobs_user_set_uid (user, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
-
-	/* manual password? */
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
-		password_changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "changed"));
-
-		if (password_changed)
-			oobs_user_set_password (user, gtk_entry_get_text (GTK_ENTRY (widget)));
-	} else {
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_random_passwd");
-		oobs_user_set_password (user, gtk_entry_get_text (GTK_ENTRY (widget)));
-	}
-
-	/* allowed to login without password? */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
-	no_passwd_login_group = get_no_passwd_login_group ();
-	if (!is_user_root (user) && no_passwd_login_group != NULL) {
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
-			oobs_group_add_user (no_passwd_login_group, user);
-		else
-			oobs_group_remove_user (no_passwd_login_group, user);
-	}
-	if (no_passwd_login_group)
-		g_object_unref (no_passwd_login_group);
-
 	/* If FALSE, group could not be found or created, which means
 	 * we won't be able to create the new user anyway, so stop here */
 	if (!set_main_group (user))
@@ -916,4 +839,206 @@ user_settings_apply_profile (GstUsersTool   *users_tool,
 
 	/* default groups */
 	privileges_table_set_from_profile (profile);
+}
+
+
+/*
+ * Common to all modular edit dialogs: run the dialog after filling
+ * the user's name and face and handling window settings.
+ */
+static int
+run_edit_dialog (GtkDialog *dialog, GtkImage *face_image2, GtkLabel *name_label)
+{
+	OobsUser *user;
+	GtkWidget *face_image1;
+	GdkPixbuf *face;
+	const char *name;
+	int response;
+
+	/* Set user face from the main dialog image */
+	face_image1 = gst_dialog_get_widget (tool->main_dialog, "user_settings_face");
+	face = gtk_image_get_pixbuf (GTK_IMAGE (face_image1));
+	gtk_image_set_from_pixbuf (face_image2, face);
+
+	/* Set user name */
+	user = users_table_get_current ();
+	name = oobs_user_get_full_name (user);
+	gtk_label_set_text (name_label, name);
+	g_object_unref (user);
+
+	/* Run dialog with correct settings */
+	gtk_window_set_transient_for (GTK_WINDOW (dialog),
+	                              GTK_WINDOW (tool->main_dialog));
+	gst_dialog_add_edit_dialog (tool->main_dialog, GTK_WIDGET (dialog));
+	response = gtk_dialog_run (dialog);
+	gst_dialog_remove_edit_dialog (tool->main_dialog, GTK_WIDGET (dialog));
+	gtk_widget_hide (GTK_WIDGET (dialog));
+
+	return response;
+}
+
+/*
+ * Callback for edit_user_name_button: run the dialog to change the user's
+ * real name and apply changes if needed.
+ */
+void
+on_edit_user_name (GtkButton *button, gpointer user_data)
+{
+	int response;
+	GtkWidget *user_name_dialog;
+	GtkWidget *user_name_entry;
+	GtkWidget *face_image;
+	GtkWidget *name_label;
+	OobsUser *user;
+	const char *fullname;
+
+	user_name_dialog = gst_dialog_get_widget (tool->main_dialog, "user_name_dialog");
+	user_name_entry = gst_dialog_get_widget (tool->main_dialog, "user_name_entry");
+	face_image = gst_dialog_get_widget (tool->main_dialog, "user_name_face");
+	name_label = gst_dialog_get_widget (tool->main_dialog, "user_name_name");
+
+	user = users_table_get_current ();
+	fullname = oobs_user_get_full_name (user);
+	gtk_entry_set_text (GTK_ENTRY (user_name_entry), fullname);
+	gtk_editable_select_region (GTK_EDITABLE (user_name_entry), 0, -1);
+
+	response = run_edit_dialog (GTK_DIALOG (user_name_dialog),
+	                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
+
+	if (response == GTK_RESPONSE_OK) {
+		user_name_entry = gst_dialog_get_widget (tool->main_dialog,
+		                                         "user_name_entry");
+
+		fullname = gtk_entry_get_text (GTK_ENTRY (user_name_entry));
+		oobs_user_set_full_name (user, fullname);
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
+	}
+
+	g_object_unref (user);
+}
+
+/*
+ * Callback for edit_user_name_button: run the dialog to change the user's
+ * password and apply changes if needed.
+ */
+void
+on_edit_user_passwd (GtkButton *button, gpointer user_data)
+{
+	int response;
+	GtkWidget *user_passwd_dialog;
+	GtkWidget *face_image;
+	GtkWidget *name_label;
+	GtkWidget *manual_toggle;
+	GtkWidget *passwd_entry;
+	GtkWidget *nocheck_toggle;
+	gboolean passwd_changed;
+	OobsUser *user;
+	OobsGroup *no_passwd_login_group;
+
+	user_passwd_dialog = gst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
+	face_image = gst_dialog_get_widget (tool->main_dialog, "user_passwd_face");
+	name_label = gst_dialog_get_widget (tool->main_dialog, "user_passwd_name");
+
+	user = users_table_get_current ();
+
+	/* set manual password */
+	manual_toggle = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (manual_toggle), TRUE);
+
+	/* set option to skip password check at login */
+	nocheck_toggle = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
+	no_passwd_login_group = get_no_passwd_login_group ();
+	/* root should not be allowed to login without password,
+	 * and we disable the feature if the group does not exist */
+	if (is_user_root (user) || no_passwd_login_group == NULL) {
+		gtk_widget_set_sensitive (nocheck_toggle, FALSE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (nocheck_toggle),
+		                              FALSE);
+	}
+	else {
+		gst_dialog_try_set_sensitive (tool->main_dialog, nocheck_toggle, TRUE);
+		if (is_user_in_group (user, no_passwd_login_group))
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (nocheck_toggle),
+			                              TRUE);
+		else
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (nocheck_toggle),
+			                              FALSE);
+	}
+	if (no_passwd_login_group)
+		g_object_unref (no_passwd_login_group);
+
+
+	response = run_edit_dialog (GTK_DIALOG (user_passwd_dialog),
+	                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
+
+	if (response != GTK_RESPONSE_OK){
+		g_object_unref (user);
+		return;
+	}
+
+	/* set manual or random password if needed */
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (manual_toggle))) {
+		passwd_entry = gst_dialog_get_widget (tool->main_dialog,
+		                                      "user_settings_passwd1");
+		passwd_changed =
+			GPOINTER_TO_INT (g_object_get_data (G_OBJECT (passwd_entry),
+			                                    "changed"));
+
+		if (passwd_changed)
+			oobs_user_set_password (user,
+			                        gtk_entry_get_text (GTK_ENTRY (passwd_entry)));
+	} else {
+		passwd_entry = gst_dialog_get_widget (tool->main_dialog,
+		                                      "user_settings_random_passwd");
+		oobs_user_set_password (user,
+		                        gtk_entry_get_text (GTK_ENTRY (passwd_entry)));
+	}
+
+	/* check whether user is allowed to login without password */
+	no_passwd_login_group = get_no_passwd_login_group ();
+	if (!is_user_root (user) && no_passwd_login_group != NULL) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (nocheck_toggle)))
+			oobs_group_add_user (no_passwd_login_group, user);
+		else
+			oobs_group_remove_user (no_passwd_login_group, user);
+	}
+	if (no_passwd_login_group)
+		g_object_unref (no_passwd_login_group);
+
+	/* commit both user and groups config
+	 * because of the no_passwd_login_group membership */
+	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+
+	g_object_unref (user);
+}
+
+/*
+ * Callback for edit_user_profile_button: run the dialog to change the user's
+ * account type and apply changes if needed.
+ */
+void
+on_edit_user_profile (GtkButton *button, gpointer user_data)
+{
+	int response;
+	GtkWidget *user_profile_dialog;
+	GtkWidget *user_profile_entry;
+	GtkWidget *face_image;
+	GtkWidget *name_label;
+	OobsUser *user;
+
+	user_profile_dialog = gst_dialog_get_widget (tool->main_dialog, "user_profile_dialog");
+	face_image = gst_dialog_get_widget (tool->main_dialog, "user_profile_face");
+	name_label = gst_dialog_get_widget (tool->main_dialog, "user_profile_name");
+
+	user = users_table_get_current ();
+
+	response = run_edit_dialog (GTK_DIALOG (user_profile_dialog),
+	                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
+
+	if (response == GTK_RESPONSE_OK) {
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
+	}
+
+	g_object_unref (user);
 }

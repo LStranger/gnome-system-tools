@@ -177,9 +177,30 @@ static void
 update_profiles (GstUsersTool *tool)
 {
 	GList *names = NULL;
+	GtkWidget *label1, *label2, *button;
 
 	names = gst_user_profiles_get_names (tool->profiles);
 	table_populate_profiles (tool, names);
+
+	/* Hide profiles line in main dialog if only one profile is available */
+	label1 = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
+	                                "user_settings_profile");
+	label2 = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
+	                                "user_settings_profile_label");
+	button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
+	                                "edit_user_profile_button");
+
+	if (g_list_length (names) > 1) {
+		gtk_widget_show (label1);
+		gtk_widget_show (label2);
+		gtk_widget_show (button);
+	}
+	else {
+		gtk_widget_hide (label1);
+		gtk_widget_hide (label2);
+		gtk_widget_hide (button);
+	}
+
 	g_list_free (names);
 }
 

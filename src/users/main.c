@@ -41,12 +41,10 @@ void quit_cb (GstTool *tool, gpointer data);
 
 static GstDialogSignal signals[] = {
 	/* User settings dialog callbacks */
-	{ "user_settings_name",                 "changed",              G_CALLBACK (on_user_settings_login_changed) },
 	{ "user_passwd_manual",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
 	{ "user_passwd_random",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
 	{ "user_passwd_random_new",		"clicked",		G_CALLBACK (on_user_settings_passwd_random_new) },
 	{ "user_settings_passwd1",		"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
-	{ "user_settings_profile_menu",         "changed",              G_CALLBACK (on_user_settings_profile_changed) },
 
 	/* Main dialog callbacks, users tab */
 	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
@@ -70,8 +68,6 @@ const gchar *policy_widgets [] = {
 	"profile_new",
 	"profile_delete",
 	"profile_settings",
-	"user_settings_name",
-	"user_settings_profile_menu",
 	"user_passwd_no_check",
 	"user_privileges",
 	"user_settings_home",
