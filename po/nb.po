@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools 2.27.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-01 13:19+0200\n"
-"PO-Revision-Date: 2009-09-01 12:52+0200\n"
+"Project-Id-Version: gnome-system-tools 2.29.x\n"
+"Report-Msgid-Bugs-To:\n"
+"POT-Creation-Date: 2009-11-15 16:06+0100\n"
+"PO-Revision-Date: 2009-11-15 16:08+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -19,30 +19,6 @@ msgstr ""
 #: ../gnome-system-tools.schemas.in.h:1
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Om users-admin skal vise alle brukere og grupper eller ikke"
-
-#: ../interfaces/common.ui.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Vennligst oppgi passord for root</span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "Oppgi passord"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
-msgstr ""
-"Du må ha administratorrettigheter for å bruke dette verktøyet. Oppgi et "
-"passord for å endre\n"
-"din systemkonfigurasjon."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "_Passord:"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -689,40 +665,42 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Plattform som ikke er støttet"
 
-#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
+#: ../src/common/gst-tool.c:181
 msgid "The configuration could not be loaded"
 msgstr "Konfigurasjonen kunne ikke lastes"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "Du har ikke tilgang til å aksessere systemkonfiguraasjonen."
-
-#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:183
 msgid "The configuration could not be saved"
 msgstr "Konfigurasjonen kunne ikke lagres"
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:187
+msgid "You are not allowed to access the system configuration."
+msgstr "Du har ikke tilgang til å aksessere systemkonfiguraasjonen."
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:189
 msgid "You are not allowed to modify the system configuration."
 msgstr "Du har ikke tilgang til å endre systemkonfigurasjonen."
 
-#: ../src/common/gst-tool.c:218
+#: ../src/common/gst-tool.c:192
 msgid "Invalid data was found."
 msgstr "Ugyldige data ble funnet."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:220
+#: ../src/common/gst-tool.c:194
 msgid "An unknown error occurred."
 msgstr "En ukjent feil har oppstått."
 
-#: ../src/common/gst-tool.c:442
+#: ../src/common/gst-tool.c:416
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjelp"
 
-#: ../src/common/gst-tool.c:626
+#: ../src/common/gst-tool.c:600
 msgid "The system configuration has potentially changed."
 msgstr "Systemkonfigurasjonen kan ha blitt endret."
 
-#: ../src/common/gst-tool.c:628
+#: ../src/common/gst-tool.c:602
 msgid "Update content? This will lose any modification in course."
 msgstr "Oppdater innholdet? Du vil miste dine endringer."
 
@@ -1551,9 +1529,9 @@ msgstr "Innstillinger for tid og dato"
 msgid "Administrator group can not be deleted"
 msgstr "Administratorgruppen kan ikke slettes"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
-#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:688
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:296
+#: ../src/users/group-settings.c:320 ../src/users/user-settings.c:61
+#: ../src/users/user-settings.c:702
 msgid "This would leave the system unusable."
 msgstr "Dette kan gjøre systemet ubrukelig."
 
@@ -1566,32 +1544,32 @@ msgstr "Er du sikker på at du vil slette gruppen «%s»?"
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Dette vil etterlate filer med ugyldig gruppe-ID i i filsystemet."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:171
 msgid "New group"
 msgstr "Ny gruppe"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:179
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Egenskaper for gruppe «%s»"
 
-#: ../src/users/group-settings.c:291
+#: ../src/users/group-settings.c:292
 msgid "Group name is empty"
 msgstr "Gruppenavnet er tomt"
 
-#: ../src/users/group-settings.c:292
+#: ../src/users/group-settings.c:293
 msgid "A group name must be specified."
 msgstr "Et gruppenavn må oppgis."
 
-#: ../src/users/group-settings.c:294
+#: ../src/users/group-settings.c:295
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Gruppenavn for administrator-brukeren bør ikke endres"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:298
 msgid "Group name has invalid characters"
 msgstr "Gruppenavnet har ugyldige tegn"
 
-#: ../src/users/group-settings.c:298
+#: ../src/users/group-settings.c:299
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1599,16 +1577,16 @@ msgstr ""
 "Sett et gyldig brukernavn som består bare av en liten bokstav fulgt av små "
 "bokstaver og tall."
 
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:621
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:635
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Gruppen «%s» eksisterer allerede"
 
-#: ../src/users/group-settings.c:303
+#: ../src/users/group-settings.c:304
 msgid "Please choose a different group name."
 msgstr "Vennligst velg et annet gruppenavn."
 
-#: ../src/users/group-settings.c:318
+#: ../src/users/group-settings.c:319
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Gruppe-ID for administrator-brukeren bør ikke endres"
 
@@ -1653,30 +1631,50 @@ msgid "Use floppy drives"
 msgstr "Bruk diskettstasjoner"
 
 #: ../src/users/privileges-table.c:58
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Monter brukerstyrte filsystemer (FUSE)"
+
+#: ../src/users/privileges-table.c:59
+msgid "Configure printers"
+msgstr "Konfigurer skrivere."
+
+#: ../src/users/privileges-table.c:60
+msgid "Connect to wireless and ethernet networks"
+msgstr "Koble til trådløse og faste nettverk"
+
+#: ../src/users/privileges-table.c:61
 msgid "Access external storage devices automatically"
 msgstr "Aksesser eksterne lagringsenheter automatisk"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:62
+msgid "Suspend and hibernate the computer"
+msgstr "Sett datamaskinen i hvilemodus og dvalemodus"
+
+#: ../src/users/privileges-table.c:63
 msgid "Access /proc filesystem"
 msgstr "Aksesser /proc-filsystemet"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:64
 msgid "Use scanners"
 msgstr "Bruk skannere"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:65
 msgid "Use tape drives"
 msgstr "Bruk båndstasjoner"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:66
 msgid "Use USB devices"
 msgstr "Bruk USB-enheter"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:67
+msgid "Use VirtualBox virtualization solution"
+msgstr "Bruk VirtualBox virtualiseringsløsning"
+
+#: ../src/users/privileges-table.c:68
 msgid "Use video devices"
 msgstr "Bruk videoenheter"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:69
 msgid "Be able to get administrator privileges"
 msgstr "Få administratorrettigheter"
 
@@ -1709,56 +1707,56 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Denne brukeren er aktiv på denne datamaskinen nå"
 
-#: ../src/users/user-settings.c:425
+#: ../src/users/user-settings.c:439
 msgid "New user account"
 msgstr "Ny brukerkonto"
 
-#: ../src/users/user-settings.c:446
+#: ../src/users/user-settings.c:460
 #, c-format
 msgid "Account '%s' Properties"
 msgstr "Egenskaper for konto «%s»"
 
-#: ../src/users/user-settings.c:607
+#: ../src/users/user-settings.c:621
 msgid "User name is empty"
 msgstr "Brukernavnet er tomt"
 
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:622
 msgid "A user name must be specified."
 msgstr "Et brukernavn må oppgis."
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:624
 msgid "User name has invalid characters"
 msgstr "Brukernavnet har ugyldige tegn"
 
-#: ../src/users/user-settings.c:611
+#: ../src/users/user-settings.c:625
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "Velg et brukernavn som består bare av små bokstaver og tall."
 
-#: ../src/users/user-settings.c:615
+#: ../src/users/user-settings.c:629
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Brukernavn «%s» eksisterer allerede"
 
-#: ../src/users/user-settings.c:616 ../src/users/user-settings.c:622
+#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
 msgid "Please choose a different user name."
 msgstr "Vennligst velg et annet brukernavn."
 
-#: ../src/users/user-settings.c:647
+#: ../src/users/user-settings.c:661
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Ugyldig tegn «%c» i kommentar"
 
-#: ../src/users/user-settings.c:648
+#: ../src/users/user-settings.c:662
 msgid "Check that this character is not used."
 msgstr "Sjekk at dette tegnet ikke brukes."
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:680
 msgid "Incomplete path in home directory"
 msgstr "Ugyldig sti i hjemmemappen"
 
-#: ../src/users/user-settings.c:667
+#: ../src/users/user-settings.c:681
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1766,32 +1764,32 @@ msgstr ""
 "Vennligst oppgi full sti til hjemmemappen\n"
 "<span size=\"smaller\">f.eks: /home/john</span>."
 
-#: ../src/users/user-settings.c:670
+#: ../src/users/user-settings.c:684
 msgid "Home directory already exists"
 msgstr "Hjemmekatalog eksisterer allerede"
 
-#: ../src/users/user-settings.c:671
+#: ../src/users/user-settings.c:685
 msgid "Please enter a different home directory path."
 msgstr "Vennligst velg en annen stil til hjemmekatalogen."
 
-#: ../src/users/user-settings.c:687
+#: ../src/users/user-settings.c:701
 msgid "Administrator account's user ID should not be modified"
 msgstr "Bruker-ID for administrator-brukeren bør ikke endres"
 
-#: ../src/users/user-settings.c:692
+#: ../src/users/user-settings.c:706
 #, c-format
 msgid "User ID %d is already used"
 msgstr "Bruker-ID %d er allerede i bruk"
 
-#: ../src/users/user-settings.c:693
+#: ../src/users/user-settings.c:707
 msgid "Please choose a different numeric identifier for the new user."
 msgstr "Vennligst velg en annen numerisk identifikator for den nye brukeren."
 
-#: ../src/users/user-settings.c:707
+#: ../src/users/user-settings.c:721
 msgid "Incomplete path in shell"
 msgstr "Ufullferdig sti i skallet"
 
-#: ../src/users/user-settings.c:708
+#: ../src/users/user-settings.c:722
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1799,11 +1797,11 @@ msgstr ""
 "Vennligst oppgi full sti for skallet\n"
 "<span size=\"smaller\">f.eks: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:741
+#: ../src/users/user-settings.c:755
 msgid "Password is too short"
 msgstr "Passordet er for kort"
 
-#: ../src/users/user-settings.c:742
+#: ../src/users/user-settings.c:756
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1811,11 +1809,11 @@ msgstr ""
 "Brukerpassord må være lengre enn 6 tegn og helst utformet av tall, bokstaver "
 "og spesielle tegn."
 
-#: ../src/users/user-settings.c:745
+#: ../src/users/user-settings.c:759
 msgid "Password confirmation is not correct"
 msgstr "Bekreftelse av passord er ikke korrekt"
 
-#: ../src/users/user-settings.c:746
+#: ../src/users/user-settings.c:760
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Sjekk at du har oppgitt samme passord i begge tekstfeltene."
 
@@ -1831,6 +1829,6 @@ msgstr "Innloggingsnavn"
 msgid "Home directory"
 msgstr "Hjemmemappe"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/users-tool.c:238
 msgid "Users Settings"
 msgstr "Instillinger for bruker"
