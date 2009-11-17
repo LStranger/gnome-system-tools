@@ -286,9 +286,9 @@ get_no_passwd_login_group ()
 	return NULL;
 }
 
-static gboolean
-is_user_in_group (OobsUser  *user,
-		  OobsGroup *group)
+gboolean
+user_settings_is_user_in_group (OobsUser  *user,
+		                OobsGroup *group)
 {
 	OobsUser *tmp_user;
 	GList *users = NULL;
@@ -352,9 +352,9 @@ uid_exists (uid_t uid)
 	return FALSE;
 }
 
-static uid_t
-find_new_uid (gint uid_min,
-	      gint uid_max)
+uid_t
+user_settings_find_new_uid (gint uid_min,
+                            gint uid_max)
 {
 	OobsUsersConfig *config;
 	OobsList *list;
@@ -442,8 +442,8 @@ user_settings_set (OobsUser *user)
 				oobs_users_config_get_default_shell (config));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		uid = find_new_uid (GST_USERS_TOOL (tool)->minimum_uid,
-				    GST_USERS_TOOL (tool)->maximum_uid);
+		uid = user_settings_find_new_uid (GST_USERS_TOOL (tool)->minimum_uid,
+		                                  GST_USERS_TOOL (tool)->maximum_uid);
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
 		gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
 		gtk_widget_hide (notice);
@@ -502,9 +502,6 @@ user_settings_set (OobsUser *user)
 	/* set always the first page */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
-
-	if (!login)
-		table_set_default_profile (GST_USERS_TOOL (tool));
 
 	if (user) {
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
@@ -808,40 +805,6 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 	return user;
 }
 
-void
-user_settings_apply_profile (GstUsersTool   *users_tool,
-			     GstUserProfile *profile)
-{
-	GstTool *tool;
-	GtkWidget *widget;
-	gint uid;
-
-	if (!profile)
-		return;
-
-	tool = GST_TOOL (users_tool);
-
-	/* default UID */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	uid = find_new_uid (profile->uid_min, profile->uid_max);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
-
-	/* default shell */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-	set_entry_text (GTK_BIN (widget)->child, profile->shell);
-
-	/* default home prefix */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-	g_object_set_data (G_OBJECT (widget), "default-home", profile->home_prefix);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
-	on_user_settings_login_changed (GTK_EDITABLE (widget), NULL);
-
-	/* default groups */
-	privileges_table_set_from_profile (profile);
-}
-
-
 /*
  * Common to all modular edit dialogs: run the dialog after filling
  * the user's name and face and handling window settings.
@@ -957,7 +920,7 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 	}
 	else {
 		gst_dialog_try_set_sensitive (tool->main_dialog, nocheck_toggle, TRUE);
-		if (is_user_in_group (user, no_passwd_login_group))
+		if (user_settings_is_user_in_group (user, no_passwd_login_group))
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (nocheck_toggle),
 			                              TRUE);
 		else

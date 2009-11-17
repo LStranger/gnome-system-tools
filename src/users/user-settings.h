@@ -24,6 +24,8 @@
 #ifndef __USER_SETTINGS_H
 #define __USER_SETTINGS_H
 
+#include <gtk/gtk.h>
+
 #define NO_PASSWD_LOGIN_GROUP "nopasswdlogin"
 
 gboolean        user_delete                      (GtkTreeModel *model,
@@ -32,8 +34,9 @@ void	        user_settings_set	         (OobsUser *user);
 gint            user_settings_dialog_run         (GtkWidget *dialog);
 
 OobsUser *      user_settings_dialog_get_data    (GtkWidget *dialog);
-void            user_settings_apply_profile      (GstUsersTool *tool, GstUserProfile *profile);
 GdkPixbuf *     user_settings_get_user_face      (OobsUser *user, int size);
+uid_t           user_settings_find_new_uid       (gint uid_min,
+                                                  gint uid_max);
 
 
 #endif /* USER_SETTINGS_H */

@@ -25,6 +25,8 @@ G_BEGIN_DECLS
 
 #include <glib.h>
 #include <glib-object.h>
+#include <oobs/oobs-user.h>
+#include <oobs/oobs-group.h>
 
 #define GST_TYPE_USER_PROFILES           (gst_user_profiles_get_type ())
 #define GST_USER_PROFILES(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_USER_PROFILES, GstUserProfiles))
@@ -60,14 +62,23 @@ struct _GstUserProfile
 	gchar **groups;
 };
 
-GType            gst_user_profiles_get_type    (void);
-GstUserProfiles* gst_user_profiles_get         (void);
+GType            gst_user_profiles_get_type            (void);
+GstUserProfiles* gst_user_profiles_get                 (void);
 
-GList*           gst_user_profiles_get_names   (GstUserProfiles *profiles);
-GstUserProfile*  gst_user_profiles_set_current (GstUserProfiles *profiles,
-						const gchar     *profile);
-GstUserProfile*  gst_user_profiles_get_current (GstUserProfiles *profiles);
+GstUserProfile*  gst_user_profiles_get_from_name       (GstUserProfiles *profiles,
+                                                        const gchar *name);
+GList*           gst_user_profiles_get_names           (GstUserProfiles *profiles);
+GstUserProfile*  gst_user_profiles_set_current         (GstUserProfiles *profiles,
+						        const gchar     *profile);
+GstUserProfile*  gst_user_profiles_get_current         (GstUserProfiles *profiles);
 GstUserProfile*  gst_user_profiles_get_default_profile (GstUserProfiles *profiles);
+GstUserProfile*  gst_user_profiles_get_for_user        (GstUserProfiles *profiles,
+                                                        OobsUser        *user,
+                                                        gboolean         strict);
+void             gst_user_profiles_apply               (GstUserProfiles *profiles,
+                                                        GstUserProfile  *profile,
+                                                        OobsUser        *user,
+                                                        gboolean         new_user);
 
 
 G_END_DECLS

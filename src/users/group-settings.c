@@ -215,7 +215,8 @@ is_group_root (OobsGroup *group)
 	return (strcmp (name, "root") == 0);
 }
 
-/* Get the OobsGroup corresponding to a name, or NULL if it does not exist */
+/* Get the OobsGroup corresponding to a name, or NULL if it does not exist.
+ * Don't forget to unref the group when valid. */
 OobsGroup *
 group_settings_get_group_from_name (const gchar *name)
 {
