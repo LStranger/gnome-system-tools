@@ -68,9 +68,6 @@ GstUserProfiles* gst_user_profiles_get                 (void);
 GstUserProfile*  gst_user_profiles_get_from_name       (GstUserProfiles *profiles,
                                                         const gchar *name);
 GList*           gst_user_profiles_get_names           (GstUserProfiles *profiles);
-GstUserProfile*  gst_user_profiles_set_current         (GstUserProfiles *profiles,
-						        const gchar     *profile);
-GstUserProfile*  gst_user_profiles_get_current         (GstUserProfiles *profiles);
 GstUserProfile*  gst_user_profiles_get_default_profile (GstUserProfiles *profiles);
 GstUserProfile*  gst_user_profiles_get_for_user        (GstUserProfiles *profiles,
                                                         OobsUser        *user,

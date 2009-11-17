@@ -215,33 +215,6 @@ gst_user_profiles_get_names (GstUserProfiles *profiles)
 }
 
 GstUserProfile*
-gst_user_profiles_set_current (GstUserProfiles *profiles,
-			       const gchar     *profile)
-{
-	GstUserProfilesPrivate *priv;
-
-	g_return_if_fail (GST_IS_USER_PROFILES (profiles));
-
-	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
-
-	priv->current_profile = gst_user_profiles_get_from_name (profiles, profile);
-
-	return priv->current_profile;
-}
-
-GstUserProfile*
-gst_user_profiles_get_current (GstUserProfiles *profiles)
-{
-	GstUserProfilesPrivate *priv;
-
-	g_return_if_fail (GST_IS_USER_PROFILES (profiles));
-
-	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
-
-	return priv->default_profile;
-}
-
-GstUserProfile*
 gst_user_profiles_get_default_profile (GstUserProfiles *profiles)
 {
 	GstUserProfilesPrivate *priv;
