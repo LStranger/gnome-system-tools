@@ -513,10 +513,6 @@ user_settings_set (OobsUser *user)
 		gtk_label_set_text (GTK_LABEL (widget), profile ? profile->name : _("Custom"));
 	}
 
-	/* set always the first page */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
-
 	if (user) {
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 		set_entry_text (widget, oobs_user_get_home_directory (user));
