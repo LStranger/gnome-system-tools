@@ -18,12 +18,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
+ *          Milan Bouchet-Valat <nalimilan@club.fr>.
  */
 
 #include <config.h>
 #include "gst.h"
 #include <glib/gi18n.h>
+#include <pango/pango.h>
 
 #include "table.h"
 #include "users-table.h"
@@ -120,53 +122,89 @@ setup_shells_combo (GstUsersTool *tool)
 
 void
 table_populate_profiles (GstUsersTool *tool,
-			 GList        *names)
+                         GList *profiles)
 {
+	GstUserProfile *profile;
 	GtkWidget *table;
 	GtkWidget *radio;
+	GtkWidget *label;
 	GHashTable *radios;
+	GHashTable *labels;
 	GHashTableIter iter;
 	gpointer value;
+	GList *l;
 	static int ncols, nrows; /* original size of the table */
+	PangoAttribute *attribute;
+	PangoAttrList *attributes;
 	int i;
 
 	table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_profile_table");
 	radios = g_object_get_data (G_OBJECT (table), "radio_buttons");
+	labels = g_object_get_data (G_OBJECT (table), "labels");
 
-	/* create the hash table to hold references to radio buttons */
+	/* create the hash table to hold references to radio buttons and their labels */
 	if (radios == NULL) {
 		/* keys are names owned by GstUserProfiles, values are pointers:
 		 * no need to free anything */
 		radios = g_hash_table_new (g_str_hash, g_str_equal);
+		labels = g_hash_table_new (g_str_hash, g_str_equal);
 		g_object_set_data (G_OBJECT (table), "radio_buttons", radios);
+		g_object_set_data (G_OBJECT (table), "labels", labels);
 		g_object_get (G_OBJECT (table), "n-rows", &nrows, "n-columns", &ncols, NULL);
 	}
 	else {
-		/* free the radio buttons if they were already here */
+		/* free the radio buttons and labels if they were already here */
 		g_hash_table_iter_init (&iter, radios);
 		while (g_hash_table_iter_next (&iter, NULL, &value)) {
 			gtk_widget_destroy (GTK_WIDGET (value));
 		}
 
+		g_hash_table_iter_init (&iter, labels);
+		while (g_hash_table_iter_next (&iter, NULL, &value)) {
+			gtk_widget_destroy (GTK_WIDGET (value));
+		}
+
 		g_hash_table_remove_all (radios);
+		g_hash_table_remove_all (labels);
 	}
 
-	/* increase table's size based on it's "empty" size */
-	gtk_table_resize (GTK_TABLE (table), g_list_length (names) + nrows, ncols);
+	/* increase table's size based on it's "empty" size
+	 * we leave an empty line after a radio and its decription label */
+	gtk_table_resize (GTK_TABLE (table), g_list_length (profiles) * 3 + nrows, ncols);
 
 	radio = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_profile_custom");
+	label = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_profile_custom_label");
 
-	for (i = 0; names; i++) {
+	attributes = pango_attr_list_new ();
+	attribute = pango_attr_size_new (9 * PANGO_SCALE);
+	pango_attr_list_insert (attributes, attribute);
+	attribute = pango_attr_style_new (PANGO_STYLE_ITALIC);
+	pango_attr_list_insert (attributes, attribute);
+	gtk_label_set_attributes (GTK_LABEL (label), attributes);
+
+	i = 1; /* empty line after "Custom" radio and label */
+	for (l = profiles; l; l = l->next) {
+		profile = (GstUserProfile *) l->data;
 		radio = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio),
-		                                                     (char *) names->data);
+		                                                     profile->name);
+		label = gtk_label_new (profile->description);
+		gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+		gtk_misc_set_padding (GTK_MISC (label), 16, 0);
+		gtk_label_set_attributes (GTK_LABEL (label), attributes);
 
 		gtk_table_attach_defaults (GTK_TABLE (table),
 		                           radio, 0, ncols,
 		                           nrows + i, nrows + i + 1);
+		gtk_table_attach_defaults (GTK_TABLE (table),
+		                           label, 1, ncols,
+		                           nrows + i + 1, nrows + i + 2);
 		gtk_widget_show (radio);
+		gtk_widget_show (label);
 
-		g_hash_table_replace (radios, (char *) names->data, radio);
-		names = names->next;
+		g_hash_table_replace (radios, profile->name, radio);
+		g_hash_table_replace (labels, profile->name, label);
+		i += 3;
 	}
 }
 

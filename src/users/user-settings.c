@@ -1005,6 +1005,7 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 	GtkWidget *table;
 	GtkWidget *radio;
 	GtkWidget *custom_radio;
+	GtkWidget *custom_label;
 	GHashTable *radios;
 	GHashTableIter iter;
 	gpointer key;
@@ -1018,6 +1019,7 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_profile_name");
 	table = gst_dialog_get_widget (tool->main_dialog, "user_profile_table");
 	custom_radio = gst_dialog_get_widget (tool->main_dialog, "user_profile_custom");
+	custom_label = gst_dialog_get_widget (tool->main_dialog, "user_profile_custom_label");
 
 	user = users_table_get_current ();
 
@@ -1030,10 +1032,12 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 		radio = g_hash_table_lookup (radios, profile->name);
 		gtk_widget_set_sensitive (custom_radio, FALSE);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+		gtk_widget_set_sensitive (custom_label, FALSE);
 	}
 	else {
 		gtk_widget_set_sensitive (custom_radio, TRUE);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (custom_radio), TRUE);
+		gtk_widget_set_sensitive (custom_label, FALSE);
 	}
 
 	response = run_edit_dialog (GTK_DIALOG (user_profile_dialog),

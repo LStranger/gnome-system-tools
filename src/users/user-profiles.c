@@ -65,6 +65,8 @@ create_profile (GKeyFile    *key_file,
 
 	profile = g_new0 (GstUserProfile, 1);
 	profile->name = g_key_file_get_locale_string (key_file, group, "name", NULL, NULL);
+	profile->description = g_key_file_get_locale_string (key_file, group,
+	                                                     "description", NULL, NULL);
 	profile->is_default = g_key_file_get_boolean (key_file, group, "default", NULL);
 	profile->shell = g_key_file_get_string (key_file, group, "shell", NULL);
 	profile->home_prefix = g_key_file_get_string (key_file, group, "home-prefix", NULL);
@@ -128,6 +130,7 @@ static void
 free_profile (GstUserProfile *profile)
 {
 	g_free (profile->name);
+	g_free (profile->description);
 	g_free (profile->shell);
 	g_free (profile->home_prefix);
 	g_strfreev (profile->groups);
@@ -196,22 +199,16 @@ gst_user_profiles_get_from_name (GstUserProfiles *profiles,
 }
 
 GList*
-gst_user_profiles_get_names (GstUserProfiles *profiles)
+gst_user_profiles_get_list (GstUserProfiles *profiles)
 {
 	GstUserProfilesPrivate *priv;
 	GstUserProfile *profile;
-	GList *names = NULL;
 	GList *l;
 
 	g_return_val_if_fail (GST_IS_USER_PROFILES (profiles), NULL);
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
 
-	for (l = priv->profiles; l; l = l->next) {
-		profile = l->data;
-		names = g_list_prepend (names, profile->name);
-	}
-
-	return names;
+	return priv->profiles;
 }
 
 GstUserProfile*

@@ -52,6 +52,7 @@ struct _GstUserProfilesClass
 struct _GstUserProfile
 {
 	gchar *name;
+	gchar  *description;
 	gboolean is_default;
 
 	/* profile data */
@@ -67,7 +68,7 @@ GstUserProfiles* gst_user_profiles_get                 (void);
 
 GstUserProfile*  gst_user_profiles_get_from_name       (GstUserProfiles *profiles,
                                                         const gchar *name);
-GList*           gst_user_profiles_get_names           (GstUserProfiles *profiles);
+GList*           gst_user_profiles_get_list            (GstUserProfiles *profiles);
 GstUserProfile*  gst_user_profiles_get_default_profile (GstUserProfiles *profiles);
 GstUserProfile*  gst_user_profiles_get_for_user        (GstUserProfiles *profiles,
                                                         OobsUser        *user,

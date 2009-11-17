@@ -176,11 +176,11 @@ update_groups (GstUsersTool *tool)
 static void
 update_profiles (GstUsersTool *tool)
 {
-	GList *names = NULL;
+	GList *list;
 	GtkWidget *label1, *label2, *button;
 
-	names = gst_user_profiles_get_names (tool->profiles);
-	table_populate_profiles (tool, names);
+	list = gst_user_profiles_get_list (tool->profiles);
+	table_populate_profiles (tool, list);
 
 	/* Hide profiles line in main dialog if only one profile is available */
 	label1 = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
@@ -190,7 +190,7 @@ update_profiles (GstUsersTool *tool)
 	button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
 	                                "edit_user_profile_button");
 
-	if (g_list_length (names) > 1) {
+	if (g_list_length (list) > 1) {
 		gtk_widget_show (label1);
 		gtk_widget_show (label2);
 		gtk_widget_show (button);
@@ -200,8 +200,6 @@ update_profiles (GstUsersTool *tool)
 		gtk_widget_hide (label2);
 		gtk_widget_hide (button);
 	}
-
-	g_list_free (names);
 }
 
 void
