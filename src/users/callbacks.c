@@ -555,25 +555,6 @@ on_user_settings_login_changed (GtkEditable *editable,
 }
 
 void
-on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
-{
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	gchar *profile_name;
-	GstUserProfile *profile;
-
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter))
-		return;
-
-	gtk_tree_model_get (model, &iter, 0, &profile_name, -1);
-	profile = gst_user_profiles_set_current (GST_USERS_TOOL (tool)->profiles, profile_name);
-
-	g_free (profile_name);
-}
-
-void
 on_groups_dialog_show_help (GtkWidget *widget, gpointer data)
 {
 	GstDialog *dialog = GST_DIALOG (data);

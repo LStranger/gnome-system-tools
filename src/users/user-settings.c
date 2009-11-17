@@ -423,11 +423,12 @@ user_settings_set (OobsUser *user)
 {
 	OobsUsersConfig *config;
 	OobsGroup *no_passwd_login_group;
-	GtkWidget *dialog, *widget, *notice;
+	GtkWidget *dialog, *widget, *widget2, *notice;
 	const gchar *login = NULL;
 	gchar *title;
 	gint uid;
 	GdkPixbuf *face;
+	GstUserProfile *profile;
 
 	notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
 
@@ -498,6 +499,19 @@ user_settings_set (OobsUser *user)
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
 	set_entry_text (widget, NULL);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile");
+	widget2 = gst_dialog_get_widget (tool->main_dialog, "edit_user_profile_button");
+	profile = gst_user_profiles_get_for_user (GST_USERS_TOOL (tool)->profiles,
+	                                          user, FALSE);
+	if (is_user_root (user)) {
+		gtk_widget_set_sensitive (widget2, FALSE);
+		gtk_label_set_text (GTK_LABEL (widget), _("Superuser"));
+	}
+	else {
+		gtk_widget_set_sensitive (widget2, TRUE);
+		gtk_label_set_text (GTK_LABEL (widget), profile ? profile->name : _("Custom"));
+	}
 
 	/* set always the first page */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
@@ -988,19 +1002,59 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 	GtkWidget *user_profile_entry;
 	GtkWidget *face_image;
 	GtkWidget *name_label;
+	GtkWidget *table;
+	GtkWidget *radio;
+	GtkWidget *custom_radio;
+	GHashTable *radios;
+	GHashTableIter iter;
+	gpointer key;
+	gpointer value;
 	OobsUser *user;
+	GstUserProfile *profile;
+	gchar *name;
 
 	user_profile_dialog = gst_dialog_get_widget (tool->main_dialog, "user_profile_dialog");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_profile_face");
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_profile_name");
+	table = gst_dialog_get_widget (tool->main_dialog, "user_profile_table");
+	custom_radio = gst_dialog_get_widget (tool->main_dialog, "user_profile_custom");
 
 	user = users_table_get_current ();
+
+	/* select the profile that matches the user settings, if any */
+	profile = gst_user_profiles_get_for_user (GST_USERS_TOOL (tool)->profiles,
+	                                          user, FALSE);
+	radios = (GHashTable *) g_object_get_data (G_OBJECT (table), "radio_buttons");
+
+	if (profile) {
+		radio = g_hash_table_lookup (radios, profile->name);
+		gtk_widget_set_sensitive (custom_radio, FALSE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+	}
+	else {
+		gtk_widget_set_sensitive (custom_radio, TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (custom_radio), TRUE);
+	}
 
 	response = run_edit_dialog (GTK_DIALOG (user_profile_dialog),
 	                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
 
+	/* If a profile is selected, apply it (the "custom" radio button does nothing).
+	 * For an existing user, this only means changing shell and privilege groups,
+	 * since other settings would break many things. */
+	g_hash_table_iter_init (&iter, radios);
+	while (g_hash_table_iter_next (&iter, &key, &value))
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (value))) {
+			profile = gst_user_profiles_get_from_name (GST_USERS_TOOL (tool)->profiles,
+			                                           (char *) key);
+			gst_user_profiles_apply (GST_USERS_TOOL (tool)->profiles,
+			                         profile, user, FALSE);
+			break;
+		}
+
 	if (response == GTK_RESPONSE_OK) {
-		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
+		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
 
 	g_object_unref (user);

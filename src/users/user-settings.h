@@ -25,6 +25,9 @@
 #define __USER_SETTINGS_H
 
 #include <gtk/gtk.h>
+#include "gst-tool.h"
+#include "users-tool.h"
+#include "user-profiles.h"
 
 #define NO_PASSWD_LOGIN_GROUP "nopasswdlogin"
 

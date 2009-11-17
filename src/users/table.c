@@ -118,37 +118,54 @@ setup_shells_combo (GstUsersTool *tool)
 	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (combo), 0);
 }
 
-static void
-setup_profiles_combo (void)
-{
-	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
-	GtkTreeModel *model;
-	GtkCellRenderer *cell;
-
-	cell = gtk_cell_renderer_text_new();
-	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT (combo), cell, TRUE);
-	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT (combo), cell, "text", 0, NULL);
-
-	model = GTK_TREE_MODEL (gtk_list_store_new (1, G_TYPE_STRING));
-	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
-	g_object_unref (model);
-}
-
 void
 table_populate_profiles (GstUsersTool *tool,
 			 GList        *names)
 {
-	GtkWidget *combo;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
+	GtkWidget *table;
+	GtkWidget *radio;
+	GHashTable *radios;
+	GHashTableIter iter;
+	gpointer value;
+	static int ncols, nrows; /* original size of the table */
+	int i;
 
-	combo = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_profile_menu");
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-	gtk_list_store_clear (GTK_LIST_STORE (model));
+	table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_profile_table");
+	radios = g_object_get_data (G_OBJECT (table), "radio_buttons");
 
-	while (names) {
-		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, names->data, -1);
+	/* create the hash table to hold references to radio buttons */
+	if (radios == NULL) {
+		/* keys are names owned by GstUserProfiles, values are pointers:
+		 * no need to free anything */
+		radios = g_hash_table_new (g_str_hash, g_str_equal);
+		g_object_set_data (G_OBJECT (table), "radio_buttons", radios);
+		g_object_get (G_OBJECT (table), "n-rows", &nrows, "n-columns", &ncols, NULL);
+	}
+	else {
+		/* free the radio buttons if they were already here */
+		g_hash_table_iter_init (&iter, radios);
+		while (g_hash_table_iter_next (&iter, NULL, &value)) {
+			gtk_widget_destroy (GTK_WIDGET (value));
+		}
+
+		g_hash_table_remove_all (radios);
+	}
+
+	/* increase table's size based on it's "empty" size */
+	gtk_table_resize (GTK_TABLE (table), g_list_length (names) + nrows, ncols);
+
+	radio = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_profile_custom");
+
+	for (i = 0; names; i++) {
+		radio = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio),
+		                                                     (char *) names->data);
+
+		gtk_table_attach_defaults (GTK_TABLE (table),
+		                           radio, 0, ncols,
+		                           nrows + i, nrows + i + 1);
+		gtk_widget_show (radio);
+
+		g_hash_table_replace (radios, (char *) names->data, radio);
 		names = names->next;
 	}
 }
@@ -162,7 +179,6 @@ create_tables (GstUsersTool *tool)
 	create_group_members_table ();
 
 	/* not strictly tables, but uses a model */
-	setup_profiles_combo ();
 	setup_groups_combo ();
 	setup_shells_combo (tool);
 }
