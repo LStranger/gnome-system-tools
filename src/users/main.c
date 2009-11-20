@@ -47,7 +47,6 @@ static GstDialogSignal signals[] = {
 	{ "user_settings_passwd1",		"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
 
 	/* Main dialog callbacks, users tab */
-	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
 	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
 	{ "manage_groups",                      "clicked",              G_CALLBACK (on_manage_groups_clicked) },
 	

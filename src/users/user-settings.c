@@ -45,6 +45,10 @@
 
 extern GstTool *tool;
 
+void   on_edit_user_passwd  (GtkButton *button,
+                             gpointer   user_data);
+
+
 static gboolean
 check_user_delete (OobsUser *user)
 {
@@ -813,6 +817,269 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 	privileges_table_save (user);
 
 	return user;
+}
+
+/*
+ * Callback for user_new_name entry: on every change, fill the combo entry
+ * with proposed logins.
+ */
+void
+on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
+{
+	GtkWidget *user_login;
+	GtkTreeModel *model;
+	const char *name;
+	char *lc_name, *ascii_name, *stripped_name;
+	char **words1;
+	char **words2 = NULL;
+	char **w1, **w2;
+	char *c;
+	char *unicode_fallback = "?";
+	GString *first_word, *last_word;
+	GString *item1, *item2, *item3, *item4;
+	int len;
+	int nwords1, nwords2, i;
+
+	user_login = gst_dialog_get_widget (tool->main_dialog, "user_new_login");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (user_login));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+	gtk_combo_box_set_active (GTK_COMBO_BOX (user_login), -1);
+
+	name = gtk_entry_get_text (GTK_ENTRY (user_name));
+
+	if (name == NULL || strlen (name) <= 0)
+		return;
+
+	ascii_name = g_convert_with_fallback (name, -1, "ASCII//TRANSLIT", "UTF-8",
+	                                      unicode_fallback, NULL, NULL, NULL);
+
+	lc_name = g_ascii_strdown (ascii_name, -1);
+
+	/* remove all non ASCII alphanumeric chars from the name, apart from
+	 * the few allowed symbols, and ensure the first char is a letter */
+	stripped_name = g_strnfill (strlen (lc_name) + 1, '\0');
+	i = 0;
+	for (c = ascii_name; *c; c++) {
+		if ( (c == lc_name && !g_ascii_islower (*c))
+		     || !(g_ascii_isdigit (*c) || g_ascii_islower (*c)
+		          || *c == ' ' || *c == '-' || *c == '.' || *c == '_'
+		          /* used to track invalid words, removed below */
+		          || *c == '?') )
+			continue;
+
+		    stripped_name[i] = *c;
+		    i++;
+	}
+
+	if (strlen (stripped_name) <= 0) {
+		g_free (ascii_name);
+		g_free (lc_name);
+		g_free (stripped_name);
+		return;
+	}
+
+	/* we split name on spaces, and then on dashes, so that we can treat words
+	 * linked with dashes the same way, i.e. both fully shown, or both abbreviated */
+	words1 = g_strsplit_set (stripped_name, " ", -1);
+	len = g_strv_length (words1);
+
+	g_free (ascii_name);
+	g_free (lc_name);
+	g_free (stripped_name);
+
+
+	/* Concatenate the whole first word with the first letter of each word (item1),
+	 * and the last word with the first letter of each word (item2). item3 and item4
+	 * are symmetrical respectively to item1 and item2.
+	 *
+	 * Constant 5 is the max reasonable number of words we may get when
+	 * splitting on dashes, since we can't guess it at this point,
+	 * and reallocating would be too bad. */
+	item1 = g_string_sized_new (strlen (words1[0]) + len - 1 + 5);
+	item3 = g_string_sized_new (strlen (words1[0]) + len - 1 + 5);
+
+	item2 = g_string_sized_new (strlen (words1[len - 1]) + len - 1 + 5);
+	item4 = g_string_sized_new (strlen (words1[len - 1]) + len - 1 + 5);
+
+	/* again, guess at the max size of names */
+	first_word = g_string_sized_new (20);
+	last_word = g_string_sized_new (20);
+
+	nwords1 = 0;
+	nwords2 = 0;
+	for (w1 = words1; *w1; w1++) {
+		if (strlen (*w1) == 0)
+			continue;
+
+		/* skip words with string '?', most likely resulting
+		 * from failed transliteration to ASCII */
+		if (strstr (*w1, unicode_fallback) != NULL)
+			continue;
+
+		nwords1++; /* count real words, excluding empty string */
+
+		words2 = g_strsplit_set (*w1, "-", -1);
+
+		/* reset last word if a new non-empty word has been found */
+		if (strlen (*words2) > 0)
+			last_word = g_string_set_size (last_word, 0);
+
+		for (w2 = words2; *w2; w2++) {
+			if (strlen (*w2) == 0)
+				continue;
+
+			nwords2++;
+
+			/* part of the first "toplevel" real word */
+			if (nwords1 == 1) {
+				item1 = g_string_append (item1, *w2);
+				first_word = g_string_append (first_word, *w2);
+			}
+			else {
+				item1 = g_string_append_unichar (item1,
+				                                 g_utf8_get_char (*w2));
+				item3 = g_string_append_unichar (item3,
+				                                 g_utf8_get_char (*w2));
+			}
+
+			/* not part of the last "toplevel" word */
+			if (w1 != words1 + len - 1) {
+				item2 = g_string_append_unichar (item2,
+				                                 g_utf8_get_char (*w2));
+				item4 = g_string_append_unichar (item4,
+				                                 g_utf8_get_char (*w2));
+			}
+
+			/* always save current word so that we have it if last one reveals empty */
+			last_word = g_string_append (last_word, *w2);
+		}
+
+		g_strfreev (words2);
+	}
+
+	item2 = g_string_append (item2, last_word->str);
+	item3 = g_string_append (item3, first_word->str);
+	item4 = g_string_prepend (item4, last_word->str);
+
+	if (nwords2 > 0 && !login_exists (item1->str))
+		gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item1->str);
+
+	/* if there's only one word, would be the same as item1 */
+	if (nwords2 > 1) {
+		/* add other items */
+		if (!login_exists (item2->str))
+			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item2->str);
+
+		if (!login_exists (item3->str))
+			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item3->str);
+
+		if (!login_exists (item4->str))
+			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item4->str);
+
+		/* add the last word */
+		if (!login_exists (last_word->str))
+			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), last_word->str);
+
+		/* ...and the first one */
+		if (!login_exists (first_word->str))
+			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), first_word->str);
+	}
+
+
+	gtk_combo_box_set_active (GTK_COMBO_BOX (user_login), 0);
+
+	g_strfreev (words1);
+	g_string_free (first_word, TRUE);
+	g_string_free (last_word, TRUE);
+	g_string_free (item1, TRUE);
+	g_string_free (item2, TRUE);
+	g_string_free (item3, TRUE);
+	g_string_free (item4, TRUE);
+}
+
+/*
+ * Callback for user_new button: run the dialog to enter the user's
+ * real name and login, and create the user with default settings.
+ */
+void
+on_user_new (GtkButton *button, gpointer user_data)
+{
+	int response;
+	GtkWidget *user_new_dialog;
+	GtkWidget *user_name;
+	GtkWidget *user_login;
+	GtkTreeModel *model;
+	GtkTreePath *user_path;
+	OobsUser *user;
+	const char *fullname, *login;
+	GstUserProfile *profile;
+	OobsList *users_list;
+	OobsListIter list_iter;
+	OobsUsersConfig *users_config;
+
+	user_new_dialog = gst_dialog_get_widget (tool->main_dialog, "user_new_dialog");
+	user_name = gst_dialog_get_widget (tool->main_dialog, "user_new_name");
+	user_login = gst_dialog_get_widget (tool->main_dialog, "user_new_login");
+
+	/* clear any text left */
+	gtk_entry_set_text (GTK_ENTRY (user_name), "");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (user_login));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+	gtk_combo_box_set_active (GTK_COMBO_BOX (user_login), -1);
+
+	gtk_window_set_focus (GTK_WINDOW (user_new_dialog), user_name);
+
+	/* run dialog with correct settings */
+	gtk_window_set_transient_for (GTK_WINDOW (user_new_dialog),
+	                              GTK_WINDOW (tool->main_dialog));
+	gst_dialog_add_edit_dialog (tool->main_dialog, GTK_WIDGET (user_new_dialog));
+	response = gtk_dialog_run (GTK_DIALOG (user_new_dialog));
+	gst_dialog_remove_edit_dialog (tool->main_dialog, GTK_WIDGET (user_new_dialog));
+	gtk_widget_hide (GTK_WIDGET (user_new_dialog));
+
+	if (response != GTK_RESPONSE_OK)
+		return;
+
+	/* create user with base data entered by the user */
+	login = gtk_combo_box_get_active_text (GTK_COMBO_BOX (user_login));
+	fullname = gtk_entry_get_text (GTK_ENTRY (user_name));
+	user = oobs_user_new (login);
+	oobs_user_set_full_name (user, fullname);
+
+	g_return_if_fail (user != NULL);
+
+	/* If FALSE, group could not be found or created, which means
+	 * we won't be able to create the new user anyway, so stop here.
+	 * Error dialog has already been shown when trying to commit changes. */
+	if (!set_main_group (user)) {
+		g_object_unref (user);
+		return;
+	}
+
+	/* fill settings with values from default profile */
+	profile = gst_user_profiles_get_default_profile (GST_USERS_TOOL (tool)->profiles);
+	gst_user_profiles_apply (GST_USERS_TOOL (tool)->profiles, profile, user, TRUE);
+
+	users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
+	users_list = oobs_users_config_get_users (users_config);
+	oobs_list_append (users_list, &list_iter);
+	oobs_list_set (users_list, &list_iter, user);
+
+	/* Commit both users and groups config because of possible memberships
+	 * added by the profile. Avoid showing the new user or trying to commit
+	 * group changes if the user has not been created. */
+	if (gst_tool_commit (tool, OOBS_OBJECT (users_config)) == OOBS_RESULT_OK) {
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+		user_path = users_table_add_user (user, &list_iter);
+		users_table_select_path (user_path);
+
+		/* Finally, run the password edit dialog.
+		 * User can hit cancel, leaving the account disabled */
+		on_edit_user_passwd (NULL, NULL);
+	}
+
+	g_object_unref (user);
+	gtk_tree_path_free (user_path);
 }
 
 /*

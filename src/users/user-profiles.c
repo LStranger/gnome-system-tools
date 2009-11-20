@@ -381,6 +381,7 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
 
 	/* default UID */
 	uid = user_settings_find_new_uid (profile->uid_min, profile->uid_max);
+	oobs_user_set_uid (user, uid);
 
 	/* default home prefix */
 	home = g_build_path (G_DIR_SEPARATOR_S,

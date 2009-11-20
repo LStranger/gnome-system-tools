@@ -128,12 +128,16 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 		user = users_table_get_current ();
 	}
 
+	/* this happens when we unselect all users before selecting a single one */
+	if (!user)
+		return;
+
 	actions_set_sensitive (table, count, user);
 
 	/* Show the settings for the selected user */
 	user_settings_set (user);
-	if (user)
-		g_object_unref (user);
+
+	g_object_unref (user);
 }
 
 static void
@@ -223,7 +227,7 @@ on_popup_add_activate (GtkAction *action, gpointer data)
 	if (table == TABLE_GROUPS)
 		on_group_new_clicked (NULL, NULL);
 	else if (table == TABLE_USERS)
-		on_user_new_clicked (NULL, NULL);
+		on_user_new (NULL, NULL);
 }
 
 void
@@ -249,39 +253,6 @@ on_popup_delete_activate (GtkAction *action, gpointer data)
 }
 
 /* Users Tab */
-
-void
-on_user_new_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkWidget *dialog;
-	OobsUsersConfig *config;
-	OobsUser *user;
-	OobsList *users_list;
-	OobsListIter list_iter;
-	gint response;
-#if 0
-	dialog = user_settings_dialog_new (NULL);
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
-	response = user_settings_dialog_run (dialog);
-#endif
-	if (response == GTK_RESPONSE_OK) {
-		user = user_settings_dialog_get_data (dialog);
-
-		if (!user) /* Means an error has already occurred and been displayed, stop here */
-			return;
-
-		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-		users_list = oobs_users_config_get_users (config);
-		oobs_list_append (users_list, &list_iter);
-		oobs_list_set (users_list, &list_iter, user);
-
-		/* Avoid showing the new user or trying to commit group changes if the user has not been created */
-		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK) {
-			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-			users_table_add_user (user, &list_iter);
-		}
-	}
-}
 
 void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)

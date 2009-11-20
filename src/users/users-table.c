@@ -174,16 +174,25 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 		g_object_unref (face);
 }
 
-void
+/*
+ * Add an item in the users list. This function is used on start to fill in
+ * all the existing users, and when creating a new user.
+ *
+ * Returns: the path to the new item
+ */
+GtkTreePath *
 users_table_add_user (OobsUser *user, OobsListIter *list_iter)
 {
 	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
 	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
 	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
 	GtkTreeIter iter;
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	users_table_set_user (user, list_iter, &iter);
+
+	return gtk_tree_model_get_path (model, &iter);
 }
 
 void
@@ -194,6 +203,27 @@ users_table_clear (void)
         GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 
         gtk_list_store_clear (GTK_LIST_STORE (model));
+}
+
+/*
+ * Select the given path, translating it to a row in the filter model. Useful when
+ * we only want to select a newly added item.
+ */
+void
+users_table_select_path (GtkTreePath *path)
+{
+	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	GtkTreePath *filter_path;
+
+	filter_path = gtk_tree_model_filter_convert_child_path_to_path
+		(GTK_TREE_MODEL_FILTER (filter_model), path);
+
+	gtk_tree_selection_unselect_all (selection);
+	gtk_tree_selection_select_path (selection, filter_path);
+
+	gtk_tree_path_free (filter_path);
 }
 
 void
@@ -223,6 +253,9 @@ users_table_get_current (void)
 	OobsUser *user;
 
 	selected = gtk_tree_selection_get_selected_rows (selection, &model);
+
+	if (selected == NULL)
+		return NULL;
 
 	/* Only choose the first selected user */
 	path = (GtkTreePath *) selected->data;
