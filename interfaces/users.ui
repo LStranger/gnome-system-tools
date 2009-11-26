@@ -2844,7 +2844,7 @@
         <child>
           <object class="GtkTable" id="table2">
             <property name="visible">True</property>
-            <property name="n_rows">3</property>
+            <property name="n_rows">4</property>
             <property name="n_columns">2</property>
             <property name="column_spacing">12</property>
             <property name="row_spacing">12</property>
@@ -2909,12 +2909,79 @@
                 <property name="visible">True</property>
                 <property name="model">liststore2</property>
                 <property name="text_column">0</property>
+                <signal name="changed" handler="on_user_new_login_changed"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="user_new_notice_image">
+                <property name="visible">True</property>
+                <property name="xalign">1</property>
+                <property name="yalign">0</property>
+                <property name="xpad">6</property>
+                <property name="stock">gtk-dialog-info</property>
+                <property name="icon-size">3</property>
+              </object>
+              <packing>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkVBox" id="vbox3">
+                <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel" id="user_new_login_notice">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
+                    <property name="label" translatable="yes" comments="No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!">Short name must consist of:
+  &#x27A3; lower case letters from the English alphabet
+  &#x27A3; digits
+  &#x27A3; any of the characters ".", "-" and "_"</property>
+                    <property name="wrap">True</property>
+                    <attributes>
+                      <attribute name="style" value="italic"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="user_new_login_used_notice">
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
+                    <property name="label" translatable="yes">An user with such a name already exists. Please choose a different short name for the new user.</property>
+                    <property name="wrap">True</property>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="user_new_login_letter_notice">
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
+                    <property name="label" translatable="yes">Short name must start with a letter!</property>
+                    <property name="wrap">True</property>
+                  </object>
+                  <packing>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
               </packing>
             </child>
           </object>
@@ -2944,6 +3011,7 @@
               <object class="GtkButton" id="user_new_validate_button">
                 <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>
@@ -2969,5 +3037,13 @@
       <action-widget response="-6">user_new_cancel_button</action-widget>
       <action-widget response="-5">user_new_validate_button</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkSizeGroup" id="user_new_notice_sizegroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="user_new_login_notice"/>
+      <widget name="user_new_login_used_notice"/>
+      <widget name="user_new_login_letter_notice"/>
+    </widgets>
   </object>
 </interface>

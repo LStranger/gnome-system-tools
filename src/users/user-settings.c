@@ -551,27 +551,6 @@ login_exists (const gchar *login)
 	return FALSE;
 }
 
-/* FIXME: this function is duplicated in group-settings.c */
-static gboolean
-is_valid_name (const gchar *name)
-{
-	/*
-	 * User/group names must start with a letter, and may not
-	 * contain colons, commas, newlines (used in passwd/group
-	 * files...) or any non-printable characters.
-	 */
-        if (!*name || !isalpha(*name))
-                return FALSE;
-
-        while (*name) {
-		if (!isdigit (*name) && !islower (*name) && *name != '-')
-                        return FALSE;
-                name++;
-        }
-
-        return TRUE;
-}
-
 static void
 check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
@@ -821,13 +800,17 @@ user_settings_dialog_get_data (GtkWidget *dialog)
 
 /*
  * Callback for user_new_name entry: on every change, fill the combo entry
- * with proposed logins.
+ * with proposed logins. Also update validate button's sensitivity if name is empty.
  */
 void
 on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 {
+	GtkWidget *validate_button;
 	GtkWidget *user_login;
 	GtkTreeModel *model;
+	GdkColor color;
+	gboolean valid_login;
+	gboolean valid_name;
 	const char *name;
 	char *lc_name, *ascii_name, *stripped_name;
 	char **words1;
@@ -840,6 +823,9 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	int len;
 	int nwords1, nwords2, i;
 
+	validate_button = gst_dialog_get_widget (tool->main_dialog,
+	                                         "user_new_validate_button");
+
 	user_login = gst_dialog_get_widget (tool->main_dialog, "user_new_login");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (user_login));
 	gtk_list_store_clear (GTK_LIST_STORE (model));
@@ -847,8 +833,19 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 
 	name = gtk_entry_get_text (GTK_ENTRY (user_name));
 
-	if (name == NULL || strlen (name) <= 0)
+	/* make validate button insensitive if name is empty */
+	valid_name = (strlen (name) > 0);
+
+	/* take into account sensitivity set from on_user_new_login_changed() */
+	valid_login = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (validate_button),
+	                                                  "valid-login"));
+	gtk_widget_set_sensitive (validate_button, valid_name && valid_login);
+	g_object_set_data (G_OBJECT (validate_button),
+	                   "valid-name", GINT_TO_POINTER (valid_name));
+
+	if (!valid_name)
 		return;
+
 
 	ascii_name = g_convert_with_fallback (name, -1, "ASCII//TRANSLIT", "UTF-8",
 	                                      unicode_fallback, NULL, NULL, NULL);
@@ -998,6 +995,79 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 }
 
 /*
+ * Callback for user_new login combo box: prevent inserting invalid chars,
+ * update notice, icons and validate button sensitivity.
+ */
+void
+on_user_new_login_changed (GtkComboBox *login_combo, gpointer user_data)
+{
+	GtkWidget *login_entry;
+	GtkWidget *validate_button;
+	GtkWidget *notice_image;
+	GtkWidget *used_notice;
+	GtkWidget *login_notice;
+	GtkWidget *letter_notice;
+	GdkColor color;
+	gboolean used_login;
+	gboolean empty_login;
+	gboolean valid_login;
+	gboolean valid_name;
+	char *login;
+	char *c;
+
+	login = gtk_combo_box_get_active_text (login_combo);
+	login_entry = gtk_bin_get_child (GTK_BIN (login_combo));
+	validate_button = gst_dialog_get_widget (tool->main_dialog, "user_new_validate_button");
+	notice_image = gst_dialog_get_widget (tool->main_dialog, "user_new_notice_image");
+	used_notice = gst_dialog_get_widget (tool->main_dialog, "user_new_login_used_notice");
+	login_notice = gst_dialog_get_widget (tool->main_dialog, "user_new_login_notice");
+	letter_notice = gst_dialog_get_widget (tool->main_dialog, "user_new_login_letter_notice");
+
+	used_login = login_exists (login);
+	empty_login = (strlen (login) <= 0);
+	valid_login = TRUE;
+
+	if (!used_login && !empty_login) {
+		/* first char of a login must be a letter, and it must only composed
+		 * of ASCII letters, digits, and a '.', '-', '_' */
+		for (c = login; *c; c++) {
+			if ( (c == login && !islower (*c))
+			    || !(isdigit (*c) || islower (*c)
+			         || *c == '.' || *c == '-' || *c == '_' ) )
+				valid_login = FALSE;
+		}
+	}
+
+	if (!empty_login && !isdigit (login[0])) {
+		gtk_widget_set_visible (letter_notice, FALSE);
+		gtk_widget_set_visible (used_notice, used_login);
+		gtk_widget_set_visible (login_notice, !used_login);
+	}
+	else {
+		gtk_widget_set_visible (letter_notice, !empty_login);
+		gtk_widget_set_visible (used_notice, FALSE);
+		gtk_widget_set_visible (login_notice, empty_login);
+	}
+
+	/* don't override sensitivity set from on_user_new_name_changed() */
+	valid_name = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (validate_button),
+	                                                 "valid-name"));
+	gtk_widget_set_sensitive (validate_button,
+	                          !used_login && valid_login && valid_name && !empty_login);
+	g_object_set_data (G_OBJECT (validate_button), "valid-login",
+	                   GINT_TO_POINTER (!used_login && valid_login && !empty_login));
+
+	gtk_image_set_from_stock (GTK_IMAGE (notice_image),
+	                          (!used_login && valid_login) || empty_login ? GTK_STOCK_INFO :
+		                                                                GTK_STOCK_DIALOG_WARNING,
+	                          GTK_ICON_SIZE_LARGE_TOOLBAR);
+
+	gdk_color_parse ("red", &color);
+	gtk_widget_modify_base (GTK_WIDGET (login_entry), GTK_STATE_NORMAL,
+	                        (!used_login && valid_login) || empty_login ? NULL : &color);
+}
+
+/*
  * Callback for user_new button: run the dialog to enter the user's
  * real name and login, and create the user with default settings.
  */
@@ -1008,6 +1078,8 @@ on_user_new (GtkButton *button, gpointer user_data)
 	GtkWidget *user_new_dialog;
 	GtkWidget *user_name;
 	GtkWidget *user_login;
+	GtkWidget *login_entry;
+	GtkWidget *notice_image;
 	GtkTreeModel *model;
 	GtkTreePath *user_path;
 	OobsUser *user;
@@ -1020,12 +1092,15 @@ on_user_new (GtkButton *button, gpointer user_data)
 	user_new_dialog = gst_dialog_get_widget (tool->main_dialog, "user_new_dialog");
 	user_name = gst_dialog_get_widget (tool->main_dialog, "user_new_name");
 	user_login = gst_dialog_get_widget (tool->main_dialog, "user_new_login");
+	login_entry = gtk_bin_get_child (GTK_BIN (user_login));
+	notice_image = gst_dialog_get_widget (tool->main_dialog, "user_new_notice_image");
 
-	/* clear any text left */
+	/* clear any text, colors or icon left */
 	gtk_entry_set_text (GTK_ENTRY (user_name), "");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (user_login));
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (user_login), -1);
+	on_user_new_login_changed (GTK_COMBO_BOX (user_login), NULL);
 
 	gtk_window_set_focus (GTK_WINDOW (user_new_dialog), user_name);
 
