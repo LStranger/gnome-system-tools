@@ -856,7 +856,7 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	 * the few allowed symbols, and ensure the first char is a letter */
 	stripped_name = g_strnfill (strlen (lc_name) + 1, '\0');
 	i = 0;
-	for (c = ascii_name; *c; c++) {
+	for (c = lc_name; *c; c++) {
 		if ( (c == lc_name && !g_ascii_islower (*c))
 		     || !(g_ascii_isdigit (*c) || g_ascii_islower (*c)
 		          || *c == ' ' || *c == '-' || *c == '.' || *c == '_'
