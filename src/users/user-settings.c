@@ -741,63 +741,6 @@ user_settings_dialog_run (GtkWidget *dialog)
 	return response;
 }
 
-OobsUser *
-user_settings_dialog_get_data (GtkWidget *dialog)
-{
-	GtkWidget *widget;
-	OobsGroup *group;
-	OobsGroup *no_passwd_login_group;
-	OobsGroupsConfig *groups_config;
-	OobsList *groups_list;
-	OobsListIter list_iter;
-	OobsUser *user;
-	const gchar *str;
-	gboolean password_changed;
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
-	str = gtk_entry_get_text (GTK_ENTRY (widget));
-	user = g_object_get_data (G_OBJECT (dialog), "user");
-
-	if (!str || !*str)
-		return NULL;
-
-	if (!user) {
-		user = oobs_user_new (str);
-		g_object_set_data_full (G_OBJECT (dialog), "user",
-					user, (GDestroyNotify) g_object_unref);
-	}
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
-	oobs_user_set_full_name (user, gtk_entry_get_text (GTK_ENTRY (widget)));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
-	oobs_user_set_room_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_wphone");
-	oobs_user_set_work_phone_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_hphone");
-	oobs_user_set_home_phone_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-	oobs_user_set_shell (user, gtk_entry_get_text (GTK_ENTRY (GTK_BIN (widget)->child)));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-	oobs_user_set_home_directory (user, gtk_entry_get_text (GTK_ENTRY (widget)));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	oobs_user_set_uid (user, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
-
-	/* If FALSE, group could not be found or created, which means
-	 * we won't be able to create the new user anyway, so stop here */
-	if (!set_main_group (user))
-		return NULL;
-
-	privileges_table_save (user);
-
-	return user;
-}
-
 /*
  * Callback for user_new_name entry: on every change, fill the combo entry
  * with proposed logins. Also update validate button's sensitivity if name is empty.
@@ -1397,6 +1340,57 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
 			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
+
+	g_object_unref (user);
+}
+
+
+void
+on_edit_user_advanced (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *user_advanced_dialog;
+	GtkWidget *face_image;
+	GtkWidget *name_label;
+	GtkWidget *widget;
+	OobsUser *user;
+	int response;
+
+	user_advanced_dialog = gst_dialog_get_widget (tool->main_dialog, "user_advanced_dialog");
+	face_image = gst_dialog_get_widget (tool->main_dialog, "user_advanced_face");
+	name_label = gst_dialog_get_widget (tool->main_dialog, "user_advanced_name");
+
+	user = users_table_get_current ();
+
+	response = run_edit_dialog (GTK_DIALOG (user_advanced_dialog),
+	                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
+
+	if (response != GTK_RESPONSE_OK) {
+		g_object_unref (user);
+		return;
+	}
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
+	oobs_user_set_room_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_wphone");
+	oobs_user_set_work_phone_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_hphone");
+	oobs_user_set_home_phone_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
+	oobs_user_set_shell (user, gtk_entry_get_text (GTK_ENTRY (GTK_BIN (widget)->child)));
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
+	oobs_user_set_home_directory (user, gtk_entry_get_text (GTK_ENTRY (widget)));
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
+	oobs_user_set_uid (user, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
+
+	privileges_table_save (user);
+
+	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 
 	g_object_unref (user);
 }

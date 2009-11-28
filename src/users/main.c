@@ -84,6 +84,9 @@ main_window_prepare (GstUsersTool *tool)
 {
 	create_tables (tool);
 
+	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog),
+	                             400, 500);
+
 	/* For random password generation. */
 	srand (time (NULL));
 }
