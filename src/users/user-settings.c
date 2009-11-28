@@ -494,8 +494,7 @@ user_settings_set (OobsUser *user)
 			gst_dialog_try_set_sensitive (tool->main_dialog, widget, FALSE);
 			gtk_widget_hide (notice);
 		}
-		else if (oobs_user_get_active (user) &&
-			 gst_dialog_is_authenticated (tool->main_dialog)) {
+		else if (oobs_user_get_active (user)) {
 			gst_dialog_try_set_sensitive (tool->main_dialog, widget, FALSE);
 			gtk_widget_show (notice);
 		}

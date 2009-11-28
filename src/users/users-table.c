@@ -45,7 +45,6 @@ add_user_columns (GtkTreeView *treeview)
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column, renderer,
 					     "pixbuf", COL_USER_FACE,
-					     "sensitive", COL_USER_SENSITIVE,
 					     NULL);
 	g_object_set (G_OBJECT (renderer),
 		      "xpad", 3,
@@ -93,10 +92,9 @@ create_users_model (GstUsersTool *tool)
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
 				    G_TYPE_INT,
-				    G_TYPE_BOOLEAN,
+	                            G_TYPE_BOOLEAN,
 				    G_TYPE_OBJECT,
-				    OOBS_TYPE_LIST_ITER,
-				    G_TYPE_BOOLEAN);
+				    OOBS_TYPE_LIST_ITER);
 	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
 
 	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model),
@@ -155,8 +153,6 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 	name = oobs_user_get_full_name (user);
 	login = oobs_user_get_login_name (user);
 	label = g_strdup_printf ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>", name, login);
-	sensitive = gst_dialog_is_authenticated (tool->main_dialog) ||
-	            (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_USER_FACE, face,
@@ -167,7 +163,6 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 			    COL_USER_ID, oobs_user_get_uid (user),
 			    COL_USER_OBJECT, user,
 			    COL_USER_ITER, list_iter,
-			    COL_USER_SENSITIVE, sensitive,
 			    -1);
 	g_free (label);
 	if (face)

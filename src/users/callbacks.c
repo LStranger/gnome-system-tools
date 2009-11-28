@@ -37,50 +37,11 @@
 
 extern GstTool *tool;
 
-/* PolkitLockButton state has changed, reflect this in the UI */
-void
-on_lock_changed (GstDialog *dialog)
-{
-	GtkWidget *users_table;
-	GtkTreeModel *model, *store;
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-	OobsUser *self, *user;
-	gboolean valid;
-	gboolean is_authenticated;
-
-	users_table = gst_dialog_get_widget (dialog, "users_table");
-
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
-	store = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-
-	is_authenticated = gst_dialog_is_authenticated (tool->main_dialog);
-	self = oobs_self_config_get_user (OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config));
-
-	valid = gtk_tree_model_get_iter_first (store, &iter);
-
-	while (valid) {
-		gtk_tree_model_get (store, &iter,
-				    COL_USER_OBJECT, &user,
-				    -1);
-
-		gtk_list_store_set (GTK_LIST_STORE (store), &iter,
-				    COL_USER_SENSITIVE, is_authenticated | (user == self),
-				    -1);
-
-		g_object_unref (user);
-		valid = gtk_tree_model_iter_next (store, &iter);
-	}
-
-	/* Update the status depending on the selected user */
-	on_table_selection_changed (selection, NULL);
-}
 
 /* Common stuff to users and groups tables */
 
 static void
-actions_set_sensitive (gint table, gint count, OobsUser *user)
+actions_set_sensitive (gint table, gint count)
 {
 	OobsObject *object = GST_USERS_TOOL (tool)->self_config;
 	gboolean sensitive;
@@ -93,9 +54,6 @@ actions_set_sensitive (gint table, gint count, OobsUser *user)
 		gst_dialog_try_set_sensitive (tool->main_dialog,
 					      gst_dialog_get_widget (tool->main_dialog, "user_delete"),
 					      (count > 0));
-
-		sensitive = count == 1 && gst_dialog_is_authenticated (tool->main_dialog)
-				       || (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
 		break;
 	case TABLE_GROUPS:
 		gst_dialog_try_set_sensitive (tool->main_dialog,
@@ -132,7 +90,7 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 	if (!user)
 		return;
 
-	actions_set_sensitive (table, count, user);
+	actions_set_sensitive (table, count);
 
 	/* Show the settings for the selected user */
 	user_settings_set (user);
@@ -163,11 +121,11 @@ do_popup_menu (GtkTreeView *treeview, GdkEventButton *event)
 	ui_manager = g_object_get_data (G_OBJECT (treeview), "ui-manager");
 
 	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Add"),
-				  cont == 1 && (gst_dialog_is_authenticated (tool->main_dialog)));
+				  cont == 1);
 	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Properties"),
-				  cont == 1 && (gst_dialog_is_authenticated (tool->main_dialog)));
+				  cont == 1);
 	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Delete"),
-				  cont > 0 && gst_dialog_is_authenticated (tool->main_dialog));
+				  cont > 0);
 
 	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, NULL, NULL,
 			button, event_time);

@@ -57,27 +57,6 @@ static GstDialogSignal signals[] = {
 	{ "groups_dialog_help",                 "clicked",              G_CALLBACK (on_groups_dialog_show_help) },
 	{ NULL }};
 
-const gchar *policy_widgets [] = {
-	"user_new",
-	"user_delete",
-	"groups_table",
-	"group_new",
-	"group_delete",
-	"group_settings",
-	"profile_new",
-	"profile_delete",
-	"profile_settings",
-	"user_passwd_no_check",
-	"user_privileges",
-	"user_settings_home",
-	"user_settings_shell",
-	"user_settings_uid",
-	"user_passwd_max",
-	"user_passwd_min",
-	"user_passwd_days",
-	"user_settings_group",
-	NULL
-};
 
 static void
 main_window_prepare (GstUsersTool *tool)
@@ -97,7 +76,6 @@ main (int argc, char *argv[])
 	gst_init_tool ("users-admin", argc, argv, NULL);
 	tool = GST_TOOL (gst_users_tool_new ());
 
-	gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 	main_window_prepare (GST_USERS_TOOL (tool));
 
