@@ -1046,6 +1046,8 @@ on_user_new (GtkButton *button, gpointer user_data)
 
 	gtk_window_set_focus (GTK_WINDOW (user_new_dialog), user_name);
 
+	set_login_length (login_entry);
+
 	/* run dialog with correct settings */
 	gtk_window_set_transient_for (GTK_WINDOW (user_new_dialog),
 	                              GTK_WINDOW (tool->main_dialog));
