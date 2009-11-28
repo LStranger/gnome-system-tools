@@ -151,6 +151,34 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 	return retval;
 }
 
+void
+on_user_delete_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkTreeModel *model;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	GList *list, *elem;
+	gboolean count;
+
+	list = elem = table_get_row_references (TABLE_USERS, &model);
+
+	count = 0;
+
+	while (elem) {
+		path = gtk_tree_row_reference_get_path (elem->data);
+		count += user_delete (model, path);
+
+		gtk_tree_path_free (path);
+		elem = elem->next;
+	}
+
+	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
+	g_list_free (list);
+
+	if (count > 0)
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
+}
+
 static void
 set_entry_text (GtkWidget *entry, const gchar *text)
 {
