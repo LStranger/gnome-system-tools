@@ -852,16 +852,15 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 
 	lc_name = g_ascii_strdown (ascii_name, -1);
 
-	/* remove all non ASCII alphanumeric chars from the name, apart from
-	 * the few allowed symbols, and ensure the first char is a letter */
+	/* remove all non ASCII alphanumeric chars from the name,
+	 * apart from the few allowed symbols */
 	stripped_name = g_strnfill (strlen (lc_name) + 1, '\0');
 	i = 0;
 	for (c = lc_name; *c; c++) {
-		if ( (c == lc_name && !g_ascii_islower (*c))
-		     || !(g_ascii_isdigit (*c) || g_ascii_islower (*c)
-		          || *c == ' ' || *c == '-' || *c == '.' || *c == '_'
-		          /* used to track invalid words, removed below */
-		          || *c == '?') )
+		if ( !(g_ascii_isdigit (*c) || g_ascii_islower (*c)
+		       || *c == ' ' || *c == '-' || *c == '.' || *c == '_'
+		       /* used to track invalid words, removed below */
+		       || *c == '?') )
 			continue;
 
 		    stripped_name[i] = *c;
@@ -958,27 +957,27 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	item3 = g_string_append (item3, first_word->str);
 	item4 = g_string_prepend (item4, last_word->str);
 
-	if (nwords2 > 0 && !login_exists (item1->str))
+	if (nwords2 > 0 && !login_exists (item1->str) && !isdigit(item1->str[0]))
 		gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item1->str);
 
 	/* if there's only one word, would be the same as item1 */
 	if (nwords2 > 1) {
 		/* add other items */
-		if (!login_exists (item2->str))
+		if (!login_exists (item2->str) && !isdigit(item2->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item2->str);
 
-		if (!login_exists (item3->str))
+		if (!login_exists (item3->str) && !isdigit(item3->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item3->str);
 
-		if (!login_exists (item4->str))
+		if (!login_exists (item4->str) && !isdigit(item4->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item4->str);
 
 		/* add the last word */
-		if (!login_exists (last_word->str))
+		if (!login_exists (last_word->str) && !isdigit(last_word->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), last_word->str);
 
 		/* ...and the first one */
-		if (!login_exists (first_word->str))
+		if (!login_exists (first_word->str) && !isdigit(first_word->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), first_word->str);
 	}
 
