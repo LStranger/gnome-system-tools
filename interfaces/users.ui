@@ -557,10 +557,34 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <placeholder/>
+              <object class="GtkButton" id="group_settings_cancel_button">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkButton" id="group_settings_validate_button">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -571,6 +595,10 @@
         </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="-6">group_settings_cancel_button</action-widget>
+      <action-widget response="-5">group_settings_validate_button</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkDialog" id="profile_settings_dialog">
     <property name="resizable">False</property>
@@ -1517,7 +1545,6 @@
                   <object class="GtkButton" id="group_settings">
                     <property name="label">gtk-properties</property>
                     <property name="visible">True</property>
-                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="can_default">True</property>
                     <property name="receives_default">False</property>
@@ -1532,7 +1559,6 @@
                 <child>
                   <object class="GtkButton" id="group_delete">
                     <property name="visible">True</property>
-                    <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="can_default">True</property>
                     <property name="receives_default">False</property>
@@ -3211,9 +3237,9 @@
   <object class="GtkSizeGroup" id="user_new_notice_sizegroup">
     <property name="mode">both</property>
     <widgets>
-      <widget name="user_new_login_notice"/>
-      <widget name="user_new_login_used_notice"/>
       <widget name="user_new_login_letter_notice"/>
+      <widget name="user_new_login_used_notice"/>
+      <widget name="user_new_login_notice"/>
     </widgets>
   </object>
 </interface>
