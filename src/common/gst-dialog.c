@@ -44,6 +44,7 @@ struct _GstDialogPrivate {
 
 	gchar   *title;
 	gchar   *widget_name;
+	gboolean lock_button;
 
 	GtkBuilder *builder;
 	GtkWidget  *child;
@@ -95,7 +96,8 @@ enum {
 	PROP_0,
 	PROP_TOOL,
 	PROP_WIDGET_NAME,
-	PROP_TITLE
+	PROP_TITLE,
+	PROP_LOCK_BUTTON
 };
 
 enum {
@@ -145,6 +147,14 @@ gst_dialog_class_init (GstDialogClass *class)
 							      "title",
 							      NULL,
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property (object_class,
+					 PROP_LOCK_BUTTON,
+					 g_param_spec_boolean ("lock_button",
+					                       "Lock button",
+					                       "Show PolkitLockButton",
+					                       TRUE,
+					                       G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
 
 	signals [LOCK_CHANGED] =
 		g_signal_new ("lock-changed",
@@ -227,12 +237,15 @@ gst_dialog_constructor (GType                  type,
 		const gchar *action;
 		GtkWidget *action_area;
 
-		action = oobs_session_get_authentication_action (priv->tool->session);
-		priv->polkit_button = polkit_lock_button_new (action);
-		gtk_widget_show (priv->polkit_button);
+		/* Some tools don't use the lock button at all */
+		if (priv->lock_button) {
+			action = oobs_session_get_authentication_action (priv->tool->session);
+			priv->polkit_button = polkit_lock_button_new (action);
 
-		action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
-		gtk_box_pack_start (GTK_BOX (action_area), priv->polkit_button, TRUE, TRUE, 0);
+			action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
+			gtk_box_pack_start (GTK_BOX (action_area), priv->polkit_button, TRUE, TRUE, 0);
+			gtk_widget_show (priv->polkit_button);
+		}
 
 		g_signal_connect_swapped (priv->polkit_button, "changed",
 					  G_CALLBACK (gst_dialog_lock_changed), dialog);
@@ -269,6 +282,9 @@ gst_dialog_set_property (GObject      *object,
 		break;
 	case PROP_TITLE:
 		priv->title = g_value_dup_string (value);
+		break;
+	case PROP_LOCK_BUTTON:
+		priv->lock_button = g_value_get_boolean (value);
 		break;
 	}
 }
@@ -338,13 +354,14 @@ gst_dialog_delete_event (GtkWidget   *widget,
 }
 
 GstDialog*
-gst_dialog_new (GstTool *tool, const char *widget, const char *title)
+gst_dialog_new (GstTool *tool, const char *widget, const char *title, gboolean lock_button)
 {
 	return g_object_new (GST_TYPE_DIALOG,
 			     "has-separator", FALSE,
 			     "tool", tool,
 			     "widget-name", widget,
 			     "title", title,
+	                     "lock-button", lock_button,
 			     NULL);
 }
 

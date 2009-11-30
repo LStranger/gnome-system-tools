@@ -64,7 +64,8 @@ enum {
 	PROP_0,
 	PROP_NAME,
 	PROP_TITLE,
-	PROP_ICON
+	PROP_ICON,
+	PROP_LOCK_BUTTON
 };
 
 typedef struct _GstAsyncData {
@@ -109,6 +110,14 @@ gst_tool_class_init (GstToolClass *class)
 							      "Tool icon",
 							      NULL,
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property (object_class,
+					 PROP_LOCK_BUTTON,
+					 g_param_spec_boolean ("lock_button",
+					                       "Lock button",
+					                       "Show PolkitLockButton",
+					                       TRUE,
+					                       G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
 }
 
 static gboolean
@@ -231,7 +240,7 @@ gst_tool_constructor (GType                  type,
 		tool->ui_path = g_strdup_printf (INTERFACES_DIR "/%s.ui", tool->name);
 
 		widget_name = g_strdup_printf ("%s_admin", tool->name);
-		tool->main_dialog = gst_dialog_new (tool, widget_name, tool->title);
+		tool->main_dialog = gst_dialog_new (tool, widget_name, tool->title, tool->lock_button);
 		g_free (widget_name);
 	}
 
@@ -268,6 +277,9 @@ gst_tool_set_property (GObject      *object,
 		break;
 	case PROP_ICON:
 		tool->icon = g_value_dup_string (value);
+		break;
+	case PROP_LOCK_BUTTON:
+		tool->lock_button = g_value_get_boolean (value);
 		break;
 	}
 }

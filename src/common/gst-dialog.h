@@ -56,7 +56,8 @@ GType               gst_dialog_get_type            (void);
 
 GstDialog          *gst_dialog_new                 (GstTool *tool, 
 						    const char *widget, 
-						    const char *title);
+						    const char *title,
+						    gboolean    lock_button);
 
 void                gst_dialog_connect_signals     (GstDialog *xd, GstDialogSignal *signals);
 void                gst_dialog_connect_signals_after (GstDialog *xd, GstDialogSignal *signals);
