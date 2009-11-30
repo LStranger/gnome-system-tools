@@ -1,3 +1,72 @@
+GNOME System Tools Version 2.29.1, 2009-11-30
+-----------------------------------------------
+
+  General
+  =======
+  - Enable Automake silent rules by default, and compiler warnings
+  - Remove call to deprecated gdk_event_get_graphics_expose() (thanks to Andre Klapper)
+
+  Users
+  =====
+  - Complete rework of the user interface: settings are now shown in the main dialog, with separate dialogs to edit them. Unlock button is gone, replaced with on-the-fly authentication request when applying changes.
+  - Login proposals are now shown when creating an user, with live checking of forbidden characters, and transliteration from Unicode where possible.
+  - Fix empty shells combo box
+  - Fix GID wrongly set to 0 in group settings dialog, which could lead to adding users to the root group
+  - Add privilege groups from Debian (Sam Morris)
+  - Always show system groups: "showall" GConf option is now only for users, because system groups are the most interesting ones
+
+  Shares
+  ======
+  - Don't check for Nautilus dependencies when not building it (Emilio Pozuelo Monfort)
+
+  Time
+  ====
+  - Remove obsolete time servers, which generated log error messages from ntpd (thanks to MechaMechanism)
+
+  Services
+  ========
+  - Never reset script boot priority to a default of 50, but use previous value.
+  - Add landscape-client to the list of known services.
+
+  Network
+  =======
+  - Bring back PPP connection type combo box, which was empty since the migration to GtkBuilder
+
+  Translation
+  ===========
+  - ar, courtesy of Khaled Hosny
+  - br, courtesy of denis
+  - ca, courtesy of Josep Puigdemont i Casamajó
+  - cs, courtesy of Jiri Eischmann
+  - da, courtesy of Kenneth Nielsen
+  - de, courtesy of Christian Kirbach
+  - el, courtesy of Kostas Papadimas
+  - en_GB, courtesy of Philip Withnall
+  - en@shaw, courtesy of Thomas Thurman
+  - es, courtesy of Jorge González
+  - et, courtesy of Ivar Smolin
+  - fi, courtesy of Tommi Vainikainen
+  - hu, courtesy of Gabor Kelemen
+  - it, courtesy of Gianvito Cavasoli
+  - mai, courtesy of Sangeeta Kumari
+  - mr, courtesy of Sandeep Shedmake
+  - nb, courtesy of Kjartan Maraas
+  - nds, courtesy of Nils-Christoph Fiedler
+  - pl, courtesy of Tomasz Dominikowski
+  - pt_BR, courtesy of André Gondim
+  - pt, courtesy of Duarte Loreto
+  - ro, courtesy of Adi Roiban
+  - sl, courtesy of Matej Urbančič
+  - sv, courtesy of Daniel Nylander
+  - ta, courtesy of Dr.T.Vasudevan
+  - te, courtesy of Krishna Babu K
+  - uk, courtesy of Maxim Dziumanenko
+  - zh_CN, courtesy of Tao Wei
+  - zh_HK, courtesy of Chao-Hsiung Liao
+  - zh_TW, courtesy of Chao-Hsiung Liao
+
+
+
 GNOME System Tools Version 2.27.3, 2009-08-20
 -----------------------------------------------
 
