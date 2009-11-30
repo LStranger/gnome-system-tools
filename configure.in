@@ -3,6 +3,7 @@ AC_INIT(gnome-system-tools, 2.27.92, http://bugzilla.gnome.org/enter_bug.cgi?pro
 AC_CONFIG_SRCDIR(src/common/gst-tool.c)
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 IT_PROG_INTLTOOL([0.35.0])
 
@@ -190,6 +191,59 @@ dnl =====================================================
 dnl =====================================================
 dnl GST_LIBS & GST_CFLAGS 
 dnl =====================================================
+
+
+#### gcc warning flags (taken from PolicyKit-gnome)
+
+if test "x$GCC" = "xyes"; then
+  changequote(,)dnl
+  case " $CFLAGS " in
+  *[\ \	]-Wall[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wall" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wchar-subscripts[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wchar-subscripts" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wmissing-declarations[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wmissing-declarations" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wnested-externs[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wnested-externs" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wpointer-arith[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wpointer-arith" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wcast-align[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wcast-align" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wsign-compare[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wsign-compare" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wformat[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wformat" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\ \	]-Wformat-security[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wformat-security" ;;
+  esac
+
+  changequote([,])dnl
+fi
 
 dnl GST_DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
 GST_DEPRECATED_FLAGS=""
