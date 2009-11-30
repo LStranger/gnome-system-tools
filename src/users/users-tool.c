@@ -173,8 +173,10 @@ update_groups (GstUsersTool *tool)
 static void
 update_profiles (GstUsersTool *tool)
 {
-	GList *list;
+	GList *list, *l;
 	GtkWidget *label1, *label2, *button;
+	GstUserProfile *profile;
+	int max_len, len;
 
 	list = gst_user_profiles_get_list (tool->profiles);
 	table_populate_profiles (tool, list);
@@ -196,7 +198,20 @@ update_profiles (GstUsersTool *tool)
 		gtk_widget_hide (label1);
 		gtk_widget_hide (label2);
 		gtk_widget_hide (button);
+		return;
 	}
+
+	/* use the length of the longest profile name to avoid resizing
+	 * the label and moving widgets around */
+	max_len = 0;
+	for (l = list; l; l = l->next) {
+		profile = l->data;
+		len = g_utf8_strlen (profile->name, -1);
+		if (len > max_len)
+			max_len = len;
+	}
+
+	gtk_label_set_width_chars (GTK_LABEL (label1), max_len);
 }
 
 void
