@@ -29,8 +29,6 @@
 static void  gst_users_tool_class_init     (GstUsersToolClass *class);
 static void  gst_users_tool_init           (GstUsersTool      *tool);
 static void  gst_users_tool_finalize       (GObject           *object);
-
-static void  gst_users_tool_update_gui     (GstTool *tool);
 static void  gst_users_tool_update_config  (GstTool *tool);
 
 static GObject* gst_users_tool_constructor (GType                  type,
@@ -107,9 +105,6 @@ gst_users_tool_constructor (GType                  type,
 	gst_conf_add_notify (GST_TOOL (tool), "showall",
 			     on_showall_changed, tool);
 
-	g_signal_connect (G_OBJECT (tool->main_dialog), "lock_changed",
-			  G_CALLBACK (on_lock_changed), NULL);
-
 	return object;
 }
 
@@ -145,6 +140,8 @@ update_users (GstUsersTool *tool)
 		g_object_unref (user);
 		valid = oobs_list_iter_next (list, &iter);
 	}
+
+	users_table_select_first ();
 }
 
 static void
@@ -176,11 +173,45 @@ update_groups (GstUsersTool *tool)
 static void
 update_profiles (GstUsersTool *tool)
 {
-	GList *names = NULL;
+	GList *list, *l;
+	GtkWidget *label1, *label2, *button;
+	GstUserProfile *profile;
+	int max_len, len;
 
-	names = gst_user_profiles_get_names (tool->profiles);
-	table_populate_profiles (tool, names);
-	g_list_free (names);
+	list = gst_user_profiles_get_list (tool->profiles);
+	table_populate_profiles (tool, list);
+
+	/* Hide profiles line in main dialog if only one profile is available */
+	label1 = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
+	                                "user_settings_profile");
+	label2 = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
+	                                "user_settings_profile_label");
+	button = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
+	                                "edit_user_profile_button");
+
+	if (g_list_length (list) > 1) {
+		gtk_widget_show (label1);
+		gtk_widget_show (label2);
+		gtk_widget_show (button);
+	}
+	else {
+		gtk_widget_hide (label1);
+		gtk_widget_hide (label2);
+		gtk_widget_hide (button);
+		return;
+	}
+
+	/* use the length of the longest profile name to avoid resizing
+	 * the label and moving widgets around */
+	max_len = 0;
+	for (l = list; l; l = l->next) {
+		profile = l->data;
+		len = g_utf8_strlen (profile->name, -1);
+		if (len > max_len)
+			max_len = len;
+	}
+
+	gtk_label_set_width_chars (GTK_LABEL (label1), max_len);
 }
 
 static void
@@ -204,7 +235,7 @@ update_shells (GstUsersTool *tool)
 	}
 }
 
-static void
+void
 gst_users_tool_update_gui (GstTool *tool)
 {
 	update_users (GST_USERS_TOOL (tool));
@@ -237,5 +268,6 @@ gst_users_tool_new (void)
 			     "name", "users",
 			     "title", _("Users Settings"),
 			     "icon", "config-users",
+	                     "lock-button", FALSE,
 			     NULL);
 }

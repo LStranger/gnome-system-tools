@@ -65,18 +65,25 @@ static void
 gst_services_tool_update_gui (GstTool *tool)
 {
 	OobsServicesConfig *config;
+	OobsServicesRunlevel *rl;
 	OobsList *list;
 	OobsListIter iter;
 	GObject *service;
 	gboolean valid;
+	guint status;
 
 	config = OOBS_SERVICES_CONFIG (GST_SERVICES_TOOL (tool)->services_config);
 	list = oobs_services_config_get_services (config);
 	valid = oobs_list_get_iter_first (list, &iter);
 
+	rl = (OobsServicesRunlevel *) GST_SERVICES_TOOL (tool)->default_runlevel;
+
 	while (valid) {
 		service = oobs_list_get (list, &iter);
-		table_add_service (service, &iter);
+		/* Don't add services not listed for this runlevel, as this status is not valid */
+		oobs_service_get_runlevel_configuration (OOBS_SERVICE (service), rl, &status, NULL);
+		if (status != OOBS_SERVICE_IGNORE);
+			table_add_service (service, &iter);
 		g_object_unref (service);
 
 		valid = oobs_list_iter_next (list, &iter);

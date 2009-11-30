@@ -37,50 +37,11 @@
 
 extern GstTool *tool;
 
-/* PolkitLockButton state has changed, reflect this in the UI */
-void
-on_lock_changed (GstDialog *dialog)
-{
-	GtkWidget *users_table;
-	GtkTreeModel *model, *store;
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-	OobsUser *self, *user;
-	gboolean valid;
-	gboolean is_authenticated;
-
-	users_table = gst_dialog_get_widget (dialog, "users_table");
-
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
-	store = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-
-	is_authenticated = gst_dialog_is_authenticated (tool->main_dialog);
-	self = oobs_self_config_get_user (OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config));
-
-	valid = gtk_tree_model_get_iter_first (store, &iter);
-
-	while (valid) {
-		gtk_tree_model_get (store, &iter,
-				    COL_USER_OBJECT, &user,
-				    -1);
-
-		gtk_list_store_set (GTK_LIST_STORE (store), &iter,
-				    COL_USER_SENSITIVE, is_authenticated | (user == self),
-				    -1);
-
-		g_object_unref (user);
-		valid = gtk_tree_model_iter_next (store, &iter);
-	}
-
-	/* Update the status depending on the selected user */
-	on_table_selection_changed (selection, NULL);
-}
 
 /* Common stuff to users and groups tables */
 
 static void
-actions_set_sensitive (gint table, gint count, OobsUser *user)
+actions_set_sensitive (gint table, gint count)
 {
 	OobsObject *object = GST_USERS_TOOL (tool)->self_config;
 	gboolean sensitive;
@@ -93,11 +54,6 @@ actions_set_sensitive (gint table, gint count, OobsUser *user)
 		gst_dialog_try_set_sensitive (tool->main_dialog,
 					      gst_dialog_get_widget (tool->main_dialog, "user_delete"),
 					      (count > 0));
-
-		sensitive = count == 1 && gst_dialog_is_authenticated (tool->main_dialog)
-				       || (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
-		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "user_settings"),
-					  sensitive);
 		break;
 	case TABLE_GROUPS:
 		gst_dialog_try_set_sensitive (tool->main_dialog,
@@ -126,20 +82,20 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 	table = GPOINTER_TO_INT (data);
 	count = gtk_tree_selection_count_selected_rows (selection);
 
-	if (table == TABLE_USERS && count == 1 && !gst_dialog_is_authenticated (tool->main_dialog)) {
-		GtkTreeModel *model;
-		GList *selected;
-		GtkTreePath *path;
-		GtkTreeIter iter;
-
-		selected = gtk_tree_selection_get_selected_rows (selection, &model);
-		path = (GtkTreePath *) selected->data;
-
-		gtk_tree_model_get_iter (model, &iter, path);
-		gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
+	if (table == TABLE_USERS) {
+		user = users_table_get_current ();
 	}
 
-	actions_set_sensitive (table, count, user);
+	/* this happens when we unselect all users before selecting a single one */
+	if (!user)
+		return;
+
+	actions_set_sensitive (table, count);
+
+	/* Show the settings for the selected user */
+	user_settings_set (user);
+
+	g_object_unref (user);
 }
 
 static void
@@ -165,11 +121,11 @@ do_popup_menu (GtkTreeView *treeview, GdkEventButton *event)
 	ui_manager = g_object_get_data (G_OBJECT (treeview), "ui-manager");
 
 	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Add"),
-				  cont == 1 && (gst_dialog_is_authenticated (tool->main_dialog)));
+				  cont == 1);
 	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Properties"),
-				  cont == 1 && (gst_dialog_is_authenticated (tool->main_dialog)));
+				  cont == 1);
 	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Delete"),
-				  cont > 0 && gst_dialog_is_authenticated (tool->main_dialog));
+				  cont > 0);
 
 	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, NULL, NULL,
 			button, event_time);
@@ -206,31 +162,10 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer da
 		return TRUE;
 	}
 
-	if (cont != 0 && (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)) {
-		if (!gst_dialog_is_authenticated (tool->main_dialog)) {
-			GtkTreeModel *model;
-			GList *selected;
-			GtkTreePath *path;
-			GtkTreeIter iter;
-			OobsUser *user;
-			OobsObject *object;
-
-			selected = gtk_tree_selection_get_selected_rows (selection, &model);
-			path = (GtkTreePath *) selected->data;
-
-			gtk_tree_model_get_iter (model, &iter, path);
-			gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
-
-			object = GST_USERS_TOOL (tool)->self_config;
-			if (user != oobs_self_config_get_user (OOBS_SELF_CONFIG (object)))
-				return FALSE;
-		}
-
-		if (table == TABLE_USERS)
-			on_user_settings_clicked (NULL, NULL);
-		else if (table == TABLE_GROUPS)
-			on_group_settings_clicked (NULL, NULL);
-	}
+	if (cont != 0 && (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)
+	    && (table == TABLE_GROUPS)
+	    && gst_dialog_is_authenticated (tool->main_dialog))
+		on_group_settings_clicked (NULL, NULL);
 
 	return FALSE;
 }
@@ -250,7 +185,7 @@ on_popup_add_activate (GtkAction *action, gpointer data)
 	if (table == TABLE_GROUPS)
 		on_group_new_clicked (NULL, NULL);
 	else if (table == TABLE_USERS)
-		on_user_new_clicked (NULL, NULL);
+		on_user_new (NULL, NULL);
 }
 
 void
@@ -278,39 +213,6 @@ on_popup_delete_activate (GtkAction *action, gpointer data)
 /* Users Tab */
 
 void
-on_user_new_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkWidget *dialog;
-	OobsUsersConfig *config;
-	OobsUser *user;
-	OobsList *users_list;
-	OobsListIter list_iter;
-	gint response;
-
-	dialog = user_settings_dialog_new (NULL);
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
-	response = user_settings_dialog_run (dialog);
-
-	if (response == GTK_RESPONSE_OK) {
-		user = user_settings_dialog_get_data (dialog);
-
-		if (!user) /* Means an error has already occurred and been displayed, stop here */
-			return;
-
-		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-		users_list = oobs_users_config_get_users (config);
-		oobs_list_append (users_list, &list_iter);
-		oobs_list_set (users_list, &list_iter, user);
-
-		/* Avoid showing the new user or trying to commit group changes if the user has not been created */
-		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK) {
-			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-			users_table_add_user (user, &list_iter);
-		}
-	}
-}
-
-void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *table, *dialog;
@@ -335,6 +237,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 			    COL_USER_OBJECT, &user,
 			    COL_USER_ITER, &list_iter,
 			    -1);
+#if 0 /* FIXME: adapt this code to work when applying changes */
 	dialog = user_settings_dialog_new (user);
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	response = user_settings_dialog_run (dialog);
@@ -369,32 +272,9 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 #endif
 		}
 	}
+#endif
 
 	oobs_list_iter_free (list_iter);
-}
-
-void
-on_user_delete_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkTreeModel *model;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	GList *list, *elem;
-
-	list = elem = table_get_row_references (TABLE_USERS, &model);
-
-	while (elem) {
-		path = gtk_tree_row_reference_get_path (elem->data);
-		user_delete (model, path);
-
-		gtk_tree_path_free (path);
-		elem = elem->next;
-	}
-
-	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
-	g_list_free (list);
-
-	gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
 }
 
 void
@@ -577,26 +457,6 @@ on_user_settings_login_changed (GtkEditable *editable,
 
 	gtk_entry_set_text (GTK_ENTRY (home_entry), home);
 	g_free (home);
-}
-
-void
-on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
-{
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	gchar *profile_name;
-	GstUserProfile *profile;
-
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter))
-		return;
-
-	gtk_tree_model_get (model, &iter, 0, &profile_name, -1);
-	profile = gst_user_profiles_set_current (GST_USERS_TOOL (tool)->profiles, profile_name);
-
-	user_settings_apply_profile (GST_USERS_TOOL (tool), profile);
-	g_free (profile_name);
 }
 
 void

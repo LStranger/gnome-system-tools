@@ -33,6 +33,7 @@
 
 #include "table.h"
 #include "callbacks.h"
+#include "users-tool.h"
 
 GstTool *tool;
 
@@ -40,16 +41,12 @@ void quit_cb (GstTool *tool, gpointer data);
 
 static GstDialogSignal signals[] = {
 	/* User settings dialog callbacks */
-	{ "user_settings_name",                 "changed",              G_CALLBACK (on_user_settings_login_changed) },
 	{ "user_passwd_manual",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
 	{ "user_passwd_random",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
 	{ "user_passwd_random_new",		"clicked",		G_CALLBACK (on_user_settings_passwd_random_new) },
 	{ "user_settings_passwd1",		"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
-	{ "user_settings_profile_menu",         "changed",              G_CALLBACK (on_user_settings_profile_changed) },
 
 	/* Main dialog callbacks, users tab */
-	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
-	{ "user_settings",             		"clicked",       	G_CALLBACK (on_user_settings_clicked) },
 	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
 	{ "manage_groups",                      "clicked",              G_CALLBACK (on_manage_groups_clicked) },
 	
@@ -60,42 +57,17 @@ static GstDialogSignal signals[] = {
 	{ "groups_dialog_help",                 "clicked",              G_CALLBACK (on_groups_dialog_show_help) },
 	{ NULL }};
 
-const gchar *policy_widgets [] = {
-	"user_new",
-	"user_delete",
-	"groups_table",
-	"group_new",
-	"group_delete",
-	"group_settings",
-	"profile_new",
-	"profile_delete",
-	"profile_settings",
-	"user_settings_name",
-	"user_settings_profile_menu",
-	"user_passwd_no_check",
-	"user_privileges",
-	"user_settings_home",
-	"user_settings_shell",
-	"user_settings_uid",
-	"user_passwd_max",
-	"user_passwd_min",
-	"user_passwd_days",
-	"user_settings_group",
-	NULL
-};
 
 static void
 main_window_prepare (GstUsersTool *tool)
 {
 	create_tables (tool);
 
+	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog),
+	                             650, 400);
+
 	/* For random password generation. */
 	srand (time (NULL));
-
-	/* This sucks, but calculating the needed size for simple mode based on the
-	 * hidden widgets plus the tabs size is going to be ugly. Chema
-	 */
-	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog), 550, 300);
 }
 
 int
@@ -104,9 +76,12 @@ main (int argc, char *argv[])
 	gst_init_tool ("users-admin", argc, argv, NULL);
 	tool = GST_TOOL (gst_users_tool_new ());
 
-	gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 	main_window_prepare (GST_USERS_TOOL (tool));
+
+	/* Required for the users tool to avoid resizing the window after showing it.
+	 * FIXME: we should find something more elegant to do that. */
+	gst_users_tool_update_gui (tool);
 
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();

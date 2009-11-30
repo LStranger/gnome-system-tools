@@ -30,26 +30,35 @@ enum {
 	COL_USER_FACE,
 	COL_USER_NAME,
 	COL_USER_LOGIN,
+	COL_USER_LABEL,
 	COL_USER_HOME,
 	COL_USER_ID,
 	COL_USER_MEMBER, /* used in group members dialog */
 	COL_USER_OBJECT,
 	COL_USER_ITER,
-	COL_USER_SENSITIVE,
 	COL_USER_LAST
 };
 
-void	create_users_table	(GstUsersTool *tool);
-void    users_table_clear       (void);
-void    users_table_set_user    (OobsUser     *user,
-				 OobsListIter *list_iter,
-				 GtkTreeIter  *iter);
-void    users_table_add_user    (OobsUser     *user,
-				 OobsListIter *list_iter);
+void         create_users_table	               (GstUsersTool *tool);
 
-void    users_table_actions_set_sensitive (gint      table,
-					   gint      count,
-					   OobsUser *user);
+void         users_table_clear                 (void);
+
+void         users_table_set_user              (OobsUser     *user,
+                                                OobsListIter *list_iter,
+                                                GtkTreeIter  *iter);
+
+GtkTreePath *users_table_add_user              (OobsUser     *user,
+                                                OobsListIter *list_iter);
+
+void         users_table_select_path           (GtkTreePath *path);
+
+void         users_table_select_first          (void);
+
+OobsUser    *users_table_get_current           (void);
+
+void         users_table_actions_set_sensitive (gint      table,
+                                                gint      count,
+                                                OobsUser *user);
 
 #endif /* _USERS_TABLE_H */
 

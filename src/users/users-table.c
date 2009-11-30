@@ -27,6 +27,7 @@
 
 #include "table.h"
 #include "users-table.h"
+#include "user-settings.h"
 #include "callbacks.h"
 
 extern GstTool *tool;
@@ -36,50 +37,30 @@ add_user_columns (GtkTreeView *treeview)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
-	guint i;
+
+	column = gtk_tree_view_column_new ();
 
 	/* Face */
 	renderer = gtk_cell_renderer_pixbuf_new ();
-	column = gtk_tree_view_column_new ();
-	gtk_tree_view_column_set_title (column, _("Name"));
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes (column, renderer,
 					     "pixbuf", COL_USER_FACE,
-					     "sensitive", COL_USER_SENSITIVE,
 					     NULL);
-
-	/* User full name */
+	g_object_set (G_OBJECT (renderer),
+		      "xpad", 3,
+		      "ypad", 6,
+		      NULL);
+	/* User full name and login, on two lines */
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes (column, renderer,
-					     "text", COL_USER_NAME,
-					     "sensitive", COL_USER_SENSITIVE,
-					      NULL);
+					     "markup", COL_USER_LABEL,
+					     NULL);
+	g_object_set (G_OBJECT (renderer),
+		      "xpad", 3,
+		      "ypad", 6,
+		      NULL);
 
-	gtk_tree_view_column_set_resizable (column, TRUE);
-	gtk_tree_view_column_set_sort_column_id (column, 0);
-	gtk_tree_view_column_set_expand (column, TRUE);
-
-	gtk_tree_view_insert_column (treeview, column, -1);
-
-	/* Login name */
-	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Login name"),
-							   renderer,
-							   "text", COL_USER_LOGIN,
-							   "sensitive", COL_USER_SENSITIVE,
-							    NULL);
-	gtk_tree_view_column_set_expand (column, TRUE);
-	gtk_tree_view_insert_column (treeview, column, -1);
-
-	/* Home directory */
-	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Home directory"),
-							   renderer,
-							   "text", COL_USER_HOME,
-							   "sensitive", COL_USER_SENSITIVE,
-							   NULL);
-	gtk_tree_view_column_set_expand (column, TRUE);
 	gtk_tree_view_insert_column (treeview, column, -1);
 }
 
@@ -109,11 +90,11 @@ create_users_model (GstUsersTool *tool)
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
+	                            G_TYPE_STRING,
 				    G_TYPE_INT,
-				    G_TYPE_BOOLEAN,
+	                            G_TYPE_BOOLEAN,
 				    G_TYPE_OBJECT,
-				    OOBS_TYPE_LIST_ITER,
-				    G_TYPE_BOOLEAN);
+				    OOBS_TYPE_LIST_ITER);
 	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
 
 	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model),
@@ -155,22 +136,6 @@ create_users_table (GstUsersTool *tool)
 			  G_CALLBACK (on_table_popup_menu), NULL);
 }
 
-static GdkPixbuf*
-get_user_face (const gchar *homedir)
-{
-	gchar *face_path = g_strdup_printf ("%s/.face", homedir);
-	GdkPixbuf *pixbuf;
-
-	pixbuf = gdk_pixbuf_new_from_file_at_size (face_path, 24, 24, NULL);
-
-	if (!pixbuf)
-		pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "stock_person", 24, 0, NULL);
-
-	g_free (face_path);
-
-	return pixbuf;
-}
-
 void
 users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter)
 {
@@ -179,36 +144,50 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 	OobsObject *object = GST_USERS_TOOL (tool)->self_config;
 	GdkPixbuf *face;
+	const char *name;
+	const char *login;
+	char *label;
 	gboolean sensitive;
 
-	face = get_user_face (oobs_user_get_home_directory (user));
-	sensitive = gst_dialog_is_authenticated (tool->main_dialog) ||
-	            (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)));
+	face = user_settings_get_user_face (user, 48);
+	name = oobs_user_get_full_name (user);
+	login = oobs_user_get_login_name (user);
+	label = g_strdup_printf ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>", name, login);
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_USER_FACE, face,
-			    COL_USER_NAME, oobs_user_get_full_name (user),
-			    COL_USER_LOGIN, oobs_user_get_login_name (user),
+			    COL_USER_NAME, name,
+			    COL_USER_LOGIN, login,
+			    COL_USER_LABEL, label,
 			    COL_USER_HOME, oobs_user_get_home_directory (user),
 			    COL_USER_ID, oobs_user_get_uid (user),
 			    COL_USER_OBJECT, user,
 			    COL_USER_ITER, list_iter,
-			    COL_USER_SENSITIVE, sensitive,
 			    -1);
+	g_free (label);
 	if (face)
 		g_object_unref (face);
 }
 
-void
+/*
+ * Add an item in the users list. This function is used on start to fill in
+ * all the existing users, and when creating a new user.
+ *
+ * Returns: the path to the new item
+ */
+GtkTreePath *
 users_table_add_user (OobsUser *user, OobsListIter *list_iter)
 {
 	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
 	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
 	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
 	GtkTreeIter iter;
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	users_table_set_user (user, list_iter, &iter);
+
+	return gtk_tree_model_get_path (model, &iter);
 }
 
 void
@@ -219,4 +198,67 @@ users_table_clear (void)
         GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 
         gtk_list_store_clear (GTK_LIST_STORE (model));
+}
+
+/*
+ * Select the given path, translating it to a row in the filter model. Useful when
+ * we only want to select a newly added item.
+ */
+void
+users_table_select_path (GtkTreePath *path)
+{
+	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	GtkTreePath *filter_path;
+
+	filter_path = gtk_tree_model_filter_convert_child_path_to_path
+		(GTK_TREE_MODEL_FILTER (filter_model), path);
+
+	gtk_tree_selection_unselect_all (selection);
+	gtk_tree_selection_select_path (selection, filter_path);
+
+	gtk_tree_path_free (filter_path);
+}
+
+void
+users_table_select_first (void)
+{
+	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	GtkTreePath *first_user = gtk_tree_path_new_first ();
+
+	gtk_tree_selection_select_path (selection, first_user);
+}
+
+/*
+ * Convenience function to get the first selected user of the table,
+ * i.e. the one whose settings are currently shown.
+ * Don't forget to unref the return value
+ */
+OobsUser *
+users_table_get_current (void)
+{
+	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	GtkTreeModel *model;
+	GList *selected;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	OobsUser *user;
+
+	selected = gtk_tree_selection_get_selected_rows (selection, &model);
+
+	if (selected == NULL)
+		return NULL;
+
+	/* Only choose the first selected user */
+	path = (GtkTreePath *) selected->data;
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	g_list_foreach (selected, (GFunc) gtk_tree_path_free, NULL);
+	g_list_free (selected);
+
+	gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
+	return user;
 }
