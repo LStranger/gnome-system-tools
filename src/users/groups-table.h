@@ -54,4 +54,10 @@ void	create_groups_table		(void);
 void	populate_groups_table		(void);
 void	group_table_update_content	(void);
 
+void    groups_table_set_group          (OobsGroup    *group,
+                                         OobsListIter *list_iter,
+                                         GtkTreeIter  *iter);
+void    groups_table_add_group          (OobsGroup    *group,
+                                         OobsListIter *list_iter);
+
 #endif /* _GROUPS_TABLE_H */

@@ -19,4 +19,6 @@
  * Authors: Carlos Garnacho Parro <carlosg@gnome.org>
  */
 
-void   create_group_members_table   (void);
+void   create_group_members_table         (void);
+void   group_members_table_set_from_group (OobsGroup *group);
+void   group_members_table_save           (OobsGroup *group);

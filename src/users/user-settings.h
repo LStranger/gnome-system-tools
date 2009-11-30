@@ -40,6 +40,10 @@ OobsUser *      user_settings_dialog_get_data    (GtkWidget *dialog);
 GdkPixbuf *     user_settings_get_user_face      (OobsUser *user, int size);
 uid_t           user_settings_find_new_uid       (gint uid_min,
                                                   gint uid_max);
+gboolean        user_settings_is_user_in_group   (OobsUser  *user,
+                                                  OobsGroup *group);
+
+void            on_user_new                      (GtkButton *button, gpointer user_data);
 
 
 #endif /* USER_SETTINGS_H */

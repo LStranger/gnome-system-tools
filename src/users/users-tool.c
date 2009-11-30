@@ -23,6 +23,10 @@
 #include <glib/gi18n.h>
 #include "callbacks.h"
 #include "user-profiles.h"
+#include "users-table.h"
+#include "groups-table.h"
+#include "privileges-table.h"
+#include "table.h"
 #include "users-tool.h"
 #include "gst.h"
 

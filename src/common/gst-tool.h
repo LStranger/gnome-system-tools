@@ -89,6 +89,11 @@ void         gst_init                     (const gchar *app_name,
 					   int argc, char *argv [],
 					   GOptionEntry *entries);
 
+void         gst_init_tool                (const char   *app_name,
+                                           int           argc,
+                                           char         *argv [],
+                                           GOptionEntry *entries);
+
 void         gst_tool_update_gui          (GstTool *tool);
 void         gst_tool_update_config       (GstTool *tool);
 void         gst_tool_close               (GstTool *tool);

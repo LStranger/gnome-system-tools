@@ -24,8 +24,11 @@
  */
 
 #include <config.h>
-#include "gst.h"
+
+#include <stdlib.h>
 #include <glib/gi18n.h>
+
+#include "gst.h"
 #include "privileges-table.h"
 #include "user-profiles.h"
 
@@ -139,7 +142,6 @@ create_user_privileges_table (void)
 	GtkTreeModel *model, *filter_model;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GtkTreeIter iter;
 
 	list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
 

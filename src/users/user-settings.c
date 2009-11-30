@@ -156,7 +156,6 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkTreePath *path;
-	GtkTreeIter iter;
 	GList *list, *elem;
 	gboolean count;
 
@@ -299,7 +298,6 @@ get_no_passwd_login_group ()
 	OobsGroup *group;
 	gboolean valid;
 	const gchar *group_name;
-	gid_t gid;
 
 	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 	groups_list = oobs_groups_config_get_groups (config);
@@ -454,10 +452,8 @@ void
 user_settings_set (OobsUser *user)
 {
 	OobsUsersConfig *config;
-	OobsGroup *no_passwd_login_group;
-	GtkWidget *dialog, *widget, *widget2, *notice;
+	GtkWidget *widget, *widget2, *notice;
 	const gchar *login = NULL;
-	gchar *title;
 	gint uid;
 	GdkPixbuf *face;
 	GstUserProfile *profile;
@@ -576,44 +572,6 @@ login_exists (const gchar *login)
 	}
 
 	return FALSE;
-}
-
-static void
-check_login (gchar **primary_text, gchar **secondary_text, gpointer data)
-{
-	OobsUser *user;
-	GtkWidget *widget;
-	GtkWidget *combo;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	const gchar *login;
-	gchar *group;
-
-	user = g_object_get_data (G_OBJECT (data), "user");
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_name");
-	login = gtk_entry_get_text (GTK_ENTRY (widget));
-
-	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
-
-	if (strlen (login) < 1) {
-		*primary_text = g_strdup (_("User name is empty"));
-		*secondary_text = g_strdup (_("A user name must be specified."));
-	} else if (!is_valid_name (login)) {
-		*primary_text = g_strdup (_("User name has invalid characters"));
-		*secondary_text = g_strdup (_("Please set a valid user name consisting of "
-		                              "a lower case letter followed by lower case "
-		                              "letters and numbers."));
-	} else if (!user && login_exists (login)) {
-		*primary_text = g_strdup_printf (_("User name \"%s\" already exists"), login);
-		*secondary_text = g_strdup (_("Please choose a different user name."));
-	/* Check that the new user won't be added to an already existing group
-	 * without that group being explicitly chosen in the list (temporary security check) */
-	} else if (!user && gtk_combo_box_get_active (GTK_COMBO_BOX (combo)) == -1
-	                 && group_settings_group_exists (login)) {
-		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), login);
-		*secondary_text = g_strdup (_("Please choose a different user name."));
-	}
 }
 
 static void
@@ -778,7 +736,6 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	GtkWidget *validate_button;
 	GtkWidget *user_login;
 	GtkTreeModel *model;
-	GdkColor color;
 	gboolean valid_login;
 	gboolean valid_name;
 	const char *name;
@@ -1118,6 +1075,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 		user_path = users_table_add_user (user, &list_iter);
 		users_table_select_path (user_path);
+		gtk_tree_path_free (user_path);
 
 		/* Finally, run the password edit dialog.
 		 * User can hit cancel, leaving the account disabled */
@@ -1125,7 +1083,6 @@ on_user_new (GtkButton *button, gpointer user_data)
 	}
 
 	g_object_unref (user);
-	gtk_tree_path_free (user_path);
 }
 
 /*
@@ -1308,7 +1265,6 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 {
 	int response;
 	GtkWidget *user_profile_dialog;
-	GtkWidget *user_profile_entry;
 	GtkWidget *face_image;
 	GtkWidget *name_label;
 	GtkWidget *table;
@@ -1321,7 +1277,6 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 	gpointer value;
 	OobsUser *user;
 	GstUserProfile *profile;
-	gchar *name;
 
 	user_profile_dialog = gst_dialog_get_widget (tool->main_dialog, "user_profile_dialog");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_profile_face");

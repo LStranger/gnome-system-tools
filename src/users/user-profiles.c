@@ -84,7 +84,6 @@ load_profiles (GstUserProfiles *profiles)
 	GKeyFile *key_file;
 	gchar **groups, **group, **group_name;
 	GstUserProfile *profile;
-	GList *l, *item;
 
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
 	key_file = g_key_file_new ();
@@ -202,8 +201,6 @@ GList*
 gst_user_profiles_get_list (GstUserProfiles *profiles)
 {
 	GstUserProfilesPrivate *priv;
-	GstUserProfile *profile;
-	GList *l;
 
 	g_return_val_if_fail (GST_IS_USER_PROFILES (profiles), NULL);
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
@@ -216,7 +213,7 @@ gst_user_profiles_get_default_profile (GstUserProfiles *profiles)
 {
 	GstUserProfilesPrivate *priv;
 
-	g_return_if_fail (GST_IS_USER_PROFILES (profiles));
+	g_return_val_if_fail (GST_IS_USER_PROFILES (profiles), NULL);
 
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
 
@@ -243,12 +240,10 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 	GstUserProfilesPrivate *priv;
 	GstUserProfile *profile;
 	GstUserProfile *matched;
-	GHashTableIter iter;
-	gpointer value;
 	GFile *file_home, *file_prefix;
 	const gchar *shell, *home;
 	gint uid;
-	gchar **groups, **group_name;
+	gchar **group_name;
 	OobsGroup *group;
 	GList *l, *m;
 	gboolean matched_groups, in_profile, in_group;
@@ -292,7 +287,7 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 			continue;
 
 		/* check user's membership to all groups of the profile,
-		/* also check that user is not member of any group
+		 * also check that user is not member of any group
 		 * that defines another profile vs the current one */
 		matched_groups = TRUE;
 		for (m = priv->all_groups; m && matched_groups; m = m->next) {

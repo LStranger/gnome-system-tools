@@ -245,10 +245,10 @@ gst_dialog_constructor (GType                  type,
 			action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
 			gtk_box_pack_start (GTK_BOX (action_area), priv->polkit_button, TRUE, TRUE, 0);
 			gtk_widget_show (priv->polkit_button);
-		}
 
-		g_signal_connect_swapped (priv->polkit_button, "changed",
-					  G_CALLBACK (gst_dialog_lock_changed), dialog);
+			g_signal_connect_swapped (priv->polkit_button, "changed",
+		                          G_CALLBACK (gst_dialog_lock_changed), dialog);
+		}
 	}
 #endif
 

@@ -26,7 +26,9 @@
 #include <glib/gi18n.h>
 
 #include <string.h>
+#include <ctype.h>
 
+#include "group-members-table.h"
 #include "groups-table.h"
 #include "table.h"
 #include "callbacks.h"

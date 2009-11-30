@@ -43,9 +43,6 @@ extern GstTool *tool;
 static void
 actions_set_sensitive (gint table, gint count)
 {
-	OobsObject *object = GST_USERS_TOOL (tool)->self_config;
-	gboolean sensitive;
-
 	switch (table) {
 	case TABLE_USERS:
 		gst_dialog_try_set_sensitive (tool->main_dialog,
@@ -76,7 +73,6 @@ void
 on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
 	gint count, table;
-	gboolean active;
 	OobsUser *user = NULL;
 
 	table = GPOINTER_TO_INT (data);
@@ -215,13 +211,12 @@ on_popup_delete_activate (GtkAction *action, gpointer data)
 void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *table, *dialog;
+	GtkWidget *table;
 	GtkTreePath *path;
 	GtkTreeModel *model;
-	GtkTreeIter iter, filter_iter;
+	GtkTreeIter iter;
 	OobsUser *user;
 	OobsListIter *list_iter;
-	gint response;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "users_table");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
@@ -369,7 +364,6 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkTreeModel *model;
 	GtkTreePath *path;
-	GtkTreeIter iter;
 	GList *list, *elem;
 
 	list = elem = table_get_row_references (TABLE_GROUPS, &model);

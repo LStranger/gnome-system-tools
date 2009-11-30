@@ -36,7 +36,6 @@ add_group_columns (GtkTreeView *treeview)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
-	guint i;
 
 	column = gtk_tree_view_column_new ();
 
