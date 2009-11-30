@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools 2.14\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2009-09-06 14:49+0000\n"
-"PO-Revision-Date: 2009-09-04 13:52+0800\n"
-"Last-Translator: Hinker <hinkerliu@163.com>\n"
+"POT-Creation-Date: 2009-11-26 21:29+0000\n"
+"PO-Revision-Date: 2009-11-29 10:13+0100\n"
+"Last-Translator: Tao Wei <weitao1979@gmail.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +43,7 @@ msgstr "<b>主机设置</b>"
 
 #: ../interfaces/network.ui.h:5
 msgid "<b>Internet service provider data</b>"
-msgstr "<b>Internet 服务提供商数据</b>"
+msgstr "<b>互联网服务提供商数据</b>"
 
 #: ../interfaces/network.ui.h:6
 msgid "<b>Modem Settings</b>"
@@ -131,7 +131,7 @@ msgstr "位置："
 
 #: ../interfaces/network.ui.h:27
 msgid "Loud"
-msgstr ""
+msgstr "高"
 
 #: ../interfaces/network.ui.h:28
 msgid "Low"
@@ -187,7 +187,7 @@ msgstr "音调"
 
 #: ../interfaces/network.ui.h:41
 msgid "Use the Internet service provider nameservers"
-msgstr "使用 Internet 服务提供商的命名服务器"
+msgstr "使用互联网服务提供商的命名服务器"
 
 #: ../interfaces/network.ui.h:42
 msgid "_Autodetect"
@@ -341,7 +341,7 @@ msgstr "共享的文件夹"
 
 #: ../interfaces/shares.ui.h:22
 msgid "This computer is a _WINS server"
-msgstr "此计算机是 WINS 服务器(_W)"
+msgstr "此计算机是 _WINS 服务器"
 
 #: ../interfaces/shares.ui.h:23
 msgid "Users"
@@ -460,13 +460,12 @@ msgid "Advanced"
 msgstr "高级"
 
 #: ../interfaces/users.ui.h:12
-#, fuzzy
 msgid ""
 "Allow this user to open a local session without entering his password. The "
 "password will still be required to perform administrative tasks."
 msgstr ""
-"允许此用户打开一个本地会话，而无需输入自己的密码。密码将仍然需要执行管理任"
-"务。"
+"允许此用户打开一个本地会话，而无需输入自己的密码。在执行管理任务时仍然需要这"
+"个密码。"
 
 #: ../interfaces/users.ui.h:13
 msgid "Assign a random password by default"
@@ -494,7 +493,7 @@ msgstr "默认组(_G)："
 
 #: ../interfaces/users.ui.h:19
 msgid "Default _shell:"
-msgstr "默认的 shell(_S)："
+msgstr "默认的 _shell："
 
 #: ../interfaces/users.ui.h:20
 msgid "Don't ask for password on _login"
@@ -850,7 +849,7 @@ msgstr "<b>类型：</b>%s <b>访问点名称：</b>%s"
 #: ../src/network/ifaces-list.c:325
 #, c-format
 msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
-msgstr "<b>类型：</b>%s <b>Ethernet 接口：</b>%s"
+msgstr "<b>类型：</b>%s <b>以太网接口：</b>%s"
 
 #: ../src/network/ifaces-list.c:329
 #, c-format
@@ -958,11 +957,11 @@ msgstr "这可能从不同方式影响您系统的行为，可能会导致系统
 
 #: ../src/services/service.c:32
 msgid "Web server"
-msgstr "Web 服务器"
+msgstr "网络服务器"
 
 #: ../src/services/service.c:32
 msgid "Shares your web pages over the Internet"
-msgstr "在 Internet 上共享您的网页"
+msgstr "在互联网上共享您的网页"
 
 #. GST_ROLE_WEB_SERVER
 #: ../src/services/service.c:33
@@ -1042,7 +1041,7 @@ msgstr "FTP 服务"
 
 #: ../src/services/service.c:42 ../src/services/service.c:43
 msgid "Shares folders over the Internet"
-msgstr "在 Internet 上共享文件夹"
+msgstr "在互联网上共享文件夹"
 
 #. GST_ROLE_FILE_SERVER_TFTP
 #: ../src/services/service.c:44
@@ -1051,7 +1050,7 @@ msgstr "时钟同步服务"
 
 #: ../src/services/service.c:44
 msgid "Synchronizes your computer clock with Internet time servers"
-msgstr "将计算机的时钟与 Internet 时间服务器同步"
+msgstr "将计算机的时钟与互联网时间服务器同步"
 
 #. GST_ROLE_NTP_SERVER
 #: ../src/services/service.c:46
@@ -1142,7 +1141,7 @@ msgstr "网络安全审核器"
 #. GST_ROLE_SECURITY_AUDITING
 #: ../src/services/service.c:61
 msgid "Web calendar server"
-msgstr "Web 日历服务器"
+msgstr "网络日历服务器"
 
 #. GST_ROLE_WEB_CALENDAR_SERVER
 #: ../src/services/service.c:62
@@ -1517,7 +1516,7 @@ msgstr "同步系统时钟"
 
 #: ../src/time/time-tool.c:521
 msgid "Keep synchronized with Internet servers"
-msgstr "与 Internet 服务器保持同步"
+msgstr "与互联网服务器保持同步"
 
 #: ../src/time/time-tool.c:522
 msgid "Manual"
@@ -1531,8 +1530,8 @@ msgstr "时间和日期设置"
 msgid "Administrator group can not be deleted"
 msgstr "无法删除管理员组"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
-#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
+#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:296
+#: ../src/users/group-settings.c:320 ../src/users/user-settings.c:61
 #: ../src/users/user-settings.c:702
 msgid "This would leave the system unusable."
 msgstr "这将使得系统不可用。"
@@ -1546,47 +1545,47 @@ msgstr "您确定要删除“%s”组吗?"
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "这将使得文件系统中的某些文件组 ID 无效。"
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:171
 msgid "New group"
 msgstr "新的组"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:179
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "组“%s”的属性"
 
-#: ../src/users/group-settings.c:291
+#: ../src/users/group-settings.c:292
 msgid "Group name is empty"
 msgstr "组名为空"
 
-#: ../src/users/group-settings.c:292
+#: ../src/users/group-settings.c:293
 msgid "A group name must be specified."
 msgstr "必须指定组名。"
 
-#: ../src/users/group-settings.c:294
+#: ../src/users/group-settings.c:295
 msgid "Group name of the administrator group user should not be modified"
 msgstr "管理员用户所属的组名不应修改"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:298
 msgid "Group name has invalid characters"
 msgstr "组名包含无效的字符"
 
-#: ../src/users/group-settings.c:298
+#: ../src/users/group-settings.c:299
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "请设定一个有效的组名，第一个字母要小写，后面可跟小写字母和数字。"
 
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
+#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:635
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "组“%s”已经存在"
 
-#: ../src/users/group-settings.c:303
+#: ../src/users/group-settings.c:304
 msgid "Please choose a different group name."
 msgstr "请选择一个不同的分组名字。"
 
-#: ../src/users/group-settings.c:318
+#: ../src/users/group-settings.c:319
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "管理员账户的组 ID 不应修改"
 
@@ -1620,7 +1619,7 @@ msgstr "使用调制解调器"
 
 #: ../src/users/privileges-table.c:55
 msgid "Connect to Internet using a modem"
-msgstr "使用调制解调器连接到 Internet"
+msgstr "使用调制解调器连接到互联网"
 
 #: ../src/users/privileges-table.c:56
 msgid "Send and receive faxes"
@@ -1631,31 +1630,50 @@ msgid "Use floppy drives"
 msgstr "使用软盘驱动器"
 
 #: ../src/users/privileges-table.c:58
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "挂载用户空间文件系统(FUSE)"
+
+#: ../src/users/privileges-table.c:59
+msgid "Configure printers"
+msgstr "配置打印机"
+
+#: ../src/users/privileges-table.c:60
+msgid "Connect to wireless and ethernet networks"
+msgstr "连接到无线网络和以太网"
+
+#: ../src/users/privileges-table.c:61
 msgid "Access external storage devices automatically"
 msgstr "自动访问外部存储设备"
 
-#: ../src/users/privileges-table.c:59
-#, fuzzy
-msgid "Access /proc filesystem"
-msgstr "存取 /proc 文件系统"
+#: ../src/users/privileges-table.c:62
+msgid "Suspend and hibernate the computer"
+msgstr "挂起和休眠计算机"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:63
+msgid "Access /proc filesystem"
+msgstr "访问 /proc 文件系统"
+
+#: ../src/users/privileges-table.c:64
 msgid "Use scanners"
 msgstr "使用扫描仪"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:65
 msgid "Use tape drives"
 msgstr "使用磁带机"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:66
 msgid "Use USB devices"
 msgstr "使用USB设备"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:67
+msgid "Use VirtualBox virtualization solution"
+msgstr "使用 VirtualBox 虚拟化解决方案"
+
+#: ../src/users/privileges-table.c:68
 msgid "Use video devices"
 msgstr "使用视频设备"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:69
 msgid "Be able to get administrator privileges"
 msgstr "可以获得管理员权限"
 
@@ -1806,7 +1824,7 @@ msgstr "登录名"
 msgid "Home directory"
 msgstr "主目录"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/users-tool.c:238
 msgid "Users Settings"
 msgstr "用户设置"
 
