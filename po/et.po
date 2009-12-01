@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: GNOME System Tools MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2009-11-22 02:15+0000\n"
-"PO-Revision-Date: 2009-11-25 08:19+0200\n"
+"POT-Creation-Date: 2009-11-30 22:35+0000\n"
+"PO-Revision-Date: 2009-12-01 08:27+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -339,30 +339,49 @@ msgstr "<span weight=\"bold\">Valikulised sätted</span>"
 msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Parooli seaded</span>"
 
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Parool</span>"
-
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Profiili sätted</span>"
 
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Süsteemi vaikesätted</span>"
 
-msgid "Account"
-msgstr "Konto"
+msgid "Account _type:"
+msgstr "Konto _liik:"
 
 msgid "Advanced"
 msgstr "Laiendatud"
 
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
 msgstr ""
-"Sellel kasutajal kohaliku seansi avamise lubamine ilma parooli sisestamata. "
-"Haldustoimingute jaoks läheb siiski parooli tarvis."
 
 msgid "Assign a random password by default"
 msgstr "Vaikimisi suvalise parooli määramine"
+
+msgid "Change Advanced User Settings"
+msgstr "Kasutaja laiendatud sätete muutmine"
+
+msgid "Change User Account Type"
+msgstr "Kasutajakonto liigi muutmine"
+
+msgid "Change User Name and Login"
+msgstr "Kasutaja- ja konto nime muutmine"
+
+msgid "Change User Password"
+msgstr "Kasutaja parooli muutmine"
+
+msgid "Changing account type for:"
+msgstr ""
+
+msgid "Changing advanced settings for:"
+msgstr ""
+
+msgid "Changing user name for:"
+msgstr ""
+
+msgid "Changing user password for:"
+msgstr ""
 
 msgid "Check password _quality"
 msgstr "Parooli _kvaliteedi kontroll"
@@ -372,6 +391,12 @@ msgstr "_Paroolikordus:"
 
 msgid "Contact Information"
 msgstr "Kontaktandmed"
+
+msgid "Create New User"
+msgstr "Uue kasutaja loomine"
+
+msgid "Create a new user"
+msgstr "Uue kasutaja loomine"
 
 msgid "Days between warning and password expiration:"
 msgstr "Päevade arv, mil enne parooli aegumist kuvatakse hoiatust:"
@@ -384,6 +409,9 @@ msgstr "Vaikimisi _kest (shell):"
 
 msgid "Don't ask for password on _login"
 msgstr "Sisselogimisel parooli _ei küsita"
+
+msgid "Full _Name:"
+msgstr "Täis_nimi:"
 
 msgid "Generate _random password"
 msgstr "_Juhusliku parooli genereerimine"
@@ -402,6 +430,9 @@ msgstr "Gruppide sätted"
 
 msgid "Ma_ximum days a password may be used:"
 msgstr "_Suurim päevade arv, millal parooli saab kasutada:"
+
+msgid "Manual"
+msgstr "Käsitsi"
 
 msgid "Maximum GID:"
 msgstr "Suurim GID:"
@@ -439,6 +470,24 @@ msgstr "_Profiili nimi:"
 msgid "Set password b_y hand"
 msgstr "Parooli _käsitsi määramine"
 
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+
+msgid "Short name must start with a letter!"
+msgstr ""
+
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the Advanced dialog to tune them."
+msgstr ""
+"Sellele kontole on määratud käsitsi kirjeldatud kohandased. Nende kohanduste "
+"muutmiseks kasuta laiendatud sätete dialoogi."
+
 msgid "User ID:"
 msgstr "Kasutaja ID:"
 
@@ -454,23 +503,20 @@ msgstr "Kasutaja peab enne ID muutmist välja logima."
 msgid "User profiles"
 msgstr "Kasutajaprofiilid"
 
-msgid "_Add Group"
-msgstr "_Lisa grupp"
-
 msgid "_Add Profile"
 msgstr "_Lisa profiil"
 
-msgid "_Add User"
-msgstr "_Lisa kasutaja"
+msgid "_Advanced Settings"
+msgstr "_Laiendatud sätted"
 
 msgid "_Comments"
 msgstr "_Kommentaarid"
 
+msgid "_Custom"
+msgstr "Ko_handatud"
+
 msgid "_Days between warning and password expiration:"
 msgstr "_Päevade arv hoiatuse ja parooli aegumise vahel:"
-
-msgid "_Delete"
-msgstr "_Eemalda"
 
 msgid "_Generate"
 msgstr "_Genereeri"
@@ -487,14 +533,17 @@ msgstr "_Peagrupp:"
 msgid "_Manage Groups"
 msgstr "Halda _gruppe"
 
-msgid "_Profile:"
-msgstr "_Profiil:"
+msgid "_Name:"
+msgstr "_Nimi:"
 
-msgid "_Real name:"
-msgstr "_Tegelik nimi:"
+msgid "_Password:"
+msgstr "_Parool:"
 
 msgid "_Shell:"
 msgstr "K_est:"
+
+msgid "_Short Name:"
+msgstr "_Lühinimi:"
 
 msgid "_Work phone:"
 msgstr "_Töötelefon:"
@@ -548,6 +597,9 @@ msgstr "Kas uuendada sisu? Sel juhul lähevad tehtud muudatused kaotsi."
 
 msgid "_Add"
 msgstr "_Lisa"
+
+msgid "_Delete"
+msgstr "_Eemalda"
 
 msgid "Type address"
 msgstr "Sisesta aadress"
@@ -1178,9 +1230,6 @@ msgstr "Süsteemse kella sünkroniseerimine"
 msgid "Keep synchronized with Internet servers"
 msgstr "Internetis olevate serveritega sünkroonis hoidmine"
 
-msgid "Manual"
-msgstr "Käsitsi"
-
 msgid "Time and Date Settings"
 msgstr "Kella ja kuupäeva sätted"
 
@@ -1322,35 +1371,11 @@ msgstr ""
 msgid "This user is currently using this computer"
 msgstr "Kasutaja pruugib hetkel seda arvutit"
 
-msgid "New user account"
-msgstr "Uus kasutajakonto"
+msgid "Superuser"
+msgstr "Superkasutaja"
 
-#, c-format
-msgid "Account '%s' Properties"
-msgstr "Konto '%s' omadused"
-
-msgid "User name is empty"
-msgstr "Kasutajanimi on tühi"
-
-msgid "A user name must be specified."
-msgstr "Kasutajanimi peab olema määratud."
-
-msgid "User name has invalid characters"
-msgstr "Kasutajanimi sisaldab lubamatuid sümboleid"
-
-msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr ""
-"Palun sisesta korrektne grupinimi, kasutades esimese tähena väiketähte, "
-"millele järgnevad ainult väiketähed ja/või numbrid."
-
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "Kasutaja nimega \"%s\" on juba olemas"
-
-msgid "Please choose a different user name."
-msgstr "Palun vali mõni muu kasutajanimi."
+msgid "Custom"
+msgstr "Kohandatud"
 
 #, c-format
 msgid "Invalid character \"%c\" in comment"
@@ -1411,26 +1436,67 @@ msgstr "Paroolikontroll ei ole korras"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
 
-msgid "Name"
-msgstr "Nimi"
-
-msgid "Login name"
-msgstr "Sisselogimisnimi"
-
-msgid "Home directory"
-msgstr "Kodukataloog"
-
 msgid "Users Settings"
 msgstr "Kasutajate sätted"
+
+#~ msgid ""
+#~ "Allow this user to open a local session without entering his password. "
+#~ "The password will still be required to perform administrative tasks."
+#~ msgstr ""
+#~ "Sellel kasutajal kohaliku seansi avamise lubamine ilma parooli "
+#~ "sisestamata. Haldustoimingute jaoks läheb siiski parooli tarvis."
+
+#~ msgid "_Add Group"
+#~ msgstr "_Lisa grupp"
+
+#~ msgid "_Add User"
+#~ msgstr "_Lisa kasutaja"
+
+#~ msgid "_Profile:"
+#~ msgstr "_Profiil:"
+
+#~ msgid "_Real name:"
+#~ msgstr "_Tegelik nimi:"
+
+#~ msgid "Account '%s' Properties"
+#~ msgstr "Konto '%s' omadused"
+
+#~ msgid "User name is empty"
+#~ msgstr "Kasutajanimi on tühi"
+
+#~ msgid "A user name must be specified."
+#~ msgstr "Kasutajanimi peab olema määratud."
+
+#~ msgid "User name has invalid characters"
+#~ msgstr "Kasutajanimi sisaldab lubamatuid sümboleid"
+
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "Palun sisesta korrektne grupinimi, kasutades esimese tähena väiketähte, "
+#~ "millele järgnevad ainult väiketähed ja/või numbrid."
+
+#~ msgid "User name \"%s\" already exists"
+#~ msgstr "Kasutaja nimega \"%s\" on juba olemas"
+
+#~ msgid "Please choose a different user name."
+#~ msgstr "Palun vali mõni muu kasutajanimi."
+
+#~ msgid "Name"
+#~ msgstr "Nimi"
+
+#~ msgid "Login name"
+#~ msgstr "Sisselogimisnimi"
+
+#~ msgid "Home directory"
+#~ msgstr "Kodukataloog"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
 #~ "span>"
 #~ msgstr ""
 #~ "<span weight=\"bold\" size=\"larger\">Palun sisesta oma root parool</span>"
-
-#~ msgid "Enter Password"
-#~ msgstr "Parooli sisestamine"
 
 #~ msgid ""
 #~ "You need administrator privileges to use this tool. Enter a password to "
@@ -1440,9 +1506,6 @@ msgstr "Kasutajate sätted"
 #~ "Selle tööriista kasutamiseks on sul vaja administraatori õigusi. "
 #~ "Süsteemsete sätete\n"
 #~ " muutmiseks sisesta administraatori parool."
-
-#~ msgid "_Password:"
-#~ msgstr "_Parool:"
 
 #~ msgid "_Unlock"
 #~ msgstr "_Võta lukust lahti"
