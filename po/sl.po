@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2009-11-09 19:35+0000\n"
-"PO-Revision-Date: 2009-11-13 07:49+0100\n"
+"POT-Creation-Date: 2009-12-01 07:49+0000\n"
+"PO-Revision-Date: 2009-12-04 15:30+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -101,7 +101,7 @@ msgid "Ethernet interface:"
 msgstr "Eternet vmesnik:"
 
 #: ../interfaces/network.ui.h:20
-#: ../interfaces/users.ui.h:21
+#: ../interfaces/users.ui.h:31
 msgid "General"
 msgstr "Splošno"
 
@@ -243,7 +243,6 @@ msgid "_Subnet mask:"
 msgstr "_Maska Podomrežja:"
 
 #: ../interfaces/network.ui.h:55
-#: ../interfaces/users.ui.h:59
 msgid "_Username:"
 msgstr "__Uporabniško ime:"
 
@@ -405,7 +404,7 @@ msgstr "Časovni pas:"
 
 #: ../interfaces/time.ui.h:11
 msgid "Unconfigured"
-msgstr "Nedoločeno"
+msgstr "Nenastavljeno"
 
 #: ../interfaces/time.ui.h:12
 msgid "_Configuration:"
@@ -444,214 +443,276 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Nastavitve gesla</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Geslo</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Nastavitve profila</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Privzete sistemske nastavitve</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "Račun"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "Vrsta _računa:"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "Napredno"
 
-#: ../interfaces/users.ui.h:12
-msgid "Allow this user to open a local session without entering his password. The password will still be required to perform administrative tasks."
-msgstr "Dovoli uporabniku odpiranje krajevne seje brez vnosa gesla. Geslo bo še vedno zahtevano za izvajanje skrbniških nalog."
+#: ../interfaces/users.ui.h:11
+msgid "An user with such a name already exists. Please choose a different short name for the new user."
+msgstr "Uporabnik s tem imenom že obstaja. Izberite novo ime za novega uporabnika."
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "Privzeto določi naključno geslo"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "Spremeni napredne nastavitve uporabnika:"
+
 #: ../interfaces/users.ui.h:14
+msgid "Change User Account Type"
+msgstr "Spremeni vrsto uporabniškega računa"
+
+#: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "Spremeni uporabniško ime in prijavo"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "Sprememba uporabniškega gesla"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing account type for:"
+msgstr "Spremeni vrsto računa za:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing advanced settings for:"
+msgstr "Spreminjanje naprednih nastavitev za:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "Spremeni uporabniškega imena:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "Spreminjanje uporabniškega gesla"
+
+#: ../interfaces/users.ui.h:21
 msgid "Check password _quality"
 msgstr "Preveri _kakovost gesla"
 
-#: ../interfaces/users.ui.h:15
+#: ../interfaces/users.ui.h:22
 msgid "Con_firmation:"
 msgstr "_Potrditev:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:23
 msgid "Contact Information"
 msgstr "Podatki o stiku"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:24
+msgid "Create New User"
+msgstr "Ustvari novega uporabnika"
+
+#: ../interfaces/users.ui.h:25
+msgid "Create a new user"
+msgstr "Ustvari novega uporabnika"
+
+#: ../interfaces/users.ui.h:26
 msgid "Days between warning and password expiration:"
 msgstr "Število dni med opozorilom in dokončnim pretekom gesla:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:27
 msgid "Default _group:"
 msgstr "Privzeta _skupina:"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:28
 msgid "Default _shell:"
 msgstr "Privzeta _lupina:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "Ne vprašaj za geslo ob _prijavi"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid "Full _Name:"
+msgstr "Polno _Ime:"
+
+#: ../interfaces/users.ui.h:32
 msgid "Generate _random password"
 msgstr "Ustvari _naključno geslo"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:33
 msgid "Group _ID:"
 msgstr "_ID skupine:"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:34
 msgid "Group _name:"
 msgstr "Ime _skupine:"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:35
 msgid "Group properties"
 msgstr "Lastnosti skupine"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:36
 msgid "Groups settings"
 msgstr "Nastavitev skupin"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:37
 msgid "Ma_ximum days a password may be used:"
 msgstr "Naj_večje število dni uporabe gesla:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:38
+#: ../src/time/time-tool.c:522
+msgid "Manual"
+msgstr "Priročnik"
+
+#: ../interfaces/users.ui.h:39
 msgid "Maximum GID:"
 msgstr "Največji GID:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:40
 msgid "Maximum UID:"
 msgstr "Največji UID:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:41
 msgid "Mi_nimum days between password changes:"
 msgstr "Naj_manjše število dni uporabe gesla:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:42
 msgid "Minimum GID:"
 msgstr "Najmanjši GID:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:43
 msgid "Minimum UID:"
 msgstr "Najmanjši UID:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:44
 msgid "Minimum days allowed between password changes:"
 msgstr "Najmanjše število dovoljenih dni med menjavo gesla:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:45
 msgid "Number of days that a password may be used:"
 msgstr "Število dni, ko je geslo veljavno:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:46
 msgid "O_ffice location:"
 msgstr "Mesto _pisarne:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:47
 msgid "Password set to: "
 msgstr "Geslo nastavljeno za:"
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:48
 msgid "Privileges"
 msgstr "Dovoljenja"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:49
 msgid "Profile _name:"
 msgstr "_Ime profila:"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:50
 msgid "Set password b_y hand"
 msgstr "_Ročno določilo gesla"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:52
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"Kratko ime je lahko sestavljeno iz:\n"
+"  &#x27A3; majhnih črk angleške abecede\n"
+"  &#x27A3; številk\n"
+"  &#x27A3; posebnih znakov \".\", \"-\" in \"_\""
+
+#: ../interfaces/users.ui.h:56
+msgid "Short name must start with a letter!"
+msgstr "Kratko ime se mora začeti s črko!"
+
+#: ../interfaces/users.ui.h:57
+msgid "This account is using special settings that have been defined manually. Use the Advanced dialog to tune them."
+msgstr "Račun uporablja posebne nastavitve, ki so bile določene ročno. Nastavite jih med naprednimi nastavitvami."
+
+#: ../interfaces/users.ui.h:58
 msgid "User ID:"
 msgstr "ID uporabnika:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:59
 msgid "User Privileges"
 msgstr "Uporabniška dovoljenja"
 
-#: ../interfaces/users.ui.h:42
+#: ../interfaces/users.ui.h:60
 msgid "User _password:"
 msgstr "Uporabnikovo _geslo:"
 
-#: ../interfaces/users.ui.h:43
+#: ../interfaces/users.ui.h:61
 msgid "User must log out before you can change his ID."
 msgstr "Uporabnik se mora odjaviti, preden je mogoče spremeniti njegov ID."
 
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:62
 msgid "User profiles"
 msgstr "Uporabniški profil"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "_Dodaj skupino"
-
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:63
 msgid "_Add Profile"
 msgstr "_Dodaj profil"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "_Dodaj uporabnika"
+#: ../interfaces/users.ui.h:64
+msgid "_Advanced Settings"
+msgstr "_Napredne nastavitve"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:65
 msgid "_Comments"
 msgstr "_Opombe"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:66
+msgid "_Custom"
+msgstr "_Po meri"
+
+#: ../interfaces/users.ui.h:67
 msgid "_Days between warning and password expiration:"
 msgstr "Število _dni med opozorilom in dokončnim pretekom gesla:"
 
-#: ../interfaces/users.ui.h:50
-#: ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33
-#: ../src/shares/table.c:40
-#: ../src/users/table.c:40
-msgid "_Delete"
-msgstr "_Izbriši"
-
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:68
 msgid "_Generate"
 msgstr "_Ustvari"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:69
 msgid "_Home directory:"
 msgstr "_Domači imenik:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:70
 msgid "_Home phone:"
 msgstr "_Domači telefon:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:71
 msgid "_Main group:"
 msgstr "_Glavna skupina:"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:72
 msgid "_Manage Groups"
 msgstr "_Upravljanje s skupinami"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "_Profil:"
+#: ../interfaces/users.ui.h:73
+msgid "_Name:"
+msgstr "_Ime:"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "_Pravo ime:"
+#: ../interfaces/users.ui.h:74
+msgid "_Password:"
+msgstr "_Geslo:"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:75
 msgid "_Shell:"
 msgstr "_Lupina:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:76
+msgid "_Short Name:"
+msgstr "_Kratko ime:"
+
+#: ../interfaces/users.ui.h:77
 msgid "_Work phone:"
 msgstr "_Službeni telefon"
 
@@ -668,51 +729,58 @@ msgstr "Če ste prepričani, da deluje kot kakšna izmed spodaj naštetih platfo
 msgid "Unsupported platform"
 msgstr "Nepodprt sistem"
 
-#: ../src/common/gst-tool.c:181
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "Ni mogoče naložiti nastavitve"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "Nastavitev ni mogoče shraniti"
 
-#: ../src/common/gst-tool.c:187
+#: ../src/common/gst-tool.c:196
 msgid "You are not allowed to access the system configuration."
 msgstr "Ni primernega dovoljenja za dostop do sistemskih nastavitev."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:189
+#: ../src/common/gst-tool.c:198
 msgid "You are not allowed to modify the system configuration."
 msgstr "Ni primernega dovoljenja za spreminjanje sistemskih nastavitev."
 
-#: ../src/common/gst-tool.c:192
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "Najdeni neveljavni podatki."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:194
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "Prišlo je do neznane napake."
 
-#: ../src/common/gst-tool.c:416
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "Ni mogoče prikazati pomoči"
 
-#: ../src/common/gst-tool.c:600
+#: ../src/common/gst-tool.c:612
 msgid "The system configuration has potentially changed."
 msgstr "Sistemske nastavitve so spremenjene."
 
-#: ../src/common/gst-tool.c:602
+#: ../src/common/gst-tool.c:614
 msgid "Update content? This will lose any modification in course."
 msgstr "Ali naj se posodobi vsebina? Med posodobitvijo bodo izgubljene vse naknadne spremembe."
 
 #: ../src/network/address-list.c:76
 #: ../src/network/hosts.c:31
 #: ../src/shares/table.c:38
-#: ../src/users/table.c:38
+#: ../src/users/table.c:40
 msgid "_Add"
 msgstr "_Dodaj"
+
+#: ../src/network/address-list.c:77
+#: ../src/network/hosts.c:33
+#: ../src/shares/table.c:40
+#: ../src/users/table.c:42
+msgid "_Delete"
+msgstr "_Izbriši"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -795,7 +863,7 @@ msgstr "Lastnosti %s"
 #: ../src/network/hosts.c:32
 #: ../src/network/ifaces-list.c:33
 #: ../src/shares/table.c:39
-#: ../src/users/table.c:39
+#: ../src/users/table.c:41
 msgid "_Properties"
 msgstr "_Lastnosti"
 
@@ -1397,7 +1465,7 @@ msgstr "Stanje"
 msgid "Priority"
 msgstr "Prednost"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "Nastavitve storitev"
 
@@ -1510,163 +1578,158 @@ msgstr "Usklajevanje sistemske ure"
 msgid "Keep synchronized with Internet servers"
 msgstr "Ohrani usklajeno s spletnimi strežniki"
 
-#: ../src/time/time-tool.c:522
-msgid "Manual"
-msgstr "Priročnik"
-
 #: ../src/time/time-tool.c:668
 msgid "Time and Date Settings"
 msgstr "Nastavitve časa in datuma"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:54
 msgid "Administrator group can not be deleted"
 msgstr "Skrbniške skupine ni mogoče izbrisati"
 
-#: ../src/users/group-settings.c:55
-#: ../src/users/group-settings.c:296
-#: ../src/users/group-settings.c:320
-#: ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:702
+#: ../src/users/group-settings.c:57
+#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:323
+#: ../src/users/user-settings.c:66
+#: ../src/users/user-settings.c:639
 msgid "This would leave the system unusable."
 msgstr "To bi naredilo sistem neuporaben."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:70
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Ali ste prepričani, da želite izbrisati skupino \"%s\"?"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:73
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "To lahko v datotečnem sistemu pusti datoteke z neveljavnim ID-jem skupine."
 
-#: ../src/users/group-settings.c:171
+#: ../src/users/group-settings.c:173
 msgid "New group"
 msgstr "Nova skupina"
 
-#: ../src/users/group-settings.c:179
+#: ../src/users/group-settings.c:181
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Lastnosti skupine '%s'"
 
-#: ../src/users/group-settings.c:292
+#: ../src/users/group-settings.c:295
 msgid "Group name is empty"
 msgstr "Ime skupine je prazno"
 
-#: ../src/users/group-settings.c:293
+#: ../src/users/group-settings.c:296
 msgid "A group name must be specified."
 msgstr "Ime skupine mora biti navedeno"
 
-#: ../src/users/group-settings.c:295
+#: ../src/users/group-settings.c:298
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Skrbniško ime skupine ne sme biti spremenjeno"
 
-#: ../src/users/group-settings.c:298
+#: ../src/users/group-settings.c:301
 msgid "Group name has invalid characters"
 msgstr "Ime skupine vsebuje neveljavne znake"
 
-#: ../src/users/group-settings.c:299
+#: ../src/users/group-settings.c:302
 msgid "Please set a valid group name consisting of a lower case letter followed by lower case letters and numbers."
 msgstr "Nastavite veljavno ime skupine, ki vsebuje malo črko, ki ji sledijo male črke in številke."
 
-#: ../src/users/group-settings.c:303
-#: ../src/users/user-settings.c:635
+#: ../src/users/group-settings.c:306
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Skupina \"%s\" že obstaja."
 
-#: ../src/users/group-settings.c:304
+#: ../src/users/group-settings.c:307
 msgid "Please choose a different group name."
 msgstr "Izberite drugo ime skupine."
 
-#: ../src/users/group-settings.c:319
+#: ../src/users/group-settings.c:322
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Skrbniški ID skupine ne sme biti spremenjen"
 
-#: ../src/users/groups-table.c:45
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Ime skupine"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:52
 msgid "Monitor system logs"
 msgstr "Nadzor sistema beleženja"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:53
 msgid "Administer the system"
 msgstr "Oskrbovanje sistema"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:54
 msgid "Use audio devices"
 msgstr "Uporabi zvočne naprave"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:55
 msgid "Use CD-ROM drives"
 msgstr "Uporabi CD naprave"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:56
 msgid "Burn CDs / DVDs"
 msgstr "Zapisovanje CD-jev in DVD-jev"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:57
 msgid "Use modems"
 msgstr "Uporabi modem"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:58
 msgid "Connect to Internet using a modem"
 msgstr "Povezava s strežnikom preko modema"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:59
 msgid "Send and receive faxes"
 msgstr "Pošiljanje in prejemanje faksov"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:60
 msgid "Use floppy drives"
 msgstr "Uporabi disketni pogon"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:61
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "Priklopi uporabniški datotečni sistem (FUSE)"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:62
 msgid "Configure printers"
 msgstr "Nastavitev tiskalnikov"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:63
 msgid "Connect to wireless and ethernet networks"
 msgstr "Povazava v brežžična ali žična omrežja"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:64
 msgid "Access external storage devices automatically"
 msgstr "Samodejni dostop do zunanjih diskovnih naprav"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:65
 msgid "Suspend and hibernate the computer"
 msgstr "Hiberniranje in mirovanje računalnika"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:66
 msgid "Access /proc filesystem"
 msgstr "Dostop do /proc datotečnega sistema"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:67
 msgid "Use scanners"
 msgstr "Uporabi skener"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:68
 msgid "Use tape drives"
 msgstr "Uporabi tračni pogon"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:69
 msgid "Use USB devices"
 msgstr "Uporabi USB naprave"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:70
 msgid "Use VirtualBox virtualization solution"
 msgstr "Uporabi VirtualBox sistem"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:71
 msgid "Use video devices"
 msgstr "Uporabi video naprave"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:72
 msgid "Be able to get administrator privileges"
 msgstr "Dostop do skrbniških dovoljenj"
 
@@ -1678,72 +1741,45 @@ msgstr "Dodajte ali odstranite uporabnike in skupine"
 msgid "Users and Groups"
 msgstr "Uporabniki in skupine"
 
-#: ../src/users/user-settings.c:58
+#: ../src/users/user-settings.c:63
 msgid "Administrator account cannot be deleted"
 msgstr "Računa skrbnika ni mogoče izbrisati"
 
-#: ../src/users/user-settings.c:72
+#: ../src/users/user-settings.c:77
 #, c-format
 msgid "Are you sure you want to delete account \"%s\"?"
 msgstr "Ali ste prepričani, da želite izbrisati račun \"%s\"?"
 
-#: ../src/users/user-settings.c:75
+#: ../src/users/user-settings.c:80
 msgid "This will disable this user's access to the system without deleting the user's home directory."
 msgstr "To bo onemogočilo dostop uporabnika do sistema, brez da bi izbrisali uporabnikov domači imenik."
 
-#: ../src/users/user-settings.c:85
+#: ../src/users/user-settings.c:90
 msgid "This user is currently using this computer"
 msgstr "Uporabnik, ki trenutno uporablja računalnik"
 
-#: ../src/users/user-settings.c:439
-msgid "New user account"
-msgstr "Nov uporabniški račun"
+#: ../src/users/user-settings.c:536
+msgid "Superuser"
+msgstr "Izkušeni uporabnik"
 
-#: ../src/users/user-settings.c:460
-#, c-format
-msgid "Account '%s' Properties"
-msgstr "Lastnosti računa '%s'"
+#: ../src/users/user-settings.c:540
+msgid "Custom"
+msgstr "Po meri"
 
-#: ../src/users/user-settings.c:621
-msgid "User name is empty"
-msgstr "Uporabniško ime je prazno"
-
-#: ../src/users/user-settings.c:622
-msgid "A user name must be specified."
-msgstr "Podano mora biti uporabniško ime."
-
-#: ../src/users/user-settings.c:624
-msgid "User name has invalid characters"
-msgstr "Uporabniško ime vsebuje neveljavne znake"
-
-#: ../src/users/user-settings.c:625
-msgid "Please set a valid user name consisting of a lower case letter followed by lower case letters and numbers."
-msgstr "Nastavite veljavno uporabniško ime, ki vsebuje malo črko, ki ji sledijo male črke in številke."
-
-#: ../src/users/user-settings.c:629
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "Uporabniško ime \"%s\" že obstaja"
-
-#: ../src/users/user-settings.c:630
-#: ../src/users/user-settings.c:636
-msgid "Please choose a different user name."
-msgstr "Izberite drugo uporabniško ime."
-
-#: ../src/users/user-settings.c:661
+#: ../src/users/user-settings.c:598
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Neveljavni znak \"%c\" v opombi"
 
-#: ../src/users/user-settings.c:662
+#: ../src/users/user-settings.c:599
 msgid "Check that this character is not used."
 msgstr "Preverite, ali ta znak že ni uporabljen."
 
-#: ../src/users/user-settings.c:680
+#: ../src/users/user-settings.c:617
 msgid "Incomplete path in home directory"
 msgstr "Nepopolna pot v domači imenik"
 
-#: ../src/users/user-settings.c:681
+#: ../src/users/user-settings.c:618
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1751,32 +1787,32 @@ msgstr ""
 "Vnesite celo pot za domačo mapo\n"
 "<span size=\"smaller\">npr.: /home/janez</span>."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:621
 msgid "Home directory already exists"
 msgstr "Domači imenik že obstaja"
 
-#: ../src/users/user-settings.c:685
+#: ../src/users/user-settings.c:622
 msgid "Please enter a different home directory path."
 msgstr "Izberite drugo pot domače mape."
 
-#: ../src/users/user-settings.c:701
+#: ../src/users/user-settings.c:638
 msgid "Administrator account's user ID should not be modified"
 msgstr "Skrbniški ID ne sme biti spremenjen"
 
-#: ../src/users/user-settings.c:706
+#: ../src/users/user-settings.c:643
 #, c-format
 msgid "User ID %d is already used"
 msgstr "Uporabniški ID %d je že uporabljen"
 
-#: ../src/users/user-settings.c:707
+#: ../src/users/user-settings.c:644
 msgid "Please choose a different numeric identifier for the new user."
 msgstr "Izberite drugo številčno določilo novega uporabnika."
 
-#: ../src/users/user-settings.c:721
+#: ../src/users/user-settings.c:658
 msgid "Incomplete path in shell"
 msgstr "Nepopolna pot v ukazni lupini"
 
-#: ../src/users/user-settings.c:722
+#: ../src/users/user-settings.c:659
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1784,45 +1820,71 @@ msgstr ""
 "Vpišite polno pot za ukazno lupino\n"
 "<span size=\"smaller\">npr.: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:755
+#: ../src/users/user-settings.c:692
 msgid "Password is too short"
 msgstr "Geslo je prekratko"
 
-#: ../src/users/user-settings.c:756
+#: ../src/users/user-settings.c:693
 msgid "User passwords must be longer than 6 characters and preferably formed by numbers, letters and special characters."
 msgstr "Uporabniško geslo mora biti daljše od šestih znakov in sestavljeno iz črk, številk in drugih znakov."
 
-#: ../src/users/user-settings.c:759
+#: ../src/users/user-settings.c:696
 msgid "Password confirmation is not correct"
 msgstr "Potrditev gesla ni pravilna"
 
-#: ../src/users/user-settings.c:760
+#: ../src/users/user-settings.c:697
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Preverite, ali ste vpisali isto geslo v obe polji."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Ime"
-
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "Uporabniško ime"
-
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "Domači imenik"
-
-#: ../src/users/users-tool.c:238
+#: ../src/users/users-tool.c:273
 msgid "Users Settings"
 msgstr "Nastavitev uporabnika"
 
+#~ msgid "<span weight=\"bold\">Password</span>"
+#~ msgstr "<span weight=\"bold\">Geslo</span>"
+#~ msgid ""
+#~ "Allow this user to open a local session without entering his password. "
+#~ "The password will still be required to perform administrative tasks."
+#~ msgstr ""
+#~ "Dovoli uporabniku odpiranje krajevne seje brez vnosa gesla. Geslo bo še "
+#~ "vedno zahtevano za izvajanje skrbniških nalog."
+#~ msgid "_Add Group"
+#~ msgstr "_Dodaj skupino"
+#~ msgid "_Add User"
+#~ msgstr "_Dodaj uporabnika"
+#~ msgid "_Profile:"
+#~ msgstr "_Profil:"
+#~ msgid "_Real name:"
+#~ msgstr "_Pravo ime:"
+#~ msgid "Account '%s' Properties"
+#~ msgstr "Lastnosti računa '%s'"
+#~ msgid "User name is empty"
+#~ msgstr "Uporabniško ime je prazno"
+#~ msgid "A user name must be specified."
+#~ msgstr "Podano mora biti uporabniško ime."
+#~ msgid "User name has invalid characters"
+#~ msgstr "Uporabniško ime vsebuje neveljavne znake"
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "Nastavite veljavno uporabniško ime, ki vsebuje malo črko, ki ji sledijo "
+#~ "male črke in številke."
+#~ msgid "User name \"%s\" already exists"
+#~ msgstr "Uporabniško ime \"%s\" že obstaja"
+#~ msgid "Please choose a different user name."
+#~ msgstr "Izberite drugo uporabniško ime."
+#~ msgid "Name"
+#~ msgstr "Ime"
+#~ msgid "Login name"
+#~ msgstr "Uporabniško ime"
+#~ msgid "Home directory"
+#~ msgstr "Domači imenik"
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
 #~ "span>"
 #~ msgstr ""
 #~ "<span weight=\"bold\" size=\"larger\">Vnesite skrbniško geslo</span>"
-#~ msgid "Enter Password"
-#~ msgstr "Vnesite geslo"
 #~ msgid ""
 #~ "You need administrator privileges to use this tool. Enter a password to "
 #~ "modify\n"
@@ -1831,8 +1893,6 @@ msgstr "Nastavitev uporabnika"
 #~ "Za uporabo tega orodja morate imeti skrbniško dovoljenje. Vnesite geslo "
 #~ "za\n"
 #~ "spreminjanje nastavitev sistema."
-#~ msgid "_Password:"
-#~ msgstr "_Geslo:"
 #~ msgid "<span weight=\"bold\">Contact Information</span>"
 #~ msgstr "<span weight=\"bold\">Podrobnosti stika</span>"
 #~ msgid "_Unlock"
