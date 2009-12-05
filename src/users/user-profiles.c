@@ -26,6 +26,8 @@
 #include "user-settings.h"
 #include "group-settings.h"
 
+extern GstTool *tool;
+
 #define PROFILES_FILE "/etc/gnome-system-tools/users/profiles"
 #define GST_USER_PROFILES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_USER_PROFILES, GstUserProfilesPrivate))
 
@@ -240,6 +242,7 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 	GstUserProfilesPrivate *priv;
 	GstUserProfile *profile;
 	GstUserProfile *matched;
+	OobsGroupsConfig *groups_config;
 	GFile *file_home, *file_prefix;
 	const gchar *shell, *home;
 	gint uid;
@@ -256,6 +259,7 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 	uid = oobs_user_get_uid (user);
 
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
+	groups_config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 
 	matched = NULL;
 	for (l = priv->profiles; l; l = l->next) {
@@ -300,8 +304,8 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 				group_name++;
 			}
 
-			group = group_settings_get_group_from_name ((char *) m->data);
-			in_group = user_settings_is_user_in_group (user, group);
+			group = oobs_groups_config_get_from_name (groups_config, (char *) m->data);
+			in_group = oobs_user_is_in_group (user, group);
 			if ((in_profile && !in_group) || (!in_profile && in_group)) {
 				if (group)
 					g_object_unref (group);
@@ -335,6 +339,8 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
                          gboolean         new_user)
 {
 	GstUserProfilesPrivate *priv;
+	OobsUsersConfig *users_config;
+	OobsGroupsConfig *groups_config;
 	gint uid;
 	char *home;
 	char **group_name;
@@ -349,6 +355,7 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
 	g_return_if_fail (oobs_user_get_login_name (user) != NULL);
 
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
+	groups_config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 
 	/* default shell */
 	oobs_user_set_shell (user, profile->shell);
@@ -364,7 +371,7 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
 			group_name++;
 		}
 
-		group = group_settings_get_group_from_name ((char *) l->data);
+		group = oobs_groups_config_get_from_name (groups_config, (char *) l->data);
 		if (in_profile)
 			oobs_group_add_user (group, user);
 		else
@@ -375,7 +382,8 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
 		return;
 
 	/* default UID */
-	uid = user_settings_find_new_uid (profile->uid_min, profile->uid_max);
+	users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
+	uid = oobs_users_config_find_free_uid (users_config, profile->uid_min, profile->uid_max);
 	oobs_user_set_uid (user, uid);
 
 	/* default home prefix */

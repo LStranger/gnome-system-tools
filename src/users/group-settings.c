@@ -119,47 +119,16 @@ group_delete (GtkTreeModel *model, GtkTreePath *path)
 
 }
 
-gid_t
-group_settings_find_new_gid (void)
-{
-	OobsGroupsConfig *config;
-	OobsList *list;
-	OobsListIter list_iter;
-	GObject *group;
-	gboolean valid;
-	gid_t new_gid, gid, gid_min, gid_max;
-
-	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
-	list = oobs_groups_config_get_groups (config);
-	valid = oobs_list_get_iter_first (list, &list_iter);
-
-	gid_min = GST_USERS_TOOL (tool)->minimum_gid;
-	gid_max = GST_USERS_TOOL (tool)->maximum_gid;
-
-	new_gid = gid_min - 1;
-
-	while (valid) {
-		group = oobs_list_get (list, &list_iter);
-		gid = oobs_group_get_gid (OOBS_GROUP (group));
-		g_object_unref (group);
-
-		if (gid <= gid_max && gid >= gid_min && new_gid < gid)
-			new_gid = gid;
-
-		valid = oobs_list_iter_next (list, &list_iter);
-	}
-
-	new_gid++;
-
-	return new_gid;
-}
-
 GtkWidget*
 group_settings_dialog_new (OobsGroup *group)
 {
+	OobsGroupsConfig *config;
 	GtkWidget *dialog, *widget;
 	const gchar *name;
 	gchar *title;
+	gid_t gid;
+
+	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	name = oobs_group_get_name (group);
@@ -173,8 +142,7 @@ group_settings_dialog_new (OobsGroup *group)
 		gtk_window_set_title (GTK_WINDOW (dialog), _("New group"));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget),
-					   group_settings_find_new_gid ());
+		gid = oobs_groups_config_find_free_gid (config, 0, 0);
 	} else {
 		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (FALSE));
 
@@ -183,8 +151,10 @@ group_settings_dialog_new (OobsGroup *group)
 		g_free (title);
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_group_get_gid (group));
+		gid = oobs_group_get_gid (group);
 	}
+
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), gid);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
 	gtk_entry_set_text (GTK_ENTRY (widget), (name) ? name : "");
@@ -205,59 +175,6 @@ group_settings_dialog_group_is_new (void)
 	is_new = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (dialog), "is_new"));
 
 	return is_new;
-}
-
-static gboolean
-is_group_root (OobsGroup *group)
-{
-	const gchar *name = oobs_group_get_name (group);
-
-	if (!name)
-		return FALSE;
-
-	return (strcmp (name, "root") == 0);
-}
-
-/* Get the OobsGroup corresponding to a name, or NULL if it does not exist.
- * Don't forget to unref the group when valid. */
-OobsGroup *
-group_settings_get_group_from_name (const gchar *name)
-{
-	OobsGroupsConfig *config;
-	OobsList *groups_list;
-	OobsListIter iter;
-	OobsGroup *group;
-	gboolean valid;
-	const gchar *group_name;
-
-	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
-	groups_list = oobs_groups_config_get_groups (config);
-	valid = oobs_list_get_iter_first (groups_list, &iter);
-
-	while (valid) {
-		group = OOBS_GROUP (oobs_list_get (groups_list, &iter));
-		group_name = oobs_group_get_name (group);
-
-		if (group_name && strcmp (name, group_name) == 0)
-			return group;
-
-		valid = oobs_list_iter_next (groups_list, &iter);
-	}
-
-	return NULL;
-}
-
-gboolean
-group_settings_group_exists (const gchar *name)
-{
-	OobsGroup *group = group_settings_get_group_from_name (name);
-
-	if (group) {
-		g_object_unref (group);
-		return TRUE;
-	}
-	else
-		return FALSE;
 }
 
 /* FIXME: this function is duplicated in user-settings.c */
@@ -284,9 +201,12 @@ is_valid_name (const gchar *name)
 static void
 check_name (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
+	OobsGroupsConfig *config;
 	OobsGroup *group = OOBS_GROUP (data);
 	GtkWidget *widget;
 	const gchar *name;
+
+	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
 	name = gtk_entry_get_text (GTK_ENTRY (widget));
@@ -294,7 +214,7 @@ check_name (gchar **primary_text, gchar **secondary_text, gpointer data)
 	if (strlen (name) < 1) {
 		*primary_text = g_strdup (_("Group name is empty"));
 		*secondary_text = g_strdup (_("A group name must be specified."));
-	} else if (is_group_root (group) && strcmp (name, "root") != 0) {
+	} else if (oobs_group_is_root (group) && strcmp (name, "root") != 0) {
 		*primary_text = g_strdup (_("Group name of the administrator group user should not be modified"));
 		*secondary_text = g_strdup (_("This would leave the system unusable."));
 	} else if (!is_valid_name (name)) {
@@ -302,7 +222,8 @@ check_name (gchar **primary_text, gchar **secondary_text, gpointer data)
 		*secondary_text = g_strdup (_("Please set a valid group name consisting of "
 					      "a lower case letter followed by lower case "
 					      "letters and numbers."));
-	} else if (group_settings_dialog_group_is_new () && group_settings_group_exists (name)) {
+	} else if (group_settings_dialog_group_is_new ()
+	           && oobs_groups_config_is_name_used (config, name)) {
 		*primary_text = g_strdup_printf (_("Group \"%s\" already exists"), name);
 		*secondary_text = g_strdup (_("Please choose a different group name."));
 	}
@@ -318,7 +239,7 @@ check_gid (gchar **primary_text, gchar **secondary_text, gpointer data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
 	gid = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
 
-	if (is_group_root (group) && gid != 0) {
+	if (oobs_group_is_root (group) && gid != 0) {
 		*primary_text = g_strdup (_("Group ID of the Administrator account should not be modified"));
 		*secondary_text = g_strdup (_("This would leave the system unusable."));
 	}

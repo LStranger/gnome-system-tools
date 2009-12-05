@@ -246,16 +246,18 @@ set_main_group (OobsUser *user)
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
 	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter)) {
-		group =	group_settings_get_group_from_name (name);
+		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+		group =	oobs_groups_config_get_from_name (config, name);
+
 		/* Most standard case when creating user:
 		 * no group using the login already exists, so create it */
 		if (group == NULL) {
 			is_group_new = TRUE;
 			group = oobs_group_new (name);
-			oobs_group_set_gid (group, group_settings_find_new_gid ());
+			oobs_group_set_gid (group,
+			                    oobs_groups_config_find_free_gid (config, 0, 0));
 
 			/* FIXME: this should be in a generic function */
-			config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 			groups_list = oobs_groups_config_get_groups (config);
 			oobs_list_append (groups_list, &list_iter);
 			oobs_list_set (groups_list, &list_iter, group);
@@ -316,104 +318,6 @@ get_no_passwd_login_group ()
 	return NULL;
 }
 
-gboolean
-user_settings_is_user_in_group (OobsUser  *user,
-		                OobsGroup *group)
-{
-	OobsUser *tmp_user;
-	GList *users = NULL;
-	GList *l;
-
-	if (!user || !group)
-		return FALSE;
-
-	users = oobs_group_get_users (group);
-	for (l = users; l; l = l->next) {
-		tmp_user = l->data;
-		if (tmp_user == user)
-			break;
-	}
-	g_list_free (users);
-
-	return l != NULL;
-}
-
-static gboolean
-is_user_root (OobsUser *user)
-{
-	const gchar *login;
-
-	if (!user)
-		return FALSE;
-
-	login = oobs_user_get_login_name (user);
-
-	if (!login)
-		return FALSE;
-
-	return (strcmp (login, "root") == 0);
-}
-
-static gboolean
-uid_exists (uid_t uid)
-{
-	OobsUsersConfig *config;
-	OobsList *list;
-	OobsListIter list_iter;
-	GObject *user;
-	gboolean valid;
-	uid_t user_uid;
-
-	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-	list = oobs_users_config_get_users (config);
-	valid = oobs_list_get_iter_first (list, &list_iter);
-
-	while (valid) {
-		user = oobs_list_get (list, &list_iter);
-		user_uid = oobs_user_get_uid (OOBS_USER (user));
-		g_object_unref (user);
-
-		if (user_uid == uid)
-			return TRUE;
-
-		valid = oobs_list_iter_next (list, &list_iter);
-	}
-
-	return FALSE;
-}
-
-uid_t
-user_settings_find_new_uid (gint uid_min,
-                            gint uid_max)
-{
-	OobsUsersConfig *config;
-	OobsList *list;
-	OobsListIter list_iter;
-	GObject *user;
-	gboolean valid;
-	uid_t new_uid, uid;
-
-	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-	list = oobs_users_config_get_users (config);
-	valid = oobs_list_get_iter_first (list, &list_iter);
-	new_uid = uid_min - 1;
-
-	while (valid) {
-		user = oobs_list_get (list, &list_iter);
-		uid = oobs_user_get_uid (OOBS_USER (user));
-		g_object_unref (user);
-
-		if (uid <= uid_max && uid >= uid_min && new_uid < uid)
-			new_uid = uid;
-
-		valid = oobs_list_iter_next (list, &list_iter);
-	}
-
-	new_uid++;
-
-	return new_uid;
-}
-
 static void
 set_login_length (GtkWidget *entry)
 {
@@ -471,8 +375,9 @@ user_settings_set (OobsUser *user)
 				oobs_users_config_get_default_shell (config));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		uid = user_settings_find_new_uid (GST_USERS_TOOL (tool)->minimum_uid,
-		                                  GST_USERS_TOOL (tool)->maximum_uid);
+		uid = oobs_users_config_find_free_uid (config,
+		                                       GST_USERS_TOOL (tool)->minimum_uid,
+		                                       GST_USERS_TOOL (tool)->maximum_uid);
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
 		gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
 		gtk_widget_hide (notice);
@@ -486,7 +391,7 @@ user_settings_set (OobsUser *user)
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
 		/* Show a notice if the user is logged in,
 		 * except if we don't have the required permissions to edit UID anyway */
-		if (is_user_root (user)) {
+		if (oobs_user_is_root (user)) {
 			gst_dialog_try_set_sensitive (tool->main_dialog, widget, FALSE);
 			gtk_widget_hide (notice);
 		}
@@ -531,7 +436,7 @@ user_settings_set (OobsUser *user)
 	widget2 = gst_dialog_get_widget (tool->main_dialog, "edit_user_profile_button");
 	profile = gst_user_profiles_get_for_user (GST_USERS_TOOL (tool)->profiles,
 	                                          user, FALSE);
-	if (is_user_root (user)) {
+	if (oobs_user_is_root (user)) {
 		gtk_widget_set_sensitive (widget2, FALSE);
 		gtk_label_set_text (GTK_LABEL (widget), _("Superuser"));
 	}
@@ -544,34 +449,6 @@ user_settings_set (OobsUser *user)
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 		set_entry_text (widget, oobs_user_get_home_directory (user));
 	}
-}
-
-static gboolean
-login_exists (const gchar *login)
-{
-	OobsUsersConfig *config;
-	OobsList *users_list;
-	OobsListIter iter;
-	GObject *user;
-	gboolean valid;
-	const gchar *user_login;
-
-	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-	users_list = oobs_users_config_get_users (config);
-	valid = oobs_list_get_iter_first (users_list, &iter);
-
-	while (valid) {
-		user = oobs_list_get (users_list, &iter);
-		user_login = oobs_user_get_login_name (OOBS_USER (user));
-		g_object_unref (user);
-
-		if (user_login && strcmp (login, user_login) == 0)
-			return TRUE;
-
-		valid = oobs_list_iter_next (users_list, &iter);
-	}
-
-	return FALSE;
 }
 
 static void
@@ -626,23 +503,33 @@ check_home (gchar **primary_text, gchar **secondary_text, gpointer data)
 static void
 check_uid (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
+	OobsUsersConfig *config;
 	OobsUser *user;
+	OobsUser *uid_user;
 	GtkWidget *widget;
 	gint uid;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 	uid = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-	user = g_object_get_data (G_OBJECT (data), "user");
+	user = users_table_get_current ();
 
-	if (is_user_root (user) && uid != 0) {
+	if (oobs_user_is_root (user) && uid != 0) {
 		*primary_text   = g_strdup (_("Administrator account's user ID should not be modified"));
 		*secondary_text = g_strdup (_("This would leave the system unusable."));
 	}
 
-	if (!user && uid_exists (uid)) {
-		*primary_text   = g_strdup_printf (_("User ID %d is already used"), uid);
-		*secondary_text = g_strdup (_("Please choose a different numeric identifier for the new user."));
+	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
+	uid_user = oobs_users_config_get_from_uid (config, uid);
+
+	if (uid_user != user) {
+		*primary_text   = g_strdup_printf (_("User ID %d is already used by user %s"),
+		                                   uid, oobs_user_get_login_name (uid_user));
+		*secondary_text = g_strdup_printf (_("Please choose a different numeric identifier for %s."),
+		                                   oobs_user_get_login_name (user));
 	}
+
+	g_object_unref (user);
+	g_object_unref (uid_user);
 }
 
 static void
@@ -733,11 +620,13 @@ user_settings_dialog_run (GtkWidget *dialog)
 void
 on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 {
+	OobsUsersConfig *config;
 	GtkWidget *validate_button;
 	GtkWidget *user_login;
 	GtkTreeModel *model;
 	gboolean valid_login;
 	gboolean valid_name;
+	gboolean used_login;
 	const char *name;
 	char *lc_name, *ascii_name, *stripped_name;
 	char **words1;
@@ -884,27 +773,35 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	item3 = g_string_append (item3, first_word->str);
 	item4 = g_string_prepend (item4, last_word->str);
 
-	if (nwords2 > 0 && !login_exists (item1->str) && !isdigit(item1->str[0]))
+	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
+
+	used_login = oobs_users_config_is_login_used (config, item1->str);
+	if (nwords2 > 0 && !used_login && !isdigit(item1->str[0]))
 		gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item1->str);
 
 	/* if there's only one word, would be the same as item1 */
 	if (nwords2 > 1) {
 		/* add other items */
-		if (!login_exists (item2->str) && !isdigit(item2->str[0]))
+		used_login = oobs_users_config_is_login_used (config, item2->str);
+		if (!used_login && !isdigit(item2->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item2->str);
 
-		if (!login_exists (item3->str) && !isdigit(item3->str[0]))
+		used_login = oobs_users_config_is_login_used (config, item3->str);
+		if (!used_login && !isdigit(item3->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item3->str);
 
-		if (!login_exists (item4->str) && !isdigit(item4->str[0]))
+		used_login = oobs_users_config_is_login_used (config, item4->str);
+		if (!used_login && !isdigit(item4->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item4->str);
 
 		/* add the last word */
-		if (!login_exists (last_word->str) && !isdigit(last_word->str[0]))
+		used_login = oobs_users_config_is_login_used (config, last_word->str);
+		if (!used_login && !isdigit(last_word->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), last_word->str);
 
 		/* ...and the first one */
-		if (!login_exists (first_word->str) && !isdigit(first_word->str[0]))
+		used_login = oobs_users_config_is_login_used (config, first_word->str);
+		if (!used_login && !isdigit(first_word->str[0]))
 			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), first_word->str);
 	}
 
@@ -949,7 +846,8 @@ on_user_new_login_changed (GtkComboBox *login_combo, gpointer user_data)
 	login_notice = gst_dialog_get_widget (tool->main_dialog, "user_new_login_notice");
 	letter_notice = gst_dialog_get_widget (tool->main_dialog, "user_new_login_letter_notice");
 
-	used_login = login_exists (login);
+	used_login = oobs_users_config_is_login_used (OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config),
+	                                              login);
 	empty_login = (strlen (login) <= 0);
 	valid_login = TRUE;
 
@@ -1193,14 +1091,14 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 	no_passwd_login_group = get_no_passwd_login_group ();
 	/* root should not be allowed to login without password,
 	 * and we disable the feature if the group does not exist */
-	if (is_user_root (user) || no_passwd_login_group == NULL) {
+	if (oobs_user_is_root (user) || no_passwd_login_group == NULL) {
 		gtk_widget_set_sensitive (nocheck_toggle, FALSE);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (nocheck_toggle),
 		                              FALSE);
 	}
 	else {
 		gst_dialog_try_set_sensitive (tool->main_dialog, nocheck_toggle, TRUE);
-		if (user_settings_is_user_in_group (user, no_passwd_login_group))
+		if (oobs_user_is_in_group (user, no_passwd_login_group))
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (nocheck_toggle),
 			                              TRUE);
 		else
@@ -1239,7 +1137,7 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 
 	/* check whether user is allowed to login without password */
 	no_passwd_login_group = get_no_passwd_login_group ();
-	if (!is_user_root (user) && no_passwd_login_group != NULL) {
+	if (!oobs_user_is_root (user) && no_passwd_login_group != NULL) {
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (nocheck_toggle)))
 			oobs_group_add_user (no_passwd_login_group, user);
 		else
