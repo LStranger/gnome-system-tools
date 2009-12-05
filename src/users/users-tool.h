@@ -52,6 +52,7 @@ struct _GstUsersTool {
 	gint maximum_gid;
 
 	gboolean showall;
+	gboolean showroot;
 };
 
 struct _GstUsersToolClass {

@@ -54,24 +54,19 @@ gst_users_tool_class_init (GstUsersToolClass *class)
 }
 
 static void
-on_showall_changed (GConfClient *client,
+on_option_changed (GConfClient *client,
 		    guint        conn_id,
 		    GConfEntry  *entry,
 		    gpointer     data)
 {
 	GstTool *tool = GST_TOOL (data);
-	GConfValue *value;
 	GtkWidget *widget;
 	GtkTreeModel *model;
 
-	value = gconf_entry_get_value (entry);
-	GST_USERS_TOOL (tool)->showall = gconf_value_get_bool (value);
+	GST_USERS_TOOL (tool)->showall = gst_conf_get_boolean (GST_TOOL (tool), "showall");
+	GST_USERS_TOOL (tool)->showroot = gst_conf_get_boolean (GST_TOOL (tool), "showroot");
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "users_table");
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
-	gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
-	
-	widget = gst_dialog_get_widget (tool->main_dialog, "groups_table");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
 	gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
 }
@@ -105,9 +100,12 @@ gst_users_tool_constructor (GType                  type,
 
 	tool = GST_TOOL (object);
 	GST_USERS_TOOL (tool)->showall = gst_conf_get_boolean (GST_TOOL (tool), "showall");
+	GST_USERS_TOOL (tool)->showroot = gst_conf_get_boolean (GST_TOOL (tool), "showroot");
 
 	gst_conf_add_notify (GST_TOOL (tool), "showall",
-			     on_showall_changed, tool);
+			     on_option_changed, tool);
+	gst_conf_add_notify (GST_TOOL (tool), "showroot",
+			     on_option_changed, tool);
 
 	return object;
 }
