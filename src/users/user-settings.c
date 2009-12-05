@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
+#include <oobs/oobs-defines.h>
 #include "gst.h"
 
 #include <string.h>
@@ -366,7 +367,7 @@ user_settings_set (OobsUser *user)
 
 	/* Set this before setting the UID so that it's not rejected */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, G_MAXINT32);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, OOBS_MAX_UID);
 
 	if (!user) {
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);

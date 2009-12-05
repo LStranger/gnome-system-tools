@@ -24,6 +24,7 @@
 #include <config.h>
 #include "gst.h"
 #include <glib/gi18n.h>
+#include <oobs/oobs-defines.h>
 
 #include <string.h>
 #include <ctype.h>
@@ -135,7 +136,7 @@ group_settings_dialog_new (OobsGroup *group)
 
 	/* Set this before setting the GID so that it's not rejected */
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, G_MAXINT32);
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, OOBS_MAX_GID);
 
 	if (!name) {
 		g_object_set_data (G_OBJECT (dialog), "is_new", GINT_TO_POINTER (TRUE));
