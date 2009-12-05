@@ -51,44 +51,18 @@ add_group_columns (GtkTreeView *treeview)
 	gtk_tree_view_insert_column (treeview, column, -1);
 }
 
-static gboolean
-groups_model_filter (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
-{
-	/* Temporary hack to show system groups without forcing to show system users,
-	 * which would make the users list quite messy */
-	return TRUE;
-
-#if 0
-	GstUsersTool *tool = (GstUsersTool *) data;
-	gint gid;
-
-	gtk_tree_model_get (model, iter,
-			    COL_GROUP_ID, &gid,
-			    -1);
-
-	return (tool->showall ||
-		(gid == 0 ||
-		 (gid >= tool->minimum_gid &&
-		  gid <= tool->maximum_gid)));
-#endif
-}
-
 static GtkTreeModel*
 create_groups_model (void)
 {
 	GtkListStore *store;
-	GtkTreeModel *filter_model;
-	
+
 	store = gtk_list_store_new (COL_GROUP_LAST,
 	                            G_TYPE_STRING,
 	                            G_TYPE_INT,
 				    G_TYPE_OBJECT,
 				    OOBS_TYPE_LIST_ITER);
-	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
 
-	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model),
-						groups_model_filter, tool, NULL);
-	return filter_model;
+	return GTK_TREE_MODEL (store);
 }
 
 void
@@ -129,8 +103,7 @@ void
 groups_table_set_group (OobsGroup *group, OobsListIter *list_iter, GtkTreeIter *iter)
 {
 	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
-	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_GROUP_NAME, oobs_group_get_name (group),
@@ -144,8 +117,7 @@ void
 groups_table_add_group (OobsGroup *group, OobsListIter *list_iter)
 {
 	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
-	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
 	GtkTreeIter iter;
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
@@ -156,8 +128,7 @@ void
 groups_table_clear (void)
 {
 	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
-	GtkTreeModel *model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
 
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 }
