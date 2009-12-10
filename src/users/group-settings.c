@@ -234,15 +234,38 @@ static void
 check_gid (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
 	OobsGroup *group = OOBS_GROUP (data);
+	OobsGroupsConfig *config;
+	OobsGroup *gid_group;
 	GtkWidget *widget;
-	gint gid;
+	gid_t gid;
+	gboolean new;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-	gid = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+	/* we know the value is positive because the range is limited */
+	gid = (unsigned) gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+	new = group_settings_dialog_group_is_new();
+
+	/* don't warn if nothing has changed */
+	if (!new && gid == oobs_group_get_gid (group))
+		return;
+
+	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+	gid_group = oobs_groups_config_get_from_gid (config, gid);
 
 	if (oobs_group_is_root (group) && gid != 0) {
 		*primary_text = g_strdup (_("Group ID of the Administrator account should not be modified"));
 		*secondary_text = g_strdup (_("This would leave the system unusable."));
+	}
+	else if (gid_group) { /* check that GID is free */
+		*primary_text   = g_strdup_printf (_("Group ID %d is already used by group \"%s\""),
+		                                   gid, oobs_group_get_name (gid_group));
+		if (new)
+			*secondary_text = g_strdup (_("Please choose a different numeric identifier for the new group."));
+		else
+			*secondary_text = g_strdup_printf (_("Please choose a different numeric identifier for new group \"%s\"."),
+			                                   oobs_group_get_name (group));
+
+		g_object_unref (gid_group);
 	}
 }
 
