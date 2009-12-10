@@ -428,7 +428,6 @@ user_settings_set (OobsUser *user)
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
 	set_entry_text (widget, NULL);
-	g_object_set_data (G_OBJECT (widget), "changed", GINT_TO_POINTER (FALSE));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
 	set_entry_text (widget, NULL);
@@ -455,16 +454,14 @@ user_settings_set (OobsUser *user)
 static void
 check_comments (gchar **primary_text, gchar **secondary_text, gpointer data)
 {
-	GtkWidget *name, *room_number, *wphone, *hphone;
+	GtkWidget *room_number, *wphone, *hphone;
 	gchar *comment, *ch;
 
-	name = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
 	room_number = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
 	wphone = gst_dialog_get_widget (tool->main_dialog, "user_settings_wphone");
 	hphone = gst_dialog_get_widget (tool->main_dialog, "user_settings_hphone");
 
 	comment = g_strjoin (" ",
-			     gtk_entry_get_text (GTK_ENTRY (name)),
 			     gtk_entry_get_text (GTK_ENTRY (room_number)),
 			     gtk_entry_get_text (GTK_ENTRY (wphone)),
 			     gtk_entry_get_text (GTK_ENTRY (hphone)),
@@ -480,25 +477,55 @@ check_comments (gchar **primary_text, gchar **secondary_text, gpointer data)
 	g_free (comment);
 }
 
-static void
-check_home (gchar **primary_text, gchar **secondary_text, gpointer data)
+static gboolean
+check_home (OobsUser *user)
 {
-	OobsUser *user;
-	GtkWidget *widget;
-	const gchar *home;
+	GtkWidget *dialog;
+	GtkWidget *home_entry;
+	const char *home;
+	char *message;
+	int response;
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-	home = gtk_entry_get_text (GTK_ENTRY (widget));
-	user = g_object_get_data (G_OBJECT (data), "user");
+	home_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
+	home = gtk_entry_get_text (GTK_ENTRY (home_entry));
 
 	if (strlen (home) < 1 || !g_path_is_absolute (home)) {
-		*primary_text   = g_strdup (_("Incomplete path in home directory"));
-		*secondary_text = g_strdup (_("Please enter full path for home directory\n"
-					      "<span size=\"smaller\">i.e.: /home/john</span>."));
-	} else if (!user && g_file_test (home, G_FILE_TEST_EXISTS)) {
-		*primary_text   = g_strdup (_("Home directory already exists"));
-		*secondary_text = g_strdup (_("Please enter a different home directory path."));
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,
+		                                 "%s", _("Incomplete path in home directory"));
+		message = _("Please enter full path for home directory\n"
+		            "<span size=\"smaller\">i.e.: /home/john</span>.");
+		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+		                                            "%s", message);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
+		return FALSE;
 	}
+	else if (strcmp (oobs_user_get_home_directory (user), home) != 0
+	         && g_file_test (home, G_FILE_TEST_EXISTS)) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_QUESTION,
+		                                 GTK_BUTTONS_NONE,
+		                                 "%s", _("Home directory already exists"));
+		message = _("The directory <tt>%s</tt> already exists. User may not have the permissions required to read or write in that directory. "
+		            "Do you want to use it anyway?");
+		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+		                                            message, home);
+		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+		                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		                        _("Use this directory"), GTK_RESPONSE_OK, NULL);
+
+		response = gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
+		return (response == GTK_RESPONSE_OK);
+	}
+
+	return TRUE;
 }
 
 static void
@@ -508,29 +535,35 @@ check_uid (gchar **primary_text, gchar **secondary_text, gpointer data)
 	OobsUser *user;
 	OobsUser *uid_user;
 	GtkWidget *widget;
-	gint uid;
+	uid_t uid;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	uid = gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
+	/* we know the value is positive because the range is limited */
+	uid = (unsigned) gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
 	user = users_table_get_current ();
 
-	if (oobs_user_is_root (user) && uid != 0) {
-		*primary_text   = g_strdup (_("Administrator account's user ID should not be modified"));
-		*secondary_text = g_strdup (_("This would leave the system unusable."));
+	/* don't warn if nothing has changed */
+	if (uid == oobs_user_get_uid (user)) {
+		g_object_unref (user);
+		return;
 	}
 
 	config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
 	uid_user = oobs_users_config_get_from_uid (config, uid);
 
-	if (uid_user != user) {
+	if (oobs_user_is_root (user) && uid != 0) {
+		*primary_text   = g_strdup (_("Administrator account's user ID should not be modified"));
+		*secondary_text = g_strdup (_("This would leave the system unusable."));
+	}
+	else if (uid_user) { /* check that UID is free */
 		*primary_text   = g_strdup_printf (_("User ID %d is already used by user %s"),
 		                                   uid, oobs_user_get_login_name (uid_user));
 		*secondary_text = g_strdup_printf (_("Please choose a different numeric identifier for %s."),
 		                                   oobs_user_get_login_name (user));
+		g_object_unref (uid_user);
 	}
 
 	g_object_unref (user);
-	g_object_unref (uid_user);
 }
 
 static void
@@ -549,22 +582,22 @@ check_shell (gchar **primary_text, gchar **secondary_text, gpointer data)
 	}
 }
 
-static void
-check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
+static gboolean
+check_password (OobsUser *user)
 {
-	OobsUser *user;
+	GtkWidget *dialog;
 	GtkWidget *widget;
 	const gchar *password, *confirmation;
-	gboolean changed = TRUE;
+	char *primary_text = NULL;
+	char *secondary_text;
+	int len;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
-	user = g_object_get_data (G_OBJECT (data), "user");
 
 	/* manual password? */
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
 		password = gtk_entry_get_text (GTK_ENTRY (widget));
-		changed = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "changed"));
 
 		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
 		confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
@@ -573,45 +606,37 @@ check_password (gchar **primary_text, gchar **secondary_text, gpointer data)
 		password = confirmation = gtk_entry_get_text (GTK_ENTRY (widget));
 	}
 
-	if (user && !changed)
-		return;
+	len = strlen (password);
 
-	if (strlen (password) < 6) {
-		*primary_text = g_strdup (_("Password is too short"));
-		*secondary_text = g_strdup (_("User passwords must be longer than 6 characters and preferably "
-					      "formed by numbers, letters and special characters."));
-	} else if (strcmp (password, confirmation) != 0) {
-		*primary_text = g_strdup (_("Password confirmation is not correct"));
-		*secondary_text = g_strdup (_("Check that you have provided the same password in both text fields."));
+	/* empty password, accept but don't change it */
+	if (len == 0) {
+		return TRUE;
 	}
-}
+	else if (len < 6) {
+		primary_text = _("Password is too short");
+		secondary_text = _("User passwords must be longer than 6 characters and preferably "
+		                   "formed by numbers, letters and special characters.");
+	} else if (strcmp (password, confirmation) != 0) {
+		primary_text = _("Password confirmation is not correct");
+		secondary_text = _("Check that you have provided the same password in both text fields.");
+	}
 
-gint
-user_settings_dialog_run (GtkWidget *dialog)
-{
-	gint response;
-	gboolean valid;
-	TestBattery battery[] = {
-		check_comments,
-		check_home,
-		check_uid,
-		check_shell,
-		check_password,
-		NULL
-	};
+	if (primary_text) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,
+		                                 "%s", primary_text);
 
-	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
+		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+		                                            "%s", secondary_text);
 
-	do {
-		response = gtk_dialog_run (GTK_DIALOG (dialog));
-		valid = (response == GTK_RESPONSE_OK) ?
-			test_battery_run (battery, GTK_WINDOW (dialog), dialog) : TRUE;
-	} while (!valid);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		return FALSE;
+	}
 
-	gtk_widget_hide (dialog);
-	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
-
-	return response;
+	return TRUE;
 }
 
 /*
@@ -1073,9 +1098,9 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 	GtkWidget *manual_toggle;
 	GtkWidget *passwd_entry;
 	GtkWidget *nocheck_toggle;
-	gboolean passwd_changed;
 	OobsUser *user;
 	OobsGroup *no_passwd_login_group;
+	const char *passwd;
 
 	user_passwd_dialog = gst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_passwd_face");
@@ -1110,8 +1135,10 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 		g_object_unref (no_passwd_login_group);
 
 
-	response = run_edit_dialog (GTK_DIALOG (user_passwd_dialog),
-	                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
+	do {
+		response = run_edit_dialog (GTK_DIALOG (user_passwd_dialog),
+		                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
+	} while (response == GTK_RESPONSE_OK && !check_password (user));
 
 	if (response != GTK_RESPONSE_OK){
 		g_object_unref (user);
@@ -1119,22 +1146,18 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 	}
 
 	/* set manual or random password if needed */
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (manual_toggle))) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (manual_toggle)))
 		passwd_entry = gst_dialog_get_widget (tool->main_dialog,
 		                                      "user_settings_passwd1");
-		passwd_changed =
-			GPOINTER_TO_INT (g_object_get_data (G_OBJECT (passwd_entry),
-			                                    "changed"));
-
-		if (passwd_changed)
-			oobs_user_set_password (user,
-			                        gtk_entry_get_text (GTK_ENTRY (passwd_entry)));
-	} else {
+	else
 		passwd_entry = gst_dialog_get_widget (tool->main_dialog,
 		                                      "user_settings_random_passwd");
-		oobs_user_set_password (user,
-		                        gtk_entry_get_text (GTK_ENTRY (passwd_entry)));
-	}
+
+	passwd = gtk_entry_get_text (GTK_ENTRY (passwd_entry));
+
+	/* empty password means: don't change it */
+	if (strlen (passwd) > 0)
+		oobs_user_set_password (user, passwd);
 
 	/* check whether user is allowed to login without password */
 	no_passwd_login_group = get_no_passwd_login_group ();
@@ -1238,19 +1261,31 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	OobsUser *user;
 	int response;
 
+	TestBattery battery[] = {
+		check_comments,
+		check_uid,
+		check_shell,
+		NULL
+	};
+
 	user_advanced_dialog = gst_dialog_get_widget (tool->main_dialog, "user_advanced_dialog");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_advanced_face");
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_advanced_name");
 
 	user = users_table_get_current ();
 
-	response = run_edit_dialog (GTK_DIALOG (user_advanced_dialog),
-	                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
+	do {
+		response = run_edit_dialog (GTK_DIALOG (user_advanced_dialog),
+		                            GTK_IMAGE (face_image), GTK_LABEL (name_label));
 
-	if (response != GTK_RESPONSE_OK) {
-		g_object_unref (user);
-		return;
-	}
+		if (response != GTK_RESPONSE_OK) {
+			g_object_unref (user);
+			return;
+		}
+
+	} while (!test_battery_run (battery, GTK_WINDOW (user_advanced_dialog), user_advanced_dialog)
+	         || !check_home (user));
+
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
 	oobs_user_set_room_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
