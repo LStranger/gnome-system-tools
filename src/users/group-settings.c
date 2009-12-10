@@ -243,7 +243,7 @@ check_gid (gchar **primary_text, gchar **secondary_text, gpointer data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
 	/* we know the value is positive because the range is limited */
 	gid = (unsigned) gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget));
-	new = group_settings_dialog_group_is_new();
+	new = group_settings_dialog_group_is_new ();
 
 	/* don't warn if nothing has changed */
 	if (!new && gid == oobs_group_get_gid (group))
@@ -262,7 +262,7 @@ check_gid (gchar **primary_text, gchar **secondary_text, gpointer data)
 		if (new)
 			*secondary_text = g_strdup (_("Please choose a different numeric identifier for the new group."));
 		else
-			*secondary_text = g_strdup_printf (_("Please choose a different numeric identifier for new group \"%s\"."),
+			*secondary_text = g_strdup_printf (_("Please choose a different numeric identifier for group \"%s\"."),
 			                                   oobs_group_get_name (group));
 
 		g_object_unref (gid_group);
