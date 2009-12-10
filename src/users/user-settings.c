@@ -70,45 +70,32 @@ check_user_delete (OobsUser *user)
 
 		return FALSE;
 	}
-
-	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+	else if (oobs_user_get_active (user)) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 					 GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_WARNING,
-					 GTK_BUTTONS_NONE,
-					 _("Are you sure you want to delete account \"%s\"?"),
-					 oobs_user_get_login_name (user));
-	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _("This will disable this user's access to the system "
-						    "without deleting the user's home directory."));
-
-	if (oobs_user_get_active (user)) {
-		GtkWidget *alignment, *box, *image, *label;
-		gint image_width;
-
-		image = gtk_image_new_from_stock (GTK_STOCK_INFO, GTK_ICON_SIZE_MENU);
-		gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &image_width, NULL);
-
-		label = gtk_label_new (_("This user is currently using this computer"));
-		gtk_label_set_selectable (GTK_LABEL (label), TRUE);
-		gtk_misc_set_alignment (GTK_MISC (label), 0., 0.);
-
-		box = gtk_hbox_new (FALSE, 12);
-		gtk_box_pack_start (GTK_BOX (box), image, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-
-		alignment = gtk_alignment_new (0., 0., 0., 0.);
-		gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, image_width, 0);
-		gtk_container_add (GTK_CONTAINER (alignment), box);
-		gtk_widget_show_all (alignment);
-
-
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), alignment, FALSE, FALSE, 0);
+					 GTK_MESSAGE_INFO,
+					 GTK_BUTTONS_CLOSE,
+					 _("%s is currently using this computer"),
+					 oobs_user_get_full_name (user));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("Please ensure the user has logged out before deleting this account."));
 	}
+	else {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_WARNING,
+		                                 GTK_BUTTONS_NONE,
+		                                 _("Are you sure you want to delete account \"%s\"?"),
+		                                 oobs_user_get_login_name (user));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+		                                          _("This will disable this user's access to the system "
+		                                            "without deleting the user's home directory."));
 
-	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
-				NULL);
+		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+		                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		                        GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+		                        NULL);
+	}
 
 	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
