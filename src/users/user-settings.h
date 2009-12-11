@@ -30,6 +30,7 @@
 #include "user-profiles.h"
 
 #define NO_PASSWD_LOGIN_GROUP "nopasswdlogin"
+#define ADMIN_GROUP "admin"
 
 gboolean        user_delete                      (GtkTreeModel *model,
 						  GtkTreePath *path);
@@ -42,6 +43,8 @@ uid_t           user_settings_find_new_uid       (gint uid_min,
                                                   gint uid_max);
 gboolean        user_settings_is_user_in_group   (OobsUser  *user,
                                                   OobsGroup *group);
+
+gboolean        user_settings_check_revoke_admin_rights ();
 
 void            on_user_new                      (GtkButton *button, gpointer user_data);
 

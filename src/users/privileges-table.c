@@ -31,6 +31,7 @@
 #include "gst.h"
 #include "privileges-table.h"
 #include "user-profiles.h"
+#include "user-settings.h"
 
 extern GstTool *tool;
 
@@ -50,7 +51,7 @@ struct _PrivilegeDescription {
 /* keep this sorted, or you'll go to hell */
 static const PrivilegeDescription descriptions[] = {
 	{ "adm", N_("Monitor system logs") },
-	{ "admin", N_("Administer the system") },
+	{ ADMIN_GROUP, N_("Administer the system") },
 	{ "audio", N_("Use audio devices") },
 	{ "cdrom", N_("Use CD-ROM drives") },
 	{ "cdwrite", N_("Burn CDs / DVDs") },
@@ -102,6 +103,7 @@ on_user_privilege_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointe
 	GtkTreeModel *model, *child_model;
 	GtkTreePath  *path  = gtk_tree_path_new_from_string (path_str);
 	GtkTreeIter   iter, child_iter;
+	OobsGroup    *group;
 	gboolean      value;
 
 	model = (GtkTreeModel*) data;
@@ -111,8 +113,17 @@ on_user_privilege_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointe
 		gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
 								  &child_iter, &iter);
 
-		gtk_tree_model_get (child_model, &child_iter, COL_MEMBER, &value, -1);
-		gtk_list_store_set (GTK_LIST_STORE (child_model), &child_iter, COL_MEMBER, !value, -1);
+		gtk_tree_model_get (child_model, &child_iter,
+		                    COL_MEMBER, &value,
+		                    COL_GROUP, &group, -1);
+
+		/* check that current user should be allowed to lose admin rights,
+		 * possibly showing a warning/error dialog */
+		if (!value || strcmp (oobs_group_get_name (group), ADMIN_GROUP) != 0
+		           || user_settings_check_revoke_admin_rights ())
+			gtk_list_store_set (GTK_LIST_STORE (child_model), &child_iter, COL_MEMBER, !value, -1);
+
+		g_object_unref (group);
 	}
 
 	gtk_tree_path_free (path);

@@ -54,7 +54,14 @@ static gboolean
 check_user_delete (OobsUser *user)
 {
 	GtkWidget *dialog;
+	OobsGroupsConfig *config;
+	OobsGroup *admin_group;
+	GList *admin_users;
 	gint response;
+
+	config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+	admin_group = oobs_groups_config_get_from_name (config, ADMIN_GROUP);
+	admin_users = oobs_group_get_users (admin_group);
 
 	if (oobs_user_get_uid (user) == 0) {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
@@ -65,10 +72,7 @@ check_user_delete (OobsUser *user)
 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 							  _("This would leave the system unusable."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
 
-		return FALSE;
 	}
 	else if (oobs_user_get_active (user)) {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
@@ -79,6 +83,21 @@ check_user_delete (OobsUser *user)
 					 oobs_user_get_full_name (user));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("Please ensure the user has logged out before deleting this account."));
+	}
+	/* don't allow deleting the last admin */
+	else if (oobs_user_is_in_group (user, admin_group)
+	         && g_list_length (admin_users) < 2)
+	{
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,
+		                                 _("Can't delete the only administrator account"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+		                                          _("%s is the only administrator on this computer. "
+		                                            "Deleting this account would lock you out of "
+		                                            "administrating the system."),
+		                                          oobs_user_get_full_name (user));
 	}
 	else {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
@@ -102,6 +121,8 @@ check_user_delete (OobsUser *user)
 	gst_dialog_remove_edit_dialog (tool->main_dialog, dialog);
 
 	gtk_widget_destroy (dialog);
+	g_object_unref (admin_group);
+	g_list_free (admin_users);
 
 	return (response == GTK_RESPONSE_ACCEPT);
 }
@@ -622,6 +643,100 @@ check_password (OobsUser *user)
 		gtk_widget_destroy (dialog);
 		return FALSE;
 	}
+
+	return TRUE;
+}
+
+/*
+ * Check that current user is not removing himself from the admin group: warn if it's the case.
+ * Also, if selected user is the only admin left, we directly show an error dialog.
+ * (This function assumes selected user is an administrator, so check this before calling.)
+ */
+gboolean
+user_settings_check_revoke_admin_rights ()
+{
+	OobsGroupsConfig *groups_config;
+	OobsSelfConfig *self_config;
+	OobsUser *user;
+	OobsGroup *admin_group;
+	GList *members;
+	GtkWidget *dialog;
+	int response;
+
+	groups_config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+	self_config = OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config);
+
+	user = users_table_get_current ();
+	admin_group = oobs_groups_config_get_from_name (groups_config, ADMIN_GROUP);
+	members = oobs_group_get_users (admin_group);
+
+	/* check that user is no alone in the admin group */
+	if (g_list_length (members) < 2) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,
+		                                 _("Can't revoke administration rights"));
+
+		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+		                                            _("%s is the only administrator on this computer. "
+		                                              "Revoking administration rights for this account "
+		                                              "would lock you out of administrating the system."),
+		                                            oobs_user_get_full_name (user));
+
+		response = gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		return FALSE;
+	}
+	/* If there are other admins, ask for confirmation only when dealing
+	 * with the current account. This does not catch the case where PolicyKit
+	 * authentication was done with another admin account, but this is not critical. */
+	else if (user == oobs_self_config_get_user (self_config)) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_WARNING,
+		                                 GTK_BUTTONS_NONE,
+		                                 _("You are about to revoke your own administration rights"));
+
+		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+		                                            _("%s will no longer be able to perform administrative tasks. "
+		                                              "This account won't be allowed to get administration rights back on its own."),
+		                                            oobs_user_get_full_name (user));
+		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+		                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+		                        _("Give up administration rights"), GTK_RESPONSE_OK, NULL);
+
+		response = gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		return (response == GTK_RESPONSE_OK);
+	}
+
+	return TRUE;
+}
+
+static gboolean
+check_profile (OobsUser *user, GstUserProfile *profile)
+{
+	OobsGroupsConfig *groups_config;
+	OobsGroup *admin_group;
+	char **l;
+	gboolean is_admin_profile;
+
+	groups_config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+	admin_group = oobs_groups_config_get_from_name (groups_config, ADMIN_GROUP);
+
+	if (oobs_user_is_in_group (user, admin_group)) {
+		is_admin_profile = FALSE;
+
+		for (l = profile->groups; *l; l++)
+			  if (strcmp (ADMIN_GROUP, *l) == 0) {
+				  is_admin_profile = TRUE;
+				  break;
+			  }
+
+		  if (!is_admin_profile)
+			  return user_settings_check_revoke_admin_rights (user);
+	  }
 
 	return TRUE;
 }
@@ -1224,15 +1339,20 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (value))) {
 			profile = gst_user_profiles_get_from_name (GST_USERS_TOOL (tool)->profiles,
 			                                           (char *) key);
-			gst_user_profiles_apply (GST_USERS_TOOL (tool)->profiles,
-			                         profile, user, FALSE);
 			break;
 		}
 
-	if (response == GTK_RESPONSE_OK) {
-		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
-			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-	}
+	/* apply if conditions were met, else a message has been displayed in check_profile */
+	if (profile && check_profile (user, profile))
+	  {
+		  gst_user_profiles_apply (GST_USERS_TOOL (tool)->profiles,
+		                           profile, user, FALSE);
+
+		  if (response == GTK_RESPONSE_OK) {
+			  if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+				  gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+		  }
+	  }
 
 	g_object_unref (user);
 }
