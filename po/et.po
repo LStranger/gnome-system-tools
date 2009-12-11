@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: GNOME System Tools MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2009-11-30 22:35+0000\n"
-"PO-Revision-Date: 2009-12-01 08:27+0200\n"
+"POT-Creation-Date: 2009-12-10 17:47+0000\n"
+"PO-Revision-Date: 2009-12-11 09:05+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -24,10 +24,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Whether the users-admin tool should show all users and groups or not"
+msgid "Whether the users-admin tool should show system users in the users list"
 msgstr ""
-"Kas kasutajate haldamise vahend peab näitama kõiki kasutajaid ja gruppe või "
-"mitte"
+"Kas kasutajate haldamise vahend peab kasutajate nimekirjas näitama ka "
+"süsteemseid kasutajaid või mitte"
+
+msgid ""
+"Whether the users-admin tool should show the root user in the users list"
+msgstr ""
+"Kas kasutajate haldamise vahend peab kasutajate nimekirjas näitama ka "
+"juurkasutajat või mitte"
 
 msgid "<b>Account data</b>"
 msgstr "<b>Konto andmed</b>"
@@ -355,6 +361,8 @@ msgid ""
 "An user with such a name already exists. Please choose a different short "
 "name for the new user."
 msgstr ""
+"Sellise nimega kasutaja on juba olemas. Palun vali uue kasutaja kontole mõni "
+"muu nimi."
 
 msgid "Assign a random password by default"
 msgstr "Vaikimisi suvalise parooli määramine"
@@ -1282,6 +1290,18 @@ msgstr "Palun vali mõni muu grupinimi."
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Administraatori grupi ID-d ei tohiks muuta"
 
+#. check that GID is free
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "Kasutaja ID %d on juba grupi \"%s\" poolt kasutusel"
+
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "Palun määra uuele grupile mõni muu numbriline identifikaator."
+
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "Palun määra grupile \"%s\" mõni muu numbriline identifikaator."
+
 msgid "Group name"
 msgstr "Grupi nimi"
 
@@ -1358,6 +1378,14 @@ msgid "Administrator account cannot be deleted"
 msgstr "Administraatori kontot pole võimalik kustutada"
 
 #, c-format
+msgid "%s is currently using this computer"
+msgstr "Kasutaja %s pruugib hetkel seda arvutit"
+
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr ""
+"Palun veendu, et kasutaja on enne selle konto kustutamist välja logitud."
+
+#, c-format
 msgid "Are you sure you want to delete account \"%s\"?"
 msgstr "Kas soovid kustutada gruppi \"%s\"?"
 
@@ -1367,9 +1395,6 @@ msgid ""
 msgstr ""
 "Selle abil saab keelata kasutajal süsteemi ligipääsu ilma kasutaja "
 "kodukataloogi kustutamata."
-
-msgid "This user is currently using this computer"
-msgstr "Kasutaja pruugib hetkel seda arvutit"
 
 msgid "Superuser"
 msgstr "Superkasutaja"
@@ -1397,18 +1422,29 @@ msgstr ""
 msgid "Home directory already exists"
 msgstr "Kodukataloog on juba olemas"
 
-msgid "Please enter a different home directory path."
-msgstr "Palun määra kodukataloogi jaoks mõni muu rada."
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"Kataloog <tt>%s</tt> on juba olemas. Kasutajal ei pruugi olla selle "
+"kataloogi jaoks vajalikke lugemis- ja kirjutamisõiguseid. Kas soovid siiski "
+"seda kataloogi kasutada?"
+
+msgid "Use this directory"
+msgstr "Kasuta seda kataloogi"
 
 msgid "Administrator account's user ID should not be modified"
 msgstr "Administraatori konto kasutaja ID-d ei tohiks muuta"
 
+#. check that UID is free
 #, c-format
-msgid "User ID %d is already used"
-msgstr "Kasutaja ID %d on juba kasutusel"
+msgid "User ID %d is already used by user %s"
+msgstr "Kasutaja ID %d on juba kasutaja %s poolt kasutusel"
 
-msgid "Please choose a different numeric identifier for the new user."
-msgstr "Palun määra uuele kasutajale mõni muu numbriline identifikaator."
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "Palun määra kasutajale %s mõni muu numbriline identifikaator."
 
 msgid "Incomplete path in shell"
 msgstr "Mittetäielik kestprogrammi rada"
@@ -1438,83 +1474,3 @@ msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
 
 msgid "Users Settings"
 msgstr "Kasutajate sätted"
-
-#~ msgid ""
-#~ "Allow this user to open a local session without entering his password. "
-#~ "The password will still be required to perform administrative tasks."
-#~ msgstr ""
-#~ "Sellel kasutajal kohaliku seansi avamise lubamine ilma parooli "
-#~ "sisestamata. Haldustoimingute jaoks läheb siiski parooli tarvis."
-
-#~ msgid "_Add Group"
-#~ msgstr "_Lisa grupp"
-
-#~ msgid "_Add User"
-#~ msgstr "_Lisa kasutaja"
-
-#~ msgid "_Profile:"
-#~ msgstr "_Profiil:"
-
-#~ msgid "_Real name:"
-#~ msgstr "_Tegelik nimi:"
-
-#~ msgid "Account '%s' Properties"
-#~ msgstr "Konto '%s' omadused"
-
-#~ msgid "User name is empty"
-#~ msgstr "Kasutajanimi on tühi"
-
-#~ msgid "A user name must be specified."
-#~ msgstr "Kasutajanimi peab olema määratud."
-
-#~ msgid "User name has invalid characters"
-#~ msgstr "Kasutajanimi sisaldab lubamatuid sümboleid"
-
-#~ msgid ""
-#~ "Please set a valid user name consisting of a lower case letter followed "
-#~ "by lower case letters and numbers."
-#~ msgstr ""
-#~ "Palun sisesta korrektne grupinimi, kasutades esimese tähena väiketähte, "
-#~ "millele järgnevad ainult väiketähed ja/või numbrid."
-
-#~ msgid "User name \"%s\" already exists"
-#~ msgstr "Kasutaja nimega \"%s\" on juba olemas"
-
-#~ msgid "Please choose a different user name."
-#~ msgstr "Palun vali mõni muu kasutajanimi."
-
-#~ msgid "Name"
-#~ msgstr "Nimi"
-
-#~ msgid "Login name"
-#~ msgstr "Sisselogimisnimi"
-
-#~ msgid "Home directory"
-#~ msgstr "Kodukataloog"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
-#~ "span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Palun sisesta oma root parool</span>"
-
-#~ msgid ""
-#~ "You need administrator privileges to use this tool. Enter a password to "
-#~ "modify\n"
-#~ "your system configuration."
-#~ msgstr ""
-#~ "Selle tööriista kasutamiseks on sul vaja administraatori õigusi. "
-#~ "Süsteemsete sätete\n"
-#~ " muutmiseks sisesta administraatori parool."
-
-#~ msgid "_Unlock"
-#~ msgstr "_Võta lukust lahti"
-
-#~ msgid "This action is allowed"
-#~ msgstr "See tegevus on lubatud"
-
-#~ msgid "This action is not allowed"
-#~ msgstr "See tegevus pole lubatud"
-
-#~ msgid "Could not authenticate"
-#~ msgstr "Autentimine pole võimalik"
