@@ -61,6 +61,11 @@ static GstDialogSignal signals[] = {
 static void
 main_window_prepare (GstUsersTool *tool)
 {
+	GtkWidget *uid_entry;
+
+	uid_entry = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_uid");
+	gtk_spin_button_set_range (GTK_SPIN_BUTTON (uid_entry), 0, OOBS_MAX_UID);
+
 	create_tables (tool);
 
 	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog),

@@ -34,7 +34,7 @@
 
 gboolean        user_delete                      (GtkTreeModel *model,
 						  GtkTreePath *path);
-void	        user_settings_set	         (OobsUser *user);
+void            user_settings_show               (OobsUser *user);
 gint            user_settings_dialog_run         (GtkWidget *dialog);
 
 OobsUser *      user_settings_dialog_get_data    (GtkWidget *dialog);

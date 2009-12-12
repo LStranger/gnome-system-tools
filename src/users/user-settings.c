@@ -362,100 +362,35 @@ user_settings_get_user_face (OobsUser *user, int size)
 }
 
 void
-user_settings_set (OobsUser *user)
+user_settings_show (OobsUser *user)
 {
-	OobsUsersConfig *config;
-	GtkWidget *widget, *widget2, *notice;
-	const gchar *login = NULL;
-	gint uid;
+	GtkWidget *name_label;
+	GtkWidget *face_image;
+	GtkWidget *profile_label;
+	GtkWidget *profile_button;
 	GdkPixbuf *face;
 	GstUserProfile *profile;
 
-	notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
+	name_label = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
+	gtk_label_set_text (GTK_LABEL (name_label), oobs_user_get_full_name (user));
 
-	/* Set this before setting the UID so that it's not rejected */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	gtk_spin_button_set_range (GTK_SPIN_BUTTON (widget), 0, OOBS_MAX_UID);
-
-	if (!user) {
-		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-		set_entry_text (GTK_BIN (widget)->child,
-				oobs_users_config_get_default_shell (config));
-
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		uid = oobs_users_config_find_free_uid (config,
-		                                       GST_USERS_TOOL (tool)->minimum_uid,
-		                                       GST_USERS_TOOL (tool)->maximum_uid);
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), uid);
-		gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
-		gtk_widget_hide (notice);
-	} else {
-		login = oobs_user_get_login_name (user);
-
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-		set_entry_text (GTK_BIN (widget)->child, oobs_user_get_shell (user));
-
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
-		/* Show a notice if the user is logged in,
-		 * except if we don't have the required permissions to edit UID anyway */
-		if (oobs_user_is_root (user)) {
-			gst_dialog_try_set_sensitive (tool->main_dialog, widget, FALSE);
-			gtk_widget_hide (notice);
-		}
-		else if (oobs_user_get_active (user)) {
-			gst_dialog_try_set_sensitive (tool->main_dialog, widget, FALSE);
-			gtk_widget_show (notice);
-		}
-		else {
-			gst_dialog_try_set_sensitive (tool->main_dialog, widget, TRUE);
-			gtk_widget_hide (notice);
-		}
-	}
-
-	privileges_table_set_from_user (user);
-	select_main_group (user);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
-	gtk_label_set_text (GTK_LABEL (widget),  oobs_user_get_full_name (user));
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_face");
+	face_image = gst_dialog_get_widget (tool->main_dialog, "user_settings_face");
 	face = user_settings_get_user_face (user, 60);
-	gtk_image_set_from_pixbuf (GTK_IMAGE (widget), face);
+	gtk_image_set_from_pixbuf (GTK_IMAGE (face_image), face);
 	g_object_unref (face);
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
-	set_entry_text (widget, (user) ? oobs_user_get_room_number (user) : NULL);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_wphone");
-	set_entry_text (widget, (user) ? oobs_user_get_work_phone_number (user) : NULL);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_hphone");
-	set_entry_text (widget, (user) ? oobs_user_get_home_phone_number (user) : NULL);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
-	set_entry_text (widget, NULL);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
-	set_entry_text (widget, NULL);
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile");
-	widget2 = gst_dialog_get_widget (tool->main_dialog, "edit_user_profile_button");
+	profile_label = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile");
+	profile_button = gst_dialog_get_widget (tool->main_dialog, "edit_user_profile_button");
 	profile = gst_user_profiles_get_for_user (GST_USERS_TOOL (tool)->profiles,
 	                                          user, FALSE);
 	if (oobs_user_is_root (user)) {
-		gtk_widget_set_sensitive (widget2, FALSE);
-		gtk_label_set_text (GTK_LABEL (widget), _("Superuser"));
+		gtk_widget_set_sensitive (profile_button, FALSE);
+		gtk_label_set_text (GTK_LABEL (profile_label), _("Superuser"));
 	}
 	else {
-		gtk_widget_set_sensitive (widget2, TRUE);
-		gtk_label_set_text (GTK_LABEL (widget), profile ? profile->name : _("Custom"));
-	}
-
-	if (user) {
-		widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-		set_entry_text (widget, oobs_user_get_home_directory (user));
+		gtk_widget_set_sensitive (profile_button, TRUE);
+		gtk_label_set_text (GTK_LABEL (profile_label),
+		                    profile ? profile->name : _("Custom"));
 	}
 }
 
@@ -1214,6 +1149,13 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 	manual_toggle = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (manual_toggle), TRUE);
 
+	/* clear entries */
+	passwd_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
+	set_entry_text (passwd_entry, NULL);
+
+	passwd_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
+	set_entry_text (passwd_entry, NULL);
+
 	/* set option to skip password check at login */
 	nocheck_toggle = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
 	no_passwd_login_group = get_no_passwd_login_group ();
@@ -1364,6 +1306,7 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	GtkWidget *user_advanced_dialog;
 	GtkWidget *face_image;
 	GtkWidget *name_label;
+	GtkWidget *uid_notice;
 	GtkWidget *widget;
 	OobsUser *user;
 	int response;
@@ -1381,6 +1324,47 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 
 	user = users_table_get_current ();
 
+
+	/* set various settings */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_room_number");
+	set_entry_text (widget, (user) ? oobs_user_get_room_number (user) : NULL);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_wphone");
+	set_entry_text (widget, (user) ? oobs_user_get_work_phone_number (user) : NULL);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_hphone");
+	set_entry_text (widget, (user) ? oobs_user_get_home_phone_number (user) : NULL);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
+	set_entry_text (GTK_BIN (widget)->child, oobs_user_get_shell (user));
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
+	set_entry_text (widget, oobs_user_get_home_directory (user));
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
+
+	/* show a notice if the user is logged in */
+	uid_notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
+
+	if (oobs_user_is_root (user)) {
+		gtk_widget_set_sensitive (widget, FALSE);
+		gtk_widget_hide (uid_notice);
+	}
+	else if (oobs_user_get_active (user)) {
+		gtk_widget_set_sensitive (widget, FALSE);
+		gtk_widget_show (uid_notice);
+	}
+	else {
+		gtk_widget_set_sensitive (widget, TRUE);
+		gtk_widget_hide (uid_notice);
+	}
+
+	privileges_table_set_from_user (user);
+	select_main_group (user);
+
+
+	/* run dialog */
 	do {
 		response = run_edit_dialog (GTK_DIALOG (user_advanced_dialog),
 		                            GTK_IMAGE (face_image), GTK_LABEL (name_label));

@@ -89,7 +89,7 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 	actions_set_sensitive (table, count);
 
 	/* Show the settings for the selected user */
-	user_settings_set (user);
+	user_settings_show (user);
 
 	g_object_unref (user);
 }
