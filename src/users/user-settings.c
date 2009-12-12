@@ -560,7 +560,7 @@ check_uid (gchar **primary_text, gchar **secondary_text, gpointer data)
 	uid_user = oobs_users_config_get_from_uid (config, uid);
 
 	if (oobs_user_is_root (user) && uid != 0) {
-		*primary_text   = g_strdup (_("Administrator account's user ID should not be modified"));
+		*primary_text   = g_strdup (_("ID for the root user should not be modified"));
 		*secondary_text = g_strdup (_("This would leave the system unusable."));
 	}
 	else if (uid_user) { /* check that UID is free */
