@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2009-10-09 14:03+0000\n"
-"PO-Revision-Date: 2009-10-11 11:55+0200\n"
+"POT-Creation-Date: 2009-12-14 20:35+0000\n"
+"PO-Revision-Date: 2009-12-19 17:25+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,10 +27,19 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
+#| msgid "Whether the users-admin tool should show all users and groups or not"
+msgid "Whether the users-admin tool should show system users in the users list"
 msgstr ""
-"Indica si la herramienta de administración de usuarios debe mostrar todos "
-"los usuarios y grupos o no"
+"Indica si la herramienta de administración de usuarios debe mostrar los "
+"usuarios del sistema en la lista de usuarios"
+
+#: ../gnome-system-tools.schemas.in.h:2
+#| msgid "Whether the users-admin tool should show all users and groups or not"
+msgid ""
+"Whether the users-admin tool should show the root user in the users list"
+msgstr ""
+"Indica si la herramienta de administración de usuarios debe mostrar el "
+"usuario root en la lista de usuarios"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -108,7 +117,7 @@ msgstr "Ac_tivar esta conexión"
 msgid "Ethernet interface:"
 msgstr "Interfaz ethernet:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:31
 msgid "General"
 msgstr "General"
 
@@ -248,7 +257,7 @@ msgstr "_Establecer el módem como ruta predeterminada a Internet"
 msgid "_Subnet mask:"
 msgstr "Máscara de _subred:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "_Usuario:"
 
@@ -449,216 +458,293 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Configuración de contraseñas</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Contraseña</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Configuración de perfiles</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Configuración predeterminada del sistema</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "Cuenta"
+#: ../interfaces/users.ui.h:9
+#| msgid "Account"
+msgid "Account _type:"
+msgstr "_Tipo de cuenta:"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
+#, fuzzy
+#| msgid "Please choose a different numeric identifier for the new user."
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
-msgstr ""
-"Permitir a este usuario iniciar una sesión local sin introducir su "
-"contraseña. Aún se requerirá la contraseña para realizar tareas "
-"administrativas."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
+msgstr "Elija un identificador numérico diferente para el nuevo usuario."
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "Asignar una contraseña aleatora de forma predeterminada"
 
+#: ../interfaces/users.ui.h:13
+#, fuzzy
+#| msgid "Advanced settings:"
+msgid "Change Advanced User Settings"
+msgstr "Configuración avanzada:"
+
 #: ../interfaces/users.ui.h:14
+#| msgid "New user account"
+msgid "Change User Account Type"
+msgstr "Cambiar el tipo de cuenta de usuario"
+
+#: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "Cambiar el nombre de usuario e inicio de sesión"
+
+#: ../interfaces/users.ui.h:16
+#| msgid "Enter Password"
+msgid "Change User Password"
+msgstr "Cambiar la contraseña del usuario"
+
+#: ../interfaces/users.ui.h:17
+#| msgid "Advanced settings:"
+msgid "Changing advanced settings for:"
+msgstr "Cambiando los ajustes avanzados para:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "Cambiando el tipo de cuenta de usuario para:"
+
+#: ../interfaces/users.ui.h:19
+#| msgid "Change _Host name"
+msgid "Changing user name for:"
+msgstr "Cambiando el nombre de usuario para:"
+
+#: ../interfaces/users.ui.h:20
+#| msgid "Enter password for user"
+msgid "Changing user password for:"
+msgstr "Cambiando la contraseña de usuario para:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Check password _quality"
 msgstr "Comprobar la cali_dad de la contraseña"
 
-#: ../interfaces/users.ui.h:15
+#: ../interfaces/users.ui.h:22
 msgid "Con_firmation:"
 msgstr "Con_firmación:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:23
 msgid "Contact Information"
 msgstr "Información de contacto"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:24
+msgid "Create New User"
+msgstr "Crear un usuario nuevo"
+
+#: ../interfaces/users.ui.h:25
+msgid "Create a new user"
+msgstr "Crear un usuario nuevo"
+
+#: ../interfaces/users.ui.h:26
 msgid "Days between warning and password expiration:"
 msgstr "Número de días entre el aviso y la expiración de la contraseña:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:27
 msgid "Default _group:"
 msgstr "_Grupo predeterminado:"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:28
 msgid "Default _shell:"
 msgstr "_Shell predeterminada:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "No preguntar de nuevo la contraseña al _iniciar sesión"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+#, fuzzy
+#| msgid "Name:"
+msgid "Full _Name:"
+msgstr "Nombre:"
+
+#: ../interfaces/users.ui.h:32
 msgid "Generate _random password"
 msgstr "Generar contraseña _aleatoria"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:33
 msgid "Group _ID:"
 msgstr "_ID del grupo:"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:34
 msgid "Group _name:"
 msgstr "_Nombre del grupo:"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:35
 msgid "Group properties"
 msgstr "Propiedades del grupo"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:36
 msgid "Groups settings"
 msgstr "Ajustes del grupo"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:37
 msgid "Ma_ximum days a password may be used:"
 msgstr "Má_ximo número de días que se puede usar una contraseña:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:38 ../src/time/time-tool.c:522
+msgid "Manual"
+msgstr "Manual"
+
+#: ../interfaces/users.ui.h:39
 msgid "Maximum GID:"
 msgstr "GID máximo:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:40
 msgid "Maximum UID:"
 msgstr "UID máximo:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:41
 msgid "Mi_nimum days between password changes:"
 msgstr "Mí_nimo número de días entre cambio de contraseñas:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:42
 msgid "Minimum GID:"
 msgstr "GID mínimo:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:43
 msgid "Minimum UID:"
 msgstr "UID mínimo:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:44
 msgid "Minimum days allowed between password changes:"
 msgstr "Mínimo número de días permitidos entre cambios de contraseñas:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:45
 msgid "Number of days that a password may be used:"
 msgstr "Número de días que se puede usar una contraseña:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:46
 msgid "O_ffice location:"
 msgstr "Ubicación en la o_ficina:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:47
 msgid "Password set to: "
 msgstr "Contraseña establecida a: "
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:48
 msgid "Privileges"
 msgstr "Privilegios"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:49
 msgid "Profile _name:"
 msgstr "_Nombre del perfil:"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:50
 msgid "Set password b_y hand"
 msgstr "Establecer la contraseña _a mano"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:52
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+
+#: ../interfaces/users.ui.h:56
+msgid "Short name must start with a letter!"
+msgstr ""
+
+#: ../interfaces/users.ui.h:57
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+
+#: ../interfaces/users.ui.h:58
 msgid "User ID:"
 msgstr "ID del usuario:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:59
 msgid "User Privileges"
 msgstr "Privilegios del usuario"
 
-#: ../interfaces/users.ui.h:42
+#: ../interfaces/users.ui.h:60
 msgid "User _password:"
 msgstr "Con_traseña del usuario:"
 
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr "El usuario debe cerrar la sesión antes de que pueda cambiar su ID."
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:61
 msgid "User profiles"
 msgstr "Perfiles del usuario"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "_Añadir grupo"
+#: ../interfaces/users.ui.h:62
+msgid "You can't change user ID while the user is logged in."
+msgstr ""
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:63
 msgid "_Add Profile"
 msgstr "_Añadir perfil"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "_Añadir usuario"
+#: ../interfaces/users.ui.h:64
+#, fuzzy
+#| msgid "Advanced settings:"
+msgid "_Advanced Settings"
+msgstr "Configuración avanzada:"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:65
 msgid "_Comments"
 msgstr "_Comentarios"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:66
+msgid "_Custom"
+msgstr ""
+
+#: ../interfaces/users.ui.h:67
 msgid "_Days between warning and password expiration:"
 msgstr "_Días entre la advertencia y la expiración de la contraseña:"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "_Borrar"
-
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:68
 msgid "_Generate"
 msgstr "_Generar"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:69
 msgid "_Home directory:"
 msgstr "Directorio per_sonal:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:70
 msgid "_Home phone:"
 msgstr "Teléfono del _domicilio:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:71
 msgid "_Main group:"
 msgstr "Grupo pri_ncipal:"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:72
 msgid "_Manage Groups"
 msgstr "Gestionar g_rupos"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "_Perfil:"
+#: ../interfaces/users.ui.h:73
+#, fuzzy
+#| msgid "Name:"
+msgid "_Name:"
+msgstr "Nombre:"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "Nombre _real:"
+#: ../interfaces/users.ui.h:74
+msgid "_Password:"
+msgstr "_Contraseña:"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:75
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:76
+#, fuzzy
+#| msgid "_Host name:"
+msgid "_Short Name:"
+msgstr "Nombre del _servidor:"
+
+#: ../interfaces/users.ui.h:77
 msgid "_Work phone:"
 msgstr "Teléfono del _trabajo:"
 
@@ -684,49 +770,54 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Plataforma no soportada"
 
-#: ../src/common/gst-tool.c:181
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "La configuración no se pudo cargar"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "La configuración no se pudo guardar"
 
-#: ../src/common/gst-tool.c:187
+#: ../src/common/gst-tool.c:196
 msgid "You are not allowed to access the system configuration."
 msgstr "No se le permite acceder a la configuración del sistema."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:189
+#: ../src/common/gst-tool.c:198
 msgid "You are not allowed to modify the system configuration."
 msgstr "No se le permite modificar la configuración del sistema."
 
-#: ../src/common/gst-tool.c:192
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "Se encontraron datos no válidos."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:194
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "Ocurrió un error desconocido."
 
-#: ../src/common/gst-tool.c:416
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "No se pudo mostrar la ayuda"
 
-#: ../src/common/gst-tool.c:600
+#: ../src/common/gst-tool.c:612
 msgid "The system configuration has potentially changed."
 msgstr "La configuración del sistema ha cambiado."
 
-#: ../src/common/gst-tool.c:602
+#: ../src/common/gst-tool.c:614
 msgid "Update content? This will lose any modification in course."
 msgstr "¿Actualizar el contenido? Se perderá cualquier modificación en curso."
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "_Añadir"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "_Borrar"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -814,7 +905,7 @@ msgid "%s Properties"
 msgstr "Propiedades de %s"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "_Propiedades"
 
@@ -1422,7 +1513,7 @@ msgstr "Estado"
 msgid "Priority"
 msgstr "Prioridad"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "Configuración de los servicios"
 
@@ -1541,60 +1632,56 @@ msgstr "Sincronizando reloj del sistema"
 msgid "Keep synchronized with Internet servers"
 msgstr "Mantener sincronizado con los servidores de Internet"
 
-#: ../src/time/time-tool.c:522
-msgid "Manual"
-msgstr "Manual"
-
 #: ../src/time/time-tool.c:668
 msgid "Time and Date Settings"
 msgstr "Ajustes de hora y fecha"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "El grupo del administrador no se puede borrar"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
-#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:702
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:220
+#: ../src/users/group-settings.c:257 ../src/users/user-settings.c:74
+#: ../src/users/user-settings.c:499
 msgid "This would leave the system unusable."
 msgstr "Esto podría dejar el sistema inutilizable."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "¿Está seguro que desea borrar el grupo «%s»?"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr ""
 "Esto puede dejar archivos con ID de grupo inválido en el sistema de archivos."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:143
 msgid "New group"
 msgstr "Grupo nuevo"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:150
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Propiedades del grupo «%s»"
 
-#: ../src/users/group-settings.c:291
+#: ../src/users/group-settings.c:216
 msgid "Group name is empty"
 msgstr "El nombre del grupo está vacío"
 
-#: ../src/users/group-settings.c:292
+#: ../src/users/group-settings.c:217
 msgid "A group name must be specified."
 msgstr "Debe especificarse un nombre de grupo."
 
-#: ../src/users/group-settings.c:294
+#: ../src/users/group-settings.c:219
 msgid "Group name of the administrator group user should not be modified"
 msgstr "El nombre de grupo del administrador no debería modificarse"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:222
 msgid "Group name has invalid characters"
 msgstr "El nombre de grupo tiene caracteres inválidos"
 
-#: ../src/users/group-settings.c:298
+#: ../src/users/group-settings.c:223
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1602,105 +1689,123 @@ msgstr ""
 "Establezca un nombre de usuario válido, consistente en una letra minúscula "
 "seguida de letras minúsculas y/o números."
 
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
+#: ../src/users/group-settings.c:228
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "El grupo «%s» ya existe"
 
-#: ../src/users/group-settings.c:303
+#: ../src/users/group-settings.c:229
 msgid "Please choose a different group name."
 msgstr "Elija un nombre de grupo diferente."
 
-#: ../src/users/group-settings.c:318
+#: ../src/users/group-settings.c:256
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "El ID del grupo de la cuenta de administrador no debería modificarse"
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:260
+#, fuzzy, c-format
+#| msgid "User ID %d is already used"
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "El ID de usuario %d ya está en uso"
+
+#: ../src/users/group-settings.c:263
+#, fuzzy
+#| msgid "Please choose a different numeric identifier for the new user."
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "Elija un identificador numérico diferente para el nuevo usuario."
+
+#: ../src/users/group-settings.c:265
+#, fuzzy, c-format
+#| msgid "Please choose a different numeric identifier for the new user."
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "Elija un identificador numérico diferente para el nuevo usuario."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Nombre del grupo"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "Monitorizar los registros del sistema"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "Administrar el sistema"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "Usar dispositivos de sonido"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "Usar unidades de CD-ROM"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "Grabar CD / DVD"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "Usar módems"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "Conectar a Internet con un módem"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "Enviar y recibir faxes"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "Usar disqueteras"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "Montar sistemas de archivo de espacio de usuario (FUSE)"
 
-#: ../src/users/privileges-table.c:59
-#| msgid "Configure a network interface"
+#: ../src/users/privileges-table.c:63
 msgid "Configure printers"
 msgstr "Configurar impresoras"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:64
 msgid "Connect to wireless and ethernet networks"
 msgstr "Conectar con una red inalámbrica y otras redes ethernet"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "Acceder automáticamente a dispositivos de almacenamiento externo"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:66
 msgid "Suspend and hibernate the computer"
 msgstr "Suspender e hibernar el equipo"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "Acceder al sistema de archivos /proc"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "Usar escáneres"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "Usar unidades de cinta"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "Usar dispositivos USB"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:71
 msgid "Use VirtualBox virtualization solution"
 msgstr "Usar la solución de virtualización de VirtualBox"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "Usar dispositivos de vídeo"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "Poder obtener privilegios de administrador"
 
@@ -1712,16 +1817,37 @@ msgstr "Añadir o quitar usuarios y grupos"
 msgid "Users and Groups"
 msgstr "Usuarios y grupos"
 
-#: ../src/users/user-settings.c:58
+#: ../src/users/user-settings.c:71
 msgid "Administrator account cannot be deleted"
 msgstr "La cuenta del administrador no se puede borrar"
 
-#: ../src/users/user-settings.c:72
+#: ../src/users/user-settings.c:82
+#, fuzzy, c-format
+#| msgid "This user is currently using this computer"
+msgid "%s is currently using this computer"
+msgstr "Actualmente este usuario está usando este equipo"
+
+#: ../src/users/user-settings.c:85
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr ""
+
+#: ../src/users/user-settings.c:95
+msgid "Can't delete the only administrator account"
+msgstr ""
+
+#: ../src/users/user-settings.c:97
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr ""
+
+#: ../src/users/user-settings.c:107
 #, c-format
 msgid "Are you sure you want to delete account \"%s\"?"
 msgstr "¿Está seguro que desea borrar la cuenta «%s»?"
 
-#: ../src/users/user-settings.c:75
+#: ../src/users/user-settings.c:110
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1729,62 +1855,28 @@ msgstr ""
 "Esto desactivará el acceso de este usuario al sistema, pero su directorio "
 "personal no se borrará."
 
-#: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "Actualmente este usuario está usando este equipo"
-
-#: ../src/users/user-settings.c:439
-msgid "New user account"
-msgstr "Cuenta de usuario nueva"
-
-#: ../src/users/user-settings.c:460
-#, c-format
-msgid "Account '%s' Properties"
-msgstr "Propiedades de la cuenta «%s»"
-
-#: ../src/users/user-settings.c:621
-msgid "User name is empty"
-msgstr "El nombre de usuario está vacío"
-
-#: ../src/users/user-settings.c:622
-msgid "A user name must be specified."
-msgstr "Debe especificar un nombre de usuario."
-
-#: ../src/users/user-settings.c:624
-msgid "User name has invalid characters"
-msgstr "El nombre de usuario tiene caracteres inválidos"
-
-#: ../src/users/user-settings.c:625
-msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
+#: ../src/users/user-settings.c:388
+msgid "Superuser"
 msgstr ""
-"Establezca un nombre de usuario válido, consistente en una letra minúscula "
-"seguida de letras minúsculas y/o números."
 
-#: ../src/users/user-settings.c:629
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "El nombre de usuario «%s» ya existe"
+#: ../src/users/user-settings.c:393
+msgid "Custom"
+msgstr ""
 
-#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
-msgid "Please choose a different user name."
-msgstr "Elija un nombre de usuario diferente."
-
-#: ../src/users/user-settings.c:661
+#: ../src/users/user-settings.c:416
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Carácter inválido «%c» en comentario"
 
-#: ../src/users/user-settings.c:662
+#: ../src/users/user-settings.c:417
 msgid "Check that this character is not used."
 msgstr "Compruebe que este carácter no se use."
 
-#: ../src/users/user-settings.c:680
+#: ../src/users/user-settings.c:440
 msgid "Incomplete path in home directory"
 msgstr "Ruta incompleta en el directorio personal"
 
-#: ../src/users/user-settings.c:681
+#: ../src/users/user-settings.c:441
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1792,34 +1884,47 @@ msgstr ""
 "Escriba la ruta completa para el directorio personal\n"
 "<span size=\"smaller\">ej: /home/juan</span>."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:456
 msgid "Home directory already exists"
 msgstr "El directorio personal ya existe"
 
-#: ../src/users/user-settings.c:685
-msgid "Please enter a different home directory path."
-msgstr "Introduzca una ruta para el directorio personal diferente."
-
-#: ../src/users/user-settings.c:701
-msgid "Administrator account's user ID should not be modified"
-msgstr "El ID de la cuenta de usuario del administrador no debería modificarse"
-
-#: ../src/users/user-settings.c:706
+#: ../src/users/user-settings.c:457
 #, c-format
-#| msgid "User name \"%s\" already exists"
-msgid "User ID %d is already used"
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+
+#: ../src/users/user-settings.c:463
+#, fuzzy
+#| msgid "Home directory"
+msgid "Use this directory"
+msgstr "Directorio personal"
+
+#: ../src/users/user-settings.c:498
+#, fuzzy
+#| msgid "Group name of the administrator group user should not be modified"
+msgid "ID for the root user should not be modified"
+msgstr "El nombre de grupo del administrador no debería modificarse"
+
+#. check that UID is free
+#: ../src/users/user-settings.c:502
+#, fuzzy, c-format
+#| msgid "User ID %d is already used"
+msgid "User ID %d is already used by user %s"
 msgstr "El ID de usuario %d ya está en uso"
 
-#: ../src/users/user-settings.c:707
-#| msgid "Please choose a different user name."
-msgid "Please choose a different numeric identifier for the new user."
+#: ../src/users/user-settings.c:504
+#, fuzzy, c-format
+#| msgid "Please choose a different numeric identifier for the new user."
+msgid "Please choose a different numeric identifier for %s."
 msgstr "Elija un identificador numérico diferente para el nuevo usuario."
 
-#: ../src/users/user-settings.c:721
+#: ../src/users/user-settings.c:522
 msgid "Incomplete path in shell"
 msgstr "Ruta incompleta en el shell"
 
-#: ../src/users/user-settings.c:722
+#: ../src/users/user-settings.c:523
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1827,11 +1932,11 @@ msgstr ""
 "Introduzca una ruta completa para la shell\n"
 "<span size=\"smaller\">ej: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:755
+#: ../src/users/user-settings.c:559
 msgid "Password is too short"
 msgstr "La contraseña es demasiado corta"
 
-#: ../src/users/user-settings.c:756
+#: ../src/users/user-settings.c:560
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1839,30 +1944,110 @@ msgstr ""
 "Las contraseñas de usuario deben ser más largas que 6 caracteres y "
 "preferiblemente formadas por números, letras y caracteres especiales."
 
-#: ../src/users/user-settings.c:759
+#: ../src/users/user-settings.c:563
 msgid "Password confirmation is not correct"
 msgstr "La confirmación de la contraseña es incorrecta"
 
-#: ../src/users/user-settings.c:760
+#: ../src/users/user-settings.c:564
 msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 "Compruebe que ha proporcionado la misma contraseña en ambos campos de texto."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Nombre"
+#: ../src/users/user-settings.c:614
+#, fuzzy
+#| msgid "Be able to get administrator privileges"
+msgid "Can't revoke administration rights"
+msgstr "Poder obtener privilegios de administrador"
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "Nombre de usuario"
+#: ../src/users/user-settings.c:617
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr ""
 
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "Directorio personal"
+#: ../src/users/user-settings.c:634
+msgid "You are about to revoke your own administration rights"
+msgstr ""
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/user-settings.c:637
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+
+#: ../src/users/user-settings.c:642
+msgid "Give up administration rights"
+msgstr ""
+
+#: ../src/users/users-tool.c:271
 msgid "Users Settings"
 msgstr "Ajustes de los usuarios"
+
+#~ msgid "<span weight=\"bold\">Password</span>"
+#~ msgstr "<span weight=\"bold\">Contraseña</span>"
+
+#~ msgid ""
+#~ "Allow this user to open a local session without entering his password. "
+#~ "The password will still be required to perform administrative tasks."
+#~ msgstr ""
+#~ "Permitir a este usuario iniciar una sesión local sin introducir su "
+#~ "contraseña. Aún se requerirá la contraseña para realizar tareas "
+#~ "administrativas."
+
+#~ msgid "User must log out before you can change his ID."
+#~ msgstr "El usuario debe cerrar la sesión antes de que pueda cambiar su ID."
+
+#~ msgid "_Add Group"
+#~ msgstr "_Añadir grupo"
+
+#~ msgid "_Add User"
+#~ msgstr "_Añadir usuario"
+
+#~ msgid "_Profile:"
+#~ msgstr "_Perfil:"
+
+#~ msgid "_Real name:"
+#~ msgstr "Nombre _real:"
+
+#~ msgid "Account '%s' Properties"
+#~ msgstr "Propiedades de la cuenta «%s»"
+
+#~ msgid "User name is empty"
+#~ msgstr "El nombre de usuario está vacío"
+
+#~ msgid "A user name must be specified."
+#~ msgstr "Debe especificar un nombre de usuario."
+
+#~ msgid "User name has invalid characters"
+#~ msgstr "El nombre de usuario tiene caracteres inválidos"
+
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "Establezca un nombre de usuario válido, consistente en una letra "
+#~ "minúscula seguida de letras minúsculas y/o números."
+
+#~ msgid "User name \"%s\" already exists"
+#~ msgstr "El nombre de usuario «%s» ya existe"
+
+#~ msgid "Please choose a different user name."
+#~ msgstr "Elija un nombre de usuario diferente."
+
+#~ msgid "Please enter a different home directory path."
+#~ msgstr "Introduzca una ruta para el directorio personal diferente."
+
+#~ msgid "Administrator account's user ID should not be modified"
+#~ msgstr ""
+#~ "El ID de la cuenta de usuario del administrador no debería modificarse"
+
+#~ msgid "Name"
+#~ msgstr "Nombre"
+
+#~ msgid "Login name"
+#~ msgstr "Nombre de usuario"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
@@ -1870,9 +2055,6 @@ msgstr "Ajustes de los usuarios"
 #~ msgstr ""
 #~ "<span weight=\"bold\" size=\"larger\">Introduzca su contraseña de "
 #~ "superusuario</span>"
-
-#~ msgid "Enter Password"
-#~ msgstr "Introduzca la contraseña"
 
 #~ msgid ""
 #~ "You need administrator privileges to use this tool. Enter a password to "
@@ -1882,9 +2064,6 @@ msgstr "Ajustes de los usuarios"
 #~ "Necesita privilegios de administrador para usar esta herramienta. "
 #~ "Introduzca una contraseña para modificar\n"
 #~ "la configuración de su sistema."
-
-#~ msgid "_Password:"
-#~ msgstr "_Contraseña:"
 
 #~ msgid "_Unlock"
 #~ msgstr "_Desbloquear"
