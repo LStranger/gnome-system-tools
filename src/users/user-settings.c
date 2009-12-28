@@ -686,6 +686,7 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	OobsUsersConfig *config;
 	GtkWidget *validate_button;
 	GtkWidget *user_login;
+	GtkWidget *login_entry;
 	GtkTreeModel *model;
 	gboolean valid_login;
 	gboolean valid_name;
@@ -706,9 +707,9 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	                                         "user_new_validate_button");
 
 	user_login = gst_dialog_get_widget (tool->main_dialog, "user_new_login");
+	login_entry = gtk_bin_get_child (GTK_BIN (user_login));
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (user_login));
 	gtk_list_store_clear (GTK_LIST_STORE (model));
-	gtk_combo_box_set_active (GTK_COMBO_BOX (user_login), -1);
 
 	name = gtk_entry_get_text (GTK_ENTRY (user_name));
 
@@ -722,8 +723,10 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 	g_object_set_data (G_OBJECT (validate_button),
 	                   "valid-name", GINT_TO_POINTER (valid_name));
 
-	if (!valid_name)
+	if (!valid_name) {
+		gtk_entry_set_text (GTK_ENTRY (login_entry), "");
 		return;
+	}
 
 
 	ascii_name = g_convert_with_fallback (name, -1, "ASCII//TRANSLIT", "UTF-8",
