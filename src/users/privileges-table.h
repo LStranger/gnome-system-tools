@@ -33,8 +33,7 @@ void     privileges_table_clear            (void);
 void     populate_privileges_table         (GtkWidget*, gchar*);
 GList*   user_privileges_get_list          (GList*);
 
-void     privileges_table_add_group        (OobsGroup    *group,
-                                            OobsListIter *list_iter);
+void     privileges_table_add_group        (OobsGroup    *group);
 
 void     privileges_table_set_from_profile (GstUserProfile *profile);
 void     privileges_table_set_from_user    (OobsUser *user);

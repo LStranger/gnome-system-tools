@@ -162,10 +162,10 @@ update_groups (GstUsersTool *tool)
 
 	while (valid) {
 		group = oobs_list_get (list, &iter);
-		groups_table_add_group (OOBS_GROUP (group), &iter);
+		groups_table_add_group (OOBS_GROUP (group));
 
 		/* update privileges table too */
-		privileges_table_add_group (OOBS_GROUP (group), &iter);
+		privileges_table_add_group (OOBS_GROUP (group));
 
 		g_object_unref (group);
 		valid = oobs_list_iter_next (list, &iter);

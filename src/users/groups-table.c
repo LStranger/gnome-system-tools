@@ -59,8 +59,7 @@ create_groups_model (void)
 	store = gtk_list_store_new (COL_GROUP_LAST,
 	                            G_TYPE_STRING,
 	                            G_TYPE_INT,
-				    G_TYPE_OBJECT,
-				    OOBS_TYPE_LIST_ITER);
+				    G_TYPE_OBJECT);
 
 	return GTK_TREE_MODEL (store);
 }
@@ -100,7 +99,7 @@ create_groups_table (void)
 }
 
 void
-groups_table_set_group (OobsGroup *group, OobsListIter *list_iter, GtkTreeIter *iter)
+groups_table_set_group (OobsGroup *group, GtkTreeIter *iter)
 {
 	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
@@ -109,19 +108,18 @@ groups_table_set_group (OobsGroup *group, OobsListIter *list_iter, GtkTreeIter *
 			    COL_GROUP_NAME, oobs_group_get_name (group),
 			    COL_GROUP_ID, oobs_group_get_gid (group),
 			    COL_GROUP_OBJECT, group,
-			    COL_GROUP_ITER, list_iter,
 			    -1);
 }
 
 void
-groups_table_add_group (OobsGroup *group, OobsListIter *list_iter)
+groups_table_add_group (OobsGroup *group)
 {
 	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
 	GtkTreeIter iter;
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	groups_table_set_group (group, list_iter, &iter);
+	groups_table_set_group (group, &iter);
 }
 
 void

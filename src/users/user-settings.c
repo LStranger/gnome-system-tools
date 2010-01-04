@@ -133,7 +133,6 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 	GtkTreeIter iter;
 	OobsUsersConfig *config;
 	OobsUser *user;
-	OobsList *users_list;
 	OobsListIter *list_iter;
 	gboolean retval = FALSE;
 
@@ -147,11 +146,12 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 
 	if (check_user_delete (user)) {
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-		users_list = oobs_users_config_get_users (config);
-		oobs_list_remove (users_list, list_iter);
-
-		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-		retval = TRUE;
+		if (oobs_users_config_delete_user (config, user)) {
+			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+			retval = TRUE;
+		}
+		else
+			retval = FALSE;
 	}
 
 	g_object_unref (user);
@@ -182,9 +182,6 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 
 	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
 	g_list_free (list);
-
-	if (count > 0)
-		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
 }
 
 static void
@@ -284,7 +281,7 @@ set_main_group (OobsUser *user)
 	/* Try to commit before doing anything, to avoid displaying wrong data */
 	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config) == OOBS_RESULT_OK) {
 		if (is_group_new)
-			groups_table_add_group (group, &list_iter);
+			groups_table_add_group (group);
 
 		/* This will be committed with the user himself */
 		oobs_user_set_main_group (user, group);
@@ -975,8 +972,6 @@ on_user_new (GtkButton *button, gpointer user_data)
 	OobsUser *user;
 	const char *fullname, *login;
 	GstUserProfile *profile;
-	OobsList *users_list;
-	OobsListIter list_iter;
 	OobsUsersConfig *users_config;
 
 	user_new_dialog = gst_dialog_get_widget (tool->main_dialog, "user_new_dialog");
@@ -1028,16 +1023,13 @@ on_user_new (GtkButton *button, gpointer user_data)
 	gst_user_profiles_apply (GST_USERS_TOOL (tool)->profiles, profile, user, TRUE);
 
 	users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-	users_list = oobs_users_config_get_users (users_config);
-	oobs_list_append (users_list, &list_iter);
-	oobs_list_set (users_list, &list_iter, user);
 
-	/* Commit both users and groups config because of possible memberships
+	/* Commit both user and groups config because of possible memberships
 	 * added by the profile. Avoid showing the new user or trying to commit
 	 * group changes if the user has not been created. */
-	if (gst_tool_commit (tool, OOBS_OBJECT (users_config)) == OOBS_RESULT_OK) {
+	if (oobs_users_config_add_user (users_config, user) == OOBS_RESULT_OK) {
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-		user_path = users_table_add_user (user, &list_iter);
+		user_path = users_table_add_user (user, NULL);
 		users_table_select_path (user_path);
 		gtk_tree_path_free (user_path);
 
@@ -1118,7 +1110,7 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 
 		fullname = gtk_entry_get_text (GTK_ENTRY (user_name_entry));
 		oobs_user_set_full_name (user, fullname);
-		gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config);
+		gst_tool_commit (tool, OOBS_OBJECT (user));
 	}
 
 	g_object_unref (user);
@@ -1219,7 +1211,7 @@ on_edit_user_passwd (GtkButton *button, gpointer user_data)
 
 	/* commit both user and groups config
 	 * because of the no_passwd_login_group membership */
-	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK)
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 
 	g_object_unref (user);
@@ -1294,7 +1286,7 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 		                           profile, user, FALSE);
 
 		  if (response == GTK_RESPONSE_OK) {
-			  if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+			  if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK)
 				  gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 		  }
 	  }
@@ -1401,7 +1393,7 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 
 	privileges_table_save (user);
 
-	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK)
+	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK)
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 
 	g_object_unref (user);

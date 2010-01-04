@@ -292,8 +292,6 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *parent_dialog;
 	OobsGroupsConfig *config;
 	OobsGroup *group;
-	OobsList *groups_list;
-	OobsListIter list_iter;
 	gint response;
 
 	group = oobs_group_new (NULL);
@@ -305,14 +303,10 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 
 	if (response == GTK_RESPONSE_OK) {
 		group = group_settings_dialog_get_group ();
-
 		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
-		groups_list = oobs_groups_config_get_groups (config);
-		oobs_list_append (groups_list, &list_iter);
-		oobs_list_set (groups_list, &list_iter, group);
 
-		if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config) == OOBS_RESULT_OK)
-			groups_table_add_group (group, &list_iter);
+		if (oobs_groups_config_add_group (config, group) == OOBS_RESULT_OK)
+			groups_table_add_group (group);
 	}
 }
 
@@ -324,7 +318,6 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	GtkTreeModel *model;
 	GtkTreeIter filter_iter, iter;
 	OobsGroup *group;
-	OobsListIter *list_iter;
 	gint response;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
@@ -339,7 +332,6 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 
 	gtk_tree_model_get (model, &iter,
 			    COL_GROUP_OBJECT, &group,
-			    COL_GROUP_ITER, &list_iter,
 			    -1);
 	dialog = group_settings_dialog_new (group);
 	parent_dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
@@ -351,12 +343,11 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 		gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
 								  &filter_iter, &iter);
 		group_settings_dialog_get_data (group);
-		groups_table_set_group (group, list_iter, &filter_iter);
+		groups_table_set_group (group, &filter_iter);
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
 
 	g_object_unref (group);
-	oobs_list_iter_free (list_iter);
 }
 
 void
@@ -378,8 +369,6 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 
 	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
 	g_list_free (list);
-
-	gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 }
 
 /* User settings callbacks */

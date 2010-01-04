@@ -190,7 +190,7 @@ create_user_privileges_table (void)
 }
 
 void
-privileges_table_add_group (OobsGroup *group, OobsListIter *list_iter)
+privileges_table_add_group (OobsGroup *group)
 {
 	const PrivilegeDescription *p;
 	GtkWidget *table;

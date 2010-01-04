@@ -28,7 +28,6 @@ enum {
 	COL_GROUP_NAME,
 	COL_GROUP_ID,
 	COL_GROUP_OBJECT,
-	COL_GROUP_ITER,
 	COL_GROUP_LAST
 };
 
@@ -55,9 +54,7 @@ void	populate_groups_table		(void);
 void	group_table_update_content	(void);
 
 void    groups_table_set_group          (OobsGroup    *group,
-                                         OobsListIter *list_iter,
                                          GtkTreeIter  *iter);
-void    groups_table_add_group          (OobsGroup    *group,
-                                         OobsListIter *list_iter);
+void    groups_table_add_group          (OobsGroup    *group);
 
 #endif /* _GROUPS_TABLE_H */
