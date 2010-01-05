@@ -316,7 +316,7 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *table, *dialog, *parent_dialog;
 	GtkTreePath *path;
 	GtkTreeModel *model;
-	GtkTreeIter filter_iter, iter;
+	GtkTreeIter iter;
 	OobsGroup *group;
 	gint response;
 
@@ -340,10 +340,8 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	response = group_settings_dialog_run (dialog, group);
 
 	if (response == GTK_RESPONSE_OK) {
-		gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-								  &filter_iter, &iter);
 		group_settings_dialog_get_data (group);
-		groups_table_set_group (group, &filter_iter);
+		groups_table_set_group (group, &iter);
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 	}
 

@@ -227,24 +227,35 @@ GList*
 table_get_row_references (gint table, GtkTreeModel **model)
 {
 	GtkTreeSelection *selection;
-	GtkTreeModel *filter_model;
+	GtkTreeModel *table_model;
 	GtkTreePath *child_path;
 	GList *paths, *elem, *list = NULL;
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (get_table (table)));
-	paths = elem = gtk_tree_selection_get_selected_rows (selection, &filter_model);
-	*model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	paths = elem = gtk_tree_selection_get_selected_rows (selection, &table_model);
+	if (table == TABLE_USERS)
+		*model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (table_model));
+	else
+		*model = table_model;
 
 	if (!paths)
 		return NULL;
 
-	while (elem) {
-		child_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (filter_model),
-									       (GtkTreePath *) elem->data);
+	if (table == TABLE_USERS) {
+		while (elem) {
+			child_path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (table_model),
+			                                                               (GtkTreePath *) elem->data);
 
-		list = g_list_prepend (list, gtk_tree_row_reference_new (*model, child_path));
-		gtk_tree_path_free (child_path);
-		elem = elem->next;
+			list = g_list_prepend (list, gtk_tree_row_reference_new (*model, child_path));
+			gtk_tree_path_free (child_path);
+			elem = elem->next;
+		}
+	}
+	else {
+		while (elem) {
+			list = g_list_prepend (list, gtk_tree_row_reference_new (*model, (GtkTreePath *) elem->data));
+			elem = elem->next;
+		}
 	}
 
 	list = g_list_reverse (list);
