@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-18 10:46+0300\n"
-"PO-Revision-Date: 2009-09-08 10:26+0300\n"
+"POT-Creation-Date: 2010-01-05 14:31+0200\n"
+"PO-Revision-Date: 2010-01-05 10:26+0300\n"
 "Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
 "Language-Team: ukrainian <Ukrainian <uk@li.org>>\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,13 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
-msgstr "Чи буде утиліта users-admin показувати усі користувачі та групи"
+msgid "Whether the users-admin tool should show system users in the users list"
+msgstr "Чи буде утиліта users-admin показувати усіх користувачі у списку користувачів"
+
+#: ../gnome-system-tools.schemas.in.h:2
+msgid ""
+"Whether the users-admin tool should show the root user in the users list"
+msgstr "Чи буде утиліта users-admin показувати усі групи у списку груп"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -97,7 +102,7 @@ msgstr "_Увімкнути це з'єднання"
 msgid "Ethernet interface:"
 msgstr "Інтерфейс Ethernet:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:31
 msgid "General"
 msgstr "Загальне"
 
@@ -237,7 +242,7 @@ msgstr "_Встановити модем як типовий маршрут до
 msgid "_Subnet mask:"
 msgstr "Маска _мережі:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "_Ім'я користувача:"
 
@@ -436,216 +441,280 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Параметри пароля</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Пароль</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Параметри профілю</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Системні початкові значення</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "Обліковий запис"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "_Тип облікового запису:"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "Додатково"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
-msgstr ""
-"Дозволити цьому користувачу відкривати локальні сесії без вводу пароля. "
-"Однак пароль буде потрібен для виконання адміністративних задач."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
+msgstr "Користувач з таким ім'ям вже існує. Вкажіть інше коротке ім'я для нового користувача."
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "Призначати початковий випадковий пароль"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "Змінити розширені параметри"
+
 #: ../interfaces/users.ui.h:14
+msgid "Change User Account Type"
+msgstr "Змінити тип облікового запису"
+
+#: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "Змінити ім'я та реєстраційне ім'я"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "Змінити пароль"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "Зміна розширених параметрів для:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "Зміна типу облікового запису для:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "Зміна імені користувача для:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "Зміна паролю для:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Check password _quality"
 msgstr "Перевірити _якість пароля"
 
-#: ../interfaces/users.ui.h:15
+#: ../interfaces/users.ui.h:22
 msgid "Con_firmation:"
 msgstr "_Конфігурація:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:23
 msgid "Contact Information"
 msgstr "Контактна інформація"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:24
+msgid "Create New User"
+msgstr "Створити нового користувача"
+
+#: ../interfaces/users.ui.h:25
+msgid "Create a new user"
+msgstr "Створити нового користувача"
+
+#: ../interfaces/users.ui.h:26
 msgid "Days between warning and password expiration:"
 msgstr "Діб між попередженням та закінченням дії паролю:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:27
 msgid "Default _group:"
 msgstr "Типова _група:"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:28
 msgid "Default _shell:"
 msgstr "Типова _оболонка:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "Не запитувати пароль при в_ході в систему"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid "Full _Name:"
+msgstr "Повне _ім'я:"
+
+#: ../interfaces/users.ui.h:32
 msgid "Generate _random password"
 msgstr "Створити _випадковий пароль"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:33
 msgid "Group _ID:"
 msgstr "_Ідентифікатор групи:"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:34
 msgid "Group _name:"
 msgstr "_Назва групи:"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:35
 msgid "Group properties"
 msgstr "Властивості групи"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:36
 msgid "Groups settings"
 msgstr "Параметри груп"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:37
 msgid "Ma_ximum days a password may be used:"
 msgstr "_Максимальна кількість діб дії паролю:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:38 ../src/time/time-tool.c:522
+msgid "Manual"
+msgstr "Посібник"
+
+#: ../interfaces/users.ui.h:39
 msgid "Maximum GID:"
 msgstr "Максимальний GID:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:40
 msgid "Maximum UID:"
 msgstr "Максимальний UID:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:41
 msgid "Mi_nimum days between password changes:"
 msgstr "М_інімальна кількість діб між зміною паролю:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:42
 msgid "Minimum GID:"
 msgstr "Мінімальний GID:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:43
 msgid "Minimum UID:"
 msgstr "Мінімальний UID:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:44
 msgid "Minimum days allowed between password changes:"
 msgstr "Мінімальна кількість діб між змінами паролю:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:45
 msgid "Number of days that a password may be used:"
 msgstr "Кількість діб дії паролю:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:46
 msgid "O_ffice location:"
 msgstr "Розташування _офісу:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:47
 msgid "Password set to: "
 msgstr "Пароль встановлено у: "
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:48
 msgid "Privileges"
 msgstr "Привілеї"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:49
 msgid "Profile _name:"
 msgstr "_Назва профілю:"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:50
 msgid "Set password b_y hand"
 msgstr "Встановити пароль в_ручну"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:52
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"Коротка назва має складатися з:\n"
+"  &#x27A3; символів нижнього регістру англійського алфавіту\n"
+"  &#x27A3; цифр\n"
+"  &#x27A3; набору символів «.», «-» та «_»"
+
+#: ../interfaces/users.ui.h:56
+msgid "Short name must start with a letter!"
+msgstr "Коротке ім'я має починатися з літери!"
+
+#: ../interfaces/users.ui.h:57
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+"Цей обліковий запис використовує спеціальні параметри, які було визначено вручну. Їх можна налаштувати у вікні <i>Розширені параметри</i>."
+
+#: ../interfaces/users.ui.h:58
 msgid "User ID:"
 msgstr "Ідентифікатор користувача:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:59
 msgid "User Privileges"
 msgstr "Привілеї користувача"
 
-#: ../interfaces/users.ui.h:42
+#: ../interfaces/users.ui.h:60
 msgid "User _password:"
 msgstr "_Пароль користувача:"
 
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr ""
-"Користувачу треба завершити сеанс, перш ніж ви зможете змінити його ID."
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:61
 msgid "User profiles"
 msgstr "Профілі користувачів"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "_Додати групу"
+#: ../interfaces/users.ui.h:62
+msgid "You can't change user ID while the user is logged in."
+msgstr "Неможливо змінити ID користувача, поки він зареєстрований у системі."
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:63
 msgid "_Add Profile"
 msgstr "_Додати профіль"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "_Додати користувача"
+#: ../interfaces/users.ui.h:64
+msgid "_Advanced Settings"
+msgstr "_Розширені параметри:"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:65
 msgid "_Comments"
 msgstr "_Коментарі"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:66
+msgid "_Custom"
+msgstr "_Інше"
+
+#: ../interfaces/users.ui.h:67
 msgid "_Days between warning and password expiration:"
 msgstr "_Діб між попередженням та закінченням дії паролю:"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "В_идалити"
-
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:68
 msgid "_Generate"
 msgstr "_Загальне"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:69
 msgid "_Home directory:"
 msgstr "_Домашній каталог:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:70
 msgid "_Home phone:"
 msgstr "_Домашній телефон:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:71
 msgid "_Main group:"
 msgstr "_Основна група:"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:72
 msgid "_Manage Groups"
 msgstr "_Керування групами:"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "_Профіль:"
+#: ../interfaces/users.ui.h:73
+msgid "_Name:"
+msgstr "_Назва:"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "_Справжнє ім'я:"
+#: ../interfaces/users.ui.h:74
+msgid "_Password:"
+msgstr "_Пароль:"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:75
 msgid "_Shell:"
 msgstr "_Оболонка:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:76
+msgid "_Short Name:"
+msgstr "_Коротка назва:"
+
+#: ../interfaces/users.ui.h:77
 msgid "_Work phone:"
 msgstr "_Робочий телефон:"
 
@@ -668,49 +737,54 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Платформа не підтримуються"
 
-#: ../src/common/gst-tool.c:181
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "Не вдається завантажити конфігурацію"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "Не вдається зберегти конфігурацію"
 
-#: ../src/common/gst-tool.c:187
+#: ../src/common/gst-tool.c:196
 msgid "You are not allowed to access the system configuration."
 msgstr "У вас немає прав доступу до параметрів системи."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:189
+#: ../src/common/gst-tool.c:198
 msgid "You are not allowed to modify the system configuration."
 msgstr "У вас немає прав на зміну конфігурації системи."
 
-#: ../src/common/gst-tool.c:192
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "Знайдено неправильні дані."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:194
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "Виникла несподівана помилка."
 
-#: ../src/common/gst-tool.c:416
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "Не вдається вивести довідку"
 
-#: ../src/common/gst-tool.c:600
+#: ../src/common/gst-tool.c:612
 msgid "The system configuration has potentially changed."
 msgstr "Конфігурацію системи, можливо, було змінено."
 
-#: ../src/common/gst-tool.c:602
+#: ../src/common/gst-tool.c:614
 msgid "Update content? This will lose any modification in course."
 msgstr "Оновити зміст? Це призведе до втрати внесених змін."
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "_Додати"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "В_идалити"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -797,7 +871,7 @@ msgid "%s Properties"
 msgstr "Властивості %s"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "В_ластивості"
 
@@ -1403,7 +1477,7 @@ msgstr "Стан"
 msgid "Priority"
 msgstr "Пріоритет"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "Параметри служб"
 
@@ -1524,59 +1598,55 @@ msgstr "Синхронізація системного годинника"
 msgid "Keep synchronized with Internet servers"
 msgstr "Синхронізувати годинники з серверами у Інтернет"
 
-#: ../src/time/time-tool.c:522
-msgid "Manual"
-msgstr "Посібник"
-
 #: ../src/time/time-tool.c:668
 msgid "Time and Date Settings"
 msgstr "Параметри дати й часу"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "Групу адміністраторів не можна видаляти"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
-#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:702
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:220
+#: ../src/users/group-settings.c:257 ../src/users/user-settings.c:74
+#: ../src/users/user-settings.c:499
 msgid "This would leave the system unusable."
 msgstr "Це може привести систему до непрацездатного стану."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Ви дійсно бажаєте видалити групу \"%s\"?"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Це може призвести до появи файлів з неправильним ідентифікатором групи"
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:143
 msgid "New group"
 msgstr "Створити групу"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:150
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Властивості групи '%s'"
 
-#: ../src/users/group-settings.c:291
+#: ../src/users/group-settings.c:216
 msgid "Group name is empty"
 msgstr "Назва групи порожня."
 
-#: ../src/users/group-settings.c:292
+#: ../src/users/group-settings.c:217
 msgid "A group name must be specified."
 msgstr "Необхідно вказати назву групи."
 
-#: ../src/users/group-settings.c:294
+#: ../src/users/group-settings.c:219
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Назва групи адміністратора не повинна змінюватись"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:222
 msgid "Group name has invalid characters"
 msgstr "Назва групи має некоректні символи"
 
-#: ../src/users/group-settings.c:298
+#: ../src/users/group-settings.c:223
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1584,84 +1654,119 @@ msgstr ""
 "Вкажіть коректну назву групи, що починається з латинського символу у "
 "нижньому регістрі, за якими йдуть символи у нижньому регістрі та числа."
 
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
+#: ../src/users/group-settings.c:228
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Група \"%s\" вже існує."
 
-#: ../src/users/group-settings.c:303
+#: ../src/users/group-settings.c:229
 msgid "Please choose a different group name."
 msgstr "Вкажіть іншу назву групи."
 
-#: ../src/users/group-settings.c:318
+#: ../src/users/group-settings.c:256
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Ідентифікатор групи адміністратора не повинен змінюватись"
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:260
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "Ідентифікатор групи %d вже використовується групою «%s»"
+
+#: ../src/users/group-settings.c:263
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "Вкажіть інший ідентифікатор для нової групи."
+
+#: ../src/users/group-settings.c:265
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "Вкажіть інший ідентифікатор для групи «%s»."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Назва групи"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "Стежити за системними журналами"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "Адмініструвати систему"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "Використовувати аудіо-пристрої"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "Використовувати пристрої компакт-дисків"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "Запис CD / DVD"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "Використовувати модеми"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "З'єднуватись з Інтернет, використовуючи модем"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "Надсилати та отримувати факси"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "Використовувати дисководи гнучких дисків"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Підключення файлових систем у просторі користувача (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "Налаштовування принтерів"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "З'єднання з бездротовими та ethernet мережами"
+
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "Автоматично отримувати доступ до зовнішніх носіїв даних"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "Призупинення та перехід ком'ютера у режим сну'"
+
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "Доступ до файлової системи /proc"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "Використовувати сканери"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "Використовувати накопичувачі на магнітній стрічці"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "Використовувати USB-пристрої"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "Використовувати віртуалізацію VirtualBox"
+
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "Використовувати відео-пристрої"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "Отримувати привілеї адміністратора"
 
@@ -1673,16 +1778,37 @@ msgstr "Додавання і вилучення користувачів і г�
 msgid "Users and Groups"
 msgstr "Користувачі та групи"
 
-#: ../src/users/user-settings.c:58
+#: ../src/users/user-settings.c:71
 msgid "Administrator account cannot be deleted"
 msgstr "Обліковий запис адміністратора видаляти не можна"
 
-#: ../src/users/user-settings.c:72
+#: ../src/users/user-settings.c:82
+#, c-format
+msgid "%s is currently using this computer"
+msgstr "Користувач %s наразі користується цим комп'ютером"
+
+#: ../src/users/user-settings.c:85
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr "Перед видаленням користувача, перевірте, що він не працює у системі."
+
+#: ../src/users/user-settings.c:95
+msgid "Can't delete the only administrator account"
+msgstr "Не можна видаляти обліковий запис адміністратора"
+
+#: ../src/users/user-settings.c:97
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr ""
+"%s - єдиний адміністратор цього комп'ютера. Видалення цього облікового запису зробить неможливим адміністрування комп'ютера."
+
+#: ../src/users/user-settings.c:107
 #, c-format
 msgid "Are you sure you want to delete account \"%s\"?"
 msgstr "Ви дійсно бажаєте видалити обліковий запис \"%s\"?"
 
-#: ../src/users/user-settings.c:75
+#: ../src/users/user-settings.c:110
 msgid ""
 "This will disable this user's access to the system without deleting the "
 "user's home directory."
@@ -1690,62 +1816,28 @@ msgstr ""
 "Це призведе до заборони цьому користувачу доступу до системи, але його "
 "домашній катало не буде видалено."
 
-#: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "Цей користувач наразі користується цим комп'ютером"
+#: ../src/users/user-settings.c:388
+msgid "Superuser"
+msgstr "Привілейований користувача"
 
-#: ../src/users/user-settings.c:439
-msgid "New user account"
-msgstr "Новий обліковий запис"
+#: ../src/users/user-settings.c:393
+msgid "Custom"
+msgstr "Інший"
 
-#: ../src/users/user-settings.c:460
-#, c-format
-msgid "Account '%s' Properties"
-msgstr "Властивості облікового запису «%s»"
-
-#: ../src/users/user-settings.c:621
-msgid "User name is empty"
-msgstr "Назва облікового рахунку порожня"
-
-#: ../src/users/user-settings.c:622
-msgid "A user name must be specified."
-msgstr "Необхідно вказати назву облікового рахунку користувача."
-
-#: ../src/users/user-settings.c:624
-msgid "User name has invalid characters"
-msgstr "Назва облікового рахунку містить неправильні символи"
-
-#: ../src/users/user-settings.c:625
-msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr ""
-"Вкажіть коректну назву облікового рахунку, що починається з символу нижнього "
-"регістру за якими йдуть символи нижнього регістру та числа."
-
-#: ../src/users/user-settings.c:629
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "Назва облікового рахунку \"%s\" вже існує"
-
-#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
-msgid "Please choose a different user name."
-msgstr "Вкажіть інше ім'я користувача."
-
-#: ../src/users/user-settings.c:661
+#: ../src/users/user-settings.c:416
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Заборонений символ \"%c\" у коментарі"
 
-#: ../src/users/user-settings.c:662
+#: ../src/users/user-settings.c:417
 msgid "Check that this character is not used."
 msgstr "Перевірте, що цей символ не використовується."
 
-#: ../src/users/user-settings.c:680
+#: ../src/users/user-settings.c:440
 msgid "Incomplete path in home directory"
 msgstr "Неповний шлях у домашньому каталозі"
 
-#: ../src/users/user-settings.c:681
+#: ../src/users/user-settings.c:441
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1753,33 +1845,42 @@ msgstr ""
 "Введіть повний шлях домашнього каталогу\n"
 "<span size=\"smaller\">наприклад: /home/john</span>."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:456
 msgid "Home directory already exists"
 msgstr "Домашній каталог вже існує"
 
-#: ../src/users/user-settings.c:685
-msgid "Please enter a different home directory path."
-msgstr "Вкажіть інший шлях до домашнього каталогу."
-
-#: ../src/users/user-settings.c:701
-msgid "Administrator account's user ID should not be modified"
-msgstr ""
-"Ідентифікатор користувача облікового рахунку адміністратора можна змінювати"
-
-#: ../src/users/user-settings.c:706
+#: ../src/users/user-settings.c:457
 #, c-format
-msgid "User ID %d is already used"
-msgstr "Ідентифікатор облікового рахунку %d вже використовується"
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"Каталог <tt>%s</tt> вже існує. Користувач може не мати прав доступу для читання чи запису до цього каталогу. Використати цей каталог?"
 
-#: ../src/users/user-settings.c:707
-msgid "Please choose a different numeric identifier for the new user."
-msgstr "Вкажіть інший ідентифікатор для нового користувача."
+#: ../src/users/user-settings.c:463
+msgid "Use this directory"
+msgstr "Використати цей каталог"
 
-#: ../src/users/user-settings.c:721
+#: ../src/users/user-settings.c:498
+msgid "ID for the root user should not be modified"
+msgstr "Ідентифікатор  адміністратора не повинен змінюватись"
+
+#. check that UID is free
+#: ../src/users/user-settings.c:502
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "Ідентифікатор облікового рахунку %d вже використовується користувачем %s"
+
+#: ../src/users/user-settings.c:504
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "Вкажіть інший ідентифікатор для користувача  %s."
+
+#: ../src/users/user-settings.c:522
 msgid "Incomplete path in shell"
 msgstr "Неповний шлях у оболонці"
 
-#: ../src/users/user-settings.c:722
+#: ../src/users/user-settings.c:523
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1787,11 +1888,11 @@ msgstr ""
 "Введіть повний шлях до інтерпретатора командного рядка\n"
 "<span size=\"smaller\">наприклад: /bin/bash</span>"
 
-#: ../src/users/user-settings.c:755
+#: ../src/users/user-settings.c:559
 msgid "Password is too short"
 msgstr "Пароль надто короткий"
 
-#: ../src/users/user-settings.c:756
+#: ../src/users/user-settings.c:560
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1799,62 +1900,46 @@ msgstr ""
 "Паролі користувачів повинні бути не менш ніж з 6 символів, та бажано, щоб "
 "вони складались з цифр, символів та спеціальних символів."
 
-#: ../src/users/user-settings.c:759
+#: ../src/users/user-settings.c:563
 msgid "Password confirmation is not correct"
 msgstr "Підтвердження паролю некоректне"
 
-#: ../src/users/user-settings.c:760
+#: ../src/users/user-settings.c:564
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Переконайтесь, що ви вказали однаковий пароль у обох текстових полях."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Назва"
+#: ../src/users/user-settings.c:614
+msgid "Can't revoke administration rights"
+msgstr "Неможливо відкликати привілеї адміністратора"
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "Обліковий запис"
+#: ../src/users/user-settings.c:617
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr ""
+"%s є єдиним адміністратором цього комп'ютера. Відкликання прав адміністратора "
+"для цього облікового запису зробить унеможливить адміністрування комп'ютера."
 
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "Домашній каталог"
+#: ../src/users/user-settings.c:634
+msgid "You are about to revoke your own administration rights"
+msgstr "Ви намагаєтесь відкликати права адміністратора"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/user-settings.c:637
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+"%s більше не зможе виконувати адміністративні функції. Цей обліковий запис "
+"не зможе повернути адміністративні повноваження."
+
+#: ../src/users/user-settings.c:642
+msgid "Give up administration rights"
+msgstr "Забрати адміністративні права"
+
+#: ../src/users/users-tool.c:271
 msgid "Users Settings"
 msgstr "Параметри користувачів"
 
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
-#~ "span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Введіть пароль користувача root</"
-#~ "span>"
 
-#~ msgid "Enter Password"
-#~ msgstr "Введіть пароль"
-
-#~ msgid ""
-#~ "You need administrator privileges to use this tool. Enter a password to "
-#~ "modify\n"
-#~ "your system configuration."
-#~ msgstr ""
-#~ "Для використання цієї програми потрібні права адміністратора (root).\n"
-#~ "Введіть пароль для зміни конфігурацію системи."
-
-#~ msgid "_Password:"
-#~ msgstr "_Пароль:"
-
-#~ msgid "<span weight=\"bold\">Contact Information</span>"
-#~ msgstr "<span weight=\"bold\">Контактна інформація</span>"
-
-#~ msgid "_Unlock"
-#~ msgstr "_Розблокувати"
-
-#~ msgid "This action is allowed"
-#~ msgstr "Дія не дозволена"
-
-#~ msgid "This action is not allowed"
-#~ msgstr "Ця дія не дозволена"
-
-#~ msgid "Could not authenticate"
-#~ msgstr "Не вдається пройти автентифікацію"
