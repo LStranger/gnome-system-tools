@@ -201,16 +201,14 @@ select_main_group (OobsUser *user)
 
 	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 
-	if (!user) {
+	main_group = oobs_user_get_main_group (user);
+
+	if (!main_group) {
 		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), -1);
 		return;
 	}
 
-	main_group = oobs_user_get_main_group (user);
 	found = FALSE;
-
-	if (!main_group)
-		main_group = oobs_users_config_get_default_group (OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config));
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -231,68 +229,6 @@ select_main_group (OobsUser *user)
 
 	if (!found)
 		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), -1);
-}
-
-static gboolean
-set_main_group (OobsUser *user)
-{
-	GtkWidget *combo;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	OobsGroup *group;
-	OobsGroupsConfig *config;
-	OobsList *groups_list;
-	OobsListIter list_iter;
-	const gchar *name;
-	gboolean is_group_new = FALSE;
-
-
-	name = oobs_user_get_login_name (user);
-	combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
-	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter)) {
-		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
-		group =	oobs_groups_config_get_from_name (config, name);
-
-		/* Most standard case when creating user:
-		 * no group using the login already exists, so create it */
-		if (group == NULL) {
-			is_group_new = TRUE;
-			group = oobs_group_new (name);
-			oobs_group_set_gid (group,
-			                    oobs_groups_config_find_free_gid (config, 0, 0));
-
-			/* FIXME: this should be in a generic function */
-			groups_list = oobs_groups_config_get_groups (config);
-			oobs_list_append (groups_list, &list_iter);
-			oobs_list_set (groups_list, &list_iter, group);
-		}
-		/* Else group exists, use it */
-	}
-	else { /* Group has been chosen in the list, use it */
-		gtk_tree_model_get (model, &iter,
-				    COL_GROUP_OBJECT, &group,
-				    -1);
-	}
-
-	oobs_group_add_user (group, user);
-
-	/* Try to commit before doing anything, to avoid displaying wrong data */
-	if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config) == OOBS_RESULT_OK) {
-		if (is_group_new)
-			groups_table_add_group (group);
-
-		/* This will be committed with the user himself */
-		oobs_user_set_main_group (user, group);
-
-		g_object_unref (group);
-		return TRUE;
-	}
-
-	/* Something bad is happening, don't try to create the user.
-	 * gst_tool_commit () must already have displayed an error. */
-	return FALSE;
 }
 
 /* Retrieve the NO_PASSWD_LOGIN_GROUP.
@@ -1002,21 +938,15 @@ on_user_new (GtkButton *button, gpointer user_data)
 	if (response != GTK_RESPONSE_OK)
 		return;
 
-	/* create user with base data entered by the user */
+	/* Create user with base data entered by the user.
+	   Main group will be automatically managed by the backends,
+	   following the system configuration. */
 	login = gtk_combo_box_get_active_text (GTK_COMBO_BOX (user_login));
 	fullname = gtk_entry_get_text (GTK_ENTRY (user_name));
 	user = oobs_user_new (login);
 	oobs_user_set_full_name (user, fullname);
 
 	g_return_if_fail (user != NULL);
-
-	/* If FALSE, group could not be found or created, which means
-	 * we won't be able to create the new user anyway, so stop here.
-	 * Error dialog has already been shown when trying to commit changes. */
-	if (!set_main_group (user)) {
-		g_object_unref (user);
-		return;
-	}
 
 	/* fill settings with values from default profile */
 	profile = gst_user_profiles_get_default_profile (GST_USERS_TOOL (tool)->profiles);
@@ -1303,7 +1233,10 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	GtkWidget *name_label;
 	GtkWidget *uid_notice;
 	GtkWidget *widget;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 	OobsUser *user;
+	OobsGroup *main_group;
 	int response;
 
 	TestBattery battery[] = {
@@ -1392,6 +1325,21 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	oobs_user_set_uid (user, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
 
 	privileges_table_save (user);
+
+	/* Get main group */
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter) != -1) {
+		gtk_tree_model_get (model, &iter,
+				    COL_GROUP_OBJECT, &main_group,
+				    -1);
+		oobs_user_set_main_group (user, main_group);
+		g_object_unref (main_group);
+	}
+	else
+		oobs_user_set_main_group (user, NULL);
+
 
 	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK)
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
