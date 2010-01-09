@@ -102,18 +102,24 @@ check_user_delete (OobsUser *user)
 	else {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 		                                 GTK_DIALOG_MODAL,
-		                                 GTK_MESSAGE_WARNING,
+		                                 GTK_MESSAGE_QUESTION,
 		                                 GTK_BUTTONS_NONE,
-		                                 _("Are you sure you want to delete account \"%s\"?"),
-		                                 oobs_user_get_login_name (user));
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-		                                          _("This will disable this user's access to the system "
-		                                            "without deleting the user's home directory."));
+		                                 _("Remove home folder for %s?"),
+		                                 oobs_user_get_full_name (user));
+		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+		                                            _("Files owned by user %s in <tt>%s</tt> can be completely "
+		                                              "removed if you don't need them anymore. You may want to "
+		                                              "back them up before deleting the account, or keep them "
+		                                              "so that and administrator can save them later."),
+		                                            oobs_user_get_login_name (user),
+		                                            oobs_user_get_home_directory (user));
 
 		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-		                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		                        GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+		                        _("Keep Files"), GTK_RESPONSE_NO,
+		                        _("Don't Remove Account"), GTK_RESPONSE_CANCEL,
+		                        _("Delete Files"), GTK_RESPONSE_YES,
 		                        NULL);
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
 	}
 
 	gst_dialog_add_edit_dialog (tool->main_dialog, dialog);
@@ -124,7 +130,13 @@ check_user_delete (OobsUser *user)
 	g_object_unref (admin_group);
 	g_list_free (admin_users);
 
-	return (response == GTK_RESPONSE_ACCEPT);
+	/* Home flag is used to remove home when deleting an user */
+	if (response == GTK_RESPONSE_YES)
+		oobs_user_set_home_flags (user, OOBS_USER_REMOVE_HOME);
+	else
+		oobs_user_set_home_flags (user, 0);
+
+	return (response == GTK_RESPONSE_YES || response == GTK_RESPONSE_NO);
 }
 
 gboolean
@@ -170,15 +182,12 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	GtkTreeModel *model;
 	GtkTreePath *path;
 	GList *list, *elem;
-	gboolean count;
 
 	list = elem = table_get_row_references (TABLE_USERS, &model);
 
-	count = 0;
-
 	while (elem) {
 		path = gtk_tree_row_reference_get_path (elem->data);
-		count += user_delete (model, path);
+		user_delete (model, path);
 
 		gtk_tree_path_free (path);
 		elem = elem->next;
