@@ -58,8 +58,8 @@ struct _GstUserProfile
 	/* profile data */
 	gchar  *shell;
 	gchar  *home_prefix;
-	gint    uid_min;
-	gint    uid_max;
+	uid_t   uid_min;
+	uid_t   uid_max;
 	gchar **groups;
 };
 

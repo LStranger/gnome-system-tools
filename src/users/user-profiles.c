@@ -131,10 +131,14 @@ static void
 free_profile (GstUserProfile *profile)
 {
 	g_free (profile->name);
-	g_free (profile->description);
-	g_free (profile->shell);
-	g_free (profile->home_prefix);
-	g_strfreev (profile->groups);
+	if (profile->description)
+		g_free (profile->description);
+	if (profile->shell)
+		g_free (profile->shell);
+	if (profile->home_prefix)
+		g_free (profile->home_prefix);
+	if (profile->groups)
+		g_strfreev (profile->groups);
 	g_free (profile);
 }
 
@@ -245,7 +249,7 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 	OobsGroupsConfig *groups_config;
 	GFile *file_home, *file_prefix;
 	const gchar *shell, *home;
-	gint uid;
+	uid_t uid;
 	gchar **group_name;
 	OobsGroup *group;
 	GList *l, *m;
@@ -268,26 +272,29 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 		/* also check for settings that should not be changed for existing users */
 		if (strict)
 		  {
-			  /* check that UID is in the range */
-			  if (!(profile->uid_min <= uid && uid <= profile->uid_max))
+			  /* check that UID is in the range, when UID range is set and valid */
+			  if ((profile->uid_min < profile->uid_max)
+			      && !(profile->uid_min <= uid && uid <= profile->uid_max))
 				  continue;
 
-			  /* check that home is under the prefix */
-			  file_home = g_file_new_for_path (home);
-			  file_prefix = g_file_new_for_path (profile->home_prefix);
-			  if (!g_file_has_prefix (file_home, file_prefix)) {
-				  g_object_unref (file_home);
-				  g_object_unref (file_prefix);
-				  continue;
-			  }
-			  else {
-				  g_object_unref (file_home);
-				  g_object_unref (file_prefix);
+			  /* check that home is under the prefix, when home prefix is set */
+			  if (profile->home_prefix) {
+				  file_home = g_file_new_for_path (home);
+				  file_prefix = g_file_new_for_path (profile->home_prefix);
+				  if (!g_file_has_prefix (file_home, file_prefix)) {
+					  g_object_unref (file_home);
+					  g_object_unref (file_prefix);
+					  continue;
+				  }
+				  else {
+					  g_object_unref (file_home);
+					  g_object_unref (file_prefix);
+				  }
 			  }
 		  }
 
-		/* check that shell is the right one */
-		if (strcmp (shell, profile->shell) != 0)
+		/* check that shell is the right one, when shell is set */
+		if (profile->shell && strcmp (shell, profile->shell) != 0)
 			continue;
 
 		/* check user's membership to all groups of the profile,
@@ -357,9 +364,6 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
 	priv = GST_USER_PROFILES_GET_PRIVATE (profiles);
 	groups_config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 
-	/* default shell */
-	oobs_user_set_shell (user, profile->shell);
-
 	/* add user to groups from the profile, remove it from groups of other profiles */
 	for (l = priv->all_groups; l; l = l->next) {
 		in_profile = FALSE;
@@ -378,19 +382,27 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
 			oobs_group_remove_user (group, user);
 	}
 
+	/* default shell */
+	if (profile->shell)
+		oobs_user_set_shell (user, profile->shell);
+
 	if (!new_user) /* don't apply settings below to existing users */
 		return;
 
-	/* default UID */
-	users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-	uid = oobs_users_config_find_free_uid (users_config, profile->uid_min, profile->uid_max);
-	oobs_user_set_uid (user, uid);
+	/* default UID, G_MAXUINT32 indicates we want the default value from the system */
+	if (profile->uid_min != 0 || profile->uid_max != 0) {
+		users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
+		uid = oobs_users_config_find_free_uid (users_config, profile->uid_min, profile->uid_max);
+		oobs_user_set_uid (user, uid);
+	}
 
 	/* default home prefix */
-	home = g_build_path (G_DIR_SEPARATOR_S,
-			     profile->home_prefix,
-			     oobs_user_get_login_name (user),
-			     NULL);
-	oobs_user_set_home_directory (user, home);
-	g_free (home);
+	if (profile->home_prefix) {
+		home = g_build_path (G_DIR_SEPARATOR_S,
+		                     profile->home_prefix,
+		                     oobs_user_get_login_name (user),
+		                     NULL);
+		oobs_user_set_home_directory (user, home);
+		g_free (home);
+	}
 }
