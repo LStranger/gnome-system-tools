@@ -488,7 +488,7 @@ gst_tool_hide_report_window (GstTool *tool)
 	gtk_widget_hide (tool->report_window);
 }
 
-/* Simple wrapper around oobs_object_commit(), that shows an error if needed */
+/* Simple wrapper around oobs_object_commit() that shows an error if needed */
 OobsResult
 gst_tool_commit (GstTool    *tool,
 		 OobsObject *object)
@@ -499,6 +499,16 @@ gst_tool_commit (GstTool    *tool,
 		show_oobs_error_dialog (tool, OPERATION_COMMIT, result);
 
 	return result;
+}
+
+/* Same as gst_tool_commit, but taking the result from an already run operation.
+   Used for non-standard commit methods, such as oobs_users_config_add_user(). */
+void
+gst_tool_commit_error (GstTool   *tool,
+                       OobsResult result)
+{
+	if (result != OOBS_RESULT_OK)
+		show_oobs_error_dialog (tool, OPERATION_COMMIT, result);
 }
 
 static void

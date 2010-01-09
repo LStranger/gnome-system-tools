@@ -292,6 +292,7 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *parent_dialog;
 	OobsGroupsConfig *config;
 	OobsGroup *group;
+	OobsResult result;
 	gint response;
 
 	group = oobs_group_new (NULL);
@@ -304,9 +305,12 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	if (response == GTK_RESPONSE_OK) {
 		group = group_settings_dialog_get_group ();
 		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+		result = oobs_groups_config_add_group (config, group);
 
-		if (oobs_groups_config_add_group (config, group) == OOBS_RESULT_OK)
+		if (result == OOBS_RESULT_OK)
 			groups_table_add_group (group);
+		else
+			gst_tool_commit_error (tool, result);
 	}
 }
 

@@ -92,6 +92,7 @@ group_delete (GtkTreeModel *model, GtkTreePath *path)
 	GtkTreeIter iter;
 	OobsGroupsConfig *config;
 	OobsGroup *group;
+	OobsResult result;
 	gboolean retval = FALSE;
 
 	if (!gtk_tree_model_get_iter (model, &iter, path))
@@ -107,6 +108,18 @@ group_delete (GtkTreeModel *model, GtkTreePath *path)
 
 		if (retval)
 			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+	}
+	if (check_group_delete (group)) {
+		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+		result = oobs_groups_config_delete_group (config, group);
+		if (result == OOBS_RESULT_OK) {
+			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+			retval = TRUE;
+		}
+		else {
+			gst_tool_commit_error (tool, result);
+			retval = FALSE;
+		}
 	}
 
 	g_object_unref (group);

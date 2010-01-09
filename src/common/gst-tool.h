@@ -112,6 +112,9 @@ void         gst_tool_commit_async    (GstTool             *tool,
 				       OobsObjectAsyncFunc  func,
 				       gpointer             data);
 
+void         gst_tool_commit_error    (GstTool             *tool,
+                                       OobsResult           result);
+
 void         gst_tool_update_async    (GstTool             *tool);
 
 void         gst_tool_add_configuration_object (GstTool    *tool,

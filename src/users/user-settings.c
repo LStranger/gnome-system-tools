@@ -134,6 +134,7 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 	OobsUsersConfig *config;
 	OobsUser *user;
 	OobsListIter *list_iter;
+	OobsResult result;
 	gboolean retval = FALSE;
 
 	if (!gtk_tree_model_get_iter (model, &iter, path))
@@ -146,12 +147,15 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 
 	if (check_user_delete (user)) {
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
-		if (oobs_users_config_delete_user (config, user)) {
+		result = oobs_users_config_delete_user (config, user);
+		if (result == OOBS_RESULT_OK) {
 			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 			retval = TRUE;
 		}
-		else
+		else {
+			gst_tool_commit_error (tool, result);
 			retval = FALSE;
+		}
 	}
 
 	g_object_unref (user);
@@ -909,6 +913,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	const char *fullname, *login;
 	GstUserProfile *profile;
 	OobsUsersConfig *users_config;
+	OobsResult result;
 
 	user_new_dialog = gst_dialog_get_widget (tool->main_dialog, "user_new_dialog");
 	user_name = gst_dialog_get_widget (tool->main_dialog, "user_new_name");
@@ -957,7 +962,8 @@ on_user_new (GtkButton *button, gpointer user_data)
 	/* Commit both user and groups config because of possible memberships
 	 * added by the profile. Avoid showing the new user or trying to commit
 	 * group changes if the user has not been created. */
-	if (oobs_users_config_add_user (users_config, user) == OOBS_RESULT_OK) {
+	result = oobs_users_config_add_user (users_config, user);
+	if (result == OOBS_RESULT_OK) {
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 		user_path = users_table_add_user (user, NULL);
 		users_table_select_path (user_path);
@@ -966,6 +972,9 @@ on_user_new (GtkButton *button, gpointer user_data)
 		/* Finally, run the password edit dialog.
 		 * User can hit cancel, leaving the account disabled */
 		on_edit_user_passwd (NULL, NULL);
+	}
+	else {
+		gst_tool_commit_error (tool, result);
 	}
 
 	g_object_unref (user);
