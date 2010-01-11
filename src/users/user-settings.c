@@ -971,6 +971,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	result = oobs_users_config_add_user (users_config, user);
 	if (result == OOBS_RESULT_OK) {
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+
 		user_path = users_table_add_user (user);
 		users_table_select_path (user_path);
 		gtk_tree_path_free (user_path);

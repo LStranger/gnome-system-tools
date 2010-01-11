@@ -138,6 +138,7 @@ update_users (GstUsersTool *tool)
 	while (valid) {
 		user = oobs_list_get (list, &iter);
 		users_table_add_user (OOBS_USER (user));
+		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (user));
 
 		g_object_unref (user);
 		valid = oobs_list_iter_next (list, &iter);
@@ -163,6 +164,7 @@ update_groups (GstUsersTool *tool)
 	while (valid) {
 		group = oobs_list_get (list, &iter);
 		groups_table_add_group (OOBS_GROUP (group));
+		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (group));
 
 		/* update privileges table too */
 		privileges_table_add_group (OOBS_GROUP (group));
