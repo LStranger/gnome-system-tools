@@ -1,4 +1,5 @@
-INCLUDES = $(NAUTILUS_CFLAGS)				\
+INCLUDES = $(GST_TOOL_CFLAGS)				\
+	$(NAUTILUS_CFLAGS)				\
 	-DDATADIR=\"$(datadir)\"			\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(top_srcdir)					\
