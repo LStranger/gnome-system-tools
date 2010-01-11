@@ -1,3 +1,30 @@
+GNOME System Tools Version 2.29.2, 2010-01-11
+-----------------------------------------------
+
+  Users
+  =====
+  - Move to new System Tools Backends protocol (new liboobs API). We now only commit changes to one user at a time, reducing the risk for dangerous bugs.
+  - Include default profiles configuration file (user-profiles.conf). Distributors should modify it to suit their needs and send them back for inclusion.
+  - When creating an user, don't force UID, main group, home directory and shell: these parameters are now handled (better) by the platform tools.
+  - Allow removing home directory when deleting an user.
+  - Don't allow deleting the last administrator account, and warn when the user is losing its own admin rights. Same for active users.
+  - Don't allow creating a group with an existing GID.
+  - Use UID and GID ranges defined by liboobs, depending on the platform's abilities.
+  - Clear suggested login entry when Real name is emptied in the new user dialog.
+  - Change GConf "showall" option to apply only on users. System groups are always shown, since they are the most interesting ones.
+  - Various UI and string improvements.
+
+  Translation
+  ===========
+  - ast, courtesy of astur
+  - es, courtesy of Jorge González
+  - et, courtesy of Ivar Smolin
+  - fr, courtesy of Claude Paroz
+  - nb, courtesy of Kjartan Maraas
+  - sl, courtesy of Matej Urbančič
+  - uk, courtesy of Maxim Dziumanenko
+
+
 GNOME System Tools Version 2.29.1, 2009-11-30
 -----------------------------------------------
 
