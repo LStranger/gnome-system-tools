@@ -12,8 +12,6 @@ bin_PROGRAMS = users-admin
 
 SUBDIRS = 
 INCLUDES += $(GST_TOOL_CFLAGS)
-CLEANFILES = $(GST_TOOL_CLEANFILES)
-EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 
 users_admin_LDADD = $(GST_TOOL_LIBS) 
 users_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) 
@@ -35,3 +33,11 @@ users_admin_SOURCES = \
 toolpixmaps =
 
 -include $(top_srcdir)/git.mk
+
+profilesdir = $(confdir)
+profiles_in_files = user-profiles.conf.in
+profiles_DATA = $(profiles_in_files:.conf.in=.conf)
+user-profiles.conf: user-profiles.conf.in @INTLTOOL_MERGE@ $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< user-profiles.conf
+
+CLEANFILES = $(GST_TOOL_CLEANFILES) user-profiles.conf
+EXTRA_DIST = $(GST_TOOL_EXTRA_DIST) user-profiles.conf.in

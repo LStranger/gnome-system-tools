@@ -28,7 +28,7 @@
 
 extern GstTool *tool;
 
-#define PROFILES_FILE "/etc/gnome-system-tools/users/profiles"
+#define PROFILES_FILE CONF_DIR "/user-profiles.conf"
 #define GST_USER_PROFILES_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_USER_PROFILES, GstUserProfilesPrivate))
 
 typedef struct _GstUserProfilesPrivate GstUserProfilesPrivate;
@@ -66,15 +66,15 @@ create_profile (GKeyFile    *key_file,
 	GstUserProfile *profile;
 
 	profile = g_new0 (GstUserProfile, 1);
-	profile->name = g_key_file_get_locale_string (key_file, group, "name", NULL, NULL);
+	profile->name = g_key_file_get_locale_string (key_file, group, "Name", NULL, NULL);
 	profile->description = g_key_file_get_locale_string (key_file, group,
-	                                                     "description", NULL, NULL);
-	profile->is_default = g_key_file_get_boolean (key_file, group, "default", NULL);
-	profile->shell = g_key_file_get_string (key_file, group, "shell", NULL);
-	profile->home_prefix = g_key_file_get_string (key_file, group, "home-prefix", NULL);
-	profile->groups = g_key_file_get_string_list (key_file, group, "groups", NULL, NULL);
-	profile->uid_min = g_key_file_get_integer (key_file, group, "uid-min", NULL);
-	profile->uid_max = g_key_file_get_integer (key_file, group, "uid-max", NULL);
+	                                                     "Description", NULL, NULL);
+	profile->is_default = g_key_file_get_boolean (key_file, group, "Default", NULL);
+	profile->shell = g_key_file_get_string (key_file, group, "Shell", NULL);
+	profile->home_prefix = g_key_file_get_string (key_file, group, "HomePrefix", NULL);
+	profile->groups = g_key_file_get_string_list (key_file, group, "Groups", NULL, NULL);
+	profile->uid_min = g_key_file_get_integer (key_file, group, "MinUID", NULL);
+	profile->uid_max = g_key_file_get_integer (key_file, group, "MaxUID", NULL);
 
 	return profile;
 }

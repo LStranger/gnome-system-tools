@@ -4,8 +4,11 @@
 
 pixmapsdir = $(pkgdatadir)/pixmaps
 interfacesdir = $(pkgdatadir)/ui
+confdir = $(sysconfdir)/gnome-system-tools
 
 INCLUDES = -DPIXMAPS_DIR=\""$(pixmapsdir)"\"		\
 	   -DINTERFACES_DIR=\""$(interfacesdir)"\"	\
 	   -DFRONTEND_DIR=\""$(frontenddir)"\"		\
-	   -DDESKTOP_DATA_DIR=\""$(desktopdatadir)"\"
+	   -DDESKTOP_DATA_DIR=\""$(desktopdatadir)"\"	\
+	   -DCONF_DIR=\""$(confdir)"\"
+
