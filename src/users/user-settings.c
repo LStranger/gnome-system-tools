@@ -145,7 +145,6 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 	GtkTreeIter iter;
 	OobsUsersConfig *config;
 	OobsUser *user;
-	OobsListIter *list_iter;
 	OobsResult result;
 	gboolean retval = FALSE;
 
@@ -154,7 +153,6 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 
 	gtk_tree_model_get (model, &iter,
 			    COL_USER_OBJECT, &user,
-			    COL_USER_ITER, &list_iter,
 			    -1);
 
 	if (check_user_delete (user)) {
@@ -171,7 +169,6 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 	}
 
 	g_object_unref (user);
-	oobs_list_iter_free (list_iter);
 
 	return retval;
 }
@@ -974,7 +971,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	result = oobs_users_config_add_user (users_config, user);
 	if (result == OOBS_RESULT_OK) {
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-		user_path = users_table_add_user (user, NULL);
+		user_path = users_table_add_user (user);
 		users_table_select_path (user_path);
 		gtk_tree_path_free (user_path);
 

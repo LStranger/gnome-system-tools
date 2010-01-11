@@ -147,7 +147,7 @@ create_users_table (GstUsersTool *tool)
 }
 
 void
-users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter)
+users_table_set_user (OobsUser *user, GtkTreeIter *iter)
 {
 	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
 	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
@@ -170,7 +170,6 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
 			    COL_USER_HOME, oobs_user_get_home_directory (user),
 			    COL_USER_ID, oobs_user_get_uid (user),
 			    COL_USER_OBJECT, user,
-			    COL_USER_ITER, list_iter,
 			    -1);
 	g_free (label);
 	if (face)
@@ -184,7 +183,7 @@ users_table_set_user (OobsUser *user, OobsListIter *list_iter, GtkTreeIter *iter
  * Returns: the path to the new item
  */
 GtkTreePath *
-users_table_add_user (OobsUser *user, OobsListIter *list_iter)
+users_table_add_user (OobsUser *user)
 {
 	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
 	GtkTreeModel *filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
@@ -192,7 +191,7 @@ users_table_add_user (OobsUser *user, OobsListIter *list_iter)
 	GtkTreeIter iter;
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	users_table_set_user (user, list_iter, &iter);
+	users_table_set_user (user, &iter);
 
 	return gtk_tree_model_get_path (model, &iter);
 }

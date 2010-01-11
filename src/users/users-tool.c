@@ -137,7 +137,7 @@ update_users (GstUsersTool *tool)
 
 	while (valid) {
 		user = oobs_list_get (list, &iter);
-		users_table_add_user (OOBS_USER (user), &iter);
+		users_table_add_user (OOBS_USER (user));
 
 		g_object_unref (user);
 		valid = oobs_list_iter_next (list, &iter);

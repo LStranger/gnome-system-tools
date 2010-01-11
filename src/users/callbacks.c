@@ -191,8 +191,6 @@ on_popup_settings_activate (GtkAction *action, gpointer data)
 
 	if (table == TABLE_GROUPS)
 		on_group_settings_clicked (NULL, NULL);
-	else if (table == TABLE_USERS)
-		on_user_settings_clicked (NULL, NULL);
 }
 
 void
@@ -204,72 +202,6 @@ on_popup_delete_activate (GtkAction *action, gpointer data)
 		on_group_delete_clicked (NULL, NULL);
 	else if (table == TABLE_USERS)
 		on_user_delete_clicked (NULL, NULL);
-}
-
-/* Users Tab */
-
-void
-on_user_settings_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkWidget *table;
-	GtkTreePath *path;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	OobsUser *user;
-	OobsListIter *list_iter;
-
-	table = gst_dialog_get_widget (tool->main_dialog, "users_table");
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
-        gtk_tree_view_get_cursor (GTK_TREE_VIEW (table), &path, NULL);
-
-	if (!path)
-		return;
-
-	if (!gtk_tree_model_get_iter (model, &iter, path))
-		return;
-
-	gtk_tree_model_get (model, &iter,
-			    COL_USER_OBJECT, &user,
-			    COL_USER_ITER, &list_iter,
-			    -1);
-#if 0 /* FIXME: adapt this code to work when applying changes */
-	dialog = user_settings_dialog_new (user);
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
-	response = user_settings_dialog_run (dialog);
-	g_object_unref (user);
-
-	if (response == GTK_RESPONSE_OK) {
-		gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-								  &filter_iter, &iter);
-		user = user_settings_dialog_get_data (dialog);
-
-		if (!user) /* Means an error has already occurred and been displayed, stop here */
-			return;
-
-		if (gst_dialog_is_authenticated (tool->main_dialog)) {
-			/* change users/groups configuration */
-			if (gst_tool_commit (tool, GST_USERS_TOOL (tool)->users_config) == OOBS_RESULT_OK) {
-				gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-				users_table_set_user (user, list_iter, &filter_iter);
-			}
-#ifdef HAVE_POLKIT
-		/* With PolicyKit1, we don't have to check for authorizations: just try to commit,
-		 * the backend will trigger authentication if possible, or fail */
-		} else {
-			OobsObject *object = GST_USERS_TOOL (tool)->self_config;
-
-			/* change self, only if it is the modified user */
-			if (user == oobs_self_config_get_user (OOBS_SELF_CONFIG (object)) &&
-			    gst_tool_commit (tool, GST_USERS_TOOL (tool)->self_config) == OOBS_RESULT_OK) {
-				gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-				users_table_set_user (user, list_iter, &filter_iter);
-			}
-#endif
-		}
-	}
-#endif
-
-	oobs_list_iter_free (list_iter);
 }
 
 void
@@ -419,29 +351,6 @@ on_user_settings_passwd_toggled (GtkToggleButton *toggle, gpointer data)
 		gtk_entry_set_text (GTK_ENTRY (user_passwd_entry2), "");
 		on_user_settings_passwd_random_new (NULL, NULL);
 	}
-}
-
-void
-on_user_settings_login_changed (GtkEditable *editable,
-				gpointer     data)
-{
-	gchar *home, *base_dir;
-	GtkWidget *home_entry;
-
-	home_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-	base_dir = g_object_get_data (G_OBJECT (home_entry), "default-home");
-
-	if (!base_dir)
-		g_object_get (GST_USERS_TOOL (tool)->users_config,
-			      "default-home", &base_dir, NULL);
-
-	home = g_build_path (G_DIR_SEPARATOR_S,
-			     base_dir,
-			     gtk_entry_get_text (GTK_ENTRY (editable)),
-			     NULL);
-
-	gtk_entry_set_text (GTK_ENTRY (home_entry), home);
-	g_free (home);
 }
 
 void

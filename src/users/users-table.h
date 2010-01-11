@@ -35,7 +35,6 @@ enum {
 	COL_USER_ID,
 	COL_USER_MEMBER, /* used in group members dialog */
 	COL_USER_OBJECT,
-	COL_USER_ITER,
 	COL_USER_LAST
 };
 
@@ -44,11 +43,9 @@ void         create_users_table	               (GstUsersTool *tool);
 void         users_table_clear                 (void);
 
 void         users_table_set_user              (OobsUser     *user,
-                                                OobsListIter *list_iter,
                                                 GtkTreeIter  *iter);
 
-GtkTreePath *users_table_add_user              (OobsUser     *user,
-                                                OobsListIter *list_iter);
+GtkTreePath *users_table_add_user              (OobsUser     *user);
 
 void         users_table_select_path           (GtkTreePath *path);
 
