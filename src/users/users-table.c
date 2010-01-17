@@ -237,6 +237,36 @@ users_table_select_first (void)
 	gtk_tree_selection_select_path (selection, first_user);
 }
 
+void
+users_table_update_current ()
+{
+	GtkWidget *users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	GtkTreeModel *filter_model;
+	GList *selected;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	GtkTreeIter filter_iter;
+	OobsUser *user;
+
+	selected = gtk_tree_selection_get_selected_rows (selection, &filter_model);
+	g_assert (selected != NULL);
+
+	/* Only choose the first selected user */
+	path = (GtkTreePath *) selected->data;
+
+	gtk_tree_model_get_iter (filter_model, &filter_iter, path);
+	g_list_foreach (selected, (GFunc) gtk_tree_path_free, NULL);
+	g_list_free (selected);
+
+	gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (filter_model),
+	                                                  &iter, &filter_iter);
+
+	user = users_table_get_current ();
+	users_table_set_user (user, &iter);
+	g_object_unref (user);
+}
+
 /*
  * Convenience function to get the first selected user of the table,
  * i.e. the one whose settings are currently shown.
@@ -255,8 +285,7 @@ users_table_get_current (void)
 
 	selected = gtk_tree_selection_get_selected_rows (selection, &model);
 
-	if (selected == NULL)
-		return NULL;
+	g_return_val_if_fail (selected != NULL, NULL);
 
 	/* Only choose the first selected user */
 	path = (GtkTreePath *) selected->data;
@@ -264,7 +293,6 @@ users_table_get_current (void)
 	gtk_tree_model_get_iter (model, &iter, path);
 	g_list_foreach (selected, (GFunc) gtk_tree_path_free, NULL);
 	g_list_free (selected);
-
 	gtk_tree_model_get (model, &iter, COL_USER_OBJECT, &user, -1);
 	return user;
 }

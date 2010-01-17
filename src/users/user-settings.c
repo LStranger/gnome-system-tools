@@ -1038,6 +1038,7 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 	GtkWidget *user_name_entry;
 	GtkWidget *face_image;
 	GtkWidget *name_label;
+	GtkWidget *user_settings_real_name;
 	OobsUser *user;
 	const char *fullname;
 	gboolean is_self;
@@ -1060,6 +1061,8 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 	user_name_entry = gst_dialog_get_widget (tool->main_dialog, "user_name_entry");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_name_face");
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_name_name");
+	user_settings_real_name = gst_dialog_get_widget (tool->main_dialog,
+	                                                 "user_settings_real_name");
 
 	fullname = oobs_user_get_full_name (user);
 	gtk_entry_set_text (GTK_ENTRY (user_name_entry), fullname);
@@ -1079,6 +1082,9 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 			gst_tool_commit (tool, GST_USERS_TOOL (tool)->self_config);
 		else
 			gst_tool_commit (tool, OOBS_OBJECT (user));
+
+		gtk_label_set_text (GTK_LABEL (user_settings_real_name), fullname);
+		users_table_update_current ();
 	}
 
 	g_object_unref (user);

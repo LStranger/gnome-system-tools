@@ -53,6 +53,8 @@ void         users_table_select_first          (void);
 
 OobsUser    *users_table_get_current           (void);
 
+void         users_table_update_current        (void);
+
 void         users_table_actions_set_sensitive (gint      table,
                                                 gint      count,
                                                 OobsUser *user);
