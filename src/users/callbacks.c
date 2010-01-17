@@ -40,35 +40,6 @@ extern GstTool *tool;
 
 /* Common stuff to users and groups tables */
 
-static void
-actions_set_sensitive (gint table, gint count)
-{
-	switch (table) {
-	case TABLE_USERS:
-		gst_dialog_try_set_sensitive (tool->main_dialog,
-					      gst_dialog_get_widget (tool->main_dialog, "user_new"),
-					      TRUE);
-		gst_dialog_try_set_sensitive (tool->main_dialog,
-					      gst_dialog_get_widget (tool->main_dialog, "user_delete"),
-					      (count > 0));
-		break;
-	case TABLE_GROUPS:
-		gst_dialog_try_set_sensitive (tool->main_dialog,
-					      gst_dialog_get_widget (tool->main_dialog, "group_new"),
-					      TRUE);
-		gst_dialog_try_set_sensitive (tool->main_dialog,
-					      gst_dialog_get_widget (tool->main_dialog, "group_delete"),
-					      (count > 0));
-		gst_dialog_try_set_sensitive (tool->main_dialog,
-					      gst_dialog_get_widget (tool->main_dialog, "group_settings"),
-					      (count == 1));
-		break;
-	default:
-		g_assert_not_reached ();
-		return;
-	}
-}
-
 void
 on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
@@ -85,8 +56,6 @@ on_table_selection_changed (GtkTreeSelection *selection, gpointer data)
 	/* this happens when we unselect all users before selecting a single one */
 	if (!user)
 		return;
-
-	actions_set_sensitive (table, count);
 
 	/* Show the settings for the selected user */
 	user_settings_show (user);
@@ -159,8 +128,7 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer da
 	}
 
 	if (cont != 0 && (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)
-	    && (table == TABLE_GROUPS)
-	    && gst_dialog_is_authenticated (tool->main_dialog))
+	    && (table == TABLE_GROUPS))
 		on_group_settings_clicked (NULL, NULL);
 
 	return FALSE;
@@ -227,6 +195,10 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	OobsResult result;
 	gint response;
 
+	/* Before going further, check for authorizations, authenticating if needed */
+	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->groups_config))
+		return;
+
 	group = oobs_group_new (NULL);
 	parent_dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
 	dialog = group_settings_dialog_new (group);
@@ -269,13 +241,19 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_tree_model_get (model, &iter,
 			    COL_GROUP_OBJECT, &group,
 			    -1);
+	
 	dialog = group_settings_dialog_new (group);
 	parent_dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent_dialog));
 	response = group_settings_dialog_run (dialog, group);
 
-	if (response == GTK_RESPONSE_OK) {
+	/* This is the only dialog we show without authentication, because it's the only
+	 * way to get some informations. Committing without authorization could leave
+	 * changes in queue in case of failure, which would get committed with
+	 * the first successful commit later! */
+	if (response == GTK_RESPONSE_OK
+	    && gst_tool_authenticate (tool, OOBS_OBJECT (group))) {
 		group_settings_dialog_get_data (group);
 		groups_table_set_group (group, &iter);
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
@@ -292,6 +270,10 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	GList *list, *elem;
 
 	list = elem = table_get_row_references (TABLE_GROUPS, &model);
+
+	/* Before going further, check for authorizations, authenticating if needed */
+	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->groups_config))
+		return;
 
 	while (elem) {
 		path = gtk_tree_row_reference_get_path (elem->data);

@@ -658,3 +658,40 @@ gst_tool_add_configuration_object (GstTool    *tool,
 	g_signal_connect (object, "committed",
 			  G_CALLBACK (configuration_object_committed), tool);
 }
+
+/*
+ * Wrapper around oobs_object_authenticate() to show an error dialog if needed.
+ */
+gboolean
+gst_tool_authenticate (GstTool    *tool,
+                       OobsObject *object)
+{
+	gboolean result;
+	GError *error = NULL;
+
+        result = oobs_object_authenticate (object, &error);
+
+	/* Don't show an error if the user manually cancelled authentication */
+	if (error && error->code != OOBS_ERROR_AUTHENTICATION_CANCELLED) {
+		GtkWidget *dialog;
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+		                                 GTK_DIALOG_MODAL,
+		                                 GTK_MESSAGE_ERROR,
+		                                 GTK_BUTTONS_CLOSE,
+		                                 "%s",
+		                                 _("You are not allowed to modify the system configuration."));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+		                                          _("An error occurred while checking for authorizations: %s\n"
+		                                            "You may report this as a bug."),
+		                                          error->message);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+
+		gtk_widget_destroy (dialog);
+	}
+
+	if (error)
+		g_error_free (error);
+
+	return result;
+}

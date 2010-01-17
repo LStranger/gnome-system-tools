@@ -120,6 +120,9 @@ void         gst_tool_update_async    (GstTool             *tool);
 void         gst_tool_add_configuration_object (GstTool    *tool,
 						OobsObject *object);
 
+gboolean     gst_tool_authenticate    (GstTool *tool,
+				       OobsObject *object);
+
 
 G_END_DECLS
 

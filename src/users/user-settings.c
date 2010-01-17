@@ -921,6 +921,10 @@ on_user_new (GtkButton *button, gpointer user_data)
 	OobsUsersConfig *users_config;
 	OobsResult result;
 
+	/* Before going further, check for authorizations, authenticating if needed */
+	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->users_config))
+		return;
+
 	user_new_dialog = gst_dialog_get_widget (tool->main_dialog, "user_new_dialog");
 	user_name = gst_dialog_get_widget (tool->main_dialog, "user_new_name");
 	user_login = gst_dialog_get_widget (tool->main_dialog, "user_new_login");
@@ -1036,13 +1040,27 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 	GtkWidget *name_label;
 	OobsUser *user;
 	const char *fullname;
+	gboolean is_self;
+
+	user = users_table_get_current ();
+
+	/* Before going further, check for authorizations, authenticating if needed */
+	is_self = oobs_self_config_is_user_self (OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config),
+	                                         user);
+
+	/* Authenticate as self when changing self user, as admin for all other users */
+	if (is_self) {
+		if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->self_config))
+			return;
+	}
+	else if (!gst_tool_authenticate (tool, OOBS_OBJECT (user)))
+		return;
 
 	user_name_dialog = gst_dialog_get_widget (tool->main_dialog, "user_name_dialog");
 	user_name_entry = gst_dialog_get_widget (tool->main_dialog, "user_name_entry");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_name_face");
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_name_name");
 
-	user = users_table_get_current ();
 	fullname = oobs_user_get_full_name (user);
 	gtk_entry_set_text (GTK_ENTRY (user_name_entry), fullname);
 	gtk_editable_select_region (GTK_EDITABLE (user_name_entry), 0, -1);
@@ -1056,7 +1074,11 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 
 		fullname = gtk_entry_get_text (GTK_ENTRY (user_name_entry));
 		oobs_user_set_full_name (user, fullname);
-		gst_tool_commit (tool, OOBS_OBJECT (user));
+
+		if (is_self)
+			gst_tool_commit (tool, GST_USERS_TOOL (tool)->self_config);
+		else
+			gst_tool_commit (tool, OOBS_OBJECT (user));
 	}
 
 	g_object_unref (user);
@@ -1185,14 +1207,18 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 	OobsUser *user;
 	GstUserProfile *profile;
 
+	user = users_table_get_current ();
+
+	/* Before going further, check for authorizations, authenticating if needed */
+	if (!gst_tool_authenticate (tool, OOBS_OBJECT (user)))
+		return;
+
 	user_profile_dialog = gst_dialog_get_widget (tool->main_dialog, "user_profile_dialog");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_profile_face");
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_profile_name");
 	table = gst_dialog_get_widget (tool->main_dialog, "user_profile_table");
 	custom_radio = gst_dialog_get_widget (tool->main_dialog, "user_profile_custom");
 	custom_label = gst_dialog_get_widget (tool->main_dialog, "user_profile_custom_label");
-
-	user = users_table_get_current ();
 
 	/* select the profile that matches the user settings, if any */
 	profile = gst_user_profiles_get_for_user (GST_USERS_TOOL (tool)->profiles,
@@ -1262,11 +1288,15 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 		NULL
 	};
 
+	user = users_table_get_current ();
+
+	/* Before going further, check for authorizations, authenticating if needed */
+	if (!gst_tool_authenticate (tool, OOBS_OBJECT (user)))
+		return;
+
 	user_advanced_dialog = gst_dialog_get_widget (tool->main_dialog, "user_advanced_dialog");
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_advanced_face");
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_advanced_name");
-
-	user = users_table_get_current ();
 
 
 	/* set various settings */
