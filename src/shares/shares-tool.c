@@ -191,7 +191,8 @@ gst_shares_tool_update_gui (GstTool *tool)
 	users_table_set_config (shares_tool);
 
 	if (shares_tool->path) {
-		gst_dialog_authenticate (tool->main_dialog);
+		gst_tool_authenticate (tool, GST_SHARES_TOOL (tool)->smb_config);
+		gst_tool_authenticate (tool, GST_SHARES_TOOL (tool)->nfs_config);
 		share_settings_dialog_run (shares_tool->path, TRUE);
 	}
 }

@@ -724,16 +724,3 @@ gst_dialog_stop_editing (GstDialog *dialog)
 	g_slist_free (priv->edit_dialogs);
 	priv->edit_dialogs = NULL;
 }
-
-void
-gst_dialog_authenticate (GstDialog *dialog)
-{
-#ifdef HAVE_POLKIT
-	GstDialogPrivate *priv;
-
-	if (!gst_dialog_is_authenticated (dialog)) {
-		priv = GST_DIALOG_GET_PRIVATE (dialog);
-		gtk_button_clicked (GTK_BUTTON (priv->polkit_button));
-	}
-#endif
-}
