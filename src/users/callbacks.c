@@ -256,7 +256,7 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	    && gst_tool_authenticate (tool, OOBS_OBJECT (group))) {
 		group_settings_dialog_get_data (group);
 		groups_table_set_group (group, &iter);
-		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+		gst_tool_commit (tool, OOBS_OBJECT (group));
 	}
 
 	g_object_unref (group);
