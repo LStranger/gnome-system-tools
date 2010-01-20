@@ -4,7 +4,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Abdulaziz Al-Arfaj <alarfaj0@yahoo.com>, 2004.
 # Ayman Hourieh <aymanh@gmail.com>, 2004.
-# Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007, 2009.
+# Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007, 2009, 2010.
 # Ahmad Farghal <ahmad.farghal@gmail.com>, 2007.
 # Anas Husseini <linux.anas@gmail.com>, 2008.
 # Osama Khalid <osamak.wfm@gmail.com>, 2009.
@@ -12,43 +12,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-20 21:39+0300\n"
-"PO-Revision-Date: 2009-08-20 21:46+0300\n"
+"POT-Creation-Date: 2010-01-20 19:33+0200\n"
+"PO-Revision-Date: 2010-01-20 19:33+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
-"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Virtaal 0.4.0\n"
+"X-Generator: Virtaal 0.5.1\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
-msgstr "فيما إذا يفترض أن تظهر أداة users-admin كل المستخدمين و المجموعات أم لا"
-
-#: ../interfaces/common.ui.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">رجاء أدخل كلمة سر الجذر</span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "ادخل كلمة السّر"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
+msgid "Whether the users-admin tool should show system users in the users list"
 msgstr ""
-"تحتاج صلاحيات المدير لتستخدم هذه الأداة. ادخل كلمة سر لتعدّل\n"
-"اعدادات نظامك."
+"فيما إذا يفترض أن تُظهر أداة users-admin مستخدمي النظام في قائمة المستخدمين"
 
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "_كلمة السر:"
+#: ../gnome-system-tools.schemas.in.h:2
+msgid ""
+"Whether the users-admin tool should show the root user in the users list"
+msgstr ""
+"فيما إذا يفترض أن تظهر أداة users-admin المستخدم الجذر في قائمة المستخدمين"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -126,7 +111,7 @@ msgstr "فعّل هذا الات_صال"
 msgid "Ethernet interface:"
 msgstr "واجهة الإثرنت:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:31
 msgid "General"
 msgstr "عام"
 
@@ -266,7 +251,7 @@ msgstr "_عيِّن المودم على أنّه المسلك الرّئيسي �
 msgid "_Subnet mask:"
 msgstr "_قناع الشّبكة الفرعيّة:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "ا_سم المستخدم:"
 
@@ -465,215 +450,282 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">إعدادات كلمة السّر</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">كلمة السّر</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">إعدادات الهيئة</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">افتراضيات النّظام</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "الحساب"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "_نوع الحساب:"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "متقدّم"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
 msgstr ""
-"اسمح لهذا المستخدم بفتح جلسة محلية دون إدخال كلمة السر. ستظل كلمة السر "
-"مطلوبة لأداء المهام الإدارية."
+"يوجد بالفعل مستخدم بهذا الاسم. من فضلك اختر اسما قصيرا آخر للمستخدم الجديد."
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "ضَع كلمة سرٍّ عشوائيّة افتراضيًّا"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "غيّر إعدادات المستخدم المتقدمة"
+
 #: ../interfaces/users.ui.h:14
+msgid "Change User Account Type"
+msgstr "غيّر نوع حساب المستخدم"
+
+#: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "غير اسم المستخدم واسم الولوج"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "غيّر كلمة سر المستخدم"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "غير الإعدادات المتقدمة ل‍:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "غيّر نوع الحساب ل‍:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "غيّر ا_سم المستخدم:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "غيّر كلمة سر المستخدم:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Check password _quality"
 msgstr "افحص _جودة كلمة السّر"
 
-#: ../interfaces/users.ui.h:15
+#: ../interfaces/users.ui.h:22
 msgid "Con_firmation:"
 msgstr "التّأ_كيد:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:23
 msgid "Contact Information"
 msgstr "معلومات الاتصال"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:24
+msgid "Create New User"
+msgstr "أنشئ مستخدما جديدا"
+
+#: ../interfaces/users.ui.h:25
+msgid "Create a new user"
+msgstr "أنشئ مستخدما جديدا"
+
+#: ../interfaces/users.ui.h:26
 msgid "Days between warning and password expiration:"
 msgstr "الأيّام بين التّحذير و بطلان كلمة السّر:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:27
 msgid "Default _group:"
 msgstr "ال_مجموعة الافتراضيّة:"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:28
 msgid "Default _shell:"
 msgstr "ال_صدفة الافتراضية:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "لا تطلب كلمة السر عند الو_لوج"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid "Full _Name:"
+msgstr "الاسم ال_كامل:"
+
+#: ../interfaces/users.ui.h:32
 msgid "Generate _random password"
 msgstr "ولِّد كلمة سر _عشوائيّة"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:33
 msgid "Group _ID:"
 msgstr "_معرّف المجموعة:"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:34
 msgid "Group _name:"
 msgstr "ا_سم المجموعة:"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:35
 msgid "Group properties"
 msgstr "خصائص المجموعة"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:36
 msgid "Groups settings"
 msgstr "اعدادات المجموعات"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:37
 msgid "Ma_ximum days a password may be used:"
 msgstr "أ_قصى عدد من الأيّام التي يمكن استخدام كلمة السّر فيها:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:38 ../src/time/time-tool.c:522
+msgid "Manual"
+msgstr "يدوي"
+
+#: ../interfaces/users.ui.h:39
 msgid "Maximum GID:"
 msgstr "أقصى معرّف مجموعة:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:40
 msgid "Maximum UID:"
 msgstr "أقصى معرّف مستخدم:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:41
 msgid "Mi_nimum days between password changes:"
 msgstr "أ_دنى عدد من الأيّام بين تغييرات كلمة السّر:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:42
 msgid "Minimum GID:"
 msgstr "أدنى معرّف مجموعة:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:43
 msgid "Minimum UID:"
 msgstr "أدنى معرّف مستخدم:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:44
 msgid "Minimum days allowed between password changes:"
 msgstr "أدنى عدد مسموح به من الأيّام بين تغييرات كلمة السّر:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:45
 msgid "Number of days that a password may be used:"
 msgstr "عدد الأيّام التي يمكن فيها استخدام كلمة السّر:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:46
 msgid "O_ffice location:"
 msgstr "عنوان ال_مكتب:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:47
 msgid "Password set to: "
 msgstr "كلمة السّر مضبوطة لـى:"
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:48
 msgid "Privileges"
 msgstr "صلاحيات"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:49
 msgid "Profile _name:"
 msgstr "ا_سم الهيئة:"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:50
 msgid "Set password b_y hand"
 msgstr "ضع كلمة السّر _يدويًّا"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:52
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"يجب أن تتكون الأسماء القصيرة من:\n"
+"  &#x27A3; حروف إنجليزية صغيرة\n"
+"  &#x27A3; أرقام\n"
+"  &#x27A3; أي من الحروف \".\"، \"-\" و \"_\""
+
+#: ../interfaces/users.ui.h:56
+msgid "Short name must start with a letter!"
+msgstr "يجب أن يبدأ الاسم القصير بحرف"
+
+#: ../interfaces/users.ui.h:57
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+"يستخدم هذا الحساب إعدادات خاصة ضُبطت يدويا. استخدم حوار <i>الإعدادات "
+"المتقدمة</i> لضبطها."
+
+#: ../interfaces/users.ui.h:58
 msgid "User ID:"
 msgstr "معرّف المستخدم:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:59
 msgid "User Privileges"
 msgstr "صلاحيات المستخدم"
 
-#: ../interfaces/users.ui.h:42
+#: ../interfaces/users.ui.h:60
 msgid "User _password:"
 msgstr "_كلمة سر المستخدم:"
 
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr "يجب أن يخرج المستخدم قبل أن تتمكن من تغيير معرّفه."
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:61
 msgid "User profiles"
 msgstr "هيئات المستخدم"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "_اضف مجموعة"
+#: ../interfaces/users.ui.h:62
+msgid "You can't change user ID while the user is logged in."
+msgstr "لا يمكن تغيير معرف المستخدم بينما هو والج إلى النظام."
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:63
 msgid "_Add Profile"
 msgstr "أ_ضف هيئة..."
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "_اضف مستخدم"
+#: ../interfaces/users.ui.h:64
+msgid "_Advanced Settings"
+msgstr "الإ_عدادات المتقدمة"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:65
 msgid "_Comments"
 msgstr "_تعليقات:"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:66
+msgid "_Custom"
+msgstr "_مُخصَّص"
+
+#: ../interfaces/users.ui.h:67
 msgid "_Days between warning and password expiration:"
 msgstr "الأ_يّام بين التّحذير و بطلان كلمة السّر:"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "ا_حذف"
-
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:68
 msgid "_Generate"
 msgstr "ولِّد"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:69
 msgid "_Home directory:"
 msgstr "المجلّد المنز_ل:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:70
 msgid "_Home phone:"
 msgstr "هاتف المنز_ل:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:71
 msgid "_Main group:"
 msgstr "المجموعة ال_رّئيسيّة:"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:72
 msgid "_Manage Groups"
 msgstr "إ_دارة المجموعات"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "ال_هيئة:"
+#: ../interfaces/users.ui.h:73
+msgid "_Name:"
+msgstr "الا_سم:"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "الا_سم الحقيقي:"
+#: ../interfaces/users.ui.h:74
+msgid "_Password:"
+msgstr "_كلمة السر:"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:75
 msgid "_Shell:"
 msgstr "ال_صدَفة:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:76
+msgid "_Short Name:"
+msgstr "الاسم ال_قصير:"
+
+#: ../interfaces/users.ui.h:77
 msgid "_Work phone:"
 msgstr "هاتف ال_عمل:"
 
@@ -695,47 +747,54 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "منصّة غير مدعومة"
 
-#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "لا يمكن تحميل الإعدادات"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "غير مسموح لك بالنفاذ لإعدادات النظام."
-
-#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "تعذر حفظ الإعدادات."
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:196
+msgid "You are not allowed to access the system configuration."
+msgstr "غير مسموح لك بالنفاذ لإعدادات النظام."
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:198
 msgid "You are not allowed to modify the system configuration."
 msgstr "غير مسموح لك بتغيير لإعدادات النظام."
 
-#: ../src/common/gst-tool.c:218
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "وجدت بيانات غير سليمة."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:220
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "حدث خطأ مجهول."
 
-#: ../src/common/gst-tool.c:442
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "لم أستطع عرض المساعدة"
 
-#: ../src/common/gst-tool.c:626
+#: ../src/common/gst-tool.c:622
 msgid "The system configuration has potentially changed."
 msgstr "إعدادات النظام قد تغيرت فعلًا."
 
-#: ../src/common/gst-tool.c:628
+#: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "هل تريد تحديث المحتوى؟ سيجعلك هذا تفقد كل تعديل حالي."
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "أ_ضف"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "ا_حذف"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -821,7 +880,7 @@ msgid "%s Properties"
 msgstr "خصائص %s"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "_خصائص"
 
@@ -1064,7 +1123,7 @@ msgstr "تُشارك المجلدات عبر الشبكة"
 #. GST_ROLE_FILE_SERVER_NFS
 #: ../src/services/service.c:42
 msgid "FTP service"
-msgstr "خدمة FTP "
+msgstr "خدمة FTP"
 
 #: ../src/services/service.c:42 ../src/services/service.c:43
 msgid "Shares folders over the Internet"
@@ -1129,11 +1188,11 @@ msgstr "مرشح سخام"
 #. GST_ROLE_SPAM_FILTER
 #: ../src/services/service.c:54
 msgid "Remote shell server"
-msgstr "خادومات صدفة  بعيدة"
+msgstr "خادوم صدفة بعيدة"
 
 #: ../src/services/service.c:54
 msgid "Secure shell server"
-msgstr "خدمات صدفة  آمنة"
+msgstr "خادوم صدفة آمنة"
 
 #. GST_ROLE_SECURE_SHELL_SERVER
 #: ../src/services/service.c:55
@@ -1203,7 +1262,7 @@ msgstr "محدّث خدمات DNS ديناميكي"
 #. GST_ROLE_DYNAMIC_DNS_SERVICE
 #: ../src/services/service.c:68
 msgid "DHCP server"
-msgstr "خادوم DHCP "
+msgstr "خادوم DHCP"
 
 #. GST_ROLE_DHCP_SERVER
 #: ../src/services/service.c:69
@@ -1268,7 +1327,7 @@ msgstr "خادوم توجيه"
 #. GST_ROLE_ROUTE_SERVER
 #: ../src/services/service.c:81
 msgid "RPC mapper"
-msgstr "محدد الـ RPC "
+msgstr "محدد الـ RPC"
 
 #. GST_ROLE_RPC_MAPPER
 #: ../src/services/service.c:82
@@ -1426,7 +1485,7 @@ msgstr "الحالة"
 msgid "Priority"
 msgstr "الأهمية"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "إعدادات الخدمات"
 
@@ -1517,11 +1576,11 @@ msgstr "غيّر وقت النّظام و التّاريخ و المنطقة ا�
 msgid "Time and Date"
 msgstr "الوقت و التّاريخ"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:397
 msgid "NTP support is not installed"
 msgstr "دعم NTP ليس مثبتا"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:399
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1529,160 +1588,213 @@ msgstr ""
 "رّجاء ثبّت وفعّل دعم NTP في نظامك لتمكِّن مزامنة خادوم التوقيت المحلّي مع خواديم "
 "توقيت الإنترنت."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Enabling NTP"
 msgstr "يجري تمكين NTP"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:429
 msgid "Disabling NTP"
 msgstr "يجري تعطيل NTP"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:441
 msgid "Synchronizing system clock"
 msgstr "يجري مزامنة ساعة النظام"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:521
 msgid "Keep synchronized with Internet servers"
 msgstr "ابقِ متزامنا مع خواديم الإنترنت"
 
-#: ../src/time/time-tool.c:515
-msgid "Manual"
-msgstr "يدوي"
-
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:668
 msgid "Time and Date Settings"
 msgstr "إعدادات الوقت و التّاريخ"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "لا يمكن حذف مجموعة المديرين"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:636
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:74
+#: ../src/users/user-settings.c:442
 msgid "This would leave the system unusable."
 msgstr "قد يترك هذا النّظام غير قابل للاستخدام."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "أمتأكّدٌ أنّك تريد حذف المجموعة \"%s\"؟"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "قد يترك هذا ملفات بـ ID مجموعة غير سليم في نظام الملفّات"
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:151
 msgid "New group"
 msgstr "مجموعة جديدة"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:158
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "خصائص المجموعة '%s'"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:224
 msgid "Group name is empty"
 msgstr "اسم المجموعة خالٍ"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:225
 msgid "A group name must be specified."
 msgstr "يجب أن يحدد اسم للمجموعة."
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:227
 msgid "Group name of the administrator group user should not be modified"
 msgstr "يجب ألّا يعدّل اسم مجموعة المستخدم مدير النظام"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:230
 msgid "Group name has invalid characters"
 msgstr "يحوي اسم المجموعة محارفً غيرسليمة"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:231
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "رجاءً ضع اسم مجموعة سليم يتكوّنٍ من حرفٍ صغير متبوعًا بحروفٍ صغيرة و أرقام."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:569
+#: ../src/users/group-settings.c:236
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "المجموعة \"%s\" موجودةٌ بالفعل"
 
-#: ../src/users/group-settings.c:287
+#: ../src/users/group-settings.c:237
 msgid "Please choose a different group name."
 msgstr "رجاء اختر اسم مجموعة آخر."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:264
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "يجب ألّا يعدّل ID مجموعة مدير النظام"
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:268
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "معرف المجموعة %d تستخدمه مسبقا المجموعة \"%s\""
+
+#: ../src/users/group-settings.c:271
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "رجاء اختر معرفا رقميا آخر للمجموعة الجديدة."
+
+#: ../src/users/group-settings.c:273
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "رجاء اختر معرفا رقميا آخر للمجموعة \"%s\"."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "اسم المجموعة"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "مراقبة سجلات النظام"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "إدارة النظام"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "استخدام الأجهزة الصوتية"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "استخدام محركات الأقراص المدمجة"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "نسخ الاسطوانات"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "استخدام المودم"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "الاتصال بالإنترنت باستخدام مودم"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "إرسال واستقبال الفاكسات"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "استخدام محركات الأقراص المرنة"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "وصل نظام ملفات نطاق المستخدمين (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "إعداد الطابعات"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "الاتصال بالشبكات السلكية واللاسلكية"
+
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "الوصول إلى أجهزة التخزين الخارجية آليًا"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "تعليق وإسبات الحاسوب"
+
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "الوصول إلى نظام ملفات ‪/proc‬"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "استخدام الماسحات"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "استخدام محركات الأشرطة"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "استخدام أجهزة USB"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "استخدام محاكاة VirtualBox الافتراضية"
+
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "استخدام أجهزة العرض"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "إمكانية الحصول على صلاحيات المدير"
+
+#: ../src/users/user-profiles.conf.in.h:1
+msgid "Administrator"
+msgstr "إداري"
+
+#: ../src/users/user-profiles.conf.in.h:2
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr "يستطيع تغيير أي شيء في النظام بما فيه تثبيت وترقية البرمجيات."
+
+#: ../src/users/user-profiles.conf.in.h:3
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr ""
+"يستطيع أداء المهام الشائعة. لا يستطيع تثبيت برمجيات أو تغيير الإعدادات التي "
+"تؤثر على كل المستخدمين."
+
+#: ../src/users/user-profiles.conf.in.h:4
+msgid "Desktop user"
+msgstr "مستخدم مكتبي"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
@@ -1690,77 +1802,84 @@ msgstr "أضف أو أزل مستخدمين و مجموعات"
 
 #: ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
-msgstr "المستخدمون والمجموعات"
+msgstr "المستخدمين والمجموعات"
 
-#: ../src/users/user-settings.c:58
+#: ../src/users/user-settings.c:71
 msgid "Administrator account cannot be deleted"
 msgstr "لا يمكن حذف حساب المدير"
 
-#: ../src/users/user-settings.c:72
+#: ../src/users/user-settings.c:82
 #, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "أمتأكّدٌ أنّك تريد حذف الحساب \"%s\"؟"
-
-#: ../src/users/user-settings.c:75
-msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
-msgstr "سيعطّل هذا وصول المستخدم للنظام بدون حذف مجلده المنزل."
+msgid "%s is currently using this computer"
+msgstr "‏%s يستخدم الحاسوب حاليا"
 
 #: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "هذا المستخدم يستخدم الحاسوب حاليا"
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr "من فضلك تأكد من خروج المستخدم قبل حذف حسابه."
 
-#: ../src/users/user-settings.c:385
-msgid "New user account"
-msgstr "حساب مستخدم جديد"
+#: ../src/users/user-settings.c:95
+msgid "Can't delete the only administrator account"
+msgstr "لا يمكن حذف الحساب الإداري الوحيد"
 
-#: ../src/users/user-settings.c:403
+#: ../src/users/user-settings.c:97
 #, c-format
-msgid "Account '%s' Properties"
-msgstr "خصائص الحساب '%s'"
-
-#: ../src/users/user-settings.c:558
-msgid "User name is empty"
-msgstr "اسم المستخدم خال"
-
-#: ../src/users/user-settings.c:559
-msgid "A user name must be specified."
-msgstr "يجب أن يحدد اسم المستخدم."
-
-#: ../src/users/user-settings.c:561
-msgid "User name has invalid characters"
-msgstr "يحتوي اسم المستخدم محارفً غير صالحة"
-
-#: ../src/users/user-settings.c:562
 msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr "رجاءً ضع اسم مستخدمٍ سليم يتكوّنٍ من حرفٍ صغير متبوعًا بحروفٍ صغيرة و أرقام."
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr ""
+"‏%s هو المدير الوحيد لهذا الحاسوب. حذف هذا الحساب سيؤدي إلى منعك من إدارة "
+"النظام."
 
-#: ../src/users/user-settings.c:566
+#: ../src/users/user-settings.c:107
 #, c-format
-msgid "User name \"%s\" already exists"
-msgstr "اسم المستخدم \"%s\" موجود بالفعلً"
+msgid "Remove home folder for %s?"
+msgstr "أأزيل مجلد %s المنزلي؟"
 
-#: ../src/users/user-settings.c:567 ../src/users/user-settings.c:570
-msgid "Please choose a different user name."
-msgstr "رجاء اختر اسم مستخدم آخر."
+#: ../src/users/user-settings.c:110
+#, c-format
+msgid ""
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that and administrator can save them later."
+msgstr ""
+"يمكن حذف الملفات التي تخص المستخدم %s في <tt>%s</tt> نهائيا إذا لم تعد بحاجة "
+"إليها. ربما ترغب في الاحتفاظ بنسخة احتياطية قبل حذف الحساب، أو الإبقاء عليها "
+"حتى يستطيع مدير النظام حفظها لاحقا."
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:118
+msgid "Keep Files"
+msgstr "أبقِ الملفات"
+
+#: ../src/users/user-settings.c:119
+msgid "Don't Remove Account"
+msgstr "لا تحذف الحساب"
+
+#: ../src/users/user-settings.c:120
+msgid "Delete Files"
+msgstr "احذف الملفات"
+
+#: ../src/users/user-settings.c:331
+msgid "Superuser"
+msgstr "مستخدم فائق"
+
+#: ../src/users/user-settings.c:336
+msgid "Custom"
+msgstr "مخصّص"
+
+#: ../src/users/user-settings.c:359
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "محرفٌ غير سليم \"%c\" في التّعليق"
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:360
 msgid "Check that this character is not used."
 msgstr "تأكّد أن هذا المحرف غير مستخدم."
 
-#: ../src/users/user-settings.c:614
+#: ../src/users/user-settings.c:383
 msgid "Incomplete path in home directory"
 msgstr "مسار غير كامل لمجلّد المنزل"
 
-#: ../src/users/user-settings.c:615
+#: ../src/users/user-settings.c:384
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1768,23 +1887,43 @@ msgstr ""
 "رجاءًا أدخل المسار الكامل لمجلّد المنزل\n"
 "<span size=\"smaller\">مثلًا: /homealid</span>"
 
-#: ../src/users/user-settings.c:618
+#: ../src/users/user-settings.c:399
 msgid "Home directory already exists"
 msgstr "المجلد المنزلي موجود مسبقًا"
 
-#: ../src/users/user-settings.c:619
-msgid "Please enter a different home directory path."
-msgstr "رجاءً أدخل مسار مجلد منزلي آخر."
+#: ../src/users/user-settings.c:400
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"الديل <tt>%s</tt> موجود مسبقا. قد لا يكون للمستخدم الصلاحيات اللازمة لقراءة "
+"وكتابة هذا الدليل. أما زلت ترغب في استخدامه؟"
 
-#: ../src/users/user-settings.c:635
-msgid "Administrator account's user ID should not be modified"
-msgstr "يجب ألا يتم تعديل هوية حساب المدير"
+#: ../src/users/user-settings.c:406
+msgid "Use this directory"
+msgstr "استخدم هذا المجلد"
 
-#: ../src/users/user-settings.c:650
+#: ../src/users/user-settings.c:441
+msgid "ID for the root user should not be modified"
+msgstr "يجب ألّا تعدّل هوية المستخدم الجذر"
+
+#. check that UID is free
+#: ../src/users/user-settings.c:445
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "معرف المستخدم %d يستخدمه مسبقا المستخدم \"%s\""
+
+#: ../src/users/user-settings.c:447
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "رجاء اختر معرفا رقميا آخر ل‍ \"%s\"."
+
+#: ../src/users/user-settings.c:465
 msgid "Incomplete path in shell"
 msgstr "مسار غير كامل في الصدفة "
 
-#: ../src/users/user-settings.c:651
+#: ../src/users/user-settings.c:466
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1792,11 +1931,11 @@ msgstr ""
 "رّجاء إدخال مسار كامل للصدفة\n"
 "<span size=\"smaller\">مثلًا: /bin/sh</span>"
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:502
 msgid "Password is too short"
 msgstr "كلمة السّر قصيرة جدًا"
 
-#: ../src/users/user-settings.c:685
+#: ../src/users/user-settings.c:503
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1804,29 +1943,124 @@ msgstr ""
 "يجب أن تكون كلمات سر المستخدمين أطول من ٦ محارف ويفضل أن تتكون من أرقام "
 "وحروف ومحارف خاصة."
 
-#: ../src/users/user-settings.c:688
+#: ../src/users/user-settings.c:506
 msgid "Password confirmation is not correct"
 msgstr "تأكيد كلمة السّر غير صحيح."
 
-#: ../src/users/user-settings.c:689
+#: ../src/users/user-settings.c:507
 msgid "Check that you have provided the same password in both text fields."
 msgstr "تأكّد أنّك قد أدخلت كلمة السر نفسها في حقلي النّصّ كليهما."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "الاسم"
+#: ../src/users/user-settings.c:557
+msgid "Can't revoke administration rights"
+msgstr "لا يمكن إبطال الصلاحيات الإدارية"
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "اسم الولوج:"
+#: ../src/users/user-settings.c:560
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr ""
+"‏%s هو المدير الوحيد لهذا الحاسوب. إبطال الصلاحيات الإدارية سيؤدي إلى منعك من "
+"إدارة النظام."
 
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "المجلد المنزلي"
+#: ../src/users/user-settings.c:577
+msgid "You are about to revoke your own administration rights"
+msgstr "أنت على وشك إبطال صلاحياتك الإدارية"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/user-settings.c:580
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+"لن يعود بإمكان %s أداء المهاد الإدارية. لن يسمح لهذا الحساب باستعادة "
+"الصلاحية الإدارية بنفسه."
+
+#: ../src/users/user-settings.c:585
+msgid "Give up administration rights"
+msgstr "تخل عن الصلاحيات الإدارية"
+
+#: ../src/users/users-tool.c:273
 msgid "Users Settings"
 msgstr "إعدادات المستخدمين"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
+#~ "span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">رجاء أدخل كلمة سر الجذر</span>"
+
+#~ msgid ""
+#~ "You need administrator privileges to use this tool. Enter a password to "
+#~ "modify\n"
+#~ "your system configuration."
+#~ msgstr ""
+#~ "تحتاج صلاحيات المدير لتستخدم هذه الأداة. ادخل كلمة سر لتعدّل\n"
+#~ "اعدادات نظامك."
+
+#~ msgid "<span weight=\"bold\">Password</span>"
+#~ msgstr "<span weight=\"bold\">كلمة السّر</span>"
+
+#~ msgid ""
+#~ "Allow this user to open a local session without entering his password. "
+#~ "The password will still be required to perform administrative tasks."
+#~ msgstr ""
+#~ "اسمح لهذا المستخدم بفتح جلسة محلية دون إدخال كلمة السر. ستظل كلمة السر "
+#~ "مطلوبة لأداء المهام الإدارية."
+
+#~ msgid "User must log out before you can change his ID."
+#~ msgstr "يجب أن يخرج المستخدم قبل أن تتمكن من تغيير معرّفه."
+
+#~ msgid "_Add Group"
+#~ msgstr "_اضف مجموعة"
+
+#~ msgid "_Add User"
+#~ msgstr "_اضف مستخدم"
+
+#~ msgid "_Profile:"
+#~ msgstr "ال_هيئة:"
+
+#~ msgid "_Real name:"
+#~ msgstr "الا_سم الحقيقي:"
+
+#~ msgid "Are you sure you want to delete account \"%s\"?"
+#~ msgstr "أمتأكّدٌ أنّك تريد حذف الحساب \"%s\"؟"
+
+#~ msgid ""
+#~ "This will disable this user's access to the system without deleting the "
+#~ "user's home directory."
+#~ msgstr "سيعطّل هذا وصول المستخدم للنظام بدون حذف مجلده المنزل."
+
+#~ msgid "Account '%s' Properties"
+#~ msgstr "خصائص الحساب '%s'"
+
+#~ msgid "User name is empty"
+#~ msgstr "اسم المستخدم خال"
+
+#~ msgid "A user name must be specified."
+#~ msgstr "يجب أن يحدد اسم المستخدم."
+
+#~ msgid "User name has invalid characters"
+#~ msgstr "يحتوي اسم المستخدم محارفً غير صالحة"
+
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "رجاءً ضع اسم مستخدمٍ سليم يتكوّنٍ من حرفٍ صغير متبوعًا بحروفٍ صغيرة و أرقام."
+
+#~ msgid "Please enter a different home directory path."
+#~ msgstr "رجاءً أدخل مسار مجلد منزلي آخر."
+
+#~ msgid "Administrator account's user ID should not be modified"
+#~ msgstr "يجب ألا يتم تعديل هوية حساب المدير"
+
+#~ msgid "Name"
+#~ msgstr "الاسم"
+
+#~ msgid "Login name"
+#~ msgstr "اسم الولوج:"
 
 #~ msgid "<span weight=\"bold\">Contact Information</span>"
 #~ msgstr "<span weight=\"bold\">معلومات الاتصال</span>"
