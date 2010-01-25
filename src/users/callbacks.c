@@ -26,7 +26,6 @@
 #include <config.h>
 #include "gst.h"
 
-#include "passwd.h"
 #include "callbacks.h"
 #include "table.h"
 #include "user-settings.h"
@@ -285,54 +284,6 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 
 	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
 	g_list_free (list);
-}
-
-/* User settings callbacks */
-
-void
-on_user_settings_passwd_changed (GtkEntry *entry, gpointer data)
-{
-	g_object_set_data (G_OBJECT (entry), "changed", GINT_TO_POINTER (TRUE));
-}
-
-void
-on_user_settings_passwd_random_new (GtkButton *button, gpointer data)
-{
-	GtkWidget *widget;
-	gchar *passwd;
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_random_passwd");
-
-	passwd = passwd_get_random ();
-	gtk_entry_set_text (GTK_ENTRY (widget), passwd);
-	g_free (passwd);
-}
-
-void
-on_user_settings_passwd_toggled (GtkToggleButton *toggle, gpointer data)
-{
-	GtkWidget *user_passwd_random_new = gst_dialog_get_widget (tool->main_dialog, "user_passwd_random_new");
-	GtkWidget *user_passwd_random_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_random_passwd");
-	GtkWidget *user_passwd_entry1 = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
-	GtkWidget *user_passwd_entry2 = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd2");
-	GtkToggleButton *pwd_manual = GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual"));
-	
-
-	if (gtk_toggle_button_get_active (pwd_manual)) {
-		gtk_widget_set_sensitive (user_passwd_random_new, FALSE);
-		gtk_widget_set_sensitive (user_passwd_random_entry, FALSE);
-		gtk_widget_set_sensitive (user_passwd_entry1, TRUE);
-		gtk_widget_set_sensitive (user_passwd_entry2, TRUE);
-		gtk_entry_set_text (GTK_ENTRY (user_passwd_random_entry), "");
-	} else {
-		gtk_widget_set_sensitive (user_passwd_random_new, TRUE);
-		gtk_widget_set_sensitive (user_passwd_random_entry, TRUE);
-		gtk_widget_set_sensitive (user_passwd_entry1, FALSE);
-		gtk_widget_set_sensitive (user_passwd_entry2, FALSE);
-		gtk_entry_set_text (GTK_ENTRY (user_passwd_entry1), "");
-		gtk_entry_set_text (GTK_ENTRY (user_passwd_entry2), "");
-		on_user_settings_passwd_random_new (NULL, NULL);
-	}
 }
 
 void

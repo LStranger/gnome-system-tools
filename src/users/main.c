@@ -40,12 +40,6 @@ GstTool *tool;
 void quit_cb (GstTool *tool, gpointer data);
 
 static GstDialogSignal signals[] = {
-	/* User settings dialog callbacks */
-	{ "user_passwd_manual",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
-	{ "user_passwd_random",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
-	{ "user_passwd_random_new",		"clicked",		G_CALLBACK (on_user_settings_passwd_random_new) },
-	{ "user_settings_passwd1",		"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
-
 	/* Main dialog callbacks, users tab */
 	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
 	{ "manage_groups",                      "clicked",              G_CALLBACK (on_manage_groups_clicked) },

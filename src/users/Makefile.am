@@ -28,7 +28,9 @@ users_admin_SOURCES = \
 	privileges-table.c 	privileges-table.h \
 	group-members-table.c 	group-members-table.h \
 	user-profiles.c		user-profiles.h \
-	test-battery.c		test-battery.h
+	test-battery.c		test-battery.h	\
+	run-passwd.c		run-passwd.h	\
+	user-password.c
 
 toolpixmaps =
 

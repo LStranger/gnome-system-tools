@@ -29,7 +29,6 @@
 #include "users-tool.h"
 #include "user-profiles.h"
 
-#define NO_PASSWD_LOGIN_GROUP "nopasswdlogin"
 #define ADMIN_GROUP "admin"
 
 gboolean        user_delete                      (GtkTreeModel *model,
