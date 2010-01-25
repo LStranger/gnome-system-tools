@@ -128,23 +128,28 @@ update_users (GstUsersTool *tool)
 	OobsList *list;
 	OobsListIter iter;
 	GObject *user;
+	OobsUser *self;
+	GtkTreePath *path;
 	gboolean valid;
 
 	users_table_clear ();
 	list = oobs_users_config_get_users (OOBS_USERS_CONFIG (tool->users_config));
+	self = oobs_self_config_get_user (OOBS_SELF_CONFIG (tool->self_config));
 
 	valid = oobs_list_get_iter_first (list, &iter);
 
 	while (valid) {
 		user = oobs_list_get (list, &iter);
-		users_table_add_user (OOBS_USER (user));
+		path = users_table_add_user (OOBS_USER (user));
 		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (user));
 
+		if (self == (OobsUser *) user)
+			users_table_select_path (path);
+
 		g_object_unref (user);
+		gtk_tree_path_free (path);
 		valid = oobs_list_iter_next (list, &iter);
 	}
-
-	users_table_select_first ();
 }
 
 static void
