@@ -78,10 +78,6 @@ main (int argc, char *argv[])
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 	main_window_prepare (GST_USERS_TOOL (tool));
 
-	/* Required for the users tool to avoid resizing the window after showing it.
-	 * FIXME: we should find something more elegant to do that. */
-	gst_users_tool_update_gui (tool);
-
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();
 	
