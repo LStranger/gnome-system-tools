@@ -180,15 +180,22 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	GtkTreePath *path;
 	GList *list, *elem;
 
+	/* No need to prompt if not allowed */
+	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->users_config))
+		return;
+
 	list = elem = table_get_row_references (TABLE_USERS, &model);
 
 	while (elem) {
 		path = gtk_tree_row_reference_get_path (elem->data);
+
 		user_delete (model, path);
 
 		gtk_tree_path_free (path);
 		elem = elem->next;
 	}
+
+	users_table_select_first ();
 
 	g_list_foreach (list, (GFunc) gtk_tree_row_reference_free, NULL);
 	g_list_free (list);

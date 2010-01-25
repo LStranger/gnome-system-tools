@@ -285,7 +285,8 @@ users_table_get_current (void)
 
 	selected = gtk_tree_selection_get_selected_rows (selection, &model);
 
-	g_return_val_if_fail (selected != NULL, NULL);
+	if (!selected)
+	    return NULL;
 
 	/* Only choose the first selected user */
 	path = (GtkTreePath *) selected->data;
