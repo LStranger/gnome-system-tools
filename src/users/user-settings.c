@@ -827,6 +827,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	GtkWidget *user_login;
 	GtkWidget *login_entry;
 	GtkWidget *notice_image;
+	GtkWidget *encrypted_home;
 	GtkTreeModel *model;
 	GtkTreePath *user_path;
 	OobsUser *user;
@@ -834,6 +835,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	GstUserProfile *profile;
 	OobsUsersConfig *users_config;
 	OobsResult result;
+	gboolean encrypt;
 
 	/* Before going further, check for authorizations, authenticating if needed */
 	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->users_config))
@@ -844,6 +846,9 @@ on_user_new (GtkButton *button, gpointer user_data)
 	user_login = gst_dialog_get_widget (tool->main_dialog, "user_new_login");
 	login_entry = gtk_bin_get_child (GTK_BIN (user_login));
 	notice_image = gst_dialog_get_widget (tool->main_dialog, "user_new_notice_image");
+	encrypted_home = gst_dialog_get_widget (tool->main_dialog, "user_new_encrypted_home");
+
+	users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
 
 	/* clear any text, colors or icon left */
 	gtk_entry_set_text (GTK_ENTRY (user_name), "");
@@ -851,6 +856,10 @@ on_user_new (GtkButton *button, gpointer user_data)
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 	gtk_combo_box_set_active (GTK_COMBO_BOX (user_login), -1);
 	on_user_new_login_changed (GTK_COMBO_BOX (user_login), NULL);
+
+	/* Show the encrypt home check box if supported */
+	if (oobs_users_config_get_encrypted_home_support (users_config))
+	    gtk_widget_show (encrypted_home);
 
 	gtk_window_set_focus (GTK_WINDOW (user_new_dialog), user_name);
 
@@ -872,16 +881,16 @@ on_user_new (GtkButton *button, gpointer user_data)
 	   following the system configuration. */
 	login = gtk_combo_box_get_active_text (GTK_COMBO_BOX (user_login));
 	fullname = gtk_entry_get_text (GTK_ENTRY (user_name));
+	encrypt = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (encrypted_home));
 	user = oobs_user_new (login);
 	oobs_user_set_full_name (user, fullname);
+	oobs_user_set_encrypted_home (user, encrypt);
 
 	g_return_if_fail (user != NULL);
 
 	/* fill settings with values from default profile */
 	profile = gst_user_profiles_get_default_profile (GST_USERS_TOOL (tool)->profiles);
 	gst_user_profiles_apply (GST_USERS_TOOL (tool)->profiles, profile, user, TRUE);
-
-	users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
 
 	/* Commit both user and groups config because of possible memberships
 	 * added by the profile. Avoid showing the new user or trying to commit

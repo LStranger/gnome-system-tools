@@ -2329,7 +2329,7 @@
         <child>
           <object class="GtkTable" id="table2">
             <property name="visible">True</property>
-            <property name="n_rows">4</property>
+            <property name="n_rows">5</property>
             <property name="n_columns">2</property>
             <property name="column_spacing">12</property>
             <property name="row_spacing">12</property>
@@ -2467,6 +2467,22 @@
                 <property name="right_attach">2</property>
                 <property name="top_attach">3</property>
                 <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="user_new_encrypted_home">
+                <property name="label" translatable="yes">_Encrypt home folder to protect sensitive data</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="tooltip_text" translatable="yes">Encrypt all your files with your login password to strongly protect them from people with physical access to your computer, at the expense of a slightly reduced performance.</property>
+                <property name="use_underline">True</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="right_attach">2</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
               </packing>
             </child>
           </object>
