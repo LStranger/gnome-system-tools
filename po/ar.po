@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-20 19:33+0200\n"
-"PO-Revision-Date: 2010-01-20 19:33+0300\n"
+"POT-Creation-Date: 2010-01-26 16:41+0200\n"
+"PO-Revision-Date: 2010-01-26 16:41+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -345,7 +345,7 @@ msgid "Share through:"
 msgstr "شارك عبر:"
 
 #: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:239
+#: ../src/shares/shares-tool.c:240
 msgid "Shared Folders"
 msgstr "المجلدات المشتركة"
 
@@ -509,40 +509,45 @@ msgid "Changing user password for:"
 msgstr "غيّر كلمة سر المستخدم:"
 
 #: ../interfaces/users.ui.h:21
-msgid "Check password _quality"
-msgstr "افحص _جودة كلمة السّر"
-
-#: ../interfaces/users.ui.h:22
 msgid "Con_firmation:"
 msgstr "التّأ_كيد:"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:22
 msgid "Contact Information"
 msgstr "معلومات الاتصال"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:23
 msgid "Create New User"
 msgstr "أنشئ مستخدما جديدا"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:24
 msgid "Create a new user"
 msgstr "أنشئ مستخدما جديدا"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:25
 msgid "Days between warning and password expiration:"
 msgstr "الأيّام بين التّحذير و بطلان كلمة السّر:"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:26
 msgid "Default _group:"
 msgstr "ال_مجموعة الافتراضيّة:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:27
 msgid "Default _shell:"
 msgstr "ال_صدفة الافتراضية:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:28
 msgid "Don't ask for password on _login"
 msgstr "لا تطلب كلمة السر عند الو_لوج"
+
+#: ../interfaces/users.ui.h:29
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr ""
+"عمّ كل ملفاتك بكلمة سر الولوج لحماية أقوى ممن يستطيع الوصول ماديا إلى حاسوبك، "
+"على حساب قليل من التدهور في الأداء."
 
 #: ../interfaces/users.ui.h:30
 msgid "Full _Name:"
@@ -601,31 +606,35 @@ msgid "Minimum days allowed between password changes:"
 msgstr "أدنى عدد مسموح به من الأيّام بين تغييرات كلمة السّر:"
 
 #: ../interfaces/users.ui.h:45
+msgid "New _password:"
+msgstr "كلمة _سر جديدة:"
+
+#: ../interfaces/users.ui.h:46
 msgid "Number of days that a password may be used:"
 msgstr "عدد الأيّام التي يمكن فيها استخدام كلمة السّر:"
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:47
 msgid "O_ffice location:"
 msgstr "عنوان ال_مكتب:"
 
-#: ../interfaces/users.ui.h:47
+#: ../interfaces/users.ui.h:48
 msgid "Password set to: "
 msgstr "كلمة السّر مضبوطة لـى:"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:49
 msgid "Privileges"
 msgstr "صلاحيات"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:50
 msgid "Profile _name:"
 msgstr "ا_سم الهيئة:"
 
-#: ../interfaces/users.ui.h:50
+#: ../interfaces/users.ui.h:51
 msgid "Set password b_y hand"
 msgstr "ضع كلمة السّر _يدويًّا"
 
 #. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:53
 msgid ""
 "Short name must consist of:\n"
 "  &#x27A3; lower case letters from the English alphabet\n"
@@ -637,11 +646,11 @@ msgstr ""
 "  &#x27A3; أرقام\n"
 "  &#x27A3; أي من الحروف \".\"، \"-\" و \"_\""
 
-#: ../interfaces/users.ui.h:56
+#: ../interfaces/users.ui.h:57
 msgid "Short name must start with a letter!"
 msgstr "يجب أن يبدأ الاسم القصير بحرف"
 
-#: ../interfaces/users.ui.h:57
+#: ../interfaces/users.ui.h:58
 msgid ""
 "This account is using special settings that have been defined manually. Use "
 "the <i>Advanced Settings</i> dialog to tune them."
@@ -649,17 +658,13 @@ msgstr ""
 "يستخدم هذا الحساب إعدادات خاصة ضُبطت يدويا. استخدم حوار <i>الإعدادات "
 "المتقدمة</i> لضبطها."
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:59
 msgid "User ID:"
 msgstr "معرّف المستخدم:"
 
-#: ../interfaces/users.ui.h:59
+#: ../interfaces/users.ui.h:60
 msgid "User Privileges"
 msgstr "صلاحيات المستخدم"
-
-#: ../interfaces/users.ui.h:60
-msgid "User _password:"
-msgstr "_كلمة سر المستخدم:"
 
 #: ../interfaces/users.ui.h:61
 msgid "User profiles"
@@ -682,50 +687,58 @@ msgid "_Comments"
 msgstr "_تعليقات:"
 
 #: ../interfaces/users.ui.h:66
+msgid "_Current password:"
+msgstr "كلمة السر ال_حالية:"
+
+#: ../interfaces/users.ui.h:67
 msgid "_Custom"
 msgstr "_مُخصَّص"
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:68
 msgid "_Days between warning and password expiration:"
 msgstr "الأ_يّام بين التّحذير و بطلان كلمة السّر:"
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:69
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr "_عمّ مجلد المنزل لحماية البيانات الحساسة"
+
+#: ../interfaces/users.ui.h:70
 msgid "_Generate"
 msgstr "ولِّد"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:71
 msgid "_Home directory:"
 msgstr "المجلّد المنز_ل:"
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:72
 msgid "_Home phone:"
 msgstr "هاتف المنز_ل:"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:73
 msgid "_Main group:"
 msgstr "المجموعة ال_رّئيسيّة:"
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:74
 msgid "_Manage Groups"
 msgstr "إ_دارة المجموعات"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:75
 msgid "_Name:"
 msgstr "الا_سم:"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:76
 msgid "_Password:"
 msgstr "_كلمة السر:"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:77
 msgid "_Shell:"
 msgstr "ال_صدَفة:"
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:78
 msgid "_Short Name:"
 msgstr "الاسم ال_قصير:"
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:79
 msgid "_Work phone:"
 msgstr "هاتف ال_عمل:"
 
@@ -761,7 +774,7 @@ msgid "You are not allowed to access the system configuration."
 msgstr "غير مسموح لك بالنفاذ لإعدادات النظام."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:198
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:683
 msgid "You are not allowed to modify the system configuration."
 msgstr "غير مسموح لك بتغيير لإعدادات النظام."
 
@@ -785,6 +798,15 @@ msgstr "إعدادات النظام قد تغيرت فعلًا."
 #: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "هل تريد تحديث المحتوى؟ سيجعلك هذا تفقد كل تعديل حالي."
+
+#: ../src/common/gst-tool.c:685
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
+"حدث خطأ أثناء مراجعة التخويلات: %s\n"
+"هذه علة قد تريد الإبلاغ عنها."
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -1614,7 +1636,7 @@ msgstr "لا يمكن حذف مجموعة المديرين"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
 #: ../src/users/group-settings.c:265 ../src/users/user-settings.c:74
-#: ../src/users/user-settings.c:442
+#: ../src/users/user-settings.c:420
 msgid "This would leave the system unusable."
 msgstr "قد يترك هذا النّظام غير قابل للاستخدام."
 
@@ -1796,6 +1818,45 @@ msgstr ""
 msgid "Desktop user"
 msgstr "مستخدم مكتبي"
 
+#: ../src/users/run-passwd.c:421
+msgid "Authentication failed"
+msgstr "فشل الاستيثاق"
+
+#: ../src/users/run-passwd.c:493
+#, c-format
+msgid "The new password is too short"
+msgstr "كلمة السّر الجديدة قصيرة جدًا"
+
+#: ../src/users/run-passwd.c:497
+#, c-format
+msgid "The new password is too simple"
+msgstr "كلمة السر الجديدة بسيطة جدا"
+
+#: ../src/users/run-passwd.c:501
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "كلمتا السر القديمة و الجديدة متشابهتان جدا"
+
+#: ../src/users/run-passwd.c:504
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "يجب أن تحتوي كلمة السر الجديدة على محارف خاصة أو أرقام"
+
+#: ../src/users/run-passwd.c:508
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "كلمتا السر القديمة و الجديدة متطابقتان"
+
+#: ../src/users/run-passwd.c:512
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "تغيِّرت كلمة السر بعد الاستيثاق!"
+
+#: ../src/users/run-passwd.c:516
+#, c-format
+msgid "Unknown error"
+msgstr "خطأ مجهول"
+
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "أضف أو أزل مستخدمين و مجموعات"
@@ -1803,6 +1864,38 @@ msgstr "أضف أو أزل مستخدمين و مجموعات"
 #: ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "المستخدمين والمجموعات"
+
+#: ../src/users/user-password.c:101
+msgid "Password is too short"
+msgstr "كلمة السّر قصيرة جدًا"
+
+#: ../src/users/user-password.c:102
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"يجب أن تكون كلمات سر المستخدمين أطول من ٦ محارف ويفضل أن تتكون من أرقام "
+"وحروف ومحارف خاصة."
+
+#: ../src/users/user-password.c:105
+msgid "Password confirmation is not correct"
+msgstr "تأكيد كلمة السّر غير صحيح."
+
+#: ../src/users/user-password.c:106
+msgid "Check that you have provided the same password in both text fields."
+msgstr "تأكّد أنّك قد أدخلت كلمة السر نفسها في حقلي النّصّ كليهما."
+
+#: ../src/users/user-password.c:417
+msgid "Please choose another password."
+msgstr "رجاء اختر كلمة سر أخرى."
+
+#: ../src/users/user-password.c:428
+msgid "Please type again your current password."
+msgstr "رجاء أعد كتابة كلمة السر الحالية."
+
+#: ../src/users/user-password.c:435
+msgid "Password could not be changed"
+msgstr "لا يمكن تغيير كلمة السر"
 
 #: ../src/users/user-settings.c:71
 msgid "Administrator account cannot be deleted"
@@ -1858,28 +1951,28 @@ msgstr "لا تحذف الحساب"
 msgid "Delete Files"
 msgstr "احذف الملفات"
 
-#: ../src/users/user-settings.c:331
+#: ../src/users/user-settings.c:309
 msgid "Superuser"
 msgstr "مستخدم فائق"
 
-#: ../src/users/user-settings.c:336
+#: ../src/users/user-settings.c:314
 msgid "Custom"
 msgstr "مخصّص"
 
-#: ../src/users/user-settings.c:359
+#: ../src/users/user-settings.c:337
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "محرفٌ غير سليم \"%c\" في التّعليق"
 
-#: ../src/users/user-settings.c:360
+#: ../src/users/user-settings.c:338
 msgid "Check that this character is not used."
 msgstr "تأكّد أن هذا المحرف غير مستخدم."
 
-#: ../src/users/user-settings.c:383
+#: ../src/users/user-settings.c:361
 msgid "Incomplete path in home directory"
 msgstr "مسار غير كامل لمجلّد المنزل"
 
-#: ../src/users/user-settings.c:384
+#: ../src/users/user-settings.c:362
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1887,11 +1980,11 @@ msgstr ""
 "رجاءًا أدخل المسار الكامل لمجلّد المنزل\n"
 "<span size=\"smaller\">مثلًا: /homealid</span>"
 
-#: ../src/users/user-settings.c:399
+#: ../src/users/user-settings.c:377
 msgid "Home directory already exists"
 msgstr "المجلد المنزلي موجود مسبقًا"
 
-#: ../src/users/user-settings.c:400
+#: ../src/users/user-settings.c:378
 #, c-format
 msgid ""
 "The directory <tt>%s</tt> already exists. User may not have the permissions "
@@ -1900,30 +1993,30 @@ msgstr ""
 "الديل <tt>%s</tt> موجود مسبقا. قد لا يكون للمستخدم الصلاحيات اللازمة لقراءة "
 "وكتابة هذا الدليل. أما زلت ترغب في استخدامه؟"
 
-#: ../src/users/user-settings.c:406
+#: ../src/users/user-settings.c:384
 msgid "Use this directory"
 msgstr "استخدم هذا المجلد"
 
-#: ../src/users/user-settings.c:441
+#: ../src/users/user-settings.c:419
 msgid "ID for the root user should not be modified"
 msgstr "يجب ألّا تعدّل هوية المستخدم الجذر"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:445
+#: ../src/users/user-settings.c:423
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "معرف المستخدم %d يستخدمه مسبقا المستخدم \"%s\""
 
-#: ../src/users/user-settings.c:447
+#: ../src/users/user-settings.c:425
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "رجاء اختر معرفا رقميا آخر ل‍ \"%s\"."
 
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:443
 msgid "Incomplete path in shell"
 msgstr "مسار غير كامل في الصدفة "
 
-#: ../src/users/user-settings.c:466
+#: ../src/users/user-settings.c:444
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1931,31 +2024,11 @@ msgstr ""
 "رّجاء إدخال مسار كامل للصدفة\n"
 "<span size=\"smaller\">مثلًا: /bin/sh</span>"
 
-#: ../src/users/user-settings.c:502
-msgid "Password is too short"
-msgstr "كلمة السّر قصيرة جدًا"
-
-#: ../src/users/user-settings.c:503
-msgid ""
-"User passwords must be longer than 6 characters and preferably formed by "
-"numbers, letters and special characters."
-msgstr ""
-"يجب أن تكون كلمات سر المستخدمين أطول من ٦ محارف ويفضل أن تتكون من أرقام "
-"وحروف ومحارف خاصة."
-
-#: ../src/users/user-settings.c:506
-msgid "Password confirmation is not correct"
-msgstr "تأكيد كلمة السّر غير صحيح."
-
-#: ../src/users/user-settings.c:507
-msgid "Check that you have provided the same password in both text fields."
-msgstr "تأكّد أنّك قد أدخلت كلمة السر نفسها في حقلي النّصّ كليهما."
-
-#: ../src/users/user-settings.c:557
+#: ../src/users/user-settings.c:478
 msgid "Can't revoke administration rights"
 msgstr "لا يمكن إبطال الصلاحيات الإدارية"
 
-#: ../src/users/user-settings.c:560
+#: ../src/users/user-settings.c:481
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -1964,11 +2037,11 @@ msgstr ""
 "‏%s هو المدير الوحيد لهذا الحاسوب. إبطال الصلاحيات الإدارية سيؤدي إلى منعك من "
 "إدارة النظام."
 
-#: ../src/users/user-settings.c:577
+#: ../src/users/user-settings.c:498
 msgid "You are about to revoke your own administration rights"
 msgstr "أنت على وشك إبطال صلاحياتك الإدارية"
 
-#: ../src/users/user-settings.c:580
+#: ../src/users/user-settings.c:501
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -1977,13 +2050,19 @@ msgstr ""
 "لن يعود بإمكان %s أداء المهاد الإدارية. لن يسمح لهذا الحساب باستعادة "
 "الصلاحية الإدارية بنفسه."
 
-#: ../src/users/user-settings.c:585
+#: ../src/users/user-settings.c:506
 msgid "Give up administration rights"
 msgstr "تخل عن الصلاحيات الإدارية"
 
-#: ../src/users/users-tool.c:273
+#: ../src/users/users-tool.c:278
 msgid "Users Settings"
 msgstr "إعدادات المستخدمين"
+
+#~ msgid "Check password _quality"
+#~ msgstr "افحص _جودة كلمة السّر"
+
+#~ msgid "User _password:"
+#~ msgstr "_كلمة سر المستخدم:"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
