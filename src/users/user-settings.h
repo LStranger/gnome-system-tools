@@ -30,6 +30,7 @@
 #include "user-profiles.h"
 
 #define ADMIN_GROUP "admin"
+#define NO_PASSWD_LOGIN_GROUP "nopasswdlogin"
 
 gboolean        user_delete                      (GtkTreeModel *model,
 						  GtkTreePath *path);

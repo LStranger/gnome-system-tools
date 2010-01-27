@@ -34,8 +34,6 @@
 #include "passwd.h"
 
 
-#define NO_PASSWD_LOGIN_GROUP "nopasswdlogin"
-
 extern GstTool *tool;
 
 
@@ -362,8 +360,12 @@ finish_password_change ()
 	if (no_passwd_login_changed || !is_self) {
 		/* commit both user and groups config
 		 * because of the no_passwd_login_group membership */
-		if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK)
+		if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK) {
 			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+
+			/* Update settings shown in the main dialog */
+			user_settings_show (user);
+		}
 	}
 
 	gst_dialog_remove_edit_dialog (tool->main_dialog, GTK_WIDGET (user_passwd_dialog));

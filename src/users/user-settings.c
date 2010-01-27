@@ -289,8 +289,11 @@ user_settings_show (OobsUser *user)
 	GtkWidget *face_image;
 	GtkWidget *profile_label;
 	GtkWidget *profile_button;
+	GtkWidget *passwd_label;
 	GdkPixbuf *face;
 	GstUserProfile *profile;
+	OobsGroupsConfig *groups_config;
+	OobsGroup *group;
 
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
 	gtk_label_set_text (GTK_LABEL (name_label), oobs_user_get_full_name (user));
@@ -313,6 +316,19 @@ user_settings_show (OobsUser *user)
 		gtk_label_set_text (GTK_LABEL (profile_label),
 		                    profile ? profile->name : _("Custom"));
 	}
+
+	passwd_label = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd");
+	groups_config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+	group = oobs_groups_config_get_from_name (groups_config, NO_PASSWD_LOGIN_GROUP);
+
+	if (oobs_user_get_password_empty (user))
+		/* TRANSLATORS: This applies to a password. */
+		gtk_label_set_text (GTK_LABEL (passwd_label), _("None"));
+	else if (oobs_user_is_in_group (user, group))
+		/* TRANSLATORS:  This applies to a password. Keep the string short. */
+		gtk_label_set_text (GTK_LABEL (passwd_label), _("Not asked on login"));
+	else
+		gtk_label_set_text (GTK_LABEL (passwd_label), _("Asked on login"));
 }
 
 static void

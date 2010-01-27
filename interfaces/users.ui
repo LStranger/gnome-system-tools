@@ -152,8 +152,8 @@
           <object class="GtkTable" id="table1">
             <property name="visible">True</property>
             <property name="n_rows">5</property>
-            <property name="n_columns">3</property>
-            <property name="column_spacing">24</property>
+            <property name="n_columns">4</property>
+            <property name="column_spacing">12</property>
             <property name="row_spacing">12</property>
             <child>
               <object class="GtkImage" id="user_settings_face">
@@ -196,8 +196,8 @@
                 <signal name="clicked" handler="on_edit_user_name"/>
               </object>
               <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
               </packing>
@@ -214,7 +214,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
+                <property name="right_attach">3</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
             </child>
@@ -243,7 +243,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
+                <property name="right_attach">3</property>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
                 <property name="y_options">GTK_FILL</property>
@@ -260,8 +260,8 @@
                 <signal name="clicked" handler="on_edit_user_passwd"/>
               </object>
               <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
                 <property name="x_options"></property>
@@ -279,7 +279,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
+                <property name="right_attach">3</property>
                 <property name="top_attach">1</property>
                 <property name="bottom_attach">2</property>
                 <property name="y_options">GTK_FILL</property>
@@ -296,12 +296,22 @@
                 <signal name="clicked" handler="on_edit_user_profile"/>
               </object>
               <packing>
-                <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
+                <property name="left_attach">3</property>
+                <property name="right_attach">4</property>
                 <property name="top_attach">1</property>
                 <property name="bottom_attach">2</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label5">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="right_attach">4</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
@@ -315,21 +325,11 @@
               </object>
               <packing>
                 <property name="left_attach">2</property>
-                <property name="right_attach">3</property>
+                <property name="right_attach">4</property>
                 <property name="top_attach">4</property>
                 <property name="bottom_attach">5</property>
                 <property name="x_options"></property>
                 <property name="y_options"></property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label5">
-                <property name="visible">True</property>
-              </object>
-              <packing>
-                <property name="right_attach">3</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
@@ -3203,9 +3203,9 @@
   <object class="GtkSizeGroup" id="user_new_notice_sizegroup">
     <property name="mode">both</property>
     <widgets>
-      <widget name="user_new_login_notice"/>
-      <widget name="user_new_login_used_notice"/>
       <widget name="user_new_login_letter_notice"/>
+      <widget name="user_new_login_used_notice"/>
+      <widget name="user_new_login_notice"/>
     </widgets>
   </object>
 </interface>
