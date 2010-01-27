@@ -460,6 +460,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 			                        "short",
 			                        "longer",
 			                        "palindrome",
+			                        "dictionary",
 			                        "simple",
 			                        "similar",
 			                        "wrapped",
@@ -492,7 +493,8 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
 						                     _("The new password is too short"));
 					} else if (g_strrstr (str->str, "palindrome") != NULL ||
-						   g_strrstr (str->str, "simple") != NULL) {
+						   g_strrstr (str->str, "simple") != NULL ||
+						   g_strrstr (str->str, "dictionary") != NULL) {
 						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
 						                     _("The new password is too simple"));
 					} else if (g_strrstr (str->str, "similar") != NULL ||
