@@ -422,10 +422,9 @@ on_option_configuration_changed (GtkWidget *widget,
 		oobs_service_set_runlevel_configuration (time_tool->ntp_service,
 							 (OobsServicesRunlevel *) runlevel,
 							 (active) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
-							 /* FIXME: hardcoded priority? */
-							 50);
+							 0);
 
-		gst_tool_commit_async (GST_TOOL (time_tool), time_tool->services_config,
+		gst_tool_commit_async (GST_TOOL (time_tool), OOBS_OBJECT (time_tool->ntp_service),
 				       (active) ? _("Enabling NTP") : _("Disabling NTP"),
 				       NULL, NULL);
 	}

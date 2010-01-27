@@ -75,7 +75,7 @@ show_settings (void)
 
 	if (response != GTK_RESPONSE_NONE) {
 		service_settings_table_save (service);
-		gst_tool_commit (tool, GST_SERVICES_TOOL (tool)->services_config);
+		gst_tool_commit (tool, OOBS_OBJECT (service));
 	}
 
 	g_object_unref (service);
@@ -162,12 +162,13 @@ on_service_toggled (GtkCellRenderer *renderer, gchar *path_str, gpointer data)
 							 (new_value) ? OOBS_SERVICE_START : OOBS_SERVICE_STOP,
 							 /* Keep previous priority, see how liboobs handles this */
 							 0);
-		gst_tool_commit (tool, GST_SERVICES_TOOL (tool)->services_config);
+		if (gst_tool_commit (tool, OOBS_OBJECT (service)) != OOBS_RESULT_OK)
+			new_value = !new_value;
 
 		gtk_list_store_set (GTK_LIST_STORE (model),
-				    &iter,
-				    COL_ACTIVE, new_value,
-				    -1);
+		                    &iter,
+		                    COL_ACTIVE, new_value,
+		                    -1);
 	}
 
 	gtk_tree_path_free (path);
