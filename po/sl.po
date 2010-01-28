@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2010-01-26 19:08+0000\n"
-"PO-Revision-Date: 2010-01-28 10:16+0100\n"
+"POT-Creation-Date: 2010-01-28 09:44+0000\n"
+"PO-Revision-Date: 2010-01-28 12:47+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "<b>Nastavitve povezave</b>"
 
 #: ../interfaces/network.ui.h:3
 msgid "<b>DNS Servers</b>"
-msgstr "<b>DNS Strežnik</b>"
+msgstr "<b>DNS strežnik</b>"
 
 #: ../interfaces/network.ui.h:4
 msgid "<b>Host Settings</b>"
@@ -537,7 +537,7 @@ msgstr "Ne vprašaj za geslo ob _prijavi"
 
 #: ../interfaces/users.ui.h:29
 msgid "Encrypt all your files with your login password to strongly protect them from people with physical access to your computer, at the expense of a slightly reduced performance."
-msgstr ""
+msgstr "Šifriranje vseh datotek in podatkov za močno zaščito pred uporabniki, ki imajo neposreden dostop do računalnika (na račun malce zmanjšanje zmogljivosti delovanja sistema)."
 
 #: ../interfaces/users.ui.h:30
 msgid "Full _Name:"
@@ -659,7 +659,7 @@ msgstr "Uporabniški profil"
 
 #: ../interfaces/users.ui.h:62
 msgid "You can't change user ID while the user is logged in."
-msgstr ""
+msgstr "Ni mogoče spremeniti uporabniškega ID, dokler je uporabnik prijavljen."
 
 #: ../interfaces/users.ui.h:63
 msgid "_Add Profile"
@@ -788,6 +788,8 @@ msgid ""
 "An error occurred while checking for authorizations: %s\n"
 "You may report this as a bug."
 msgstr ""
+"Prišlo je od napake med preverjanjem overitve: %s\n"
+"Napako je mogoče prijaviti kot hrošč."
 
 #: ../src/network/address-list.c:76
 #: ../src/network/hosts.c:31
@@ -1775,11 +1777,11 @@ msgstr "Skrbnik"
 
 #: ../src/users/user-profiles.conf.in.h:2
 msgid "Can change anything on the system, including installing and upgrading software."
-msgstr ""
+msgstr "Spremeniti je mogoče vse nastavitve, vključno z nameščanjem in posodabljanjem sistema."
 
 #: ../src/users/user-profiles.conf.in.h:3
 msgid "Can perform common tasks. Can't install software or change settings affecting all users."
-msgstr ""
+msgstr "Mogoče je opravljati splošne naloge, ni pa mogoče spreminjati nastavitev, ki vplivajo na vse uporabnike."
 
 #: ../src/users/user-profiles.conf.in.h:4
 msgid "Desktop user"
@@ -1817,7 +1819,7 @@ msgstr "Staro in novo geslo je enako."
 #: ../src/users/run-passwd.c:512
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
+msgstr "Geslo se je spremenilo od začetne overitve!"
 
 #: ../src/users/run-passwd.c:516
 #, c-format
@@ -1854,7 +1856,7 @@ msgstr "Izberite drugačno ime."
 
 #: ../src/users/user-password.c:428
 msgid "Please type again your current password."
-msgstr ""
+msgstr "Znova vnesite trenutno geslo."
 
 #: ../src/users/user-password.c:435
 msgid "Password could not be changed"
@@ -1871,7 +1873,7 @@ msgstr "%si trenutno uporablja računalnik"
 
 #: ../src/users/user-settings.c:85
 msgid "Please ensure the user has logged out before deleting this account."
-msgstr ""
+msgstr "Prepričajte se, da se je uporabnik odjavil pred izbrisanjem računa."
 
 #: ../src/users/user-settings.c:95
 msgid "Can't delete the only administrator account"
@@ -1880,7 +1882,7 @@ msgstr "Ni mogoče izbrisati edinega skrbniškega računa"
 #: ../src/users/user-settings.c:97
 #, c-format
 msgid "%s is the only administrator on this computer. Deleting this account would lock you out of administrating the system."
-msgstr ""
+msgstr "%s je edini skrbnik tega sistema. Z izbrisom tega računa, onemogočite nadaljnje izvajanje skrbniških opravil celotnega sistema."
 
 #: ../src/users/user-settings.c:107
 #, c-format
@@ -1890,7 +1892,7 @@ msgstr "Ali naj se odstrani domača mapa %s?"
 #: ../src/users/user-settings.c:110
 #, c-format
 msgid "Files owned by user %s in <tt>%s</tt> can be completely removed if you don't need them anymore. You may want to back them up before deleting the account, or keep them so that and administrator can save them later."
-msgstr ""
+msgstr "Datoteke uporabnika %s v <tt>%s</tt> je mogoče dokončno odstraniti. Morda je vredno prej ustvariti varnostno kopijo ali pa jih ohraniti do pregleda skrbnika."
 
 #: ../src/users/user-settings.c:118
 msgid "Keep Files"
@@ -1940,7 +1942,7 @@ msgstr "Domači imenik že obstaja"
 #: ../src/users/user-settings.c:378
 #, c-format
 msgid "The directory <tt>%s</tt> already exists. User may not have the permissions required to read or write in that directory. Do you want to use it anyway?"
-msgstr ""
+msgstr "Mapa <tt>%s</tt> že obstaja. Uporabnik morda nima dovoljenj za branje in pisanje v to mapo. Ali jo vseeno želite uporabiti?"
 
 #: ../src/users/user-settings.c:384
 msgid "Use this directory"
@@ -1980,20 +1982,20 @@ msgstr "Ni mogoče povrniti skrbniških dovoljenj"
 #: ../src/users/user-settings.c:481
 #, c-format
 msgid "%s is the only administrator on this computer. Revoking administration rights for this account would lock you out of administrating the system."
-msgstr ""
+msgstr "%s je edini skrbnik tega sistema. S preklicom skrbniških dovoljenj za ta račun, onemogočite nadaljnje izvajanje skrbniških opravil celotnega sistema."
 
 #: ../src/users/user-settings.c:498
 msgid "You are about to revoke your own administration rights"
-msgstr ""
+msgstr "Preklicali boste lastne skrbniške pravice."
 
 #: ../src/users/user-settings.c:501
 #, c-format
 msgid "%s will no longer be able to perform administrative tasks. This account won't be allowed to get administration rights back on its own."
-msgstr ""
+msgstr "%s nima več dovoljenja za izvajanje skrbniških nalog. S tem računom ni več mogoče lastnoročno pridobiti skrbniških pravic."
 
 #: ../src/users/user-settings.c:506
 msgid "Give up administration rights"
-msgstr ""
+msgstr "Prepusti skrbniška dovoljenja"
 
 #: ../src/users/users-tool.c:278
 msgid "Users Settings"
