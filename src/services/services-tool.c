@@ -105,5 +105,6 @@ gst_services_tool_new (void)
 			     "name", "services",
 			     "title", _("Services Settings"),
 			     "icon", "network-server",
+	                     "lock-button", FALSE,
 			     NULL);
 }

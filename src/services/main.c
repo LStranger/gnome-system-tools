@@ -39,10 +39,6 @@ static GstDialogSignal signals [] = {
 	{ NULL }
 };
 
-static const gchar *policy_widgets [] = {
-	"services_list",
-	NULL
-};
 
 int 
 main (int argc, char *argv[])
@@ -51,7 +47,6 @@ main (int argc, char *argv[])
 	tool = gst_services_tool_new ();
 
 	gst_dialog_connect_signals (tool->main_dialog, signals);
-	gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
 	table_create ();
 	service_settings_table_create ();
 

@@ -56,6 +56,12 @@ show_settings (void)
 			    COL_OBJECT, &service,
 			    -1);
 
+	/* Don't try to commit if not allowed */
+	if (!gst_tool_authenticate (tool, OOBS_OBJECT (service))) {
+		g_object_unref (service);
+		return;
+	}
+
 	title = g_strdup_printf (_("Settings for service \"%s\""),
 				 oobs_service_get_name (service));
 
@@ -154,6 +160,12 @@ on_service_toggled (GtkCellRenderer *renderer, gchar *path_str, gpointer data)
 			    COL_DANGEROUS, &dangerous,
 			    -1);
 
+	/* Don't try to commit if not allowed */
+	if (!gst_tool_authenticate (tool, OOBS_OBJECT (service))) {
+		g_object_unref (service);
+		return;
+	}
+
 	if (new_value || !dangerous || show_warning_dialog (tool, service)) {
 		OobsServicesRunlevel *rl;
 		
@@ -172,6 +184,7 @@ on_service_toggled (GtkCellRenderer *renderer, gchar *path_str, gpointer data)
 	}
 
 	gtk_tree_path_free (path);
+	g_object_unref (service);
 }
 
 void
