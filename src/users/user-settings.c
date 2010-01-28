@@ -49,6 +49,9 @@ extern GstTool *tool;
 void   on_edit_user_passwd  (GtkButton *button,
                              gpointer   user_data);
 
+void   on_user_settings_enable_account  (GtkButton *button,
+                                         gpointer   user_data);
+
 
 static gboolean
 check_user_delete (OobsUser *user)
@@ -290,6 +293,9 @@ user_settings_show (OobsUser *user)
 	GtkWidget *profile_label;
 	GtkWidget *profile_button;
 	GtkWidget *passwd_label;
+	GtkWidget *disabled_image;
+	GtkWidget *disabled_label;
+	GtkWidget *enable_button;
 	GdkPixbuf *face;
 	GstUserProfile *profile;
 	OobsGroupsConfig *groups_config;
@@ -329,6 +335,26 @@ user_settings_show (OobsUser *user)
 		gtk_label_set_text (GTK_LABEL (passwd_label), _("Not asked on login"));
 	else
 		gtk_label_set_text (GTK_LABEL (passwd_label), _("Asked on login"));
+
+	/* Show notice if account is locked, this is really useful for new accounts
+	 * where user did not choose a password. */
+	disabled_image = gst_dialog_get_widget (tool->main_dialog,
+	                                        "user_settings_disabled_account_image");
+	disabled_label = gst_dialog_get_widget (tool->main_dialog,
+	                                        "user_settings_disabled_account");
+	enable_button = gst_dialog_get_widget (tool->main_dialog,
+	                                       "user_settings_enable_account");
+
+	if (oobs_user_get_password_disabled (user)) {
+		gtk_widget_show (disabled_image);
+		gtk_widget_show (disabled_label);
+		gtk_widget_show (enable_button);
+	}
+	else {
+		gtk_widget_hide (disabled_image);
+		gtk_widget_hide (disabled_label);
+		gtk_widget_hide (enable_button);
+	}
 }
 
 static void
@@ -554,6 +580,37 @@ check_profile (OobsUser *user, GstUserProfile *profile)
 	  }
 
 	return TRUE;
+}
+
+/*
+ * Callback for user_settings_enable_account: unlock account and commit changes.
+ */
+void
+on_user_settings_enable_account  (GtkButton *enable_button,
+                                  gpointer   user_data)
+{
+	GtkWidget *disabled_image;
+	GtkWidget *disabled_label;
+	OobsUser *user;
+
+	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->users_config))
+		return;
+
+	user = users_table_get_current ();
+	oobs_user_set_password_disabled (user, FALSE);
+
+	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK) {
+		disabled_image = gst_dialog_get_widget (tool->main_dialog,
+		                                        "user_settings_disabled_account_image");
+		disabled_label = gst_dialog_get_widget (tool->main_dialog,
+		                                        "user_settings_disabled_account");
+
+		gtk_widget_hide (disabled_image);
+		gtk_widget_hide (disabled_label);
+		gtk_widget_hide (GTK_WIDGET (enable_button));
+	}
+
+	g_object_unref (user);
 }
 
 /*
