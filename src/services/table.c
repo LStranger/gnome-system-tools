@@ -84,7 +84,7 @@ add_columns (GtkTreeView *treeview)
 	g_signal_connect (G_OBJECT (renderer), "toggled",
 			  G_CALLBACK (on_service_toggled), tool);
 
-	g_object_set (G_OBJECT (renderer), "xpad", 12, NULL);
+	g_object_set (G_OBJECT (renderer), "xpad", 6, NULL);
 
 	gtk_tree_view_insert_column_with_attributes (treeview,
 						     -1, "",
@@ -120,6 +120,7 @@ create_model (void)
 	model = gtk_list_store_new (COL_LAST,
 				    G_TYPE_BOOLEAN,
 				    G_TYPE_STRING,
+	                            G_TYPE_STRING,
 				    GDK_TYPE_PIXBUF,
 				    G_TYPE_INT,
 				    G_TYPE_OBJECT,
@@ -140,6 +141,7 @@ table_create (void)
 	
 	add_columns (GTK_TREE_VIEW (runlevel_table));
 	table_popup_menu_create (GTK_TREE_VIEW (runlevel_table));
+	gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (runlevel_table), COL_TOOLTIP);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (runlevel_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
@@ -165,11 +167,11 @@ get_service_icon (GstTool     *tool,
 	GdkPixbuf *icon = NULL;
 
 	if (icon_name)
-		icon = gtk_icon_theme_load_icon (tool->icon_theme, icon_name, 48, 0, NULL);
+		icon = gtk_icon_theme_load_icon (tool->icon_theme, icon_name, 32, 0, NULL);
 
 	/* fallback icon */
 	if (!icon)
-		icon = gtk_icon_theme_load_icon (tool->icon_theme, "exec", 48, 0, NULL);
+		icon = gtk_icon_theme_load_icon (tool->icon_theme, "exec", 32, 0, NULL);
 
 	return icon;
 }
@@ -186,14 +188,17 @@ table_add_service (OobsService *service, OobsListIter *list_iter)
 
 	desc = service_search (service);
 
-	if (!desc)
-		return;
-
-	icon = get_service_icon (tool, desc->icon);
-	description = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s (<i>%s</i>)</span>\n%s",
-				       _(desc->description),
-				       oobs_service_get_name (service),
-				       (desc->long_description) ? _(desc->long_description) : "");
+	if (desc) {
+		icon = get_service_icon (tool, desc->icon);
+		description = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>\n<i>%s</i>",
+		                               oobs_service_get_name (service),
+		                               _(desc->description));
+	}
+	else {
+		icon = get_service_icon (tool, NULL);
+		description = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>",
+		                               oobs_service_get_name (service));
+	}
 
 	table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "services_list"));
 	model = gtk_tree_view_get_model (table);
@@ -202,8 +207,9 @@ table_add_service (OobsService *service, OobsListIter *list_iter)
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    COL_ACTIVE, service_get_active (service),
 			    COL_DESC, description,
+	                    COL_TOOLTIP, desc ? _(desc->long_description) : NULL,
 			    COL_IMAGE, icon,
-			    COL_DANGEROUS, desc->dangerous,
+			    COL_DANGEROUS, desc ? desc->dangerous : FALSE,
 			    COL_OBJECT, service,
 			    COL_ITER, list_iter,
 			    -1);
