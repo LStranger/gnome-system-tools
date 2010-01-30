@@ -54,6 +54,7 @@ add_group_columns (GtkTreeView *treeview)
 static GtkTreeModel*
 create_groups_model (void)
 {
+	GtkTreeModel *sort_model;
 	GtkListStore *store;
 
 	store = gtk_list_store_new (COL_GROUP_LAST,
@@ -61,7 +62,12 @@ create_groups_model (void)
 	                            G_TYPE_INT,
 				    G_TYPE_OBJECT);
 
-	return GTK_TREE_MODEL (store);
+	/* Sort model */
+	sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
+	                                      COL_GROUP_NAME, GTK_SORT_ASCENDING);
+
+	return sort_model;
 }
 
 void
@@ -98,11 +104,24 @@ create_groups_table (void)
 			  G_CALLBACK (on_table_popup_menu), NULL);
 }
 
+GtkTreeModel *
+groups_table_get_model ()
+{
+	GtkWidget *groups_table;
+	GtkTreeModel *sort_model;
+
+	groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
+	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
+
+	return gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
+}
+
 void
 groups_table_set_group (OobsGroup *group, GtkTreeIter *iter)
 {
-	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
+	GtkTreeModel *model;
+
+	model = groups_table_get_model ();
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_GROUP_NAME, oobs_group_get_name (group),
@@ -114,9 +133,10 @@ groups_table_set_group (OobsGroup *group, GtkTreeIter *iter)
 void
 groups_table_add_group (OobsGroup *group)
 {
-	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
+	GtkTreeModel *model;
 	GtkTreeIter iter;
+
+	model = groups_table_get_model ();
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	groups_table_set_group (group, &iter);
@@ -125,8 +145,49 @@ groups_table_add_group (OobsGroup *group)
 void
 groups_table_clear (void)
 {
-	GtkWidget *groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
+	GtkTreeModel *model;
+
+	model = groups_table_get_model ();
 
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 }
+
+/*
+ * Get selected items, translating them to child GtkListStore references.
+ */
+GList*
+groups_table_get_row_references ()
+{
+	GtkWidget *groups_table;
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeModel *sort_model;
+	GtkTreePath *path;
+	GList *paths, *elem, *list = NULL;
+
+	groups_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "groups_table");
+	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
+	paths = elem = gtk_tree_selection_get_selected_rows (selection, &model);
+
+	if (!paths)
+		return NULL;
+
+	while (elem) {
+		path = gtk_tree_model_sort_convert_path_to_child_path (GTK_TREE_MODEL_SORT (sort_model),
+		                                                       elem->data);
+
+		list = g_list_prepend (list, gtk_tree_row_reference_new (model, path));
+
+		gtk_tree_path_free (path);
+		elem = elem->next;
+	}
+
+	list = g_list_reverse (list);
+	g_list_foreach (paths, (GFunc) gtk_tree_path_free, NULL);
+	g_list_free (paths);
+
+	return list;
+}
+

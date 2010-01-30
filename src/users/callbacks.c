@@ -268,7 +268,8 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	GtkTreePath *path;
 	GList *list, *elem;
 
-	list = elem = table_get_row_references (TABLE_GROUPS, &model);
+	list = elem = groups_table_get_row_references ();
+	model = groups_table_get_model ();
 
 	/* Before going further, check for authorizations, authenticating if needed */
 	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->groups_config))

@@ -38,18 +38,22 @@ enum {
 	COL_USER_LAST
 };
 
-void         create_users_table	               (GstUsersTool *tool);
+void          create_users_table                (GstUsersTool *tool);
 
-void         users_table_clear                 (void);
+GtkTreeModel *users_table_get_model             ();
 
-void         users_table_set_user              (OobsUser     *user,
+void          users_table_clear                 (void);
+
+void          users_table_set_user              (OobsUser     *user,
                                                 GtkTreeIter  *iter);
 
-GtkTreePath *users_table_add_user              (OobsUser     *user);
+GtkTreePath  *users_table_add_user              (OobsUser     *user);
 
-void         users_table_select_path           (GtkTreePath *path);
+GList        *users_table_get_row_references    ();
 
-void         users_table_select_first          (void);
+void          users_table_select_path           (GtkTreePath *path);
+
+void          users_table_select_first          (void);
 
 OobsUser    *users_table_get_current           (void);
 

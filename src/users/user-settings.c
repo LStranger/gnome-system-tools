@@ -187,7 +187,8 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->users_config))
 		return;
 
-	list = elem = table_get_row_references (TABLE_USERS, &model);
+	list = elem = users_table_get_row_references ();
+	model = users_table_get_model ();
 
 	while (elem) {
 		path = gtk_tree_row_reference_get_path (elem->data);
