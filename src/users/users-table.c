@@ -47,8 +47,7 @@ add_user_columns (GtkTreeView *treeview)
 					     "pixbuf", COL_USER_FACE,
 					     NULL);
 	g_object_set (G_OBJECT (renderer),
-		      "xpad", 3,
-		      "ypad", 6,
+		      "ypad", 3,
 		      NULL);
 	/* User full name and login, on two lines */
 	renderer = gtk_cell_renderer_text_new ();
@@ -57,8 +56,9 @@ add_user_columns (GtkTreeView *treeview)
 					     "markup", COL_USER_LABEL,
 					     NULL);
 	g_object_set (G_OBJECT (renderer),
-		      "xpad", 3,
-		      "ypad", 6,
+		      "ypad", 3,
+	              "ellipsize", PANGO_ELLIPSIZE_END,
+	              "ellipsize-set", TRUE,
 		      NULL);
 
 	gtk_tree_view_insert_column (treeview, column, -1);
