@@ -9,10 +9,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools 2.27.92\n"
+"Project-Id-Version: gnome-system-tools 2.29.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-19 20:43+0800\n"
-"PO-Revision-Date: 2009-09-15 20:55+0800\n"
+"POT-Creation-Date: 2010-02-04 20:40+0800\n"
+"PO-Revision-Date: 2010-02-04 13:22+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,16 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
+#, fuzzy
+#| msgid "Whether the users-admin tool should show all users and groups or not"
+msgid "Whether the users-admin tool should show system users in the users list"
+msgstr "「使用者及群組」工具應否顯示所有帳號及群組"
+
+#: ../gnome-system-tools.schemas.in.h:2
+#, fuzzy
+#| msgid "Whether the users-admin tool should show all users and groups or not"
+msgid ""
+"Whether the users-admin tool should show the root user in the users list"
 msgstr "「使用者及群組」工具應否顯示所有帳號及群組"
 
 #: ../interfaces/network.ui.h:1
@@ -100,7 +109,7 @@ msgstr "啟用這個連線(_N)"
 msgid "Ethernet interface:"
 msgstr "乙太網路介面:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:32
 msgid "General"
 msgstr "一般"
 
@@ -240,7 +249,7 @@ msgstr "設定數據機為預設路由(_S)"
 msgid "_Subnet mask:"
 msgstr "子網路遮罩(_S):"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "使用者名稱(_U):"
 
@@ -334,7 +343,7 @@ msgid "Share through:"
 msgstr "共享為："
 
 #: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:239
+#: ../src/shares/shares-tool.c:240
 msgid "Shared Folders"
 msgstr "共享的資料夾"
 
@@ -439,215 +448,307 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">密碼設定</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">密碼</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">設定檔內容</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">系統預設值</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "帳號"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "帳號類型(_T):"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "進階"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
-msgstr ""
-"允許這個使用者不需輸入密碼就能開啟本地端作業階段。如果要進行系統管理工作時仍"
-"需密碼。"
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
+msgstr "已經有同樣名稱的使用者存在。請為新的使用者選擇不同的短式名稱。"
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "預設分配隨機的密碼"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "改變進階的使用者設定值"
+
 #: ../interfaces/users.ui.h:14
-msgid "Check password _quality"
-msgstr "檢查密碼品質(_Q)"
+msgid "Change User Account Type"
+msgstr "改變使用者帳號類型"
 
 #: ../interfaces/users.ui.h:15
+#, fuzzy
+msgid "Change User Name and Login"
+msgstr "改變便用者名稱並登入"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "改變使用者密碼"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "正在改變此人的進階設定值："
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "改變使用者帳號類型："
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "正在改變使用者名稱："
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "正在改變使用者密碼："
+
+#: ../interfaces/users.ui.h:21
 msgid "Con_firmation:"
 msgstr "確認密碼(_F):"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:22
 msgid "Contact Information"
 msgstr "連絡人資訊"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:23
+msgid "Create New User"
+msgstr "建立新的使用者"
+
+#: ../interfaces/users.ui.h:24
+msgid "Create a new user"
+msgstr "建立一個新的使用者"
+
+#: ../interfaces/users.ui.h:25
 msgid "Days between warning and password expiration:"
 msgstr "密碼過期前，於指定日數發出警告："
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:26
 msgid "Default _group:"
 msgstr "預設群組(_G):"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:27
 msgid "Default _shell:"
 msgstr "預設 _Shell："
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:28
+msgid "Disable _account"
+msgstr "停用帳號(_A)"
+
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "登入時不詢問密碼(_L)"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr ""
+"使用您登入的密碼來加密您所有的檔案，以便防止能直接碰觸您的電腦的人取得它們，"
+"不過加密會稍稍減少系統的效能。"
+
+#: ../interfaces/users.ui.h:31
+msgid "Full _Name:"
+msgstr "全名(_N):"
+
+#: ../interfaces/users.ui.h:33
 msgid "Generate _random password"
 msgstr "產生隨機密碼(_R)"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:34
 msgid "Group _ID:"
 msgstr "群組 _ID："
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:35
 msgid "Group _name:"
 msgstr "群組名稱(_N):"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:36
 msgid "Group properties"
 msgstr "群組屬性"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:37
 msgid "Groups settings"
 msgstr "群組設定值"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:38
 msgid "Ma_ximum days a password may be used:"
 msgstr "密碼可使用的日數上限(_X):"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:521
+msgid "Manual"
+msgstr "手動"
+
+#: ../interfaces/users.ui.h:40
 msgid "Maximum GID:"
 msgstr "GID 值上限："
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:41
 msgid "Maximum UID:"
 msgstr "UID 值上限："
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:42
 msgid "Mi_nimum days between password changes:"
 msgstr "密碼使用了指定的日數後方可修改(_N):"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:43
 msgid "Minimum GID:"
 msgstr "GID 值下限："
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:44
 msgid "Minimum UID:"
 msgstr "UID 值下限："
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:45
 msgid "Minimum days allowed between password changes:"
 msgstr "密碼使用了指定的日數後方可修改："
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:46
+msgid "New _password:"
+msgstr "新的密碼(_P):"
+
+#: ../interfaces/users.ui.h:47
 msgid "Number of days that a password may be used:"
 msgstr "密碼可使用的日數："
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:48
 msgid "O_ffice location:"
 msgstr "公司位置(_F):"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:49
 msgid "Password set to: "
 msgstr "密碼設定為："
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:50
 msgid "Privileges"
 msgstr "權限"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:51
 msgid "Profile _name:"
 msgstr "設定組合名稱(_N):"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:52
 msgid "Set password b_y hand"
 msgstr "自行設定密碼(_Y)"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:54
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"短式名稱必須由這些字組成：\n"
+"  &#x27A3; 小寫英文字母\n"
+"  &#x27A3; 數字\n"
+"  &#x27A3; 其他字元如 \".\"、 \"-\" 和 \"_\""
+
+#: ../interfaces/users.ui.h:58
+msgid "Short name must start with a letter!"
+msgstr "短式名稱必須以英文字母開頭！"
+
+#: ../interfaces/users.ui.h:59
+msgid "This account is disabled."
+msgstr "這個帳號已停用。"
+
+#: ../interfaces/users.ui.h:60
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+"這個帳號使用了以手動設定的特殊設定值。請使用 <i>進階設定</i> 對話盒來調整他"
+"們。"
+
+#: ../interfaces/users.ui.h:61
 msgid "User ID:"
 msgstr "使用者ID："
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:62
 msgid "User Privileges"
 msgstr "使用者權限"
 
-#: ../interfaces/users.ui.h:42
-msgid "User _password:"
-msgstr "使用者密碼(_P):"
-
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr "在您改變使用者的 ID 前他必須先登出。"
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:63
 msgid "User profiles"
 msgstr "使用者設定檔"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "加入群組(_A)"
+#: ../interfaces/users.ui.h:64
+msgid "You can't change user ID while the user is logged in."
+msgstr "您不能在使用者處於登入狀態時改變使用者 ID。"
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "新增設定檔(_A)"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "新增使用者(_A)"
+#: ../interfaces/users.ui.h:66
+msgid "_Advanced Settings"
+msgstr "進階設定(_A)"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "備註(_C)"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:68
+msgid "_Current password:"
+msgstr "目前的密碼(_C):"
+
+#: ../interfaces/users.ui.h:69
+msgid "_Custom"
+msgstr "自訂(_C)"
+
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "密碼過期前，於指定日數發出警告(_D):"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "刪除(_D)"
+#: ../interfaces/users.ui.h:71
+msgid "_Enable Account"
+msgstr "啟用帳號(_E)"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:72
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr "加密家目錄以保護敏感資料(_E)"
+
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "產生(_G)"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "個人目錄(_H):"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "住家電話(_H):"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "主要群組(_M):"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "管理群組(_M):"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "設定組合(_P):"
+#: ../interfaces/users.ui.h:78
+msgid "_Name:"
+msgstr "名稱(_N):"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "真實姓名(_R):"
+#: ../interfaces/users.ui.h:79
+msgid "_Password:"
+msgstr "密碼(_P):"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:81
+msgid "_Short Name:"
+msgstr "短式名稱(_S):"
+
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "工作電話(_W):"
 
@@ -669,49 +770,63 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "不支援的平台"
 
-#: ../src/common/gst-tool.c:181
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "無法載入設定"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "無法儲存組態設定"
 
-#: ../src/common/gst-tool.c:187
+#: ../src/common/gst-tool.c:196
 msgid "You are not allowed to access the system configuration."
 msgstr "您不允許存取系統設定。"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:189
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:683
 msgid "You are not allowed to modify the system configuration."
 msgstr "您不被允許修改系統組態。"
 
-#: ../src/common/gst-tool.c:192
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "找不到無效的資料。"
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:194
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "發生不明的錯誤。"
 
-#: ../src/common/gst-tool.c:416
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "無法顯示說明文件"
 
-#: ../src/common/gst-tool.c:600
+#: ../src/common/gst-tool.c:622
 msgid "The system configuration has potentially changed."
 msgstr "系統組態可能被更改了。"
 
-#: ../src/common/gst-tool.c:602
+#: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "是否要更新內容？這樣會失去任何在先前過程中的修改。"
 
+#: ../src/common/gst-tool.c:685
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
+"在檢查驗證時發生錯誤：%s\n"
+"您可以將這個錯誤回報給開發者。"
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "加入(_A)"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "刪除(_D)"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -795,7 +910,7 @@ msgid "%s Properties"
 msgstr "%s 屬性"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "屬性(_P)"
 
@@ -938,17 +1053,17 @@ msgstr "網路"
 msgid "Network Settings"
 msgstr "網路設定"
 
-#: ../src/services/callbacks.c:59
+#: ../src/services/callbacks.c:65
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "服務“%s”的設定"
 
-#: ../src/services/callbacks.c:119
+#: ../src/services/callbacks.c:125
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "您確定要停用 %s？"
 
-#: ../src/services/callbacks.c:123
+#: ../src/services/callbacks.c:129
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1398,7 +1513,7 @@ msgstr "狀態"
 msgid "Priority"
 msgstr "優先等級"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "服務設定值"
 
@@ -1500,75 +1615,71 @@ msgid ""
 msgstr ""
 "請在系統安裝並啟用 NTP 支援，令您的本地時間伺服器能與網路時間伺服器進行同步。"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:428
 msgid "Enabling NTP"
 msgstr "啟用 NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:428
 msgid "Disabling NTP"
 msgstr "停用 NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:440
 msgid "Synchronizing system clock"
 msgstr "系統時鐘同步"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:520
 msgid "Keep synchronized with Internet servers"
 msgstr "與網路伺服器保持同步"
 
-#: ../src/time/time-tool.c:522
-msgid "Manual"
-msgstr "手動"
-
-#: ../src/time/time-tool.c:668
+#: ../src/time/time-tool.c:667
 msgid "Time and Date Settings"
 msgstr "時間及日期設定"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "管理員群組無法被刪除"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
-#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:702
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:77
+#: ../src/users/user-settings.c:463
 msgid "This would leave the system unusable."
 msgstr "這樣會讓系統停留在無法使用的狀態。"
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "是否確定刪除群組“%s”？"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "這樣可能會在檔案系統中留下具有無效的群組 ID 的檔案。"
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:151
 msgid "New group"
 msgstr "建立新群組"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:158
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "群組‘%s’屬性"
 
-#: ../src/users/group-settings.c:291
+#: ../src/users/group-settings.c:224
 msgid "Group name is empty"
 msgstr "群組名稱是空的"
 
-#: ../src/users/group-settings.c:292
+#: ../src/users/group-settings.c:225
 msgid "A group name must be specified."
 msgstr "必須指定群組名稱。"
 
-#: ../src/users/group-settings.c:294
+#: ../src/users/group-settings.c:227
 msgid "Group name of the administrator group user should not be modified"
 msgstr "不應修改屬於管理員群組使用者的群組名稱"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:230
 msgid "Group name has invalid characters"
 msgstr "群組名稱含有不正確的字元"
 
-#: ../src/users/group-settings.c:298
+#: ../src/users/group-settings.c:231
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1576,86 +1687,181 @@ msgstr ""
 "請設定有效的群組名稱，第一個字元只可以是小寫字母，其它的必須是小寫字母或數"
 "字。"
 
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
+#: ../src/users/group-settings.c:236
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "群組“%s”已經存在"
 
-#: ../src/users/group-settings.c:303
+#: ../src/users/group-settings.c:237
 msgid "Please choose a different group name."
 msgstr "請使用另外一個群組名稱。"
 
-#: ../src/users/group-settings.c:318
+#: ../src/users/group-settings.c:264
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "不應修改管理員帳號所屬的群組 ID"
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:268
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "群組 ID %d 已被群組「%s」所使用"
+
+#: ../src/users/group-settings.c:271
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "請為這個新群組選擇不同的數字識別碼。"
+
+#: ../src/users/group-settings.c:273
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "請為群組「%s」選擇不同的數字識別碼。"
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "群組名稱"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "監視系統日誌"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "管理此系統"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "使用音效裝置"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "使用光碟機"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "燒錄 CD / DVD"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "使用數據機"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "經由數據機連線到網際網路"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "傳送與接收傳真"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "使用軟碟機"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
+#, fuzzy
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "掛載使用者層級檔案系統 (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "設定印表機"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "連線到無線和乙太網路"
+
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "自動存取外部的儲存裝置"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "將電腦暫停與休眠"
+
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "存取 /proc 檔案系統"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "使用掃描器"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "使用磁帶機"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "使用 USB 裝置"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "使用 VirtualBox 虛擬化解決方案"
+
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "使用視訊裝置"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "可以得到管理者權限"
+
+#: ../src/users/user-profiles.conf.in.h:1
+msgid "Administrator"
+msgstr "系統管理者"
+
+#: ../src/users/user-profiles.conf.in.h:2
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr "可以改變系統中的任何事，包括安裝和升級軟體。"
+
+#: ../src/users/user-profiles.conf.in.h:3
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr "可以進行一般工作。不能安裝軟體或改變會影響所有使用者的設定值。"
+
+#: ../src/users/user-profiles.conf.in.h:4
+msgid "Desktop user"
+msgstr "桌面使用者"
+
+#: ../src/users/run-passwd.c:421
+msgid "Authentication failed"
+msgstr "驗證失敗"
+
+#: ../src/users/run-passwd.c:494
+#, c-format
+msgid "The new password is too short"
+msgstr "新的密碼太短"
+
+#: ../src/users/run-passwd.c:499
+#, c-format
+msgid "The new password is too simple"
+msgstr "新的密碼太簡單"
+
+#: ../src/users/run-passwd.c:503
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "舊密碼與新密碼太相似了"
+
+#: ../src/users/run-passwd.c:506
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "新的密碼必須包含數字或特殊字元"
+
+#: ../src/users/run-passwd.c:510
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "舊密碼與新密碼是相同的"
+
+#: ../src/users/run-passwd.c:514
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr ""
+
+#: ../src/users/run-passwd.c:518
+#, c-format
+msgid "Unknown error"
+msgstr "不明的錯誤"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
@@ -1665,77 +1871,124 @@ msgstr "加入或移除使用者及群組"
 msgid "Users and Groups"
 msgstr "使用者及群組"
 
-#: ../src/users/user-settings.c:58
+#: ../src/users/user-password.c:99
+msgid "Password is too short"
+msgstr "密碼太短"
+
+#: ../src/users/user-password.c:100
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr "使用者密碼須為 6 個字元以上，及最好由數字、字元及特殊字元所組成。"
+
+#: ../src/users/user-password.c:103
+msgid "Password confirmation is not correct"
+msgstr "密碼確認並不正確"
+
+#: ../src/users/user-password.c:104
+msgid "Check that you have provided the same password in both text fields."
+msgstr "請檢查您是否在兩個文字欄位中提供相同的密碼。"
+
+#: ../src/users/user-password.c:419
+msgid "Please choose another password."
+msgstr "請選擇其他密碼。"
+
+#: ../src/users/user-password.c:430
+msgid "Please type again your current password."
+msgstr "請再次輸入您目前的密碼。"
+
+#: ../src/users/user-password.c:437
+msgid "Password could not be changed"
+msgstr "密碼無法變更"
+
+#: ../src/users/user-settings.c:74
 msgid "Administrator account cannot be deleted"
 msgstr "管理員帳號無法被刪除"
 
-#: ../src/users/user-settings.c:72
-#, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "您是否確定要刪除帳號“%s”？"
-
-#: ../src/users/user-settings.c:75
-msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
-msgstr "這會停止該使用者存取系統，但他的家目錄不會被刪除。"
-
 #: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "該使用者目前正在使用這部電腦"
-
-#: ../src/users/user-settings.c:439
-msgid "New user account"
-msgstr "新使用者帳號"
-
-#: ../src/users/user-settings.c:460
 #, c-format
-msgid "Account '%s' Properties"
-msgstr "帳號‘%s’屬性"
+msgid "%s is currently using this computer"
+msgstr "%s 目前正在使用這部電腦"
 
-#: ../src/users/user-settings.c:621
-msgid "User name is empty"
-msgstr "使用者名稱是空的"
+#: ../src/users/user-settings.c:88
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr "在刪除這個帳號之前請確定該使用者已經登出。"
 
-#: ../src/users/user-settings.c:622
-msgid "A user name must be specified."
-msgstr "必須指定使用者名稱。"
+#: ../src/users/user-settings.c:98
+msgid "Can't delete the only administrator account"
+msgstr "不能刪除唯一的系統管理者帳號"
 
-#: ../src/users/user-settings.c:624
-msgid "User name has invalid characters"
-msgstr "使用者名稱含有無效的字"
-
-#: ../src/users/user-settings.c:625
+#: ../src/users/user-settings.c:100
+#, c-format
 msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
 msgstr ""
-"請設定有效的使用者名稱，第一個字元只可以是小寫字母，其它的必須是小寫字母或數"
-"字。"
+"%s 是這台電腦上唯一的系統管理者。刪除這個帳號會導致您無法管理這個系統。"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:110
 #, c-format
-msgid "User name \"%s\" already exists"
-msgstr "該使用者名稱“%s”已經存在"
+msgid "Remove home folder for %s?"
+msgstr "是否移除 %s 的家目錄？"
 
-#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
-msgid "Please choose a different user name."
-msgstr "請選擇不同的使用者名稱。"
+#: ../src/users/user-settings.c:113
+#, c-format
+msgid ""
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that and administrator can save them later."
+msgstr ""
+"如果已無需要，您可以完全移除使用者 %s 在 <tt>%s</tt> 中所擁有的檔案。您可能會"
+"想在刪除這個帳號前先把它們備份，或是保留它們以便系統管理者能在稍後保存它們。"
 
-#: ../src/users/user-settings.c:661
+#: ../src/users/user-settings.c:121
+msgid "Keep Files"
+msgstr "保留檔案"
+
+#: ../src/users/user-settings.c:122
+msgid "Don't Remove Account"
+msgstr "不移除帳號"
+
+#: ../src/users/user-settings.c:123
+msgid "Delete Files"
+msgstr "刪除檔案"
+
+#: ../src/users/user-settings.c:319
+msgid "Superuser"
+msgstr "超級使用者"
+
+#: ../src/users/user-settings.c:324
+msgid "Custom"
+msgstr "自訂"
+
+#. TRANSLATORS: This applies to a password.
+#: ../src/users/user-settings.c:333
+msgid "None"
+msgstr "沒有"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+#: ../src/users/user-settings.c:336
+msgid "Not asked on login"
+msgstr "不在登入時詢問"
+
+#: ../src/users/user-settings.c:338
+msgid "Asked on login"
+msgstr "登入時詢問"
+
+#: ../src/users/user-settings.c:380
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "備註中出現無效的字元“%c”"
 
-#: ../src/users/user-settings.c:662
+#: ../src/users/user-settings.c:381
 msgid "Check that this character is not used."
 msgstr "請檢查有無使用此不正確的字元。"
 
-#: ../src/users/user-settings.c:680
+#: ../src/users/user-settings.c:404
 msgid "Incomplete path in home directory"
 msgstr "個人目錄含有不完整的路徑"
 
-#: ../src/users/user-settings.c:681
+#: ../src/users/user-settings.c:405
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1743,35 +1996,43 @@ msgstr ""
 "請輸入家目錄的完整路徑\n"
 "<span size=\"smaller\">例如：/home/john</span>。"
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:420
 msgid "Home directory already exists"
 msgstr "家目錄已經存在"
 
-#: ../src/users/user-settings.c:685
-msgid "Please enter a different home directory path."
-msgstr "請選擇不同的家目錄路徑。"
+#: ../src/users/user-settings.c:421
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"目錄 <tt>%s</tt> 已存在。使用者可能會沒有讀寫該目錄必須的權限。您仍然要使用它"
+"嗎？"
 
-#: ../src/users/user-settings.c:701
-msgid "Administrator account's user ID should not be modified"
-msgstr "不應修改管理員帳號的使用者 ID"
+#: ../src/users/user-settings.c:427
+msgid "Use this directory"
+msgstr "使用這個目錄"
 
-#: ../src/users/user-settings.c:706
-#, fuzzy, c-format
-#| msgid "User name \"%s\" already exists"
-msgid "User ID %d is already used"
-msgstr "該使用者名稱“%s”已經存在"
+#: ../src/users/user-settings.c:462
+msgid "ID for the root user should not be modified"
+msgstr "不應修改 root 使用者的 ID"
 
-#: ../src/users/user-settings.c:707
-#, fuzzy
-#| msgid "Please choose a different user name."
-msgid "Please choose a different numeric identifier for the new user."
-msgstr "請選擇不同的使用者名稱。"
+#. check that UID is free
+#: ../src/users/user-settings.c:466
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "使用者 ID %d 已經被使用者 %s 所用"
 
-#: ../src/users/user-settings.c:721
+#: ../src/users/user-settings.c:468
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "請為 %s 選擇不同的數字識別碼。"
+
+#: ../src/users/user-settings.c:486
 msgid "Incomplete path in shell"
 msgstr "shell 含有不完整的路徑"
 
-#: ../src/users/user-settings.c:722
+#: ../src/users/user-settings.c:487
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1779,53 +2040,119 @@ msgstr ""
 "請輸入 shell 的完整路徑\n"
 "<span size=\"smaller\">例如：/bin/bash</span>。"
 
-#: ../src/users/user-settings.c:755
-msgid "Password is too short"
-msgstr "密碼太短"
+#: ../src/users/user-settings.c:521
+msgid "Can't revoke administration rights"
+msgstr "不能註銷系統管理者權限"
 
-#: ../src/users/user-settings.c:756
+#: ../src/users/user-settings.c:524
+#, c-format
 msgid ""
-"User passwords must be longer than 6 characters and preferably formed by "
-"numbers, letters and special characters."
-msgstr "使用者密碼須為 6 個字元以上，及最好由數字、字元及特殊字元所組成。"
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr ""
+"%s 是這台電腦上唯一的系統管理者。註銷這個帳號的系統管理者權限會導致您無法管理"
+"這個系統。"
 
-#: ../src/users/user-settings.c:759
-msgid "Password confirmation is not correct"
-msgstr "密碼確認並不正確"
+#: ../src/users/user-settings.c:541
+msgid "You are about to revoke your own administration rights"
+msgstr "您即將註銷自己的系統管理者權限"
 
-#: ../src/users/user-settings.c:760
-msgid "Check that you have provided the same password in both text fields."
-msgstr "請檢查您是否在兩個文字欄位中提供相同的密碼。"
+#: ../src/users/user-settings.c:544
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+"%s 將不再能進行管理層級的工作。往後這個帳號無法自行取回系統管理者權限。"
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "名稱"
+#: ../src/users/user-settings.c:549
+msgid "Give up administration rights"
+msgstr "放棄系統管理者權限"
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "登入名稱"
-
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "個人目錄"
-
-#: ../src/users/users-tool.c:216
+#: ../src/users/users-tool.c:278
 msgid "Users Settings"
 msgstr "使用者設定值"
+
+#~ msgid "<span weight=\"bold\">Password</span>"
+#~ msgstr "<span weight=\"bold\">密碼</span>"
+
+#~ msgid ""
+#~ "Allow this user to open a local session without entering his password. "
+#~ "The password will still be required to perform administrative tasks."
+#~ msgstr ""
+#~ "允許這個使用者不需輸入密碼就能開啟本地端作業階段。如果要進行系統管理工作時"
+#~ "仍需密碼。"
+
+#~ msgid "Check password _quality"
+#~ msgstr "檢查密碼品質(_Q)"
+
+#~ msgid "User _password:"
+#~ msgstr "使用者密碼(_P):"
+
+#~ msgid "User must log out before you can change his ID."
+#~ msgstr "在您改變使用者的 ID 前他必須先登出。"
+
+#~ msgid "_Add Group"
+#~ msgstr "加入群組(_A)"
+
+#~ msgid "_Add User"
+#~ msgstr "新增使用者(_A)"
+
+#~ msgid "_Profile:"
+#~ msgstr "設定組合(_P):"
+
+#~ msgid "_Real name:"
+#~ msgstr "真實姓名(_R):"
+
+#~ msgid "Are you sure you want to delete account \"%s\"?"
+#~ msgstr "您是否確定要刪除帳號“%s”？"
+
+#~ msgid ""
+#~ "This will disable this user's access to the system without deleting the "
+#~ "user's home directory."
+#~ msgstr "這會停止該使用者存取系統，但他的家目錄不會被刪除。"
+
+#~ msgid "Account '%s' Properties"
+#~ msgstr "帳號‘%s’屬性"
+
+#~ msgid "User name is empty"
+#~ msgstr "使用者名稱是空的"
+
+#~ msgid "A user name must be specified."
+#~ msgstr "必須指定使用者名稱。"
+
+#~ msgid "User name has invalid characters"
+#~ msgstr "使用者名稱含有無效的字"
+
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "請設定有效的使用者名稱，第一個字元只可以是小寫字母，其它的必須是小寫字母或"
+#~ "數字。"
+
+#~ msgid "User name \"%s\" already exists"
+#~ msgstr "該使用者名稱“%s”已經存在"
+
+#~ msgid "Please enter a different home directory path."
+#~ msgstr "請選擇不同的家目錄路徑。"
+
+#~ msgid "Administrator account's user ID should not be modified"
+#~ msgstr "不應修改管理員帳號的使用者 ID"
+
+#~ msgid "Name"
+#~ msgstr "名稱"
+
+#~ msgid "Login name"
+#~ msgstr "登入名稱"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
 #~ "span>"
 #~ msgstr "<span weight=\"bold\" size=\"larger\">請輸入 root 密碼</span>"
 
-#~ msgid "Enter Password"
-#~ msgstr "輸入密碼"
-
 #~ msgid ""
 #~ "You need administrator privileges to use this tool. Enter a password to "
 #~ "modify\n"
 #~ "your system configuration."
 #~ msgstr "您需要有系統管理員的權限來使用此工具。輸入密碼以修改您的系統組態。"
-
-#~ msgid "_Password:"
-#~ msgstr "密碼(_P):"
