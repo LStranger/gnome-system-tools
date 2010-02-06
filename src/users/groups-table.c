@@ -167,9 +167,10 @@ groups_table_get_row_references ()
 
 	groups_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "groups_table");
 	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
+	model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
-	paths = elem = gtk_tree_selection_get_selected_rows (selection, &model);
+	paths = elem = gtk_tree_selection_get_selected_rows (selection, NULL);
 
 	if (!paths)
 		return NULL;

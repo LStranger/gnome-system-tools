@@ -248,9 +248,10 @@ users_table_get_row_references ()
 	users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
 	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
 	filter_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
+	model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
-	paths = elem = gtk_tree_selection_get_selected_rows (selection, &model);
+	paths = elem = gtk_tree_selection_get_selected_rows (selection, NULL);
 
 	if (!paths)
 		return NULL;

@@ -41,17 +41,20 @@ get_model (void)
 static void
 on_group_member_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
 {
-	GtkTreeModel *model, *filter_model;
-	GtkTreePath *filter_path, *path;
+	GtkTreeModel *model, *sort_model, *filter_model;
+	GtkTreePath *sort_path, *filter_path, *path;
 	GtkTreeIter iter;
 	gboolean value;
 
-	filter_model = (GtkTreeModel*) data;
+	sort_model = (GtkTreeModel*) data;
+	filter_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 	model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 
-	filter_path = gtk_tree_path_new_from_string (path_str);
+	sort_path = gtk_tree_path_new_from_string (path_str);
+	filter_path = gtk_tree_model_sort_convert_path_to_child_path (GTK_TREE_MODEL_SORT (sort_model),
+	                                                              sort_path);
 	path = gtk_tree_model_filter_convert_path_to_child_path (GTK_TREE_MODEL_FILTER (filter_model),
-								 filter_path);
+	                                                         filter_path);
 
 	if (gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path)) {
 		gtk_tree_model_get (model, &iter, COL_USER_MEMBER, &value, -1);
@@ -60,6 +63,7 @@ on_group_member_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer 
 				    -1);
 	}
 
+	gtk_tree_path_free (sort_path);
 	gtk_tree_path_free (filter_path);
 	gtk_tree_path_free (path);
 }
@@ -122,14 +126,15 @@ void
 group_members_table_set_from_group (OobsGroup *group)
 {
 	GtkWidget *table;
-	GtkTreeModel *filter_model, *model;
+	GtkTreeModel *sort_model, *filter_model, *model;
 	GtkTreeIter iter;
 	GList *users;
 	gboolean valid;
 	OobsUser *user;
 
 	table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "group_settings_members");
-	filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	filter_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
 	model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
 	users = oobs_group_get_users (group);
 
