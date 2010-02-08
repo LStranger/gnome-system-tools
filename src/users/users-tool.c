@@ -116,8 +116,14 @@ gst_users_tool_finalize (GObject *object)
 	GstUsersTool *tool = GST_USERS_TOOL (object);
 
 	g_object_unref (tool->users_config);
+	g_object_unref (tool->self_config);
 	g_object_unref (tool->groups_config);
 	g_object_unref (tool->profiles);
+
+	/* Clear models to unreference OobsUsers and OobsGroups
+	 * to be sure they are finalized properly (passwords...) */
+	users_table_clear ();
+	groups_table_clear ();
 
 	(* G_OBJECT_CLASS (gst_users_tool_parent_class)->finalize) (object);
 }

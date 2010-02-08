@@ -239,6 +239,7 @@ privileges_table_set_from_user (OobsUser *user)
 				    COL_MEMBER, (g_list_find (users, user) != NULL),
 				    -1);
 		g_list_free (users);
+		g_object_unref (group);
 		valid = gtk_tree_model_iter_next (child_model, &iter);
 	}
 }
@@ -289,6 +290,7 @@ privileges_table_set_from_profile (GstUserProfile *profile)
 				    COL_MEMBER, find_group_in_profile (group, profile),
 				    -1);
 
+		g_object_unref (group);
 		valid = gtk_tree_model_iter_next (child_model, &iter);
 	}
 }

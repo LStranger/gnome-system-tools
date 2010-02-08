@@ -314,12 +314,12 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 			group = oobs_groups_config_get_from_name (groups_config, (char *) m->data);
 			in_group = oobs_user_is_in_group (user, group);
 			if ((in_profile && !in_group) || (!in_profile && in_group)) {
-				if (group)
-					g_object_unref (group);
-
 				matched_groups = FALSE;
 				break;
 			}
+
+			if (group)
+				g_object_unref (group);
 		}
 
 		/* stop at first match, since the list has been reverted on loading,

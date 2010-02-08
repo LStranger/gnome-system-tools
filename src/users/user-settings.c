@@ -356,6 +356,8 @@ user_settings_show (OobsUser *user)
 		gtk_widget_hide (disabled_label);
 		gtk_widget_hide (enable_button);
 	}
+
+	g_object_unref (group);
 }
 
 static void
@@ -553,6 +555,8 @@ user_settings_check_revoke_admin_rights ()
 		return (response == GTK_RESPONSE_OK);
 	}
 
+	g_object_unref (admin_group);
+
 	return TRUE;
 }
 
@@ -579,6 +583,8 @@ check_profile (OobsUser *user, GstUserProfile *profile)
 		  if (!is_admin_profile)
 			  return user_settings_check_revoke_admin_rights (user);
 	  }
+
+	g_object_unref (admin_group);
 
 	return TRUE;
 }
