@@ -68,9 +68,6 @@ gst_shares_tool_init (GstSharesTool *tool)
 	tool->hosts_config = oobs_hosts_config_get ();
 	gst_tool_add_configuration_object (gst_tool, tool->hosts_config);
 
-	tool->ifaces_config = oobs_ifaces_config_get ();
-	gst_tool_add_configuration_object (gst_tool, tool->ifaces_config);
-
 	tool->users_config = oobs_users_config_get ();
 	gst_tool_add_configuration_object (gst_tool, tool->users_config);
 }

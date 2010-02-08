@@ -46,7 +46,6 @@ struct _GstSharesTool {
 	/* read only */
 	OobsObject *services_config;
 	OobsObject *hosts_config;
-	OobsObject *ifaces_config;
 	OobsObject *users_config;
 
 	gchar *path;
