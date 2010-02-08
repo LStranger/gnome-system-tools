@@ -1,3 +1,40 @@
+GNOME System Tools Version 2.29.90, 2010-02-08
+-----------------------------------------------
+
+  Users
+  =====
+  - Fix hangs when changing own password with some PAM setups
+  - Update password field to indicate whether password is empty and/or asked on login
+  - Support disabled accounts, waiting for the backends to report this
+  - Sort users and groups list, implement search
+  - Don't resize window with long user names
+  - Improve buttons string to be "Change..."
+  - Fix "Reload Changes?" dialog shown after creating an user
+  - Fix a few leaks of OobsUsers and OobsGroups
+
+  Services
+  ========
+  - Only commit changes to one service at a time, to avoid many harmful issues
+  - Remove unlock button, ask for authentication on-the-fly
+  - Improve appearance of services list, use some additional icons and known services
+
+  Shares
+  ======
+  - Don't create an OobsIfacesConfig object since it's not used and consumes memory
+
+  Translation
+  ===========
+  - ar, courtesy of Khaled Hosny
+  - es, courtesy of Jorge González
+  - fr, courtesy of Claude Paroz
+  - nb, courtesy of Kjartan Maraas
+  - pa, courtesy of A S Alam
+  - sl, courtesy of Matej Urbančič
+  - zh_CN, courtesy of Eleanor Chen
+  - zh_HK, courtesy of Chao-Hsiung Liao
+  - zh_TW, courtesy of Chao-Hsiung Liao
+
+
 GNOME System Tools Version 2.29.3, 2010-01-25
 -----------------------------------------------
 
