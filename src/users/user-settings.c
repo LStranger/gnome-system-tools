@@ -1295,7 +1295,7 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
 
-	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter) != -1) {
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter)) {
 		gtk_tree_model_get (model, &iter,
 				    COL_GROUP_OBJECT, &main_group,
 				    -1);
