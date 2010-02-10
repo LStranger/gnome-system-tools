@@ -38,6 +38,7 @@
 #include "table.h"
 #include "callbacks.h"
 #include "user-settings.h"
+#include "user-password.h"
 #include "privileges-table.h"
 #include "groups-table.h"
 #include "group-settings.h"
@@ -46,10 +47,20 @@
 
 extern GstTool *tool;
 
-void   on_edit_user_passwd  (GtkButton *button,
-                             gpointer   user_data);
 
 void   on_user_settings_enable_account  (GtkButton *button,
+                                         gpointer   user_data);
+void   on_user_new_name_changed         (GtkEditable *user_name,
+                                         gpointer     user_data);
+void   on_user_new_login_changed        (GtkComboBox *login_combo,
+                                         gpointer     user_data);
+void   on_user_new                      (GtkButton *button,
+                                         gpointer   user_data);
+void   on_edit_user_name                (GtkButton *button,
+                                         gpointer   user_data);
+void   on_edit_user_profile             (GtkButton *button,
+                                         gpointer   user_data);
+void   on_edit_user_advanced            (GtkButton *button,
                                          gpointer   user_data);
 
 

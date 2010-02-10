@@ -30,7 +30,7 @@ users_admin_SOURCES = \
 	user-profiles.c		user-profiles.h \
 	test-battery.c		test-battery.h	\
 	run-passwd.c		run-passwd.h	\
-	user-password.c
+	user-password.c		user-password.h
 
 toolpixmaps =
 

@@ -27,6 +27,7 @@
 #include <string.h>
 
 #include "gst.h"
+#include "user-password.h"
 #include "users-tool.h"
 #include "users-table.h"
 #include "user-settings.h"
