@@ -77,7 +77,8 @@
     <child>
       <object class="GtkHBox" id="users_admin">
         <property name="visible">True</property>
-        <property name="spacing">24</property>
+        <property name="border_width">6</property>
+        <property name="spacing">18</property>
         <child>
           <object class="GtkVBox" id="vbox2">
             <property name="width_request">200</property>
@@ -402,7 +403,6 @@
             </child>
           </object>
           <packing>
-            <property name="padding">6</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -3280,9 +3280,9 @@
   <object class="GtkSizeGroup" id="user_new_notice_sizegroup">
     <property name="mode">both</property>
     <widgets>
-      <widget name="user_new_login_letter_notice"/>
-      <widget name="user_new_login_used_notice"/>
       <widget name="user_new_login_notice"/>
+      <widget name="user_new_login_used_notice"/>
+      <widget name="user_new_login_letter_notice"/>
     </widgets>
   </object>
 </interface>
