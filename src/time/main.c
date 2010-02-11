@@ -55,16 +55,10 @@ static const gchar *policy_widgets [] = {
 
 ETzMap *tzmap;
 
-static void timezone_button_clicked (GtkWidget *w, gpointer data);
 static void update_tz (GstTimeTool *time_tool);
-static void server_button_clicked (GtkWidget *w, gpointer data);
 
-static GstDialogSignal signals[] = {
-	{ "timezone_button",     "clicked",  G_CALLBACK (timezone_button_clicked) },
-	{ "timeserver_button",   "clicked",  G_CALLBACK (server_button_clicked) },
-	{ "ntp_add_server",      "clicked",  G_CALLBACK (on_ntp_addserver) },
-	{ NULL, NULL }
-};
+void timezone_button_clicked (GtkWidget *w, gpointer data);
+void server_button_clicked   (GtkWidget *w, gpointer data);
 
 #define is_leap_year(yyy) ((((yyy % 4) == 0) && ((yyy % 100) != 0)) || ((yyy % 400) == 0));
 
@@ -120,7 +114,7 @@ gst_time_update_date (GstTimeTool *tool, gint add)
 }
 #undef is_leap_year
 
-static void
+void
 timezone_button_clicked (GtkWidget *w, gpointer data)
 {
 	GstTimeTool *time_tool;
@@ -131,7 +125,7 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	gst_time_tool_run_timezone_dialog (time_tool);
 }
 
-static void
+void
 server_button_clicked (GtkWidget *w, gpointer data)
 {
 	GtkWidget *d;
@@ -161,7 +155,7 @@ main (int argc, char *argv[])
 	tool = GST_TOOL (gst_time_tool_new ());
 
 	gst_dialog_require_authentication_for_widgets (tool->main_dialog, policy_widgets);
-	gst_dialog_connect_signals (tool->main_dialog, signals);
+
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();
 
