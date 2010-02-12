@@ -99,9 +99,6 @@ get_ntp_service (GstTimeTool *tool)
 	gboolean valid;
 	GstServiceRole role;
 
-	/* Be sure we take into account newly installed NTP support */
-	oobs_object_update (OOBS_OBJECT (tool->services_config));
-
 	list = oobs_services_config_get_services (OOBS_SERVICES_CONFIG (tool->services_config));
 	valid = oobs_list_get_iter_first (list, &iter);
 
@@ -384,6 +381,14 @@ check_ntp_support (GstTool  *tool)
 
 	if (GST_TIME_TOOL (tool)->ntp_service)
 		return TRUE;
+	else {
+		/* Be sure we take into account newly installed NTP support */
+		oobs_object_update (OOBS_OBJECT (GST_TIME_TOOL (tool)->services_config));
+		get_ntp_service (GST_TIME_TOOL (tool));
+
+		if (GST_TIME_TOOL (tool)->ntp_service)
+			return TRUE;
+	}
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "configuration_options");
 	g_signal_handler_block (widget, priv->configuration_changed_id);
