@@ -301,9 +301,10 @@ users_table_select_path (GtkTreePath *path)
 		(GTK_TREE_MODEL_SORT (sort_model), filter_path);
 
 	gtk_tree_selection_unselect_all (selection);
-	gtk_tree_selection_select_path (selection, filter_path);
+	gtk_tree_selection_select_path (selection, sort_path);
 
 	gtk_tree_path_free (filter_path);
+	gtk_tree_path_free (sort_path);
 }
 
 void
