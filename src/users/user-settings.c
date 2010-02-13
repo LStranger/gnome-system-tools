@@ -992,7 +992,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 
 	/* We need to know about this user before adding it, else we won't be aware
 	 * that we triggered the commit, and we will show a "Reload config?" dialog. */
-	gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (user));
+	gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (user), FALSE);
 
 	/* Commit both user and groups config because of possible memberships
 	 * added by the profile. Avoid showing the new user or trying to commit

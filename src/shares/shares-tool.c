@@ -57,19 +57,19 @@ gst_shares_tool_init (GstSharesTool *tool)
 	GstTool *gst_tool = GST_TOOL (tool);
 
 	tool->nfs_config = oobs_nfs_config_get ();
-	gst_tool_add_configuration_object (gst_tool, tool->nfs_config);
+	gst_tool_add_configuration_object (gst_tool, tool->nfs_config, TRUE);
 
 	tool->smb_config = oobs_smb_config_get ();
-	gst_tool_add_configuration_object (gst_tool, tool->smb_config);
+	gst_tool_add_configuration_object (gst_tool, tool->smb_config, TRUE);
 
 	tool->services_config = oobs_services_config_get ();
-	gst_tool_add_configuration_object (gst_tool, tool->services_config);
+	gst_tool_add_configuration_object (gst_tool, tool->services_config, TRUE);
 
 	tool->hosts_config = oobs_hosts_config_get ();
-	gst_tool_add_configuration_object (gst_tool, tool->hosts_config);
+	gst_tool_add_configuration_object (gst_tool, tool->hosts_config, TRUE);
 
 	tool->users_config = oobs_users_config_get ();
-	gst_tool_add_configuration_object (gst_tool, tool->users_config);
+	gst_tool_add_configuration_object (gst_tool, tool->users_config, TRUE);
 }
 
 static GObject *

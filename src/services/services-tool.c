@@ -48,7 +48,7 @@ static void
 gst_services_tool_init (GstServicesTool *tool)
 {
 	tool->services_config = oobs_services_config_get ();
-	gst_tool_add_configuration_object (GST_TOOL (tool), tool->services_config);
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->services_config, TRUE);
 }
 
 static void

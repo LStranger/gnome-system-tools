@@ -118,7 +118,8 @@ void         gst_tool_commit_error    (GstTool             *tool,
 void         gst_tool_update_async    (GstTool             *tool);
 
 void         gst_tool_add_configuration_object (GstTool    *tool,
-						OobsObject *object);
+                                                OobsObject *object,
+                                                gboolean    watch_updates);
 
 gboolean     gst_tool_authenticate    (GstTool *tool,
 				       OobsObject *object);

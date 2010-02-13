@@ -75,13 +75,13 @@ static void
 gst_users_tool_init (GstUsersTool *tool)
 {
 	tool->users_config = oobs_users_config_get ();
-	gst_tool_add_configuration_object (GST_TOOL (tool), tool->users_config);
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->users_config, TRUE);
 
 	tool->groups_config = oobs_groups_config_get ();
-	gst_tool_add_configuration_object (GST_TOOL (tool), tool->groups_config);
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->groups_config, TRUE);
 
 	tool->self_config = oobs_self_config_get ();
-	gst_tool_add_configuration_object (GST_TOOL (tool), tool->self_config);
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->self_config, TRUE);
 
 	tool->profiles = gst_user_profiles_get ();
 }
@@ -147,7 +147,7 @@ update_users (GstUsersTool *tool)
 	while (valid) {
 		user = oobs_list_get (list, &iter);
 		path = users_table_add_user (OOBS_USER (user));
-		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (user));
+		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (user), FALSE);
 
 		if (self == (OobsUser *) user)
 			users_table_select_path (path);
@@ -175,7 +175,7 @@ update_groups (GstUsersTool *tool)
 	while (valid) {
 		group = oobs_list_get (list, &iter);
 		groups_table_add_group (OOBS_GROUP (group));
-		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (group));
+		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (group), FALSE);
 
 		/* update privileges table too */
 		privileges_table_add_group (OOBS_GROUP (group));

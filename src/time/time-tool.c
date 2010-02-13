@@ -131,13 +131,13 @@ gst_time_tool_init (GstTimeTool *tool)
 	}
 
 	tool->time_config = oobs_time_config_get ();
-	gst_tool_add_configuration_object (GST_TOOL (tool), tool->time_config);
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->time_config, TRUE);
 
 	tool->ntp_config = oobs_ntp_config_get ();
-	gst_tool_add_configuration_object (GST_TOOL (tool), tool->ntp_config);
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->ntp_config, TRUE);
 
 	tool->services_config = oobs_services_config_get ();
-	gst_tool_add_configuration_object (GST_TOOL (tool), tool->services_config);
+	gst_tool_add_configuration_object (GST_TOOL (tool), tool->services_config, TRUE);
 }
 
 static void

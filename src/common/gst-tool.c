@@ -646,17 +646,25 @@ configuration_object_committed (OobsObject *object,
 
 void
 gst_tool_add_configuration_object (GstTool    *tool,
-				   OobsObject *object)
+                                   OobsObject *object,
+                                   gboolean    watch_updates)
 {
 	g_return_if_fail (GST_IS_TOOL (tool));
 	g_return_if_fail (OOBS_IS_OBJECT (object));
 
-	g_ptr_array_add (tool->objects, object);
-
-	g_signal_connect (object, "changed",
-			  G_CALLBACK (configuration_object_changed), tool);
 	g_signal_connect (object, "committed",
 			  G_CALLBACK (configuration_object_committed), tool);
+
+	/* For child objects like OobsUser or OobsService, we don't want
+	 * to get updates directly: instead, we update OobsUsersConfig and OobsServicesConfig,
+	 * and drop old child objects.
+	 */
+	if (watch_updates) {
+		g_ptr_array_add (tool->objects, object);
+
+		g_signal_connect (object, "changed",
+		                  G_CALLBACK (configuration_object_changed), tool);
+	}
 }
 
 /*
