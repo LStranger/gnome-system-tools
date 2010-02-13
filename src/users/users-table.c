@@ -82,7 +82,8 @@ users_model_filter (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 
 	show = (tool->showall
 	        || (oobs_user_is_root (user) && tool->showroot)
-	        || (uid >= tool->minimum_uid && uid <= tool->maximum_uid));
+	        || (uid >= tool->minimum_uid && uid <= tool->maximum_uid)
+	        || oobs_self_config_is_user_self (OOBS_SELF_CONFIG (tool->self_config), user));
 
 	g_object_unref (user);
 
