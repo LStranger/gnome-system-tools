@@ -1,3 +1,31 @@
+GNOME System Tools Version 2.29.91, 2010-02-15
+-----------------------------------------------
+
+  Common
+  ======
+  - Add nfs-common and nfs-server to the services list (needed by ArchLinux)
+
+  Users
+  =====
+  - Fix crash when main group isn't set
+  - Fix hang when configuration files are updated while the tool is running
+  - Fix selecting current user on start, and ensure we always show it in the list
+  - Always make new users own their home directory, if it already existed
+  - Unreference users and groups on exit to allow them to clear their data
+  - Small cosmetic improvements
+
+  Time
+  ====
+  - Fix time-admin crash due to broken callbacks
+  - Don't update NTP configuration on every start
+
+  Translation
+  ===========
+  - de, courtesy of Christian Kirbach
+  - gl, courtesy of Fran Diéguez
+  - ta, courtesy of Dr. T. Vasudevan
+
+
 GNOME System Tools Version 2.29.90, 2010-02-08
 -----------------------------------------------
 
