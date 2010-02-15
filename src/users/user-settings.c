@@ -983,6 +983,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	user = oobs_user_new (login);
 	oobs_user_set_full_name (user, fullname);
 	oobs_user_set_encrypted_home (user, encrypt);
+	oobs_user_set_home_flags (user, OOBS_USER_CHOWN_HOME);
 
 	g_return_if_fail (user != NULL);
 
