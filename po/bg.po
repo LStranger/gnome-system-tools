@@ -1,18 +1,19 @@
 # Bulgarian translation of gnome-system-tools po-file.
-# Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same conditions as the gnome-system-tools package.
 # Peter "Peshka" Slavov <pslavov@i-space.org>, 2004.
-# Vladimir "Kaladan" Petkov <vpetkov@i-space.org>, 2004, 2005.
-# Alexander Shopov <ash@contact.bg>, 2006, 2007, 2009.
+# Vladimir "Kaladan" Petkov <kaladan@gmail.com>, 2004, 2005.
+# Alexander Shopov <ash@kambanaria.org>, 2006, 2007, 2009, 2010.
 # Yavor Doganov <yavor@gnu.org>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-22 18:52+0300\n"
-"PO-Revision-Date: 2009-08-22 18:52+0300\n"
-"Last-Translator: Yavor Doganov <yavor@gnu.org>\n"
+"POT-Creation-Date: 2010-02-21 20:29+0200\n"
+"PO-Revision-Date: 2010-02-21 20:28+0200\n"
+"Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,34 +21,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
+msgid "Whether the users-admin tool should show system users in the users list"
 msgstr ""
-"Дали инструментът за настройка на потребителите да покаже всички потребители "
-"и групи"
+"Дали инструментът за настройка на потребителите да показва и системните "
+"потребители в списъците с потребители"
 
-#: ../interfaces/common.ui.h:1
+#: ../gnome-system-tools.schemas.in.h:2
 msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+"Whether the users-admin tool should show the root user in the users list"
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">Въведете паролата на администратора</"
-"span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "Въведете парола"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
-msgstr ""
-"Трябва да имате права на администратор, за да използвате този инструмент.\n"
-"Въведете парола, за да промените настройките на системата."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "_Парола:"
+"Дали инструментът за настройка на потребителите да показва и администраторът "
+"в списъците с потребители"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -125,7 +109,7 @@ msgstr "Активира_не на тази връзка"
 msgid "Ethernet interface:"
 msgstr "Мрежов интерфейс:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:32
 msgid "General"
 msgstr "Основни"
 
@@ -259,13 +243,13 @@ msgstr "Повторен опит, ако връзката _не се осъще
 
 #: ../interfaces/network.ui.h:53
 msgid "_Set modem as default route to internet"
-msgstr "На_стройване модема като стандартна връзка към Интернет"
+msgstr "На_стройване на модема като стандартна връзка към Интернет"
 
 #: ../interfaces/network.ui.h:54
 msgid "_Subnet mask:"
 msgstr "Ма_ска на мрежата:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "Потребителско _име:"
 
@@ -280,7 +264,7 @@ msgstr "Допълнителни настройки:"
 
 #: ../interfaces/services.ui.h:2
 msgid "Select the services that you wish to activate:"
-msgstr "Изберете услугите, които искате да активирате:"
+msgstr "Изберете услугите, които искате да включите:"
 
 #: ../interfaces/shares.ui.h:1
 msgid "<b>Allowed Hosts</b>"
@@ -300,7 +284,7 @@ msgstr "<b>Споделена папка</b>"
 
 #: ../interfaces/shares.ui.h:5
 msgid "<b>Windows sharing</b>"
-msgstr "<b>Споделяне тип Windows</b>"
+msgstr "<b>Споделяне като Windows</b>"
 
 #: ../interfaces/shares.ui.h:6
 msgid "<span size=\"larger\" weight=\"bold\">Enter password for user:</span>"
@@ -360,7 +344,7 @@ msgid "Share through:"
 msgstr "Споделяне чрез:"
 
 #: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:239
+#: ../src/shares/shares-tool.c:237
 msgid "Shared Folders"
 msgstr "Споделени папки"
 
@@ -442,12 +426,12 @@ msgstr "_Час:"
 
 #: ../interfaces/users.ui.h:1
 msgid "<span weight=\"bold\">Advanced Settings</span>"
-msgstr "<span weight=\"bold\">Разширени настройки</span>"
+msgstr "<span weight=\"bold\">Допълнителни настройки</span>"
 
 #: ../interfaces/users.ui.h:2
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
 msgstr ""
-"<span weight=\"bold\">Автоматични групови и потребителски идентификатори</"
+"<span weight=\"bold\">Автоматични идентификатори на групи и потребители</"
 "span>"
 
 #: ../interfaces/users.ui.h:3
@@ -467,217 +451,313 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Настройки за паролата</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Парола</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Настройки за профила</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Настройки по подразбиране</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "Потребител"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "_Вид регистрация:"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "Допълнителни"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
 msgstr ""
-"Позволяване на потребителя да отвори локална сесия, без да въвежда парола. "
-"Парола ще е необходима за административните задачи."
+"Вече съществува потребител с такова име. Изберете различно име за новия "
+"потребител."
+
+#: ../interfaces/users.ui.h:12
+msgid "Assign a random password by default"
+msgstr "Задаване на случайна парола"
 
 #: ../interfaces/users.ui.h:13
-msgid "Assign a random password by default"
-msgstr "Задаване на случайна парола по подразбиране"
+msgid "Change Advanced User Settings"
+msgstr "Промяна на допълнителните настройки на потребителите:"
 
 #: ../interfaces/users.ui.h:14
-msgid "Check password _quality"
-msgstr "Проверка на _качеството на паролата"
+msgid "Change User Account Type"
+msgstr "Промяна на вида на регистрацията"
 
 #: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "Промяна на потребителското име"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "Промяна на потребителската парола"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "Промяна на допълнителните настройки на:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "Промяна на вида регистрация на:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "Промяна на потребителското име на:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "Промяна на потребителската парола на:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Con_firmation:"
 msgstr "Потв_ърждение:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:22
 msgid "Contact Information"
 msgstr "Данни за контакт"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:23
+msgid "Create New User"
+msgstr "Създаване на нов потребител"
+
+#: ../interfaces/users.ui.h:24
+msgid "Create a new user"
+msgstr "Създаване на нов потребител"
+
+#: ../interfaces/users.ui.h:25
 msgid "Days between warning and password expiration:"
 msgstr "Дни между предупреждението и изтичането на паролата"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:26
 msgid "Default _group:"
 msgstr "_Група по подразбиране:"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:27
 msgid "Default _shell:"
 msgstr "_Обвивка по подразбиране:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:28
+msgid "Disable _account"
+msgstr "_Изключване на регистрация"
+
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "_Без парола при влизане"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr ""
+"Шифриране на всичките ви файлове с паролата ви за влизане. Това защитава "
+"данните ви от хората с физически достъп до компютъра ви с цената на малко "
+"понижаване на бързодействието."
+
+#: ../interfaces/users.ui.h:31
+msgid "Full _Name:"
+msgstr "_Пълно име:"
+
+#: ../interfaces/users.ui.h:33
 msgid "Generate _random password"
 msgstr "Генериране на случа_йна парола"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:34
 msgid "Group _ID:"
 msgstr "_Идентификатор на групата:"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:35
 msgid "Group _name:"
 msgstr "И_ме на групата:"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:36
 msgid "Group properties"
 msgstr "Настройки на групата"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:37
 msgid "Groups settings"
 msgstr "Настройки на групите"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:38
 msgid "Ma_ximum days a password may be used:"
 msgstr "_Максимум дни за използване на паролата:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:526
+msgid "Manual"
+msgstr "Ръчно"
+
+#: ../interfaces/users.ui.h:40
 msgid "Maximum GID:"
 msgstr "Макс. ид-р на група:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:41
 msgid "Maximum UID:"
 msgstr "Макс. ид-р на потребител:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:42
 msgid "Mi_nimum days between password changes:"
 msgstr "_Най-малък брой дни между промени на паролата:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:43
 msgid "Minimum GID:"
 msgstr "Мин. ид-р на група:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:44
 msgid "Minimum UID:"
 msgstr "Мин. ид-р на потребител:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:45
 msgid "Minimum days allowed between password changes:"
 msgstr "Най-малък брой дни между промени на паролата:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:46
+msgid "New _password:"
+msgstr "_Нова парола:"
+
+#: ../interfaces/users.ui.h:47
 msgid "Number of days that a password may be used:"
 msgstr "Брой дни, в които може да се използва паролата:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:48
 msgid "O_ffice location:"
 msgstr "Място на о_фиса:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:49
 msgid "Password set to: "
 msgstr "Задаване на паролата да е:"
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:50
 msgid "Privileges"
 msgstr "Привилегии"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:51
 msgid "Profile _name:"
 msgstr "Име _на профила:"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:52
 msgid "Set password b_y hand"
 msgstr "_Ръчна настройка на паролата"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:54
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"Краткото може да съдържа следните знаци:\n"
+"  • малки букви от латиницата;\n"
+"  • цифри;\n"
+"  • „.“, „-“ и „_“."
+
+#: ../interfaces/users.ui.h:58
+msgid "Short name must start with a letter!"
+msgstr "Краткото име трябва да започва с буква!"
+
+#: ../interfaces/users.ui.h:59
+msgid "This account is disabled."
+msgstr "Тази регистрация е изключена."
+
+#: ../interfaces/users.ui.h:60
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+"Тази регистрация е със специални настройки, които са зададени ръчно. "
+"Използвайте прозореца <i>Допълнителни настройки</i>, за да ги промените."
+
+#: ../interfaces/users.ui.h:61
 msgid "User ID:"
 msgstr "Идентификатор на потребителя:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:62
 msgid "User Privileges"
 msgstr "Привилегии на потребителите"
 
-#: ../interfaces/users.ui.h:42
-msgid "User _password:"
-msgstr "_Парола на потребителя:"
-
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr "Потребителят трабва да не е влязъл, за да промените идентификатора му."
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:63
 msgid "User profiles"
 msgstr "Профили на потребителите"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "Добавяне на _група"
+#: ../interfaces/users.ui.h:64
+msgid "You can't change user ID while the user is logged in."
+msgstr ""
+"Не можете да промените идентификатора на потребител, който в момента е в "
+"системата."
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "Добавяне на про_фил"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "Добавяне на _потребител"
+#: ../interfaces/users.ui.h:66
+msgid "_Advanced Settings"
+msgstr "_Допълнителни настройки:"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "_Коментари"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:68
+msgid "_Current password:"
+msgstr "_Текуща парола:"
+
+#: ../interfaces/users.ui.h:69
+msgid "_Custom"
+msgstr "_Специфичен"
+
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "_Дни между предупреждението и изтичането на паролата:"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "_Изтриване"
+#: ../interfaces/users.ui.h:71
+msgid "_Enable Account"
+msgstr "_Включване на регистрация"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:72
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr "_Шифриране на домашната папка за защита на данни"
+
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "_Генериране"
 
 # Дублира се с бутона „_Добре“.
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "До_машна папка:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "До_машен телефон:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "_Главна група:"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "_Управление на групите"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "_Профил:"
+#: ../interfaces/users.ui.h:78
+msgid "_Name:"
+msgstr "_Име:"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "Ис_тинско име:"
+#: ../interfaces/users.ui.h:79
+msgid "_Password:"
+msgstr "_Парола:"
 
 # Дублира се с бутона „_Отказване“.
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "О_бвивка:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:81
+msgid "_Short Name:"
+msgstr "_Кратко име:"
+
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "_Служебен телефон:"
 
@@ -700,47 +780,63 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Неподдържана платформа"
 
-#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "Настройките не могат да бъдат заредени"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "Нямате права за достъп до системните настройки."
-
-#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "Неуспех при запазването на настройките"
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:196
+msgid "You are not allowed to access the system configuration."
+msgstr "Нямате права за достъп до системните настройки."
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:691
 msgid "You are not allowed to modify the system configuration."
 msgstr "Нямате права да променяте системните настройки."
 
-#: ../src/common/gst-tool.c:218
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "Открити са неправилни данни."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:220
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "Възникна непозната грешка."
 
-#: ../src/common/gst-tool.c:442
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "Помощта не може да бъде показана"
 
-#: ../src/common/gst-tool.c:626
+#: ../src/common/gst-tool.c:622
 msgid "The system configuration has potentially changed."
 msgstr "Настройките на системата бяха най-вероятно променени."
 
-#: ../src/common/gst-tool.c:628
+#: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "Искате ли да ги обновите? Това ще доведе до загуба на промените ви."
 
+#: ../src/common/gst-tool.c:693
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
+"Възникна грешка при проверката за идентификация: %s\n"
+"Молим, докладвайте тази грешка."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "_Добавяне"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "_Изтриване"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -828,7 +924,7 @@ msgid "%s Properties"
 msgstr "Настройки на %s"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "_Настройки"
 
@@ -942,8 +1038,8 @@ msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
 msgstr ""
-"Проверете дали е написано правилно и дали се поддържа коректно от вашата "
-"система."
+"Проверете дали е написано правилно и дали се поддържа коректно от системата "
+"ви."
 
 #: ../src/network/main.c:183
 msgid "Configure a network interface"
@@ -973,22 +1069,22 @@ msgstr "Мрежа"
 msgid "Network Settings"
 msgstr "Настройки на мрежата"
 
-#: ../src/services/callbacks.c:59
+#: ../src/services/callbacks.c:65
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Настройки за услугата „%s“"
 
-#: ../src/services/callbacks.c:119
+#: ../src/services/callbacks.c:125
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Искате ли да изключите „%s“?"
 
-#: ../src/services/callbacks.c:123
+#: ../src/services/callbacks.c:129
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
 msgstr ""
-"Това може да повлияе върху поведението на вашата система по много начини, "
+"Това може да повлияе върху поведението на системата ви по много начини, "
 "възможно е да се стигне до загуба на данни"
 
 #: ../src/services/service.c:32
@@ -1178,7 +1274,7 @@ msgstr "Наблюдение на сигурността на мрежата"
 #. GST_ROLE_SECURITY_AUDITING
 #: ../src/services/service.c:61
 msgid "Web calendar server"
-msgstr "Сървър за уеб календар"
+msgstr "Сървър за календар по уеб"
 
 #. GST_ROLE_WEB_CALENDAR_SERVER
 #: ../src/services/service.c:62
@@ -1367,7 +1463,7 @@ msgstr "Управление на честотата на процесора"
 #. GST_ROLE_CPUFREQ_MANAGEMENT
 #: ../src/services/service.c:98
 msgid "Eagle USB ADSL modems manager"
-msgstr "Управление на ADSL модеми на Eagle за USB"
+msgstr "Управление на модеми за ADSL на Eagle през USB"
 
 #. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
 #: ../src/services/service.c:99
@@ -1377,7 +1473,7 @@ msgstr "Управление на настройките на серийния �
 #. GST_ROLE_SERIAL_PORTS_MANAGEMENT
 #: ../src/services/service.c:100
 msgid "ISDN modems manager"
-msgstr "Управление на модеми тип ISDN"
+msgstr "Управление на модеми за ISDN"
 
 #. GST_ROLE_ISDN_MANAGEMENT
 #: ../src/services/service.c:101
@@ -1436,7 +1532,7 @@ msgstr "Състояние"
 msgid "Priority"
 msgstr "Приоритет"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "Настройки на услугите"
 
@@ -1450,9 +1546,7 @@ msgstr "Другите компютри във вашата мрежа няма 
 
 #: ../src/shares/main.c:103
 msgid "Add a shared path, modifies it if it already exists"
-msgstr ""
-"Добавяне на споделен път или променянето му, ако вече\n"
-"                          съществува"
+msgstr "Добавяне или промяна на споделен път."
 
 #: ../src/shares/main.c:103
 msgid "PATH"
@@ -1511,11 +1605,11 @@ msgstr "Настройки на папката „%s“"
 msgid "Share Folder"
 msgstr "Споделяне на папка"
 
-#: ../src/shares/shares-tool.c:155
+#: ../src/shares/shares-tool.c:152
 msgid "Sharing services are not installed"
 msgstr "Услугите за споделяне не са инсталирани"
 
-#: ../src/shares/shares-tool.c:157
+#: ../src/shares/shares-tool.c:154
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -1529,11 +1623,11 @@ msgstr "Промяна на датата, часа и часовия пояс н
 msgid "Time and Date"
 msgstr "Дата и час"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:402
 msgid "NTP support is not installed"
 msgstr "Липсва поддръжка на NTP"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:404
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1541,165 +1635,259 @@ msgstr ""
 "Инсталирайте и задействайте поддръжката на NTP, за да синхронизирате "
 "часовника на компютъра със сървърите за точно време в Интернет."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:433
 msgid "Enabling NTP"
 msgstr "Включване на NTP"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:433
 msgid "Disabling NTP"
 msgstr "Изключване на NTP"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:445
 msgid "Synchronizing system clock"
 msgstr "Синхронизиране на системния часовник"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:525
 msgid "Keep synchronized with Internet servers"
 msgstr "Синхронизиране на часовника през Интернет"
 
-#: ../src/time/time-tool.c:515
-msgid "Manual"
-msgstr "Ръчно"
-
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:672
 msgid "Time and Date Settings"
 msgstr "Настройки на дата и час"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "Групата на администраторите не може да бъде изтрита"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:636
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:88
+#: ../src/users/user-settings.c:476
 msgid "This would leave the system unusable."
 msgstr "Това ще направи системата неизползваема."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Сигурни ли сте, че искате да изтриете групата „%s“?"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr ""
 "Това може да остави файлове с неправилен идентификатор на група във "
 "файловата система."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:151
 msgid "New group"
 msgstr "Нова група"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:158
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Настройки на групата „%s“"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:224
 msgid "Group name is empty"
 msgstr "Името на групата е празно"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:225
 msgid "A group name must be specified."
 msgstr "Трябва да зададете име на групата"
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:227
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Името на групата на администратора не трябва да се променя"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:230
 msgid "Group name has invalid characters"
 msgstr "В името на групата има неправилни знаци"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:231
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr ""
-"Задайте име за групата, което е от малки букви следвано от малки букви и "
-"цифри."
+"Задайте име за групата, което да започва с малка буква следвана от малки "
+"букви и цифри."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:569
+#: ../src/users/group-settings.c:236
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Групата „%s“ вече съществува"
 
-#: ../src/users/group-settings.c:287
+#: ../src/users/group-settings.c:237
 msgid "Please choose a different group name."
 msgstr "Изберете различно име на група."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:264
 msgid "Group ID of the Administrator account should not be modified"
 msgstr ""
 "Идентификаторът на групата на администраторите не трябва да се променя."
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:268
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "Идентификаторът на група %d е зает от „%s“"
+
+#: ../src/users/group-settings.c:271
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "Изберете различен числов идентификатор за новата група."
+
+#: ../src/users/group-settings.c:273
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "Изберете различен числов идентификатор за групата „%s“."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Име на групата"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "Наблюдение на системните дневници"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "Администрация на системата"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "Ползване на аудио устройства"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "Ползване на CD-ROM"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "Запис на CD/DVD"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "Ползване на модеми"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "Свързване към Интернет през модем"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "Изпращане и получаване на факсове"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "Ползване на флопидискови устройства"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Монтиране на файлови системи извън ядрото (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "Настройка на принтери"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "Безжични мрежови връзки и Етернет"
+
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "Автоматичен достъп до външни устройства за съхранение"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "Приспиване и дълбоко приспиване на компютъра"
+
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "Достъп до файловата система /proc"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "Ползване на скенери"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "Ползване на лентови устройства"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "Ползване на устройства за USB"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "Използване на VirtualBox за виртуализация"
+
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "Ползване на видео устройства"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "Да можете да придобиете права на администратор"
+
+#: ../src/users/user-profiles.conf.in.h:1
+msgid "Administrator"
+msgstr "Администратор"
+
+#: ../src/users/user-profiles.conf.in.h:2
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr ""
+"Може да управлява всичко на компютъра, включително инсталирането и "
+"обновяването на софтуера."
+
+#: ../src/users/user-profiles.conf.in.h:3
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr ""
+"Може да извършва честите задачи. Не може да инсталира софтуер или да променя "
+"настройките, които са за всички потребители."
+
+#: ../src/users/user-profiles.conf.in.h:4
+msgid "Desktop user"
+msgstr "Обикновен потребител"
+
+#: ../src/users/run-passwd.c:421
+msgid "Authentication failed"
+msgstr "Неуспешна идентификация"
+
+#: ../src/users/run-passwd.c:494
+#, c-format
+msgid "The new password is too short"
+msgstr "Новата парола е прекалено кратка"
+
+#: ../src/users/run-passwd.c:499
+#, c-format
+msgid "The new password is too simple"
+msgstr "Новата парола е прекалено лесна"
+
+#: ../src/users/run-passwd.c:503
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "Старата и новата пароли са много близки"
+
+#: ../src/users/run-passwd.c:506
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "Новата парола трябва да съдържа цифри или специални знаци"
+
+#: ../src/users/run-passwd.c:510
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "Старата и новата парола са еднакви"
+
+#: ../src/users/run-passwd.c:514
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "Паролата ви е сменена след като сте се идентифицирали!"
+
+#: ../src/users/run-passwd.c:518
+#, c-format
+msgid "Unknown error"
+msgstr "Непозната грешка"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
@@ -1709,113 +1897,11 @@ msgstr "Добавяне или премахване на потребители
 msgid "Users and Groups"
 msgstr "Потребители и групи"
 
-#: ../src/users/user-settings.c:58
-msgid "Administrator account cannot be deleted"
-msgstr "Потребителят на администратора не може да бъде изтрит"
-
-#: ../src/users/user-settings.c:72
-#, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "Сигурни ли сте, че искате да изтриете потребителя „%s“?"
-
-#: ../src/users/user-settings.c:75
-msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
-msgstr ""
-"Това ще прекрати достъпа на този потребител до системата, но неговата "
-"домашна папка няма да бъде изтрита."
-
-#: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "Този потребител в момента използва този компютър"
-
-#: ../src/users/user-settings.c:385
-msgid "New user account"
-msgstr "Нов потребител"
-
-#: ../src/users/user-settings.c:403
-#, c-format
-msgid "Account '%s' Properties"
-msgstr "Настройки на потребителя „%s“"
-
-#: ../src/users/user-settings.c:558
-msgid "User name is empty"
-msgstr "Името на потребителя е празно"
-
-#: ../src/users/user-settings.c:559
-msgid "A user name must be specified."
-msgstr "Трябва да зададете име на потребителя."
-
-#: ../src/users/user-settings.c:561
-msgid "User name has invalid characters"
-msgstr "Името на потребителя съдържа неправилни знаци"
-
-#: ../src/users/user-settings.c:562
-msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr "Задайте име, което е от малки букви следвано от малки букви и цифри."
-
-#: ../src/users/user-settings.c:566
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "Потребителят „%s“ вече съществува"
-
-#: ../src/users/user-settings.c:567 ../src/users/user-settings.c:570
-msgid "Please choose a different user name."
-msgstr "Изберете различно име на потребител."
-
-#: ../src/users/user-settings.c:595
-#, c-format
-msgid "Invalid character \"%c\" in comment"
-msgstr "Неправилен знак „%c“ в коментара"
-
-#: ../src/users/user-settings.c:596
-msgid "Check that this character is not used."
-msgstr "Проверете дали този знак се използва."
-
-#: ../src/users/user-settings.c:614
-msgid "Incomplete path in home directory"
-msgstr "Пътят за домашна папка не е пълен"
-
-#: ../src/users/user-settings.c:615
-msgid ""
-"Please enter full path for home directory\n"
-"<span size=\"smaller\">i.e.: /home/john</span>."
-msgstr ""
-"Въведете пълния път до домашната папка\n"
-"<span size=\"smaller\">например: /home/ivancho</span>."
-
-#: ../src/users/user-settings.c:618
-msgid "Home directory already exists"
-msgstr "Домашната папка вече съществува"
-
-#: ../src/users/user-settings.c:619
-msgid "Please enter a different home directory path."
-msgstr "Въведете друг път за домашната папка."
-
-#: ../src/users/user-settings.c:635
-msgid "Administrator account's user ID should not be modified"
-msgstr "Идентификаторът на администратора (root) не трябва да се променя"
-
-#: ../src/users/user-settings.c:650
-msgid "Incomplete path in shell"
-msgstr "Непълен път в обвивката"
-
-#: ../src/users/user-settings.c:651
-msgid ""
-"Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/bash</span>."
-msgstr ""
-"Въведете пълния път за обвивката.\n"
-"<span size=\"smaller\">например: /bin/bash</span>."
-
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-password.c:100
 msgid "Password is too short"
 msgstr "Паролата е прекалено кратка"
 
-#: ../src/users/user-settings.c:685
+#: ../src/users/user-password.c:101
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1823,26 +1909,201 @@ msgstr ""
 "Паролата на потребителя трябва да е повече от 6 знака и за предпочитане да "
 "съдържа цифри, букви и специални знаци."
 
-#: ../src/users/user-settings.c:688
+#: ../src/users/user-password.c:104
 msgid "Password confirmation is not correct"
 msgstr "Невярно потвърждаване на паролата"
 
-#: ../src/users/user-settings.c:689
+#: ../src/users/user-password.c:105
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Проверете дали сте въвели една и съща парола в двете текстови полета."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Име"
+#: ../src/users/user-password.c:420
+msgid "Please choose another password."
+msgstr "Изберете друга парола."
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "Име на потребителя"
+#: ../src/users/user-password.c:431
+msgid "Please type again your current password."
+msgstr "Въведете отново текущата си парола."
 
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "Домашна папка"
+#: ../src/users/user-password.c:438
+msgid "Password could not be changed"
+msgstr "Паролата не бе сменена"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/user-settings.c:85
+msgid "Administrator account cannot be deleted"
+msgstr "Потребителят на администратора не може да бъде изтрит"
+
+#: ../src/users/user-settings.c:96
+#, c-format
+msgid "%s is currently using this computer"
+msgstr "%s в момента използва този компютър"
+
+#: ../src/users/user-settings.c:99
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr ""
+"Проверявайте дали потребителят е излязъл от регистрацията си преди да я "
+"изтриете."
+
+#: ../src/users/user-settings.c:109
+msgid "Can't delete the only administrator account"
+msgstr "Последната регистрация на администратор не може да се изтрие"
+
+#: ../src/users/user-settings.c:111
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr ""
+"%s е единственият администратор на този компютър. Изтриването на тази "
+"регистрация ще ви лиши от всякаква възможност за администриране на системата."
+
+#: ../src/users/user-settings.c:121
+#, c-format
+msgid "Remove home folder for %s?"
+msgstr "Изтриване на домашната папка на %s?"
+
+#: ../src/users/user-settings.c:124
+#, c-format
+msgid ""
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that and administrator can save them later."
+msgstr ""
+"Файловете на потребителя %s в <tt>%s</tt> могат да бъдат окончателно "
+"изтрити, ако вече не се нуждаете от тях. Може да ги архивирате преди "
+"изтриване или да ги запазите, за да бъдат съхранени по-късно от "
+"администратор."
+
+#: ../src/users/user-settings.c:132
+msgid "Keep Files"
+msgstr "Запазване на файловете"
+
+#: ../src/users/user-settings.c:133
+msgid "Don't Remove Account"
+msgstr "Регистрацията да не се изтрива"
+
+#: ../src/users/user-settings.c:134
+msgid "Delete Files"
+msgstr "Изтриване на файлове"
+
+#: ../src/users/user-settings.c:330
+msgid "Superuser"
+msgstr "Администратор"
+
+#: ../src/users/user-settings.c:335
+msgid "Custom"
+msgstr "Специфичен"
+
+#. TRANSLATORS: This applies to a password.
+#: ../src/users/user-settings.c:344
+msgid "None"
+msgstr "Няма"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+#: ../src/users/user-settings.c:347
+msgid "Not asked on login"
+msgstr "Без парола при влизане"
+
+#: ../src/users/user-settings.c:349
+msgid "Asked on login"
+msgstr "Искане на парола при влизане"
+
+#: ../src/users/user-settings.c:393
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "Неправилен знак „%c“ в коментара"
+
+#: ../src/users/user-settings.c:394
+msgid "Check that this character is not used."
+msgstr "Проверете дали този знак се използва."
+
+#: ../src/users/user-settings.c:417
+msgid "Incomplete path in home directory"
+msgstr "Пътят за домашна папка не е пълен"
+
+#: ../src/users/user-settings.c:418
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>."
+msgstr ""
+"Въведете пълния път до домашната папка\n"
+"<span size=\"smaller\">например: /home/ivancho</span>."
+
+#: ../src/users/user-settings.c:433
+msgid "Home directory already exists"
+msgstr "Домашната папка вече съществува"
+
+#: ../src/users/user-settings.c:434
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"Папката <tt>%s</tt> вече съществува. Потребителят може да няма права да чете "
+"или пише в папката. Искате ли въпреки това тя да се поза?"
+
+#: ../src/users/user-settings.c:440
+msgid "Use this directory"
+msgstr "Използване на тази папка"
+
+#: ../src/users/user-settings.c:475
+msgid "ID for the root user should not be modified"
+msgstr "Идентификаторът на администратора не трябва да се променя"
+
+#. check that UID is free
+#: ../src/users/user-settings.c:479
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "Идентификаторът на потребител %d е зает от %s"
+
+#: ../src/users/user-settings.c:481
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "Изберете различен числов идентификатор за %s."
+
+#: ../src/users/user-settings.c:499
+msgid "Incomplete path in shell"
+msgstr "Непълен път в обвивката"
+
+#: ../src/users/user-settings.c:500
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
+msgstr ""
+"Въведете пълния път за обвивката.\n"
+"<span size=\"smaller\">например: /bin/bash</span>."
+
+#: ../src/users/user-settings.c:534
+msgid "Can't revoke administration rights"
+msgstr "Не можете махнете права на администратор"
+
+#: ../src/users/user-settings.c:537
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr ""
+"%s е единственият администратор на този компютър. Махането на правата му на "
+"администратор ще ви лиши от всякаква възможност за администриране на "
+"системата."
+
+#: ../src/users/user-settings.c:554
+msgid "You are about to revoke your own administration rights"
+msgstr "Ще премахнете собствените си права на администратор"
+
+#: ../src/users/user-settings.c:557
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+"%s няма да може да извършва административни задачи. Потребителят с тази "
+"регистрация няма да може сам да си върне правата на администратор."
+
+#: ../src/users/user-settings.c:562
+msgid "Give up administration rights"
+msgstr "Отказване от администраторски права"
+
+#: ../src/users/users-tool.c:284
 msgid "Users Settings"
 msgstr "Настройки на потребителите"
