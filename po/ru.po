@@ -1,54 +1,42 @@
+# translation of ru.po to Russian
 # translation of gnome-system-tools to Russian
-# Copyright (C) 2000, 2006, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2006, 2008, 2009 Free Software Foundation, Inc.
+#
 #
 # Valek Filippov <frob@df.ru>, 2000, 2001.
 # Alexander Bokovoy <ab@altlinux.ru>, 2001.
 # Valek Filippov <frob@df.ru>, 2004.
 # Zarubin Pavel aka Gnome <gnome_bin@mail.ru>, 2004.
 # Yuri Kozlov <kozlov.y@gmail.com>, 2008.
-#
+# Leonid Kanter <leon@asplinux.ru>, 2009.
+# Alexander Saprykin <xelfium@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools trunk\n"
+"Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-04 00:05+0300\n"
-"PO-Revision-Date: 2008-03-02 22:20+0300\n"
-"Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
+"POT-Creation-Date: 2010-02-22 11:16+0200\n"
+"PO-Revision-Date: 2010-02-19 00:44+0300\n"
+"Last-Translator: Alexander Saprykin <xelfium@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
+msgid "Whether the users-admin tool should show system users in the users list"
 msgstr ""
-"Показывать все группы и всех пользователей в программе настройки "
+"Показывать ли системных пользователей в общем списке в программе настройки "
 "пользователей"
 
-#: ../interfaces/common.ui.h:1
+#: ../gnome-system-tools.schemas.in.h:2
 msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+"Whether the users-admin tool should show the root user in the users list"
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">Введите пароль администратора</span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "Введите пароль"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
-msgstr ""
-"Для использования этой программы нужны привилегии администратора. \n"
-"Введите пароль для изменения параметров вашей системы."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "_Пароль:"
+"Показывать ли суперпользователя в общем списке в программе настройки "
+"пользователей"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -56,7 +44,7 @@ msgstr "<b>Учётная запись</b>"
 
 #: ../interfaces/network.ui.h:2
 msgid "<b>Connection Settings</b>"
-msgstr "<b>Настройки соединения</b>"
+msgstr "<b>Параметры соединения</b>"
 
 #: ../interfaces/network.ui.h:3
 msgid "<b>DNS Servers</b>"
@@ -64,15 +52,15 @@ msgstr "<b>Серверы имён</b>"
 
 #: ../interfaces/network.ui.h:4
 msgid "<b>Host Settings</b>"
-msgstr "<b>Настройки узла</b>"
+msgstr "<b>Параметры узла</b>"
 
 #: ../interfaces/network.ui.h:5
 msgid "<b>Internet service provider data</b>"
-msgstr "<b>Данные об Интернет провайдере</b>"
+msgstr "<b>Данные о провайдере Интернет</b>"
 
 #: ../interfaces/network.ui.h:6
 msgid "<b>Modem Settings</b>"
-msgstr "<b>Настройки модема</b>"
+msgstr "<b>Параметры модема</b>"
 
 #: ../interfaces/network.ui.h:7
 msgid "<b>Search Domains</b>"
@@ -80,7 +68,7 @@ msgstr "<b>Поисковые домены</b>"
 
 #: ../interfaces/network.ui.h:8
 msgid "<b>Wireless Settings</b>"
-msgstr "<b>Настройки беспроводной связи</b>"
+msgstr "<b>Параметры беспроводной связи</b>"
 
 #: ../interfaces/network.ui.h:9
 msgid "Access point name:"
@@ -126,125 +114,158 @@ msgstr "_Активировать соединение"
 msgid "Ethernet interface:"
 msgstr "Ethernet интерфейс:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:19
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:32
 msgid "General"
 msgstr "Общие"
 
 #: ../interfaces/network.ui.h:21
-msgid "Host Alias Properties"
-msgstr "Настройки псевдонимов узлов"
+msgid "Hexadecimal"
+msgstr "Шестнадцатеричный"
 
 #: ../interfaces/network.ui.h:22
+msgid "Host Alias Properties"
+msgstr "Свойства псевдонимов узлов"
+
+#: ../interfaces/network.ui.h:23
 msgid "Hosts"
 msgstr "Узлы"
 
-#: ../interfaces/network.ui.h:23 ../interfaces/shares.ui.h:14
+#: ../interfaces/network.ui.h:24 ../interfaces/shares.ui.h:14
 msgid "IP address:"
 msgstr "IP адрес:"
 
-#: ../interfaces/network.ui.h:24
+#: ../interfaces/network.ui.h:25
 msgid "Interface properties"
 msgstr "Свойства интерфейса"
 
-#: ../interfaces/network.ui.h:25
+#: ../interfaces/network.ui.h:26
 msgid "Location:"
 msgstr "Расположение:"
 
-#: ../interfaces/network.ui.h:26
+#: ../interfaces/network.ui.h:27
+msgid "Loud"
+msgstr "Громко"
+
+#: ../interfaces/network.ui.h:28
+msgid "Low"
+msgstr "Тихо"
+
+#: ../interfaces/network.ui.h:29
+msgid "Medium"
+msgstr "Средне"
+
+#: ../interfaces/network.ui.h:30
 msgid "Modem"
 msgstr "Модем"
 
-#: ../interfaces/network.ui.h:27
+#: ../interfaces/network.ui.h:31
 msgid "Network _password:"
 msgstr "Сетевой _пароль:"
 
-#: ../interfaces/network.ui.h:28
+#: ../interfaces/network.ui.h:32
 msgid "Network name (_ESSID):"
 msgstr "Сетевое имя (_ESSID):"
 
-#: ../interfaces/network.ui.h:29
-msgid "Options"
-msgstr "Настройки"
+#: ../interfaces/network.ui.h:33
+msgid "Off"
+msgstr "Выключено"
 
-#: ../interfaces/network.ui.h:30
+#: ../interfaces/network.ui.h:34
+msgid "Options"
+msgstr "Параметры"
+
+#: ../interfaces/network.ui.h:35
 msgid "P_assword"
 msgstr "_Пароль"
 
-#: ../interfaces/network.ui.h:31
+#: ../interfaces/network.ui.h:36
 msgid "Password _type:"
 msgstr "_Тип пароля:"
 
-#: ../interfaces/network.ui.h:32
+#: ../interfaces/network.ui.h:37
+msgid "Plain (ASCII)"
+msgstr "Простой текст (ASCII)"
+
+#: ../interfaces/network.ui.h:38
+msgid "Pulses"
+msgstr "Импульсный"
+
+#: ../interfaces/network.ui.h:39
 msgid "Save current network configuration as a location"
 msgstr "Сохранить текущую конфигурацию сети в файле"
 
-#: ../interfaces/network.ui.h:33
-msgid "Use the Internet service provider nameservers"
-msgstr "Использовать сервера имен провайдера Интернет"
+#: ../interfaces/network.ui.h:40
+msgid "Tones"
+msgstr "Тональный"
 
-#: ../interfaces/network.ui.h:34
+#: ../interfaces/network.ui.h:41
+msgid "Use the Internet service provider nameservers"
+msgstr "Использовать сервера имён провайдера Интернет"
+
+#: ../interfaces/network.ui.h:42
 msgid "_Autodetect"
 msgstr "_Автообнаружение"
 
-#: ../interfaces/network.ui.h:35
+#: ../interfaces/network.ui.h:43
 msgid "_Dial prefix:"
 msgstr "Префикс при наборе:"
 
-#: ../interfaces/network.ui.h:36
+#: ../interfaces/network.ui.h:44
 msgid "_Dial type:"
 msgstr "Способ _набора:"
 
-#: ../interfaces/network.ui.h:37
+#: ../interfaces/network.ui.h:45
 msgid "_Gateway address:"
 msgstr "Адрес _шлюза:"
 
-#: ../interfaces/network.ui.h:38
+#: ../interfaces/network.ui.h:46
 msgid "_Host name:"
 msgstr "_Имя узла:"
 
-#: ../interfaces/network.ui.h:39
+#: ../interfaces/network.ui.h:47
 msgid "_IP address:"
 msgstr "_IP адрес:"
 
-#: ../interfaces/network.ui.h:40
+#: ../interfaces/network.ui.h:48
 msgid "_Local IP:"
 msgstr "_Локальный IP:"
 
-#: ../interfaces/network.ui.h:41
+#: ../interfaces/network.ui.h:49
 msgid "_Modem port:"
 msgstr "Порт _модема:"
 
-#: ../interfaces/network.ui.h:42
+#: ../interfaces/network.ui.h:50
 msgid "_Phone number:"
 msgstr "Номер _телефона:"
 
-#: ../interfaces/network.ui.h:43
+#: ../interfaces/network.ui.h:51
 msgid "_Remote IP:"
 msgstr "_Удалённый IP:"
 
-#: ../interfaces/network.ui.h:44
+#: ../interfaces/network.ui.h:52
 msgid "_Retry if the connection breaks or fails to start"
-msgstr "_Попробовать ещё раз при разрыве или неудаче соединения."
+msgstr "_Попробовать ещё раз при разрыве или неудаче соединения"
 
-#: ../interfaces/network.ui.h:45
+#: ../interfaces/network.ui.h:53
 msgid "_Set modem as default route to internet"
 msgstr "Установить _модем как устройство по умолчанию для доступа в Интернет"
 
-#: ../interfaces/network.ui.h:46
+#: ../interfaces/network.ui.h:54
 msgid "_Subnet mask:"
 msgstr "Маска _подсети:"
 
-#: ../interfaces/network.ui.h:47 ../interfaces/users.ui.h:55
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "_Имя пользователя:"
 
-#: ../interfaces/network.ui.h:48
+#. TRANSLATORS: Volume as in loudness
+#: ../interfaces/network.ui.h:57
 msgid "_Volume:"
 msgstr "_Громкость:"
 
 #: ../interfaces/services.ui.h:1
 msgid "Advanced settings:"
-msgstr "Дополнительные настройки:"
+msgstr "Дополнительные параметры:"
 
 #: ../interfaces/services.ui.h:2
 msgid "Select the services that you wish to activate:"
@@ -256,11 +277,11 @@ msgstr "<b>Разрешённые узлы</b>"
 
 #: ../interfaces/shares.ui.h:2
 msgid "<b>Hosts Settings</b>"
-msgstr "<b>Настройки узлов</b>"
+msgstr "<b>Параметры узлов</b>"
 
 #: ../interfaces/shares.ui.h:3
 msgid "<b>Share Properties</b>"
-msgstr "<b>Параметры публикации</b>"
+msgstr "<b>Свойства публикации</b>"
 
 #: ../interfaces/shares.ui.h:4
 msgid "<b>Shared Folder</b>"
@@ -281,7 +302,7 @@ msgstr "Добавить разрешённые узлы"
 
 #: ../interfaces/shares.ui.h:8
 msgid "Allowed hosts:"
-msgstr "Разрешённые узлы"
+msgstr "Разрешённые узлы:"
 
 #: ../interfaces/shares.ui.h:9
 msgid "Comment:"
@@ -297,7 +318,7 @@ msgstr "Введите пароль пользователя"
 
 #: ../interfaces/shares.ui.h:12
 msgid "General Properties"
-msgstr "Общие параметры"
+msgstr "Общие свойства"
 
 #: ../interfaces/shares.ui.h:13
 msgid "Host name:"
@@ -320,31 +341,35 @@ msgid "Read only"
 msgstr "Только чтение"
 
 #: ../interfaces/shares.ui.h:19
+msgid "Share"
+msgstr "Опубликовать"
+
+#: ../interfaces/shares.ui.h:20
 msgid "Share through:"
 msgstr "Публикация с помощью:"
 
-#: ../interfaces/shares.ui.h:20 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:239
+#: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
+#: ../src/shares/shares-tool.c:237
 msgid "Shared Folders"
 msgstr "Опубликованные папки"
 
-#: ../interfaces/shares.ui.h:21
+#: ../interfaces/shares.ui.h:22
 msgid "This computer is a _WINS server"
 msgstr "Этот компьютер является сервером _WINS"
 
-#: ../interfaces/shares.ui.h:22
+#: ../interfaces/shares.ui.h:23
 msgid "Users"
 msgstr "Пользователи"
 
-#: ../interfaces/shares.ui.h:23
+#: ../interfaces/shares.ui.h:24
 msgid "WINS _server:"
 msgstr "_Сервер WINS:"
 
-#: ../interfaces/shares.ui.h:24
+#: ../interfaces/shares.ui.h:25
 msgid "_Path:"
 msgstr "_Путь:"
 
-#: ../interfaces/shares.ui.h:25
+#: ../interfaces/shares.ui.h:26
 msgid "_Read only"
 msgstr "Только _чтение"
 
@@ -406,7 +431,7 @@ msgstr "_Время:"
 
 #: ../interfaces/users.ui.h:1
 msgid "<span weight=\"bold\">Advanced Settings</span>"
-msgstr "<span weight=\"bold\">Дополнительные настройки</span>"
+msgstr "<span weight=\"bold\">Дополнительные параметры</span>"
 
 #: ../interfaces/users.ui.h:2
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
@@ -414,216 +439,327 @@ msgstr "<span weight=\"bold\">Автоматический UID/GID</span>"
 
 #: ../interfaces/users.ui.h:3
 msgid "<span weight=\"bold\">Basic Settings</span>"
-msgstr "<span weight=\"bold\">Общие настройки</span>"
+msgstr "<span weight=\"bold\">Основные параметры</span>"
 
 #: ../interfaces/users.ui.h:4
-msgid "<span weight=\"bold\">Contact Information</span>"
-msgstr "<span weight=\"bold\">Контактная информация</span>"
-
-#: ../interfaces/users.ui.h:5
 msgid "<span weight=\"bold\">Group Members</span>"
 msgstr "<span weight=\"bold\">Члены группы</span>"
 
-#: ../interfaces/users.ui.h:6
+#: ../interfaces/users.ui.h:5
 msgid "<span weight=\"bold\">Optional Settings</span>"
-msgstr "<span weight=\"bold\">Дополнительные настройки</span>"
+msgstr "<span weight=\"bold\">Прочие параметры</span>"
+
+#: ../interfaces/users.ui.h:6
+msgid "<span weight=\"bold\">Password Settings</span>"
+msgstr "<span weight=\"bold\">Параметры пароля</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password Settings</span>"
-msgstr "<span weight=\"bold\">Настройки пароля</span>"
+msgid "<span weight=\"bold\">Profile Settings</span>"
+msgstr "<span weight=\"bold\">Параметры профиля</span>"
 
 #: ../interfaces/users.ui.h:8
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Пароль</span>"
+msgid "<span weight=\"bold\">System Defaults</span>"
+msgstr "<span weight=\"bold\">Системные параметры</span>"
 
 #: ../interfaces/users.ui.h:9
-msgid "<span weight=\"bold\">Profile Settings</span>"
-msgstr "<span weight=\"bold\">Настройки профиля</span>"
+msgid "Account _type:"
+msgstr "_Тип учётной записи:"
 
 #: ../interfaces/users.ui.h:10
-msgid "<span weight=\"bold\">System Defaults</span>"
-msgstr "<span weight=\"bold\">Системные настройки</span>"
-
-#: ../interfaces/users.ui.h:11
-msgid "Account"
-msgstr "Учётная запись"
-
-#: ../interfaces/users.ui.h:12
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:11
+msgid ""
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
+msgstr ""
+"Пользователь с таким именем уже существует. Выберите другое имя для нового "
+"пользователя."
+
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "Случайный пароль по умолчанию"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "Изменить дополнительные параметры пользователя"
+
 #: ../interfaces/users.ui.h:14
-msgid "Check password _quality"
-msgstr "Проверить _качество пароля"
+msgid "Change User Account Type"
+msgstr "Изменить тип учётной записи пользователя"
 
 #: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "Изменить имя пользователя"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "Изменить пароль пользователя"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "Изменение дополнительных параметров у:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "Изменение типа учётной записи у:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "Изменение имени пользователя у:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "Изменение пароля пользователя у:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Con_firmation:"
 msgstr "Под_тверждение:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:22
+msgid "Contact Information"
+msgstr "Контактная информация"
+
+#: ../interfaces/users.ui.h:23
+msgid "Create New User"
+msgstr "Создать нового пользователя"
+
+#: ../interfaces/users.ui.h:24
+msgid "Create a new user"
+msgstr "Создать нового пользователя"
+
+#: ../interfaces/users.ui.h:25
 msgid "Days between warning and password expiration:"
 msgstr "Дней между предупреждением и блокированием пароля:"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:26
 msgid "Default _group:"
 msgstr "_Группа по умолчанию:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:27
 msgid "Default _shell:"
-msgstr "_Shell по умолчанию:"
+msgstr "_Интерпретатор по умолчанию:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:28
+msgid "Disable _account"
+msgstr "Выключить _учётную запись"
+
+#: ../interfaces/users.ui.h:29
+msgid "Don't ask for password on _login"
+msgstr "Не спрашивать пароль при _входе"
+
+#: ../interfaces/users.ui.h:30
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr ""
+"Зашифровать все ваши файлы паролем входа в систему для надёжной защиты от "
+"людей, имеющих физический доступ к компьютеру, несмотря на незначительное "
+"снижение производительности."
+
+#: ../interfaces/users.ui.h:31
+msgid "Full _Name:"
+msgstr "Полное и_мя:"
+
+#: ../interfaces/users.ui.h:33
 msgid "Generate _random password"
 msgstr "Сгенерировать _произвольный пароль"
 
-#: ../interfaces/users.ui.h:21
+#: ../interfaces/users.ui.h:34
 msgid "Group _ID:"
 msgstr "_ID группы:"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:35
 msgid "Group _name:"
 msgstr "_Имя группы:"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:36
 msgid "Group properties"
-msgstr "Настройки группы:"
+msgstr "Свойства группы"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:37
 msgid "Groups settings"
-msgstr "Настройки групп"
+msgstr "Параметры групп"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:38
 msgid "Ma_ximum days a password may be used:"
-msgstr "Ма_ксимум дней когда пароль может использоваться:"
+msgstr "Ма_ксимум дней на пользование паролем:"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:526
+msgid "Manual"
+msgstr "Вручную"
+
+#: ../interfaces/users.ui.h:40
+msgid "Maximum GID:"
+msgstr "Максимальный GID:"
+
+#: ../interfaces/users.ui.h:41
 msgid "Maximum UID:"
 msgstr "Максимальный UID:"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:42
 msgid "Mi_nimum days between password changes:"
-msgstr "Ми_нимум дней между тем когда пароль должен быть изменен:"
+msgstr "Ми_нимум дней между сменой пароля:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:43
 msgid "Minimum GID:"
 msgstr "Минимальный GID:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:44
 msgid "Minimum UID:"
 msgstr "Минимальный UID:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:45
 msgid "Minimum days allowed between password changes:"
-msgstr "Минимальное время для смены пароля в днях:"
+msgstr "Минимум дней между сменой пароля:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:46
+msgid "New _password:"
+msgstr "Новый _пароль:"
+
+#: ../interfaces/users.ui.h:47
 msgid "Number of days that a password may be used:"
-msgstr "Время использования пароля в днях:"
+msgstr "Дней на пользование паролем:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:48
 msgid "O_ffice location:"
 msgstr "_Расположение:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:49
 msgid "Password set to: "
 msgstr "Пароль будет таким: "
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:50
 msgid "Privileges"
 msgstr "Привилегии"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:51
 msgid "Profile _name:"
 msgstr "_Имя профиля:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:52
 msgid "Set password b_y hand"
 msgstr "Ввести пароль _вручную"
 
-#: ../interfaces/users.ui.h:37
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:54
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"В коротком имени допустимы:\n"
+"  &#x27A3; строчные латинские буквы\n"
+"  &#x27A3; цифры\n"
+"  &#x27A3; символы «.», «-» и «_»"
+
+#: ../interfaces/users.ui.h:58
+msgid "Short name must start with a letter!"
+msgstr "Короткое имя должно начинаться с буквы!"
+
+#: ../interfaces/users.ui.h:59
+msgid "This account is disabled."
+msgstr "Эта учётная запись выключена."
+
+#: ../interfaces/users.ui.h:60
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+"Эта учётная запись использует особые параметры, которые были установлены "
+"вручную. Используйте диалоговое окно <i>Дополнительные параметры</i> для их "
+"настройки."
+
+#: ../interfaces/users.ui.h:61
 msgid "User ID:"
 msgstr "ID пользователя:"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:62
 msgid "User Privileges"
 msgstr "Привилегии пользователя"
 
-#: ../interfaces/users.ui.h:39
-msgid "User _password:"
-msgstr "Пароль _пользователя:"
-
-#: ../interfaces/users.ui.h:40
+#: ../interfaces/users.ui.h:63
 msgid "User profiles"
-msgstr "Профили пользователей"
+msgstr "Профили пользователя"
 
-#: ../interfaces/users.ui.h:41
-msgid "_Add Group"
-msgstr "Добавить _группу"
+#: ../interfaces/users.ui.h:64
+msgid "You can't change user ID while the user is logged in."
+msgstr "Нельзя изменить ID пользователя, вошедшего в систему."
 
-#: ../interfaces/users.ui.h:42
+#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "Добавить _профиль"
 
-#: ../interfaces/users.ui.h:43
-msgid "_Add User"
-msgstr "Добавить п_ользователя"
+#: ../interfaces/users.ui.h:66
+msgid "_Advanced Settings"
+msgstr "_Дополнительные параметры"
 
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "_Комментарии"
 
-#: ../interfaces/users.ui.h:45
+#: ../interfaces/users.ui.h:68
+msgid "_Current password:"
+msgstr "Те_кущий пароль:"
+
+#: ../interfaces/users.ui.h:69
+msgid "_Custom"
+msgstr "_Другое"
+
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "_Дней между предупреждением и блокированием пароля:"
 
-#: ../interfaces/users.ui.h:46 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "_Удалить"
+#: ../interfaces/users.ui.h:71
+msgid "_Enable Account"
+msgstr "_Включить учётную запись"
 
-#: ../interfaces/users.ui.h:47
+#: ../interfaces/users.ui.h:72
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr "_Шифровать домашнюю папку для защиты данных"
+
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "_Создать"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "Домашний _каталог:"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "Домашний _телефон:"
 
-#: ../interfaces/users.ui.h:50
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "_Основная группа:"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "_Управление группами"
 
-#: ../interfaces/users.ui.h:52
-msgid "_Profile:"
-msgstr "_Профиль:"
+#: ../interfaces/users.ui.h:78
+msgid "_Name:"
+msgstr "И_мя:"
 
-#: ../interfaces/users.ui.h:53
-msgid "_Real name:"
-msgstr "_Настоящее имя:"
+#: ../interfaces/users.ui.h:79
+msgid "_Password:"
+msgstr "_Пароль:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
-msgstr "_Shell:"
+msgstr "_Командный интерпретатор:"
 
-#: ../interfaces/users.ui.h:56
+#: ../interfaces/users.ui.h:81
+msgid "_Short Name:"
+msgstr "_Короткое имя:"
+
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "_Рабочий телефон:"
-
-#: ../src/common/gst-dialog.c:179
-msgid "_Unlock"
-msgstr "_Разблокировать"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -644,54 +780,63 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Платформа не поддерживается"
 
-#: ../src/common/gst-polkit-button.c:126
-msgid "This action is allowed"
-msgstr "Это действие разрешено"
-
-#: ../src/common/gst-polkit-button.c:140
-msgid "This action is not allowed"
-msgstr "Это действие не разрешено"
-
-#: ../src/common/gst-polkit-button.c:247
-msgid "Could not authenticate"
-msgstr "Не удалось пройти аутентификацию"
-
-#: ../src/common/gst-polkit-button.c:249
-msgid "An unexpected error has occurred."
-msgstr "Возникла непредвиденная ошибка."
-
-#: ../src/common/gst-tool.c:185
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "Не удалось загрузить конфигурацию"
 
-#: ../src/common/gst-tool.c:186
-msgid "You are not allowed to access the system configuration."
-msgstr "У вас нет разрешения на доступ к настройкам системы."
-
-#: ../src/common/gst-tool.c:188
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "Конфигурация не может быть сохранена"
 
-#: ../src/common/gst-tool.c:189
-msgid "You are not allowed to modify the system configuration."
-msgstr "У вас нет прав на изменение настроек системы."
+#: ../src/common/gst-tool.c:196
+msgid "You are not allowed to access the system configuration."
+msgstr "У вас нет разрешения на доступ к параметрам системы."
 
-#: ../src/common/gst-tool.c:418
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:691
+msgid "You are not allowed to modify the system configuration."
+msgstr "У вас нет прав на изменение параметров системы."
+
+#: ../src/common/gst-tool.c:201
+msgid "Invalid data was found."
+msgstr "Обнаружены неверные данные."
+
+#. OOBS_RESULT_ERROR
+#: ../src/common/gst-tool.c:203
+msgid "An unknown error occurred."
+msgstr "Возникла неизвестная ошибка."
+
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "Не удалось отобразить справку"
 
-#: ../src/common/gst-tool.c:596
+#: ../src/common/gst-tool.c:622
 msgid "The system configuration has potentially changed."
 msgstr "Вероятно, были изменены настройки системы."
 
-#: ../src/common/gst-tool.c:598
+#: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "Обновить содержимое? Будут потеряны все сделанные изменения."
 
+#: ../src/common/gst-tool.c:693
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
+"Сбой во время проверки авторизаций: %s\n"
+"Можете сообщить об этой ошибке."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "_Добавить"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "_Удалить"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -699,7 +844,7 @@ msgstr "Введите адрес"
 
 #: ../src/network/callbacks.c:237 ../src/network/callbacks.c:487
 msgid "Changing interface configuration"
-msgstr "Изменение настроек интерфейса"
+msgstr "Изменение параметров интерфейса"
 
 #: ../src/network/callbacks.c:299
 msgid "Could not autodetect modem device"
@@ -709,7 +854,7 @@ msgstr "Не удалось найти модем"
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer."
-msgstr "Проверьте что устройство не занято и подключено к Вашему компьютеру."
+msgstr "Проверьте, что устройство не занято и подключено к компьютеру."
 
 #: ../src/network/callbacks.c:523
 msgid "The host name has changed"
@@ -720,8 +865,8 @@ msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
 msgstr ""
-"Это не позволит вам запускать новые приложения и поэтому вам будет нужно "
-"войти заново. Продолжить в любом случае?"
+"Это не позволит вам запускать новые приложения, и поэтому необходимо войти в "
+"систему заново. Всё равно продолжить?"
 
 #: ../src/network/callbacks.c:532
 msgid "Change _Host name"
@@ -777,7 +922,7 @@ msgid "%s Properties"
 msgstr "Параметры %s"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "_Параметры"
 
@@ -880,7 +1025,7 @@ msgstr "Имя _расположения:"
 #: ../src/network/locations-combo.c:422
 #, c-format
 msgid "Do you want to delete location \"%s\"?"
-msgstr "Вы хотите удалить расположение «%s»?"
+msgstr "Хотите удалить расположение «%s»?"
 
 #: ../src/network/main.c:135
 msgid "The interface does not exist"
@@ -890,8 +1035,7 @@ msgstr "Интерфейс не существует"
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
-msgstr ""
-"Проверьте что введённое значение корректно и поддерживается Вашей системой."
+msgstr "Проверьте, что введённое значение корректно и поддерживается системой."
 
 #: ../src/network/main.c:183
 msgid "Configure a network interface"
@@ -899,7 +1043,7 @@ msgstr "Настроить сетевой интерфейс"
 
 #: ../src/network/main.c:183
 msgid "INTERFACE"
-msgstr "Интерфейс"
+msgstr "ИНТЕРФЕЙС"
 
 #: ../src/network/main.c:184
 msgid "Configure the first network interface with a specific type"
@@ -907,7 +1051,7 @@ msgstr "Установить тип первого сетевого интерф
 
 #: ../src/network/main.c:184
 msgid "TYPE"
-msgstr "Тип"
+msgstr "ТИП"
 
 #: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -921,23 +1065,22 @@ msgstr "Сеть"
 msgid "Network Settings"
 msgstr "Сетевые параметры"
 
-#: ../src/services/callbacks.c:59
+#: ../src/services/callbacks.c:65
 #, c-format
 msgid "Settings for service \"%s\""
-msgstr "Настройки для службы «%s»"
+msgstr "Параметры службы «%s»"
 
-#: ../src/services/callbacks.c:119
+#: ../src/services/callbacks.c:125
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
-msgstr "Вы уверены, что хотите отключить %s?"
+msgstr "Действительно хотите отключить %s?"
 
-#: ../src/services/callbacks.c:123
+#: ../src/services/callbacks.c:129
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
 msgstr ""
-"Это может сказаться на поведении вашей системы и даже привести к потере "
-"данных."
+"Это может сказаться на поведении системы и даже привести к потере данных."
 
 #: ../src/services/service.c:32
 msgid "Web server"
@@ -945,7 +1088,7 @@ msgstr "Веб-сервер"
 
 #: ../src/services/service.c:32
 msgid "Shares your web pages over the Internet"
-msgstr "Публикует ваши веб-страницы в Интернете"
+msgstr "Публикует веб-страницы в Интернете"
 
 #. GST_ROLE_WEB_SERVER
 #: ../src/services/service.c:33
@@ -959,7 +1102,7 @@ msgstr "Выполняет запланированные задания"
 #. GST_ROLE_COMMAND_SCHEDULER
 #: ../src/services/service.c:34
 msgid "Printer service"
-msgstr "Печать"
+msgstr "Служба печати"
 
 #: ../src/services/service.c:34
 msgid "Allows applications to use printers"
@@ -972,30 +1115,30 @@ msgstr "Почтовый агент"
 
 #: ../src/services/service.c:35
 msgid "Delivers your outgoing mail"
-msgstr "Доставляет вашу почту"
+msgstr "Доставляет исходящую почту"
 
 #. GST_ROLE_MTA
 #: ../src/services/service.c:36
 msgid "MTA authentication service"
-msgstr "Сервис аутентификации MTA"
+msgstr "Служба аутентификации MTA"
 
 #. GST_ROLE_MTA_AUTH
 #: ../src/services/service.c:37
 msgid "Mail fetcher"
-msgstr "Сбор почты"
+msgstr "Сборщик почты"
 
 #: ../src/services/service.c:37
 msgid "Downloads your mail from remote accounts"
-msgstr "Скачивает почту с удалённых почтовых ящиков"
+msgstr "Загружает почту с удалённых почтовых ящиков"
 
 #. GST_ROLE_MAIL_FETCHER
 #: ../src/services/service.c:38
 msgid "Graphical login manager"
-msgstr "Графическое приглашение"
+msgstr "Графическое приглашение входа"
 
 #: ../src/services/service.c:38
 msgid "Allows users to login graphically"
-msgstr "Позволяет пользователям входить в систему"
+msgstr "Предоставляет пользователям наглядный вход в систему"
 
 #. GST_ROLE_DISPLAY_MANAGER
 #: ../src/services/service.c:39
@@ -1016,7 +1159,7 @@ msgstr "Система публикации папок"
 
 #: ../src/services/service.c:40 ../src/services/service.c:41
 msgid "Shares folders over your network"
-msgstr "Разделяет папки по вашей сети"
+msgstr "Открывает общий доступ к папкам через сеть"
 
 #. GST_ROLE_FILE_SERVER_NFS
 #: ../src/services/service.c:42
@@ -1025,7 +1168,7 @@ msgstr "Сервер FTP"
 
 #: ../src/services/service.c:42 ../src/services/service.c:43
 msgid "Shares folders over the Internet"
-msgstr "Открывает общий доступ к папке через Интернет"
+msgstr "Открывает общий доступ к папкам через Интернет"
 
 #. GST_ROLE_FILE_SERVER_TFTP
 #: ../src/services/service.c:44
@@ -1043,16 +1186,16 @@ msgstr "Антивирус"
 
 #: ../src/services/service.c:46
 msgid "Analyzes your incoming mail for virus"
-msgstr "Анализ входящей почты на вирусы"
+msgstr "Анализирует входящую почту на вирусы"
 
 #. GST_ROLE_ANTIVIRUS
 #: ../src/services/service.c:47
 msgid "Firewall"
-msgstr "Сетевой фильтр"
+msgstr "Межсетевой экран"
 
 #: ../src/services/service.c:47
 msgid "Blocks undesired network access to your computer"
-msgstr "Блокирует доступ нежелательной сети к вашему компьютеру"
+msgstr "Блокирует нежелательный доступ к компьютеру по сети"
 
 #. GST_ROLE_FIREWALL_MANAGEMENT
 #: ../src/services/service.c:49
@@ -1067,11 +1210,11 @@ msgstr "Поддержка синтеза речи"
 #. GST_ROLE_SPEECH_SYNTHESIS
 #: ../src/services/service.c:51
 msgid "Computer activity logger"
-msgstr "Журналирование"
+msgstr "Журналирование системы"
 
 #: ../src/services/service.c:51
 msgid "Keeps a log of your computer activity"
-msgstr "Сохраняет журнал активности"
+msgstr "Ведёт журнал активности системы"
 
 #. GST_ROLE_SYSTEM_LOGGER
 #: ../src/services/service.c:52
@@ -1110,7 +1253,7 @@ msgstr "Шина системной коммуникации"
 #. GST_ROLE_DBUS,
 #: ../src/services/service.c:58
 msgid "System configuration manager"
-msgstr "Менеджер системной конфигурации"
+msgstr "Диспетчер системной конфигурации"
 
 #. GST_ROLE_SYSTEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:59
@@ -1130,7 +1273,7 @@ msgstr "Сервер веб-календаря"
 #. GST_ROLE_WEB_CALENDAR_SERVER
 #: ../src/services/service.c:62
 msgid "OEM configuration manager"
-msgstr "Менеджер настройки OEM"
+msgstr "Диспетчер настройки OEM"
 
 #. GST_ROLE_OEM_CONFIGURATION_MANAGEMENT
 #: ../src/services/service.c:63
@@ -1165,7 +1308,7 @@ msgstr "Сервер DHCP"
 #. GST_ROLE_DHCP_SERVER
 #: ../src/services/service.c:69
 msgid "Domain name server"
-msgstr "Сервер доменных имен"
+msgstr "Сервер доменных имён"
 
 #. GST_ROLE_DNS
 #: ../src/services/service.c:70
@@ -1180,7 +1323,7 @@ msgstr "Сервер LDAP"
 #. GST_ROLE_LDAP_SERVER
 #: ../src/services/service.c:72
 msgid "Mailing lists manager"
-msgstr "Менеджер почтовых списков"
+msgstr "Диспетчер почтовых списков"
 
 #. GST_ROLE_MAILING_LISTS_MANAGER
 #: ../src/services/service.c:73
@@ -1205,7 +1348,7 @@ msgstr "Сервер оптимизации маршрутизации"
 #. GST_ROLE_ROUTER_ADVERTISEMENT_SERVER
 #: ../src/services/service.c:77
 msgid "IPSec key exchange server"
-msgstr "Сервер обмена ключей IPSec"
+msgstr "Сервер обмена ключами IPSec"
 
 #. GST_ROLE_IPSEC_KEY_EXCHANGE_SERVER
 #: ../src/services/service.c:78
@@ -1240,16 +1383,16 @@ msgstr "Клиент терминального сервера"
 #. GST_ROLE_LTSP_CLIENT
 #: ../src/services/service.c:84
 msgid "Audio settings management"
-msgstr "Управление настройками звука"
+msgstr "Управление параметрами аудио"
 
 #. GST_ROLE_AUDIO_MANAGEMENT
 #: ../src/services/service.c:85
 msgid "Volumes mounter"
-msgstr "Подсоединение разделов"
+msgstr "Подсоединение томов"
 
 #: ../src/services/service.c:85
 msgid "Mounts your volumes automatically"
-msgstr "Автоматически подсоединяет новые разделы"
+msgstr "Автоматически подсоединяет новые тома"
 
 #. GST_ROLE_AUTOMOUNTER
 #: ../src/services/service.c:86
@@ -1294,7 +1437,7 @@ msgstr "Инструмент управления кластером"
 #. GST_ROLE_CLUSTER_MANAGEMENT
 #: ../src/services/service.c:94
 msgid "Fax settings management"
-msgstr "Управление настройками факса"
+msgstr "Управление параметрами факса"
 
 #. GST_ROLE_FAX_MANAGEMENT
 #: ../src/services/service.c:95
@@ -1319,7 +1462,7 @@ msgstr "Управление USB ADSL модемами Eagle"
 #. GST_ROLE_EAGLE_USB_MODEMS_MANAGEMENT
 #: ../src/services/service.c:99
 msgid "Serial port settings management"
-msgstr "Управление настройками последовательного порта"
+msgstr "Управление параметрами последовательного порта"
 
 #. GST_ROLE_SERIAL_PORTS_MANAGEMENT
 #: ../src/services/service.c:100
@@ -1329,7 +1472,7 @@ msgstr "Управление ISDN модемами"
 #. GST_ROLE_ISDN_MANAGEMENT
 #: ../src/services/service.c:101
 msgid "Telstra Bigpond Cable Network client"
-msgstr "клиент кабельной сети Telstra Bigpond"
+msgstr "Клиент кабельной сети Telstra Bigpond"
 
 #. GST_ROLE_TELSTRA_BIGPOND_NETWORK_CLIENT
 #: ../src/services/service.c:102
@@ -1341,9 +1484,14 @@ msgstr "Монитор аппаратного контроля"
 msgid "System monitor"
 msgstr "Системный монитор"
 
+#. GST_ROLE_SYSTEM_MONITORING
+#: ../src/services/service.c:104
+msgid "Virtual Machine management"
+msgstr "Управление виртуальными машинами"
+
 #: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
-msgstr "Установить какие службы будут запущены при загрузке системы"
+msgstr "Установить, какие службы будут запущены при загрузке системы"
 
 #: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
@@ -1378,17 +1526,17 @@ msgstr "Состояние"
 msgid "Priority"
 msgstr "Приоритет"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
-msgstr "Настройки служб"
+msgstr "Параметры служб"
 
 #: ../src/shares/callbacks.c:196
 msgid "Are you sure you want to delete this share?"
-msgstr "Вы уверены, что хотите удалить эту публикацию?"
+msgstr "Действительно хотите удалить эту публикацию?"
 
 #: ../src/shares/callbacks.c:198
 msgid "Other computers in your network will stop viewing this."
-msgstr "Удалённые узлы не смогут получить доступ."
+msgstr "Другие компьютеры в сети не смогут получить доступ."
 
 #: ../src/shares/main.c:103
 msgid "Add a shared path, modifies it if it already exists"
@@ -1396,7 +1544,7 @@ msgstr "Добавить путь публикации, исправить су�
 
 #: ../src/shares/main.c:103
 msgid "PATH"
-msgstr "Путь"
+msgstr "ПУТЬ"
 
 #: ../src/shares/nautilus/nautilus-shares.c:152
 msgid "_Share Folder..."
@@ -1408,11 +1556,11 @@ msgstr "Опубликовать папку для доступа с удалё�
 
 #: ../src/shares/nfs-acl-table.c:50
 msgid "Allowed host/network"
-msgstr "Разрешённые узлы/сети"
+msgstr "Разрешённый узел/сеть"
 
 #: ../src/shares/share-nfs-add-hosts.c:117
 msgid "Specify hostname"
-msgstr "Задать узел"
+msgstr "Задать имя узла"
 
 #: ../src/shares/share-nfs-add-hosts.c:124
 msgid "Specify IP address"
@@ -1424,7 +1572,7 @@ msgstr "Задать сеть"
 
 #: ../src/shares/shares.desktop.in.in.h:1
 msgid "Configure which folders are available for your network neighborhood"
-msgstr "Задать папки доступные для сетевого окружения"
+msgstr "Задать папки, доступные для сетевого окружения"
 
 #: ../src/shares/share-settings.c:61
 msgid "File System"
@@ -1442,255 +1590,431 @@ msgstr "Сети Windows (SMB)"
 msgid "Unix networks (NFS)"
 msgstr "Сети Unix (NFS)"
 
-#: ../src/shares/shares-tool.c:155
-msgid "Sharing services are not installed"
-msgstr "Поддержка публикации папок не установлена"
+#: ../src/shares/share-settings.c:462
+#, c-format
+msgid "Settings for folder '%s'"
+msgstr "Параметры для папки «%s»"
 
-#: ../src/shares/shares-tool.c:157
+#: ../src/shares/share-settings.c:469
+msgid "Share Folder"
+msgstr "Опубликованная папка"
+
+#: ../src/shares/shares-tool.c:152
+msgid "Sharing services are not installed"
+msgstr "Службы публикации папок не установлены"
+
+#: ../src/shares/shares-tool.c:154
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
 msgstr ""
-"Вам необходимо установить по крайней мере Samba или NFS для возможности "
-"общего доступа к вашим папкам."
+"Необходимо установить, по крайней мере, Samba или NFS для возможности общего "
+"доступа к вашим папкам."
 
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
-msgstr "Установка времени, даты и часового пояса."
+msgstr "Установка времени, даты и часового пояса"
 
 #: ../src/time/time.desktop.in.in.h:2
 msgid "Time and Date"
 msgstr "Дата и время"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:402
 msgid "NTP support is not installed"
 msgstr "Поддержка протокола NTP не установлена"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:404
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr ""
 "Установите и активируйте поддержку NTP для обеспечения возможности "
-"синхронизации локального сервера времени с серверами времени в Интернет."
+"синхронизации локального сервера времени с серверами времени в Интернете."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:433
 msgid "Enabling NTP"
 msgstr "Включение NTP"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:433
 msgid "Disabling NTP"
 msgstr "Выключение NTP"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:445
 msgid "Synchronizing system clock"
-msgstr "Синхронизация системный часов"
+msgstr "Синхронизация системных часов"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:525
 msgid "Keep synchronized with Internet servers"
-msgstr "С_инхронизировать время с интернет-серверами"
+msgstr "С_инхронизировать время с серверами Интернет"
 
-#: ../src/time/time-tool.c:515
-msgid "Manual"
-msgstr "Вручную"
-
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:672
 msgid "Time and Date Settings"
-msgstr "Настройки даты и времени"
+msgstr "Параметры даты и времени"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
-msgstr "Группа администраторов не может быть удалена"
+msgstr "Нельзя удалить группу администраторов"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:60
-#: ../src/users/user-settings.c:550
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:88
+#: ../src/users/user-settings.c:476
 msgid "This would leave the system unusable."
-msgstr "Это может сделать систему непригодной к использованию"
-
-#: ../src/users/group-settings.c:68
-#, c-format
-msgid "Are you sure you want to delete group \"%s\"?"
-msgstr "Вы уверены в том что хотите удалить группу «%s»?"
+msgstr "Это может сделать систему непригодной к использованию."
 
 #: ../src/users/group-settings.c:71
+#, c-format
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "Действительно хотите удалить группу «%s»?"
+
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Могут остаться файлы с неверным идентификатором группы."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:151
 msgid "New group"
 msgstr "Создать группу"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:158
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Свойства группы «%s»"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:224
 msgid "Group name is empty"
 msgstr "Название группы пусто"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:225
 msgid "A group name must be specified."
-msgstr "Имя группы должно быть указано."
+msgstr "Необходимо указать имя группы."
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:227
 msgid "Group name of the administrator group user should not be modified"
-msgstr "Имя группы администратора не может быть изменено"
+msgstr "Нельзя изменить имя группы администраторов"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:230
 msgid "Group name has invalid characters"
 msgstr "Имя группы содержит запрещённые символы"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:231
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr ""
-"Пожалуйста установите корректное имя группы, состоящее из латинской буквы в "
-"нижнем регистре и следующих за ней латинских букв в нижнем регистре и цифр."
+"Установите корректное имя группы, состоящее из латинской буквы в нижнем "
+"регистре и следующих за ней латинских букв в нижнем регистре и цифр."
 
-#: ../src/users/group-settings.c:286
+#: ../src/users/group-settings.c:236
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Группа «%s» уже существует"
 
-#: ../src/users/group-settings.c:287 ../src/users/user-settings.c:484
-msgid "Please select a different user name."
-msgstr "Пожалуйста, выберите другое имя пользователя."
+#: ../src/users/group-settings.c:237
+msgid "Please choose a different group name."
+msgstr "Выберите другое имя группы."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:264
 msgid "Group ID of the Administrator account should not be modified"
-msgstr "ID группы администратора не может быть изменено"
+msgstr "Нельзя изменить ID группы администраторов"
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:268
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "Групповой ID %d уже используется группой «%s»"
+
+#: ../src/users/group-settings.c:271
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "Выберите другой числовой идентификатор для новой группы."
+
+#: ../src/users/group-settings.c:273
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "Выберите другой числовой идентификатор для группы «%s»."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Имя группы"
 
-#: ../src/users/privileges-table.c:49
-msgid "Monitor system logs"
-msgstr "Следить за системными журналами"
-
-#: ../src/users/privileges-table.c:50
-msgid "Administer the system"
-msgstr "Администрировать систему"
-
-#: ../src/users/privileges-table.c:51
-msgid "Use audio devices"
-msgstr "Использовать аудио-устройства"
-
-#: ../src/users/privileges-table.c:52
-msgid "Use CD-ROM drives"
-msgstr "Использовать приводы компакт-дисков"
-
 #: ../src/users/privileges-table.c:53
-msgid "Use modems"
-msgstr "Использовать модемы"
+msgid "Monitor system logs"
+msgstr "Наблюдение за системными журналами"
 
 #: ../src/users/privileges-table.c:54
-msgid "Connect to Internet using a modem"
-msgstr "Соединяться с Интернет, используя модем"
+msgid "Administer the system"
+msgstr "Администрирование системы"
 
 #: ../src/users/privileges-table.c:55
-msgid "Send and receive faxes"
-msgstr "Отправлять и получать факсы"
+msgid "Use audio devices"
+msgstr "Использование аудио-устройств"
 
 #: ../src/users/privileges-table.c:56
-msgid "Use floppy drives"
-msgstr "Использовать дисководы гибких дисков"
+msgid "Use CD-ROM drives"
+msgstr "Использование приводов компакт-дисков"
 
 #: ../src/users/privileges-table.c:57
-msgid "Access external storage devices automatically"
-msgstr "Автоматически получать доступ к внешним носителям данных"
+msgid "Burn CDs / DVDs"
+msgstr "Запись CD / DVD"
 
 #: ../src/users/privileges-table.c:58
-msgid "Use scanners"
-msgstr "Использовать сканеры"
+msgid "Use modems"
+msgstr "Использование модемов"
 
 #: ../src/users/privileges-table.c:59
-msgid "Use tape drives"
-msgstr "Использовать накопители на магнитной ленте"
+msgid "Connect to Internet using a modem"
+msgstr "Соединение с Интернет, используя модем"
 
 #: ../src/users/privileges-table.c:60
+msgid "Send and receive faxes"
+msgstr "Отправка и получение факсов"
+
+#: ../src/users/privileges-table.c:61
+msgid "Use floppy drives"
+msgstr "Использование дисководов гибких дисков"
+
+#: ../src/users/privileges-table.c:62
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Подключение пользовательских файловых систем (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "Настройка принтеров"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "Подключение к беспроводным и проводным сетям"
+
+#: ../src/users/privileges-table.c:65
+msgid "Access external storage devices automatically"
+msgstr "Автоматический доступ к внешним носителям данных"
+
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "Перевод компьютера в ждущий и спящий режимы"
+
+#: ../src/users/privileges-table.c:67
+msgid "Access /proc filesystem"
+msgstr "Доступ к файловой системе /proc"
+
+#: ../src/users/privileges-table.c:68
+msgid "Use scanners"
+msgstr "Использование сканеров"
+
+#: ../src/users/privileges-table.c:69
+msgid "Use tape drives"
+msgstr "Использование накопителей на магнитной ленте"
+
+#: ../src/users/privileges-table.c:70
+msgid "Use USB devices"
+msgstr "Использование устройств USB"
+
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "Виртуализация VirtualBox"
+
+#: ../src/users/privileges-table.c:72
+msgid "Use video devices"
+msgstr "Использование видео-устройств"
+
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
-msgstr "Получать привилегии администратора"
+msgstr "Возможность получать привилегии администратора"
+
+#: ../src/users/user-profiles.conf.in.h:1
+msgid "Administrator"
+msgstr "Администратор"
+
+#: ../src/users/user-profiles.conf.in.h:2
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr ""
+"Может изменять в системе что угодно, включая установку и удаление "
+"программного обеспечения."
+
+#: ../src/users/user-profiles.conf.in.h:3
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr ""
+"Может выполнять типичные для пользователя действия. Не может устанавливать "
+"программное обеспечение или изменять параметры, затрагивающие всех "
+"пользователей."
+
+#: ../src/users/user-profiles.conf.in.h:4
+msgid "Desktop user"
+msgstr "Пользователь"
+
+#: ../src/users/run-passwd.c:421
+msgid "Authentication failed"
+msgstr "Сбой аутентификации"
+
+#: ../src/users/run-passwd.c:494
+#, c-format
+msgid "The new password is too short"
+msgstr "Новый пароль слишком короткий"
+
+#: ../src/users/run-passwd.c:499
+#, c-format
+msgid "The new password is too simple"
+msgstr "Новый пароль слишком простой"
+
+#: ../src/users/run-passwd.c:503
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "Старый и новый пароли слишком похожи"
+
+#: ../src/users/run-passwd.c:506
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "Новый пароль должен содержать числовые или специальные символы"
+
+#: ../src/users/run-passwd.c:510
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "Старый и новый пароли совпадают"
+
+#: ../src/users/run-passwd.c:514
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "Ваш пароль был изменён со времени первоначальной аутентификации!"
+
+#: ../src/users/run-passwd.c:518
+#, c-format
+msgid "Unknown error"
+msgstr "Неизвестная ошибка"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
-msgstr "Добавить или удалить пользователей или группы"
+msgstr "Добавить или удалить пользователей и группы"
 
 #: ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Пользователи и группы"
 
-#: ../src/users/user-settings.c:57
+#: ../src/users/user-password.c:100
+msgid "Password is too short"
+msgstr "Пароль слишком короткий"
+
+#: ../src/users/user-password.c:101
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Пароль пользователя должен содержать более 6 символов и, желательно, "
+"состоять из чисел, букв и специальных символов."
+
+#: ../src/users/user-password.c:104
+msgid "Password confirmation is not correct"
+msgstr "Подтверждение пароля не совпадает с самим паролем"
+
+#: ../src/users/user-password.c:105
+msgid "Check that you have provided the same password in both text fields."
+msgstr "Убедитесь, что пароли в обоих полях ввода одинаковы."
+
+#: ../src/users/user-password.c:420
+msgid "Please choose another password."
+msgstr "Укажите другой пароль."
+
+#: ../src/users/user-password.c:431
+msgid "Please type again your current password."
+msgstr "Введите текущий пароль ещё раз."
+
+#: ../src/users/user-password.c:438
+msgid "Password could not be changed"
+msgstr "Нельзя изменить пароль"
+
+#: ../src/users/user-settings.c:85
 msgid "Administrator account cannot be deleted"
-msgstr "Невозможно удалить учётную запись администратора"
+msgstr "Нельзя удалить учётную запись администратора"
 
-#: ../src/users/user-settings.c:71
+#: ../src/users/user-settings.c:96
 #, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "Вы уверены, что хотите удалить учётную запись «%s»?"
+msgid "%s is currently using this computer"
+msgstr "%s сейчас использует данный компьютер"
 
-#: ../src/users/user-settings.c:74
-msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
+#: ../src/users/user-settings.c:99
+msgid "Please ensure the user has logged out before deleting this account."
 msgstr ""
-"Доступ пользователя в систему будет запрещён, но домашний каталог останется."
+"Убедитесь, что пользователь вышел из системы перед удалением его учётной "
+"записи."
 
-#: ../src/users/user-settings.c:84
-msgid "This user is currently using this computer"
-msgstr "Этот пользователь сейчас использует данный компьютер."
+#: ../src/users/user-settings.c:109
+msgid "Can't delete the only administrator account"
+msgstr "Нельзя удалить единственную учётную запись администратора"
 
-#: ../src/users/user-settings.c:324
-msgid "New user account"
-msgstr "Новая пользовательская учётная запись"
-
-#: ../src/users/user-settings.c:342
+#: ../src/users/user-settings.c:111
 #, c-format
-msgid "Account '%s' Properties"
-msgstr "Настройки учётной записи «%s»"
-
-#: ../src/users/user-settings.c:475
-msgid "User name is empty"
-msgstr "Имя пользователя пусто"
-
-#: ../src/users/user-settings.c:476
-msgid "A user name must be specified."
-msgstr "Должно быть указано имя пользователя."
-
-#: ../src/users/user-settings.c:478
-msgid "User name has invalid characters"
-msgstr "Имя пользователя содержит запрещённые символы"
-
-#: ../src/users/user-settings.c:479
 msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
 msgstr ""
-"Пожалуйста выберите допустимое имя пользователя, используя только символы "
-"нижнего регистра и цифры."
+"%s является единственным администратором этого компьютера. Удаление этой "
+"учётной записи приведёт к отсутствию возможности администрирования системы."
 
-#: ../src/users/user-settings.c:483
+#: ../src/users/user-settings.c:121
 #, c-format
-msgid "User name \"%s\" already exists"
-msgstr "Пользователь «%s» уже существует"
+msgid "Remove home folder for %s?"
+msgstr "Удалить домашнюю папку пользователя %s?"
 
-#: ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:124
+#, c-format
+msgid ""
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that and administrator can save them later."
+msgstr ""
+"Файлы пользователя %s в <tt>%s</tt> можно полностью удалить. Но можно "
+"оставить их для создания резервной копии перед удалением учётной записи, или "
+"чтобы администратор мог сохранить их позднее."
+
+#: ../src/users/user-settings.c:132
+msgid "Keep Files"
+msgstr "Оставить файлы"
+
+#: ../src/users/user-settings.c:133
+msgid "Don't Remove Account"
+msgstr "Оставить учётную запись"
+
+#: ../src/users/user-settings.c:134
+msgid "Delete Files"
+msgstr "Удалить файлы"
+
+#: ../src/users/user-settings.c:330
+msgid "Superuser"
+msgstr "Суперпользователь"
+
+#: ../src/users/user-settings.c:335
+msgid "Custom"
+msgstr "Другой"
+
+#. TRANSLATORS: This applies to a password.
+#: ../src/users/user-settings.c:344
+msgid "None"
+msgstr "Отсутствует"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+#: ../src/users/user-settings.c:347
+msgid "Not asked on login"
+msgstr "Не спрашивать при входе"
+
+#: ../src/users/user-settings.c:349
+msgid "Asked on login"
+msgstr "Спрашивать при входе"
+
+#: ../src/users/user-settings.c:393
 #, c-format
 msgid "Invalid character \"%c\" in comment"
-msgstr "В комментариях невозможно использовать символ «%c»"
+msgstr "В комментариях нельзя использовать символ «%c»"
 
-#: ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:394
 msgid "Check that this character is not used."
-msgstr "Проверьте что данные символы не используются."
+msgstr "Проверьте, что данный символ не используется."
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:417
 msgid "Incomplete path in home directory"
-msgstr "Неполный путь к домашнему каталогу."
+msgstr "Неполный путь к домашнему каталогу"
 
-#: ../src/users/user-settings.c:529
+#: ../src/users/user-settings.c:418
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1698,23 +2022,43 @@ msgstr ""
 "Укажите полный путь к домашнему каталогу\n"
 "<span size=\"smaller\">например: /home/john</span>."
 
-#: ../src/users/user-settings.c:532
+#: ../src/users/user-settings.c:433
 msgid "Home directory already exists"
 msgstr "Домашний каталог уже существует"
 
-#: ../src/users/user-settings.c:533
-msgid "Please enter a different home directory path."
-msgstr "Пожалуйста, выберите другое имя домашнего каталога."
+#: ../src/users/user-settings.c:434
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"Каталог <tt>%s</tt> уже существует. У пользователя может не быть прав для "
+"чтения или записи в него. Всё равно использовать его?"
 
-#: ../src/users/user-settings.c:549
-msgid "Administrator account's user ID should not be modified"
-msgstr "Невозможно изменить пользовательский идентификатор администратора"
+#: ../src/users/user-settings.c:440
+msgid "Use this directory"
+msgstr "Использовать каталог"
 
-#: ../src/users/user-settings.c:564
+#: ../src/users/user-settings.c:475
+msgid "ID for the root user should not be modified"
+msgstr "Нельзя изменить ID суперпользователя"
+
+#. check that UID is free
+#: ../src/users/user-settings.c:479
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "Пользовательский ID %d уже используется пользователем %s"
+
+#: ../src/users/user-settings.c:481
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "Выберите другой числовой идентификатор для %s."
+
+#: ../src/users/user-settings.c:499
 msgid "Incomplete path in shell"
 msgstr "Неполный путь к интерпретатору командной строки"
 
-#: ../src/users/user-settings.c:565
+#: ../src/users/user-settings.c:500
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -1722,38 +2066,107 @@ msgstr ""
 "Введите полный путь до интерпретатора командной строки\n"
 "<span size=\"smaller\">например: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:598
-msgid "Password is too short"
-msgstr "Пароль слишком короткий"
+#: ../src/users/user-settings.c:534
+msgid "Can't revoke administration rights"
+msgstr "Не удалось отозвать права администрирования"
 
-#: ../src/users/user-settings.c:599
+#: ../src/users/user-settings.c:537
+#, c-format
 msgid ""
-"User passwords must be longer than 6 characters and preferably formed by "
-"numbers, letters and special characters."
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
 msgstr ""
-"Пароль пользователя должен содержать более 6 символов, и, желательно, "
-"состоять из чисел, букв и даже специальных символов."
+"%s является единственным администратором этого компьютера. Отзыв прав "
+"администрирования у этой учётной записи приведёт к отсутствию возможности "
+"администрирования системы."
 
-#: ../src/users/user-settings.c:602
-msgid "Password confirmation is not correct"
-msgstr "Подтверждение пароля не совпадает с самим паролем"
+#: ../src/users/user-settings.c:554
+msgid "You are about to revoke your own administration rights"
+msgstr "Отзыв ваших собственных прав администрирования"
 
-#: ../src/users/user-settings.c:603
-msgid "Check that you have provided the same password in both text fields."
-msgstr "Убедитесь, что вы написали одинаковые пароли в обоих полях ввода."
+#: ../src/users/user-settings.c:557
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+"%s больше не сможет выполнять задачи администрирования. Эта учётная запись "
+"не сможет вернуть их себе назад сама."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Имя"
+#: ../src/users/user-settings.c:562
+msgid "Give up administration rights"
+msgstr "Отказаться от прав администрирования"
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "Учётная запись"
-
-#: ../src/users/users-table.c:76
-msgid "Home directory"
-msgstr "Домашний каталог"
-
-#: ../src/users/users-tool.c:216
+#: ../src/users/users-tool.c:284
 msgid "Users Settings"
-msgstr "Настройки пользователей"
+msgstr "Параметры пользователей"
+
+#~ msgid "<span weight=\"bold\">Password</span>"
+#~ msgstr "<span weight=\"bold\">Пароль</span>"
+
+#~ msgid ""
+#~ "Allow this user to open a local session without entering his password. "
+#~ "The password will still be required to perform administrative tasks."
+#~ msgstr ""
+#~ "Разрешить этому пользователю открывать локальный сеанс без ввода своего "
+#~ "пароля. Пароль по-прежнему будет необходим для выполнения "
+#~ "административных задач."
+
+#~ msgid "Check password _quality"
+#~ msgstr "Проверить _качество пароля"
+
+#~ msgid "User must log out before you can change his ID."
+#~ msgstr "Пользователь должен выйти прежде чем вы сможете изменить его ID."
+
+#~ msgid "_Add Group"
+#~ msgstr "Добавить _группу"
+
+#~ msgid "_Add User"
+#~ msgstr "Добавить п_ользователя"
+
+#~ msgid "_Profile:"
+#~ msgstr "_Профиль:"
+
+#~ msgid "_Real name:"
+#~ msgstr "_Настоящее имя:"
+
+#~ msgid "Are you sure you want to delete account \"%s\"?"
+#~ msgstr "Вы уверены, что хотите удалить учётную запись «%s»?"
+
+#~ msgid ""
+#~ "This will disable this user's access to the system without deleting the "
+#~ "user's home directory."
+#~ msgstr ""
+#~ "Доступ пользователя в систему будет запрещён, но домашний каталог "
+#~ "останется."
+
+#~ msgid "Account '%s' Properties"
+#~ msgstr "Настройки учётной записи «%s»"
+
+#~ msgid "User name is empty"
+#~ msgstr "Имя пользователя пусто"
+
+#~ msgid "A user name must be specified."
+#~ msgstr "Должно быть указано имя пользователя."
+
+#~ msgid "User name has invalid characters"
+#~ msgstr "Имя пользователя содержит запрещённые символы"
+
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "Пожалуйста выберите допустимое имя пользователя, используя только символы "
+#~ "нижнего регистра и цифры."
+
+#~ msgid "Please enter a different home directory path."
+#~ msgstr "Пожалуйста, выберите другое имя домашнего каталога."
+
+#~ msgid "Administrator account's user ID should not be modified"
+#~ msgstr "Невозможно изменить пользовательский идентификатор администратора"
+
+#~ msgid "Name"
+#~ msgstr "Имя"
+
+#~ msgid "Login name"
+#~ msgstr "Учётная запись"
