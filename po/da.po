@@ -7,13 +7,13 @@
 # Ole Laursen <olau@hardworking.dk>, 2001, 02, 03, 04, 06.
 # Martin Willemoes Hansen <mwh@sysrq.dk>, 2004-2005.
 # Marie Lund <marielund@post.cybercity.dk>, 2004-2005.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2007, 09.
 # Kenneth Nielsen <k.nielsen81@gmail.com>, 2008.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2007, 09, 10.
 #
 # Konventioner:
 #
 #   boot -> start
-#   firewall -> brandmur
+#   firewall -> firewall
 #   gateway -> adgangspunkt
 #   Gnome Setup Tools -> systemværktøjer
 #   host -> vært
@@ -41,9 +41,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-15 21:27+0200\n"
-"PO-Revision-Date: 2009-09-12 16:57+0200\n"
-"Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
+"POT-Creation-Date: 2010-02-23 22:11+0100\n"
+"PO-Revision-Date: 2010-02-19 01:51+0100\n"
+"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,8 +51,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
-msgstr "Om users-admin-værktøjet skal vise alle brugere og grupper eller ej"
+msgid "Whether the users-admin tool should show system users in the users list"
+msgstr "Om værktøjet users-admin skal vise systembrugere i brugerlisten"
+
+#: ../gnome-system-tools.schemas.in.h:2
+msgid ""
+"Whether the users-admin tool should show the root user in the users list"
+msgstr "Om værktøjet users-admin skal vise superbrugeren root i brugerlisten"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -130,7 +135,7 @@ msgstr "_Aktivér denne forbindelse"
 msgid "Ethernet interface:"
 msgstr "Ethernetgrænseflade:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:32
 msgid "General"
 msgstr "Generelt"
 
@@ -272,7 +277,7 @@ msgstr "Sæt _modem som standardrute til internettet"
 msgid "_Subnet mask:"
 msgstr "_Undernetmaske:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "Br_ugernavn:"
 
@@ -368,7 +373,7 @@ msgid "Share through:"
 msgstr "Del med:"
 
 #: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:239
+#: ../src/shares/shares-tool.c:237
 msgid "Shared Folders"
 msgstr "Delte mapper"
 
@@ -473,216 +478,309 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Adgangskodeindstillinger</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Adgangskode</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Profilindstillinger</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Systemforvalg</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "Konto"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "Konto_type:"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "Avanceret"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
 msgstr ""
-"Tillad denne bruger at åbne en lokal session uden at indtaste sin "
-"adgangskode. Adgangskoden vil stadig være påkrævet for at gennemføre "
-"administrative opgaver."
+"Der findes allerede en bruger med dette brugernavn. Vælg venligst et andet, "
+"kort navn til den nye bruger."
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "Tildel tilfældig adgangskode som standard"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "Ændr avancerede brugerindstillinger"
+
 #: ../interfaces/users.ui.h:14
-msgid "Check password _quality"
-msgstr "Tjek _kvaliteten af adgangskoden"
+msgid "Change User Account Type"
+msgstr "Ændr type af brugerkonto"
 
 #: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "Skift brugernavn og logind"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "Skift brugeradgangskode"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "Ændrer avancerede indstillinger for:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "Ændrer brugerkontotype for:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "Ændrer brugernavn for:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "Ændrer brugeradgangskode for:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Con_firmation:"
 msgstr "B_ekræftelse:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:22
 msgid "Contact Information"
 msgstr "Kontaktinformation"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:23
+msgid "Create New User"
+msgstr "Opret ny bruger"
+
+#: ../interfaces/users.ui.h:24
+msgid "Create a new user"
+msgstr "Opret en ny bruger"
+
+#: ../interfaces/users.ui.h:25
 msgid "Days between warning and password expiration:"
 msgstr "Dage mellem advarsel og adgangskodes udløb:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:26
 msgid "Default _group:"
 msgstr "Forvalgt _gruppe:"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:27
 msgid "Default _shell:"
 msgstr "Forvalgt _kommandoskal:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:28
+msgid "Disable _account"
+msgstr ""
+
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "Bed ikke om adgangskode ved i_ndlogning"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr ""
+
+#: ../interfaces/users.ui.h:31
+msgid "Full _Name:"
+msgstr "Fulde _navn:"
+
+#: ../interfaces/users.ui.h:33
 msgid "Generate _random password"
 msgstr "Generér _tilfældig adgangskode"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:34
 msgid "Group _ID:"
 msgstr "Gruppe-_id:"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:35
 msgid "Group _name:"
 msgstr "Gruppe_navn:"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:36
 msgid "Group properties"
 msgstr "Gruppeegenskaber"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:37
 msgid "Groups settings"
 msgstr "Gruppeindstillinger"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:38
 msgid "Ma_ximum days a password may be used:"
 msgstr "St_ørste antal dage en adgangskode kan bruges:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:526
+msgid "Manual"
+msgstr "Manuelt"
+
+#: ../interfaces/users.ui.h:40
 msgid "Maximum GID:"
 msgstr "Største gruppe-id:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:41
 msgid "Maximum UID:"
 msgstr "Største bruger-id:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:42
 msgid "Mi_nimum days between password changes:"
 msgstr "Mi_ndste antal dage mellem skift af adgangskode:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:43
 msgid "Minimum GID:"
 msgstr "Mindste gruppe-id:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:44
 msgid "Minimum UID:"
 msgstr "Mindste bruger-id:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:45
 msgid "Minimum days allowed between password changes:"
 msgstr "Mindste tilladte antal dage mellem skift af adgangskode:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:46
+#, fuzzy
+msgid "New _password:"
+msgstr "Netværks_adgangskode:"
+
+#: ../interfaces/users.ui.h:47
 msgid "Number of days that a password may be used:"
 msgstr "Antal dage en adgangskode kan bruges:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:48
 msgid "O_ffice location:"
 msgstr "_Kontorplacering:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:49
 msgid "Password set to: "
 msgstr "Adgangskode sat til: "
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:50
 msgid "Privileges"
 msgstr "Rettigheder"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:51
 msgid "Profile _name:"
 msgstr "Profil_navn:"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:52
 msgid "Set password b_y hand"
 msgstr "Angiv adgangskode _manuelt"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:54
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"Det korte navn skal bestå af:\n"
+"  &#x27A3; små bogstaver fra det engelske alfabet\n"
+"  &#x27A3; cifre\n"
+"  &#x27A3; ethvert af tegnene \".\", \"-\" og \"_\""
+
+#: ../interfaces/users.ui.h:58
+msgid "Short name must start with a letter!"
+msgstr "Det korte navn skal starte med et bogstav!"
+
+#: ../interfaces/users.ui.h:59
+#, fuzzy
+msgid "This account is disabled."
+msgstr "Denne handling er tilladt"
+
+#: ../interfaces/users.ui.h:60
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+"Denne konto bruger specielle indstillinger, der er blevet defineret manuelt. "
+"Brug dialogvinduet <i>Avancerede indstillinger</i> til at ændre dem."
+
+#: ../interfaces/users.ui.h:61
 msgid "User ID:"
 msgstr "Bruger-id:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:62
 msgid "User Privileges"
 msgstr "Brugerrettigheder"
 
-#: ../interfaces/users.ui.h:42
-msgid "User _password:"
-msgstr "Bruger_adgangskode:"
-
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr "Brugeren skal logge ud før du kan ændre hans id."
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:63
 msgid "User profiles"
 msgstr "Brugerprofiler"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "_Tilføj gruppe"
+#: ../interfaces/users.ui.h:64
+msgid "You can't change user ID while the user is logged in."
+msgstr "Du kan ikke ændre bruger-id mens brugeren er logget ind."
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "_Tilføj profil"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "_Tilføj bruger"
+#: ../interfaces/users.ui.h:66
+msgid "_Advanced Settings"
+msgstr "_Avancerede indstillinger"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "_Kommentarer"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:68
+#, fuzzy
+msgid "_Current password:"
+msgstr "Netværks_adgangskode:"
+
+#: ../interfaces/users.ui.h:69
+msgid "_Custom"
+msgstr "_Brugertilpasset"
+
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "_Dage mellem advarsel og adgangskodes udløb:"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "_Slet"
+#: ../interfaces/users.ui.h:71
+msgid "_Enable Account"
+msgstr ""
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:72
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr ""
+
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "_Generér"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "_Hjemmemappe:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "Tlf. (_hjemme):"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "_Hovedgruppe:"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "_Håndtér grupper"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "_Profil:"
+#: ../interfaces/users.ui.h:78
+msgid "_Name:"
+msgstr "_Navn:"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "_Rigtigt navn:"
+#: ../interfaces/users.ui.h:79
+msgid "_Password:"
+msgstr "_Adgangskode:"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "_Kommandoskal:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:81
+msgid "_Short Name:"
+msgstr "_Kort navn:"
+
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "Tlf. (_arbejde):"
 
@@ -705,49 +803,61 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Platform ikke understøttet"
 
-#: ../src/common/gst-tool.c:181
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "Konfigurationen kunne ikke indlæses"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "Konfigurationen kunne ikke gemmes"
 
-#: ../src/common/gst-tool.c:187
+#: ../src/common/gst-tool.c:196
 msgid "You are not allowed to access the system configuration."
 msgstr "Du har ikke adgang til systemindstillingerne."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:189
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:691
 msgid "You are not allowed to modify the system configuration."
 msgstr "Du har ikke lov til modificere systemindstillingerne."
 
-#: ../src/common/gst-tool.c:192
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "Der blev fundet ugyldige data."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:194
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "Der opstod en ukendt fejl."
 
-#: ../src/common/gst-tool.c:416
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "Kunne ikke vise hjælp"
 
-#: ../src/common/gst-tool.c:600
+#: ../src/common/gst-tool.c:622
 msgid "The system configuration has potentially changed."
 msgstr "Systemindstillinger har muligvis ændret sig."
 
-#: ../src/common/gst-tool.c:602
+#: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "Opdater indhold? Dette vil medføre at alle modifikationer går tabt."
 
+#: ../src/common/gst-tool.c:693
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "_Tilføj"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "_Slet"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -834,7 +944,7 @@ msgid "%s Properties"
 msgstr "%s-egenskaber"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "_Egenskaber"
 
@@ -982,17 +1092,17 @@ msgstr "Netværk"
 msgid "Network Settings"
 msgstr "Netværksindstillinger"
 
-#: ../src/services/callbacks.c:59
+#: ../src/services/callbacks.c:65
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Indstillinger for tjenesten \"%s\""
 
-#: ../src/services/callbacks.c:119
+#: ../src/services/callbacks.c:125
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Er du sikker på at du vil deaktivere %s?"
 
-#: ../src/services/callbacks.c:123
+#: ../src/services/callbacks.c:129
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1109,7 +1219,7 @@ msgstr "Analyserer den indgående post for virus"
 #. GST_ROLE_ANTIVIRUS
 #: ../src/services/service.c:47
 msgid "Firewall"
-msgstr "Brandmur"
+msgstr "Firewall"
 
 #: ../src/services/service.c:47
 msgid "Blocks undesired network access to your computer"
@@ -1451,7 +1561,7 @@ msgstr "Status"
 msgid "Priority"
 msgstr "Prioritet"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "Indstillinger for tjenester"
 
@@ -1524,11 +1634,11 @@ msgstr "Indstillinger for mappen \"%s\""
 msgid "Share Folder"
 msgstr "Del mapper"
 
-#: ../src/shares/shares-tool.c:155
+#: ../src/shares/shares-tool.c:152
 msgid "Sharing services are not installed"
 msgstr "Delingstjenester er ikke installeret"
 
-#: ../src/shares/shares-tool.c:157
+#: ../src/shares/shares-tool.c:154
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -1544,11 +1654,11 @@ msgstr "Skift klokkeslæt, dato og tidszone"
 msgid "Time and Date"
 msgstr "Dato og klokkeslæt"
 
-#: ../src/time/time-tool.c:397
+#: ../src/time/time-tool.c:402
 msgid "NTP support is not installed"
 msgstr "NTP-understøttelse er ikke installeret"
 
-#: ../src/time/time-tool.c:399
+#: ../src/time/time-tool.c:404
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1556,75 +1666,71 @@ msgstr ""
 "Installér og aktivér venligst NTP-understøttelse på systemet for at aktivere "
 "synkronisering af din lokale tidsserver med tidsservere på internettet."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:433
 msgid "Enabling NTP"
 msgstr "Aktiverer NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:433
 msgid "Disabling NTP"
 msgstr "Deaktiverer NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:445
 msgid "Synchronizing system clock"
 msgstr "Synkroniserer systemur"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:525
 msgid "Keep synchronized with Internet servers"
 msgstr "Hold synkroniseret med internetservere"
 
-#: ../src/time/time-tool.c:522
-msgid "Manual"
-msgstr "Manuelt"
-
-#: ../src/time/time-tool.c:668
+#: ../src/time/time-tool.c:672
 msgid "Time and Date Settings"
 msgstr "Indstillinger for dato og klokkeslæt"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "Administratorgruppen kan ikke slettes"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:295
-#: ../src/users/group-settings.c:319 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:702
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:88
+#: ../src/users/user-settings.c:476
 msgid "This would leave the system unusable."
 msgstr "Dette ville efterlade systemet ubrugeligt."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Er du sikker på at du vil slette gruppen \"%s\"?"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Dette kan efterlade filer med ugyldige gruppe-id'er i filsystemet."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:151
 msgid "New group"
 msgstr "Ny gruppe"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:158
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "Egenskaber for gruppen \"%s\""
 
-#: ../src/users/group-settings.c:291
+#: ../src/users/group-settings.c:224
 msgid "Group name is empty"
 msgstr "Gruppenavn er tomt"
 
-#: ../src/users/group-settings.c:292
+#: ../src/users/group-settings.c:225
 msgid "A group name must be specified."
 msgstr "Et gruppenavn skal angives."
 
-#: ../src/users/group-settings.c:294
+#: ../src/users/group-settings.c:227
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Gruppenavnet for administratorgruppe-brugeren bør ikke ændres"
 
-#: ../src/users/group-settings.c:297
+#: ../src/users/group-settings.c:230
 msgid "Group name has invalid characters"
 msgstr "Gruppenavn har ugyldige tegn"
 
-#: ../src/users/group-settings.c:298
+#: ../src/users/group-settings.c:231
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1632,87 +1738,186 @@ msgstr ""
 "Angiv venligst et gyldigt brugernavn med et lille bogstav efterfulgt af kun "
 "små bogstaver og tal."
 
-#: ../src/users/group-settings.c:302 ../src/users/user-settings.c:635
+#: ../src/users/group-settings.c:236
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "Gruppen \"%s\" findes allerede"
 
-#: ../src/users/group-settings.c:303
+#: ../src/users/group-settings.c:237
 msgid "Please choose a different group name."
 msgstr "Vælg venligst et andet gruppenavn."
 
-#: ../src/users/group-settings.c:318
+#: ../src/users/group-settings.c:264
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Gruppe-id for administratorkontoen bør ikke ændres"
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:268
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "Gruppe-id %d bruges allerede af gruppen \"%s\""
+
+#: ../src/users/group-settings.c:271
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "Vælg venligst et andet nummer for den nye gruppe."
+
+#: ../src/users/group-settings.c:273
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "Vælg venligst et andet nummer til gruppen \"%s\"."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Gruppenavn"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "Overvåg systemlog"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "Administrér systemet"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "Brug lydenheder"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "Brug CD-ROM drev"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "Brænd cd'er/dvd'er"
 
 # Hvad er flertalsformen af modem?
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "Brug modemer"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "Forbind til internet gennem et modem"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "Send og modtag fax"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "Brug diskettedrev"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Montér filsystemer i brugerrum (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "Konfigurér printere"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "Forbind til trådløse netværk og ethernet-netværk"
+
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "Benyt automatisk adgang til eksterne lagringsenheder"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "Sæt computeren i hvile/dvaletilstand"
+
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "Tilgå /proc-filsystemet"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "Brug skannere"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "Brug bånddrev"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "Brug USB-enheder"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "Brug virtualiseringsløsningen VirtualBox"
+
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "Brug videoenheder"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "Vær i stand til at opnå administratorrettigheder"
+
+#: ../src/users/user-profiles.conf.in.h:1
+msgid "Administrator"
+msgstr "Administrator"
+
+#: ../src/users/user-profiles.conf.in.h:2
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr ""
+"Kan ændre hvad som helst på systemet, herunder installere og opgradere "
+"software."
+
+#: ../src/users/user-profiles.conf.in.h:3
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr ""
+"Kan udføre almindelige opgaver. Kan ikke installere programmel eller ændre "
+"indstillinger, som vedrører alle brugere."
+
+#: ../src/users/user-profiles.conf.in.h:4
+msgid "Desktop user"
+msgstr "Skrivebordsbruger"
+
+#: ../src/users/run-passwd.c:421
+#, fuzzy
+msgid "Authentication failed"
+msgstr "MTA-autentifikationstjeneste"
+
+#: ../src/users/run-passwd.c:494
+#, fuzzy, c-format
+msgid "The new password is too short"
+msgstr "Adgangskoden er for kort"
+
+#: ../src/users/run-passwd.c:499
+#, fuzzy, c-format
+msgid "The new password is too simple"
+msgstr "Den indtastede adgangskode er ugyldig"
+
+#: ../src/users/run-passwd.c:503
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr ""
+
+#: ../src/users/run-passwd.c:506
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr ""
+
+#: ../src/users/run-passwd.c:510
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr ""
+
+#: ../src/users/run-passwd.c:514
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr ""
+
+#: ../src/users/run-passwd.c:518
+#, fuzzy, c-format
+msgid "Unknown error"
+msgstr "Ukendt"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
@@ -1722,126 +1927,11 @@ msgstr "Tilføj eller fjern brugere og grupper"
 msgid "Users and Groups"
 msgstr "Brugere og grupper"
 
-#: ../src/users/user-settings.c:58
-msgid "Administrator account cannot be deleted"
-msgstr "Administratorkontoen kan ikke slettes"
-
-#: ../src/users/user-settings.c:72
-#, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "Er du sikker på at du vil slette kontoen \"%s\"?"
-
-#: ../src/users/user-settings.c:75
-msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
-msgstr ""
-"Dette vil deaktivere denne brugers adgang til systemet uden at slette "
-"brugerens hjemmemappe."
-
-#: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "Denne bruger bruger denne computer på nuværende tidspunkt"
-
-#: ../src/users/user-settings.c:439
-msgid "New user account"
-msgstr "Ny brugerkonto"
-
-#: ../src/users/user-settings.c:460
-#, c-format
-msgid "Account '%s' Properties"
-msgstr "Egenskaber for kontoen \"%s\""
-
-# 'tomt' er ikke så brugervenligt
-#: ../src/users/user-settings.c:621
-msgid "User name is empty"
-msgstr "Brugernavnet er ikke angivet"
-
-#: ../src/users/user-settings.c:622
-msgid "A user name must be specified."
-msgstr "Et brugernavn skal angives."
-
-#: ../src/users/user-settings.c:624
-msgid "User name has invalid characters"
-msgstr "Brugernavnet har ugyldige tegn"
-
-#: ../src/users/user-settings.c:625
-msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr ""
-"Angiv venligst et gyldigt brugernavn med et lille bogstav efterfulgt af kun "
-"små bogstaver og tal."
-
-#: ../src/users/user-settings.c:629
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "Brugernavnet \"%s\" findes allerede"
-
-#: ../src/users/user-settings.c:630 ../src/users/user-settings.c:636
-msgid "Please choose a different user name."
-msgstr "Vælg venligst et andet brugernavn."
-
-#: ../src/users/user-settings.c:661
-#, c-format
-msgid "Invalid character \"%c\" in comment"
-msgstr "Ugyldigt tegn \"%c\" i kommentar"
-
-#: ../src/users/user-settings.c:662
-msgid "Check that this character is not used."
-msgstr "Kontrollér at dette tegn ikke er benyttet."
-
-#: ../src/users/user-settings.c:680
-msgid "Incomplete path in home directory"
-msgstr "Ufuldstændig sti til hjemmemappe"
-
-#: ../src/users/user-settings.c:681
-msgid ""
-"Please enter full path for home directory\n"
-"<span size=\"smaller\">i.e.: /home/john</span>."
-msgstr ""
-"Angiv venligst komplet sti til hjemmemappen\n"
-"<span size=\"smaller\">fx /home/knud</span>."
-
-#: ../src/users/user-settings.c:684
-msgid "Home directory already exists"
-msgstr "Hjemmemappe eksisterer allerede"
-
-#: ../src/users/user-settings.c:685
-msgid "Please enter a different home directory path."
-msgstr "Indtast venligst en anden hjemmemappe-sti."
-
-#: ../src/users/user-settings.c:701
-msgid "Administrator account's user ID should not be modified"
-msgstr "Administratorkontoens bruger-id bør ikke ændres"
-
-#: ../src/users/user-settings.c:706
-#, fuzzy, c-format
-msgid "User ID %d is already used"
-msgstr "Brugernavnet \"%s\" findes allerede"
-
-#: ../src/users/user-settings.c:707
-#, fuzzy
-msgid "Please choose a different numeric identifier for the new user."
-msgstr "Vælg venligst et andet brugernavn."
-
-#: ../src/users/user-settings.c:721
-msgid "Incomplete path in shell"
-msgstr "Ufuldstændig sti til kommandoskal"
-
-#: ../src/users/user-settings.c:722
-msgid ""
-"Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/bash</span>."
-msgstr ""
-"Angiv venligst komplet sti til kommandoskallen\n"
-"<span size=\"smaller\">f.eks.: /bin/bash</span>."
-
-#: ../src/users/user-settings.c:755
+#: ../src/users/user-password.c:100
 msgid "Password is too short"
 msgstr "Adgangskoden er for kort"
 
-#: ../src/users/user-settings.c:756
+#: ../src/users/user-password.c:101
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1849,30 +1939,285 @@ msgstr ""
 "Brugeradgangskoder skal være længere end 6 tegn og helst bestå af tal, "
 "bogstaver og specialtegn."
 
-#: ../src/users/user-settings.c:759
+#: ../src/users/user-password.c:104
 msgid "Password confirmation is not correct"
 msgstr "Bekræftelsen af adgangskoden er ikke korrekt"
 
-#: ../src/users/user-settings.c:760
+#: ../src/users/user-password.c:105
 msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 "Kontrollér at du har angivet den samme adgangskode i begge tekstfelter."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Navn"
+#: ../src/users/user-password.c:420
+#, fuzzy
+msgid "Please choose another password."
+msgstr "Vælg venligst et andet brugernavn."
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "Brugernavn"
+#: ../src/users/user-password.c:431
+msgid "Please type again your current password."
+msgstr ""
 
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "Hjemmemappe"
+#: ../src/users/user-password.c:438
+#, fuzzy
+msgid "Password could not be changed"
+msgstr "Adgangskoder er ikke ens"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/user-settings.c:85
+msgid "Administrator account cannot be deleted"
+msgstr "Administratorkontoen kan ikke slettes"
+
+#: ../src/users/user-settings.c:96
+#, c-format
+msgid "%s is currently using this computer"
+msgstr "%s bruger i øjeblikket denne computer"
+
+#: ../src/users/user-settings.c:99
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr "Sikr dig venligst, at brugeren er logget ud, før denne konto slettes."
+
+#: ../src/users/user-settings.c:109
+msgid "Can't delete the only administrator account"
+msgstr "Kan ikke slette den eneste administratorkonto"
+
+#: ../src/users/user-settings.c:111
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr ""
+"%s er den eneste administrator på denne computer. Hvis denne brugerkonto "
+"blev slettet, ville det være umuligt at administrere systemet."
+
+#: ../src/users/user-settings.c:121
+#, c-format
+msgid "Remove home folder for %s?"
+msgstr "Fjern hjemmemappe for %s?"
+
+#: ../src/users/user-settings.c:124
+#, c-format
+msgid ""
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that and administrator can save them later."
+msgstr ""
+"Filer som ejes af brugeren %s i <tt>%s</tt> kan fjernes helt, hvis du ikke "
+"har brug for dem længere. Du vil måske ønske at tage en sikkerhedskopi før "
+"du sletter brugerkontoen, eller beholde dem, så en administrator kan "
+"overtage dem senere."
+
+#: ../src/users/user-settings.c:132
+msgid "Keep Files"
+msgstr "Behold filer"
+
+#: ../src/users/user-settings.c:133
+msgid "Don't Remove Account"
+msgstr "Fjern ikke konto"
+
+#: ../src/users/user-settings.c:134
+msgid "Delete Files"
+msgstr "Slet filer"
+
+#: ../src/users/user-settings.c:330
+msgid "Superuser"
+msgstr "Superbruger"
+
+#: ../src/users/user-settings.c:335
+msgid "Custom"
+msgstr "Brugertilpasset"
+
+#. TRANSLATORS: This applies to a password.
+#: ../src/users/user-settings.c:344
+#, fuzzy
+msgid "None"
+msgstr "Toner"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+#: ../src/users/user-settings.c:347
+#, fuzzy
+msgid "Not asked on login"
+msgstr "Bed ikke om adgangskode ved i_ndlogning"
+
+#: ../src/users/user-settings.c:349
+msgid "Asked on login"
+msgstr ""
+
+#: ../src/users/user-settings.c:393
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "Ugyldigt tegn \"%c\" i kommentar"
+
+#: ../src/users/user-settings.c:394
+msgid "Check that this character is not used."
+msgstr "Kontrollér at dette tegn ikke er benyttet."
+
+#: ../src/users/user-settings.c:417
+msgid "Incomplete path in home directory"
+msgstr "Ufuldstændig sti til hjemmemappe"
+
+#: ../src/users/user-settings.c:418
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>."
+msgstr ""
+"Angiv venligst komplet sti til hjemmemappen\n"
+"<span size=\"smaller\">fx /home/knud</span>."
+
+#: ../src/users/user-settings.c:433
+msgid "Home directory already exists"
+msgstr "Hjemmemappe eksisterer allerede"
+
+#: ../src/users/user-settings.c:434
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"Mappen <tt>%s</tt> findes allerede. Brugeren har måske ikke rettigheder til "
+"at læse eller skrive i denne mappe. Vil du bruge den alligevel?"
+
+#: ../src/users/user-settings.c:440
+msgid "Use this directory"
+msgstr "Brug denne mappe"
+
+#: ../src/users/user-settings.c:475
+msgid "ID for the root user should not be modified"
+msgstr "Id for superbrugeren bør ikke ændres"
+
+#. check that UID is free
+#: ../src/users/user-settings.c:479
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "Bruger-id %d bruges allerede af brugeren %s"
+
+#: ../src/users/user-settings.c:481
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "Vælg venligst et andet nummer til %s."
+
+#: ../src/users/user-settings.c:499
+msgid "Incomplete path in shell"
+msgstr "Ufuldstændig sti til kommandoskal"
+
+#: ../src/users/user-settings.c:500
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
+msgstr ""
+"Angiv venligst komplet sti til kommandoskallen\n"
+"<span size=\"smaller\">f.eks.: /bin/bash</span>."
+
+#: ../src/users/user-settings.c:534
+msgid "Can't revoke administration rights"
+msgstr "Kan ikke fjerne administratorrettigheder"
+
+#: ../src/users/user-settings.c:537
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr ""
+"%s er den eneste administratorkonto på denne computer. Hvis du fjerner "
+"administrationsrettigheder for denne konto, vil det være umuligt at "
+"administrere systemet."
+
+#: ../src/users/user-settings.c:554
+msgid "You are about to revoke your own administration rights"
+msgstr "Du er ved at fjerne dine egne administrationsrettigheder"
+
+#: ../src/users/user-settings.c:557
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+"%s vil ikke længere kunne udføre administrationsopgaver. Det vil ikke "
+"længere være tilladt denne brugerkonto at få tildelt "
+"administrationsrettigheder på egen hånd."
+
+#: ../src/users/user-settings.c:562
+msgid "Give up administration rights"
+msgstr "Giv afkald på administrationsrettigheder"
+
+#: ../src/users/users-tool.c:284
 msgid "Users Settings"
 msgstr "Brugerindstillinger"
+
+#~ msgid "Check password _quality"
+#~ msgstr "Tjek _kvaliteten af adgangskoden"
+
+#~ msgid "User _password:"
+#~ msgstr "Bruger_adgangskode:"
+
+#~ msgid "<span weight=\"bold\">Password</span>"
+#~ msgstr "<span weight=\"bold\">Adgangskode</span>"
+
+#~ msgid ""
+#~ "Allow this user to open a local session without entering his password. "
+#~ "The password will still be required to perform administrative tasks."
+#~ msgstr ""
+#~ "Tillad denne bruger at åbne en lokal session uden at indtaste sin "
+#~ "adgangskode. Adgangskoden vil stadig være påkrævet for at gennemføre "
+#~ "administrative opgaver."
+
+#~ msgid "User must log out before you can change his ID."
+#~ msgstr "Brugeren skal logge ud før du kan ændre hans id."
+
+#~ msgid "_Add Group"
+#~ msgstr "_Tilføj gruppe"
+
+#~ msgid "_Add User"
+#~ msgstr "_Tilføj bruger"
+
+#~ msgid "_Profile:"
+#~ msgstr "_Profil:"
+
+#~ msgid "_Real name:"
+#~ msgstr "_Rigtigt navn:"
+
+#~ msgid "Are you sure you want to delete account \"%s\"?"
+#~ msgstr "Er du sikker på at du vil slette kontoen \"%s\"?"
+
+#~ msgid ""
+#~ "This will disable this user's access to the system without deleting the "
+#~ "user's home directory."
+#~ msgstr ""
+#~ "Dette vil deaktivere denne brugers adgang til systemet uden at slette "
+#~ "brugerens hjemmemappe."
+
+#~ msgid "Account '%s' Properties"
+#~ msgstr "Egenskaber for kontoen \"%s\""
+
+# 'tomt' er ikke så brugervenligt
+#~ msgid "User name is empty"
+#~ msgstr "Brugernavnet er ikke angivet"
+
+#~ msgid "A user name must be specified."
+#~ msgstr "Et brugernavn skal angives."
+
+#~ msgid "User name has invalid characters"
+#~ msgstr "Brugernavnet har ugyldige tegn"
+
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "Angiv venligst et gyldigt brugernavn med et lille bogstav efterfulgt af "
+#~ "kun små bogstaver og tal."
+
+#~ msgid "User name \"%s\" already exists"
+#~ msgstr "Brugernavnet \"%s\" findes allerede"
+
+#~ msgid "Please enter a different home directory path."
+#~ msgstr "Indtast venligst en anden hjemmemappe-sti."
+
+#~ msgid "Administrator account's user ID should not be modified"
+#~ msgstr "Administratorkontoens bruger-id bør ikke ændres"
+
+#~ msgid "Name"
+#~ msgstr "Navn"
+
+#~ msgid "Login name"
+#~ msgstr "Brugernavn"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">Please enter your root password</"
@@ -1880,9 +2225,6 @@ msgstr "Brugerindstillinger"
 #~ msgstr ""
 #~ "<span weight=\"bold\" size=\"larger\">Indtast venligst administrator-"
 #~ "adgangskoden</span>"
-
-#~ msgid "Enter Password"
-#~ msgstr "Indtast adgangskode"
 
 #~ msgid ""
 #~ "You need administrator privileges to use this tool. Enter a password to "
@@ -1893,17 +2235,11 @@ msgstr "Brugerindstillinger"
 #~ "Indtast\n"
 #~ "adgangskoden for at ændre din systemopsætning."
 
-#~ msgid "_Password:"
-#~ msgstr "_Adgangskode:"
-
 #~ msgid "<span weight=\"bold\">Contact Information</span>"
 #~ msgstr "<span weight=\"bold\">Kontaktoplysninger</span>"
 
 #~ msgid "_Unlock"
 #~ msgstr "_Lås op"
-
-#~ msgid "This action is allowed"
-#~ msgstr "Denne handling er tilladt"
 
 #~ msgid "This action is not allowed"
 #~ msgstr "Denne handling er ikke tilladt"
@@ -2096,9 +2432,6 @@ msgstr "Brugerindstillinger"
 #~ msgid "_Kernel image path:"
 #~ msgstr "Sti til _kerneaftryk:"
 
-#~ msgid "_Name:"
-#~ msgstr "_Navn:"
-
 #~ msgid "_Operating system:"
 #~ msgstr "_Styresystem:"
 
@@ -2107,9 +2440,6 @@ msgstr "Brugerindstillinger"
 
 #~ msgid "_Root file system device:"
 #~ msgstr "Enhed til _rodfilsystem:"
-
-#~ msgid "Remote administration"
-#~ msgstr "Fjernadministration"
 
 #~ msgid "Run _Without Password"
 #~ msgstr "Kør _uden adgangskode"
@@ -2222,9 +2552,6 @@ msgstr "Brugerindstillinger"
 #~ msgid "Finished creating a new boot image"
 #~ msgstr "Færdig med oprettelse af nyt startaftryk"
 
-#~ msgid "Unknown"
-#~ msgstr "Ukendt"
-
 #~ msgid "Windows NT"
 #~ msgstr "Windows-NT"
 
@@ -2312,9 +2639,6 @@ msgstr "Brugerindstillinger"
 #~ msgstr ""
 #~ "Kontroller at du har adgang til dette netværk, og at maskinen faktisk "
 #~ "virker og kører SSH-tjenesten"
-
-#~ msgid "The entered password is invalid"
-#~ msgstr "Den indtastede adgangskode er ugyldig"
 
 #~ msgid ""
 #~ "Check that you typed it correctly and that you haven't activated the "
@@ -2430,9 +2754,6 @@ msgstr "Brugerindstillinger"
 #~ msgid "Create New profile"
 #~ msgstr "Opret ny profil"
 
-#~ msgid "Create New Group"
-#~ msgstr "Opret en ny gruppe"
-
 #~ msgid "Invalid group ID"
 #~ msgstr "Ugyldig gruppe-id"
 
@@ -2482,6 +2803,3 @@ msgstr "Brugerindstillinger"
 
 #~ msgid "User GID is"
 #~ msgstr "Brugers gruppe-id er"
-
-#~ msgid "Passwords do not match"
-#~ msgstr "Adgangskoder er ikke ens"
