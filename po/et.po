@@ -2,12 +2,12 @@
 # Estonian translation of Gnome System Tools.
 #
 # Copyright (C) 2002, 2005, 2006 Free Software Foundation, Inc.
-# Copyright (C) 2007-2009 The GNOME Project
+# Copyright (C) 2007–2010 The GNOME Project
 # This file is distributed under the same license as the gnome-system-tools
 # package.
 #
 # Tõivo Leedjärv <toivo linux ee>, 2002.
-# Ivar Smolin <okul linux ee>, 2005-2009.
+# Ivar Smolin <okul linux ee>, 2005–2010.
 # Priit Laes <amd store20 com>, 2006.
 #
 msgid ""
@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: GNOME System Tools MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2009-12-10 17:47+0000\n"
-"PO-Revision-Date: 2009-12-11 09:05+0200\n"
+"POT-Creation-Date: 2010-01-28 12:36+0000\n"
+"PO-Revision-Date: 2010-02-26 08:24+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -379,10 +379,10 @@ msgstr "Kasutaja- ja konto nime muutmine"
 msgid "Change User Password"
 msgstr "Kasutaja parooli muutmine"
 
-msgid "Changing account type for:"
+msgid "Changing advanced settings for:"
 msgstr ""
 
-msgid "Changing advanced settings for:"
+msgid "Changing user account type for:"
 msgstr ""
 
 msgid "Changing user name for:"
@@ -390,9 +390,6 @@ msgstr ""
 
 msgid "Changing user password for:"
 msgstr ""
-
-msgid "Check password _quality"
-msgstr "Parooli _kvaliteedi kontroll"
 
 msgid "Con_firmation:"
 msgstr "_Paroolikordus:"
@@ -415,8 +412,17 @@ msgstr "Vaikimisi _grupp:"
 msgid "Default _shell:"
 msgstr "Vaikimisi _kest (shell):"
 
+msgid "Disable _account"
+msgstr ""
+
 msgid "Don't ask for password on _login"
 msgstr "Sisselogimisel parooli _ei küsita"
+
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr ""
 
 msgid "Full _Name:"
 msgstr "Täis_nimi:"
@@ -460,6 +466,9 @@ msgstr "Väikseim UID:"
 msgid "Minimum days allowed between password changes:"
 msgstr "Vähim lubatud arv päevi paroolimuutmiste vahel:"
 
+msgid "New _password:"
+msgstr "_Uus parool:"
+
 msgid "Number of days that a password may be used:"
 msgstr "Päevade arv, mil parooli tohib kasutada:"
 
@@ -489,9 +498,12 @@ msgstr ""
 msgid "Short name must start with a letter!"
 msgstr ""
 
+msgid "This account is disabled."
+msgstr "See konto on keelatud."
+
 msgid ""
 "This account is using special settings that have been defined manually. Use "
-"the Advanced dialog to tune them."
+"the <i>Advanced Settings</i> dialog to tune them."
 msgstr ""
 "Sellele kontole on määratud käsitsi kirjeldatud kohandased. Nende kohanduste "
 "muutmiseks kasuta laiendatud sätete dialoogi."
@@ -502,14 +514,11 @@ msgstr "Kasutaja ID:"
 msgid "User Privileges"
 msgstr "Kasutaja õigused"
 
-msgid "User _password:"
-msgstr "Kasutaja _parool:"
-
-msgid "User must log out before you can change his ID."
-msgstr "Kasutaja peab enne ID muutmist välja logima."
-
 msgid "User profiles"
 msgstr "Kasutajaprofiilid"
+
+msgid "You can't change user ID while the user is logged in."
+msgstr ""
 
 msgid "_Add Profile"
 msgstr "_Lisa profiil"
@@ -520,11 +529,20 @@ msgstr "_Laiendatud sätted"
 msgid "_Comments"
 msgstr "_Kommentaarid"
 
+msgid "_Current password:"
+msgstr "P_raegune parool:"
+
 msgid "_Custom"
 msgstr "Ko_handatud"
 
 msgid "_Days between warning and password expiration:"
 msgstr "_Päevade arv hoiatuse ja parooli aegumise vahel:"
+
+msgid "_Enable Account"
+msgstr ""
+
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr ""
 
 msgid "_Generate"
 msgstr "_Genereeri"
@@ -602,6 +620,12 @@ msgstr "Süsteemi sätteid on tõenäoliselt muudetud."
 
 msgid "Update content? This will lose any modification in course."
 msgstr "Kas uuendada sisu? Sel juhul lähevad tehtud muudatused kaotsi."
+
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
 
 msgid "_Add"
 msgstr "_Lisa"
@@ -1368,11 +1392,80 @@ msgstr "Videoseadmete kasutamine"
 msgid "Be able to get administrator privileges"
 msgstr "Administraatori õiguste saamise võimalus"
 
+msgid "Administrator"
+msgstr ""
+
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr ""
+
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr ""
+
+msgid "Desktop user"
+msgstr ""
+
+msgid "Authentication failed"
+msgstr "Tõrge autentimisel"
+
+msgid "The new password is too short"
+msgstr "Uus parool on liiga lühike"
+
+msgid "The new password is too simple"
+msgstr "Uus parool on liiga lihtne"
+
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "Vana ja uus parool on liiga sarnased"
+
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "Uus parool peab sisaldama numbreid ja erimärke"
+
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "Vana ja uus parool on samasugused"
+
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr ""
+
+msgid "Unknown error"
+msgstr "Tundmatu viga."
+
 msgid "Add or remove users and groups"
 msgstr "Kasutajate ja gruppide lisamine või eemaldamine"
 
 msgid "Users and Groups"
 msgstr "Kasutajad ja grupid"
+
+msgid "Password is too short"
+msgstr "Parool on liiga lühike"
+
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Kasutajate paroolid peavad olema pikemad kui 6 märki ja eelistatavalt "
+"sisaldama ka numbreid, tähti ja erimärke."
+
+msgid "Password confirmation is not correct"
+msgstr "Paroolikontroll ei ole korras"
+
+msgid "Check that you have provided the same password in both text fields."
+msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
+
+msgid "Please choose another password."
+msgstr "Palun vali mõni muu parool."
+
+msgid "Please type again your current password."
+msgstr ""
+
+msgid "Password could not be changed"
+msgstr ""
 
 msgid "Administrator account cannot be deleted"
 msgstr "Administraatori kontot pole võimalik kustutada"
@@ -1385,22 +1478,51 @@ msgid "Please ensure the user has logged out before deleting this account."
 msgstr ""
 "Palun veendu, et kasutaja on enne selle konto kustutamist välja logitud."
 
-#, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "Kas soovid kustutada gruppi \"%s\"?"
-
-msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
+msgid "Can't delete the only administrator account"
 msgstr ""
-"Selle abil saab keelata kasutajal süsteemi ligipääsu ilma kasutaja "
-"kodukataloogi kustutamata."
+
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr ""
+
+#, c-format
+msgid "Remove home folder for %s?"
+msgstr ""
+
+#, c-format
+msgid ""
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that and administrator can save them later."
+msgstr ""
+
+msgid "Keep Files"
+msgstr ""
+
+msgid "Don't Remove Account"
+msgstr ""
+
+msgid "Delete Files"
+msgstr ""
 
 msgid "Superuser"
 msgstr "Superkasutaja"
 
 msgid "Custom"
 msgstr "Kohandatud"
+
+#. TRANSLATORS: This applies to a password.
+msgid "None"
+msgstr "Puudub"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+msgid "Not asked on login"
+msgstr "Sisselogimisel ei küsita"
+
+msgid "Asked on login"
+msgstr ""
 
 #, c-format
 msgid "Invalid character \"%c\" in comment"
@@ -1434,8 +1556,8 @@ msgstr ""
 msgid "Use this directory"
 msgstr "Kasuta seda kataloogi"
 
-msgid "Administrator account's user ID should not be modified"
-msgstr "Administraatori konto kasutaja ID-d ei tohiks muuta"
+msgid "ID for the root user should not be modified"
+msgstr "Juurkasutaja ID-d ei tohiks muuta"
 
 #. check that UID is free
 #, c-format
@@ -1456,21 +1578,48 @@ msgstr ""
 "Palun sisesta kestprogrammi täielik rada\n"
 "<span size=\"smaller\">näiteks: /bin/sh</span>."
 
-msgid "Password is too short"
-msgstr "Parool on liiga lühike"
+msgid "Can't revoke administration rights"
+msgstr "Administraatori õiguseid pole võimalik saada"
 
+#, c-format
 msgid ""
-"User passwords must be longer than 6 characters and preferably formed by "
-"numbers, letters and special characters."
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
 msgstr ""
-"Kasutajate paroolid peavad olema pikemad kui 6 märki ja eelistatavalt "
-"sisaldama ka numbreid, tähti ja erimärke."
 
-msgid "Password confirmation is not correct"
-msgstr "Paroolikontroll ei ole korras"
+msgid "You are about to revoke your own administration rights"
+msgstr ""
 
-msgid "Check that you have provided the same password in both text fields."
-msgstr "Veendu, et sul oleks mõlemale väljale sisestatud sama parool."
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+
+msgid "Give up administration rights"
+msgstr ""
 
 msgid "Users Settings"
 msgstr "Kasutajate sätted"
+
+#~ msgid "Check password _quality"
+#~ msgstr "Parooli _kvaliteedi kontroll"
+
+#~ msgid "User _password:"
+#~ msgstr "Kasutaja _parool:"
+
+#~ msgid "User must log out before you can change his ID."
+#~ msgstr "Kasutaja peab enne ID muutmist välja logima."
+
+#~ msgid "Are you sure you want to delete account \"%s\"?"
+#~ msgstr "Kas soovid kustutada gruppi \"%s\"?"
+
+#~ msgid ""
+#~ "This will disable this user's access to the system without deleting the "
+#~ "user's home directory."
+#~ msgstr ""
+#~ "Selle abil saab keelata kasutajal süsteemi ligipääsu ilma kasutaja "
+#~ "kodukataloogi kustutamata."
+
+#~ msgid "Administrator account's user ID should not be modified"
+#~ msgstr "Administraatori konto kasutaja ID-d ei tohiks muuta"
