@@ -124,7 +124,7 @@ check_user_delete (OobsUser *user)
 		                                            _("Files owned by user %s in <tt>%s</tt> can be completely "
 		                                              "removed if you don't need them anymore. You may want to "
 		                                              "back them up before deleting the account, or keep them "
-		                                              "so that and administrator can save them later."),
+		                                              "so that an administrator can save them later."),
 		                                            oobs_user_get_login_name (user),
 		                                            oobs_user_get_home_directory (user));
 
