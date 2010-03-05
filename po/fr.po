@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2010-01-28 12:36+0000\n"
-"PO-Revision-Date: 2010-01-28 22:13+0100\n"
+"POT-Creation-Date: 2010-02-28 11:47+0000\n"
+"PO-Revision-Date: 2010-03-05 22:07+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -351,7 +351,7 @@ msgid "Share through:"
 msgstr "Partager avec :"
 
 #: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:240
+#: ../src/shares/shares-tool.c:237
 msgid "Shared Folders"
 msgstr "Dossiers partagés"
 
@@ -592,7 +592,7 @@ msgstr "Paramètres des groupes"
 msgid "Ma_ximum days a password may be used:"
 msgstr "_Validité du mot de passe en jours :"
 
-#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:521
+#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:526
 msgid "Manual"
 msgstr "Manuel"
 
@@ -802,7 +802,7 @@ msgid "You are not allowed to access the system configuration."
 msgstr "Vous n'êtes pas autorisé à accéder à la configuration du système."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:683
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:691
 msgid "You are not allowed to modify the system configuration."
 msgstr "Vous n'êtes pas autorisé à modifier la configuration du système."
 
@@ -829,7 +829,7 @@ msgstr ""
 "Voulez-vous mettre à jour le contenu ? Toutes les modifications en cours "
 "seront perdues."
 
-#: ../src/common/gst-tool.c:685
+#: ../src/common/gst-tool.c:693
 #, c-format
 msgid ""
 "An error occurred while checking for authorizations: %s\n"
@@ -1079,17 +1079,17 @@ msgstr "Réseau"
 msgid "Network Settings"
 msgstr "Paramètres du réseau"
 
-#: ../src/services/callbacks.c:59
+#: ../src/services/callbacks.c:65
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "Paramètres pour le service « %s »"
 
-#: ../src/services/callbacks.c:119
+#: ../src/services/callbacks.c:125
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Voulez-vous vraiment désactiver « %s » ?"
 
-#: ../src/services/callbacks.c:123
+#: ../src/services/callbacks.c:129
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1619,11 +1619,11 @@ msgstr "Paramètres pour le dossier « %s »"
 msgid "Share Folder"
 msgstr "Dossier partagé"
 
-#: ../src/shares/shares-tool.c:155
+#: ../src/shares/shares-tool.c:152
 msgid "Sharing services are not installed"
 msgstr "Les services de partage ne sont pas installés"
 
-#: ../src/shares/shares-tool.c:157
+#: ../src/shares/shares-tool.c:154
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -1638,11 +1638,11 @@ msgstr "Modifier la date, l'heure et le fuseau horaire."
 msgid "Time and Date"
 msgstr "Date et heure"
 
-#: ../src/time/time-tool.c:397
+#: ../src/time/time-tool.c:402
 msgid "NTP support is not installed"
 msgstr "Support NTP manquant"
 
-#: ../src/time/time-tool.c:399
+#: ../src/time/time-tool.c:404
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1650,23 +1650,23 @@ msgstr ""
 "Veuillez installer et activer le support NTP afin de synchroniser l'horloge "
 "locale de votre système avec des serveurs de temps Internet."
 
-#: ../src/time/time-tool.c:428
+#: ../src/time/time-tool.c:433
 msgid "Enabling NTP"
 msgstr "Activation de NTP"
 
-#: ../src/time/time-tool.c:428
+#: ../src/time/time-tool.c:433
 msgid "Disabling NTP"
 msgstr "Désactivation de NTP"
 
-#: ../src/time/time-tool.c:440
+#: ../src/time/time-tool.c:445
 msgid "Synchronizing system clock"
 msgstr "Synchronisation de l'horloge système"
 
-#: ../src/time/time-tool.c:520
+#: ../src/time/time-tool.c:525
 msgid "Keep synchronized with Internet servers"
 msgstr "Rester synchronisé avec les serveurs sur Internet"
 
-#: ../src/time/time-tool.c:667
+#: ../src/time/time-tool.c:672
 msgid "Time and Date Settings"
 msgstr "Configuration de la date et de l'heure"
 
@@ -1675,8 +1675,8 @@ msgid "Administrator group can not be deleted"
 msgstr "Le groupe des administrateurs ne peut pas être supprimé"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
-#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:77
-#: ../src/users/user-settings.c:462
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:88
+#: ../src/users/user-settings.c:476
 msgid "This would leave the system unusable."
 msgstr "Cette opération peut rendre le système inutilisable."
 
@@ -1853,16 +1853,16 @@ msgid ""
 "Can change anything on the system, including installing and upgrading "
 "software."
 msgstr ""
-"Peut agir sur tous les composants du système, y compris en installant et "
-"en mettant à jour des logiciels."
+"Peut agir sur tous les composants du système, y compris en installant et en "
+"mettant à jour des logiciels."
 
 #: ../src/users/user-profiles.conf.in.h:3
 msgid ""
 "Can perform common tasks. Can't install software or change settings "
 "affecting all users."
 msgstr ""
-"Peut travailler normalement avec l'ordinateur. Non autorisé à installer "
-"des logiciels ni à modifier des paramètres qui affectent tous les utilisateurs."
+"Peut travailler normalement avec l'ordinateur. Non autorisé à installer des "
+"logiciels ni à modifier des paramètres qui affectent tous les utilisateurs."
 
 #: ../src/users/user-profiles.conf.in.h:4
 msgid "Desktop user"
@@ -1873,10 +1873,12 @@ msgid "Authentication failed"
 msgstr "Échec d'authentification"
 
 #: ../src/users/run-passwd.c:494
+#, c-format
 msgid "The new password is too short"
 msgstr "Le nouveau mot de passe est trop court"
 
 #: ../src/users/run-passwd.c:499
+#, c-format
 msgid "The new password is too simple"
 msgstr "Le nouveau mot de passe est trop simple"
 
@@ -1902,6 +1904,7 @@ msgid "Your password has been changed since you initially authenticated!"
 msgstr "Votre mot de passe a changé depuis votre dernière authentification"
 
 #: ../src/users/run-passwd.c:518
+#, c-format
 msgid "Unknown error"
 msgstr "Erreur inconnue"
 
@@ -1913,11 +1916,11 @@ msgstr "Ajouter ou supprimer des utilisateurs et groupes"
 msgid "Users and Groups"
 msgstr "Utilisateurs et groupes"
 
-#: ../src/users/user-password.c:99
+#: ../src/users/user-password.c:100
 msgid "Password is too short"
 msgstr "Le mot de passe est trop court"
 
-#: ../src/users/user-password.c:100
+#: ../src/users/user-password.c:101
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1926,47 +1929,47 @@ msgstr ""
 "formés de préférence par des chiffres, des lettres et des caractères "
 "spéciaux."
 
-#: ../src/users/user-password.c:103
+#: ../src/users/user-password.c:104
 msgid "Password confirmation is not correct"
 msgstr "La confirmation du mot de passe est incorrecte"
 
-#: ../src/users/user-password.c:104
+#: ../src/users/user-password.c:105
 msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 "Veuillez vérifier que vous avez saisi le même mot de passe dans les deux "
 "champs."
 
-#: ../src/users/user-password.c:419
+#: ../src/users/user-password.c:420
 msgid "Please choose another password."
 msgstr "Veuillez choisir un autre mot de passe."
 
-#: ../src/users/user-password.c:430
+#: ../src/users/user-password.c:431
 msgid "Please type again your current password."
 msgstr "Saisissez une nouvelle fois votre mot de passe actuel."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:438
 msgid "Password could not be changed"
 msgstr "Le mot de passe n'a pas pu être changé"
 
-#: ../src/users/user-settings.c:74
+#: ../src/users/user-settings.c:85
 msgid "Administrator account cannot be deleted"
 msgstr "Le compte administrateur ne peut pas être supprimé"
 
-#: ../src/users/user-settings.c:85
+#: ../src/users/user-settings.c:96
 #, c-format
 msgid "%s is currently using this computer"
 msgstr "%s utilise actuellement cet ordinateur"
 
-#: ../src/users/user-settings.c:88
+#: ../src/users/user-settings.c:99
 msgid "Please ensure the user has logged out before deleting this account."
 msgstr ""
 "Assurez-vous que l'utilisateur est déconnecté avant de supprimer son compte."
 
-#: ../src/users/user-settings.c:98
+#: ../src/users/user-settings.c:109
 msgid "Can't delete the only administrator account"
 msgstr "Impossible de supprimer le seul compte administrateur"
 
-#: ../src/users/user-settings.c:100
+#: ../src/users/user-settings.c:111
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Deleting this account would "
@@ -1975,71 +1978,71 @@ msgstr ""
 "%s est le seul administrateur de cet ordinateur. La suppression de ce compte "
 "rendrait impossible l'administration de ce système."
 
-#: ../src/users/user-settings.c:110
+#: ../src/users/user-settings.c:121
 #, c-format
 msgid "Remove home folder for %s?"
 msgstr "Effacer le dossier personnel de %s ?"
 
-#: ../src/users/user-settings.c:113
+#: ../src/users/user-settings.c:124
 #, c-format
 msgid ""
 "Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
 "need them anymore. You may want to back them up before deleting the account, "
-"or keep them so that and administrator can save them later."
+"or keep them so that an administrator can save them later."
 msgstr ""
 "Les fichiers appartenant à %s dans <tt>%s</tt> peuvent être complètement "
-"supprimés si vous n'en avez plus besoin. Il peut être utile de les sauvegarder "
-"avant de supprimer le compte ou vous pouvez les conserver afin qu'un "
-"administrateur puisse les sauvegarder plus tard."
+"supprimés si vous n'en avez plus besoin. Il peut être utile de les "
+"sauvegarder avant de supprimer le compte ou vous pouvez les conserver afin "
+"qu'un administrateur puisse les sauvegarder plus tard."
 
-#: ../src/users/user-settings.c:121
+#: ../src/users/user-settings.c:132
 msgid "Keep Files"
 msgstr "Conserver les fichiers"
 
-#: ../src/users/user-settings.c:122
+#: ../src/users/user-settings.c:133
 msgid "Don't Remove Account"
 msgstr "Ne pas supprimer le compte"
 
-#: ../src/users/user-settings.c:123
+#: ../src/users/user-settings.c:134
 msgid "Delete Files"
 msgstr "Supprimer les fichiers"
 
-#: ../src/users/user-settings.c:318
+#: ../src/users/user-settings.c:330
 msgid "Superuser"
 msgstr "Superutilisateur"
 
-#: ../src/users/user-settings.c:323
+#: ../src/users/user-settings.c:335
 msgid "Custom"
 msgstr "Personnalisé"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:332
+#: ../src/users/user-settings.c:344
 msgid "None"
 msgstr "Aucun"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:347
 msgid "Not asked on login"
 msgstr "Non demandé lors de la connexion"
 
-#: ../src/users/user-settings.c:337
+#: ../src/users/user-settings.c:349
 msgid "Asked on login"
 msgstr "Demandé lors de la connexion"
 
-#: ../src/users/user-settings.c:379
+#: ../src/users/user-settings.c:393
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Caractère « %c » non valide dans le commentaire"
 
-#: ../src/users/user-settings.c:380
+#: ../src/users/user-settings.c:394
 msgid "Check that this character is not used."
 msgstr "Vérifiez que ce caractère n'est pas utilisé."
 
-#: ../src/users/user-settings.c:403
+#: ../src/users/user-settings.c:417
 msgid "Incomplete path in home directory"
 msgstr "Chemin d'accès au dossier personnel incorrect"
 
-#: ../src/users/user-settings.c:404
+#: ../src/users/user-settings.c:418
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2047,11 +2050,11 @@ msgstr ""
 "Veuillez saisir le chemin d'accès complet au dossier personnel\n"
 "<span size=\"smaller\">ex: /home/casimir</span>."
 
-#: ../src/users/user-settings.c:419
+#: ../src/users/user-settings.c:433
 msgid "Home directory already exists"
 msgstr "Le dossier personnel existe déjà"
 
-#: ../src/users/user-settings.c:420
+#: ../src/users/user-settings.c:434
 #, c-format
 msgid ""
 "The directory <tt>%s</tt> already exists. User may not have the permissions "
@@ -2061,30 +2064,30 @@ msgstr ""
 "dispose pas des permissions de lecture ou d'écriture dans ce répertoire. "
 "Voulez-vous l'utilisez quand même ?"
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:440
 msgid "Use this directory"
 msgstr "Utiliser ce répertoire"
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:475
 msgid "ID for the root user should not be modified"
 msgstr "L'ID de l'utilisateur root ne doit pas être modifié"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:479
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "L'ID d'utilisateur %d est déjà utilisé par l'utilisateur %s"
 
-#: ../src/users/user-settings.c:467
+#: ../src/users/user-settings.c:481
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Veuillez choisir un identificateur numérique différent pour %s."
 
-#: ../src/users/user-settings.c:485
+#: ../src/users/user-settings.c:499
 msgid "Incomplete path in shell"
 msgstr "Chemin incomplet dans le shell"
 
-#: ../src/users/user-settings.c:486
+#: ../src/users/user-settings.c:500
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2092,11 +2095,11 @@ msgstr ""
 "Veuillez saisir le chemin complet du shell\n"
 "<span size=\"smaller\">ex : /bin/bash</span>."
 
-#: ../src/users/user-settings.c:520
+#: ../src/users/user-settings.c:534
 msgid "Can't revoke administration rights"
 msgstr "Impossible de retirer les privilèges d'administrateur"
 
-#: ../src/users/user-settings.c:523
+#: ../src/users/user-settings.c:537
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2105,11 +2108,11 @@ msgstr ""
 "%s est le seul administrateur sur cet ordinateur. Le retrait des droits "
 "d'administration de ce compte empêcherait toute administration du système."
 
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:554
 msgid "You are about to revoke your own administration rights"
 msgstr "Vous êtes sur le point de retirer vos propres droits d'administrateur"
 
-#: ../src/users/user-settings.c:543
+#: ../src/users/user-settings.c:557
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2118,71 +2121,10 @@ msgstr ""
 "%s ne pourra plus effectuer de tâches d'administration. Ce compte n'est pas "
 "autorisé à s'attribuer lui-même les privilèges d'administrateur."
 
-#: ../src/users/user-settings.c:548
+#: ../src/users/user-settings.c:562
 msgid "Give up administration rights"
 msgstr "Abandonner les droits d'administration"
 
-#: ../src/users/users-tool.c:278
+#: ../src/users/users-tool.c:284
 msgid "Users Settings"
 msgstr "Paramètres utilisateurs"
-
-#~ msgid "Check password _quality"
-#~ msgstr "Vérifier la _qualité du mot de passe"
-
-#~ msgid "User _password:"
-#~ msgstr "_Mot de passe utilisateur :"
-
-#~ msgid "Are you sure you want to delete account \"%s\"?"
-#~ msgstr "Voulez-vous réellement supprimer le compte « %s » ?"
-
-#~ msgid ""
-#~ "This will disable this user's access to the system without deleting the "
-#~ "user's home directory."
-#~ msgstr ""
-#~ "Ceci désactivera l'accès au système pour cet utilisateur, mais son "
-#~ "répertoire personnel ne sera pas supprimé."
-
-#~ msgid ""
-#~ "You need administrator privileges to use this tool. Enter a password to "
-#~ "modify\n"
-#~ "your system configuration."
-#~ msgstr ""
-#~ "Cet outil nécessite les privilèges d'administrateur. Veuillez saisir le "
-#~ "mot de passe pour modifier\n"
-#~ "la configuration de votre système."
-
-#~ msgid ""
-#~ "Allow this user to open a local session without entering his password. "
-#~ "The password will still be required to perform administrative tasks."
-#~ msgstr ""
-#~ "Autorise cet utilisateur à ouvrir une session locale sans entrer de mot "
-#~ "de passe. Un mot de passe sera tout de même demandé pour effectuer des "
-#~ "tâches administratives."
-
-#~ msgid "_Add Group"
-#~ msgstr "_Ajouter un groupe"
-
-#~ msgid "_Add User"
-#~ msgstr "A_jouter un utilisateur"
-
-#~ msgid "User name is empty"
-#~ msgstr "Le nom de l'utilisateur est vide"
-
-#~ msgid "A user name must be specified."
-#~ msgstr "Un nom d'utilisateur doit être indiqué."
-
-#~ msgid "User name has invalid characters"
-#~ msgstr "Le nom de l'utilisateur possède des caractères non valides"
-
-#~ msgid ""
-#~ "Please set a valid user name consisting of a lower case letter followed "
-#~ "by lower case letters and numbers."
-#~ msgstr ""
-#~ "Veuillez sélectionner un nom d'utilisateur valide c'est à dire une lettre "
-#~ "minuscule suivie par des lettres minuscules ou des chiffres."
-
-#~ msgid "Please enter a different home directory path."
-#~ msgstr "Veuillez saisir un chemin différent pour le dossier personnel."
-
-#~ msgid "Login name"
-#~ msgstr "Nom de connexion"
