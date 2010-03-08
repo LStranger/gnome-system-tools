@@ -312,14 +312,18 @@ gst_user_profiles_get_for_user (GstUserProfiles *profiles,
 			}
 
 			group = oobs_groups_config_get_from_name (groups_config, (char *) m->data);
+
+			/* Non-existent groups are not considered as breaking match */
+			if (!group)
+				continue;
+
 			in_group = oobs_user_is_in_group (user, group);
 			if ((in_profile && !in_group) || (!in_profile && in_group)) {
 				matched_groups = FALSE;
 				break;
 			}
 
-			if (group)
-				g_object_unref (group);
+			g_object_unref (group);
 		}
 
 		/* stop at first match, since the list has been reverted on loading,
@@ -376,10 +380,17 @@ gst_user_profiles_apply (GstUserProfiles *profiles,
 		}
 
 		group = oobs_groups_config_get_from_name (groups_config, (char *) l->data);
+
+		/* Non-existent groups are simply skipped */
+		if (!group)
+			continue;
+
 		if (in_profile)
 			oobs_group_add_user (group, user);
 		else
 			oobs_group_remove_user (group, user);
+
+		g_object_unref (group);
 	}
 
 	/* default shell */
