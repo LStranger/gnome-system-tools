@@ -1191,6 +1191,8 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 		  if (response == GTK_RESPONSE_OK) {
 			  if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK)
 				  gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+
+			  user_settings_show (user);
 		  }
 	  }
 

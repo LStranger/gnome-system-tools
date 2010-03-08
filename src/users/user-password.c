@@ -369,6 +369,10 @@ finish_password_change ()
 		}
 	}
 
+	/* We know we've set a non-empty password */
+	oobs_user_set_password_empty (user, FALSE);
+	user_settings_show (user);
+
 	gst_dialog_remove_edit_dialog (tool->main_dialog, GTK_WIDGET (user_passwd_dialog));
 	gtk_widget_hide (GTK_WIDGET (user_passwd_dialog));
 
