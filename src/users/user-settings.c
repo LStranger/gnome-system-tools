@@ -929,9 +929,11 @@ on_user_new (GtkButton *button, gpointer user_data)
 	GtkTreeModel *model;
 	GtkTreePath *user_path;
 	OobsUser *user;
+	OobsGroup *main_group;
 	const char *fullname, *login;
 	GstUserProfile *profile;
 	OobsUsersConfig *users_config;
+	OobsGroupsConfig *groups_config;
 	OobsResult result;
 	gboolean encrypt;
 
@@ -947,6 +949,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	encrypted_home = gst_dialog_get_widget (tool->main_dialog, "user_new_encrypted_home");
 
 	users_config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
+	groups_config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 
 	/* clear any text, colors or icon left */
 	gtk_entry_set_text (GTK_ENTRY (user_name), "");
@@ -984,6 +987,15 @@ on_user_new (GtkButton *button, gpointer user_data)
 	oobs_user_set_full_name (user, fullname);
 	oobs_user_set_encrypted_home (user, encrypt);
 	oobs_user_set_home_flags (user, OOBS_USER_CHOWN_HOME);
+
+	/* If the user group already exists and /etc/adduser.conf USERGROUPS option is yes,
+	 * then adduser will fail, and the backends don't allow reporting that error.
+	 * So assume we want the user to be in that group. */
+	main_group = oobs_groups_config_get_from_name (groups_config, login);
+	if (main_group) {
+		oobs_user_set_main_group (user, main_group);
+		g_object_unref (main_group);
+	}
 
 	g_return_if_fail (user != NULL);
 
