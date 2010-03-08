@@ -376,7 +376,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="on_user_settings_enable_account"/>
+                <signal name="clicked" handler="on_edit_user_passwd"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -3034,6 +3034,7 @@
                         <child>
                           <object class="GtkCheckButton" id="user_settings_locked_account">
                             <property name="label" translatable="yes">Disable _account</property>
+                            <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
@@ -3280,9 +3281,9 @@
   <object class="GtkSizeGroup" id="user_new_notice_sizegroup">
     <property name="mode">both</property>
     <widgets>
-      <widget name="user_new_login_notice"/>
-      <widget name="user_new_login_used_notice"/>
       <widget name="user_new_login_letter_notice"/>
+      <widget name="user_new_login_used_notice"/>
+      <widget name="user_new_login_notice"/>
     </widgets>
   </object>
 </interface>

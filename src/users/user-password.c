@@ -51,9 +51,6 @@ void on_user_settings_passwd_toggled      (GtkToggleButton *toggle,
 void on_passwd_entry_changed              (GtkWidget *entry,
                                            gpointer   user_data);
 
-void on_edit_user_passwd                  (GtkButton *button,
-                                           gpointer   user_data);
-
 gboolean on_user_passwd_current_focus_out (GtkWidget *entry,
                                            GdkEventFocus *event,
                                            gpointer user_data);
@@ -371,6 +368,11 @@ finish_password_change ()
 
 	/* We know we've set a non-empty password */
 	oobs_user_set_password_empty (user, FALSE);
+
+	/* Unlock account, this may not be what is wanted, but that's the only solution
+	 * since 'passwd' doesn't differentiate accounts with no passwords yet from disabled ones */
+	oobs_user_set_password_disabled (user, FALSE);
+
 	user_settings_show (user);
 
 	gst_dialog_remove_edit_dialog (tool->main_dialog, GTK_WIDGET (user_passwd_dialog));

@@ -601,37 +601,6 @@ check_profile (OobsUser *user, GstUserProfile *profile)
 }
 
 /*
- * Callback for user_settings_enable_account: unlock account and commit changes.
- */
-void
-on_user_settings_enable_account  (GtkButton *enable_button,
-                                  gpointer   user_data)
-{
-	GtkWidget *disabled_image;
-	GtkWidget *disabled_label;
-	OobsUser *user;
-
-	if (!gst_tool_authenticate (tool, GST_USERS_TOOL (tool)->users_config))
-		return;
-
-	user = users_table_get_current ();
-	oobs_user_set_password_disabled (user, FALSE);
-
-	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK) {
-		disabled_image = gst_dialog_get_widget (tool->main_dialog,
-		                                        "user_settings_disabled_account_image");
-		disabled_label = gst_dialog_get_widget (tool->main_dialog,
-		                                        "user_settings_disabled_account");
-
-		gtk_widget_hide (disabled_image);
-		gtk_widget_hide (disabled_label);
-		gtk_widget_hide (GTK_WIDGET (enable_button));
-	}
-
-	g_object_unref (user);
-}
-
-/*
  * Callback for user_new_name entry: on every change, fill the combo entry
  * with proposed logins. Also update validate button's sensitivity if name is empty.
  */
@@ -988,6 +957,10 @@ on_user_new (GtkButton *button, gpointer user_data)
 	oobs_user_set_encrypted_home (user, encrypt);
 	oobs_user_set_home_flags (user, OOBS_USER_CHOWN_HOME);
 
+	/* Emptying password and disabling account allows enabling it more easily if asked */
+	oobs_user_set_password_empty (user, TRUE);
+	oobs_user_set_password_disabled (user, TRUE);
+
 	/* If the user group already exists and /etc/adduser.conf USERGROUPS option is yes,
 	 * then adduser will fail, and the backends don't allow reporting that error.
 	 * So assume we want the user to be in that group. */
@@ -1263,6 +1236,10 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
 
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_locked_account");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), oobs_user_get_password_disabled (user));
+
+
 	/* show a notice if the user is logged in */
 	uid_notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
 
@@ -1315,6 +1292,9 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 	oobs_user_set_uid (user, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
 
+	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_locked_account");
+	oobs_user_set_password_disabled (user, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
+
 	privileges_table_save (user);
 
 	/* Get main group */
@@ -1332,8 +1312,10 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 		oobs_user_set_main_group (user, NULL);
 
 
-	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK)
+	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK) {
 		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+		user_settings_show (user);
+	}
 
 	g_object_unref (user);
 }
