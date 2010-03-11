@@ -217,7 +217,7 @@ gst_dialog_constructor (GType                  type,
 		priv->child = gst_dialog_get_widget (dialog, priv->widget_name);
 		toplevel = gtk_widget_get_toplevel (priv->child);
 
-		if (GTK_WIDGET_TOPLEVEL (priv->child)) {
+		if (gtk_widget_is_toplevel (priv->child)) {
 			g_critical ("The widget \"%s\" should not be a toplevel widget in the .ui file\n"
 				    "You just need to add the widget inside a GtkWindow so that it can be deparented.", priv->widget_name);
 
@@ -226,8 +226,8 @@ gst_dialog_constructor (GType                  type,
 		}
 
 		g_object_ref (priv->child);
-		gtk_container_remove (GTK_CONTAINER (priv->child->parent), priv->child);
-		gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), priv->child);
+		gtk_container_remove (GTK_CONTAINER (gtk_widget_get_parent (priv->child)), priv->child);
+		gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), priv->child);
 
 		gtk_widget_destroy (toplevel);
 	}
@@ -320,7 +320,7 @@ gst_dialog_response (GtkDialog *dialog,
 	switch (response) {
 	case GTK_RESPONSE_CLOSE:
 	case GTK_RESPONSE_DELETE_EVENT:
-		if (GTK_WIDGET_SENSITIVE (dialog)) {
+		if (gtk_widget_get_sensitive (GTK_WIDGET (dialog))) {
 			gtk_widget_hide (GTK_WIDGET (dialog));
 			gst_tool_close (priv->tool);
 		}
@@ -416,10 +416,10 @@ gst_dialog_set_cursor (GstDialog     *dialog,
 {
 	GdkCursor *cursor;
 
-	g_return_if_fail (GTK_WIDGET_REALIZED (dialog));
+	g_return_if_fail (gtk_widget_get_realized (GTK_WIDGET (dialog)));
 
 	cursor = gdk_cursor_new (GDK_WATCH);
-	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, cursor);
+	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (dialog)), cursor);
 	gdk_cursor_unref (cursor);
 }
 
@@ -433,7 +433,7 @@ gst_dialog_freeze (GstDialog *dialog)
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
 	if (priv->frozen == 0) {
-		if (GTK_WIDGET (dialog)->window)
+		if (gtk_widget_get_window (GTK_WIDGET (dialog)))
 			gst_dialog_set_cursor (dialog, GDK_WATCH);
 
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog), FALSE);
@@ -456,8 +456,8 @@ gst_dialog_thaw (GstDialog *dialog)
 	priv->frozen--;
 
 	if (priv->frozen == 0) {
-		if (GTK_WIDGET (dialog)->window)
-			gdk_window_set_cursor (GTK_WIDGET (dialog)->window, NULL);
+		if (gtk_widget_get_window (GTK_WIDGET (dialog)))
+			gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (dialog)), NULL);
 
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog), TRUE);
 	}
@@ -549,7 +549,7 @@ gst_dialog_require_authentication_for_widget (GstDialog *xd, GtkWidget *w)
 	priv = GST_DIALOG_GET_PRIVATE (xd);
 	policy = g_new0 (GstWidgetPolicy, 1);
 
-	policy->was_sensitive = GTK_WIDGET_SENSITIVE (w);
+	policy->was_sensitive = gtk_widget_get_sensitive (w);
 
 	g_object_set_qdata_full (G_OBJECT (w), widget_policy_quark,
 				 policy, (GDestroyNotify) g_free);

@@ -140,7 +140,7 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
   /* reuse text cell renderer for the essid */
   gtk_combo_box_entry_set_text_column (combo, 1);
 
-  g_signal_connect (GTK_BIN (combo)->child, "changed",
+  g_signal_connect (gtk_bin_get_child (GTK_BIN (combo)), "changed",
 		    G_CALLBACK (on_dialog_changed), tool);
 }
 
@@ -314,7 +314,7 @@ wireless_dialog_prepare (GstConnectionDialog *dialog)
 		NULL);
 
   connection_combo_set_value (GTK_COMBO_BOX (dialog->key_type_combo), key_type);
-  gtk_entry_set_text (GTK_ENTRY (GTK_BIN (dialog->essid)->child), (essid) ? essid : "");
+  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (dialog->essid))), (essid) ? essid : "");
   gtk_entry_set_text (GTK_ENTRY (dialog->wep_key), (key) ? key : "");
 
 #ifdef HAVE_LIBIW_H
@@ -337,7 +337,7 @@ wireless_dialog_save (GstConnectionDialog *dialog)
 
   key_type = connection_combo_get_value (GTK_COMBO_BOX (dialog->key_type_combo));
   g_object_set (G_OBJECT (dialog->iface),
-		"essid",   get_entry_text (GTK_BIN (dialog->essid)->child),
+		"essid",   get_entry_text (gtk_bin_get_child (GTK_BIN (dialog->essid))),
 		"key", get_entry_text (dialog->wep_key),
 		"key-type", key_type,
 		NULL);
@@ -347,7 +347,7 @@ wireless_dialog_save (GstConnectionDialog *dialog)
 static gboolean
 wireless_dialog_check_fields (GstConnectionDialog *dialog)
 {
-  return (get_entry_text (GTK_BIN (dialog->essid)->child) != NULL);
+  return (get_entry_text (gtk_bin_get_child (GTK_BIN (dialog->essid))) != NULL);
 }
 
 static void
@@ -436,7 +436,7 @@ ppp_dialog_prepare (GstConnectionDialog *dialog)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->peerdns), peerdns);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->persist), persist);
 
-  gtk_entry_set_text (GTK_ENTRY (GTK_BIN (dialog->serial_port)->child),
+  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (dialog->serial_port))),
                       (serial_port) ? serial_port : "");
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (dialog->volume), volume);
@@ -479,7 +479,7 @@ ppp_dialog_save (GstConnectionDialog *dialog)
                 "default-gateway", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->default_gw)),
                 "use-peer-dns", gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->peerdns)),
                 "persistent",   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->persist)),
-                "serial-port",  get_entry_text (GTK_BIN (dialog->serial_port)->child),
+                "serial-port",  get_entry_text (gtk_bin_get_child (GTK_BIN (dialog->serial_port))),
                 "volume",       gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->volume)),
                 "dial-type",    gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->dial_type)),
 		"apn",          get_entry_text (dialog->apn),
@@ -509,7 +509,7 @@ ppp_dialog_check_fields (GstConnectionDialog *dialog)
   if (strcmp (connection_type, "modem") == 0)
     valid = (get_entry_text (dialog->login) &&
 	     get_entry_text (dialog->phone_number) &&
-	     get_entry_text (GTK_BIN (dialog->serial_port)->child));
+	     get_entry_text (gtk_bin_get_child (GTK_BIN (dialog->serial_port))));
   else if (strcmp (connection_type, "isdn") == 0)
     valid = (get_entry_text (dialog->login) &&
 	     get_entry_text (dialog->phone_number));
@@ -518,7 +518,7 @@ ppp_dialog_check_fields (GstConnectionDialog *dialog)
 	     gtk_combo_box_get_active (GTK_COMBO_BOX (dialog->pppoe_interface_combo)) != -1);
   else if (strcmp (connection_type, "gprs") == 0)
     valid = (get_entry_text (dialog->apn) &&
-	     get_entry_text (GTK_BIN (dialog->serial_port)->child));
+	     get_entry_text (gtk_bin_get_child (GTK_BIN (dialog->serial_port))));
 
   g_free (connection_type);
 

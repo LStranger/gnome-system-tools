@@ -381,7 +381,7 @@ on_save_button_clicked (GtkWidget *widget, gpointer data)
       gtk_box_pack_start (GTK_BOX (hbox), priv->location_entry, TRUE, TRUE, 0);
 
       gtk_widget_show_all (hbox);
-      gtk_container_add (GTK_CONTAINER (GTK_DIALOG (priv->save_dialog)->vbox), hbox);
+      gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (priv->save_dialog))), hbox);
     }
 
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->combo));

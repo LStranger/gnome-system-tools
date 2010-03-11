@@ -204,7 +204,7 @@ gst_platform_dialog_init (GstPlatformDialog *dialog)
 	gtk_box_pack_start (GTK_BOX (box), scrolled_window, TRUE, TRUE, 0);
 	gtk_widget_show_all (box);
 
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), box);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), box);
 
 	priv->cancel_button = gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 	priv->ok_button = gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_OK, GTK_RESPONSE_OK);

@@ -275,12 +275,12 @@ on_detect_modem_clicked (GtkWidget *widget, gpointer data)
   dialog = network_tool->dialog;
 
   /* give some feedback to let know the user that the tool is busy */
-  gtk_entry_set_text (GTK_ENTRY (GTK_BIN (GTK_COMBO_BOX (dialog->serial_port))->child), "");
+  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (GTK_COMBO_BOX (dialog->serial_port)))), "");
   gtk_widget_set_sensitive (dialog->serial_port, FALSE);
   gtk_widget_set_sensitive (dialog->detect_modem, FALSE);
 
   cursor = gdk_cursor_new (GDK_WATCH);
-  gdk_window_set_cursor (GTK_WIDGET (dialog->dialog)->window, cursor);
+  gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (dialog->dialog)), cursor);
   gdk_cursor_unref (cursor);
 
   dev = connection_detect_modem ();
@@ -288,7 +288,7 @@ on_detect_modem_clicked (GtkWidget *widget, gpointer data)
   /* remove the user feedback */
   gtk_widget_set_sensitive (dialog->detect_modem, TRUE);
   gtk_widget_set_sensitive (dialog->serial_port, TRUE);
-  gdk_window_set_cursor (GTK_WIDGET (dialog->dialog)->window, NULL);
+  gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (dialog->dialog)), NULL);
 
   if (!dev || !*dev)
     {
@@ -306,7 +306,7 @@ on_detect_modem_clicked (GtkWidget *widget, gpointer data)
       gtk_widget_destroy (d);
     }
   else
-    gtk_entry_set_text (GTK_ENTRY (GTK_BIN (GTK_COMBO_BOX (dialog->serial_port))->child), dev);
+    gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (GTK_COMBO_BOX (dialog->serial_port)))), dev);
 
   g_free (dev);
 }
