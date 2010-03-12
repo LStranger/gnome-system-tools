@@ -1,17 +1,17 @@
 # translation of eu.po to Basque
 # Basque translation of gnome-system-tools.
-# Copyright (C) 2003, 2004, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-system-tools package.
 #
 # Eneko Lacunza <enlar@enlar.net>, 2003.
-# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004, 2005, 2006, 2007, 2008, 2009.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-27 11:48+0200\n"
-"PO-Revision-Date: 2009-08-27 11:56+0200\n"
+"POT-Creation-Date: 2010-03-12 11:22+0100\n"
+"PO-Revision-Date: 2010-03-12 15:07+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,33 +21,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
-msgstr ""
-"Erabiltzaile-kudeatzaileak erabiltzaile eta talde denak erakutsiko dituen "
-"ala ez"
+msgid "Whether the users-admin tool should show system users in the users list"
+msgstr "Erabiltzaileak administratzeko tresnak sistemako erabiltzaileak erakutsiko dituen erabiltzaileen zerrendan ala ez adierazten du"
 
-#: ../interfaces/common.ui.h:1
-msgid "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Sartu supererabiltzailearen pasahitza</"
-"span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "Sartu pasahitza"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
-msgstr ""
-"Administratzailearen baimenak behar dituzu tresna hau erabiltzeko.\n"
-"Sartu pasahitza sistemako konfigurazioa aldatzeko."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "_Pasahitza:"
+#: ../gnome-system-tools.schemas.in.h:2
+msgid "Whether the users-admin tool should show the root user in the users list"
+msgstr "Erabiltzaileak administratzeko tresnak root erabiltzailea erakutsiko duen erabiltzaileen zerrendan ala ez adierazten du"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -125,7 +104,7 @@ msgstr "_Gaitu konexio hau"
 msgid "Ethernet interface:"
 msgstr "Ethernet interfazea:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:32
 msgid "General"
 msgstr "Orokorra"
 
@@ -265,7 +244,7 @@ msgstr "_Ezarri modema interneterako bide lehenetsi gisa"
 msgid "_Subnet mask:"
 msgstr "A_zpisareko maskara:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "_Erabiltzaile-izena:"
 
@@ -361,7 +340,7 @@ msgid "Share through:"
 msgstr "Partekatu honen bidez:"
 
 #: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:239
+#: ../src/shares/shares-tool.c:237
 msgid "Shared Folders"
 msgstr "Partekatutako karpetak"
 
@@ -466,215 +445,309 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Pasahitzaren ezarpenak</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Pasahitza</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Profilaren ezarpenak</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Sistemako lehenetsiak</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "Kontua"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "Kontu _mota:"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "Aurreratua"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
 msgstr ""
-"Baimendu erabiltzaile honi lokaleko saioa irekitzea bere pasahitza sartu gabe. "
-"Hala ere, pasahitza beharko da administrazioko atazak lantzeko."
+"Izen berdineko erabiltzaile bat badago lehendik ere. Aukeratu beste izen labur bat "
+"erabiltzaile berriarentzako."
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "Esleitu ausazko pasahitza lehenetsi gisa"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "Aldatu erabiltzailearen ezarpen aurreratuak"
+
 #: ../interfaces/users.ui.h:14
-msgid "Check password _quality"
-msgstr "Egiaztatu pasahitzaren _kalitatea"
+msgid "Change User Account Type"
+msgstr "Aldatu erabiltzailearen kontu mota"
 
 #: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "Aldatu erabiltzailearen izen eta saio-hasierako izena"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "Aldatu erabiltzailearen pasahitza"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "Honen ezarpen aurreratuak aldatzen:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "Erabiltzaile honen kontu mota aldatzen:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "Honen erabiltzaile-izena aldatzen:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "Erabiltzaile honen pasahitza aldatzen:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Con_firmation:"
 msgstr "_Baieztapena:"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:22
 msgid "Contact Information"
 msgstr "Kontaktuaren informazioa"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:23
+msgid "Create New User"
+msgstr "Sortu erabiltzaile berria"
+
+#: ../interfaces/users.ui.h:24
+msgid "Create a new user"
+msgstr "Sortu erabiltzaile berria"
+
+#: ../interfaces/users.ui.h:25
 msgid "Days between warning and password expiration:"
 msgstr "Jakinarazpen eta pasahitzaren iraungitzearen arteko egunak:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:26
 msgid "Default _group:"
 msgstr "_Talde lehenetsia:"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:27
 msgid "Default _shell:"
 msgstr "Komando-lerro lehenetsia:"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:28
+msgid "Disable _account"
+msgstr "Desgaitu _kontua"
+
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "Ez eskatu pasahitza _saio-hasieran"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr ""
+"Enkriptatu zure fitxategi guztiak zure saio-hasierako pasahitzarekin ordenagailu "
+"honetara fisikoki atzitzeko aukera duten beste erabiltzaileengandik babesteko. "
+"Jakin ezazu babesak errendimendua piska bat moteltzen duela."
+
+#: ../interfaces/users.ui.h:31
+msgid "Full _Name:"
+msgstr "Izen _osoa:"
+
+#: ../interfaces/users.ui.h:33
 msgid "Generate _random password"
 msgstr "Sortu _ausazko pasahitza"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:34
 msgid "Group _ID:"
 msgstr "Talde _IDa:"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:35
 msgid "Group _name:"
 msgstr "Taldearen ize_na:"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:36
 msgid "Group properties"
 msgstr "Taldearen propietateak"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:37
 msgid "Groups settings"
 msgstr "Taldearen ezarpenak"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:38
 msgid "Ma_ximum days a password may be used:"
 msgstr "Pasahitz bat erabil daitekeen ge_hienezko egun-kopurua:"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:526
+msgid "Manual"
+msgstr "Eskuz"
+
+#: ../interfaces/users.ui.h:40
 msgid "Maximum GID:"
 msgstr "Gehienezko GIDa:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:41
 msgid "Maximum UID:"
 msgstr "Gehienezko UIDa:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:42
 msgid "Mi_nimum days between password changes:"
 msgstr "Pasahitz aldaketen arteko g_utxieneko egun-kopurua:"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:43
 msgid "Minimum GID:"
 msgstr "Gutxieneko GIDa:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:44
 msgid "Minimum UID:"
 msgstr "Gutxieneko UIDa:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:45
 msgid "Minimum days allowed between password changes:"
 msgstr "Pasahitz aldaketen arteko gutxieneko egun-kopurua:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:46
+msgid "New _password:"
+msgstr "Pasahitz _berria:"
+
+#: ../interfaces/users.ui.h:47
 msgid "Number of days that a password may be used:"
 msgstr "Pasahitz bat erabil daitekeen egun-kopurua:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:48
 msgid "O_ffice location:"
 msgstr "_Bulegoaren kokalekua:"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:49
 msgid "Password set to: "
 msgstr "Pasahitza ezarri da: "
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:50
 msgid "Privileges"
 msgstr "Pribilegioak"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:51
 msgid "Profile _name:"
 msgstr "Profila-_izena:"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:52
 msgid "Set password b_y hand"
 msgstr "Ezarri pasahitza _eskuz"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:54
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"Izen laburraren osagaiak:\n"
+"  &#x27A3; Ingelera alfabetoko letra minuskulak\n"
+"  &#x27A3; digituak\n"
+"  &#x27A3; hauetariko beste edozein karaktere: \".\", \"-\" eta \"_\""
+
+#: ../interfaces/users.ui.h:58
+msgid "Short name must start with a letter!"
+msgstr "Izen laburra letra batekin hasi behar da."
+
+#: ../interfaces/users.ui.h:59
+msgid "This account is disabled."
+msgstr "Kontu hau desgaitu egin da."
+
+#: ../interfaces/users.ui.h:60
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr ""
+"Kontu honek eskuz definitutako ezarpen berezi batzuk darabilzki. "
+"Erabili <i>Ezarpen aurreratuak</i> elkarrizketa-koadroa doitzeko."
+
+#: ../interfaces/users.ui.h:61
 msgid "User ID:"
 msgstr "Erabiltzailearen IDa:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:62
 msgid "User Privileges"
 msgstr "Erabiltzaile-pribilegioak"
 
-#: ../interfaces/users.ui.h:42
-msgid "User _password:"
-msgstr "Erabiltzailearen _pasahitza:"
-
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr "Erabiltzaileak saioa amaitu behar du zuk bere IDa aldatu aurretik."
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:63
 msgid "User profiles"
 msgstr "Erabiltzaile-profilak"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "_Gehitu taldea"
+#: ../interfaces/users.ui.h:64
+msgid "You can't change user ID while the user is logged in."
+msgstr "Ezin duzu erabiltzailearen IDa aldatu erabiltzaileak saioa hasita duen bitartean."
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "_Gehitu profila"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "_Gehitu erabiltzailea"
+#: ../interfaces/users.ui.h:66
+msgid "_Advanced Settings"
+msgstr "_Ezarpen aurreratuak"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "_Iruzkinak"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:68
+msgid "_Current password:"
+msgstr "_Uneko pasahitza:"
+
+#: ../interfaces/users.ui.h:69
+msgid "_Custom"
+msgstr "_Pertsonalizatua"
+
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "Jakinarazpen eta pasahitza iraungitzearen arteko _egunak:"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "_Ezabatu"
+#: ../interfaces/users.ui.h:71
+msgid "_Enable Account"
+msgstr "_Gaitu kontua"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:72
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr "_Enkriptatu karpeta nagusia datu sentikorrak babesteko"
+
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "_Sortu"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "_Karpeta nagusia:"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "_Etxeko telefonoa:"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "_Talde nagusia:"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "Kudeatu _taldeak"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "_Profila:"
+#: ../interfaces/users.ui.h:78
+msgid "_Name:"
+msgstr "_Izena:"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "_Benetako izena:"
+#: ../interfaces/users.ui.h:79
+msgid "_Password:"
+msgstr "_Pasahitza:"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:81
+msgid "_Short Name:"
+msgstr "Izen _laburra:"
+
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "_Laneko telefonoa:"
 
@@ -698,47 +771,63 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "Plataforma ezezaguna"
 
-#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "Konfigurazioa ezin izan da kargatu"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "Ez duzu baimenik sistemako konfigurazioan sarbidetzeko."
-
-#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "Konfigurazioa ezin izan da gorde"
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:196
+msgid "You are not allowed to access the system configuration."
+msgstr "Ez duzu baimenik sistemako konfigurazioan sarbidetzeko."
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:691
 msgid "You are not allowed to modify the system configuration."
 msgstr "Ez duzu baimenik sistemako konfigurazioa aldatzeko."
 
-#: ../src/common/gst-tool.c:218
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "Baliogabeko datuak aurkitu dira."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:220
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "Errore ezezaguna gertatu da."
 
-#: ../src/common/gst-tool.c:442
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "Ezin izan da laguntza bistaratu"
 
-#: ../src/common/gst-tool.c:626
+#: ../src/common/gst-tool.c:622
 msgid "The system configuration has potentially changed."
 msgstr "Sistemako konfigurazioa aldatu egin da."
 
-#: ../src/common/gst-tool.c:628
+#: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "Eguneratu edukia? Uneko aldaketak galdu egingo dira."
 
+#: ../src/common/gst-tool.c:693
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
+"Errorea gertatu da autorizazioak begiratzean: %s\n"
+"Eskertuko genizuke akats honen berri emango bazenu."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "_Gehitu"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "_Ezabatu"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -826,7 +915,7 @@ msgid "%s Properties"
 msgstr "%s(r)en propietateak"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "_Propietateak"
 
@@ -969,17 +1058,17 @@ msgstr "Sarea"
 msgid "Network Settings"
 msgstr "Sareko ezarpenak"
 
-#: ../src/services/callbacks.c:59
+#: ../src/services/callbacks.c:65
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "\"%s\" zerbitzuaren ezarpenak"
 
-#: ../src/services/callbacks.c:119
+#: ../src/services/callbacks.c:125
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Ziur %s desaktibatu nahi duzula?"
 
-#: ../src/services/callbacks.c:123
+#: ../src/services/callbacks.c:129
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1431,7 +1520,7 @@ msgstr "Egoera"
 msgid "Priority"
 msgstr "Lehentasuna"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "Zerbitzuen ezarpenak"
 
@@ -1504,11 +1593,11 @@ msgstr "'%s' karpetaren ezarpenak"
 msgid "Share Folder"
 msgstr "Partekatu karpeta"
 
-#: ../src/shares/shares-tool.c:155
+#: ../src/shares/shares-tool.c:152
 msgid "Sharing services are not installed"
 msgstr "Partekatzeko zerbitzua ez dago instalatuta"
 
-#: ../src/shares/shares-tool.c:157
+#: ../src/shares/shares-tool.c:154
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -1522,11 +1611,11 @@ msgstr "Aldatu sistemako ordua, data eta ordu-zona."
 msgid "Time and Date"
 msgstr "Ordua eta data"
 
-#: ../src/time/time-tool.c:397
+#: ../src/time/time-tool.c:402
 msgid "NTP support is not installed"
 msgstr "NTP euskarria ez dago instalatuta"
 
-#: ../src/time/time-tool.c:399
+#: ../src/time/time-tool.c:404
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1534,75 +1623,71 @@ msgstr ""
 "Instalatu eta aktibatu NTP euskarria zure lokaleko denbora-zerbitzaria "
 "interneteko denbora-zerbitzariekin sinkronizatzeko."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:433
 msgid "Enabling NTP"
 msgstr "NTP gaitzen"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:433
 msgid "Disabling NTP"
 msgstr "NTP desgaitzen"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:445
 msgid "Synchronizing system clock"
 msgstr "Sistemaren ordua sinkronizatzen"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:525
 msgid "Keep synchronized with Internet servers"
 msgstr "Mantendu sinkronizatua interneteko zerbitzariekin"
 
-#: ../src/time/time-tool.c:522
-msgid "Manual"
-msgstr "Eskuz"
-
-#: ../src/time/time-tool.c:668
+#: ../src/time/time-tool.c:672
 msgid "Time and Date Settings"
 msgstr "Ordu eta data ezarpenak"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "Administratzailearen taldea ezin da ezabatu"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:639
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:88
+#: ../src/users/user-settings.c:476
 msgid "This would leave the system unusable."
 msgstr "Honek sistema erabilkaitza utziko du."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "Ziur \"%s\" taldea ezabatu nahi duzula?"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "Honek fitxategiak taldearen ID baliogabearekin utziko ditu fitxategi-sisteman"
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:151
 msgid "New group"
 msgstr "Talde berria"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:158
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "'%s' taldearen propietateak"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:224
 msgid "Group name is empty"
 msgstr "Talde-izena hutsik dago"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:225
 msgid "A group name must be specified."
 msgstr "Talde-izen bat zehaztu behar da"
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:227
 msgid "Group name of the administrator group user should not be modified"
 msgstr "Administratzailearen taldearen talde-izena ez litzateke aldatu behar."
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:230
 msgid "Group name has invalid characters"
 msgstr "Taldearen izenak karaktere baliogabeak ditu"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:231
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1610,86 +1695,182 @@ msgstr ""
 "Letra xehez hasi eta letra xehe eta zenbakiez jarraitutako erabiltzaile-izen "
 "onargarri bat ezarri behar duzu."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:572
+#: ../src/users/group-settings.c:236
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "\"%s\" taldea badago lehendik ere"
 
-#: ../src/users/group-settings.c:287
+#: ../src/users/group-settings.c:237
 msgid "Please choose a different group name."
 msgstr "Hautatu talde-izen desberdin bat."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:264
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "Administratzailearen taldearen IDa ez litzateke aldatu behar."
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:268
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "%d talde-IDa jadanik \"%s\" taldeak darabil"
+
+#: ../src/users/group-settings.c:271
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "Aukeratu zenbakizko beste identifikatzaile bat talde berriarentzako."
+
+#: ../src/users/group-settings.c:273
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "Aukeratu zenbakizko beste identifikatzaile bat \"%s\" taldearentzako."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Taldearen izena"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "Monitorizatu sistemako egunkariak"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "Administratu sistema"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "Erabili audioko gailuak"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "Erabili CD-ROM unitateak"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "Grabatu CDak/DVDak"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "Erabili modemak"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "Konektatu internetera modem bat erabiliz"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "Bidali eta jaso faxak"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "Erabili disketeak"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "Muntatu erabiltzaile-espazioko fitxategi-sistemak (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "Konfiguratu inprimagailuak"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "Konektatu haririk gabeko eta ethernet sareetara"
+
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "Erabili kanpoko biltegi-gailuak automatikoki"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "Esekitu eta hibernatu ordenagailua"
+
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "Atzitu /proc fitxategi-sistema"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "Erabili eskanerrak"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "Erabili zinta euskarriak"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "Erabili USB gailuak"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "Erabili VirtualBox birtualizazio-sistema"
+
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "Erabili bideoko gailuak"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "Izan gai administratzailearen baimenak lortzeko"
+
+#: ../src/users/user-profiles.conf.in.h:1
+msgid "Administrator"
+msgstr "Administratzailea"
+
+#: ../src/users/user-profiles.conf.in.h:2
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr "Edozer alda dezake sisteman, baita softwarea instalatzea eta bertsio-berritzea ere."
+
+#: ../src/users/user-profiles.conf.in.h:3
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr ""
+"Ataza arruntak lan ditzake. Ezin du softwarerik instalatu edo "
+"beste erabiltzaile guztiei eragiten dieten ezarpenik aldatu."
+
+#: ../src/users/user-profiles.conf.in.h:4
+msgid "Desktop user"
+msgstr "Mahaigaineko erabiltzailea"
+
+#: ../src/users/run-passwd.c:421
+msgid "Authentication failed"
+msgstr "Autentifikazioak huts egin du"
+
+#: ../src/users/run-passwd.c:494
+#, c-format
+msgid "The new password is too short"
+msgstr "Pasahitz berria laburregia da"
+
+#: ../src/users/run-passwd.c:499
+#, c-format
+msgid "The new password is too simple"
+msgstr "Pasahitz berria bakunegia da"
+
+#: ../src/users/run-passwd.c:503
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "Pasahitz zaharra eta berria oso antzekoak dira"
+
+#: ../src/users/run-passwd.c:506
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "Pasahitz berriak karaktere numeriko edo bereziak eduki behar ditu"
+
+#: ../src/users/run-passwd.c:510
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "Pasahitz zaharra eta berria berdinak dira."
+
+#: ../src/users/run-passwd.c:514
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "Zure pasahitza aldatu egin da hasieran autentifikatu zarenetik!"
+
+#: ../src/users/run-passwd.c:518
+#, c-format
+msgid "Unknown error"
+msgstr "Errore ezezaguna"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
@@ -1699,115 +1880,11 @@ msgstr "Gehitu edo ezabatu erabiltzaile eta taldeak"
 msgid "Users and Groups"
 msgstr "Erabiltzaile eta taldeak"
 
-#: ../src/users/user-settings.c:58
-msgid "Administrator account cannot be deleted"
-msgstr "Administratzailearen kontua ezin da ezabatu"
-
-#: ../src/users/user-settings.c:72
-#, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "Ziur \"%s\" kontua ezabatu nahi duzula?"
-
-#: ../src/users/user-settings.c:75
-msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
-msgstr ""
-"Honek erabiltzaile hau sisteman sartzea debekatzen du, dagokion erabiltzaile-"
-"etxea ezabatu gabe."
-
-#: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "Erabiltzaile hau jadanik ordenagailua erabiltzen ari da"
-
-#: ../src/users/user-settings.c:386
-msgid "New user account"
-msgstr "Erabiltzaile-kontu berria"
-
-#: ../src/users/user-settings.c:407
-#, c-format
-msgid "Account '%s' Properties"
-msgstr "'%s' kontuaren propietateak"
-
-#: ../src/users/user-settings.c:561
-msgid "User name is empty"
-msgstr "Erabiltzaile-izena hutsik dago"
-
-#: ../src/users/user-settings.c:562
-msgid "A user name must be specified."
-msgstr "Erabiltzaile-izena zehaztu behar da."
-
-#: ../src/users/user-settings.c:564
-msgid "User name has invalid characters"
-msgstr "Erabiltzaile-izenak karaktere baliogabeak ditu"
-
-#: ../src/users/user-settings.c:565
-msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr ""
-"Letra xehez hasi eta letra xehe eta zenbakiez jarraitutako erabiltzaile-izen "
-"onargarri bat ezarri behar duzu."
-
-#: ../src/users/user-settings.c:569
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "\"%s\" erabiltzaile-izena badago lehendik ere"
-
-#: ../src/users/user-settings.c:570 ../src/users/user-settings.c:573
-msgid "Please choose a different user name."
-msgstr "Hautatu erabiltzaile-izen desberdin bat."
-
-#: ../src/users/user-settings.c:598
-#, c-format
-msgid "Invalid character \"%c\" in comment"
-msgstr "Iruzkinean \"%c\" karaktere baliogabea"
-
-#: ../src/users/user-settings.c:599
-msgid "Check that this character is not used."
-msgstr "Egiaztatu karaktere hau ez dela erabiltzen."
-
-#: ../src/users/user-settings.c:617
-msgid "Incomplete path in home directory"
-msgstr "Etxe-direktoriorako bide-izena ez dago osatua"
-
-#: ../src/users/user-settings.c:618
-msgid ""
-"Please enter full path for home directory\n"
-"<span size=\"smaller\">i.e.: /home/john</span>."
-msgstr ""
-"Sartu etxe-direktorioaren bide-izen osoa.\n"
-"<span size=\"smaller\">adib: /home/araitz</span>"
-
-#: ../src/users/user-settings.c:621
-msgid "Home directory already exists"
-msgstr "Etxeko direktorioa badago lehendik ere"
-
-#: ../src/users/user-settings.c:622
-msgid "Please enter a different home directory path."
-msgstr "Idatzi etxeko direktorioaren beste bide-izena."
-
-#: ../src/users/user-settings.c:638
-msgid "Administrator account's user ID should not be modified"
-msgstr "Administratzailearen IDa ez litzateke aldatu behar"
-
-#: ../src/users/user-settings.c:653
-msgid "Incomplete path in shell"
-msgstr "Komando-lerroaren bide-izena ez dago osatua"
-
-#: ../src/users/user-settings.c:654
-msgid ""
-"Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/bash</span>."
-msgstr ""
-"Sartu bide-izen osoa komando-lerroan\n"
-"<span size=\"smaller\">adib.: /bin/bash</span>"
-
-#: ../src/users/user-settings.c:687
+#: ../src/users/user-password.c:97
 msgid "Password is too short"
 msgstr "Pasahitza laburregia da"
 
-#: ../src/users/user-settings.c:688
+#: ../src/users/user-password.c:98
 msgid ""
 "User passwords must be longer than 6 characters and preferably formed by "
 "numbers, letters and special characters."
@@ -1815,27 +1892,200 @@ msgstr ""
 "Erabiltzailearen pasahitzak 6 karaktere baino gehiago eduki behar ditu. "
 "Pasahitzak hizki, zenbaki eta karaktere bereziak edukitzea gomendatzen da."
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-password.c:101
 msgid "Password confirmation is not correct"
 msgstr "Pasahitzaren baieztapena ez da zuzena"
 
-#: ../src/users/user-settings.c:692
+#: ../src/users/user-password.c:102
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Egiaztatu testu eremu bietan pasahitz berdina idatzi duzula."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Izena"
+#: ../src/users/user-password.c:426
+msgid "Please choose another password."
+msgstr "Aukeratu pasahitz desberdin bat."
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "Erabiltzaile-izena"
+#: ../src/users/user-password.c:437
+msgid "Please type again your current password."
+msgstr "Idatzi berriro zure uneko pasahitza."
 
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "Etxea direktorioa"
+#: ../src/users/user-password.c:444
+msgid "Password could not be changed"
+msgstr "Pasahitza ezin izan da aldatu"
 
-#: ../src/users/users-tool.c:216
+#: ../src/users/user-settings.c:85
+msgid "Administrator account cannot be deleted"
+msgstr "Administratzailearen kontua ezin da ezabatu"
+
+#: ../src/users/user-settings.c:96
+#, c-format
+msgid "%s is currently using this computer"
+msgstr "%s jadanik ordenagailua erabiltzen ari da"
+
+#: ../src/users/user-settings.c:99
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr "Ziurtatu erabiltzaileak saioa amaitu duela haren kontua ezabatu aurretik."
+
+#: ../src/users/user-settings.c:109
+msgid "Can't delete the only administrator account"
+msgstr "Ezin da administratzaile bakarraren kontua ezabatu"
+
+#: ../src/users/user-settings.c:111
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr ""
+"%s administratzaile bakarra da ordenagailu honetan. Kontu hau ezabatzeak "
+"sistemako administrazioa blokeatuko luke."
+
+#: ../src/users/user-settings.c:121
+#, c-format
+msgid "Remove home folder for %s?"
+msgstr "Kendu '%s'(r)en karpeta nagusia?"
+
+#: ../src/users/user-settings.c:124
+#, c-format
+msgid ""
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that an administrator can save them later."
+msgstr ""
+"%s erabiltzaileak jabetutako <tt>%s</tt>(e)ko fitxategiak erabat ezaba daitezke "
+"gehiago behar ez badituzu. Kontua ezabatu aurretik, hauen babeskopia egitea nahi "
+"izan dezakezu, edo mantentea beranduago administratzaileak gorde ditzan."
+
+#: ../src/users/user-settings.c:132
+msgid "Keep Files"
+msgstr "Mantendu fitxategiak"
+
+#: ../src/users/user-settings.c:133
+msgid "Don't Remove Account"
+msgstr "Ez kendu kontua"
+
+#: ../src/users/user-settings.c:134
+msgid "Delete Files"
+msgstr "Ezabatu fitxategiak"
+
+#: ../src/users/user-settings.c:330
+msgid "Superuser"
+msgstr "Supererabiltzailea"
+
+#: ../src/users/user-settings.c:335
+msgid "Custom"
+msgstr "Pertsonalizatua"
+
+#. TRANSLATORS: This applies to a password.
+#: ../src/users/user-settings.c:344
+msgid "None"
+msgstr "Bat ere ez"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+#: ../src/users/user-settings.c:347
+msgid "Not asked on login"
+msgstr "Ez galdetu saio-hasieran"
+
+#: ../src/users/user-settings.c:349
+msgid "Asked on login"
+msgstr "Galdetu saio-hasieran"
+
+#: ../src/users/user-settings.c:393
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "Iruzkinean \"%c\" karaktere baliogabea"
+
+#: ../src/users/user-settings.c:394
+msgid "Check that this character is not used."
+msgstr "Egiaztatu karaktere hau ez dela erabiltzen."
+
+#: ../src/users/user-settings.c:417
+msgid "Incomplete path in home directory"
+msgstr "Etxe-direktoriorako bide-izena ez dago osatua"
+
+#: ../src/users/user-settings.c:418
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>."
+msgstr ""
+"Sartu etxe-direktorioaren bide-izen osoa.\n"
+"<span size=\"smaller\">adib: /home/araitz</span>"
+
+#: ../src/users/user-settings.c:433
+msgid "Home directory already exists"
+msgstr "Etxeko direktorioa badago lehendik ere"
+
+#: ../src/users/user-settings.c:434
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr ""
+"<tt>%s</tt> direktorioa badago lehendik ere. Erabiltzaileak ez dauka baimenik "
+"direktorio horretan irakurtzeko edo idazteko. Hala ere, erabiltzea nahi duzu?"
+
+#: ../src/users/user-settings.c:440
+msgid "Use this directory"
+msgstr "Erabili direktorio hau"
+
+#: ../src/users/user-settings.c:475
+msgid "ID for the root user should not be modified"
+msgstr "'root' erabiltzailearen IDa ez litzateke aldatu behar."
+
+#. check that UID is free
+#: ../src/users/user-settings.c:479
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "%d erabiltzaile-IDa lehendik ere %s erabiltzaileak darabil"
+
+#: ../src/users/user-settings.c:481
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "Aukeratu zenbakizko beste identifikatzaile bat \"%s\"(r)entzako."
+
+#: ../src/users/user-settings.c:499
+msgid "Incomplete path in shell"
+msgstr "Komando-lerroaren bide-izena ez dago osatua"
+
+#: ../src/users/user-settings.c:500
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
+msgstr ""
+"Sartu bide-izen osoa komando-lerroan\n"
+"<span size=\"smaller\">adib.: /bin/bash</span>"
+
+#: ../src/users/user-settings.c:534
+msgid "Can't revoke administration rights"
+msgstr "Ezin dira administrazioko baimenak indargabetu"
+
+#: ../src/users/user-settings.c:537
+#, c-format
+msgid ""
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr ""
+"%s administratzaile bakarra da ordenagailu honetan. Kontu honen "
+"administratzailearen baimenak indargabetzeak sistemako administrazioa "
+"blokeatuko luke."
+
+#: ../src/users/user-settings.c:554
+msgid "You are about to revoke your own administration rights"
+msgstr "Zure administrazioko baimenak indargabetzera zoaz"
+
+#: ../src/users/user-settings.c:557
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr ""
+"Aurrerantzean, %s(e)k ezin izango du administrazioko zereginik egingo. "
+"Kontu honek ez du baimenik izango administrazioko eskubideak bere kasa "
+"eskuratzeko."
+
+#: ../src/users/user-settings.c:562
+msgid "Give up administration rights"
+msgstr "Eman administrazioko baimenak"
+
+#: ../src/users/users-tool.c:284
 msgid "Users Settings"
 msgstr "Erabiltzaileen ezarpenak"
 
