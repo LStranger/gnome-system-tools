@@ -217,8 +217,6 @@ static void
 gst_platform_dialog_finalize (GObject *object)
 {
 	GstPlatformDialog *dialog = GST_PLATFORM_DIALOG (object);
-	GstPlatformDialogPrivate *priv = dialog->_priv;
-	gint i = 0;
 
 	if (dialog->session)
 		g_object_unref (dialog->session);
@@ -322,10 +320,7 @@ gst_platform_dialog_populate_list (GstPlatformDialog *dialog)
 	GstPlatformDialogPrivate *priv;
 	GtkTreeModel *sort_model;
 	GtkTreeStore *store;
-	GtkTreeIter iter;
 	GList *platforms;
-	OobsPlatform *platform;
-	GString *str;
 	GHashTable *distros;
 
 	g_return_if_fail (OOBS_IS_SESSION (dialog->session));

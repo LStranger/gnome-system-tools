@@ -241,7 +241,7 @@ gst_network_tool_update_gui (GstTool *tool)
 {
   GstNetworkTool *network_tool;
   GList *dns, *search_domains;
-  OobsList *hosts_list, *ifaces_list;
+  OobsList *hosts_list;
 
   network_tool = GST_NETWORK_TOOL (tool);
 

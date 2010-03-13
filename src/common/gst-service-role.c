@@ -20,6 +20,8 @@
  */
 
 #include "gst-service-role.h"
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct _ServiceRole ServiceRole;
 

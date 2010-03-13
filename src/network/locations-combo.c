@@ -458,7 +458,6 @@ gst_locations_combo_constructor (GType                  type,
   GObject *object;
   GstLocationsComboPrivate *priv;
   GtkCellRenderer *renderer;
-  GtkTreeIter selected_iter;
 
   object = (* G_OBJECT_CLASS (gst_locations_combo_parent_class)->constructor) (type,
 									       n_construct_properties,

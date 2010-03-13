@@ -221,7 +221,6 @@ gst_tool_constructor (GType                  type,
 	GObject *object;
 	GstTool *tool;
 	gchar *widget_name;
-	const gchar *platform;
 	GtkWidget *dialog;
 	OobsResult result;
 
@@ -569,7 +568,7 @@ update_async_func (OobsObject *object,
 void
 gst_tool_update_async (GstTool *tool)
 {
-	gint i;
+	guint i;
 
 	g_return_if_fail (GST_IS_TOOL (tool));
 

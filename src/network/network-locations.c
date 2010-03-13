@@ -21,6 +21,8 @@
 #include <oobs/oobs.h>
 #include <string.h>
 #include <gio/gio.h>
+#include <glib.h>
+#include <glib/gstdio.h>
 #include "network-locations.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -486,7 +488,7 @@ get_interface_properties (OobsIface *iface)
 {
   GPtrArray *array;
   GParamSpec **params;
-  gint n_params, i;
+  guint n_params, i;
 
   params = g_object_class_list_properties (G_OBJECT_GET_CLASS (iface), &n_params);
   array = g_ptr_array_sized_new (n_params);
@@ -545,7 +547,7 @@ compare_interface (OobsIface *iface,
 {
   gboolean equal = FALSE;
   gchar *name;
-  gint i;
+  guint i;
 
   g_object_get (iface, "device", &name, NULL);
 
@@ -804,7 +806,7 @@ set_interface (OobsIface *iface,
 	       GKeyFile  *key_file)
 {
   gchar *name;
-  gint i;
+  guint i;
 
   g_object_get (iface, "device", &name, NULL);
 
@@ -1006,7 +1008,7 @@ save_interface (OobsIface *iface,
 		GKeyFile  *key_file)
 {
   gchar *name;
-  gint i;
+  guint i;
 
   g_object_get (iface, "device", &name, NULL);
 
