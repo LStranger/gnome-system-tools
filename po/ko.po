@@ -1,46 +1,29 @@
 # gnome-system-tools Korean Translation
 # This file is distributed under the same license as the gnome-system-tools package.
 # Young-Ho, Cha <ganadist@gmail.com>, 2000-2007.
-# Changwoo Ryu <cwryu@debian.org>, 2006, 2007, 2008, 2009.
+# Changwoo Ryu <cwryu@debian.org>, 2006, 2007, 2008, 2009, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 07:28+0900\n"
-"PO-Revision-Date: 2009-08-23 07:32+0900\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools&component=general\n"
+"POT-Creation-Date: 2010-03-14 00:09+0900\n"
+"PO-Revision-Date: 2010-03-14 01:19+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
-"Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
+"Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show all users and groups or not"
-msgstr "사용자 관리도구에서 모든 사용자와 그룹을 보여줍니다"
+msgid "Whether the users-admin tool should show system users in the users list"
+msgstr "사용자 관리 도구의 사용자 목록에서 시스템 사용자를 표시할지 여부"
 
-#: ../interfaces/common.ui.h:1
+#: ../gnome-system-tools.schemas.in.h:2
 msgid ""
-"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">root 암호를 입력하십시오</span>"
-
-#: ../interfaces/common.ui.h:2
-msgid "Enter Password"
-msgstr "암호 입력"
-
-#: ../interfaces/common.ui.h:3
-msgid ""
-"You need administrator privileges to use this tool. Enter a password to "
-"modify\n"
-"your system configuration."
-msgstr ""
-"이 도구를 쓰려면 관리자 권한이 필요합니다.\n"
-"시스템 설정을 수정하려면 암호를 입력하십시오."
-
-#: ../interfaces/common.ui.h:5
-msgid "_Password:"
-msgstr "암호(_P):"
+"Whether the users-admin tool should show the root user in the users list"
+msgstr "사용자 관리 도구의 사용자 목록에서 루트 사용자를 표시할지 여부"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -118,7 +101,7 @@ msgstr "연결 사용(_N)"
 msgid "Ethernet interface:"
 msgstr "이더넷 인터페이스:"
 
-#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:21
+#: ../interfaces/network.ui.h:20 ../interfaces/users.ui.h:32
 msgid "General"
 msgstr "일반"
 
@@ -258,7 +241,7 @@ msgstr "모뎀을 기본 라우팅으로 설정(_S)"
 msgid "_Subnet mask:"
 msgstr "서브넷 마스크(_S):"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:59
+#: ../interfaces/network.ui.h:55
 msgid "_Username:"
 msgstr "사용자이름(_U):"
 
@@ -326,7 +309,7 @@ msgstr "일반 속성"
 
 #: ../interfaces/shares.ui.h:13
 msgid "Host name:"
-msgstr "호스트이름:"
+msgstr "호스트 이름:"
 
 #: ../interfaces/shares.ui.h:15
 msgid "Name:"
@@ -353,7 +336,7 @@ msgid "Share through:"
 msgstr "공유 경로:"
 
 #: ../interfaces/shares.ui.h:21 ../src/shares/shares.desktop.in.in.h:2
-#: ../src/shares/shares-tool.c:239
+#: ../src/shares/shares-tool.c:237
 msgid "Shared Folders"
 msgstr "공유 폴더"
 
@@ -458,213 +441,302 @@ msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">암호 설정</span>"
 
 #: ../interfaces/users.ui.h:7
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">암호</span>"
-
-#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">프로파일 설정</span>"
 
-#: ../interfaces/users.ui.h:9
+#: ../interfaces/users.ui.h:8
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">시스템 기본값</span>"
 
-#: ../interfaces/users.ui.h:10
-msgid "Account"
-msgstr "계정"
+#: ../interfaces/users.ui.h:9
+msgid "Account _type:"
+msgstr "계정 종류(_T):"
 
-#: ../interfaces/users.ui.h:11
+#: ../interfaces/users.ui.h:10
 msgid "Advanced"
 msgstr "고급"
 
-#: ../interfaces/users.ui.h:12
+#: ../interfaces/users.ui.h:11
 msgid ""
-"Allow this user to open a local session without entering his password. The "
-"password will still be required to perform administrative tasks."
-msgstr "이 사용자가 암호를 입력하지 않고 로컬 세션을 열 수 있도록 합니다. 관리 작업을 하려면 여전히 암호가 필요합니다."
+"An user with such a name already exists. Please choose a different short "
+"name for the new user."
+msgstr "해당 이름의 사용자가 이미 있습니다. 다른 짧은 이름을 사용하십시오."
 
-#: ../interfaces/users.ui.h:13
+#: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
 msgstr "기본으로 무작위 암호 지정"
 
+#: ../interfaces/users.ui.h:13
+msgid "Change Advanced User Settings"
+msgstr "고급 사용자 설정 바꾸기"
+
 #: ../interfaces/users.ui.h:14
-msgid "Check password _quality"
-msgstr "암호 강도 검사(_Q)"
+msgid "Change User Account Type"
+msgstr "사용자 계정 종류 바꾸기"
 
 #: ../interfaces/users.ui.h:15
+msgid "Change User Name and Login"
+msgstr "사용자 이름과 로그인 바꾸기"
+
+#: ../interfaces/users.ui.h:16
+msgid "Change User Password"
+msgstr "사용자 암호 바꾸기"
+
+#: ../interfaces/users.ui.h:17
+msgid "Changing advanced settings for:"
+msgstr "고급 설정 바꾸기:"
+
+#: ../interfaces/users.ui.h:18
+msgid "Changing user account type for:"
+msgstr "사용자 계정 종류 바꾸기:"
+
+#: ../interfaces/users.ui.h:19
+msgid "Changing user name for:"
+msgstr "사용자 이름 바꾸기:"
+
+#: ../interfaces/users.ui.h:20
+msgid "Changing user password for:"
+msgstr "사용자 암호 바꾸기:"
+
+#: ../interfaces/users.ui.h:21
 msgid "Con_firmation:"
 msgstr "확인(_F):"
 
-#: ../interfaces/users.ui.h:16
+#: ../interfaces/users.ui.h:22
 msgid "Contact Information"
 msgstr "연락처 정보"
 
-#: ../interfaces/users.ui.h:17
+#: ../interfaces/users.ui.h:23
+msgid "Create New User"
+msgstr "새 사용자 만들기"
+
+#: ../interfaces/users.ui.h:24
+msgid "Create a new user"
+msgstr "새 사용자를 만듭니다"
+
+#: ../interfaces/users.ui.h:25
 msgid "Days between warning and password expiration:"
 msgstr "암호 만료 경고일:"
 
-#: ../interfaces/users.ui.h:18
+#: ../interfaces/users.ui.h:26
 msgid "Default _group:"
 msgstr "기본 그룹(_G):"
 
-#: ../interfaces/users.ui.h:19
+#: ../interfaces/users.ui.h:27
 msgid "Default _shell:"
-msgstr "기본 쉘(_S):"
+msgstr "기본 셸(_S):"
 
-#: ../interfaces/users.ui.h:20
+#: ../interfaces/users.ui.h:28
+msgid "Disable _account"
+msgstr "계정 사용 막기(_A)"
+
+#: ../interfaces/users.ui.h:29
 msgid "Don't ask for password on _login"
 msgstr "로그인할 때 암호 묻지 않기(_L)"
 
-#: ../interfaces/users.ui.h:22
+#: ../interfaces/users.ui.h:30
+msgid ""
+"Encrypt all your files with your login password to strongly protect them "
+"from people with physical access to your computer, at the expense of a "
+"slightly reduced performance."
+msgstr "모든 파일을 로그인 암호로 암호화합니다. 그러면 컴퓨터에 물리적으로 접근할 수 있는 사람도 파일을 읽지 못하게 할 수 있습니다. 대신 효율이 약간 떨어집니다."
+
+#: ../interfaces/users.ui.h:31
+msgid "Full _Name:"
+msgstr "전체 이름(_N):"
+
+#: ../interfaces/users.ui.h:33
 msgid "Generate _random password"
 msgstr "무작위 암호 만들기(_R)"
 
-#: ../interfaces/users.ui.h:23
+#: ../interfaces/users.ui.h:34
 msgid "Group _ID:"
 msgstr "그룹 ID(_I):"
 
-#: ../interfaces/users.ui.h:24
+#: ../interfaces/users.ui.h:35
 msgid "Group _name:"
 msgstr "그룹 이름(_N):"
 
-#: ../interfaces/users.ui.h:25
+#: ../interfaces/users.ui.h:36
 msgid "Group properties"
 msgstr "그룹 속성"
 
-#: ../interfaces/users.ui.h:26
+#: ../interfaces/users.ui.h:37
 msgid "Groups settings"
 msgstr "그룹 설정"
 
-#: ../interfaces/users.ui.h:27
+#: ../interfaces/users.ui.h:38
 msgid "Ma_ximum days a password may be used:"
 msgstr "암호 최대 사용 가능 일수(_X):"
 
-#: ../interfaces/users.ui.h:28
+#: ../interfaces/users.ui.h:39 ../src/time/time-tool.c:526
+msgid "Manual"
+msgstr "수동"
+
+#: ../interfaces/users.ui.h:40
 msgid "Maximum GID:"
 msgstr "최대 GID 값:"
 
-#: ../interfaces/users.ui.h:29
+#: ../interfaces/users.ui.h:41
 msgid "Maximum UID:"
 msgstr "최대 UID 값:"
 
-#: ../interfaces/users.ui.h:30
+#: ../interfaces/users.ui.h:42
 msgid "Mi_nimum days between password changes:"
 msgstr "암호 바꿀 때 최소 일수(_N):"
 
-#: ../interfaces/users.ui.h:31
+#: ../interfaces/users.ui.h:43
 msgid "Minimum GID:"
 msgstr "최소 GID 값:"
 
-#: ../interfaces/users.ui.h:32
+#: ../interfaces/users.ui.h:44
 msgid "Minimum UID:"
 msgstr "최소 UID 값:"
 
-#: ../interfaces/users.ui.h:33
+#: ../interfaces/users.ui.h:45
 msgid "Minimum days allowed between password changes:"
 msgstr "암호 바꿀 때 허용하는 최소 일수:"
 
-#: ../interfaces/users.ui.h:34
+#: ../interfaces/users.ui.h:46
+msgid "New _password:"
+msgstr "새 암호(_P):"
+
+#: ../interfaces/users.ui.h:47
 msgid "Number of days that a password may be used:"
 msgstr "암호를 사용 가능한 일수:"
 
-#: ../interfaces/users.ui.h:35
+#: ../interfaces/users.ui.h:48
 msgid "O_ffice location:"
 msgstr "사무실 위치(_F):"
 
-#: ../interfaces/users.ui.h:36
+#: ../interfaces/users.ui.h:49
 msgid "Password set to: "
 msgstr "설정할 암호: "
 
-#: ../interfaces/users.ui.h:37
+#: ../interfaces/users.ui.h:50
 msgid "Privileges"
 msgstr "권한"
 
-#: ../interfaces/users.ui.h:38
+#: ../interfaces/users.ui.h:51
 msgid "Profile _name:"
 msgstr "프로파일 이름(_N):"
 
-#: ../interfaces/users.ui.h:39
+#: ../interfaces/users.ui.h:52
 msgid "Set password b_y hand"
 msgstr "수동으로 암호 설정(_Y)"
 
-#: ../interfaces/users.ui.h:40
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:54
+msgid ""
+"Short name must consist of:\n"
+"  &#x27A3; lower case letters from the English alphabet\n"
+"  &#x27A3; digits\n"
+"  &#x27A3; any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"짧은 이름은 다음 문자로만 이루어져야 합니다:\n"
+"  &#x27A3; 영어 알파벳 소문자\n"
+"  &#x27A3; 숫자\n"
+"  &#x27A3; \".\", \"-\", \"_\" 문자"
+
+#: ../interfaces/users.ui.h:58
+msgid "Short name must start with a letter!"
+msgstr "짧은 이름은 알파벳 문자로 시작해야 합니다!"
+
+#: ../interfaces/users.ui.h:59
+msgid "This account is disabled."
+msgstr "이 계정은 사용이 막혀 있습니다."
+
+#: ../interfaces/users.ui.h:60
+msgid ""
+"This account is using special settings that have been defined manually. Use "
+"the <i>Advanced Settings</i> dialog to tune them."
+msgstr "이 계정은 수동으로 정의한 설정을 사용하고 있습니다. <i>고급 설정</i> 창에서 자세히 설정할 수 있습니다."
+
+#: ../interfaces/users.ui.h:61
 msgid "User ID:"
 msgstr "사용자 ID:"
 
-#: ../interfaces/users.ui.h:41
+#: ../interfaces/users.ui.h:62
 msgid "User Privileges"
 msgstr "사용자 권한"
 
-#: ../interfaces/users.ui.h:42
-msgid "User _password:"
-msgstr "사용자 암호(_P):"
-
-#: ../interfaces/users.ui.h:43
-msgid "User must log out before you can change his ID."
-msgstr "자기 ID를 바꾸려면 그 전에 로그 아웃해야 합니다."
-
-#: ../interfaces/users.ui.h:44
+#: ../interfaces/users.ui.h:63
 msgid "User profiles"
 msgstr "사용자 프로파일"
 
-#: ../interfaces/users.ui.h:45
-msgid "_Add Group"
-msgstr "그룹 추가(_A)"
+#: ../interfaces/users.ui.h:64
+msgid "You can't change user ID while the user is logged in."
+msgstr "사용자가 로그인하고 있는 중에는 사용자 ID를 바꿀 수 없습니다."
 
-#: ../interfaces/users.ui.h:46
+#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "프로파일 추가(_A)"
 
-#: ../interfaces/users.ui.h:47
-msgid "_Add User"
-msgstr "사용자 추가(_A)"
+#: ../interfaces/users.ui.h:66
+msgid "_Advanced Settings"
+msgstr "고급 설정(_A):"
 
-#: ../interfaces/users.ui.h:48
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "설명(_C)"
 
-#: ../interfaces/users.ui.h:49
+#: ../interfaces/users.ui.h:68
+msgid "_Current password:"
+msgstr "현재 암호(_C):"
+
+#: ../interfaces/users.ui.h:69
+msgid "_Custom"
+msgstr "사용자 지정(_C)"
+
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "암호 만료 주의 날짜(_D):"
 
-#: ../interfaces/users.ui.h:50 ../src/network/address-list.c:77
-#: ../src/network/hosts.c:33 ../src/shares/table.c:40 ../src/users/table.c:40
-msgid "_Delete"
-msgstr "삭제(_D)"
+#: ../interfaces/users.ui.h:71
+msgid "_Enable Account"
+msgstr "계정 사용 가능하게 하기(_E)"
 
-#: ../interfaces/users.ui.h:51
+#: ../interfaces/users.ui.h:72
+msgid "_Encrypt home folder to protect sensitive data"
+msgstr "비밀 데이터 보호를 위해 홈 폴더 암호화(_E)"
+
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "만들기(_G)"
 
-#: ../interfaces/users.ui.h:52
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "홈 디렉터리(_H):"
 
-#: ../interfaces/users.ui.h:53
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "집 전화(_H):"
 
-#: ../interfaces/users.ui.h:54
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "메인 그룹(_M):"
 
-#: ../interfaces/users.ui.h:55
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "그룹 관리(_M):"
 
-#: ../interfaces/users.ui.h:56
-msgid "_Profile:"
-msgstr "프로파일(_P):"
+#: ../interfaces/users.ui.h:78
+msgid "_Name:"
+msgstr "이름(_N):"
 
-#: ../interfaces/users.ui.h:57
-msgid "_Real name:"
-msgstr "실제 이름(_R):"
+#: ../interfaces/users.ui.h:79
+msgid "_Password:"
+msgstr "암호(_P):"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
-msgstr "쉘(_S):"
+msgstr "셸(_S):"
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:81
+msgid "_Short Name:"
+msgstr "짧은 이름(_S):"
+
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "직장 전화(_W):"
 
@@ -686,47 +758,63 @@ msgstr ""
 msgid "Unsupported platform"
 msgstr "지원하지 않는 플랫폼"
 
-#: ../src/common/gst-tool.c:179 ../src/common/gst-tool.c:213
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be loaded"
 msgstr "설정을 읽을 수 없습니다"
 
-#: ../src/common/gst-tool.c:180
-msgid "You are not allowed to access the system configuration."
-msgstr "시스템 설정에 접근할 수 없습니다."
-
-#: ../src/common/gst-tool.c:182 ../src/common/gst-tool.c:215
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:192
 msgid "The configuration could not be saved"
 msgstr "설정을 저장할 수 없습니다"
 
-#: ../src/common/gst-tool.c:183
+#: ../src/common/gst-tool.c:196
+msgid "You are not allowed to access the system configuration."
+msgstr "시스템 설정에 접근할 수 없습니다."
+
+#. OPERATION_COMMIT
+#: ../src/common/gst-tool.c:198 ../src/common/gst-tool.c:691
 msgid "You are not allowed to modify the system configuration."
 msgstr "시스템 설정의 수정을 허용하지 않습니다."
 
-#: ../src/common/gst-tool.c:218
+#: ../src/common/gst-tool.c:201
 msgid "Invalid data was found."
 msgstr "올바르지 않은 데이터를 찾았습니다."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:220
+#: ../src/common/gst-tool.c:203
 msgid "An unknown error occurred."
 msgstr "알 수 없는 오류가 발생했습니다."
 
-#: ../src/common/gst-tool.c:442
+#: ../src/common/gst-tool.c:428
 msgid "Could not display help"
 msgstr "도움말을 보여줄 수 없습니다"
 
-#: ../src/common/gst-tool.c:626
+#: ../src/common/gst-tool.c:622
 msgid "The system configuration has potentially changed."
 msgstr "시스템 설정이 바뀌었습니다."
 
-#: ../src/common/gst-tool.c:628
+#: ../src/common/gst-tool.c:624
 msgid "Update content? This will lose any modification in course."
 msgstr "업데이트할까요? 업데이트하면 지금 바꾼 사항을 잃어버립니다."
 
+#: ../src/common/gst-tool.c:693
+#, c-format
+msgid ""
+"An error occurred while checking for authorizations: %s\n"
+"You may report this as a bug."
+msgstr ""
+"권한을 확인하는 중 오류가 발생했습니다: %s\n"
+"이 상황을 버그로 보고해 주십시오."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
-#: ../src/shares/table.c:38 ../src/users/table.c:38
+#: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
 msgstr "추가(_A)"
+
+#: ../src/network/address-list.c:77 ../src/network/hosts.c:33
+#: ../src/shares/table.c:40 ../src/users/table.c:42
+msgid "_Delete"
+msgstr "삭제(_D)"
 
 #: ../src/network/address-list.c:486
 msgid "Type address"
@@ -812,7 +900,7 @@ msgid "%s Properties"
 msgstr "%s 속성"
 
 #: ../src/network/hosts.c:32 ../src/network/ifaces-list.c:33
-#: ../src/shares/table.c:39 ../src/users/table.c:39
+#: ../src/shares/table.c:39 ../src/users/table.c:41
 msgid "_Properties"
 msgstr "속성(_P)"
 
@@ -955,17 +1043,17 @@ msgstr "네트워크"
 msgid "Network Settings"
 msgstr "네트워크 설정"
 
-#: ../src/services/callbacks.c:59
+#: ../src/services/callbacks.c:65
 #, c-format
 msgid "Settings for service \"%s\""
 msgstr "\"%s\" 서비스의 설정"
 
-#: ../src/services/callbacks.c:119
+#: ../src/services/callbacks.c:125
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "정말로 \"%s\"을(를) 비활성화하시겠습니까?"
 
-#: ../src/services/callbacks.c:123
+#: ../src/services/callbacks.c:129
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1120,11 +1208,11 @@ msgstr "스팸 필터"
 #. GST_ROLE_SPAM_FILTER
 #: ../src/services/service.c:54
 msgid "Remote shell server"
-msgstr "원격 쉘 서버"
+msgstr "원격 셸 서버"
 
 #: ../src/services/service.c:54
 msgid "Secure shell server"
-msgstr "보안 쉘 서버"
+msgstr "보안 셸 서버"
 
 #. GST_ROLE_SECURE_SHELL_SERVER
 #: ../src/services/service.c:55
@@ -1417,7 +1505,7 @@ msgstr "상태"
 msgid "Priority"
 msgstr "우선 순위"
 
-#: ../src/services/services-tool.c:99
+#: ../src/services/services-tool.c:106
 msgid "Services Settings"
 msgstr "서비스 설정"
 
@@ -1490,11 +1578,11 @@ msgstr "'%s' 폴더 설정"
 msgid "Share Folder"
 msgstr "공유 폴더"
 
-#: ../src/shares/shares-tool.c:155
+#: ../src/shares/shares-tool.c:152
 msgid "Sharing services are not installed"
 msgstr "공유 서비스를 설치하지 않았습니다"
 
-#: ../src/shares/shares-tool.c:157
+#: ../src/shares/shares-tool.c:154
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders."
@@ -1508,11 +1596,11 @@ msgstr "시간, 날짜와 시간대를 설정합니다"
 msgid "Time and Date"
 msgstr "시간과 날짜"
 
-#: ../src/time/time-tool.c:390
+#: ../src/time/time-tool.c:402
 msgid "NTP support is not installed"
 msgstr "NTP 기능을 설치하지 않았습니다"
 
-#: ../src/time/time-tool.c:392
+#: ../src/time/time-tool.c:404
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1520,75 +1608,71 @@ msgstr ""
 "로컬 시간서버와 인터넷 시간서버의 시계를 똑같이 맞추기 위해서는 시스템에서 "
 "NTP 기능을 설치하고 실행해야 합니다."
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:433
 msgid "Enabling NTP"
 msgstr "NTP 사용하기"
 
-#: ../src/time/time-tool.c:422
+#: ../src/time/time-tool.c:433
 msgid "Disabling NTP"
 msgstr "NTP 사용하지 않기"
 
-#: ../src/time/time-tool.c:434
+#: ../src/time/time-tool.c:445
 msgid "Synchronizing system clock"
 msgstr "시스템 시계와 동기화"
 
-#: ../src/time/time-tool.c:514
+#: ../src/time/time-tool.c:525
 msgid "Keep synchronized with Internet servers"
 msgstr "인터넷 서버와 동기화 유지"
 
-#: ../src/time/time-tool.c:515
-msgid "Manual"
-msgstr "수동"
-
-#: ../src/time/time-tool.c:661
+#: ../src/time/time-tool.c:672
 msgid "Time and Date Settings"
 msgstr "시간과 날짜 설정"
 
-#: ../src/users/group-settings.c:52
+#: ../src/users/group-settings.c:55
 msgid "Administrator group can not be deleted"
 msgstr "관리자 그룹은 삭제할 수 없습니다"
 
-#: ../src/users/group-settings.c:55 ../src/users/group-settings.c:279
-#: ../src/users/group-settings.c:303 ../src/users/user-settings.c:61
-#: ../src/users/user-settings.c:636
+#: ../src/users/group-settings.c:58 ../src/users/group-settings.c:228
+#: ../src/users/group-settings.c:265 ../src/users/user-settings.c:88
+#: ../src/users/user-settings.c:476
 msgid "This would leave the system unusable."
 msgstr "시스템을 쓰지 못하게 할 것입니다."
 
-#: ../src/users/group-settings.c:68
+#: ../src/users/group-settings.c:71
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "그룹 \"%s\"을(를) 정말로 삭제하시겠습니까?"
 
-#: ../src/users/group-settings.c:71
+#: ../src/users/group-settings.c:74
 msgid "This may leave files with invalid group ID in the filesystem."
 msgstr "파일 시스템에 잘못된 그룹 ID를 가진 파일을 남기게 할 수 있습니다."
 
-#: ../src/users/group-settings.c:167
+#: ../src/users/group-settings.c:151
 msgid "New group"
 msgstr "새 그룹"
 
-#: ../src/users/group-settings.c:175
+#: ../src/users/group-settings.c:158
 #, c-format
 msgid "Group '%s' Properties"
 msgstr "그룹 '%s' 속성"
 
-#: ../src/users/group-settings.c:275
+#: ../src/users/group-settings.c:224
 msgid "Group name is empty"
 msgstr "그룹 이름이 비어있습니다"
 
-#: ../src/users/group-settings.c:276
+#: ../src/users/group-settings.c:225
 msgid "A group name must be specified."
 msgstr "그룹 이름을 지정해야 합니다."
 
-#: ../src/users/group-settings.c:278
+#: ../src/users/group-settings.c:227
 msgid "Group name of the administrator group user should not be modified"
 msgstr "관리자 그룹의 그룹 이름은 고칠 수 없습니다"
 
-#: ../src/users/group-settings.c:281
+#: ../src/users/group-settings.c:230
 msgid "Group name has invalid characters"
 msgstr "그룹이름에 잘못된 글자가 있습니다"
 
-#: ../src/users/group-settings.c:282
+#: ../src/users/group-settings.c:231
 msgid ""
 "Please set a valid group name consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1596,86 +1680,180 @@ msgstr ""
 "올바른 그룹 이름을 설정해 주십시오. 그룹 이름은 소문자로 시작해서 소문자와 숫"
 "자로 이루어져야 합니다."
 
-#: ../src/users/group-settings.c:286 ../src/users/user-settings.c:569
+#: ../src/users/group-settings.c:236
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "\"%s\" 그룹이 이미 있습니다."
 
-#: ../src/users/group-settings.c:287
+#: ../src/users/group-settings.c:237
 msgid "Please choose a different group name."
 msgstr "다른 그룹 이름을 선택하십시오."
 
-#: ../src/users/group-settings.c:302
+#: ../src/users/group-settings.c:264
 msgid "Group ID of the Administrator account should not be modified"
 msgstr "관리자 계정의 그룹 ID는 고칠 수 없습니다"
 
-#: ../src/users/groups-table.c:45
+#. check that GID is free
+#: ../src/users/group-settings.c:268
+#, c-format
+msgid "Group ID %d is already used by group \"%s\""
+msgstr "그룹 ID %d번은 이미 %s 그룹이 사용하고 있습니다"
+
+#: ../src/users/group-settings.c:271
+msgid "Please choose a different numeric identifier for the new group."
+msgstr "새 그룹에 다른 ID 번호를 사용하십시오."
+
+#: ../src/users/group-settings.c:273
+#, c-format
+msgid "Please choose a different numeric identifier for group \"%s\"."
+msgstr "\"%s\" 그룹에 다른 ID 번호를 사용하십시오."
+
+#: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "그룹 이름"
 
-#: ../src/users/privileges-table.c:49
+#: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
 msgstr "시스템 로그 보기"
 
-#: ../src/users/privileges-table.c:50
+#: ../src/users/privileges-table.c:54
 msgid "Administer the system"
 msgstr "시스템 관리"
 
-#: ../src/users/privileges-table.c:51
+#: ../src/users/privileges-table.c:55
 msgid "Use audio devices"
 msgstr "오디오 장치 사용"
 
-#: ../src/users/privileges-table.c:52
+#: ../src/users/privileges-table.c:56
 msgid "Use CD-ROM drives"
 msgstr "CD-ROM 드라이브 사용"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:57
 msgid "Burn CDs / DVDs"
 msgstr "CD/DVD 굽기"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:58
 msgid "Use modems"
 msgstr "모뎀 사용"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:59
 msgid "Connect to Internet using a modem"
 msgstr "모뎀을 사용해 인터넷에 연결"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:60
 msgid "Send and receive faxes"
 msgstr "팩스를 보내고 받음"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:61
 msgid "Use floppy drives"
 msgstr "플로피 드라이브 사용"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:62
+msgid "Mount user-space filesystems (FUSE)"
+msgstr "유저스페이스 파일 시스템 마운트 (FUSE)"
+
+#: ../src/users/privileges-table.c:63
+msgid "Configure printers"
+msgstr "프린터 설정"
+
+#: ../src/users/privileges-table.c:64
+msgid "Connect to wireless and ethernet networks"
+msgstr "무선 및 이더넷 네트워크에 연결"
+
+#: ../src/users/privileges-table.c:65
 msgid "Access external storage devices automatically"
 msgstr "자동으로 외부 저장 장치에 접근"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:66
+msgid "Suspend and hibernate the computer"
+msgstr "컴퓨터를 절전하거나 최대절전"
+
+#: ../src/users/privileges-table.c:67
 msgid "Access /proc filesystem"
 msgstr "/proc 파일 시스템 접근"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:68
 msgid "Use scanners"
 msgstr "스캐너 사용"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:69
 msgid "Use tape drives"
 msgstr "테이프 드라이브 사용"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:70
 msgid "Use USB devices"
 msgstr "USB 장치 사용"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:71
+msgid "Use VirtualBox virtualization solution"
+msgstr "VirtualBox 가상화 솔루션 사용"
+
+#: ../src/users/privileges-table.c:72
 msgid "Use video devices"
 msgstr "비디오 장치 사용"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:73
 msgid "Be able to get administrator privileges"
 msgstr "관리자 권한을 얻을 수 있음"
+
+#: ../src/users/user-profiles.conf.in.h:1
+msgid "Administrator"
+msgstr "관리자"
+
+#: ../src/users/user-profiles.conf.in.h:2
+msgid ""
+"Can change anything on the system, including installing and upgrading "
+"software."
+msgstr "시스템의 모든 것을 바꿀 수 있습니다. 소프트웨어 설치 업그레이드도 할 수 있습니다."
+
+#: ../src/users/user-profiles.conf.in.h:3
+msgid ""
+"Can perform common tasks. Can't install software or change settings "
+"affecting all users."
+msgstr "일반적인 작업을 할 수 있습니다. 소프트웨어를 설치하거나 다른 사용자에 영향을 미치는 설정을 할 수 없습니다."
+
+#: ../src/users/user-profiles.conf.in.h:4
+msgid "Desktop user"
+msgstr "데스크톱 사용자"
+
+#: ../src/users/run-passwd.c:421
+msgid "Authentication failed"
+msgstr "인증이 실패했습니다"
+
+#: ../src/users/run-passwd.c:494
+#, c-format
+msgid "The new password is too short"
+msgstr "새 암호가 너무 짧습니다"
+
+#: ../src/users/run-passwd.c:499
+#, c-format
+msgid "The new password is too simple"
+msgstr "새 암호가 너무 간단합니다"
+
+#: ../src/users/run-passwd.c:503
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "예전 암호와 새 암호가 너무 비슷합니다"
+
+#: ../src/users/run-passwd.c:506
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "새 암호에 숫자나 특수 문자가 들어가야 합니다"
+
+#: ../src/users/run-passwd.c:510
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "예전 암호와 새 암호가 같습니다"
+
+#: ../src/users/run-passwd.c:514
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "최초에 로그인한 이후 암호가 바뀌었습니다!"
+
+#: ../src/users/run-passwd.c:518
+#, c-format
+msgid "Unknown error"
+msgstr "알 수 없는 오류"
 
 #: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
@@ -1685,79 +1863,123 @@ msgstr "사용자와 그룹을 추가하거나 제거합니다"
 msgid "Users and Groups"
 msgstr "사용자와 그룹"
 
-#: ../src/users/user-settings.c:58
+#: ../src/users/user-password.c:97
+msgid "Password is too short"
+msgstr "암호가 너무 짧습니다"
+
+#: ../src/users/user-password.c:98
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"사용자 암호는 6자보다 길어야 하며, 숫자, 문자 특수문자로 이루어져야 합니다."
+
+#: ../src/users/user-password.c:101
+msgid "Password confirmation is not correct"
+msgstr "암호 확인이 올바르지 않습니다."
+
+#: ../src/users/user-password.c:102
+msgid "Check that you have provided the same password in both text fields."
+msgstr "암호를 똑같이 입력하여야 합니다."
+
+#: ../src/users/user-password.c:426
+msgid "Please choose another password."
+msgstr "다른 암호를 입력하십시오."
+
+#: ../src/users/user-password.c:437
+msgid "Please type again your current password."
+msgstr "현재 암호를 다시 입력하십시오."
+
+#: ../src/users/user-password.c:444
+msgid "Password could not be changed"
+msgstr "암호를 바꿀 수 없습니다"
+
+#: ../src/users/user-settings.c:85
 msgid "Administrator account cannot be deleted"
 msgstr "관리자 계정은 삭제할 수 없습니다"
 
-#: ../src/users/user-settings.c:72
+#: ../src/users/user-settings.c:96
 #, c-format
-msgid "Are you sure you want to delete account \"%s\"?"
-msgstr "계정 \"%s\"을(를) 정말로 삭제하시겠습니까?"
+msgid "%s is currently using this computer"
+msgstr "%s 사용자가 현재 이 컴퓨터를 사용하고 있습니다"
 
-#: ../src/users/user-settings.c:75
+#: ../src/users/user-settings.c:99
+msgid "Please ensure the user has logged out before deleting this account."
+msgstr "이 사용자가 로그아웃한 다음에 이 계정을 삭제하십시오."
+
+#: ../src/users/user-settings.c:109
+msgid "Can't delete the only administrator account"
+msgstr "유일하게 남은 관리자 계정은 삭제할 수 없습니다."
+
+#: ../src/users/user-settings.c:111
+#, c-format
 msgid ""
-"This will disable this user's access to the system without deleting the "
-"user's home directory."
-msgstr ""
-"이 사용자가 시스템에 접근하지 못하도록합니다. 하지만 홈 디렉터리는 삭제하지 "
-"않습니다."
+"%s is the only administrator on this computer. Deleting this account would "
+"lock you out of administrating the system."
+msgstr "%s 사용자는 이 컴퓨터에 유일하게 남은 관리자입니다. 이 계정을 지우면 시스템을 관리할 방법이 없어집니다."
 
-#: ../src/users/user-settings.c:85
-msgid "This user is currently using this computer"
-msgstr "이 사용자는 현재 이 사용자를 사용하고 있습니다"
-
-#: ../src/users/user-settings.c:385
-msgid "New user account"
-msgstr "새 사용자 계정"
-
-#: ../src/users/user-settings.c:403
+#: ../src/users/user-settings.c:121
 #, c-format
-msgid "Account '%s' Properties"
-msgstr "계정 '%s' 속성"
+msgid "Remove home folder for %s?"
+msgstr "%s 사용자의 홈 폴더를 제거하시겠습니까?"
 
-#: ../src/users/user-settings.c:558
-msgid "User name is empty"
-msgstr "사용자 이름이 비어있습니다."
-
-#: ../src/users/user-settings.c:559
-msgid "A user name must be specified."
-msgstr "사용자 이름을 정해야 합니다."
-
-#: ../src/users/user-settings.c:561
-msgid "User name has invalid characters"
-msgstr "사용자 이름에 잘못된 글자가 있습니다"
-
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:124
+#, c-format
 msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr ""
-"올바른 사용자 이름을 설정해 주십시오. 사용자 이름은 소문자로 시작해서 소문자"
-"와 숫자로 이루어져야 합니다."
+"Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
+"need them anymore. You may want to back them up before deleting the account, "
+"or keep them so that an administrator can save them later."
+msgstr "<tt>%2$s</tt> 안에 %1$s 사용자 소유의 파일을 필요 없으면 완전히 제거합니다. 계정을 삭제하기 전에 백업할 수도 있고, 아니면 나중에 사용하도록 이 파일을 유지할 수도 있습니다."
 
-#: ../src/users/user-settings.c:566
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "\"%s\" 사용자 이름이 이미 있습니다"
+#: ../src/users/user-settings.c:132
+msgid "Keep Files"
+msgstr "파일 유지"
 
-#: ../src/users/user-settings.c:567 ../src/users/user-settings.c:570
-msgid "Please choose a different user name."
-msgstr "다른 사용자 이름을 선택하십시오."
+#: ../src/users/user-settings.c:133
+msgid "Don't Remove Account"
+msgstr "계정 제거하지 않기"
 
-#: ../src/users/user-settings.c:595
+#: ../src/users/user-settings.c:134
+msgid "Delete Files"
+msgstr "파일 삭제"
+
+# root
+#: ../src/users/user-settings.c:330
+msgid "Superuser"
+msgstr "루트 사용자"
+
+#: ../src/users/user-settings.c:335
+msgid "Custom"
+msgstr "사용자 지정"
+
+#. TRANSLATORS: This applies to a password.
+#: ../src/users/user-settings.c:344
+msgid "None"
+msgstr "없음"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+#: ../src/users/user-settings.c:347
+msgid "Not asked on login"
+msgstr "로그인할 때 묻지 않기"
+
+#: ../src/users/user-settings.c:349
+msgid "Asked on login"
+msgstr "로그인할 때 묻기"
+
+#: ../src/users/user-settings.c:393
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "설명에 잘못된 문자 \"%c\"'"
 
-#: ../src/users/user-settings.c:596
+#: ../src/users/user-settings.c:394
 msgid "Check that this character is not used."
 msgstr "이 글자가 쓰이지 않는지 확인하십시오."
 
-#: ../src/users/user-settings.c:614
+#: ../src/users/user-settings.c:417
 msgid "Incomplete path in home directory"
 msgstr "홈 디렉터리의 전체 경로를 입력하십시오."
 
-#: ../src/users/user-settings.c:615
+#: ../src/users/user-settings.c:418
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1765,99 +1987,74 @@ msgstr ""
 "홈 디렉터리의 전체 경로를 입력하십시오\n"
 "<span size=\"smaller\">예: /home/john</span>."
 
-#: ../src/users/user-settings.c:618
+#: ../src/users/user-settings.c:433
 msgid "Home directory already exists"
 msgstr "홈 디렉터리가 이미 있습니다"
 
-#: ../src/users/user-settings.c:619
-msgid "Please enter a different home directory path."
-msgstr "다른 홈 디렉터리 경로를 입력하십시오."
+#: ../src/users/user-settings.c:434
+#, c-format
+msgid ""
+"The directory <tt>%s</tt> already exists. User may not have the permissions "
+"required to read or write in that directory. Do you want to use it anyway?"
+msgstr "<tt>%s</tt> 디렉터리가 이미 있습니다. 이 디렉터리를 읽거나 쓰는데 필요한 권한이 사용자에게 없을 수도 있습니다. 그래도 이 디렉터리를 사용하시겠습니까?"
 
-#: ../src/users/user-settings.c:635
-msgid "Administrator account's user ID should not be modified"
-msgstr "관리자 계정의 사용자 ID는 고칠 수 없습니다"
+#: ../src/users/user-settings.c:440
+msgid "Use this directory"
+msgstr "이 디렉터리 사용"
 
-#: ../src/users/user-settings.c:650
+#: ../src/users/user-settings.c:475
+msgid "ID for the root user should not be modified"
+msgstr "루트(root) 사용자의 ID는 수정할 수 없습니다"
+
+#. check that UID is free
+#: ../src/users/user-settings.c:479
+#, c-format
+msgid "User ID %d is already used by user %s"
+msgstr "사용자 ID %d번은 이미 %s 사용자가 사용하고 있습니다"
+
+#: ../src/users/user-settings.c:481
+#, c-format
+msgid "Please choose a different numeric identifier for %s."
+msgstr "%s 사용자에 다른 ID 번호를 사용하십시오."
+
+#: ../src/users/user-settings.c:499
 msgid "Incomplete path in shell"
-msgstr "완전하지 않은 쉘 경로"
+msgstr "완전하지 않은 셸 경로"
 
-#: ../src/users/user-settings.c:651
+#: ../src/users/user-settings.c:500
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr ""
-"쉘의 전체경로를 넣으십시오\n"
+"셸의 전체경로를 넣으십시오\n"
 "<span size=\"smaller\">예: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:684
-msgid "Password is too short"
-msgstr "암호가 너무 짧습니다"
+#: ../src/users/user-settings.c:534
+msgid "Can't revoke administration rights"
+msgstr "관리 권한을 무효화할 수 없습니다"
 
-#: ../src/users/user-settings.c:685
+#: ../src/users/user-settings.c:537
+#, c-format
 msgid ""
-"User passwords must be longer than 6 characters and preferably formed by "
-"numbers, letters and special characters."
-msgstr ""
-"사용자 암호는 6자보다 길어야 하며, 숫자, 문자 특수문자로 이루어져야 합니다."
+"%s is the only administrator on this computer. Revoking administration "
+"rights for this account would lock you out of administrating the system."
+msgstr "%s 사용자는 이 컴퓨터의 유일한 관리자입니다. 이 계정의 관리 권한을 무효화하면 시스템을 관리할 방법이 없어집니다."
 
-#: ../src/users/user-settings.c:688
-msgid "Password confirmation is not correct"
-msgstr "암호 확인이 올바르지 않습니다."
+#: ../src/users/user-settings.c:554
+msgid "You are about to revoke your own administration rights"
+msgstr "자기 자신의 관리자 권한을 무효화하려고 합니다"
 
-#: ../src/users/user-settings.c:689
-msgid "Check that you have provided the same password in both text fields."
-msgstr "암호를 똑같이 입력하여야 합니다."
+#: ../src/users/user-settings.c:557
+#, c-format
+msgid ""
+"%s will no longer be able to perform administrative tasks. This account "
+"won't be allowed to get administration rights back on its own."
+msgstr "%s 사용자는 이제 관리 작업을 수행할 수 없게 됩니다. 이 계정은 자기 스스로 관리 권한을 획득할 수 없습니다."
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "이름"
+#: ../src/users/user-settings.c:562
+msgid "Give up administration rights"
+msgstr "관리자 권한 포기"
 
-#: ../src/users/users-table.c:67
-msgid "Login name"
-msgstr "로그인 이름"
-
-#: ../src/users/users-table.c:77
-msgid "Home directory"
-msgstr "홈 디렉터리"
-
-#: ../src/users/users-tool.c:216
+#: ../src/users/users-tool.c:284
 msgid "Users Settings"
 msgstr "사용자 설정"
-
-#~ msgid "<span weight=\"bold\">Contact Information</span>"
-#~ msgstr "<span weight=\"bold\">연락 정보</span>"
-
-#~ msgid "_Unlock"
-#~ msgstr "잠금 풀기(_U)"
-
-#~ msgid "This action is allowed"
-#~ msgstr "이 동작은 허용합니다"
-
-#~ msgid "This action is not allowed"
-#~ msgstr "이 동작은 허용하지 않습니다"
-
-#~ msgid "Could not authenticate"
-#~ msgstr "인증할 수 없습니다"
-
-#~ msgid "<b>Phone number:</b> %s <b>Login:</b> %s"
-#~ msgstr "<b>전화번호:</b> %s <b>로그인:</b> %s"
-
-#~ msgid "Administrator account's user name should not be modified"
-#~ msgstr "관리자 계정의 사용자 이름은 고칠 수 없습니다"
-
-#~ msgid ""
-#~ "Off\n"
-#~ "Low\n"
-#~ "Medium\n"
-#~ "Loud"
-#~ msgstr ""
-#~ "끔\n"
-#~ "낮음\n"
-#~ "중간\n"
-#~ "높음"
-
-#~ msgid "Modem connection"
-#~ msgstr "모뎀 연결"
-
-#~ msgid "ISDN connection"
-#~ msgstr "ISDN 연결"
