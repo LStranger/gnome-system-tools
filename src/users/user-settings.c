@@ -1053,6 +1053,7 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 	OobsUser *user;
 	const char *fullname;
 	gboolean is_self;
+	OobsResult result;
 
 	user = users_table_get_current ();
 
@@ -1090,12 +1091,14 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 		oobs_user_set_full_name (user, fullname);
 
 		if (is_self)
-			gst_tool_commit (tool, GST_USERS_TOOL (tool)->self_config);
+			result = gst_tool_commit (tool, GST_USERS_TOOL (tool)->self_config);
 		else
-			gst_tool_commit (tool, OOBS_OBJECT (user));
+			result = gst_tool_commit (tool, OOBS_OBJECT (user));
 
-		gtk_label_set_text (GTK_LABEL (user_settings_real_name), fullname);
-		users_table_update_current ();
+		if (result == OOBS_RESULT_OK) {
+			gtk_label_set_text (GTK_LABEL (user_settings_real_name), fullname);
+			users_table_update_current ();
+		}
 	}
 
 	g_object_unref (user);
