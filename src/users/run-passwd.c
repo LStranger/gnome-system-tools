@@ -557,6 +557,9 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 					 * in this case, simply remove it from the queue */
 					pw = g_queue_pop_head (passwd_handler->backend_stdin_queue);
 					g_free (pw);
+
+					/* Pop the IO queue, i.e. send new password */
+					io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
 				} else {
 
 					passwd_handler->backend_state = PASSWD_STATE_AUTH;
@@ -731,8 +734,12 @@ passwd_change_password (PasswdHandler *passwd_handler,
 		update_password (passwd_handler);
 	}
 
-	/* Pop new password through the backend */
-	io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
+	/* Pop new password through the backend. If user has no password, popping the queue
+	   would output current password, while 'passwd' is waiting for the new one. So wait
+	   for io_watch_stdout() to remove current password from the queue, and output
+	   the new one for us.*/
+	if (passwd_handler->current_password)
+		io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
 
 	/* Our IO watcher should now handle the rest */
 
