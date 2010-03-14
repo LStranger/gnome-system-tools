@@ -342,7 +342,7 @@ user_settings_show (OobsUser *user)
 	if (oobs_user_get_password_empty (user))
 		/* TRANSLATORS: This applies to a password. */
 		gtk_label_set_text (GTK_LABEL (passwd_label), _("None"));
-	else if (oobs_user_is_in_group (user, group))
+	else if (group && oobs_user_is_in_group (user, group))
 		/* TRANSLATORS:  This applies to a password. Keep the string short. */
 		gtk_label_set_text (GTK_LABEL (passwd_label), _("Not asked on login"));
 	else
