@@ -104,13 +104,6 @@ group_delete (GtkTreeModel *model, GtkTreePath *path)
 
 	if (check_group_delete (group)) {
 		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
-		retval = (OOBS_RESULT_OK == oobs_groups_config_delete_group (config, group));
-
-		if (retval)
-			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-	}
-	if (check_group_delete (group)) {
-		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
 		result = oobs_groups_config_delete_group (config, group);
 		if (result == OOBS_RESULT_OK) {
 			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
