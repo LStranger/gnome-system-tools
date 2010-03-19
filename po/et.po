@@ -15,9 +15,9 @@ msgstr ""
 "Project-Id-Version: GNOME System Tools MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2010-01-28 12:36+0000\n"
-"PO-Revision-Date: 2010-02-26 08:24+0200\n"
-"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
+"POT-Creation-Date: 2010-03-18 09:39+0000\n"
+"PO-Revision-Date: 2010-03-18 17:21+0300\n"
+"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -380,16 +380,16 @@ msgid "Change User Password"
 msgstr "Kasutaja parooli muutmine"
 
 msgid "Changing advanced settings for:"
-msgstr ""
+msgstr "Täpsemate sätete muutmine kasutajal:"
 
 msgid "Changing user account type for:"
-msgstr ""
+msgstr "Konto liigi muutmine kasutajal:"
 
 msgid "Changing user name for:"
-msgstr ""
+msgstr "Kasutajanime muutmine kasutajal:"
 
 msgid "Changing user password for:"
-msgstr ""
+msgstr "Parooli muutmine kasutajal:"
 
 msgid "Con_firmation:"
 msgstr "_Paroolikordus:"
@@ -413,7 +413,7 @@ msgid "Default _shell:"
 msgstr "Vaikimisi _kest (shell):"
 
 msgid "Disable _account"
-msgstr ""
+msgstr "_Keela konto"
 
 msgid "Don't ask for password on _login"
 msgstr "Sisselogimisel parooli _ei küsita"
@@ -423,6 +423,9 @@ msgid ""
 "from people with physical access to your computer, at the expense of a "
 "slightly reduced performance."
 msgstr ""
+"Krüpteeri kõik oma failid sisselogimisparooliga, ega neid tõhusalt kaitsta "
+"ka nende inimeste eest, kellel on füüsiline ligipääs arvutile, pisut "
+"väiksema jõudluse hinnaga."
 
 msgid "Full _Name:"
 msgstr "Täis_nimi:"
@@ -444,9 +447,6 @@ msgstr "Gruppide sätted"
 
 msgid "Ma_ximum days a password may be used:"
 msgstr "_Suurim päevade arv, millal parooli saab kasutada:"
-
-msgid "Manual"
-msgstr "Käsitsi"
 
 msgid "Maximum GID:"
 msgstr "Suurim GID:"
@@ -494,9 +494,13 @@ msgid ""
 "  &#x27A3; digits\n"
 "  &#x27A3; any of the characters \".\", \"-\" and \"_\""
 msgstr ""
+"Lühinimes võivad olla:\n"
+"  &#x27A3; inglise tähestiku väiketähtedest\n"
+"  &#x27A3; numbrid\n"
+"  &#x27A3; märgid \".\", \"-\" ja \"_\""
 
 msgid "Short name must start with a letter!"
-msgstr ""
+msgstr "Lühinimi peab algama tähega!"
 
 msgid "This account is disabled."
 msgstr "See konto on keelatud."
@@ -519,12 +523,16 @@ msgstr "Kasutajaprofiilid"
 
 msgid "You can't change user ID while the user is logged in."
 msgstr ""
+"Kasutaja ID-d pole võimalik muuta sel ajal, kui kasutaja on sisse logitud."
 
 msgid "_Add Profile"
 msgstr "_Lisa profiil"
 
 msgid "_Advanced Settings"
 msgstr "_Laiendatud sätted"
+
+msgid "_Change..."
+msgstr "_Muuda..."
 
 msgid "_Comments"
 msgstr "_Kommentaarid"
@@ -539,10 +547,10 @@ msgid "_Days between warning and password expiration:"
 msgstr "_Päevade arv hoiatuse ja parooli aegumise vahel:"
 
 msgid "_Enable Account"
-msgstr ""
+msgstr "_Luba konto"
 
 msgid "_Encrypt home folder to protect sensitive data"
-msgstr ""
+msgstr "_Kodukataloog krüpteeritakse tundlike andmete kaitseks"
 
 msgid "_Generate"
 msgstr "_Genereeri"
@@ -626,6 +634,8 @@ msgid ""
 "An error occurred while checking for authorizations: %s\n"
 "You may report this as a bug."
 msgstr ""
+"Autoriseeringute kontrollil esines viga: %s\n"
+"Võid sellest veast raporteerida."
 
 msgid "_Add"
 msgstr "_Lisa"
@@ -1262,6 +1272,9 @@ msgstr "Süsteemse kella sünkroniseerimine"
 msgid "Keep synchronized with Internet servers"
 msgstr "Internetis olevate serveritega sünkroonis hoidmine"
 
+msgid "Manual"
+msgstr "Käsitsi"
+
 msgid "Time and Date Settings"
 msgstr "Kella ja kuupäeva sätted"
 
@@ -1393,27 +1406,33 @@ msgid "Be able to get administrator privileges"
 msgstr "Administraatori õiguste saamise võimalus"
 
 msgid "Administrator"
-msgstr ""
+msgstr "Administraator"
 
 msgid ""
 "Can change anything on the system, including installing and upgrading "
 "software."
 msgstr ""
+"Võib teha arvutis ükskõik mida, sealhulgas tarkvara paigaldamine ja "
+"uuendamine."
 
 msgid ""
 "Can perform common tasks. Can't install software or change settings "
 "affecting all users."
 msgstr ""
+"Võib sooritada tavapäraseid ülesandeid. Ei saa paigaldada tarkvara ega muuta "
+"teisi kasutajaid mõjutavaid sätteid."
 
 msgid "Desktop user"
-msgstr ""
+msgstr "Töölauakasutaja"
 
 msgid "Authentication failed"
 msgstr "Tõrge autentimisel"
 
+#, c-format
 msgid "The new password is too short"
 msgstr "Uus parool on liiga lühike"
 
+#, c-format
 msgid "The new password is too simple"
 msgstr "Uus parool on liiga lihtne"
 
@@ -1431,8 +1450,9 @@ msgstr "Vana ja uus parool on samasugused"
 
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
+msgstr "Sinu parooli on pärast esmast sisselogimist muudetud!"
 
+#, c-format
 msgid "Unknown error"
 msgstr "Tundmatu viga."
 
@@ -1462,10 +1482,10 @@ msgid "Please choose another password."
 msgstr "Palun vali mõni muu parool."
 
 msgid "Please type again your current password."
-msgstr ""
+msgstr "Palun sisesta oma praegune parool uuesti."
 
 msgid "Password could not be changed"
-msgstr ""
+msgstr "Parooli pole võimalik muuta"
 
 msgid "Administrator account cannot be deleted"
 msgstr "Administraatori kontot pole võimalik kustutada"
@@ -1479,33 +1499,39 @@ msgstr ""
 "Palun veendu, et kasutaja on enne selle konto kustutamist välja logitud."
 
 msgid "Can't delete the only administrator account"
-msgstr ""
+msgstr "Ainsa administraatori kontot pole võimalik kustutada"
 
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Deleting this account would "
 "lock you out of administrating the system."
 msgstr ""
+"Kasutaja %s on ainukene administraator selles arvutis. Selle konto "
+"kustutamine muudaks süsteemi administreerimise võimatuks."
 
 #, c-format
 msgid "Remove home folder for %s?"
-msgstr ""
+msgstr "Kas eemaldada kasutaja %s kodukataloog?"
 
 #, c-format
 msgid ""
 "Files owned by user %s in <tt>%s</tt> can be completely removed if you don't "
 "need them anymore. You may want to back them up before deleting the account, "
-"or keep them so that and administrator can save them later."
+"or keep them so that an administrator can save them later."
 msgstr ""
+"Kasutajale %s kuuluvad failid kaustas <tt>%s</tt> võib täielikult kustutada, "
+"kui sa neid enam ei vaja. Võib-olla tahad aga enne konto kustutamist need "
+"failid varundada või need säilitada, et administraator saaks neid hiljem "
+"päästa."
 
 msgid "Keep Files"
-msgstr ""
+msgstr "Failid säilitatakse"
 
 msgid "Don't Remove Account"
-msgstr ""
+msgstr "Kontot ei eemaldata"
 
 msgid "Delete Files"
-msgstr ""
+msgstr "Failide kustutatakse"
 
 msgid "Superuser"
 msgstr "Superkasutaja"
@@ -1522,7 +1548,7 @@ msgid "Not asked on login"
 msgstr "Sisselogimisel ei küsita"
 
 msgid "Asked on login"
-msgstr ""
+msgstr "Küsitakse sisselogimisel"
 
 #, c-format
 msgid "Invalid character \"%c\" in comment"
@@ -1586,18 +1612,23 @@ msgid ""
 "%s is the only administrator on this computer. Revoking administration "
 "rights for this account would lock you out of administrating the system."
 msgstr ""
+"Kasutaja %s on ainukene administraator selles arvutis. Selle konto "
+"administratiivõiguste tühistamine muudaks süsteemi administreerimise "
+"võimatuks."
 
 msgid "You are about to revoke your own administration rights"
-msgstr ""
+msgstr "Sa tühistad praegu enda administratiivõigused"
 
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
 "won't be allowed to get administration rights back on its own."
 msgstr ""
+"%s ei ole siis enam võimeline sooritama administratiivülesandeid. Selle "
+"konto ei saa pärast seda enam administratiivõiguseid ise tagasi võtta."
 
 msgid "Give up administration rights"
-msgstr ""
+msgstr "Ütle administraatori õigustest lahti"
 
 msgid "Users Settings"
 msgstr "Kasutajate sätted"
