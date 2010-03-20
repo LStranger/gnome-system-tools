@@ -208,6 +208,11 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	if (response == GTK_RESPONSE_OK) {
 		group = group_settings_dialog_get_group ();
 		config = OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config);
+
+		/* We need to know about this group before adding it, else we won't be aware
+		 * that we triggered the commit, and we will show a "Reload config?" dialog. */
+		gst_tool_add_configuration_object (tool, OOBS_OBJECT (group), FALSE);
+
 		result = oobs_groups_config_add_group (config, group);
 
 		if (result == OOBS_RESULT_OK)
