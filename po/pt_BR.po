@@ -14,14 +14,14 @@
 # Thadeu Lima de Souza Cascardo <cascardo@holoscopio.com>, 2009.
 # Djavan Fagundes <dnoway@gmail.com>m 2009.
 # André Gondim <andregondim@ubuntu.com>, 2009
-#
+# Jonh Wendell <jwendell@gnome.org>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-19 08:56-0400\n"
-"PO-Revision-Date: 2010-03-19 09:53-0500\n"
-"Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
+"POT-Creation-Date: 2010-03-22 11:31-0300\n"
+"PO-Revision-Date: 2010-03-22 11:29-0300\n"
+"Last-Translator: Jonh Wendell <jwendell@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -558,10 +558,13 @@ msgid ""
 "from people with physical access to your computer, at the expense of a "
 "slightly reduced performance."
 msgstr ""
+"Criptografa seus arquivos com a sua senha, protegendo-os de pessoas que "
+"tenham acesso físico ao seu computador. Isso pode reduzir um pouco a "
+"performance da máquina."
 
 #: ../interfaces/users.ui.h:31
 msgid "Full _Name:"
-msgstr "_Nome completo::"
+msgstr "_Nome completo:"
 
 # _aleatória colide com c_asa
 #: ../interfaces/users.ui.h:33
@@ -666,6 +669,8 @@ msgid ""
 "This account is using special settings that have been defined manually. Use "
 "the <i>Advanced Settings</i> dialog to tune them."
 msgstr ""
+"Esta conta usa configurações especiais que foram definidas manualmente. Use "
+"o diálogo <i>Configurações avançadas</i> para ajustá-las."
 
 #: ../interfaces/users.ui.h:60
 msgid "User ID:"
@@ -825,6 +830,8 @@ msgid ""
 "An error occurred while checking for authorizations: %s\n"
 "You may report this as a bug."
 msgstr ""
+"Ocorreu um erro ao checar as autorizações: %s\n"
+"Você pode relatar isso como uma falha."
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -1819,7 +1826,7 @@ msgstr "Usar dispositivos USB"
 
 #: ../src/users/privileges-table.c:71
 msgid "Use VirtualBox virtualization solution"
-msgstr ""
+msgstr "Usar a solução de virtualização VirtualBox"
 
 #: ../src/users/privileges-table.c:72
 msgid "Use video devices"
@@ -1838,12 +1845,16 @@ msgid ""
 "Can change anything on the system, including installing and upgrading "
 "software."
 msgstr ""
+"Pode fazer qualquer coisa no sistema, inclusive instalar e atualizar "
+"programas."
 
 #: ../src/users/user-profiles.conf.in.h:3
 msgid ""
 "Can perform common tasks. Can't install software or change settings "
 "affecting all users."
 msgstr ""
+"Pode executar tarefas usuais. Não pode instalar programas ou fazer alguma "
+"mudança que afete todos os usuários."
 
 #: ../src/users/user-profiles.conf.in.h:4
 msgid "Desktop user"
@@ -1952,11 +1963,13 @@ msgid ""
 "%s is the only administrator on this computer. Deleting this account would "
 "lock you out of administrating the system."
 msgstr ""
+"%s é o único administrador do sistema. Remover esta conta lhe impedirá de "
+"administrar o computador."
 
 #: ../src/users/user-settings.c:121
 #, c-format
 msgid "Remove home folder for %s?"
-msgstr "Remover a psta pessoal para %s?"
+msgstr "Remover a pasta pessoal de %s?"
 
 #: ../src/users/user-settings.c:124
 #, c-format
@@ -1965,6 +1978,10 @@ msgid ""
 "need them anymore. You may want to back them up before deleting the account, "
 "or keep them so that an administrator can save them later."
 msgstr ""
+"Os arquivos do usuário %s, que estão em <tt>%s</tt> podem ser completamente "
+"removidos se você não precisa mais deles. Você pode querer fazer um backup "
+"deles antes de excluir a conta, ou mantê-los de forma que um administrador "
+"possa salvá-los posteriormente."
 
 #: ../src/users/user-settings.c:132
 msgid "Keep Files"
@@ -2033,6 +2050,9 @@ msgid ""
 "The directory <tt>%s</tt> already exists. User may not have the permissions "
 "required to read or write in that directory. Do you want to use it anyway?"
 msgstr ""
+"O diretório <tt>%s</tt> já existe. O usuário pode não ter as permissões "
+"necessárias para ler ou escrever neste diretório. Você quer usá-lo assim "
+"mesmo?"
 
 #: ../src/users/user-settings.c:440
 msgid "Use this directory"
@@ -2067,7 +2087,7 @@ msgstr ""
 
 #: ../src/users/user-settings.c:534
 msgid "Can't revoke administration rights"
-msgstr "Não é possível revocar direitos administrativos"
+msgstr "Não é possível revogar direitos administrativos"
 
 #: ../src/users/user-settings.c:537
 #, c-format
@@ -2075,10 +2095,12 @@ msgid ""
 "%s is the only administrator on this computer. Revoking administration "
 "rights for this account would lock you out of administrating the system."
 msgstr ""
+"%s é o único administrador do sistema. Revogar os direitos de administração "
+"desta conta lhe impedirá de administrar o computador."
 
 #: ../src/users/user-settings.c:554
 msgid "You are about to revoke your own administration rights"
-msgstr "Você está prestes a revocar seus próprios direitos administrativos"
+msgstr "Você está prestes a revogar seus próprios direitos administrativos"
 
 #: ../src/users/user-settings.c:557
 #, c-format
@@ -2086,6 +2108,8 @@ msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
 "won't be allowed to get administration rights back on its own."
 msgstr ""
+"%s não será mais apto a executar tarefas administrativas. Esta conta não "
+"poderá ganhar novamente os direitos administrativos por conta própria."
 
 #: ../src/users/user-settings.c:562
 msgid "Give up administration rights"
