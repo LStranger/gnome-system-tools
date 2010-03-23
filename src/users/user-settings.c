@@ -930,6 +930,8 @@ on_user_new (GtkButton *button, gpointer user_data)
 	/* Show the encrypt home check box if supported */
 	if (oobs_users_config_get_encrypted_home_support (users_config))
 	    gtk_widget_show (encrypted_home);
+	else
+	    gtk_widget_hide (encrypted_home);
 
 	gtk_window_set_focus (GTK_WINDOW (user_new_dialog), user_name);
 
