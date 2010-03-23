@@ -177,6 +177,12 @@ on_manage_groups_clicked (GtkWidget *widget, gpointer user_data)
 	GtkWidget *dialog;
 
 	dialog = gst_dialog_get_widget (tool->main_dialog, "groups_dialog");
+
+	/* Force reloading configuration. This is needed when an user was just
+	 * created/deleted, in which case groups may have changed. */
+	oobs_object_update (GST_USERS_TOOL (tool)->groups_config);
+	gst_users_tool_update_gui (tool);
+
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
 	while (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_HELP);
 	gtk_widget_hide (dialog);
