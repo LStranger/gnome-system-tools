@@ -144,7 +144,7 @@ check_user_delete (OobsUser *user)
 	g_object_unref (admin_group);
 	g_list_free (admin_users);
 
-	/* Home flag is used to remove home when deleting an user */
+	/* Home flag is used to remove home when deleting a user */
 	if (response == GTK_RESPONSE_YES)
 		oobs_user_set_home_flags (user, OOBS_USER_REMOVE_HOME);
 	else
