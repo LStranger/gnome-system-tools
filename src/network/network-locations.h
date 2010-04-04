@@ -62,7 +62,7 @@ gboolean               gst_network_locations_set_location    (GstNetworkLocation
 							      const gchar         *name);
 gboolean               gst_network_locations_save_current    (GstNetworkLocations *locations,
 							      const gchar         *name);
-gboolean               gst_network_locations_delete_location (GstNetworkLocations *locations,
+void                   gst_network_locations_delete_location (GstNetworkLocations *locations,
 							      const gchar         *name);
 
 G_END_DECLS

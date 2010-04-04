@@ -468,7 +468,7 @@ gst_dialog_get_freeze_level (GstDialog *dialog)
 {
 	GstDialogPrivate *priv;
 
-	g_return_if_fail (GST_IS_DIALOG (dialog));
+	g_return_val_if_fail (GST_IS_DIALOG (dialog), 0);
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 	return priv->frozen;

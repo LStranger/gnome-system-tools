@@ -1131,13 +1131,12 @@ gst_network_locations_save_current (GstNetworkLocations *locations,
   return result;
 }
 
-gboolean
+void
 gst_network_locations_delete_location (GstNetworkLocations *locations,
 				       const gchar         *name)
 {
   GstNetworkLocationsPrivate *priv;
   gchar *filename, *str, *location_path;
-  gboolean success;
 
   g_return_val_if_fail (GST_IS_NETWORK_LOCATIONS (locations), FALSE);
 
@@ -1150,6 +1149,4 @@ gst_network_locations_delete_location (GstNetworkLocations *locations,
   g_unlink (location_path);
   g_free (location_path);
   g_free (filename);
-
-  return success;
 }
