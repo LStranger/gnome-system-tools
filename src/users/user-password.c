@@ -95,7 +95,7 @@ check_password (OobsUser *user)
 	}
 	else if (len < 6) {
 		primary_text = _("Password is too short");
-		secondary_text = _("User passwords must be longer than 6 characters and preferably "
+		secondary_text = _("User passwords must be longer than 5 characters and preferably "
 		                   "formed by numbers, letters and special characters.");
 	} else if (strcmp (password, confirmation) != 0) {
 		primary_text = _("Password confirmation is not correct");
