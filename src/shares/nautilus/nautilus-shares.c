@@ -129,7 +129,6 @@ get_file_items (NautilusMenuProvider *provider,
   gboolean one_item, is_local, is_dir;
   NautilusFileInfo *info;
   NautilusMenuItem *menu_item;
-  GList            *items = NULL;
 
   shares = NAUTILUS_SHARES (provider);
   one_item = (files && !files->next);

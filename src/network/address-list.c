@@ -290,7 +290,6 @@ setup_treeview (GstAddressList *list)
   GtkCellRenderer *renderer;
   GtkTreeModel    *model;
   GstTablePopup   *table_popup;
-  GtkTargetEntry   target = { "dns", GTK_TARGET_SAME_WIDGET, 0 };
 
   model = GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_BOOLEAN));
   gtk_tree_view_set_model (list->_priv->list, model);

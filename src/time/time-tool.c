@@ -92,7 +92,6 @@ gst_time_tool_class_init (GstTimeToolClass *class)
 static void
 get_ntp_service (GstTimeTool *tool)
 {
-	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 	GObject *service;
 	OobsList *list;
 	OobsListIter iter;
@@ -117,7 +116,6 @@ get_ntp_service (GstTimeTool *tool)
 static void
 gst_time_tool_init (GstTimeTool *tool)
 {
-	OobsList *list;
 	DBusError error;
 	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 
@@ -195,7 +193,6 @@ inhibit_screensaver (GstTimeTool *tool,
 static gboolean
 on_apply_timeout (GstTimeTool *tool)
 {
-	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (tool);
 	guint year, month, day, hour, minute, second;
 
 	gtk_calendar_get_date (GTK_CALENDAR (tool->calendar), &year, &month, &day);
@@ -350,7 +347,6 @@ init_timezone (GstTimeTool *time_tool)
 	GtkWidget *w;
 	GtkCellRenderer *cell;
 	GPtrArray *locs;
-	GList *combo_locs = NULL;
 	int i;
 
 	time_tool->tzmap = e_tz_map_new (tool);
@@ -542,7 +538,6 @@ gst_time_tool_constructor (GType                  type,
 {
 	GObject *object;
 	GstTimeTool *time_tool;
-	GtkWidget *widget;
 
 	object = (* G_OBJECT_CLASS (gst_time_tool_parent_class)->constructor) (type,
 									       n_construct_properties,
@@ -575,7 +570,6 @@ static void
 gst_time_tool_finalize (GObject *object)
 {
 	GstTimeTool *tool = GST_TIME_TOOL (object);
-	GstTimeToolPrivate *priv = GST_TIME_TOOL_GET_PRIVATE (object);
 
 	/* FIXME: missing things to free */
 	g_object_unref (tool->time_config);
@@ -586,7 +580,6 @@ gst_time_tool_finalize (GObject *object)
 static void
 update_servers_list (GstTimeTool *tool)
 {
-	GstTimeToolPrivate *priv;
 	OobsList *list;
 	OobsListIter iter;
 	GObject *server;
@@ -755,9 +748,7 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 	GtkWidget *label;
 	const gchar *timezone;
 	gchar *tz_name = NULL;
-	gchar *old_tz_name = NULL;
 	TzLocation *tz_location;
-	gint correction;
 
 	tool  = GST_TOOL (time_tool);
 	label = gst_dialog_get_widget (tool->main_dialog, "tzlabel");

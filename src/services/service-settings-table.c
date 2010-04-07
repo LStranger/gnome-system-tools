@@ -121,9 +121,9 @@ on_status_edited (GtkCellRendererText *cell_renderer,
 		  const gchar         *new_text,
 		  gpointer             data)
 {
-	GtkTreeModel *model, *combo_model;
+	GtkTreeModel *model;
 	GtkTreePath *path;
-	GtkTreeIter iter, combo_iter;
+	GtkTreeIter iter;
 
 	model = GTK_TREE_MODEL (data);
 	path = gtk_tree_path_new_from_string (path_string);

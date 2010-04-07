@@ -198,7 +198,6 @@ table_modify_share_at_iter (GtkTreeIter *iter, OobsShare *share, OobsListIter *l
 {
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	GtkTreeModel *model;
-	GdkPixbuf    *pixbuf = NULL;
 
 	g_return_if_fail (share != NULL);
 	g_return_if_fail (OOBS_IS_SHARE (share));

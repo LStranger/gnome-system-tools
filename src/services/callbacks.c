@@ -41,7 +41,7 @@ show_settings (void)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	OobsService *service;
-	gchar *script, *title;
+	gchar *title;
 	gint response;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "services_list");
@@ -90,12 +90,9 @@ show_settings (void)
 static void
 do_popup_menu (GtkWidget *table, GtkWidget *popup, GdkEventButton *event)
 {
-	gint button, event_time;
 	GtkTreeSelection *selection;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GtkUIManager *ui_manager;
-	GtkAction *action;
 	gboolean active;
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table));

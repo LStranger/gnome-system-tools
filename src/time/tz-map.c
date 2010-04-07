@@ -406,7 +406,6 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 	else
 	{
 		GtkWidget  *location_combo;
-		GtkWidget  *location_entry;
 		TzLocation *tz_location;
 		gchar      *entry_text, *entry_text_new;
 

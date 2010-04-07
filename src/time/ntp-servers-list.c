@@ -180,10 +180,7 @@ on_server_toggled (GtkCellRendererToggle *renderer,
 	GtkListStore *store = (GtkListStore *) data;
 	GtkTreePath *path  = gtk_tree_path_new_from_string (path_str);
 	GstTimeTool *tool;
-	OobsList *list;
-	OobsListIter *list_iter;
 	GtkTreeIter iter;
-	gchar *url;
 
 	if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path)) {
 		g_critical ("could not get list iter");
@@ -287,7 +284,6 @@ on_ntp_addserver (GtkWidget *widget, GstDialog *dialog)
 {
 	GtkEditable *ntp_entry;
 	GtkTreeView *ntp_list;
-	GtkWidget *item;
 	GtkListStore *store;
 	GtkTreeIter iter;
 	gchar *text;
