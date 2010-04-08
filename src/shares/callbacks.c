@@ -123,7 +123,7 @@ on_shares_dragged_folder (GtkWidget *widget, GdkDragContext *context,
 	gint i = 0;
 
 	if (info == SHARES_DND_URI_LIST) {
-		uris = g_uri_list_extract_uris((gchar *) selection_data->data);
+		uris = g_uri_list_extract_uris((gchar *) gtk_selection_data_get_text(selection_data));
 
 		if (uris != NULL) {
 		    while ( uris[i] != NULL) {
