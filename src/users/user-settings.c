@@ -493,7 +493,7 @@ check_shell (gchar **primary_text, gchar **secondary_text, gpointer data)
 	const gchar *path;
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-	path = gtk_entry_get_text (GTK_ENTRY (GTK_BIN (widget)->child));
+	path = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (widget))));
 
 	if (strlen (path) < 1 || !g_path_is_absolute (path)) {
 		*primary_text = g_strdup (_("Incomplete path in shell"));
@@ -1233,7 +1233,7 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	set_entry_text (widget, (user) ? oobs_user_get_home_phone_number (user) : NULL);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-	set_entry_text (GTK_BIN (widget)->child, oobs_user_get_shell (user));
+	set_entry_text (gtk_bin_get_child (GTK_BIN (widget)), oobs_user_get_shell (user));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 	set_entry_text (widget, oobs_user_get_home_directory (user));
@@ -1289,7 +1289,7 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	oobs_user_set_home_phone_number (user, gtk_entry_get_text (GTK_ENTRY (widget)));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-	oobs_user_set_shell (user, gtk_entry_get_text (GTK_ENTRY (GTK_BIN (widget)->child)));
+	oobs_user_set_shell (user, gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (widget)))));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 	oobs_user_set_home_directory (user, gtk_entry_get_text (GTK_ENTRY (widget)));

@@ -462,8 +462,8 @@ on_option_changed (GtkWidget   *combo,
 	container = gst_dialog_get_widget (GST_TOOL (time_tool)->main_dialog, "configuration_container");
 
 	/* remove the child */
-	if (GTK_BIN (container)->child)
-		gtk_container_remove (GTK_CONTAINER (container), GTK_BIN (container)->child);
+	if (gtk_bin_get_child (GTK_BIN (container)))
+		gtk_container_remove (GTK_CONTAINER (container), gtk_bin_get_child (GTK_BIN (container)));
 
 	gtk_container_add (GTK_CONTAINER (container), widget);
 	gtk_widget_show_all (container);
@@ -482,7 +482,7 @@ add_option (GstTool      *tool,
 	toplevel = gtk_widget_get_toplevel (w);
 
 	g_object_ref (w);
-	gtk_container_remove (GTK_CONTAINER (w->parent), w);
+	gtk_container_remove (GTK_CONTAINER (gtk_widget_get_parent (w)), w);
 	gtk_widget_destroy (toplevel);
 
 	gtk_list_store_append (store, &iter);
