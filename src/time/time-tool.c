@@ -347,7 +347,7 @@ init_timezone (GstTimeTool *time_tool)
 	GtkWidget *w;
 	GtkCellRenderer *cell;
 	GPtrArray *locs;
-	int i;
+	guint i;
 
 	time_tool->tzmap = e_tz_map_new (tool);
 	g_return_if_fail (time_tool->tzmap != NULL);

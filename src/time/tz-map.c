@@ -59,7 +59,7 @@ e_tz_map_new (GstTool *tool)
 	GPtrArray *locs;
 	TzLocation *tzl;
 	GtkWidget *location_combo;
-	int i;
+	guint i;
 
 	tzmap = g_new0 (ETzMap, 1);
 	tzmap->tool = GST_TOOL (tool);
@@ -140,7 +140,7 @@ e_tz_map_get_location_by_name (ETzMap *tzmap, const gchar *name)
 	TzLocation *tz_loc = NULL;
 	TzDB *tz_db;
 	GPtrArray *locs;
-	int i;
+	guint i;
 
 	tz_db = e_tz_map_get_tz_db (tzmap);
 	locs = tz_get_locations (tz_db);
@@ -195,7 +195,7 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, const gchar *name)
 	TzDB *tz_db;
 	GPtrArray *locs;
 	double l_longitude = 0.0, l_latitude = 0.0;
-	int i;
+	guint i;
 
 	g_return_if_fail (tzmap != NULL);
 
@@ -269,7 +269,7 @@ e_tz_map_location_from_point (ETzMap *tzmap, EMapPoint *point)
 	GPtrArray *locs;
 	double p_longitude, p_latitude;
 	double l_longitude, l_latitude;
-	int i;
+	guint i;
 
 	tz_db = e_tz_map_get_tz_db (tzmap);
 	locs = tz_get_locations (tz_db);
