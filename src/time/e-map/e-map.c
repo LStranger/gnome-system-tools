@@ -209,8 +209,8 @@ e_map_init (EMap *view)
 	priv->zoom_state = E_MAP_ZOOMED_OUT;
         priv->points = g_ptr_array_new ();
 
-	GTK_WIDGET_SET_FLAGS (view, GTK_CAN_FOCUS);
-	GTK_WIDGET_UNSET_FLAGS (view, GTK_NO_WINDOW);
+	gtk_widget_set_can_focus (GTK_WIDGET (view), TRUE);
+	gtk_widget_set_has_window (GTK_WIDGET (view), TRUE);
 }
 
 /* Destroy handler for the map view */
@@ -299,7 +299,7 @@ e_map_realize (GtkWidget *widget)
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (E_IS_MAP (widget));
 
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+	gtk_widget_set_realized (widget, TRUE);
 
 	gtk_widget_get_allocation (widget, &allocation);
 
