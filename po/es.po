@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2010-03-19 10:15+0000\n"
-"PO-Revision-Date: 2010-03-24 21:24+0100\n"
+"POT-Creation-Date: 2010-04-13 10:23+0000\n"
+"PO-Revision-Date: 2010-04-15 08:37+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -464,20 +464,20 @@ msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Configuración predeterminada del sistema</span>"
 
 #: ../interfaces/users.ui.h:9
-msgid "Account _type:"
-msgstr "_Tipo de cuenta:"
-
-#: ../interfaces/users.ui.h:10
-msgid "Advanced"
-msgstr "Avanzado"
-
-#: ../interfaces/users.ui.h:11
 msgid ""
-"A user with this name already exists. Please choose a different short "
-"name for the new user."
+"A user with this name already exists. Please choose a different short name "
+"for the new user."
 msgstr ""
 "Ya existe un usuario con ese nombre. Elija un identificador numérico "
 "diferente para el nuevo usuario."
+
+#: ../interfaces/users.ui.h:10
+msgid "Account _type:"
+msgstr "_Tipo de cuenta:"
+
+#: ../interfaces/users.ui.h:11
+msgid "Advanced"
+msgstr "Avanzado"
 
 #: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
@@ -643,11 +643,6 @@ msgstr "Establecer la contraseña _a mano"
 
 #. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
 #: ../interfaces/users.ui.h:53
-#| msgid ""
-#| "Short name must consist of:\n"
-#| "  &#x27A3; lower case letters from the English alphabet\n"
-#| "  &#x27A3; digits\n"
-#| "  &#x27A3; any of the characters \".\", \"-\" and \"_\""
 msgid ""
 "Short name must consist of:\n"
 "  ➣ lower case letters from the English alphabet\n"
@@ -848,7 +843,7 @@ msgstr "_Añadir"
 msgid "_Delete"
 msgstr "_Borrar"
 
-#: ../src/network/address-list.c:486
+#: ../src/network/address-list.c:485
 msgid "Type address"
 msgstr "Teclee la dirección"
 
@@ -1084,12 +1079,12 @@ msgstr "Configuración de la red"
 msgid "Settings for service \"%s\""
 msgstr "Configuración para el servicio «%s»"
 
-#: ../src/services/callbacks.c:125
+#: ../src/services/callbacks.c:122
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "¿Seguro que desea desactivar «%s»?"
 
-#: ../src/services/callbacks.c:129
+#: ../src/services/callbacks.c:126
 msgid ""
 "This may affect your system behavior in several ways, possibly leading to "
 "data loss."
@@ -1562,11 +1557,11 @@ msgstr "Al añadir una ruta compartida, se modifica su ya existe"
 msgid "PATH"
 msgstr "RUTA"
 
-#: ../src/shares/nautilus/nautilus-shares.c:152
+#: ../src/shares/nautilus/nautilus-shares.c:151
 msgid "_Share Folder..."
 msgstr "_Compartir carpeta…"
 
-#: ../src/shares/nautilus/nautilus-shares.c:153
+#: ../src/shares/nautilus/nautilus-shares.c:152
 msgid "Share this folder with other computers"
 msgstr "Compartir esta carpeta con otras computadoras"
 
@@ -1625,6 +1620,19 @@ msgid ""
 "folders."
 msgstr "Necesita instalar al menos Samba o NFS para compartir sus carpetas."
 
+#: ../src/time/e-map/e-map.c:620
+msgid "World Map"
+msgstr "Mapa del mundo"
+
+#: ../src/time/e-map/e-map.c:622
+msgid ""
+"Mouse-based interactive map widget for selecting timezone. Keyboard users "
+"should instead select the timezone from the drop-down combination box below."
+msgstr ""
+"Un control de mapa interactivo basado en el ratón para seleccionar la zona "
+"horaria. Los usuarios de teclado, en su lugar, deberán seleccionar la zona "
+"horaria debajo, desde una caja de combinación desplegable."
+
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
 msgstr "Cambiar hora, fecha y zona horaria"
@@ -1633,11 +1641,11 @@ msgstr "Cambiar hora, fecha y zona horaria"
 msgid "Time and Date"
 msgstr "Hora y fecha"
 
-#: ../src/time/time-tool.c:402
+#: ../src/time/time-tool.c:398
 msgid "NTP support is not installed"
 msgstr "El soporte NTP no está instalado"
 
-#: ../src/time/time-tool.c:404
+#: ../src/time/time-tool.c:400
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1645,27 +1653,27 @@ msgstr ""
 "Instale y active el soporte NTP en el sistema para activar la sincronización "
 "con su servidor de hora local con los servidores de hora de Internet."
 
-#: ../src/time/time-tool.c:433
+#: ../src/time/time-tool.c:429
 msgid "Enabling NTP"
 msgstr "Activando NTP"
 
-#: ../src/time/time-tool.c:433
+#: ../src/time/time-tool.c:429
 msgid "Disabling NTP"
 msgstr "Desactivando NTP"
 
-#: ../src/time/time-tool.c:445
+#: ../src/time/time-tool.c:441
 msgid "Synchronizing system clock"
 msgstr "Sincronizando reloj del sistema"
 
-#: ../src/time/time-tool.c:525
+#: ../src/time/time-tool.c:521
 msgid "Keep synchronized with Internet servers"
 msgstr "Mantener sincronizado con los servidores de Internet"
 
-#: ../src/time/time-tool.c:526
+#: ../src/time/time-tool.c:522
 msgid "Manual"
 msgstr "Manual"
 
-#: ../src/time/time-tool.c:672
+#: ../src/time/time-tool.c:665
 msgid "Time and Date Settings"
 msgstr "Ajustes de hora y fecha"
 
@@ -1866,37 +1874,37 @@ msgstr "Usuario del escritorio"
 msgid "Authentication failed"
 msgstr "Falló la autenticación"
 
-#: ../src/users/run-passwd.c:494
+#: ../src/users/run-passwd.c:495
 #, c-format
 msgid "The new password is too short"
 msgstr "La contraseña nuevav es demasiado corta"
 
-#: ../src/users/run-passwd.c:499
+#: ../src/users/run-passwd.c:500
 #, c-format
 msgid "The new password is too simple"
 msgstr "La contraseña nueva es demasiado simple"
 
-#: ../src/users/run-passwd.c:503
+#: ../src/users/run-passwd.c:505
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "La contraseña antigua y la nueva son demasiado similares"
 
-#: ../src/users/run-passwd.c:506
+#: ../src/users/run-passwd.c:508
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "La contraseña nueva debe contener caracteres numéricos o especiales"
 
-#: ../src/users/run-passwd.c:510
+#: ../src/users/run-passwd.c:512
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "La contraseña nueva y la antigua son la misma"
 
-#: ../src/users/run-passwd.c:514
+#: ../src/users/run-passwd.c:516
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Se ha cambiado su contraseña desde que se autenticó inicialmente."
 
-#: ../src/users/run-passwd.c:518
+#: ../src/users/run-passwd.c:520
 #, c-format
 msgid "Unknown error"
 msgstr "Error desconocido"
@@ -1914,11 +1922,14 @@ msgid "Password is too short"
 msgstr "La contraseña es demasiado corta"
 
 #: ../src/users/user-password.c:98
+#| msgid ""
+#| "User passwords must be longer than 6 characters and preferably formed by "
+#| "numbers, letters and special characters."
 msgid ""
-"User passwords must be longer than 6 characters and preferably formed by "
+"User passwords must be longer than 5 characters and preferably formed by "
 "numbers, letters and special characters."
 msgstr ""
-"Las contraseñas de usuario deben ser más largas que 6 caracteres y "
+"Las contraseñas de usuario deben ser más largas de 5 caracteres y "
 "preferiblemente formadas por números, letras y caracteres especiales."
 
 #: ../src/users/user-password.c:101
