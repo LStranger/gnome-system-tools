@@ -28,7 +28,6 @@
 #include <stdlib.h>
 #include "gst-tool.h"
 #include "gst-dialog.h"
-#include "gst-conf.h"
 
 #ifdef HAVE_POLKIT
 #include <polkitgtk/polkitgtk.h>

@@ -17,13 +17,15 @@ EXTRA_DIST = \
 	gnome-system-tools.pc.in
 
 
-schema_in_files = gnome-system-tools.schemas.in
-schemadir = @GCONF_SCHEMA_FILE_DIR@
-schema_DATA = $(schema_in_files:.schemas.in=.schemas)
-@INTLTOOL_SCHEMAS_RULE@
-
-install-data-local:
-	-GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/$(schema_DATA)
+# gsettingsschemadir and gschema_compile are defined by the GLIB_GSETTINGS
+# macro in configure.in
+gsettingsschema_DATA = org.gnome.system-tools.gschema.xml
+# This rule will check your schemas for validity before installation
+@GSETTINGS_CHECK_RULE@
+if GSETTINGS_SCHEMAS_INSTALL
+install-data-hook:
+	$(gschema_compile) $(DESTDIR)$(gsettingsschemadir)
+endif
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-system-tools.pc
@@ -35,7 +37,6 @@ DISTCLEANFILES = \
 	backends/intltool-extract \
 	backends/intltool-merge \
 	backends/intltool-update \
-	gnome-system-tools.schemas \
 	gnome-doc-utils.make \
 	gnome-system-tools.pc
 

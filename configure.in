@@ -28,11 +28,12 @@ AC_PROG_MAKE_SET
 dnl glib-genmarshal
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
+GLIB_GSETTINGS
+
 STB_REQUIRED=2.9.4
 LIBOOBS_REQUIRED=2.29.91
 GTK_REQUIRED=2.19.7
-GLIB_REQUIRED=2.15.2
-GCONF_REQUIRED=2.2.0
+GLIB_REQUIRED=2.25.3
 DBUS_REQUIRED=0.32
 POLICYKIT_GTK_REQUIRED=0.92
 
@@ -79,8 +80,8 @@ dnl =====================================================
 PKG_CHECK_MODULES(GST_DEPENDS,[
 			   gtk+-2.0 >= $GTK_REQUIRED
 			   gmodule-export-2.0
+			   gio-2.0 >= $GLIB_REQUIRED
 			   pango
-			   gconf-2.0 >= $GCONF_REQUIRED
 			   liboobs-1 >= $LIBOOBS_REQUIRED
 			   system-tools-backends-2.0 >= $STB_REQUIRED
 			   ])
@@ -172,22 +173,7 @@ dnl ========================================================
 dnl END : Translations
 dnl ========================================================
 
-dnl =====================================================
-dnl GCONF
-dnl =====================================================
 
-AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
-
-if test x"$GCONFTOOL" = xno; then
-AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
-fi
-     
-AM_GCONF_SOURCE_2
-
-dnl =====================================================
-dnl END: GCONF
-dnl =====================================================
-    
 dnl =====================================================
 dnl GST_LIBS & GST_CFLAGS 
 dnl =====================================================
@@ -268,21 +254,6 @@ AC_SUBST(GST_TOOL_DEPENDENCIES)
 
 dnl ==================================
 dnl END: GST_LIBS & GST_FLAGS
-dnl ==================================
-
-dnl ==================================
-dnl GIO
-dnl ==================================
-
-PKG_CHECK_MODULES(GIO,[
-		  gio-2.0 >= $GLIB_REQUIRED
-		  ])
-
-AC_SUBST(GIO_LIBS)
-AC_SUBST(GIO_CFLAGS)
-
-dnl ==================================
-dnl END: GIO
 dnl ==================================
 
 dnl ==================================

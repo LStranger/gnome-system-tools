@@ -28,7 +28,6 @@
 G_BEGIN_DECLS
 
 #include <oobs/oobs.h>
-#include <gconf/gconf-client.h>
 
 typedef struct _GstTool      GstTool;
 typedef struct _GstToolClass GstToolClass;
@@ -52,7 +51,6 @@ struct _GstTool {
 
 	OobsSession *session;
 	GPtrArray   *objects;
-	GConfClient *gconf_client;
 
 	char *ui_path;
 	char *common_ui_path;

@@ -54,17 +54,16 @@ gst_users_tool_class_init (GstUsersToolClass *class)
 }
 
 static void
-on_option_changed (GConfClient *client,
-		    guint        conn_id,
-		    GConfEntry  *entry,
-		    gpointer     data)
+on_option_changed (GSettings  *settings,
+                   const char *key,
+                   gpointer    user_data)
 {
-	GstTool *tool = GST_TOOL (data);
+	GstTool *tool = GST_TOOL (user_data);
 	GtkWidget *widget;
 	GtkTreeModel *model;
 
-	GST_USERS_TOOL (tool)->showall = gst_conf_get_boolean (GST_TOOL (tool), "showall");
-	GST_USERS_TOOL (tool)->showroot = gst_conf_get_boolean (GST_TOOL (tool), "showroot");
+	GST_USERS_TOOL (tool)->showall = g_settings_get_boolean (settings, "showall");
+	GST_USERS_TOOL (tool)->showroot = g_settings_get_boolean (settings, "showroot");
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "users_table");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
@@ -84,6 +83,8 @@ gst_users_tool_init (GstUsersTool *tool)
 	gst_tool_add_configuration_object (GST_TOOL (tool), tool->self_config, TRUE);
 
 	tool->profiles = gst_user_profiles_get ();
+
+	tool->settings = g_settings_new ("org.gnome.system-tools.users");
 }
 
 static GObject*
@@ -92,20 +93,21 @@ gst_users_tool_constructor (GType                  type,
 			    GObjectConstructParam *construct_params)
 {
 	GObject *object;
-	GstTool *tool;
+	GstUsersTool *tool;
 
 	object = (* G_OBJECT_CLASS (gst_users_tool_parent_class)->constructor) (type,
 										n_construct_properties,
 										construct_params);
 
-	tool = GST_TOOL (object);
-	GST_USERS_TOOL (tool)->showall = gst_conf_get_boolean (GST_TOOL (tool), "showall");
-	GST_USERS_TOOL (tool)->showroot = gst_conf_get_boolean (GST_TOOL (tool), "showroot");
+	tool = GST_USERS_TOOL (object);
 
-	gst_conf_add_notify (GST_TOOL (tool), "showall",
-			     on_option_changed, tool);
-	gst_conf_add_notify (GST_TOOL (tool), "showroot",
-			     on_option_changed, tool);
+	g_signal_connect (tool->settings, "changed::showall",
+	                  (GCallback) on_option_changed, tool);
+	g_signal_connect (tool->settings, "changed::showroot",
+	                  (GCallback) on_option_changed, tool);
+
+	tool->showall = g_settings_get_boolean (tool->settings, "showall");
+	tool->showroot = g_settings_get_boolean (tool->settings, "showroot");
 
 	return object;
 }
@@ -119,6 +121,7 @@ gst_users_tool_finalize (GObject *object)
 	g_object_unref (tool->self_config);
 	g_object_unref (tool->groups_config);
 	g_object_unref (tool->profiles);
+	g_object_unref (tool->settings);
 
 	/* Clear models to unreference OobsUsers and OobsGroups
 	 * to be sure they are finalized properly (passwords...) */

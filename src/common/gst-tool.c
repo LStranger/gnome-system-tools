@@ -24,7 +24,6 @@
 #include <config.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 #include <time.h>
 
 #include <stdlib.h>
@@ -155,7 +154,6 @@ gst_tool_init (GstTool *tool)
 	tool->common_ui_path  = INTERFACES_DIR "/common.ui";
 
 	tool->session = oobs_session_get ();
-	tool->gconf_client = gconf_client_get_default ();
 
 	builder = gst_tool_load_common_ui (tool);
 
@@ -301,9 +299,6 @@ gst_tool_finalize (GObject *object)
 
 	if (tool->report_window)
 		gtk_widget_destroy (tool->report_window);
-
-	if (tool->gconf_client)
-		g_object_unref (tool->gconf_client);
 
 	g_ptr_array_free (tool->objects, FALSE);
 

@@ -46,13 +46,15 @@ struct _GstUsersTool {
 	OobsObject *users_config;
 	OobsObject *groups_config;
 	OobsObject *self_config;
+
 	gint minimum_uid;
 	gint maximum_uid;
 	gint minimum_gid;
 	gint maximum_gid;
 
-	gboolean showall;
-	gboolean showroot;
+	GSettings *settings;
+	gboolean   showall;
+	gboolean   showroot;
 };
 
 struct _GstUsersToolClass {
