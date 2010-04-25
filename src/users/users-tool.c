@@ -60,14 +60,15 @@ on_option_changed (GSettings  *settings,
 {
 	GstTool *tool = GST_TOOL (user_data);
 	GtkWidget *widget;
-	GtkTreeModel *model;
+	GtkTreeModel *sort_model, *filter_model;
 
 	GST_USERS_TOOL (tool)->showall = g_settings_get_boolean (settings, "showall");
 	GST_USERS_TOOL (tool)->showroot = g_settings_get_boolean (settings, "showroot");
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "users_table");
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
-	gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (model));
+	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+	filter_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
+	gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (filter_model));
 }
 
 static void
