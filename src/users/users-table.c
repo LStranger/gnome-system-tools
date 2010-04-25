@@ -186,6 +186,11 @@ users_table_set_user (OobsUser *user, GtkTreeIter *iter)
 	face = user_settings_get_user_face (user, 48);
 	name = oobs_user_get_full_name (user);
 	login = oobs_user_get_login_name (user);
+
+	/* Work around users with empty Real name */
+	if (!name)
+		name = login;
+
 	label = g_strdup_printf ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>", name, login);
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
