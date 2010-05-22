@@ -463,6 +463,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 			                        "dictionary",
 			                        "simple",
 			                        "similar",
+			                        "different",
 			                        "case",
 			                        "wrapped",
 			                        "recovered",
@@ -499,6 +500,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
 						                     _("The new password is too simple"));
 					} else if (g_strrstr (str->str, "similar") != NULL ||
+					           g_strrstr (str->str, "different") != NULL ||
 					           g_strrstr (str->str, "case") != NULL ||
 						   g_strrstr (str->str, "wrapped") != NULL) {
 						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
