@@ -191,7 +191,8 @@ users_table_set_user (OobsUser *user, GtkTreeIter *iter)
 	if (!name)
 		name = login;
 
-	label = g_strdup_printf ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>", name, login);
+	label = g_markup_printf_escaped ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>",
+	                                 name, login);
 
 	gtk_list_store_set (GTK_LIST_STORE (model), iter,
 			    COL_USER_FACE, face,
