@@ -7,25 +7,17 @@ distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 EXTRA_DIST = \
 	HACKING 		\
 	BUGS			\
-	$(schema_in_files)      \
 	intltool-extract.in	\
 	intltool-merge.in 	\
 	intltool-update.in 	\
 	omf.make		\
 	xmldocs.make		\
 	gnome-doc-utils.make	\
-	gnome-system-tools.pc.in
+	gnome-system-tools.pc.in \
+	$(gsettings_SCHEMAS)
 
-
-# gsettingsschemadir and gschema_compile are defined by the GLIB_GSETTINGS
-# macro in configure.in
-gsettingsschema_DATA = org.gnome.system-tools.gschema.xml
-# This rule will check your schemas for validity before installation
-@GSETTINGS_CHECK_RULE@
-if GSETTINGS_SCHEMAS_INSTALL
-install-data-hook:
-	$(gschema_compile) $(DESTDIR)$(gsettingsschemadir)
-endif
+gsettings_SCHEMAS = org.gnome.system-tools.gschema.xml
+@GSETTINGS_RULES@
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-system-tools.pc
