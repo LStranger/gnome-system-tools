@@ -25,6 +25,7 @@
 
 
 #include <config.h>
+#include <glib/gi18n.h>
 #include "gst.h"
 
 #include <string.h>
@@ -56,6 +57,8 @@ static void
 main_window_prepare (GstUsersTool *tool)
 {
 	GtkWidget *uid_entry;
+	GtkWidget *passwd_label;
+	int width;
 
 	uid_entry = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "user_settings_uid");
 	gtk_spin_button_set_range (GTK_SPIN_BUTTON (uid_entry), 0, OOBS_MAX_UID);
@@ -64,6 +67,12 @@ main_window_prepare (GstUsersTool *tool)
 
 	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog),
 	                             650, 400);
+
+	/* Ensure dialog won't change size when selecting another user */
+	passwd_label = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
+	                                        "user_settings_passwd");
+	width = MAX (strlen (_("Not asked on login")), strlen (_("Asked on login")));
+	gtk_label_set_width_chars (GTK_LABEL (passwd_label), width);
 
 	/* For random password generation. */
 	srand (time (NULL));
