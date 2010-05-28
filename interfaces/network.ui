@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
+  <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="liststore1">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -24,7 +24,7 @@
   </object>
   <object class="GtkListStore" id="liststore2">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -38,7 +38,7 @@
   </object>
   <object class="GtkListStore" id="liststore3">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -61,13 +61,13 @@
   </object>
   <object class="GtkListStore" id="liststore4">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore5">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -302,8 +302,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label37">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Host Settings&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Host Settings</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -410,8 +412,10 @@
                     <child type="label">
                       <object class="GtkLabel" id="label35">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;DNS Servers&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">DNS Servers</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                     </child>
                   </object>
@@ -503,8 +507,10 @@
                     <child type="label">
                       <object class="GtkLabel" id="label36">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Search Domains&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Search Domains</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                     </child>
                   </object>
@@ -838,8 +844,10 @@
                     <child type="label">
                       <object class="GtkLabel" id="label43">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Wireless Settings&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Wireless Settings</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                     </child>
                   </object>
@@ -992,8 +1000,10 @@
                     <child type="label">
                       <object class="GtkLabel" id="label46">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Connection Settings&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Connection Settings</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                     </child>
                   </object>
@@ -1082,8 +1092,10 @@
                     <child type="label">
                       <object class="GtkLabel" id="label51">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Connection Settings&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Connection Settings</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                     </child>
                   </object>
@@ -1209,8 +1221,10 @@
                     <child type="label">
                       <object class="GtkLabel" id="label60">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Internet service provider data&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Internet service provider data</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                     </child>
                   </object>
@@ -1297,8 +1311,10 @@
                     <child type="label">
                       <object class="GtkLabel" id="label63">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Account data&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="label" translatable="yes">Account data</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                     </child>
                   </object>
@@ -1498,8 +1514,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label55">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Modem Settings&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Modem Settings</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -1585,8 +1603,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label67">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Connection Settings&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Connection Settings</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>

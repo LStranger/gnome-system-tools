@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <interface>
-  <!-- interface-requires gtk+ 2.12 -->
+  <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="liststore1">
     <columns>
-      <!-- column-name item text -->
+      <!-- column-name item -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -116,8 +116,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label7">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Shared Folder&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Shared Folder</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -216,8 +218,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label10">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Share Properties&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Share Properties</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -309,8 +313,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label11">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Allowed Hosts&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Allowed Hosts</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -552,8 +558,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label20">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Allowed Hosts&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Allowed Hosts</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -587,8 +595,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label21">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Hosts Settings&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Hosts Settings</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -853,8 +863,10 @@
                 <child type="label">
                   <object class="GtkLabel" id="label22">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Windows sharing&lt;/b&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Windows sharing</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                 </child>
               </object>
@@ -945,8 +957,11 @@
                   <object class="GtkLabel" id="label29">
                     <property name="visible">True</property>
                     <property name="xalign">0</property>
-                    <property name="label" translatable="yes">&lt;span size="larger" weight="bold"&gt;Enter password for user:&lt;/span&gt;</property>
-                    <property name="use_markup">True</property>
+                    <property name="label" translatable="yes">Enter password for user:</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                      <attribute name="size" value="12000"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>

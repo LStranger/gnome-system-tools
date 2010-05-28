@@ -292,16 +292,20 @@ get_iface_secondary_text (OobsIface *iface)
       config_method = oobs_iface_ethernet_get_configuration_method (OOBS_IFACE_ETHERNET (iface));
 
       if (config_method && strcmp (config_method, "static") == 0)
-	g_string_append_printf (str, _("<b>Address:</b> %s <b>Subnet mask:</b> %s"),
+	g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+				_("Address:"),
 				oobs_iface_ethernet_get_ip_address (OOBS_IFACE_ETHERNET (iface)),
+				 _("Subnet mask:"),
 				oobs_iface_ethernet_get_network_mask (OOBS_IFACE_ETHERNET (iface)));
       else
-	g_string_append_printf (str, _("<b>Address:</b> %s"), config_method);
+	g_string_append_printf (str, "<b>%s</b> %s", _("Address:"), config_method);
     }
   else if (OOBS_IS_IFACE_PLIP (iface))
     {
-      g_string_append_printf (str, _("<b>Address:</b> %s <b>Remote address:</b> %s"),
+      g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+			      _("Address:"),
 			      oobs_iface_plip_get_address (OOBS_IFACE_PLIP (iface)),
+			      _("Remote address:"),
 			      oobs_iface_plip_get_remote_address (OOBS_IFACE_PLIP (iface)));
     }
   else if (OOBS_IS_IFACE_PPP (iface))
@@ -312,21 +316,27 @@ get_iface_secondary_text (OobsIface *iface)
 
       if (strcmp (type, "modem") == 0 ||
 	  strcmp (type, "isdn") == 0)
-	g_string_append_printf (str, _("<b>Type:</b> %s <b>Phone number:</b> %s"),
-				type, oobs_iface_ppp_get_phone_number (OOBS_IFACE_PPP (iface)));
+	g_string_append_printf (str,"<b>%s</b> %s </b>%s</b> %s",
+				_("Type:"), type,
+				_("Phone number:"),
+				oobs_iface_ppp_get_phone_number (OOBS_IFACE_PPP (iface)));
       else if (strcmp (type, "gprs") == 0)
-	g_string_append_printf (str, _("<b>Type:</b> %s <b>Access point name:</b> %s"),
-				type, oobs_iface_ppp_get_apn (OOBS_IFACE_PPP (iface)));
+	g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+				_("Type:"), type,
+				_("Access point name:"),
+				oobs_iface_ppp_get_apn (OOBS_IFACE_PPP (iface)));
       else if (strcmp (type, "pppoe") == 0)
 	{
 	  OobsIfaceEthernet *ethernet;
 
 	  ethernet = oobs_iface_ppp_get_ethernet (OOBS_IFACE_PPP (iface));
-	  g_string_append_printf (str, _("<b>Type:</b> %s <b>Ethernet interface:</b> %s"),
-				  type, oobs_iface_get_device_name (OOBS_IFACE (ethernet)));
+	  g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+				  _("Type:"), type,
+				  _("Ethernet interface:"),
+				  oobs_iface_get_device_name (OOBS_IFACE (ethernet)));
 	}
       else
-	g_string_append_printf (str, _("<b>Type:</b> %s"), type);
+	g_string_append_printf (str, "<b>%s</b> %s", _("Type:"), type);
     }
 
   text = str->str;
