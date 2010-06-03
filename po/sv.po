@@ -10,22 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-19 22:54+0100\n"
-"PO-Revision-Date: 2010-03-19 22:55+0100\n"
+"POT-Creation-Date: 2010-06-03 22:17+0200\n"
+"PO-Revision-Date: 2010-06-03 22:19+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ../gnome-system-tools.schemas.in.h:1
-msgid "Whether the users-admin tool should show system users in the users list"
-msgstr "Huruvida användaradministrationsverktyget ska visa systemanvändare i användarlistan"
-
-#: ../gnome-system-tools.schemas.in.h:2
-msgid "Whether the users-admin tool should show the root user in the users list"
-msgstr "Huruvida användaradministrationsverktyget ska visa root-användaren i användarlistan"
 
 #: ../interfaces/network.ui.h:1
 msgid "<b>Account data</b>"
@@ -454,16 +446,16 @@ msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Systemstandardalternativ</span>"
 
 #: ../interfaces/users.ui.h:9
+msgid "A user with this name already exists. Please choose a different short name for the new user."
+msgstr "En användare med ett sådant namn finns redan. Välj ett annat kortnamn för den nya användaren."
+
+#: ../interfaces/users.ui.h:10
 msgid "Account _type:"
 msgstr "Konto_typ:"
 
-#: ../interfaces/users.ui.h:10
+#: ../interfaces/users.ui.h:11
 msgid "Advanced"
 msgstr "Avancerat"
-
-#: ../interfaces/users.ui.h:11
-msgid "A user with this name already exists. Please choose a different short name for the new user."
-msgstr "En användare med ett sådant namn finns redan. Välj ett annat kortnamn för den nya användaren."
 
 #: ../interfaces/users.ui.h:12
 msgid "Assign a random password by default"
@@ -751,47 +743,47 @@ msgstr "Om du är säker på att det fungerar som en av de plattformar som anges
 msgid "Unsupported platform"
 msgstr "Plattformen stöds inte"
 
-#: ../src/common/gst-tool.c:190
+#: ../src/common/gst-tool.c:188
 msgid "The configuration could not be loaded"
 msgstr "Konfigurationen kunde inte läsas in"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:192
+#: ../src/common/gst-tool.c:190
 msgid "The configuration could not be saved"
 msgstr "Konfigurationen kunde inte sparas"
 
-#: ../src/common/gst-tool.c:196
+#: ../src/common/gst-tool.c:194
 msgid "You are not allowed to access the system configuration."
 msgstr "Du tillåts inte komma åt systemkonfigurationen."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:198
-#: ../src/common/gst-tool.c:690
+#: ../src/common/gst-tool.c:196
+#: ../src/common/gst-tool.c:685
 msgid "You are not allowed to modify the system configuration."
 msgstr "Du tillåts inte att ändra systemkonfigurationen."
 
-#: ../src/common/gst-tool.c:201
+#: ../src/common/gst-tool.c:199
 msgid "Invalid data was found."
 msgstr "Ogiltig data hittades."
 
 #. OOBS_RESULT_ERROR
-#: ../src/common/gst-tool.c:203
+#: ../src/common/gst-tool.c:201
 msgid "An unknown error occurred."
 msgstr "Ett okänt fel har inträffat."
 
-#: ../src/common/gst-tool.c:427
+#: ../src/common/gst-tool.c:422
 msgid "Could not display help"
 msgstr "Kunde inte visa hjälp"
 
-#: ../src/common/gst-tool.c:621
+#: ../src/common/gst-tool.c:616
 msgid "The system configuration has potentially changed."
 msgstr "Systemkonfigurationen har möjligen ändrats."
 
-#: ../src/common/gst-tool.c:623
+#: ../src/common/gst-tool.c:618
 msgid "Update content? This will lose any modification in course."
 msgstr "Uppdatera innehållet? Detta innebär att ändringar går förlorade."
 
-#: ../src/common/gst-tool.c:692
+#: ../src/common/gst-tool.c:687
 #, c-format
 msgid ""
 "An error occurred while checking for authorizations: %s\n"
@@ -814,7 +806,7 @@ msgstr "_Lägg till"
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: ../src/network/address-list.c:486
+#: ../src/network/address-list.c:485
 msgid "Type address"
 msgstr "Typadress"
 
@@ -1041,12 +1033,12 @@ msgstr "Nätverksinställningar"
 msgid "Settings for service \"%s\""
 msgstr "Inställningar för tjänsten \"%s\""
 
-#: ../src/services/callbacks.c:125
+#: ../src/services/callbacks.c:122
 #, c-format
 msgid "Are you sure you want to deactivate %s?"
 msgstr "Är du säker på att du vill inaktivera %s?"
 
-#: ../src/services/callbacks.c:129
+#: ../src/services/callbacks.c:126
 msgid "This may affect your system behavior in several ways, possibly leading to data loss."
 msgstr "Detta kan påverka ditt systems beteende på många sätt, och kan möjligen leda till förlust av data."
 
@@ -1517,11 +1509,11 @@ msgstr "Lägg till en utdelad sökväg, ändrar den om den redan finns"
 msgid "PATH"
 msgstr "SÖKVÄG"
 
-#: ../src/shares/nautilus/nautilus-shares.c:152
+#: ../src/shares/nautilus/nautilus-shares.c:151
 msgid "_Share Folder..."
 msgstr "_Dela ut mapp..."
 
-#: ../src/shares/nautilus/nautilus-shares.c:153
+#: ../src/shares/nautilus/nautilus-shares.c:152
 msgid "Share this folder with other computers"
 msgstr "Dela denna mapp med andra datorer"
 
@@ -1578,6 +1570,14 @@ msgstr "Utdelningstjänster är inte installerade"
 msgid "You need to install at least either Samba or NFS in order to share your folders."
 msgstr "Du måste åtminstone installera antingen Samba eller NFS för att kunna dela dina mappar."
 
+#: ../src/time/e-map/e-map.c:620
+msgid "World Map"
+msgstr "Världskarta"
+
+#: ../src/time/e-map/e-map.c:622
+msgid "Mouse-based interactive map widget for selecting timezone. Keyboard users should instead select the timezone from the drop-down combination box below."
+msgstr "Musbaserad, interaktiv kartwidget för att välja tidszon. Tangentbordsanvändare bör istället välja tidszon från rullgardinsmenyn nedan."
+
 #: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
 msgstr "Ändra systemtid, datum och tidszon."
@@ -1586,35 +1586,35 @@ msgstr "Ändra systemtid, datum och tidszon."
 msgid "Time and Date"
 msgstr "Tid och datum"
 
-#: ../src/time/time-tool.c:402
+#: ../src/time/time-tool.c:398
 msgid "NTP support is not installed"
 msgstr "Stöd för NTP är inte installerat"
 
-#: ../src/time/time-tool.c:404
+#: ../src/time/time-tool.c:400
 msgid "Please install and activate NTP support in the system to enable synchronization of your local time server with internet time servers."
 msgstr "Installera och aktivera NTP-stöd på systemet för att aktivera synkronisering av din lokala tidsserver med Internet-tidsservrar."
 
-#: ../src/time/time-tool.c:433
+#: ../src/time/time-tool.c:429
 msgid "Enabling NTP"
 msgstr "Aktiverar NTP"
 
-#: ../src/time/time-tool.c:433
+#: ../src/time/time-tool.c:429
 msgid "Disabling NTP"
 msgstr "Inaktiverar NTP"
 
-#: ../src/time/time-tool.c:445
+#: ../src/time/time-tool.c:441
 msgid "Synchronizing system clock"
 msgstr "Synkroniserar systemklocka"
 
-#: ../src/time/time-tool.c:525
+#: ../src/time/time-tool.c:521
 msgid "Keep synchronized with Internet servers"
 msgstr "Synkronisera med Internetservrar"
 
-#: ../src/time/time-tool.c:526
+#: ../src/time/time-tool.c:522
 msgid "Manual"
 msgstr "Manuell"
 
-#: ../src/time/time-tool.c:672
+#: ../src/time/time-tool.c:665
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
 
@@ -1699,6 +1699,17 @@ msgstr "Välj en annan numerisk identifierare för gruppen \"%s\"."
 #: ../src/users/groups-table.c:44
 msgid "Group name"
 msgstr "Gruppnamn"
+
+#. TRANSLATORS:  This applies to a password. Keep the string short.
+#: ../src/users/main.c:74
+#: ../src/users/user-settings.c:347
+msgid "Not asked on login"
+msgstr "Efterfrågas inte vid inloggning"
+
+#: ../src/users/main.c:74
+#: ../src/users/user-settings.c:349
+msgid "Asked on login"
+msgstr "Efterfrågas vid inloggning"
 
 #: ../src/users/privileges-table.c:53
 msgid "Monitor system logs"
@@ -1804,37 +1815,37 @@ msgstr "Skrivbordsanvändare"
 msgid "Authentication failed"
 msgstr "Autentiseringen misslyckades"
 
-#: ../src/users/run-passwd.c:494
+#: ../src/users/run-passwd.c:496
 #, c-format
 msgid "The new password is too short"
 msgstr "Det nya lösenordet är för kort"
 
-#: ../src/users/run-passwd.c:499
+#: ../src/users/run-passwd.c:501
 #, c-format
 msgid "The new password is too simple"
 msgstr "Det nya lösenordet är för enkelt"
 
-#: ../src/users/run-passwd.c:503
+#: ../src/users/run-passwd.c:507
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "Det gamla och nya lösenordet är för lika"
 
-#: ../src/users/run-passwd.c:506
+#: ../src/users/run-passwd.c:510
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "Det nya lösenordet måste innehåll numeriska tecken eller specialtecken"
 
-#: ../src/users/run-passwd.c:510
+#: ../src/users/run-passwd.c:514
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "Det gamla och nya lösenordet är samma"
 
-#: ../src/users/run-passwd.c:514
+#: ../src/users/run-passwd.c:518
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Ditt lösenord har ändrats sedan du loggade in!"
 
-#: ../src/users/run-passwd.c:518
+#: ../src/users/run-passwd.c:522
 #, c-format
 msgid "Unknown error"
 msgstr "Okänt fel"
@@ -1852,8 +1863,8 @@ msgid "Password is too short"
 msgstr "Lösenordet är för kort"
 
 #: ../src/users/user-password.c:98
-msgid "User passwords must be longer than 6 characters and preferably formed by numbers, letters and special characters."
-msgstr "Användarlösenord måste vara längre än 6 tecken och föredragsvis konstruerade av siffror, bokstäver och specialtecken."
+msgid "User passwords must be longer than 5 characters and preferably formed by numbers, letters and special characters."
+msgstr "Användarlösenord måste vara längre än 5 tecken och föredragsvis konstruerade av siffror, bokstäver och specialtecken."
 
 #: ../src/users/user-password.c:101
 msgid "Password confirmation is not correct"
@@ -1931,15 +1942,6 @@ msgstr "Anpassad"
 #: ../src/users/user-settings.c:344
 msgid "None"
 msgstr "Inget"
-
-#. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/user-settings.c:347
-msgid "Not asked on login"
-msgstr "Efterfrågas inte vid inloggning"
-
-#: ../src/users/user-settings.c:349
-msgid "Asked on login"
-msgstr "Efterfrågas vid inloggning"
 
 #: ../src/users/user-settings.c:393
 #, c-format
@@ -2024,10 +2026,20 @@ msgstr "%s kommer inte längre att kunna genomföra administrativa åtgärder. D
 msgid "Give up administration rights"
 msgstr "Lämna tillbaka administrationsrättigheter"
 
-#: ../src/users/users-tool.c:284
+#: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "Användarinställningar"
 
+#~ msgid ""
+#~ "Whether the users-admin tool should show system users in the users list"
+#~ msgstr ""
+#~ "Huruvida användaradministrationsverktyget ska visa systemanvändare i "
+#~ "användarlistan"
+#~ msgid ""
+#~ "Whether the users-admin tool should show the root user in the users list"
+#~ msgstr ""
+#~ "Huruvida användaradministrationsverktyget ska visa root-användaren i "
+#~ "användarlistan"
 #~ msgid "Check password _quality"
 #~ msgstr "_Kontrollera lösenordskvalitet"
 #~ msgid "User _password:"
