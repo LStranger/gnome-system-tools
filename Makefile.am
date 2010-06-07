@@ -14,10 +14,11 @@ EXTRA_DIST = \
 	xmldocs.make		\
 	gnome-doc-utils.make	\
 	gnome-system-tools.pc.in \
-	$(gsettings_SCHEMAS)
+	org.gnome.system-tools.gschema.xml.in
 
 gsettings_SCHEMAS = org.gnome.system-tools.gschema.xml
 @GSETTINGS_RULES@
+@INTLTOOL_XML_NOMERGE_RULE@
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-system-tools.pc
