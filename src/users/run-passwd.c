@@ -462,11 +462,13 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 			                        "palindrome",
 			                        "dictionary",
 			                        "simple",
+			                        "simplistic",
 			                        "similar",
 			                        "different",
 			                        "case",
 			                        "wrapped",
 			                        "recovered",
+			                        "recent",
 			                        "unchanged",
 			                        "match",
 			                        "1 numeric or special",
@@ -496,6 +498,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 						                     _("The new password is too short"));
 					} else if (g_strrstr (str->str, "palindrome") != NULL ||
 						   g_strrstr (str->str, "simple") != NULL ||
+						   g_strrstr (str->str, "simplistic") != NULL ||
 						   g_strrstr (str->str, "dictionary") != NULL) {
 						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
 						                     _("The new password is too simple"));
@@ -512,6 +515,9 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 						   g_strrstr (str->str, "match") != NULL) {
 						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
 						                     _("The old and new passwords are the same"));
+					} else if (g_strrstr (str->str, "recent") != NULL) {
+						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
+						                     _("The new password has already been used recently."));
 					} else if (g_strrstr (str->str, "failure") != NULL) {
 						/* Authentication failure */
 						error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_AUTH_FAILED,
