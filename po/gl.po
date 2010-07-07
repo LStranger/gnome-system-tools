@@ -15,15 +15,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools-master-po-gl-76140.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-13 19:48+0200\n"
-"PO-Revision-Date: 2010-06-13 19:59+0200\n"
+"POT-Creation-Date: 2010-07-07 18:29+0200\n"
+"PO-Revision-Date: 2010-07-07 18:31+0200\n"
 "Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
-"Language-Team: Galician <gnome@g11.net>\n"
+"Language-Team: Galician <gnome@g11n.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gl\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../interfaces/network.ui.h:1 ../src/network/ifaces-list.c:326
@@ -243,7 +243,7 @@ msgid "_Subnet mask:"
 msgstr "Máscara de _subrede:"
 
 # (pofilter) accelerators: accelerator _ is missing from translation
-#: ../interfaces/network.ui.h:55
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "Nome de _usuario:"
 
@@ -419,10 +419,10 @@ msgstr "_Hora:"
 
 #: ../interfaces/users.ui.h:1
 msgid ""
-"A user with this name already exists. Please choose a different short name "
-"for the new user."
+"A user with this name already exists. Please choose a different name for the "
+"new user."
 msgstr ""
-"Un usuario para o cal un nome xa existe. Escolla un nome curto diferente "
+"Xa existe un usuario con este nome. Escolla un nome de usuario diferente "
 "para o novo usuario."
 
 #: ../interfaces/users.ui.h:2
@@ -458,8 +458,8 @@ msgid "Change User Account Type"
 msgstr "Cambiar o tipo de conta de usuario"
 
 #: ../interfaces/users.ui.h:10
-msgid "Change User Name and Login"
-msgstr "Cambiar o nome de usuario e login"
+msgid "Change User Name"
+msgstr "Cambiar o nome de usuario"
 
 #: ../interfaces/users.ui.h:11
 msgid "Change User Password"
@@ -623,32 +623,15 @@ msgstr "_Nome do perfil:"
 msgid "Set password b_y hand"
 msgstr "Estabelecer o contrasi_nal á man"
 
-#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
-#: ../interfaces/users.ui.h:52
-msgid ""
-"Short name must consist of:\n"
-"  ➣ lower case letters from the English alphabet\n"
-"  ➣ digits\n"
-"  ➣ any of the characters \".\", \"-\" and \"_\""
-msgstr ""
-"O nome curto debe estar formado por:\n"
-"  ➣ letras en minúsculas do alfabeto inglés\n"
-"  ➣ díxitos\n"
-"  ➣ calquera dos caractéres \".\", \"-\" e \"_\""
-
-#: ../interfaces/users.ui.h:56
-msgid "Short name must start with a letter!"
-msgstr "O nome curto debe comezar por unha letra!"
-
-#: ../interfaces/users.ui.h:57
+#: ../interfaces/users.ui.h:51
 msgid "System Defaults"
 msgstr "Configuracións predefinidas do sistema"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:52
 msgid "This account is disabled."
 msgstr "Esta conta está desactivada."
 
-#: ../interfaces/users.ui.h:59
+#: ../interfaces/users.ui.h:53
 msgid ""
 "This account is using special settings that have been defined manually. Use "
 "the <i>Advanced Settings</i> dialog to tune them."
@@ -656,17 +639,34 @@ msgstr ""
 "Esta conta está usando configuracións especiais que foron definidas "
 "manualmente. Use o diálogo <i>Configuracións avanzadas</i> para adaptalas."
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:54
 msgid "User ID:"
 msgstr "ID do usuario:"
 
-#: ../interfaces/users.ui.h:61
+#: ../interfaces/users.ui.h:55
 msgid "User Privileges"
 msgstr "Privilexios do usuario"
 
-#: ../interfaces/users.ui.h:62
+#: ../interfaces/users.ui.h:56
 msgid "User profiles"
 msgstr "Perfís do usuario"
+
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:58
+msgid ""
+"Username must consist of:\n"
+"  ➣ lower case letters from the English alphabet\n"
+"  ➣ digits\n"
+"  ➣ any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+"O nome de usuario debe estar formado por:\n"
+"  ➣ letras en minúsculas do alfabeto inglés\n"
+"  ➣ díxitos\n"
+"  ➣ calquera dos caractéres \".\", \"-\" e \"_\""
+
+#: ../interfaces/users.ui.h:62
+msgid "Username must start with a letter!"
+msgstr "O nome de usuario debe comezar por unha letra!"
 
 #: ../interfaces/users.ui.h:63
 msgid "You can't change user ID while the user is logged in."
@@ -741,10 +741,6 @@ msgstr "_Contrasinal:"
 #: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "_Intérprete de ordes:"
-
-#: ../interfaces/users.ui.h:81
-msgid "_Short Name:"
-msgstr "Nome _curto:"
 
 #: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
@@ -1862,37 +1858,42 @@ msgstr "Usuario de escritorio"
 msgid "Authentication failed"
 msgstr "Produciuse un fallo na autenticación"
 
-#: ../src/users/run-passwd.c:496
+#: ../src/users/run-passwd.c:498
 #, c-format
 msgid "The new password is too short"
 msgstr "O novo contrasinal é demasiado curta"
 
-#: ../src/users/run-passwd.c:501
+#: ../src/users/run-passwd.c:504
 #, c-format
 msgid "The new password is too simple"
 msgstr "O novo contrasinal é demasiado simple"
 
-#: ../src/users/run-passwd.c:507
+#: ../src/users/run-passwd.c:510
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "O contrasinal novo e antigo son demasiado similares"
 
-#: ../src/users/run-passwd.c:510
+#: ../src/users/run-passwd.c:513
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "O novo contrasinal debe conter caracteres numéricos ou especiais"
 
-#: ../src/users/run-passwd.c:514
+#: ../src/users/run-passwd.c:517
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "O contrasinal novo e antigo son o mesmo"
 
-#: ../src/users/run-passwd.c:518
+#: ../src/users/run-passwd.c:520
+#, c-format
+msgid "The new password has already been used recently."
+msgstr "O novo contrasinal xa foi usado recentemente."
+
+#: ../src/users/run-passwd.c:524
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "O seu contrasinal cambiou desde que iniciou a sesión inicialmente!"
 
-#: ../src/users/run-passwd.c:522
+#: ../src/users/run-passwd.c:528
 #, c-format
 msgid "Unknown error"
 msgstr "Erro descoñecido"
@@ -2104,6 +2105,9 @@ msgstr "Darlle permisos de administración"
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "Configuracións de usuario"
+
+#~ msgid "_Short Name:"
+#~ msgstr "Nome _curto:"
 
 #~ msgid ""
 #~ "Whether the users-admin tool should show system users in the users list"
