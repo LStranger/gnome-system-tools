@@ -6,11 +6,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.31.x\n"
-"Report-Msgid-Bugs-To:\n"
-"POT-Creation-Date: 2010-06-20 12:15+0200\n"
-"PO-Revision-Date: 2010-06-20 12:18+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-07 19:06+0200\n"
+"PO-Revision-Date: 2010-08-07 19:10+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -232,7 +233,7 @@ msgstr "_Sett modem som forvalgt rute til internett"
 msgid "_Subnet mask:"
 msgstr "_Subnettmaske:"
 
-#: ../interfaces/network.ui.h:55
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "Br_ukernavn:"
 
@@ -408,11 +409,9 @@ msgstr "_Klokkeslett:"
 
 #: ../interfaces/users.ui.h:1
 msgid ""
-"A user with this name already exists. Please choose a different short name "
-"for the new user."
-msgstr ""
-"Det finnes allerede en bruker med dette navnet. Vennligst velg et annet "
-"kortnavn for den nye brukeren."
+"A user with this name already exists. Please choose a different name for the "
+"new user."
+msgstr "En bruker med dette navnet finnes allerede. Vennligst velg et annet navn for den nye brukeren."
 
 #: ../interfaces/users.ui.h:2
 msgid "Account _type:"
@@ -447,8 +446,8 @@ msgid "Change User Account Type"
 msgstr "Bytt brukerkontotype"
 
 #: ../interfaces/users.ui.h:10
-msgid "Change User Name and Login"
-msgstr "Bytt brukernavn og påloggingsinformasjon"
+msgid "Change User Name"
+msgstr "Bytt brukernavn"
 
 #: ../interfaces/users.ui.h:11
 msgid "Change User Password"
@@ -609,44 +608,44 @@ msgstr "_Navn på profil:"
 msgid "Set password b_y hand"
 msgstr "Sett passord _manuelt"
 
-#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
-#: ../interfaces/users.ui.h:52
-msgid ""
-"Short name must consist of:\n"
-"  ➣ lower case letters from the English alphabet\n"
-"  ➣ digits\n"
-"  ➣ any of the characters \".\", \"-\" and \"_\""
-msgstr ""
-
-#: ../interfaces/users.ui.h:56
-msgid "Short name must start with a letter!"
-msgstr "Kortnavn må starte med en bokstav!"
-
-#: ../interfaces/users.ui.h:57
+#: ../interfaces/users.ui.h:51
 msgid "System Defaults"
 msgstr "Forvalg for systemet"
 
-#: ../interfaces/users.ui.h:58
+#: ../interfaces/users.ui.h:52
 msgid "This account is disabled."
 msgstr "Denne kontoen er deaktivert."
 
-#: ../interfaces/users.ui.h:59
+#: ../interfaces/users.ui.h:53
 msgid ""
 "This account is using special settings that have been defined manually. Use "
 "the <i>Advanced Settings</i> dialog to tune them."
 msgstr ""
 
-#: ../interfaces/users.ui.h:60
+#: ../interfaces/users.ui.h:54
 msgid "User ID:"
 msgstr "Bruker-ID:"
 
-#: ../interfaces/users.ui.h:61
+#: ../interfaces/users.ui.h:55
 msgid "User Privileges"
 msgstr "Brukerrettigheter"
 
-#: ../interfaces/users.ui.h:62
+#: ../interfaces/users.ui.h:56
 msgid "User profiles"
 msgstr "Brukerprofiler"
+
+#. No item should exceed a length of 40 characters, to avoid wrapping on two lines. Better simplifying than making it hard to read!
+#: ../interfaces/users.ui.h:58
+msgid ""
+"Username must consist of:\n"
+"  ➣ lower case letters from the English alphabet\n"
+"  ➣ digits\n"
+"  ➣ any of the characters \".\", \"-\" and \"_\""
+msgstr ""
+
+#: ../interfaces/users.ui.h:62
+msgid "Username must start with a letter!"
+msgstr "Brukernavn må starte med en bokstav!"
 
 #: ../interfaces/users.ui.h:63
 msgid "You can't change user ID while the user is logged in."
@@ -720,13 +719,27 @@ msgstr "_Passord:"
 msgid "_Shell:"
 msgstr "_Skall:"
 
-#: ../interfaces/users.ui.h:81
-msgid "_Short Name:"
-msgstr "_Kortnavn:"
-
 #: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "_Telefon arbeid:"
+
+#: ../org.gnome.system-tools.gschema.xml.in.h:1
+msgid "Show root user"
+msgstr "Vis root-bruker"
+
+#: ../org.gnome.system-tools.gschema.xml.in.h:2
+msgid "Show system users"
+msgstr "Vis systembrukere"
+
+#: ../org.gnome.system-tools.gschema.xml.in.h:3
+msgid ""
+"Whether the users-admin tool should show system users in the users list."
+msgstr ""
+
+#: ../org.gnome.system-tools.gschema.xml.in.h:4
+msgid ""
+"Whether the users-admin tool should show the root user in the users list."
+msgstr ""
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -1816,37 +1829,42 @@ msgstr "Skrivebordsbruker"
 msgid "Authentication failed"
 msgstr "Autentisering feilet"
 
-#: ../src/users/run-passwd.c:496
+#: ../src/users/run-passwd.c:498
 #, c-format
 msgid "The new password is too short"
 msgstr "Nytt passord er for kort"
 
-#: ../src/users/run-passwd.c:501
+#: ../src/users/run-passwd.c:504
 #, c-format
 msgid "The new password is too simple"
 msgstr "Nytt passordet er for enkelt"
 
-#: ../src/users/run-passwd.c:507
+#: ../src/users/run-passwd.c:510
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "Gammelt og nytt passord er for like"
 
-#: ../src/users/run-passwd.c:510
+#: ../src/users/run-passwd.c:513
 #, c-format
 msgid "The new password must contain numeric or special characters"
-msgstr ""
+msgstr "Det nye passordet må inneholde tall og spesielle tegn"
 
-#: ../src/users/run-passwd.c:514
+#: ../src/users/run-passwd.c:517
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "Gammelt og nytt passord er like"
 
-#: ../src/users/run-passwd.c:518
+#: ../src/users/run-passwd.c:520
+#, c-format
+msgid "The new password has already been used recently."
+msgstr "Det nye passordet har vært brukt nylig."
+
+#: ../src/users/run-passwd.c:524
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
+msgstr "Passordet ditt er endret siden du autentiserte deg sist!"
 
-#: ../src/users/run-passwd.c:522
+#: ../src/users/run-passwd.c:528
 #, c-format
 msgid "Unknown error"
 msgstr "Ukjent feil"
@@ -1867,7 +1885,9 @@ msgstr "Passordet er for kort"
 msgid ""
 "User passwords must be longer than 5 characters and preferably formed by "
 "numbers, letters and special characters."
-msgstr "Brukerpassord må være lengre enn 5 tegn og helst utformet av tall, bokstaver og spesielle tegn."
+msgstr ""
+"Brukerpassord må være lengre enn 5 tegn og helst utformet av tall, bokstaver "
+"og spesielle tegn."
 
 #: ../src/users/user-password.c:101
 msgid "Password confirmation is not correct"
@@ -1900,7 +1920,7 @@ msgstr "%s er aktiv på denne datamaskinen nå"
 
 #: ../src/users/user-settings.c:99
 msgid "Please ensure the user has logged out before deleting this account."
-msgstr ""
+msgstr "Vennligst sjekk at bruker har logget ut før denne kontoen slettes."
 
 #: ../src/users/user-settings.c:109
 msgid "Can't delete the only administrator account"
@@ -1911,7 +1931,7 @@ msgstr "Kan ikke slette den eneste administratorkontoen"
 msgid ""
 "%s is the only administrator on this computer. Deleting this account would "
 "lock you out of administrating the system."
-msgstr ""
+msgstr "%s er den eneste administratoren på denne datamaskinen. Hvis du sletter denne kontoen vil det hindre deg i å administrere systemet."
 
 #: ../src/users/user-settings.c:121
 #, c-format
@@ -2043,3 +2063,6 @@ msgstr "Gi opp administrasjonsrettigheter"
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "Instillinger for bruker"
+
+#~ msgid "_Short Name:"
+#~ msgstr "_Kortnavn:"
