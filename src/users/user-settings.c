@@ -402,9 +402,18 @@ check_home (OobsUser *user)
 {
 	GtkWidget *dialog;
 	GtkWidget *home_entry;
+	GtkWidget *content_area;
+	GtkWidget *chown_home_checkbutton;
+	GtkWidget *delete_old_checkbutton;
 	const char *home;
+	gboolean old_home_exists, new_home_exists;
+	gboolean chown_home, delete_old;
 	char *message;
 	int response;
+	int home_flags;
+
+	/* Better be sure there's no remnant from aborted changes */
+	oobs_user_set_home_flags (user, 0);
 
 	home_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 	home = gtk_entry_get_text (GTK_ENTRY (home_entry));
@@ -424,25 +433,145 @@ check_home (OobsUser *user)
 
 		return FALSE;
 	}
-	else if (strcmp (oobs_user_get_home_directory (user), home) != 0
-	         && g_file_test (home, G_FILE_TEST_EXISTS)) {
-		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-		                                 GTK_DIALOG_MODAL,
-		                                 GTK_MESSAGE_QUESTION,
-		                                 GTK_BUTTONS_NONE,
-		                                 "%s", _("Home directory already exists"));
-		message = _("The directory <tt>%s</tt> already exists. User may not have the permissions required to read or write in that directory. "
-		            "Do you want to use it anyway?");
-		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
-		                                            message, home);
-		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-		                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-		                        _("Use this directory"), GTK_RESPONSE_OK, NULL);
+	else if (strcmp (oobs_user_get_home_directory (user), home) != 0) {
+		old_home_exists = g_file_test (oobs_user_get_home_directory (user), G_FILE_TEST_EXISTS);
+		new_home_exists = g_file_test (home, G_FILE_TEST_EXISTS);
 
-		response = gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		chown_home = FALSE;
+		delete_old = FALSE;
+		home_flags = 0;
 
-		return (response == GTK_RESPONSE_OK);
+		if (old_home_exists && new_home_exists) {
+			dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog), GTK_DIALOG_MODAL,
+			                                 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+			                                 _("New home directory already exists, use it?"));
+			gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+			                                            _("The home directory for %s has been set "
+			                                              "to <tt>%s</tt>, which already exists. "
+			                                              "Do you want to use files from this directory, "
+			                                              "or copy the contents of <tt>%s</tt> "
+			                                              "to the new home, overwriting it?\n\n"
+			                                              "In doubt, use the new directory to avoid "
+			                                              "losing data, and copy files from the old "
+			                                              "directory later."),
+			                                            oobs_user_get_full_name (user),
+			                                            home,
+			                                            oobs_user_get_home_directory (user));
+			gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+			                        _("_Replace With Old Files"), GTK_RESPONSE_NO,
+			                        _("_Cancel Change"), GTK_RESPONSE_CANCEL,
+			                        /* TRANSLATORS: This means "use the files from the new location",
+			                         * as opposed to those from the old location. */
+			                        _("_Use New Files"), GTK_RESPONSE_YES, NULL);
+			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
+
+			content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+			chown_home_checkbutton =
+			    gtk_check_button_new_with_mnemonic (_("Make user the _owner of the new home directory"));
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (chown_home_checkbutton), TRUE);
+			delete_old_checkbutton =
+			    gtk_check_button_new_with_mnemonic (_("_Delete old home directory"));
+			gtk_box_pack_start (GTK_BOX (content_area), chown_home_checkbutton, FALSE, FALSE, 0);
+			gtk_box_pack_start (GTK_BOX (content_area), delete_old_checkbutton, FALSE, FALSE, 0);
+			gtk_widget_show (chown_home_checkbutton);
+			gtk_widget_show (delete_old_checkbutton);
+
+			response = gtk_dialog_run (GTK_DIALOG (dialog));
+			chown_home = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (chown_home_checkbutton));
+			delete_old = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (delete_old_checkbutton));
+
+			if (response == GTK_RESPONSE_NO)
+			  home_flags = OOBS_USER_COPY_HOME;
+
+			gtk_widget_destroy (dialog);
+		}
+		else if (new_home_exists) {
+			dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog), GTK_DIALOG_MODAL,
+			                                 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+			                                 _("New home directory already exists, use it?"));
+			gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+			                                            _("The home directory for %s has been set "
+			                                              "to <tt>%s</tt>, which already exists. "
+			                                              "Do you want to use files from this directory, "
+			                                              "or delete all its contents and use a "
+			                                              "completely empty home directory?\n\n"
+			                                              "In doubt, keep the files, and remove them "
+			                                              "later if needed."),
+			                                            oobs_user_get_full_name (user),
+			                                            home);
+			gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+			                        _("_Delete Files"), GTK_RESPONSE_NO,
+			                        _("_Cancel Change"), GTK_RESPONSE_CANCEL,
+			                        _("_Use Existing Files"), GTK_RESPONSE_YES, NULL);
+			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
+
+			content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+			chown_home_checkbutton =
+			    gtk_check_button_new_with_mnemonic (_("Make user the _owner of the new home directory"));
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (chown_home_checkbutton), TRUE);
+			gtk_box_pack_start (GTK_BOX (content_area), chown_home_checkbutton, FALSE, FALSE, 0);
+			gtk_widget_show (chown_home_checkbutton);
+
+			response = gtk_dialog_run (GTK_DIALOG (dialog));
+			chown_home = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (chown_home_checkbutton));
+
+			if (response == GTK_RESPONSE_NO)
+			  home_flags = OOBS_USER_ERASE_HOME;
+
+			gtk_widget_destroy (dialog);
+		}
+		else if (old_home_exists) {
+			dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog), GTK_DIALOG_MODAL,
+			                                 GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+			                                 _("Copy old home directory to new location?"));
+			gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+			                                            _("The home directory for %s has been set "
+			                                              "to <tt>%s</tt>, which doesn't exist. "
+			                                              "Do you want to copy the contents of the "
+			                                              "old home directory (<tt>%s</tt>), or use "
+			                                              "a completely empty home directory?\n\n"
+			                                              "If you choose to copy the files to the new "
+			                                              "location, it's safe to delete the old directory."),
+			                                            oobs_user_get_full_name (user),
+			                                            home,
+			                                            oobs_user_get_home_directory (user));
+			gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+			                        _("_Use Empty Directory"), GTK_RESPONSE_NO,
+			                        _("_Cancel Change"), GTK_RESPONSE_CANCEL,
+			                        /* TRANSLATORS: This means "copy files from the old home directory". */
+			                        _("Co_py Old Files"), GTK_RESPONSE_YES, NULL);
+			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
+
+			content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+			delete_old_checkbutton =
+			    gtk_check_button_new_with_mnemonic (_("_Delete old home directory"));
+			gtk_box_pack_start (GTK_BOX (content_area), delete_old_checkbutton, FALSE, FALSE, 0);
+			gtk_widget_show (delete_old_checkbutton);
+
+			response = gtk_dialog_run (GTK_DIALOG (dialog));
+			delete_old = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (delete_old_checkbutton));
+
+			if (response == GTK_RESPONSE_YES)
+			  home_flags = OOBS_USER_COPY_HOME;
+
+			gtk_widget_destroy (dialog);
+		}
+		else {
+			/* Backends will create an empty dir owned by the user */
+			return TRUE;
+		}
+
+		if (chown_home && delete_old)
+			oobs_user_set_home_flags (user, home_flags | OOBS_USER_CHOWN_HOME
+			                                           | OOBS_USER_REMOVE_HOME);
+		else if (chown_home)
+			oobs_user_set_home_flags (user, home_flags | OOBS_USER_CHOWN_HOME);
+		else if (delete_old)
+			oobs_user_set_home_flags (user, home_flags | OOBS_USER_REMOVE_HOME);
+		else
+			oobs_user_set_home_flags (user, home_flags);
+
+		return (response != GTK_RESPONSE_CANCEL);
 	}
 
 	return TRUE;
@@ -1189,6 +1318,14 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 	g_object_unref (user);
 }
 
+static void
+on_commit_finish (OobsObject *object, OobsResult result, gpointer user)
+{
+	if (result == OOBS_RESULT_OK) {
+		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+		user_settings_show (OOBS_USER (user));
+	}
+}
 
 void
 on_edit_user_advanced (GtkButton *button, gpointer user_data)
@@ -1317,10 +1454,10 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 		oobs_user_set_main_group (user, NULL);
 
 
-	if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK) {
-		gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
-		user_settings_show (user);
-	}
+	/* Need to run async since copying home dir could be slow */
+	gst_tool_commit_async (tool, OOBS_OBJECT (user),
+	                       _("Applying changes to user settings..."),
+	                       on_commit_finish, user);
 
 	g_object_unref (user);
 }
