@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-17 00:44+0300\n"
-"PO-Revision-Date: 2010-08-17 00:46+0200\n"
+"POT-Creation-Date: 2010-08-21 02:38+0300\n"
+"PO-Revision-Date: 2010-08-21 02:50+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1650,7 +1650,7 @@ msgstr "קבוצת מנהלי המערכת אינה ניתנת למחיקה"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:605
 msgid "This would leave the system unusable."
 msgstr "פעולה זו תשאיר את המערכת במצב בלתי שמיש."
 
@@ -1895,14 +1895,14 @@ msgstr "משתמשים וקבוצות"
 
 #: ../src/users/user-password.c:97
 msgid "Password is too short"
-msgstr "הסיסמה קצרה מדי"
+msgstr "הססמה קצרה מדי"
 
 #: ../src/users/user-password.c:98
 msgid ""
 "User passwords must be longer than 5 characters and preferably formed by "
 "numbers, letters and special characters."
 msgstr ""
-"על ססמאות המשתמש להיות ארוכות מ־5 תווים ועדיף שיכילו מספקים, אותיות ותווים "
+"על ססמאות המשתמש להיות ארוכות מ־5 תווים ועדיף שיכילו מספרים, אותיות ותווים "
 "מיוחדים."
 
 #: ../src/users/user-password.c:101
@@ -2001,11 +2001,11 @@ msgstr "התו \"%c\" בהערה לא חוקי"
 msgid "Check that this character is not used."
 msgstr "נא לוודא שלא נעשה שימוש בתו זה"
 
-#: ../src/users/user-settings.c:417
+#: ../src/users/user-settings.c:426
 msgid "Incomplete path in home directory"
-msgstr "נתיב לא מלא בספריית הבית"
+msgstr "נתיב לא מלא בתיקייה הבית"
 
-#: ../src/users/user-settings.c:418
+#: ../src/users/user-settings.c:427
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2013,43 +2013,121 @@ msgstr ""
 "יש להזין את הנתיב המלא אל תיקיית הבית\n"
 "<span size=\"smaller\">לדוגמה: /home/yaron</span>."
 
-#: ../src/users/user-settings.c:433
-msgid "Home directory already exists"
-msgstr "תיקיית הבית כבר קיימת"
+#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+msgid "New home directory already exists, use it?"
+msgstr "כבר קיימת תיקיית בית חדשה, האם להשתמש בה?"
 
-#: ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:449
 #, c-format
 msgid ""
-"The directory <tt>%s</tt> already exists. User may not have the permissions "
-"required to read or write in that directory. Do you want to use it anyway?"
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or copy the contents of <tt>%"
+"s</tt> to the new home, overwriting it?\n"
+"\n"
+"In doubt, use the new directory to avoid losing data, and copy files from "
+"the old directory later."
 msgstr ""
-"התיקייה <tt>%s</tt> כבר קיימת. יתכן שלמשתמש אין את ההרשאות הנחוצות לקרוא "
-"ולכתוב אל ומתיקייה זו. האם ברצונך להשתמש בה בכול זאת?"
+"תיקיית הבית של %s הוגדרה במיקום <tt>%s</tt>, שכבר קיים. האם ברצונך להשתמש "
+"בקבצים מתיקייה זו או להעתיק את התוכן של <tt>%s</tt> לתיקיית הבית החדשה, תוך "
+"כדי שכתוב עליה?\n"
+"\n"
+"במידת הספק, כדאי להשתמש בתיקייה החדשה כדי להימנע מאבדן נתונים ולהעתיק את "
+"הקבצים מהתיקייה הישנה בשלב מאוחר יותר."
 
-#: ../src/users/user-settings.c:440
-msgid "Use this directory"
-msgstr "שימוש בתיקייה זו"
+#: ../src/users/user-settings.c:461
+msgid "_Replace With Old Files"
+msgstr "ה_חלפה בקבצים הישנים"
 
-#: ../src/users/user-settings.c:475
+#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:540
+msgid "_Cancel Change"
+msgstr "_ביטול השינוי"
+
+#. TRANSLATORS: This means "use the files from the new location",
+#. * as opposed to those from the old location.
+#: ../src/users/user-settings.c:465
+msgid "_Use New Files"
+msgstr "שימוש בקבצים _חדשים"
+
+#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+msgid "Make user the _owner of the new home directory"
+msgstr "הפיכת המשתמש _לבעלים של תיקיית הביתה החדשה"
+
+#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+msgid "_Delete old home directory"
+msgstr "מחיקת תיקיית הבית ה_ישנה"
+
+#: ../src/users/user-settings.c:493
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or delete all its contents and "
+"use a completely empty home directory?\n"
+"\n"
+"In doubt, keep the files, and remove them later if needed."
+msgstr ""
+"תיקיית הבית של %s הוגדרה במיקום <tt>%s</tt>, שכבר קיים. האם ברצונך להשתמש "
+"בקבצים מתיקייה זו או למחוק את כל תוכנה ולהשתמש בתיקיית בית ריקה לגמרי?\n"
+"\n"
+"במידת הספק, כדאי לשמור את הקבצים ולהסיר אותם בשלב מאוחר יותר במידת הצורך."
+
+#: ../src/users/user-settings.c:503
+msgid "_Delete Files"
+msgstr "_מחיקת הקבצים"
+
+#: ../src/users/user-settings.c:505
+msgid "_Use Existing Files"
+msgstr "שימוש בקבצים ה_קיימים"
+
+#: ../src/users/user-settings.c:526
+msgid "Copy old home directory to new location?"
+msgstr "האם להעתיק את תיקייה הבית למיקום חדש?"
+
+#: ../src/users/user-settings.c:528
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
+"Do you want to copy the contents of the old home directory (<tt>%s</tt>), or "
+"use a completely empty home directory?\n"
+"\n"
+"If you choose to copy the files to the new location, it's safe to delete the "
+"old directory."
+msgstr ""
+"תיקיית הבית של %s הוגדרה במיקום <tt>%s</tt>, שאינה קיימת. האם ברצונך להעתיק "
+"את התכנים של תיקיית הבית הישנה (<tt>%s</tt>), או להשתמש בתיקיית בית ריקה "
+"לגמרי?\n"
+"\n"
+"אם תתבצע בחירה להעתקת הקבצים למיקום החדש, ניתן למחוק את התיקייה הישנה בבטחה."
+
+#: ../src/users/user-settings.c:539
+msgid "_Use Empty Directory"
+msgstr "שימוש בתיקייה _ריקה"
+
+#. TRANSLATORS: This means "copy files from the old home directory".
+#: ../src/users/user-settings.c:542
+msgid "Co_py Old Files"
+msgstr "ה_עתקת קבצים ישנים"
+
+#: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
 msgstr "לא ניתן לשנות את מזהה משתמש העל"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:608
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "מזהה המשתמש %d כבר נמצא בשימוש על ידי המשתמש %s"
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:610
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "יש לבחור מזהה מספרי אחר עבור %s"
 
-#: ../src/users/user-settings.c:499
+#: ../src/users/user-settings.c:628
 msgid "Incomplete path in shell"
 msgstr "נתיב לא מלא עבור המעטפת"
 
-#: ../src/users/user-settings.c:500
+#: ../src/users/user-settings.c:629
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2057,11 +2135,11 @@ msgstr ""
 "יש להזין את נתיב המעטפת המלא\n"
 "<span size=\"smaller\">לדוגמה: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:534
+#: ../src/users/user-settings.c:663
 msgid "Can't revoke administration rights"
 msgstr "לא ניתן לשלול את הרשאות הניהול"
 
-#: ../src/users/user-settings.c:537
+#: ../src/users/user-settings.c:666
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2070,11 +2148,11 @@ msgstr ""
 "%s הוא המנהל היחידי במחשב זה. שלילת זכויות הניהול לחשבון זה עלולה לנעול אותך "
 "מפני ניהול המערכת."
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:683
 msgid "You are about to revoke your own administration rights"
 msgstr "הרשאות הניהול שלך עומדות להישלל על ידיך"
 
-#: ../src/users/user-settings.c:557
+#: ../src/users/user-settings.c:686
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2083,13 +2161,25 @@ msgstr ""
 "%s לא יוכל עוד לבצע פעולות ניהוליות. חשבון זה לא יורשה לקבל את הרשאות הניהול "
 "בחזרה בכוחות עצמו."
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:691
 msgid "Give up administration rights"
 msgstr "ויתור על זכויות ניהול"
+
+#: ../src/users/user-settings.c:1459
+msgid "Applying changes to user settings..."
+msgstr "השינויים בהגדרות המשתמש מוחלות..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "הגדרות משתמשים"
+
+#~ msgid ""
+#~ "The directory <tt>%s</tt> already exists. User may not have the "
+#~ "permissions required to read or write in that directory. Do you want to "
+#~ "use it anyway?"
+#~ msgstr ""
+#~ "התיקייה <tt>%s</tt> כבר קיימת. יתכן שלמשתמש אין את ההרשאות הנחוצות לקרוא "
+#~ "ולכתוב אל ומתיקייה זו. האם ברצונך להשתמש בה בכול זאת?"
 
 #~ msgid "_Short Name:"
 #~ msgstr "שם _קצר:"
