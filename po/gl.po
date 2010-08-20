@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools-master-po-gl-76140.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-16 18:01+0200\n"
-"PO-Revision-Date: 2010-08-16 18:01+0200\n"
+"POT-Creation-Date: 2010-08-20 12:39+0200\n"
+"PO-Revision-Date: 2010-08-20 12:45+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@ubuntu.com>\n"
 "Language-Team: Galician <gnome-gl-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1684,7 +1684,7 @@ msgstr "Non é posíbel eliminar o grupo do administrador"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:605
 msgid "This would leave the system unusable."
 msgstr "Isto podería inutilizar o sistema."
 
@@ -2043,11 +2043,11 @@ msgstr "Carácter non válido \"%c\" no comentario"
 msgid "Check that this character is not used."
 msgstr "Verifique que este carácter non estea en uso."
 
-#: ../src/users/user-settings.c:417
+#: ../src/users/user-settings.c:426
 msgid "Incomplete path in home directory"
 msgstr "Camiño incompleto no cartafol persoal"
 
-#: ../src/users/user-settings.c:418
+#: ../src/users/user-settings.c:427
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2055,43 +2055,123 @@ msgstr ""
 "Introduza o camiño completo para o cartafol persoal\n"
 "<span size=\"smaller\">p.e.: /home/alba</span>."
 
-#: ../src/users/user-settings.c:433
-msgid "Home directory already exists"
-msgstr "Xa existe o cartafol persoal"
+#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+msgid "New home directory already exists, use it?"
+msgstr "O novo cartafol persoal xa existe, desexa usar o existente?"
 
-#: ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:449
 #, c-format
 msgid ""
-"The directory <tt>%s</tt> already exists. User may not have the permissions "
-"required to read or write in that directory. Do you want to use it anyway?"
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or copy the contents of <tt>%"
+"s</tt> to the new home, overwriting it?\n"
+"\n"
+"In doubt, use the new directory to avoid losing data, and copy files from "
+"the old directory later."
 msgstr ""
-"O cartafol <tt>%s</tt> xa existe. O usuario non debe ter os permisos "
-"requiridos para ler e escribir nese cartafol. Desexa usalo de todos modos?"
+"O cartafol persoal para %s estabeleceuse a <tt>%s</tt>, o cal xa existe. "
+"Desexa usar os ficheiros deste cartafol ou copiar os contidos de <tt>%s</tt> "
+"ao novo cartafol persoal, sobrescribíndoos?\n"
+"\n"
+"Se ten dúbidas, use un novo cartafol para evitar a perda de datos e copie os "
+"ficheiros desde o antigo cartafol."
 
-#: ../src/users/user-settings.c:440
-msgid "Use this directory"
-msgstr "Usar este cartafol"
+#: ../src/users/user-settings.c:461
+msgid "_Replace With Old Files"
+msgstr "_Substituír cos ficheiros antigos"
 
-#: ../src/users/user-settings.c:475
+#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:540
+msgid "_Cancel Change"
+msgstr "_Cancelar o cambio"
+
+#. TRANSLATORS: This means "use the files from the new location",
+#. * as opposed to those from the old location.
+#: ../src/users/user-settings.c:465
+msgid "_Use New Files"
+msgstr "_Usar novos ficheiros"
+
+#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+msgid "Make user the _owner of the new home directory"
+msgstr "Facer ao usuario o _propietario do novo cartafol persoal"
+
+#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+msgid "_Delete old home directory"
+msgstr "_Eliminar o cartafol persoal antigo"
+
+#: ../src/users/user-settings.c:493
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or delete all its contents and "
+"use a completely empty home directory?\n"
+"\n"
+"In doubt, keep the files, and remove them later if needed."
+msgstr ""
+"O cartafol persoal para %s foi estabelecido a <tt>%s</tt>, o cal xa existe. "
+"Desexa usar os ficheiros desde este cartafol, ou eliminalos todos os seus "
+"contidos e usar un novo cartafol persoal baleiro?\n"
+"\n"
+"Se ten dúbidas, manteña os ficheiros e elimíneos máis tarde se o precisa."
+
+#: ../src/users/user-settings.c:503
+msgid "_Delete Files"
+msgstr "_Eliminar os ficheiros"
+
+#: ../src/users/user-settings.c:505
+msgid "_Use Existing Files"
+msgstr "_Usar os ficheiros existentes"
+
+#: ../src/users/user-settings.c:526
+msgid "Copy old home directory to new location?"
+msgstr "Desexa copiar o cartafol persoal a un lugar novo?"
+
+#: ../src/users/user-settings.c:528
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
+"Do you want to copy the contents of the old home directory (<tt>%s</tt>), or "
+"use a completely empty home directory?\n"
+"\n"
+"If you choose to copy the files to the new location, it's safe to delete the "
+"old directory."
+msgstr ""
+"O cartafol persoal para %s estabeleceuse a <tt>%s</tt>, o cal non existe. "
+"Desexa copiar os contidos do cartafol persoal antigo (<tt>%s</tt>), ou usar "
+"un novo cartafol persoal baleiro?\n"
+"\n"
+"Se escolle copiar os ficheiros a unha nova localización será seguro eliminar "
+"o cartafol antigo."
+
+#: ../src/users/user-settings.c:539
+msgid "_Use Empty Directory"
+msgstr "_Usar un cartafol baleiro"
+
+#. TRANSLATORS: This means "copy files from the old home directory".
+#: ../src/users/user-settings.c:542
+msgid "Co_py Old Files"
+msgstr "Co_piar os ficheiros antigos"
+
+#: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
 msgstr "Non se debe modificar o ID para o usuario administrador"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:608
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "O ID de usuario %d xa se está usando polo usuario %s"
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:610
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Seleccione un identificador numérico diferente para %s."
 
-#: ../src/users/user-settings.c:499
+#: ../src/users/user-settings.c:628
 msgid "Incomplete path in shell"
 msgstr "Camiño incompleto no intérprete de ordes"
 
-#: ../src/users/user-settings.c:500
+#: ../src/users/user-settings.c:629
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2099,11 +2179,11 @@ msgstr ""
 "Introduza un camiño completo para o intérprete de ordes\n"
 "<span size=\"smaller\">p.ex.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:534
+#: ../src/users/user-settings.c:663
 msgid "Can't revoke administration rights"
 msgstr "Non é posíbel revocar os dereitos de administración"
 
-#: ../src/users/user-settings.c:537
+#: ../src/users/user-settings.c:666
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2112,11 +2192,11 @@ msgstr ""
 "%s é o último administrador neste computador. Se revoca os dereitos de "
 "administración para esta conta pode bloquear a administración do sistema."
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:683
 msgid "You are about to revoke your own administration rights"
 msgstr "Vostede vai revocar os seus propios dereitos de administración"
 
-#: ../src/users/user-settings.c:557
+#: ../src/users/user-settings.c:686
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2125,10 +2205,22 @@ msgstr ""
 "%s non poderá levar a cabo tarefas de administración. Esta conta non poderá "
 "obter de administración de novo por si mesma."
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:691
 msgid "Give up administration rights"
 msgstr "Darlle permisos de administración"
+
+#: ../src/users/user-settings.c:1459
+msgid "Applying changes to user settings..."
+msgstr "Aplicar os cambios ás configuracións do usuario..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "Configuracións de usuario"
+
+#~ msgid ""
+#~ "The directory <tt>%s</tt> already exists. User may not have the "
+#~ "permissions required to read or write in that directory. Do you want to "
+#~ "use it anyway?"
+#~ msgstr ""
+#~ "O cartafol <tt>%s</tt> xa existe. O usuario non debe ter os permisos "
+#~ "requiridos para ler e escribir nese cartafol. Desexa usalo de todos modos?"
