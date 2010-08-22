@@ -184,12 +184,8 @@ users_table_set_user (OobsUser *user, GtkTreeIter *iter)
 	model = users_table_get_model ();
 
 	face = user_settings_get_user_face (user, 48);
-	name = oobs_user_get_full_name (user);
+	name = oobs_user_get_full_name_fallback (user);
 	login = oobs_user_get_login_name (user);
-
-	/* Work around users with empty Real name */
-	if (!name)
-		name = login;
 
 	label = g_markup_printf_escaped ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>",
 	                                 name, login);

@@ -200,7 +200,7 @@ prepare_edit_dialog (GtkDialog *dialog,
 
 	/* Set user name */
 	user = users_table_get_current ();
-	name = oobs_user_get_full_name (user);
+	name = oobs_user_get_full_name_fallback (user);
 	gtk_label_set_text (name_label, name);
 	g_object_unref (user);
 

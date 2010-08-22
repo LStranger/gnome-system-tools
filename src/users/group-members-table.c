@@ -82,10 +82,7 @@ user_name_cell_data_func (GtkCellLayout   *layout,
 			    COL_USER_OBJECT, &user,
 			    -1);
 
-	name = oobs_user_get_full_name (user);
-
-	if (!name || !*name)
-		name = oobs_user_get_login_name (user);
+	name = oobs_user_get_full_name_fallback (user);
 
 	g_object_set (renderer, "text", name, NULL);
 	g_object_unref (user);

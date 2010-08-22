@@ -94,7 +94,7 @@ check_user_delete (OobsUser *user)
 					 GTK_MESSAGE_INFO,
 					 GTK_BUTTONS_CLOSE,
 					 _("%s is currently using this computer"),
-					 oobs_user_get_full_name (user));
+					 oobs_user_get_full_name_fallback (user));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("Please ensure the user has logged out before deleting this account."));
 	}
@@ -111,7 +111,7 @@ check_user_delete (OobsUser *user)
 		                                          _("%s is the only administrator on this computer. "
 		                                            "Deleting this account would lock you out of "
 		                                            "administrating the system."),
-		                                          oobs_user_get_full_name (user));
+		                                          oobs_user_get_full_name_fallback (user));
 	}
 	else {
 		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
@@ -119,7 +119,7 @@ check_user_delete (OobsUser *user)
 		                                 GTK_MESSAGE_QUESTION,
 		                                 GTK_BUTTONS_NONE,
 		                                 _("Remove home folder for %s?"),
-		                                 oobs_user_get_full_name (user));
+		                                 oobs_user_get_full_name_fallback (user));
 		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
 		                                            _("Files owned by user %s in <tt>%s</tt> can be completely "
 		                                              "removed if you don't need them anymore. You may want to "
@@ -314,7 +314,7 @@ user_settings_show (OobsUser *user)
 	OobsGroup *group;
 
 	name_label = gst_dialog_get_widget (tool->main_dialog, "user_settings_real_name");
-	gtk_label_set_text (GTK_LABEL (name_label), oobs_user_get_full_name (user));
+	gtk_label_set_text (GTK_LABEL (name_label), oobs_user_get_full_name_fallback (user));
 
 	face_image = gst_dialog_get_widget (tool->main_dialog, "user_settings_face");
 	face = user_settings_get_user_face (user, 60);
@@ -454,7 +454,7 @@ check_home (OobsUser *user)
 			                                              "In doubt, use the new directory to avoid "
 			                                              "losing data, and copy files from the old "
 			                                              "directory later."),
-			                                            oobs_user_get_full_name (user),
+			                                            oobs_user_get_full_name_fallback (user),
 			                                            home,
 			                                            oobs_user_get_home_directory (user));
 			gtk_dialog_add_buttons (GTK_DIALOG (dialog),
@@ -497,7 +497,7 @@ check_home (OobsUser *user)
 			                                              "completely empty home directory?\n\n"
 			                                              "In doubt, keep the files, and remove them "
 			                                              "later if needed."),
-			                                            oobs_user_get_full_name (user),
+			                                            oobs_user_get_full_name_fallback (user),
 			                                            home);
 			gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 			                        _("_Delete Files"), GTK_RESPONSE_NO,
@@ -532,7 +532,7 @@ check_home (OobsUser *user)
 			                                              "a completely empty home directory?\n\n"
 			                                              "If you choose to copy the files to the new "
 			                                              "location, it's safe to delete the old directory."),
-			                                            oobs_user_get_full_name (user),
+			                                            oobs_user_get_full_name_fallback (user),
 			                                            home,
 			                                            oobs_user_get_home_directory (user));
 			gtk_dialog_add_buttons (GTK_DIALOG (dialog),
@@ -666,7 +666,7 @@ user_settings_check_revoke_admin_rights ()
 		                                            _("%s is the only administrator on this computer. "
 		                                              "Revoking administration rights for this account "
 		                                              "would lock you out of administrating the system."),
-		                                            oobs_user_get_full_name (user));
+		                                            oobs_user_get_full_name_fallback (user));
 
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
@@ -685,7 +685,7 @@ user_settings_check_revoke_admin_rights ()
 		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
 		                                            _("%s will no longer be able to perform administrative tasks. "
 		                                              "This account won't be allowed to get administration rights back on its own."),
-		                                            oobs_user_get_full_name (user));
+		                                            oobs_user_get_full_name_fallback (user));
 		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
 		                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 		                        _("Give up administration rights"), GTK_RESPONSE_OK, NULL);
@@ -1153,7 +1153,7 @@ run_edit_dialog (GtkDialog *dialog, GtkImage *face_image2, GtkLabel *name_label)
 
 	/* Set user name */
 	user = users_table_get_current ();
-	name = oobs_user_get_full_name (user);
+	name = oobs_user_get_full_name_fallback (user);
 	gtk_label_set_text (name_label, name);
 	g_object_unref (user);
 
@@ -1208,7 +1208,7 @@ on_edit_user_name (GtkButton *button, gpointer user_data)
 	                                                 "user_settings_real_name");
 
 	fullname = oobs_user_get_full_name (user);
-	gtk_entry_set_text (GTK_ENTRY (user_name_entry), fullname);
+	gtk_entry_set_text (GTK_ENTRY (user_name_entry), fullname ? fullname : "");
 	gtk_editable_select_region (GTK_EDITABLE (user_name_entry), 0, -1);
 
 	response = run_edit_dialog (GTK_DIALOG (user_name_dialog),
