@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.31.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-21 20:47+0800\n"
-"PO-Revision-Date: 2010-08-21 20:48+0800\n"
+"POT-Creation-Date: 2010-08-23 19:54+0800\n"
+"PO-Revision-Date: 2010-08-23 19:54+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
@@ -1995,10 +1995,8 @@ msgstr ""
 "<span size=\"smaller\">例如：/home/john</span>。"
 
 #: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
-#, fuzzy
-#| msgid "Home directory already exists"
 msgid "New home directory already exists, use it?"
-msgstr "家目錄已經存在"
+msgstr "新的家目錄已經存在，是否使用它？"
 
 #: ../src/users/user-settings.c:449
 #, c-format
@@ -2010,33 +2008,32 @@ msgid ""
 "In doubt, use the new directory to avoid losing data, and copy files from "
 "the old directory later."
 msgstr ""
+"%s 的家目錄被設定為 <tt>%s</tt>，但是它已經存在。你想要使用這個目錄裏的檔案，或是把 <tt>%s</tt> 的內容複製到新的家目錄，將它覆蓋？\n"
+"\n"
+"如果不確定，使用新的目錄可以避免資料遺失，並且在稍後才從舊目錄複製檔案。"
 
 #: ../src/users/user-settings.c:461
 msgid "_Replace With Old Files"
-msgstr ""
+msgstr "以舊的檔案取代(_R)"
 
 #: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
 #: ../src/users/user-settings.c:540
 msgid "_Cancel Change"
-msgstr ""
+msgstr "取消更改(_C)"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
 #: ../src/users/user-settings.c:465
-#, fuzzy
-#| msgid "Keep Files"
 msgid "_Use New Files"
-msgstr "保留檔案"
+msgstr "使用新的檔案(_U)"
 
 #: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
 msgid "Make user the _owner of the new home directory"
-msgstr ""
+msgstr "將使用者設為新家目錄的擁有者(_O)"
 
 #: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
-#, fuzzy
-#| msgid "Incomplete path in home directory"
 msgid "_Delete old home directory"
-msgstr "個人目錄含有不完整的路徑"
+msgstr "刪除舊的家目錄(_D)"
 
 #: ../src/users/user-settings.c:493
 #, c-format
@@ -2047,20 +2044,21 @@ msgid ""
 "\n"
 "In doubt, keep the files, and remove them later if needed."
 msgstr ""
+"%s 的家目錄被設定為 <tt>%s</tt>，但是它已經存在。你想要使用這個目錄裏的檔案，或是將它所有的內容刪除以使用完全空白的家目錄？\n"
+"\n"
+"如果不確定，先保留檔案，並且在稍後才根據需求刪除它們。"
 
 #: ../src/users/user-settings.c:503
-#, fuzzy
-#| msgid "Delete Files"
 msgid "_Delete Files"
-msgstr "刪除檔案"
+msgstr "刪除檔案(_D)"
 
 #: ../src/users/user-settings.c:505
 msgid "_Use Existing Files"
-msgstr ""
+msgstr "使用現有的檔案(_U)"
 
 #: ../src/users/user-settings.c:526
 msgid "Copy old home directory to new location?"
-msgstr ""
+msgstr "是否將舊的家目錄複製到新位置？"
 
 #: ../src/users/user-settings.c:528
 #, c-format
@@ -2072,17 +2070,18 @@ msgid ""
 "If you choose to copy the files to the new location, it's safe to delete the "
 "old directory."
 msgstr ""
+"%s 的家目錄被設定為 <tt>%s</tt>，但是它還不存在。你想要複製舊的家目錄 (<tt>%s</tt>) 裏的檔案，或是使用完全空白的家目錄？\n"
+"\n"
+"如果你選擇將檔案複製到新的位置，把舊的目錄刪除也無妨。"
 
 #: ../src/users/user-settings.c:539
-#, fuzzy
-#| msgid "Use this directory"
 msgid "_Use Empty Directory"
-msgstr "使用這個目錄"
+msgstr "使用空的目錄(_U)"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
 #: ../src/users/user-settings.c:542
 msgid "Co_py Old Files"
-msgstr ""
+msgstr "複製舊的檔案(_P)"
 
 #: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
@@ -2139,7 +2138,7 @@ msgstr "放棄系統管理者權限"
 
 #: ../src/users/user-settings.c:1459
 msgid "Applying changes to user settings..."
-msgstr ""
+msgstr "正在套用更改到使用者設定值..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
