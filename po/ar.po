@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-19 21:32+0200\n"
-"PO-Revision-Date: 2010-08-19 21:31+0300\n"
+"POT-Creation-Date: 2010-08-24 04:35+0200\n"
+"PO-Revision-Date: 2010-08-24 04:35+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -1659,7 +1659,7 @@ msgstr "لا يمكن حذف مجموعة المديرين"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:605
 msgid "This would leave the system unusable."
 msgstr "قد يترك هذا النّظام غير قابل للاستخدام."
 
@@ -2010,11 +2010,11 @@ msgstr "محرفٌ غير سليم \"%c\" في التّعليق"
 msgid "Check that this character is not used."
 msgstr "تأكّد أن هذا المحرف غير مستخدم."
 
-#: ../src/users/user-settings.c:417
+#: ../src/users/user-settings.c:426
 msgid "Incomplete path in home directory"
 msgstr "مسار غير كامل لمجلّد المنزل"
 
-#: ../src/users/user-settings.c:418
+#: ../src/users/user-settings.c:427
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2022,43 +2022,114 @@ msgstr ""
 "رجاءً أدخل المسار الكامل لمجلّد المنزل\n"
 "<span size=\"smaller\">مثلًا: ‪/home/john‬</span>."
 
-#: ../src/users/user-settings.c:433
-msgid "Home directory already exists"
-msgstr "المجلد المنزلي موجود مسبقًا"
+#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+msgid "New home directory already exists, use it?"
+msgstr "المجلد المنزلي الجديد موجود مسبقًا، أأستخدمه؟"
 
-#: ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:449
 #, c-format
 msgid ""
-"The directory <tt>%s</tt> already exists. User may not have the permissions "
-"required to read or write in that directory. Do you want to use it anyway?"
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or copy the contents of <tt>%"
+"s</tt> to the new home, overwriting it?\n"
+"\n"
+"In doubt, use the new directory to avoid losing data, and copy files from "
+"the old directory later."
 msgstr ""
-"الديل <tt>%s</tt> موجود مسبقا. قد لا يكون للمستخدم الصلاحيات اللازمة لقراءة "
-"وكتابة هذا الدليل. أما زلت ترغب في استخدامه؟"
+"لقد حدد المجلد <tt>‪‬%s‬</tt> ليكون المنزلي للمستخدم %s، لكنه موجود مسبقا. "
+"أتريد استخدام الملفات من هذا المجلد أم نقل محتويات <tt>‪%s‬</tt> إلى المنزل "
+"الجديد مستبدلا إياه؟\n"
+"\n"
+"في حال الشك استخدم مجلدا جديدا لتلافي فقد البيانات، لاحقا يمكنك نسخ الملفات "
+"من المجلد القديم."
 
-#: ../src/users/user-settings.c:440
-msgid "Use this directory"
+#: ../src/users/user-settings.c:461
+msgid "_Replace With Old Files"
+msgstr "ا_ستخدم الملفات القديمة"
+
+#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:540
+msgid "_Cancel Change"
+msgstr "ألغِ الت_غيير"
+
+#. TRANSLATORS: This means "use the files from the new location",
+#. * as opposed to those from the old location.
+#: ../src/users/user-settings.c:465
+msgid "_Use New Files"
+msgstr "اس_تخدم الملفات الجديدة"
+
+#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+msgid "Make user the _owner of the new home directory"
+msgstr "اجعل المستخدم _مالك مجلد المنزل الجديد"
+
+#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+msgid "_Delete old home directory"
+msgstr "ا_حذف مجلد المنزل القديم"
+
+#: ../src/users/user-settings.c:493
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or delete all its contents and "
+"use a completely empty home directory?\n"
+"\n"
+"In doubt, keep the files, and remove them later if needed."
+msgstr ""
+
+#: ../src/users/user-settings.c:503
+#, fuzzy
+msgid "_Delete Files"
+msgstr "احذف الملفات"
+
+#: ../src/users/user-settings.c:505
+msgid "_Use Existing Files"
+msgstr ""
+
+#: ../src/users/user-settings.c:526
+msgid "Copy old home directory to new location?"
+msgstr ""
+
+#: ../src/users/user-settings.c:528
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
+"Do you want to copy the contents of the old home directory (<tt>%s</tt>), or "
+"use a completely empty home directory?\n"
+"\n"
+"If you choose to copy the files to the new location, it's safe to delete the "
+"old directory."
+msgstr ""
+
+#: ../src/users/user-settings.c:539
+#, fuzzy
+msgid "_Use Empty Directory"
 msgstr "استخدم هذا المجلد"
 
-#: ../src/users/user-settings.c:475
+#. TRANSLATORS: This means "copy files from the old home directory".
+#: ../src/users/user-settings.c:542
+msgid "Co_py Old Files"
+msgstr ""
+
+#: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
 msgstr "يجب ألّا تعدّل هوية المستخدم الجذر"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:608
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "معرف المستخدم %d يستخدمه مسبقا المستخدم \"%s\""
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:610
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "رجاء اختر معرفا رقميا آخر ل‍ \"%s\"."
 
-#: ../src/users/user-settings.c:499
+#: ../src/users/user-settings.c:628
 msgid "Incomplete path in shell"
 msgstr "مسار غير كامل في الصدفة"
 
-#: ../src/users/user-settings.c:500
+#: ../src/users/user-settings.c:629
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2066,11 +2137,11 @@ msgstr ""
 "رّجاء إدخال مسار كامل للصدفة\n"
 "<span size=\"smaller\">مثلًا: ‪/bin/bash‬</span>."
 
-#: ../src/users/user-settings.c:534
+#: ../src/users/user-settings.c:663
 msgid "Can't revoke administration rights"
 msgstr "لا يمكن إبطال الصلاحيات الإدارية"
 
-#: ../src/users/user-settings.c:537
+#: ../src/users/user-settings.c:666
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2079,11 +2150,11 @@ msgstr ""
 "‏%s هو المدير الوحيد لهذا الحاسوب. إبطال الصلاحيات الإدارية سيؤدي إلى منعك من "
 "إدارة النظام."
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:683
 msgid "You are about to revoke your own administration rights"
 msgstr "أنت على وشك إبطال صلاحياتك الإدارية"
 
-#: ../src/users/user-settings.c:557
+#: ../src/users/user-settings.c:686
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2092,13 +2163,25 @@ msgstr ""
 "لن يعود بإمكان %s أداء المهاد الإدارية. لن يسمح لهذا الحساب باستعادة "
 "الصلاحية الإدارية بنفسه."
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:691
 msgid "Give up administration rights"
 msgstr "تخل عن الصلاحيات الإدارية"
+
+#: ../src/users/user-settings.c:1459
+msgid "Applying changes to user settings..."
+msgstr ""
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "إعدادات المستخدمين"
+
+#~ msgid ""
+#~ "The directory <tt>%s</tt> already exists. User may not have the "
+#~ "permissions required to read or write in that directory. Do you want to "
+#~ "use it anyway?"
+#~ msgstr ""
+#~ "الديل <tt>%s</tt> موجود مسبقا. قد لا يكون للمستخدم الصلاحيات اللازمة "
+#~ "لقراءة وكتابة هذا الدليل. أما زلت ترغب في استخدامه؟"
 
 #~ msgid "_Short Name:"
 #~ msgstr "الاسم ال_قصير:"
