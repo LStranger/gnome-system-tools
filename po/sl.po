@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2010-08-11 09:53+0000\n"
-"PO-Revision-Date: 2010-08-11 13:32+0100\n"
+"POT-Creation-Date: 2010-08-24 02:35+0000\n"
+"PO-Revision-Date: 2010-08-25 08:43+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -544,7 +544,7 @@ msgstr "Lastnosti skupine"
 
 #: ../interfaces/users.ui.h:33
 msgid "Groups available on the system:"
-msgstr "Skupina na voljo v sistemu"
+msgstr "Skupine na voljo v sistemu:"
 
 #: ../interfaces/users.ui.h:34
 msgid "Groups settings"
@@ -1637,7 +1637,7 @@ msgstr "Skrbniške skupine ni mogoče izbrisati"
 #: ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258
 #: ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:605
 msgid "This would leave the system unusable."
 msgstr "To bi naredilo sistem neuporaben."
 
@@ -1968,11 +1968,11 @@ msgstr "Neveljavni znak \"%c\" v opombi"
 msgid "Check that this character is not used."
 msgstr "Preverite, ali ta znak že ni uporabljen."
 
-#: ../src/users/user-settings.c:417
+#: ../src/users/user-settings.c:426
 msgid "Incomplete path in home directory"
 msgstr "Nepopolna pot v domači imenik"
 
-#: ../src/users/user-settings.c:418
+#: ../src/users/user-settings.c:427
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1980,39 +1980,111 @@ msgstr ""
 "Vnesite celo pot za domačo mapo\n"
 "<span size=\"smaller\">npr.: /home/janez</span>."
 
-#: ../src/users/user-settings.c:433
-msgid "Home directory already exists"
-msgstr "Domači imenik že obstaja"
+#: ../src/users/user-settings.c:447
+#: ../src/users/user-settings.c:491
+msgid "New home directory already exists, use it?"
+msgstr "Nova domača mapa že obstaja. Ali jo želite uporabiti?"
 
-#: ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:449
 #, c-format
-msgid "The directory <tt>%s</tt> already exists. User may not have the permissions required to read or write in that directory. Do you want to use it anyway?"
-msgstr "Mapa <tt>%s</tt> že obstaja. Uporabnik morda nima dovoljenj za branje in pisanje v to mapo. Ali jo vseeno želite uporabiti?"
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. Do you want to use files from this directory, or copy the contents of <tt>%s</tt> to the new home, overwriting it?\n"
+"\n"
+"In doubt, use the new directory to avoid losing data, and copy files from the old directory later."
+msgstr ""
+"Domača mapa %s je nastavljena na <tt>%s</tt>, ki pa že obstaja. Ali želite uporabiti datoteke iz te mape ali pa morda kopirati vsebino <tt>%s</tt> v novo domačo mapo in prepisati obstoječe datoteke?\n"
+"\n"
+"V kolikor ste v dvomih, uporabite novo mapo in se izognite izgubi podatkov. Datoteke je mogoče kopirati tudi kasneje."
 
-#: ../src/users/user-settings.c:440
-msgid "Use this directory"
-msgstr "Uporabi to mapo"
+#: ../src/users/user-settings.c:461
+msgid "_Replace With Old Files"
+msgstr "_Zamenjaj s starimi datotekami"
 
-#: ../src/users/user-settings.c:475
+#: ../src/users/user-settings.c:462
+#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:540
+msgid "_Cancel Change"
+msgstr "_Prekliči spremembo"
+
+#. TRANSLATORS: This means "use the files from the new location",
+#. * as opposed to those from the old location.
+#: ../src/users/user-settings.c:465
+msgid "_Use New Files"
+msgstr "_Uporabi nove datoteke"
+
+#: ../src/users/user-settings.c:470
+#: ../src/users/user-settings.c:510
+msgid "Make user the _owner of the new home directory"
+msgstr "Določi uporabnika kot _lastnika domače mape"
+
+#: ../src/users/user-settings.c:473
+#: ../src/users/user-settings.c:547
+msgid "_Delete old home directory"
+msgstr "_Izbriši staro domačo mapo"
+
+#: ../src/users/user-settings.c:493
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. Do you want to use files from this directory, or delete all its contents and use a completely empty home directory?\n"
+"\n"
+"In doubt, keep the files, and remove them later if needed."
+msgstr ""
+"Domača mapa %s je nastavljena na <tt>%s</tt>, ki pa že obstaja. Ali želite uporabiti datoteke iz te mape ali pa morda izbrisati vsebino mape in uporabiti povsem prazno domačo mapo?\n"
+"\n"
+"V kolikor ste v dvomih, ohranite datoteke in jih izbrišite kasneje."
+
+#: ../src/users/user-settings.c:503
+msgid "_Delete Files"
+msgstr "_Izbriši datoteke"
+
+#: ../src/users/user-settings.c:505
+msgid "_Use Existing Files"
+msgstr "_Uporabi obstoječe datoteke"
+
+#: ../src/users/user-settings.c:526
+msgid "Copy old home directory to new location?"
+msgstr "Ali naj se kopira stara domača mapa na novo mesto?"
+
+#: ../src/users/user-settings.c:528
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. Do you want to copy the contents of the old home directory (<tt>%s</tt>), or use a completely empty home directory?\n"
+"\n"
+"If you choose to copy the files to the new location, it's safe to delete the old directory."
+msgstr ""
+"Domača mapa %s je nastavljena na <tt>%s</tt>, ki pa ne obstaja. Ali želite kopirati vsebino stare domače mape (<tt>%s</tt>), ali pa uporabiti povsem prazno domačo mapo?\n"
+"\n"
+"V kolikor želite kopirati vsebino, lahko staro mapo varno izbrišete."
+
+#: ../src/users/user-settings.c:539
+msgid "_Use Empty Directory"
+msgstr "_Uporabi prazno mapo"
+
+#. TRANSLATORS: This means "copy files from the old home directory".
+#: ../src/users/user-settings.c:542
+msgid "Co_py Old Files"
+msgstr "_Kopiraj stare datoteke"
+
+#: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
 msgstr "ID skrbnika ni dovoljeno spreminjati"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:608
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "Uporabniški ID %d je že uporabljen pri uporabniku %s"
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:610
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Izberite drugo številčno določilo za %s."
 
-#: ../src/users/user-settings.c:499
+#: ../src/users/user-settings.c:628
 msgid "Incomplete path in shell"
 msgstr "Nepopolna pot v ukazni lupini"
 
-#: ../src/users/user-settings.c:500
+#: ../src/users/user-settings.c:629
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2020,31 +2092,43 @@ msgstr ""
 "Vpišite polno pot za ukazno lupino\n"
 "<span size=\"smaller\">npr.: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:534
+#: ../src/users/user-settings.c:663
 msgid "Can't revoke administration rights"
 msgstr "Ni mogoče povrniti skrbniških dovoljenj"
 
-#: ../src/users/user-settings.c:537
+#: ../src/users/user-settings.c:666
 #, c-format
 msgid "%s is the only administrator on this computer. Revoking administration rights for this account would lock you out of administrating the system."
 msgstr "%s je edini skrbnik tega sistema. S preklicom skrbniških dovoljenj za ta račun, onemogočite nadaljnje izvajanje skrbniških opravil celotnega sistema."
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:683
 msgid "You are about to revoke your own administration rights"
 msgstr "Preklicali boste lastne skrbniške pravice."
 
-#: ../src/users/user-settings.c:557
+#: ../src/users/user-settings.c:686
 #, c-format
 msgid "%s will no longer be able to perform administrative tasks. This account won't be allowed to get administration rights back on its own."
 msgstr "%s nima več dovoljenja za izvajanje skrbniških nalog. S tem računom ni več mogoče lastnoročno pridobiti skrbniških pravic."
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:691
 msgid "Give up administration rights"
 msgstr "Prepusti skrbniška dovoljenja"
+
+#: ../src/users/user-settings.c:1459
+msgid "Applying changes to user settings..."
+msgstr "Uveljavljanje sprememb nastavitev uporabnika ..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "Nastavitev uporabnika"
+
+#~ msgid ""
+#~ "The directory <tt>%s</tt> already exists. User may not have the "
+#~ "permissions required to read or write in that directory. Do you want to "
+#~ "use it anyway?"
+#~ msgstr ""
+#~ "Mapa <tt>%s</tt> že obstaja. Uporabnik morda nima dovoljenj za branje in "
+#~ "pisanje v to mapo. Ali jo vseeno želite uporabiti?"
 
 #~ msgid "<b>Allowed Hosts</b>"
 #~ msgstr "<b>Dovoljeni gostitelji</b>"
