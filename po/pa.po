@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2010-08-11 09:53+0000\n"
-"PO-Revision-Date: 2010-08-12 18:50+0530\n"
+"POT-Creation-Date: 2010-08-20 09:55+0000\n"
+"PO-Revision-Date: 2010-08-25 20:48+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -1649,7 +1649,7 @@ msgstr "ਪਰਸ਼ਾਸ਼ਕ ਗਰੁੱਪ ਹਟਾਇਆ ਨਹੀਂ �
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:605
 msgid "This would leave the system unusable."
 msgstr "ਇਹ ਸਿਸਟਮ ਨੂੰ ਅਸਥਿਰ ਕਰ ਦੇਵੇਗਾ।"
 
@@ -2001,11 +2001,11 @@ msgstr "ਟਿੱਪਣੀ ਵਿੱਚ \"%c\" ਗਲਤ ਅੱਖਰ"
 msgid "Check that this character is not used."
 msgstr "ਜਾਂਚ ਕਰੋ ਕਿ ਇਹ ਅੱਖਰ ਵਰਤਿਆ ਨਹੀਂ ਗਿਆ ਹੈ।"
 
-#: ../src/users/user-settings.c:417
+#: ../src/users/user-settings.c:426
 msgid "Incomplete path in home directory"
 msgstr "ਘਰ ਡਾਇਰੈਕਟਰੀ ਲਈ ਅਧੂਰਾ ਮਾਰਗ"
 
-#: ../src/users/user-settings.c:418
+#: ../src/users/user-settings.c:427
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2013,43 +2013,129 @@ msgstr ""
 "ਘਰ ਡਾਇਰੈਕਟਰੀ ਲਈ ਪੂਰਾ ਮਾਰਗ\n"
 "<span size=\"smaller\">ਜਿਵੇਂ ਕਿ: /home/punjabi</span> ਦਿਓ ਜੀ।"
 
-#: ../src/users/user-settings.c:433
-msgid "Home directory already exists"
-msgstr "ਘਰ ਡਾਇਰੈਕਟਰੀ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ"
+#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#| msgid "Home directory already exists"
+msgid "New home directory already exists, use it?"
+msgstr "ਨਵੀਂ ਘਰ ਡਾਇਰੈਕਟਰੀ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ, ਇਸੇ ਨੂੰ ਵਰਤਣਾ ਹੈ?"
 
-#: ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:449
 #, c-format
 msgid ""
-"The directory <tt>%s</tt> already exists. User may not have the permissions "
-"required to read or write in that directory. Do you want to use it anyway?"
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or copy the contents of <tt>%"
+"s</tt> to the new home, overwriting it?\n"
+"\n"
+"In doubt, use the new directory to avoid losing data, and copy files from "
+"the old directory later."
 msgstr ""
-"ਡਾਇਰੈਕਟਰੀ <tt>%s</tt> ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਯੂਜ਼ਰ ਨੂੰ ਉਸ ਡਾਇਰੈਕਟਰੀ ਲਈ ਪੜ੍ਹਨ ਜਾਂ ਲਿਖਣ ਲਈ "
-"ਅਧਿਕਾਰ ਨਹੀਂ ਵੀ ਹੋ ਸਕਦੇ। ਕੀ ਤੁਸੀਂ ਜਾਰੀ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+"%s ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ <tt>%s</tt> ਸੈੱਟ ਕੀਤੀ ਗਈ ਹੈ, ਜੋ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। "
+"ਕੀ ਤੁਸੀਂ ਇਸ ਡਾਇਰੈਕਟਰੀ ਤੋਂ ਫਾਇਲਾਂ ਨੂੰ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ <tt>%s</tt> ਦੀ ਸਮੱਗਰੀ ਨੂੰ "
+"ਨਵੇਂ ਘਰ 'ਚ ਕਾਪੀ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ, ਉੱਤੇ ਲਿਖਣਾ ਹੈ?\n"
+"\n"
+"ਜੇ ਕੋਈ ਵੀ ਸ਼ੱਕ ਹੋਵੇ ਤਾਂ, ਡਾਟਾ ਖਰਾਬ ਹੋਣ ਤੋਂ ਬਚਾਉਣ ਲਈ ਨਵੀਂ ਡਾਇਰੈਕਟਰੀ ਵਰਤੋਂ ਤੇ ਪੁਰਾਣੀ ਡਾਇਰੈਕਟਰੀ 'ਚੋਂ "
+"ਡਾਟਾ ਬਾਅਦ 'ਚ ਕਾਪੀ ਕਰ ਲਿਉ।"
 
-#: ../src/users/user-settings.c:440
-msgid "Use this directory"
-msgstr "ਇਹ ਡਾਇਰੈਕਟਰੀ ਵਰਤੋਂ"
+#: ../src/users/user-settings.c:461
+msgid "_Replace With Old Files"
+msgstr "ਪੁਰਾਣੀਆਂ ਫਾਇਲਾਂ ਨਾਲ ਬਦਲੋ(_R)"
 
-#: ../src/users/user-settings.c:475
+#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:540
+msgid "_Cancel Change"
+msgstr "ਬਦਲਾਅ ਰੱਦ ਕਰੋ(_C)"
+
+#. TRANSLATORS: This means "use the files from the new location",
+#. * as opposed to those from the old location.
+#: ../src/users/user-settings.c:465
+#| msgid "Keep Files"
+msgid "_Use New Files"
+msgstr "ਨਵੀਆਂ ਫਾਇਲਾਂ ਵਰਤੋਂ(_U)"
+
+#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+msgid "Make user the _owner of the new home directory"
+msgstr "ਯੂਜ਼ਰ ਨੂੰ ਨਵੀਂ ਘਰ ਡਾਇਰੈਕਟਰੀ ਦਾ ਮਾਲਕ ਬਣਾਓ(_o)"
+
+#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#| msgid "Incomplete path in home directory"
+msgid "_Delete old home directory"
+msgstr "ਪੁਰਾਣੀ ਘਰ ਡਾਇਰੈਕਟਰੀ ਹਟਾਓ(_D)"
+
+#: ../src/users/user-settings.c:493
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. "
+"Do you want to use files from this directory, or delete all its contents and "
+"use a completely empty home directory?\n"
+"\n"
+"In doubt, keep the files, and remove them later if needed."
+msgstr ""
+"%s ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ <tt>%s </tt> ਸੈੱਟ ਕੀਤੀ ਗਈ ਹੈ, ਜੋ ਕਿ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। "
+"ਕੀ ਤੁਸੀਂ ਇਸ ਡਾਇਰੈਕਟਰੀ ਤੋਂ ਫਾਇਲਾਂ ਨੂੰ ਵਰਤਣਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਇਸ ਵਿੱਚੋਂ ਸਭ ਸਮੱਗਰੀ ਹਟਾ ਕੇ ਪੂਰੀ "
+"ਤਰ੍ਹਾਂ ਖਾਲੀ ਘਰ ਡਾਇਰੈਕਟਰੀ ਵਰਤਣੀ ਚਾਹੁੰਦੇ ਹੋ?\n"
+"\n"
+"ਜੇ ਕੋਈ ਵੀ ਸ਼ੱਕ ਹੋਵੇ ਤਾਂ ਫਾਇਲਾਂ ਰੱਖੋ, ਅਤੇ ਬਾਅਦ 'ਚ ਲੋੜ ਮੁਤਾਬਕ ਹਟਾ ਦਿਉ।"
+
+#: ../src/users/user-settings.c:503
+#| msgid "Delete Files"
+msgid "_Delete Files"
+msgstr "ਫਾਇਲਾਂ ਹਟਾਓ(_D)"
+
+#: ../src/users/user-settings.c:505
+msgid "_Use Existing Files"
+msgstr "ਮੌਜੂਦਾ ਫਾਇਲਾਂ ਵਰਤੋਂ(_U)"
+
+#: ../src/users/user-settings.c:526
+msgid "Copy old home directory to new location?"
+msgstr "ਪੁਰਾਣੀ ਘਰ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਨਵੇਂ ਟਿਕਾਣੇ ਉੱਤੇ ਕਾਪੀ ਕਰਨਾ ਹੈ?"
+
+#: ../src/users/user-settings.c:528
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
+"Do you want to copy the contents of the old home directory (<tt>%s</tt>), or "
+"use a completely empty home directory?\n"
+"\n"
+"If you choose to copy the files to the new location, it's safe to delete the "
+"old directory."
+msgstr ""
+"%s ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ <tt>%s </tt> ਸੈੱਟ ਕੀਤੀ ਗਈ ਹੈ, ਜੋ ਕਿ ਮੌਜੂਦ ਨਹੀਂ ਹੈ। "
+"ਕੀ ਤੁਸੀਂ ਪੁਰਾਣੀ ਘਰ ਡਾਇਰੈਕਟਰੀ (<tt>%s </tt>) ਤੋਂ ਸਮੱਗਰੀ ਕਾਪੀ ਕਰਨੀ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ "
+"ਪੂਰੀ ਤਰ੍ਹਾਂ ਖਾਲੀ ਘਰ ਡਾਇਰੈਕਟਰੀ ਵਰਤਣੀ ਚਾਹੁੰਦੇ ਹੋ?\n"
+"\n"
+"ਜੇ ਤੁਸੀਂ ਫਾਇਲਾਂ ਨੂੰ ਨਵੇਂ ਟਿਕਾਣੇ ਉੱਤੇ ਕਾਪੀ ਕਰਨ ਦੀ ਚੋਣ ਕੀਤੀ ਤਾਂ, ਪੁਰਾਣੀ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਹਟਾਉਣਾ "
+"ਸੁਰੱਖਿਅਤ "
+"ਹੋਵੇਗਾ।"
+
+#: ../src/users/user-settings.c:539
+#| msgid "Use this directory"
+msgid "_Use Empty Directory"
+msgstr "ਖਾਲੀ ਡਾਇਰੈਕਟਰੀ ਵਰਤੋਂ(_U)"
+
+#. TRANSLATORS: This means "copy files from the old home directory".
+#: ../src/users/user-settings.c:542
+msgid "Co_py Old Files"
+msgstr "ਪੁਰਾਣੀਆਂ ਫਾਇਲਾਂ ਕਾਪੀ ਕਰੋ(_p)"
+
+#: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
 msgstr "ਰੂਟ ਯੂਜ਼ਰ ਦਾ ਆਈਡੀ (ID) ਸੋਧਿਆ ਜਾਣਾ ਚਾਹੀਦਾ"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:608
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "ਯੂਜ਼ਰ ID %d ਪਹਿਲਾਂ ਹੀ ਯੂਜ਼ਰ %s ਵਲੋਂ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ"
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:610
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "%s ਲਈ ਵੱਖਰਾ ਅੰਕ ਪਛਾਣਕਰਤਾ ਚੁਣੋ ਜੀ।"
 
-#: ../src/users/user-settings.c:499
+#: ../src/users/user-settings.c:628
 msgid "Incomplete path in shell"
 msgstr "ਸ਼ੈੱਲ ਅਧੂਰਾ ਮਾਰਗ"
 
-#: ../src/users/user-settings.c:500
+#: ../src/users/user-settings.c:629
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2057,11 +2143,11 @@ msgstr ""
 "ਸ਼ੈੱਲ ਲਈ ਪੂਰਾ ਮਾਰਗ\n"
 "<span size=\"smaller\">ਜਿਵੇਂ ਕਿ: /bin/bash</span> ਦਿਓ ਜੀ।"
 
-#: ../src/users/user-settings.c:534
+#: ../src/users/user-settings.c:663
 msgid "Can't revoke administration rights"
 msgstr "ਪਰਸ਼ਾਸ਼ਕੀ ਅਧਿਕਾਰ ਵਾਪਸ ਨਹੀਂ ਲਏ ਜਾ ਸਕਦੇ"
 
-#: ../src/users/user-settings.c:537
+#: ../src/users/user-settings.c:666
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2070,11 +2156,11 @@ msgstr ""
 "%s ਇਸ ਕੰਪਿਊਟਰ ਲਈ ਇੱਕਲਾ ਪਰਸ਼ਾਸ਼ਕ (ਐਡਮਿਨਸਟੇਟਰ) ਹੈ। ਇਸ ਅਕਾਊਂਟ ਲਈ ਪਰਸ਼ਾਸ਼ਕੀ ਹੱਕ ਵਾਪਸ ਲੈਣ "
 "ਨਾਲ ਤੁਸੀਂ ਸਿਸਟਮ ਲਈ ਬਿਨ-ਪਰਸਾਸ਼ਨ ਫਸ ਜਾਵੋਗੇ।"
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:683
 msgid "You are about to revoke your own administration rights"
 msgstr "ਤੁਸੀਂ ਆਪਣੇ ਪਰਸ਼ਾਸ਼ਕੀ ਹੱਕ ਛੱਡਣ ਜਾ ਰਹੇ ਹੋ"
 
-#: ../src/users/user-settings.c:557
+#: ../src/users/user-settings.c:686
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2083,13 +2169,25 @@ msgstr ""
 "%s ਹੁਣ ਪਰਸ਼ਾਸ਼ਕੀ ਕੰਮ ਕਰਨ ਨਹੀਂ ਸਕੇਦਾ। ਇਹ ਅਕਾਊਂਟ ਨੂੰ ਖੁਦ ਲਈ ਪਰਸ਼ਾਸ਼ਕੀ ਹੱਕ ਵਾਪਸ ਲੈਣ ਦੀ ਮਨਜ਼ੂਰੀ "
 "ਨਹੀਂ ਹੋਵੇਗੀ।"
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:691
 msgid "Give up administration rights"
 msgstr "ਪਰਸ਼ਾਸ਼ਕੀ ਹੱਕ ਛੱਡੋ"
+
+#: ../src/users/user-settings.c:1459
+msgid "Applying changes to user settings..."
+msgstr "ਯੂਜ਼ਰ ਸੈਟਿੰਗ ਲਾਗੂ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "ਯੂਜ਼ਰ ਸੈਟਿੰਗ"
+
+#~ msgid ""
+#~ "The directory <tt>%s</tt> already exists. User may not have the "
+#~ "permissions required to read or write in that directory. Do you want to "
+#~ "use it anyway?"
+#~ msgstr ""
+#~ "ਡਾਇਰੈਕਟਰੀ <tt>%s</tt> ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ। ਯੂਜ਼ਰ ਨੂੰ ਉਸ ਡਾਇਰੈਕਟਰੀ ਲਈ ਪੜ੍ਹਨ ਜਾਂ ਲਿਖਣ ਲਈ "
+#~ "ਅਧਿਕਾਰ ਨਹੀਂ ਵੀ ਹੋ ਸਕਦੇ। ਕੀ ਤੁਸੀਂ ਜਾਰੀ ਰੱਖਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #~ msgid "_Short Name:"
 #~ msgstr "ਛੋਟਾ ਨਾਂ(_S):"
