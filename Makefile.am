@@ -31,7 +31,8 @@ DISTCLEANFILES = \
 	backends/intltool-merge \
 	backends/intltool-update \
 	gnome-doc-utils.make \
-	gnome-system-tools.pc
+	gnome-system-tools.pc \
+	org.gnome.system-tools.gschema.xml
 
 MAINTAINERCLEANFILES = \
 	INSTALL			\
