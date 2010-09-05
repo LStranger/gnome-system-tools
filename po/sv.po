@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-14 13:04+0200\n"
-"PO-Revision-Date: 2010-08-14 13:08+0100\n"
+"POT-Creation-Date: 2010-09-05 23:32+0200\n"
+"PO-Revision-Date: 2010-09-05 23:38+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -1635,7 +1635,7 @@ msgstr "Administratörsgruppen kan inte tas bort"
 #: ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258
 #: ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:476
+#: ../src/users/user-settings.c:605
 msgid "This would leave the system unusable."
 msgstr "Detta skulle lämna systemet i ett oanvändbart tillstånd."
 
@@ -1966,11 +1966,11 @@ msgstr "Ogiltigt tecken \"%c\" i kommentar"
 msgid "Check that this character is not used."
 msgstr "Kontrollera att detta tecken inte används."
 
-#: ../src/users/user-settings.c:417
+#: ../src/users/user-settings.c:426
 msgid "Incomplete path in home directory"
 msgstr "Ofullständig sökväg i hemkatalogen"
 
-#: ../src/users/user-settings.c:418
+#: ../src/users/user-settings.c:427
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1978,39 +1978,111 @@ msgstr ""
 "Ange fullständig sökväg till hemkatalogen\n"
 "<span size=\"smaller\">t.ex.: /home/johan</span>."
 
-#: ../src/users/user-settings.c:433
-msgid "Home directory already exists"
-msgstr "Hemkatalogen finns redan"
+#: ../src/users/user-settings.c:447
+#: ../src/users/user-settings.c:491
+msgid "New home directory already exists, use it?"
+msgstr "Ny hemkatalog finns redan. Använd den?"
 
-#: ../src/users/user-settings.c:434
+#: ../src/users/user-settings.c:449
 #, c-format
-msgid "The directory <tt>%s</tt> already exists. User may not have the permissions required to read or write in that directory. Do you want to use it anyway?"
-msgstr "Katalogen <tt>%s</tt> finns redan. Användaren kanske inte har rättigheter som krävs för att läsa eller skriva i den katalogen. Vill du använda den ändå?"
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. Do you want to use files from this directory, or copy the contents of <tt>%s</tt> to the new home, overwriting it?\n"
+"\n"
+"In doubt, use the new directory to avoid losing data, and copy files from the old directory later."
+msgstr ""
+"Hemkatalogen för %s har ställts in till <tt>%s</tt>, vilken redan finns. Vill du använda filerna från denna katalog, eller kopiera innehållet för <tt>%s</tt> till det nya hemmet och skriva över den?\n"
+"\n"
+"Om du är osäker så använd den nya katalogen för att undvika att data förloras. Kopiera sedan över filer från den gamla katalogen."
 
-#: ../src/users/user-settings.c:440
-msgid "Use this directory"
-msgstr "Använd denna katalog"
+#: ../src/users/user-settings.c:461
+msgid "_Replace With Old Files"
+msgstr "_Ersätt med gamla filer"
 
-#: ../src/users/user-settings.c:475
+#: ../src/users/user-settings.c:462
+#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:540
+msgid "_Cancel Change"
+msgstr "_Avbryt ändring"
+
+#. TRANSLATORS: This means "use the files from the new location",
+#. * as opposed to those from the old location.
+#: ../src/users/user-settings.c:465
+msgid "_Use New Files"
+msgstr "Använd _nya filer"
+
+#: ../src/users/user-settings.c:470
+#: ../src/users/user-settings.c:510
+msgid "Make user the _owner of the new home directory"
+msgstr "Gör användaren till ä_gare av nya hemkatalogen"
+
+#: ../src/users/user-settings.c:473
+#: ../src/users/user-settings.c:547
+msgid "_Delete old home directory"
+msgstr "Ta bort _gamla hemkatalogen"
+
+#: ../src/users/user-settings.c:493
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which already exists. Do you want to use files from this directory, or delete all its contents and use a completely empty home directory?\n"
+"\n"
+"In doubt, keep the files, and remove them later if needed."
+msgstr ""
+"Hemkatalogen för %s har ställts in till <tt>%s</tt>, vilken redan finns. Vill du använda filer från denna katalog eller ta bort allt dess innehåll och använda en helt tom hemkatalog?\n"
+"\n"
+"Om du är osäker så behåll filerna och ta bort dem senare om det behövs."
+
+#: ../src/users/user-settings.c:503
+msgid "_Delete Files"
+msgstr "_Ta bort filer"
+
+#: ../src/users/user-settings.c:505
+msgid "_Use Existing Files"
+msgstr "Använd _befintliga filer"
+
+#: ../src/users/user-settings.c:526
+msgid "Copy old home directory to new location?"
+msgstr "Kopiera gamla hemkatalogen till nya platsen?"
+
+#: ../src/users/user-settings.c:528
+#, c-format
+msgid ""
+"The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. Do you want to copy the contents of the old home directory (<tt>%s</tt>), or use a completely empty home directory?\n"
+"\n"
+"If you choose to copy the files to the new location, it's safe to delete the old directory."
+msgstr ""
+"Hemkatalogen för %s har ställts in till <tt>%s</tt>, vilken inte finns. Vill du kopiera innehållet i den gamla hemkatalogen (<tt>%s</tt>) eller använda en helt tom hemkatalog?\n"
+"\n"
+"Om du väljer att kopiera filerna till den nya platsen så är det säkert att ta bort den gamla katalogen."
+
+#: ../src/users/user-settings.c:539
+msgid "_Use Empty Directory"
+msgstr "Använd _tom katalog"
+
+#. TRANSLATORS: This means "copy files from the old home directory".
+#: ../src/users/user-settings.c:542
+msgid "Co_py Old Files"
+msgstr "Ko_piera gamla filer"
+
+#: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
 msgstr "ID för root-användaren bör inte ändras"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:479
+#: ../src/users/user-settings.c:608
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "Användar-id %d används redan av användaren %s"
 
-#: ../src/users/user-settings.c:481
+#: ../src/users/user-settings.c:610
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Välj en annan numerisk identifierare för %s."
 
-#: ../src/users/user-settings.c:499
+#: ../src/users/user-settings.c:628
 msgid "Incomplete path in shell"
 msgstr "Ofullständig sökväg i skal"
 
-#: ../src/users/user-settings.c:500
+#: ../src/users/user-settings.c:629
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2018,32 +2090,44 @@ msgstr ""
 "Ange fullständig sökväg till skalet\n"
 "<span size=\"smaller\">t.ex.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:534
+#: ../src/users/user-settings.c:663
 msgid "Can't revoke administration rights"
 msgstr "Kan inte återkalla administrationsrättigheter"
 
-#: ../src/users/user-settings.c:537
+#: ../src/users/user-settings.c:666
 #, c-format
 msgid "%s is the only administrator on this computer. Revoking administration rights for this account would lock you out of administrating the system."
 msgstr "%s är den enda administratören på denna dator. Återkallning av administrationsrättigheter för detta konto skulle förhindra dig från att administrera systemet."
 
-#: ../src/users/user-settings.c:554
+#: ../src/users/user-settings.c:683
 msgid "You are about to revoke your own administration rights"
 msgstr "Du är på väg att återkalla dina egna administrationsrättigheter"
 
-#: ../src/users/user-settings.c:557
+#: ../src/users/user-settings.c:686
 #, c-format
 msgid "%s will no longer be able to perform administrative tasks. This account won't be allowed to get administration rights back on its own."
 msgstr "%s kommer inte längre att kunna genomföra administrativa åtgärder. Detta konto kommer inte att tillåtas att få tillbaka administrationsrättigheter på egen hand."
 
-#: ../src/users/user-settings.c:562
+#: ../src/users/user-settings.c:691
 msgid "Give up administration rights"
 msgstr "Lämna tillbaka administrationsrättigheter"
+
+#: ../src/users/user-settings.c:1459
+msgid "Applying changes to user settings..."
+msgstr "Verkställer ändringar i användarinställningarna..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "Användarinställningar"
 
+#~ msgid ""
+#~ "The directory <tt>%s</tt> already exists. User may not have the "
+#~ "permissions required to read or write in that directory. Do you want to "
+#~ "use it anyway?"
+#~ msgstr ""
+#~ "Katalogen <tt>%s</tt> finns redan. Användaren kanske inte har rättigheter "
+#~ "som krävs för att läsa eller skriva i den katalogen. Vill du använda den "
+#~ "ändå?"
 #~ msgid "_Short Name:"
 #~ msgstr "_Kortnamn:"
 #~ msgid "Address: %s Subnet mask: %s"
@@ -2615,8 +2699,6 @@ msgstr "Användarinställningar"
 #~ msgstr[1] "Användarnamnet bör ha färre än %d tecken för att vara giltigt"
 #~ msgid "Home directory should not be empty"
 #~ msgstr "Hemkatalogen bör inte vara tom."
-#~ msgid "Make sure you provide a home directory."
-#~ msgstr "Försäkra dig om att du anger en hemkatalog."
 #~ msgid "Invalid user ID"
 #~ msgstr "Ogiltigt användar-id"
 #~ msgid "User ID must be a positive number."
