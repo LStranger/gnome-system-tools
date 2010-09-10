@@ -9,12 +9,13 @@
 # Petr Kovar <pknbe@volny.cz>, 2008.
 # Jiri Eischmann <jiri@eischmann.cz>, 2009.
 # Marek Černocký <marek@manet.cz>, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-23 22:40+0200\n"
-"PO-Revision-Date: 2010-08-06 12:02+0200\n"
+"POT-Creation-Date: 2010-09-10 22:30+0200\n"
+"PO-Revision-Date: 2010-08-30 21:18+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -549,7 +550,7 @@ msgstr "Vlastnosti skupiny"
 
 #: ../interfaces/users.ui.h:33
 msgid "Groups available on the system:"
-msgstr ""
+msgstr "Skupiny dostupné v systému:"
 
 #: ../interfaces/users.ui.h:34
 msgid "Groups settings"
@@ -2038,9 +2039,8 @@ msgstr ""
 "<span size=\"smaller\">např.: /home/honza</span>."
 
 #: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
-#, fuzzy
 msgid "New home directory already exists, use it?"
-msgstr "Domovská složka již existuje"
+msgstr "Nová domovská složka již existuje, použít ji?"
 
 #: ../src/users/user-settings.c:449
 #, c-format
@@ -2052,31 +2052,35 @@ msgid ""
 "In doubt, use the new directory to avoid losing data, and copy files from "
 "the old directory later."
 msgstr ""
+"Domovská složka pro %s byla nastavena na složku <tt>%s</tt>, která již "
+"existuje. Chcete použít soubory z této složky, nebo nakopírovat obsah složky "
+"<tt>%s</tt> do nové domovské, a tím ji přepsat?\n"
+"\n"
+"Pokud si nejste jisti, co zvolit, použijte novou složku, abyste předešli "
+"ztrátě dat, a soubory ze staré složky nakopírujte dodatečně."
 
 #: ../src/users/user-settings.c:461
 msgid "_Replace With Old Files"
-msgstr ""
+msgstr "Nah_radit starými soubory"
 
 #: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
 #: ../src/users/user-settings.c:540
 msgid "_Cancel Change"
-msgstr ""
+msgstr "_Zrušit změny"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
 #: ../src/users/user-settings.c:465
-#, fuzzy
 msgid "_Use New Files"
-msgstr "Zachovat soubory"
+msgstr "Po_užít nové soubory"
 
 #: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
 msgid "Make user the _owner of the new home directory"
-msgstr ""
+msgstr "Nastavit uživatele jak_o vlastníka nové domovské složky"
 
 #: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
-#, fuzzy
 msgid "_Delete old home directory"
-msgstr "Neúplná cesta k domovské složce"
+msgstr "_Smazat starou domovskou složku"
 
 #: ../src/users/user-settings.c:493
 #, c-format
@@ -2087,19 +2091,24 @@ msgid ""
 "\n"
 "In doubt, keep the files, and remove them later if needed."
 msgstr ""
+"Domovská složka pro %s byla nastavena na složku <tt>%s</tt>, která již "
+"existuje. Chcete použít soubory z této složky, nebo smazat celý její obsah a "
+"použít úplně prázdnou domovskou složku?\n"
+"\n"
+"Pokud si nejste jisti, co zvolit, tak soubory zachovejte a když bude třeba, "
+"odstraňte je dodatečně."
 
 #: ../src/users/user-settings.c:503
-#, fuzzy
 msgid "_Delete Files"
-msgstr "Smazat soubory"
+msgstr "_Smazat soubory"
 
 #: ../src/users/user-settings.c:505
 msgid "_Use Existing Files"
-msgstr ""
+msgstr "Po_užít stávající soubory"
 
 #: ../src/users/user-settings.c:526
 msgid "Copy old home directory to new location?"
-msgstr ""
+msgstr "Zkopírovat starou domovskou složku do nového umístění?"
 
 #: ../src/users/user-settings.c:528
 #, c-format
@@ -2111,16 +2120,21 @@ msgid ""
 "If you choose to copy the files to the new location, it's safe to delete the "
 "old directory."
 msgstr ""
+"Domovská složka pro %s byla nastavena na složku <tt>%s</tt>, která již "
+"existuje. Chcete zkopírovat obsah staré domovské složky (<tt>%s</tt>), nebo "
+"použít úplně prázdnou domovskou složku?\n"
+"\n"
+"Pokud zvolíte zkopírování souborů do nového umístění, můžete starou složku "
+"bezpečně smazat."
 
 #: ../src/users/user-settings.c:539
-#, fuzzy
 msgid "_Use Empty Directory"
-msgstr "Použít tuto složku"
+msgstr "Po_užít prázdnou složku"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
 #: ../src/users/user-settings.c:542
 msgid "Co_py Old Files"
-msgstr ""
+msgstr "_Kopírovat staré soubory"
 
 #: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
@@ -2181,81 +2195,8 @@ msgstr "Vzdát se správcovských oprávnění"
 
 #: ../src/users/user-settings.c:1459
 msgid "Applying changes to user settings..."
-msgstr ""
+msgstr "Změny se zanášejí do uživatelova nastavení…"
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
 msgstr "Nastavení uživatelů"
-
-#~ msgid ""
-#~ "The directory <tt>%s</tt> already exists. User may not have the "
-#~ "permissions required to read or write in that directory. Do you want to "
-#~ "use it anyway?"
-#~ msgstr ""
-#~ "Složka <tt>%s</tt> již existuje. Uživatel možná nemá oprávnění potřebná "
-#~ "pro čtení nebo zápis do této složky. Chcete ji přesto použít?"
-
-#~ msgid "<b>Allowed Hosts</b>"
-#~ msgstr "<b>Povolené počítače</b>"
-
-#~ msgid "<b>Shared Folder</b>"
-#~ msgstr "<b>Sdílená složka</b>"
-
-#~ msgid ""
-#~ "<span size=\"larger\" weight=\"bold\">Enter password for user:</span>"
-#~ msgstr ""
-#~ "<span size=\"larger\" weight=\"bold\">Zadejte heslo pro uživatele:</span>"
-
-#~ msgid "<b>Selection</b>"
-#~ msgstr "<b>Výběr</b>"
-
-#~ msgid "<b>Time Zone</b>"
-#~ msgstr "<b>Časové pásmo</b>"
-
-#~ msgid "<span weight=\"bold\">Advanced Settings</span>"
-#~ msgstr "<span weight=\"bold\">Pokročilá nastavení</span>"
-
-#~ msgid "<span weight=\"bold\">Automatic UID/GID</span>"
-#~ msgstr "<span weight=\"bold\">Automatické UID/GID</span>"
-
-#~ msgid "<span weight=\"bold\">Basic Settings</span>"
-#~ msgstr "<span weight=\"bold\">Základní nastavení</span>"
-
-#~ msgid "<span weight=\"bold\">Group Members</span>"
-#~ msgstr "<span weight=\"bold\">Členové skupiny</span>"
-
-#~ msgid "<span weight=\"bold\">Optional Settings</span>"
-#~ msgstr "<span weight=\"bold\">Nepovinná nastavení</span>"
-
-#~ msgid "<span weight=\"bold\">Password Settings</span>"
-#~ msgstr "<span weight=\"bold\">Nastavení hesla</span>"
-
-#~ msgid "<span weight=\"bold\">Profile Settings</span>"
-#~ msgstr "<span weight=\"bold\">Nastavení profilu</span>"
-
-#~ msgid "<span weight=\"bold\">System Defaults</span>"
-#~ msgstr "<span weight=\"bold\">Výchozí hodnoty systému</span>"
-
-#~ msgid "_Short Name:"
-#~ msgstr "_Zkrácené jméno:"
-
-#~ msgid "<b>Address:</b> %s <b>Subnet mask:</b> %s"
-#~ msgstr "<b>Adresa:</b> %s <b>Maska podsítě:</b> %s"
-
-#~ msgid "<b>Address:</b> %s"
-#~ msgstr "<b>Adresa:</b> %s"
-
-#~ msgid "<b>Address:</b> %s <b>Remote address:</b> %s"
-#~ msgstr "<b>Adresa:</b> %s <b>Vzdálená adresa:</b> %s"
-
-#~ msgid "<b>Type:</b> %s <b>Phone number:</b> %s"
-#~ msgstr "<b>Typ:</b> %s <b>Telefonní číslo:</b> %s"
-
-#~ msgid "<b>Type:</b> %s <b>Access point name:</b> %s"
-#~ msgstr "<b>Typ:</b> %s <b>Název přístupového bodu:</b> %s"
-
-#~ msgid "<b>Type:</b> %s <b>Ethernet interface:</b> %s"
-#~ msgstr "<b>Typ:</b> %s <b>Ethernetové rozhraní:</b> %s"
-
-#~ msgid "<b>Type:</b> %s"
-#~ msgstr "<b>Typ:</b> %s"
