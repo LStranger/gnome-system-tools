@@ -326,6 +326,7 @@ static void
 finish_password_change ()
 {
 	GtkWidget *user_passwd_dialog;
+	GtkWidget *passwd_entry;
 	GtkWidget *nocheck_toggle;
 	OobsUser  *user;
 	OobsGroup *no_passwd_login_group;
@@ -333,45 +334,64 @@ finish_password_change ()
 	gboolean   is_self;
 
 	user_passwd_dialog = gst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
+	passwd_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
 	nocheck_toggle = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
 	user = users_table_get_current ();
 	is_self = oobs_self_config_is_user_self (OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config),
 	                                         user);
 
-	/* check whether user is allowed to login without password */
 	no_passwd_login_group =
 		oobs_groups_config_get_from_name (OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config),
 		                                  NO_PASSWD_LOGIN_GROUP);
-	no_passwd_login_changed =
-		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (nocheck_toggle))
-		!= oobs_user_is_in_group (user, no_passwd_login_group);
-	if (no_passwd_login_changed) {
 
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (nocheck_toggle)))
-			oobs_group_add_user (no_passwd_login_group, user);
-		else
-			oobs_group_remove_user (no_passwd_login_group, user);
-	}
+	/* FIXME: this is a hack; proper handling of this mess would involve
+	 * displaying an error message when people enable password-less login
+	 * without providing a non-empty password.
+	 *
+	 * Only unlock account if a new, non-empty password was provided.
+	 * Else, we would believe the account is enabled, while it's not,
+	 * and we would allow password-less login, which is unexpected. */
+	if (oobs_user_get_password_disabled (user)
+	    && strlen (gtk_entry_get_text (GTK_ENTRY (passwd_entry))) == 0)
+	  {
+		  /* Force removing user from this group, since results are unexpected */
+		  if (no_passwd_login_group)
+			  oobs_group_remove_user (no_passwd_login_group, user);
+	  }
+	else
+	  {
+		  /* check whether user is allowed to login without password */
+		  no_passwd_login_changed =
+			  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (nocheck_toggle))
+			  != oobs_user_is_in_group (user, no_passwd_login_group);
 
-	/* Only commit if password-less login option has changed, or
-	 * if user is not self (changing password via the backends). */
-	if (no_passwd_login_changed || !is_self) {
-		/* commit both user and groups config
-		 * because of the no_passwd_login_group membership */
-		if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK) {
-			gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
+		  if (no_passwd_login_changed) {
+			  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (nocheck_toggle)))
+				  oobs_group_add_user (no_passwd_login_group, user);
+			  else
+				  oobs_group_remove_user (no_passwd_login_group, user);
+		  }
 
-			/* Update settings shown in the main dialog */
-			user_settings_show (user);
-		}
-	}
+		  /* Unlock account, this may not be what is wanted, but that's the only solution
+		   * since 'passwd' doesn't differentiate accounts with no passwords yet from disabled ones */
+		  oobs_user_set_password_disabled (user, FALSE);
 
-	/* We know we've set a non-empty password */
-	oobs_user_set_password_empty (user, FALSE);
+		  /* Only commit if password-less login option has changed, or
+		   * if user is not self (changing password via the backends). */
+		  if (no_passwd_login_changed || !is_self) {
+			  /* commit both user and groups config
+			   * because of the no_passwd_login_group membership */
+			  if (gst_tool_commit (tool, OOBS_OBJECT (user)) == OOBS_RESULT_OK) {
+				  gst_tool_commit (tool, GST_USERS_TOOL (tool)->groups_config);
 
-	/* Unlock account, this may not be what is wanted, but that's the only solution
-	 * since 'passwd' doesn't differentiate accounts with no passwords yet from disabled ones */
-	oobs_user_set_password_disabled (user, FALSE);
+				  /* Update settings shown in the main dialog */
+				  user_settings_show (user);
+			  }
+		  }
+
+		  /* We know we've set a non-empty password */
+		  oobs_user_set_password_empty (user, FALSE);
+	  }
 
 	user_settings_show (user);
 
@@ -379,7 +399,6 @@ finish_password_change ()
 	gtk_widget_hide (GTK_WIDGET (user_passwd_dialog));
 
 	g_object_unref (user);
-
 	if (no_passwd_login_group)
 		g_object_unref (no_passwd_login_group);
 }

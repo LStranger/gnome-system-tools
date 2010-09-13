@@ -1339,6 +1339,8 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	GtkTreeIter iter;
 	OobsUser *user;
 	OobsGroup *main_group;
+	gboolean password_disabled;
+	OobsGroup *no_passwd_login_group;
 	int response;
 
 	TestBattery battery[] = {
@@ -1435,7 +1437,15 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	oobs_user_set_uid (user, gtk_spin_button_get_value (GTK_SPIN_BUTTON (widget)));
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_locked_account");
-	oobs_user_set_password_disabled (user, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
+	password_disabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	oobs_user_set_password_disabled (user, password_disabled);
+	/* Leaving user in the password-less login group would still allow him to login,
+	 * which defeats the purpose of disabling account */
+	no_passwd_login_group =
+		oobs_groups_config_get_from_name (GST_USERS_TOOL (tool)->groups_config,
+		                                  NO_PASSWD_LOGIN_GROUP);
+	if (password_disabled && no_passwd_login_group)
+		oobs_group_remove_user (no_passwd_login_group, user);
 
 	privileges_table_save (user);
 
@@ -1460,4 +1470,6 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	                       on_commit_finish, user);
 
 	g_object_unref (user);
+	if (no_passwd_login_group)
+		g_object_unref (no_passwd_login_group);
 }
