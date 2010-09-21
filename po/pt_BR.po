@@ -16,15 +16,16 @@
 # André Gondim <andregondim@ubuntu.com>, 2009
 # Jonh Wendell <jwendell@gnome.org>, 2010.
 # Enrico Nicoletto <liverig@gmail.com>, 2010.
+# Daniel S. Koda <danielskoda@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2010-09-13 15:32+0000\n"
-"PO-Revision-Date: 2010-09-10 15:35-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"POT-Creation-Date: 2010-09-19 17:06+0000\n"
+"PO-Revision-Date: 2010-09-19 18:51-0300\n"
+"Last-Translator: Daniel S. Koda <danielskoda@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -558,7 +559,7 @@ msgstr "Propriedades do grupo"
 
 #: ../interfaces/users.ui.h:33
 msgid "Groups available on the system:"
-msgstr ""
+msgstr "Grupos disponíveis no sistema:"
 
 #: ../interfaces/users.ui.h:34
 msgid "Groups settings"
@@ -2059,10 +2060,8 @@ msgstr ""
 "<span size=\"smaller\">p.ex.: /home/luciana</span>."
 
 #: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
-#, fuzzy
-#| msgid "Home directory already exists"
 msgid "New home directory already exists, use it?"
-msgstr "Diretório pessoal já existe"
+msgstr "Novo diretório pessoal já existe, deseja utilizá-lo?"
 
 #: ../src/users/user-settings.c:449
 #, c-format
@@ -2074,35 +2073,35 @@ msgid ""
 "In doubt, use the new directory to avoid losing data, and copy files from "
 "the old directory later."
 msgstr ""
+"O diretório pessoal para %s foi definido como <tt>%s</tt>, o qual já existe. "
+"Você gostaria de usar os arquivos deste diretório ou copiar o conteúdo de "
+"<tt>%s</tt> para a nova pasta pessoal, sobrescrevendo-o?\n"
+"\n"
+"Em caso de dúvida, use o novo diretório para evitar perder dados e copie os "
+"arquivos do diretório antigo depois."
 
 #: ../src/users/user-settings.c:461
 msgid "_Replace With Old Files"
-msgstr ""
+msgstr "Substitui_r com arquivos antigos"
 
 #: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
 #: ../src/users/user-settings.c:540
 msgid "_Cancel Change"
-msgstr ""
+msgstr "_Cancelar alteração"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
 #: ../src/users/user-settings.c:465
-#, fuzzy
-#| msgid "Keep Files"
 msgid "_Use New Files"
-msgstr "Manter arquivos"
+msgstr "_Usar arquivos novos"
 
 #: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
-#, fuzzy
-#| msgid "Make sure you provide a home directory."
 msgid "Make user the _owner of the new home directory"
-msgstr "Certifique-se de digitar uma pasta pessoal."
+msgstr "Tornar o usuário o d_ono do novo diretório pessoal"
 
 #: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
-#, fuzzy
-#| msgid "Incomplete path in home directory"
 msgid "_Delete old home directory"
-msgstr "Caminho incompleto no diretório pessoal"
+msgstr "E_xcluir diretório pessoal antigo"
 
 #: ../src/users/user-settings.c:493
 #, c-format
@@ -2113,20 +2112,23 @@ msgid ""
 "\n"
 "In doubt, keep the files, and remove them later if needed."
 msgstr ""
+"O diretório pessoal para %s foi definido como <tt>%s</tt>, o qual já existe. "
+"Você gostaria de usar os arquivos deste diretório ou excluir todo seu "
+"conteúdo e usar um diretório pessoal completamente vazia?\n"
+"\n"
+"Em caso de dúvida, mantenha os arquivos e remova-os mais tarde se necessário."
 
 #: ../src/users/user-settings.c:503
-#, fuzzy
-#| msgid "Delete Files"
 msgid "_Delete Files"
-msgstr "Excluir arquivos"
+msgstr "E_xcluir arquivos"
 
 #: ../src/users/user-settings.c:505
 msgid "_Use Existing Files"
-msgstr ""
+msgstr "_Usar arquivos existentes"
 
 #: ../src/users/user-settings.c:526
 msgid "Copy old home directory to new location?"
-msgstr ""
+msgstr "Copiar o diretório pessoal antigo para nova localização?"
 
 #: ../src/users/user-settings.c:528
 #, c-format
@@ -2138,17 +2140,21 @@ msgid ""
 "If you choose to copy the files to the new location, it's safe to delete the "
 "old directory."
 msgstr ""
+"O diretório pessoal para %s foi definido como <tt>%s</tt>, o qual não "
+"existe. Você gostaria de copiar o conteúdo do diretório pessoal antigo (<tt>%"
+"s</tt>) ou usar um diretório pessoal completamente vazio?\n"
+"\n"
+"Se você escolher copiar os arquivos para a nova localização, é seguro "
+"excluir o diretório antigo."
 
 #: ../src/users/user-settings.c:539
-#, fuzzy
-#| msgid "Use this directory"
 msgid "_Use Empty Directory"
-msgstr "Usar este diretório"
+msgstr "_Usar diretório vazio"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
 #: ../src/users/user-settings.c:542
 msgid "Co_py Old Files"
-msgstr ""
+msgstr "Co_piar arquivos antigos"
 
 #: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
@@ -2209,7 +2215,7 @@ msgstr "Renunciar direitos administrativos"
 
 #: ../src/users/user-settings.c:1469
 msgid "Applying changes to user settings..."
-msgstr ""
+msgstr "Aplicando alterações para as configurações do usuário..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
