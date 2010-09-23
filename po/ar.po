@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-24 04:35+0200\n"
-"PO-Revision-Date: 2010-08-24 04:35+0300\n"
+"POT-Creation-Date: 2010-09-23 14:53+0300\n"
+"PO-Revision-Date: 2010-09-23 14:52+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -1922,15 +1922,15 @@ msgstr "تأكيد كلمة السّر غير صحيح."
 msgid "Check that you have provided the same password in both text fields."
 msgstr "تأكّد أنّك قد أدخلت كلمة السر نفسها في حقلي النّصّ كليهما."
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:445
 msgid "Please choose another password."
 msgstr "رجاء اختر كلمة سر أخرى."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:456
 msgid "Please type again your current password."
 msgstr "رجاء أعد كتابة كلمة السر الحالية."
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:463
 msgid "Password could not be changed"
 msgstr "لا يمكن تغيير كلمة السر"
 
@@ -2075,19 +2075,23 @@ msgid ""
 "\n"
 "In doubt, keep the files, and remove them later if needed."
 msgstr ""
+"لقد حدد المجلد <tt>‪‬%s‬</tt> ليكون المنزلي للمستخدم %s، لكنه موجود مسبقا. "
+"أتريد استخدام الملفات من هذا المجلد أم حذف كل محتوياته واستخدام مجلد منزلي "
+"خال تماما؟\n"
+"\n"
+"في حال الشك، أبق على الملفات واحذفهم يدويا إن دعت الحاجة."
 
 #: ../src/users/user-settings.c:503
-#, fuzzy
 msgid "_Delete Files"
-msgstr "احذف الملفات"
+msgstr "ا_حذف الملفات"
 
 #: ../src/users/user-settings.c:505
 msgid "_Use Existing Files"
-msgstr ""
+msgstr "ا_ستخدم الملفات الموجودة"
 
 #: ../src/users/user-settings.c:526
 msgid "Copy old home directory to new location?"
-msgstr ""
+msgstr "أأنسخ المجلد المنزلي القديم إلى المكان الجديد؟"
 
 #: ../src/users/user-settings.c:528
 #, c-format
@@ -2099,16 +2103,20 @@ msgid ""
 "If you choose to copy the files to the new location, it's safe to delete the "
 "old directory."
 msgstr ""
+"لقد حدد المجلد <tt>‪‬%s‬</tt> ليكون المنزلي للمستخدم %s، لكنه موجود مسبقا. "
+"أتريد نقل محتويات المنزل القديم (<tt>‪%s‬</tt>) أم استخدام مجلد منزلي خال "
+"تماما؟\n"
+"\n"
+"إذا اخترت نسخ الملفات إلى المكان الجيد فمن الآمن حذف المجلد القديم."
 
 #: ../src/users/user-settings.c:539
-#, fuzzy
 msgid "_Use Empty Directory"
-msgstr "استخدم هذا المجلد"
+msgstr "استخدم _مجلدا خاليا"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
 #: ../src/users/user-settings.c:542
 msgid "Co_py Old Files"
-msgstr ""
+msgstr "ا_نسخ الملفات القديمة"
 
 #: ../src/users/user-settings.c:604
 msgid "ID for the root user should not be modified"
@@ -2167,9 +2175,9 @@ msgstr ""
 msgid "Give up administration rights"
 msgstr "تخل عن الصلاحيات الإدارية"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1469
 msgid "Applying changes to user settings..."
-msgstr ""
+msgstr "طبق التغييرات على إعدادات المستخدم..."
 
 #: ../src/users/users-tool.c:288
 msgid "Users Settings"
