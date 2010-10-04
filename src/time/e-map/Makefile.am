@@ -31,3 +31,8 @@ libemap_a_SOURCES = \
 	$(BUILT_SOURCES)
 
 -include $(top_srcdir)/git.mk
+
+noinst_PROGRAMS = e-map-test
+
+e_map_test_SOURCES = e-map-test.c
+e_map_test_LDADD = libemap.a
