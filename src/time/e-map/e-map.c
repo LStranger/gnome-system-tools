@@ -33,6 +33,7 @@
 #include "e-map-marshal.h"
 
 #define E_MAP_TWEEN_TIMEOUT_MSECS 25
+#define E_MAP_TWEEN_DURATION_MSECS 150
 
 /* Scroll step increment */
 
@@ -873,7 +874,7 @@ e_map_zoom_to_location (EMap *map, gdouble longitude, gdouble latitude)
         e_map_set_zoom (map, E_MAP_ZOOMED_IN);
         center_at (map, longitude, latitude);
 
-        e_map_tween_new_from (map, 150, prevlong, prevlat, prevzoom);
+        e_map_tween_new_from (map, E_MAP_TWEEN_DURATION_MSECS, prevlong, prevlat, prevzoom);
 }
 
 void
@@ -890,7 +891,7 @@ e_map_zoom_out (EMap *map)
         e_map_set_zoom (map, E_MAP_ZOOMED_OUT);
         center_at (map, longitude, latitude);
 
-        e_map_tween_new_from (map, 150, longitude, latitude, prevzoom);
+        e_map_tween_new_from (map, E_MAP_TWEEN_DURATION_MSECS, longitude, latitude, prevzoom);
 }
 
 void
