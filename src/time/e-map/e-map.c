@@ -230,6 +230,20 @@ e_map_tween_new (EMap *view, guint msecs, double longitude_offset, double latitu
         gtk_widget_queue_draw (GTK_WIDGET (view));
 }
 
+static void
+e_map_tween_new_from (EMap *view, guint msecs, double longitude, double latitude, double zoom)
+{
+        double current_longitude, current_latitude;
+
+        e_map_get_current_location (view, &current_longitude, &current_latitude);
+
+        e_map_tween_new (view,
+                         msecs,
+                         longitude - current_longitude,
+                         latitude - current_latitude,
+                         zoom / e_map_get_magnification (view));
+}
+
 /* ----------------- *
  * Widget management *
  * ----------------- */
@@ -858,20 +872,14 @@ e_map_zoom_to_location (EMap *map, gdouble longitude, gdouble latitude)
 
         e_map_set_zoom (map, E_MAP_ZOOMED_IN);
         center_at (map, longitude, latitude);
-        /* need to reget location, centering might have clipped it */
-        e_map_get_current_location (map, &longitude, &latitude);
 
-        e_map_tween_new (map,
-                         150,
-                         prevlong - longitude,
-                         prevlat - latitude,
-                         prevzoom / e_map_get_magnification (map));
+        e_map_tween_new_from (map, 150, prevlong, prevlat, prevzoom);
 }
 
 void
 e_map_zoom_out (EMap *map)
 {
-        double longitude, latitude, actual_longitude, actual_latitude;
+        double longitude, latitude;
         double prevzoom;
 
 	g_return_if_fail (map);
@@ -882,14 +890,7 @@ e_map_zoom_out (EMap *map)
         e_map_set_zoom (map, E_MAP_ZOOMED_OUT);
         center_at (map, longitude, latitude);
 
-        /* need to reget location, centering might have clipped it */
-        e_map_get_current_location (map, &actual_longitude, &actual_latitude);
-
-        e_map_tween_new (map,
-                         150,
-                         longitude - actual_longitude,
-                         latitude - actual_latitude,
-                         prevzoom / e_map_get_magnification (map));
+        e_map_tween_new_from (map, 150, longitude, latitude, prevzoom);
 }
 
 void
