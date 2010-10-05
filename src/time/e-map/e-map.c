@@ -351,10 +351,10 @@ e_map_finalize (GObject *object)
 	view = E_MAP (object);
 	priv = view->priv;
 
-	g_object_unref((priv->hadj));
+	g_object_unref ((priv->hadj));
 	priv->hadj = NULL;
 
-	g_object_unref((priv->vadj));
+	g_object_unref ((priv->vadj));
 	priv->vadj = NULL;
 
 	if (priv->map_pixbuf)
@@ -693,25 +693,25 @@ e_map_key_press (GtkWidget *widget, GdkEventKey *event)
 
 	switch (event->keyval)
 	{
-		case GDK_Up:
+		case GDK_KEY_Up:
 			do_scroll = TRUE;
 			xofs = 0;
 			yofs = -SCROLL_STEP_SIZE;
 			break;
 
-		case GDK_Down:
+		case GDK_KEY_Down:
 			do_scroll = TRUE;
 			xofs = 0;
 			yofs = SCROLL_STEP_SIZE;
 			break;
 
-		case GDK_Left:
+		case GDK_KEY_Left:
 			do_scroll = TRUE;
 			xofs = -SCROLL_STEP_SIZE;
 			yofs = 0;
 			break;
 
-		case GDK_Right:
+		case GDK_KEY_Right:
 			do_scroll = TRUE;
 			xofs = SCROLL_STEP_SIZE;
 			yofs = 0;
