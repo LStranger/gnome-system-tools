@@ -53,7 +53,7 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 
 	if (event->button != 1)
 		e_map_zoom_out (map);
-	else if (e_map_get_magnification (map) <= 1.0)
+	else
 		e_map_zoom_to_location (map, longitude, latitude);
 
 	if (point) e_map_point_set_color_rgba (map, point, 0xf010d0ff);
