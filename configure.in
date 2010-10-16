@@ -159,15 +159,11 @@ dnl ========================================================
 dnl Translations
 dnl ========================================================
 
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.17])
 GETTEXT_PACKAGE=gnome-system-tools
-AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package name])
-AM_GLIB_GNU_GETTEXT
-
-# AM_GNOME_GETTEXT above substs $DATADIRNAME
-# this is the directory where the *.{mo,gmo} files are installed
-gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
-AC_SUBST(gnomelocaledir)
+AC_SUBST([GETTEXT_PACKAGE], GETTEXT_PACKAGE)
 
 dnl ========================================================
 dnl END : Translations
