@@ -7,6 +7,6 @@ DOC_INCLUDES =
 DOC_FIGURES = figures/users-tool.png	\
 	       figures/groups.png
 
-DOC_LINGUAS = ca cs de el en_GB es fr gl oc pt_BR ru sv it zh_CN
+DOC_LINGUAS = ca cs de el en_GB es fr gl oc pt_BR ru sl sv it zh_CN
 
 -include $(top_srcdir)/git.mk
