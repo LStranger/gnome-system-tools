@@ -7,7 +7,7 @@ DOC_INCLUDES =
 DOC_FIGURES = \
 	figures/services-tool.png
 
-DOC_LINGUAS = ca cs de el en_GB es fr gl oc pl pt_BR sv it zh_CN
+DOC_LINGUAS = ca cs de el en_GB es fr gl oc pl pt_BR sl sv it zh_CN
 
 # this isn't still ported to gnome-doc-utils
 SUBDIRS = nl 
