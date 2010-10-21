@@ -10,7 +10,7 @@ DOC_FIGURES = \
 	figures/time-tool-automatic.png	\
 	figures/time-tool-manual.png
 
-DOC_LINGUAS = ca cs de el en_GB es fr gl it oc pt_BR ru sv zh_CN
+DOC_LINGUAS = ca cs de el en_GB es fr gl it oc pt_BR ru sl sv zh_CN
 
 # This isn't still ported to gnome-doc-utils
 SUBDIRS = nl
