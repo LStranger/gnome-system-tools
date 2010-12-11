@@ -407,7 +407,6 @@ gst_platform_dialog_new (OobsSession *session)
 	g_return_val_if_fail (OOBS_IS_SESSION (session), NULL);
 
 	return g_object_new (GST_TYPE_PLATFORM_DIALOG,
-			     "has-separator", FALSE,
 			     "session", session,
 			     NULL);
 }

@@ -354,7 +354,7 @@ on_save_button_clicked (GtkWidget *widget, gpointer data)
 
       priv->save_dialog = gtk_dialog_new_with_buttons (_("Save location"),
 						       GTK_WINDOW (priv->tool->main_dialog),
-						       GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
+						       GTK_DIALOG_MODAL,
 						       NULL);
       gtk_dialog_add_button (GTK_DIALOG (priv->save_dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
       button = gtk_dialog_add_button (GTK_DIALOG (priv->save_dialog), GTK_STOCK_SAVE, GTK_RESPONSE_OK);

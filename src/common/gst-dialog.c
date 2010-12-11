@@ -356,7 +356,6 @@ GstDialog*
 gst_dialog_new (GstTool *tool, const char *widget, const char *title, gboolean lock_button)
 {
 	return g_object_new (GST_TYPE_DIALOG,
-			     "has-separator", FALSE,
 			     "tool", tool,
 			     "widget-name", widget,
 			     "title", title,
