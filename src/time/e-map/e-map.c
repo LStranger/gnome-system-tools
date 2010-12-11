@@ -311,7 +311,8 @@ e_map_class_init (EMapClass *class)
 
 	widget_class->realize = e_map_realize;
 	widget_class->unrealize = e_map_unrealize;
-	widget_class->size_request = e_map_size_request;
+	widget_class->get_preferred_height = e_map_get_preferred_height;
+	widget_class->get_preferred_width = e_map_get_preferred_width;
 	widget_class->size_allocate = e_map_size_allocate;
 	widget_class->button_press_event = e_map_button_press;
 	widget_class->button_release_event = e_map_button_release;
@@ -500,25 +501,40 @@ e_map_unrealize (GtkWidget *widget)
                 (*GTK_WIDGET_CLASS (e_map_parent_class)->unrealize) (widget);
 }
 
-/* Size_request handler for the map view */
+/* Size requests handlers for the map view */
 
 static void
-e_map_size_request (GtkWidget *widget, GtkRequisition *requisition)
+e_map_get_preferred_height (GtkWidget *widget, gint *minimum_height, gint *natural_height)
 {
 	EMap *view;
 	EMapPrivate *priv;
 
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (E_IS_MAP (widget));
-	g_return_if_fail (requisition != NULL);
 
 	view = E_MAP (widget);
 	priv = view->priv;
 
 	/* TODO: Put real sizes here. */
 
-	requisition->width = gdk_pixbuf_get_width (priv->map_pixbuf);
-	requisition->height = gdk_pixbuf_get_height (priv->map_pixbuf);
+	*minimum_height = *natural_height = gdk_pixbuf_get_height (priv->map_pixbuf);
+}
+
+static void
+e_map_get_preferred_width (GtkWidget *widget, gint *minimum_width, gint *natural_width)
+{
+	EMap *view;
+	EMapPrivate *priv;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (E_IS_MAP (widget));
+
+	view = E_MAP (widget);
+	priv = view->priv;
+
+	/* TODO: Put real sizes here. */
+
+	*minimum_width = *natural_width = gdk_pixbuf_get_width (priv->map_pixbuf);
 }
 
 /* Size_allocate handler for the map view */
