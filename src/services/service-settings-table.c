@@ -167,7 +167,7 @@ add_columns (GtkWidget    *table,
 {
 	GtkTreeModel *combo_model;
 	GtkCellRenderer *renderer;
-	GtkObject *adjustment;
+	GtkAdjustment *adjustment;
 
 	/* runlevel name */
 	renderer = gtk_cell_renderer_text_new ();
