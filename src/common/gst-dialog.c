@@ -30,7 +30,8 @@
 #include "gst-dialog.h"
 
 #ifdef HAVE_POLKIT
-#include <polkitgtk/polkitgtk.h>
+#include <polkit/polkit.h>
+#include "um-lockbutton.h"
 #endif
 
 #define GST_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GST_TYPE_DIALOG, GstDialogPrivate))
@@ -43,12 +44,13 @@ struct _GstDialogPrivate {
 
 	gchar   *title;
 	gchar   *widget_name;
-	gboolean lock_button;
+	gboolean show_lock_button;
 
 	GtkBuilder *builder;
 	GtkWidget  *child;
 #ifdef HAVE_POLKIT
-	GtkWidget  *polkit_button;
+	GPermission *permission;
+	GtkWidget   *lock_button;
 #endif
 	GSList     *policy_widgets;
 
@@ -96,7 +98,7 @@ enum {
 	PROP_TOOL,
 	PROP_WIDGET_NAME,
 	PROP_TITLE,
-	PROP_LOCK_BUTTON
+	PROP_SHOW_LOCK_BUTTON
 };
 
 enum {
@@ -148,10 +150,10 @@ gst_dialog_class_init (GstDialogClass *class)
 							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
 
 	g_object_class_install_property (object_class,
-					 PROP_LOCK_BUTTON,
-					 g_param_spec_boolean ("lock_button",
-					                       "Lock button",
-					                       "Show PolkitLockButton",
+					 PROP_SHOW_LOCK_BUTTON,
+					 g_param_spec_boolean ("show_lock_button",
+					                       "Show Lock button",
+					                       "Whether to show lock button",
 					                       TRUE,
 					                       G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
 
@@ -235,18 +237,35 @@ gst_dialog_constructor (GType                  type,
 	if (priv->tool) {
 		const gchar *action;
 		GtkWidget *action_area;
+		GError *error = NULL;
 
 		/* Some tools don't use the lock button at all */
-		if (priv->lock_button) {
+		if (priv->show_lock_button) {
 			action = oobs_session_get_authentication_action (priv->tool->session);
-			priv->polkit_button = polkit_lock_button_new (action);
+			priv->permission = polkit_permission_new_sync (action, NULL, NULL, &error);
+
+			if (!priv->permission) {
+				GtkWidget *message_dialog;
+
+				message_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
+				                                         GTK_DIALOG_MODAL,
+				                                         GTK_MESSAGE_ERROR,
+				                                         GTK_BUTTONS_CLOSE,
+				                                         _("Error accessing system permissions: %s"),
+				                                         error->message);
+				gtk_dialog_run (GTK_DIALOG (message_dialog));
+
+				exit (-1);
+			}
+
+			priv->lock_button = um_lock_button_new (priv->permission);
 
 			action_area = gtk_dialog_get_action_area (GTK_DIALOG (dialog));
-			gtk_box_pack_start (GTK_BOX (action_area), priv->polkit_button, TRUE, TRUE, 0);
-			gtk_widget_show (priv->polkit_button);
+			gtk_box_pack_start (GTK_BOX (action_area), priv->lock_button, TRUE, TRUE, 0);
+			gtk_widget_show (priv->lock_button);
 
-			g_signal_connect_swapped (priv->polkit_button, "changed",
-		                          G_CALLBACK (gst_dialog_lock_changed), dialog);
+			g_signal_connect_swapped (priv->permission, "notify",
+		                                  G_CALLBACK (gst_dialog_lock_changed), dialog);
 		}
 	}
 #endif
@@ -282,8 +301,8 @@ gst_dialog_set_property (GObject      *object,
 	case PROP_TITLE:
 		priv->title = g_value_dup_string (value);
 		break;
-	case PROP_LOCK_BUTTON:
-		priv->lock_button = g_value_get_boolean (value);
+	case PROP_SHOW_LOCK_BUTTON:
+		priv->show_lock_button = g_value_get_boolean (value);
 		break;
 	}
 }
@@ -353,13 +372,13 @@ gst_dialog_delete_event (GtkWidget   *widget,
 }
 
 GstDialog*
-gst_dialog_new (GstTool *tool, const char *widget, const char *title, gboolean lock_button)
+gst_dialog_new (GstTool *tool, const char *widget, const char *title, gboolean show_lock_button)
 {
 	return g_object_new (GST_TYPE_DIALOG,
 			     "tool", tool,
 			     "widget-name", widget,
 			     "title", title,
-	                     "lock-button", lock_button,
+	                     "show-lock-button", show_lock_button,
 			     NULL);
 }
 
@@ -651,9 +670,7 @@ gst_dialog_is_authenticated (GstDialog *dialog)
 
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
 
-	return (polkit_lock_button_get_is_authorized (POLKIT_LOCK_BUTTON (priv->polkit_button)) ||
-		(polkit_lock_button_get_can_obtain (POLKIT_LOCK_BUTTON (priv->polkit_button)) &&
-		!polkit_lock_button_get_is_visible (POLKIT_LOCK_BUTTON (priv->polkit_button))));
+	return g_permission_get_allowed (priv->permission);
 #else
 	return TRUE;
 #endif

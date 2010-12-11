@@ -287,6 +287,6 @@ gst_users_tool_new (void)
 			     "name", "users",
 			     "title", _("Users Settings"),
 			     "icon", "config-users",
-	                     "lock-button", FALSE,
+	                     "show-lock-button", FALSE,
 			     NULL);
 }

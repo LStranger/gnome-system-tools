@@ -47,7 +47,7 @@ struct _GstTool {
 	gchar *name;
 	gchar *title;
 	gchar *icon;
-	gboolean lock_button;
+	gboolean show_lock_button;
 
 	OobsSession *session;
 	GPtrArray   *objects;
