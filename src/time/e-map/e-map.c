@@ -116,7 +116,7 @@ static void e_map_get_current_location (EMap *map, double *longitude, double *la
 static void e_map_world_to_render_surface (EMap *map, gdouble world_longitude, gdouble world_latitude,
                                            gdouble *win_x, gdouble *win_y);
 static void update_render_surface (EMap *map, gboolean render_overlays);
-static void set_scroll_area (EMap *view, int width, int height);
+static void set_scroll_area (EMap *view, gint width, gint height);
 static void center_at (EMap *map, double longitude, double latitude);
 static void scroll_to (EMap *view, gint x, gint y);
 static gint load_map_background (EMap *view, gchar *name);
@@ -172,7 +172,7 @@ e_map_do_tween_cb (gpointer data)
 
         priv->timer_current_ms = g_timer_elapsed (priv->timer, NULL) * 1000;
         gtk_widget_queue_draw (GTK_WIDGET (view));
-        
+
         /* Can't use for loop here, because we need to advance 
          * the list before deleting.
          */
@@ -180,7 +180,7 @@ e_map_do_tween_cb (gpointer data)
         while (walk)
         {
                 EMapTween *tween = walk->data;
-                
+
                 walk = walk->next;
 
                 if (tween->end_time <= priv->timer_current_ms)
@@ -211,7 +211,7 @@ e_map_tween_new (EMap *view, guint msecs, double longitude_offset, double latitu
 {
         EMapPrivate *priv = view->priv;
         EMapTween *tween;
-        
+
         if (!priv->smooth_zoom)
                 return;
 
@@ -230,6 +230,11 @@ e_map_tween_new (EMap *view, guint msecs, double longitude_offset, double latitu
         gtk_widget_queue_draw (GTK_WIDGET (view));
 }
 
+G_DEFINE_TYPE (
+	EMap,
+	e_map,
+	GTK_TYPE_WIDGET)
+
 static void
 e_map_tween_new_from (EMap *view, guint msecs, double longitude, double latitude, double zoom)
 {
@@ -247,8 +252,6 @@ e_map_tween_new_from (EMap *view, guint msecs, double longitude, double latitude
 /* ----------------- *
  * Widget management *
  * ----------------- */
-
-G_DEFINE_TYPE(EMap, e_map, GTK_TYPE_WIDGET)
 
 /* Class initialization function for the map view */
 
@@ -291,7 +294,10 @@ static void
 e_map_init (EMap *view)
 {
 	EMapPrivate *priv;
+	GtkWidget *widget;
 	gchar *map_file_name = g_build_filename (PIXMAPS_DIR, "world_map-960.png", NULL);
+
+        widget = GTK_WIDGET (view);
 
 	priv = g_new0 (EMapPrivate, 1);
 	view->priv = priv;
@@ -303,8 +309,8 @@ e_map_init (EMap *view)
 	priv->zoom_state = E_MAP_ZOOMED_OUT;
         priv->points = g_ptr_array_new ();
 
-	gtk_widget_set_can_focus (GTK_WIDGET (view), TRUE);
-	gtk_widget_set_has_window (GTK_WIDGET (view), TRUE);
+	gtk_widget_set_can_focus (widget, TRUE);
+	gtk_widget_set_has_window (widget, TRUE);
 }
 
 /* Finalize handler for the map view */
@@ -346,8 +352,7 @@ e_map_finalize (GObject *object)
 	g_free (priv);
 	view->priv = NULL;
 
-	if (G_OBJECT_CLASS (e_map_parent_class)->finalize)
-		(*G_OBJECT_CLASS (e_map_parent_class)->finalize) (object);
+	G_OBJECT_CLASS (e_map_parent_class)->finalize (object);
 }
 
 /* Realize handler for the map view */
@@ -374,8 +379,8 @@ e_map_realize (GtkWidget *widget)
 	attr.width = allocation.width;
 	attr.height = allocation.height;
 	attr.wclass = GDK_INPUT_OUTPUT;
-	attr.visual = gdk_rgb_get_visual ();
-	attr.colormap = gdk_rgb_get_colormap ();
+	attr.visual = gtk_widget_get_visual (widget);
+	attr.colormap = gtk_widget_get_colormap (widget);
 	attr.event_mask = gtk_widget_get_events (widget) |
 	  GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK |
 	  GDK_POINTER_MOTION_MASK;
@@ -395,19 +400,17 @@ e_map_realize (GtkWidget *widget)
 	update_render_surface (E_MAP (widget), TRUE);
 }
 
-/* Unrealize handler for the map view */
-
 static void
 e_map_unrealize (GtkWidget *widget)
 {
         EMap *view = E_MAP (widget);
-	EMapPrivate *priv = view->priv;
+        EMapPrivate *priv = view->priv;
 
         cairo_surface_destroy (priv->map_render_surface);
         priv->map_render_surface = NULL;
 
-	if (GTK_WIDGET_CLASS (e_map_parent_class)->unrealize)
-		(*GTK_WIDGET_CLASS (e_map_parent_class)->unrealize) (widget);
+        if (GTK_WIDGET_CLASS (e_map_parent_class)->unrealize)
+                (*GTK_WIDGET_CLASS (e_map_parent_class)->unrealize) (widget);
 }
 
 /* Size_request handler for the map view */
@@ -550,7 +553,7 @@ e_map_tweens_compute_matrix (EMap *view, cairo_matrix_t *matrix)
         cairo_matrix_init_translate (matrix,
                                 allocation.width / 2.0,
                                 allocation.height / 2.0);
-        
+
         e_map_world_to_render_surface (view,
                                        longitude, latitude,
                                        &x, &y);
@@ -569,7 +572,7 @@ e_map_expose (GtkWidget *widget, GdkEventExpose *event)
         cairo_matrix_t matrix;
 
 	if (!gtk_widget_is_drawable (widget))
-	        return FALSE;
+		return FALSE;
 
 	view = E_MAP (widget);
 	priv = view->priv;
@@ -581,11 +584,11 @@ e_map_expose (GtkWidget *widget, GdkEventExpose *event)
         e_map_tweens_compute_matrix (view, &matrix);
         cairo_transform (cr, &matrix);
 
-        cairo_set_source_surface (cr, 
+        cairo_set_source_surface (cr,
                                   priv->map_render_surface,
                                   0, 0);
         cairo_paint (cr);
-        
+
         cairo_destroy (cr);
 
 	return FALSE;
@@ -1015,7 +1018,7 @@ e_map_get_closest_point (EMap *map, gdouble longitude, gdouble latitude, gboolea
 	EMapPoint *point_chosen = NULL, *point;
 	gdouble min_dist = 0.0, dist;
 	gdouble dx, dy;
-	guint i;
+	gint i;
 
 	priv = map->priv;
 
@@ -1077,7 +1080,7 @@ update_render_surface (EMap *map,
 	GtkAllocation allocation;
 	gint width, height, orig_width, orig_height;
 	gdouble zoom;
-	guint i;
+	gint i;
 
 	if (!gtk_widget_get_realized (GTK_WIDGET (map)))
 		return;
@@ -1106,12 +1109,13 @@ update_render_surface (EMap *map,
 
 	/* Reallocate the pixbuf */
 
-	if (priv->map_render_surface) cairo_surface_destroy (priv->map_render_surface);
-	priv->map_render_surface = gdk_window_create_similar_surface (gtk_widget_get_window (GTK_WIDGET (map)),
+        if (priv->map_render_surface) cairo_surface_destroy (priv->map_render_surface);
+        priv->map_render_surface = gdk_window_create_similar_surface (gtk_widget_get_window (GTK_WIDGET (map)),
                                                                       CAIRO_CONTENT_COLOR,
-			         			              width, height);
+                                                                      width, height);
 
 	/* Scale the original map into the rendering pixbuf */
+
 	if (width > 1 && height > 1)
 	{
                 cairo_t *cr = cairo_create (priv->map_render_surface);
@@ -1121,9 +1125,9 @@ update_render_surface (EMap *map,
                 cairo_destroy (cr);
 	}
 
-	/* Compute image offsets with respect to window */
+        /* Compute image offsets with respect to window */
 
-	set_scroll_area (map, width, height);
+        set_scroll_area (map, width, height);
 
 	if (render_overlays)
 	{
@@ -1172,7 +1176,7 @@ update_render_point (EMap *map, EMapPoint *point)
         cairo_mask_surface (cr, mask, px - 2, py - 2);
         cairo_surface_destroy (mask);
 
-        cairo_set_source_rgba (cr, 
+        cairo_set_source_rgba (cr,
                                ((point->rgba >> 24) & 0xff) / 255.0,
                                ((point->rgba >> 16) & 0xff) / 255.0,
                                ((point->rgba >>  8) & 0xff) / 255.0,
@@ -1260,7 +1264,7 @@ e_map_get_current_location (EMap *map, double *longitude, double *latitude)
 
 	e_map_window_to_world (map,
                                allocation.width / 2.0, allocation.height / 2.0,
-		               longitude, latitude);
+			       longitude, latitude);
 }
 
 /* Callback used when an adjustment is changed */
@@ -1281,7 +1285,7 @@ adjustment_changed_cb (GtkAdjustment *adj, gpointer data)
 }
 
 static void
-set_scroll_area (EMap *view, int width, int height)
+set_scroll_area (EMap *view, gint width, gint height)
 {
 	EMapPrivate *priv;
 	GtkAllocation allocation;
