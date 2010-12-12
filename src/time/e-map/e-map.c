@@ -134,7 +134,7 @@ static void e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
 static gint e_map_button_press (GtkWidget *widget, GdkEventButton *event);
 static gint e_map_button_release (GtkWidget *widget, GdkEventButton *event);
 static gint e_map_motion (GtkWidget *widget, GdkEventMotion *event);
-static gint e_map_expose (GtkWidget *widget, GdkEventExpose *event);
+static gint e_map_draw (GtkWidget *widget, cairo_t *cr);
 static gint e_map_key_press (GtkWidget *widget, GdkEventKey *event);
 
 /* GtkScrollable implementation */
@@ -317,7 +317,7 @@ e_map_class_init (EMapClass *class)
 	widget_class->button_press_event = e_map_button_press;
 	widget_class->button_release_event = e_map_button_release;
 	widget_class->motion_notify_event = e_map_motion;
-	widget_class->expose_event = e_map_expose;
+	widget_class->draw = e_map_draw;
 	widget_class->key_press_event = e_map_key_press;
 }
 
@@ -662,25 +662,17 @@ e_map_tweens_compute_matrix (EMap *view, cairo_matrix_t *matrix)
         cairo_matrix_translate (matrix, -x, -y);
 }
 
-/* Expose handler for the map view */
+/* Draw handler for the map view */
 
 static gboolean
-e_map_expose (GtkWidget *widget, GdkEventExpose *event)
+e_map_draw (GtkWidget *widget, cairo_t *cr)
 {
 	EMap *view;
 	EMapPrivate *priv;
-        cairo_t *cr;
         cairo_matrix_t matrix;
-
-	if (!gtk_widget_is_drawable (widget))
-		return FALSE;
 
 	view = E_MAP (widget);
 	priv = view->priv;
-
-        cr = gdk_cairo_create (event->window);
-        gdk_cairo_region (cr, event->region);
-        cairo_clip (cr);
 
         e_map_tweens_compute_matrix (view, &matrix);
         cairo_transform (cr, &matrix);
@@ -689,8 +681,6 @@ e_map_expose (GtkWidget *widget, GdkEventExpose *event)
                                   priv->map_render_surface,
                                   0, 0);
         cairo_paint (cr);
-
-        cairo_destroy (cr);
 
 	return FALSE;
 }
