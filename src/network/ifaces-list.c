@@ -292,7 +292,7 @@ get_iface_secondary_text (OobsIface *iface)
       config_method = oobs_iface_ethernet_get_configuration_method (OOBS_IFACE_ETHERNET (iface));
 
       if (config_method && strcmp (config_method, "static") == 0)
-	g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+	g_string_append_printf (str, "<b>%s</b> %s <b>%s</b> %s",
 				_("Address:"),
 				oobs_iface_ethernet_get_ip_address (OOBS_IFACE_ETHERNET (iface)),
 				 _("Subnet mask:"),
@@ -302,7 +302,7 @@ get_iface_secondary_text (OobsIface *iface)
     }
   else if (OOBS_IS_IFACE_PLIP (iface))
     {
-      g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+      g_string_append_printf (str, "<b>%s</b> %s <b>%s</b> %s",
 			      _("Address:"),
 			      oobs_iface_plip_get_address (OOBS_IFACE_PLIP (iface)),
 			      _("Remote address:"),
@@ -316,12 +316,12 @@ get_iface_secondary_text (OobsIface *iface)
 
       if (strcmp (type, "modem") == 0 ||
 	  strcmp (type, "isdn") == 0)
-	g_string_append_printf (str,"<b>%s</b> %s </b>%s</b> %s",
+	g_string_append_printf (str,"<b>%s</b> %s <b>%s</b> %s",
 				_("Type:"), type,
 				_("Phone number:"),
 				oobs_iface_ppp_get_phone_number (OOBS_IFACE_PPP (iface)));
       else if (strcmp (type, "gprs") == 0)
-	g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+	g_string_append_printf (str, "<b>%s</b> %s <b>%s</b> %s",
 				_("Type:"), type,
 				_("Access point name:"),
 				oobs_iface_ppp_get_apn (OOBS_IFACE_PPP (iface)));
@@ -330,13 +330,13 @@ get_iface_secondary_text (OobsIface *iface)
 	  OobsIfaceEthernet *ethernet;
 
 	  ethernet = oobs_iface_ppp_get_ethernet (OOBS_IFACE_PPP (iface));
-	  g_string_append_printf (str, "<b>%s</b> %s </b>%s</b> %s",
+	  g_string_append_printf (str, "<b>%s</b> %s <b>%s</b> %s",
 				  _("Type:"), type,
 				  _("Ethernet interface:"),
 				  oobs_iface_get_device_name (OOBS_IFACE (ethernet)));
 	}
       else
-	g_string_append_printf (str, "<b>%s</b> %s", _("Type:"), type);
+	g_string_append_printf (str, "<b>%s<b> %s", _("Type:"), type);
     }
 
   text = str->str;
