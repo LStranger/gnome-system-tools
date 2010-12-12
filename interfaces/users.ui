@@ -856,8 +856,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkComboBoxEntry" id="profile_settings_shell">
+                      <object class="GtkComboBox" id="profile_settings_shell">
                         <property name="visible">True</property>
+                        <property name="has-entry">True</property>
+                        <property name="entry-text-column">0</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -2466,10 +2468,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBoxEntry" id="user_new_login">
+              <object class="GtkComboBoxText" id="user_new_login">
                 <property name="visible">True</property>
                 <property name="model">liststore2</property>
-                <property name="text_column">0</property>
+                <property name="has-entry">True</property>
+                <property name="entry-text-column">0</property>
                 <signal name="changed" handler="on_user_new_login_changed"/>
               </object>
               <packing>
@@ -2896,8 +2899,10 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBoxEntry" id="user_settings_shell">
+                          <object class="GtkComboBox" id="user_settings_shell">
                             <property name="visible">True</property>
+                            <property name="has-entry">True</property>
+                            <property name="entry-text-column">0</property>
                           </object>
                           <packing>
                             <property name="left_attach">2</property>

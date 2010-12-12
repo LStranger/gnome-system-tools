@@ -106,7 +106,7 @@ setup_shells_combo (GstUsersTool *tool)
 	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
 	g_object_unref (model);
 
-	gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (combo), 0);
+	gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (combo), 0);
 }
 
 void

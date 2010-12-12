@@ -21,6 +21,8 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
+
 #include "gst.h"
 #include "network-tool.h"
 #include "connection.h"
@@ -113,7 +115,7 @@ connection_combo_get_value (GtkComboBox *combo)
 }
 
 static void
-connection_essids_combo_init (GtkComboBoxEntry *combo)
+connection_essids_combo_init (GtkComboBox *combo)
 {
   GtkTreeModel *model;
   GtkCellRenderer *renderer;
@@ -138,10 +140,10 @@ connection_essids_combo_init (GtkComboBoxEntry *combo)
 				 renderer, "value", 2);
 
   /* reuse text cell renderer for the essid */
-  gtk_combo_box_entry_set_text_column (combo, 1);
+  gtk_combo_box_set_entry_text_column (combo, 1);
 
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (combo)), "changed",
-		    G_CALLBACK (on_dialog_changed), tool);
+  g_signal_connect (G_OBJECT (combo), "changed",
+                    G_CALLBACK (on_dialog_changed), tool);
 }
 
 static void
@@ -670,9 +672,9 @@ connection_dialog_init (GstTool *tool)
   gcd->isp_frame      = gst_dialog_get_widget (tool->main_dialog, "isp_data");
   gcd->account_frame  = gst_dialog_get_widget (tool->main_dialog, "isp_account_data");
 
-  gtk_combo_box_entry_set_text_column (GTK_COMBO_BOX_ENTRY (gcd->serial_port), 0);
+  gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (gcd->serial_port), 0);
 
-  connection_essids_combo_init (GTK_COMBO_BOX_ENTRY (gcd->essid));
+  connection_essids_combo_init (GTK_COMBO_BOX (gcd->essid));
   connection_pppoe_combo_init (GTK_COMBO_BOX (gcd->pppoe_interface_combo));
 
   return gcd;

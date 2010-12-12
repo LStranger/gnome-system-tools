@@ -897,32 +897,38 @@ on_user_new_name_changed (GtkEditable *user_name, gpointer user_data)
 
 	used_login = oobs_users_config_is_login_used (config, item1->str);
 	if (nwords2 > 0 && !used_login && !isdigit(item1->str[0]))
-		gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item1->str);
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (user_login),
+		                                item1->str);
 
 	/* if there's only one word, would be the same as item1 */
 	if (nwords2 > 1) {
 		/* add other items */
 		used_login = oobs_users_config_is_login_used (config, item2->str);
 		if (!used_login && !isdigit(item2->str[0]))
-			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item2->str);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (user_login),
+			                                item2->str);
 
 		used_login = oobs_users_config_is_login_used (config, item3->str);
 		if (!used_login && !isdigit(item3->str[0]))
-			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item3->str);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (user_login),
+			                                item3->str);
 
 		used_login = oobs_users_config_is_login_used (config, item4->str);
 		if (!used_login && !isdigit(item4->str[0]))
-			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), item4->str);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (user_login),
+			                                item4->str);
 
 		/* add the last word */
 		used_login = oobs_users_config_is_login_used (config, last_word->str);
 		if (!used_login && !isdigit(last_word->str[0]))
-			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), last_word->str);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (user_login),
+			                                last_word->str);
 
 		/* ...and the first one */
 		used_login = oobs_users_config_is_login_used (config, first_word->str);
 		if (!used_login && !isdigit(first_word->str[0]))
-			gtk_combo_box_append_text (GTK_COMBO_BOX (user_login), first_word->str);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (user_login),
+			                                first_word->str);
 	}
 
 
@@ -955,10 +961,10 @@ on_user_new_login_changed (GtkComboBox *login_combo, gpointer user_data)
 	gboolean empty_login;
 	gboolean valid_login;
 	gboolean valid_name;
-	char *login;
-	char *c;
+	const char *login;
+	const char *c;
 
-	login = gtk_combo_box_get_active_text (login_combo);
+	login = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (login_combo))));
 	login_entry = gtk_bin_get_child (GTK_BIN (login_combo));
 	validate_button = gst_dialog_get_widget (tool->main_dialog, "user_new_validate_button");
 	notice_image = gst_dialog_get_widget (tool->main_dialog, "user_new_notice_image");
@@ -1081,7 +1087,7 @@ on_user_new (GtkButton *button, gpointer user_data)
 	/* Create user with base data entered by the user.
 	   Main group will be automatically managed by the backends,
 	   following the system configuration. */
-	login = gtk_combo_box_get_active_text (GTK_COMBO_BOX (user_login));
+	login = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (user_login))));
 	fullname = gtk_entry_get_text (GTK_ENTRY (user_name));
 	encrypt = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (encrypted_home));
 	user = oobs_user_new (login);

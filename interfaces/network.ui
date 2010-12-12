@@ -763,8 +763,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBoxEntry" id="connection_essid">
+                              <object class="GtkComboBox" id="connection_essid">
                                 <property name="visible">True</property>
+                                <property name="has-entry">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1410,15 +1411,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBoxEntry" id="connection_serial_port">
+                              <object class="GtkComboBox" id="connection_serial_port">
                                 <property name="visible">True</property>
+                                <property name="has-entry">True</property>
+                                <property name="entry-text-column">0</property>
                                 <property name="model">liststore3</property>
-                                <child>
-                                  <object class="GtkCellRendererText" id="cellrenderertext3"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
