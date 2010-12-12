@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.31.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-11 11:43+0200\n"
-"PO-Revision-Date: 2010-09-11 11:52+0200\n"
+"POT-Creation-Date: 2010-12-12 22:04+0100\n"
+"PO-Revision-Date: 2010-12-12 22:38+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -512,7 +512,9 @@ msgid ""
 "Encrypt all your files with your login password to strongly protect them "
 "from people with physical access to your computer, at the expense of a "
 "slightly reduced performance."
-msgstr "Krypter alle dine filer med påloggingspassordet for å beskytte dem fra andre som har fysisk tilgang til din datamaskin. Påvirker ytelsen noe."
+msgstr ""
+"Krypter alle dine filer med påloggingspassordet for å beskytte dem fra andre "
+"som har fysisk tilgang til din datamaskin. Påvirker ytelsen noe."
 
 #: ../interfaces/users.ui.h:26
 msgid "Full _Name:"
@@ -626,7 +628,9 @@ msgstr "Denne kontoen er deaktivert."
 msgid ""
 "This account is using special settings that have been defined manually. Use "
 "the <i>Advanced Settings</i> dialog to tune them."
-msgstr "Denne kontoen bruker spesielle innstillinger som er definert manuelt. Bruk <i>Avanserte innstillinger</i> for å endre dem."
+msgstr ""
+"Denne kontoen bruker spesielle innstillinger som er definert manuelt. Bruk "
+"<i>Avanserte innstillinger</i> for å endre dem."
 
 #: ../interfaces/users.ui.h:55
 msgid "User ID:"
@@ -744,12 +748,18 @@ msgstr "Vis systembrukere"
 #: ../org.gnome.system-tools.gschema.xml.in.h:3
 msgid ""
 "Whether the users-admin tool should show system users in the users list."
-msgstr "Hvorvidt verktøyet users-admin skal vises systembrukere i brukerlisten."
+msgstr ""
+"Hvorvidt verktøyet users-admin skal vises systembrukere i brukerlisten."
 
 #: ../org.gnome.system-tools.gschema.xml.in.h:4
 msgid ""
 "Whether the users-admin tool should show the root user in the users list."
 msgstr "Hvorvidt verktøyet users-admin skal vise root-brukeren i brukerlisten."
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr ""
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -815,6 +825,36 @@ msgid ""
 "You may report this as a bug."
 msgstr ""
 
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "Lås"
+
+#: ../src/common/um-lockbutton.c:365
+msgid "Unlock"
+msgstr "Lås opp"
+
+#: ../src/common/um-lockbutton.c:374
+msgid "Locked"
+msgstr "Låst"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
@@ -860,51 +900,51 @@ msgstr ""
 msgid "Change _Host name"
 msgstr "Endre _vertsnavn"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "Automatisk konfigurasjon (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "Lokalt Zeroconf-nettverk (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "Statisk IP-adresse"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "WEP-nøkkel (ASCII)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "WEP-nøkkel (heksadesimal)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA personlig"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 personlig"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "ISDN-modem"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "Seriell-modem"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "Egenskaper for %s"
@@ -1584,11 +1624,11 @@ msgid ""
 "folders."
 msgstr "Du må installere enten Samba eller NFS for å kunne dele dine mapper."
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "Verdenskart"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1602,11 +1642,11 @@ msgstr "Endre systemets tid, dato og tidssone"
 msgid "Time and Date"
 msgstr "Tid og dato"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "NTP-støtte er ikke installert"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1614,27 +1654,27 @@ msgstr ""
 "Installer og aktiver NTP-støtte i systemet for å synkronisere din lokale "
 "tidtjener med en tidtjener på internett."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "Aktiverer NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "Deaktiverer NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "Synkroniserer systemklokken"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "Synkroniser klokken med tjenere på internett"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "Manuell"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Innstillinger for tid og dato"
 
@@ -1644,7 +1684,7 @@ msgstr "Administratorgruppen kan ikke slettes"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:606
 msgid "This would leave the system unusable."
 msgstr "Dette kan gjøre systemet ubrukelig."
 
@@ -1723,11 +1763,11 @@ msgid "Group name"
 msgstr "Gruppenavn"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:348
 msgid "Not asked on login"
 msgstr "Ikke spør ved pålogging"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:350
 msgid "Asked on login"
 msgstr "Spør ved innlogging"
 
@@ -1823,13 +1863,17 @@ msgstr "Administrator"
 msgid ""
 "Can change anything on the system, including installing and upgrading "
 "software."
-msgstr "Kan endre alt på systemet inkludert installering og oppgradering av programvare."
+msgstr ""
+"Kan endre alt på systemet inkludert installering og oppgradering av "
+"programvare."
 
 #: ../src/users/user-profiles.conf.in.h:3
 msgid ""
 "Can perform common tasks. Can't install software or change settings "
 "affecting all users."
-msgstr "Kan utføre vanlige oppgaver. Kan ikke installere programvare eller endre innstillinger som påvirker alle brukere."
+msgstr ""
+"Kan utføre vanlige oppgaver. Kan ikke installere programvare eller endre "
+"innstillinger som påvirker alle brukere."
 
 #: ../src/users/user-profiles.conf.in.h:4
 msgid "Desktop user"
@@ -1907,15 +1951,15 @@ msgstr "Bekreftelse av passord er ikke korrekt"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Sjekk at du har oppgitt samme passord i begge tekstfeltene."
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:445
 msgid "Please choose another password."
 msgstr "Vennligst velg et annet passord."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:456
 msgid "Please type again your current password."
 msgstr "Vennligst skriv inn passordet på nytt."
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:463
 msgid "Password could not be changed"
 msgstr "Passordet kunne ikke byttes"
 
@@ -1970,33 +2014,33 @@ msgstr "Ikke fjern konto"
 msgid "Delete Files"
 msgstr "Slett filer"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:331
 msgid "Superuser"
 msgstr "Superbruker"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:336
 msgid "Custom"
 msgstr "Egendefinert"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:345
 msgid "None"
 msgstr "Ingen"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:394
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Ugyldig tegn «%c» i kommentar"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:395
 msgid "Check that this character is not used."
 msgstr "Sjekk at dette tegnet ikke brukes."
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:427
 msgid "Incomplete path in home directory"
 msgstr "Ugyldig sti i hjemmemappen"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:428
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2004,11 +2048,11 @@ msgstr ""
 "Vennligst oppgi full sti til hjemmemappen\n"
 "<span size=\"smaller\">f.eks: /home/john</span>."
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:448 ../src/users/user-settings.c:492
 msgid "New home directory already exists, use it?"
 msgstr "Ny hjemmekatalog eksisterer allerede, bruk den?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:450
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2019,30 +2063,30 @@ msgid ""
 "the old directory later."
 msgstr ""
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:462
 msgid "_Replace With Old Files"
 msgstr "E_rstatt med gamle filer"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:463 ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:541
 msgid "_Cancel Change"
 msgstr "_Avbryt endring"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:466
 msgid "_Use New Files"
 msgstr "Br_uk nye filer"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:471 ../src/users/user-settings.c:511
 msgid "Make user the _owner of the new home directory"
 msgstr ""
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:548
 msgid "_Delete old home directory"
 msgstr "_Slett gammel hjemmemappe"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:494
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2052,19 +2096,19 @@ msgid ""
 "In doubt, keep the files, and remove them later if needed."
 msgstr ""
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:504
 msgid "_Delete Files"
 msgstr "_Slett filer"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:506
 msgid "_Use Existing Files"
 msgstr "Br_uk eksisterende filer"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:527
 msgid "Copy old home directory to new location?"
 msgstr "Kopier gammel hjemmekatalog til ny lokasjon?"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:529
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2075,35 +2119,35 @@ msgid ""
 "old directory."
 msgstr ""
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:540
 msgid "_Use Empty Directory"
 msgstr "Br_uk tom katalog"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:543
 msgid "Co_py Old Files"
 msgstr "Ko_pier gamle filer"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:605
 msgid "ID for the root user should not be modified"
 msgstr "ID for administrator-brukeren bør ikke endres"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:609
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "Bruker-ID %d er allerede i bruk av bruker %s"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:611
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Vennligst velg en annen numerisk identifikator for %s."
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:629
 msgid "Incomplete path in shell"
 msgstr "Ufullferdig sti i skallet"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:630
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2111,33 +2155,33 @@ msgstr ""
 "Vennligst oppgi full sti for skallet\n"
 "<span size=\"smaller\">f.eks: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:664
 msgid "Can't revoke administration rights"
 msgstr "Kan ikke trekke tilbake administratorrettigheter"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:667
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
 "rights for this account would lock you out of administrating the system."
 msgstr ""
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:684
 msgid "You are about to revoke your own administration rights"
 msgstr "Du er i ferd med å trekke tilbake dine egne administrative rettigheter"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:687
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
 "won't be allowed to get administration rights back on its own."
 msgstr ""
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:692
 msgid "Give up administration rights"
 msgstr "Gi opp administrasjonsrettigheter"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1476
 msgid "Applying changes to user settings..."
 msgstr "Aktiverer endringer i innstillinger for bruker..."
 
