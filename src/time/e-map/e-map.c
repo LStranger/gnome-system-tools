@@ -468,12 +468,11 @@ e_map_realize (GtkWidget *widget)
 	attr.height = allocation.height;
 	attr.wclass = GDK_INPUT_OUTPUT;
 	attr.visual = gtk_widget_get_visual (widget);
-	attr.colormap = gtk_widget_get_colormap (widget);
 	attr.event_mask = gtk_widget_get_events (widget) |
 	  GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK |
 	  GDK_POINTER_MOTION_MASK;
 
-	attr_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
+	attr_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL;
 
 	window = gdk_window_new (
 		gtk_widget_get_parent_window (widget), &attr, attr_mask);
@@ -484,7 +483,6 @@ e_map_realize (GtkWidget *widget)
 	style = gtk_style_attach (style, window);
 	gtk_widget_set_style (widget, style);
 
-	gdk_window_set_back_pixmap (window, NULL, FALSE);
 	update_render_surface (E_MAP (widget), TRUE);
 }
 
