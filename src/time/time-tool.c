@@ -462,7 +462,7 @@ on_option_changed (GtkWidget   *combo,
 		gtk_container_remove (GTK_CONTAINER (container), gtk_bin_get_child (GTK_BIN (container)));
 
 	gtk_container_add (GTK_CONTAINER (container), widget);
-	gtk_widget_show_all (container);
+	gtk_widget_show (container);
 }
 
 static void
@@ -757,9 +757,9 @@ gst_time_tool_run_timezone_dialog (GstTimeTool *time_tool)
 
 	gst_dialog_add_edit_dialog (tool->main_dialog, time_tool->timezone_dialog);
 
-	gtk_widget_show_all (time_tool->timezone_dialog);
+	gtk_widget_show (time_tool->timezone_dialog);
 	gtk_dialog_run (GTK_DIALOG (time_tool->timezone_dialog));
-	gtk_widget_hide_all (time_tool->timezone_dialog);
+	gtk_widget_hide (time_tool->timezone_dialog);
 
 	gst_dialog_remove_edit_dialog (tool->main_dialog, time_tool->timezone_dialog);
 
