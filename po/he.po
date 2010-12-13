@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-21 02:38+0300\n"
-"PO-Revision-Date: 2010-08-21 02:50+0200\n"
+"POT-Creation-Date: 2010-12-13 23:38+0200\n"
+"PO-Revision-Date: 2010-12-13 23:38+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -754,6 +754,11 @@ msgid ""
 msgstr ""
 "Whether the users-admin tool should show the root user in the users list."
 
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr "אירעה שגיאה בעת הגישה להרשאות המערכת: %s"
+
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
 msgstr "המערכת המופעלת אינה נתמכת על ידי כלי זה"
@@ -865,51 +870,51 @@ msgstr ""
 msgid "Change _Host name"
 msgstr "שינוי שם המ_ארח"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "הגדרה אוטומטית (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "רשת מקומית של Zeroconf‏ (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "כתובת IP קבועה"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "מפתח WEP (טקסטואלי)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "מפתח WEP (הקסדצימלי)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA אישי"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 אישי"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "מודם ISDN"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "מודם טורי"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "מאפייני %s"
@@ -1588,11 +1593,11 @@ msgid ""
 "folders."
 msgstr "עליך להתקין את Samba או את NFS כדי לשתף תיקיות."
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "מפת העולם"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1608,11 +1613,11 @@ msgstr "כיוון השעון, התאריך ואזור הזמן של המערכ�
 msgid "Time and Date"
 msgstr "זמן ותאריך"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "התמיכה בשרותי זמן (NTP) אינה מותקנת"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1620,27 +1625,27 @@ msgstr ""
 "יש להתקין ולהפעיל את התמיכה בשרותי הזמן (NTP) כדי לאפשר את כיוון השעון "
 "המקומי שלך לפי שרתי זמן מהאינטרנט."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "NTP מופעל"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "NTP נכבה"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "מכוון את שעון המערכת"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "שמירה על סנכרון מול שרתי האינטרנט"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "ידני"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "הגדרות זמן ותאריך"
 
@@ -1650,7 +1655,7 @@ msgstr "קבוצת מנהלי המערכת אינה ניתנת למחיקה"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:606
 msgid "This would leave the system unusable."
 msgstr "פעולה זו תשאיר את המערכת במצב בלתי שמיש."
 
@@ -1727,11 +1732,11 @@ msgid "Group name"
 msgstr "שם קבוצה"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:348
 msgid "Not asked on login"
 msgstr "לא התבקשה בעת הכניסה"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:350
 msgid "Asked on login"
 msgstr "התבקשה עם הכניסה"
 
@@ -1913,15 +1918,15 @@ msgstr "אימות סיסמה שגוי"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "נא לבדוק שהקולדה אותה הססמה בשתי התיבות."
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:445
 msgid "Please choose another password."
 msgstr "יש לבחור ססמה אחרת."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:456
 msgid "Please type again your current password."
 msgstr "יש להזין את הססמה הנוכחית שלך בשנית."
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:463
 msgid "Password could not be changed"
 msgstr "לא ניתן לשנות את הססמה"
 
@@ -1979,33 +1984,33 @@ msgstr "לא להסיר את החשבון"
 msgid "Delete Files"
 msgstr "מחיקת קבצים"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:331
 msgid "Superuser"
 msgstr "משתמש־על"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:336
 msgid "Custom"
 msgstr "מותאם אישית"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:345
 msgid "None"
 msgstr "ללא"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:394
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "התו \"%c\" בהערה לא חוקי"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:395
 msgid "Check that this character is not used."
 msgstr "נא לוודא שלא נעשה שימוש בתו זה"
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:427
 msgid "Incomplete path in home directory"
 msgstr "נתיב לא מלא בתיקייה הבית"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:428
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2013,11 +2018,11 @@ msgstr ""
 "יש להזין את הנתיב המלא אל תיקיית הבית\n"
 "<span size=\"smaller\">לדוגמה: /home/yaron</span>."
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:448 ../src/users/user-settings.c:492
 msgid "New home directory already exists, use it?"
 msgstr "כבר קיימת תיקיית בית חדשה, האם להשתמש בה?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:450
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2034,30 +2039,30 @@ msgstr ""
 "במידת הספק, כדאי להשתמש בתיקייה החדשה כדי להימנע מאבדן נתונים ולהעתיק את "
 "הקבצים מהתיקייה הישנה בשלב מאוחר יותר."
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:462
 msgid "_Replace With Old Files"
 msgstr "ה_חלפה בקבצים הישנים"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:463 ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:541
 msgid "_Cancel Change"
 msgstr "_ביטול השינוי"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:466
 msgid "_Use New Files"
 msgstr "שימוש בקבצים _חדשים"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:471 ../src/users/user-settings.c:511
 msgid "Make user the _owner of the new home directory"
 msgstr "הפיכת המשתמש _לבעלים של תיקיית הביתה החדשה"
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:548
 msgid "_Delete old home directory"
 msgstr "מחיקת תיקיית הבית ה_ישנה"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:494
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2071,19 +2076,19 @@ msgstr ""
 "\n"
 "במידת הספק, כדאי לשמור את הקבצים ולהסיר אותם בשלב מאוחר יותר במידת הצורך."
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:504
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:506
 msgid "_Use Existing Files"
 msgstr "שימוש בקבצים ה_קיימים"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:527
 msgid "Copy old home directory to new location?"
 msgstr "האם להעתיק את תיקייה הבית למיקום חדש?"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:529
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2099,35 +2104,35 @@ msgstr ""
 "\n"
 "אם תתבצע בחירה להעתקת הקבצים למיקום החדש, ניתן למחוק את התיקייה הישנה בבטחה."
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:540
 msgid "_Use Empty Directory"
 msgstr "שימוש בתיקייה _ריקה"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:543
 msgid "Co_py Old Files"
 msgstr "ה_עתקת קבצים ישנים"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:605
 msgid "ID for the root user should not be modified"
 msgstr "לא ניתן לשנות את מזהה משתמש העל"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:609
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "מזהה המשתמש %d כבר נמצא בשימוש על ידי המשתמש %s"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:611
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "יש לבחור מזהה מספרי אחר עבור %s"
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:629
 msgid "Incomplete path in shell"
 msgstr "נתיב לא מלא עבור המעטפת"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:630
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2135,11 +2140,11 @@ msgstr ""
 "יש להזין את נתיב המעטפת המלא\n"
 "<span size=\"smaller\">לדוגמה: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:664
 msgid "Can't revoke administration rights"
 msgstr "לא ניתן לשלול את הרשאות הניהול"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:667
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2148,11 +2153,11 @@ msgstr ""
 "%s הוא המנהל היחידי במחשב זה. שלילת זכויות הניהול לחשבון זה עלולה לנעול אותך "
 "מפני ניהול המערכת."
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:684
 msgid "You are about to revoke your own administration rights"
 msgstr "הרשאות הניהול שלך עומדות להישלל על ידיך"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:687
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2161,11 +2166,11 @@ msgstr ""
 "%s לא יוכל עוד לבצע פעולות ניהוליות. חשבון זה לא יורשה לקבל את הרשאות הניהול "
 "בחזרה בכוחות עצמו."
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:692
 msgid "Give up administration rights"
 msgstr "ויתור על זכויות ניהול"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1476
 msgid "Applying changes to user settings..."
 msgstr "השינויים בהגדרות המשתמש מוחלות..."
 
