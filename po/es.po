@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2010-08-20 09:55+0000\n"
+"POT-Creation-Date: 2010-12-12 17:45+0000\n"
 "PO-Revision-Date: 2010-08-22 21:15+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
@@ -771,6 +771,11 @@ msgstr ""
 "Indica si la herramienta de administración de usuarios debe mostrar el "
 "usuario root en la lista de usuarios."
 
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr ""
+
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
 msgstr ""
@@ -887,51 +892,51 @@ msgstr ""
 msgid "Change _Host name"
 msgstr "Cambiar nombre del _equipo"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "Configuración automática (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "Red local Zeroconf (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "Dirección IP estática"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "Clave WEP (ASCII)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "Clave WEP (hexadecimal)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA personal"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 personal"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "Módem RDSI"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "Módem serie"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "Propiedades de %s"
@@ -1615,11 +1620,11 @@ msgid ""
 "folders."
 msgstr "Necesita instalar al menos Samba o NFS para compartir sus carpetas."
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "Mapa del mundo"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1636,11 +1641,11 @@ msgstr "Cambiar hora, fecha y zona horaria"
 msgid "Time and Date"
 msgstr "Hora y fecha"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "El soporte NTP no está instalado"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1648,27 +1653,27 @@ msgstr ""
 "Instale y active el soporte NTP en el sistema para activar la sincronización "
 "con su servidor de hora local con los servidores de hora de Internet."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "Activando NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "Desactivando NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "Sincronizando reloj del sistema"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "Mantener sincronizado con los servidores de Internet"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "Manual"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Ajustes de hora y fecha"
 
@@ -1678,7 +1683,7 @@ msgstr "El grupo del administrador no se puede borrar"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:606
 msgid "This would leave the system unusable."
 msgstr "Esto podría dejar el sistema inutilizable."
 
@@ -1758,11 +1763,11 @@ msgid "Group name"
 msgstr "Nombre del grupo"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:348
 msgid "Not asked on login"
 msgstr "No preguntar al iniciar sesión"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:350
 msgid "Asked on login"
 msgstr "Preguntar al iniciar sesión"
 
@@ -1947,15 +1952,15 @@ msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 "Compruebe que ha proporcionado la misma contraseña en ambos campos de texto."
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:445
 msgid "Please choose another password."
 msgstr "Elija otra contraseña."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:456
 msgid "Please type again your current password."
 msgstr "Escriba de nuevo su contraseña actual."
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:463
 msgid "Password could not be changed"
 msgstr "No se pudo cambiar la contraseña"
 
@@ -2016,33 +2021,33 @@ msgstr "No eliminar la cuenta"
 msgid "Delete Files"
 msgstr "Eliminar archivos"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:331
 msgid "Superuser"
 msgstr "Superusuario"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:336
 msgid "Custom"
 msgstr "Personalizado"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:345
 msgid "None"
 msgstr "Ninguna"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:394
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Carácter inválido «%c» en comentario"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:395
 msgid "Check that this character is not used."
 msgstr "Compruebe que este carácter no se use."
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:427
 msgid "Incomplete path in home directory"
 msgstr "Ruta incompleta en el directorio personal"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:428
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2050,12 +2055,11 @@ msgstr ""
 "Escriba la ruta completa para el directorio personal\n"
 "<span size=\"smaller\">ej: /home/juan</span>."
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
-#| msgid "Home directory already exists"
+#: ../src/users/user-settings.c:448 ../src/users/user-settings.c:492
 msgid "New home directory already exists, use it?"
 msgstr "La carpeta personal ya existe, ¿quiere usarlo?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:450
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2072,32 +2076,30 @@ msgstr ""
 "Si duda, use la nueva carpeta personal para evitar la pérdida de datos, y "
 "copie los archivos de la carpeta antigua más tarde."
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:462
 msgid "_Replace With Old Files"
 msgstr "_Reemplazar con los archivos antiguos"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:463 ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:541
 msgid "_Cancel Change"
 msgstr "_Cancelar el cambio"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
-#| msgid "Keep Files"
+#: ../src/users/user-settings.c:466
 msgid "_Use New Files"
 msgstr "_Usar archivos nuevos"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:471 ../src/users/user-settings.c:511
 msgid "Make user the _owner of the new home directory"
 msgstr "Hacer que el _usuario sea el propietario de la nueva carpeta personal"
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
-#| msgid "Incomplete path in home directory"
+#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:548
 msgid "_Delete old home directory"
 msgstr "_Eliminar la carpeta personal antigua"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:494
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2112,20 +2114,19 @@ msgstr ""
 "\n"
 "Si duda, mantenga los archivos y elimínelos luego si es necesario."
 
-#: ../src/users/user-settings.c:503
-#| msgid "Delete Files"
+#: ../src/users/user-settings.c:504
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:506
 msgid "_Use Existing Files"
 msgstr "_Usar archivos existentes"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:527
 msgid "Copy old home directory to new location?"
 msgstr "¿Copiar la carpeta personal antigua a la nueva ubicación?"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:529
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2142,36 +2143,35 @@ msgstr ""
 "Si elije copiar los archivos a la ubicación nueva, es más seguro eliminar la "
 "carpeta antigua."
 
-#: ../src/users/user-settings.c:539
-#| msgid "Use this directory"
+#: ../src/users/user-settings.c:540
 msgid "_Use Empty Directory"
 msgstr "_Usar carpeta vacía"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:543
 msgid "Co_py Old Files"
 msgstr "C_opiar archivos antiguos"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:605
 msgid "ID for the root user should not be modified"
 msgstr "No se debe modificar el ID para el usuario root"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:609
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "El ID de usuario %d ya se está usando para el usuario %s"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:611
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Elija un identificador numérico diferente para %s."
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:629
 msgid "Incomplete path in shell"
 msgstr "Ruta incompleta en el shell"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:630
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2179,11 +2179,11 @@ msgstr ""
 "Introduzca una ruta completa para la shell\n"
 "<span size=\"smaller\">ej: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:664
 msgid "Can't revoke administration rights"
 msgstr "No se pueden revocar los privilegios de administración"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:667
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2193,11 +2193,11 @@ msgstr ""
 "administración para esta cuenta le dejará sin privilegios de administración "
 "en el sistema."
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:684
 msgid "You are about to revoke your own administration rights"
 msgstr "Está a punto de revocar sus propios privilegios de administración"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:687
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2206,11 +2206,11 @@ msgstr ""
 "%s no podrá realizar tareas administrativas. No se permitirá que esta cuenta "
 "obtenga privilegios de administración por si misma."
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:692
 msgid "Give up administration rights"
 msgstr "Renunciar a los privilegios de administración"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1476
 msgid "Applying changes to user settings..."
 msgstr "Aplicar cambios a la configuración del usuario…"
 
