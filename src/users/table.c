@@ -178,9 +178,13 @@ table_populate_profiles (GstUsersTool *tool,
 		                                                     profile->name);
 		label = gtk_label_new (profile->description);
 		gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+		gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_FILL);
 		gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 		gtk_misc_set_padding (GTK_MISC (label), 16, 0);
 		gtk_label_set_attributes (GTK_LABEL (label), attributes);
+
+		/* To force a minimum size for the dialog, set a somewhat arbitrary length */
+		gtk_label_set_width_chars (GTK_LABEL (label), 50);
 
 		gtk_table_attach_defaults (GTK_TABLE (table),
 		                           radio, 0, ncols,
