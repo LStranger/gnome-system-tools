@@ -1449,7 +1449,7 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	/* Leaving user in the password-less login group would still allow him to login,
 	 * which defeats the purpose of disabling account */
 	no_passwd_login_group =
-		oobs_groups_config_get_from_name (GST_USERS_TOOL (tool)->groups_config,
+		oobs_groups_config_get_from_name (OOBS_GROUPS_CONFIG (GST_USERS_TOOL (tool)->groups_config),
 		                                  NO_PASSWD_LOGIN_GROUP);
 	if (password_disabled && no_passwd_login_group)
 		oobs_group_remove_user (no_passwd_login_group, user);
