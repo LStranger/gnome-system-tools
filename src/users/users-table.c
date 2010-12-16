@@ -32,6 +32,8 @@
 
 extern GstTool *tool;
 
+static GtkListStore *users_model = NULL;
+
 static void
 add_user_columns (GtkTreeView *treeview)
 {
@@ -90,14 +92,18 @@ users_model_filter (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 	return show;
 }
 
-static GtkTreeModel*
-create_users_model (GstUsersTool *tool)
+void
+create_users_table (GstUsersTool *tool)
 {
-	GtkListStore *store;
+	GtkWidget *users_table;
+	GtkTreeSelection *selection;
 	GtkTreeModel *filter_model;
 	GtkTreeModel *sort_model;
-	
-	store = gtk_list_store_new (COL_USER_LAST,
+	GtkWidget *popup;
+
+	users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
+
+	users_model = gtk_list_store_new (COL_USER_LAST,
 				    GDK_TYPE_PIXBUF,
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
@@ -109,7 +115,7 @@ create_users_model (GstUsersTool *tool)
 				    OOBS_TYPE_LIST_ITER);
 
 	/* Filter model */
-	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
+	filter_model = gtk_tree_model_filter_new (GTK_TREE_MODEL (users_model), NULL);
 	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model),
 						users_model_filter, tool, NULL);
 
@@ -118,23 +124,9 @@ create_users_model (GstUsersTool *tool)
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
 	                                      COL_USER_LOGIN, GTK_SORT_ASCENDING);
 
-	return sort_model;
-}
+	gtk_tree_view_set_model (GTK_TREE_VIEW (users_table), sort_model);
+	g_object_unref (users_model);
 
-void
-create_users_table (GstUsersTool *tool)
-{
-	GtkWidget *users_table;
-	GtkTreeSelection *selection;
-	GtkTreeModel *model;
-	GtkWidget *popup;
-	
-	users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
-
-	model = create_users_model (tool);
-	gtk_tree_view_set_model (GTK_TREE_VIEW (users_table), model);
-	g_object_unref (model);
-	
 	add_user_columns (GTK_TREE_VIEW (users_table));
 	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
@@ -160,28 +152,16 @@ create_users_table (GstUsersTool *tool)
 GtkTreeModel *
 users_table_get_model ()
 {
-	GtkWidget *users_table;
-	GtkTreeModel *sort_model;
-	GtkTreeModel *filter_model;
-
-	users_table = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "users_table");
-
-	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
-	filter_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
-
-	return gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+	return GTK_TREE_MODEL (users_model);
 }
 
 void
 users_table_set_user (OobsUser *user, GtkTreeIter *iter)
 {
-	GtkTreeModel *model;
 	GdkPixbuf *face;
 	const char *name;
 	const char *login;
 	char *label;
-
-	model = users_table_get_model ();
 
 	face = user_settings_get_user_face (user, 48);
 	name = oobs_user_get_full_name_fallback (user);
@@ -190,7 +170,7 @@ users_table_set_user (OobsUser *user, GtkTreeIter *iter)
 	label = g_markup_printf_escaped ("<big><b>%s</b>\n<span color=\'dark grey\'><i>%s</i></span></big>",
 	                                 name, login);
 
-	gtk_list_store_set (GTK_LIST_STORE (model), iter,
+	gtk_list_store_set (users_model, iter,
 			    COL_USER_FACE, face,
 			    COL_USER_NAME, name,
 			    COL_USER_LOGIN, login,
@@ -213,25 +193,18 @@ users_table_set_user (OobsUser *user, GtkTreeIter *iter)
 GtkTreePath *
 users_table_add_user (OobsUser *user)
 {
-	GtkTreeModel *model;
 	GtkTreeIter iter;
 
-	model = users_table_get_model ();
-
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_append (users_model, &iter);
 	users_table_set_user (user, &iter);
 
-	return gtk_tree_model_get_path (model, &iter);
+	return gtk_tree_model_get_path (GTK_TREE_MODEL (users_model), &iter);
 }
 
 void
 users_table_clear (void)
 {
-        GtkTreeModel *model;
-
-	model = users_table_get_model ();
-
-        gtk_list_store_clear (GTK_LIST_STORE (model));
+        gtk_list_store_clear (users_model);
 }
 
 /*

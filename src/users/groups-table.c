@@ -31,6 +31,8 @@
 
 extern GstTool *tool;
 
+static GtkListStore *groups_model = NULL;
+
 static void
 add_group_columns (GtkTreeView *treeview)
 {
@@ -51,38 +53,27 @@ add_group_columns (GtkTreeView *treeview)
 	gtk_tree_view_insert_column (treeview, column, -1);
 }
 
-static GtkTreeModel*
-create_groups_model (void)
-{
-	GtkTreeModel *sort_model;
-	GtkListStore *store;
-
-	store = gtk_list_store_new (COL_GROUP_LAST,
-	                            G_TYPE_STRING,
-	                            G_TYPE_INT,
-				    G_TYPE_OBJECT);
-
-	/* Sort model */
-	sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (store));
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
-	                                      COL_GROUP_NAME, GTK_SORT_ASCENDING);
-
-	return sort_model;
-}
-
 void
 create_groups_table (void)
 {
 	GtkWidget *groups_table;
-	GtkTreeModel *model;
+	GtkTreeModel *sort_model;
 	GtkTreeSelection *selection;
 	GtkWidget *popup;
 	
 	groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
 
-	model = create_groups_model ();
-	gtk_tree_view_set_model (GTK_TREE_VIEW (groups_table), model);
-	g_object_unref (model);
+	groups_model = gtk_list_store_new (COL_GROUP_LAST,
+	                                   G_TYPE_STRING,
+	                                   G_TYPE_INT,
+				           G_TYPE_OBJECT);
+
+	/* Sort model */
+	sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (groups_model));
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
+	                                      COL_GROUP_NAME, GTK_SORT_ASCENDING);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (groups_table), GTK_TREE_MODEL (groups_model));
+	g_object_unref (groups_model);
 
 	add_group_columns (GTK_TREE_VIEW (groups_table));
 
@@ -107,23 +98,13 @@ create_groups_table (void)
 GtkTreeModel *
 groups_table_get_model ()
 {
-	GtkWidget *groups_table;
-	GtkTreeModel *sort_model;
-
-	groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
-	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
-
-	return gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
+	return GTK_TREE_MODEL (groups_model);
 }
 
 void
 groups_table_set_group (OobsGroup *group, GtkTreeIter *iter)
 {
-	GtkTreeModel *model;
-
-	model = groups_table_get_model ();
-
-	gtk_list_store_set (GTK_LIST_STORE (model), iter,
+	gtk_list_store_set (groups_model, iter,
 			    COL_GROUP_NAME, oobs_group_get_name (group),
 			    COL_GROUP_ID, oobs_group_get_gid (group),
 			    COL_GROUP_OBJECT, group,
@@ -133,23 +114,17 @@ groups_table_set_group (OobsGroup *group, GtkTreeIter *iter)
 void
 groups_table_add_group (OobsGroup *group)
 {
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	model = groups_table_get_model ();
-
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	groups_table_set_group (group, &iter);
+	gtk_list_store_insert_with_values (groups_model, NULL, G_MAXINT,
+	                                   COL_GROUP_NAME, oobs_group_get_name (group),
+	                                   COL_GROUP_ID, oobs_group_get_gid (group),
+	                                   COL_GROUP_OBJECT, group,
+	                                   -1);
 }
 
 void
 groups_table_clear (void)
 {
-	GtkTreeModel *model;
-
-	model = groups_table_get_model ();
-
-	gtk_list_store_clear (GTK_LIST_STORE (model));
+	gtk_list_store_clear (groups_model);
 }
 
 /*

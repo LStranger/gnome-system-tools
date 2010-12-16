@@ -59,16 +59,12 @@ on_option_changed (GSettings  *settings,
                    gpointer    user_data)
 {
 	GstTool *tool = GST_TOOL (user_data);
-	GtkWidget *widget;
-	GtkTreeModel *sort_model, *filter_model;
 
 	GST_USERS_TOOL (tool)->showall = g_settings_get_boolean (settings, "showall");
 	GST_USERS_TOOL (tool)->showroot = g_settings_get_boolean (settings, "showroot");
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "users_table");
-	sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
-	filter_model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
-	gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (filter_model));
+	/* We need to reload the users table since unshown users aren't added */
+	gst_tool_update_gui (tool);
 }
 
 static void
@@ -137,7 +133,7 @@ update_users (GstUsersTool *tool)
 {
 	OobsList *list;
 	OobsListIter iter;
-	GObject *user;
+	OobsUser *user;
 	OobsUser *self;
 	GtkTreePath *path;
 	gboolean valid;
@@ -149,11 +145,11 @@ update_users (GstUsersTool *tool)
 	valid = oobs_list_get_iter_first (list, &iter);
 
 	while (valid) {
-		user = oobs_list_get (list, &iter);
-		path = users_table_add_user (OOBS_USER (user));
+		user = OOBS_USER (oobs_list_get (list, &iter));
+		path = users_table_add_user (user);
 		gst_tool_add_configuration_object (GST_TOOL (tool), OOBS_OBJECT (user), FALSE);
 
-		if (self == (OobsUser *) user)
+		if (self == user)
 			users_table_select_path (path);
 
 		g_object_unref (user);
