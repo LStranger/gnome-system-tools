@@ -167,7 +167,9 @@ update_groups (GstUsersTool *tool)
 	gboolean valid;
 
 	groups_table_clear ();
+	groups_table_begin_insertions ();
 	privileges_table_clear ();
+
 	list = oobs_groups_config_get_groups (OOBS_GROUPS_CONFIG (tool->groups_config));
 
 	valid = oobs_list_get_iter_first (list, &iter);
@@ -183,6 +185,8 @@ update_groups (GstUsersTool *tool)
 		g_object_unref (group);
 		valid = oobs_list_iter_next (list, &iter);
 	}
+
+	groups_table_end_insertions ();
 }
 
 static void

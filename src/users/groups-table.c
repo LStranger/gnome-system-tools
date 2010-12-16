@@ -128,6 +128,30 @@ groups_table_clear (void)
 }
 
 /*
+ * Detach the model from the tree view before massive insert,
+ * for performance reasons.
+ */
+void
+groups_table_begin_insertions (void)
+{
+	GtkWidget *groups_table;
+
+	groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (groups_table), NULL);
+}
+
+void
+groups_table_end_insertions (void)
+{
+	GtkWidget *groups_table;
+
+	groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (groups_table), GTK_TREE_MODEL (groups_model));
+}
+
+/*
  * Get selected items, translating them to child GtkListStore references.
  */
 GList*

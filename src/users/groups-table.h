@@ -57,6 +57,8 @@ GtkTreeModel *groups_table_get_model           ();
 void          groups_table_set_group           (OobsGroup    *group,
                                                 GtkTreeIter  *iter);
 void          groups_table_add_group           (OobsGroup    *group);
+void          groups_table_begin_insertions    (void);
+void          groups_table_end_insertions      (void);
 
 GList        *groups_table_get_row_references  ();
 
