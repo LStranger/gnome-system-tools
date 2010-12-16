@@ -2997,9 +2997,10 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="user_settings_uid_disabled">
+                          <object class="GtkHBox" id="user_settings_active_notice">
                             <property name="visible">True</property>
                             <property name="spacing">6</property>
+                            <property name="expand">False</property>
                             <child>
                               <object class="GtkImage" id="image256">
                                 <property name="visible">True</property>
@@ -3015,11 +3016,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label256">
+                              <object class="GtkLabel" id="user_settings_active_label">
                                 <property name="visible">True</property>
                                 <property name="xalign">0</property>
-                                <property name="label" translatable="yes">You can't change user ID while the user is logged in.</property>
                                 <property name="wrap">True</property>
+                                <property name="justify">GTK_JUSTIFY_FILL</property>
+                                <property name="expand">False</property>
                                 <attributes>
                                   <attribute name="style" value="italic"/>
                                 </attributes>

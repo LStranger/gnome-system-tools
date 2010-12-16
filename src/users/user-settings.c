@@ -1340,7 +1340,11 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	GtkWidget *user_advanced_dialog;
 	GtkWidget *face_image;
 	GtkWidget *name_label;
-	GtkWidget *uid_notice;
+	GtkWidget *active_notice;
+	GtkWidget *active_label;
+	GtkWidget *uid_entry;
+	GtkWidget *locked_checkbox;
+	GtkWidget *home_entry;
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -1381,30 +1385,53 @@ on_edit_user_advanced (GtkButton *button, gpointer user_data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
 	set_entry_text (gtk_bin_get_child (GTK_BIN (widget)), oobs_user_get_shell (user));
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-	set_entry_text (widget, oobs_user_get_home_directory (user));
+	home_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_home");
+	set_entry_text (home_entry, oobs_user_get_home_directory (user));
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), oobs_user_get_uid (user));
+	uid_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (uid_entry), oobs_user_get_uid (user));
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_locked_account");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), oobs_user_get_password_disabled (user));
-
+	locked_checkbox = gst_dialog_get_widget (tool->main_dialog, "user_settings_locked_account");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (locked_checkbox),
+	                              oobs_user_get_password_disabled (user));
 
 	/* show a notice if the user is logged in */
-	uid_notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_uid_disabled");
+	active_notice = gst_dialog_get_widget (tool->main_dialog, "user_settings_active_notice");
+	active_label = gst_dialog_get_widget (tool->main_dialog, "user_settings_active_label");
 
 	if (oobs_user_is_root (user)) {
-		gtk_widget_set_sensitive (widget, FALSE);
-		gtk_widget_hide (uid_notice);
+		gtk_widget_set_sensitive (locked_checkbox, TRUE);
+		gtk_widget_set_sensitive (home_entry, TRUE);
+		gtk_widget_set_sensitive (uid_entry, FALSE);
+		gtk_label_set_text (GTK_LABEL (active_label),
+		                    _("You cannot change the user ID for the superuser account."));
+		gtk_widget_show (active_notice);
+	}
+	else if (oobs_self_config_is_user_self (OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config), user)) {
+		gtk_widget_set_sensitive (locked_checkbox, FALSE);
+		gtk_widget_set_sensitive (home_entry, FALSE);
+		gtk_widget_set_sensitive (uid_entry, FALSE);
+		gtk_label_set_text (GTK_LABEL (active_label),
+                                    _("You cannot disable your own account, "
+		                      "nor change your own home directory or user ID. "
+		                      "Run this program from another user's session to edit these settings."));
+		gtk_widget_show (active_notice);
 	}
 	else if (oobs_user_get_active (user)) {
-		gtk_widget_set_sensitive (widget, FALSE);
-		gtk_widget_show (uid_notice);
+		gtk_widget_set_sensitive (locked_checkbox, FALSE);
+		gtk_widget_set_sensitive (home_entry, FALSE);
+		gtk_widget_set_sensitive (uid_entry, FALSE);
+		gtk_label_set_text (GTK_LABEL (active_label),
+				    _("You cannot change an account's home directory or user ID "
+		                      "while the user is logged in."));
+		gtk_widget_show (active_notice);
 	}
 	else {
-		gtk_widget_set_sensitive (widget, TRUE);
-		gtk_widget_hide (uid_notice);
+		gtk_widget_set_sensitive (locked_checkbox, TRUE);
+		gtk_widget_set_sensitive (home_entry, TRUE);
+		gtk_widget_set_sensitive (uid_entry, TRUE);
+
+		gtk_widget_hide (active_notice);
 	}
 
 	privileges_table_set_from_user (user);
