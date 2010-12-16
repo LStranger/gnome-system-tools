@@ -1284,14 +1284,14 @@ on_edit_user_profile (GtkButton *button, gpointer user_data)
 
 	if (profile) {
 		radio = g_hash_table_lookup (radios, profile->name);
-		gtk_widget_set_sensitive (custom_radio, FALSE);
+		gtk_widget_hide (custom_radio);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
-		gtk_widget_set_sensitive (custom_label, FALSE);
+		gtk_widget_hide (custom_label);
 	}
 	else {
-		gtk_widget_set_sensitive (custom_radio, TRUE);
+		gtk_widget_show (custom_radio);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (custom_radio), TRUE);
-		gtk_widget_set_sensitive (custom_label, FALSE);
+		gtk_widget_show (custom_label);
 	}
 
 	response = run_edit_dialog (GTK_DIALOG (user_profile_dialog),
