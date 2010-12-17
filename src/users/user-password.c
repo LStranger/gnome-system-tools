@@ -323,10 +323,9 @@ on_edit_user_passwd (GtkButton *button,
  * to the password-less option should be committed, and close dialog.
  */
 static void
-finish_password_change ()
+finish_password_change (gboolean passwd_provided)
 {
 	GtkWidget *user_passwd_dialog;
-	GtkWidget *passwd_entry;
 	GtkWidget *nocheck_toggle;
 	OobsUser  *user;
 	OobsGroup *no_passwd_login_group;
@@ -334,7 +333,6 @@ finish_password_change ()
 	gboolean   is_self;
 
 	user_passwd_dialog = gst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
-	passwd_entry = gst_dialog_get_widget (tool->main_dialog, "user_settings_passwd1");
 	nocheck_toggle = gst_dialog_get_widget (tool->main_dialog, "user_passwd_no_check");
 	user = users_table_get_current ();
 	is_self = oobs_self_config_is_user_self (OOBS_SELF_CONFIG (GST_USERS_TOOL (tool)->self_config),
@@ -352,7 +350,7 @@ finish_password_change ()
 	 * Else, we would believe the account is enabled, while it's not,
 	 * and we would allow password-less login, which is unexpected. */
 	if (oobs_user_get_password_disabled (user)
-	    && strlen (gtk_entry_get_text (GTK_ENTRY (passwd_entry))) == 0)
+	    && !passwd_provided)
 	  {
 		  /* Force removing user from this group, since results are unexpected */
 		  if (no_passwd_login_group)
@@ -434,7 +432,7 @@ chpasswd_cb (PasswdHandler *passwd_handler,
 
 
 	if (!error) {
-		finish_password_change ();
+		finish_password_change (TRUE);
 
 		passwd_destroy (passwd_handler);
 		return;
@@ -539,7 +537,7 @@ on_user_passwd_dialog_response (GtkDialog *user_passwd_dialog,
 	}
 	/* If empty, directly handle password-less option, don't change password */
 	else if (strlen (passwd) == 0) {
-		finish_password_change ();
+		finish_password_change (FALSE);
 		g_object_unref (user);
 		return;
 	}
@@ -564,7 +562,7 @@ on_user_passwd_dialog_response (GtkDialog *user_passwd_dialog,
 	/* For other users, set password via the backends */
 	else {
 		oobs_user_set_password (user, passwd);
-		finish_password_change ();
+		finish_password_change (TRUE);
 	}
 
 	g_object_unref (user);
