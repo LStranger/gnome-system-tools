@@ -263,6 +263,18 @@ gst_users_tool_update_gui (GstTool *tool)
 	update_shells (GST_USERS_TOOL (tool));
 }
 
+/*
+ * Function called via g_idle_add() when we need to allow signals
+ * to be processed before updating.
+ */
+gboolean
+gst_users_tool_update_groups_async (gpointer data)
+{
+	update_groups (GST_USERS_TOOL (data));
+
+	return FALSE;
+}
+
 static void
 gst_users_tool_update_config (GstTool *tool)
 {

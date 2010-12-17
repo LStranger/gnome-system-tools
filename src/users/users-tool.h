@@ -61,12 +61,13 @@ struct _GstUsersToolClass {
 	GstToolClass parent_class;
 };
 
-GType    gst_users_tool_get_type           (void);
+GType    gst_users_tool_get_type            (void);
 
-GstTool *gst_users_tool_new                (void);
+GstTool *gst_users_tool_new                 (void);
 
-void     gst_users_tool_update_gui         (GstTool *tool);
+void     gst_users_tool_update_gui          (GstTool *tool);
 
+gboolean gst_users_tool_update_groups_async (gpointer data);
 
 G_END_DECLS
 

@@ -173,6 +173,10 @@ user_delete (GtkTreeModel *model, GtkTreePath *path)
 		config = OOBS_USERS_CONFIG (GST_USERS_TOOL (tool)->users_config);
 		result = oobs_users_config_delete_user (config, user);
 		if (result == OOBS_RESULT_OK) {
+			/* Take into account the possible deletion of user's main group.
+			 * If we update groups here, the 'changed' signal will be blocked, and
+			 * if it happens after 2 seconds, it will trigger a confirmation dialog. */
+			g_idle_add (gst_users_tool_update_groups_async, tool);
 			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 			retval = TRUE;
 		}
@@ -1128,6 +1132,11 @@ on_user_new (GtkButton *button, gpointer user_data)
 		user_path = users_table_add_user (user);
 		users_table_select_path (user_path);
 		gtk_tree_path_free (user_path);
+
+		/* Take into account possibly new main group for user.
+		 * If we update groups here, the 'changed' signal will be blocked,
+		 * and if it happens after 2 seconds, it will trigger a confirmation dialog. */
+		g_idle_add (gst_users_tool_update_groups_async, tool);
 
 		/* Finally, run the password edit dialog.
 		 * User can hit cancel, leaving the account disabled */
