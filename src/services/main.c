@@ -50,6 +50,9 @@ main (int argc, char *argv[])
 	table_create ();
 	service_settings_table_create ();
 
+	gtk_window_set_default_size (GTK_WINDOW (GST_TOOL (tool)->main_dialog),
+	                             400, 550);
+
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();
 
