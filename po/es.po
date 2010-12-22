@@ -11,15 +11,16 @@
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004, 2005, 2006.
 # Rodrigo Marcos Fombellida <rmarcos@cvs.gnome.org>, 2007.
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "system-tools&component=general\n"
-"POT-Creation-Date: 2010-12-16 12:19+0000\n"
-"PO-Revision-Date: 2010-12-18 14:22+0100\n"
-"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"POT-Creation-Date: 2010-12-19 21:45+0000\n"
+"PO-Revision-Date: 2010-12-22 20:26+0100\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -840,6 +841,44 @@ msgid ""
 msgstr ""
 "Ocurrió un error al comprobar las actualizaciones: %s\n"
 "Puede informar de esto como un error."
+
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "Bloquear"
+
+#: ../src/common/um-lockbutton.c:365
+#| msgid "_Unlock"
+msgid "Unlock"
+msgstr "Desbloquear"
+
+#: ../src/common/um-lockbutton.c:374
+#| msgid "Loud"
+msgid "Locked"
+msgstr "Bloqueado"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"El diálogo está desbloqueado.\n"
+"Pulse para evitar posibles cambios"
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"El diálogo está bloqueado.\n"
+"Pulse para realizar cambios."
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"La política del sistema impide los cambios.\n"
+"Contacte con el administrador de su sistema"
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -1678,7 +1717,7 @@ msgstr "El grupo del administrador no se puede borrar"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:606
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "Esto podría dejar el sistema inutilizable."
 
@@ -1753,16 +1792,16 @@ msgstr "Elija un identificador numérico diferente para el nuevo grupo."
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "Elija un identificador numérico diferente para el grupo «%s»."
 
-#: ../src/users/groups-table.c:46
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "Nombre del grupo"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:348
+#: ../src/users/main.c:74 ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "No preguntar al iniciar sesión"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:350
+#: ../src/users/main.c:74 ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "Preguntar al iniciar sesión"
 
@@ -1947,15 +1986,15 @@ msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 "Compruebe que ha proporcionado la misma contraseña en ambos campos de texto."
 
-#: ../src/users/user-password.c:445
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "Elija otra contraseña."
 
-#: ../src/users/user-password.c:456
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "Escriba de nuevo su contraseña actual."
 
-#: ../src/users/user-password.c:463
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "No se pudo cambiar la contraseña"
 
@@ -2016,33 +2055,33 @@ msgstr "No eliminar la cuenta"
 msgid "Delete Files"
 msgstr "Eliminar archivos"
 
-#: ../src/users/user-settings.c:331
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "Superusuario"
 
-#: ../src/users/user-settings.c:336
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "Personalizado"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:345
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "Ninguna"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Carácter inválido «%c» en comentario"
 
-#: ../src/users/user-settings.c:395
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "Compruebe que este carácter no se use."
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "Ruta incompleta en el directorio personal"
 
-#: ../src/users/user-settings.c:428
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2050,11 +2089,11 @@ msgstr ""
 "Escriba la ruta completa para el directorio personal\n"
 "<span size=\"smaller\">ej: /home/juan</span>."
 
-#: ../src/users/user-settings.c:448 ../src/users/user-settings.c:492
+#: ../src/users/user-settings.c:452 ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "La carpeta personal ya existe, ¿quiere usarlo?"
 
-#: ../src/users/user-settings.c:450
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2071,30 +2110,30 @@ msgstr ""
 "Si duda, use la nueva carpeta personal para evitar la pérdida de datos, y "
 "copie los archivos de la carpeta antigua más tarde."
 
-#: ../src/users/user-settings.c:462
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "_Reemplazar con los archivos antiguos"
 
-#: ../src/users/user-settings.c:463 ../src/users/user-settings.c:505
-#: ../src/users/user-settings.c:541
+#: ../src/users/user-settings.c:467 ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "_Cancelar el cambio"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:466
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "_Usar archivos nuevos"
 
-#: ../src/users/user-settings.c:471 ../src/users/user-settings.c:511
+#: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "Hacer que el _usuario sea el propietario de la nueva carpeta personal"
 
-#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:548
+#: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "_Eliminar la carpeta personal antigua"
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2109,19 +2148,19 @@ msgstr ""
 "\n"
 "Si duda, mantenga los archivos y elimínelos luego si es necesario."
 
-#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: ../src/users/user-settings.c:506
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "_Usar archivos existentes"
 
-#: ../src/users/user-settings.c:527
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "¿Copiar la carpeta personal antigua a la nueva ubicación?"
 
-#: ../src/users/user-settings.c:529
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2138,35 +2177,35 @@ msgstr ""
 "Si elije copiar los archivos a la ubicación nueva, es más seguro eliminar la "
 "carpeta antigua."
 
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "_Usar carpeta vacía"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:543
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "C_opiar archivos antiguos"
 
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "No se debe modificar el ID para el usuario root"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:609
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "El ID de usuario %d ya se está usando para el usuario %s"
 
-#: ../src/users/user-settings.c:611
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Elija un identificador numérico diferente para %s."
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "Ruta incompleta en el shell"
 
-#: ../src/users/user-settings.c:630
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2174,11 +2213,11 @@ msgstr ""
 "Introduzca una ruta completa para la shell\n"
 "<span size=\"smaller\">ej: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:664
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "No se pueden revocar los privilegios de administración"
 
-#: ../src/users/user-settings.c:667
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2188,11 +2227,11 @@ msgstr ""
 "administración para esta cuenta le dejará sin privilegios de administración "
 "en el sistema."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "Está a punto de revocar sus propios privilegios de administración"
 
-#: ../src/users/user-settings.c:687
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2201,16 +2240,15 @@ msgstr ""
 "%s no podrá realizar tareas administrativas. No se permitirá que esta cuenta "
 "obtenga privilegios de administración por si misma."
 
-#: ../src/users/user-settings.c:692
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "Renunciar a los privilegios de administración"
 
-#: ../src/users/user-settings.c:1407
-#| msgid "You can't change user ID while the user is logged in."
+#: ../src/users/user-settings.c:1416
 msgid "You cannot change the user ID for the superuser account."
 msgstr "No puede cambiar el ID del usuario para la cuenta de superusuario."
 
-#: ../src/users/user-settings.c:1415
+#: ../src/users/user-settings.c:1424
 msgid ""
 "You cannot disable your own account, nor change your own home directory or "
 "user ID. Run this program from another user's session to edit these settings."
@@ -2219,8 +2257,7 @@ msgstr ""
 "personal o ID de usuario. Para editar estos ajustes ejecute este programa "
 "desde la sesión de otro usuario."
 
-#: ../src/users/user-settings.c:1425
-#| msgid "You can't change user ID while the user is logged in."
+#: ../src/users/user-settings.c:1434
 msgid ""
 "You cannot change an account's home directory or user ID while the user is "
 "logged in."
@@ -2228,11 +2265,11 @@ msgstr ""
 "No puede cambiar la carpeta personal o el ID de un usuario mientras el "
 "usuario haya iniciado sesión en el sistema."
 
-#: ../src/users/user-settings.c:1503
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "Aplicar cambios a la configuración del usuario…"
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "Ajustes de los usuarios"
 
@@ -2352,9 +2389,6 @@ msgstr "Ajustes de los usuarios"
 #~ "Necesita privilegios de administrador para usar esta herramienta. "
 #~ "Introduzca una contraseña para modificar\n"
 #~ "la configuración de su sistema."
-
-#~ msgid "_Unlock"
-#~ msgstr "_Desbloquear"
 
 #~ msgid "This action is not allowed"
 #~ msgstr "Esta acción no está permitida"
