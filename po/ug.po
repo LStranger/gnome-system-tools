@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2010-11-13 21:28+0000\n"
+"POT-Creation-Date: 2010-12-19 21:45+0000\n"
 "PO-Revision-Date: 2010-09-22 14:22+0600\n"
 "Last-Translator: Sahran <sahran.ug@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -74,7 +74,7 @@ msgstr "تور كارتا ئېغىزى:"
 
 #: ../interfaces/network.ui.h:15 ../interfaces/users.ui.h:27
 msgid "General"
-msgstr "ئادەتتە"
+msgstr "ئادەتتىكى"
 
 #: ../interfaces/network.ui.h:16
 msgid "Hexadecimal"
@@ -232,7 +232,7 @@ msgstr "مودېمنى كۆڭۈلدىكى ئىنتېرنېتقا چىقىدىغ�
 msgid "_Subnet mask:"
 msgstr "تارماق تور نىقابلاش كودى(_S):"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:82
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "ئىشلەتكۈچى ئاتى(_U):"
 
@@ -654,78 +654,74 @@ msgid "Username must start with a letter!"
 msgstr "ئىشلەتكۈچى ئاتى ھەرپتىن باشلىنىشى لازىم!"
 
 #: ../interfaces/users.ui.h:64
-msgid "You can't change user ID while the user is logged in."
-msgstr "ئىشلەتكۈچى تىزىمغا كىرگەندىن كېيىن ئۇنىڭ ئىشلەتكۈچى ID سىنى ئۆزگەرتەلمەيسىز."
-
-#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "سەپلىمە ھۆججەت قوش(_A)"
 
-#: ../interfaces/users.ui.h:66
+#: ../interfaces/users.ui.h:65
 msgid "_Advanced Settings"
 msgstr "ئالىي تەڭشەكler(_A)"
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:66
 msgid "_Change..."
 msgstr "ئۆزگەرت(_C)…"
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "ئىزاھات(_C)"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:68
 msgid "_Current password:"
 msgstr "ھازىرقى ئىم(_C):"
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:69
 msgid "_Custom"
 msgstr "ئىختىيارى(_C)"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "ئىمنىڭ ۋاقتى ئۆتىدىغان  ۋاقىت بىلەن راستىنىلا ۋاقتى ئۆتكەن ۋاقىت ئوتتۇرىسىدىكى كۈننى ئاگاھلاندۇر(_D):"
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:71
 msgid "_Enable Account"
 msgstr "ھېسابات قوزغات(_E)"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:72
 msgid "_Encrypt home folder to protect sensitive data"
 msgstr "غول مۇندەرىجىنى شىفىرلاپ سەزگۈر سانلىق-مەلۇماتلار قوغدا(_E)"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "قۇر(_G)"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "ماكان مۇندەرىجە(_H):"
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "ئۆي تېلېفونى(_H):"
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "ئاساسىي گۇرۇپپا(_M):"
 
-#: ../interfaces/users.ui.h:78
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "گۇرۇپپا باشقۇر(_M)"
 
-#: ../interfaces/users.ui.h:79
+#: ../interfaces/users.ui.h:78
 msgid "_Name:"
 msgstr "ئاتى(_N):"
 
-#: ../interfaces/users.ui.h:80
+#: ../interfaces/users.ui.h:79
 msgid "_Password:"
 msgstr "ئىم(_P):"
 
-#: ../interfaces/users.ui.h:81
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "Shell(_S):"
 
-#: ../interfaces/users.ui.h:83
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "خىزمەت تېلېفونى(_W):"
 
@@ -746,6 +742,11 @@ msgstr "ئىشلەتكۈچى باشقۇرۇش قورالى ئىشلەتكۈچى 
 msgid ""
 "Whether the users-admin tool should show the root user in the users list."
 msgstr "ئىشلەتكۈچى باشقۇرۇش قورالى ئىشلەتكۈچى تىزىملىكىدە باشقۇرغۇچى (root) ئىشلەتكۈچىسىنى كۆرسىتەمدۇ يوق"
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr ""
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -810,6 +811,39 @@ msgid ""
 msgstr "ھوقۇق دەلىللىگەندە خاتالىق كۆرۈلدى: %s\n"
 "بۇنى كەمتۈك سۈپىتىدە مەلۇم قىلسىڭىز بولىدۇ."
 
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "قۇلۇپلا"
+
+#: ../src/common/um-lockbutton.c:365
+msgid "Unlock"
+msgstr "قۇلۇپ ئاچ"
+
+#: ../src/common/um-lockbutton.c:374
+#| msgid "Loud"
+msgid "Locked"
+msgstr "قۇلۇپلانغان"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr "سۆزلەشكۈ قۇلۇپسىزلاندى.\n"
+"ئەمدى ئۆزگەرتمەسلىك ئۈچۈن چېكىڭ"
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr "سۆزلەشكۈ قۇلۇپلانغان.\n"
+"ئۆزگەرتىش ئۈچۈن چېكىڭ"
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
@@ -852,51 +886,51 @@ msgstr "بۇنداق بولغاندا يېڭى پروگرامما قوزغىتى
 msgid "Change _Host name"
 msgstr "ئاساسىي ئاپپارات ئاتىنى ئۆزگەرت(_H)"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "ئۆزلۈكىدىن سەپلەش (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "يەرلىك Zeroconf تورى (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "مۇقىم IP ئادرېس"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "WEP شىفىرلىق ئاچقۇچ (ascii)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "WEP شىفىرلىق ئاچقۇچ (hexadecimal)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "شەخسىي WPA"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "شەخسىي WPA2"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "ISDN  مودېم"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "ئارقىمۇ-ئارقا مودېم"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "%s خاسلىقى"
@@ -1510,7 +1544,7 @@ msgstr "ھەمبەھىر يولى قوش، ئەگەر مەۋجۇت بولسا ئ
 
 #: ../src/shares/main.c:103
 msgid "PATH"
-msgstr "يولى"
+msgstr "PATH"
 
 #: ../src/shares/nautilus/nautilus-shares.c:151
 msgid "_Share Folder..."
@@ -1575,11 +1609,11 @@ msgid ""
 "folders."
 msgstr "سىز ھېچ بولمىغاندا Samba ياكى NFS قاچىلىسىڭىز ئاندىن مۇندەرىجىنى ھەمبەھىر قىلالايسىز."
 
-#: ../src/time/e-map/e-map.c:745
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "دۇنيا خەرىتىسى"
 
-#: ../src/time/e-map/e-map.c:747
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1593,37 +1627,37 @@ msgstr "سىستېما ۋاقتى، چېسلا ۋە ۋاقىت رايونىنى 
 msgid "Time and Date"
 msgstr "ۋاقىت ۋە چېسلا"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "NTP قوللاش قاچىلانمىغان"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
 msgstr "سىستېمىغا NTP قوللاشنى قاچىلاپ ئاكتىپلاڭ، شۇ چاغدا يەرلىك ۋاقىت مۇلازىمېتىرى بىلەن ئىنتېرنېت ۋاقىت مۇلازىمېتىرىنى قەدەمداش قىلىش ئىقتىدارىنى قوزغاتقىلى بولىدۇ."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "NTP قوزغات"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "NTP چەكلە"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "سىستېما سائىتىنى قەدەمداشلا"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "ئىنتېرنېت مۇلازىمېتىرى بىلەن قەدەمداشلىقنى ساقلا"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "قولدا"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "ۋاقىت ۋە چېسلا تەڭشىكى"
 
@@ -1633,7 +1667,7 @@ msgstr "باشقۇرغۇچى گۇرۇپپىسىنى ئۆچۈرۈشكە بولم�
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:606
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "بۇنداق بولغاندا سىستېمىنى ئىشلەتكىلى بولمايدۇ."
 
@@ -1705,100 +1739,100 @@ msgstr "يېڭى گۇرۇپپىغا پەرقلىق رەقەملىك بەلگە �
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "\"%s\" گۇرۇپپىغا پەرقلىق رەقەملىك بەلگە تاللاڭ."
 
-#: ../src/users/groups-table.c:44
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "گۇرۇپپا ئاتى"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:348
+#: ../src/users/main.c:74 ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "تىزىمغا كىرگەندە سورىما"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:350
+#: ../src/users/main.c:74 ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "تىزىمغا كىرگەندە سورا"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:55
 msgid "Monitor system logs"
 msgstr "سىستېما كۈندىلىك خاتىرىسىنى كۆزەتمەك"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:56
 msgid "Administer the system"
 msgstr "سىستېما باشقۇرۇش"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:57
 msgid "Use audio devices"
 msgstr "ئۈن ئۈسكۈنىسى ئىشلەت"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:58
 msgid "Use CD-ROM drives"
 msgstr "CD-ROM قوزغاتقۇچىنى ئىشلەت"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:59
 msgid "Burn CDs / DVDs"
 msgstr "CDs / DVDs غا يازماق"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:60
 msgid "Use modems"
 msgstr "مودېم ئىشلەت"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Connect to Internet using a modem"
-msgstr "مودېم ئىشلىتىپ ئىنتېرنېتقا باغلانماق"
+msgstr "مودېم ئىشلىتىپ ئىنتېرنېتقا باغلىنىدۇ"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
 msgid "Send and receive faxes"
 msgstr "فاكىس يوللاش ۋە قوبۇللاش"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:63
 msgid "Use floppy drives"
 msgstr "يۇمشاق دىسكا قوزغاتقۇچ ئىشلەت"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:64
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "ئىشلەتكۈچى بوشلۇق ھۆججەت سىستېمىسى ئېگەرلەيدۇ (FUSE)"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:65
 msgid "Configure printers"
 msgstr "پرىنتېر سەپلەش"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:66
 msgid "Connect to wireless and ethernet networks"
 msgstr "سىملىق ۋە سىمسىز تورغا باغلانماق"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:67
 msgid "Access external storage devices automatically"
 msgstr "سىرتقى ئۈسكۈنىلەرنى ئاپتوماتىك زىيارەت قىلىدۇ"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:68
 msgid "Suspend and hibernate the computer"
 msgstr "كومپيۇتېرنى ۋاقىتلىق توختىتىدۇ ياكى ئۇخلىتىدۇ"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:69
 msgid "Access /proc filesystem"
 msgstr "/proc ھۆججەت سىستېما زىيارىتى"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:70
 msgid "Use scanners"
 msgstr "شولىلىغۇچ ئىشلەت"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:71
 msgid "Use tape drives"
 msgstr "ماگنىتلىق لېنتا ئۈسكۈنىسى ئىشلەت"
 
-#: ../src/users/privileges-table.c:70
+#: ../src/users/privileges-table.c:72
 msgid "Use USB devices"
 msgstr "USB ئۈسكۈنىسى ئىشلەت"
 
-#: ../src/users/privileges-table.c:71
+#: ../src/users/privileges-table.c:73
 msgid "Use VirtualBox virtualization solution"
 msgstr "VirtualBox مەۋھۇملاشتۇرۇش لايىھىسى ئىشلەت"
 
-#: ../src/users/privileges-table.c:72
+#: ../src/users/privileges-table.c:74
 msgid "Use video devices"
 msgstr "سىن ئۈسكۈنىسى ئىشلەت"
 
-#: ../src/users/privileges-table.c:73
+#: ../src/users/privileges-table.c:75
 msgid "Be able to get administrator privileges"
 msgstr "باشقۇرغۇچى ھوقۇقىغا ئېرىشىشكە بولىدۇ"
 
@@ -1892,15 +1926,15 @@ msgstr "ئىم دەلىللەش خاتا"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "ئىككى تېكىست رامكىسىغا كىرگۈزگەن ئىمنىڭ ئوخشاشلىقىنى جەزملەڭ."
 
-#: ../src/users/user-password.c:445
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "باشقا ئىم تاللاڭ."
 
-#: ../src/users/user-password.c:456
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "ھازىرقى ئىمنى قايتا كىرگۈزۈڭ."
 
-#: ../src/users/user-password.c:463
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "ئىمنى ئۆزگەرتكىلى بولمىدى"
 
@@ -1953,44 +1987,44 @@ msgstr "ھېساباتنى چىقىرىۋەتمە"
 msgid "Delete Files"
 msgstr "ھۆججەت ئۆچۈر"
 
-#: ../src/users/user-settings.c:331
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "ئالاھىدە ئىشلەتكۈچى"
 
-#: ../src/users/user-settings.c:336
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "ئىختىيارى"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:345
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "يوق"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "ئىزاھات \"%c\" دا ئىناۋەتسىز ھەرپ بار"
 
-#: ../src/users/user-settings.c:395
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "بۇ ھەرپنىڭ ئىشلىتىلمىگەنلىكىنى تەكشۈرۈڭ."
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "باش مۇندەرىجىنىڭ يولى تولۇق ئەمەس"
 
-#: ../src/users/user-settings.c:428
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
 msgstr "باش مۇندەرىجىنىڭ تولۇق يولىنى كىرگۈزۈڭ\n"
 "<span size=\"smaller\">مەسىلەن: /home/john</span>."
 
-#: ../src/users/user-settings.c:448 ../src/users/user-settings.c:492
+#: ../src/users/user-settings.c:452 ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "ماكان مۇندەرىجە بۇرۇنلا مەۋجۇت، ئۇنى ئىشلىتەمسىز؟"
 
-#: ../src/users/user-settings.c:450
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2003,30 +2037,30 @@ msgstr "%s ئۈچۈن بېكىتىلگەن ماكان مۇندەرىجە <tt>%s<
 "\n"
 "ئىككىلىنىپ قالسىڭىز، سانلىق-مەلۇماتلارنىڭ يوقالماسلىقى ئۈچۈن يېڭى مۇندەرىجىنى ئىشلىتىپ، كونا مۇندەرىجىدىكى ھۆججەتلەرنى كېيىن كۆچۈرۈۋالسىڭىزمۇ بولىدۇ."
 
-#: ../src/users/user-settings.c:462
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "كونا ھۆججەت بىلەن ئالماشتۇر(_R)"
 
-#: ../src/users/user-settings.c:463 ../src/users/user-settings.c:505
-#: ../src/users/user-settings.c:541
+#: ../src/users/user-settings.c:467 ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "ئۆزگەرتىشتىن ۋاز كەچ(_C)"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:466
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "يېڭى ھۆججەت ئىشلەت(_U)"
 
-#: ../src/users/user-settings.c:471 ../src/users/user-settings.c:511
+#: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "ئىشلەتكۈچىنى يېڭى ماكان مۇندەرىجىنىڭ ئىگىسى قىل(_O)"
 
-#: ../src/users/user-settings.c:474 ../src/users/user-settings.c:548
+#: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "كونا ماكان مۇندەرىجىنى ئۆچۈر(_D)"
 
-#: ../src/users/user-settings.c:494
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2038,19 +2072,19 @@ msgstr "%s ئۈچۈن بېكىتىلگەن ماكان مۇندەرىجە <tt>%s<
 "\n"
 "ئىككىلىنىپ قالسىڭىز، ھۆججەتلەرنى ساقلاپ قېلىپ،  زۆرۈر بولغاندا كېيىن ئۆچۈرسىڭىزمۇ بولىدۇ."
 
-#: ../src/users/user-settings.c:504
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "ھۆججەت ئۆچۈر(_D)"
 
-#: ../src/users/user-settings.c:506
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "مەۋجۇت ھۆججەت ئىشلەت(_U)"
 
-#: ../src/users/user-settings.c:527
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "كونا ماكان مۇندەرىجىنى يېڭى ئورۇنغا كۆچۈرەمدۇ؟"
 
-#: ../src/users/user-settings.c:529
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2063,72 +2097,90 @@ msgstr "%s ئۈچۈن بېكىتىلگەن ماكان مۇندەرىجە <tt>%s<
 "\n"
 "ئەگەر يېڭى ئورۇنغا كۆچۈرسىڭىز، كونا مۇندەرىجىنى ئۆچۈرۈۋەتسىڭىزمۇ بولۇۋېرىدۇ."
 
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "بوش مۇندەرىجىنى ئىشلەت(_U)"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:543
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "كونا ھۆججەتنى كۆچۈر(_P)"
 
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "root ئىشلەتكۈچىنىڭ ID سى ئۆزگەرتىلمەسلىكى كېرەك"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:609
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "%d ئىشلەتكۈچى ID سى ئاللىقاچان %s ئىشلەتكۈچى تەرىپىدىن ئىشلىتىلگەن"
 
-#: ../src/users/user-settings.c:611
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "%s ئۈچۈن ئوخشىمىغان رەقەملىك كىملىك كىرگۈزۈڭ."
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "shell يولى تولۇق ئەمەس"
 
-#: ../src/users/user-settings.c:630
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
 msgstr "shell نىڭ تولۇق يولىنى كىرگۈزۈڭ\n"
 "<span size=\"smaller\">مەسىلەن: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:664
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "باشقۇرغۇچى ھوقۇقىدىن ئېلىۋەتكىلى بولمىدى."
 
-#: ../src/users/user-settings.c:667
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
 "rights for this account would lock you out of administrating the system."
 msgstr "%s كومپيۇتېردىكى بىردىن-بىر باشقۇرغۇچى. ئۇنىڭ ھوقۇقىنى ئېلىۋەتسىڭىز، سىستېمىڭىز مەڭگۈ باشقۇرغۇچىسىز ھالەتتە قالىدۇ."
 
-#: ../src/users/user-settings.c:684
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "ئۆزىڭىزنىڭ باشقۇرغۇچىلىق ھوقۇقىڭىزنى ئېلىۋەتمەكچى بولۇۋاتىسىز."
 
-#: ../src/users/user-settings.c:687
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
 "won't be allowed to get administration rights back on its own."
 msgstr "%s باشقۇرغۇچىلىق ھوقۇقىنى يۈرگۈزەلمەيدۇ. ئۇ ئۆزىنىڭ باشقۇرغۇچىلىق ھوقۇقىنى ئەمدى ئەسلىگە كەلتۈرەلمەيدۇ."
 
-#: ../src/users/user-settings.c:692
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "باشقۇرغۇچى ھوقۇقىدىن ۋاز كەچ"
 
-#: ../src/users/user-settings.c:1470
+#: ../src/users/user-settings.c:1416
+#| msgid "You can't change user ID while the user is logged in."
+msgid "You cannot change the user ID for the superuser account."
+msgstr ""
+
+#: ../src/users/user-settings.c:1424
+msgid ""
+"You cannot disable your own account, nor change your own home directory or "
+"user ID. Run this program from another user's session to edit these settings."
+msgstr ""
+
+#: ../src/users/user-settings.c:1434
+#| msgid "You can't change user ID while the user is logged in."
+msgid ""
+"You cannot change an account's home directory or user ID while the user is "
+"logged in."
+msgstr ""
+
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "ئۆزگەرتىشنى ئىشلەتكۈچى تەڭشىكىگە قوللىنىۋاتىدۇ…"
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "ئىشلەتكۈچى تەڭشىكى"
 
