@@ -9,10 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2010-08-24 02:35+0000\n"
-"PO-Revision-Date: 2010-10-12 14:47+0100\n"
-"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"POT-Creation-Date: 2010-12-28 21:34+0000\n"
+"PO-Revision-Date: 2010-12-28 22:54+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -242,7 +243,7 @@ msgid "_Subnet mask:"
 msgstr "_Maska Podomrežja:"
 
 #: ../interfaces/network.ui.h:55
-#: ../interfaces/users.ui.h:82
+#: ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "__Uporabniško ime:"
 
@@ -660,78 +661,74 @@ msgid "Username must start with a letter!"
 msgstr "Uporabniško ime se mora začeti s črko!"
 
 #: ../interfaces/users.ui.h:64
-msgid "You can't change user ID while the user is logged in."
-msgstr "Ni mogoče spremeniti uporabniškega ID, dokler je uporabnik prijavljen."
-
-#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "_Dodaj profil"
 
-#: ../interfaces/users.ui.h:66
+#: ../interfaces/users.ui.h:65
 msgid "_Advanced Settings"
 msgstr "_Napredne nastavitve"
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:66
 msgid "_Change..."
 msgstr "_Spremeni ..."
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "_Opombe"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:68
 msgid "_Current password:"
 msgstr "_Trenutno geslo:"
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:69
 msgid "_Custom"
 msgstr "_Po meri"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "Število _dni med opozorilom in dokončnim pretekom gesla:"
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:71
 msgid "_Enable Account"
 msgstr "_Omogoči račun"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:72
 msgid "_Encrypt home folder to protect sensitive data"
 msgstr "_Šifriraj domačo mapo za zaščito občutljivih podatkov"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "_Ustvari"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "_Domači imenik:"
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "_Domači telefon:"
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "_Glavna skupina:"
 
-#: ../interfaces/users.ui.h:78
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "_Upravljanje skupin"
 
-#: ../interfaces/users.ui.h:79
+#: ../interfaces/users.ui.h:78
 msgid "_Name:"
 msgstr "_Ime:"
 
-#: ../interfaces/users.ui.h:80
+#: ../interfaces/users.ui.h:79
 msgid "_Password:"
 msgstr "_Geslo:"
 
-#: ../interfaces/users.ui.h:81
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "_Lupina:"
 
-#: ../interfaces/users.ui.h:83
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "_Službeni telefon"
 
@@ -750,6 +747,11 @@ msgstr "Ali naj orodje user-admin pokaže sistemske uporabnike na seznamu uporab
 #: ../org.gnome.system-tools.gschema.xml.in.h:4
 msgid "Whether the users-admin tool should show the root user in the users list."
 msgstr "Ali naj orodje user-admin pokaže skrbniški račun na seznamu uporabnikov."
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr "Prišlo je do napake dostopa do sistemskih dovoljenj: %s"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -813,6 +815,42 @@ msgstr ""
 "Prišlo je od napake med preverjanjem overitve: %s\n"
 "Napako je mogoče prijaviti kot hrošč."
 
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "Zakleni"
+
+#: ../src/common/um-lockbutton.c:365
+msgid "Unlock"
+msgstr "Odkleni"
+
+#: ../src/common/um-lockbutton.c:374
+msgid "Locked"
+msgstr "Zaklenjeno"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Pogovorno okno je odklenjeno.\n"
+"Kliknite za preprečitev nadaljnjih sprememb."
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Pogovorno okno je zaklenjeno.\n"
+"Kliknite za spreminjanje zaklepa."
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"Sistemska pravila preprečujejo spremembe.\n"
+"Stopite v stik s sistemskim skrbnikom."
+
 #: ../src/network/address-list.c:76
 #: ../src/network/hosts.c:31
 #: ../src/shares/table.c:38
@@ -856,51 +894,51 @@ msgstr "To vam bo preprečilo zagon novih programov in tako se boste morali znov
 msgid "Change _Host name"
 msgstr "Spremeni ime _gostitelja"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "Samodejne nastavitve (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "Krajevno Zeroconf omrežje (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "Statični naslov IP"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "WEP ključ (ascii)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "WEP ključ (hex)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA Osebni"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 Osebni"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "ISDN modem"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "Serijski modem"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "Lastnosti %s"
@@ -1581,11 +1619,11 @@ msgstr "Storitve deljenja niso nameščene"
 msgid "You need to install at least either Samba or NFS in order to share your folders."
 msgstr "Namestiti morate vsaj Sambo ali NFS za souporabo mape."
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "Zemljevid sveta"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid "Mouse-based interactive map widget for selecting timezone. Keyboard users should instead select the timezone from the drop-down combination box below."
 msgstr "Gradnik za izbor časovnega pasu z miško na zemljevidu. Uporabniki tipkovnice lahko časovni pas izberejo iz spodnjega spustnega polja."
 
@@ -1597,35 +1635,35 @@ msgstr "Spremenite sistemski čas, datum in časovni pas"
 msgid "Time and Date"
 msgstr "Čas in datum"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "Podpora za NTP ni nameščena"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid "Please install and activate NTP support in the system to enable synchronization of your local time server with internet time servers."
 msgstr "Namestite in vključite podporo za NTP da bi vključili usklajevanje vašega krajevnega časovnega strežnika s spletnimi časovnimi strežniki."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "Omogočanje NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "Onemogočanje NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "Usklajevanje sistemske ure"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "Ohrani usklajeno s spletnimi strežniki"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "Ročno"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Nastavitve časa in datuma"
 
@@ -1637,7 +1675,7 @@ msgstr "Skrbniške skupine ni mogoče izbrisati"
 #: ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258
 #: ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "To bi naredilo sistem neuporaben."
 
@@ -1707,102 +1745,102 @@ msgstr "Izberite drugo številčno določilo nove skupine \"%s\"."
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "Izberite drugo številčno določilo skupine \"%s\"."
 
-#: ../src/users/groups-table.c:44
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "Ime skupine"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
 #: ../src/users/main.c:74
-#: ../src/users/user-settings.c:347
+#: ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "Ne vprašaj ob prijavi"
 
 #: ../src/users/main.c:74
-#: ../src/users/user-settings.c:349
+#: ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "Vprašanje ob prijavi"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:55
 msgid "Monitor system logs"
 msgstr "Nadzor sistema beleženja"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:56
 msgid "Administer the system"
 msgstr "Oskrbovanje sistema"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:57
 msgid "Use audio devices"
 msgstr "Uporabi zvočne naprave"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:58
 msgid "Use CD-ROM drives"
 msgstr "Uporabi CD naprave"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:59
 msgid "Burn CDs / DVDs"
 msgstr "Zapisovanje CD-jev in DVD-jev"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:60
 msgid "Use modems"
 msgstr "Uporabi modem"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Connect to Internet using a modem"
 msgstr "Povezava s strežnikom preko modema"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
 msgid "Send and receive faxes"
 msgstr "Pošiljanje in prejemanje faksov"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:63
 msgid "Use floppy drives"
 msgstr "Uporabi disketni pogon"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:64
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "Priklopi uporabniški datotečni sistem (FUSE)"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:65
 msgid "Configure printers"
 msgstr "Nastavitev tiskalnikov"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:66
 msgid "Connect to wireless and ethernet networks"
 msgstr "Povezava v brežžična ali žična omrežja"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:67
 msgid "Access external storage devices automatically"
 msgstr "Samodejni dostop do zunanjih diskovnih naprav"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:68
 msgid "Suspend and hibernate the computer"
 msgstr "Pripravljenost ali mirovanje računalnika"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:69
 msgid "Access /proc filesystem"
 msgstr "Dostop do /proc datotečnega sistema"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:70
 msgid "Use scanners"
 msgstr "Uporabi preiskovalnike"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:71
 msgid "Use tape drives"
 msgstr "Uporabi tračni pogon"
 
-#: ../src/users/privileges-table.c:70
+#: ../src/users/privileges-table.c:72
 msgid "Use USB devices"
 msgstr "Uporabi USB naprave"
 
-#: ../src/users/privileges-table.c:71
+#: ../src/users/privileges-table.c:73
 msgid "Use VirtualBox virtualization solution"
 msgstr "Uporabi VirtualBox sistem"
 
-#: ../src/users/privileges-table.c:72
+#: ../src/users/privileges-table.c:74
 msgid "Use video devices"
 msgstr "Uporabi video naprave"
 
-#: ../src/users/privileges-table.c:73
+#: ../src/users/privileges-table.c:75
 msgid "Be able to get administrator privileges"
 msgstr "Dostop do skrbniških dovoljenj"
 
@@ -1890,15 +1928,15 @@ msgstr "Potrditev gesla ni pravilna"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Preverite, ali ste vpisali isto geslo v obe polji."
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "Izberite drugačno ime."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "Znova vnesite trenutno geslo."
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "Gesla ni mogoče spremeniti."
 
@@ -1946,33 +1984,33 @@ msgstr "Ne odstrani računa"
 msgid "Delete Files"
 msgstr "Izbriši datoteke"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "Izkušeni uporabnik"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "Po meri"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "Brez"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Neveljavni znak \"%c\" v opombi"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "Preverite, ali ta znak že ni uporabljen."
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "Nepopolna pot v domači imenik"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -1980,12 +2018,12 @@ msgstr ""
 "Vnesite celo pot za domačo mapo\n"
 "<span size=\"smaller\">npr.: /home/janez</span>."
 
-#: ../src/users/user-settings.c:447
-#: ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:452
+#: ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "Nova domača mapa že obstaja. Ali jo želite uporabiti?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. Do you want to use files from this directory, or copy the contents of <tt>%s</tt> to the new home, overwriting it?\n"
@@ -1996,33 +2034,33 @@ msgstr ""
 "\n"
 "V kolikor ste v dvomih, uporabite novo mapo in se izognite izgubi podatkov. Datoteke je mogoče kopirati tudi kasneje."
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "_Zamenjaj s starimi datotekami"
 
-#: ../src/users/user-settings.c:462
-#: ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:467
+#: ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "_Prekliči spremembo"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "_Uporabi nove datoteke"
 
-#: ../src/users/user-settings.c:470
-#: ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:475
+#: ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "Določi uporabnika kot _lastnika domače mape"
 
-#: ../src/users/user-settings.c:473
-#: ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:478
+#: ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "_Izbriši staro domačo mapo"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. Do you want to use files from this directory, or delete all its contents and use a completely empty home directory?\n"
@@ -2033,19 +2071,19 @@ msgstr ""
 "\n"
 "V kolikor ste v dvomih, ohranite datoteke in jih izbrišite kasneje."
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "_Izbriši datoteke"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "_Uporabi obstoječe datoteke"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "Ali naj se kopira stara domača mapa na novo mesto?"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. Do you want to copy the contents of the old home directory (<tt>%s</tt>), or use a completely empty home directory?\n"
@@ -2056,35 +2094,35 @@ msgstr ""
 "\n"
 "V kolikor želite kopirati vsebino, lahko staro mapo varno izbrišete."
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "_Uporabi prazno mapo"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "_Kopiraj stare datoteke"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "ID skrbnika ni dovoljeno spreminjati"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "Uporabniški ID %d je že uporabljen pri uporabniku %s"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Izberite drugo številčno določilo za %s."
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "Nepopolna pot v ukazni lupini"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2092,33 +2130,45 @@ msgstr ""
 "Vpišite polno pot za ukazno lupino\n"
 "<span size=\"smaller\">npr.: /bin/sh</span>."
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "Ni mogoče povrniti skrbniških dovoljenj"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid "%s is the only administrator on this computer. Revoking administration rights for this account would lock you out of administrating the system."
 msgstr "%s je edini skrbnik tega sistema. S preklicom skrbniških dovoljenj za ta račun, onemogočite nadaljnje izvajanje skrbniških opravil celotnega sistema."
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "Preklicali boste lastne skrbniške pravice."
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid "%s will no longer be able to perform administrative tasks. This account won't be allowed to get administration rights back on its own."
 msgstr "%s nima več dovoljenja za izvajanje skrbniških nalog. S tem računom ni več mogoče lastnoročno pridobiti skrbniških pravic."
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "Prepusti skrbniška dovoljenja"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1416
+msgid "You cannot change the user ID for the superuser account."
+msgstr "Ni mogoče spremeniti uporabniškega ID skrbnika."
+
+#: ../src/users/user-settings.c:1424
+msgid "You cannot disable your own account, nor change your own home directory or user ID. Run this program from another user's session to edit these settings."
+msgstr "Ni mogoče onemogočiti lastnega računa, niti ni mogoče spremeniti lastne domače mape ali pa uporabniškega ID. Za spreminjanje teh nastavitev je treba biti prijavljen z drugim računom."
+
+#: ../src/users/user-settings.c:1434
+msgid "You cannot change an account's home directory or user ID while the user is logged in."
+msgstr "Ni mogoče spremeniti domače mape računa ali pa ID uporabnika, dokler je uporabnik prijavljen."
+
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "Uveljavljanje sprememb nastavitev uporabnika ..."
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "Nastavitev uporabnika"
 
@@ -2242,8 +2292,6 @@ msgstr "Nastavitev uporabnika"
 #~ "spreminjanje nastavitev sistema."
 #~ msgid "<span weight=\"bold\">Contact Information</span>"
 #~ msgstr "<span weight=\"bold\">Podrobnosti stika</span>"
-#~ msgid "_Unlock"
-#~ msgstr "_Odkleni"
 #~ msgid "This action is not allowed"
 #~ msgstr "Dejanje ni dovoljeno"
 #~ msgid "Could not authenticate"
