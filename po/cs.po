@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-10 22:30+0200\n"
-"PO-Revision-Date: 2010-08-30 21:18+0200\n"
+"POT-Creation-Date: 2010-12-29 23:54+0100\n"
+"PO-Revision-Date: 2010-12-28 11:38+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -240,7 +240,7 @@ msgstr "_Nastavit modem jako výchozí cestu k Internetu"
 msgid "_Subnet mask:"
 msgstr "Maska pod_sítě:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:82
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "_Uživatelské jméno:"
 
@@ -670,78 +670,74 @@ msgid "Username must start with a letter!"
 msgstr "Jméno uživatele musí začínat písmenem!"
 
 #: ../interfaces/users.ui.h:64
-msgid "You can't change user ID while the user is logged in."
-msgstr "Nemůžete změnit ID uživatele, dokud je tento uživatel přihlášen."
-
-#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "Přid_at profil"
 
-#: ../interfaces/users.ui.h:66
+#: ../interfaces/users.ui.h:65
 msgid "_Advanced Settings"
 msgstr "Pokročilá n_astavení"
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:66
 msgid "_Change..."
 msgstr "_Změnit…"
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "_Komentář"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:68
 msgid "_Current password:"
 msgstr "_Současné heslo:"
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:69
 msgid "_Custom"
 msgstr "_Vlastní"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "_Dní mezi varováním a vypršením hesla:"
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:71
 msgid "_Enable Account"
 msgstr "_Povolit účet"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:72
 msgid "_Encrypt home folder to protect sensitive data"
 msgstr "_Zašifrovat domovskou složku kvůli ochraně citlivých dat"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "Vy_generovat"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "_Domovská složka:"
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "Telefon _domů:"
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "Hlavní _skupina:"
 
-#: ../interfaces/users.ui.h:78
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "_Spravovat skupiny"
 
-#: ../interfaces/users.ui.h:79
+#: ../interfaces/users.ui.h:78
 msgid "_Name:"
 msgstr "Jmé_no:"
 
-#: ../interfaces/users.ui.h:80
+#: ../interfaces/users.ui.h:79
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: ../interfaces/users.ui.h:81
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: ../interfaces/users.ui.h:83
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "Telefon do _práce:"
 
@@ -766,6 +762,11 @@ msgid ""
 msgstr ""
 "Zda by měl nástroj pro správu uživatelů zobrazovat v seznamu uživatelů "
 "uživatele root."
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr "Chyba přístupu k systémovým oprávněním: %s"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -835,6 +836,42 @@ msgstr ""
 "Vyskytla se chyba při ověřování oprávnění: %s\n"
 "Můžete to nahlásit jako chybu."
 
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "Zamknout"
+
+#: ../src/common/um-lockbutton.c:365
+msgid "Unlock"
+msgstr "Odemknout"
+
+#: ../src/common/um-lockbutton.c:374
+msgid "Locked"
+msgstr "Zamčeno"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Dialogové okno je odemknuto.\n"
+"Klikněte, abyste zabránili změnám."
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Dialogové okno je uzamknuto.\n"
+"Klikněte, abyste mohli dělat změny."
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"Systémová politika zabránila změnám.\n"
+"Kontaktujte svého správce systému."
+
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
 msgid "_Add"
@@ -880,51 +917,51 @@ msgstr ""
 msgid "Change _Host name"
 msgstr "Změnit _název počítače"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "Automatické nastavení (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "Místní síť v režimu Zeroconf (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "Statická adresa IP"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "Klíč WEP (ascii)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "Klíč WEP (šestnáctkově)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "Osobní režim WPA"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "Osobní režim WPA2"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "Modem ISDN"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "Sériový modem"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "Vlastnosti %s"
@@ -1607,11 +1644,11 @@ msgid ""
 "folders."
 msgstr "Pro sdílení svých složek je nutné nainstalovat buď Sambu nebo NFS."
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "Mapa světa"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1628,11 +1665,11 @@ msgstr "Změnit systémový čas, datum a časové pásmo"
 msgid "Time and Date"
 msgstr "Datum a čas"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "Podpora NTP není nainstalována"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1640,27 +1677,27 @@ msgstr ""
 "Pro umožnění synchronizace vašeho lokálního časového serveru s časovými "
 "servery v Internetu je nutné nainstalovat a aktivovat podporu NTP."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "Zapíná se NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "Vypíná se NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "Synchronizují se systémové hodiny"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "Udržovat synchronizované se servery v Internetu"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "Ruční"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Nastavení data a času"
 
@@ -1670,7 +1707,7 @@ msgstr "Správcovská skupina nemůže být odstraněna"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "Systém by pak nebyl použitelný."
 
@@ -1744,100 +1781,100 @@ msgstr "Zvolte prosím pro novou skupinu jiný číselný identifikátor."
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "Zvolte prosím pro skupinu „%s“ jiný číselný identifikátor."
 
-#: ../src/users/groups-table.c:44
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "Název skupiny"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "Neptat se při přihlášení"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "Dotázat při přihlášení"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:55
 msgid "Monitor system logs"
 msgstr "Sledovat systémové protokoly"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:56
 msgid "Administer the system"
 msgstr "Spravovat systém"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:57
 msgid "Use audio devices"
 msgstr "Používat zvuková zařízení"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:58
 msgid "Use CD-ROM drives"
 msgstr "Používat mechaniky CD-ROM"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:59
 msgid "Burn CDs / DVDs"
 msgstr "Vypalovat CD / DVD"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:60
 msgid "Use modems"
 msgstr "Používat modemy"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Connect to Internet using a modem"
 msgstr "Připojovat se k Internetu přes modem"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
 msgid "Send and receive faxes"
 msgstr "Odesílat a přijímat faxy"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:63
 msgid "Use floppy drives"
 msgstr "Používat disketové mechaniky"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:64
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "Připojovat souborové systémy v uživatelském prostoru (FUSE)"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:65
 msgid "Configure printers"
 msgstr "Nastavovat tiskárny"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:66
 msgid "Connect to wireless and ethernet networks"
 msgstr "Připojovat se k bezdrátovým a ethernetovým sítím"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:67
 msgid "Access external storage devices automatically"
 msgstr "Automatický přistupovat k externím úložným zařízením"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:68
 msgid "Suspend and hibernate the computer"
 msgstr "Uspávat počítač do paměti nebo na disk"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:69
 msgid "Access /proc filesystem"
 msgstr "Přistupovat k souborovému systému /proc"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:70
 msgid "Use scanners"
 msgstr "Používat skenery"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:71
 msgid "Use tape drives"
 msgstr "Používat páskové mechaniky"
 
-#: ../src/users/privileges-table.c:70
+#: ../src/users/privileges-table.c:72
 msgid "Use USB devices"
 msgstr "Používat zařízení USB"
 
-#: ../src/users/privileges-table.c:71
+#: ../src/users/privileges-table.c:73
 msgid "Use VirtualBox virtualization solution"
 msgstr "Používat virtualizační řešení VirtualBox"
 
-#: ../src/users/privileges-table.c:72
+#: ../src/users/privileges-table.c:74
 msgid "Use video devices"
 msgstr "Používat video zařízení"
 
-#: ../src/users/privileges-table.c:73
+#: ../src/users/privileges-table.c:75
 msgid "Be able to get administrator privileges"
 msgstr "Mít možnost získat oprávnění správce"
 
@@ -1936,15 +1973,15 @@ msgstr "Potvrzení hesla nesouhlasí"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "Zkontrolujte, že jste v obou textových polích zadali stejné heslo."
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "Zvolte prosím jiné heslo."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "Napište prosím své současné heslo znovu."
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "Heslo nelze změnit"
 
@@ -2003,34 +2040,34 @@ msgstr "Neodstraňovat účet"
 msgid "Delete Files"
 msgstr "Smazat soubory"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "Superuživatel"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "Vlastní"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "Žádné"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Neplatný znak „%c“ v komentáři"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "Zkontrolujte, že se tento znak nepoužívá."
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "Neúplná cesta k domovské složce"
 
 # FIXME: s/i.e./e.g./
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2038,11 +2075,11 @@ msgstr ""
 "Zadejte prosím plnou cestu k domovské složce\n"
 "<span size=\"smaller\">např.: /home/honza</span>."
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:452 ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "Nová domovská složka již existuje, použít ji?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2059,30 +2096,30 @@ msgstr ""
 "Pokud si nejste jisti, co zvolit, použijte novou složku, abyste předešli "
 "ztrátě dat, a soubory ze staré složky nakopírujte dodatečně."
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "Nah_radit starými soubory"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:467 ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "_Zrušit změny"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "Po_užít nové soubory"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "Nastavit uživatele jak_o vlastníka nové domovské složky"
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "_Smazat starou domovskou složku"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2098,19 +2135,19 @@ msgstr ""
 "Pokud si nejste jisti, co zvolit, tak soubory zachovejte a když bude třeba, "
 "odstraňte je dodatečně."
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "_Smazat soubory"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "Po_užít stávající soubory"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "Zkopírovat starou domovskou složku do nového umístění?"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2127,35 +2164,35 @@ msgstr ""
 "Pokud zvolíte zkopírování souborů do nového umístění, můžete starou složku "
 "bezpečně smazat."
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "Po_užít prázdnou složku"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "_Kopírovat staré soubory"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "ID uživatele root nelze měnit"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "Uživatelské ID %d již existuje pro uživatele %s"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Zvolte prosím jiný číselný identifikátor pro uživatele %s."
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "Neúplná cesta v shellu"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2163,11 +2200,11 @@ msgstr ""
 "Zadejte prosím plnou cestu k shellu\n"
 "<span size=\"smaller\">např.: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "Nelze odejmout správcovská oprávnění"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2176,11 +2213,11 @@ msgstr ""
 "%s je jediný správce na tomto počítači. Odejmutí oprávnění správce tomuto "
 "účtu by mohlo zablokovat správu systému."
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "Chystáte se odejmout svá vlastní oprávnění správce"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2189,14 +2226,35 @@ msgstr ""
 "Uživatel %s nebude moci nadále provádět správcovské úkoly. Tomuto účtu "
 "nebude umožněno získat správcovská oprávnění zpět vlastními silami."
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "Vzdát se správcovských oprávnění"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1416
+msgid "You cannot change the user ID for the superuser account."
+msgstr "Nemůžete změnit ID účtu superuživatele."
+
+#: ../src/users/user-settings.c:1424
+msgid ""
+"You cannot disable your own account, nor change your own home directory or "
+"user ID. Run this program from another user's session to edit these settings."
+msgstr ""
+"Nemůžete zakázat svůj vlastní účet, změnit svoji vlastní domovskou složku "
+"nebo své uživatelské ID. Abyste mohli provést takovéto změny, spusťte tento "
+"program v sezení jiného uživatele."
+
+#: ../src/users/user-settings.c:1434
+msgid ""
+"You cannot change an account's home directory or user ID while the user is "
+"logged in."
+msgstr ""
+"Nemůžete změnit domovskou složku účtu nebo ID uživatele, dokud je tento "
+"uživatel přihlášen."
+
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "Změny se zanášejí do uživatelova nastavení…"
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "Nastavení uživatelů"
