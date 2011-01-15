@@ -7,16 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 2.31.x\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=gnome-system-tools&component=general\n"
-"POT-Creation-Date: 2010-12-19 21:45+0000\n"
-"PO-Revision-Date: 2010-12-30 20:33+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-15 13:47+0100\n"
+"PO-Revision-Date: 2011-01-15 13:49+0100\n"
 "Last-Translator: Torstein Adolf Winterseth <kvikende@fsfe.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.1\n"
 
@@ -758,7 +757,7 @@ msgstr "Hvorvidt verktøyet users-admin skal vise root-brukeren i brukerlisten."
 #: ../src/common/gst-dialog.c:254
 #, c-format
 msgid "Error accessing system permissions: %s"
-msgstr ""
+msgstr "Feil under tilgang til systemrettigheter: %s"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -823,6 +822,8 @@ msgid ""
 "An error occurred while checking for authorizations: %s\n"
 "You may report this as a bug."
 msgstr ""
+"En feil oppsto under sjekk for autorisasjon: %s\n"
+"Du kan rapportere dette som en feil."
 
 #: ../src/common/um-lockbutton.c:356
 msgid "Lock"
@@ -841,18 +842,24 @@ msgid ""
 "Dialog is unlocked.\n"
 "Click to prevent further changes"
 msgstr ""
+"Dialogen er låst opp.\n"
+"Klikk for å forhindre videre endringer"
 
 #: ../src/common/um-lockbutton.c:392
 msgid ""
 "Dialog is locked.\n"
 "Click to make changes"
 msgstr ""
+"Dialogen er låst.\n"
+"Klikk for å gjøre endringer"
 
 #: ../src/common/um-lockbutton.c:401
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
 msgstr ""
+"Regelsett for systemet forhindrer endringer.\n"
+"Kontakt din systemadministrator"
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -2055,8 +2062,8 @@ msgstr "Ny hjemmekatalog eksisterer allerede, bruk den?"
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
-"Do you want to use files from this directory, or copy the contents of <tt>%"
-"s</tt> to the new home, overwriting it?\n"
+"Do you want to use files from this directory, or copy the contents of <tt>"
+"%s</tt> to the new home, overwriting it?\n"
 "\n"
 "In doubt, use the new directory to avoid losing data, and copy files from "
 "the old directory later."
@@ -2079,7 +2086,7 @@ msgstr "Br_uk nye filer"
 
 #: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
-msgstr ""
+msgstr "Gjør bruker til _eier av den nye hjemmekatalogen"
 
 #: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
@@ -2181,10 +2188,8 @@ msgid "Give up administration rights"
 msgstr "Gi opp administrasjonsrettigheter"
 
 #: ../src/users/user-settings.c:1416
-#, fuzzy
-#| msgid "You can't change user ID while the user is logged in."
 msgid "You cannot change the user ID for the superuser account."
-msgstr "Du kan ikke endre bruker-ID mens brukeren er logget inn."
+msgstr "Du kan ikke endre bruker-ID for superbrukerkontoen."
 
 #: ../src/users/user-settings.c:1424
 msgid ""
@@ -2193,12 +2198,10 @@ msgid ""
 msgstr ""
 
 #: ../src/users/user-settings.c:1434
-#, fuzzy
-#| msgid "You can't change user ID while the user is logged in."
 msgid ""
 "You cannot change an account's home directory or user ID while the user is "
 "logged in."
-msgstr "Du kan ikke endre bruker-ID mens brukeren er logget inn."
+msgstr "Du kan ikke endre hjemmekatalog eller bruker-ID for en konto mens brukeren er logget inn."
 
 #: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
@@ -2207,4 +2210,3 @@ msgstr "Aktiverer endringer i innstillinger for bruker …"
 #: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "Instillinger for bruker"
-
