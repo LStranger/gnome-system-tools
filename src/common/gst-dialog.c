@@ -114,14 +114,12 @@ static void
 gst_dialog_class_init (GstDialogClass *class)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (class);
-	GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (class);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
 
 	object_class->set_property = gst_dialog_set_property;
 	object_class->constructor  = gst_dialog_constructor;
 	object_class->finalize     = gst_dialog_finalize;
 
-	dialog_class->response     = gst_dialog_response;
 	widget_class->delete_event = gst_dialog_delete_event;
 	widget_class->realize      = gst_dialog_realize;
 
@@ -203,6 +201,8 @@ gst_dialog_constructor (GType                  type,
 									    construct_params);
 	dialog = GST_DIALOG (object);
 	priv = GST_DIALOG_GET_PRIVATE (dialog);
+
+	g_signal_connect (object, "response", G_CALLBACK(gst_dialog_response), NULL);
 
 	if (priv->tool && priv->widget_name) {
 		priv->builder = gtk_builder_new ();
