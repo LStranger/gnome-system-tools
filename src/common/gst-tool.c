@@ -374,6 +374,9 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 {
 	GdkScreen *screen;
 	GError *error = NULL;
+	GdkAppLaunchContext *launch_context;
+	GAppInfo *app_info;
+	GtkWidget *dialog;
 	gchar *help_file, *help_file_xml, *command, *uri;
 	const gchar **langs, *lang;
 	gint i;
@@ -407,28 +410,44 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 		command = g_strconcat ("gnome-help ghelp://", uri, NULL);
 	}
 
+
+	app_info = g_app_info_create_from_commandline (command, _("Help"),
+                                                       G_APP_INFO_CREATE_NONE,
+                                                       &error);
+
 	screen = gtk_window_get_screen (GTK_WINDOW (tool->main_dialog));
-	gdk_spawn_command_line_on_screen (screen, command, &error);
+
 	g_free (command);
 	g_free (uri);
-
-	if (error) {
-		GtkWidget *dialog;
-
-		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						 GTK_DIALOG_MODAL,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 _("Could not display help"));
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-							  "%s", error->message);
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-		g_error_free (error);
-	}
-
 	g_free (help_file_xml);
 	g_free (help_file);
+
+	if (error)
+		goto error;
+
+	launch_context = gdk_app_launch_context_new ();
+	gdk_app_launch_context_set_screen (launch_context, screen);
+	g_app_info_launch (app_info, NULL, G_APP_LAUNCH_CONTEXT (launch_context), &error);
+
+	g_object_unref (launch_context);
+	g_object_unref (app_info);
+
+	if (error)
+		goto error;
+
+	return;
+
+error:
+	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+	                                 GTK_DIALOG_MODAL,
+	                                 GTK_MESSAGE_ERROR,
+	                                 GTK_BUTTONS_CLOSE,
+	                                 _("Could not display help"));
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+	                                          "%s", error->message);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+	g_error_free (error);
 }
 
 static gboolean
