@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-08 10:26+0200\n"
-"PO-Revision-Date: 2010-09-07 14:07+0200\n"
+"POT-Creation-Date: 2011-03-13 16:51+0100\n"
+"PO-Revision-Date: 2011-03-13 16:52+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Polish\n"
@@ -240,7 +240,7 @@ msgstr "_Domyślna trasa do Internetu przez modem"
 msgid "_Subnet mask:"
 msgstr "_Maska podsieci:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:82
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "_Nazwa użytkownika:"
 
@@ -670,78 +670,74 @@ msgid "Username must start with a letter!"
 msgstr "Nazwa użytkownika musi zaczynać się od litery."
 
 #: ../interfaces/users.ui.h:64
-msgid "You can't change user ID while the user is logged in."
-msgstr "Nie można zmienić identyfikatora zalogowanego użytkownika."
-
-#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "_Dodaj profil"
 
-#: ../interfaces/users.ui.h:66
+#: ../interfaces/users.ui.h:65
 msgid "_Advanced Settings"
 msgstr "Z_aawansowane ustawienia"
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:66
 msgid "_Change..."
 msgstr "_Zmień..."
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "K_omentarze"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:68
 msgid "_Current password:"
 msgstr "_Bieżące hasło:"
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:69
 msgid "_Custom"
 msgstr "_Własne"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "_Liczba dni pomiędzy ostrzeżeniem a unieważnieniem hasła:"
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:71
 msgid "_Enable Account"
 msgstr "Włącz_enie konta"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:72
 msgid "_Encrypt home folder to protect sensitive data"
 msgstr "_Zaszyfrowanie katalogu domowego, aby chronić prywatne dane"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "_Utworzenie"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "Katalog do_mowy:"
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "Telefon _domowy:"
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "G_rupa główna:"
 
-#: ../interfaces/users.ui.h:78
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "_Zarządzaj grupami"
 
-#: ../interfaces/users.ui.h:79
+#: ../interfaces/users.ui.h:78
 msgid "_Name:"
 msgstr "_Nazwa:"
 
-#: ../interfaces/users.ui.h:80
+#: ../interfaces/users.ui.h:79
 msgid "_Password:"
 msgstr "_Hasło:"
 
-#: ../interfaces/users.ui.h:81
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "Po_włoka:"
 
-#: ../interfaces/users.ui.h:83
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "Telefon _służbowy:"
 
@@ -766,6 +762,11 @@ msgid ""
 msgstr ""
 "Określa, czy narzędzie users-admin powinno wyświetlać użytkownika root na "
 "liście użytkowników."
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr "Błąd podczas uzyskiwania uprawnień systemowych: %s"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -800,7 +801,7 @@ msgid "You are not allowed to access the system configuration."
 msgstr "Brak uprawnień do dostępu do konfiguracji systemu."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:685
+#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:704
 msgid "You are not allowed to modify the system configuration."
 msgstr "Brak uprawnień do modyfikacji konfiguracji systemu."
 
@@ -813,19 +814,23 @@ msgstr "Odnaleziono nieprawidłowe dane."
 msgid "An unknown error occurred."
 msgstr "Wystąpił nieznany błąd."
 
-#: ../src/common/gst-tool.c:422
+#: ../src/common/gst-tool.c:414
+msgid "Help"
+msgstr "Pomoc"
+
+#: ../src/common/gst-tool.c:445
 msgid "Could not display help"
 msgstr "Nie można wyświetlić pomocy"
 
-#: ../src/common/gst-tool.c:616
+#: ../src/common/gst-tool.c:635
 msgid "The system configuration has potentially changed."
 msgstr "Konfiguracja systemu mogła zostać zmieniona."
 
-#: ../src/common/gst-tool.c:618
+#: ../src/common/gst-tool.c:637
 msgid "Update content? This will lose any modification in course."
 msgstr "Zaktualizować zawartość? Wszystkie zmiany zostaną utracone."
 
-#: ../src/common/gst-tool.c:687
+#: ../src/common/gst-tool.c:706
 #, c-format
 msgid ""
 "An error occurred while checking for authorizations: %s\n"
@@ -833,6 +838,42 @@ msgid ""
 msgstr ""
 "Wystąpił błąd podczas sprawdzania upoważnień: %s\n"
 "Można to zgłosić jako błąd."
+
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "Zablokuj"
+
+#: ../src/common/um-lockbutton.c:365
+msgid "Unlock"
+msgstr "Odblokuj"
+
+#: ../src/common/um-lockbutton.c:374
+msgid "Locked"
+msgstr "Zablokowane"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Okno nie jest zablokowane.\n"
+"Naciśnięcie uniemożliwi dalsze zmiany"
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Okno jest zablokowane.\n"
+"Naciśnięcie umożliwi wprowadzanie zmian"
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"Polityka systemu uniemożliwia zmiany.\n"
+"Proszę skontaktować się z administratorem systemu"
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -880,51 +921,51 @@ msgstr ""
 msgid "Change _Host name"
 msgstr "Zmień nazwę _komputera"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "Konfiguracja automatyczna (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "Lokalna sieć Zeroconf (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "Statyczny adres IP"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "Klucz WEP (znaki ASCII)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "Klucz WEP (szesnastkowo)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA Personal"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 Personal"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "Modem ISDN"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "Modem szeregowy"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "Właściwości %s"
@@ -1609,11 +1650,11 @@ msgstr ""
 "Aby mieć możliwość udostępniania katalogów, należy zainstalować usługę Samba "
 "lub NFS."
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "Mapa świata"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1630,11 +1671,11 @@ msgstr "Zmiana czasu, daty i strefy czasowej"
 msgid "Time and Date"
 msgstr "Czas i data"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "Obsługa NTP nie jest zainstalowana"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1642,27 +1683,27 @@ msgstr ""
 "Aby włączyć synchronizację lokalnego serwera czasu z internetowymi serwerami "
 "czasu, należy zainstalować i włączyć usługę NTP."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "Włączanie NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "Wyłączanie NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "Synchronizowanie zegara systemowego"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "Synchronizowanie zegara z serwerami w Internecie"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "Ręcznie"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "Ustawienia czasu i daty"
 
@@ -1672,7 +1713,7 @@ msgstr "Nie można usunąć grupy administratora"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "Spowoduje to, że system stanie się bezużyteczny."
 
@@ -1748,100 +1789,100 @@ msgstr "Proszę wybrać inny identyfikator numeryczny dla nowej grupy."
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "Proszę wybrać inny identyfikator numeryczny dla grupy \"%s\"."
 
-#: ../src/users/groups-table.c:44
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "Nazwa grupy"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "Bez pytania podczas logowania"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "Pytanie podczas logowania"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:55
 msgid "Monitor system logs"
 msgstr "Monitorowanie dzienników systemowych"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:56
 msgid "Administer the system"
 msgstr "Administruje systemem"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:57
 msgid "Use audio devices"
 msgstr "Użycie urządzeń dźwiękowych"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:58
 msgid "Use CD-ROM drives"
 msgstr "Użycie napędów CD-ROM"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:59
 msgid "Burn CDs / DVDs"
 msgstr "Nagrywanie płyt CD/DVD"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:60
 msgid "Use modems"
 msgstr "Użycie modemów"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Connect to Internet using a modem"
 msgstr "Połączenie z Internetem za pomocą modemu"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
 msgid "Send and receive faxes"
 msgstr "Wysyłanie i odbiór faksów"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:63
 msgid "Use floppy drives"
 msgstr "Użycie napędów dyskietek"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:64
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "Montowanie systemów plików w przestrzeni użytkownika (FUSE)"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:65
 msgid "Configure printers"
 msgstr "Konfiguracja drukarek"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:66
 msgid "Connect to wireless and ethernet networks"
 msgstr "Łączenie z sieciami bezprzewodowymi i sieciami Ethernet"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:67
 msgid "Access external storage devices automatically"
 msgstr "Automatyczny dostęp do zewnętrznych urządzeń pamięci masowej"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:68
 msgid "Suspend and hibernate the computer"
 msgstr "Usypianie i hibernowanie komputera"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:69
 msgid "Access /proc filesystem"
 msgstr "Dostęp do systemu plików /proc"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:70
 msgid "Use scanners"
 msgstr "Użycie skanerów"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:71
 msgid "Use tape drives"
 msgstr "Użycie napędów taśmowych"
 
-#: ../src/users/privileges-table.c:70
+#: ../src/users/privileges-table.c:72
 msgid "Use USB devices"
 msgstr "Użycie urządzeń USB"
 
-#: ../src/users/privileges-table.c:71
+#: ../src/users/privileges-table.c:73
 msgid "Use VirtualBox virtualization solution"
 msgstr "Użycie wirtualizacji VirtualBox"
 
-#: ../src/users/privileges-table.c:72
+#: ../src/users/privileges-table.c:74
 msgid "Use video devices"
 msgstr "Użycie urządzeń wideo"
 
-#: ../src/users/privileges-table.c:73
+#: ../src/users/privileges-table.c:75
 msgid "Be able to get administrator privileges"
 msgstr "Możliwość otrzymania uprawnień administratora"
 
@@ -1942,15 +1983,15 @@ msgid "Check that you have provided the same password in both text fields."
 msgstr ""
 "Proszę się upewnić, że podano takie samo hasło w obu polach tekstowych."
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "Proszę wybrać inne hasło."
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "Proszę ponownie wprowadzić bieżące hasło."
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "Nie można zmienić hasła"
 
@@ -2010,33 +2051,33 @@ msgstr "Nie usuwaj konta"
 msgid "Delete Files"
 msgstr "Usuń pliki"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "Administrator"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "Własne"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "Brak"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Nieprawidłowy znak \"%c\" w komentarzu"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "Proszę sprawdzić, czy ten znak nie został użyty."
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "Niepełna ścieżka do katalogu domowego"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2044,16 +2085,16 @@ msgstr ""
 "Proszę wprowadzić pełną ścieżkę do katalogu domowego,\n"
 "<span size=\"smaller\">np.: /home/jan</span>."
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:452 ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "Nowy katalog domowy już istnieje, użyć go?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
-"Do you want to use files from this directory, or copy the contents of <tt>%"
-"s</tt> to the new home, overwriting it?\n"
+"Do you want to use files from this directory, or copy the contents of <tt>"
+"%s</tt> to the new home, overwriting it?\n"
 "\n"
 "In doubt, use the new directory to avoid losing data, and copy files from "
 "the old directory later."
@@ -2065,30 +2106,30 @@ msgstr ""
 "W razie wątpliwości należy użyć nowego katalogu, aby uniknąć utraty danych, "
 "i skopiować pliki z poprzedniego katalogu w późniejszym czasie."
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "_Zastąp poprzednimi plikami"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:467 ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "_Anuluj zmianę"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "_Użyj nowych plików"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "Uczyń użytk_ownika właścicielem nowego katalogu domowego"
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "_Usuń poprzedni katalog domowy"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2104,19 +2145,19 @@ msgstr ""
 "W razie wątpliwości należy zachować pliki i usunąć je w późniejszym czasie, "
 "jeśli nie będą potrzebne."
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "U_suń pliki"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "_Użyj istniejących plików"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "Skopiować poprzedni katalog domowy do nowego położenia?"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2133,35 +2174,35 @@ msgstr ""
 "Jeśli zostanie wybrane skopiowanie plików do nowego położenia, to można "
 "będzie bezpiecznie usunąć poprzedni katalog."
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "_Użyj pustego katalogu"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "_Skopiuj poprzednie pliki"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "Identyfikator użytkownika root nie powinien być modyfikowany"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "Identyfikator użytkownika %d jest już używany przez użytkownika %s"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "Proszę wybrać inny identyfikator numeryczny dla użytkownika %s."
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "Niepełna ścieżka do powłoki"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2169,11 +2210,11 @@ msgstr ""
 "Proszę wprowadzić pełną ścieżkę do powłoki,\n"
 "<span size=\"smaller\">np: /bin/bash</span>."
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "Nie można unieważnić uprawnień administratora"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2183,11 +2224,11 @@ msgstr ""
 "uprawnień administratora dla tego konta spowoduję utratę możliwości "
 "administrowania systemem."
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "Uprawnienia administratora zostaną zaraz unieważnione"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2196,14 +2237,35 @@ msgstr ""
 "Użytkownik %s nie może już wykonywać zadań administracyjnych. To konto nie "
 "będzie mogło samo uzyskać uprawnień administratora z powrotem."
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "Oddaj uprawnienia administratora"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1416
+msgid "You cannot change the user ID for the superuser account."
+msgstr "Nie można zmienić identyfikatora superużytkownika."
+
+#: ../src/users/user-settings.c:1424
+msgid ""
+"You cannot disable your own account, nor change your own home directory or "
+"user ID. Run this program from another user's session to edit these settings."
+msgstr ""
+"Nie można wyłączyć własnego konta, ani zmienić katalogu domowego lub "
+"identyfikatora użytkownika. Należy uruchomić ten program w sesji innego "
+"użytkownika, aby zmienić te ustawienia."
+
+#: ../src/users/user-settings.c:1434
+msgid ""
+"You cannot change an account's home directory or user ID while the user is "
+"logged in."
+msgstr ""
+"Nie można zmienić katalogu domowego lub identyfikatora zalogowanego "
+"użytkownika."
+
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "Zastosowywanie zmian w ustawieniach użytkownika..."
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "Ustawienia użytkowników"
