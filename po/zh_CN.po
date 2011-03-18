@@ -1,19 +1,20 @@
 # Simplified Chinese translation of gnome-system-tools
-# Copyright (C) 2010 Free Software Foundation, Inc.
+# Copyright (C) 2010, 2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-system-tools package.
 # Xun Zhang <zhangxun1977@hotmail.com>, 2003.
 # QAed by lark and fundawang, 2004.
 # Eleanor Chen <chenyueg@gmail.com>, 2010.
 # Tao Wang <dancefire@gmail.com>, 2010.
 # Dean Lee <xslidian@lidian.info>, 2010.
+# Yinghua Wang <wantinghard@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"system-tools&component=general\n"
-"POT-Creation-Date: 2010-09-05 21:38+0000\n"
-"PO-Revision-Date: 2010-09-06 21:06+0800\n"
+"system-tools&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-13 15:52+0000\n"
+"PO-Revision-Date: 2011-03-18 21:27+0800\n"
 "Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -238,7 +239,7 @@ msgstr "将调制解调器设为默认路由(_S)"
 msgid "_Subnet mask:"
 msgstr "子网掩码(_S)："
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:82
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "用户名(_U)："
 
@@ -664,78 +665,74 @@ msgid "Username must start with a letter!"
 msgstr "用户名必须以字母开始！"
 
 #: ../interfaces/users.ui.h:64
-msgid "You can't change user ID while the user is logged in."
-msgstr "您不能在用户已经登录时更改用户 ID。"
-
-#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "添加配置(_A)"
 
-#: ../interfaces/users.ui.h:66
+#: ../interfaces/users.ui.h:65
 msgid "_Advanced Settings"
 msgstr "高级设置(_A)："
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:66
 msgid "_Change..."
 msgstr "更改(_C)..."
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "注释(_C)"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:68
 msgid "_Current password:"
 msgstr "当前密码(_P)："
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:69
 msgid "_Custom"
 msgstr "自定义(_C)"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "警告和密码过期间的天数(_D)："
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:71
 msgid "_Enable Account"
 msgstr "启用账户(_E)"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:72
 msgid "_Encrypt home folder to protect sensitive data"
 msgstr "加密主目录以保护敏感数据(_E)"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "生成(_G)"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "主目录(_H)："
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "家庭电话(_H)："
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "主组(_M)："
 
-#: ../interfaces/users.ui.h:78
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "管理组(_M)"
 
-#: ../interfaces/users.ui.h:79
+#: ../interfaces/users.ui.h:78
 msgid "_Name:"
 msgstr "名称(_N)："
 
-#: ../interfaces/users.ui.h:80
+#: ../interfaces/users.ui.h:79
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#: ../interfaces/users.ui.h:81
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "_Shell："
 
-#: ../interfaces/users.ui.h:83
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "工作电话(_W)："
 
@@ -756,6 +753,11 @@ msgstr "用户管理工具是否在用户列表中显示系统用户。"
 msgid ""
 "Whether the users-admin tool should show the root user in the users list."
 msgstr "用户管理工具是否在用户列表中显示 root 用户。"
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr "获取系统权限出错：%s"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -789,7 +791,7 @@ msgid "You are not allowed to access the system configuration."
 msgstr "系统管理员不允许您访问系统配置。"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:685
+#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:704
 msgid "You are not allowed to modify the system configuration."
 msgstr "您不被允许修改系统配置。"
 
@@ -802,19 +804,23 @@ msgstr "无效的数据被发现"
 msgid "An unknown error occurred."
 msgstr "发生未知的错误。"
 
-#: ../src/common/gst-tool.c:422
+#: ../src/common/gst-tool.c:414
+msgid "Help"
+msgstr "帮助"
+
+#: ../src/common/gst-tool.c:445
 msgid "Could not display help"
 msgstr "无法显示帮助"
 
-#: ../src/common/gst-tool.c:616
+#: ../src/common/gst-tool.c:635
 msgid "The system configuration has potentially changed."
 msgstr "系统配置可能已更改。"
 
-#: ../src/common/gst-tool.c:618
+#: ../src/common/gst-tool.c:637
 msgid "Update content? This will lose any modification in course."
 msgstr "更新内容吗？这将会丢失所有正进行的修改。"
 
-#: ../src/common/gst-tool.c:687
+#: ../src/common/gst-tool.c:706
 #, c-format
 msgid ""
 "An error occurred while checking for authorizations: %s\n"
@@ -822,6 +828,42 @@ msgid ""
 msgstr ""
 "在检查授权的时候发生了一个错误：%s\n"
 "您可以作为 bug 报告这个问题。"
+
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "锁定"
+
+#: ../src/common/um-lockbutton.c:365
+msgid "Unlock"
+msgstr "解锁"
+
+#: ../src/common/um-lockbutton.c:374
+msgid "Locked"
+msgstr "已锁定"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"对话框已解锁。\n"
+"点击来避免更多的更改"
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"对话框已锁定。\n"
+"点击来进行更改"
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"系统策略不允许进行更改。\n"
+"联系您的系统管理员"
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -865,51 +907,51 @@ msgstr "这将阻止您启动新的应用程序，因此您必须重新登录。
 msgid "Change _Host name"
 msgstr "更改主机名(_H)"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "自动配置(DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "本地 Zeroconf 网络(IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "静态 IP 地址"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "WEP 密钥(ASCII)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "WEP 密钥(十六进制)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA 个人"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 个人"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "ISDN 调制解调器"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "串行调制解调器"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr " %s 属性"
@@ -1588,11 +1630,11 @@ msgid ""
 "folders."
 msgstr "您需要至少安装 Samba 或 NFS 才能共享文件夹。"
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "世界地图"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1608,11 +1650,11 @@ msgstr "更改系统时间、日期和时区"
 msgid "Time and Date"
 msgstr "时间和日期"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "NTP 支持未安装"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1620,27 +1662,27 @@ msgstr ""
 "请在系统中安装并激活 NTP 支持，以启用将您的本地时间服务器与 Internet 时间服务"
 "器同步的功能。"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "启用 NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "禁用 NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "同步系统时钟"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "与互联网服务器保持同步"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "手动"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "时间和日期设置"
 
@@ -1650,7 +1692,7 @@ msgstr "无法删除管理员组"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "这将使得系统不可用。"
 
@@ -1722,100 +1764,100 @@ msgstr "请为新组选择不同的数字标识符。"
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "请为组“%s”选择不同的数字标识符。"
 
-#: ../src/users/groups-table.c:44
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "组名"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "登录时不询问"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "登录时询问"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:55
 msgid "Monitor system logs"
 msgstr "监视系统日志"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:56
 msgid "Administer the system"
 msgstr "管理系统"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:57
 msgid "Use audio devices"
 msgstr "使用音频设备"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:58
 msgid "Use CD-ROM drives"
 msgstr "使用 CD-ROM 驱动器"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:59
 msgid "Burn CDs / DVDs"
 msgstr "刻录CD/DVD"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:60
 msgid "Use modems"
 msgstr "使用调制解调器"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Connect to Internet using a modem"
 msgstr "使用调制解调器连接到互联网"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
 msgid "Send and receive faxes"
 msgstr "发送和接受传真"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:63
 msgid "Use floppy drives"
 msgstr "使用软盘驱动器"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:64
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "挂载用户空间文件系统(FUSE)"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:65
 msgid "Configure printers"
 msgstr "配置打印机"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:66
 msgid "Connect to wireless and ethernet networks"
 msgstr "连接到无线网络和以太网"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:67
 msgid "Access external storage devices automatically"
 msgstr "自动访问外部存储设备"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:68
 msgid "Suspend and hibernate the computer"
 msgstr "挂起和休眠计算机"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:69
 msgid "Access /proc filesystem"
 msgstr "访问 /proc 文件系统"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:70
 msgid "Use scanners"
 msgstr "使用扫描仪"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:71
 msgid "Use tape drives"
 msgstr "使用磁带机"
 
-#: ../src/users/privileges-table.c:70
+#: ../src/users/privileges-table.c:72
 msgid "Use USB devices"
 msgstr "使用USB设备"
 
-#: ../src/users/privileges-table.c:71
+#: ../src/users/privileges-table.c:73
 msgid "Use VirtualBox virtualization solution"
 msgstr "使用 VirtualBox 虚拟化解决方案"
 
-#: ../src/users/privileges-table.c:72
+#: ../src/users/privileges-table.c:74
 msgid "Use video devices"
 msgstr "使用视频设备"
 
-#: ../src/users/privileges-table.c:73
+#: ../src/users/privileges-table.c:75
 msgid "Be able to get administrator privileges"
 msgstr "可以获得管理员权限"
 
@@ -1909,15 +1951,15 @@ msgstr "密码确认不正确"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "请检查您在两个文本框中输入的密码相同。"
 
-#: ../src/users/user-password.c:426
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "请选择其它密码。"
 
-#: ../src/users/user-password.c:437
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "请再次输入您当前的密码。"
 
-#: ../src/users/user-password.c:444
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "无法更改密码"
 
@@ -1972,33 +2014,33 @@ msgstr "不要移除账户"
 msgid "Delete Files"
 msgstr "删除文件"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "超级用户"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "自定义"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "无"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "注释中存在无效字符“%c”"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "请检查未使用此字符。"
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "主目录的路径不完整"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2006,11 +2048,11 @@ msgstr ""
 "请输入主目录的完整路径\n"
 "<span size=\"smaller\">如：/home/john</span>。"
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:452 ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "新的主目录已存在，是否使用它?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2025,30 +2067,30 @@ msgstr ""
 "\n"
 "如果有所顾虑，请使用新目录以避免丢失数据，稍后再从旧目录复制文件。"
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "使用旧文件替换(_R)"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:467 ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "取消变更(_C)"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "使用新文件(_U)"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "将用户设为新主目录的所有者(_O)"
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "删除旧的主目录(_D)"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2062,19 +2104,19 @@ msgstr ""
 "\n"
 "如果有所顾虑，请保留这些文件，如果需要则稍后移除它们。"
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "删除文件(_D)"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "使用现存文件(_U)"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "将旧主目录复制到新位置？"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2089,35 +2131,35 @@ msgstr ""
 "\n"
 "如果您选择复制文件到新地点，则可以放心删除旧目录。"
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "使用空目录(_U)"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "复制旧文件(_P)"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "root 用户的 ID 不应修改"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "用户 ID %d 已被用户 %s 使用了"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "请为 %s 选择不同的数字标识符。"
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "shell 的路径不完整"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2125,37 +2167,55 @@ msgstr ""
 "请输入 shell 的完整路径\n"
 "<span size=\"smaller\">如：/bin/bash</span>。"
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "不能撤销管理员权限"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
 "rights for this account would lock you out of administrating the system."
 msgstr "%s 是计算机上唯一的管理员。放弃此用户的管理器权限将使您不能管理系统。"
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "您将放弃自己的管理权限"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
 "won't be allowed to get administration rights back on its own."
 msgstr "%s 不再能执行管理任务。此账户将不被允许重新获得管理权限。"
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "放弃管理权限"
 
-#: ../src/users/user-settings.c:1459
+#: ../src/users/user-settings.c:1416
+msgid "You cannot change the user ID for the superuser account."
+msgstr "您不能更改超级账户的用户 ID。"
+
+#: ../src/users/user-settings.c:1424
+msgid ""
+"You cannot disable your own account, nor change your own home directory or "
+"user ID. Run this program from another user's session to edit these settings."
+msgstr ""
+"您不能禁用自己的账户或更改自己的主目录和用户 ID。请从其他用户的会话中运行此程"
+"序来编辑这些设置。"
+
+#: ../src/users/user-settings.c:1434
+msgid ""
+"You cannot change an account's home directory or user ID while the user is "
+"logged in."
+msgstr "您不能在用户已经登录的条件下更改用户的主目录。"
+
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "正在将更改应用到用户设置..."
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "用户设置"
 
@@ -2264,9 +2324,6 @@ msgstr "用户设置"
 #~ "your system configuration."
 #~ msgstr ""
 #~ "要使用此工具，您需要有管理员权限。请输入密码，以便修改您的系统配置。"
-
-#~ msgid "_Unlock"
-#~ msgstr "解锁(_U)"
 
 #~ msgid "This action is not allowed"
 #~ msgstr "不允许此动作"
