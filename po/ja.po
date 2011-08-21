@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"system-tools&component=general\n"
-"POT-Creation-Date: 2010-09-18 22:27+0000\n"
-"PO-Revision-Date: 2010-09-20 00:06+0900\n"
-"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
+"system-tools&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-07-08 21:05+0000\n"
+"PO-Revision-Date: 2011-08-21 18:09+0900\n"
+"Last-Translator: OKANO Takayoshi <kano@na.rim.or.jp>\n"
 "Language-Team: Japanese <gnome-translations@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -237,7 +237,7 @@ msgstr "モデムをインターネットに対するデフォルト・ルート
 msgid "_Subnet mask:"
 msgstr "サブネット・マスク(_S):"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:82
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "ユーザ名(_U):"
 
@@ -666,78 +666,74 @@ msgid "Username must start with a letter!"
 msgstr "ユーザ名は文字で始まってなくてはなりません!"
 
 #: ../interfaces/users.ui.h:64
-msgid "You can't change user ID while the user is logged in."
-msgstr "ユーザがログインしている間、そのユーザのIDを変更することはできません"
-
-#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "プロファイルの追加(_A)"
 
-#: ../interfaces/users.ui.h:66
+#: ../interfaces/users.ui.h:65
 msgid "_Advanced Settings"
 msgstr "高度な設定(_A)"
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:66
 msgid "_Change..."
 msgstr "変更(_C)..."
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "コメント(_C)"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:68
 msgid "_Current password:"
 msgstr "現在のパスワード(_C):"
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:69
 msgid "_Custom"
 msgstr "カスタム(_C)"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "パスワードの有効期限の警告を出すまでの日数(_D):"
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:71
 msgid "_Enable Account"
 msgstr "アカウントを有効化(_E)"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:72
 msgid "_Encrypt home folder to protect sensitive data"
 msgstr "秘密にしておきたいデータを守るためにホームディレクトリを暗号化(_E)"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "生成(_G)"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "ホームディレクトリ(_H):"
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "自宅の電話番号(_H):"
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "メインのグループ(_M):"
 
-#: ../interfaces/users.ui.h:78
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "グループの管理(_M)"
 
-#: ../interfaces/users.ui.h:79
+#: ../interfaces/users.ui.h:78
 msgid "_Name:"
 msgstr "名前(_N):"
 
-#: ../interfaces/users.ui.h:80
+#: ../interfaces/users.ui.h:79
 msgid "_Password:"
 msgstr "パスワード(_P):"
 
-#: ../interfaces/users.ui.h:81
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "Shell (_S):"
 
-#: ../interfaces/users.ui.h:83
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "会社の電話番号(_W):"
 
@@ -758,6 +754,11 @@ msgstr "users-admin ツールでユーザの一覧中のシステムユーザを
 msgid ""
 "Whether the users-admin tool should show the root user in the users list."
 msgstr "users-admin ツールでユーザの一覧中の root ユーザを表示するかどうか。"
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr ""
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -792,7 +793,7 @@ msgid "You are not allowed to access the system configuration."
 msgstr "システムの設定情報にアクセスする権限がありません。"
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:685
+#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:704
 msgid "You are not allowed to modify the system configuration."
 msgstr "あなたはシステムの設定情報を変更する権限はありません。"
 
@@ -805,19 +806,23 @@ msgstr "無効なデータが見つかりました。"
 msgid "An unknown error occurred."
 msgstr "不明なエラーが発生しました。"
 
-#: ../src/common/gst-tool.c:422
+#: ../src/common/gst-tool.c:414
+msgid "Help"
+msgstr ""
+
+#: ../src/common/gst-tool.c:445
 msgid "Could not display help"
 msgstr "ヘルプを表示できませんでした"
 
-#: ../src/common/gst-tool.c:616
+#: ../src/common/gst-tool.c:635
 msgid "The system configuration has potentially changed."
 msgstr "システムの設定情報は潜在的に変更されています。"
 
-#: ../src/common/gst-tool.c:618
+#: ../src/common/gst-tool.c:637
 msgid "Update content? This will lose any modification in course."
 msgstr "内容を更新しますか? (更新すると変更内容が失われます)"
 
-#: ../src/common/gst-tool.c:687
+#: ../src/common/gst-tool.c:706
 #, c-format
 msgid ""
 "An error occurred while checking for authorizations: %s\n"
@@ -825,6 +830,40 @@ msgid ""
 msgstr ""
 "権限をチェックしようとした時にエラーが発生しました: %s\n"
 "これはバグとして報告できます。"
+
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr ""
+
+#: ../src/common/um-lockbutton.c:365
+#, fuzzy
+#| msgid "_Unlock"
+msgid "Unlock"
+msgstr "ロックの解除(_U)"
+
+#: ../src/common/um-lockbutton.c:374
+#, fuzzy
+#| msgid "Loud"
+msgid "Locked"
+msgstr "大"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -872,51 +911,51 @@ msgstr ""
 msgid "Change _Host name"
 msgstr "ホスト名を変更する(_H)"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "自動設定 (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "ローカルの Zeroconf ネットワーク (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "IP-アドレスを指定する"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "WEP キー (ASCII)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "WEP キー (16進形式)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA パーソナル"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 パーソナル"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "ISDN モデム"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "シリアル・モデム"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "%sのプロパティ"
@@ -1363,7 +1402,7 @@ msgstr "RPC マッパ"
 #. GST_ROLE_RPC_MAPPER
 #: ../src/services/service.c:82
 msgid "SNMP server"
-msgstr "SNNP サーバ"
+msgstr "SNMP サーバ"
 
 #. GST_ROLE_SNMP_SERVER
 #: ../src/services/service.c:83
@@ -1601,11 +1640,11 @@ msgstr ""
 "お使いのフォルダを共有するには、少なくとも Samba または NFS のどちらかをイン"
 "ストールしておいてください。"
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "世界地図"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1622,11 +1661,11 @@ msgstr "システム時刻や日付、タイムゾーンを管理します"
 msgid "Time and Date"
 msgstr "時刻と日付の設定"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "NTP サービスがインストールされていません"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1634,27 +1673,27 @@ msgstr ""
 "インターネット上の時刻サーバとローカルの時刻サーバを同期するために、NTP サー"
 "ビスをインストールしてから起動してください。"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "NTP を有効にする"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "NTP を無効にする"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "システム時計と同期中"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "インターネット上のサーバと同期させる"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "手動"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "時刻と日付の設定"
 
@@ -1664,7 +1703,7 @@ msgstr "管理者のグループは削除できません"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "システムを利用できなくなります。"
 
@@ -1738,100 +1777,100 @@ msgstr "新しいグループに別の数のIDを選んでください。"
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "グループ \"%s\" に別の数のIDを選んでください。"
 
-#: ../src/users/groups-table.c:44
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "グループ名"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "ログイン時に尋ねない"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "ログイン時に尋ねる"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:55
 msgid "Monitor system logs"
 msgstr "システムのログを監視できる"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:56
 msgid "Administer the system"
 msgstr "システムの管理者である"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:57
 msgid "Use audio devices"
 msgstr "オーディオ・デバイスを使用できる"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:58
 msgid "Use CD-ROM drives"
 msgstr "CD-ROM ドライブを使用できる"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:59
 msgid "Burn CDs / DVDs"
 msgstr "CD / DVD を書き込める"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:60
 msgid "Use modems"
 msgstr "モデムを使用できる"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Connect to Internet using a modem"
 msgstr "モデムを使ってインターネットに接続できる"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
 msgid "Send and receive faxes"
 msgstr "FAX を送受信できる"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:63
 msgid "Use floppy drives"
 msgstr "フロッピー・ドライブを使用できる"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:64
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "ユーザスペースファイルシステム (FUSE) をマウントできる"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:65
 msgid "Configure printers"
 msgstr "プリンタを設定できる"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:66
 msgid "Connect to wireless and ethernet networks"
 msgstr "無線およびイーサネットのネットワークに接続できる"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:67
 msgid "Access external storage devices automatically"
 msgstr "自動的に外部のディスクにアクセスできる"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:68
 msgid "Suspend and hibernate the computer"
 msgstr "コンピュータをサスペンド、ハイバネートできる"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:69
 msgid "Access /proc filesystem"
 msgstr "/proc ファイルシステムにアクセスできる"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:70
 msgid "Use scanners"
 msgstr "スキャナを使用できる"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:71
 msgid "Use tape drives"
 msgstr "テープ・ドライブを使用できる"
 
-#: ../src/users/privileges-table.c:70
+#: ../src/users/privileges-table.c:72
 msgid "Use USB devices"
 msgstr "USB デバイスを使用する"
 
-#: ../src/users/privileges-table.c:71
+#: ../src/users/privileges-table.c:73
 msgid "Use VirtualBox virtualization solution"
 msgstr "VirtualBox 仮想ソリューションを使用できる"
 
-#: ../src/users/privileges-table.c:72
+#: ../src/users/privileges-table.c:74
 msgid "Use video devices"
 msgstr "ビデオ・デバイスを使用できる"
 
-#: ../src/users/privileges-table.c:73
+#: ../src/users/privileges-table.c:75
 msgid "Be able to get administrator privileges"
 msgstr "管理者の権限を取得できる"
 
@@ -1930,15 +1969,15 @@ msgstr "パスワードの妥当性を確認できませんでした"
 msgid "Check that you have provided the same password in both text fields."
 msgstr "両方の入力フィールドに同じパスワードを指定しているか確認してください。"
 
-#: ../src/users/user-password.c:445
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "他のパスワードを選択してください。"
 
-#: ../src/users/user-password.c:456
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "あなたの現在のパスワードを再度タイプしてください。"
 
-#: ../src/users/user-password.c:463
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "パスワードは変更できませんでした"
 
@@ -1998,33 +2037,33 @@ msgstr "アカウントを削除しない"
 msgid "Delete Files"
 msgstr "ファイルを削除"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "スーパユーザ"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "カスタム"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "なし"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "コメントに無効な文字 \"%c\" があります"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "この文字を使用していないか確認してください。"
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "ホームディレクトリの中に不完全なパスがあります"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2032,11 +2071,11 @@ msgstr ""
 "ホームディレクトリの絶対パスを入力してください。\n"
 "<span size=\"smaller\">例: /home/john</span>"
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:452 ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "新しいホームディレクトリが既に存在しています。それを使用しますか?"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2053,30 +2092,30 @@ msgstr ""
 "よくわからない場合は、新しいディレクトリを使ってデータを失うのを避け、古い"
 "ホームディレクトリから後でファイルをコピーしてください。"
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "古いファイルで置き換える(_R)"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:467 ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "変更をキャンセル(_C)"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "新しいファイルを使用(_U)"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "ユーザを新しいホームディレクトリのオーナにする(_O)"
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "古いホームディレクトリを削除(_D)"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2092,19 +2131,19 @@ msgstr ""
 "よくわからない場合は、ファイルをそのままにしておき、必要になったあとで削除し"
 "てください。"
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "ファイルを削除(_D)"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "既存のファイルを使用(_U)"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "古いホームディレクトリを新しい場所へコピーしますか?"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2121,35 +2160,35 @@ msgstr ""
 "新しい場所にコピーすることを選択した場合、古いディレクトリは削除してしまうの"
 "が安全です。"
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "空のディレクトリを使用(_U)"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "古いファイルをコピー(_P)"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "root ユーザの ID は変更すべきではありません"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "ユーザ ID %d はユーザ \"%s\" で既に使用されています"
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "%s の別の数のIDを選択してください。"
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "シェルの中に不完全なパスがあります"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2157,11 +2196,11 @@ msgstr ""
 "シェルの絶対パスを入力してください。\n"
 "<span size=\"smaller\">例: /bin/bash</span>"
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "管理者の権限は剥奪できません"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2170,11 +2209,11 @@ msgstr ""
 "%s はこのコンピュータの唯一の管理者です。このアカウントの管理者の権限を剥奪す"
 "ると、このシステムを管理することができなくなってしまいます。"
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "あなたはあなたの管理者権限を削除しようとしています"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2183,15 +2222,35 @@ msgstr ""
 "%s はもはやタスクの管理を実行できません。このアカウントに管理者権限を取り戻す"
 "ことは許可されていません。"
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "管理者権限を放棄する"
 
-#: ../src/users/user-settings.c:1469
+#: ../src/users/user-settings.c:1416
+#, fuzzy
+#| msgid "You can't change user ID while the user is logged in."
+msgid "You cannot change the user ID for the superuser account."
+msgstr "ユーザがログインしている間、そのユーザのIDを変更することはできません"
+
+#: ../src/users/user-settings.c:1424
+msgid ""
+"You cannot disable your own account, nor change your own home directory or "
+"user ID. Run this program from another user's session to edit these settings."
+msgstr ""
+
+#: ../src/users/user-settings.c:1434
+#, fuzzy
+#| msgid "You can't change user ID while the user is logged in."
+msgid ""
+"You cannot change an account's home directory or user ID while the user is "
+"logged in."
+msgstr "ユーザがログインしている間、そのユーザのIDを変更することはできません"
+
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "ユーザの設定への変更を適用中..."
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "ユーザの設定"
 
@@ -2226,9 +2285,6 @@ msgstr "ユーザの設定"
 
 #~ msgid "_Real name:"
 #~ msgstr "氏名(_R):"
-
-#~ msgid "_Unlock"
-#~ msgstr "ロックの解除(_U)"
 
 #~ msgid "This action is not allowed"
 #~ msgstr "この操作は許可されていません"
