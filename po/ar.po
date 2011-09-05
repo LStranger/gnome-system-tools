@@ -8,13 +8,15 @@
 # Ahmad Farghal <ahmad.farghal@gmail.com>, 2007.
 # Anas Husseini <linux.anas@gmail.com>, 2008.
 # Osama Khalid <osamak.wfm@gmail.com>, 2009.
+# Abdalrahim G. Fakhouri <abdilra7eem@yahoo.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.ar\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-23 14:53+0300\n"
-"PO-Revision-Date: 2010-09-23 14:52+0300\n"
-"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"system-tools&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-08-30 07:18+0000\n"
+"PO-Revision-Date: 2011-09-03 23:36+0300\n"
+"Last-Translator: Abdalrahim G. Fakhouri <abdilra7eem@yahoo.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +24,8 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Virtaal 0.6.1\n"
+"X-Generator: Virtaal 0.7.0\n"
+"X-Project-Style: gnome\n"
 
 #: ../interfaces/network.ui.h:1 ../src/network/ifaces-list.c:326
 msgid "Access point name:"
@@ -240,7 +243,7 @@ msgstr "_عيِّن المودم على أنّه المسلك الرّئيسي �
 msgid "_Subnet mask:"
 msgstr "_قناع الشّبكة الفرعيّة:"
 
-#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:82
+#: ../interfaces/network.ui.h:55 ../interfaces/users.ui.h:81
 msgid "_Username:"
 msgstr "ا_سم المستخدم:"
 
@@ -667,78 +670,74 @@ msgid "Username must start with a letter!"
 msgstr "يجب أن يبدأ اسم المستخدم بحرف"
 
 #: ../interfaces/users.ui.h:64
-msgid "You can't change user ID while the user is logged in."
-msgstr "لا يمكن تغيير معرف المستخدم بينما هو والج إلى النظام."
-
-#: ../interfaces/users.ui.h:65
 msgid "_Add Profile"
 msgstr "أ_ضف هيئة..."
 
-#: ../interfaces/users.ui.h:66
+#: ../interfaces/users.ui.h:65
 msgid "_Advanced Settings"
 msgstr "الإ_عدادات المتقدمة"
 
-#: ../interfaces/users.ui.h:67
+#: ../interfaces/users.ui.h:66
 msgid "_Change..."
 msgstr "غيّر..."
 
-#: ../interfaces/users.ui.h:68
+#: ../interfaces/users.ui.h:67
 msgid "_Comments"
 msgstr "_تعليقات:"
 
-#: ../interfaces/users.ui.h:69
+#: ../interfaces/users.ui.h:68
 msgid "_Current password:"
 msgstr "كلمة السر ال_حالية:"
 
-#: ../interfaces/users.ui.h:70
+#: ../interfaces/users.ui.h:69
 msgid "_Custom"
 msgstr "_مُخصَّص"
 
-#: ../interfaces/users.ui.h:71
+#: ../interfaces/users.ui.h:70
 msgid "_Days between warning and password expiration:"
 msgstr "الأ_يّام بين التّحذير و بطلان كلمة السّر:"
 
-#: ../interfaces/users.ui.h:72
+#: ../interfaces/users.ui.h:71
 msgid "_Enable Account"
 msgstr "_فعّل الحساب"
 
-#: ../interfaces/users.ui.h:73
+#: ../interfaces/users.ui.h:72
 msgid "_Encrypt home folder to protect sensitive data"
 msgstr "_عمّ مجلد المنزل لحماية البيانات الحساسة"
 
-#: ../interfaces/users.ui.h:74
+#: ../interfaces/users.ui.h:73
 msgid "_Generate"
 msgstr "ولِّد"
 
-#: ../interfaces/users.ui.h:75
+#: ../interfaces/users.ui.h:74
 msgid "_Home directory:"
 msgstr "المجلّد المنز_ل:"
 
-#: ../interfaces/users.ui.h:76
+#: ../interfaces/users.ui.h:75
 msgid "_Home phone:"
 msgstr "هاتف المنز_ل:"
 
-#: ../interfaces/users.ui.h:77
+#: ../interfaces/users.ui.h:76
 msgid "_Main group:"
 msgstr "المجموعة ال_رّئيسيّة:"
 
-#: ../interfaces/users.ui.h:78
+#: ../interfaces/users.ui.h:77
 msgid "_Manage Groups"
 msgstr "إ_دارة المجموعات"
 
-#: ../interfaces/users.ui.h:79
+#: ../interfaces/users.ui.h:78
 msgid "_Name:"
 msgstr "الا_سم:"
 
-#: ../interfaces/users.ui.h:80
+#: ../interfaces/users.ui.h:79
 msgid "_Password:"
 msgstr "_كلمة السر:"
 
-#: ../interfaces/users.ui.h:81
+#: ../interfaces/users.ui.h:80
 msgid "_Shell:"
 msgstr "ال_صدَفة:"
 
-#: ../interfaces/users.ui.h:83
+#: ../interfaces/users.ui.h:82
 msgid "_Work phone:"
 msgstr "هاتف ال_عمل:"
 
@@ -761,6 +760,11 @@ msgid ""
 "Whether the users-admin tool should show the root user in the users list."
 msgstr ""
 "فيما إذا يفترض أن تظهر أداة users-admin المستخدم الجذر في قائمة المستخدمين."
+
+#: ../src/common/gst-dialog.c:254
+#, c-format
+msgid "Error accessing system permissions: %s"
+msgstr "خطأ في إعراب صلاحيات النظام: %s"
 
 #: ../src/common/gst-platform-dialog.c:179
 msgid "The platform you are running is not supported by this tool"
@@ -794,7 +798,7 @@ msgid "You are not allowed to access the system configuration."
 msgstr "غير مسموح لك بالنفاذ لإعدادات النظام."
 
 #. OPERATION_COMMIT
-#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:685
+#: ../src/common/gst-tool.c:196 ../src/common/gst-tool.c:704
 msgid "You are not allowed to modify the system configuration."
 msgstr "غير مسموح لك بتغيير لإعدادات النظام."
 
@@ -807,19 +811,23 @@ msgstr "وجدت بيانات غير سليمة."
 msgid "An unknown error occurred."
 msgstr "حدث خطأ مجهول."
 
-#: ../src/common/gst-tool.c:422
+#: ../src/common/gst-tool.c:414
+msgid "Help"
+msgstr "مساعدة"
+
+#: ../src/common/gst-tool.c:445
 msgid "Could not display help"
 msgstr "لم أستطع عرض المساعدة"
 
-#: ../src/common/gst-tool.c:616
+#: ../src/common/gst-tool.c:635
 msgid "The system configuration has potentially changed."
 msgstr "إعدادات النظام قد تغيرت فعلًا."
 
-#: ../src/common/gst-tool.c:618
+#: ../src/common/gst-tool.c:637
 msgid "Update content? This will lose any modification in course."
 msgstr "هل تريد تحديث المحتوى؟ سيجعلك هذا تفقد كل تعديل حالي."
 
-#: ../src/common/gst-tool.c:687
+#: ../src/common/gst-tool.c:706
 #, c-format
 msgid ""
 "An error occurred while checking for authorizations: %s\n"
@@ -827,6 +835,42 @@ msgid ""
 msgstr ""
 "حدث خطأ أثناء مراجعة التخويلات: %s\n"
 "هذه علة قد تريد الإبلاغ عنها."
+
+#: ../src/common/um-lockbutton.c:356
+msgid "Lock"
+msgstr "اقفل"
+
+#: ../src/common/um-lockbutton.c:365
+msgid "Unlock"
+msgstr "الغِ القفل"
+
+#: ../src/common/um-lockbutton.c:374
+msgid "Locked"
+msgstr "مقفل"
+
+#: ../src/common/um-lockbutton.c:383
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"مربع الحوار ليس مقفلاً.\n"
+"انقر لمنع التعديلات المستقبليّة"
+
+#: ../src/common/um-lockbutton.c:392
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"مربع الحوار مقفل.\n"
+"انقر لعمل تغييرات"
+
+#: ../src/common/um-lockbutton.c:401
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"سياسة النظام تمنع التغييرات.\n"
+"تواصل مع مدير النظام"
 
 #: ../src/network/address-list.c:76 ../src/network/hosts.c:31
 #: ../src/shares/table.c:38 ../src/users/table.c:40
@@ -872,51 +916,51 @@ msgstr ""
 msgid "Change _Host name"
 msgstr "غيّر ا_سم المستضيف:"
 
-#: ../src/network/connection.c:40
+#: ../src/network/connection.c:42
 msgid "Automatic configuration (DHCP)"
 msgstr "إعداد تلقائي (DHCP)"
 
-#: ../src/network/connection.c:41
+#: ../src/network/connection.c:43
 msgid "Local Zeroconf network (IPv4 LL)"
 msgstr "شبكة زيروكونف محلية (IPv4 LL)"
 
-#: ../src/network/connection.c:42
+#: ../src/network/connection.c:44
 msgid "Static IP address"
 msgstr "عنوان IP ثابت"
 
-#: ../src/network/connection.c:46
+#: ../src/network/connection.c:48
 msgid "WEP key (ascii)"
 msgstr "مفتاح WEP (أسكي)"
 
-#: ../src/network/connection.c:47
+#: ../src/network/connection.c:49
 msgid "WEP key (hexadecimal)"
 msgstr "مفتاح WEP (ست عشري)"
 
-#: ../src/network/connection.c:48
+#: ../src/network/connection.c:50
 msgid "WPA Personal"
 msgstr "WPA شخصي"
 
-#: ../src/network/connection.c:49
+#: ../src/network/connection.c:51
 msgid "WPA2 Personal"
 msgstr "WPA2 شخصي"
 
-#: ../src/network/connection.c:53
+#: ../src/network/connection.c:55
 msgid "GPRS/UMTS"
 msgstr "GPRS/UMTS"
 
-#: ../src/network/connection.c:54
+#: ../src/network/connection.c:56
 msgid "ISDN modem"
 msgstr "مودم ISDN"
 
-#: ../src/network/connection.c:55
+#: ../src/network/connection.c:57
 msgid "Serial modem"
 msgstr "مودم تسلسلية"
 
-#: ../src/network/connection.c:56
+#: ../src/network/connection.c:58
 msgid "PPPoE"
 msgstr "PPPoE"
 
-#: ../src/network/connection.c:769
+#: ../src/network/connection.c:771
 #, c-format
 msgid "%s Properties"
 msgstr "خصائص %s"
@@ -1597,11 +1641,11 @@ msgid ""
 "folders."
 msgstr "تحتاج لتثبيت على الأقل Samba أو NFS لتشارك مجلداتك."
 
-#: ../src/time/e-map/e-map.c:620
+#: ../src/time/e-map/e-map.c:775
 msgid "World Map"
 msgstr "خريطة العالم"
 
-#: ../src/time/e-map/e-map.c:622
+#: ../src/time/e-map/e-map.c:777
 msgid ""
 "Mouse-based interactive map widget for selecting timezone. Keyboard users "
 "should instead select the timezone from the drop-down combination box below."
@@ -1617,11 +1661,11 @@ msgstr "غيّر وقت النّظام و التّاريخ و المنطقة ا�
 msgid "Time and Date"
 msgstr "الوقت و التّاريخ"
 
-#: ../src/time/time-tool.c:398
+#: ../src/time/time-tool.c:394
 msgid "NTP support is not installed"
 msgstr "دعم NTP ليس مثبتا"
 
-#: ../src/time/time-tool.c:400
+#: ../src/time/time-tool.c:396
 msgid ""
 "Please install and activate NTP support in the system to enable "
 "synchronization of your local time server with internet time servers."
@@ -1629,27 +1673,27 @@ msgstr ""
 "رّجاء ثبّت وفعّل دعم NTP في نظامك لتمكِّن مزامنة خادوم التوقيت المحلّي مع خواديم "
 "توقيت الإنترنت."
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Enabling NTP"
 msgstr "يجري تمكين NTP"
 
-#: ../src/time/time-tool.c:429
+#: ../src/time/time-tool.c:425
 msgid "Disabling NTP"
 msgstr "يجري تعطيل NTP"
 
-#: ../src/time/time-tool.c:441
+#: ../src/time/time-tool.c:437
 msgid "Synchronizing system clock"
 msgstr "يجري مزامنة ساعة النظام"
 
-#: ../src/time/time-tool.c:521
+#: ../src/time/time-tool.c:517
 msgid "Keep synchronized with Internet servers"
 msgstr "ابقِ متزامنا مع خواديم الإنترنت"
 
-#: ../src/time/time-tool.c:522
+#: ../src/time/time-tool.c:518
 msgid "Manual"
 msgstr "يدوي"
 
-#: ../src/time/time-tool.c:665
+#: ../src/time/time-tool.c:661
 msgid "Time and Date Settings"
 msgstr "إعدادات الوقت و التّاريخ"
 
@@ -1659,7 +1703,7 @@ msgstr "لا يمكن حذف مجموعة المديرين"
 
 #: ../src/users/group-settings.c:58 ../src/users/group-settings.c:221
 #: ../src/users/group-settings.c:258 ../src/users/user-settings.c:88
-#: ../src/users/user-settings.c:605
+#: ../src/users/user-settings.c:610
 msgid "This would leave the system unusable."
 msgstr "قد يترك هذا النّظام غير قابل للاستخدام."
 
@@ -1731,100 +1775,100 @@ msgstr "رجاء اختر معرفا رقميا آخر للمجموعة الجد
 msgid "Please choose a different numeric identifier for group \"%s\"."
 msgstr "رجاء اختر معرفا رقميا آخر للمجموعة \"%s\"."
 
-#: ../src/users/groups-table.c:44
+#: ../src/users/groups-table.c:47
 msgid "Group name"
 msgstr "اسم المجموعة"
 
 #. TRANSLATORS:  This applies to a password. Keep the string short.
-#: ../src/users/main.c:74 ../src/users/user-settings.c:347
+#: ../src/users/main.c:74 ../src/users/user-settings.c:352
 msgid "Not asked on login"
 msgstr "لن تُطلب عند الولوج"
 
-#: ../src/users/main.c:74 ../src/users/user-settings.c:349
+#: ../src/users/main.c:74 ../src/users/user-settings.c:354
 msgid "Asked on login"
 msgstr "تُطلب عند الولوج"
 
-#: ../src/users/privileges-table.c:53
+#: ../src/users/privileges-table.c:55
 msgid "Monitor system logs"
 msgstr "مراقبة سجلات النظام"
 
-#: ../src/users/privileges-table.c:54
+#: ../src/users/privileges-table.c:56
 msgid "Administer the system"
 msgstr "إدارة النظام"
 
-#: ../src/users/privileges-table.c:55
+#: ../src/users/privileges-table.c:57
 msgid "Use audio devices"
 msgstr "استخدام الأجهزة الصوتية"
 
-#: ../src/users/privileges-table.c:56
+#: ../src/users/privileges-table.c:58
 msgid "Use CD-ROM drives"
 msgstr "استخدام محركات الأقراص المدمجة"
 
-#: ../src/users/privileges-table.c:57
+#: ../src/users/privileges-table.c:59
 msgid "Burn CDs / DVDs"
 msgstr "نسخ الاسطوانات"
 
-#: ../src/users/privileges-table.c:58
+#: ../src/users/privileges-table.c:60
 msgid "Use modems"
 msgstr "استخدام المودم"
 
-#: ../src/users/privileges-table.c:59
+#: ../src/users/privileges-table.c:61
 msgid "Connect to Internet using a modem"
 msgstr "الاتصال بالإنترنت باستخدام مودم"
 
-#: ../src/users/privileges-table.c:60
+#: ../src/users/privileges-table.c:62
 msgid "Send and receive faxes"
 msgstr "إرسال واستقبال الفاكسات"
 
-#: ../src/users/privileges-table.c:61
+#: ../src/users/privileges-table.c:63
 msgid "Use floppy drives"
 msgstr "استخدام محركات الأقراص المرنة"
 
-#: ../src/users/privileges-table.c:62
+#: ../src/users/privileges-table.c:64
 msgid "Mount user-space filesystems (FUSE)"
 msgstr "وصل نظام ملفات نطاق المستخدمين (FUSE)"
 
-#: ../src/users/privileges-table.c:63
+#: ../src/users/privileges-table.c:65
 msgid "Configure printers"
 msgstr "إعداد الطابعات"
 
-#: ../src/users/privileges-table.c:64
+#: ../src/users/privileges-table.c:66
 msgid "Connect to wireless and ethernet networks"
 msgstr "الاتصال بالشبكات السلكية واللاسلكية"
 
-#: ../src/users/privileges-table.c:65
+#: ../src/users/privileges-table.c:67
 msgid "Access external storage devices automatically"
 msgstr "الوصول إلى أجهزة التخزين الخارجية آليًا"
 
-#: ../src/users/privileges-table.c:66
+#: ../src/users/privileges-table.c:68
 msgid "Suspend and hibernate the computer"
 msgstr "تعليق وإسبات الحاسوب"
 
-#: ../src/users/privileges-table.c:67
+#: ../src/users/privileges-table.c:69
 msgid "Access /proc filesystem"
 msgstr "الوصول إلى نظام ملفات ‪/proc‬"
 
-#: ../src/users/privileges-table.c:68
+#: ../src/users/privileges-table.c:70
 msgid "Use scanners"
 msgstr "استخدام الماسحات"
 
-#: ../src/users/privileges-table.c:69
+#: ../src/users/privileges-table.c:71
 msgid "Use tape drives"
 msgstr "استخدام محركات الأشرطة"
 
-#: ../src/users/privileges-table.c:70
+#: ../src/users/privileges-table.c:72
 msgid "Use USB devices"
 msgstr "استخدام أجهزة USB"
 
-#: ../src/users/privileges-table.c:71
+#: ../src/users/privileges-table.c:73
 msgid "Use VirtualBox virtualization solution"
 msgstr "استخدام محاكاة VirtualBox الافتراضية"
 
-#: ../src/users/privileges-table.c:72
+#: ../src/users/privileges-table.c:74
 msgid "Use video devices"
 msgstr "استخدام أجهزة العرض"
 
-#: ../src/users/privileges-table.c:73
+#: ../src/users/privileges-table.c:75
 msgid "Be able to get administrator privileges"
 msgstr "إمكانية الحصول على صلاحيات المدير"
 
@@ -1922,15 +1966,15 @@ msgstr "تأكيد كلمة السّر غير صحيح."
 msgid "Check that you have provided the same password in both text fields."
 msgstr "تأكّد أنّك قد أدخلت كلمة السر نفسها في حقلي النّصّ كليهما."
 
-#: ../src/users/user-password.c:445
+#: ../src/users/user-password.c:443
 msgid "Please choose another password."
 msgstr "رجاء اختر كلمة سر أخرى."
 
-#: ../src/users/user-password.c:456
+#: ../src/users/user-password.c:454
 msgid "Please type again your current password."
 msgstr "رجاء أعد كتابة كلمة السر الحالية."
 
-#: ../src/users/user-password.c:463
+#: ../src/users/user-password.c:461
 msgid "Password could not be changed"
 msgstr "لا يمكن تغيير كلمة السر"
 
@@ -1988,33 +2032,33 @@ msgstr "لا تحذف الحساب"
 msgid "Delete Files"
 msgstr "احذف الملفات"
 
-#: ../src/users/user-settings.c:330
+#: ../src/users/user-settings.c:335
 msgid "Superuser"
 msgstr "مستخدم فائق"
 
-#: ../src/users/user-settings.c:335
+#: ../src/users/user-settings.c:340
 msgid "Custom"
 msgstr "مخصّص"
 
 #. TRANSLATORS: This applies to a password.
-#: ../src/users/user-settings.c:344
+#: ../src/users/user-settings.c:349
 msgid "None"
 msgstr "لا شيء"
 
-#: ../src/users/user-settings.c:393
+#: ../src/users/user-settings.c:398
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "محرفٌ غير سليم \"%c\" في التّعليق"
 
-#: ../src/users/user-settings.c:394
+#: ../src/users/user-settings.c:399
 msgid "Check that this character is not used."
 msgstr "تأكّد أن هذا المحرف غير مستخدم."
 
-#: ../src/users/user-settings.c:426
+#: ../src/users/user-settings.c:431
 msgid "Incomplete path in home directory"
 msgstr "مسار غير كامل لمجلّد المنزل"
 
-#: ../src/users/user-settings.c:427
+#: ../src/users/user-settings.c:432
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>."
@@ -2022,11 +2066,11 @@ msgstr ""
 "رجاءً أدخل المسار الكامل لمجلّد المنزل\n"
 "<span size=\"smaller\">مثلًا: ‪/home/john‬</span>."
 
-#: ../src/users/user-settings.c:447 ../src/users/user-settings.c:491
+#: ../src/users/user-settings.c:452 ../src/users/user-settings.c:496
 msgid "New home directory already exists, use it?"
 msgstr "المجلد المنزلي الجديد موجود مسبقًا، أأستخدمه؟"
 
-#: ../src/users/user-settings.c:449
+#: ../src/users/user-settings.c:454
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2043,30 +2087,30 @@ msgstr ""
 "في حال الشك استخدم مجلدا جديدا لتلافي فقد البيانات، لاحقا يمكنك نسخ الملفات "
 "من المجلد القديم."
 
-#: ../src/users/user-settings.c:461
+#: ../src/users/user-settings.c:466
 msgid "_Replace With Old Files"
 msgstr "ا_ستخدم الملفات القديمة"
 
-#: ../src/users/user-settings.c:462 ../src/users/user-settings.c:504
-#: ../src/users/user-settings.c:540
+#: ../src/users/user-settings.c:467 ../src/users/user-settings.c:509
+#: ../src/users/user-settings.c:545
 msgid "_Cancel Change"
 msgstr "ألغِ الت_غيير"
 
 #. TRANSLATORS: This means "use the files from the new location",
 #. * as opposed to those from the old location.
-#: ../src/users/user-settings.c:465
+#: ../src/users/user-settings.c:470
 msgid "_Use New Files"
 msgstr "اس_تخدم الملفات الجديدة"
 
-#: ../src/users/user-settings.c:470 ../src/users/user-settings.c:510
+#: ../src/users/user-settings.c:475 ../src/users/user-settings.c:515
 msgid "Make user the _owner of the new home directory"
 msgstr "اجعل المستخدم _مالك مجلد المنزل الجديد"
 
-#: ../src/users/user-settings.c:473 ../src/users/user-settings.c:547
+#: ../src/users/user-settings.c:478 ../src/users/user-settings.c:552
 msgid "_Delete old home directory"
 msgstr "ا_حذف مجلد المنزل القديم"
 
-#: ../src/users/user-settings.c:493
+#: ../src/users/user-settings.c:498
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which already exists. "
@@ -2081,19 +2125,19 @@ msgstr ""
 "\n"
 "في حال الشك، أبق على الملفات واحذفهم يدويا إن دعت الحاجة."
 
-#: ../src/users/user-settings.c:503
+#: ../src/users/user-settings.c:508
 msgid "_Delete Files"
 msgstr "ا_حذف الملفات"
 
-#: ../src/users/user-settings.c:505
+#: ../src/users/user-settings.c:510
 msgid "_Use Existing Files"
 msgstr "ا_ستخدم الملفات الموجودة"
 
-#: ../src/users/user-settings.c:526
+#: ../src/users/user-settings.c:531
 msgid "Copy old home directory to new location?"
 msgstr "أأنسخ المجلد المنزلي القديم إلى المكان الجديد؟"
 
-#: ../src/users/user-settings.c:528
+#: ../src/users/user-settings.c:533
 #, c-format
 msgid ""
 "The home directory for %s has been set to <tt>%s</tt>, which doesn't exist. "
@@ -2109,35 +2153,35 @@ msgstr ""
 "\n"
 "إذا اخترت نسخ الملفات إلى المكان الجيد فمن الآمن حذف المجلد القديم."
 
-#: ../src/users/user-settings.c:539
+#: ../src/users/user-settings.c:544
 msgid "_Use Empty Directory"
 msgstr "استخدم _مجلدا خاليا"
 
 #. TRANSLATORS: This means "copy files from the old home directory".
-#: ../src/users/user-settings.c:542
+#: ../src/users/user-settings.c:547
 msgid "Co_py Old Files"
 msgstr "ا_نسخ الملفات القديمة"
 
-#: ../src/users/user-settings.c:604
+#: ../src/users/user-settings.c:609
 msgid "ID for the root user should not be modified"
 msgstr "يجب ألّا تعدّل هوية المستخدم الجذر"
 
 #. check that UID is free
-#: ../src/users/user-settings.c:608
+#: ../src/users/user-settings.c:613
 #, c-format
 msgid "User ID %d is already used by user %s"
 msgstr "معرف المستخدم %d يستخدمه مسبقا المستخدم \"%s\""
 
-#: ../src/users/user-settings.c:610
+#: ../src/users/user-settings.c:615
 #, c-format
 msgid "Please choose a different numeric identifier for %s."
 msgstr "رجاء اختر معرفا رقميا آخر ل‍ \"%s\"."
 
-#: ../src/users/user-settings.c:628
+#: ../src/users/user-settings.c:633
 msgid "Incomplete path in shell"
 msgstr "مسار غير كامل في الصدفة"
 
-#: ../src/users/user-settings.c:629
+#: ../src/users/user-settings.c:634
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/bash</span>."
@@ -2145,11 +2189,11 @@ msgstr ""
 "رّجاء إدخال مسار كامل للصدفة\n"
 "<span size=\"smaller\">مثلًا: ‪/bin/bash‬</span>."
 
-#: ../src/users/user-settings.c:663
+#: ../src/users/user-settings.c:668
 msgid "Can't revoke administration rights"
 msgstr "لا يمكن إبطال الصلاحيات الإدارية"
 
-#: ../src/users/user-settings.c:666
+#: ../src/users/user-settings.c:671
 #, c-format
 msgid ""
 "%s is the only administrator on this computer. Revoking administration "
@@ -2158,11 +2202,11 @@ msgstr ""
 "‏%s هو المدير الوحيد لهذا الحاسوب. إبطال الصلاحيات الإدارية سيؤدي إلى منعك من "
 "إدارة النظام."
 
-#: ../src/users/user-settings.c:683
+#: ../src/users/user-settings.c:688
 msgid "You are about to revoke your own administration rights"
 msgstr "أنت على وشك إبطال صلاحياتك الإدارية"
 
-#: ../src/users/user-settings.c:686
+#: ../src/users/user-settings.c:691
 #, c-format
 msgid ""
 "%s will no longer be able to perform administrative tasks. This account "
@@ -2171,15 +2215,34 @@ msgstr ""
 "لن يعود بإمكان %s أداء المهاد الإدارية. لن يسمح لهذا الحساب باستعادة "
 "الصلاحية الإدارية بنفسه."
 
-#: ../src/users/user-settings.c:691
+#: ../src/users/user-settings.c:696
 msgid "Give up administration rights"
 msgstr "تخل عن الصلاحيات الإدارية"
 
-#: ../src/users/user-settings.c:1469
+#: ../src/users/user-settings.c:1416
+msgid "You cannot change the user ID for the superuser account."
+msgstr "لا يمكنك تغيير معرف المستخدم لحساب المستخدم الجذر."
+
+#: ../src/users/user-settings.c:1424
+msgid ""
+"You cannot disable your own account, nor change your own home directory or "
+"user ID. Run this program from another user's session to edit these settings."
+msgstr ""
+"لا يمكنك تعطيل حسابك، أو تغيير معرّف المستخدم أو مجلد المنزل الخاص بك. شغّل "
+"هذا البرنامج من جلسة مستخدم آخر لتعديل هذه الإعدادات."
+
+#: ../src/users/user-settings.c:1434
+msgid ""
+"You cannot change an account's home directory or user ID while the user is "
+"logged in."
+msgstr ""
+"لا يمكنك تغيير معرف المستخدم أو مجلّد المنزل لحساب بينما هو والج إلى النظام."
+
+#: ../src/users/user-settings.c:1512
 msgid "Applying changes to user settings..."
 msgstr "طبق التغييرات على إعدادات المستخدم..."
 
-#: ../src/users/users-tool.c:288
+#: ../src/users/users-tool.c:300
 msgid "Users Settings"
 msgstr "إعدادات المستخدمين"
 
@@ -2287,9 +2350,6 @@ msgstr "إعدادات المستخدمين"
 
 #~ msgid "Login name"
 #~ msgstr "اسم الولوج:"
-
-#~ msgid "_Unlock"
-#~ msgstr "ا_فتح القفل"
 
 #~ msgid "This action is not allowed"
 #~ msgstr "هذا الإجراء غير مسموح"
